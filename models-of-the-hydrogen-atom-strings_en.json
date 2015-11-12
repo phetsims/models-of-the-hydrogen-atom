@@ -1,5 +1,149 @@
 {
   "models-of-the-hydrogen-atom.title": {
     "value": "Models of the Hydrogen Atom"
+  },
+  "3DView": {
+    "value": "3D view"
+  },
+  "alphaParticle": {
+    "value": "alpha particle"
+  },
+  "alphaParticles": {
+    "value": "Alpha Particles"
+  },
+  "atomicModel": {
+    "value": "Atomic Model"
+  },
+  "billiardBall": {
+    "value": "Billiard Ball"
+  },
+  "bohr": {
+    "value": "Bohr"
+  },
+  "boxOfHydrogen": {
+    "value": "Box of\nHydrogen"
+  },
+  "brightnessView": {
+    "value": "brightness view"
+  },
+  "classical": {
+    "value": "Classical..."
+  },
+  "classicalSolarSystem": {
+    "value": "Classical\nSolar System"
+  },
+  "close": {
+    "value": "Close"
+  },
+  "deBroglie": {
+    "value": "deBroglie"
+  },
+  "deBroglieView": {
+    "value": "deBroglie view"
+  },
+  "drawingsAreNotToScale": {
+    "value": "* Drawings are not to scale"
+  },
+  "electron": {
+    "value": "electron"
+  },
+  "electronEnergyLevel": {
+    "value": "Electron energy level"
+  },
+  "energyEV": {
+    "value": "Energy (eV)"
+  },
+  "exciteAtom": {
+    "value": "Excite Atom"
+  },
+  "experiment": {
+    "value": "Experiment"
+  },
+  "irPhoton": {
+    "value": "IR photon"
+  },
+  "legend": {
+    "value": "Legend"
+  },
+  "light": {
+    "value": "Light"
+  },
+  "lightControls": {
+    "value": "Light controls"
+  },
+  "monochromatic": {
+    "value": "Monochromatic"
+  },
+  "neutron": {
+    "value": "neutron"
+  },
+  "nTransition": {
+    "value": "n Transition"
+  },
+  "photon": {
+    "value": "photon"
+  },
+  "plumPudding": {
+    "value": "Plum Pudding"
+  },
+  "prediction": {
+    "value": "Prediction"
+  },
+  "proton": {
+    "value": "proton"
+  },
+  "quantum": {
+    "value": "...Quantum"
+  },
+  "radialView": {
+    "value": "radial view"
+  },
+  "reset": {
+    "value": "Reset"
+  },
+  "schrodinger": {
+    "value": "Schr\u00f6dinger"
+  },
+  "showAbsorptionWavelengths": {
+    "value": "Show absorption wavelengths"
+  },
+  "showElectronEnergyLevelDiagram": {
+    "value": "Show electron\nenergy level diagram"
+  },
+  "showSpectrometer": {
+    "value": "Show spectrometer"
+  },
+  "showTraces": {
+    "value": "Show traces"
+  },
+  "snapshot": {
+    "value": "Snapshot"
+  },
+  "spectrometerPhotonsEmittedNm": {
+    "value": "Spectrometer: photons emitted / nm"
+  },
+  "start": {
+    "value": "Start"
+  },
+  "stop": {
+    "value": "Stop"
+  },
+  "transitions": {
+    "value": "Transitions"
+  },
+  "uvPhoton": {
+    "value": "UV photon"
+  },
+  "wavelength": {
+    "value": "wavelength"
+  },
+  "whatReallyHappens": {
+    "value": "(what really happens)"
+  },
+  "whatTheModelPredicts": {
+    "value": "(what the model predicts)"
+  },
+  "white": {
+    "value": "White"
   }
 }
