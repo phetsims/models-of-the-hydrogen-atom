@@ -42,9 +42,9 @@ define( function( require ) {
   var quantumString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/quantum' );
 
   // constants
-  var TITLE_FONT = new MHAFont( { size: 14, weight: 'bold' } );
-  var BUTTON_FONT = new MHAFont( 12 );
-  var SPECTRUM_FONT = new MHAFont( 12 );
+  var TITLE_FONT = new MHAFont( { size: 18, weight: 'bold' } );
+  var BUTTON_FONT = new MHAFont( 13 );
+  var SPECTRUM_FONT = new MHAFont( 14 );
   var PANEL_X_MARGIN = 10;
   var PANEL_Y_MARGIN = 10;
   var SPECTRUM_TEXT_MARGIN = 6;

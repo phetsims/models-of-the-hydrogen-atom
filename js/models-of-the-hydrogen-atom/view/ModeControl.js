@@ -38,6 +38,8 @@ define( function( require ) {
   var OFF_COLOR = 'black'; // UI components are this color when they are 'off'
   var TICK_LENGTH = 15;
   var TEXT_MAX_WIDTH = 145; // for i18n, determined empirically
+  var BIG_TEXT_FONT = new MHAFont( { size: 18, weight: 'bold' } );
+  var SMALL_TEXT_FONT = new MHAFont( 12 );
 
   /**
    * @param {Property.<string>} modeProperty - the mode, 'experiment'|'prediction'
@@ -53,7 +55,7 @@ define( function( require ) {
 
     // big text
     var bigTextOptions = {
-      font: new MHAFont( { size: 16, weight: 'bold' } ),
+      font: BIG_TEXT_FONT,
       maxWidth: TEXT_MAX_WIDTH
     };
     var experimentBigText = new Text( experimentString, bigTextOptions );
@@ -61,7 +63,7 @@ define( function( require ) {
 
     // small (parenthetical) text
     var smallTextOptions = {
-      font: new MHAFont( 12 ),
+      font: SMALL_TEXT_FONT,
       maxWidth: TEXT_MAX_WIDTH
     };
     var experimentSmallText = new Text( whatReallyHappensString, smallTextOptions );
