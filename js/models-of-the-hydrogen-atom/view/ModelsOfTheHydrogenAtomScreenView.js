@@ -1,6 +1,7 @@
 // Copyright 2015, University of Colorado Boulder
 
 /**
+ * View for 'Models of the Hydrogen Atom' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

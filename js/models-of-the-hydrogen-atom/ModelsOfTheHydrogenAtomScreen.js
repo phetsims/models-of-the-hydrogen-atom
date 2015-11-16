@@ -1,6 +1,7 @@
 // Copyright 2015, University of Colorado Boulder
 
 /**
+ * 'Models of the Hydrogen Atom' screen
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -29,7 +30,7 @@ define( function( require ) {
     Screen.call( this, modelsOfTheHydrogenAtomTitleString, icon,
       function() { return new ModelsOfTheHydrogenAtomModel(); },
       function( model ) { return new ModelsOfTheHydrogenAtomScreenView( model ); },
-      { backgroundColor: 'white' }
+      { backgroundColor: 'black' }
     );
   }
 
