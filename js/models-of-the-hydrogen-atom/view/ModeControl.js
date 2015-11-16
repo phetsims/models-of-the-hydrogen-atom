@@ -32,8 +32,8 @@ define( function( require ) {
   var whatTheModelPredictsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/whatTheModelPredicts' );
 
   // constants
-  var X_MARGIN = 10;
-  var Y_MARGIN = 10;
+  var PANEL_X_MARGIN = 10;
+  var PANEL_Y_MARGIN = 10;
   var ON_COLOR = 'white';  // UI components are this color when they are 'on'
   var OFF_COLOR = 'black'; // UI components are this color when they are 'off'
   var TICK_LENGTH = 15;
@@ -53,7 +53,7 @@ define( function( require ) {
 
     // big text
     var bigTextOptions = {
-      font: new MHAFont( { size: 18, weight: 'bold' } ),
+      font: new MHAFont( { size: 16, weight: 'bold' } ),
       maxWidth: TEXT_MAX_WIDTH
     };
     var experimentBigText = new Text( experimentString, bigTextOptions );
@@ -61,7 +61,7 @@ define( function( require ) {
 
     // small (parenthetical) text
     var smallTextOptions = {
-      font: new MHAFont( 12 ),
+      font: new MHAFont( 10 ),
       maxWidth: TEXT_MAX_WIDTH
     };
     var experimentSmallText = new Text( whatReallyHappensString, smallTextOptions );
@@ -109,15 +109,15 @@ define( function( require ) {
 
     // panel background
     var backgroundNode = new ShadedRectangle(
-      new Bounds2( 0, 0, contentNode.width + ( 2 * X_MARGIN ), contentNode.height + ( 2 * Y_MARGIN ) ), {
+      new Bounds2( 0, 0, contentNode.width + ( 2 * PANEL_X_MARGIN ), contentNode.height + ( 2 * PANEL_Y_MARGIN ) ), {
         baseColor: 'rgb( 146, 146, 146 )'
       } );
 
-    options.children = [ backgroundNode, contentNode ];
-    Node.call( this, options );
-
     // content centered in panel
     contentNode.center = backgroundNode.center;
+
+    options.children = [ backgroundNode, contentNode ];
+    Node.call( this, options );
 
     // Change the selection to match the mode.
     // No need to unlink since ModeControl exists for the lifetime of the sim.

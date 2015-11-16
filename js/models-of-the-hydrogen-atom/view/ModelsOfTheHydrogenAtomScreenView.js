@@ -11,37 +11,50 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
+  var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelControl' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var ViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ViewProperties' );
 
   /**
-   * @param {ModelsOfTheHydrogenAtomModel} modelsOfTheHydrogenAtomModel
+   * @param {ModelsOfTheHydrogenAtomModel} model
    * @constructor
    */
-  function ModelsOfTheHydrogenAtomScreenView( modelsOfTheHydrogenAtomModel ) {
+  function ModelsOfTheHydrogenAtomScreenView( model ) {
 
     ScreenView.call( this );
 
     var viewProperties = new ViewProperties();
 
+    // selects between 'Experiment' and 'Prediction' modes
     var modeControl = new ModeControl( viewProperties.modeProperty, {
-      left: this.layoutBounds.left + 20,
-      top: this.layoutBounds.top + 20
+      left: this.layoutBounds.left + 10,
+      top: this.layoutBounds.top + 5
     } );
     this.addChild( modeControl );
+
+    // selects a predictive model
+    var modelControl = new ModelControl( model.modelProperty, {
+      left: modeControl.left,
+      top: modeControl.bottom + 5
+    } );
+    this.addChild( modelControl );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
-        modelsOfTheHydrogenAtomModel.reset();
+        model.reset();
         viewProperties.reset();
       },
       right:  this.layoutBounds.maxX - 10,
       bottom: this.layoutBounds.maxY - 10
     } );
     this.addChild( resetAllButton );
+
+    viewProperties.modeProperty.link( function( mode ) {
+      modelControl.visible = ( mode === 'prediction' );
+    } );
   }
 
   modelsOfTheHydrogenAtom.register( 'ModelsOfTheHydrogenAtomScreenView', ModelsOfTheHydrogenAtomScreenView );

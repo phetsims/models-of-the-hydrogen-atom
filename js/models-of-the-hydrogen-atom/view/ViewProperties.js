@@ -26,7 +26,7 @@ define( function( require ) {
     } );
 
     this.modeProperty.link( function( mode ) {
-      assert && assert( _.indexOf( MODE_VALUES, mode ) !== -1 );;
+      assert && assert( _.indexOf( MODE_VALUES, mode ) !== -1 );
     } );
   }
 
