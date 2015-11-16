@@ -1,7 +1,7 @@
 // Copyright 2015, University of Colorado Boulder
 
 /**
- * RequireJS configuration file for the sim.
+ * RequireJS configuration file for the models-of-the-hydrogen-atom sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
