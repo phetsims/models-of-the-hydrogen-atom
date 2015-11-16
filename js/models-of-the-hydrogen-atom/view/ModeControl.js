@@ -61,7 +61,7 @@ define( function( require ) {
 
     // small (parenthetical) text
     var smallTextOptions = {
-      font: new MHAFont( 10 ),
+      font: new MHAFont( 12 ),
       maxWidth: TEXT_MAX_WIDTH
     };
     var experimentSmallText = new Text( whatReallyHappensString, smallTextOptions );
