@@ -32,11 +32,12 @@ define( function( require ) {
   var whatTheModelPredictsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/whatTheModelPredicts' );
 
   // constants
-  var OFF_TEXT_FILL = 'black';
-  var ON_TEXT_FILL = 'white';
-  var TICK_LENGTH = 15;
-  var X_MARGIN = 20;
+  var X_MARGIN = 10;
   var Y_MARGIN = 10;
+  var ON_COLOR = 'white';  // UI components are this color when they are 'on'
+  var OFF_COLOR = 'black'; // UI components are this color when they are 'off'
+  var TICK_LENGTH = 15;
+  var TEXT_MAX_WIDTH = 145; // for i18n, determined empirically
 
   /**
    * @param {Property.<string>} modeProperty - the mode, 'experiment'|'prediction'
@@ -51,37 +52,41 @@ define( function( require ) {
     var predictionSwitch = new Image( modeSwitchDownImage, switchOptions );
 
     // big text
-    var bigTextOptions = { font: new MHAFont( { size: 20, weight: 'bold' } ) };
+    var bigTextOptions = {
+      font: new MHAFont( { size: 18, weight: 'bold' } ),
+      maxWidth: TEXT_MAX_WIDTH
+    };
     var experimentBigText = new Text( experimentString, bigTextOptions );
     var predictionBigText = new Text( predictionString, bigTextOptions );
 
     // small (parenthetical) text
-    var smallTextOptions = { font: new MHAFont( 14 ) };
+    var smallTextOptions = {
+      font: new MHAFont( 12 ),
+      maxWidth: TEXT_MAX_WIDTH
+    };
     var experimentSmallText = new Text( whatReallyHappensString, smallTextOptions );
     var predictionSmallText = new Text( whatTheModelPredictsString, smallTextOptions );
 
-    var textYSpacing = 1;
-    var textAlign = 'left';
+    var labelOptions = {
+      align: 'left',
+      spacing: 1
+    };
 
     // label for experiment setting
-    var experimentLabel = new VBox( {
-      align: textAlign,
-      spacing: textYSpacing,
+    var experimentLabel = new VBox( _.extend( {}, labelOptions, {
       children: [
         experimentBigText,
         experimentSmallText
       ]
-    } );
+    } ) );
 
     // label for prediction setting
-    var predictionLabel = new VBox( {
-      align: textAlign,
-      spacing: textYSpacing,
+    var predictionLabel = new VBox( _.extend( {}, labelOptions, {
       children: [
         predictionBigText,
         predictionSmallText
       ]
-    } );
+    } ) );
 
     // tick marks that the switch points to
     var lineOptions = { lineWidth: 3, stroke: 'black', lineCap: 'round' };
@@ -119,12 +124,12 @@ define( function( require ) {
 
       // 'Experiment' mode components
       experimentSwitch.visible = ( mode === 'experiment' );
-      var upColor = ( mode === 'experiment' ) ? ON_TEXT_FILL : OFF_TEXT_FILL;
+      var upColor = ( mode === 'experiment' ) ? ON_COLOR : OFF_COLOR;
       experimentTick.stroke = experimentBigText.fill = experimentSmallText.fill = upColor;
 
       // 'Prediction' mode components
       predictionSwitch.visible = ( mode === 'prediction' );
-      var downColor = ( mode === 'prediction' ) ? ON_TEXT_FILL : OFF_TEXT_FILL;
+      var downColor = ( mode === 'prediction' ) ? ON_COLOR : OFF_COLOR;
       predictionTick.stroke = predictionBigText.fill = predictionSmallText.fill = downColor;
     } );
 
