@@ -12,6 +12,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
 
+  // valid values for the mode property
+  var MODE_VALUES = [ 'experiment', 'prediction' ];
+
   /**
    * @constructor
    */
@@ -22,7 +25,7 @@ define( function( require ) {
     } );
 
     this.modeProperty.link( function( mode ) {
-      assert && assert( mode === 'experiment' || mode === 'prediction' );
+      assert && assert( _.indexOf( MODE_VALUES, mode ) !== -1 );;
     } );
   }
 
