@@ -20,6 +20,7 @@ define( function( require ) {
    */
   function ViewProperties() {
 
+    // @public
     PropertySet.call( this, {
       mode: 'experiment' // {string} 'experiment'|'prediction'
     } );
