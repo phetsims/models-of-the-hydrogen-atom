@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
 
-  // valid values for the mode property
+  // valid values for the 'mode' property
   var MODE_VALUES = [ 'experiment', 'prediction' ];
 
   /**
