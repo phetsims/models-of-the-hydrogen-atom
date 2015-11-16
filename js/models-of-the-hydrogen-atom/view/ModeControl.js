@@ -47,7 +47,7 @@ define( function( require ) {
   function ModeSwitch( modeProperty, options ) {
 
     // switches
-    var switchOptions = { cursor: 'pointer' };
+    var switchOptions = { cursor: 'pointer', scale: 0.8 };
     var experimentSwitch = new Image( modeSwitchUpImage, switchOptions );
     var predictionSwitch = new Image( modeSwitchDownImage, switchOptions );
 
