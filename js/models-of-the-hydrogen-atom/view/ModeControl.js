@@ -119,7 +119,8 @@ define( function( require ) {
     // content centered in panel
     contentNode.center = backgroundNode.center;
 
-    // when the mode changes ...
+    // Change the selection to match the mode.
+    // No need to unlink since ModeControl exists for the lifetime of the sim.
     modeProperty.link( function( mode ) {
 
       // 'Experiment' mode components
