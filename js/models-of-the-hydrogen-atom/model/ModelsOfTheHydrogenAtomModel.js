@@ -13,7 +13,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
 
-  // Valid values for the 'model' property
+  // valid values for the 'model' property
   var MODEL_VALUES = [
     'billiardBall',
     'plumPudding',
