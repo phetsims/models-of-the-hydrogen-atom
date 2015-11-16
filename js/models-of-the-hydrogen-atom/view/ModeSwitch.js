@@ -93,7 +93,7 @@ define( function( require ) {
     var experimentTick = new Line( 0, 0, TICK_LENGTH, 0, lineOptions );
     var predictionTick = new Line( 0, 0, TICK_LENGTH, 0, lineOptions );
 
-    // content of the panel
+    // contents of the panel
     var contentNode = new Node( {
       children: [ predictionSwitch, experimentSwitch, experimentTick, predictionTick, experimentLabel, predictionLabel ]
     } );
