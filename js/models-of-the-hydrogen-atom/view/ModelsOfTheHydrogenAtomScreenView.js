@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var ModeSwitch = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeSwitch' );
+  var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
@@ -26,11 +26,11 @@ define( function( require ) {
 
     var viewProperties = new ViewProperties();
 
-    var modeSwitch = new ModeSwitch( viewProperties.modeProperty, {
+    var modeControl = new ModeControl( viewProperties.modeProperty, {
       left: this.layoutBounds.left + 20,
       top: this.layoutBounds.top + 20
     } );
-    this.addChild( modeSwitch );
+    this.addChild( modeControl );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
