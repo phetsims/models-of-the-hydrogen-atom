@@ -76,7 +76,8 @@ define( function( require ) {
     // title
     var titleNode = new MultiLineText( boxOfHydrogenString, _.extend( {}, TITLE_OPTIONS, {
       centerX: boxNode.centerX,
-      bottom: boxNode.top - 10
+      bottom: boxNode.top - 10,
+      maxWidth: 1.25 * BOX_SIZE.width // i18n, determined empirically
     } ) );
 
     options.children = [ boxNode, tinyBoxNode, titleNode ];
