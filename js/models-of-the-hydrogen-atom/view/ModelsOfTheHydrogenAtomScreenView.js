@@ -9,12 +9,14 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelControl' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var Property = require( 'AXON/Property' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ViewProperties' );
@@ -45,10 +47,19 @@ define( function( require ) {
 
     // Box of hydrogen
     var boxOfHydrogenNode = new BoxOfHydrogenNode( {
-      left: modelControl.right + 40, //TODO
-      top: modeControl.bottom + 30 //TODO
+      left: modelControl.right + 40,
+      top: modeControl.bottom + 30
     } );
     this.addChild( boxOfHydrogenNode );
+
+    // Beam of light from gun
+    var beamVisibleProperty = new Property( true ); //TODO move to model, this is whether gun is on/off
+    var beamColorProperty = new Property( 'yellow' ); //TODO move to model, this is derived from gun's wavelength
+    var beamNode = new BeamNode( beamVisibleProperty, beamColorProperty, {
+      centerX: boxOfHydrogenNode.centerX,
+      top: boxOfHydrogenNode.bottom
+    } );
+    this.addChild( beamNode );
 
     // Legend
     var legendNode = new LegendNode( {
