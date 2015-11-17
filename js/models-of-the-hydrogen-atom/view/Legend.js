@@ -62,7 +62,7 @@ define( function( require ) {
       { icon: new NeutronNode(), label: neutronString }
     ];
 
-    // widest icon, we use this to center all icons and left-align all labels
+    // widest icon, used to horizontally center all icons and left-align all labels
     var maxIconWidth = _.max( items, function( item ) {
       return item.icon.width;
     } ).icon.width;
