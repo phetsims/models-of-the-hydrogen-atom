@@ -55,7 +55,7 @@ define( function( require ) {
     // title
     var titleNode = new Text( legendString, TITLE_OPTIONS );
 
-    // items that appear in the legend
+    // items that appear in the legend, { icon: {Node}, label: {string} }
     var items = [
       { icon: new ElectronNode(), label: electronString },
       { icon: new ProtonNode(), label: protonString },
@@ -83,18 +83,16 @@ define( function( require ) {
       } ) );
     } );
 
-    var itemsBox = new VBox( {
-      spacing: 5,
-      align: 'left',
-      children: itemNodes
-    } );
-
     var contentNode = new VBox( {
       spacing: 8,
       align: 'center',
       children: [
         titleNode,
-        itemsBox
+        new VBox( {
+          spacing: 5,
+          align: 'left',
+          children: itemNodes
+        } )
       ]
     } );
 
