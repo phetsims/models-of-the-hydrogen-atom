@@ -67,7 +67,7 @@ define( function( require ) {
       return item.icon.width;
     } ).icon.width;
 
-    var itemNodes = [];
+    var itemNodes = []; // {Node[]}
     items.forEach( function( item ) {
 
       // pad the icon with a strut, so that all icons occupy the same amount of horizontal space
