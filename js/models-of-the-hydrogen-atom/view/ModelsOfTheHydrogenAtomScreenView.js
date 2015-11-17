@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Legend = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/Legend' );
+  var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelControl' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -43,11 +43,11 @@ define( function( require ) {
     this.addChild( modelControl );
 
     // Legend
-    var legend = new Legend( {
+    var legendNode = new LegendNode( {
       right: this.layoutBounds.right - 10,
       top: this.layoutBounds.top + 10
     } );
-    this.addChild( legend );
+    this.addChild( legendNode );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {

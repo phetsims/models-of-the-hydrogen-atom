@@ -42,7 +42,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function Legend( options ) {
+  function LegendNode( options ) {
 
     options = _.extend( {
       fill: 'black',
@@ -99,7 +99,7 @@ define( function( require ) {
     Panel.call( this, contentNode, options );
   }
 
-  modelsOfTheHydrogenAtom.register( 'Legend', Legend );
+  modelsOfTheHydrogenAtom.register( 'LegendNode', LegendNode );
 
-  return inherit( Panel, Legend );
+  return inherit( Panel, LegendNode );
 } );
