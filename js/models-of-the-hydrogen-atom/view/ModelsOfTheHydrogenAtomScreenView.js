@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
@@ -41,6 +42,13 @@ define( function( require ) {
       top: modeControl.bottom + 5
     } );
     this.addChild( modelControl );
+
+    // Box of hydrogen
+    var boxOfHydrogenNode = new BoxOfHydrogenNode( {
+      left: modelControl.right + 40, //TODO
+      top: modeControl.bottom + 30 //TODO
+    } );
+    this.addChild( boxOfHydrogenNode );
 
     // Legend
     var legendNode = new LegendNode( {
