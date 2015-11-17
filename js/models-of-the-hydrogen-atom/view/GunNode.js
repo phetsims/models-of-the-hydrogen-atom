@@ -33,6 +33,7 @@ define( function( require ) {
 
     var button = new RoundStickyToggleButton( false, true, onProperty, {
       radius: 20,
+      touchExpansion: 15,
       baseColor: 'red',
       centerX: 0,
       centerY: gunNode.top + 92  // determined empirically, dependent on gunImage
