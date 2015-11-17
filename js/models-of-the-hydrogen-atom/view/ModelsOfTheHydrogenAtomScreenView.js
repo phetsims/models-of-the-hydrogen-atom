@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
+  var GunNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/GunNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
@@ -48,7 +49,7 @@ define( function( require ) {
     // Box of hydrogen
     var boxOfHydrogenNode = new BoxOfHydrogenNode( {
       left: modelControl.right + 40,
-      top: modeControl.bottom + 30
+      top: modeControl.bottom + 5
     } );
     this.addChild( boxOfHydrogenNode );
 
@@ -60,6 +61,13 @@ define( function( require ) {
       top: boxOfHydrogenNode.bottom
     } );
     this.addChild( beamNode );
+
+    // Gun
+    var gunNode = new GunNode( beamVisibleProperty, {
+      x: beamNode.centerX,
+      y: beamNode.bottom
+    } );
+    this.addChild( gunNode );
 
     // Legend
     var legendNode = new LegendNode( {

@@ -18,8 +18,8 @@ define( function( require ) {
   var BEAM_SIZE = new Dimension2( 52, 75 );
 
   /**
-   * @param {Property.<boolean>} visibleProperty
-   * @param {Property.<Color|string>} colorProperty
+   * @param {Property.<boolean>} visibleProperty - is the beam visible?
+   * @param {Property.<Color|string>} colorProperty - the beam's color
    * @param {Object} [options]
    * @constructor
    */
