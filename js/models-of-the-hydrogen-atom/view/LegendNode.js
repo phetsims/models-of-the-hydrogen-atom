@@ -31,11 +31,13 @@ define( function( require ) {
   // constants
   var TITLE_OPTIONS = {
     font: new MHAFont( { size: 18, weight: 'bold' } ),
-    fill: 'white'
+    fill: 'white',
+    maxWidth: 100 // i18n, determined empirically
   };
-  var ITEM_OPTIONS = {
+  var LABEL_OPTIONS = {
     font: new MHAFont( 18 ),
-    fill: 'white'
+    fill: 'white',
+    maxWidth: 100 // i18n, determined empirically
   };
 
   /**
@@ -79,8 +81,9 @@ define( function( require ) {
         spacing: 10,
         children: [
           paddedIcon,
-          new Text( item.label, ITEM_OPTIONS ) ]
+          new Text( item.label, LABEL_OPTIONS ) ]
       } ) );
+
     } );
 
     var contentNode = new VBox( {
