@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AnimationBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/AnimationBoxNode' );
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
   var CheckBox = require( 'SUN/CheckBox' );
@@ -83,6 +84,13 @@ define( function( require ) {
     } );
     this.addChild( lightControls );
 
+    // Expanded box where the animation occurs
+    var animationBoxNode = new AnimationBoxNode( {
+      left: lightNode.right + 30,
+      top: this.layoutBounds.top + 25
+    } );
+    this.addChild( animationBoxNode );
+
     // Check box for showing spectrometer
     var spectrometerCheckBox = new CheckBox(
       new Text( showSpectrometerString, {
@@ -106,8 +114,8 @@ define( function( require ) {
 
     // Legend
     var legendNode = new LegendNode( {
-      right: this.layoutBounds.right - 10,
-      top: this.layoutBounds.top + 10
+      left: animationBoxNode.right + 15,
+      centerY: animationBoxNode.centerY
     } );
     this.addChild( legendNode );
 
@@ -115,8 +123,8 @@ define( function( require ) {
     var disclaimerNode = new Text( drawingsAreNotToScaleString, {
       font: new MHAFont( 14 ),
       fill: 'white',
-      centerX: this.layoutBounds.centerX, //TODO center over big box
-      top: this.layoutBounds.top + 10,
+      centerX: animationBoxNode.centerX,
+      centerY: this.layoutBounds.top + ( animationBoxNode.top - this.layoutBounds.top ) / 2,
       maxWidth: 250 // TODO width of the big box
     } );
     this.addChild( disclaimerNode );
