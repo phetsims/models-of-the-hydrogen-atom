@@ -151,9 +151,11 @@ define( function( require ) {
 
     // Check box for showing electron energy level diagram
     var energyDiagramCheckBox = new CheckBox(
-      new Text( showElectronEnergyLevelDiagramString, {
+      new MultiLineText( showElectronEnergyLevelDiagramString, {
+        align: 'left',
         font: new MHAFont( 16 ),
-        fill: 'white'
+        fill: 'white',
+        maxWidth: 190 // i18n, determined empirically
       } ),
       viewProperties.energyDiagramVisibleProperty,
       {
