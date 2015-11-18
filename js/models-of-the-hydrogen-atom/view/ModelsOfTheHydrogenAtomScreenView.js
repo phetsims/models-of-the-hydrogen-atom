@@ -88,6 +88,7 @@ define( function( require ) {
     this.addChild( resetAllButton );
 
     viewProperties.modeProperty.link( function( mode ) {
+      //TODO perhaps fade this in/out
       modelControl.visible = ( mode === 'prediction' );
     } );
   }
