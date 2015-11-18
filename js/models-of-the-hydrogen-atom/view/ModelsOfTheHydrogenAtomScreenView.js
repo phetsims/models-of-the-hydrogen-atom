@@ -35,7 +35,6 @@ define( function( require ) {
   // strings
   var boxOfHydrogenString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/boxOfHydrogen' );
   var drawingsAreNotToScaleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/drawingsAreNotToScale' );
-  var showElectronEnergyLevelDiagramString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showElectronEnergyLevelDiagram' );
   var showSpectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showSpectrometer' );
 
   /**
@@ -157,24 +156,9 @@ define( function( require ) {
     } );
     this.addChild( spectrometerNode );
 
-    // Check box for showing electron energy level diagram
-    var energyDiagramCheckBox = new CheckBox(
-      new MultiLineText( showElectronEnergyLevelDiagramString, {
-        align: 'left',
-        font: new MHAFont( 16 ),
-        fill: 'white',
-        maxWidth: 190 // i18n, determined empirically
-      } ),
-      viewProperties.energyDiagramVisibleProperty,
-      {
-        left: zoomBoxNode.right + 15,
-        top: zoomBoxNode.top + 10
-      }
-    );
-    this.addChild( energyDiagramCheckBox );
-
     // Energy diagram
-    var energyDiagram = new EnergyDiagram( viewProperties.energyDiagramVisibleProperty, {
+    var energyDiagram = new EnergyDiagram( {
+      expandedProperty: viewProperties.energyDiagramVisibleProperty,
       left: zoomBoxNode.right + 10,
       top: zoomBoxNode.top
     } );

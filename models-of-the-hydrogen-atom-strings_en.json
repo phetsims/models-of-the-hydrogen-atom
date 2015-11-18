@@ -107,9 +107,6 @@
   "showAbsorptionWavelengths": {
     "value": "Show absorption wavelengths"
   },
-  "showElectronEnergyLevelDiagram": {
-    "value": "Show electron\nenergy level diagram"
-  },
   "showSpectrometer": {
     "value": "Show spectrometer"
   },
