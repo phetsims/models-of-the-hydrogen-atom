@@ -86,7 +86,8 @@ define( function( require ) {
       font: new MHAFont( 14 ),
       fill: 'white',
       centerX: this.layoutBounds.centerX, //TODO center over big box
-      top: this.layoutBounds.top + 10
+      top: this.layoutBounds.top + 10,
+      maxWidth: 250 // TODO width of the big box
     } );
     this.addChild( disclaimerNode );
 
