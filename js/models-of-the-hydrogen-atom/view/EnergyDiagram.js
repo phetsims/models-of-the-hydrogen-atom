@@ -21,13 +21,14 @@ define( function( require ) {
   var electronEnergyLevelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/electronEnergyLevel' );
 
   // constants
-  var DIAGRAM_SIZE = new Dimension2( 220, 400 );
+  var DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
   /**
+   * @param {Property.<boolean>} expandedProperty
    * @param {Object} [options]
    * @constructor
    */
-  function EnergyDiagram( options ) {
+  function EnergyDiagram( expandedProperty, options ) {
 
     options = _.extend( {
       fill: 'rgb( 160, 160, 160 )',
@@ -37,8 +38,11 @@ define( function( require ) {
       buttonXMargin: 5,
       buttonYMargin: 5,
       contentXMargin: 5,
-      contentYMargin: 5
+      contentYMargin: 5,
+      contentYSpacing: 0
     }, options );
+
+    options.expandedProperty = expandedProperty;
 
     options.titleNode = new Text( electronEnergyLevelString, {
       font: new MHAFont( { size: 16, weight: 'bold' } ),

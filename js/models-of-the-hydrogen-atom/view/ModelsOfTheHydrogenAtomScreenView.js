@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
-  var CheckBox = require( 'SUN/CheckBox' );
   var EnergyDiagram = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/EnergyDiagram' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
@@ -35,7 +34,6 @@ define( function( require ) {
   // strings
   var boxOfHydrogenString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/boxOfHydrogen' );
   var drawingsAreNotToScaleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/drawingsAreNotToScale' );
-  var showSpectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showSpectrometer' );
 
   /**
    * @param {ModelsOfTheHydrogenAtomModel} model
@@ -135,30 +133,15 @@ define( function( require ) {
     } );
     this.addChild( legendNode );
 
-    // Check box for showing spectrometer
-    var spectrometerCheckBox = new CheckBox(
-      new Text( showSpectrometerString, {
-        font: new MHAFont( 16 ),
-        fill: 'white'
-      } ),
-      viewProperties.spectrometerVisibleProperty,
-      {
-        left: lightControls.right + 25,
-        top: lightControls.top + 10
-      }
-    );
-    this.addChild( spectrometerCheckBox );
-
     // Spectrometer
     var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
-      left: lightControls.right + 15,
+      left: lightControls.right + 10,
       bottom: lightControls.bottom
     } );
     this.addChild( spectrometerNode );
 
     // Energy diagram
-    var energyDiagram = new EnergyDiagram( {
-      expandedProperty: viewProperties.energyDiagramVisibleProperty,
+    var energyDiagram = new EnergyDiagram( viewProperties.energyDiagramVisibleProperty, {
       left: zoomBoxNode.right + 10,
       top: zoomBoxNode.top
     } );

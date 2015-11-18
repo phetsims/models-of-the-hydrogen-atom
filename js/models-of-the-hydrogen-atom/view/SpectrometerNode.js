@@ -9,45 +9,55 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AccordionBox = require( 'SUN/AccordionBox' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var CloseButton = require( 'SCENERY_PHET/buttons/CloseButton' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Text = require( 'SCENERY/nodes/Text' );
+
+  // strings
+  var spectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometer' );
 
   /**
-   * @param {Property.<boolean>} spectrometerVisibleProperty
+   * @param {Property.<boolean>} expandedProperty
    * @param {Object} [options]
    * @constructor
    */
-  function SpectrometerNode( spectrometerVisibleProperty, options ) {
+  function SpectrometerNode( expandedProperty, options ) {
 
-    options = options || {};
+    options = _.extend( {
+      fill: 'rgb( 160, 160, 160 )',
+      xMargin: 5,
+      yMargin: 5,
+      cornerRadius: 5,
+      buttonXMargin: 5,
+      buttonYMargin: 5,
+      contentXMargin: 5,
+      contentYMargin: 5,
+      contentYSpacing: 0
+    }, options );
 
-    var backgroundNode = new ShadedRectangle( new Bounds2( 0, 0, 400, 120 ), {
-      baseColor: 'rgb( 90, 90, 126 )'
+    options.expandedProperty = expandedProperty;
+
+    options.titleNode = new Text( spectrometerString, {
+      font: new MHAFont( { size: 16, weight: 'bold' } ),
+      fill: 'white',
+      maxWidth: 150 // i18n, determined empirically
     } );
 
-    var closeButton = new CloseButton( {
-      iconLength: 6,
-      xTouchExpansion: 8,
-      yTouchExpansion: 8,
-      listener: function() {
-        spectrometerVisibleProperty.set( false );
-      },
-      right: backgroundNode.right - 10,
-      top: backgroundNode.top + 6
+    var contentNode = new Rectangle( 0, 0, 400, 85, {
+      fill: 'white',
+      stroke: 'black'
     } );
 
-    options.children = [ backgroundNode, closeButton ];
-
-    Node.call( this, options );
-
-    spectrometerVisibleProperty.linkAttribute( this, 'visible' );
+    AccordionBox.call( this, contentNode, options );
   }
 
   modelsOfTheHydrogenAtom.register( 'SpectrometerNode', SpectrometerNode );
 
-  return inherit( ShadedRectangle, SpectrometerNode );
+  return inherit( AccordionBox, SpectrometerNode );
 } );
