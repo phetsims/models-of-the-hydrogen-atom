@@ -9,8 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ModelsOfTheHydrogenAtomModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/model/ModelsOfTheHydrogenAtomModel' );
-  var ModelsOfTheHydrogenAtomScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelsOfTheHydrogenAtomScreenView' );
+  var MOTHAModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/model/MOTHAModel' );
+  var MOTHAScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
@@ -21,20 +21,20 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function ModelsOfTheHydrogenAtomScreen() {
+  function MOTHAScreen() {
 
     //If this is a single-screen sim, then no icon is necessary.
     //If there are multiple screens, then the icon must be provided here.
     var icon = null;
 
     Screen.call( this, modelsOfTheHydrogenAtomTitleString, icon,
-      function() { return new ModelsOfTheHydrogenAtomModel(); },
-      function( model ) { return new ModelsOfTheHydrogenAtomScreenView( model ); },
+      function() { return new MOTHAModel(); },
+      function( model ) { return new MOTHAScreenView( model ); },
       { backgroundColor: 'black' }
     );
   }
 
-  modelsOfTheHydrogenAtom.register( 'ModelsOfTheHydrogenAtomScreen', ModelsOfTheHydrogenAtomScreen );
+  modelsOfTheHydrogenAtom.register( 'MOTHAScreen', MOTHAScreen );
 
-  return inherit( Screen, ModelsOfTheHydrogenAtomScreen );
+  return inherit( Screen, MOTHAScreen );
 } );

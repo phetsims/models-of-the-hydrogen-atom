@@ -19,7 +19,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function ViewProperties() {
+  function MOTHAViewProperties() {
 
     // @public
     PropertySet.call( this, {
@@ -35,7 +35,7 @@ define( function( require ) {
     } );
   }
 
-  modelsOfTheHydrogenAtom.register( 'ViewProperties', ViewProperties );
+  modelsOfTheHydrogenAtom.register( 'MOTHAViewProperties', MOTHAViewProperties );
 
-  return inherit( PropertySet, ViewProperties );
+  return inherit( PropertySet, MOTHAViewProperties );
 } );

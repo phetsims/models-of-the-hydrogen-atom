@@ -27,7 +27,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function ModelsOfTheHydrogenAtomModel() {
+  function MOTHAModel() {
 
     // @public
     PropertySet.call( this, {
@@ -43,9 +43,9 @@ define( function( require ) {
     } );
   }
 
-  modelsOfTheHydrogenAtom.register( 'ModelsOfTheHydrogenAtomModel', ModelsOfTheHydrogenAtomModel );
+  modelsOfTheHydrogenAtom.register( 'MOTHAModel', MOTHAModel );
 
-  return inherit( PropertySet, ModelsOfTheHydrogenAtomModel, {
+  return inherit( PropertySet, MOTHAModel, {
 
     // @public @override
     reset: function() {

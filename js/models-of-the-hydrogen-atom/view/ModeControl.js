@@ -14,8 +14,8 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -38,8 +38,8 @@ define( function( require ) {
   var OFF_COLOR = 'black'; // UI components are this color when they are 'off'
   var TICK_LENGTH = 15;
   var TEXT_MAX_WIDTH = 145; // for i18n, determined empirically
-  var BIG_TEXT_FONT = new MHAFont( { size: 18, weight: 'bold' } );
-  var SMALL_TEXT_FONT = new MHAFont( 12 );
+  var BIG_TEXT_FONT = new MOTHAFont( { size: 18, weight: 'bold' } );
+  var SMALL_TEXT_FONT = new MOTHAFont( 12 );
 
   /**
    * @param {Property.<string>} modeProperty - the mode, 'experiment'|'prediction'

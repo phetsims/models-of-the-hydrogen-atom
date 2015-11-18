@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ModelsOfTheHydrogenAtomScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/ModelsOfTheHydrogenAtomScreen' );
+  var MOTHAScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/MOTHAScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
@@ -36,7 +36,7 @@ define( function( require ) {
   }
 
   SimLauncher.launch( function() {
-    var sim = new Sim( modelsOfTheHydrogenAtomTitleString, [ new ModelsOfTheHydrogenAtomScreen() ], simOptions );
+    var sim = new Sim( modelsOfTheHydrogenAtomTitleString, [ new MOTHAScreen() ], simOptions );
     sim.start();
   } );
 } );

@@ -16,10 +16,11 @@ define( function( require ) {
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
   var LightNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightNode' );
   var LightControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightControls' );
-  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelControl' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
+  var MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAViewProperties' );
   var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
   var Path = require( 'SCENERY/nodes/Path' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -28,7 +29,6 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/TinyBox' );
-  var ViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ViewProperties' );
   var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ZoomBoxNode' );
 
   // strings
@@ -36,14 +36,14 @@ define( function( require ) {
   var drawingsAreNotToScaleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/drawingsAreNotToScale' );
 
   /**
-   * @param {ModelsOfTheHydrogenAtomModel} model
+   * @param {MOTHAModel} model
    * @constructor
    */
-  function ModelsOfTheHydrogenAtomScreenView( model ) {
+  function MOTHAScreenView( model ) {
 
     ScreenView.call( this );
 
-    var viewProperties = new ViewProperties();
+    var viewProperties = new MOTHAViewProperties();
 
     // selects between 'Experiment' and 'Prediction' modes
     var modeControl = new ModeControl( viewProperties.modeProperty, {
@@ -68,7 +68,7 @@ define( function( require ) {
 
     // Title above box of hydrogen
     var boxOfHydrogenLabelNode = new MultiLineText( boxOfHydrogenString, {
-      font: new MHAFont( { size: 16, weight: 'bold' } ),
+      font: new MOTHAFont( { size: 16, weight: 'bold' } ),
       fill: 'white',
       centerX: boxOfHydrogenNode.centerX,
       bottom: boxOfHydrogenNode.top - 10,
@@ -149,7 +149,7 @@ define( function( require ) {
 
     // Disclaimer
     var disclaimerNode = new Text( drawingsAreNotToScaleString, {
-      font: new MHAFont( 14 ),
+      font: new MOTHAFont( 14 ),
       fill: 'white',
       centerX: zoomBoxNode.centerX,
       centerY: this.layoutBounds.top + ( zoomBoxNode.top - this.layoutBounds.top ) / 2,
@@ -180,9 +180,9 @@ define( function( require ) {
     } );
   }
 
-  modelsOfTheHydrogenAtom.register( 'ModelsOfTheHydrogenAtomScreenView', ModelsOfTheHydrogenAtomScreenView );
+  modelsOfTheHydrogenAtom.register( 'MOTHAScreenView', MOTHAScreenView );
 
-  return inherit( ScreenView, ModelsOfTheHydrogenAtomScreenView, {
+  return inherit( ScreenView, MOTHAScreenView, {
 
     // @public
     step: function( dt ) {

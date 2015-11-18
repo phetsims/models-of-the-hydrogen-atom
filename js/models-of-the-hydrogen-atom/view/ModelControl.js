@@ -14,8 +14,8 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var Node = require( 'SCENERY/nodes/Node' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -43,9 +43,9 @@ define( function( require ) {
   var quantumString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/quantum' );
 
   // constants
-  var TITLE_FONT = new MHAFont( { size: 18, weight: 'bold' } );
-  var BUTTON_FONT = new MHAFont( 13 );
-  var SPECTRUM_FONT = new MHAFont( 14 );
+  var TITLE_FONT = new MOTHAFont( { size: 18, weight: 'bold' } );
+  var BUTTON_FONT = new MOTHAFont( 13 );
+  var SPECTRUM_FONT = new MOTHAFont( 14 );
   var PANEL_X_MARGIN = 10;
   var PANEL_Y_MARGIN = 10;
   var SPECTRUM_TEXT_MARGIN = 6;

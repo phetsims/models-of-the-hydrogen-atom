@@ -12,8 +12,8 @@ define( function( require ) {
   var AccordionBox = require( 'SUN/AccordionBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
@@ -45,7 +45,7 @@ define( function( require ) {
     options.expandedProperty = expandedProperty;
 
     options.titleNode = new Text( electronEnergyLevelString, {
-      font: new MHAFont( { size: 16, weight: 'bold' } ),
+      font: new MOTHAFont( { size: 16, weight: 'bold' } ),
       fill: 'white',
       maxWidth: 150 // i18n, determined empirically
     } );

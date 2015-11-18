@@ -18,7 +18,7 @@ define( function( require ) {
    * @param {Object|number} options {Object} font options or {number} font size
    * @constructor
    */
-  function MHAFont( options ) {
+  function MOTHAFont( options ) {
 
     // convenience for specifying font size only, e.g. new RPALFont(24)
     if ( typeof options === 'number' ) {
@@ -33,7 +33,7 @@ define( function( require ) {
     PhetFont.call( this, options );
   }
 
-  modelsOfTheHydrogenAtom.register( 'MHAFont', MHAFont );
+  modelsOfTheHydrogenAtom.register( 'MOTHAFont', MOTHAFont );
 
-  return inherit( PhetFont, MHAFont );
+  return inherit( PhetFont, MOTHAFont );
 } );

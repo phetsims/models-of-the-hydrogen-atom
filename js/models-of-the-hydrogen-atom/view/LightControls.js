@@ -13,8 +13,8 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -30,7 +30,7 @@ define( function( require ) {
     radius: 10
   };
   var RADIO_BUTTON_LABEL_OPTIONS = {
-    font: new MHAFont( 14 ),
+    font: new MOTHAFont( 14 ),
     fill: 'white',
     maxWidth: 100 // i18n, determined empirically
   };
@@ -65,7 +65,7 @@ define( function( require ) {
       thumbWidth: 25,
       thumbHeight: 25,
       valueFill: 'white',
-      valueFont: new MHAFont( 14 )
+      valueFont: new MOTHAFont( 14 )
     } );
 
     var contentNode = new VBox( {

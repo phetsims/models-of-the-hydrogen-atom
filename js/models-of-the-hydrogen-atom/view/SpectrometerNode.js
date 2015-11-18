@@ -14,8 +14,8 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -31,7 +31,7 @@ define( function( require ) {
 
   // constants
   var BUTTON_LABEL_OPTIONS = {
-    font: new MHAFont( 14 ),
+    font: new MOTHAFont( 14 ),
     maxWidth: 50 // i18n, determined empirically
   };
   var BUTTON_COLOR = 'rgb( 245, 245, 245 )';
@@ -59,7 +59,7 @@ define( function( require ) {
     options.expandedProperty = expandedProperty;
 
     options.titleNode = new Text( spectrometerPhotonsEmittedNmString, {
-      font: new MHAFont( { size: 16, weight: 'bold' } ),
+      font: new MOTHAFont( { size: 16, weight: 'bold' } ),
       fill: 'white',
       maxWidth: 290 // i18n, determined empirically
     } );

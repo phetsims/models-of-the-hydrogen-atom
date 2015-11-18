@@ -13,8 +13,8 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/NeutronNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
@@ -30,12 +30,12 @@ define( function( require ) {
 
   // constants
   var TITLE_OPTIONS = {
-    font: new MHAFont( { size: 18, weight: 'bold' } ),
+    font: new MOTHAFont( { size: 18, weight: 'bold' } ),
     fill: 'white',
     maxWidth: 100 // i18n, determined empirically
   };
   var LABEL_OPTIONS = {
-    font: new MHAFont( 18 ),
+    font: new MOTHAFont( 18 ),
     fill: 'white',
     maxWidth: 100 // i18n, determined empirically
   };
