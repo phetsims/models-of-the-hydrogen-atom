@@ -172,6 +172,12 @@ define( function( require ) {
       //TODO perhaps fade this in/out
       modelControl.visible = ( mode === 'prediction' );
     } );
+
+    // Show the energy diagram for models where it's relevant
+    model.modelProperty.link( function( model ) {
+      var modelsWithDiagram = [ 'classicalSolarSystem', 'bohr', 'deBroglie', 'schrodinger ']
+      energyDiagram.visible = ( _.indexOf( modelsWithDiagram, model ) !== -1 );
+    } );
   }
 
   modelsOfTheHydrogenAtom.register( 'ModelsOfTheHydrogenAtomScreenView', ModelsOfTheHydrogenAtomScreenView );
