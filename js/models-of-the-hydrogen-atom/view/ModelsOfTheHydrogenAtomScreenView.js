@@ -175,7 +175,7 @@ define( function( require ) {
 
     // Show the energy diagram for models where it's relevant
     model.modelProperty.link( function( model ) {
-      var modelsWithDiagram = [ 'classicalSolarSystem', 'bohr', 'deBroglie', 'schrodinger ']
+      var modelsWithDiagram = [ 'classicalSolarSystem', 'bohr', 'deBroglie', 'schrodinger '];
       energyDiagram.visible = ( _.indexOf( modelsWithDiagram, model ) !== -1 );
     } );
   }
