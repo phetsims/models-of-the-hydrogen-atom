@@ -21,13 +21,18 @@ define( function( require ) {
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelControl' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
+  var Path = require( 'SCENERY/nodes/Path' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpectrometerNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/SpectrometerNode' );
+  var Shape = require( 'KITE/Shape' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/TinyBox' );
   var ViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ViewProperties' );
 
   // strings
+  var boxOfHydrogenString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/boxOfHydrogen' );
   var drawingsAreNotToScaleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/drawingsAreNotToScale' );
   var showSpectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showSpectrometer' );
 
@@ -58,9 +63,29 @@ define( function( require ) {
     // Box of hydrogen
     var boxOfHydrogenNode = new BoxOfHydrogenNode( {
       left: modelControl.right + 40,
-      top: modeControl.bottom + 5
+      top: modeControl.bottom + 50
     } );
     this.addChild( boxOfHydrogenNode );
+
+    // Title above box of hydrogen
+    var boxOfHydrogenLabelNode = new MultiLineText( boxOfHydrogenString, {
+      font: new MHAFont( { size: 16, weight: 'bold' } ),
+      fill: 'white',
+      centerX: boxOfHydrogenNode.centerX,
+      bottom: boxOfHydrogenNode.top - 10,
+
+      // i18n, determined empirically
+      maxWidth: 90,
+      maxHeight: 35
+    } );
+    this.addChild( boxOfHydrogenLabelNode );
+
+    // Tiny box that indicates what will be exploded
+    var tinyBoxNode = new TinyBox( {
+      right: boxOfHydrogenNode.right - 10,
+      top: boxOfHydrogenNode.top + 20
+    } );
+    this.addChild( tinyBoxNode );
 
     // Beam of light from gun
     var beamNode = new BeamNode( model.light.onProperty, model.light.colorProperty, {
@@ -81,7 +106,7 @@ define( function( require ) {
       model.light.modeProperty, model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
         left: lightNode.left,
         top: lightNode.bottom
-    } );
+      } );
     this.addChild( lightControls );
 
     // Expanded box where the animation occurs
@@ -90,6 +115,17 @@ define( function( require ) {
       top: this.layoutBounds.top + 25
     } );
     this.addChild( animationBoxNode );
+
+    // Dashed lines that connect the tiny box and exploded box
+    var dashedLines = new Path( new Shape()
+      .moveTo( tinyBoxNode.left, tinyBoxNode.top )
+      .lineTo( animationBoxNode.left, animationBoxNode.top )
+      .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
+      .lineTo( animationBoxNode.left, animationBoxNode.bottom ), {
+      stroke: 'white',
+      lineDash: [ 5, 5 ]
+    } );
+    this.addChild( dashedLines );
 
     // Check box for showing spectrometer
     var spectrometerCheckBox = new CheckBox(
@@ -135,7 +171,7 @@ define( function( require ) {
         model.reset();
         viewProperties.reset();
       },
-      right:  this.layoutBounds.right - 10,
+      right: this.layoutBounds.right - 10,
       bottom: spectrometerNode.bottom
     } );
     this.addChild( resetAllButton );
@@ -150,7 +186,6 @@ define( function( require ) {
 
   return inherit( ScreenView, ModelsOfTheHydrogenAtomScreenView, {
 
-    //TODO Called by the animation loop. Optional, so if your view has no animation, please delete this.
     step: function( dt ) {
       //TODO Handle view animation here.
     }
