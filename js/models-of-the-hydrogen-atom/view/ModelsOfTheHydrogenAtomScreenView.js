@@ -79,14 +79,14 @@ define( function( require ) {
     } );
     this.addChild( boxOfHydrogenLabelNode );
 
-    // Tiny box that indicates what will be exploded
+    // Tiny box that indicates what will be zoomed
     var tinyBoxNode = new TinyBox( {
       right: boxOfHydrogenNode.right - 10,
       top: boxOfHydrogenNode.top + 20
     } );
     this.addChild( tinyBoxNode );
 
-    // Beam of light from gun
+    // Beam of light
     var beamNode = new BeamNode( model.light.onProperty, model.light.colorProperty, {
       centerX: boxOfHydrogenNode.centerX,
       top: boxOfHydrogenNode.bottom
@@ -100,20 +100,20 @@ define( function( require ) {
     } );
     this.addChild( lightNode );
 
-    // Light controls
-    var lightControls = new LightControls(
-      model.light.modeProperty, model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
-        left: lightNode.left,
-        top: lightNode.bottom + 15
-      } );
-    this.addChild( lightControls );
-
     // Box that shows the zoomed-in view
     var zoomBoxNode = new ZoomBoxNode( {
       left: lightNode.right + 30,
       top: this.layoutBounds.top + 25
     } );
     this.addChild( zoomBoxNode );
+
+    // Light controls
+    var lightControls = new LightControls(
+      model.light.modeProperty, model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
+        left: lightNode.left,
+        top: zoomBoxNode.bottom + 10
+      } );
+    this.addChild( lightControls );
 
     // Dashed lines that connect the tiny box and zoom box
     var dashedLines = new Path( new Shape()
@@ -136,7 +136,7 @@ define( function( require ) {
     // Spectrometer
     var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
       left: lightControls.right + 10,
-      bottom: lightControls.bottom
+      top: lightControls.top
     } );
     this.addChild( spectrometerNode );
 
