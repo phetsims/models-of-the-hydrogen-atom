@@ -1,0 +1,63 @@
+{
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.1 Wed Nov 18 2015 14:33:10 GMT-0700 (MST)",
+  "assert": {
+    "sha": "3921bc3784dc67e9cbfa31cdec52b582fcfc68e7",
+    "branch": "master"
+  },
+  "axon": {
+    "sha": "fffc6c30fe12ce50630ddf3946ed486ca3288133",
+    "branch": "master"
+  },
+  "brand": {
+    "sha": "3b236d6fc040318086b7d360782871f1dcf45a87",
+    "branch": "master"
+  },
+  "chipper": {
+    "sha": "a4994516ff859787b03658a4934bfe6b07348582",
+    "branch": "master"
+  },
+  "dot": {
+    "sha": "5c39b7d803db50ef802291f79fb43396f1cf9bb8",
+    "branch": "master"
+  },
+  "joist": {
+    "sha": "9ae1dc4a473ae68a4e4c4533750f4c3bd47549e1",
+    "branch": "master"
+  },
+  "kite": {
+    "sha": "84e84bcaef87ea4be58ad08d4b61fb6fa591088d",
+    "branch": "master"
+  },
+  "models-of-the-hydrogen-atom": {
+    "sha": "913046cd0f74e75596a880413bb52ef584fce236",
+    "branch": "master"
+  },
+  "phet-core": {
+    "sha": "73a034c676ee7b14b99aeeb1e7aad79f579b91b1",
+    "branch": "master"
+  },
+  "phetcommon": {
+    "sha": "d9d2e688fc28dcaac114fdeb3d0d22cadfb6237e",
+    "branch": "master"
+  },
+  "scenery": {
+    "sha": "24cc43dd1c7428578bec60ef19df7b6e830ffeec",
+    "branch": "master"
+  },
+  "scenery-phet": {
+    "sha": "72e12d068515bf6f7466ef77449cef320a7199ba",
+    "branch": "master"
+  },
+  "sherpa": {
+    "sha": "be8c4fc917f1644586ba4459351eade68e3bc0d2",
+    "branch": "master"
+  },
+  "sun": {
+    "sha": "7b4a98d631d2a37a5245c3859f03fae0b65877ec",
+    "branch": "master"
+  },
+  "tandem": {
+    "sha": "e98bd8c3370af1d1b7b207ad054bd408de5ad190",
+    "branch": "master"
+  }
+}
