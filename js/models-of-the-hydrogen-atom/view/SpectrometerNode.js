@@ -17,7 +17,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var spectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometer' );
+  var spectrometerPhotonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometerPhotonsEmittedNm' );
 
   /**
    * @param {Property.<boolean>} expandedProperty
@@ -40,10 +40,10 @@ define( function( require ) {
 
     options.expandedProperty = expandedProperty;
 
-    options.titleNode = new Text( spectrometerString, {
+    options.titleNode = new Text( spectrometerPhotonsEmittedNmString, {
       font: new MHAFont( { size: 16, weight: 'bold' } ),
       fill: 'white',
-      maxWidth: 150 // i18n, determined empirically
+      maxWidth: 290 // i18n, determined empirically
     } );
 
     var contentNode = new Rectangle( 0, 0, 400, 85, {

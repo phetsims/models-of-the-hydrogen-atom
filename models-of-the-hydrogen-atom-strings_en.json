@@ -107,9 +107,6 @@
   "showAbsorptionWavelengths": {
     "value": "Show absorption wavelengths"
   },
-  "spectrometer": {
-    "value": "Spectrometer"
-  },
   "showTraces": {
     "value": "Show traces"
   },
