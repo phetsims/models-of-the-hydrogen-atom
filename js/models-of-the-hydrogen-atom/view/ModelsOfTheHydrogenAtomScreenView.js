@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
+  var CheckBox = require( 'SUN/CheckBox' );
   var LightNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
@@ -27,6 +28,7 @@ define( function( require ) {
 
   // strings
   var drawingsAreNotToScaleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/drawingsAreNotToScale' );
+  var showSpectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showSpectrometer' );
 
   /**
    * @param {ModelsOfTheHydrogenAtomModel} model
@@ -80,6 +82,20 @@ define( function( require ) {
         top: lightNode.bottom
     } );
     this.addChild( lightControls );
+
+    // Check box for showing spectrometer
+    var spectrometerCheckBox = new CheckBox(
+      new Text( showSpectrometerString, {
+        font: new MHAFont( 16 ),
+        fill: 'white'
+      } ),
+      viewProperties.spectrometerVisibleProperty,
+      {
+        left: lightControls.right + 25,
+        top: lightControls.top + 10
+      }
+    );
+    this.addChild( spectrometerCheckBox );
 
     // Spectrometer
     var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
