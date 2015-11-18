@@ -30,11 +30,11 @@ define( function( require ) {
   var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/TinyBox' );
   var ViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ViewProperties' );
   var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ZoomBoxNode' );
-  var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ZoomBoxNode' );
 
   // strings
   var boxOfHydrogenString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/boxOfHydrogen' );
   var drawingsAreNotToScaleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/drawingsAreNotToScale' );
+  var showElectronEnergyLevelDiagramString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showElectronEnergyLevelDiagram' );
   var showSpectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showSpectrometer' );
 
   /**
@@ -148,6 +148,20 @@ define( function( require ) {
       bottom: lightControls.bottom
     } );
     this.addChild( spectrometerNode );
+
+    // Check box for showing electron energy level diagram
+    var energyDiagramCheckBox = new CheckBox(
+      new Text( showElectronEnergyLevelDiagramString, {
+        font: new MHAFont( 16 ),
+        fill: 'white'
+      } ),
+      viewProperties.energyDiagramVisibleProperty,
+      {
+        left: zoomBoxNode.right + 10,
+        top: zoomBoxNode.top + 10
+      }
+    );
+    this.addChild( energyDiagramCheckBox );
 
     // Legend
     var legendNode = new LegendNode( {
