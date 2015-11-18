@@ -12,9 +12,10 @@ define( function( require ) {
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var LightNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightNode' );
+  var EnergyDiagram = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/EnergyDiagram' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
+  var LightNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightNode' );
   var LightControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightControls' );
   var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
@@ -128,6 +129,13 @@ define( function( require ) {
     } );
     this.addChild( dashedLines );
 
+    // Legend
+    var legendNode = new LegendNode( {
+      left: zoomBoxNode.right + 15,
+      centerY: zoomBoxNode.centerY
+    } );
+    this.addChild( legendNode );
+
     // Check box for showing spectrometer
     var spectrometerCheckBox = new CheckBox(
       new Text( showSpectrometerString, {
@@ -159,18 +167,18 @@ define( function( require ) {
       } ),
       viewProperties.energyDiagramVisibleProperty,
       {
-        left: zoomBoxNode.right + 10,
+        left: zoomBoxNode.right + 15,
         top: zoomBoxNode.top + 10
       }
     );
     this.addChild( energyDiagramCheckBox );
 
-    // Legend
-    var legendNode = new LegendNode( {
-      left: zoomBoxNode.right + 15,
-      centerY: zoomBoxNode.centerY
+    // Energy diagram
+    var energyDiagram = new EnergyDiagram( viewProperties.energyDiagramVisibleProperty, {
+      left: zoomBoxNode.right + 10,
+      top: zoomBoxNode.top
     } );
-    this.addChild( legendNode );
+    this.addChild( energyDiagram );
 
     // Disclaimer
     var disclaimerNode = new Text( drawingsAreNotToScaleString, {
