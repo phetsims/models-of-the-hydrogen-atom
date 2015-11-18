@@ -1,7 +1,7 @@
 // Copyright 2015, University of Colorado Boulder
 
 /**
- * The gun. Origin is at center of nozzle.
+ * The light. Origin is at center of nozzle.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,7 +23,7 @@ define( function( require ) {
    * @param options
    * @constructor
    */
-  function GunNode( onProperty, options ) {
+  function LightNode( onProperty, options ) {
 
     options = options || {};
 
@@ -43,7 +43,7 @@ define( function( require ) {
     Node.call( this, options );
   }
 
-  modelsOfTheHydrogenAtom.register( 'GunNode', GunNode );
+  modelsOfTheHydrogenAtom.register( 'LightNode', LightNode );
 
-  return inherit( Node, GunNode );
+  return inherit( Node, LightNode );
 } );

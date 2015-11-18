@@ -22,7 +22,8 @@ define( function( require ) {
 
     // @public
     PropertySet.call( this, {
-      mode: 'experiment' // {string} 'experiment'|'prediction'
+      mode: 'experiment', // {string} 'experiment'|'prediction'
+      absorptionWavelengthsVisible: false // {boolean}
     } );
 
     this.modeProperty.link( function( mode ) {

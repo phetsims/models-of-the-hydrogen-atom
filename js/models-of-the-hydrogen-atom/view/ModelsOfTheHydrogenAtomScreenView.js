@@ -11,9 +11,10 @@ define( function( require ) {
   // modules
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
-  var GunNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/GunNode' );
+  var LightNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
+  var LightControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightControls' );
   var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelControl' );
@@ -59,7 +60,7 @@ define( function( require ) {
     this.addChild( boxOfHydrogenNode );
 
     // Beam of light from gun
-    var beamVisibleProperty = new Property( true ); //TODO move to model, this is whether gun is on/off
+    var beamVisibleProperty = new Property( false ); //TODO move to model, this is whether light is on/off
     var beamColorProperty = new Property( 'yellow' ); //TODO move to model, this is derived from gun's wavelength
     var beamNode = new BeamNode( beamVisibleProperty, beamColorProperty, {
       centerX: boxOfHydrogenNode.centerX,
@@ -67,12 +68,22 @@ define( function( require ) {
     } );
     this.addChild( beamNode );
 
-    // Gun
-    var gunNode = new GunNode( beamVisibleProperty, {
+    // Light
+    var lightNode = new LightNode( beamVisibleProperty, {
       x: beamNode.centerX,
       y: beamNode.bottom
     } );
-    this.addChild( gunNode );
+    this.addChild( lightNode );
+
+    // Light controls
+    var lightModeProperty = new Property( 'white' ); //TODO move to model
+    var wavelengthProperty = new Property( 400 ); // TODO move to model
+    var lightControls = new LightControls(
+      lightModeProperty, wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
+        left: lightNode.left,
+        top: lightNode.bottom
+    } );
+    this.addChild( lightControls );
 
     // Legend
     var legendNode = new LegendNode( {
