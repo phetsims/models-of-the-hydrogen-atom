@@ -30,7 +30,7 @@ define( function( require ) {
     } );
 
     var closeButton = new CloseButton( {
-      iconLength: 8,
+      iconLength: 6,
       xTouchExpansion: 8,
       yTouchExpansion: 8,
       listener: function() {
