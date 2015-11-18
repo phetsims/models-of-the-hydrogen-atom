@@ -25,7 +25,7 @@ define( function( require ) {
 
     options = options || {};
 
-    var backgroundNode = new ShadedRectangle( new Bounds2( 0, 0, 350, 120 ), {
+    var backgroundNode = new ShadedRectangle( new Bounds2( 0, 0, 400, 120 ), {
       baseColor: 'rgb( 90, 90, 126 )'
     } );
 

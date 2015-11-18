@@ -99,7 +99,7 @@ define( function( require ) {
 
     // Spectrometer
     var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
-      left: lightControls.right + 20,
+      left: lightControls.right + 15,
       bottom: lightControls.bottom
     } );
     this.addChild( spectrometerNode );
@@ -128,7 +128,7 @@ define( function( require ) {
         viewProperties.reset();
       },
       right:  this.layoutBounds.right - 10,
-      bottom: this.layoutBounds.bottom - 10
+      bottom: spectrometerNode.bottom
     } );
     this.addChild( resetAllButton );
 
