@@ -14,13 +14,18 @@ define( function( require ) {
   var GunNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/GunNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
+  var MHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MHAFont' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelControl' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var Property = require( 'AXON/Property' );
-  var ScreenView = require( 'JOIST/ScreenView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var ScreenView = require( 'JOIST/ScreenView' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var ViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ViewProperties' );
+
+  // strings
+  var drawingsAreNotToScaleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/drawingsAreNotToScale' );
 
   /**
    * @param {ModelsOfTheHydrogenAtomModel} model
@@ -75,6 +80,15 @@ define( function( require ) {
       top: this.layoutBounds.top + 10
     } );
     this.addChild( legendNode );
+
+    // Disclaimer
+    var disclaimerNode = new Text( drawingsAreNotToScaleString, {
+      font: new MHAFont( 14 ),
+      fill: 'white',
+      centerX: this.layoutBounds.centerX, //TODO center over big box
+      top: this.layoutBounds.top + 10
+    } );
+    this.addChild( disclaimerNode );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
