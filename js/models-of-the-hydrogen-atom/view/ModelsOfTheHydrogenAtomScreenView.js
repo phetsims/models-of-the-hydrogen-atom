@@ -63,7 +63,7 @@ define( function( require ) {
 
     // Box of hydrogen
     var boxOfHydrogenNode = new BoxOfHydrogenNode( {
-      left: modelControl.right + 40,
+      left: modelControl.right + 20,
       top: modeControl.bottom + 50
     } );
     this.addChild( boxOfHydrogenNode );
@@ -97,8 +97,8 @@ define( function( require ) {
 
     // Light
     var lightNode = new LightNode( model.light.onProperty, {
-      x: beamNode.centerX,
-      y: beamNode.bottom
+      centerX: beamNode.centerX,
+      top: beamNode.bottom
     } );
     this.addChild( lightNode );
 
@@ -106,7 +106,7 @@ define( function( require ) {
     var lightControls = new LightControls(
       model.light.modeProperty, model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
         left: lightNode.left,
-        top: lightNode.bottom
+        top: lightNode.bottom + 15
       } );
     this.addChild( lightControls );
 
