@@ -1,7 +1,9 @@
 // Copyright 2015, University of Colorado Boulder
 
 /**
- * AnimationBoxNode is the box in which animation of atoms, photons and alpha particles takes place.
+ *
+ * Provides the zoomed-in view of part of the box of hydrogen.
+ * This is the box in which animation of atoms, photons and alpha particles takes place.
  *
  * @author Chris Malley (cmalley@pixelzoom.com)
  */
@@ -18,7 +20,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function AnimationBoxNode( options ) {
+  function ZoomBoxNode( options ) {
 
     options = options || {};
 
@@ -33,7 +35,7 @@ define( function( require ) {
     Node.call( this, options );
   }
 
-  modelsOfTheHydrogenAtom.register( 'AnimationBoxNode', AnimationBoxNode );
+  modelsOfTheHydrogenAtom.register( 'ZoomBoxNode', ZoomBoxNode );
 
-  return inherit( Node, AnimationBoxNode );
+  return inherit( Node, ZoomBoxNode );
 } );

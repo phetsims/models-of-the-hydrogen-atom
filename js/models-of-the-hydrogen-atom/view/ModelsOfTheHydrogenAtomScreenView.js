@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AnimationBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/AnimationBoxNode' );
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
   var CheckBox = require( 'SUN/CheckBox' );
@@ -30,6 +29,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/TinyBox' );
   var ViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ViewProperties' );
+  var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ZoomBoxNode' );
+  var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ZoomBoxNode' );
 
   // strings
   var boxOfHydrogenString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/boxOfHydrogen' );
@@ -109,19 +110,19 @@ define( function( require ) {
       } );
     this.addChild( lightControls );
 
-    // Expanded box where the animation occurs
-    var animationBoxNode = new AnimationBoxNode( {
+    // Box that shows the zoomed-in view
+    var zoomBoxNode = new ZoomBoxNode( {
       left: lightNode.right + 30,
       top: this.layoutBounds.top + 25
     } );
-    this.addChild( animationBoxNode );
+    this.addChild( zoomBoxNode );
 
-    // Dashed lines that connect the tiny box and exploded box
+    // Dashed lines that connect the tiny box and zoom box
     var dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )
-      .lineTo( animationBoxNode.left, animationBoxNode.top )
+      .lineTo( zoomBoxNode.left, zoomBoxNode.top )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
-      .lineTo( animationBoxNode.left, animationBoxNode.bottom ), {
+      .lineTo( zoomBoxNode.left, zoomBoxNode.bottom ), {
       stroke: 'white',
       lineDash: [ 5, 5 ]
     } );
@@ -150,8 +151,8 @@ define( function( require ) {
 
     // Legend
     var legendNode = new LegendNode( {
-      left: animationBoxNode.right + 15,
-      centerY: animationBoxNode.centerY
+      left: zoomBoxNode.right + 15,
+      centerY: zoomBoxNode.centerY
     } );
     this.addChild( legendNode );
 
@@ -159,8 +160,8 @@ define( function( require ) {
     var disclaimerNode = new Text( drawingsAreNotToScaleString, {
       font: new MHAFont( 14 ),
       fill: 'white',
-      centerX: animationBoxNode.centerX,
-      centerY: this.layoutBounds.top + ( animationBoxNode.top - this.layoutBounds.top ) / 2,
+      centerX: zoomBoxNode.centerX,
+      centerY: this.layoutBounds.top + ( zoomBoxNode.top - this.layoutBounds.top ) / 2,
       maxWidth: 250 // TODO width of the big box
     } );
     this.addChild( disclaimerNode );
