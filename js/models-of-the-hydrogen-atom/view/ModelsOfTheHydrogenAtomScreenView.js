@@ -201,6 +201,7 @@ define( function( require ) {
 
   return inherit( ScreenView, ModelsOfTheHydrogenAtomScreenView, {
 
+    // @public
     step: function( dt ) {
       //TODO Handle view animation here.
     }

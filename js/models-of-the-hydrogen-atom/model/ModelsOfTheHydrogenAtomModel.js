@@ -53,7 +53,7 @@ define( function( require ) {
       this.light.reset();
     },
 
-    //TODO Called by the animation loop. Optional, so if your model has no animation, please delete this.
+    // @public
     step: function( dt ) {
       //TODO Handle model animation here.
     }
