@@ -31,9 +31,9 @@ define( function( require ) {
     } );
 
     // @public {Color}
-    this.colorProperty = new DerivedProperty( [ this.wavelengthProperty ],
-      function( wavelength ) {
-        return VisibleColor.wavelengthToColor( wavelength );
+    this.colorProperty = new DerivedProperty( [ this.modeProperty, this.wavelengthProperty ],
+      function( mode, wavelength ) {
+        return ( mode === 'white' ) ? 'white' : VisibleColor.wavelengthToColor( wavelength );
       }
     );
   }
