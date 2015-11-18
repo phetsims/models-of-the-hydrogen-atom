@@ -31,12 +31,13 @@ define( function( require ) {
 
     // @public
     PropertySet.call( this, {
-      model: MODEL_VALUES[ 0 ] // {string} see MODEL_VALUES
+      model: MODEL_VALUES[ 0 ] // {string} the predictive model being used, see MODEL_VALUES
     } );
 
     // @public
     this.light = new Light();
 
+    // validate model Property
     this.modelProperty.link( function( model ) {
       assert && assert( _.indexOf( MODEL_VALUES, model ) !== -1 );
     } );

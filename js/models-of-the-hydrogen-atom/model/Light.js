@@ -10,6 +10,9 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
 
+  // constants
+  var MODE_VALUES = [ 'white', 'monochromatic' ];
+
   /**
    * @constructor
    */
@@ -18,8 +21,13 @@ define( function( require ) {
     // @public
     PropertySet.call( this, {
       on: false, // {boolean} is the light on?
-      mode: 'white', // {string} 'white'|'monochromatic'
+      mode: 'white', // {string} type of light being emitted, see MODE_VALUES
       wavelength: 400 // {number} wavelength in nm
+    } );
+
+    // validate mode Property
+    this.modeProperty.link( function( mode ) {
+      assert && assert( _.indexOf( MODE_VALUES, mode ) !== -1 );
     } );
 
     // @public {Color}
