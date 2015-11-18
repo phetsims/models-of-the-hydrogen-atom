@@ -22,7 +22,7 @@ define( function( require ) {
     PropertySet.call( this, {
       on: false, // {boolean} is the light on?
       mode: 'white', // {string} type of light being emitted, see MODE_VALUES
-      wavelength: 400 // {number} wavelength in nm
+      wavelength: VisibleColor.MIN_WAVELENGTH // {number} wavelength in nm
     } );
 
     // validate mode Property
