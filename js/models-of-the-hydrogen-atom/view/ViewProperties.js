@@ -23,7 +23,7 @@ define( function( require ) {
     // @public
     PropertySet.call( this, {
       mode: 'experiment', // {string} 'experiment'|'prediction'
-      absorptionWavelengthsVisible: false // {boolean}
+      absorptionWavelengthsVisible: false // {boolean} are absorption wavelengths indicated on the wavelength slider?
     } );
 
     this.modeProperty.link( function( mode ) {

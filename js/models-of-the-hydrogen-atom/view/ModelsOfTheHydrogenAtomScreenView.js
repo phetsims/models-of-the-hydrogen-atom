@@ -60,26 +60,22 @@ define( function( require ) {
     this.addChild( boxOfHydrogenNode );
 
     // Beam of light from gun
-    var beamVisibleProperty = new Property( false ); //TODO move to model, this is whether light is on/off
-    var beamColorProperty = new Property( 'yellow' ); //TODO move to model, this is derived from gun's wavelength
-    var beamNode = new BeamNode( beamVisibleProperty, beamColorProperty, {
+    var beamNode = new BeamNode( model.light.onProperty, model.light.colorProperty, {
       centerX: boxOfHydrogenNode.centerX,
       top: boxOfHydrogenNode.bottom
     } );
     this.addChild( beamNode );
 
     // Light
-    var lightNode = new LightNode( beamVisibleProperty, {
+    var lightNode = new LightNode( model.light.onProperty, {
       x: beamNode.centerX,
       y: beamNode.bottom
     } );
     this.addChild( lightNode );
 
     // Light controls
-    var lightModeProperty = new Property( 'white' ); //TODO move to model
-    var wavelengthProperty = new Property( 400 ); // TODO move to model
     var lightControls = new LightControls(
-      lightModeProperty, wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
+      model.light.modeProperty, model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
         left: lightNode.left,
         top: lightNode.bottom
     } );
