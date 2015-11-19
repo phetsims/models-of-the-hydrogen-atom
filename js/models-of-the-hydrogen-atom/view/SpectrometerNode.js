@@ -53,7 +53,9 @@ define( function( require ) {
       buttonYMargin: 5,
       contentXMargin: 5,
       contentYMargin: 5,
-      contentYSpacing: 0
+      contentYSpacing: 0,
+      buttonAlign: 'right',
+      titleAlignX: 'left'
     }, options );
 
     options.expandedProperty = expandedProperty;
