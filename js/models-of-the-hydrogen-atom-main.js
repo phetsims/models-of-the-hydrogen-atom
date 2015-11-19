@@ -19,9 +19,9 @@ define( function( require ) {
   var simOptions = {
     credits: {
       //TODO update credits for JS version
-      leadDesign: 'Sam McKagan',
+      leadDesign: 'Amy Handson, Sam McKagan',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-      team: 'Wendy Adams, Mike Dubson, Noah Finkelstein, Mindy Gratny,\nDanielle Harlow, Kathy Perkins, Noah Podolefsky, Carl Weiman',
+      team: 'Wendy Adams, Mike Dubson, Noah Finkelstein, Mindy Gratny,\nDanielle Harlow, Ariel Paul, Kathy Perkins, Noah Podolefsky, Carl Weiman',
       qualityAssurance: '',
       graphicArts: '',
       thanks: ''
