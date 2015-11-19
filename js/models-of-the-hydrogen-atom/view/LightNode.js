@@ -20,7 +20,7 @@ define( function( require ) {
   // constants
   var NOZZLE_SIZE = new Dimension2( 60, 20 );
   var BODY_SIZE = new Dimension2( 1.3 * NOZZLE_SIZE.width, 110 );
-  var BASE_COLOR = 'rgb( 180, 180, 180 )';
+  var BASE_COLOR = 'rgb( 50, 50, 50 )';
   var HIGHLIGHT_COLOR = 'rgb( 245, 245, 245 )';
 
   /**
