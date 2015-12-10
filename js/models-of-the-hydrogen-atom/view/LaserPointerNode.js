@@ -79,7 +79,7 @@ define( function( require ) {
     };
     var button = ( options.buttonType === 'toggle' ) ?
                  new RoundStickyToggleButton( false, true, onProperty, buttonOptions ) :
-                 new RoundMomentaryButton( onProperty, buttonOptions );
+                 new RoundMomentaryButton( false, true, onProperty, buttonOptions );
 
     // @private called by dispose
     this.disposeLaserPointerNode = function() {
