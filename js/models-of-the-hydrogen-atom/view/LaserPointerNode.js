@@ -77,16 +77,17 @@ define( function( require ) {
       baseColor: options.buttonColor,
       center: bodyNode.center
     };
-    var button = ( options.buttonType === 'toggle' ) ?
+    // @private
+    this.button = ( options.buttonType === 'toggle' ) ?
                  new RoundStickyToggleButton( false, true, onProperty, buttonOptions ) :
                  new RoundMomentaryButton( false, true, onProperty, buttonOptions );
 
     // @private called by dispose
     this.disposeLaserPointerNode = function() {
-      button.dispose();
+      this.button.dispose();
     };
 
-    options.children = [ nozzleNode, bodyNode, button ];
+    options.children = [ nozzleNode, bodyNode, this.button ];
     Node.call( this, options );
   }
 
@@ -97,6 +98,24 @@ define( function( require ) {
     // @public
     dispose: function() {
       this.disposeLaserPointerNode();
-    }
+    },
+
+    /**
+     * Sets the enabled state of the laser's button.
+     * @param {boolean} value
+     * @public
+     */
+    setEnabled: function( value ) {
+      this.button.enabled = value;
+    },
+    set enabled( value ) { this.setEnabled( value ); },
+
+    /**
+     * Gets the enabled state of the laser's button.
+     * @returns {boolean}
+     * @public
+     */
+    getEnabled: function() {return this.button.enabled; },
+    get enabled() { return this.getEnabled(); }
   } );
 } );
