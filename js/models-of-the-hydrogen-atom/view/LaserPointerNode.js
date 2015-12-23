@@ -83,7 +83,7 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeLaserPointerNode = function() {
-      button.dispose && button.dispose(); //TODO memory leak, sun doesn't support dispose yet
+      button.dispose();
     };
 
     options.children = [ nozzleNode, bodyNode, button ];
