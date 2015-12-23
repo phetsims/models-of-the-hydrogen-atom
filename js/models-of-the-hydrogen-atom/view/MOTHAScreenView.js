@@ -95,6 +95,7 @@ define( function( require ) {
 
     // Light
     var lightNode = new LaserPointerNode( model.light.onProperty, {
+      rotation: -Math.PI / 2, // pointing up
       centerX: beamNode.centerX,
       top: beamNode.bottom
     } );
