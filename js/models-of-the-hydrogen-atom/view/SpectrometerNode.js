@@ -54,8 +54,8 @@ define( function( require ) {
       contentXMargin: 5,
       contentYMargin: 5,
       contentYSpacing: 0,
-      buttonTouchAreaDilatedX: 16,
-      buttonTouchAreaDilatedY: 16,
+      buttonTouchAreaXDilation: 16,
+      buttonTouchAreaYDilation: 16,
       buttonAlign: 'right',
       titleAlignX: 'left'
     }, options );
