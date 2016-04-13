@@ -13,6 +13,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
@@ -45,7 +46,7 @@ define( function( require ) {
       cornerRadius: 5,
       buttonXMargin: 5,
       buttonYMargin: 5,
-      contentXMargin: 5,
+      contentXMargin: 10,
       contentYMargin: 5,
       contentYSpacing: 0,
       buttonTouchAreaXDilation: 16,
@@ -91,15 +92,17 @@ define( function( require ) {
       }
     } );
 
-    var buttonGroup = new HBox( {
-      spacing: 20,
-      children: [ recordStopButton, resetButton, cameraButton ]
-    } );
-
     //TODO placeholder
     var displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
       fill: 'white',
       stroke: 'black'
+    } );
+
+    var SPACING = 20;
+    var STRUT_WITH = displayNode.width - ( ( 3 * SPACING ) +  recordStopButton.width + resetButton.width + cameraButton.width );
+    var buttonGroup = new HBox( {
+      spacing: 20,
+      children: [ recordStopButton, new HStrut( STRUT_WITH ), resetButton, cameraButton ]
     } );
 
     var contentNode = new VBox( {
