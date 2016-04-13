@@ -71,13 +71,15 @@ define( function( require ) {
 
     var recordStopButton = new RecordStopButton( recordingProperty, {
       radius: 15,
-      baseColor: BUTTON_COLOR
+      baseColor: BUTTON_COLOR,
+      touchAreaDilation: 10
     } );
 
     var resetButton = new ResetButton( {
       baseColor: BUTTON_COLOR,
       arrowColor: 'black',
       radius: recordStopButton.height / 2,
+      touchAreaDilation: 10,
       listener: function() {
         //TODO
       }
@@ -87,6 +89,8 @@ define( function( require ) {
       maxHeight: recordStopButton.height,
       baseColor: BUTTON_COLOR,
       content: new FontAwesomeNode( 'camera' ),
+      touchAreaXDilation: 10,
+      touchAreaYDilation: 10,
       listener: function() {
         //TODO
       }
