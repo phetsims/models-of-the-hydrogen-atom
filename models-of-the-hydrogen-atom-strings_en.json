@@ -92,9 +92,6 @@
   "radialView": {
     "value": "radial view"
   },
-  "reset": {
-    "value": "Reset"
-  },
   "schrodinger": {
     "value": "Schr\u00f6dinger"
   },
@@ -109,12 +106,6 @@
   },
   "spectrometerPhotonsEmittedNm": {
     "value": "Spectrometer: photons emitted / nm"
-  },
-  "start": {
-    "value": "Start"
-  },
-  "stop": {
-    "value": "Stop"
   },
   "transitions": {
     "value": "Transitions"

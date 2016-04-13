@@ -11,29 +11,24 @@ define( function( require ) {
   // modules
   var AccordionBox = require( 'SUN/AccordionBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var Image = require( 'SCENERY/nodes/Image' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
+  var Property = require( 'AXON/Property' );
+  var RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var ResetButton = require( 'SCENERY_PHET/buttons/ResetButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
-  // images
-  var cameraImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/camera.png' );
-
   // strings
-  var resetString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/reset' );
   var spectrometerPhotonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometerPhotonsEmittedNm' );
-  var stopString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/stop' );
 
   // constants
-  var BUTTON_LABEL_OPTIONS = {
-    font: new MOTHAFont( 14 ),
-    maxWidth: 50 // i18n, determined empirically
-  };
   var BUTTON_COLOR = 'rgb( 245, 245, 245 )';
   var DISPLAY_SIZE = new Dimension2( 400, 55 );
 
@@ -51,7 +46,7 @@ define( function( require ) {
       cornerRadius: 5,
       buttonXMargin: 5,
       buttonYMargin: 5,
-      contentXMargin: 5,
+      contentXMargin: 10,
       contentYMargin: 5,
       contentYSpacing: 0,
       buttonTouchAreaXDilation: 16,
@@ -68,40 +63,50 @@ define( function( require ) {
       maxWidth: 290 // i18n, determined empirically
     } );
 
-    var stopButton = new RectangularPushButton( {
-      baseColor: BUTTON_COLOR,
-      content: new Text( stopString, BUTTON_LABEL_OPTIONS ),
-      listener: function() {
-        //TODO
-      }
+    //TODO relocate, handle reset
+    var recordingProperty = new Property( false );
+    recordingProperty.link( function( recording ) {
+      //TODO
     } );
 
-    var resetButton = new RectangularPushButton( {
+    var recordStopButton = new RecordStopButton( recordingProperty, {
+      radius: 15,
       baseColor: BUTTON_COLOR,
-      content: new Text( resetString, BUTTON_LABEL_OPTIONS ),
+      touchAreaDilation: 10
+    } );
+
+    var resetButton = new ResetButton( {
+      baseColor: BUTTON_COLOR,
+      arrowColor: 'black',
+      radius: recordStopButton.height / 2,
+      touchAreaDilation: 10,
       listener: function() {
         //TODO
       }
     } );
 
     var cameraButton = new RectangularPushButton( {
-      maxHeight: stopButton.height,
+      maxHeight: recordStopButton.height,
       baseColor: BUTTON_COLOR,
-      content: new Image( cameraImage ),
+      content: new FontAwesomeNode( 'camera' ),
+      touchAreaXDilation: 10,
+      touchAreaYDilation: 10,
       listener: function() {
         //TODO
       }
-    } );
-
-    var buttonGroup = new HBox( {
-      spacing: 20,
-      children: [ stopButton, resetButton, cameraButton ]
     } );
 
     //TODO placeholder
     var displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
       fill: 'white',
       stroke: 'black'
+    } );
+
+    var SPACING = 20;
+    var STRUT_WITH = displayNode.width - ( ( 3 * SPACING ) +  recordStopButton.width + resetButton.width + cameraButton.width );
+    var buttonGroup = new HBox( {
+      spacing: 20,
+      children: [ recordStopButton, new HStrut( STRUT_WITH ), resetButton, cameraButton ]
     } );
 
     var contentNode = new VBox( {

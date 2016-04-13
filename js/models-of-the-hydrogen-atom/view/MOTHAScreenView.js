@@ -19,15 +19,12 @@ define( function( require ) {
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModelControl' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAViewProperties' );
-  var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
   var Path = require( 'SCENERY/nodes/Path' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpectrometerNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/SpectrometerNode' );
   var Shape = require( 'KITE/Shape' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/TinyBox' );
   var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ZoomBoxNode' );
 
