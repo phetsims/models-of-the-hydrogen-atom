@@ -11,8 +11,8 @@ define( function( require ) {
   // modules
   var AccordionBox = require( 'SUN/AccordionBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
@@ -21,9 +21,6 @@ define( function( require ) {
   var ResetButton = require( 'SCENERY_PHET/buttons/ResetButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-
-  // images
-  var cameraImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/camera.png' );
 
   // strings
   var spectrometerPhotonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometerPhotonsEmittedNm' );
@@ -88,7 +85,7 @@ define( function( require ) {
     var cameraButton = new RectangularPushButton( {
       maxHeight: stopButton.height,
       baseColor: BUTTON_COLOR,
-      content: new Image( cameraImage ),
+      content: new FontAwesomeNode( 'camera' ),
       listener: function() {
         //TODO
       }
