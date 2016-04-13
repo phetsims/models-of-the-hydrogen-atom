@@ -20,9 +20,6 @@
   "bohr": {
     "value": "Bohr"
   },
-  "boxOfHydrogen": {
-    "value": "Box of\nHydrogen"
-  },
   "brightnessView": {
     "value": "brightness view"
   },
@@ -40,9 +37,6 @@
   },
   "deBroglieView": {
     "value": "deBroglie view"
-  },
-  "drawingsAreNotToScale": {
-    "value": "* Drawings are not to scale"
   },
   "electron": {
     "value": "electron"

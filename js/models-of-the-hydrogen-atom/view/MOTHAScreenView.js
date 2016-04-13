@@ -31,10 +31,6 @@ define( function( require ) {
   var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/TinyBox' );
   var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ZoomBoxNode' );
 
-  // strings
-  var boxOfHydrogenString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/boxOfHydrogen' );
-  var drawingsAreNotToScaleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/drawingsAreNotToScale' );
-
   /**
    * @param {MOTHAModel} model
    * @constructor
@@ -65,19 +61,6 @@ define( function( require ) {
       top: modeControl.bottom + 50
     } );
     this.addChild( boxOfHydrogenNode );
-
-    // Title above box of hydrogen
-    var boxOfHydrogenLabelNode = new MultiLineText( boxOfHydrogenString, {
-      font: new MOTHAFont( { size: 16, weight: 'bold' } ),
-      fill: 'white',
-      centerX: boxOfHydrogenNode.centerX,
-      bottom: boxOfHydrogenNode.top - 10,
-
-      // i18n, determined empirically
-      maxWidth: 90,
-      maxHeight: 35
-    } );
-    this.addChild( boxOfHydrogenLabelNode );
 
     // Tiny box that indicates what will be zoomed
     var tinyBoxNode = new TinyBox( {
@@ -147,16 +130,6 @@ define( function( require ) {
       top: zoomBoxNode.top
     } );
     this.addChild( energyDiagram );
-
-    // Disclaimer
-    var disclaimerNode = new Text( drawingsAreNotToScaleString, {
-      font: new MOTHAFont( 14 ),
-      fill: 'white',
-      centerX: zoomBoxNode.centerX,
-      centerY: this.layoutBounds.top + ( zoomBoxNode.top - this.layoutBounds.top ) / 2,
-      maxWidth: 250 // TODO width of the big box
-    } );
-    this.addChild( disclaimerNode );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
