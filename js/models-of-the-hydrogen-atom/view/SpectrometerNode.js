@@ -18,6 +18,7 @@ define( function( require ) {
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var ResetButton = require( 'SCENERY_PHET/buttons/ResetButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -25,7 +26,6 @@ define( function( require ) {
   var cameraImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/camera.png' );
 
   // strings
-  var resetString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/reset' );
   var spectrometerPhotonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometerPhotonsEmittedNm' );
   var stopString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/stop' );
 
@@ -76,9 +76,10 @@ define( function( require ) {
       }
     } );
 
-    var resetButton = new RectangularPushButton( {
+    var resetButton = new ResetButton( {
       baseColor: BUTTON_COLOR,
-      content: new Text( resetString, BUTTON_LABEL_OPTIONS ),
+      arrowColor: 'black',
+      radius: stopButton.height / 2,
       listener: function() {
         //TODO
       }
