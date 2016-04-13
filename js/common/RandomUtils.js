@@ -1,9 +1,8 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- * Utility methods related to random number generation.
- * These methods share a global random number generator, so they are
- * not appropriate for all situations.
+ * Utility functions related to random number generation.
+ * These functions share one instance of a random number generator.
  *
  * @author Chris Malley (cmalley@pixelzoom.com)
  */
