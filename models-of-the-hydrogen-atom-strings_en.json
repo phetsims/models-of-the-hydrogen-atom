@@ -107,12 +107,6 @@
   "spectrometerPhotonsEmittedNm": {
     "value": "Spectrometer: photons emitted / nm"
   },
-  "start": {
-    "value": "Start"
-  },
-  "stop": {
-    "value": "Stop"
-  },
   "transitions": {
     "value": "Transitions"
   },

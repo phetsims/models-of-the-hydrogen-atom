@@ -16,6 +16,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
+  var Property = require( 'AXON/Property' );
+  var RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var ResetButton = require( 'SCENERY_PHET/buttons/ResetButton' );
@@ -24,13 +26,8 @@ define( function( require ) {
 
   // strings
   var spectrometerPhotonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometerPhotonsEmittedNm' );
-  var stopString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/stop' );
 
   // constants
-  var BUTTON_LABEL_OPTIONS = {
-    font: new MOTHAFont( 14 ),
-    maxWidth: 50 // i18n, determined empirically
-  };
   var BUTTON_COLOR = 'rgb( 245, 245, 245 )';
   var DISPLAY_SIZE = new Dimension2( 400, 55 );
 
@@ -65,25 +62,28 @@ define( function( require ) {
       maxWidth: 290 // i18n, determined empirically
     } );
 
-    var stopButton = new RectangularPushButton( {
-      baseColor: BUTTON_COLOR,
-      content: new Text( stopString, BUTTON_LABEL_OPTIONS ),
-      listener: function() {
-        //TODO
-      }
+    //TODO relocate, handle reset
+    var recordingProperty = new Property( false );
+    recordingProperty.link( function( recording ) {
+      //TODO
+    } );
+
+    var recordStopButton = new RecordStopButton( recordingProperty, {
+      radius: 15,
+      baseColor: BUTTON_COLOR
     } );
 
     var resetButton = new ResetButton( {
       baseColor: BUTTON_COLOR,
       arrowColor: 'black',
-      radius: stopButton.height / 2,
+      radius: recordStopButton.height / 2,
       listener: function() {
         //TODO
       }
     } );
 
     var cameraButton = new RectangularPushButton( {
-      maxHeight: stopButton.height,
+      maxHeight: recordStopButton.height,
       baseColor: BUTTON_COLOR,
       content: new FontAwesomeNode( 'camera' ),
       listener: function() {
@@ -93,7 +93,7 @@ define( function( require ) {
 
     var buttonGroup = new HBox( {
       spacing: 20,
-      children: [ stopButton, resetButton, cameraButton ]
+      children: [ recordStopButton, resetButton, cameraButton ]
     } );
 
     //TODO placeholder
