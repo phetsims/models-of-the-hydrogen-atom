@@ -46,7 +46,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function ModeSwitch( modeProperty, options ) {
+  function ModeControl( modeProperty, options ) {
 
     // switches
     var switchOptions = { cursor: 'pointer', scale: 0.8 };
@@ -157,7 +157,7 @@ define( function( require ) {
     predictionLabel.addInputListener( predictionListener );
   }
 
-  modelsOfTheHydrogenAtom.register( 'ModeSwitch', ModeSwitch );
+  modelsOfTheHydrogenAtom.register( 'ModeControl', ModeControl );
 
-  return inherit( Node, ModeSwitch );
+  return inherit( Node, ModeControl );
 } );
