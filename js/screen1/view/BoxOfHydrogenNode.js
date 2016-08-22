@@ -63,7 +63,7 @@ define( function( require ) {
       maxWidth: 0.65 * BOX_SIZE.width
     } );
 
-    assert && assert( !options.children, 'decordation not supported' );
+    assert && assert( !options.children, 'decoration not supported' );
     options.children = [  frontNode, topNode, hydrogenSymbol  ];
 
     Node.call( this, options );
