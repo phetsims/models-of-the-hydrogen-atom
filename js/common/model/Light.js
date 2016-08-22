@@ -1,5 +1,10 @@
-// Copyright 2015-2016, University of Colorado Boulder
+// Copyright 2016, University of Colorado Boulder
 
+/**
+ * Model of a light that can be switched between 'white' and 'monochromatic' modes.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
 define( function( require ) {
   'use strict';
 
@@ -18,11 +23,12 @@ define( function( require ) {
    */
   function Light() {
 
-    // @public
     PropertySet.call( this, {
+
+      // @public
       on: false, // {boolean} is the light on?
       mode: 'white', // {string} type of light being emitted, see MODE_VALUES
-      wavelength: VisibleColor.MIN_WAVELENGTH // {number} wavelength in nm
+      wavelength: VisibleColor.MIN_WAVELENGTH // {number} wavelength in nm, relevant only for 'monochromatic' mode
     } );
 
     // validate mode Property
@@ -30,7 +36,7 @@ define( function( require ) {
       assert && assert( _.indexOf( MODE_VALUES, mode ) !== -1 );
     } );
 
-    // @public {Color}
+    // @public {Color} color displayed by the view
     this.colorProperty = new DerivedProperty( [ this.modeProperty, this.wavelengthProperty ],
       function( mode, wavelength ) {
         return ( mode === 'white' ) ? 'white' : VisibleColor.wavelengthToColor( wavelength );

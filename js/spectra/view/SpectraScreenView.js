@@ -16,6 +16,7 @@ define( function( require ) {
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var LightControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/LightControls' );
+  var LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControl' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
@@ -87,6 +88,13 @@ define( function( require ) {
       top: this.layoutBounds.top + 25
     } );
     this.addChild( zoomBoxNode );
+
+    // Light mode control (radio buttons)
+    var lightModeControl = new LightModeControl( model.light.modeProperty, {
+      right: lightNode.left - 20,
+      bottom: lightNode.bottom
+    } );
+    this.addChild( lightModeControl );
 
     // Light controls
     var lightControls = new LightControls(
