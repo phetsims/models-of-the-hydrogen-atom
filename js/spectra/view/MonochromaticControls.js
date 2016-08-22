@@ -35,8 +35,12 @@ define( function( require ) {
 
     // wavelength slider
     var wavelengthSlider = new WavelengthSlider( wavelengthProperty, {
+      trackWidth: 250,
+      trackHeight: 20,
+      maxTweakersHeight: 20,
       thumbWidth: 25,
       thumbHeight: 25,
+      ySpacing: 6,
       valueFill: 'white',
       valueFont: new MOTHAFont( 18 )
     } );
