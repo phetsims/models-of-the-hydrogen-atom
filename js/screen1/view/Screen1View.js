@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/BeamNode' );
-  var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/BoxOfHydrogenNode' );
+  var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/BoxOfHydrogenNode' );
   var EnergyDiagram = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/EnergyDiagram' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
