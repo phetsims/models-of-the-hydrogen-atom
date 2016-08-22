@@ -55,7 +55,7 @@ define( function( require ) {
       lineWidth: 1
     } );
 
-    // hydrogen symbol
+    // hydrogen symbol, in lower-left corner of front face
     var hydrogenSymbol = new Text( hydrogenSymbolString, {
       font: new MOTHAFont( { weight: 'bold', size: 28 } ),
       left: frontNode.left + ( 0.25 * BOX_SIZE.width ),
