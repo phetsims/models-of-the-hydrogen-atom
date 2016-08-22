@@ -39,24 +39,47 @@ define( function( require ) {
 
     var viewProperties = new MOTHAViewProperties();
 
-    // selects between 'Experiment' and 'Prediction' modes
-    var modeControl = new ModeControl( viewProperties.modeProperty, {
-      left: this.layoutBounds.left + 10,
-      top: this.layoutBounds.top + 5
+    // Legend
+    var legendNode = new LegendNode( {
+      left: this.layoutBounds.left + 20,
+      top: this.layoutBounds.top + 20
     } );
-    this.addChild( modeControl );
+    this.addChild( legendNode );
 
-    // selects a predictive model
-    var modelControl = new ModelControl( model.modelProperty, {
-      left: modeControl.left,
-      top: modeControl.bottom + 5
+    // Controls for monochromatic light
+    var monochromaticControls = new MonochromaticControls(
+      model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
+        left: this.layoutBounds.left + 20,
+        bottom: this.layoutBounds.bottom - 20
+      } );
+    this.addChild( monochromaticControls );
+
+    // Light mode control (radio buttons)
+    var lightModeControl = new LightModeControl( model.light.modeProperty, {
+      left: monochromaticControls.left,
+      bottom: monochromaticControls.top - 20
     } );
-    this.addChild( modelControl );
+    this.addChild( lightModeControl );
+
+    // Light
+    var lightNode = new LaserPointerNode( model.light.onProperty, {
+      rotation: -Math.PI / 2, // pointing up
+      left: lightModeControl.right + 20,
+      bottom: lightModeControl.bottom
+    } );
+    this.addChild( lightNode );
+
+    // Beam of light
+    var beamNode = new BeamNode( model.light.onProperty, model.light.colorProperty, {
+      centerX: lightNode.centerX,
+      bottom: lightNode.top + 1
+    } );
+    this.addChild( beamNode );
 
     // Box of hydrogen
     var boxOfHydrogenNode = new BoxOfHydrogenNode( {
-      left: modelControl.right + 20,
-      top: modeControl.bottom + 50
+      centerX: beamNode.centerX,
+      bottom: beamNode.top + 1
     } );
     this.addChild( boxOfHydrogenNode );
 
@@ -67,20 +90,19 @@ define( function( require ) {
     } );
     this.addChild( tinyBoxNode );
 
-    // Beam of light
-    var beamNode = new BeamNode( model.light.onProperty, model.light.colorProperty, {
-      centerX: boxOfHydrogenNode.centerX,
-      top: boxOfHydrogenNode.bottom
+    // selects between 'Experiment' and 'Prediction' modes
+    var modeControl = new ModeControl( viewProperties.modeProperty, {
+      right: this.layoutBounds.right - 20,
+      top: this.layoutBounds.top + 20
     } );
-    this.addChild( beamNode );
+    this.addChild( modeControl );
 
-    // Light
-    var lightNode = new LaserPointerNode( model.light.onProperty, {
-      rotation: -Math.PI / 2, // pointing up
-      centerX: beamNode.centerX,
-      top: beamNode.bottom
+    // selects a predictive model
+    var modelControl = new ModelControl( model.modelProperty, {
+      right: modeControl.right,
+      top: modeControl.bottom + 5
     } );
-    this.addChild( lightNode );
+    this.addChild( modelControl );
 
     // Box that shows the zoomed-in view
     var zoomBoxNode = new ZoomBoxNode( {
@@ -88,21 +110,6 @@ define( function( require ) {
       top: this.layoutBounds.top + 25
     } );
     this.addChild( zoomBoxNode );
-
-    // Light mode control (radio buttons)
-    var lightModeControl = new LightModeControl( model.light.modeProperty, {
-      right: lightNode.left - 20,
-      bottom: lightNode.bottom
-    } );
-    this.addChild( lightModeControl );
-
-    // Controls for monochromatic light
-    var monochromaticControls = new MonochromaticControls(
-      model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
-        left: lightModeControl.left,
-        top: lightModeControl.bottom + 20
-      } );
-    this.addChild( monochromaticControls );
 
     // Dashed lines that connect the tiny box and zoom box
     var dashedLines = new Path( new Shape()
@@ -114,13 +121,6 @@ define( function( require ) {
       lineDash: [ 5, 5 ]
     } );
     this.addChild( dashedLines );
-
-    // Legend
-    var legendNode = new LegendNode( {
-      left: zoomBoxNode.right + 15,
-      centerY: zoomBoxNode.centerY
-    } );
-    this.addChild( legendNode );
 
     // Spectrometer
     var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
@@ -142,8 +142,8 @@ define( function( require ) {
         model.reset();
         viewProperties.reset();
       },
-      right: this.layoutBounds.right - 10,
-      bottom: spectrometerNode.bottom
+      right: this.layoutBounds.right - 20,
+      bottom: this.layoutBounds.bottom - 20
     } );
     this.addChild( resetAllButton );
 
