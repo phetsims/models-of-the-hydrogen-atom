@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/model/Light' );
+  var Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Light' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var PropertySet = require( 'AXON/PropertySet' );
 
