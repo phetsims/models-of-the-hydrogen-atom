@@ -53,6 +53,9 @@
   "experiment": {
     "value": "Experiment"
   },
+  "hydrogenSymbol": {
+    "value": "H"
+  },
   "irPhoton": {
     "value": "IR photon"
   },
