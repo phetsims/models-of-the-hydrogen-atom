@@ -15,12 +15,12 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
-  var LightControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/LightControls' );
   var LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModeControl' );
   var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControl' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
+  var MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
   var Path = require( 'SCENERY/nodes/Path' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -96,13 +96,13 @@ define( function( require ) {
     } );
     this.addChild( lightModeControl );
 
-    // Light controls
-    var lightControls = new LightControls(
-      model.light.modeProperty, model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
-        left: lightNode.left,
-        top: zoomBoxNode.bottom + 10
+    // Controls for monochromatic light
+    var monochromaticControls = new MonochromaticControls(
+      model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
+        left: lightModeControl.left,
+        top: lightModeControl.bottom + 20
       } );
-    this.addChild( lightControls );
+    this.addChild( monochromaticControls );
 
     // Dashed lines that connect the tiny box and zoom box
     var dashedLines = new Path( new Shape()
@@ -124,8 +124,8 @@ define( function( require ) {
 
     // Spectrometer
     var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
-      left: lightControls.right + 10,
-      top: lightControls.top
+      left: monochromaticControls.right + 10,
+      top: monochromaticControls.top
     } );
     this.addChild( spectrometerNode );
 
@@ -156,6 +156,11 @@ define( function( require ) {
     model.modelProperty.link( function( model ) {
       var modelsWithDiagram = [ 'classicalSolarSystem', 'bohr', 'deBroglie', 'schrodinger '];
       energyDiagram.visible = ( _.indexOf( modelsWithDiagram, model ) !== -1 );
+    } );
+
+    // Visibility of monochromatic light controls
+    model.light.modeProperty.link( function( mode ) {
+      monochromaticControls.visible = ( mode === 'monochromatic' );
     } );
   }
 

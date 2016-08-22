@@ -68,9 +68,6 @@
   "lightControls": {
     "value": "Light controls"
   },
-  "monochromatic": {
-    "value": "Monochromatic"
-  },
   "neutron": {
     "value": "neutron"
   },
@@ -130,8 +127,5 @@
   },
   "whatTheModelPredicts": {
     "value": "(what the model predicts)"
-  },
-  "white": {
-    "value": "White"
   }
 }
