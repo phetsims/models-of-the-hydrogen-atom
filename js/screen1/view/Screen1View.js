@@ -29,7 +29,7 @@ define( function( require ) {
   var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/ZoomBoxNode' );
 
   /**
-   * @param {MOTHAModel} model
+   * @param {Screen1Model} model
    * @constructor
    */
   function Screen1View( model ) {

@@ -9,25 +9,25 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
+  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var Screen = require( 'JOIST/Screen' );
   var Screen1Model = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/model/Screen1Model' );
   var Screen1View = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/Screen1View' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Screen = require( 'JOIST/Screen' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var ScreenIcon = require( 'JOIST/ScreenIcon' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var modelsOfTheHydrogenAtomTitleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom.title' );
+  var screen1String = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.1' );
 
   /**
    * @constructor
    */
   function Screen1() {
 
-    //If this is a single-screen sim, then no icon is necessary.
-    //If there are multiple screens, then the icon must be provided here.
-    var icon = null;
-
-    Screen.call( this, modelsOfTheHydrogenAtomTitleString, icon,
+    Screen.call( this,
+      screen1String,
+      new ScreenIcon( new Text( '1' ), { fill: 'white' } ),
       function() { return new Screen1Model(); },
       function( model ) { return new Screen1View( model ); },
       { backgroundColor: 'black' }

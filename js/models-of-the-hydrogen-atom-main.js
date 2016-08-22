@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var Screen1 = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/Screen1' );
+  var Screen2 = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen2/Screen2' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
@@ -26,15 +27,8 @@ define( function( require ) {
     }
   };
 
-  // Appending '?dev' to the URL will enable developer-only features.
-  if ( phet.chipper.getQueryParameter( 'dev' ) ) {
-    simOptions = _.extend( {
-      // add dev-specific options here
-    }, simOptions );
-  }
-
   SimLauncher.launch( function() {
-    var sim = new Sim( modelsOfTheHydrogenAtomTitleString, [ new Screen1() ], simOptions );
+    var sim = new Sim( modelsOfTheHydrogenAtomTitleString, [ new Screen1(), new Screen2() ], simOptions );
     sim.start();
   } );
 } );
