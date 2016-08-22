@@ -1,7 +1,7 @@
 // Copyright 2015-2016, University of Colorado Boulder
 
 /**
- * View for 'Models of the Hydrogen Atom' screen.
+ * View for 'Spectra' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,30 +9,30 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/BeamNode' );
+  var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/BoxOfHydrogenNode' );
-  var EnergyDiagram = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/EnergyDiagram' );
+  var EnergyDiagram = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/EnergyDiagram' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
-  var LightControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/LightControls' );
-  var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/ModeControl' );
-  var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/ModelControl' );
+  var LightControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/LightControls' );
+  var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModeControl' );
+  var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControl' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/MOTHAViewProperties' );
+  var MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   var Path = require( 'SCENERY/nodes/Path' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SpectrometerNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/SpectrometerNode' );
+  var SpectrometerNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectrometerNode' );
   var Shape = require( 'KITE/Shape' );
-  var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/TinyBox' );
-  var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/ZoomBoxNode' );
+  var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TinyBox' );
+  var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ZoomBoxNode' );
 
   /**
-   * @param {Screen1Model} model
+   * @param {SpectraModel} model
    * @constructor
    */
-  function Screen1View( model ) {
+  function SpectraScreenView( model ) {
 
     ScreenView.call( this );
 
@@ -151,9 +151,9 @@ define( function( require ) {
     } );
   }
 
-  modelsOfTheHydrogenAtom.register( 'Screen1View', Screen1View );
+  modelsOfTheHydrogenAtom.register( 'SpectraScreenView', SpectraScreenView );
 
-  return inherit( ScreenView, Screen1View, {
+  return inherit( ScreenView, SpectraScreenView, {
 
     // @public
     step: function( dt ) {

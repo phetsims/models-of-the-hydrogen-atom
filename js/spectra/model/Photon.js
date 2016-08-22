@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
-  var Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/model/Particle' );
+  var Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/Particle' );
   var VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
 
   /**

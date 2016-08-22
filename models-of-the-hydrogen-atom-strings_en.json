@@ -98,11 +98,11 @@
   "schrodinger": {
     "value": "Schr\u00f6dinger"
   },
-  "screen.1": {
-    "value": "Screen 1"
+  "screen.spectra": {
+    "value": "Spectra"
   },
-  "screen.2": {
-    "value": "Screen 2"
+  "screen.energyLevels": {
+    "value": "Energy Levels"
   },
   "showAbsorptionWavelengths": {
     "value": "Show absorption wavelengths"

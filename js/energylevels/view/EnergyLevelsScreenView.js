@@ -1,7 +1,7 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- * View for 'TODO' screen.
+ * View for 'Energy Levels' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,19 +14,19 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
 
   /**
-   * @param {Screen2Model} model
+   * @param {EnergyLevelsModel} model
    * @constructor
    */
-  function Screen2View( model ) {
+  function EnergyLevelsScreenView( model ) {
 
     ScreenView.call( this );
     
     //TODO
   }
 
-  modelsOfTheHydrogenAtom.register( 'Screen2View', Screen2View );
+  modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenView', EnergyLevelsScreenView );
 
-  return inherit( ScreenView, Screen2View, {
+  return inherit( ScreenView, EnergyLevelsScreenView, {
 
     // @public
     step: function( dt ) {

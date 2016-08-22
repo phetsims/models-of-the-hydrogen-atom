@@ -1,7 +1,7 @@
 // Copyright 2015-2016, University of Colorado Boulder
 
 /**
- * Model for 'TODO' screen.
+ * Model for 'Spectra' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -27,7 +27,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function Screen1Model() {
+  function SpectraModel() {
 
     // @public
     PropertySet.call( this, {
@@ -43,9 +43,9 @@ define( function( require ) {
     } );
   }
 
-  modelsOfTheHydrogenAtom.register( 'Screen1Model', Screen1Model );
+  modelsOfTheHydrogenAtom.register( 'SpectraModel', SpectraModel );
 
-  return inherit( PropertySet, Screen1Model, {
+  return inherit( PropertySet, SpectraModel, {
 
     // @public @override
     reset: function() {

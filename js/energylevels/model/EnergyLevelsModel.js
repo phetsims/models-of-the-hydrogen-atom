@@ -1,7 +1,7 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- * Model for 'TODO' screen.
+ * Model for 'Energy Levels' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -25,7 +25,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function Screen2Model() {
+  function EnergyLevelsModel() {
 
     // @public
     PropertySet.call( this, {
@@ -41,9 +41,9 @@ define( function( require ) {
     } );
   }
 
-  modelsOfTheHydrogenAtom.register( 'Screen2Model', Screen2Model );
+  modelsOfTheHydrogenAtom.register( 'EnergyLevelsModel', EnergyLevelsModel );
 
-  return inherit( PropertySet, Screen2Model, {
+  return inherit( PropertySet, EnergyLevelsModel, {
 
     // @public @override
     reset: function() {

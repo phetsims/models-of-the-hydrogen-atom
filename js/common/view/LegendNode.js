@@ -9,15 +9,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ElectronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/ElectronNode' );
+  var ElectronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ElectronNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/NeutronNode' );
+  var NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/NeutronNode' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var ProtonNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/ProtonNode' );
+  var ProtonNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ProtonNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
