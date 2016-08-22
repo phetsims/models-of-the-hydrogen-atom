@@ -23,8 +23,8 @@ define( function( require ) {
   var LASER_POINTER_OPTIONS = {
     hasButton: false,
     rotation: -Math.PI / 2, // pointing up
-    bodySize: new Dimension2( 20, 25 ), // height x width
-    nozzleSize: new Dimension2( 7, 20 ), // height x width
+    bodySize: new Dimension2( 20, 25 ), // height x width (due to rotation)
+    nozzleSize: new Dimension2( 7, 20 ), // height x width (due to rotation)
     cornerRadius: 2,
     lineWidth: 0.5
   };
