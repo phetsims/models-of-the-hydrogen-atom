@@ -17,7 +17,6 @@ define( function( require ) {
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
   var NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/NeutronNode' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Panel = require( 'SUN/Panel' );
   var ProtonNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ProtonNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -31,7 +30,7 @@ define( function( require ) {
   // constants
   var TITLE_OPTIONS = {
     font: new MOTHAFont( { size: 18, weight: 'bold' } ),
-    fill: 'white',
+    fill: 'rgb( 182, 182, 111 )',
     maxWidth: 100 // i18n, determined empirically
   };
   var LABEL_OPTIONS = {
@@ -47,11 +46,8 @@ define( function( require ) {
   function LegendNode( options ) {
 
     options = _.extend( {
-      fill: 'black',
-      stroke: 'white',
-      cornerRadius: 6,
-      xMargin: 10,
-      yMargin: 5
+      spacing: 8,
+      align: 'left'
     }, options );
 
     // title
@@ -86,23 +82,20 @@ define( function( require ) {
 
     } );
 
-    var contentNode = new VBox( {
-      spacing: 8,
-      align: 'center',
-      children: [
-        titleNode,
-        new VBox( {
-          spacing: 5,
-          align: 'left',
-          children: itemNodes
-        } )
-      ]
-    } );
+    assert && assert( !options.children, 'decoration not supported' );
+    options.children = [
+      titleNode,
+      new VBox( {
+        spacing: 5,
+        align: 'left',
+        children: itemNodes
+      } )
+    ];
 
-    Panel.call( this, contentNode, options );
+    VBox.call( this, options );
   }
 
   modelsOfTheHydrogenAtom.register( 'LegendNode', LegendNode );
 
-  return inherit( Panel, LegendNode );
+  return inherit( VBox, LegendNode );
 } );
