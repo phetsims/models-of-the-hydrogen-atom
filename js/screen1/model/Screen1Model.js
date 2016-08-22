@@ -1,7 +1,7 @@
 // Copyright 2015-2016, University of Colorado Boulder
 
 /**
- * Model for 'Models of the Hydrogen Atom' screen.
+ * Model for 'TODO' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/model/Light' );
+  var Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/model/Light' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var PropertySet = require( 'AXON/PropertySet' );
 
@@ -27,7 +27,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function MOTHAModel() {
+  function Screen1Model() {
 
     // @public
     PropertySet.call( this, {
@@ -43,9 +43,9 @@ define( function( require ) {
     } );
   }
 
-  modelsOfTheHydrogenAtom.register( 'MOTHAModel', MOTHAModel );
+  modelsOfTheHydrogenAtom.register( 'Screen1Model', Screen1Model );
 
-  return inherit( PropertySet, MOTHAModel, {
+  return inherit( PropertySet, Screen1Model, {
 
     // @public @override
     reset: function() {

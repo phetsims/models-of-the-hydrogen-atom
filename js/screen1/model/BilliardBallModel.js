@@ -21,7 +21,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AbstractHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/model/AbstractHydrogenAtom' );
+  var AbstractHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/model/AbstractHydrogenAtom' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var RandomUtils = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/RandomUtils' );

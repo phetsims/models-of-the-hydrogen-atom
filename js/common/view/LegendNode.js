@@ -1,4 +1,4 @@
-// Copyright 2015-2016, University of Colorado Boulder
+// Copyright 2016, University of Colorado Boulder
 
 /**
  * The legend identifies the icons that appear in the sim.
@@ -9,15 +9,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ElectronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ElectronNode' );
+  var ElectronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/ElectronNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/MOTHAFont' );
-  var NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/NeutronNode' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  var NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/NeutronNode' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var ProtonNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ProtonNode' );
+  var ProtonNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/screen1/view/ProtonNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
