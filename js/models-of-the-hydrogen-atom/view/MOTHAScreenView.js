@@ -13,7 +13,7 @@ define( function( require ) {
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/BoxOfHydrogenNode' );
   var EnergyDiagram = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/EnergyDiagram' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LegendNode' );
+  var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var LightControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/LightControls' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom/view/ModeControl' );
