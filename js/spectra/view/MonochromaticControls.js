@@ -40,7 +40,7 @@ define( function( require ) {
       maxTweakersHeight: 20,
       thumbWidth: 25,
       thumbHeight: 25,
-      ySpacing: 6,
+      valueYSpacing: 6,
       valueFill: 'white',
       valueFont: new MOTHAFont( 18 )
     } );
