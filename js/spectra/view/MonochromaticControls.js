@@ -14,8 +14,8 @@ define( function( require ) {
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var WavelengthSlider = require( 'SCENERY_PHET/WavelengthSlider' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var WavelengthSlider = require( 'SCENERY_PHET/WavelengthSlider' );
 
   // strings
   var showAbsorptionWavelengthsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showAbsorptionWavelengths' );
