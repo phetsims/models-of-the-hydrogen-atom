@@ -37,6 +37,8 @@ define( function( require ) {
     var wavelengthSlider = new WavelengthSlider( wavelengthProperty, {
       trackWidth: 250,
       trackHeight: 20,
+      thumbTouchAreaXDilation: 12,
+      thumbTouchAreaYDilation: 0,
       maxTweakersHeight: 20,
       thumbWidth: 25,
       thumbHeight: 25,
