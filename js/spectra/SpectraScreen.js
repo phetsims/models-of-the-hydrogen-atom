@@ -14,8 +14,6 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
   var SpectraScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectraScreenView' );
-  var ScreenIcon = require( 'JOIST/ScreenIcon' );
-  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   var screenSpectraString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.spectra' );
@@ -25,12 +23,15 @@ define( function( require ) {
    */
   function SpectraScreen() {
 
+    var options = {
+      name: screenSpectraString,
+      backgroundColor: 'black'
+    };
+
     Screen.call( this,
-      screenSpectraString,
-      new ScreenIcon( new Text( '' ), { fill: 'lightGreen' } ), //TODO icon
       function() { return new SpectraModel(); },
       function( model ) { return new SpectraScreenView( model ); },
-      { backgroundColor: 'black' }
+      options
     );
   }
 

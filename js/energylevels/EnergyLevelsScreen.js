@@ -14,8 +14,6 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var EnergyLevelsModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/model/EnergyLevelsModel' );
   var EnergyLevelsScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/EnergyLevelsScreenView' );
-  var ScreenIcon = require( 'JOIST/ScreenIcon' );
-  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   var screenEnergyLevelsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.energyLevels' );
@@ -25,12 +23,16 @@ define( function( require ) {
    */
   function EnergyLevelsScreen() {
 
+    var options = {
+      name: screenEnergyLevelsString,
+      backgroundColor: 'black'
+      //TODO add homeScreenIcon
+    };
+
     Screen.call( this,
-      screenEnergyLevelsString,
-      new ScreenIcon( new Text( '' ), { fill: 'lightBlue' } ), //TODO icon
       function() { return new EnergyLevelsModel(); },
       function( model ) { return new EnergyLevelsScreenView( model ); },
-      { backgroundColor: 'black' }
+      options
     );
   }
 
