@@ -37,7 +37,7 @@ define( function( require ) {
   var LABEL_OPTIONS = {
     font: new MOTHAFont( 16 ),
     fill: 'white',
-    maxWidth: 100 // i18n, determined empirically
+    maxWidth: 120 // i18n, determined empirically
   };
 
   /**
