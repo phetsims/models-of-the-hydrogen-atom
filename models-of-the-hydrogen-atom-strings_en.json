@@ -71,6 +71,9 @@
   "lightControls": {
     "value": "Light controls"
   },
+  "model": {
+    "value": "Model"
+  },
   "neutron": {
     "value": "neutron"
   },
@@ -85,9 +88,6 @@
   },
   "plumPudding": {
     "value": "Plum Pudding"
-  },
-  "prediction": {
-    "value": "Prediction"
   },
   "proton": {
     "value": "proton"
@@ -130,11 +130,5 @@
   },
   "wavelength": {
     "value": "wavelength"
-  },
-  "whatReallyHappens": {
-    "value": "(what really happens)"
-  },
-  "whatTheModelPredicts": {
-    "value": "(what the model predicts)"
   }
 }

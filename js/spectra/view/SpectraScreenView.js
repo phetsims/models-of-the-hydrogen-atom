@@ -161,7 +161,7 @@ define( function( require ) {
 
     viewProperties.modeProperty.link( function( mode ) {
       //TODO perhaps fade this in/out
-      modelControl.visible = ( mode === 'prediction' );
+      modelControl.visible = ( mode === 'model' );
     } );
 
     // Show the energy diagram for models where it's relevant

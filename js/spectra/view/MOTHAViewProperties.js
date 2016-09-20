@@ -14,7 +14,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
 
   // valid values for the 'mode' property
-  var MODE_VALUES = [ 'experiment', 'prediction' ];
+  var MODE_VALUES = [ 'experiment', 'model' ];
   var CLOCK_SPEED_VALUES = [ 'fast', 'normal', 'slow' ];
 
   /**
@@ -34,12 +34,12 @@ define( function( require ) {
 
     // validate clockSpeed Property
     this.clockSpeedProperty.link( function( clockSpeed ) {
-      assert && assert( _.contains( CLOCK_SPEED_VALUES, clockSpeed ) );
+      assert && assert( _.contains( CLOCK_SPEED_VALUES, clockSpeed ), 'invalid clockSpeed: ' + clockSpeed );
     } );
 
     // validate mode Property
     this.modeProperty.link( function( mode ) {
-      assert && assert( _.contains( MODE_VALUES, mode ) );
+      assert && assert( _.contains( MODE_VALUES, mode ), 'invalid mode: ' + mode );
     } );
   }
 
