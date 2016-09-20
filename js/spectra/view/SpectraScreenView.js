@@ -105,7 +105,7 @@ define( function( require ) {
 
     // Box that shows the zoomed-in view
     var zoomBoxNode = new ZoomBoxNode( {
-      left: lightNode.right + 30,
+      left: lightNode.right + 50,
       top: this.layoutBounds.top + 15
     } );
     this.addChild( zoomBoxNode );
@@ -131,8 +131,8 @@ define( function( require ) {
       children: [ modeControl, modelControlPanel ],
       align: 'center',
       spacing: 10,
-      right: this.layoutBounds.right - 20,
-      top: this.layoutBounds.top + 20
+      left: zoomBoxNode.right + 30,
+      top: zoomBoxNode.top
     } ) );
 
     // Spectrometer
