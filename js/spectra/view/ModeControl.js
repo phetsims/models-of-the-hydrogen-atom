@@ -29,7 +29,8 @@ define( function( require ) {
   function ModeControl( modeProperty, options ) {
 
     options = _.extend( {
-      switchSize: new Dimension2( 60, 30 )
+      switchSize: new Dimension2( 60, 30 ),
+      centerOnButton: true
     }, options );
 
     var labelOptions = {

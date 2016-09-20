@@ -28,6 +28,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var TimeControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TimeControls' );
   var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TinyBox' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
   var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ZoomBoxNode' );
 
   /**
@@ -120,18 +121,18 @@ define( function( require ) {
     this.addChild( dashedLines );
 
     // selects between 'Experiment' and 'Model' modes
-    var modeControl = new ModeControl( viewProperties.modeProperty, {
-      right: this.layoutBounds.right - 20,
-      top: this.layoutBounds.top + 20
-    } );
-    this.addChild( modeControl );
+    var modeControl = new ModeControl( viewProperties.modeProperty );
 
     // selects a predictive model
-    var modelControlPanel = new ModelControlPanel( model.modelProperty, {
-      right: modeControl.right,
-      top: modeControl.bottom + 5
-    } );
-    this.addChild( modelControlPanel );
+    var modelControlPanel = new ModelControlPanel( model.modelProperty );
+
+    this.addChild( new VBox( {
+      children: [ modeControl, modelControlPanel ],
+      align: 'center',
+      spacing: 10,
+      right: this.layoutBounds.right - 20,
+      top: this.layoutBounds.top + 20
+    } ) );
 
     // Spectrometer
     var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
