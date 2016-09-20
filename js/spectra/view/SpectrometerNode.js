@@ -46,14 +46,14 @@ define( function( require ) {
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 5,
-      buttonXMargin: 5,
+      buttonXMargin: 8,
       buttonYMargin: 5,
       contentXMargin: 10,
       contentYMargin: 5,
       contentYSpacing: 0,
       buttonLength: 22,
-      buttonTouchAreaXDilation: 16,
-      buttonTouchAreaYDilation: 16,
+      buttonTouchAreaXDilation: 10,
+      buttonTouchAreaYDilation: 10,
       buttonAlign: 'right',
       titleAlignX: 'left'
     }, options );
@@ -97,14 +97,14 @@ define( function( require ) {
     var recordStopButton = new RecordStopButton( recordingProperty, {
       radius: 15,
       baseColor: BUTTON_COLOR,
-      touchAreaDilation: 10
+      touchAreaDilation: 5
     } );
 
     var resetButton = new ResetButton( {
       baseColor: BUTTON_COLOR,
       arrowColor: 'black',
       radius: recordStopButton.height / 2,
-      touchAreaDilation: 10,
+      touchAreaDilation: 5,
       listener: function() {
         //TODO
       }
@@ -115,7 +115,7 @@ define( function( require ) {
       baseColor: BUTTON_COLOR,
       content: new FontAwesomeNode( 'camera' ),
       touchAreaXDilation: 10,
-      touchAreaYDilation: 10,
+      touchAreaYDilation: 5,
       listener: function() {
         //TODO
       }
