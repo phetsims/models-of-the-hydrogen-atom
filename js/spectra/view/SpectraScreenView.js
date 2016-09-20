@@ -65,9 +65,9 @@ define( function( require ) {
 
     // Light
     var lightNode = new LaserPointerNode( model.light.onProperty, {
-      bodySize: new Dimension2( 73, 52 ),
-      nozzleSize: new Dimension2( 14, 40 ),
-      buttonRadius: 15,
+      bodySize: new Dimension2( 88, 64 ),
+      nozzleSize: new Dimension2( 18, 50 ),
+      buttonRadius: 19,
       rotation: -Math.PI / 2, // pointing up
       left: lightModeControl.right + 20,
       bottom: lightModeControl.bottom
@@ -76,6 +76,7 @@ define( function( require ) {
 
     // Beam of light
     var beamNode = new BeamNode( model.light.onProperty, model.light.colorProperty, {
+      beamSize: new Dimension2( 30, 66 ),
       centerX: lightNode.centerX,
       bottom: lightNode.top + 1
     } );

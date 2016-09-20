@@ -14,9 +14,6 @@ define( function( require ) {
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  // constants
-  var BEAM_SIZE = new Dimension2( 25, 50 );
-
   /**
    * @param {Property.<boolean>} visibleProperty - is the beam visible?
    * @param {Property.<Color|string>} colorProperty - the beam's color
@@ -25,7 +22,11 @@ define( function( require ) {
    */
   function BeamNode( visibleProperty, colorProperty, options ) {
 
-    Rectangle.call( this, 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, options );
+    options = _.extend( {
+      beamSize: new Dimension2( 10, 50 )
+    }, options );
+
+    Rectangle.call( this, 0, 0, options.beamSize.width, options.beamSize.height, options );
 
     // no need to unlink, this instance exists for the lifetime of the sim
     visibleProperty.linkAttribute( this, 'visible' );
