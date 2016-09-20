@@ -66,7 +66,7 @@ define( function( require ) {
     } );
 
     var subtitleNode = new Text( photonsEmittedNmString, {
-      font: new MOTHAFont( 12 ),
+      font: new MOTHAFont( 14 ),
       fill: 'white'
     } );
 
