@@ -44,12 +44,12 @@ define( function( require ) {
       thumbHeight: 25,
       valueYSpacing: 6,
       valueFill: 'white',
-      valueFont: new MOTHAFont( 18 )
+      valueFont: new MOTHAFont( 16 )
     } );
 
     // 'Show absorption wavelengths' check box
     var showLabel = new Text( showAbsorptionWavelengthsString, {
-      font: new MOTHAFont( 18 ),
+      font: new MOTHAFont( 14 ),
       fill: 'white',
       maxWidth: 0.85 * wavelengthSlider.width
     } );

@@ -24,7 +24,7 @@ define( function( require ) {
 
     options = options || {};
 
-    var outlineNode = new Rectangle( 0, 0, 450, 450, {
+    var outlineNode = new Rectangle( 0, 0, 400, 400, {
       fill: 'black',
       stroke: 'white',
       lineWidth: 1

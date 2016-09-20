@@ -15,7 +15,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
-  var BEAM_SIZE = new Dimension2( 50, 110 );
+  var BEAM_SIZE = new Dimension2( 25, 50 );
 
   /**
    * @param {Property.<boolean>} visibleProperty - is the beam visible?

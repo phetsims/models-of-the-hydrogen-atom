@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/BoxOfHydrogenNode' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var EnergyDiagram = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/EnergyDiagram' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
@@ -46,23 +47,26 @@ define( function( require ) {
     } );
     this.addChild( legendNode );
 
-    // Controls for monochromatic light
-    var monochromaticControls = new MonochromaticControls(
-      model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
-        left: this.layoutBounds.left + 20,
-        bottom: this.layoutBounds.bottom - 20
-      } );
-    this.addChild( monochromaticControls );
-
     // Light mode control (radio buttons)
     var lightModeControl = new LightModeControl( model.light.modeProperty, {
-      left: monochromaticControls.left,
-      bottom: monochromaticControls.top - 20
+      left: this.layoutBounds.left + 20,
+      bottom: 415
     } );
     this.addChild( lightModeControl );
 
+    // Controls for monochromatic light
+    var monochromaticControls = new MonochromaticControls(
+      model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
+        left: lightModeControl.left,
+        top: lightModeControl.bottom + 15
+      } );
+    this.addChild( monochromaticControls );
+
     // Light
     var lightNode = new LaserPointerNode( model.light.onProperty, {
+      bodySize: new Dimension2( 73, 52 ),
+      nozzleSize: new Dimension2( 14, 40 ),
+      buttonRadius: 15,
       rotation: -Math.PI / 2, // pointing up
       left: lightModeControl.right + 20,
       bottom: lightModeControl.bottom
@@ -107,7 +111,7 @@ define( function( require ) {
     // Box that shows the zoomed-in view
     var zoomBoxNode = new ZoomBoxNode( {
       left: lightNode.right + 30,
-      top: this.layoutBounds.top + 25
+      top: this.layoutBounds.top + 15
     } );
     this.addChild( zoomBoxNode );
 

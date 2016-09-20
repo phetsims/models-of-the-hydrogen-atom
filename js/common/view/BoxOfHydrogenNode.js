@@ -26,7 +26,7 @@ define( function( require ) {
   // constants
   var BACK_DEPTH = 10;
   var BACK_OFFSET = 0.15;
-  var BOX_SIZE = new Dimension2( 70, 60 );
+  var BOX_SIZE = new Dimension2( 50, 40 );
   var LIGHT_COLOR = 'rgb( 249, 249, 249 )';
   var SHADOW_COLOR = 'rgb( 100, 100, 100 )';
 
@@ -57,8 +57,8 @@ define( function( require ) {
 
     // hydrogen symbol, in lower-left corner of front face
     var hydrogenSymbol = new Text( hydrogenSymbolString, {
-      font: new MOTHAFont( { weight: 'bold', size: 28 } ),
-      left: frontNode.left + ( 0.25 * BOX_SIZE.width ),
+      font: new MOTHAFont( { weight: 'bold', size: 24 } ),
+      left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
       bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),
       maxWidth: 0.65 * BOX_SIZE.width
     } );

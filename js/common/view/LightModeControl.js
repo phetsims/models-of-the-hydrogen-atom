@@ -19,12 +19,12 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
-  var BEAM_SIZE = new Dimension2( 8, 15 );
+  var BEAM_SIZE = new Dimension2( 5, 10 );
   var LASER_POINTER_OPTIONS = {
     hasButton: false,
     rotation: -Math.PI / 2, // pointing up
-    bodySize: new Dimension2( 20, 25 ), // height x width (due to rotation)
-    nozzleSize: new Dimension2( 7, 20 ), // height x width (due to rotation)
+    bodySize: new Dimension2( 13, 17 ), // height x width (due to rotation)
+    nozzleSize: new Dimension2( 5, 13 ), // height x width (due to rotation)
     cornerRadius: 2,
     lineWidth: 0.5
   };
@@ -38,7 +38,7 @@ define( function( require ) {
 
     options = _.extend( {
       orientation: 'vertical',
-      spacing: 10,
+      spacing: 8,
       buttonContentXMargin: 20,
       buttonContentYMargin: 5,
       baseColor: 'black',

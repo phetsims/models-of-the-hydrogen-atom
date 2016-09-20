@@ -15,7 +15,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
-  var TINY_BOX_SIZE = new Dimension2( 10, 10 );
+  var TINY_BOX_SIZE = new Dimension2( 6, 6 );
 
   /**
    * @param {Object} [options]

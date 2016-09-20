@@ -29,12 +29,12 @@ define( function( require ) {
 
   // constants
   var TITLE_OPTIONS = {
-    font: new MOTHAFont( { size: 18, weight: 'bold' } ),
+    font: new MOTHAFont( { size: 16, weight: 'bold' } ),
     fill: 'rgb( 182, 182, 111 )',
     maxWidth: 100 // i18n, determined empirically
   };
   var LABEL_OPTIONS = {
-    font: new MOTHAFont( 18 ),
+    font: new MOTHAFont( 16 ),
     fill: 'white',
     maxWidth: 100 // i18n, determined empirically
   };
