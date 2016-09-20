@@ -32,7 +32,7 @@ define( function( require ) {
   var schrodingerButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/schrodingerButton.png' );
 
   // strings
-  var atomicModelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/atomicModel' );
+  var atomicModelString = 'Atomic Model'; //TODO delete this
   var billiardBallString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/billiardBall' );
   var plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
   var classicalSolarSystemString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystem' );
