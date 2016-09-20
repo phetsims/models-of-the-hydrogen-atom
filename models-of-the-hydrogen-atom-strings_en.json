@@ -56,6 +56,9 @@
   "photon": {
     "value": "photon"
   },
+  "photonsEmittedNm": {
+    "value": "photons emitted / nm"
+  },
   "plumPudding": {
     "value": "Plum Pudding"
   },
@@ -83,7 +86,7 @@
   "slow": {
     "value": "slow"
   },
-  "spectrometerPhotonsEmittedNm": {
-    "value": "Spectrometer: photons emitted / nm"
+  "spectrometer": {
+    "value": "Spectrometer"
   }
 }

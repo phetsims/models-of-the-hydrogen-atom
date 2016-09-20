@@ -13,9 +13,9 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   var Property = require( 'AXON/Property' );
   var RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
@@ -26,11 +26,12 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var spectrometerPhotonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometerPhotonsEmittedNm' );
+  var photonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/photonsEmittedNm' );
+  var spectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometer' );
 
   // constants
   var BUTTON_COLOR = 'rgb( 245, 245, 245 )';
-  var DISPLAY_SIZE = new Dimension2( 400, 55 );
+  var DISPLAY_SIZE = new Dimension2( 525, 140 );
 
   /**
    * @param {Property.<boolean>} expandedProperty
@@ -40,8 +41,8 @@ define( function( require ) {
   function SpectrometerNode( expandedProperty, options ) {
 
     options = _.extend( {
-      fill: 'black',
-      stroke: 'white',
+      fill: 'rgb( 80, 80, 80 )',
+      stroke: 'rgb( 200, 200, 200 )',
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 5,
@@ -50,6 +51,7 @@ define( function( require ) {
       contentXMargin: 10,
       contentYMargin: 5,
       contentYSpacing: 0,
+      buttonLength: 22,
       buttonTouchAreaXDilation: 16,
       buttonTouchAreaYDilation: 16,
       buttonAlign: 'right',
@@ -58,10 +60,27 @@ define( function( require ) {
 
     options.expandedProperty = expandedProperty;
 
-    options.titleNode = new Text( spectrometerPhotonsEmittedNmString, {
+    var titleNode = new Text( spectrometerString, {
       font: new MOTHAFont( { size: 16, weight: 'bold' } ),
-      fill: 'white',
+      fill: MOTHAColors.TITLE_FILL
+    } );
+
+    var subtitleNode = new Text( photonsEmittedNmString, {
+      font: new MOTHAFont( 12 ),
+      fill: 'white'
+    } );
+
+    assert && assert( !options.titleNode );
+    options.titleNode = new HBox( {
+      align: 'bottom',
+      spacing: 12,
+      children: [ titleNode, subtitleNode ],
       maxWidth: 290 // i18n, determined empirically
+    } );
+
+    //TODO placeholder
+    var displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
+      fill: 'black'
     } );
 
     //TODO relocate, handle reset
@@ -97,25 +116,16 @@ define( function( require ) {
       }
     } );
 
-    //TODO placeholder
-    var displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
-      fill: 'white',
-      stroke: 'black'
+    var buttonGroup = new VBox( {
+      spacing: 10,
+      align: 'center',
+      children: [ recordStopButton, resetButton, cameraButton ]
     } );
 
-    var SPACING = 20;
-    var STRUT_WITH = displayNode.width - ( ( 3 * SPACING ) +  recordStopButton.width + resetButton.width + cameraButton.width );
-    var buttonGroup = new HBox( {
-      spacing: 20,
-      children: [ recordStopButton, new HStrut( STRUT_WITH ), resetButton, cameraButton ]
-    } );
-
-    var contentNode = new VBox( {
-      spacing: 5,
-      children: [
-        displayNode,
-        buttonGroup
-      ]
+    var contentNode = new HBox( {
+      spacing: 12,
+      align: 'bottom',
+      children: [ displayNode, buttonGroup ]
     } );
 
     AccordionBox.call( this, contentNode, options );
