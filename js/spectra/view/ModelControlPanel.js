@@ -9,18 +9,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
+  var ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ContinuumBarNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // images
@@ -34,15 +31,10 @@ define( function( require ) {
   // strings
   var billiardBallString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/billiardBall' );
   var bohrString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/bohr' );
-  var classicalString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classical' );
   var classicalSolarSystemString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystem' );
   var deBroglieString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/deBroglie' );
   var plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
-  var quantumString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/quantum' );
   var schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
-
-  // constants
-  var SPECTRUM_TEXT_MARGIN = 6;
 
   /**
    * @param {Property.<string>} modelProperty
@@ -75,6 +67,7 @@ define( function( require ) {
       maxContentNodeWidth = Math.max( maxContentNodeWidth, content.node.width );
     } );
     contentArray.forEach( function( content ) {
+      assert && assert( content.node instanceof HBox );
       content.node.addChild( new HStrut( maxContentNodeWidth - content.node.width ) );
     } );
 
@@ -101,33 +94,12 @@ define( function( require ) {
     } );
 
     // continuum bar, 'Classical' to 'Quantum'
-    var continuumTextOptions = {
-      font: new MOTHAFont( 14 ),
-      rotation: Math.PI / 2,
-      maxWidth: 0.4 * radioButtonGroup.height
-    };
-    var classicalText = new Text( classicalString, continuumTextOptions );
-    var quantumText = new Text( quantumString, continuumTextOptions );
-    var continuumBackgroundNode = new Rectangle( 0, 0, Math.max( classicalText.width, quantumText.width ) + 10, radioButtonGroup.height, {
-      cornerRadius: 5,
-      fill: 'rgb( 220, 220, 220 )'
-    } );
-    var continuumNode = new Node( {
-      children: [
-        continuumBackgroundNode,
-        classicalText,
-        quantumText
-      ]
-    } );
-    classicalText.centerX = continuumBackgroundNode.centerX;
-    classicalText.top = continuumBackgroundNode.top + SPECTRUM_TEXT_MARGIN;
-    quantumText.centerX = continuumBackgroundNode.centerX;
-    quantumText.bottom = continuumBackgroundNode.bottom - SPECTRUM_TEXT_MARGIN;
+    var continuumBarNode = new ContinuumBarNode( radioButtonGroup.height );
 
     // panel content
     var contentNode = new HBox( {
       spacing: 10,
-      children: [ continuumNode, radioButtonGroup ]
+      children: [ continuumBarNode, radioButtonGroup ]
     } );
 
     Panel.call( this, contentNode, options );
