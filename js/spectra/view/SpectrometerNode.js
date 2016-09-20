@@ -40,7 +40,8 @@ define( function( require ) {
   function SpectrometerNode( expandedProperty, options ) {
 
     options = _.extend( {
-      fill: 'rgb( 160, 160, 160 )',
+      fill: 'black',
+      stroke: 'white',
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 5,

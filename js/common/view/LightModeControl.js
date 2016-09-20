@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
@@ -43,10 +44,10 @@ define( function( require ) {
       buttonContentYMargin: 5,
       baseColor: 'black',
       disabledBaseColor: 'black',
-      selectedStroke: 'rgb( 206, 206, 126 )',
-      deselectedStroke: 'rgb( 150, 150, 150 )',
-      selectedLineWidth: 3,
-      deselectedLineWidth: 3
+      selectedStroke: MOTHAColors.SELECTED_COLOR,
+      deselectedStroke: MOTHAColors.DESELECTED_COLOR,
+      selectedLineWidth: 2,
+      deselectedLineWidth: 2
     }, options );
 
     RadioButtonGroup.call( this, modeProperty, [

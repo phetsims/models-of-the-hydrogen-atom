@@ -14,6 +14,7 @@ define( function( require ) {
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   var NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/NeutronNode' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -30,7 +31,7 @@ define( function( require ) {
   // constants
   var TITLE_OPTIONS = {
     font: new MOTHAFont( { size: 16, weight: 'bold' } ),
-    fill: 'rgb( 182, 182, 111 )',
+    fill: MOTHAColors.TITLE_FILL,
     maxWidth: 100 // i18n, determined empirically
   };
   var LABEL_OPTIONS = {

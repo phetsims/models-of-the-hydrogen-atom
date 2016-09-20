@@ -11,14 +11,18 @@ define( function( require ) {
   // modules
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
 
+  // constants used to compute other constants
+  var ELECTRON_DIAMETER = 9;
+  var PHOTON_DIAMETER = 30;
+
   var MOTHAConstants = {
 
-    ELECTRON_DIAMETER: 9,
+    ELECTRON_DIAMETER: ELECTRON_DIAMETER,
     NEUTRON_DIAMETER: 11,
-    PHOTON_DIAMETER: 30,
+    PHOTON_DIAMETER: PHOTON_DIAMETER,
 
     // how close a photon and electron (treated as points) must be for them to collide
-    COLLISION_THRESHOLD: ( this.PHOTON_DIAMETER / 2 ) + ( this.ELECTRON_DIAMETER / 2 )
+    COLLISION_THRESHOLD: ( PHOTON_DIAMETER / 2 ) + ( ELECTRON_DIAMETER / 2 )
   };
 
   modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );

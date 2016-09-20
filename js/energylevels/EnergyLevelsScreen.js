@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
   var Screen = require( 'JOIST/Screen' );
   var EnergyLevelsModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/model/EnergyLevelsModel' );
   var EnergyLevelsScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/EnergyLevelsScreenView' );
@@ -25,7 +26,7 @@ define( function( require ) {
 
     var options = {
       name: screenEnergyLevelsString,
-      backgroundColor: 'black'
+      backgroundColor: MOTHAColors.SCREEN_BACKGROUND_COLOR
       //TODO add homeScreenIcon
     };
 
