@@ -1,0 +1,3 @@
+TODO list for models-of-the-hydrogen-atom
+
+Redo model icons on a transparent background, uniform sizes
