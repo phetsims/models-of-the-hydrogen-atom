@@ -50,7 +50,7 @@ define( function( require ) {
 
     // Light mode control (radio buttons)
     var lightModeControl = new LightModeControl( model.light.modeProperty, {
-      left: this.layoutBounds.left + 20,
+      left: this.layoutBounds.left + 30,
       bottom: 415
     } );
     this.addChild( lightModeControl );
