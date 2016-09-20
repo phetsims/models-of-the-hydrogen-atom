@@ -11,12 +11,13 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
@@ -41,9 +42,6 @@ define( function( require ) {
   var schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
   // constants
-  var SPECTRUM_FONT = new MOTHAFont( 14 );
-  var PANEL_X_MARGIN = 10;
-  var PANEL_Y_MARGIN = 10;
   var SPECTRUM_TEXT_MARGIN = 6;
 
   /**
@@ -53,78 +51,86 @@ define( function( require ) {
    */
   function ModelControl( modelProperty, options ) {
 
+    options = _.extend( {
+      fill: 'black',
+      stroke: 'white',
+      xMargin: 10,
+      yMargin: 10
+    }, options );
+
+    // content that appears on the radio buttons
+    var contentArray = [
+      createRadioButtonContent( 'billiardBall', billiardBallString, billiardBallButtonImage ),
+      createRadioButtonContent( 'plumPudding', plumPuddingString, plumPuddingButtonImage ),
+      createRadioButtonContent( 'classicalSolarSystem', classicalSolarSystemString, classicalSolarSystemButtonImage ),
+      createRadioButtonContent( 'bohr', bohrString, bohrButtonImage ),
+      createRadioButtonContent( 'deBroglie', deBroglieString, deBroglieButtonImage ),
+      createRadioButtonContent( 'schrodinger', schrodingerString, schrodingerButtonImage )
+    ];
+
+    // Workaround for https://github.com/phetsims/sun/issues/268.
+    // RadioButtonGroup options.align is broken, so handle left alignment ourselves.
+    var maxContentNodeWidth = 0;
+    contentArray.forEach( function( content ) {
+      maxContentNodeWidth = Math.max( maxContentNodeWidth, content.node.width );
+    } );
+    contentArray.forEach( function( content ) {
+      content.node.addChild( new HStrut( maxContentNodeWidth - content.node.width ) );
+    } );
+
     // radio buttons
-    var buttonGroup = new RadioButtonGroup( modelProperty, [
-      createButtonContent( 'billiardBall', billiardBallString, billiardBallButtonImage ),
-      createButtonContent( 'plumPudding', plumPuddingString, plumPuddingButtonImage ),
-      createButtonContent( 'classicalSolarSystem', classicalSolarSystemString, classicalSolarSystemButtonImage ),
-      createButtonContent( 'bohr', bohrString, bohrButtonImage ),
-      createButtonContent( 'deBroglie', deBroglieString, deBroglieButtonImage ),
-      createButtonContent( 'schrodinger', schrodingerString, schrodingerButtonImage )
-    ], {
+    var radioButtonGroup = new RadioButtonGroup( modelProperty, contentArray, {
       baseColor: 'black',
       disabledBaseColor: 'black',
       selectedStroke: 'yellow',
       deselectedStroke: 'black',
       overFill: 'black',
-      overStroke: 'gray',
-      overLineWidth: 1,
+      overStroke: 'rgb( 200, 200, 200 )',
+      overLineWidth: 2,
       selectedLineWidth: 2,
       labelAlign: 'left',
       spacing: 2,
       buttonContentXMargin: 4,
-      buttonContentYMargin: 2
+      buttonContentYMargin: 2,
+      selectedButtonOpacity: 1,
+      deselectedButtonOpacity: 1,
+      selectedContentOpacity: 1,
+      deselectedContentOpacity: 1,
+      overButtonOpacity: 1,
+      overContentOpacity: 1
     } );
 
-    // spectrum bar, 'Classical' to 'Quantum'
-    var spectrumTextOptions = {
-      font: SPECTRUM_FONT,
+    // continuum bar, 'Classical' to 'Quantum'
+    var continuumTextOptions = {
+      font: new MOTHAFont( 14 ),
       rotation: Math.PI / 2,
-      maxHeight: 0.4 * buttonGroup.height
+      maxWidth: 0.4 * radioButtonGroup.height
     };
-    var classicalText = new Text( classicalString, _.extend( {}, spectrumTextOptions, { fill: 'black' } ) );
-    var quantumText = new Text( quantumString, _.extend( {}, spectrumTextOptions, { fill: 'white' } ) );
-    var spectrumHeight = buttonGroup.height;
-    var spectrumBackgroundNode = new Rectangle( 0, 0, Math.max( classicalText.width, quantumText.width ) + 10, spectrumHeight, {
+    var classicalText = new Text( classicalString, continuumTextOptions );
+    var quantumText = new Text( quantumString, continuumTextOptions );
+    var continuumBackgroundNode = new Rectangle( 0, 0, Math.max( classicalText.width, quantumText.width ) + 10, radioButtonGroup.height, {
       cornerRadius: 5,
-      fill: new LinearGradient( 0, 0, 0, spectrumHeight ).addColorStop( 0, 'white' ).addColorStop( 1, 'black' )
+      fill: 'rgb( 220, 220, 220 )'
     } );
-    var spectrumBar = new Node( {
+    var continuumNode = new Node( {
       children: [
-        spectrumBackgroundNode,
+        continuumBackgroundNode,
         classicalText,
         quantumText
       ]
     } );
-    classicalText.centerX = spectrumBackgroundNode.centerX;
-    classicalText.top = spectrumBackgroundNode.top + SPECTRUM_TEXT_MARGIN;
-    quantumText.centerX = spectrumBackgroundNode.centerX;
-    quantumText.bottom = spectrumBackgroundNode.bottom - SPECTRUM_TEXT_MARGIN;
+    classicalText.centerX = continuumBackgroundNode.centerX;
+    classicalText.top = continuumBackgroundNode.top + SPECTRUM_TEXT_MARGIN;
+    quantumText.centerX = continuumBackgroundNode.centerX;
+    quantumText.bottom = continuumBackgroundNode.bottom - SPECTRUM_TEXT_MARGIN;
 
     // panel content
     var contentNode = new HBox( {
-      spacing: 6,
-      children: [ spectrumBar, buttonGroup ]
+      spacing: 10,
+      children: [ continuumNode, radioButtonGroup ]
     } );
 
-    // panel background
-    var backgroundNode = new ShadedRectangle(
-      new Bounds2( 0, 0, contentNode.width + ( 2 * PANEL_X_MARGIN ), contentNode.height + ( 2 * PANEL_Y_MARGIN ) ), {
-        baseColor: 'rgb( 146, 146, 146 )'
-      } );
-
-    // content centered in panel
-    contentNode.center = backgroundNode.center;
-
-    options.children = [ backgroundNode, contentNode ];
-    Node.call( this, options );
-
-    // Change the selection to match the model.
-    // No need to unlink since ModelControl exists for the lifetime of the sim.
-    modelProperty.link( function( model ) {
-        //TODO
-      }
-    );
+    Panel.call( this, contentNode, options );
   }
 
   modelsOfTheHydrogenAtom.register( 'ModelControl', ModelControl );
@@ -135,24 +141,24 @@ define( function( require ) {
    * @param {HTMLImageElement} image
    * @returns {{value:string, node:Node}}
    */
-  var createButtonContent = function( value, text, image ) {
+  var createRadioButtonContent = function( value, text, image ) {
     return {
       value: value,
       node: new HBox( {
-        spacing: 8,
+        spacing: 10,
         children: [
           new Image( image, {
-            scale: 0.5
+            scale: 0.65
           } ),
           new Text( text, {
             fill: 'white',
             font: new MOTHAFont( 16 ),
-            maxWidth: 150 // i18n, determined empirically
+            maxWidth: 200 // i18n, determined empirically
           } )
         ]
       } )
     };
   };
 
-  return inherit( Node, ModelControl );
+  return inherit( Panel, ModelControl );
 } );
