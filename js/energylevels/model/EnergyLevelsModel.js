@@ -14,7 +14,7 @@ define( function( require ) {
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var PropertySet = require( 'AXON/PropertySet' );
 
-  // valid values for the 'model' property
+  // valid values for the 'model' property. These are models that have an Energy diagram.
   var MODEL_VALUES = [
     'classicalSolarSystem',
     'bohr',
