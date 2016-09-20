@@ -119,7 +119,7 @@ define( function( require ) {
     } );
     this.addChild( dashedLines );
 
-    // selects between 'Experiment' and 'Prediction' modes
+    // selects between 'Experiment' and 'Model' modes
     var modeControl = new ModeControl( viewProperties.modeProperty, {
       right: this.layoutBounds.right - 20,
       top: this.layoutBounds.top + 20
