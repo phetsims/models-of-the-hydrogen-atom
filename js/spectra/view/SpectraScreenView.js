@@ -101,20 +101,6 @@ define( function( require ) {
     } );
     this.addChild( timeControls );
 
-    // selects between 'Experiment' and 'Prediction' modes
-    var modeControl = new ModeControl( viewProperties.modeProperty, {
-      right: this.layoutBounds.right - 20,
-      top: this.layoutBounds.top + 20
-    } );
-    this.addChild( modeControl );
-
-    // selects a predictive model
-    var modelControlPanel = new ModelControlPanel( model.modelProperty, {
-      right: modeControl.right,
-      top: modeControl.bottom + 5
-    } );
-    this.addChild( modelControlPanel );
-
     // Box that shows the zoomed-in view
     var zoomBoxNode = new ZoomBoxNode( {
       left: lightNode.right + 30,
@@ -132,6 +118,20 @@ define( function( require ) {
       lineDash: [ 5, 5 ]
     } );
     this.addChild( dashedLines );
+
+    // selects between 'Experiment' and 'Prediction' modes
+    var modeControl = new ModeControl( viewProperties.modeProperty, {
+      right: this.layoutBounds.right - 20,
+      top: this.layoutBounds.top + 20
+    } );
+    this.addChild( modeControl );
+
+    // selects a predictive model
+    var modelControlPanel = new ModelControlPanel( model.modelProperty, {
+      right: modeControl.right,
+      top: modeControl.bottom + 5
+    } );
+    this.addChild( modelControlPanel );
 
     // Spectrometer
     var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
