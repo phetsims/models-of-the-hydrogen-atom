@@ -24,7 +24,7 @@ define( function( require ) {
   var LASER_POINTER_OPTIONS = {
     hasButton: false,
     rotation: -Math.PI / 2, // pointing up
-    bodySize: new Dimension2( 13, 17 ), // height x width (due to rotation)
+    bodySize: new Dimension2( 18, 17 ), // height x width (due to rotation)
     nozzleSize: new Dimension2( 5, 13 ), // height x width (due to rotation)
     cornerRadius: 2,
     lineWidth: 0.5
@@ -40,8 +40,8 @@ define( function( require ) {
     options = _.extend( {
       orientation: 'vertical',
       spacing: 8,
-      buttonContentXMargin: 20,
-      buttonContentYMargin: 5,
+      buttonContentXMargin: 15,
+      buttonContentYMargin: 6,
       baseColor: 'black',
       disabledBaseColor: 'black',
       selectedStroke: MOTHAColors.SELECTED_COLOR,
