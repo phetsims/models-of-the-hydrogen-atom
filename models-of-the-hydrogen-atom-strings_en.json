@@ -24,7 +24,7 @@
     "value": "brightness view"
   },
   "classical": {
-    "value": "Classical..."
+    "value": "Classical"
   },
   "classicalSolarSystem": {
     "value": "Classical\nSolar System"
@@ -93,7 +93,7 @@
     "value": "proton"
   },
   "quantum": {
-    "value": "...Quantum"
+    "value": "Quantum"
   },
   "radialView": {
     "value": "radial view"
