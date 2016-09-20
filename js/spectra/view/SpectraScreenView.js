@@ -26,6 +26,7 @@ define( function( require ) {
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var SnapshotsDialog = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotsDialog' );
   var SpectrometerNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectrometerNode' );
   var Shape = require( 'KITE/Shape' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -153,7 +154,7 @@ define( function( require ) {
     var viewSnapshotsButton = new RectangularPushButton( {
       content: new Text( viewSnapshotsString, { font: new MOTHAFont( 16 ) } ),
       listener: function() {
-        //TODO
+        new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty ).show();
       },
       right: spectrometerNode.right,
       bottom: spectrometerNode.top - 10

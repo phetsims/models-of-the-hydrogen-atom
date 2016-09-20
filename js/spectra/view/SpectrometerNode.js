@@ -120,7 +120,7 @@ define( function( require ) {
       touchAreaXDilation: 10,
       touchAreaYDilation: 5,
       listener: function() {
-        var numberOfScreenshots = Math.max( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.get() + 1 );
+        var numberOfScreenshots = Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.get() + 1 );
         numberOfSnapshotsProperty.set( numberOfScreenshots );
       }
     } );
