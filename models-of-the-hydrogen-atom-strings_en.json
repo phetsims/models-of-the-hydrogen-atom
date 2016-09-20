@@ -53,6 +53,9 @@
   "experiment": {
     "value": "Experiment"
   },
+  "fast": {
+    "value": "fast"
+  },
   "hydrogenSymbol": {
     "value": "H"
   },
@@ -70,6 +73,9 @@
   },
   "neutron": {
     "value": "neutron"
+  },
+  "normal": {
+    "value": "normal"
   },
   "nTransition": {
     "value": "n Transition"
@@ -106,6 +112,9 @@
   },
   "showTraces": {
     "value": "Show traces"
+  },
+  "slow": {
+    "value": "slow"
   },
   "snapshot": {
     "value": "Snapshot"

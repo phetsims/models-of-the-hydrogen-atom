@@ -15,6 +15,7 @@ define( function( require ) {
 
   // valid values for the 'mode' property
   var MODE_VALUES = [ 'experiment', 'prediction' ];
+  var CLOCK_SPEED_VALUES = [ 'fast', 'normal', 'slow' ];
 
   /**
    * @constructor
@@ -23,15 +24,22 @@ define( function( require ) {
 
     // @public
     PropertySet.call( this, {
+      clockSpeed: 'normal', // {string} clock speed, see CLOCK_SPEED_VALUES
+      running: true, // {boolean} is the simulation running?
       mode: 'experiment', // {string} whether we're viewing an experiment or predictive model, see MODE_VALUES
       absorptionWavelengthsVisible: false, // {boolean} are absorption wavelengths indicated on the wavelength slider?
       spectrometerVisible: true, // {boolean} is the spectrometer visible?
       energyDiagramVisible: false // {boolean} is the electron level energy diagram visible?
     } );
 
+    // validate clockSpeed Property
+    this.clockSpeedProperty.link( function( clockSpeed ) {
+      assert && assert( _.contains( CLOCK_SPEED_VALUES, clockSpeed ) );
+    } );
+
     // validate mode Property
     this.modeProperty.link( function( mode ) {
-      assert && assert( _.indexOf( MODE_VALUES, mode ) !== -1 );
+      assert && assert( _.contains( MODE_VALUES, mode ) );
     } );
   }
 

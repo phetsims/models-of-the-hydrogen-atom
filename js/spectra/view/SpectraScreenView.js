@@ -27,6 +27,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpectrometerNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectrometerNode' );
   var Shape = require( 'KITE/Shape' );
+  var TimeControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TimeControls' );
   var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TinyBox' );
   var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ZoomBoxNode' );
 
@@ -94,6 +95,13 @@ define( function( require ) {
     } );
     this.addChild( tinyBoxNode );
 
+    // Time controls
+    var timeControls = new TimeControls( viewProperties.runningProperty, viewProperties.clockSpeedProperty, this, {
+      left: monochromaticControls.left,
+      top: monochromaticControls.bottom + 20
+    } );
+    this.addChild( timeControls );
+
     // selects between 'Experiment' and 'Prediction' modes
     var modeControl = new ModeControl( viewProperties.modeProperty, {
       right: this.layoutBounds.right - 20,
@@ -158,7 +166,7 @@ define( function( require ) {
 
     // Show the energy diagram for models where it's relevant
     model.modelProperty.link( function( model ) {
-      var modelsWithDiagram = [ 'classicalSolarSystem', 'bohr', 'deBroglie', 'schrodinger '];
+      var modelsWithDiagram = [ 'classicalSolarSystem', 'bohr', 'deBroglie', 'schrodinger ' ];
       energyDiagram.visible = ( _.indexOf( modelsWithDiagram, model ) !== -1 );
     } );
 
