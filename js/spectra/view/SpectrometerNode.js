@@ -42,7 +42,7 @@ define( function( require ) {
 
     options = _.extend( {
       fill: 'rgb( 80, 80, 80 )',
-      stroke: 'rgb( 200, 200, 200 )',
+      stroke: 'rgb( 140, 140, 140 )',
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 5,
@@ -85,6 +85,7 @@ define( function( require ) {
 
     //TODO placeholder
     var displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
+      cornerRadius: options.cornerRadius,
       fill: 'black'
     } );
 
