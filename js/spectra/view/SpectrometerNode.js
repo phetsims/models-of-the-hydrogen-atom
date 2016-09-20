@@ -70,6 +70,11 @@ define( function( require ) {
       fill: 'white'
     } );
 
+    // show subtitle only when expanded
+    expandedProperty.link( function( expanded ) {
+      subtitleNode.visible = expanded;
+    } );
+
     assert && assert( !options.titleNode );
     options.titleNode = new HBox( {
       align: 'bottom',
