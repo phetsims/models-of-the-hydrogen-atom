@@ -34,7 +34,7 @@ define( function( require ) {
   function TimeControls( runningProperty, clockSpeed, comboBoxListParent, options ) {
 
     options = _.extend( {
-      spacing: 6
+      spacing: 7
     }, options );
 
     var playPauseButton = new PlayPauseButton( runningProperty, {
@@ -43,6 +43,7 @@ define( function( require ) {
 
     var stepForwardButton = new StepForwardButton( {
       radius: 16,
+      touchAreaDilation: 6,
       listener: function() {
         //TODO advance the animation
       }
