@@ -60,6 +60,7 @@ define( function( require ) {
     ];
     var speedComboBox = new ComboBox( speedItems, clockSpeed, comboBoxListParent, {
       listPosition: 'above',
+      itemHighlightFill: 'rgb( 153, 206, 255 )',
       itemXMargin: 4,
       itemYMargin: 4
     } );
