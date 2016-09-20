@@ -29,7 +29,7 @@ define( function( require ) {
 
     // @public
     PropertySet.call( this, {
-      modelName: MODEL_NAMES[ 0 ] // {string} the predictive model being used, see MODEL_NAMES
+      modelName: MODEL_NAMES[ 0 ] // {string} name of the predictive model being used, see MODEL_NAMES
     } );
 
     // @public
