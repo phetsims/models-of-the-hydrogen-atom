@@ -74,11 +74,11 @@ define( function( require ) {
 
     // radio buttons
     var radioButtonGroup = new RadioButtonGroup( modelProperty, contentArray, {
-      baseColor: 'black',
-      disabledBaseColor: 'black',
+      baseColor: options.fill,
+      disabledBaseColor: options.fill,
       selectedStroke: MOTHAColors.SELECTED_COLOR,
-      deselectedStroke: 'black',
-      overFill: 'black',
+      deselectedStroke: options.fill,
+      overFill: options.fill,
       overStroke: MOTHAColors.DESELECTED_COLOR,
       overLineWidth: 2,
       selectedLineWidth: 2,
