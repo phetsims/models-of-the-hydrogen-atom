@@ -12,7 +12,6 @@ define( function( require ) {
   var BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/BeamNode' );
   var BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/BoxOfHydrogenNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var EnergyDiagram = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/EnergyDiagram' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
@@ -141,13 +140,6 @@ define( function( require ) {
     } );
     this.addChild( spectrometerNode );
 
-    // Energy diagram
-    var energyDiagram = new EnergyDiagram( viewProperties.energyDiagramVisibleProperty, {
-      left: zoomBoxNode.right + 10,
-      top: zoomBoxNode.top
-    } );
-    this.addChild( energyDiagram );
-
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
@@ -161,12 +153,6 @@ define( function( require ) {
 
     viewProperties.modeProperty.link( function( mode ) {
       modelControlPanel.visible = ( mode === 'model' );
-    } );
-
-    // Show the energy diagram for models where it's relevant
-    model.modelProperty.link( function( model ) {
-      var modelsWithDiagram = [ 'classicalSolarSystem', 'bohr', 'deBroglie', 'schrodinger ' ];
-      energyDiagram.visible = _.contains( modelsWithDiagram, model );
     } );
 
     // Visibility of monochromatic light controls
