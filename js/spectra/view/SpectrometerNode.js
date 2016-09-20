@@ -16,6 +16,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
+  var MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   var Property = require( 'AXON/Property' );
   var RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
@@ -35,10 +36,11 @@ define( function( require ) {
 
   /**
    * @param {Property.<boolean>} expandedProperty
+   * @param {Property.<number>} numberOfSnapshotsProperty
    * @param {Object} [options]
    * @constructor
    */
-  function SpectrometerNode( expandedProperty, options ) {
+  function SpectrometerNode( expandedProperty, numberOfSnapshotsProperty, options ) {
 
     options = _.extend( {
       fill: 'rgb( 80, 80, 80 )',
@@ -111,21 +113,22 @@ define( function( require ) {
       }
     } );
 
-    var cameraButton = new RectangularPushButton( {
+    var snapshotButton = new RectangularPushButton( {
       maxHeight: recordStopButton.height,
       baseColor: BUTTON_COLOR,
       content: new FontAwesomeNode( 'camera' ),
       touchAreaXDilation: 10,
       touchAreaYDilation: 5,
       listener: function() {
-        //TODO
+        var numberOfScreenshots = Math.max( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.get() + 1 );
+        numberOfSnapshotsProperty.set( numberOfScreenshots );
       }
     } );
 
     var buttonGroup = new VBox( {
       spacing: 14,
       align: 'center',
-      children: [ recordStopButton, resetButton, cameraButton ]
+      children: [ recordStopButton, resetButton, snapshotButton ]
     } );
 
     var contentNode = new HBox( {

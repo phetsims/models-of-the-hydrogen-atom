@@ -88,5 +88,8 @@
   },
   "spectrometer": {
     "value": "Spectrometer"
+  },
+  "viewSnapshots": {
+    "value": "View snapshots"
   }
 }

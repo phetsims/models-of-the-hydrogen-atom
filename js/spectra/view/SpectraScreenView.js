@@ -19,17 +19,23 @@ define( function( require ) {
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModeControl' );
   var ModelControlPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControlPanel' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   var MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   var MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpectrometerNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectrometerNode' );
   var Shape = require( 'KITE/Shape' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var TimeControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TimeControls' );
   var TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TinyBox' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ZoomBoxNode' );
+
+  // strings
+  var viewSnapshotsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/viewSnapshots' );
 
   /**
    * @param {SpectraModel} model
@@ -136,11 +142,23 @@ define( function( require ) {
     } ) );
 
     // Spectrometer
-    var spectrometerNode = new SpectrometerNode( viewProperties.spectrometerVisibleProperty, {
-      left: monochromaticControls.right + 10,
-      top: monochromaticControls.top
-    } );
+    var spectrometerNode = new SpectrometerNode(
+      viewProperties.spectrometerVisibleProperty, viewProperties.numberOfSnapshotsProperty, {
+        left: monochromaticControls.right + 10,
+        top: monochromaticControls.top
+      } );
     this.addChild( spectrometerNode );
+
+    // View Snapshots button, above upper-right corner of spectrometer
+    var viewSnapshotsButton = new RectangularPushButton( {
+      content: new Text( viewSnapshotsString, { font: new MOTHAFont( 16 ) } ),
+      listener: function() {
+        //TODO
+      },
+      right: spectrometerNode.right,
+      bottom: spectrometerNode.top - 10
+    } );
+    this.addChild( viewSnapshotsButton );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
@@ -160,6 +178,11 @@ define( function( require ) {
     // Visibility of monochromatic light controls
     model.light.modeProperty.link( function( mode ) {
       monochromaticControls.visible = ( mode === 'monochromatic' );
+    } );
+
+    // Show 'View snapshots' button when there are snapshots available
+    viewProperties.numberOfSnapshotsProperty.link( function( numberOfSnapshots ) {
+      viewSnapshotsButton.visible = ( numberOfSnapshots > 0 );
     } );
   }
 
