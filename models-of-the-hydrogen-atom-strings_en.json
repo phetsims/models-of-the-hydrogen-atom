@@ -36,7 +36,7 @@
     "value": "Experiment"
   },
   "fast": {
-    "value": "fast"
+    "value": "fast forward"
   },
   "hydrogenSymbol": {
     "value": "H"
@@ -51,7 +51,7 @@
     "value": "neutron"
   },
   "normal": {
-    "value": "normal"
+    "value": "normal speed"
   },
   "photon": {
     "value": "photon"
@@ -84,7 +84,7 @@
     "value": "Show absorption wavelengths"
   },
   "slow": {
-    "value": "slow"
+    "value": "slow motion"
   },
   "spectrometer": {
     "value": "Spectrometer"
