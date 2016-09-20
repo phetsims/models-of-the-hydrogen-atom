@@ -43,6 +43,7 @@ define( function( require ) {
 
     Dialog.call( this, content, options );
 
+    //TODO remove a specific snapshot, rather than rebuilding them all
     numberOfSnapshotsProperty.lazyLink( function( numberOfSnapshots ) {
       if ( numberOfSnapshots === 0 ) {
         self.hide();
@@ -61,6 +62,12 @@ define( function( require ) {
 
   modelsOfTheHydrogenAtom.register( 'SnapshotsDialog', SnapshotsDialog );
 
+  /**
+   * Creates the snapshots.
+   *
+   * @param numberOfSnapshotsProperty
+   * @returns {Array}
+   */
   var createSnapshotNodes = function( numberOfSnapshotsProperty ) {
     var snapshots = [];
     for ( var i = 0; i < numberOfSnapshotsProperty.get(); i++ ) {
