@@ -31,7 +31,7 @@ define( function( require ) {
 
   // constants
   var BUTTON_COLOR = 'rgb( 245, 245, 245 )';
-  var DISPLAY_SIZE = new Dimension2( 525, 140 );
+  var DISPLAY_SIZE = new Dimension2( 510, 140 );
 
   /**
    * @param {Property.<boolean>} expandedProperty
@@ -123,7 +123,7 @@ define( function( require ) {
     } );
 
     var buttonGroup = new VBox( {
-      spacing: 10,
+      spacing: 14,
       align: 'center',
       children: [ recordStopButton, resetButton, cameraButton ]
     } );
