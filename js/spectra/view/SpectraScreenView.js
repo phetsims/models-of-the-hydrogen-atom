@@ -63,7 +63,7 @@ define( function( require ) {
     this.addChild( lightModeControl );
 
     // Controls for monochromatic light
-    var monochromaticControls = new MonochromaticControls(
+    var monochromaticControls = new MonochromaticControls( model.modelProperty,
       model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
         left: lightModeControl.left,
         top: lightModeControl.bottom + 15

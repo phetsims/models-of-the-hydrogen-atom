@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  var SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var WavelengthSlider = require( 'SCENERY_PHET/WavelengthSlider' );
@@ -21,12 +22,13 @@ define( function( require ) {
   var showAbsorptionWavelengthsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showAbsorptionWavelengths' );
 
   /**
+   * @param {Property.<string>} modelProperty
    * @param {Property.<number>} wavelengthProperty
    * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
    * @param options
    * @constructor
    */
-  function MonochromaticControls( wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
+  function MonochromaticControls( modelProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
 
     options = _.extend( {
       align: 'center',
@@ -66,9 +68,15 @@ define( function( require ) {
 
     VBox.call( this, options );
 
-    absorptionWavelengthsVisibleProperty.link( function( visible ) {
-      //TODO
+    modelProperty.link( function( model ) {
+      showCheckBox.visible = _.contains( SpectraModel.MODELS_WITH_TRANSITION_WAVELENGTHS, model );
     } );
+
+    var updateAbsorptionWavelengths = function() {
+      //TODO wavelengthSlider.absorptionWavelengthsVisible = absorptionWavelengthsVisibleProperty.get() && _.contains( SpectraModel.MODELS_WITH_TRANSITION_WAVELENGTHS, modelProperty.get() );
+    };
+    modelProperty.link( updateAbsorptionWavelengths );
+    absorptionWavelengthsVisibleProperty.link( updateAbsorptionWavelengths );
   }
 
   modelsOfTheHydrogenAtom.register( 'MonochromaticControls', MonochromaticControls );

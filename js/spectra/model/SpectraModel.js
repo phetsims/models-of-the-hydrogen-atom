@@ -24,6 +24,13 @@ define( function( require ) {
     'schrodinger'
   ];
 
+  var MODELS_WITH_TRANSITION_WAVELENGTHS = [
+    'bohr',
+    'deBroglie',
+    'schrodinger'
+  ];
+  //TODO assert that MODELS_WITH_TRANSITION_WAVELENGTHS is a subset of MODEL_VALUES
+
   /**
    * @constructor
    */
@@ -57,5 +64,8 @@ define( function( require ) {
     step: function( dt ) {
       //TODO Handle model animation here.
     }
+  }, {
+
+    MODELS_WITH_TRANSITION_WAVELENGTHS: MODELS_WITH_TRANSITION_WAVELENGTHS
   } );
 } );
