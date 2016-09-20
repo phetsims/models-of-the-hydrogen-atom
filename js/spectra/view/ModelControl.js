@@ -21,30 +21,26 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // images
   var billiardBallButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/billiardBallButton.png' );
-  var plumPuddingButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/plumPuddingButton.png' );
-  var classicalSolarSystemButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystemButton.png' );
   var bohrButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/bohrButton.png' );
+  var classicalSolarSystemButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystemButton.png' );
   var deBroglieButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/deBroglieButton.png' );
+  var plumPuddingButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/plumPuddingButton.png' );
   var schrodingerButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/schrodingerButton.png' );
 
   // strings
-  var atomicModelString = 'Atomic Model'; //TODO delete this
   var billiardBallString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/billiardBall' );
-  var plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
-  var classicalSolarSystemString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystem' );
   var bohrString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/bohr' );
-  var deBroglieString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/deBroglie' );
-  var schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
   var classicalString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classical' );
+  var classicalSolarSystemString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystem' );
+  var deBroglieString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/deBroglie' );
+  var plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
   var quantumString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/quantum' );
+  var schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
   // constants
-  var TITLE_FONT = new MOTHAFont( { size: 18, weight: 'bold' } );
-  var BUTTON_FONT = new MOTHAFont( 13 );
   var SPECTRUM_FONT = new MOTHAFont( 14 );
   var PANEL_X_MARGIN = 10;
   var PANEL_Y_MARGIN = 10;
@@ -59,25 +55,25 @@ define( function( require ) {
 
     // radio buttons
     var buttonGroup = new RadioButtonGroup( modelProperty, [
-      { value: 'billiardBall', node: createButtonIcon( billiardBallString, billiardBallButtonImage ) },
-      { value: 'plumPudding', node: createButtonIcon( plumPuddingString, plumPuddingButtonImage ) },
-      {
-        value: 'classicalSolarSystem',
-        node: createButtonIcon( classicalSolarSystemString, classicalSolarSystemButtonImage )
-      },
-      { value: 'bohr', node: createButtonIcon( bohrString, bohrButtonImage ) },
-      { value: 'deBroglie', node: createButtonIcon( deBroglieString, deBroglieButtonImage ) },
-      { value: 'schrodinger', node: createButtonIcon( schrodingerString, schrodingerButtonImage ) }
+      createButtonContent( 'billiardBall', billiardBallString, billiardBallButtonImage ),
+      createButtonContent( 'plumPudding', plumPuddingString, plumPuddingButtonImage ),
+      createButtonContent( 'classicalSolarSystem', classicalSolarSystemString, classicalSolarSystemButtonImage ),
+      createButtonContent( 'bohr', bohrString, bohrButtonImage ),
+      createButtonContent( 'deBroglie', deBroglieString, deBroglieButtonImage ),
+      createButtonContent( 'schrodinger', schrodingerString, schrodingerButtonImage )
     ], {
+      baseColor: 'black',
+      disabledBaseColor: 'black',
+      selectedStroke: 'yellow',
+      deselectedStroke: 'black',
+      overFill: 'black',
+      overStroke: 'gray',
+      overLineWidth: 1,
+      selectedLineWidth: 2,
+      labelAlign: 'left',
       spacing: 2,
       buttonContentXMargin: 4,
-      buttonContentYMargin: 4
-    } );
-
-    // title
-    var titleNode = new Text( atomicModelString, {
-      font: TITLE_FONT,
-      maxWidth: buttonGroup.width
+      buttonContentYMargin: 2
     } );
 
     // spectrum bar, 'Classical' to 'Quantum'
@@ -106,16 +102,9 @@ define( function( require ) {
     quantumText.bottom = spectrumBackgroundNode.bottom - SPECTRUM_TEXT_MARGIN;
 
     // panel content
-    var contentNode = new VBox( {
-      spacing: 5,
-      align: 'center',
-      children: [
-        titleNode,
-        new HBox( {
-          spacing: 6,
-          children: [ buttonGroup, spectrumBar ]
-        } )
-      ]
+    var contentNode = new HBox( {
+      spacing: 6,
+      children: [ spectrumBar, buttonGroup ]
     } );
 
     // panel background
@@ -141,20 +130,28 @@ define( function( require ) {
   modelsOfTheHydrogenAtom.register( 'ModelControl', ModelControl );
 
   /**
+   * @param {*} value
    * @param {string} text
-   * @param {HTMLImageElement|MipMap} image
-   * @returns {*}
+   * @param {HTMLImageElement} image
+   * @returns {{value:string, node:Node}}
    */
-  var createButtonIcon = function( text, image ) {
-    return new VBox( {
-      children: [
-        new Text( text, {
-          font: BUTTON_FONT,
-          maxWidth: 125 // i18n, determined empirically
-        } ),
-        new Image( image )
-      ]
-    } );
+  var createButtonContent = function( value, text, image ) {
+    return {
+      value: value,
+      node: new HBox( {
+        spacing: 8,
+        children: [
+          new Image( image, {
+            scale: 0.5
+          } ),
+          new Text( text, {
+            fill: 'white',
+            font: new MOTHAFont( 16 ),
+            maxWidth: 150 // i18n, determined empirically
+          } )
+        ]
+      } )
+    };
   };
 
   return inherit( Node, ModelControl );
