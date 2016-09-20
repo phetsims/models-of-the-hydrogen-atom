@@ -63,7 +63,7 @@ define( function( require ) {
     this.addChild( lightModeControl );
 
     // Controls for monochromatic light
-    var monochromaticControls = new MonochromaticControls( model.modelProperty,
+    var monochromaticControls = new MonochromaticControls( model.modelNameProperty,
       model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
         left: lightModeControl.left,
         top: lightModeControl.bottom + 15
@@ -132,7 +132,7 @@ define( function( require ) {
     var modeControl = new ModeControl( viewProperties.modeProperty );
 
     // selects a predictive model
-    var modelControlPanel = new ModelControlPanel( model.modelProperty );
+    var modelControlPanel = new ModelControlPanel( model.modelNameProperty );
 
     this.addChild( new VBox( {
       children: [ modeControl, modelControlPanel ],

@@ -14,8 +14,8 @@ define( function( require ) {
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var PropertySet = require( 'AXON/PropertySet' );
 
-  // valid values for the 'model' property
-  var MODEL_VALUES = [
+  // valid values for the modelName property
+  var MODEL_NAMES = [
     'billiardBall',
     'plumPudding',
     'classicalSolarSystem',
@@ -24,13 +24,14 @@ define( function( require ) {
     'schrodinger'
   ];
 
-  var MODELS_WITH_TRANSITION_WAVELENGTHS = [
+  // models that include the concept of transition wavelengths
+  var MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS = [
     'bohr',
     'deBroglie',
     'schrodinger'
   ];
-  assert && assert( MODELS_WITH_TRANSITION_WAVELENGTHS.length === _.intersection( MODEL_VALUES, MODELS_WITH_TRANSITION_WAVELENGTHS ).length,
-    'bad model name in MODELS_WITH_TRANSITION_WAVELENGTHS' );
+  assert && assert( MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS.length === _.intersection( MODEL_NAMES, MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS ).length,
+    'bad model name in MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS' );
 
   /**
    * @constructor
@@ -39,15 +40,15 @@ define( function( require ) {
 
     // @public
     PropertySet.call( this, {
-      model: MODEL_VALUES[ 0 ] // {string} the predictive model being used, see MODEL_VALUES
+      modelName: MODEL_NAMES[ 0 ] // {string} the predictive model being used, see MODEL_NAMES
     } );
 
     // @public
     this.light = new Light();
 
     // validate model Property
-    this.modelProperty.link( function( model ) {
-      assert && assert( _.indexOf( MODEL_VALUES, model ) !== -1 );
+    this.modelNameProperty.link( function( modelName ) {
+      assert && assert( _.indexOf( MODEL_NAMES, modelName ) !== -1 );
     } );
   }
 
@@ -67,6 +68,6 @@ define( function( require ) {
     }
   }, {
 
-    MODELS_WITH_TRANSITION_WAVELENGTHS: MODELS_WITH_TRANSITION_WAVELENGTHS
+    MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS: MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS
   } );
 } );

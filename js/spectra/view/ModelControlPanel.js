@@ -38,11 +38,11 @@ define( function( require ) {
   var schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
   /**
-   * @param {Property.<string>} modelProperty
+   * @param {Property.<string>} modelNameProperty
    * @param {Object} [options]
    * @constructor
    */
-  function ModelControlPanel( modelProperty, options ) {
+  function ModelControlPanel( modelNameProperty, options ) {
 
     options = _.extend( {
       fill: 'black',
@@ -73,7 +73,7 @@ define( function( require ) {
     } );
 
     // radio buttons
-    var radioButtonGroup = new RadioButtonGroup( modelProperty, contentArray, {
+    var radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
       baseColor: options.fill,
       disabledBaseColor: options.fill,
       selectedStroke: MOTHAColors.SELECTED_COLOR,

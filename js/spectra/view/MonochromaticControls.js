@@ -22,13 +22,13 @@ define( function( require ) {
   var showAbsorptionWavelengthsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showAbsorptionWavelengths' );
 
   /**
-   * @param {Property.<string>} modelProperty
+   * @param {Property.<string>} modelNameProperty
    * @param {Property.<number>} wavelengthProperty
    * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
    * @param options
    * @constructor
    */
-  function MonochromaticControls( modelProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
+  function MonochromaticControls( modelNameProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
 
     options = _.extend( {
       align: 'center',
@@ -68,14 +68,14 @@ define( function( require ) {
 
     VBox.call( this, options );
 
-    modelProperty.link( function( model ) {
+    modelNameProperty.link( function( model ) {
       showCheckBox.visible = _.contains( SpectraModel.MODELS_WITH_TRANSITION_WAVELENGTHS, model );
     } );
 
     var updateAbsorptionWavelengths = function() {
-      //TODO wavelengthSlider.absorptionWavelengthsVisible = absorptionWavelengthsVisibleProperty.get() && _.contains( SpectraModel.MODELS_WITH_TRANSITION_WAVELENGTHS, modelProperty.get() );
+      //TODO wavelengthSlider.absorptionWavelengthsVisible = absorptionWavelengthsVisibleProperty.get() && _.contains( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
     };
-    modelProperty.link( updateAbsorptionWavelengths );
+    modelNameProperty.link( updateAbsorptionWavelengths );
     absorptionWavelengthsVisibleProperty.link( updateAbsorptionWavelengths );
   }
 
