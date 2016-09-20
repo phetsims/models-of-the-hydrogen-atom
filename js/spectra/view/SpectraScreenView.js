@@ -18,7 +18,7 @@ define( function( require ) {
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
   var ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModeControl' );
-  var ModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControl' );
+  var ModelControlPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControlPanel' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   var MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
@@ -110,11 +110,11 @@ define( function( require ) {
     this.addChild( modeControl );
 
     // selects a predictive model
-    var modelControl = new ModelControl( model.modelProperty, {
+    var modelControlPanel = new ModelControlPanel( model.modelProperty, {
       right: modeControl.right,
       top: modeControl.bottom + 5
     } );
-    this.addChild( modelControl );
+    this.addChild( modelControlPanel );
 
     // Box that shows the zoomed-in view
     var zoomBoxNode = new ZoomBoxNode( {
@@ -160,14 +160,13 @@ define( function( require ) {
     this.addChild( resetAllButton );
 
     viewProperties.modeProperty.link( function( mode ) {
-      //TODO perhaps fade this in/out
-      modelControl.visible = ( mode === 'model' );
+      modelControlPanel.visible = ( mode === 'model' );
     } );
 
     // Show the energy diagram for models where it's relevant
     model.modelProperty.link( function( model ) {
       var modelsWithDiagram = [ 'classicalSolarSystem', 'bohr', 'deBroglie', 'schrodinger ' ];
-      energyDiagram.visible = ( _.indexOf( modelsWithDiagram, model ) !== -1 );
+      energyDiagram.visible = _.contains( modelsWithDiagram, model );
     } );
 
     // Visibility of monochromatic light controls

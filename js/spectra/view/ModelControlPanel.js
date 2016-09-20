@@ -1,7 +1,7 @@
 // Copyright 2015-2016, University of Colorado Boulder
 
 /**
- * Control for selecting one of several predictive models.
+ * Control panel for selecting one of several predictive models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -49,7 +49,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function ModelControl( modelProperty, options ) {
+  function ModelControlPanel( modelProperty, options ) {
 
     options = _.extend( {
       fill: 'black',
@@ -133,7 +133,7 @@ define( function( require ) {
     Panel.call( this, contentNode, options );
   }
 
-  modelsOfTheHydrogenAtom.register( 'ModelControl', ModelControl );
+  modelsOfTheHydrogenAtom.register( 'ModelControlPanel', ModelControlPanel );
 
   /**
    * @param {*} value
@@ -160,5 +160,5 @@ define( function( require ) {
     };
   };
 
-  return inherit( Panel, ModelControl );
+  return inherit( Panel, ModelControlPanel );
 } );
