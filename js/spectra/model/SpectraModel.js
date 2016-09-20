@@ -29,7 +29,8 @@ define( function( require ) {
     'deBroglie',
     'schrodinger'
   ];
-  //TODO assert that MODELS_WITH_TRANSITION_WAVELENGTHS is a subset of MODEL_VALUES
+  assert && assert( MODELS_WITH_TRANSITION_WAVELENGTHS.length === _.intersection( MODEL_VALUES, MODELS_WITH_TRANSITION_WAVELENGTHS ).length,
+    'bad model name in MODELS_WITH_TRANSITION_WAVELENGTHS' );
 
   /**
    * @constructor
