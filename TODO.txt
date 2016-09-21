@@ -1,5 +1,1 @@
 TODO list for models-of-the-hydrogen-atom
-
-Make issue: redraw model icons on transparent background, uniform sizes, make plum pudding consistent with rutherford-scattering
-
-Make issue: do we need a projector mode?
