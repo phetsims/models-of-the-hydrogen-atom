@@ -28,7 +28,7 @@ define( function( require ) {
       running: true, // {boolean} is the simulation running?
       mode: 'experiment', // {string} whether we're viewing an experiment or predictive model, see MODE_VALUES
       absorptionWavelengthsVisible: false, // {boolean} are absorption wavelengths indicated on the wavelength slider?
-      spectrometerVisible: true, // {boolean} is the spectrometer visible?
+      spectrometerExpanded: false, // {boolean} is the spectrometer expanded?
       energyDiagramVisible: false, // {boolean} is the electron level energy diagram visible?
       numberOfSnapshots: 0 //TODO for prototyping
     } );

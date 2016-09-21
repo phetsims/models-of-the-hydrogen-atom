@@ -144,7 +144,7 @@ define( function( require ) {
 
     // Spectrometer
     var spectrometerNode = new SpectrometerNode(
-      viewProperties.spectrometerVisibleProperty, viewProperties.numberOfSnapshotsProperty, {
+      viewProperties.spectrometerExpandedProperty, viewProperties.numberOfSnapshotsProperty, {
         left: monochromaticControls.right + 10,
         top: monochromaticControls.top
       } );
