@@ -24,8 +24,12 @@ define( function( require ) {
 
     // @public
     PropertySet.call( this, {
+
+      //TODO should clock-related stuff be in model?
       clockSpeed: 'normal', // {string} clock speed, see CLOCK_SPEED_VALUES
       running: true, // {boolean} is the simulation running?
+
+      //TODO should mode be model?
       mode: 'experiment', // {string} whether we're viewing an experiment or predictive model, see MODE_VALUES
       absorptionWavelengthsVisible: false, // {boolean} are absorption wavelengths indicated on the wavelength slider?
       spectrometerExpanded: false, // {boolean} is the spectrometer expanded?

@@ -22,13 +22,14 @@ define( function( require ) {
   var showAbsorptionWavelengthsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showAbsorptionWavelengths' );
 
   /**
+   * @param {Property.<string>} modeProperty
    * @param {Property.<string>} modelNameProperty
    * @param {Property.<number>} wavelengthProperty
    * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
    * @param options
    * @constructor
    */
-  function MonochromaticControls( modelNameProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
+  function MonochromaticControls( modeProperty, modelNameProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
 
     options = _.extend( {
       align: 'center',
@@ -68,12 +69,23 @@ define( function( require ) {
 
     VBox.call( this, options );
 
-    modelNameProperty.link( function( model ) {
-      showCheckBox.visible = _.contains( SpectraModel.MODELS_WITH_TRANSITION_WAVELENGTHS, model );
-    } );
+    // transition wavelengths are relevant only to certain models
+    var hasTransitionWavelengths = function() {
+      return modeProperty.get() === 'experiment' ||
+             _.contains( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
+    };
 
+    // show the check box only if it's relevant
+    var updateCheckBoxVisible = function() {
+      showCheckBox.visible = hasTransitionWavelengths();
+    };
+    modeProperty.link( updateCheckBoxVisible );
+    modelNameProperty.link( updateCheckBoxVisible );
+
+    // show absorption wavelengths for relevant models
     var updateAbsorptionWavelengths = function() {
-      //TODO wavelengthSlider.absorptionWavelengthsVisible = absorptionWavelengthsVisibleProperty.get() && _.contains( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
+      //TODO
+      // wavelengthSlider.absorptionWavelengthsVisible = hasTransitionWavelengths() && absorptionWavelengthsVisibleProperty.get();
     };
     modelNameProperty.link( updateAbsorptionWavelengths );
     absorptionWavelengthsVisibleProperty.link( updateAbsorptionWavelengths );
