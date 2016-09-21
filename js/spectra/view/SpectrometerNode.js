@@ -67,6 +67,7 @@ define( function( require ) {
       fill: MOTHAColors.TITLE_FILL
     } );
 
+    //TODO order of title and subtitle is not localized
     var subtitleNode = new Text( photonsEmittedNmString, {
       font: new MOTHAFont( 14 ),
       fill: 'white'
