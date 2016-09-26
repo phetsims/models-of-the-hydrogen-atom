@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Light' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
 
   // valid values for the modelName property
   var MODEL_NAMES = [
@@ -38,27 +38,22 @@ define( function( require ) {
    */
   function SpectraModel() {
 
-    // @public
-    PropertySet.call( this, {
-      modelName: MODEL_NAMES[ 0 ] // {string} name of the predictive model being used, see MODEL_NAMES
+    // @public {string} name of the predictive model being used
+    this.modelNameProperty = new Property( 'classicalSolarSystem', {
+      allowedValues: MODEL_NAMES
     } );
 
     // @public
     this.light = new Light();
-
-    // validate model Property
-    this.modelNameProperty.link( function( modelName ) {
-      assert && assert( _.indexOf( MODEL_NAMES, modelName ) !== -1 );
-    } );
   }
 
   modelsOfTheHydrogenAtom.register( 'SpectraModel', SpectraModel );
 
-  return inherit( PropertySet, SpectraModel, {
+  return inherit( Object, SpectraModel, {
 
     // @public @override
     reset: function() {
-      PropertySet.prototype.reset.call( this );
+      this.modelNameProperty.reset();
       this.light.reset();
     },
 

@@ -12,28 +12,29 @@ define( function( require ) {
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
-
-  // constants
-  var MODE_VALUES = [ 'white', 'monochromatic' ];
 
   /**
    * @constructor
    */
   function Light() {
 
-    PropertySet.call( this, {
-
-      // @public
-      on: false, // {boolean} is the light on?
-      mode: 'white', // {string} type of light being emitted, see MODE_VALUES
-      wavelength: VisibleColor.MIN_WAVELENGTH // {number} wavelength in nm, relevant only for 'monochromatic' mode
+    // @public {boolean} is the light on?
+    this.onProperty = new Property( false, {
+      allowedValues: [ true, false ]
     } );
 
-    // validate mode Property
-    this.modeProperty.link( function( mode ) {
-      assert && assert( _.indexOf( MODE_VALUES, mode ) !== -1 );
+    // @public {string} type of light being emitted
+    this.modeProperty = new Property( 'white', {
+      allowedValues: [ 'white', 'monochromatic' ]
+    } );
+
+    // @public {number} wavelength in nm, relevant only for 'monochromatic' mode
+    this.wavelengthProperty = new Property( VisibleColor.MIN_WAVELENGTH, {
+      validate: function( value ) {
+        return ( value >= VisibleColor.MIN_WAVELENGTH && value <= VisibleColor.MAX_WAVELENGTH );
+      }
     } );
 
     // @public {Color} color displayed by the view
@@ -46,5 +47,13 @@ define( function( require ) {
 
   modelsOfTheHydrogenAtom.register( 'Light', Light );
 
-  return inherit( PropertySet, Light );
+  return inherit( Object, Light, {
+
+    // @public
+    reset: function() {
+      this.onProperty.reset();
+      this.modeProperty.reset();
+      this.wavelengthProperty.reset();
+    }
+  } );
 } );

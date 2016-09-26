@@ -12,42 +12,36 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Light' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var PropertySet = require( 'AXON/PropertySet' );
-
-  // Valid values for the modelName property. These are models that have an Energy diagram.
-  var MODEL_NAMES = [
-    'classicalSolarSystem',
-    'bohr',
-    'deBroglie',
-    'schrodinger'
-  ];
+  var Property = require( 'AXON/Property' );
 
   /**
    * @constructor
    */
   function EnergyLevelsModel() {
 
-    // @public
-    PropertySet.call( this, {
-      modelName: MODEL_NAMES[ 0 ] // {string} name of the predictive model being used, see MODEL_NAMES
+    // @public {string} name of the predictive model being used
+    this.modelNameProperty = new Property( 'classicalSolarSystem', {
+
+      // These are models that have an Energy diagram.
+      allowedValues: [
+        'classicalSolarSystem',
+        'bohr',
+        'deBroglie',
+        'schrodinger'
+      ]
     } );
 
     // @public
     this.light = new Light();
-
-    // validate model Property
-    this.modelNameProperty.link( function( modelName ) {
-      assert && assert( _.indexOf( MODEL_NAMES, modelName ) !== -1 );
-    } );
   }
 
   modelsOfTheHydrogenAtom.register( 'EnergyLevelsModel', EnergyLevelsModel );
 
-  return inherit( PropertySet, EnergyLevelsModel, {
+  return inherit( Object, EnergyLevelsModel, {
 
     // @public @override
     reset: function() {
-      PropertySet.prototype.reset.call( this );
+      this.modelNameProperty.reset();
       this.light.reset();
     },
 

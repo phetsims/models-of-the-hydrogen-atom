@@ -11,44 +11,63 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var PropertySet = require( 'AXON/PropertySet' );
-
-  // valid values for the 'mode' property
-  var MODE_VALUES = [ 'experiment', 'model' ];
-  var CLOCK_SPEED_VALUES = [ 'fast', 'normal', 'slow' ];
+  var Property = require( 'AXON/Property' );
 
   /**
    * @constructor
    */
   function MOTHAViewProperties() {
 
-    // @public
-    PropertySet.call( this, {
-
-      //TODO should clock-related stuff be in model?
-      clockSpeed: 'normal', // {string} clock speed, see CLOCK_SPEED_VALUES
-      running: true, // {boolean} is the simulation running?
-
-      //TODO should mode be model?
-      mode: 'experiment', // {string} whether we're viewing an experiment or predictive model, see MODE_VALUES
-      absorptionWavelengthsVisible: false, // {boolean} are absorption wavelengths indicated on the wavelength slider?
-      spectrometerExpanded: false, // {boolean} is the spectrometer expanded?
-      energyDiagramVisible: false, // {boolean} is the electron level energy diagram visible?
-      numberOfSnapshots: 0 //TODO for prototyping
+    //TODO should clock-related stuff be in model?
+    // @public {string} clock speed
+    this.clockSpeedProperty = new Property( 'normal', {
+      allowedValues: [ 'fast', 'normal', 'slow' ]
     } );
 
-    // validate clockSpeed Property
-    this.clockSpeedProperty.link( function( clockSpeed ) {
-      assert && assert( _.contains( CLOCK_SPEED_VALUES, clockSpeed ), 'invalid clockSpeed: ' + clockSpeed );
+    // @public {boolean} is the simulation running?
+    this.runningProperty = new Property( true, {
+      allowedValues: [ true, false ]
     } );
 
-    // validate mode Property
-    this.modeProperty.link( function( mode ) {
-      assert && assert( _.contains( MODE_VALUES, mode ), 'invalid mode: ' + mode );
+    //TODO should mode be model?
+    // @public {string} whether we're viewing an experiment or predictive model
+    this.modeProperty = new Property( 'experiment', {
+      allowedValues: [ 'experiment', 'model' ]
     } );
+
+    // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
+    this.absorptionWavelengthsVisibleProperty = new Property( false, {
+      allowedValues: [ true, false ]
+    } );
+
+    // @public {boolean} is the spectrometer expanded?
+    this.spectrometerExpandedProperty = new Property( false, {
+      allowedValues: [ true, false ]
+    } );
+
+    // @public {boolean} is the electron level energy diagram visible?
+    this.energyDiagramVisibleProperty = new Property( false, {
+      allowedValues: [ true, false ]
+    } );
+
+    //TODO for prototyping
+    // @public {number} number of spectrometer snapshots
+    this.numberOfSnapshotsProperty = new Property( 0 );
   }
 
   modelsOfTheHydrogenAtom.register( 'MOTHAViewProperties', MOTHAViewProperties );
 
-  return inherit( PropertySet, MOTHAViewProperties );
+  return inherit( Object, MOTHAViewProperties, {
+
+    // @public
+    reset: function() {
+      this.clockSpeedProperty.reset();
+      this.runningProperty.reset();
+      this.modeProperty.reset();
+      this.absorptionWavelengthsVisibleProperty.reset();
+      this.spectrometerExpandedProperty.reset();
+      this.energyDiagramVisibleProperty.reset();
+      this.numberOfSnapshotsProperty.reset();
+    }
+  } );
 } );
