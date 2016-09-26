@@ -29,7 +29,7 @@ define( function( require ) {
       allowedValues: [ true, false ]
     } );
 
-    //TODO should mode be model?
+    //TODO should mode be in model?
     // @public {string} whether we're viewing an experiment or predictive model
     this.modeProperty = new Property( 'experiment', {
       allowedValues: [ 'experiment', 'model' ]
