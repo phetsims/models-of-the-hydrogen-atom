@@ -32,7 +32,7 @@ define( function( require ) {
 
     // @public {number} wavelength in nm, relevant only for 'monochromatic' mode
     this.wavelengthProperty = new Property( VisibleColor.MIN_WAVELENGTH, {
-      validate: function( value ) {
+      isValidValue: function( value ) {
         return ( value >= VisibleColor.MIN_WAVELENGTH && value <= VisibleColor.MAX_WAVELENGTH );
       }
     } );
