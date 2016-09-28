@@ -40,7 +40,7 @@ define( function( require ) {
 
     // @public {string} name of the predictive model being used
     this.modelNameProperty = new Property( 'classicalSolarSystem', {
-      allowedValues: MODEL_NAMES
+      validValues: MODEL_NAMES
     } );
 
     // @public

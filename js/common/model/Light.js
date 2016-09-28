@@ -22,12 +22,12 @@ define( function( require ) {
 
     // @public {boolean} is the light on?
     this.onProperty = new Property( false, {
-      allowedValues: [ true, false ]
+      validValues: [ true, false ]
     } );
 
     // @public {string} type of light being emitted
     this.modeProperty = new Property( 'white', {
-      allowedValues: [ 'white', 'monochromatic' ]
+      validValues: [ 'white', 'monochromatic' ]
     } );
 
     // @public {number} wavelength in nm, relevant only for 'monochromatic' mode

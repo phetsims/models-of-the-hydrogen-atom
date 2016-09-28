@@ -21,33 +21,33 @@ define( function( require ) {
     //TODO should clock-related stuff be in model?
     // @public {string} clock speed
     this.clockSpeedProperty = new Property( 'normal', {
-      allowedValues: [ 'fast', 'normal', 'slow' ]
+      validValues: [ 'fast', 'normal', 'slow' ]
     } );
 
     // @public {boolean} is the simulation running?
     this.runningProperty = new Property( true, {
-      allowedValues: [ true, false ]
+      validValues: [ true, false ]
     } );
 
     //TODO should mode be in model?
     // @public {string} whether we're viewing an experiment or predictive model
     this.modeProperty = new Property( 'experiment', {
-      allowedValues: [ 'experiment', 'model' ]
+      validValues: [ 'experiment', 'model' ]
     } );
 
     // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
     this.absorptionWavelengthsVisibleProperty = new Property( false, {
-      allowedValues: [ true, false ]
+      validValues: [ true, false ]
     } );
 
     // @public {boolean} is the spectrometer expanded?
     this.spectrometerExpandedProperty = new Property( false, {
-      allowedValues: [ true, false ]
+      validValues: [ true, false ]
     } );
 
     // @public {boolean} is the electron level energy diagram visible?
     this.energyDiagramVisibleProperty = new Property( false, {
-      allowedValues: [ true, false ]
+      validValues: [ true, false ]
     } );
 
     //TODO for prototyping

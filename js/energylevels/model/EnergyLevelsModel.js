@@ -23,7 +23,7 @@ define( function( require ) {
     this.modelNameProperty = new Property( 'classicalSolarSystem', {
 
       // These are models that have an Energy diagram.
-      allowedValues: [
+      validValues: [
         'classicalSolarSystem',
         'bohr',
         'deBroglie',
