@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var Property = require( 'AXON/Property' );
@@ -25,9 +26,7 @@ define( function( require ) {
     } );
 
     // @public {boolean} is the simulation running?
-    this.runningProperty = new Property( true, {
-      validValues: [ true, false ]
-    } );
+    this.runningProperty = new BooleanProperty( true );
 
     //TODO should mode be in model?
     // @public {string} whether we're viewing an experiment or predictive model
@@ -36,19 +35,13 @@ define( function( require ) {
     } );
 
     // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
-    this.absorptionWavelengthsVisibleProperty = new Property( false, {
-      validValues: [ true, false ]
-    } );
+    this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false );
 
     // @public {boolean} is the spectrometer expanded?
-    this.spectrometerExpandedProperty = new Property( false, {
-      validValues: [ true, false ]
-    } );
+    this.spectrometerExpandedProperty = new BooleanProperty( false );
 
     // @public {boolean} is the electron level energy diagram visible?
-    this.energyDiagramVisibleProperty = new Property( false, {
-      validValues: [ true, false ]
-    } );
+    this.energyDiagramVisibleProperty = new BooleanProperty( false );
 
     //TODO for prototyping
     // @public {number} number of spectrometer snapshots

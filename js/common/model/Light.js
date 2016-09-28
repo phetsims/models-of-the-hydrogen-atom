@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
@@ -21,9 +22,7 @@ define( function( require ) {
   function Light() {
 
     // @public {boolean} is the light on?
-    this.onProperty = new Property( false, {
-      validValues: [ true, false ]
-    } );
+    this.onProperty = new BooleanProperty( false );
 
     // @public {string} type of light being emitted
     this.modeProperty = new Property( 'white', {
