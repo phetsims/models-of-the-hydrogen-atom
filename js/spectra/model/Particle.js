@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
 
   /**
@@ -23,8 +24,8 @@ define( function( require ) {
 
     // @public
     this.locationProperty = new Property( location );
-    this.speedProperty = new Property( speed );
-    this.directionProperty = new Property( direction );
+    this.speedProperty = new NumberProperty( speed );
+    this.directionProperty = new NumberProperty( direction );
   }
 
   modelsOfTheHydrogenAtom.register( 'Particle', Particle );

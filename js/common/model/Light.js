@@ -13,6 +13,7 @@ define( function( require ) {
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
 
@@ -30,10 +31,8 @@ define( function( require ) {
     } );
 
     // @public {number} wavelength in nm, relevant only for 'monochromatic' mode
-    this.wavelengthProperty = new Property( VisibleColor.MIN_WAVELENGTH, {
-      isValidValue: function( value ) {
-        return ( value >= VisibleColor.MIN_WAVELENGTH && value <= VisibleColor.MAX_WAVELENGTH );
-      }
+    this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
+      range: { min: VisibleColor.MIN_WAVELENGTH, max: VisibleColor.MAX_WAVELENGTH }
     } );
 
     // @public {Color} color displayed by the view

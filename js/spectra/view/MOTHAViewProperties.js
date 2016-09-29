@@ -12,6 +12,7 @@ define( function( require ) {
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
 
   /**
@@ -45,7 +46,7 @@ define( function( require ) {
 
     //TODO for prototyping
     // @public {number} number of spectrometer snapshots
-    this.numberOfSnapshotsProperty = new Property( 0 );
+    this.numberOfSnapshotsProperty = new NumberProperty( 0 );
   }
 
   modelsOfTheHydrogenAtom.register( 'MOTHAViewProperties', MOTHAViewProperties );
