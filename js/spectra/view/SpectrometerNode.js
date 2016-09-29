@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var AccordionBox = require( 'SUN/AccordionBox' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -93,7 +94,7 @@ define( function( require ) {
     } );
 
     //TODO relocate, handle reset
-    var recordingProperty = new Property( false );
+    var recordingProperty = new BooleanProperty( false );
     recordingProperty.link( function( recording ) {
       //TODO
     } );
