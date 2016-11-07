@@ -84,7 +84,7 @@ define( function( require ) {
     dispose: function() {
       this.disposeSnapshotsDialog();
       //TODO Dialog.dispose fails, see https://github.com/phetsims/joist/issues/366
-      // Dialog.prototype.dispose && Dialog.prototype.dispose.call( this );
+      // Dialog.prototype.dispose.call( this );
     },
 
     // @public @override
