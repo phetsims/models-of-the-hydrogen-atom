@@ -89,8 +89,8 @@ define( function( require ) {
 
     // @public @override
     hide: function() {
-      this.dispose();
       Dialog.prototype.hide.call( this );
+      this.dispose();
     }
   } );
 } );
