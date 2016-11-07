@@ -83,7 +83,8 @@ define( function( require ) {
     // @public @override
     dispose: function() {
       this.disposeSnapshotsDialog();
-      Dialog.prototype.dispose && Dialog.prototype.dispose.call( this );
+      //TODO Dialog.dispose fails, see https://github.com/phetsims/joist/issues/366
+      // Dialog.prototype.dispose && Dialog.prototype.dispose.call( this );
     },
 
     // @public @override
