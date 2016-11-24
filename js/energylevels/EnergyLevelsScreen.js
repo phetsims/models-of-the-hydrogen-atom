@@ -15,6 +15,8 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var EnergyLevelsModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/model/EnergyLevelsModel' );
   var EnergyLevelsScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/EnergyLevelsScreenView' );
+  var Property = require( 'AXON/Property' );
+  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenEnergyLevelsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.energyLevels' );
@@ -26,7 +28,7 @@ define( function( require ) {
 
     var options = {
       name: screenEnergyLevelsString,
-      backgroundColor: MOTHAColors.SCREEN_BACKGROUND_COLOR
+      backgroundColorProperty: new Property( Color.toColor( MOTHAColors.SCREEN_BACKGROUND_COLOR ) )
       //TODO add homeScreenIcon
     };
 
