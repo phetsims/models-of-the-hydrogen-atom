@@ -4,7 +4,7 @@
  * Utility functions related to random number generation.
  * These functions share one instance of a random number generator.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

@@ -3,7 +3,7 @@
 /**
  * BeamNode is the beam the comes out of the gun.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

@@ -5,7 +5,7 @@
  * Provides the zoomed-in view of part of the box of hydrogen.
  * This is the box in which animation of atoms, photons and alpha particles takes place.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

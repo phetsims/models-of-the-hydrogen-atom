@@ -3,7 +3,7 @@
 /**
  * The box of hydrogen into which the light emits photons and alpha particles.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
