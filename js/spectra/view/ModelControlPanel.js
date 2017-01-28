@@ -63,14 +63,14 @@ define( function( require ) {
 
     // Workaround for https://github.com/phetsims/sun/issues/268.
     // RadioButtonGroup options.align is broken, so handle left alignment ourselves.
-    var maxContentNodeWidth = 0;
-    contentArray.forEach( function( content ) {
-      maxContentNodeWidth = Math.max( maxContentNodeWidth, content.node.width );
-    } );
-    contentArray.forEach( function( content ) {
-      assert && assert( content.node instanceof HBox );
-      content.node.addChild( new HStrut( maxContentNodeWidth - content.node.width ) );
-    } );
+    //var maxContentNodeWidth = 0;
+    //contentArray.forEach( function( content ) {
+    //  maxContentNodeWidth = Math.max( maxContentNodeWidth, content.node.width );
+    //} );
+    //contentArray.forEach( function( content ) {
+    //  assert && assert( content.node instanceof HBox );
+    //  content.node.addChild( new HStrut( maxContentNodeWidth - content.node.width ) );
+    //} );
 
     // radio buttons
     var radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
@@ -86,6 +86,7 @@ define( function( require ) {
       spacing: 2,
       buttonContentXMargin: 4,
       buttonContentYMargin: 2,
+      buttonContentXAlign: 'left',
       selectedButtonOpacity: 1,
       deselectedButtonOpacity: 1,
       selectedContentOpacity: 1,
