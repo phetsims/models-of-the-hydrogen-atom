@@ -12,11 +12,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
+  var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
   var SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
   var SpectraScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectraScreenView' );
-  var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenSpectraString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.spectra' );
@@ -28,7 +27,7 @@ define( function( require ) {
 
     var options = {
       name: screenSpectraString,
-      backgroundColorProperty: new Property( Color.toColor( MOTHAColors.SCREEN_BACKGROUND_COLOR ) )
+      backgroundColorProperty: new Property( MOTHAColors.SCREEN_BACKGROUND_COLOR )
     };
 
     Screen.call( this,
