@@ -60,17 +60,6 @@ define( function( require ) {
       createRadioButtonContent( 'schrodinger', schrodingerString, schrodingerButtonImage )
     ];
 
-    // Workaround for https://github.com/phetsims/sun/issues/268.
-    // RadioButtonGroup options.align is broken, so handle left alignment ourselves.
-    //var maxContentNodeWidth = 0;
-    //contentArray.forEach( function( content ) {
-    //  maxContentNodeWidth = Math.max( maxContentNodeWidth, content.node.width );
-    //} );
-    //contentArray.forEach( function( content ) {
-    //  assert && assert( content.node instanceof HBox );
-    //  content.node.addChild( new HStrut( maxContentNodeWidth - content.node.width ) );
-    //} );
-
     // radio buttons
     var radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
       baseColor: options.fill,
