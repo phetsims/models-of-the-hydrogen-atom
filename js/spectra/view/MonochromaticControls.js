@@ -72,7 +72,7 @@ define( function( require ) {
     // transition wavelengths are relevant only to certain models
     var hasTransitionWavelengths = function() {
       return modeProperty.get() === 'experiment' ||
-             _.contains( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
+             _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
     };
 
     // show the check box only if it's relevant

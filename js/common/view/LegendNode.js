@@ -62,7 +62,7 @@ define( function( require ) {
     ];
 
     // widest icon, used to horizontally center all icons and left-align all labels
-    var maxIconWidth = _.max( items, function( item ) {
+    var maxIconWidth = _.maxBy( items, function( item ) {
       return item.icon.width;
     } ).icon.width;
 
