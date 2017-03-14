@@ -83,6 +83,7 @@ define( function( require ) {
     // @public @override
     dispose: function() {
       this.disposeSnapshotsDialog();
+      Dialog.prototype.dispose.call( this );
       //TODO Dialog.dispose fails, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/10 and https://github.com/phetsims/joist/issues/366
       //JO: Not calling super dispose here will fail an assertion.
       // Dialog.prototype.dispose.call( this );
