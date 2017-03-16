@@ -44,7 +44,7 @@ define( function( require ) {
     Dialog.call( this, content, options );
 
     //TODO remove a specific snapshot, rather than rebuilding them all
-    numberOfSnapshotsProperty.lazyLink( function( numberOfSnapshots ) {
+    var numberOfSnapshotsObserver = function( numberOfSnapshots ) {
       if ( numberOfSnapshots === 0 ) {
         self.hide();
       }
@@ -52,11 +52,12 @@ define( function( require ) {
         assert && assert( content instanceof VBox );
         content.children = createSnapshotNodes( numberOfSnapshotsProperty );
       }
-    } );
+    };
+    numberOfSnapshotsProperty.lazyLink( numberOfSnapshotsObserver );
 
     // @private
     this.disposeSnapshotsDialog = function() {
-      //TODO
+      numberOfSnapshotsProperty.unlink( numberOfSnapshotsObserver )
     };
   }
 
