@@ -57,7 +57,7 @@ define( function( require ) {
 
     // @private
     this.disposeSnapshotsDialog = function() {
-      numberOfSnapshotsProperty.unlink( numberOfSnapshotsObserver )
+      numberOfSnapshotsProperty.unlink( numberOfSnapshotsObserver );
     };
   }
 
