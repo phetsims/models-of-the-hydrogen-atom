@@ -23,7 +23,7 @@ define( function( require ) {
      *
      * @param {number} min
      * @param {number} max
-     * @return {number}
+     * @returns {number}
      */
     nextDouble: function( min, max ) {
       assert( max > min );
@@ -32,7 +32,7 @@ define( function( require ) {
 
     /**
      * Gets a random boolean.
-     * @return {boolean}
+     * @returns {boolean}
      */
     nextBoolean: function() {
       return RANDOM.nextBoolean();

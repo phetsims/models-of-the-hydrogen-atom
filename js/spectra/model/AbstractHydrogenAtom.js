@@ -67,7 +67,7 @@ define( function( require ) {
      * hydrogen atom models, but it is convenient to have it here.
      *
      * @param {number} state
-     * @return {number[]}
+     * @returns {number[]}
      * @public
      */
     getTransitionWavelengths: function( state ) {

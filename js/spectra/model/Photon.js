@@ -45,7 +45,7 @@ define( function( require ) {
 
     /**
      * Gets the Color associated with the photon's wavelength.
-     * @return {Color}
+     * @returns {Color}
      */
     getColor: function() {
       return VisibleColor.wavelengthToColor( this.wavelength, {
