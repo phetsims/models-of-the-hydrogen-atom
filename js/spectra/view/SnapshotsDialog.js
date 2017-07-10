@@ -81,6 +81,7 @@ define( function( require ) {
 
   return inherit( Dialog, SnapshotsDialog, {
 
+    //TODO this never gets called because of https://github.com/phetsims/joist/issues/424#issuecomment-314214885
     // @public @override
     dispose: function() {
       this.disposeSnapshotsDialog();
