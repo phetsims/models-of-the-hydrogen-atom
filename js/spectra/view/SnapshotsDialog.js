@@ -85,12 +85,6 @@ define( function( require ) {
     dispose: function() {
       this.disposeSnapshotsDialog();
       Dialog.prototype.dispose.call( this );
-    },
-
-    // @public @override
-    hide: function() {
-      Dialog.prototype.hide.call( this );
-      this.dispose();
     }
   } );
 } );
