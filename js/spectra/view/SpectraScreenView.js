@@ -150,11 +150,17 @@ define( function( require ) {
       } );
     this.addChild( spectrometerNode );
 
+    // reused and constructed lazily because Dialog requires sim bounds during construction
+    var dialog = null;
+
     // View Snapshots button, above upper-right corner of spectrometer
     var viewSnapshotsButton = new RectangularPushButton( {
       content: new Text( viewSnapshotsString, { font: new MOTHAFont( 16 ) } ),
       listener: function() {
-        new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty ).show();
+        if ( !dialog ) {
+          dialog = new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty );
+        }
+        dialog.show();
       },
       right: spectrometerNode.right,
       bottom: spectrometerNode.top - 10
