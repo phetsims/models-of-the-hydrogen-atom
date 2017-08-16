@@ -22,7 +22,8 @@ define( function( require ) {
       //TODO update credits for JS version
       leadDesign: 'Amy Hanson, Sam McKagan',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-      team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny,\nDanielle Harlow, Ariel Paul, Kathy Perkins, Noah Podolefsky, Carl Weiman',
+      team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
+            'Noah Podolefsky, Carl Weiman',
       qualityAssurance: ''
     }
   };
