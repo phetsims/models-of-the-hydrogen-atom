@@ -9,8 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
   var Dialog = require( 'JOIST/Dialog' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var SnapshotNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
