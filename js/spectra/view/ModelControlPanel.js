@@ -1,4 +1,4 @@
-// Copyright 2015-2016, University of Colorado Boulder
+// Copyright 2015-2017, University of Colorado Boulder
 
 /**
  * Control panel for selecting one of several predictive models.

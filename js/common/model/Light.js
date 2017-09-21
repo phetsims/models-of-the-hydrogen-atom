@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2015-2016, University of Colorado Boulder
 
 /**
  * Model of a light that can be switched between 'white' and 'monochromatic' modes.
