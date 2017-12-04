@@ -10,6 +10,11 @@
     "grunt": "~1.0.0"
   },
   "phet": {
-    "requirejsNamespace": "MODELS_OF_THE_HYDROGEN_ATOM"
+    "requirejsNamespace": "MODELS_OF_THE_HYDROGEN_ATOM",
+    "runnable": true,
+    "supportedBrands": [
+      "phet"
+    ],
+    "simulation": true
   }
 }
