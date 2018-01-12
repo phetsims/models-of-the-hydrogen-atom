@@ -50,7 +50,7 @@ define( function( require ) {
       valueFont: new MOTHAFont( 16 )
     } );
 
-    // 'Show absorption wavelengths' check box
+    // 'Show absorption wavelengths' checkbox
     var showLabel = new Text( showAbsorptionWavelengthsString, {
       font: new MOTHAFont( 14 ),
       fill: 'white',
@@ -75,7 +75,7 @@ define( function( require ) {
              _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
     };
 
-    // show the check box only if it's relevant
+    // show the checkbox only if it's relevant
     var updateCheckboxVisible = function() {
       showCheckbox.visible = hasTransitionWavelengths();
     };
