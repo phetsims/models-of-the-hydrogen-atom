@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var CheckBox = require( 'SUN/CheckBox' );
+  var Checkbox = require( 'SUN/Checkbox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
@@ -56,15 +56,15 @@ define( function( require ) {
       fill: 'white',
       maxWidth: 0.85 * wavelengthSlider.width
     } );
-    var showCheckBox = new CheckBox( showLabel, absorptionWavelengthsVisibleProperty, {
-      checkBoxColor: 'white',
-      checkBoxColorBackground: 'black'
+    var showCheckbox = new Checkbox( showLabel, absorptionWavelengthsVisibleProperty, {
+      checkboxColor: 'white',
+      checkboxColorBackground: 'black'
     } );
 
     assert && assert( !options.children, 'decoration not supported' );
     options.children = [
       wavelengthSlider,
-      showCheckBox
+      showCheckbox
     ];
 
     VBox.call( this, options );
@@ -76,11 +76,11 @@ define( function( require ) {
     };
 
     // show the check box only if it's relevant
-    var updateCheckBoxVisible = function() {
-      showCheckBox.visible = hasTransitionWavelengths();
+    var updateCheckboxVisible = function() {
+      showCheckbox.visible = hasTransitionWavelengths();
     };
-    modeProperty.link( updateCheckBoxVisible );
-    modelNameProperty.link( updateCheckBoxVisible );
+    modeProperty.link( updateCheckboxVisible );
+    modelNameProperty.link( updateCheckboxVisible );
 
     // show absorption wavelengths for relevant models
     var updateAbsorptionWavelengths = function() {
