@@ -25,8 +25,6 @@ define( function( require ) {
     assert && assert( numberOfSnapshotsProperty.get() > 0 );
 
     options = _.extend( {
-      modal: true,
-      hasCloseButton: false,
 
       // center dialog on the screen
       layoutStrategy: function( dialog, simBounds, screenBounds, scale ) {
