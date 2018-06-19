@@ -29,7 +29,10 @@ define( function( require ) {
       // center dialog on the screen
       layoutStrategy: function( dialog, simBounds, screenBounds, scale ) {
         dialog.center = screenBounds.center.times( 1.0 / scale );
-      }
+      },
+      topMargin: 15,
+      bottomMargin: 15,
+      leftMargin: 15
     }, options );
 
     var self = this;
