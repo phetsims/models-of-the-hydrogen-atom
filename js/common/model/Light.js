@@ -15,6 +15,7 @@ define( function( require ) {
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
+  var Range = require( 'DOT/Range' );
   var VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
 
   /**
@@ -32,7 +33,7 @@ define( function( require ) {
 
     // @public {number} wavelength in nm, relevant only for 'monochromatic' mode
     this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
-      range: { min: VisibleColor.MIN_WAVELENGTH, max: VisibleColor.MAX_WAVELENGTH }
+      range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH )
     } );
 
     // @public {Color} color displayed by the view
