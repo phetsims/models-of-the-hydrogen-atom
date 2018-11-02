@@ -9,13 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -65,7 +65,7 @@ define( function( require ) {
    * @returns {Node}
    */
   var createModeIcon = function( beamColor ) {
-    var laserNode = new LaserPointerNode( new Property( true ), LASER_POINTER_OPTIONS );
+    var laserNode = new LaserPointerNode( new BooleanProperty( true ), LASER_POINTER_OPTIONS );
     var beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
       fill: beamColor,
       centerX: laserNode.centerX,

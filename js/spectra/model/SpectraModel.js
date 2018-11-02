@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Light' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var Property = require( 'AXON/Property' );
+  var StringProperty = require( 'AXON/StringProperty' );
 
   // valid values for the modelName property
   var MODEL_NAMES = [
@@ -39,7 +39,7 @@ define( function( require ) {
   function SpectraModel() {
 
     // @public {string} name of the predictive model being used
-    this.modelNameProperty = new Property( 'classicalSolarSystem', {
+    this.modelNameProperty = new StringProperty( 'classicalSolarSystem', {
       validValues: MODEL_NAMES
     } );
 
