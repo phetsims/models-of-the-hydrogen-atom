@@ -40,7 +40,7 @@ define( function( require ) {
 
     /**
      * Gets a random sign.
-     * @return +1 or -1
+     * @returns {number} +1 or -1
      */
     nextSign: function() {
       return ( RANDOM.nextBoolean() ? +1 : -1 );
@@ -48,7 +48,7 @@ define( function( require ) {
 
     /**
      * Gets a random angle >= 0 and < 2 * PI.
-     * @return angle, in radians
+     * @returns {number} angle, in radians
      */
     nextAngle: function() {
       return RANDOM.nextDouble( 0, 2 * Math.PI );
