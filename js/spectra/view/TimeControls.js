@@ -59,6 +59,7 @@ define( function( require ) {
       ComboBox.createItem( new Text( slowString, labelOptions ), 'slow' )
     ];
     var speedComboBox = new ComboBox( speedItems, clockSpeed, comboBoxListParent, {
+      cornerRadius: 8,
       listPosition: 'above',
       highlightFill: 'rgb( 153, 206, 255 )'
     } );
