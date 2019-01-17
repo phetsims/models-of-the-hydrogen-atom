@@ -11,10 +11,6 @@ define( function( require ) {
 
   // modules
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var Random = require( 'DOT/Random' );
-
-  // constants
-  var RANDOM = new Random();
 
   var RandomUtils = {
 
@@ -27,7 +23,7 @@ define( function( require ) {
      */
     nextDouble: function( min, max ) {
       assert( max > min );
-      return min + ( RANDOM.nextDouble() * ( max - min ) );
+      return min + ( phet.joist.random.nextDouble() * ( max - min ) );
     },
 
     /**
@@ -35,7 +31,7 @@ define( function( require ) {
      * @returns {boolean}
      */
     nextBoolean: function() {
-      return RANDOM.nextBoolean();
+      return phet.joist.random.nextBoolean();
     },
 
     /**
@@ -43,7 +39,7 @@ define( function( require ) {
      * @returns {number} +1 or -1
      */
     nextSign: function() {
-      return ( RANDOM.nextBoolean() ? +1 : -1 );
+      return ( phet.joist.random.nextBoolean() ? +1 : -1 );
     },
 
     /**
@@ -51,7 +47,7 @@ define( function( require ) {
      * @returns {number} angle, in radians
      */
     nextAngle: function() {
-      return RANDOM.nextDouble( 0, 2 * Math.PI );
+      return phet.joist.random.nextDouble( 0, 2 * Math.PI );
     }
   };
 
