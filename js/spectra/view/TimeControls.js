@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var ComboBox = require( 'SUN/ComboBox' );
+  var ComboBoxItem = require( 'SUN/ComboBoxItem' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -54,9 +55,9 @@ define( function( require ) {
       maxWidth: 125 // i18n, determined empirically
     };
     var speedItems = [
-      ComboBox.createItem( new Text( fastString, labelOptions ), 'fast' ),
-      ComboBox.createItem( new Text( normalString, labelOptions ), 'normal' ),
-      ComboBox.createItem( new Text( slowString, labelOptions ), 'slow' )
+      new ComboBoxItem( new Text( fastString, labelOptions ), 'fast' ),
+      new ComboBoxItem( new Text( normalString, labelOptions ), 'normal' ),
+      new ComboBoxItem( new Text( slowString, labelOptions ), 'slow' )
     ];
     var speedComboBox = new ComboBox( speedItems, clockSpeed, comboBoxListParent, {
       cornerRadius: 8,
