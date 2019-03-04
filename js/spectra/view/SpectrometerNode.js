@@ -53,11 +53,13 @@ define( function( require ) {
       contentXMargin: 10,
       contentYMargin: 5,
       contentYSpacing: 0,
-      buttonLength: 22,
-      buttonTouchAreaXDilation: 10,
-      buttonTouchAreaYDilation: 10,
       buttonAlign: 'right',
-      titleAlignX: 'left'
+      titleAlignX: 'left',
+      expandCollapseButtonOptions: {
+        sideLength: 22,
+        touchAreaXDilation: 10,
+        touchAreaYDilation: 10
+      }
     }, options );
 
     options.expandedProperty = expandedProperty;

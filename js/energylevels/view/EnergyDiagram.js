@@ -40,8 +40,10 @@ define( function( require ) {
       contentXMargin: 5,
       contentYMargin: 5,
       contentYSpacing: 0,
-      buttonTouchAreaXDilation: 16,
-      buttonTouchAreaYDilation: 16,
+      expandCollapseButtonOptions: {
+        touchAreaXDilation: 16,
+        touchAreaYDilation: 16
+      },
       buttonAlign: 'right',
       titleAlignX: 'left'
     }, options );
