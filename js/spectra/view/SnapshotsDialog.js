@@ -26,10 +26,7 @@ define( function( require ) {
 
     options = _.extend( {
 
-      // center dialog on the screen
-      layoutStrategy: function( dialog, simBounds, screenBounds, scale ) {
-        dialog.center = screenBounds.center.times( 1.0 / scale );
-      },
+      layoutStrategy: Dialog.layoutStrategyCenteredInScreen,
       topMargin: 15,
       bottomMargin: 15,
       leftMargin: 15
