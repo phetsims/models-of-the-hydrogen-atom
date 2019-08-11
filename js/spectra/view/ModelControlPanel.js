@@ -14,7 +14,7 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
+  var MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
@@ -64,10 +64,10 @@ define( function( require ) {
     var radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
       baseColor: options.fill,
       disabledBaseColor: options.fill,
-      selectedStroke: MOTHAColors.SELECTED_COLOR,
+      selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
       deselectedStroke: options.fill,
       overFill: options.fill,
-      overStroke: MOTHAColors.DESELECTED_COLOR,
+      overStroke: MOTHAColorProfile.radioButtonDeselectedColorProperty,
       overLineWidth: 2,
       selectedLineWidth: 2,
       labelAlign: 'left',

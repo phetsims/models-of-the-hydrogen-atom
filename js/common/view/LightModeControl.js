@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
+  var MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   var Node = require( 'SCENERY/nodes/Node' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -44,8 +44,8 @@ define( function( require ) {
       buttonContentYMargin: 6,
       baseColor: 'black',
       disabledBaseColor: 'black',
-      selectedStroke: MOTHAColors.SELECTED_COLOR,
-      deselectedStroke: MOTHAColors.DESELECTED_COLOR,
+      selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
+      deselectedStroke: MOTHAColorProfile.radioButtonDeselectedColorProperty,
       selectedLineWidth: 2,
       deselectedLineWidth: 2
     }, options );

@@ -16,7 +16,7 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
+  var MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   var MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
   var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   var RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
@@ -66,7 +66,7 @@ define( function( require ) {
 
     var titleNode = new Text( spectrometerString, {
       font: new MOTHAFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.TITLE_FILL
+      fill: MOTHAColorProfile.titleFillProperty
     } );
 
     //TODO order of title and subtitle is not localized

@@ -13,7 +13,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAColors = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColors' );
+  var MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   var Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/Particle' );
   var VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
 
@@ -49,8 +49,8 @@ define( function( require ) {
      */
     getColor: function() {
       return VisibleColor.wavelengthToColor( this.wavelength, {
-        uvColor: MOTHAColors.UV_COLOR,
-        irColor: MOTHAColors.IR_COLOR
+        uvColor: MOTHAColorProfile.UV_COLOR,
+        irColor: MOTHAColorProfile.IR_COLOR
       } );
     }
   } );

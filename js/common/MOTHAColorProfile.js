@@ -19,9 +19,34 @@ define( require => {
     screenBackgroundColor: {
       default: 'black',
       projector: 'white'
+    },
+
+    titleFill: {
+      default: 'rgb( 235, 235, 0 )', // yellow
+      projector: 'black'
+    },
+
+    radioButtonSelectedColor: {
+      default: 'rgb( 235, 235, 0 )'
+    },
+
+    radioButtonDeselectedColor: {
+      default: 'rgb( 200, 200, 200 )'
+    },
+
+    uvColor: {
+      default: 'rgb( 160, 160, 160 )'
+    },
+
+    irColor: {
+      default: 'rgb( 160, 160, 160 )'
     }
 
   } );
+
+  //TODO #7 should these be changeable?
+  MOTHAColorProfile.UV_COLOR = 'rgb( 160, 160, 160 )';
+  MOTHAColorProfile.IR_COLOR = 'rgb( 160, 160, 160 )';
 
   return modelsOfTheHydrogenAtom.register( 'MOTHAColorProfile', MOTHAColorProfile );
 } );
