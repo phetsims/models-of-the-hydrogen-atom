@@ -10,9 +10,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   /**
    * @param {Object|number} options {Object} font options or {number} font size

@@ -11,10 +11,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   /**
    * @param {Object} [options]
@@ -24,7 +24,7 @@ define( function( require ) {
 
     options = options || {};
 
-    var outlineNode = new Rectangle( 0, 0, 400, 400, {
+    const outlineNode = new Rectangle( 0, 0, 400, 400, {
       fill: 'black',
       stroke: 'white',
       lineWidth: 1

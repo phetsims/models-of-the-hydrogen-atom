@@ -9,32 +9,32 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ContinuumBarNode' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var Panel = require( 'SUN/Panel' );
-  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ContinuumBarNode' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
+  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const Panel = require( 'SUN/Panel' );
+  const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // images
-  var billiardBallButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/billiardBallButton.png' );
-  var bohrButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/bohrButton.png' );
-  var classicalSolarSystemButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystemButton.png' );
-  var deBroglieButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/deBroglieButton.png' );
-  var plumPuddingButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/plumPuddingButton.png' );
-  var schrodingerButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/schrodingerButton.png' );
+  const billiardBallButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/billiardBallButton.png' );
+  const bohrButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/bohrButton.png' );
+  const classicalSolarSystemButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystemButton.png' );
+  const deBroglieButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/deBroglieButton.png' );
+  const plumPuddingButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/plumPuddingButton.png' );
+  const schrodingerButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/schrodingerButton.png' );
 
   // strings
-  var billiardBallString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/billiardBall' );
-  var bohrString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/bohr' );
-  var classicalSolarSystemString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystem' );
-  var deBroglieString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/deBroglie' );
-  var plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
-  var schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
+  const billiardBallString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/billiardBall' );
+  const bohrString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/bohr' );
+  const classicalSolarSystemString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystem' );
+  const deBroglieString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/deBroglie' );
+  const plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
+  const schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
   /**
    * @param {Property.<string>} modelNameProperty
@@ -51,7 +51,7 @@ define( function( require ) {
     }, options );
 
     // content that appears on the radio buttons
-    var contentArray = [
+    const contentArray = [
       createRadioButtonContent( 'billiardBall', billiardBallString, billiardBallButtonImage ),
       createRadioButtonContent( 'plumPudding', plumPuddingString, plumPuddingButtonImage ),
       createRadioButtonContent( 'classicalSolarSystem', classicalSolarSystemString, classicalSolarSystemButtonImage ),
@@ -61,7 +61,7 @@ define( function( require ) {
     ];
 
     // radio buttons
-    var radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
+    const radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
       baseColor: options.fill,
       disabledBaseColor: options.fill,
       selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
@@ -84,10 +84,10 @@ define( function( require ) {
     } );
 
     // continuum bar, 'Classical' to 'Quantum'
-    var continuumBarNode = new ContinuumBarNode( radioButtonGroup.height );
+    const continuumBarNode = new ContinuumBarNode( radioButtonGroup.height );
 
     // panel content
-    var contentNode = new HBox( {
+    const contentNode = new HBox( {
       spacing: 10,
       children: [ continuumBarNode, radioButtonGroup ]
     } );
@@ -103,7 +103,7 @@ define( function( require ) {
    * @param {HTMLImageElement} image
    * @returns {{value:string, node:Node}}
    */
-  var createRadioButtonContent = function( value, text, image ) {
+  const createRadioButtonContent = function( value, text, image ) {
     return {
       value: value,
       node: new HBox( {

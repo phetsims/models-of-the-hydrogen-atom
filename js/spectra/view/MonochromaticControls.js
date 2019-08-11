@@ -9,17 +9,17 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Checkbox = require( 'SUN/Checkbox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var WavelengthSlider = require( 'SCENERY_PHET/WavelengthSlider' );
+  const Checkbox = require( 'SUN/Checkbox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const WavelengthSlider = require( 'SCENERY_PHET/WavelengthSlider' );
 
   // strings
-  var showAbsorptionWavelengthsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showAbsorptionWavelengths' );
+  const showAbsorptionWavelengthsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showAbsorptionWavelengths' );
 
   /**
    * @param {Property.<string>} modeProperty
@@ -37,7 +37,7 @@ define( function( require ) {
     }, options );
 
     // wavelength slider
-    var wavelengthSlider = new WavelengthSlider( wavelengthProperty, {
+    const wavelengthSlider = new WavelengthSlider( wavelengthProperty, {
       trackWidth: 250,
       trackHeight: 20,
       thumbTouchAreaXDilation: 12,
@@ -51,12 +51,12 @@ define( function( require ) {
     } );
 
     // 'Show absorption wavelengths' checkbox
-    var showLabel = new Text( showAbsorptionWavelengthsString, {
+    const showLabel = new Text( showAbsorptionWavelengthsString, {
       font: new MOTHAFont( 14 ),
       fill: 'white',
       maxWidth: 0.85 * wavelengthSlider.width
     } );
-    var showCheckbox = new Checkbox( showLabel, absorptionWavelengthsVisibleProperty, {
+    const showCheckbox = new Checkbox( showLabel, absorptionWavelengthsVisibleProperty, {
       checkboxColor: 'white',
       checkboxColorBackground: 'black'
     } );
@@ -70,20 +70,20 @@ define( function( require ) {
     VBox.call( this, options );
 
     // transition wavelengths are relevant only to certain models
-    var hasTransitionWavelengths = function() {
+    const hasTransitionWavelengths = function() {
       return modeProperty.get() === 'experiment' ||
              _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
     };
 
     // show the checkbox only if it's relevant
-    var updateCheckboxVisible = function() {
+    const updateCheckboxVisible = function() {
       showCheckbox.visible = hasTransitionWavelengths();
     };
     modeProperty.link( updateCheckboxVisible );
     modelNameProperty.link( updateCheckboxVisible );
 
     // show absorption wavelengths for relevant models
-    var updateAbsorptionWavelengths = function() {
+    const updateAbsorptionWavelengths = function() {
       //TODO
       // wavelengthSlider.absorptionWavelengthsVisible = hasTransitionWavelengths() && absorptionWavelengthsVisibleProperty.get();
     };

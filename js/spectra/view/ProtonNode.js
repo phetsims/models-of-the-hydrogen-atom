@@ -10,13 +10,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
-  var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+  const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   // constants
-  var DIAMETER = 11;
+  const DIAMETER = 11;
 
   /**
    * @param {Object} [options]

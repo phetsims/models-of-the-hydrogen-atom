@@ -9,21 +9,21 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ComboBox = require( 'SUN/ComboBox' );
-  var ComboBoxItem = require( 'SUN/ComboBoxItem' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const ComboBox = require( 'SUN/ComboBox' );
+  const ComboBoxItem = require( 'SUN/ComboBoxItem' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
+  const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var fastString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/fast' );
-  var normalString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/normal' );
-  var slowString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/slow' );
+  const fastString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/fast' );
+  const normalString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/normal' );
+  const slowString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/slow' );
 
   /**
    * @param {Property.<boolean>} runningProperty - is the sim running?
@@ -38,11 +38,11 @@ define( function( require ) {
       spacing: 7
     }, options );
 
-    var playPauseButton = new PlayPauseButton( runningProperty, {
+    const playPauseButton = new PlayPauseButton( runningProperty, {
       radius: 22
     } );
 
-    var stepForwardButton = new StepForwardButton( {
+    const stepForwardButton = new StepForwardButton( {
       radius: 16,
       touchAreaDilation: 6,
       listener: function() {
@@ -50,16 +50,16 @@ define( function( require ) {
       }
     } );
 
-    var labelOptions = {
+    const labelOptions = {
       font: new MOTHAFont( { size: 16 } ),
       maxWidth: 125 // i18n, determined empirically
     };
-    var speedItems = [
+    const speedItems = [
       new ComboBoxItem( new Text( fastString, labelOptions ), 'fast' ),
       new ComboBoxItem( new Text( normalString, labelOptions ), 'normal' ),
       new ComboBoxItem( new Text( slowString, labelOptions ), 'slow' )
     ];
-    var speedComboBox = new ComboBox( speedItems, clockSpeed, comboBoxListParent, {
+    const speedComboBox = new ComboBox( speedItems, clockSpeed, comboBoxListParent, {
       cornerRadius: 8,
       listPosition: 'above',
       highlightFill: 'rgb( 153, 206, 255 )'

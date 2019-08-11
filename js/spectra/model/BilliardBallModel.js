@@ -21,15 +21,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AbstractHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/AbstractHydrogenAtom' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var RandomUtils = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/RandomUtils' );
-  var Util = require( 'DOT/Util' );
+  const AbstractHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/AbstractHydrogenAtom' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const RandomUtils = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/RandomUtils' );
+  const Util = require( 'DOT/Util' );
 
   // constants
-  var MIN_DEFLECTION_ANGLE = Util.toRadians( 120 );
-  var MAX_DEFLECTION_ANGLE = Util.toRadians( 170 );
+  const MIN_DEFLECTION_ANGLE = Util.toRadians( 120 );
+  const MAX_DEFLECTION_ANGLE = Util.toRadians( 170 );
 
   /**
    * @param {Vector2} location
@@ -65,8 +65,8 @@ define( function( require ) {
       // detect collision and adjust particle direction
       if ( !photon.collided ) {
         if ( photon.location.distance( this.location ) <= this.radius ) {
-          var sign = ( photon.location.x > this.location.x ) ? 1 : -1;
-          var deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
+          const sign = ( photon.location.x > this.location.x ) ? 1 : -1;
+          const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
           photon.direction = photon.direction + deflection;
           photon.collided = true;
         }
@@ -89,8 +89,8 @@ define( function( require ) {
 
       // detect collision and adjust particle direction
       if ( alphaParticle.location.distance( this.location ) <= this.radius ) {
-        var sign = ( alphaParticle.location.x > this.location.x ) ? 1 : -1;
-        var deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
+        const sign = ( alphaParticle.location.x > this.location.x ) ? 1 : -1;
+        const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
         alphaParticle.direction = alphaParticle.direction + deflection;
       }
 

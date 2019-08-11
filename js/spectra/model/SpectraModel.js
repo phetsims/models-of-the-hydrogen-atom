@@ -9,13 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Light' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var StringProperty = require( 'AXON/StringProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Light' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const StringProperty = require( 'AXON/StringProperty' );
 
   // valid values for the modelName property
-  var MODEL_NAMES = [
+  const MODEL_NAMES = [
     'billiardBall',
     'plumPudding',
     'classicalSolarSystem',
@@ -25,7 +25,7 @@ define( function( require ) {
   ];
 
   // models that include the concept of transition wavelengths
-  var MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS = [
+  const MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS = [
     'bohr',
     'deBroglie',
     'schrodinger'

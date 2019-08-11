@@ -9,13 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
-  var TINY_BOX_SIZE = new Dimension2( 6, 6 );
+  const TINY_BOX_SIZE = new Dimension2( 6, 6 );
 
   /**
    * @param {Object} [options]

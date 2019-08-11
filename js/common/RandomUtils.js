@@ -10,9 +10,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
 
-  var RandomUtils = {
+  const RandomUtils = {
 
     /**
      * Gets a random value >= min and < max.

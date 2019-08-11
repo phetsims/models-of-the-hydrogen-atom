@@ -9,18 +9,18 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ABSwitch = require( 'SUN/ABSwitch' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const ABSwitch = require( 'SUN/ABSwitch' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
+  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var experimentString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/experiment' );
-  var modelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/model' );
+  const experimentString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/experiment' );
+  const modelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/model' );
 
   /**
    * @param {Property.<string>} modeProperty
@@ -34,7 +34,7 @@ define( function( require ) {
       centerOnButton: true
     }, options );
 
-    var labelOptions = {
+    const labelOptions = {
       font: new MOTHAFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColorProfile.titleFillProperty,
       maxWidth: 100

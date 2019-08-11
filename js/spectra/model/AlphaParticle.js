@@ -10,9 +10,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/Particle' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/Particle' );
 
   /**
    * @param {Vector2} location - location in model coordinate frame

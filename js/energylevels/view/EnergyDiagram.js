@@ -9,19 +9,19 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AccordionBox = require( 'SUN/AccordionBox' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const AccordionBox = require( 'SUN/AccordionBox' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var electronEnergyLevelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/electronEnergyLevel' );
+  const electronEnergyLevelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/electronEnergyLevel' );
 
   // constants
-  var DIAGRAM_SIZE = new Dimension2( 220, 420 );
+  const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
   /**
    * @param {Property.<boolean>} expandedProperty
@@ -57,7 +57,7 @@ define( function( require ) {
     } );
 
     //TODO this is a placeholder
-    var diagramNode = new Rectangle( 0, 0, DIAGRAM_SIZE.width, DIAGRAM_SIZE.height, {
+    const diagramNode = new Rectangle( 0, 0, DIAGRAM_SIZE.width, DIAGRAM_SIZE.height, {
       fill: 'white',
       stroke: 'black'
     } );

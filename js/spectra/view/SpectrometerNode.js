@@ -9,30 +9,30 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AccordionBox = require( 'SUN/AccordionBox' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  var MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
-  var ResetButton = require( 'SCENERY_PHET/buttons/ResetButton' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const AccordionBox = require( 'SUN/AccordionBox' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
+  const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
+  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  const ResetButton = require( 'SCENERY_PHET/buttons/ResetButton' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var photonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/photonsEmittedNm' );
-  var spectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometer' );
+  const photonsEmittedNmString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/photonsEmittedNm' );
+  const spectrometerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/spectrometer' );
 
   // constants
-  var BUTTON_COLOR = 'rgb( 245, 245, 245 )';
-  var DISPLAY_SIZE = new Dimension2( 510, 130 );
+  const BUTTON_COLOR = 'rgb( 245, 245, 245 )';
+  const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
   /**
    * @param {Property.<boolean>} expandedProperty
@@ -64,13 +64,13 @@ define( function( require ) {
 
     options.expandedProperty = expandedProperty;
 
-    var titleNode = new Text( spectrometerString, {
+    const titleNode = new Text( spectrometerString, {
       font: new MOTHAFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColorProfile.titleFillProperty
     } );
 
     //TODO order of title and subtitle is not localized
-    var subtitleNode = new Text( photonsEmittedNmString, {
+    const subtitleNode = new Text( photonsEmittedNmString, {
       font: new MOTHAFont( 14 ),
       fill: 'white'
     } );
@@ -89,24 +89,24 @@ define( function( require ) {
     } );
 
     //TODO placeholder
-    var displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
+    const displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
       cornerRadius: options.cornerRadius,
       fill: 'black'
     } );
 
     //TODO relocate, handle reset
-    var recordingProperty = new BooleanProperty( false );
+    const recordingProperty = new BooleanProperty( false );
     recordingProperty.link( function( recording ) {
       //TODO
     } );
 
-    var recordStopButton = new RecordStopButton( recordingProperty, {
+    const recordStopButton = new RecordStopButton( recordingProperty, {
       radius: 15,
       baseColor: BUTTON_COLOR,
       touchAreaDilation: 5
     } );
 
-    var resetButton = new ResetButton( {
+    const resetButton = new ResetButton( {
       baseColor: BUTTON_COLOR,
       arrowColor: 'black',
       radius: recordStopButton.height / 2,
@@ -116,25 +116,25 @@ define( function( require ) {
       }
     } );
 
-    var snapshotButton = new RectangularPushButton( {
+    const snapshotButton = new RectangularPushButton( {
       maxHeight: recordStopButton.height,
       baseColor: BUTTON_COLOR,
       content: new FontAwesomeNode( 'camera' ),
       touchAreaXDilation: 10,
       touchAreaYDilation: 5,
       listener: function() {
-        var numberOfScreenshots = Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.get() + 1 );
+        const numberOfScreenshots = Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.get() + 1 );
         numberOfSnapshotsProperty.set( numberOfScreenshots );
       }
     } );
 
-    var buttonGroup = new VBox( {
+    const buttonGroup = new VBox( {
       spacing: 10,
       align: 'center',
       children: [ recordStopButton, resetButton, snapshotButton ]
     } );
 
-    var contentNode = new HBox( {
+    const contentNode = new HBox( {
       spacing: 12,
       align: 'bottom',
       children: [ displayNode, buttonGroup ]

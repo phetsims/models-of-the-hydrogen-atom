@@ -9,16 +9,16 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var EnergyLevelsScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/EnergyLevelsScreen' );
+  const EnergyLevelsScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/EnergyLevelsScreen' );
   const MOTHAOptionsNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/MOTHAOptionsNode' );
-  var Sim = require( 'JOIST/Sim' );
-  var SimLauncher = require( 'JOIST/SimLauncher' );
-  var SpectraScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/SpectraScreen' );
+  const Sim = require( 'JOIST/Sim' );
+  const SimLauncher = require( 'JOIST/SimLauncher' );
+  const SpectraScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/SpectraScreen' );
 
   // strings
-  var modelsOfTheHydrogenAtomTitleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom.title' );
+  const modelsOfTheHydrogenAtomTitleString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/models-of-the-hydrogen-atom.title' );
 
-  var simOptions = {
+  const simOptions = {
 
     // Creates content for the Options dialog, accessible via the PhET menu
     createOptionsDialogContent: tandem => new MOTHAOptionsNode( {
@@ -36,7 +36,7 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
-    var sim = new Sim( modelsOfTheHydrogenAtomTitleString, [ new SpectraScreen(), new EnergyLevelsScreen() ], simOptions );
+    const sim = new Sim( modelsOfTheHydrogenAtomTitleString, [ new SpectraScreen(), new EnergyLevelsScreen() ], simOptions );
     sim.start();
   } );
 } );

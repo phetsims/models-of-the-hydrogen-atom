@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Dialog = require( 'SUN/Dialog' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var SnapshotNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotNode' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const Dialog = require( 'SUN/Dialog' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const SnapshotNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotNode' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * @param numberOfSnapshotsProperty
@@ -32,9 +32,9 @@ define( function( require ) {
       leftMargin: 15
     }, options );
 
-    var self = this;
+    const self = this;
 
-    var content = new VBox( {
+    const content = new VBox( {
       spacing: 10,
       children: createSnapshotNodes( numberOfSnapshotsProperty )
     } );
@@ -42,7 +42,7 @@ define( function( require ) {
     Dialog.call( this, content, options );
 
     //TODO remove a specific snapshot, rather than rebuilding them all
-    var numberOfSnapshotsObserver = function( numberOfSnapshots ) {
+    const numberOfSnapshotsObserver = function( numberOfSnapshots ) {
       if ( numberOfSnapshots === 0 ) {
         self.hide();
       }
@@ -67,9 +67,9 @@ define( function( require ) {
    * @param numberOfSnapshotsProperty
    * @returns {Array}
    */
-  var createSnapshotNodes = function( numberOfSnapshotsProperty ) {
-    var snapshots = [];
-    for ( var i = 0; i < numberOfSnapshotsProperty.get(); i++ ) {
+  const createSnapshotNodes = function( numberOfSnapshotsProperty ) {
+    const snapshots = [];
+    for ( let i = 0; i < numberOfSnapshotsProperty.get(); i++ ) {
       snapshots.push( new SnapshotNode( numberOfSnapshotsProperty, {
         scale: 0.75
       } ) );

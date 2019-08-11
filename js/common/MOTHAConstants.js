@@ -9,13 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
 
   // constants used to compute other constants
-  var ELECTRON_DIAMETER = 9;
-  var PHOTON_DIAMETER = 30;
+  const ELECTRON_DIAMETER = 9;
+  const PHOTON_DIAMETER = 30;
 
-  var MOTHAConstants = {
+  const MOTHAConstants = {
 
     ELECTRON_DIAMETER: ELECTRON_DIAMETER,
     NEUTRON_DIAMETER: 11,

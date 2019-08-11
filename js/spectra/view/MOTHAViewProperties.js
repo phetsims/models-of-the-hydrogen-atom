@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var StringProperty = require( 'AXON/StringProperty' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const StringProperty = require( 'AXON/StringProperty' );
 
   /**
    * @constructor

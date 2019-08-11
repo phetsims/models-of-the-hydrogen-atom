@@ -9,26 +9,26 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Shape = require( 'KITE/Shape' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Shape = require( 'KITE/Shape' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var hydrogenSymbolString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/hydrogenSymbol' );
+  const hydrogenSymbolString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/hydrogenSymbol' );
 
   // constants
-  var BACK_DEPTH = 10;
-  var BACK_OFFSET = 0.15;
-  var BOX_SIZE = new Dimension2( 50, 40 );
-  var LIGHT_COLOR = 'rgb( 249, 249, 249 )';
-  var SHADOW_COLOR = 'rgb( 100, 100, 100 )';
+  const BACK_DEPTH = 10;
+  const BACK_OFFSET = 0.15;
+  const BOX_SIZE = new Dimension2( 50, 40 );
+  const LIGHT_COLOR = 'rgb( 249, 249, 249 )';
+  const SHADOW_COLOR = 'rgb( 100, 100, 100 )';
 
   /**
    * @param {Object} [options]
@@ -37,7 +37,7 @@ define( function( require ) {
   function BoxOfHydrogenNode( options ) {
 
     // top face, in perspective
-    var topNode = new Path( new Shape()
+    const topNode = new Path( new Shape()
       .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
       .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
       .lineTo( BOX_SIZE.width, BACK_DEPTH )
@@ -49,14 +49,14 @@ define( function( require ) {
     } );
 
     // front face
-    var frontNode = new Rectangle( 0, BACK_DEPTH, BOX_SIZE.width, BOX_SIZE.height, {
+    const frontNode = new Rectangle( 0, BACK_DEPTH, BOX_SIZE.width, BOX_SIZE.height, {
       fill: new LinearGradient( 0, 0, BOX_SIZE.width, 0 ).addColorStop( 0, LIGHT_COLOR ).addColorStop( 1, SHADOW_COLOR ),
       stroke: 'black',
       lineWidth: 1
     } );
 
     // hydrogen symbol, in lower-left corner of front face
-    var hydrogenSymbol = new Text( hydrogenSymbolString, {
+    const hydrogenSymbol = new Text( hydrogenSymbolString, {
       font: new MOTHAFont( { weight: 'bold', size: 24 } ),
       left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
       bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),

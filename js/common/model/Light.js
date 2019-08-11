@@ -9,14 +9,14 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
-  var VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
+  const VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
 
   /**
    * @constructor

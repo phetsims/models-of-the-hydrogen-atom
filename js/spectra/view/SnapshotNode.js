@@ -10,14 +10,14 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   /**
    * @param {Property.<number>} numberOfSnapshotsProperty
@@ -28,20 +28,20 @@ define( function( require ) {
 
     options = options || {};
 
-    var backgroundNode = new Rectangle( 0, 0, 500, 150, {
+    const backgroundNode = new Rectangle( 0, 0, 500, 150, {
       cornerRadius: 5,
       fill: 'black'
     } );
 
     //TODO i18n
-    var titleNode = new Text( 'Snapshot', {
+    const titleNode = new Text( 'Snapshot', {
       font: new MOTHAFont( 16 ),
       fill: 'white',
       left: backgroundNode.left + 10,
       top: backgroundNode.top + 10
     } );
 
-    var trashButton = new RectangularPushButton( {
+    const trashButton = new RectangularPushButton( {
       content: new FontAwesomeNode( 'trash', { scale: 0.5 } ),
       baseColor: 'rgb( 200, 200, 200 )',
       listener: function() {

@@ -9,10 +9,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Emitter = require( 'AXON/Emitter' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const Emitter = require( 'AXON/Emitter' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Vector2} location - location in the model coordinate frame
@@ -83,11 +83,11 @@ define( function( require ) {
      * @public
      */
     stepPhoton: function( photon, dt ) {
-      var distance = photon.speed * dt;
-      var dx = Math.cos( photon.direction ) * distance;
-      var dy = Math.sin( photon.direction ) * distance;
-      var x = photon.location.x + dx;
-      var y = photon.location.y + dy;
+      const distance = photon.speed * dt;
+      const dx = Math.cos( photon.direction ) * distance;
+      const dy = Math.sin( photon.direction ) * distance;
+      const x = photon.location.x + dx;
+      const y = photon.location.y + dy;
       photon.locationProperty.set( new Vector2( x, y ) );
     },
 
@@ -100,11 +100,11 @@ define( function( require ) {
      * @public
      */
     stepAlphaParticle: function( alphaParticle, dt ) {
-      var distance = alphaParticle.speed * dt;
-      var dx = Math.cos( alphaParticle.direction ) * distance;
-      var dy = Math.sin( alphaParticle.direction ) * distance;
-      var x = alphaParticle.location.x + dx;
-      var y = alphaParticle.location.y + dy;
+      const distance = alphaParticle.speed * dt;
+      const dx = Math.cos( alphaParticle.direction ) * distance;
+      const dy = Math.sin( alphaParticle.direction ) * distance;
+      const x = alphaParticle.location.x + dx;
+      const y = alphaParticle.location.y + dy;
       alphaParticle.locationProperty.set( new Vector2( x, y ) );
     },
 

@@ -9,19 +9,19 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
-  var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  var MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
+  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
-  var BEAM_SIZE = new Dimension2( 5, 10 );
-  var LASER_POINTER_OPTIONS = {
+  const BEAM_SIZE = new Dimension2( 5, 10 );
+  const LASER_POINTER_OPTIONS = {
     hasButton: false,
     rotation: -Math.PI / 2, // pointing up
     bodySize: new Dimension2( 18, 17 ), // height x width (due to rotation)
@@ -64,9 +64,9 @@ define( function( require ) {
    * @param {Color|string} beamColor
    * @returns {Node}
    */
-  var createModeIcon = function( beamColor ) {
-    var laserNode = new LaserPointerNode( new BooleanProperty( true ), LASER_POINTER_OPTIONS );
-    var beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
+  const createModeIcon = function( beamColor ) {
+    const laserNode = new LaserPointerNode( new BooleanProperty( true ), LASER_POINTER_OPTIONS );
+    const beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
       fill: beamColor,
       centerX: laserNode.centerX,
       bottom: laserNode.top + 1
