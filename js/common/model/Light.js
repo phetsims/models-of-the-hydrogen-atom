@@ -1,4 +1,4 @@
-// Copyright 2015-2018, University of Colorado Boulder
+// Copyright 2015-2019, University of Colorado Boulder
 
 /**
  * Model of a light that can be switched between 'white' and 'monochromatic' modes.
@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
@@ -21,38 +20,38 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function Light() {
+  class Light {
 
-    // @public {boolean} is the light on?
-    this.onProperty = new BooleanProperty( false );
+    constructor() {
 
-    // @public {string} type of light being emitted
-    this.modeProperty = new Property( 'white', {
-      validValues: [ 'white', 'monochromatic' ]
-    } );
+      // @public {boolean} is the light on?
+      this.onProperty = new BooleanProperty( false );
 
-    // @public {number} wavelength in nm, relevant only for 'monochromatic' mode
-    this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
-      range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH )
-    } );
+      // @public {string} type of light being emitted
+      this.modeProperty = new Property( 'white', {
+        validValues: [ 'white', 'monochromatic' ]
+      } );
 
-    // @public {Color} color displayed by the view
-    this.colorProperty = new DerivedProperty( [ this.modeProperty, this.wavelengthProperty ],
-      function( mode, wavelength ) {
-        return ( mode === 'white' ) ? 'white' : VisibleColor.wavelengthToColor( wavelength );
-      }
-    );
-  }
+      // @public {number} wavelength in nm, relevant only for 'monochromatic' mode
+      this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
+        range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH )
+      } );
 
-  modelsOfTheHydrogenAtom.register( 'Light', Light );
-
-  return inherit( Object, Light, {
+      // @public {Color} color displayed by the view
+      this.colorProperty = new DerivedProperty( [ this.modeProperty, this.wavelengthProperty ],
+        function( mode, wavelength ) {
+          return ( mode === 'white' ) ? 'white' : VisibleColor.wavelengthToColor( wavelength );
+        }
+      );
+    }
 
     // @public
-    reset: function() {
+    reset() {
       this.onProperty.reset();
       this.modeProperty.reset();
       this.wavelengthProperty.reset();
     }
-  } );
+  }
+
+  return modelsOfTheHydrogenAtom.register( 'Light', Light );
 } );

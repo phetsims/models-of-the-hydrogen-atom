@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
  * Base type for particles.
@@ -9,34 +9,32 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
 
-  /**
-   * @param {Vector2} location - location in model coordinate frame
-   * @param {number} speed - distance per dt
-   * @param {number} direction - direction of motion, in radians
-   * @constructor
-   */
-  function Particle( location, speed, direction ) {
+  class Particle {
+
+    /**
+     * @param {Vector2} location - location in model coordinate frame
+     * @param {number} speed - distance per dt
+     * @param {number} direction - direction of motion, in radians
+     */
+    constructor( location, speed, direction ) {
+
+      // @public
+      this.locationProperty = new Property( location );
+      this.speedProperty = new NumberProperty( speed );
+      this.directionProperty = new NumberProperty( direction );
+    }
 
     // @public
-    this.locationProperty = new Property( location );
-    this.speedProperty = new NumberProperty( speed );
-    this.directionProperty = new NumberProperty( direction );
-  }
-
-  modelsOfTheHydrogenAtom.register( 'Particle', Particle );
-
-  return inherit( Object, Particle, {
-
-    // @public
-    reset: function() {
+    reset() {
       this.locationProperty.reset();
       this.speedProperty.reset();
       this.directionProperty.reset();
     }
-  } );
+  }
+
+  return modelsOfTheHydrogenAtom.register( 'Particle', Particle );
 } );

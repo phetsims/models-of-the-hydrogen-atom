@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
  * AlphaParticle is the model of an alpha particle.
@@ -10,21 +10,20 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/Particle' );
 
-  /**
-   * @param {Vector2} location - location in model coordinate frame
-   * @param {number} speed - distance per dt
-   * @param {number} direction - direction of motion, in radians
-   * @constructor
-   */
-  function AlphaParticle( location, speed, direction ) {
-    Particle.call( this, location, speed, direction );
+  class AlphaParticle extends Particle {
+
+    /**
+     * @param {Vector2} location - location in model coordinate frame
+     * @param {number} speed - distance per dt
+     * @param {number} direction - direction of motion, in radians
+     */
+    constructor( location, speed, direction ) {
+      super( location, speed, direction );
+    }
   }
 
-  modelsOfTheHydrogenAtom.register( 'AlphaParticle', AlphaParticle );
-
-  return inherit( Particle, AlphaParticle );
+  return modelsOfTheHydrogenAtom.register( 'AlphaParticle', AlphaParticle );
 } );

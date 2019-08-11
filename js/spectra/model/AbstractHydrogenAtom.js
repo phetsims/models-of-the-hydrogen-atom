@@ -1,5 +1,6 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
+//TODO rename AbstractHydrogenAtomModel
 /**
  * Base type for all hydrogen atom models.
  *
@@ -10,55 +11,54 @@ define( function( require ) {
 
   // modules
   const Emitter = require( 'AXON/Emitter' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  /**
-   * @param {Vector2} location - location in the model coordinate frame
-   * @param {Object} [options]
-   * @constructor
-   */
-  function AbstractHydrogenAtom( location, options ) {
+  class AbstractHydrogenAtom {
 
-    options = _.extend( {
-      orientation: 0, // {number} rotation angle, in radians
-      numberOfStates: 0, // {number} number of electron states, not relevant to all hydrogen atom models
-      groundState: 1 // {number} index of ground state, not relevant to all hydrogen atom models
-    }, options );
+    /**
+     * @param {Vector2} location - location in the model coordinate frame
+     * @param {Object} [options]
+     */
+    constructor( location, options ) {
 
-    // @public (read-only)
-    this.location = location;
-    this.orientation = options.orientation;
-    this.numberOfStates = options.numberOfStates;
-    this.groundState = options.groundState;
+      options = _.extend( {
+        orientation: 0, // {number} rotation angle, in radians
+        numberOfStates: 0, // {number} number of electron states, not relevant to all hydrogen atom models
+        groundState: 1 // {number} index of ground state, not relevant to all hydrogen atom models
+      }, options );
 
-    // @public emit1 when a photon is absorbed
-    this.photonAbsorbedEmitter = new Emitter();
+      // @public (read-only)
+      this.location = location;
+      this.orientation = options.orientation;
+      this.numberOfStates = options.numberOfStates;
+      this.groundState = options.groundState;
 
-    // @public emit1 when a photon is emitted (an unfortunate name)
-    this.photonEmittedEmitter = new Emitter();
-  }
+      //TODO add options.parameters
+      // @public emit1 when a photon is absorbed
+      this.photonAbsorbedEmitter = new Emitter();
 
-  modelsOfTheHydrogenAtom.register( 'AbstractHydrogenAtom', AbstractHydrogenAtom );
-
-  return inherit( Object, AbstractHydrogenAtom, {
+      //TODO add options.parameters
+      // @public emit1 when a photon is emitted (an unfortunate name)
+      this.photonEmittedEmitter = new Emitter();
+    }
 
     // @public
-    dispose: function() {
+    dispose() {
       //TODO anything else? is this necessary?
       this.photonAbsorbedEmitter.removeAllListeners();
       this.photonEmittedEmitter.removeAllListeners();
-    },
+    }
 
     /**
      * Called when time has advanced by some delta.
      * The default implementation does nothing.
-     *
      * @param {number} dt
      * @public
      */
-    step: function( dt ) {},
+    step( dt ) {
+      //TODO @abstract?
+    }
 
     /**
      * Gets the transition wavelengths for a specified state.
@@ -70,9 +70,9 @@ define( function( require ) {
      * @returns {number[]}
      * @public
      */
-    getTransitionWavelengths: function( state ) {
-      return null;
-    },
+    getTransitionWavelengths( state ) {
+      return null; //TODO @abstract?
+    }
 
     /**
      * Moves a photon by the specified time step.
@@ -82,14 +82,14 @@ define( function( require ) {
      * @param {number} dt
      * @public
      */
-    stepPhoton: function( photon, dt ) {
+    stepPhoton( photon, dt ) {
       const distance = photon.speed * dt;
       const dx = Math.cos( photon.direction ) * distance;
       const dy = Math.sin( photon.direction ) * distance;
       const x = photon.location.x + dx;
       const y = photon.location.y + dy;
       photon.locationProperty.set( new Vector2( x, y ) );
-    },
+    }
 
     /**
      * Moves an alpha particle by the specified time step.
@@ -99,14 +99,14 @@ define( function( require ) {
      * @param {number} dt
      * @public
      */
-    stepAlphaParticle: function( alphaParticle, dt ) {
+    stepAlphaParticle( alphaParticle, dt ) {
       const distance = alphaParticle.speed * dt;
       const dx = Math.cos( alphaParticle.direction ) * distance;
       const dy = Math.sin( alphaParticle.direction ) * distance;
       const x = alphaParticle.location.x + dx;
       const y = alphaParticle.location.y + dy;
       alphaParticle.locationProperty.set( new Vector2( x, y ) );
-    },
+    }
 
     /**
      * Determines if two points collide.
@@ -118,8 +118,10 @@ define( function( require ) {
      * @returns {boolean}
      * @protected
      */
-    pointsCollide: function( p1, p2, threshold ) {
+    pointsCollide( p1, p2, threshold ) {
       return p1.distance( p2 ) <= threshold;
     }
-  } );
+  }
+
+  return modelsOfTheHydrogenAtom.register( 'AbstractHydrogenAtom', AbstractHydrogenAtom );
 } );

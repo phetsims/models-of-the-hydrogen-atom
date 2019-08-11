@@ -1,7 +1,7 @@
-// Copyright 2015-2018, University of Colorado Boulder
+// Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Model for 'Spectra' screen.
+ * Model for the 'Spectra' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Light' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const StringProperty = require( 'AXON/StringProperty' );
@@ -33,36 +32,38 @@ define( function( require ) {
   assert && assert( MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS.length === _.intersection( MODEL_NAMES, MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS ).length,
     'bad model name in MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS' );
 
-  /**
-   * @constructor
-   */
-  function SpectraModel() {
+  class SpectraModel {
 
-    // @public {string} name of the predictive model being used
-    this.modelNameProperty = new StringProperty( 'classicalSolarSystem', {
-      validValues: MODEL_NAMES
-    } );
+    constructor() {
 
-    // @public
-    this.light = new Light();
-  }
+      // @public name of the predictive model being used
+      this.modelNameProperty = new StringProperty( 'classicalSolarSystem', {
+        validValues: MODEL_NAMES
+      } );
 
-  modelsOfTheHydrogenAtom.register( 'SpectraModel', SpectraModel );
+      // @public
+      this.light = new Light();
+    }
 
-  return inherit( Object, SpectraModel, {
-
-    // @public @override
-    reset: function() {
+    /**
+     * @public
+     */
+    reset() {
       this.modelNameProperty.reset();
       this.light.reset();
-    },
-
-    // @public
-    step: function( dt ) {
-      //TODO Handle model animation here.
     }
-  }, {
 
-    MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS: MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS
-  } );
+    /**
+     * @param {number} dt
+     * @public
+     */
+    step( dt ) {
+      //TODO
+    }
+  }
+
+  // @public
+  SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS = MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS;
+
+  return modelsOfTheHydrogenAtom.register( 'SpectraModel', SpectraModel );
 } );

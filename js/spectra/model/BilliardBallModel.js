@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
  * BilliardBallModel models the hydrogen atom as a billiard ball.
@@ -22,7 +22,6 @@ define( function( require ) {
 
   // modules
   const AbstractHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/AbstractHydrogenAtom' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const RandomUtils = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/RandomUtils' );
   const Util = require( 'DOT/Util' );
@@ -31,36 +30,33 @@ define( function( require ) {
   const MIN_DEFLECTION_ANGLE = Util.toRadians( 120 );
   const MAX_DEFLECTION_ANGLE = Util.toRadians( 170 );
 
-  /**
-   * @param {Vector2} location
-   * @param {Object} [options]
-   * @constructor
-   */
-  function BilliardBallModel( location, options ) {
+  class BilliardBallModel extends AbstractHydrogenAtom {
 
-    options = _.extend( {
-      radius: 30
-    }, options );
+    /**
+     * @param {Vector2} location
+     * @param {Object} [options]
+     */
+    constructor( location, options ) {
 
-    this.radius = options.radius; // @public (read-only)
+      options = _.extend( {
+        radius: 30
+      }, options );
 
-    AbstractHydrogenAtom.call( this, location, options );
-  }
+      super( location, options );
 
-  modelsOfTheHydrogenAtom.register( 'BilliardBallModel', BilliardBallModel );
-
-  return inherit( AbstractHydrogenAtom, BilliardBallModel, {
+      // @public (read-only)
+      this.radius = options.radius;
+    }
 
     /**
      * Moves a photon. If the photon collides with the atom, the photon bounces back at
      * a 'steep but random' angle. Otherwise it continues to move in its current direction.
-     *
      * @param {Photon} photon
      * @param {number} dt
      * @public
      * @override
      */
-    movePhoton: function( photon, dt ) {
+    movePhoton( photon, dt ) {
 
       // detect collision and adjust particle direction
       if ( !photon.collided ) {
@@ -73,19 +69,18 @@ define( function( require ) {
       }
 
       // move particle
-      AbstractHydrogenAtom.prototype.movePhoton.call( this, photon, dt );
-    },
+      super.movePhoton( photon, dt );
+    }
 
     /**
      * Moves an alpha particle. If the alpha particle collides with the atom, the alpha particle
      * bounces back at a 'steep but random' angle. Otherwise it continues to move in its current direction.
-     *
      * @param {AlphaParticle} alphaParticle
      * @param {number} dt
      * @public
      * @override
      */
-    moveAlphaParticle: function( alphaParticle, dt ) {
+    moveAlphaParticle( alphaParticle, dt ) {
 
       // detect collision and adjust particle direction
       if ( alphaParticle.location.distance( this.location ) <= this.radius ) {
@@ -95,7 +90,9 @@ define( function( require ) {
       }
 
       // move particle
-      AbstractHydrogenAtom.prototype.moveAlphaParticle.call( this, alphaParticle, dt );
+      super.moveAlphaParticle( alphaParticle, dt );
     }
-  } );
+  }
+
+  return modelsOfTheHydrogenAtom.register( 'BilliardBallModel', BilliardBallModel );
 } );
