@@ -1,5 +1,6 @@
 // Copyright 2016, University of Colorado Boulder
 
+//TODO #7 move these into MOTHAColorProfile
 /**
  * Colors used throughout this simulation.
  *
@@ -13,7 +14,6 @@ define( function( require ) {
   var modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
 
   var MOTHAColors = {
-    SCREEN_BACKGROUND_COLOR: 'black',
     TITLE_FILL: 'rgb( 235, 235, 0 )', // yellow
     SELECTED_COLOR: 'rgb( 235, 235, 0 )', // yellow
     DESELECTED_COLOR: 'rgb( 200, 200, 200 )', // gray
