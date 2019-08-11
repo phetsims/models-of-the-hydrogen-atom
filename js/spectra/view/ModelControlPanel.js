@@ -72,8 +72,8 @@ define( function( require ) {
       selectedLineWidth: 2,
       labelAlign: 'left',
       spacing: 2,
-      buttonContentXMargin: 4,
-      buttonContentYMargin: 2,
+      buttonContentXMargin: 12,
+      buttonContentYMargin: 10,
       buttonContentXAlign: 'left',
       selectedButtonOpacity: 1,
       deselectedButtonOpacity: 1,
@@ -110,7 +110,7 @@ define( function( require ) {
         spacing: 10,
         children: [
           new Image( image, {
-            scale: 0.65
+            scale: 0.2
           } ),
           new Text( text, {
             fill: 'white',
