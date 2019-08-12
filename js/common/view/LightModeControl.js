@@ -43,10 +43,10 @@ define( require => {
         spacing: 8,
         buttonContentXMargin: 15,
         buttonContentYMargin: 6,
-        baseColor: 'black',
-        disabledBaseColor: 'black',
-        selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
-        deselectedStroke: MOTHAColorProfile.radioButtonDeselectedColorProperty,
+        baseColor: MOTHAColorProfile.radioButtonFillProperty,
+        disabledBaseColor: MOTHAColorProfile.radioButtonFillProperty,
+        selectedStroke: MOTHAColorProfile.radioButtonSelectedStrokeProperty,
+        deselectedStroke: MOTHAColorProfile.radioButtonDeselectedStrokeProperty,
         selectedLineWidth: 2,
         deselectedLineWidth: 2
       }, options );
@@ -67,6 +67,8 @@ define( require => {
     const laserNode = new LaserPointerNode( new BooleanProperty( true ), LASER_POINTER_OPTIONS );
     const beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
       fill: beamColor,
+      stroke: 'black',
+      lineWidth: 0.5,
       centerX: laserNode.centerX,
       bottom: laserNode.top + 1
     } );

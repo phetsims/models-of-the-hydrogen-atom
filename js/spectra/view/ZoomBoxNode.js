@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -25,8 +26,8 @@ define( require => {
       options = _.extend( {}, options );
 
       const outlineNode = new Rectangle( 0, 0, 400, 400, {
-        fill: 'black',
-        stroke: 'white',
+        fill: MOTHAColorProfile.boxFillProperty,
+        stroke: MOTHAColorProfile.boxStrokeProperty,
         lineWidth: 1
       } );
 

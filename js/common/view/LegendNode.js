@@ -35,7 +35,7 @@ define( require => {
   };
   const LABEL_OPTIONS = {
     font: new PhetFont( 16 ),
-    fill: 'white',
+    fill: MOTHAColorProfile.legendTextFillProperty,
     maxWidth: 120 // i18n, determined empirically
   };
 

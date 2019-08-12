@@ -20,6 +20,7 @@ define( require => {
   const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -125,7 +126,7 @@ define( require => {
         .lineTo( zoomBoxNode.left, zoomBoxNode.top )
         .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
         .lineTo( zoomBoxNode.left, zoomBoxNode.bottom ), {
-        stroke: 'white',
+        stroke: MOTHAColorProfile.boxStrokeProperty,
         lineDash: [ 5, 5 ]
       } );
       this.addChild( dashedLines );

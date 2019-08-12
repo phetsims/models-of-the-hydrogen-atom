@@ -21,17 +21,52 @@ define( require => {
       projector: 'white'
     },
 
+    boxFill: {
+      default: 'black',
+      projector: 'white'
+    },
+
+    boxStroke: {
+      default: 'white',
+      projector: 'black'
+    },
+
     titleFill: {
       default: 'rgb( 235, 235, 0 )', // yellow
       projector: 'black'
     },
 
-    radioButtonSelectedColor: {
+    legendTextFill: {
+      default: 'white',
+      projector: 'black'
+    },
+
+    radioButtonSelectedStroke: {
       default: 'rgb( 235, 235, 0 )'
     },
 
-    radioButtonDeselectedColor: {
+    radioButtonDeselectedStroke: {
       default: 'rgb( 200, 200, 200 )'
+    },
+
+    radioButtonFill: {
+      default: 'black',
+      projector: 'white'
+    },
+
+    radioButtonTextFill: {
+      default: 'white',
+      projector: 'black'
+    },
+
+    panelFill: {
+      default: 'black',
+      projector: 'white'
+    },
+
+    panelStroke: {
+      default: 'white',
+      projector: 'black'
     },
 
     uvColor: {

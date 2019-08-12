@@ -45,8 +45,8 @@ define( require => {
     constructor( predictiveModelProperty, options ) {
 
       options = _.extend( {
-        fill: 'black',
-        stroke: 'white',
+        fill: MOTHAColorProfile.panelFillProperty,
+        stroke: MOTHAColorProfile.panelStrokeProperty,
         xMargin: 10,
         yMargin: 10
       }, options );
@@ -64,11 +64,11 @@ define( require => {
       // radio buttons
       const radioButtonGroup = new RadioButtonGroup( predictiveModelProperty, contentArray, {
         baseColor: options.fill,
-        disabledBaseColor: options.fill,
-        selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
-        deselectedStroke: options.fill,
-        overFill: options.fill,
-        overStroke: MOTHAColorProfile.radioButtonDeselectedColorProperty,
+        disabledBaseColor: MOTHAColorProfile.radioButtonFillProperty,
+        selectedStroke: MOTHAColorProfile.radioButtonSelectedStrokeProperty,
+        deselectedStroke: MOTHAColorProfile.radioButtonFillProperty,
+        overFill: MOTHAColorProfile.radioButtonFillProperty,
+        overStroke: MOTHAColorProfile.radioButtonDeselectedStrokeProperty,
         overLineWidth: 2,
         selectedLineWidth: 2,
         labelAlign: 'left',
@@ -114,7 +114,7 @@ define( require => {
             scale: 0.2
           } ),
           new Text( text, {
-            fill: 'white',
+            fill: MOTHAColorProfile.radioButtonTextFillProperty,
             font: new PhetFont( 16 ),
             maxWidth: 200 // i18n, determined empirically
           } )

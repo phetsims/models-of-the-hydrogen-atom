@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Dimension2 = require( 'DOT/Dimension2' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
@@ -24,8 +25,8 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        fill: 'black',
-        stroke: 'white',
+        fill: MOTHAColorProfile.boxFillProperty,
+        stroke: MOTHAColorProfile.boxStrokeProperty,
         lineWidth: 2
       }, options );
 
