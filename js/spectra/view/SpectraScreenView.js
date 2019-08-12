@@ -91,6 +91,7 @@ define( require => {
         bottom: lightNode.top + 1
       } );
       this.addChild( beamNode );
+      //TODO move beamNode behind lightNode
 
       // Box of hydrogen
       const boxOfHydrogenNode = new BoxOfHydrogenNode( {
