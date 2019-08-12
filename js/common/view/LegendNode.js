@@ -81,7 +81,7 @@ define( require => {
 
       } );
 
-      assert && assert( !options.children, 'decoration not supported' );
+      assert && assert( !options.children, 'LegendNode sets children' );
       options.children = [
         titleNode,
         new VBox( {
