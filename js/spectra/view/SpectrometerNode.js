@@ -122,8 +122,8 @@ define( require => {
         touchAreaXDilation: 10,
         touchAreaYDilation: 5,
         listener: () => {
-          const numberOfScreenshots = Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.get() + 1 );
-          numberOfSnapshotsProperty.set( numberOfScreenshots );
+          numberOfSnapshotsProperty.value =
+            Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.value + 1 );
         }
       } );
 

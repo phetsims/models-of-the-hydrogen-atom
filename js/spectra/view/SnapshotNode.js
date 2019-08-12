@@ -45,7 +45,7 @@ define( require => {
         content: new FontAwesomeNode( 'trash', { scale: 0.5 } ),
         baseColor: 'rgb( 200, 200, 200 )',
         listener: () => {
-          numberOfSnapshotsProperty.set( numberOfSnapshotsProperty.get() - 1 );
+          numberOfSnapshotsProperty.value--;
         },
         right: backgroundNode.right - 10,
         bottom: backgroundNode.bottom - 10

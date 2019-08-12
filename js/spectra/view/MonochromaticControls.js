@@ -72,8 +72,8 @@ define( require => {
 
       // transition wavelengths are relevant only to certain models
       const hasTransitionWavelengths = () => {
-        return modelModeProperty.get() === ModelModes.EXPERIMENT ||
-               _.includes( SpectraModel.PREDICTIVE_MODELS_WITH_TRANSITION_WAVELENGTHS, predictiveModelProperty.get() );
+        return modelModeProperty.value === ModelModes.EXPERIMENT ||
+               _.includes( SpectraModel.PREDICTIVE_MODELS_WITH_TRANSITION_WAVELENGTHS, predictiveModelProperty.value );
       };
 
       // show the checkbox only if it's relevant
@@ -86,7 +86,7 @@ define( require => {
       // show absorption wavelengths for relevant models
       const updateAbsorptionWavelengths = () => {
         //TODO
-        // wavelengthSlider.absorptionWavelengthsVisible = hasTransitionWavelengths() && absorptionWavelengthsVisibleProperty.get();
+        // wavelengthSlider.absorptionWavelengthsVisible = hasTransitionWavelengths() && absorptionWavelengthsVisibleProperty.value;
       };
       predictiveModelProperty.link( updateAbsorptionWavelengths );
       absorptionWavelengthsVisibleProperty.link( updateAbsorptionWavelengths );

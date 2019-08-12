@@ -88,7 +88,7 @@ define( require => {
       const dy = Math.sin( photon.direction ) * distance;
       const x = photon.location.x + dx;
       const y = photon.location.y + dy;
-      photon.locationProperty.set( new Vector2( x, y ) );
+      photon.locationProperty.value = new Vector2( x, y );
     }
 
     /**
@@ -105,7 +105,7 @@ define( require => {
       const dy = Math.sin( alphaParticle.direction ) * distance;
       const x = alphaParticle.location.x + dx;
       const y = alphaParticle.location.y + dy;
-      alphaParticle.locationProperty.set( new Vector2( x, y ) );
+      alphaParticle.locationProperty.value = new Vector2( x, y );
     }
 
     /**

@@ -21,7 +21,7 @@ define( require => {
      */
     constructor( numberOfSnapshotsProperty, options ) {
 
-      assert && assert( numberOfSnapshotsProperty.get() > 0 );
+      assert && assert( numberOfSnapshotsProperty.value > 0 );
 
       options = _.extend( {
 
@@ -74,7 +74,7 @@ define( require => {
    */
   function createSnapshotNodes( numberOfSnapshotsProperty ) {
     const snapshots = [];
-    for ( let i = 0; i < numberOfSnapshotsProperty.get(); i++ ) {
+    for ( let i = 0; i < numberOfSnapshotsProperty.value; i++ ) {
       snapshots.push( new SnapshotNode( numberOfSnapshotsProperty, {
         scale: 0.75
       } ) );
