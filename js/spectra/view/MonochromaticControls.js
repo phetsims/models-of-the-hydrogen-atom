@@ -11,7 +11,7 @@ define( require => {
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -47,12 +47,12 @@ define( require => {
         thumbHeight: 25,
         valueYSpacing: 6,
         valueFill: 'white',
-        valueFont: new MOTHAFont( 16 )
+        valueFont: new PhetFont( 16 )
       } );
 
       // 'Show absorption wavelengths' checkbox
       const showLabel = new Text( showAbsorptionWavelengthsString, {
-        font: new MOTHAFont( 14 ),
+        font: new PhetFont( 14 ),
         fill: 'white',
         maxWidth: 0.85 * wavelengthSlider.width
       } );

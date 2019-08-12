@@ -12,9 +12,9 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -57,7 +57,7 @@ define( require => {
 
       // hydrogen symbol, in lower-left corner of front face
       const hydrogenSymbol = new Text( hydrogenSymbolString, {
-        font: new MOTHAFont( { weight: 'bold', size: 24 } ),
+        font: new PhetFont( { weight: 'bold', size: 24 } ),
         left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
         bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),
         maxWidth: 0.65 * BOX_SIZE.width

@@ -19,9 +19,9 @@ define( require => {
   const ModelControlPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControlPanel' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
@@ -155,7 +155,7 @@ define( require => {
 
       // View Snapshots button, above upper-right corner of spectrometer
       const viewSnapshotsButton = new RectangularPushButton( {
-        content: new Text( viewSnapshotsString, { font: new MOTHAFont( 16 ) } ),
+        content: new Text( viewSnapshotsString, { font: new PhetFont( 16 ) } ),
         listener: () => {
           if ( !dialog ) {
             dialog = new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty );

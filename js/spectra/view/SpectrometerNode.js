@@ -17,11 +17,11 @@ define( require => {
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const ResetButton = require( 'SCENERY_PHET/buttons/ResetButton' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -64,13 +64,13 @@ define( require => {
       options.expandedProperty = expandedProperty;
 
       const titleNode = new Text( spectrometerString, {
-        font: new MOTHAFont( { size: 16, weight: 'bold' } ),
+        font: new PhetFont( { size: 16, weight: 'bold' } ),
         fill: MOTHAColorProfile.titleFillProperty
       } );
 
       //TODO order of title and subtitle is not localized
       const subtitleNode = new Text( photonsEmittedNmString, {
-        font: new MOTHAFont( 14 ),
+        font: new PhetFont( 14 ),
         fill: 'white'
       } );
 

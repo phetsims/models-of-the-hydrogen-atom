@@ -12,7 +12,7 @@ define( require => {
   const AccordionBox = require( 'SUN/AccordionBox' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
 
@@ -53,7 +53,7 @@ define( require => {
 
       assert && assert( !options.titleNode, 'EnergyDiagram sets titleNode' );
       options.titleNode = new Text( electronEnergyLevelString, {
-        font: new MOTHAFont( { size: 16, weight: 'bold' } ),
+        font: new PhetFont( { size: 16, weight: 'bold' } ),
         fill: 'white',
         maxWidth: 150 // i18n, determined empirically
       } );

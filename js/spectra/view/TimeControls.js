@@ -14,7 +14,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -51,7 +51,7 @@ define( require => {
       } );
 
       const labelOptions = {
-        font: new MOTHAFont( { size: 16 } ),
+        font: new PhetFont( { size: 16 } ),
         maxWidth: 125 // i18n, determined empirically
       };
       const speedItems = [

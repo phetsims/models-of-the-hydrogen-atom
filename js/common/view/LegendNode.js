@@ -14,9 +14,9 @@ define( require => {
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/NeutronNode' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const ProtonNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ProtonNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -29,12 +29,12 @@ define( require => {
 
   // constants
   const TITLE_OPTIONS = {
-    font: new MOTHAFont( { size: 16, weight: 'bold' } ),
+    font: new PhetFont( { size: 16, weight: 'bold' } ),
     fill: MOTHAColorProfile.titleFillProperty,
     maxWidth: 100 // i18n, determined empirically
   };
   const LABEL_OPTIONS = {
-    font: new MOTHAFont( 16 ),
+    font: new PhetFont( 16 ),
     fill: 'white',
     maxWidth: 120 // i18n, determined empirically
   };

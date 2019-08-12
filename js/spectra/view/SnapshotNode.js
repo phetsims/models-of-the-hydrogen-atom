@@ -12,8 +12,8 @@ define( require => {
   // modules
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -35,7 +35,7 @@ define( require => {
 
       //TODO i18n
       const titleNode = new Text( 'Snapshot', {
-        font: new MOTHAFont( 16 ),
+        font: new PhetFont( 16 ),
         fill: 'white',
         left: backgroundNode.left + 10,
         top: backgroundNode.top + 10

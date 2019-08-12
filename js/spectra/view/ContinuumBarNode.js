@@ -10,8 +10,8 @@ define( require => {
 
   // modules
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
 
@@ -30,7 +30,7 @@ define( require => {
       options = _.extend( {
         xMargin: 5,
         yMargin: 6,
-        font: new MOTHAFont( 14 ),
+        font: new PhetFont( 14 ),
         barFill: 'rgb( 220, 220, 220 )',
         textFill: 'black'
       }, options );

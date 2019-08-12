@@ -14,8 +14,8 @@ define( require => {
   const Image = require( 'SCENERY/nodes/Image' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const Panel = require( 'SUN/Panel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   const Text = require( 'SCENERY/nodes/Text' );
 
@@ -114,7 +114,7 @@ define( require => {
           } ),
           new Text( text, {
             fill: 'white',
-            font: new MOTHAFont( 16 ),
+            font: new PhetFont( 16 ),
             maxWidth: 200 // i18n, determined empirically
           } )
         ]
