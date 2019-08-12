@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -62,7 +62,7 @@ define( function( require ) {
    * @param {Color|string} beamColor
    * @returns {Node}
    */
-  const createModeIcon = function( beamColor ) {
+  function createModeIcon( beamColor ) {
     const laserNode = new LaserPointerNode( new BooleanProperty( true ), LASER_POINTER_OPTIONS );
     const beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
       fill: beamColor,
@@ -70,7 +70,7 @@ define( function( require ) {
       bottom: laserNode.top + 1
     } );
     return new Node( { children: [ beamNode, laserNode ] } );
-  };
+  }
 
   return modelsOfTheHydrogenAtom.register( 'LightModeControl', LightModeControl );
 } );

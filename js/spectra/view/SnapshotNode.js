@@ -6,7 +6,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -44,7 +44,7 @@ define( function( require ) {
       const trashButton = new RectangularPushButton( {
         content: new FontAwesomeNode( 'trash', { scale: 0.5 } ),
         baseColor: 'rgb( 200, 200, 200 )',
-        listener: function() {
+        listener: () => {
           numberOfSnapshotsProperty.set( numberOfSnapshotsProperty.get() - 1 );
         },
         right: backgroundNode.right - 10,

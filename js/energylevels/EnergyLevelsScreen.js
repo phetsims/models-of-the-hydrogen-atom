@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -29,8 +29,8 @@ define( function( require ) {
       };
 
       super(
-        function() { return new EnergyLevelsModel(); },
-        function( model ) { return new EnergyLevelsScreenView( model ); },
+        () => new EnergyLevelsModel(),
+        model => new EnergyLevelsScreenView( model ),
         options
       );
     }

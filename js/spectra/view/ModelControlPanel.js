@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -103,7 +103,7 @@ define( function( require ) {
    * @param {HTMLImageElement} image
    * @returns {{value:string, node:Node}}
    */
-  const createRadioButtonContent = function( value, text, image ) {
+  function createRadioButtonContent( value, text, image ) {
     return {
       value: value,
       node: new HBox( {
@@ -120,7 +120,7 @@ define( function( require ) {
         ]
       } )
     };
-  };
+  }
 
   return modelsOfTheHydrogenAtom.register( 'ModelControlPanel', ModelControlPanel );
 } );

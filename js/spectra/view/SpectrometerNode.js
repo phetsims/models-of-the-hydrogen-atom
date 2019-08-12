@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -75,7 +75,7 @@ define( function( require ) {
       } );
 
       // show subtitle only when expanded
-      expandedProperty.link( function( expanded ) {
+      expandedProperty.link( expanded => {
         subtitleNode.visible = expanded;
       } );
 
@@ -95,7 +95,7 @@ define( function( require ) {
 
       //TODO relocate, handle reset
       const recordingProperty = new BooleanProperty( false );
-      recordingProperty.link( function( recording ) {
+      recordingProperty.link( recording => {
         //TODO
       } );
 
@@ -110,7 +110,7 @@ define( function( require ) {
         arrowColor: 'black',
         radius: recordStopButton.height / 2,
         touchAreaDilation: 5,
-        listener: function() {
+        listener: () => {
           //TODO
         }
       } );
@@ -121,7 +121,7 @@ define( function( require ) {
         content: new FontAwesomeNode( 'camera' ),
         touchAreaXDilation: 10,
         touchAreaYDilation: 5,
-        listener: function() {
+        listener: () => {
           const numberOfScreenshots = Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.get() + 1 );
           numberOfSnapshotsProperty.set( numberOfScreenshots );
         }

@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -156,7 +156,7 @@ define( function( require ) {
       // View Snapshots button, above upper-right corner of spectrometer
       const viewSnapshotsButton = new RectangularPushButton( {
         content: new Text( viewSnapshotsString, { font: new MOTHAFont( 16 ) } ),
-        listener: function() {
+        listener: () => {
           if ( !dialog ) {
             dialog = new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty );
           }
@@ -169,7 +169,7 @@ define( function( require ) {
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
-        listener: function() {
+        listener: () => {
           model.reset();
           viewProperties.reset();
         },
@@ -178,17 +178,17 @@ define( function( require ) {
       } );
       this.addChild( resetAllButton );
 
-      viewProperties.modeProperty.link( function( mode ) {
+      viewProperties.modeProperty.link( mode => {
         modelControlPanel.visible = ( mode === 'model' );
       } );
 
       // Visibility of monochromatic light controls
-      model.light.modeProperty.link( function( mode ) {
+      model.light.modeProperty.link( mode => {
         monochromaticControls.visible = ( mode === 'monochromatic' );
       } );
 
       // Show 'View snapshots' button when there are snapshots available
-      viewProperties.numberOfSnapshotsProperty.link( function( numberOfSnapshots ) {
+      viewProperties.numberOfSnapshotsProperty.link( numberOfSnapshots => {
         viewSnapshotsButton.visible = ( numberOfSnapshots > 0 );
       } );
     }

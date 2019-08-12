@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -70,20 +70,20 @@ define( function( require ) {
       super( options );
 
       // transition wavelengths are relevant only to certain models
-      const hasTransitionWavelengths = function() {
+      const hasTransitionWavelengths = () => {
         return modeProperty.get() === 'experiment' ||
                _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
       };
 
       // show the checkbox only if it's relevant
-      const updateCheckboxVisible = function() {
+      const updateCheckboxVisible = () => {
         showCheckbox.visible = hasTransitionWavelengths();
       };
       modeProperty.link( updateCheckboxVisible );
       modelNameProperty.link( updateCheckboxVisible );
 
       // show absorption wavelengths for relevant models
-      const updateAbsorptionWavelengths = function() {
+      const updateAbsorptionWavelengths = () => {
         //TODO
         // wavelengthSlider.absorptionWavelengthsVisible = hasTransitionWavelengths() && absorptionWavelengthsVisibleProperty.get();
       };

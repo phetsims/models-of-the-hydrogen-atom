@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -51,7 +51,7 @@ define( function( require ) {
       numberOfSnapshotsProperty.lazyLink( numberOfSnapshotsObserver );
 
       // @private
-      this.disposeSnapshotsDialog = function() {
+      this.disposeSnapshotsDialog = () => {
         numberOfSnapshotsProperty.unlink( numberOfSnapshotsObserver );
       };
     }
@@ -72,7 +72,7 @@ define( function( require ) {
    * @param numberOfSnapshotsProperty
    * @returns {Array}
    */
-  const createSnapshotNodes = function( numberOfSnapshotsProperty ) {
+  function createSnapshotNodes( numberOfSnapshotsProperty ) {
     const snapshots = [];
     for ( let i = 0; i < numberOfSnapshotsProperty.get(); i++ ) {
       snapshots.push( new SnapshotNode( numberOfSnapshotsProperty, {
@@ -80,7 +80,7 @@ define( function( require ) {
       } ) );
     }
     return snapshots;
-  };
+  }
 
   return modelsOfTheHydrogenAtom.register( 'SnapshotsDialog', SnapshotsDialog );
 } );

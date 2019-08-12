@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -35,8 +35,9 @@ define( function( require ) {
       } );
 
       // @public {Color} color displayed by the view
-      this.colorProperty = new DerivedProperty( [ this.modeProperty, this.wavelengthProperty ],
-        function( mode, wavelength ) {
+      this.colorProperty = new DerivedProperty(
+        [ this.modeProperty, this.wavelengthProperty ],
+        ( mode, wavelength ) => {
           return ( mode === 'white' ) ? 'white' : VisibleColor.wavelengthToColor( wavelength );
         }
       );

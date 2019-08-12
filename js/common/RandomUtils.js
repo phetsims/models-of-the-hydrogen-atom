@@ -6,7 +6,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -22,7 +22,7 @@ define( function( require ) {
      * @returns {number}
      * @public
      */
-    nextDouble: function( min, max ) {
+    nextDouble( min, max ) {
       assert( max > min );
       return min + ( phet.joist.random.nextDouble() * ( max - min ) );
     },
@@ -32,7 +32,7 @@ define( function( require ) {
      * @returns {boolean}
      * @public
      */
-    nextBoolean: function() {
+    nextBoolean() {
       return phet.joist.random.nextBoolean();
     },
 
@@ -41,7 +41,7 @@ define( function( require ) {
      * @returns {number} +1 or -1
      * @public
      */
-    nextSign: function() {
+    nextSign() {
       return ( phet.joist.random.nextBoolean() ? +1 : -1 );
     },
 
@@ -50,7 +50,7 @@ define( function( require ) {
      * @returns {number} angle, in radians
      * @public
      */
-    nextAngle: function() {
+    nextAngle() {
       return phet.joist.random.nextDouble( 0, 2 * Math.PI );
     }
   };

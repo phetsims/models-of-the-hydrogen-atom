@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -45,7 +45,7 @@ define( function( require ) {
       const stepForwardButton = new StepForwardButton( {
         radius: 16,
         touchAreaDilation: 6,
-        listener: function() {
+        listener: () => {
           //TODO advance the animation
         }
       } );
@@ -71,7 +71,7 @@ define( function( require ) {
       super( options );
 
       // enabled the step button when the sim is paused
-      runningProperty.link( function( running ) {
+      runningProperty.link( running => {
         stepForwardButton.enabled = !running;
       } );
     }

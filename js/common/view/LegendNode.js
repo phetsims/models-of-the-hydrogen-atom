@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
@@ -62,12 +62,10 @@ define( function( require ) {
       ];
 
       // widest icon, used to horizontally center all icons and left-align all labels
-      const maxIconWidth = _.maxBy( items, function( item ) {
-        return item.icon.width;
-      } ).icon.width;
+      const maxIconWidth = _.maxBy( items, item => item.icon.width ).icon.width;
 
       const itemNodes = []; // {Node[]}
-      items.forEach( function( item ) {
+      items.forEach( item => {
 
         // pad the icon with a strut, so that all icons occupy the same amount of horizontal space
         const strut = new HStrut( maxIconWidth );
