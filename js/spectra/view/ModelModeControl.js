@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Control for switching the model's mode (Experiment vs Model).
+ * Control for switching between the model's modes (EXPERIMENTAL vs PREDICTIVE).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -42,7 +42,7 @@ define( require => {
 
       super( modelModeProperty,
         ModelModes.EXPERIMENT, new Text( experimentString, labelOptions ),
-        ModelModes.MODEL, new Text( modelString, labelOptions ),
+        ModelModes.PREDICTIVE, new Text( modelString, labelOptions ),
         options );
     }
   }

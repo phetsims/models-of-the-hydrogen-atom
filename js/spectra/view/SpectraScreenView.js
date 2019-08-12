@@ -181,7 +181,7 @@ define( require => {
       this.addChild( resetAllButton );
 
       viewProperties.modelModeProperty.link( modelMode => {
-        predictiveModelControl.visible = ( modelMode === ModelModes.MODEL );
+        predictiveModelControl.visible = ( modelMode === ModelModes.PREDICTIVE );
       } );
 
       // Visibility of monochromatic light controls

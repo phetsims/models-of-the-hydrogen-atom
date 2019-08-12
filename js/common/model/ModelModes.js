@@ -14,7 +14,7 @@ define( require => {
 
   const ModelModes = new Enumeration( [
     'EXPERIMENT',
-    'MODEL' //TODO should this be 'PREDICTIVE'?
+    'PREDICTIVE'
   ] );
 
   return modelsOfTheHydrogenAtom.register( 'ModelModes', ModelModes );
