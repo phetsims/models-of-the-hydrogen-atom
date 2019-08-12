@@ -12,7 +12,7 @@ define( require => {
   const ABSwitch = require( 'SUN/ABSwitch' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const ModelMode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelMode' );
+  const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -24,7 +24,7 @@ define( require => {
   class ModeControl extends ABSwitch {
 
     /**
-     * @param {EnumerationProperty.<ModelMode>} modeProperty
+     * @param {EnumerationProperty.<ModelModes>} modeProperty
      * @param {Object} [options]
      */
     constructor( modeProperty, options ) {
@@ -41,8 +41,8 @@ define( require => {
       };
 
       super( modeProperty,
-        ModelMode.EXPERIMENT, new Text( experimentString, labelOptions ),
-        ModelMode.MODEL, new Text( modelString, labelOptions ),
+        ModelModes.EXPERIMENT, new Text( experimentString, labelOptions ),
+        ModelModes.MODEL, new Text( modelString, labelOptions ),
         options );
     }
   }

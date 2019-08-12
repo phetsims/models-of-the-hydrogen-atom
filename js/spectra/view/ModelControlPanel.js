@@ -12,6 +12,7 @@ define( require => {
   const ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ContinuumBarNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
+  const ModelNames = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelNames' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Panel = require( 'SUN/Panel' );
@@ -38,7 +39,7 @@ define( require => {
   class ModelControlPanel extends Panel {
 
     /**
-     * @param {Property.<string>} modelNameProperty
+     * @param {EnumerationProperty.<ModelNames>} modelNameProperty
      * @param {Object} [options]
      */
     constructor( modelNameProperty, options ) {
@@ -52,12 +53,12 @@ define( require => {
 
       // content that appears on the radio buttons
       const contentArray = [
-        createRadioButtonContent( 'billiardBall', billiardBallString, billiardBallButtonImage ),
-        createRadioButtonContent( 'plumPudding', plumPuddingString, plumPuddingButtonImage ),
-        createRadioButtonContent( 'classicalSolarSystem', classicalSolarSystemString, classicalSolarSystemButtonImage ),
-        createRadioButtonContent( 'bohr', bohrString, bohrButtonImage ),
-        createRadioButtonContent( 'deBroglie', deBroglieString, deBroglieButtonImage ),
-        createRadioButtonContent( 'schrodinger', schrodingerString, schrodingerButtonImage )
+        createRadioButtonContent( ModelNames.BILLIARD_BALL, billiardBallString, billiardBallButtonImage ),
+        createRadioButtonContent( ModelNames.PLUM_PUDDING, plumPuddingString, plumPuddingButtonImage ),
+        createRadioButtonContent( ModelNames.CLASSICAL_SOLAR_SYSTEM, classicalSolarSystemString, classicalSolarSystemButtonImage ),
+        createRadioButtonContent( ModelNames.BOHR, bohrString, bohrButtonImage ),
+        createRadioButtonContent( ModelNames.DEBROGLIE, deBroglieString, deBroglieButtonImage ),
+        createRadioButtonContent( ModelNames.SCHRODINGER, schrodingerString, schrodingerButtonImage )
       ];
 
       // radio buttons

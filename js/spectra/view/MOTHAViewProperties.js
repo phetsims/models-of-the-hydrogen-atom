@@ -10,11 +10,11 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const ClockSpeeds = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ClockSpeeds' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const ModelMode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelMode' );
+  const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const StringProperty = require( 'AXON/StringProperty' );
 
   class MOTHAViewProperties {
 
@@ -22,16 +22,14 @@ define( require => {
 
       //TODO should clock-related stuff be in model?
       // @public clock speed
-      this.clockSpeedProperty = new StringProperty( 'normal', {
-        validValues: [ 'fast', 'normal', 'slow' ]
-      } );
+      this.clockSpeedProperty = new EnumerationProperty( ClockSpeeds, ClockSpeeds.NORMAL );
 
       // @public {boolean} is the simulation running?
       this.runningProperty = new BooleanProperty( true );
 
       //TODO should mode be in model?
       // @public whether we're viewing an experiment or predictive model
-      this.modeProperty = new EnumerationProperty( ModelMode, ModelMode.EXPERIMENT );
+      this.modeProperty = new EnumerationProperty( ModelModes, ModelModes.EXPERIMENT );
 
       // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
       this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false );

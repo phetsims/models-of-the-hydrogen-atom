@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Modes for the light.
+ * Speed options for the simulation clock.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,7 +12,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
 
-  const LightMode = new Enumeration( [ 'WHITE', 'MONOCHROMATIC' ] );
+  const ClockSpeeds = new Enumeration( [ 'FAST', 'NORMAL', 'SLOW' ] );
 
-  return modelsOfTheHydrogenAtom.register( 'LightMode', LightMode );
+  return modelsOfTheHydrogenAtom.register( 'ClockSpeeds', ClockSpeeds );
 } );

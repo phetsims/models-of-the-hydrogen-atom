@@ -9,24 +9,26 @@ define( require => {
   'use strict';
 
   // modules
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const Light = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Light' );
+  const ModelNames = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelNames' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const StringProperty = require( 'AXON/StringProperty' );
 
   class EnergyLevelsModel {
 
     constructor() {
 
       // @public name of the predictive model being used
-      this.modelNameProperty = new StringProperty( 'classicalSolarSystem', {
+      this.modelNameProperty = new EnumerationProperty( ModelNames, ModelNames.CLASSICAL_SOLAR_SYSTEM, {
 
+        //TODO how to specify a subset of an Enumeration?
         // These are models that have an Energy diagram.
-        validValues: [
-          'classicalSolarSystem',
-          'bohr',
-          'deBroglie',
-          'schrodinger'
-        ]
+        // validValues: [
+        //   ModelNames.CLASSICAL_SOLAR_SYSTEM,
+        //   ModelNames.BOHR,
+        //   ModelNames.DEBROGLIE,
+        //   ModelNames.SCHRODINGER
+        // ]
       } );
 
       // @public

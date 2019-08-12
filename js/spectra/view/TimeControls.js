@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const ClockSpeeds = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ClockSpeeds' );
   const ComboBox = require( 'SUN/ComboBox' );
   const ComboBoxItem = require( 'SUN/ComboBoxItem' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -29,11 +30,11 @@ define( require => {
 
     /**
      * @param {Property.<boolean>} runningProperty - is the sim running?
-     * @param {Property.<string>} clockSpeed
+     * @param {EnumerationProperty.<ClockSpeeds>} clockSpeedProperty
      * @param {Node} comboBoxListParent
      * @param {Object} [options]
      */
-    constructor( runningProperty, clockSpeed, comboBoxListParent, options ) {
+    constructor( runningProperty, clockSpeedProperty, comboBoxListParent, options ) {
 
       options = _.extend( {
         spacing: 7
@@ -56,11 +57,11 @@ define( require => {
         maxWidth: 125 // i18n, determined empirically
       };
       const speedItems = [
-        new ComboBoxItem( new Text( fastString, labelOptions ), 'fast' ),
-        new ComboBoxItem( new Text( normalString, labelOptions ), 'normal' ),
-        new ComboBoxItem( new Text( slowString, labelOptions ), 'slow' )
+        new ComboBoxItem( new Text( fastString, labelOptions ), ClockSpeeds.FAST ),
+        new ComboBoxItem( new Text( normalString, labelOptions ), ClockSpeeds.NORMAL ),
+        new ComboBoxItem( new Text( slowString, labelOptions ), ClockSpeeds.SLOW )
       ];
-      const speedComboBox = new ComboBox( speedItems, clockSpeed, comboBoxListParent, {
+      const speedComboBox = new ComboBox( speedItems, clockSpeedProperty, comboBoxListParent, {
         cornerRadius: 8,
         listPosition: 'above',
         highlightFill: 'rgb( 153, 206, 255 )'
