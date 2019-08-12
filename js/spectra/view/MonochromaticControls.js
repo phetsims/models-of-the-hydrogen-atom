@@ -24,13 +24,13 @@ define( require => {
   class MonochromaticControls extends VBox {
 
     /**
-     * @param {EnumerationProperty.<LightModes>} modeProperty
+     * @param {EnumerationProperty.<ModelMode>} modelModeProperty
      * @param {EnumerationProperty.<ModelNames>} modelNameProperty
      * @param {Property.<number>} wavelengthProperty
      * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
      * @param {Object} [options]
      */
-    constructor( modeProperty, modelNameProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
+    constructor( modelModeProperty, modelNameProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
 
       options = _.extend( {
         align: 'center',
@@ -72,7 +72,7 @@ define( require => {
 
       // transition wavelengths are relevant only to certain models
       const hasTransitionWavelengths = () => {
-        return modeProperty.get() === ModelModes.EXPERIMENT ||
+        return modelModeProperty.get() === ModelModes.EXPERIMENT ||
                _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
       };
 
@@ -80,7 +80,7 @@ define( require => {
       const updateCheckboxVisible = () => {
         showCheckbox.visible = hasTransitionWavelengths();
       };
-      modeProperty.link( updateCheckboxVisible );
+      modelModeProperty.link( updateCheckboxVisible );
       modelNameProperty.link( updateCheckboxVisible );
 
       // show absorption wavelengths for relevant models

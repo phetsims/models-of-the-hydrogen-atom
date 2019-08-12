@@ -24,10 +24,10 @@ define( require => {
   class ModeControl extends ABSwitch {
 
     /**
-     * @param {EnumerationProperty.<ModelModes>} modeProperty
+     * @param {EnumerationProperty.<ModelModes>} modelModeProperty
      * @param {Object} [options]
      */
-    constructor( modeProperty, options ) {
+    constructor( modelModeProperty, options ) {
 
       options = _.extend( {
         switchSize: new Dimension2( 60, 30 ),
@@ -40,7 +40,7 @@ define( require => {
         maxWidth: 100
       };
 
-      super( modeProperty,
+      super( modelModeProperty,
         ModelModes.EXPERIMENT, new Text( experimentString, labelOptions ),
         ModelModes.MODEL, new Text( modelString, labelOptions ),
         options );

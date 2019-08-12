@@ -33,10 +33,10 @@ define( require => {
   class LightModeControl extends RadioButtonGroup {
 
     /**
-     * @param {EnumerationProperty.<LightModes>} modeProperty - the light's mode
+     * @param {EnumerationProperty.<LightModes>} lightModeProperty - the light's mode
      * @param {Object} [options]
      */
-    constructor( modeProperty, options ) {
+    constructor( lightModeProperty, options ) {
 
       options = _.extend( {
         orientation: 'vertical',
@@ -51,7 +51,7 @@ define( require => {
         deselectedLineWidth: 2
       }, options );
 
-      super( modeProperty, [
+      super( lightModeProperty, [
         { value: LightModes.WHITE, node: createModeIcon( 'white' ) },
         { value: LightModes.MONOCHROMATIC, node: createModeIcon( 'red' ) }
       ], options );

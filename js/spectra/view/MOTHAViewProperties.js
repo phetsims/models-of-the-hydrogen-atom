@@ -29,7 +29,7 @@ define( require => {
 
       //TODO should mode be in model?
       // @public whether we're viewing an experiment or predictive model
-      this.modeProperty = new EnumerationProperty( ModelModes, ModelModes.EXPERIMENT );
+      this.modelModeProperty = new EnumerationProperty( ModelModes, ModelModes.EXPERIMENT );
 
       // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
       this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false );
@@ -49,7 +49,7 @@ define( require => {
     reset() {
       this.clockSpeedProperty.reset();
       this.runningProperty.reset();
-      this.modeProperty.reset();
+      this.modelModeProperty.reset();
       this.absorptionWavelengthsVisibleProperty.reset();
       this.spectrometerExpandedProperty.reset();
       this.energyDiagramVisibleProperty.reset();

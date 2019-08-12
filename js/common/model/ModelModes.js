@@ -12,7 +12,10 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
 
-  const ModelModes = new Enumeration( [ 'EXPERIMENT', 'MODEL' ] );
+  const ModelModes = new Enumeration( [
+    'EXPERIMENT',
+    'MODEL' //TODO should this be 'PREDICTIVE'?
+  ] );
 
   return modelsOfTheHydrogenAtom.register( 'ModelModes', ModelModes );
 } );

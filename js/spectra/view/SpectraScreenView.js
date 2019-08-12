@@ -58,14 +58,14 @@ define( require => {
       this.addChild( legendNode );
 
       // Light mode control (radio buttons)
-      const lightModeControl = new LightModeControl( model.light.modeProperty, {
+      const lightModeControl = new LightModeControl( model.light.lightModeProperty, {
         left: this.layoutBounds.left + 30,
         bottom: 415
       } );
       this.addChild( lightModeControl );
 
       // Controls for monochromatic light
-      const monochromaticControls = new MonochromaticControls( viewProperties.modeProperty, model.modelNameProperty,
+      const monochromaticControls = new MonochromaticControls( viewProperties.modelModeProperty, model.modelNameProperty,
         model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
           left: lightModeControl.left,
           top: lightModeControl.bottom + 15
@@ -131,7 +131,7 @@ define( require => {
       this.addChild( dashedLines );
 
       // selects between 'Experiment' and 'Model' modes
-      const modeControl = new ModeControl( viewProperties.modeProperty );
+      const modeControl = new ModeControl( viewProperties.modelModeProperty );
 
       // selects a predictive model
       const modelControlPanel = new ModelControlPanel( model.modelNameProperty );
@@ -180,13 +180,13 @@ define( require => {
       } );
       this.addChild( resetAllButton );
 
-      viewProperties.modeProperty.link( mode => {
-        modelControlPanel.visible = ( mode === ModelModes.MODEL );
+      viewProperties.modelModeProperty.link( modelMode => {
+        modelControlPanel.visible = ( modelMode === ModelModes.MODEL );
       } );
 
       // Visibility of monochromatic light controls
-      model.light.modeProperty.link( mode => {
-        monochromaticControls.visible = ( mode === LightModes.MONOCHROMATIC );
+      model.light.lightModeProperty.link( lightMode => {
+        monochromaticControls.visible = ( lightMode === LightModes.MONOCHROMATIC );
       } );
 
       // Show 'View snapshots' button when there are snapshots available

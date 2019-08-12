@@ -26,7 +26,7 @@ define( require => {
       this.onProperty = new BooleanProperty( false );
 
       // @public type of light being emitted
-      this.modeProperty = new EnumerationProperty( LightModes, LightModes.WHITE );
+      this.lightModeProperty = new EnumerationProperty( LightModes, LightModes.WHITE );
 
       // @public wavelength in nm, relevant only for monochromatic mode
       this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
@@ -35,9 +35,9 @@ define( require => {
 
       // @public {Color} color displayed by the view
       this.colorProperty = new DerivedProperty(
-        [ this.modeProperty, this.wavelengthProperty ],
-        ( mode, wavelength ) => {
-          return ( mode === LightModes.WHITE ) ? 'white' : VisibleColor.wavelengthToColor( wavelength );
+        [ this.lightModeProperty, this.wavelengthProperty ],
+        ( lightMode, wavelength ) => {
+          return ( lightMode === LightModes.WHITE ) ? 'white' : VisibleColor.wavelengthToColor( wavelength );
         }
       );
     }
@@ -45,7 +45,7 @@ define( require => {
     // @public
     reset() {
       this.onProperty.reset();
-      this.modeProperty.reset();
+      this.lightModeProperty.reset();
       this.wavelengthProperty.reset();
     }
   }
