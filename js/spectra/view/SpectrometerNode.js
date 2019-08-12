@@ -42,8 +42,8 @@ define( require => {
     constructor( expandedProperty, numberOfSnapshotsProperty, options ) {
 
       options = _.extend( {
-        fill: 'rgb( 80, 80, 80 )',
-        stroke: 'rgb( 140, 140, 140 )',
+        fill: MOTHAColorProfile.accordionBoxFillProperty,
+        stroke: MOTHAColorProfile.accordionBoxStrokeProperty,
         xMargin: 5,
         yMargin: 5,
         cornerRadius: 5,
@@ -52,8 +52,9 @@ define( require => {
         contentXMargin: 10,
         contentYMargin: 5,
         contentYSpacing: 0,
-        buttonAlign: 'right',
+        buttonAlign: 'left',
         titleAlignX: 'left',
+        titleXSpacing: 10,
         expandCollapseButtonOptions: {
           sideLength: 22,
           touchAreaXDilation: 10,
@@ -71,7 +72,7 @@ define( require => {
       //TODO order of title and subtitle is not localized
       const subtitleNode = new Text( photonsEmittedNmString, {
         font: new PhetFont( 14 ),
-        fill: 'white'
+        fill: MOTHAColorProfile.spectrometerSubtitleFillProperty
       } );
 
       // show subtitle only when expanded

@@ -69,6 +69,21 @@ define( require => {
       projector: 'black'
     },
 
+    spectrometerSubtitleFill: {
+     default: 'white',
+     projector: 'black'
+    },
+
+    accordionBoxFill: {
+      default: 'rgb( 80, 80, 80 )',
+      projector: 'white'
+    },
+
+    accordionBoxStroke: {
+      default: 'rgb( 140, 140, 140 )',
+      projector: 'black'
+    },
+
     uvColor: {
       default: 'rgb( 160, 160, 160 )'
     },
