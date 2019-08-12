@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const ModelMode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelMode' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -23,7 +24,7 @@ define( require => {
   class MonochromaticControls extends VBox {
 
     /**
-     * @param {Property.<string>} modeProperty
+     * @param {EnumerationProperty.<LightMode>} modeProperty
      * @param {Property.<string>} modelNameProperty
      * @param {Property.<number>} wavelengthProperty
      * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
@@ -71,7 +72,7 @@ define( require => {
 
       // transition wavelengths are relevant only to certain models
       const hasTransitionWavelengths = () => {
-        return modeProperty.get() === 'experiment' ||
+        return modeProperty.get() === ModelMode.EXPERIMENT ||
                _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
       };
 

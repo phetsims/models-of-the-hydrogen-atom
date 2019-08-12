@@ -10,7 +10,9 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const ModelMode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelMode' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const StringProperty = require( 'AXON/StringProperty' );
 
@@ -29,9 +31,7 @@ define( require => {
 
       //TODO should mode be in model?
       // @public whether we're viewing an experiment or predictive model
-      this.modeProperty = new StringProperty( 'experiment', {
-        validValues: [ 'experiment', 'model' ]
-      } );
+      this.modeProperty = new EnumerationProperty( ModelMode, ModelMode.EXPERIMENT );
 
       // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
       this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false );

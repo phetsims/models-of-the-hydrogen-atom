@@ -14,9 +14,11 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   const LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
+  const LightMode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/LightMode' );
   const LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
   const ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModeControl' );
   const ModelControlPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControlPanel' );
+  const ModelMode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelMode' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
   const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
@@ -179,12 +181,12 @@ define( require => {
       this.addChild( resetAllButton );
 
       viewProperties.modeProperty.link( mode => {
-        modelControlPanel.visible = ( mode === 'model' );
+        modelControlPanel.visible = ( mode === ModelMode.MODEL );
       } );
 
       // Visibility of monochromatic light controls
       model.light.modeProperty.link( mode => {
-        monochromaticControls.visible = ( mode === 'monochromatic' );
+        monochromaticControls.visible = ( mode === LightMode.MONOCHROMATIC );
       } );
 
       // Show 'View snapshots' button when there are snapshots available
