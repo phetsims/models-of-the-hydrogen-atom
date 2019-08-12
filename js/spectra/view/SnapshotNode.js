@@ -23,7 +23,6 @@ define( function( require ) {
     /**
      * @param {Property.<number>} numberOfSnapshotsProperty
      * @param {Object} [options]
-     * @constructor
      */
     constructor( numberOfSnapshotsProperty, options ) {
 

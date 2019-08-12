@@ -38,12 +38,10 @@ define( function( require ) {
 
       super( content, options );
 
-      const self = this;
-
       //TODO remove a specific snapshot, rather than rebuilding them all
-      const numberOfSnapshotsObserver = function( numberOfSnapshots ) {
+      const numberOfSnapshotsObserver = numberOfSnapshots => {
         if ( numberOfSnapshots === 0 ) {
-          self.hide();
+          this.hide();
         }
         else {
           assert && assert( content instanceof VBox );
