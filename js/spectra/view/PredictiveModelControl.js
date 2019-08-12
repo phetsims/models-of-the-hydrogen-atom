@@ -12,11 +12,11 @@ define( require => {
   const ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ContinuumBarNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
-  const ModelNames = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelNames' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PredictiveModels = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModels' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   const Text = require( 'SCENERY/nodes/Text' );
 
@@ -36,13 +36,13 @@ define( require => {
   const plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
   const schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
-  class ModelNameControl extends Panel {
+  class PredictiveModelControl extends Panel {
 
     /**
-     * @param {EnumerationProperty.<ModelNames>} modelNameProperty
+     * @param {EnumerationProperty.<PredictiveModels>} predictiveModelProperty
      * @param {Object} [options]
      */
-    constructor( modelNameProperty, options ) {
+    constructor( predictiveModelProperty, options ) {
 
       options = _.extend( {
         fill: 'black',
@@ -53,16 +53,16 @@ define( require => {
 
       // content that appears on the radio buttons
       const contentArray = [
-        createRadioButtonContent( ModelNames.BILLIARD_BALL, billiardBallString, billiardBallButtonImage ),
-        createRadioButtonContent( ModelNames.PLUM_PUDDING, plumPuddingString, plumPuddingButtonImage ),
-        createRadioButtonContent( ModelNames.CLASSICAL_SOLAR_SYSTEM, classicalSolarSystemString, classicalSolarSystemButtonImage ),
-        createRadioButtonContent( ModelNames.BOHR, bohrString, bohrButtonImage ),
-        createRadioButtonContent( ModelNames.DEBROGLIE, deBroglieString, deBroglieButtonImage ),
-        createRadioButtonContent( ModelNames.SCHRODINGER, schrodingerString, schrodingerButtonImage )
+        createRadioButtonContent( PredictiveModels.BILLIARD_BALL, billiardBallString, billiardBallButtonImage ),
+        createRadioButtonContent( PredictiveModels.PLUM_PUDDING, plumPuddingString, plumPuddingButtonImage ),
+        createRadioButtonContent( PredictiveModels.CLASSICAL_SOLAR_SYSTEM, classicalSolarSystemString, classicalSolarSystemButtonImage ),
+        createRadioButtonContent( PredictiveModels.BOHR, bohrString, bohrButtonImage ),
+        createRadioButtonContent( PredictiveModels.DEBROGLIE, deBroglieString, deBroglieButtonImage ),
+        createRadioButtonContent( PredictiveModels.SCHRODINGER, schrodingerString, schrodingerButtonImage )
       ];
 
       // radio buttons
-      const radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
+      const radioButtonGroup = new RadioButtonGroup( predictiveModelProperty, contentArray, {
         baseColor: options.fill,
         disabledBaseColor: options.fill,
         selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
@@ -123,5 +123,5 @@ define( require => {
     };
   }
 
-  return modelsOfTheHydrogenAtom.register( 'ModelNameControl', ModelNameControl );
+  return modelsOfTheHydrogenAtom.register( 'PredictiveModelControl', PredictiveModelControl );
 } );

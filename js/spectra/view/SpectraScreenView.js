@@ -16,7 +16,6 @@ define( require => {
   const LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   const LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
   const LightModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/LightModes' );
-  const ModelNameControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelNameControl' );
   const ModelModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelModeControl' );
   const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
@@ -24,6 +23,7 @@ define( require => {
   const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PredictiveModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/PredictiveModelControl' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
@@ -65,7 +65,7 @@ define( require => {
       this.addChild( lightModeControl );
 
       // Controls for monochromatic light
-      const monochromaticControls = new MonochromaticControls( viewProperties.modelModeProperty, model.modelNameProperty,
+      const monochromaticControls = new MonochromaticControls( viewProperties.modelModeProperty, model.predictiveModelProperty,
         model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
           left: lightModeControl.left,
           top: lightModeControl.bottom + 15
@@ -130,14 +130,14 @@ define( require => {
       } );
       this.addChild( dashedLines );
 
-      // selects between 'Experiment' and 'Model' model modes
-      const modeControl = new ModelModeControl( viewProperties.modelModeProperty );
+      // selects between EXPERIMENT and PREDICTIVE model modes
+      const modelModeControl = new ModelModeControl( viewProperties.modelModeProperty );
 
       // selects a predictive model
-      const modelNameControl = new ModelNameControl( model.modelNameProperty );
+      const predictiveModelControl = new PredictiveModelControl( model.predictiveModelProperty );
 
       this.addChild( new VBox( {
-        children: [ modeControl, modelNameControl ],
+        children: [ modelModeControl, predictiveModelControl ],
         align: 'center',
         spacing: 10,
         left: zoomBoxNode.right + 30,
@@ -181,7 +181,7 @@ define( require => {
       this.addChild( resetAllButton );
 
       viewProperties.modelModeProperty.link( modelMode => {
-        modelNameControl.visible = ( modelMode === ModelModes.MODEL );
+        predictiveModelControl.visible = ( modelMode === ModelModes.MODEL );
       } );
 
       // Visibility of monochromatic light controls
