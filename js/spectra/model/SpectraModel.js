@@ -43,7 +43,7 @@ define( require => {
   }
 
   // @public models that include the concept of transition wavelengths
-  SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS = [
+  SpectraModel.PREDICTIVE_MODELS_WITH_TRANSITION_WAVELENGTHS = [
     PredictiveModels.BOHR,
     PredictiveModels.DEBROGLIE,
     PredictiveModels.SCHRODINGER

@@ -73,7 +73,7 @@ define( require => {
       // transition wavelengths are relevant only to certain models
       const hasTransitionWavelengths = () => {
         return modelModeProperty.get() === ModelModes.EXPERIMENT ||
-               _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, predictiveModelProperty.get() );
+               _.includes( SpectraModel.PREDICTIVE_MODELS_WITH_TRANSITION_WAVELENGTHS, predictiveModelProperty.get() );
       };
 
       // show the checkbox only if it's relevant
