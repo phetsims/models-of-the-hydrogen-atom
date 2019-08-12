@@ -30,7 +30,7 @@ define( require => {
     constructor( modelModeProperty, options ) {
 
       options = _.extend( {
-        switchSize: new Dimension2( 60, 30 ),
+        switchSize: new Dimension2( 50, 25 ),
         centerOnButton: true
       }, options );
 
