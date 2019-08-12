@@ -1,7 +1,6 @@
-// Copyright 2015-2016, University of Colorado Boulder
+// Copyright 2015-2019, University of Colorado Boulder
 
 /**
- *
  * Provides the zoomed-in view of part of the box of hydrogen.
  * This is the box in which animation of atoms, photons and alpha particles takes place.
  *
@@ -11,31 +10,32 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  /**
-   * @param {Object} [options]
-   * @constructor
-   */
-  function ZoomBoxNode( options ) {
+  //TODO extends Rectangle?
+  class ZoomBoxNode extends Node {
 
-    options = options || {};
+    /**
+     * @param {Object} [options]
+     */
+    constructor( options ) {
 
-    const outlineNode = new Rectangle( 0, 0, 400, 400, {
-      fill: 'black',
-      stroke: 'white',
-      lineWidth: 1
-    } );
+      options = _.extend( {}, options );
 
-    options.children = [ outlineNode ];
+      const outlineNode = new Rectangle( 0, 0, 400, 400, {
+        fill: 'black',
+        stroke: 'white',
+        lineWidth: 1
+      } );
 
-    Node.call( this, options );
+      assert && assert( !options.children, 'ZoomBoxNode sets children' );
+      options.children = [ outlineNode ];
+
+      super( options );
+    }
   }
 
-  modelsOfTheHydrogenAtom.register( 'ZoomBoxNode', ZoomBoxNode );
-
-  return inherit( Node, ZoomBoxNode );
+  return modelsOfTheHydrogenAtom.register( 'ZoomBoxNode', ZoomBoxNode );
 } );

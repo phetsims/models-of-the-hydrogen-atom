@@ -1,7 +1,7 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * View for 'Energy Levels' screen.
+ * View for the 'Energy Levels' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,28 +9,29 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const ScreenView = require( 'JOIST/ScreenView' );
 
-  /**
-   * @param {EnergyLevelsModel} model
-   * @constructor
-   */
-  function EnergyLevelsScreenView( model ) {
+  class EnergyLevelsScreenView extends ScreenView {
 
-    ScreenView.call( this );
-    
-    //TODO
-  }
+    /**
+     * @param {EnergyLevelsModel} model
+     */
+    constructor( model ) {
 
-  modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenView', EnergyLevelsScreenView );
+      super();
 
-  return inherit( ScreenView, EnergyLevelsScreenView, {
+      //TODO
+    }
 
-    // @public
-    step: function( dt ) {
+    /**
+     * @param {number} dt
+     * @public
+     */
+    step( dt ) {
       //TODO Handle view animation here.
     }
-  } );
+  }
+
+  return modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenView', EnergyLevelsScreenView );
 } );

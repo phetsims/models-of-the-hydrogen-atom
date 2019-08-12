@@ -1,4 +1,4 @@
-// Copyright 2016-2018, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
  * Control for selecting the light's mode (white or monochromatic).
@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Dimension2 = require( 'DOT/Dimension2' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
@@ -30,37 +29,36 @@ define( function( require ) {
     lineWidth: 0.5
   };
 
-  /**
-   * @param {Property.<string>} modeProperty - the light's mode, 'white'|'monochromatic'
-   * @param options
-   * @constructor
-   */
-  function LightModeControl( modeProperty, options ) {
+  class LightModeControl extends RadioButtonGroup {
 
-    options = _.extend( {
-      orientation: 'vertical',
-      spacing: 8,
-      buttonContentXMargin: 15,
-      buttonContentYMargin: 6,
-      baseColor: 'black',
-      disabledBaseColor: 'black',
-      selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
-      deselectedStroke: MOTHAColorProfile.radioButtonDeselectedColorProperty,
-      selectedLineWidth: 2,
-      deselectedLineWidth: 2
-    }, options );
+    /**
+     * @param {Property.<string>} modeProperty - the light's mode, 'white'|'monochromatic'
+     * @param {Object} [options]
+     */
+    constructor( modeProperty, options ) {
 
-    RadioButtonGroup.call( this, modeProperty, [
-      { value: 'white', node: createModeIcon( 'white' ) },
-      { value: 'monochromatic', node: createModeIcon( 'red' ) }
-    ], options );
+      options = _.extend( {
+        orientation: 'vertical',
+        spacing: 8,
+        buttonContentXMargin: 15,
+        buttonContentYMargin: 6,
+        baseColor: 'black',
+        disabledBaseColor: 'black',
+        selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
+        deselectedStroke: MOTHAColorProfile.radioButtonDeselectedColorProperty,
+        selectedLineWidth: 2,
+        deselectedLineWidth: 2
+      }, options );
+
+      super( modeProperty, [
+        { value: 'white', node: createModeIcon( 'white' ) },
+        { value: 'monochromatic', node: createModeIcon( 'red' ) }
+      ], options );
+    }
   }
-
-  modelsOfTheHydrogenAtom.register( 'LightModeControl', LightModeControl );
 
   /**
    * Creates an icon for a mode.
-   *
    * @param {Color|string} beamColor
    * @returns {Node}
    */
@@ -74,7 +72,5 @@ define( function( require ) {
     return new Node( { children: [ beamNode, laserNode ] } );
   };
 
-  return inherit( RadioButtonGroup, LightModeControl, {
-    //TODO prototype functions
-  } );
+  return modelsOfTheHydrogenAtom.register( 'LightModeControl', LightModeControl );
 } );

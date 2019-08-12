@@ -13,7 +13,6 @@ define( function( require ) {
   const ComboBoxItem = require( 'SUN/ComboBoxItem' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
@@ -25,58 +24,58 @@ define( function( require ) {
   const normalString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/normal' );
   const slowString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/slow' );
 
-  /**
-   * @param {Property.<boolean>} runningProperty - is the sim running?
-   * @param {Property.<string>} clockSpeed
-   * @param {Node} comboBoxListParent
-   * @param {Object} [options]
-   * @constructor
-   */
-  function TimeControls( runningProperty, clockSpeed, comboBoxListParent, options ) {
+  class TimeControls extends HBox {
 
-    options = _.extend( {
-      spacing: 7
-    }, options );
+    /**
+     * @param {Property.<boolean>} runningProperty - is the sim running?
+     * @param {Property.<string>} clockSpeed
+     * @param {Node} comboBoxListParent
+     * @param {Object} [options]
+     */
+    constructor( runningProperty, clockSpeed, comboBoxListParent, options ) {
 
-    const playPauseButton = new PlayPauseButton( runningProperty, {
-      radius: 22
-    } );
+      options = _.extend( {
+        spacing: 7
+      }, options );
 
-    const stepForwardButton = new StepForwardButton( {
-      radius: 16,
-      touchAreaDilation: 6,
-      listener: function() {
-        //TODO advance the animation
-      }
-    } );
+      const playPauseButton = new PlayPauseButton( runningProperty, {
+        radius: 22
+      } );
 
-    const labelOptions = {
-      font: new MOTHAFont( { size: 16 } ),
-      maxWidth: 125 // i18n, determined empirically
-    };
-    const speedItems = [
-      new ComboBoxItem( new Text( fastString, labelOptions ), 'fast' ),
-      new ComboBoxItem( new Text( normalString, labelOptions ), 'normal' ),
-      new ComboBoxItem( new Text( slowString, labelOptions ), 'slow' )
-    ];
-    const speedComboBox = new ComboBox( speedItems, clockSpeed, comboBoxListParent, {
-      cornerRadius: 8,
-      listPosition: 'above',
-      highlightFill: 'rgb( 153, 206, 255 )'
-    } );
+      const stepForwardButton = new StepForwardButton( {
+        radius: 16,
+        touchAreaDilation: 6,
+        listener: function() {
+          //TODO advance the animation
+        }
+      } );
 
-    assert && assert( !options.children, 'decoration not supported' );
-    options.children = [ playPauseButton, stepForwardButton, new HStrut( 4 ), speedComboBox ];
+      const labelOptions = {
+        font: new MOTHAFont( { size: 16 } ),
+        maxWidth: 125 // i18n, determined empirically
+      };
+      const speedItems = [
+        new ComboBoxItem( new Text( fastString, labelOptions ), 'fast' ),
+        new ComboBoxItem( new Text( normalString, labelOptions ), 'normal' ),
+        new ComboBoxItem( new Text( slowString, labelOptions ), 'slow' )
+      ];
+      const speedComboBox = new ComboBox( speedItems, clockSpeed, comboBoxListParent, {
+        cornerRadius: 8,
+        listPosition: 'above',
+        highlightFill: 'rgb( 153, 206, 255 )'
+      } );
 
-    HBox.call( this, options );
+      assert && assert( !options.children, 'TimeControls sets children' );
+      options.children = [ playPauseButton, stepForwardButton, new HStrut( 4 ), speedComboBox ];
 
-    // enabled the step button when the sim is paused
-    runningProperty.link( function( running ) {
-      stepForwardButton.enabled = !running;
-    } );
+      super( options );
+
+      // enabled the step button when the sim is paused
+      runningProperty.link( function( running ) {
+        stepForwardButton.enabled = !running;
+      } );
+    }
   }
 
-  modelsOfTheHydrogenAtom.register( 'TimeControls', TimeControls );
-
-  return inherit( HBox, TimeControls );
+  return modelsOfTheHydrogenAtom.register( 'TimeControls', TimeControls );
 } );

@@ -1,4 +1,4 @@
-// Copyright 2015-2017, University of Colorado Boulder
+// Copyright 2015-2019, University of Colorado Boulder
 
 /**
  * Control panel for selecting one of several predictive models.
@@ -12,7 +12,6 @@ define( function( require ) {
   const ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ContinuumBarNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
@@ -36,68 +35,69 @@ define( function( require ) {
   const plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
   const schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
-  /**
-   * @param {Property.<string>} modelNameProperty
-   * @param {Object} [options]
-   * @constructor
-   */
-  function ModelControlPanel( modelNameProperty, options ) {
+  class ModelControlPanel extends Panel {
 
-    options = _.extend( {
-      fill: 'black',
-      stroke: 'white',
-      xMargin: 10,
-      yMargin: 10
-    }, options );
+    /**
+     * @param {Property.<string>} modelNameProperty
+     * @param {Object} [options]
+     */
+    constructor( modelNameProperty, options ) {
 
-    // content that appears on the radio buttons
-    const contentArray = [
-      createRadioButtonContent( 'billiardBall', billiardBallString, billiardBallButtonImage ),
-      createRadioButtonContent( 'plumPudding', plumPuddingString, plumPuddingButtonImage ),
-      createRadioButtonContent( 'classicalSolarSystem', classicalSolarSystemString, classicalSolarSystemButtonImage ),
-      createRadioButtonContent( 'bohr', bohrString, bohrButtonImage ),
-      createRadioButtonContent( 'deBroglie', deBroglieString, deBroglieButtonImage ),
-      createRadioButtonContent( 'schrodinger', schrodingerString, schrodingerButtonImage )
-    ];
+      options = _.extend( {
+        fill: 'black',
+        stroke: 'white',
+        xMargin: 10,
+        yMargin: 10
+      }, options );
 
-    // radio buttons
-    const radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
-      baseColor: options.fill,
-      disabledBaseColor: options.fill,
-      selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
-      deselectedStroke: options.fill,
-      overFill: options.fill,
-      overStroke: MOTHAColorProfile.radioButtonDeselectedColorProperty,
-      overLineWidth: 2,
-      selectedLineWidth: 2,
-      labelAlign: 'left',
-      spacing: 2,
-      buttonContentXMargin: 12,
-      buttonContentYMargin: 10,
-      buttonContentXAlign: 'left',
-      selectedButtonOpacity: 1,
-      deselectedButtonOpacity: 1,
-      selectedContentOpacity: 1,
-      deselectedContentOpacity: 1,
-      overButtonOpacity: 1,
-      overContentOpacity: 1
-    } );
+      // content that appears on the radio buttons
+      const contentArray = [
+        createRadioButtonContent( 'billiardBall', billiardBallString, billiardBallButtonImage ),
+        createRadioButtonContent( 'plumPudding', plumPuddingString, plumPuddingButtonImage ),
+        createRadioButtonContent( 'classicalSolarSystem', classicalSolarSystemString, classicalSolarSystemButtonImage ),
+        createRadioButtonContent( 'bohr', bohrString, bohrButtonImage ),
+        createRadioButtonContent( 'deBroglie', deBroglieString, deBroglieButtonImage ),
+        createRadioButtonContent( 'schrodinger', schrodingerString, schrodingerButtonImage )
+      ];
 
-    // continuum bar, 'Classical' to 'Quantum'
-    const continuumBarNode = new ContinuumBarNode( radioButtonGroup.height );
+      // radio buttons
+      const radioButtonGroup = new RadioButtonGroup( modelNameProperty, contentArray, {
+        baseColor: options.fill,
+        disabledBaseColor: options.fill,
+        selectedStroke: MOTHAColorProfile.radioButtonSelectedColorProperty,
+        deselectedStroke: options.fill,
+        overFill: options.fill,
+        overStroke: MOTHAColorProfile.radioButtonDeselectedColorProperty,
+        overLineWidth: 2,
+        selectedLineWidth: 2,
+        labelAlign: 'left',
+        spacing: 2,
+        buttonContentXMargin: 12,
+        buttonContentYMargin: 10,
+        buttonContentXAlign: 'left',
+        selectedButtonOpacity: 1,
+        deselectedButtonOpacity: 1,
+        selectedContentOpacity: 1,
+        deselectedContentOpacity: 1,
+        overButtonOpacity: 1,
+        overContentOpacity: 1
+      } );
 
-    // panel content
-    const contentNode = new HBox( {
-      spacing: 10,
-      children: [ continuumBarNode, radioButtonGroup ]
-    } );
+      // continuum bar, 'Classical' to 'Quantum'
+      const continuumBarNode = new ContinuumBarNode( radioButtonGroup.height );
 
-    Panel.call( this, contentNode, options );
+      // panel content
+      const contentNode = new HBox( {
+        spacing: 10,
+        children: [ continuumBarNode, radioButtonGroup ]
+      } );
+
+      super( contentNode, options );
+    }
   }
 
-  modelsOfTheHydrogenAtom.register( 'ModelControlPanel', ModelControlPanel );
-
   /**
+   * Creates the content for one of the radio buttons.
    * @param {*} value
    * @param {string} text
    * @param {HTMLImageElement} image
@@ -122,5 +122,5 @@ define( function( require ) {
     };
   };
 
-  return inherit( Panel, ModelControlPanel );
+  return modelsOfTheHydrogenAtom.register( 'ModelControlPanel', ModelControlPanel );
 } );

@@ -17,9 +17,6 @@ define( function( require ) {
   const Range = require( 'DOT/Range' );
   const VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
 
-  /**
-   * @constructor
-   */
   class Light {
 
     constructor() {

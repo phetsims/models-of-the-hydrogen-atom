@@ -1,4 +1,4 @@
-// Copyright 2015-2016, University of Colorado Boulder
+// Copyright 2015-2019, University of Colorado Boulder
 
 /**
  * The box of hydrogen into which the light emits photons and alpha particles.
@@ -10,7 +10,6 @@ define( function( require ) {
 
   // modules
   const Dimension2 = require( 'DOT/Dimension2' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
@@ -30,47 +29,47 @@ define( function( require ) {
   const LIGHT_COLOR = 'rgb( 249, 249, 249 )';
   const SHADOW_COLOR = 'rgb( 100, 100, 100 )';
 
-  /**
-   * @param {Object} [options]
-   * @constructor
-   */
-  function BoxOfHydrogenNode( options ) {
+  class BoxOfHydrogenNode extends Node {
+    
+    /**
+     * @param {Object} [options]
+     */
+    constructor( options ) {
 
-    // top face, in perspective
-    const topNode = new Path( new Shape()
-      .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
-      .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
-      .lineTo( BOX_SIZE.width, BACK_DEPTH )
-      .lineTo( 0, BACK_DEPTH )
-      .close(), {
-      fill: new LinearGradient( 0, 0, BOX_SIZE.width, BACK_DEPTH ).addColorStop( 0, LIGHT_COLOR ).addColorStop( 1, SHADOW_COLOR ),
-      stroke: 'black',
-      lineWidth: 1
-    } );
+      // top face, in perspective
+      const topNode = new Path( new Shape()
+        .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
+        .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
+        .lineTo( BOX_SIZE.width, BACK_DEPTH )
+        .lineTo( 0, BACK_DEPTH )
+        .close(), {
+        fill: new LinearGradient( 0, 0, BOX_SIZE.width, BACK_DEPTH ).addColorStop( 0, LIGHT_COLOR ).addColorStop( 1, SHADOW_COLOR ),
+        stroke: 'black',
+        lineWidth: 1
+      } );
 
-    // front face
-    const frontNode = new Rectangle( 0, BACK_DEPTH, BOX_SIZE.width, BOX_SIZE.height, {
-      fill: new LinearGradient( 0, 0, BOX_SIZE.width, 0 ).addColorStop( 0, LIGHT_COLOR ).addColorStop( 1, SHADOW_COLOR ),
-      stroke: 'black',
-      lineWidth: 1
-    } );
+      // front face
+      const frontNode = new Rectangle( 0, BACK_DEPTH, BOX_SIZE.width, BOX_SIZE.height, {
+        fill: new LinearGradient( 0, 0, BOX_SIZE.width, 0 ).addColorStop( 0, LIGHT_COLOR ).addColorStop( 1, SHADOW_COLOR ),
+        stroke: 'black',
+        lineWidth: 1
+      } );
 
-    // hydrogen symbol, in lower-left corner of front face
-    const hydrogenSymbol = new Text( hydrogenSymbolString, {
-      font: new MOTHAFont( { weight: 'bold', size: 24 } ),
-      left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
-      bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),
-      maxWidth: 0.65 * BOX_SIZE.width
-    } );
+      // hydrogen symbol, in lower-left corner of front face
+      const hydrogenSymbol = new Text( hydrogenSymbolString, {
+        font: new MOTHAFont( { weight: 'bold', size: 24 } ),
+        left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
+        bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),
+        maxWidth: 0.65 * BOX_SIZE.width
+      } );
 
-    assert && assert( !options.children, 'decoration not supported' );
-    options.children = [  frontNode, topNode, hydrogenSymbol  ];
+      assert && assert( !options.children, 'BoxOfHydrogenNode sets children' );
+      options.children = [ frontNode, topNode, hydrogenSymbol ];
 
-    Node.call( this, options );
+      super( options );
+    }
   }
 
-  modelsOfTheHydrogenAtom.register( 'BoxOfHydrogenNode', BoxOfHydrogenNode );
-
-  return inherit( Node, BoxOfHydrogenNode );
+  return modelsOfTheHydrogenAtom.register( 'BoxOfHydrogenNode', BoxOfHydrogenNode );
 } );
 

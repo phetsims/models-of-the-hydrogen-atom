@@ -1,4 +1,4 @@
-// Copyright 2016-2018, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
  * Controls for the monochromatic light.
@@ -10,7 +10,6 @@ define( function( require ) {
 
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
@@ -21,77 +20,77 @@ define( function( require ) {
   // strings
   const showAbsorptionWavelengthsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/showAbsorptionWavelengths' );
 
-  /**
-   * @param {Property.<string>} modeProperty
-   * @param {Property.<string>} modelNameProperty
-   * @param {Property.<number>} wavelengthProperty
-   * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
-   * @param options
-   * @constructor
-   */
-  function MonochromaticControls( modeProperty, modelNameProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
+  class MonochromaticControls extends VBox {
 
-    options = _.extend( {
-      align: 'center',
-      spacing: 10
-    }, options );
+    /**
+     * @param {Property.<string>} modeProperty
+     * @param {Property.<string>} modelNameProperty
+     * @param {Property.<number>} wavelengthProperty
+     * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
+     * @param {Object} [options]
+     */
+    constructor( modeProperty, modelNameProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
 
-    // wavelength slider
-    const wavelengthSlider = new WavelengthSlider( wavelengthProperty, {
-      trackWidth: 250,
-      trackHeight: 20,
-      thumbTouchAreaXDilation: 12,
-      thumbTouchAreaYDilation: 0,
-      maxTweakersHeight: 20,
-      thumbWidth: 25,
-      thumbHeight: 25,
-      valueYSpacing: 6,
-      valueFill: 'white',
-      valueFont: new MOTHAFont( 16 )
-    } );
+      options = _.extend( {
+        align: 'center',
+        spacing: 10
+      }, options );
 
-    // 'Show absorption wavelengths' checkbox
-    const showLabel = new Text( showAbsorptionWavelengthsString, {
-      font: new MOTHAFont( 14 ),
-      fill: 'white',
-      maxWidth: 0.85 * wavelengthSlider.width
-    } );
-    const showCheckbox = new Checkbox( showLabel, absorptionWavelengthsVisibleProperty, {
-      checkboxColor: 'white',
-      checkboxColorBackground: 'black'
-    } );
+      // wavelength slider
+      const wavelengthSlider = new WavelengthSlider( wavelengthProperty, {
+        trackWidth: 250,
+        trackHeight: 20,
+        thumbTouchAreaXDilation: 12,
+        thumbTouchAreaYDilation: 0,
+        maxTweakersHeight: 20,
+        thumbWidth: 25,
+        thumbHeight: 25,
+        valueYSpacing: 6,
+        valueFill: 'white',
+        valueFont: new MOTHAFont( 16 )
+      } );
 
-    assert && assert( !options.children, 'decoration not supported' );
-    options.children = [
-      wavelengthSlider,
-      showCheckbox
-    ];
+      // 'Show absorption wavelengths' checkbox
+      const showLabel = new Text( showAbsorptionWavelengthsString, {
+        font: new MOTHAFont( 14 ),
+        fill: 'white',
+        maxWidth: 0.85 * wavelengthSlider.width
+      } );
+      const showCheckbox = new Checkbox( showLabel, absorptionWavelengthsVisibleProperty, {
+        checkboxColor: 'white',
+        checkboxColorBackground: 'black'
+      } );
 
-    VBox.call( this, options );
+      assert && assert( !options.children, 'MonochromaticControls sets children' );
+      options.children = [
+        wavelengthSlider,
+        showCheckbox
+      ];
 
-    // transition wavelengths are relevant only to certain models
-    const hasTransitionWavelengths = function() {
-      return modeProperty.get() === 'experiment' ||
-             _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
-    };
+      super( options );
 
-    // show the checkbox only if it's relevant
-    const updateCheckboxVisible = function() {
-      showCheckbox.visible = hasTransitionWavelengths();
-    };
-    modeProperty.link( updateCheckboxVisible );
-    modelNameProperty.link( updateCheckboxVisible );
+      // transition wavelengths are relevant only to certain models
+      const hasTransitionWavelengths = function() {
+        return modeProperty.get() === 'experiment' ||
+               _.includes( SpectraModel.MODEL_NAMES_WITH_TRANSITION_WAVELENGTHS, modelNameProperty.get() );
+      };
 
-    // show absorption wavelengths for relevant models
-    const updateAbsorptionWavelengths = function() {
-      //TODO
-      // wavelengthSlider.absorptionWavelengthsVisible = hasTransitionWavelengths() && absorptionWavelengthsVisibleProperty.get();
-    };
-    modelNameProperty.link( updateAbsorptionWavelengths );
-    absorptionWavelengthsVisibleProperty.link( updateAbsorptionWavelengths );
+      // show the checkbox only if it's relevant
+      const updateCheckboxVisible = function() {
+        showCheckbox.visible = hasTransitionWavelengths();
+      };
+      modeProperty.link( updateCheckboxVisible );
+      modelNameProperty.link( updateCheckboxVisible );
+
+      // show absorption wavelengths for relevant models
+      const updateAbsorptionWavelengths = function() {
+        //TODO
+        // wavelengthSlider.absorptionWavelengthsVisible = hasTransitionWavelengths() && absorptionWavelengthsVisibleProperty.get();
+      };
+      modelNameProperty.link( updateAbsorptionWavelengths );
+      absorptionWavelengthsVisibleProperty.link( updateAbsorptionWavelengths );
+    }
   }
 
-  modelsOfTheHydrogenAtom.register( 'MonochromaticControls', MonochromaticControls );
-
-  return inherit( VBox, MonochromaticControls );
+  return modelsOfTheHydrogenAtom.register( 'MonochromaticControls', MonochromaticControls );
 } );

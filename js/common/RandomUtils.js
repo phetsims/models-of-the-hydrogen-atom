@@ -20,6 +20,7 @@ define( function( require ) {
      * @param {number} min
      * @param {number} max
      * @returns {number}
+     * @public
      */
     nextDouble: function( min, max ) {
       assert( max > min );
@@ -29,6 +30,7 @@ define( function( require ) {
     /**
      * Gets a random boolean.
      * @returns {boolean}
+     * @public
      */
     nextBoolean: function() {
       return phet.joist.random.nextBoolean();
@@ -37,6 +39,7 @@ define( function( require ) {
     /**
      * Gets a random sign.
      * @returns {number} +1 or -1
+     * @public
      */
     nextSign: function() {
       return ( phet.joist.random.nextBoolean() ? +1 : -1 );
@@ -45,13 +48,12 @@ define( function( require ) {
     /**
      * Gets a random angle >= 0 and < 2 * PI.
      * @returns {number} angle, in radians
+     * @public
      */
     nextAngle: function() {
       return phet.joist.random.nextDouble( 0, 2 * Math.PI );
     }
   };
 
-  modelsOfTheHydrogenAtom.register( 'RandomUtils', RandomUtils );
-
-  return RandomUtils;
+  return modelsOfTheHydrogenAtom.register( 'RandomUtils', RandomUtils );
 } );

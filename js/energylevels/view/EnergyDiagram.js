@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
   const Dimension2 = require( 'DOT/Dimension2' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAFont = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -23,49 +22,51 @@ define( function( require ) {
   // constants
   const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
-  /**
-   * @param {Property.<boolean>} expandedProperty
-   * @param {Object} [options]
-   * @constructor
-   */
-  function EnergyDiagram( expandedProperty, options ) {
+  class EnergyDiagram extends AccordionBox {
 
-    options = _.extend( {
-      fill: 'rgb( 160, 160, 160 )',
-      xMargin: 5,
-      yMargin: 5,
-      cornerRadius: 5,
-      buttonXMargin: 5,
-      buttonYMargin: 5,
-      contentXMargin: 5,
-      contentYMargin: 5,
-      contentYSpacing: 0,
-      expandCollapseButtonOptions: {
-        touchAreaXDilation: 16,
-        touchAreaYDilation: 16
-      },
-      buttonAlign: 'right',
-      titleAlignX: 'left'
-    }, options );
+    /**
+     * @param {Property.<boolean>} expandedProperty
+     * @param {Object} [options]
+     */
+    constructor( expandedProperty, options ) {
 
-    options.expandedProperty = expandedProperty;
+      options = _.extend( {
+        fill: 'rgb( 160, 160, 160 )',
+        xMargin: 5,
+        yMargin: 5,
+        cornerRadius: 5,
+        buttonXMargin: 5,
+        buttonYMargin: 5,
+        contentXMargin: 5,
+        contentYMargin: 5,
+        contentYSpacing: 0,
+        expandCollapseButtonOptions: {
+          touchAreaXDilation: 16,
+          touchAreaYDilation: 16
+        },
+        buttonAlign: 'right',
+        titleAlignX: 'left'
+      }, options );
 
-    options.titleNode = new Text( electronEnergyLevelString, {
-      font: new MOTHAFont( { size: 16, weight: 'bold' } ),
-      fill: 'white',
-      maxWidth: 150 // i18n, determined empirically
-    } );
+      assert && assert( !options.expandedProperty, 'EnergyDiagram sets expandedProperty' );
+      options.expandedProperty = expandedProperty;
 
-    //TODO this is a placeholder
-    const diagramNode = new Rectangle( 0, 0, DIAGRAM_SIZE.width, DIAGRAM_SIZE.height, {
-      fill: 'white',
-      stroke: 'black'
-    } );
+      assert && assert( !options.titleNode, 'EnergyDiagram sets titleNode' );
+      options.titleNode = new Text( electronEnergyLevelString, {
+        font: new MOTHAFont( { size: 16, weight: 'bold' } ),
+        fill: 'white',
+        maxWidth: 150 // i18n, determined empirically
+      } );
 
-    AccordionBox.call( this, diagramNode, options );
+      //TODO this is a placeholder
+      const diagramNode = new Rectangle( 0, 0, DIAGRAM_SIZE.width, DIAGRAM_SIZE.height, {
+        fill: 'white',
+        stroke: 'black'
+      } );
+
+      super( diagramNode, options );
+    }
   }
 
-  modelsOfTheHydrogenAtom.register( 'EnergyDiagram', EnergyDiagram );
-
-  return inherit( AccordionBox, EnergyDiagram );
+  return modelsOfTheHydrogenAtom.register( 'EnergyDiagram', EnergyDiagram );
 } );

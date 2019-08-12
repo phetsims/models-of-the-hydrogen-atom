@@ -1,7 +1,7 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * 'Spectra' screen
+ * The 'Spectra' screen
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Screen = require( 'JOIST/Screen' );
@@ -19,25 +18,23 @@ define( function( require ) {
   // strings
   const screenSpectraString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.spectra' );
 
-  /**
-   * @constructor
-   */
-  function SpectraScreen() {
+  class SpectraScreen extends Screen {
 
-    const options = {
-      name: screenSpectraString,
-      backgroundColorProperty: MOTHAColorProfile.screenBackgroundColorProperty
-      //TODO add homeScreenIcon
-    };
+    constructor() {
 
-    Screen.call( this,
-      function() { return new SpectraModel(); },
-      function( model ) { return new SpectraScreenView( model ); },
-      options
-    );
+      const options = {
+        name: screenSpectraString,
+        backgroundColorProperty: MOTHAColorProfile.screenBackgroundColorProperty
+        //TODO add homeScreenIcon
+      };
+
+      super(
+        function() { return new SpectraModel(); },
+        function( model ) { return new SpectraScreenView( model ); },
+        options
+      );
+    }
   }
 
-  modelsOfTheHydrogenAtom.register( 'SpectraScreen', SpectraScreen );
-
-  return inherit( Screen, SpectraScreen );
+  return modelsOfTheHydrogenAtom.register( 'SpectraScreen', SpectraScreen );
 } );
