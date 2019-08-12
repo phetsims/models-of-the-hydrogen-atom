@@ -21,7 +21,7 @@ define( require => {
   'use strict';
 
   // modules
-  const AbstractHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/AbstractHydrogenAtom' );
+  const AbstractPredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/AbstractPredictiveModel' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const RandomUtils = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/RandomUtils' );
   const Util = require( 'DOT/Util' );
@@ -30,7 +30,7 @@ define( require => {
   const MIN_DEFLECTION_ANGLE = Util.toRadians( 120 );
   const MAX_DEFLECTION_ANGLE = Util.toRadians( 170 );
 
-  class BilliardBallModel extends AbstractHydrogenAtom {
+  class BilliardBallModel extends AbstractPredictiveModel {
 
     /**
      * @param {Vector2} location

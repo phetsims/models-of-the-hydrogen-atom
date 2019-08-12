@@ -1,8 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
-//TODO rename AbstractHydrogenAtomModel
 /**
- * Base type for all hydrogen atom models.
+ * Base type for all predictive hydrogen atom models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,7 +13,7 @@ define( require => {
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  class AbstractHydrogenAtom {
+  class AbstractPredictiveModel {
 
     /**
      * @param {Vector2} location - location in the model coordinate frame
@@ -123,5 +122,5 @@ define( require => {
     }
   }
 
-  return modelsOfTheHydrogenAtom.register( 'AbstractHydrogenAtom', AbstractHydrogenAtom );
+  return modelsOfTheHydrogenAtom.register( 'AbstractPredictiveModel', AbstractPredictiveModel );
 } );
