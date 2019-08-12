@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Control panel for selecting one of several predictive models.
+ * Control for choosing one of the model name options.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -36,7 +36,7 @@ define( require => {
   const plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
   const schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
-  class ModelControlPanel extends Panel {
+  class ModelNameControl extends Panel {
 
     /**
      * @param {EnumerationProperty.<ModelNames>} modelNameProperty
@@ -123,5 +123,5 @@ define( require => {
     };
   }
 
-  return modelsOfTheHydrogenAtom.register( 'ModelControlPanel', ModelControlPanel );
+  return modelsOfTheHydrogenAtom.register( 'ModelNameControl', ModelNameControl );
 } );

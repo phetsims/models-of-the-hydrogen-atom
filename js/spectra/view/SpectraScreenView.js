@@ -14,10 +14,10 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   const LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
-  const LightModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/LightModes' );
   const LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
-  const ModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModeControl' );
-  const ModelControlPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelControlPanel' );
+  const LightModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/LightModes' );
+  const ModelNameControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelNameControl' );
+  const ModelModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelModeControl' );
   const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
@@ -130,14 +130,14 @@ define( require => {
       } );
       this.addChild( dashedLines );
 
-      // selects between 'Experiment' and 'Model' modes
-      const modeControl = new ModeControl( viewProperties.modelModeProperty );
+      // selects between 'Experiment' and 'Model' model modes
+      const modeControl = new ModelModeControl( viewProperties.modelModeProperty );
 
       // selects a predictive model
-      const modelControlPanel = new ModelControlPanel( model.modelNameProperty );
+      const modelNameControl = new ModelNameControl( model.modelNameProperty );
 
       this.addChild( new VBox( {
-        children: [ modeControl, modelControlPanel ],
+        children: [ modeControl, modelNameControl ],
         align: 'center',
         spacing: 10,
         left: zoomBoxNode.right + 30,
@@ -181,7 +181,7 @@ define( require => {
       this.addChild( resetAllButton );
 
       viewProperties.modelModeProperty.link( modelMode => {
-        modelControlPanel.visible = ( modelMode === ModelModes.MODEL );
+        modelNameControl.visible = ( modelMode === ModelModes.MODEL );
       } );
 
       // Visibility of monochromatic light controls

@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Control for switching between 'Experiment' and 'Prediction' modes.
+ * Control for switching the model's mode (Experiment vs Model).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,7 +21,7 @@ define( require => {
   const experimentString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/experiment' );
   const modelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/model' );
 
-  class ModeControl extends ABSwitch {
+  class ModelModeControl extends ABSwitch {
 
     /**
      * @param {EnumerationProperty.<ModelModes>} modelModeProperty
@@ -47,5 +47,5 @@ define( require => {
     }
   }
 
-  return modelsOfTheHydrogenAtom.register( 'ModeControl', ModeControl );
+  return modelsOfTheHydrogenAtom.register( 'ModelModeControl', ModelModeControl );
 } );
