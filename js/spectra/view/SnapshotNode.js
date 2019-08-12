@@ -12,6 +12,7 @@ define( require => {
   // modules
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -30,13 +31,14 @@ define( require => {
 
       const backgroundNode = new Rectangle( 0, 0, 500, 150, {
         cornerRadius: 5,
-        fill: 'black'
+        fill: MOTHAColorProfile.spectrometerFillProperty,
+        stroke: MOTHAColorProfile.spectrometerStrokeProperty
       } );
 
       //TODO i18n
       const titleNode = new Text( 'Snapshot', {
         font: new PhetFont( 16 ),
-        fill: 'white',
+        fill: MOTHAColorProfile.snapshotTextFillProperty,
         left: backgroundNode.left + 10,
         top: backgroundNode.top + 10
       } );

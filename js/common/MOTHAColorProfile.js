@@ -84,6 +84,21 @@ define( require => {
       projector: 'black'
     },
 
+    spectrometerFill: {
+      default: 'black',
+      projector: 'white'
+    },
+
+    spectrometerStroke: {
+      default: 'white',
+      projector: 'black'
+    },
+
+    snapshotTextFill: {
+      default: 'white',
+      projector: 'black'
+    },
+
     uvColor: {
       default: 'rgb( 160, 160, 160 )'
     },

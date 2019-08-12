@@ -91,7 +91,8 @@ define( require => {
       //TODO placeholder
       const displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
         cornerRadius: options.cornerRadius,
-        fill: 'black'
+        fill: MOTHAColorProfile.spectrometerFillProperty,
+        stroke: MOTHAColorProfile.spectrometerStrokeProperty
       } );
 
       //TODO relocate, handle reset
