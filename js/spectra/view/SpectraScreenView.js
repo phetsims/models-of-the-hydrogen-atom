@@ -12,11 +12,10 @@ define( require => {
   const BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/BeamNode' );
   const BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/BoxOfHydrogenNode' );
   const Dimension2 = require( 'DOT/Dimension2' );
+  const ExperimentPredictionSwitch = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ExperimentPredictionSwitch' );
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   const LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   const LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
-  const ModelModeSwitch = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelModeSwitch' );
-  const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
@@ -64,8 +63,11 @@ define( require => {
       } );
 
       // Controls for monochromatic light
-      const monochromaticControls = new MonochromaticControls( viewProperties.modelModeProperty, model.predictiveModelProperty,
-        model.light.wavelengthProperty, viewProperties.absorptionWavelengthsVisibleProperty, {
+      const monochromaticControls = new MonochromaticControls(
+        viewProperties.experimentEnabledProperty,
+        model.predictiveModelProperty,
+        model.light.wavelengthProperty,
+        viewProperties.absorptionWavelengthsVisibleProperty, {
           left: lightModeControl.left,
           top: lightModeControl.bottom + 15
         } );
@@ -121,14 +123,14 @@ define( require => {
         lineDash: [ 5, 5 ]
       } );
 
-      // switches between EXPERIMENT and PREDICTION model modes
-      const modelModeSwitch = new ModelModeSwitch( viewProperties.modelModeProperty );
+      // switches between Experiment and Prediction
+      const experimentPredictionSwitch = new ExperimentPredictionSwitch( viewProperties.experimentEnabledProperty );
 
       // panel that contains radio buttons for selecting a predictive model
       const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty );
 
       const modelVBox = new VBox( {
-        children: [ modelModeSwitch, predictiveModelPanel ],
+        children: [ experimentPredictionSwitch, predictiveModelPanel ],
         align: 'center',
         spacing: 10,
         left: zoomBoxNode.right + 30,
@@ -184,8 +186,8 @@ define( require => {
       this.addChild( viewSnapshotsButton );
       this.addChild( resetAllButton );
 
-      viewProperties.modelModeProperty.link( modelMode => {
-        predictiveModelPanel.visible = ( modelMode === ModelModes.PREDICTION );
+      viewProperties.experimentEnabledProperty.link( experimentEnabled => {
+        predictiveModelPanel.visible = !experimentEnabled;
       } );
 
       // Visibility of monochromatic light controls

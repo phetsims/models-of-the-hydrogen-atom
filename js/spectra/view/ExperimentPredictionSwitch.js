@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * ModelModeSwitch is an AB switch, for switching between the model's 2 modes (EXPERIMENTAL vs PREDICTION).
+ * ExperimentPredictionSwitch is an AB switch that determines whether we are viewing an experiment or a predictive model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,7 +12,6 @@ define( require => {
   const ABSwitch = require( 'SUN/ABSwitch' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -21,13 +20,13 @@ define( require => {
   const experimentString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/experiment' );
   const predictionString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/prediction' );
 
-  class ModelModeSwitch extends ABSwitch {
+  class ExperimentPredictionSwitch extends ABSwitch {
 
     /**
-     * @param {EnumerationProperty.<ModelModes>} modelModeProperty
+     * @param {BooleanProperty} experimentEnabledProperty
      * @param {Object} [options]
      */
-    constructor( modelModeProperty, options ) {
+    constructor( experimentEnabledProperty, options ) {
 
       options = _.extend( {
         switchSize: new Dimension2( 50, 25 ),
@@ -40,12 +39,12 @@ define( require => {
         maxWidth: 100
       };
 
-      super( modelModeProperty,
-        ModelModes.EXPERIMENT, new Text( experimentString, labelOptions ),
-        ModelModes.PREDICTION, new Text( predictionString, labelOptions ),
+      super( experimentEnabledProperty,
+        true, new Text( experimentString, labelOptions ),
+        false, new Text( predictionString, labelOptions ),
         options );
     }
   }
 
-  return modelsOfTheHydrogenAtom.register( 'ModelModeSwitch', ModelModeSwitch );
+  return modelsOfTheHydrogenAtom.register( 'ExperimentPredictionSwitch', ExperimentPredictionSwitch );
 } );

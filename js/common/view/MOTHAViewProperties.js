@@ -13,7 +13,6 @@ define( require => {
   const ClockSpeeds = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ClockSpeeds' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const NumberProperty = require( 'AXON/NumberProperty' );
 
   class MOTHAViewProperties {
@@ -28,8 +27,8 @@ define( require => {
       this.runningProperty = new BooleanProperty( true );
 
       //TODO should mode be in model?
-      // @public whether we're viewing an experiment or predictive model
-      this.modelModeProperty = new EnumerationProperty( ModelModes, ModelModes.EXPERIMENT );
+      // @public whether we're viewing an experiment (true) or predictive (false) model
+      this.experimentEnabledProperty = new BooleanProperty( true );
 
       // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
       this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false );
@@ -49,7 +48,7 @@ define( require => {
     reset() {
       this.clockSpeedProperty.reset();
       this.runningProperty.reset();
-      this.modelModeProperty.reset();
+      this.experimentEnabledProperty.reset();
       this.absorptionWavelengthsVisibleProperty.reset();
       this.spectrometerExpandedProperty.reset();
       this.electronEnergyLevelExpandedProperty.reset();

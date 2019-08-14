@@ -11,7 +11,6 @@ define( require => {
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
@@ -25,13 +24,13 @@ define( require => {
   class MonochromaticControls extends VBox {
 
     /**
-     * @param {EnumerationProperty.<ModelMode>} modelModeProperty
+     * @param {BooleanProperty} experimentEnabledProperty
      * @param {EnumerationProperty.<PredictiveModels>} predictiveModelProperty
      * @param {Property.<number>} wavelengthProperty
      * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
      * @param {Object} [options]
      */
-    constructor( modelModeProperty, predictiveModelProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
+    constructor( experimentEnabledProperty, predictiveModelProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
 
       options = _.extend( {
         align: 'center',
@@ -73,7 +72,7 @@ define( require => {
 
       // transition wavelengths are relevant only to certain models
       const hasTransitionWavelengths = () => {
-        return modelModeProperty.value === ModelModes.EXPERIMENT ||
+        return experimentEnabledProperty.value ||
                _.includes( SpectraModel.PREDICTIVE_MODELS_WITH_TRANSITION_WAVELENGTHS, predictiveModelProperty.value );
       };
 
@@ -81,7 +80,7 @@ define( require => {
       const updateCheckboxVisible = () => {
         showCheckbox.visible = hasTransitionWavelengths();
       };
-      modelModeProperty.link( updateCheckboxVisible );
+      experimentEnabledProperty.link( updateCheckboxVisible );
       predictiveModelProperty.link( updateCheckboxVisible );
 
       // show absorption wavelengths for relevant models
