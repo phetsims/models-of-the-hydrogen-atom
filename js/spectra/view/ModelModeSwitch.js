@@ -21,7 +21,7 @@ define( require => {
   const experimentString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/experiment' );
   const modelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/model' );
 
-  class ModelModeControl extends ABSwitch {
+  class ModelModeSwitch extends ABSwitch {
 
     /**
      * @param {EnumerationProperty.<ModelModes>} modelModeProperty
@@ -47,5 +47,5 @@ define( require => {
     }
   }
 
-  return modelsOfTheHydrogenAtom.register( 'ModelModeControl', ModelModeControl );
+  return modelsOfTheHydrogenAtom.register( 'ModelModeSwitch', ModelModeSwitch );
 } );

@@ -16,7 +16,7 @@ define( require => {
   const LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   const LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
   const LightModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/LightModes' );
-  const ModelModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelModeControl' );
+  const ModelModeSwitch = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelModeSwitch' );
   const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
@@ -24,13 +24,13 @@ define( require => {
   const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const PredictiveModelControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/PredictiveModelControl' );
+  const PredictiveModelPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/PredictiveModelPanel' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const Shape = require( 'KITE/Shape' );
   const SnapshotsDialog = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotsDialog' );
-  const SpectrometerNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectrometerNode' );
+  const SpectrometerAccordionBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectrometerAccordionBox' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimeControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TimeControls' );
   const TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TinyBox' );
@@ -132,14 +132,14 @@ define( require => {
       } );
       this.addChild( dashedLines );
 
-      // selects between EXPERIMENT and PREDICTIVE model modes
-      const modelModeControl = new ModelModeControl( viewProperties.modelModeProperty );
+      // switches between EXPERIMENT and PREDICTIVE model modes
+      const modelModeSwitch = new ModelModeSwitch( viewProperties.modelModeProperty );
 
-      // selects a predictive model
-      const predictiveModelControl = new PredictiveModelControl( model.predictiveModelProperty );
+      // panel that contains radio buttons for selecting a predictive model
+      const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty );
 
       this.addChild( new VBox( {
-        children: [ modelModeControl, predictiveModelControl ],
+        children: [ modelModeSwitch, predictiveModelPanel ],
         align: 'center',
         spacing: 10,
         left: zoomBoxNode.right + 30,
@@ -147,12 +147,12 @@ define( require => {
       } ) );
 
       // Spectrometer
-      const spectrometerNode = new SpectrometerNode(
+      const spectrometerAccordionBox = new SpectrometerAccordionBox(
         viewProperties.spectrometerExpandedProperty, viewProperties.numberOfSnapshotsProperty, {
           left: monochromaticControls.right + 10,
           top: monochromaticControls.top
         } );
-      this.addChild( spectrometerNode );
+      this.addChild( spectrometerAccordionBox );
 
       // reused and constructed lazily because Dialog requires sim bounds during construction
       let dialog = null;
@@ -166,8 +166,8 @@ define( require => {
           }
           dialog.show();
         },
-        right: spectrometerNode.right,
-        bottom: spectrometerNode.top - 10
+        right: spectrometerAccordionBox.right,
+        bottom: spectrometerAccordionBox.top - 10
       } );
       this.addChild( viewSnapshotsButton );
 
@@ -183,7 +183,7 @@ define( require => {
       this.addChild( resetAllButton );
 
       viewProperties.modelModeProperty.link( modelMode => {
-        predictiveModelControl.visible = ( modelMode === ModelModes.PREDICTIVE );
+        predictiveModelPanel.visible = ( modelMode === ModelModes.PREDICTIVE );
       } );
 
       // Visibility of monochromatic light controls

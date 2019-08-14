@@ -36,7 +36,7 @@ define( require => {
   const plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
   const schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
-  class PredictiveModelControl extends Panel {
+  class PredictiveModelPanel extends Panel {
 
     /**
      * @param {EnumerationProperty.<PredictiveModels>} predictiveModelProperty
@@ -123,5 +123,5 @@ define( require => {
     };
   }
 
-  return modelsOfTheHydrogenAtom.register( 'PredictiveModelControl', PredictiveModelControl );
+  return modelsOfTheHydrogenAtom.register( 'PredictiveModelPanel', PredictiveModelPanel );
 } );

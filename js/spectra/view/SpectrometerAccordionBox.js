@@ -33,7 +33,7 @@ define( require => {
   const BUTTON_COLOR = 'rgb( 245, 245, 245 )';
   const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
-  class SpectrometerNode extends AccordionBox {
+  class SpectrometerAccordionBox extends AccordionBox {
     /**
      * @param {Property.<boolean>} expandedProperty
      * @param {Property.<number>} numberOfSnapshotsProperty
@@ -80,7 +80,7 @@ define( require => {
         subtitleNode.visible = expanded;
       } );
 
-      assert && assert( !options.titleNode, 'SpectrometerNode sets titleNode' );
+      assert && assert( !options.titleNode, 'SpectrometerAccordionBox sets titleNode' );
       options.titleNode = new HBox( {
         align: 'bottom',
         spacing: 12,
@@ -145,5 +145,5 @@ define( require => {
     }
   }
 
-  return modelsOfTheHydrogenAtom.register( 'SpectrometerNode', SpectrometerNode );
+  return modelsOfTheHydrogenAtom.register( 'SpectrometerAccordionBox', SpectrometerAccordionBox );
 } );
