@@ -36,7 +36,6 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( options ) {
-
       super( classicalSolarSystemString, classicalSolarSystemButtonImage, options );
     }
   }

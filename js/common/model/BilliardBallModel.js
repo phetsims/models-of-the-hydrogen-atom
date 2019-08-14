@@ -39,7 +39,6 @@ define( require => {
   class BilliardBallModel extends PredictiveModel {
 
     /**
-     * @param {Vector2} location
      * @param {Object} [options]
      */
     constructor( options ) {
