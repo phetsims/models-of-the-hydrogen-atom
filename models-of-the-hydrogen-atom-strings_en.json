@@ -35,6 +35,9 @@
   "experiment": {
     "value": "Experiment"
   },
+  "prediction": {
+    "value": "Prediction"
+  },
   "fast": {
     "value": "fast forward"
   },
@@ -43,9 +46,6 @@
   },
   "legend": {
     "value": "Legend"
-  },
-  "model": {
-    "value": "Model"
   },
   "neutron": {
     "value": "neutron"

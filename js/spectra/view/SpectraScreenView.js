@@ -132,7 +132,7 @@ define( require => {
       } );
       this.addChild( dashedLines );
 
-      // switches between EXPERIMENT and PREDICTIVE model modes
+      // switches between EXPERIMENT and PREDICTION model modes
       const modelModeSwitch = new ModelModeSwitch( viewProperties.modelModeProperty );
 
       // panel that contains radio buttons for selecting a predictive model
@@ -183,7 +183,7 @@ define( require => {
       this.addChild( resetAllButton );
 
       viewProperties.modelModeProperty.link( modelMode => {
-        predictiveModelPanel.visible = ( modelMode === ModelModes.PREDICTIVE );
+        predictiveModelPanel.visible = ( modelMode === ModelModes.PREDICTION );
       } );
 
       // Visibility of monochromatic light controls

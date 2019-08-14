@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Control for switching between the model's modes (EXPERIMENTAL vs PREDICTIVE).
+ * Control for switching between the model's modes (EXPERIMENTAL vs PREDICTION).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -19,7 +19,7 @@ define( require => {
 
   // strings
   const experimentString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/experiment' );
-  const modelString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/model' );
+  const predictionString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/prediction' );
 
   class ModelModeSwitch extends ABSwitch {
 
@@ -42,7 +42,7 @@ define( require => {
 
       super( modelModeProperty,
         ModelModes.EXPERIMENT, new Text( experimentString, labelOptions ),
-        ModelModes.PREDICTIVE, new Text( modelString, labelOptions ),
+        ModelModes.PREDICTION, new Text( predictionString, labelOptions ),
         options );
     }
   }
