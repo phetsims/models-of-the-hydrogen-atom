@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Properties that are specific to the view.
+ * MOTHAViewProperties is the base class that defines Properties that are common to all screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

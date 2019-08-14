@@ -22,7 +22,6 @@ define( require => {
   const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
-  const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PredictiveModelPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/PredictiveModelPanel' );
@@ -31,6 +30,7 @@ define( require => {
   const ScreenView = require( 'JOIST/ScreenView' );
   const Shape = require( 'KITE/Shape' );
   const SnapshotsDialog = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotsDialog' );
+  const SpectraViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectraViewProperties' );
   const SpectrometerAccordionBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectrometerAccordionBox' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimeControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TimeControls' );
@@ -50,7 +50,7 @@ define( require => {
 
       super();
 
-      const viewProperties = new MOTHAViewProperties();
+      const viewProperties = new SpectraViewProperties();
 
       // Legend
       const legendNode = new LegendNode( {

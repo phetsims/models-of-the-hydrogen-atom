@@ -12,7 +12,7 @@ define( require => {
   const ElectronEnergyLevelAccordionBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/ElectronEnergyLevelAccordionBox' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
-  const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
+  const EnergyLevelsViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/EnergyLevelsViewProperties' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
 
@@ -25,7 +25,7 @@ define( require => {
 
       super();
 
-      const viewProperties = new MOTHAViewProperties();
+      const viewProperties = new EnergyLevelsViewProperties();
 
       const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
         center: this.layoutBounds.center
