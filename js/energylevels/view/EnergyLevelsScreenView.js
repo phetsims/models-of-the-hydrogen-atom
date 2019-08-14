@@ -9,7 +9,9 @@ define( require => {
   'use strict';
 
   // modules
+  const ElectronEnergyLevelAccordionBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/ElectronEnergyLevelAccordionBox' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   const ScreenView = require( 'JOIST/ScreenView' );
 
   class EnergyLevelsScreenView extends ScreenView {
@@ -20,6 +22,12 @@ define( require => {
     constructor( model ) {
 
       super();
+
+      const viewProperties = new MOTHAViewProperties();
+
+      this.addChild( new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
+        center: this.layoutBounds.center
+      } ) );
 
       //TODO
     }

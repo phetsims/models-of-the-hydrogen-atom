@@ -171,6 +171,25 @@ define( require => {
     snapshotTextFill: {
       default: 'white',
       projector: 'black'
+    },
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Electron Energy Level
+    //------------------------------------------------------------------------------------------------------------------
+
+    electronEnergyLevelTitleFill: {
+      default: 'rgb( 235, 235, 0 )', // yellow
+      projector: 'black'
+    },
+
+    electronEnergyLevelAccordionBoxFill: {
+      default: 'rgb( 80, 80, 80 )',
+      projector: 'white'
+    },
+
+    electronEnergyLevelAccordionBoxStroke: {
+      default: 'rgb( 140, 140, 140 )',
+      projector: 'black'
     }
 
   } );

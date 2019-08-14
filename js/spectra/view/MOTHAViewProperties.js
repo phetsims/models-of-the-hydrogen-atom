@@ -34,11 +34,11 @@ define( require => {
       // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
       this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false );
 
-      // @public {boolean} is the spectrometer expanded?
+      // @public {boolean} is the Spectrometer accordion box expanded?
       this.spectrometerExpandedProperty = new BooleanProperty( false );
 
-      // @public {boolean} is the electron level energy diagram visible?
-      this.energyDiagramVisibleProperty = new BooleanProperty( false );
+      // @public {boolean} is the Electron Energy Level accordion box expanded?
+      this.electronEnergyLevelExpandedProperty = new BooleanProperty( false );
 
       //TODO for prototyping
       // @public {number} number of spectrometer snapshots
