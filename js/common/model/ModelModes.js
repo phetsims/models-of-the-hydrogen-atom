@@ -1,6 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 //TODO better name for this?
+//TODO replace this enum with a BooleanProperty
 /**
  *
  * @author Chris Malley (PixelZoom, Inc.)

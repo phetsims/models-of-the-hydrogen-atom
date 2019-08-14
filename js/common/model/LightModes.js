@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO replace this enum with a BooleanProperty
 /**
  * LightModes defines the operational modes for the light that shines into the box of hydrogen.
  *
