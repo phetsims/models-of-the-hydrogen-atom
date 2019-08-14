@@ -36,7 +36,7 @@ define( require => {
 
       const labelOptions = {
         font: new PhetFont( { size: 16, weight: 'bold' } ),
-        fill: MOTHAColorProfile.titleFillProperty,
+        fill: MOTHAColorProfile.abSwitchTextFillProperty,
         maxWidth: 100
       };
 

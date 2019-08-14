@@ -21,6 +21,10 @@ define( require => {
       projector: 'white'
     },
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Box
+    //------------------------------------------------------------------------------------------------------------------
+
     boxFill: {
       default: 'black',
       projector: 'white'
@@ -31,7 +35,11 @@ define( require => {
       projector: 'black'
     },
 
-    titleFill: {
+    //------------------------------------------------------------------------------------------------------------------
+    // Legend
+    //------------------------------------------------------------------------------------------------------------------
+
+    legendTitleFill: {
       default: 'rgb( 235, 235, 0 )', // yellow
       projector: 'black'
     },
@@ -41,45 +49,103 @@ define( require => {
       projector: 'black'
     },
 
-    radioButtonSelectedStroke: {
-      default: 'rgb( 235, 235, 0 )'
-    },
+    //------------------------------------------------------------------------------------------------------------------
+    // Light
+    //------------------------------------------------------------------------------------------------------------------
 
-    radioButtonDeselectedStroke: {
-      default: 'rgb( 200, 200, 200 )'
-    },
-
-    radioButtonFill: {
+    lightModeRadioButtonFill: {
       default: 'black',
       projector: 'white'
     },
 
-    radioButtonTextFill: {
+    lightModeRadioButtonSelectedStroke: {
+      default: 'rgb( 235, 235, 0 )'
+    },
+
+    lightModeRadioButtonDeselectedStroke: {
+      default: 'rgb( 200, 200, 200 )'
+    },
+
+    showAbsorptionWavelengthTextFill: {
       default: 'white',
       projector: 'black'
     },
 
-    panelFill: {
+    showAbsorptionWavelengthCheckboxFill: {
       default: 'black',
       projector: 'white'
     },
 
-    panelStroke: {
+    showAbsorptionWavelengthCheckboxStroke: {
       default: 'white',
+      projector: 'black'
+    },
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Models panel
+    //------------------------------------------------------------------------------------------------------------------
+
+    abSwitchTextFill: {
+      default: 'rgb( 235, 235, 0 )', // yellow
+      projector: 'black'
+    },
+
+    modelsPanelFill: {
+      default: 'black',
+      projector: 'white'
+    },
+
+    modelsPanelStroke: {
+      default: 'white',
+      projector: 'black'
+    },
+
+    modelsRadioButtonTextFill: {
+      default: 'white',
+      projector: 'black'
+    },
+
+    modelsRadioButtonFill: {
+      default: 'black',
+      projector: 'white'
+    },
+
+    modelsRadioButtonSelectedStroke: {
+      default: 'rgb( 235, 235, 0 )'
+    },
+
+    modelsRadioButtonDeselectedStroke: {
+      default: 'rgb( 200, 200, 200 )'
+    },
+
+    continuumBarFill: {
+      default: 'rgb( 220, 220, 220 )'
+    },
+
+    continuumBarTextFill: {
+      default: 'black'
+    },
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Spectrometer
+    //------------------------------------------------------------------------------------------------------------------
+
+    spectrometerTitleFill: {
+      default: 'rgb( 235, 235, 0 )', // yellow
       projector: 'black'
     },
 
     spectrometerSubtitleFill: {
-     default: 'white',
-     projector: 'black'
+      default: 'white',
+      projector: 'black'
     },
 
-    accordionBoxFill: {
+    spectrometerAccordionBoxFill: {
       default: 'rgb( 80, 80, 80 )',
       projector: 'white'
     },
 
-    accordionBoxStroke: {
+    spectrometerAccordionBoxStroke: {
       default: 'rgb( 140, 140, 140 )',
       projector: 'black'
     },
@@ -94,17 +160,17 @@ define( require => {
       projector: 'black'
     },
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Snapshots dialog
+    //------------------------------------------------------------------------------------------------------------------
+
+    snapshotsDialogFill: {
+      default: 'white'
+    },
+    
     snapshotTextFill: {
       default: 'white',
       projector: 'black'
-    },
-
-    uvColor: {
-      default: 'rgb( 160, 160, 160 )'
-    },
-
-    irColor: {
-      default: 'rgb( 160, 160, 160 )'
     }
 
   } );

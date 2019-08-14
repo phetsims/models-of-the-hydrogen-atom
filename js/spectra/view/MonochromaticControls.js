@@ -12,6 +12,7 @@ define( require => {
   const Checkbox = require( 'SUN/Checkbox' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -54,12 +55,12 @@ define( require => {
       // 'Show absorption wavelengths' checkbox
       const showLabel = new Text( showAbsorptionWavelengthsString, {
         font: new PhetFont( 14 ),
-        fill: 'white',
+        fill: MOTHAColorProfile.showAbsorptionWavelengthTextFillProperty,
         maxWidth: 0.85 * wavelengthSlider.width
       } );
       const showCheckbox = new Checkbox( showLabel, absorptionWavelengthsVisibleProperty, {
-        checkboxColor: 'white',
-        checkboxColorBackground: 'black'
+        checkboxColor: MOTHAColorProfile.showAbsorptionWavelengthCheckboxStrokeProperty,
+        checkboxColorBackground: MOTHAColorProfile.showAbsorptionWavelengthCheckboxFillProperty
       } );
 
       assert && assert( !options.children, 'MonochromaticControls sets children' );

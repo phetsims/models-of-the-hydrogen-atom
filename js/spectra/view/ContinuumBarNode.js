@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -31,8 +32,8 @@ define( require => {
         xMargin: 5,
         yMargin: 6,
         font: new PhetFont( 14 ),
-        barFill: 'rgb( 220, 220, 220 )',
-        textFill: 'black'
+        barFill: MOTHAColorProfile.continuumBarFillProperty,
+        textFill: MOTHAColorProfile.continuumBarTextFillProperty
       }, options );
 
       // labels

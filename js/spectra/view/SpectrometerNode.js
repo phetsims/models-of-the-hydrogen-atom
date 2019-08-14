@@ -42,8 +42,8 @@ define( require => {
     constructor( expandedProperty, numberOfSnapshotsProperty, options ) {
 
       options = _.extend( {
-        fill: MOTHAColorProfile.accordionBoxFillProperty,
-        stroke: MOTHAColorProfile.accordionBoxStrokeProperty,
+        fill: MOTHAColorProfile.spectrometerAccordionBoxFillProperty,
+        stroke: MOTHAColorProfile.spectrometerAccordionBoxStrokeProperty,
         xMargin: 5,
         yMargin: 5,
         cornerRadius: 5,
@@ -66,7 +66,7 @@ define( require => {
 
       const titleNode = new Text( spectrometerString, {
         font: new PhetFont( { size: 16, weight: 'bold' } ),
-        fill: MOTHAColorProfile.titleFillProperty
+        fill: MOTHAColorProfile.spectrometerTitleFillProperty
       } );
 
       //TODO order of title and subtitle is not localized

@@ -43,10 +43,10 @@ define( require => {
         spacing: 8,
         buttonContentXMargin: 15,
         buttonContentYMargin: 6,
-        baseColor: MOTHAColorProfile.radioButtonFillProperty,
-        disabledBaseColor: MOTHAColorProfile.radioButtonFillProperty,
-        selectedStroke: MOTHAColorProfile.radioButtonSelectedStrokeProperty,
-        deselectedStroke: MOTHAColorProfile.radioButtonDeselectedStrokeProperty,
+        baseColor: MOTHAColorProfile.lightModeRadioButtonFillProperty,
+        disabledBaseColor: MOTHAColorProfile.lightModeRadioButtonFillProperty,
+        selectedStroke: MOTHAColorProfile.lightModeRadioButtonSelectedStrokeProperty,
+        deselectedStroke: MOTHAColorProfile.lightModeRadioButtonDeselectedStrokeProperty,
         selectedLineWidth: 2,
         deselectedLineWidth: 2
       }, options );

@@ -28,11 +28,6 @@ define( require => {
   const protonString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/proton' );
 
   // constants
-  const TITLE_OPTIONS = {
-    font: new PhetFont( { size: 16, weight: 'bold' } ),
-    fill: MOTHAColorProfile.titleFillProperty,
-    maxWidth: 100 // i18n, determined empirically
-  };
   const LABEL_OPTIONS = {
     font: new PhetFont( 16 ),
     fill: MOTHAColorProfile.legendTextFillProperty,
@@ -52,7 +47,11 @@ define( require => {
       }, options );
 
       // title
-      const titleNode = new Text( legendString, TITLE_OPTIONS );
+      const titleNode = new Text( legendString, {
+        font: new PhetFont( { size: 16, weight: 'bold' } ),
+        fill: MOTHAColorProfile.legendTitleFillProperty,
+        maxWidth: 100 // i18n, determined empirically
+      } );
 
       // items that appear in the legend, { icon: {Node}, label: {string} }
       const items = [

@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Dialog = require( 'SUN/Dialog' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const SnapshotNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -25,6 +26,7 @@ define( require => {
 
       options = _.extend( {
 
+        fill: MOTHAColorProfile.snapshotsDialogFillProperty,
         layoutStrategy: Dialog.layoutStrategyCenteredInScreen,
         topMargin: 15,
         bottomMargin: 15,
