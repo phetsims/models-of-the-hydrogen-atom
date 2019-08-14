@@ -15,7 +15,6 @@ define( require => {
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   const LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   const LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
-  const LightModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/LightModes' );
   const ModelModeSwitch = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ModelModeSwitch' );
   const ModelModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ModelModes' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
@@ -59,7 +58,7 @@ define( require => {
       } );
 
       // Light mode control (radio buttons)
-      const lightModeControl = new LightModeControl( model.light.lightModeProperty, {
+      const lightModeControl = new LightModeControl( model.light.monochromaticEnabledProperty, {
         left: this.layoutBounds.left + 30,
         bottom: 415
       } );
@@ -190,8 +189,8 @@ define( require => {
       } );
 
       // Visibility of monochromatic light controls
-      model.light.lightModeProperty.link( lightMode => {
-        monochromaticControls.visible = ( lightMode === LightModes.MONOCHROMATIC );
+      model.light.monochromaticEnabledProperty.link( monochromaticEnabled => {
+        monochromaticControls.visible = monochromaticEnabled;
       } );
 
       // Show 'View snapshots' button when there are snapshots available

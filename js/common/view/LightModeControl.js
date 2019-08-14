@@ -13,7 +13,6 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
-  const LightModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/LightModes' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -34,10 +33,10 @@ define( require => {
   class LightModeControl extends RadioButtonGroup {
 
     /**
-     * @param {EnumerationProperty.<LightModes>} lightModeProperty - the light's mode
+     * @param {BooleanProperty} monochromaticEnabledProperty
      * @param {Object} [options]
      */
-    constructor( lightModeProperty, options ) {
+    constructor( monochromaticEnabledProperty, options ) {
 
       options = _.extend( {
         orientation: 'vertical',
@@ -54,9 +53,9 @@ define( require => {
         deselectedLineWidth: 2
       }, options );
 
-      super( lightModeProperty, [
-        { value: LightModes.WHITE, node: createModeIcon( 'white' ) },
-        { value: LightModes.MONOCHROMATIC, node: createModeIcon( 'red' ) }
+      super( monochromaticEnabledProperty, [
+        { value: false, node: createModeIcon( 'white' ) },
+        { value: true, node: createModeIcon( 'red' ) }
       ], options );
     }
   }

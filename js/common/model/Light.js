@@ -11,8 +11,6 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
-  const LightModes = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/LightModes' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Range = require( 'DOT/Range' );
@@ -25,8 +23,8 @@ define( require => {
       // @public is the light on?
       this.onProperty = new BooleanProperty( false );
 
-      // @public type of light being emitted
-      this.lightModeProperty = new EnumerationProperty( LightModes, LightModes.WHITE );
+      // @public whether the light is monochromatic (true) or full spectrum (false)
+      this.monochromaticEnabledProperty = new BooleanProperty( false );
 
       // @public wavelength in nm, relevant only for monochromatic mode
       this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
@@ -35,9 +33,9 @@ define( require => {
 
       // @public {Color} color displayed by the view
       this.colorProperty = new DerivedProperty(
-        [ this.lightModeProperty, this.wavelengthProperty ],
-        ( lightMode, wavelength ) => {
-          return ( lightMode === LightModes.WHITE ) ? 'white' : VisibleColor.wavelengthToColor( wavelength );
+        [ this.monochromaticEnabledProperty, this.wavelengthProperty ],
+        ( monochromaticEnabled, wavelength ) => {
+          return monochromaticEnabled ? VisibleColor.wavelengthToColor( wavelength ) : 'white';
         }
       );
     }
@@ -45,7 +43,7 @@ define( require => {
     // @public
     reset() {
       this.onProperty.reset();
-      this.lightModeProperty.reset();
+      this.monochromaticEnabledProperty.reset();
       this.wavelengthProperty.reset();
     }
   }
