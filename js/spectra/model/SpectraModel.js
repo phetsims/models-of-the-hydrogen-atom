@@ -22,6 +22,7 @@ define( require => {
 
     constructor() {
 
+      // Predictive models supported by this screen, in the order that they will appear in the UI
       const predictiveModels = [
         new BilliardBallModel(),
         new PlumPuddingModel(),
