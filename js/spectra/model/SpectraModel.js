@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Spectra' screen.
+ * SpectraModel is the model for the 'Spectra' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Energy Levels' screen.
+ * EnergyLevelsModel is the model for the 'Energy Levels' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

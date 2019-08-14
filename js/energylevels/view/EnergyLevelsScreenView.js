@@ -1,7 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * View for the 'Energy Levels' screen.
+ * EnergyLevelsScreenView is the view for the 'Energy Levels' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

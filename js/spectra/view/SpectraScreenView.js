@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * View for the 'Spectra' screen.
+ * SpectraScreenView is the view for the 'Spectra' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
