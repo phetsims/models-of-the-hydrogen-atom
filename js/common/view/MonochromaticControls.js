@@ -13,6 +13,7 @@ define( require => {
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Property = require( 'AXON/Property' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const WavelengthSlider = require( 'SCENERY_PHET/WavelengthSlider' );
@@ -23,7 +24,7 @@ define( require => {
   class MonochromaticControls extends VBox {
 
     /**
-     * @param {BooleanProperty} experimentEnabledProperty
+     * @param {Property.<boolean>} experimentEnabledProperty
      * @param {Property.<PredictiveModel>} predictiveModelProperty
      * @param {Property.<number>} wavelengthProperty
      * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
@@ -62,32 +63,24 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'MonochromaticControls sets children' );
-      options.children = [
-        wavelengthSlider,
-        showCheckbox
-      ];
+      options.children = [ wavelengthSlider, showCheckbox ];
 
       super( options );
 
-      // transition wavelengths are relevant only to certain models
-      const hasTransitionWavelengths = () => {
-        return experimentEnabledProperty.value || predictiveModelProperty.value.hasTransitionWavelengths;
-      };
-
       // show the checkbox only if it's relevant
-      const updateCheckboxVisible = () => {
-        showCheckbox.visible = hasTransitionWavelengths();
-      };
-      experimentEnabledProperty.link( updateCheckboxVisible );
-      predictiveModelProperty.link( updateCheckboxVisible );
+      Property.multilink(
+        [ experimentEnabledProperty, predictiveModelProperty ],
+        ( experimentEnabled, predictiveModel ) => {
+          showCheckbox.visible = ( experimentEnabled || predictiveModel.hasTransitionWavelengths );
+        } );
 
       // show absorption wavelengths for relevant models
-      const updateAbsorptionWavelengths = () => {
-        //TODO
-        // wavelengthSlider.absorptionWavelengthsVisible = hasTransitionWavelengths() && absorptionWavelengthsVisibleProperty.value;
-      };
-      predictiveModelProperty.link( updateAbsorptionWavelengths );
-      absorptionWavelengthsVisibleProperty.link( updateAbsorptionWavelengths );
+      Property.multilink(
+        [ predictiveModelProperty, absorptionWavelengthsVisibleProperty ],
+        ( predictiveModel, absorptionWavelengthsVisible ) => {
+          //TODO
+          // wavelengthSlider.absorptionWavelengthsVisible = predictiveModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
+        } );
     }
   }
 
