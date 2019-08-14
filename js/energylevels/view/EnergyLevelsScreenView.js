@@ -13,6 +13,7 @@ define( require => {
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
   const EnergyLevelsViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/EnergyLevelsViewProperties' );
+  const PredictiveModelPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/PredictiveModelPanel' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
 
@@ -31,6 +32,12 @@ define( require => {
         center: this.layoutBounds.center
       } );
 
+      // panel that contains radio buttons for selecting a predictive model
+      const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty, model.predictiveModels, {
+        top: electronEnergyLevelAccordionBox.top,
+        left: electronEnergyLevelAccordionBox.right + 20
+      } );
+
       // Reset All button
       const resetAllButton = new ResetAllButton( {
         listener: () => {
@@ -45,6 +52,7 @@ define( require => {
 
       // rendering order
       this.addChild( electronEnergyLevelAccordionBox );
+      this.addChild( predictiveModelPanel );
       this.addChild( resetAllButton );
     }
 

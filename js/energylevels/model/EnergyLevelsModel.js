@@ -9,30 +9,25 @@ define( require => {
   'use strict';
 
   // modules
+  const BohrModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/BohrModel' );
+  const DeBroglieModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/DeBroglieModel' );
   const MOTHAModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/MOTHAModel' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const PredictiveModels = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModels' );
-
-  // predictive models supported by this screen
-  const SUPPORTED_PREDICTIVE_MODELS = [
-    PredictiveModels.BOHR,
-    PredictiveModels.DEBROGLIE,
-    PredictiveModels.SCHRODINGER
-  ];
+  const SchrodingerModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/SchrodingerModel' );
 
   class EnergyLevelsModel extends MOTHAModel {
 
     constructor() {
 
-      super( SUPPORTED_PREDICTIVE_MODELS[ 0 ] );
+      const predictiveModels = [
+        new BohrModel(),
+        new DeBroglieModel(),
+        new SchrodingerModel()
+      ];
+      assert && assert( _.every( predictiveModels, model => model.hasTransitionWavelengths ),
+        'all models in this screen must include the concept of transition wavelengths' );
 
-      //TODO assert that all predictive models include the concept of transition wavelengths
-
-      // This screen supports a subset of models, so verify that the model is supported by this screen.
-      this.predictiveModelProperty.link( predictiveModel => {
-        assert && assert( _.includes( SUPPORTED_PREDICTIVE_MODELS, predictiveModel ),
-          `unsupported predictiveModel: ${predictiveModel}` );
-      } );
+      super( predictiveModels, predictiveModels[ 0 ] );
     }
   }
 

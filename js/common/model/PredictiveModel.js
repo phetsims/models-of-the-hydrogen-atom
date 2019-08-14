@@ -1,7 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * AbstractPredictiveModel is the base class for all predictive models.
+ * PredictiveModel is the base class for all predictive models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,25 +13,33 @@ define( require => {
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  class AbstractPredictiveModel {
+  class PredictiveModel {
 
     /**
-     * @param {Vector2} location - location in the model coordinate frame
+     * @param {string} displayName
+     * @param {HTMLImageElement} icon
      * @param {Object} [options]
      */
-    constructor( location, options ) {
+    constructor( displayName, icon, options ) {
+      assert && assert( typeof displayName === 'string', `invalid displayName: ${displayName}` );
+      assert && assert( icon instanceof HTMLImageElement, `invalid icon: ${icon}` );
 
       options = _.extend( {
+        location: Vector2.ZERO, // {Vector2} location in the model coordinate frame
         orientation: 0, // {number} rotation angle, in radians
         numberOfStates: 0, // {number} number of electron states, not relevant to all hydrogen atom models
-        groundState: 1 // {number} index of ground state, not relevant to all hydrogen atom models
+        groundState: 1, // {number} index of ground state, not relevant to all hydrogen atom models
+        hasTransitionWavelengths: false // does this model include the concept of transition wavelengths?
       }, options );
 
       // @public (read-only)
+      this.displayName = displayName;
+      this.icon = icon;
       this.location = location;
       this.orientation = options.orientation;
       this.numberOfStates = options.numberOfStates;
       this.groundState = options.groundState;
+      this.hasTransitionWavelengths = options.hasTransitionWavelengths;
 
       //TODO add options.parameters
       // @public emit1 when a photon is absorbed
@@ -122,5 +130,5 @@ define( require => {
     }
   }
 
-  return modelsOfTheHydrogenAtom.register( 'AbstractPredictiveModel', AbstractPredictiveModel );
+  return modelsOfTheHydrogenAtom.register( 'PredictiveModel', PredictiveModel );
 } );

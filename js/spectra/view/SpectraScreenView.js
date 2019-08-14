@@ -127,7 +127,7 @@ define( require => {
       const experimentPredictionSwitch = new ExperimentPredictionSwitch( viewProperties.experimentEnabledProperty );
 
       // panel that contains radio buttons for selecting a predictive model
-      const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty );
+      const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty, model.predictiveModels );
 
       const modelVBox = new VBox( {
         children: [ experimentPredictionSwitch, predictiveModelPanel ],

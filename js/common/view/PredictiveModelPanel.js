@@ -17,33 +17,18 @@ define( require => {
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const PredictiveModels = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModels' );
+  const PredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModel' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   const Text = require( 'SCENERY/nodes/Text' );
-
-  // images
-  const billiardBallButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/billiardBallButton.png' );
-  const bohrButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/bohrButton.png' );
-  const classicalSolarSystemButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystemButton.png' );
-  const deBroglieButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/deBroglieButton.png' );
-  const plumPuddingButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/plumPuddingButton.png' );
-  const schrodingerButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/schrodingerButton.png' );
-
-  // strings
-  const billiardBallString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/billiardBall' );
-  const bohrString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/bohr' );
-  const classicalSolarSystemString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystem' );
-  const deBroglieString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/deBroglie' );
-  const plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
-  const schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
 
   class PredictiveModelPanel extends Panel {
 
     /**
-     * @param {EnumerationProperty.<PredictiveModels>} predictiveModelProperty
+     * @param {Property.<PredictiveModel>} predictiveModelProperty
+     * @param {PredictiveModel[]} predictiveModels
      * @param {Object} [options]
      */
-    constructor( predictiveModelProperty, options ) {
+    constructor( predictiveModelProperty, predictiveModels, options ) {
 
       options = _.extend( {
         fill: MOTHAColorProfile.modelsPanelFillProperty,
@@ -53,14 +38,10 @@ define( require => {
       }, options );
 
       // content that appears on the radio buttons
-      const contentArray = [
-        createRadioButtonContent( PredictiveModels.BILLIARD_BALL, billiardBallString, billiardBallButtonImage ),
-        createRadioButtonContent( PredictiveModels.PLUM_PUDDING, plumPuddingString, plumPuddingButtonImage ),
-        createRadioButtonContent( PredictiveModels.CLASSICAL_SOLAR_SYSTEM, classicalSolarSystemString, classicalSolarSystemButtonImage ),
-        createRadioButtonContent( PredictiveModels.BOHR, bohrString, bohrButtonImage ),
-        createRadioButtonContent( PredictiveModels.DEBROGLIE, deBroglieString, deBroglieButtonImage ),
-        createRadioButtonContent( PredictiveModels.SCHRODINGER, schrodingerString, schrodingerButtonImage )
-      ];
+      const contentArray = [];
+      for ( let i = 0; i < predictiveModels.length; i++ ) {
+        contentArray.push( createRadioButtonContent( predictiveModels[ i ] ) );
+      }
 
       // radio buttons
       const radioButtonGroup = new RadioButtonGroup( predictiveModelProperty, contentArray, {
@@ -100,21 +81,21 @@ define( require => {
 
   /**
    * Creates the content for one of the radio buttons.
-   * @param {*} value
-   * @param {string} text
-   * @param {HTMLImageElement} image
+   * @param {PredictiveModel} predictiveModel
    * @returns {{value:string, node:Node}}
    */
-  function createRadioButtonContent( value, text, image ) {
+  function createRadioButtonContent( predictiveModel ) {
+    assert && assert( predictiveModel instanceof PredictiveModel, `invalid predictiveModel: ${predictiveModel}` );
+    
     return {
-      value: value,
+      value: predictiveModel,
       node: new HBox( {
         spacing: 10,
         children: [
-          new Image( image, {
+          new Image( predictiveModel.icon, {
             scale: 0.2
           } ),
-          new Text( text, {
+          new Text( predictiveModel.displayName, {
             fill: MOTHAColorProfile.modelsRadioButtonTextFillProperty,
             font: new PhetFont( 16 ),
             maxWidth: 200 // i18n, determined empirically

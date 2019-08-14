@@ -12,7 +12,6 @@ define( require => {
   const Checkbox = require( 'SUN/Checkbox' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const MOTHAModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/MOTHAModel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -25,7 +24,7 @@ define( require => {
 
     /**
      * @param {BooleanProperty} experimentEnabledProperty
-     * @param {EnumerationProperty.<PredictiveModels>} predictiveModelProperty
+     * @param {Property.<PredictiveModel>} predictiveModelProperty
      * @param {Property.<number>} wavelengthProperty
      * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
      * @param {Object} [options]
@@ -72,8 +71,7 @@ define( require => {
 
       // transition wavelengths are relevant only to certain models
       const hasTransitionWavelengths = () => {
-        return experimentEnabledProperty.value ||
-               _.includes( MOTHAModel.PREDICTIVE_MODELS_WITH_TRANSITION_WAVELENGTHS, predictiveModelProperty.value );
+        return experimentEnabledProperty.value || predictiveModelProperty.value.hasTransitionWavelengths;
       };
 
       // show the checkbox only if it's relevant

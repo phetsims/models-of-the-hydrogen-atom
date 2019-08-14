@@ -21,28 +21,34 @@ define( require => {
   'use strict';
 
   // modules
-  const AbstractPredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/AbstractPredictiveModel' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const PredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModel' );
   const RandomUtils = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/RandomUtils' );
   const Util = require( 'DOT/Util' );
+
+  // strings
+  const billiardBallString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/billiardBall' );
+
+  // images
+  const billiardBallButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/billiardBallButton.png' );
 
   // constants
   const MIN_DEFLECTION_ANGLE = Util.toRadians( 120 );
   const MAX_DEFLECTION_ANGLE = Util.toRadians( 170 );
 
-  class BilliardBallModel extends AbstractPredictiveModel {
+  class BilliardBallModel extends PredictiveModel {
 
     /**
      * @param {Vector2} location
      * @param {Object} [options]
      */
-    constructor( location, options ) {
+    constructor( options ) {
 
       options = _.extend( {
         radius: 30
       }, options );
 
-      super( location, options );
+      super( billiardBallString, billiardBallButtonImage, options );
 
       // @public (read-only)
       this.radius = options.radius;
