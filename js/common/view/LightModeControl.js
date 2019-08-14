@@ -47,6 +47,8 @@ define( require => {
         disabledBaseColor: MOTHAColorProfile.lightModeRadioButtonFillProperty,
         selectedStroke: MOTHAColorProfile.lightModeRadioButtonSelectedStrokeProperty,
         deselectedStroke: MOTHAColorProfile.lightModeRadioButtonDeselectedStrokeProperty,
+        overFill: MOTHAColorProfile.lightModeRadioButtonFillProperty,
+        overStroke: MOTHAColorProfile.lightModeRadioButtonDeselectedStrokeProperty,
         selectedLineWidth: 2,
         deselectedLineWidth: 2
       }, options );
