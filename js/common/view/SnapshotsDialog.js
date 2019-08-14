@@ -12,7 +12,7 @@ define( require => {
   const Dialog = require( 'SUN/Dialog' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const SnapshotNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotNode' );
+  const SnapshotNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/SnapshotNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   class SnapshotsDialog extends Dialog {

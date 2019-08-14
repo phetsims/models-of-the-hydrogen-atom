@@ -10,7 +10,7 @@ define( require => {
   'use strict';
 
   // modules
-  const ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ContinuumBarNode' );
+  const ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/ContinuumBarNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );

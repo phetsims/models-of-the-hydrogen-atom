@@ -9,15 +9,15 @@ define( require => {
   'use strict';
 
   // modules
-  const ElectronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ElectronNode' );
+  const ElectronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/ElectronNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/NeutronNode' );
+  const NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/NeutronNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const ProtonNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ProtonNode' );
+  const ProtonNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/ProtonNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 

@@ -9,32 +9,32 @@ define( require => {
   'use strict';
 
   // modules
-  const BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/BeamNode' );
+  const BeamNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/BeamNode' );
   const BoxOfHydrogenNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/BoxOfHydrogenNode' );
   const Dimension2 = require( 'DOT/Dimension2' );
-  const ExperimentPredictionSwitch = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ExperimentPredictionSwitch' );
+  const ExperimentPredictionSwitch = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/ExperimentPredictionSwitch' );
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   const LegendNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LegendNode' );
   const LightModeControl = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/LightModeControl' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
+  const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/MonochromaticControls' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const PredictiveModelPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/PredictiveModelPanel' );
+  const PredictiveModelPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/PredictiveModelPanel' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const Shape = require( 'KITE/Shape' );
-  const SnapshotsDialog = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SnapshotsDialog' );
+  const SnapshotsDialog = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/SnapshotsDialog' );
   const SpectraViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectraViewProperties' );
-  const SpectrometerAccordionBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectrometerAccordionBox' );
+  const SpectrometerAccordionBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/SpectrometerAccordionBox' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const TimeControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TimeControls' );
-  const TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/TinyBox' );
+  const TimeControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/TimeControls' );
+  const TinyBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/TinyBox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
-  const ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/ZoomBoxNode' );
+  const ZoomBoxNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/ZoomBoxNode' );
 
   // strings
   const viewSnapshotsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/viewSnapshots' );
