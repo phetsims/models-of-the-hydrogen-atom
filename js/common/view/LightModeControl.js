@@ -1,5 +1,6 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
+//TODO on mouseDown in projector mode, radio buttons go gray
 /**
  * Control for selecting the light's mode (white or monochromatic).
  *

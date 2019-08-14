@@ -1,5 +1,6 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
+//TODO on mouseDown in projector mode, radio buttons go gray
 /**
  * Control for choosing one of the model name options.
  *
