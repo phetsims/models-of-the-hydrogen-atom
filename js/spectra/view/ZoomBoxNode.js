@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Provides the zoomed-in view of part of the box of hydrogen.
+ * ZoomBoxNode provides the zoomed-in view of part of the box of hydrogen.
  * This is the box in which animation of atoms, photons and alpha particles takes place.
  *
  * @author Chris Malley (PixelZoom, Inc.)

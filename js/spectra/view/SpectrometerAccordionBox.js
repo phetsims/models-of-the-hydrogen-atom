@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * The spectrometer.
+ * SpectrometerAccordionBox is the accordion box that contains the spectrometer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

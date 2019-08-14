@@ -1,7 +1,8 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * Continuum bar, 'Classical' to 'Quantum'.
+ * ContinuumBarNode appears next to the radio buttons for choosing predicitive models, and shows whether
+ * those models fall on the 'Classical' to 'Quantum' continuum.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

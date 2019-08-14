@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * The legend identifies the icons that appear in the sim.
+ * LegendNode displays a legend, identifying the particle types that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

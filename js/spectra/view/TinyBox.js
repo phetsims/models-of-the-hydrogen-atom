@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Indicates the portion of the box of hydrogen that is shown in the exploded view.
+ * TinyBox indicates the portion of the box of hydrogen that is shown in the exploded view.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

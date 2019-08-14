@@ -2,7 +2,7 @@
 
 //TODO on mouseDown in projector mode, radio buttons go gray
 /**
- * Control for selecting the light's mode (white or monochromatic).
+ * LightModeControl provides controls (radio buttons) for selecting the light's mode (WHITE or MONOCHROMATIC).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

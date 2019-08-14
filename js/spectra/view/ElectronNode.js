@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Visual representation of an electron.
+ * ElectronNode is the visual representation of an electron.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

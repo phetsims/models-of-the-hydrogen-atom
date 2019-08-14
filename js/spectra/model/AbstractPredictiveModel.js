@@ -1,7 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * Base type for all predictive hydrogen atom models.
+ * AbstractPredictiveModel is the base class for all predictive models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

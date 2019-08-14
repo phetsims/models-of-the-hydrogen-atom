@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * The predictive models supported by this sim.
+ * PredictiveModels identifies the predictive models supported by this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

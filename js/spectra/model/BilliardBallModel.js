@@ -1,7 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * BilliardBallModel models the hydrogen atom as a billiard ball.
+ * BilliardBallModel is a predictive model that models the hydrogen atom as a billiard ball.
  *
  * Physical representation:
  * The ball is spherical, with its local origin at its center.

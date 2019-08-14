@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Modes for the light.
+ * LightModes defines the operational modes for the light that shines into the box of hydrogen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -2,7 +2,7 @@
 
 //TODO on mouseDown in projector mode, radio buttons go gray
 /**
- * Control for choosing one of the model name options.
+ * PredictiveModelPanel contains controls (radio buttons) for choosing one of the predictive models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,8 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * Utility functions related to random number generation.
- * These functions share one instance of a random number generator.
+ * RandomUtils is a collection of static utility functions related to random number generation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

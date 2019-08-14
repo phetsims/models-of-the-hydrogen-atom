@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Speed options for the simulation clock.
+ * ClockSpeeds defines the speed options for the simulation clock.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * Controls for the monochromatic light.
+ * MonochromaticControls provides controls for the monochromatic light.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

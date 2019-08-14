@@ -2,7 +2,7 @@
 
 //TODO this is a placeholder
 /**
- * Displays a snapshot of from the spectrometer.
+ * SnapshotNode is a snapshot from the spectrometer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

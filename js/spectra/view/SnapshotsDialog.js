@@ -1,7 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * Dialog that shows spectrometer snapshots.
+ * SnapshotsDialog is a dialog that displays spectrometer snapshots.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

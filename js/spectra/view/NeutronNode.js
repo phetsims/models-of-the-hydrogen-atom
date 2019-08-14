@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Visual representation of a neutron.
+ * NeutronNode is the visual representation of a neutron.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

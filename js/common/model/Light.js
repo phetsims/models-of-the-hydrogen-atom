@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Model of a light that can be switched between 'white' and 'monochromatic' modes.
+ * Light is the model of a light that shines into the box of hydrogen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

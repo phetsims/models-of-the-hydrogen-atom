@@ -1,7 +1,7 @@
 // Copyright 2015-2019, University of Colorado Boulder
 
 /**
- * Control for switching between the model's modes (EXPERIMENTAL vs PREDICTION).
+ * ModelModeSwitch is an AB switch, for switching between the model's 2 modes (EXPERIMENTAL vs PREDICTION).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

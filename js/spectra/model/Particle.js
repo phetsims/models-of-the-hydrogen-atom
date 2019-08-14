@@ -1,7 +1,7 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * Base type for particles.
+ * Particle is the base class for particles.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

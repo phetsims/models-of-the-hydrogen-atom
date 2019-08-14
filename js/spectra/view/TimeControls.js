@@ -2,7 +2,7 @@
 
 //TODO much in common with scenery-phet.TimeControl
 /**
- * Controls for simulation time.
+ * TimeControls provides the controls for simulation time.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
