@@ -21,7 +21,7 @@ define( require => {
   'use strict';
 
   // modules
-  const AbstractPredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/AbstractPredictiveModel' );
+  const AbstractPredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/AbstractPredictiveModel' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const RandomUtils = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/RandomUtils' );
   const Util = require( 'DOT/Util' );

@@ -11,7 +11,7 @@ define( require => {
 
   // modules
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/Particle' );
+  const Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Particle' );
 
   class AlphaParticle extends Particle {
 

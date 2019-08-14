@@ -13,7 +13,7 @@ define( require => {
   // modules
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/Particle' );
+  const Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Particle' );
   const VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
 
   class Photon extends Particle {
