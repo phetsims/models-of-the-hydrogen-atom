@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO replace this enum with instances of the models
 /**
  * PredictiveModels identifies the predictive models supported by this sim.
  *
