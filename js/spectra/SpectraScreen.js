@@ -10,21 +10,19 @@ define( require => {
 
   // modules
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const Screen = require( 'JOIST/Screen' );
+  const MOTHAScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/MOTHAScreen' );
   const SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
   const SpectraScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectraScreenView' );
 
   // strings
   const screenSpectraString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.spectra' );
 
-  class SpectraScreen extends Screen {
+  class SpectraScreen extends MOTHAScreen {
 
     constructor() {
 
       const options = {
-        name: screenSpectraString,
-        backgroundColorProperty: MOTHAColorProfile.screenBackgroundColorProperty
+        name: screenSpectraString
         //TODO add homeScreenIcon
       };
 

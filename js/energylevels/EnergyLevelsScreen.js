@@ -12,19 +12,17 @@ define( require => {
   const EnergyLevelsModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/model/EnergyLevelsModel' );
   const EnergyLevelsScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/EnergyLevelsScreenView' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const Screen = require( 'JOIST/Screen' );
+  const MOTHAScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/MOTHAScreen' );
 
   // strings
   const screenEnergyLevelsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.energyLevels' );
 
-  class EnergyLevelsScreen extends Screen {
+  class EnergyLevelsScreen extends MOTHAScreen {
 
     constructor() {
 
       const options = {
-        name: screenEnergyLevelsString,
-        backgroundColorProperty: MOTHAColorProfile.screenBackgroundColorProperty
+        name: screenEnergyLevelsString
         //TODO add homeScreenIcon
       };
 
