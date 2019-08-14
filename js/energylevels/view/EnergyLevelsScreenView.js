@@ -11,7 +11,9 @@ define( require => {
   // modules
   const ElectronEnergyLevelAccordionBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/ElectronEnergyLevelAccordionBox' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+  const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
   const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
 
   class EnergyLevelsScreenView extends ScreenView {
@@ -25,11 +27,25 @@ define( require => {
 
       const viewProperties = new MOTHAViewProperties();
 
-      this.addChild( new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
+      const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
         center: this.layoutBounds.center
-      } ) );
+      } );
 
-      //TODO
+      // Reset All button
+      const resetAllButton = new ResetAllButton( {
+        listener: () => {
+          model.reset();
+          viewProperties.reset();
+        },
+        right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+        bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+
+      //TODO add other UI components
+
+      // rendering order
+      this.addChild( electronEnergyLevelAccordionBox );
+      this.addChild( resetAllButton );
     }
 
     /**
@@ -37,7 +53,7 @@ define( require => {
      * @public
      */
     step( dt ) {
-      //TODO Handle view animation here.
+      //TODO
     }
   }
 

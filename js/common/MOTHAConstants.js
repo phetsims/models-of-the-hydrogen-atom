@@ -17,6 +17,10 @@ define( require => {
 
   const MOTHAConstants = {
 
+    // margins for all ScreenView instances
+    SCREEN_VIEW_X_MARGIN: 20,
+    SCREEN_VIEW_Y_MARGIN: 20,
+
     ELECTRON_DIAMETER: ELECTRON_DIAMETER,
     NEUTRON_DIAMETER: 11,
     PHOTON_DIAMETER: PHOTON_DIAMETER,

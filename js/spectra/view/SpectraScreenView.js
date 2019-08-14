@@ -21,6 +21,7 @@ define( require => {
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MonochromaticControls = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MonochromaticControls' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
+  const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
   const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/MOTHAViewProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -53,17 +54,15 @@ define( require => {
 
       // Legend
       const legendNode = new LegendNode( {
-        left: this.layoutBounds.left + 20,
-        top: this.layoutBounds.top + 20
+        left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+        top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN
       } );
-      this.addChild( legendNode );
 
       // Light mode control (radio buttons)
       const lightModeControl = new LightModeControl( model.light.lightModeProperty, {
         left: this.layoutBounds.left + 30,
         bottom: 415
       } );
-      this.addChild( lightModeControl );
 
       // Controls for monochromatic light
       const monochromaticControls = new MonochromaticControls( viewProperties.modelModeProperty, model.predictiveModelProperty,
@@ -71,7 +70,6 @@ define( require => {
           left: lightModeControl.left,
           top: lightModeControl.bottom + 15
         } );
-      this.addChild( monochromaticControls );
 
       // Light
       const lightNode = new LaserPointerNode( model.light.onProperty, {
@@ -82,7 +80,6 @@ define( require => {
         left: lightModeControl.right + 20,
         bottom: lightModeControl.bottom
       } );
-      this.addChild( lightNode );
 
       // Beam of light
       const beamNode = new BeamNode( model.light.onProperty, model.light.colorProperty, {
@@ -90,36 +87,30 @@ define( require => {
         centerX: lightNode.centerX,
         bottom: lightNode.top + 1
       } );
-      this.addChild( beamNode );
-      //TODO move beamNode behind lightNode
 
       // Box of hydrogen
       const boxOfHydrogenNode = new BoxOfHydrogenNode( {
         centerX: beamNode.centerX,
         bottom: beamNode.top + 1
       } );
-      this.addChild( boxOfHydrogenNode );
 
       // Tiny box that indicates what will be zoomed
       const tinyBoxNode = new TinyBox( {
         right: boxOfHydrogenNode.right - 10,
         top: boxOfHydrogenNode.top + 20
       } );
-      this.addChild( tinyBoxNode );
 
       // Time controls
       const timeControls = new TimeControls( viewProperties.runningProperty, viewProperties.clockSpeedProperty, this, {
         left: monochromaticControls.left,
         top: monochromaticControls.bottom + 20
       } );
-      this.addChild( timeControls );
 
       // Box that shows the zoomed-in view
       const zoomBoxNode = new ZoomBoxNode( {
         left: lightNode.right + 50,
         top: this.layoutBounds.top + 15
       } );
-      this.addChild( zoomBoxNode );
 
       // Dashed lines that connect the tiny box and zoom box
       const dashedLines = new Path( new Shape()
@@ -130,7 +121,6 @@ define( require => {
         stroke: MOTHAColorProfile.boxStrokeProperty,
         lineDash: [ 5, 5 ]
       } );
-      this.addChild( dashedLines );
 
       // switches between EXPERIMENT and PREDICTION model modes
       const modelModeSwitch = new ModelModeSwitch( viewProperties.modelModeProperty );
@@ -138,13 +128,13 @@ define( require => {
       // panel that contains radio buttons for selecting a predictive model
       const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty );
 
-      this.addChild( new VBox( {
+      const modelVBox = new VBox( {
         children: [ modelModeSwitch, predictiveModelPanel ],
         align: 'center',
         spacing: 10,
         left: zoomBoxNode.right + 30,
         top: zoomBoxNode.top
-      } ) );
+      } );
 
       // Spectrometer
       const spectrometerAccordionBox = new SpectrometerAccordionBox(
@@ -152,7 +142,6 @@ define( require => {
           left: monochromaticControls.right + 10,
           top: monochromaticControls.top
         } );
-      this.addChild( spectrometerAccordionBox );
 
       // reused and constructed lazily because Dialog requires sim bounds during construction
       let dialog = null;
@@ -169,7 +158,6 @@ define( require => {
         right: spectrometerAccordionBox.right,
         bottom: spectrometerAccordionBox.top - 10
       } );
-      this.addChild( viewSnapshotsButton );
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
@@ -177,9 +165,24 @@ define( require => {
           model.reset();
           viewProperties.reset();
         },
-        right: this.layoutBounds.right - 20,
-        bottom: this.layoutBounds.bottom - 20
+        right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+        bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN
       } );
+
+      // rendering order
+      this.addChild( legendNode );
+      this.addChild( lightModeControl );
+      this.addChild( monochromaticControls );
+      this.addChild( boxOfHydrogenNode );
+      this.addChild( tinyBoxNode );
+      this.addChild( timeControls );
+      this.addChild( zoomBoxNode );
+      this.addChild( dashedLines );
+      this.addChild( beamNode );
+      this.addChild( lightNode );
+      this.addChild( modelVBox );
+      this.addChild( spectrometerAccordionBox );
+      this.addChild( viewSnapshotsButton );
       this.addChild( resetAllButton );
 
       viewProperties.modelModeProperty.link( modelMode => {

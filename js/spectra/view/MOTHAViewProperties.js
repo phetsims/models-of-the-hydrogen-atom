@@ -52,7 +52,7 @@ define( require => {
       this.modelModeProperty.reset();
       this.absorptionWavelengthsVisibleProperty.reset();
       this.spectrometerExpandedProperty.reset();
-      this.energyDiagramVisibleProperty.reset();
+      this.electronEnergyLevelExpandedProperty.reset();
       this.numberOfSnapshotsProperty.reset();
     }
   }
