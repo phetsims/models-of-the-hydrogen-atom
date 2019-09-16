@@ -27,7 +27,6 @@ define( require => {
       options = _.extend( {
 
         fill: MOTHAColorProfile.snapshotsDialogFillProperty,
-        layoutStrategy: Dialog.layoutStrategyCenteredInScreen,
         topMargin: 15,
         bottomMargin: 15,
         leftMargin: 15
