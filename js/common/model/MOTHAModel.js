@@ -53,4 +53,4 @@ define( require => {
   }
 
   return modelsOfTheHydrogenAtom.register( 'MOTHAModel', MOTHAModel );
-} ); 
+} );
