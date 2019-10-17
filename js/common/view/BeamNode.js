@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const Dimension2 = require( 'DOT/Dimension2' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -23,7 +24,7 @@ define( require => {
      */
     constructor( visibleProperty, colorProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         beamSize: new Dimension2( 10, 50 )
       }, options );
 

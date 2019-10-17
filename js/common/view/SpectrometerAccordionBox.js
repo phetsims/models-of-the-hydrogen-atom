@@ -14,14 +14,15 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RecordStopButton = require( 'SCENERY_PHET/buttons/RecordStopButton' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const ResetButton = require( 'SCENERY_PHET/buttons/ResetButton' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -41,7 +42,7 @@ define( require => {
      */
     constructor( expandedProperty, numberOfSnapshotsProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         fill: MOTHAColorProfile.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColorProfile.spectrometerAccordionBoxStrokeProperty,
         xMargin: 5,

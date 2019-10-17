@@ -21,6 +21,7 @@ define( require => {
   'use strict';
 
   // modules
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const PredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModel' );
 
@@ -37,7 +38,7 @@ define( require => {
      */
     constructor( options ) {
 
-      options = _.extend( {}, options );
+      options = merge( {}, options );
 
       assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths'  );
       options.hasTransitionWavelengths = true;

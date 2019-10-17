@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Dialog = require( 'SUN/Dialog' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const SnapshotNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/SnapshotNode' );
@@ -24,7 +25,7 @@ define( require => {
 
       assert && assert( numberOfSnapshotsProperty.value > 0 );
 
-      options = _.extend( {
+      options = merge( {
 
         fill: MOTHAColorProfile.snapshotsDialogFillProperty,
         topMargin: 15,

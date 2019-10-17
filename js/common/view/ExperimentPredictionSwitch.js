@@ -11,6 +11,7 @@ define( require => {
   // modules
   const ABSwitch = require( 'SUN/ABSwitch' );
   const Dimension2 = require( 'DOT/Dimension2' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -28,7 +29,7 @@ define( require => {
      */
     constructor( experimentEnabledProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         switchSize: new Dimension2( 50, 25 ),
         centerOnButton: true
       }, options );

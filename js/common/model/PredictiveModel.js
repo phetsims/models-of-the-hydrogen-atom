@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Emitter = require( 'AXON/Emitter' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -24,7 +25,7 @@ define( require => {
       assert && assert( typeof displayName === 'string', `invalid displayName: ${displayName}` );
       assert && assert( icon instanceof HTMLImageElement, `invalid icon: ${icon}` );
 
-      options = _.extend( {
+      options = merge( {
         location: Vector2.ZERO, // {Vector2} location in the model coordinate frame
         orientation: 0, // {number} rotation angle, in radians
         numberOfStates: 0, // {number} number of electron states, not relevant to all hydrogen atom models

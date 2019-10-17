@@ -13,6 +13,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -38,7 +39,7 @@ define( require => {
      */
     constructor( monochromaticEnabledProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         orientation: 'vertical',
         spacing: 8,
         buttonContentXMargin: 15,

@@ -11,6 +11,7 @@ define( require => {
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
   const Dimension2 = require( 'DOT/Dimension2' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -31,7 +32,7 @@ define( require => {
      */
     constructor( expandedProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         fill: MOTHAColorProfile.electronEnergyLevelAccordionBoxFillProperty,
         stroke: MOTHAColorProfile.electronEnergyLevelAccordionBoxStrokeProperty,
         xMargin: 5,

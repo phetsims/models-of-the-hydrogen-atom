@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -27,7 +28,7 @@ define( require => {
      */
     constructor( numberOfSnapshotsProperty, options ) {
 
-      options = _.extend( {}, options );
+      options = merge( {}, options );
 
       const backgroundNode = new Rectangle( 0, 0, 500, 150, {
         cornerRadius: 5,

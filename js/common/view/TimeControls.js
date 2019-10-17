@@ -15,6 +15,7 @@ define( require => {
   const ComboBoxItem = require( 'SUN/ComboBoxItem' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
@@ -36,7 +37,7 @@ define( require => {
      */
     constructor( runningProperty, clockSpeedProperty, comboBoxListParent, options ) {
 
-      options = _.extend( {
+      options = merge( {
         spacing: 7
       }, options );
 

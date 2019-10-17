@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -29,7 +30,7 @@ define( require => {
      */
     constructor( barHeight, options ) {
 
-      options = _.extend( {
+      options = merge( {
         xMargin: 5,
         yMargin: 6,
         font: new PhetFont( 14 ),

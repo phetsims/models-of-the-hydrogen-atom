@@ -12,6 +12,7 @@ define( require => {
   const ElectronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/ElectronNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const NeutronNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/NeutronNode' );
@@ -41,7 +42,7 @@ define( require => {
      */
     constructor( options ) {
 
-      options = _.extend( {
+      options = merge( {
         spacing: 8,
         align: 'left'
       }, options );

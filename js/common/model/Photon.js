@@ -11,6 +11,7 @@ define( require => {
   'use strict';
 
   // modules
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Particle = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/Particle' );
@@ -27,7 +28,7 @@ define( require => {
      */
     constructor( wavelength, location, speed, direction, options ) {
 
-      options = _.extend( {
+      options = merge( {
         emitted: false, // {boolean} was this photon emitted by the atom?
         collided: false // {boolean} did this photon already collide with the atom?
       }, options );

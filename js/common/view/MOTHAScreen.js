@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Screen = require( 'JOIST/Screen' );
@@ -24,7 +25,7 @@ define( require => {
       assert && assert( typeof createModel === 'function', `invalid createModel: ${createModel}` );
       assert && assert( typeof createView === 'function', `invalid createView: ${createView}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         backgroundColorProperty: MOTHAColorProfile.screenBackgroundColorProperty,

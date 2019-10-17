@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -32,7 +33,7 @@ define( require => {
      */
     constructor( experimentEnabledProperty, predictiveModelProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         align: 'center',
         spacing: 10
       }, options );

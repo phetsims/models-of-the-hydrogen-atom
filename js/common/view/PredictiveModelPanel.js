@@ -13,6 +13,7 @@ define( require => {
   const ContinuumBarNode = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/ContinuumBarNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
+  const merge = require( 'PHET_CORE/merge' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
   const Panel = require( 'SUN/Panel' );
@@ -30,7 +31,7 @@ define( require => {
      */
     constructor( predictiveModelProperty, predictiveModels, options ) {
 
-      options = _.extend( {
+      options = merge( {
         fill: MOTHAColorProfile.modelsPanelFillProperty,
         stroke: MOTHAColorProfile.modelsPanelStrokeProperty,
         xMargin: 10,
