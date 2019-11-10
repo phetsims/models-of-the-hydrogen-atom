@@ -194,7 +194,7 @@ define( require => {
 
   } );
 
-  //TODO #7 should these be changeable?
+  //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/7 should these be changeable?
   MOTHAColorProfile.UV_COLOR = 'rgb( 160, 160, 160 )';
   MOTHAColorProfile.IR_COLOR = 'rgb( 160, 160, 160 )';
 
