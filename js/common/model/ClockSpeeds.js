@@ -12,7 +12,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
 
-  const ClockSpeeds = new Enumeration( [ 'FAST', 'NORMAL', 'SLOW' ] );
+  const ClockSpeeds = Enumeration.byKeys( [ 'FAST', 'NORMAL', 'SLOW' ] );
 
   return modelsOfTheHydrogenAtom.register( 'ClockSpeeds', ClockSpeeds );
 } );
