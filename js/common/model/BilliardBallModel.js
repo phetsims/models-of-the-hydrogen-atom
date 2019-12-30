@@ -25,7 +25,7 @@ define( require => {
   const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
   const PredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModel' );
   const RandomUtils = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/RandomUtils' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const billiardBallString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/billiardBall' );
@@ -34,8 +34,8 @@ define( require => {
   const billiardBallButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/billiardBallButton.png' );
 
   // constants
-  const MIN_DEFLECTION_ANGLE = Util.toRadians( 120 );
-  const MAX_DEFLECTION_ANGLE = Util.toRadians( 170 );
+  const MIN_DEFLECTION_ANGLE = Utils.toRadians( 120 );
+  const MAX_DEFLECTION_ANGLE = Utils.toRadians( 170 );
 
   class BilliardBallModel extends PredictiveModel {
 
