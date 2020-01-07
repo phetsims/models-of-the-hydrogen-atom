@@ -16,21 +16,21 @@ define( require => {
   class Particle {
 
     /**
-     * @param {Vector2} location - location in model coordinate frame
+     * @param {Vector2} position - position in model coordinate frame
      * @param {number} speed - distance per dt
      * @param {number} direction - direction of motion, in radians
      */
-    constructor( location, speed, direction ) {
+    constructor( position, speed, direction ) {
 
       // @public
-      this.locationProperty = new Property( location );
+      this.positionProperty = new Property( position );
       this.speedProperty = new NumberProperty( speed );
       this.directionProperty = new NumberProperty( direction );
     }
 
     // @public
     reset() {
-      this.locationProperty.reset();
+      this.positionProperty.reset();
       this.speedProperty.reset();
       this.directionProperty.reset();
     }

@@ -16,12 +16,12 @@ define( require => {
   class AlphaParticle extends Particle {
 
     /**
-     * @param {Vector2} location - location in model coordinate frame
+     * @param {Vector2} position - position in model coordinate frame
      * @param {number} speed - distance per dt
      * @param {number} direction - direction of motion, in radians
      */
-    constructor( location, speed, direction ) {
-      super( location, speed, direction );
+    constructor( position, speed, direction ) {
+      super( position, speed, direction );
     }
   }
 

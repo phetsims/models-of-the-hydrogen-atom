@@ -26,7 +26,7 @@ define( require => {
       assert && assert( icon instanceof HTMLImageElement, `invalid icon: ${icon}` );
 
       options = merge( {
-        location: Vector2.ZERO, // {Vector2} location in the model coordinate frame
+        position: Vector2.ZERO, // {Vector2} position in the model coordinate frame
         orientation: 0, // {number} rotation angle, in radians
         numberOfStates: 0, // {number} number of electron states, not relevant to all hydrogen atom models
         groundState: 1, // {number} index of ground state, not relevant to all hydrogen atom models
@@ -36,7 +36,7 @@ define( require => {
       // @public (read-only)
       this.displayName = displayName;
       this.icon = icon;
-      this.location = location;
+      this.position = options.position;
       this.orientation = options.orientation;
       this.numberOfStates = options.numberOfStates;
       this.groundState = options.groundState;
@@ -94,9 +94,9 @@ define( require => {
       const distance = photon.speed * dt;
       const dx = Math.cos( photon.direction ) * distance;
       const dy = Math.sin( photon.direction ) * distance;
-      const x = photon.location.x + dx;
-      const y = photon.location.y + dy;
-      photon.locationProperty.value = new Vector2( x, y );
+      const x = photon.position.x + dx;
+      const y = photon.position.y + dy;
+      photon.positionProperty.value = new Vector2( x, y );
     }
 
     /**
@@ -111,9 +111,9 @@ define( require => {
       const distance = alphaParticle.speed * dt;
       const dx = Math.cos( alphaParticle.direction ) * distance;
       const dy = Math.sin( alphaParticle.direction ) * distance;
-      const x = alphaParticle.location.x + dx;
-      const y = alphaParticle.location.y + dy;
-      alphaParticle.locationProperty.value = new Vector2( x, y );
+      const x = alphaParticle.position.x + dx;
+      const y = alphaParticle.position.y + dy;
+      alphaParticle.positionProperty.value = new Vector2( x, y );
     }
 
     /**

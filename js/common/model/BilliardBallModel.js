@@ -66,8 +66,8 @@ define( require => {
 
       // detect collision and adjust particle direction
       if ( !photon.collided ) {
-        if ( photon.location.distance( this.location ) <= this.radius ) {
-          const sign = ( photon.location.x > this.location.x ) ? 1 : -1;
+        if ( photon.position.distance( this.position ) <= this.radius ) {
+          const sign = ( photon.position.x > this.position.x ) ? 1 : -1;
           const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
           photon.direction = photon.direction + deflection;
           photon.collided = true;
@@ -89,8 +89,8 @@ define( require => {
     moveAlphaParticle( alphaParticle, dt ) {
 
       // detect collision and adjust particle direction
-      if ( alphaParticle.location.distance( this.location ) <= this.radius ) {
-        const sign = ( alphaParticle.location.x > this.location.x ) ? 1 : -1;
+      if ( alphaParticle.position.distance( this.position ) <= this.radius ) {
+        const sign = ( alphaParticle.position.x > this.position.x ) ? 1 : -1;
         const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
         alphaParticle.direction = alphaParticle.direction + deflection;
       }
