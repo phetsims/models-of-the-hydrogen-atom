@@ -30,8 +30,8 @@ define( require => {
     constructor( experimentEnabledProperty, options ) {
 
       options = merge( {
-        switchSize: new Dimension2( 50, 25 ),
-        centerOnButton: true
+        centerOnButton: true,
+        toggleSwitchOptions: { size: new Dimension2( 50, 25 ) }
       }, options );
 
       const labelOptions = {
