@@ -17,28 +17,24 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const PredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModel' );
+import plumPuddingButtonImage from '../../../images/plumPuddingButton_png.js';
+import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import PredictiveModel from './PredictiveModel.js';
 
-  // strings
-  const plumPuddingString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/plumPudding' );
+const plumPuddingString = modelsOfTheHydrogenAtomStrings.plumPudding;
 
-  // images
-  const plumPuddingButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/plumPuddingButton.png' );
 
-  class PlumPuddingModel extends PredictiveModel {
+class PlumPuddingModel extends PredictiveModel {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
-      super( plumPuddingString, plumPuddingButtonImage, options );
-    }
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+    super( plumPuddingString, plumPuddingButtonImage, options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'PlumPuddingModel', PlumPuddingModel );
-} );
+modelsOfTheHydrogenAtom.register( 'PlumPuddingModel', PlumPuddingModel );
+export default PlumPuddingModel;

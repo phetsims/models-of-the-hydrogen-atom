@@ -5,34 +5,31 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EnergyLevelsModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/model/EnergyLevelsModel' );
-  const EnergyLevelsScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/EnergyLevelsScreenView' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/MOTHAScreen' );
+import MOTHAScreen from '../common/view/MOTHAScreen.js';
+import modelsOfTheHydrogenAtomStrings from '../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import EnergyLevelsModel from './model/EnergyLevelsModel.js';
+import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
 
-  // strings
-  const screenEnergyLevelsString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.energyLevels' );
+const screenEnergyLevelsString = modelsOfTheHydrogenAtomStrings.screen.energyLevels;
 
-  class EnergyLevelsScreen extends MOTHAScreen {
+class EnergyLevelsScreen extends MOTHAScreen {
 
-    constructor() {
+  constructor() {
 
-      const options = {
-        name: screenEnergyLevelsString
-        //TODO add homeScreenIcon
-      };
+    const options = {
+      name: screenEnergyLevelsString
+      //TODO add homeScreenIcon
+    };
 
-      super(
-        () => new EnergyLevelsModel(),
-        model => new EnergyLevelsScreenView( model ),
-        options
-      );
-    }
+    super(
+      () => new EnergyLevelsModel(),
+      model => new EnergyLevelsScreenView( model ),
+      options
+    );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreen', EnergyLevelsScreen );
-} );
+modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreen', EnergyLevelsScreen );
+export default EnergyLevelsScreen;

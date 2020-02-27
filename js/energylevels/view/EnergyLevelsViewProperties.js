@@ -5,30 +5,27 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/MOTHAViewProperties' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import MOTHAViewProperties from '../../common/view/MOTHAViewProperties.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-  class EnergyLevelsViewProperties extends MOTHAViewProperties {
+class EnergyLevelsViewProperties extends MOTHAViewProperties {
 
-    constructor() {
+  constructor() {
 
-      super();
+    super();
 
-      // @public {boolean} is the Electron Energy Level accordion box expanded?
-      this.electronEnergyLevelExpandedProperty = new BooleanProperty( false );
-    }
-
-    // @public
-    reset() {
-      super.reset();
-      this.electronEnergyLevelExpandedProperty.reset();
-    }
+    // @public {boolean} is the Electron Energy Level accordion box expanded?
+    this.electronEnergyLevelExpandedProperty = new BooleanProperty( false );
   }
 
-  return modelsOfTheHydrogenAtom.register( 'EnergyLevelsViewProperties', EnergyLevelsViewProperties );
-} );
+  // @public
+  reset() {
+    super.reset();
+    this.electronEnergyLevelExpandedProperty.reset();
+  }
+}
+
+modelsOfTheHydrogenAtom.register( 'EnergyLevelsViewProperties', EnergyLevelsViewProperties );
+export default EnergyLevelsViewProperties;

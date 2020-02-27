@@ -6,38 +6,35 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const merge = require( 'PHET_CORE/merge' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+import merge from '../../../../phet-core/js/merge.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAColorProfile from '../MOTHAColorProfile.js';
 
-  //TODO extends Rectangle?
-  class ZoomBoxNode extends Node {
+//TODO extends Rectangle?
+class ZoomBoxNode extends Node {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = merge( {}, options );
+    options = merge( {}, options );
 
-      const outlineNode = new Rectangle( 0, 0, 400, 400, {
-        fill: MOTHAColorProfile.boxFillProperty,
-        stroke: MOTHAColorProfile.boxStrokeProperty,
-        lineWidth: 1
-      } );
+    const outlineNode = new Rectangle( 0, 0, 400, 400, {
+      fill: MOTHAColorProfile.boxFillProperty,
+      stroke: MOTHAColorProfile.boxStrokeProperty,
+      lineWidth: 1
+    } );
 
-      assert && assert( !options.children, 'ZoomBoxNode sets children' );
-      options.children = [ outlineNode ];
+    assert && assert( !options.children, 'ZoomBoxNode sets children' );
+    options.children = [ outlineNode ];
 
-      super( options );
-    }
+    super( options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'ZoomBoxNode', ZoomBoxNode );
-} );
+modelsOfTheHydrogenAtom.register( 'ZoomBoxNode', ZoomBoxNode );
+export default ZoomBoxNode;

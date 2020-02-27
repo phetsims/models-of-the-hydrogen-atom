@@ -6,79 +6,76 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ClockSpeeds = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ClockSpeeds' );
-  const ComboBox = require( 'SUN/ComboBox' );
-  const ComboBoxItem = require( 'SUN/ComboBoxItem' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const merge = require( 'PHET_CORE/merge' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import merge from '../../../../phet-core/js/merge.js';
+import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
+import StepForwardButton from '../../../../scenery-phet/js/buttons/StepForwardButton.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import ComboBox from '../../../../sun/js/ComboBox.js';
+import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
+import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ClockSpeeds from '../model/ClockSpeeds.js';
 
-  // strings
-  const fastString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/fast' );
-  const normalString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/normal' );
-  const slowString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/slow' );
+const fastString = modelsOfTheHydrogenAtomStrings.fast;
+const normalString = modelsOfTheHydrogenAtomStrings.normal;
+const slowString = modelsOfTheHydrogenAtomStrings.slow;
 
-  class TimeControls extends HBox {
+class TimeControls extends HBox {
 
-    /**
-     * @param {Property.<boolean>} runningProperty - is the sim running?
-     * @param {EnumerationProperty.<ClockSpeeds>} clockSpeedProperty
-     * @param {Node} comboBoxListParent
-     * @param {Object} [options]
-     */
-    constructor( runningProperty, clockSpeedProperty, comboBoxListParent, options ) {
+  /**
+   * @param {Property.<boolean>} runningProperty - is the sim running?
+   * @param {EnumerationProperty.<ClockSpeeds>} clockSpeedProperty
+   * @param {Node} comboBoxListParent
+   * @param {Object} [options]
+   */
+  constructor( runningProperty, clockSpeedProperty, comboBoxListParent, options ) {
 
-      options = merge( {
-        spacing: 7
-      }, options );
+    options = merge( {
+      spacing: 7
+    }, options );
 
-      const playPauseButton = new PlayPauseButton( runningProperty, {
-        radius: 22
-      } );
+    const playPauseButton = new PlayPauseButton( runningProperty, {
+      radius: 22
+    } );
 
-      const stepForwardButton = new StepForwardButton( {
-        radius: 16,
-        touchAreaDilation: 6,
-        listener: () => {
-          //TODO advance the animation
-        }
-      } );
+    const stepForwardButton = new StepForwardButton( {
+      radius: 16,
+      touchAreaDilation: 6,
+      listener: () => {
+        //TODO advance the animation
+      }
+    } );
 
-      const labelOptions = {
-        font: new PhetFont( { size: 16 } ),
-        maxWidth: 125 // i18n, determined empirically
-      };
-      const speedItems = [
-        new ComboBoxItem( new Text( fastString, labelOptions ), ClockSpeeds.FAST ),
-        new ComboBoxItem( new Text( normalString, labelOptions ), ClockSpeeds.NORMAL ),
-        new ComboBoxItem( new Text( slowString, labelOptions ), ClockSpeeds.SLOW )
-      ];
-      const speedComboBox = new ComboBox( speedItems, clockSpeedProperty, comboBoxListParent, {
-        cornerRadius: 8,
-        listPosition: 'above',
-        highlightFill: 'rgb( 153, 206, 255 )'
-      } );
+    const labelOptions = {
+      font: new PhetFont( { size: 16 } ),
+      maxWidth: 125 // i18n, determined empirically
+    };
+    const speedItems = [
+      new ComboBoxItem( new Text( fastString, labelOptions ), ClockSpeeds.FAST ),
+      new ComboBoxItem( new Text( normalString, labelOptions ), ClockSpeeds.NORMAL ),
+      new ComboBoxItem( new Text( slowString, labelOptions ), ClockSpeeds.SLOW )
+    ];
+    const speedComboBox = new ComboBox( speedItems, clockSpeedProperty, comboBoxListParent, {
+      cornerRadius: 8,
+      listPosition: 'above',
+      highlightFill: 'rgb( 153, 206, 255 )'
+    } );
 
-      assert && assert( !options.children, 'TimeControls sets children' );
-      options.children = [ playPauseButton, stepForwardButton, new HStrut( 4 ), speedComboBox ];
+    assert && assert( !options.children, 'TimeControls sets children' );
+    options.children = [ playPauseButton, stepForwardButton, new HStrut( 4 ), speedComboBox ];
 
-      super( options );
+    super( options );
 
-      // enabled the step button when the sim is paused
-      runningProperty.link( running => {
-        stepForwardButton.enabled = !running;
-      } );
-    }
+    // enabled the step button when the sim is paused
+    runningProperty.link( running => {
+      stepForwardButton.enabled = !running;
+    } );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'TimeControls', TimeControls );
-} );
+modelsOfTheHydrogenAtom.register( 'TimeControls', TimeControls );
+export default TimeControls;

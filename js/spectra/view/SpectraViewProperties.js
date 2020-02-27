@@ -6,19 +6,16 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/MOTHAViewProperties' );
+import MOTHAViewProperties from '../../common/view/MOTHAViewProperties.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-  class SpectraViewProperties extends MOTHAViewProperties {
+class SpectraViewProperties extends MOTHAViewProperties {
 
-    constructor() {
-      super();
-    }
+  constructor() {
+    super();
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'SpectraViewProperties', SpectraViewProperties );
-} );
+modelsOfTheHydrogenAtom.register( 'SpectraViewProperties', SpectraViewProperties );
+export default SpectraViewProperties;

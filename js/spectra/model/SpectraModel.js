@@ -5,36 +5,33 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BilliardBallModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/BilliardBallModel' );
-  const BohrModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/BohrModel' );
-  const ClassicalSolarSystemModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/ClassicalSolarSystemModel' );
-  const DeBroglieModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/DeBroglieModel' );
-  const MOTHAModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/MOTHAModel' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const PlumPuddingModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PlumPuddingModel' );
-  const SchrodingerModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/SchrodingerModel' );
+import BilliardBallModel from '../../common/model/BilliardBallModel.js';
+import BohrModel from '../../common/model/BohrModel.js';
+import ClassicalSolarSystemModel from '../../common/model/ClassicalSolarSystemModel.js';
+import DeBroglieModel from '../../common/model/DeBroglieModel.js';
+import MOTHAModel from '../../common/model/MOTHAModel.js';
+import PlumPuddingModel from '../../common/model/PlumPuddingModel.js';
+import SchrodingerModel from '../../common/model/SchrodingerModel.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-  class SpectraModel extends MOTHAModel {
+class SpectraModel extends MOTHAModel {
 
-    constructor() {
+  constructor() {
 
-      // Predictive models supported by this screen, in the order that they will appear in the UI
-      const predictiveModels = [
-        new BilliardBallModel(),
-        new PlumPuddingModel(),
-        new ClassicalSolarSystemModel(),
-        new BohrModel(),
-        new DeBroglieModel(),
-        new SchrodingerModel()
-      ];
+    // Predictive models supported by this screen, in the order that they will appear in the UI
+    const predictiveModels = [
+      new BilliardBallModel(),
+      new PlumPuddingModel(),
+      new ClassicalSolarSystemModel(),
+      new BohrModel(),
+      new DeBroglieModel(),
+      new SchrodingerModel()
+    ];
 
-      super( predictiveModels, predictiveModels[ 2 ] );
-    }
+    super( predictiveModels, predictiveModels[ 2 ] );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'SpectraModel', SpectraModel );
-} );
+modelsOfTheHydrogenAtom.register( 'SpectraModel', SpectraModel );
+export default SpectraModel;

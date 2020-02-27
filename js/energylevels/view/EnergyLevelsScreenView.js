@@ -5,65 +5,62 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ElectronEnergyLevelAccordionBox = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/ElectronEnergyLevelAccordionBox' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAConstants = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAConstants' );
-  const EnergyLevelsViewProperties = require( 'MODELS_OF_THE_HYDROGEN_ATOM/energylevels/view/EnergyLevelsViewProperties' );
-  const PredictiveModelPanel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/PredictiveModelPanel' );
-  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  const ScreenView = require( 'JOIST/ScreenView' );
+import ScreenView from '../../../../joist/js/ScreenView.js';
+import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import MOTHAConstants from '../../common/MOTHAConstants.js';
+import PredictiveModelPanel from '../../common/view/PredictiveModelPanel.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
+import EnergyLevelsViewProperties from './EnergyLevelsViewProperties.js';
 
-  class EnergyLevelsScreenView extends ScreenView {
+class EnergyLevelsScreenView extends ScreenView {
 
-    /**
-     * @param {EnergyLevelsModel} model
-     */
-    constructor( model ) {
+  /**
+   * @param {EnergyLevelsModel} model
+   */
+  constructor( model ) {
 
-      super();
+    super();
 
-      const viewProperties = new EnergyLevelsViewProperties();
+    const viewProperties = new EnergyLevelsViewProperties();
 
-      const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
-        center: this.layoutBounds.center
-      } );
+    const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
+      center: this.layoutBounds.center
+    } );
 
-      // panel that contains radio buttons for selecting a predictive model
-      const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty, model.predictiveModels, {
-        top: electronEnergyLevelAccordionBox.top,
-        left: electronEnergyLevelAccordionBox.right + 20
-      } );
+    // panel that contains radio buttons for selecting a predictive model
+    const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty, model.predictiveModels, {
+      top: electronEnergyLevelAccordionBox.top,
+      left: electronEnergyLevelAccordionBox.right + 20
+    } );
 
-      // Reset All button
-      const resetAllButton = new ResetAllButton( {
-        listener: () => {
-          model.reset();
-          viewProperties.reset();
-        },
-        right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
-        bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN
-      } );
+    // Reset All button
+    const resetAllButton = new ResetAllButton( {
+      listener: () => {
+        model.reset();
+        viewProperties.reset();
+      },
+      right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+      bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN
+    } );
 
-      //TODO add other UI components
+    //TODO add other UI components
 
-      // rendering order
-      this.addChild( electronEnergyLevelAccordionBox );
-      this.addChild( predictiveModelPanel );
-      this.addChild( resetAllButton );
-    }
-
-    /**
-     * @param {number} dt
-     * @public
-     */
-    step( dt ) {
-      //TODO
-    }
+    // rendering order
+    this.addChild( electronEnergyLevelAccordionBox );
+    this.addChild( predictiveModelPanel );
+    this.addChild( resetAllButton );
   }
 
-  return modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenView', EnergyLevelsScreenView );
-} );
+  /**
+   * @param {number} dt
+   * @public
+   */
+  step( dt ) {
+    //TODO
+  }
+}
+
+modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenView', EnergyLevelsScreenView );
+export default EnergyLevelsScreenView;

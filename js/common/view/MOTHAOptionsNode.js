@@ -5,41 +5,38 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const merge = require( 'PHET_CORE/merge' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
-  const Tandem = require( 'TANDEM/Tandem' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
+import merge from '../../../../phet-core/js/merge.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAColorProfile from '../MOTHAColorProfile.js';
 
-  class MOTHAOptionsNode extends VBox {
+class MOTHAOptionsNode extends VBox {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = merge( {
+    options = merge( {
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, options );
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
 
-      // Projector Mode checkbox
-      const projectorModeCheckbox = new ProjectorModeCheckbox( MOTHAColorProfile, {
-        tandem: options.tandem.createTandem( 'projectorModeCheckbox' )
-      } );
+    // Projector Mode checkbox
+    const projectorModeCheckbox = new ProjectorModeCheckbox( MOTHAColorProfile, {
+      tandem: options.tandem.createTandem( 'projectorModeCheckbox' )
+    } );
 
-      assert && assert( !options.children, 'MOTHAOptionsNode sets children' );
-      options.children = [ projectorModeCheckbox ];
+    assert && assert( !options.children, 'MOTHAOptionsNode sets children' );
+    options.children = [ projectorModeCheckbox ];
 
-      super( options );
-    }
+    super( options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'MOTHAOptionsNode', MOTHAOptionsNode );
-} );
+modelsOfTheHydrogenAtom.register( 'MOTHAOptionsNode', MOTHAOptionsNode );
+export default MOTHAOptionsNode;

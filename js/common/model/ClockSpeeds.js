@@ -5,14 +5,11 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-  const ClockSpeeds = Enumeration.byKeys( [ 'FAST', 'NORMAL', 'SLOW' ] );
+const ClockSpeeds = Enumeration.byKeys( [ 'FAST', 'NORMAL', 'SLOW' ] );
 
-  return modelsOfTheHydrogenAtom.register( 'ClockSpeeds', ClockSpeeds );
-} );
+modelsOfTheHydrogenAtom.register( 'ClockSpeeds', ClockSpeeds );
+export default ClockSpeeds;

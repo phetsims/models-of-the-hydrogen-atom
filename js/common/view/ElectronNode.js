@@ -5,30 +5,27 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-  // constants
-  const DIAMETER = 9;
+// constants
+const DIAMETER = 9;
 
-  class ElectronNode extends ShadedSphereNode {
+class ElectronNode extends ShadedSphereNode {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = options || {};
-      options.mainColor = 'rgb( 120, 120, 255 )';
-      options.highlightColor = 'rgb( 140, 140, 255 )';
+    options = options || {};
+    options.mainColor = 'rgb( 120, 120, 255 )';
+    options.highlightColor = 'rgb( 140, 140, 255 )';
 
-      super( DIAMETER, options );
-    }
+    super( DIAMETER, options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'ElectronNode', ElectronNode );
-} );
+modelsOfTheHydrogenAtom.register( 'ElectronNode', ElectronNode );
+export default ElectronNode;

@@ -17,35 +17,31 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const merge = require( 'PHET_CORE/merge' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const PredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModel' );
+import merge from '../../../../phet-core/js/merge.js';
+import deBroglieButtonImage from '../../../images/deBroglieButton_png.js';
+import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import PredictiveModel from './PredictiveModel.js';
 
-  // strings
-  const deBroglieString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/deBroglie' );
+const deBroglieString = modelsOfTheHydrogenAtomStrings.deBroglie;
 
-  // images
-  const deBroglieButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/deBroglieButton.png' );
 
-  class DeBroglieModel extends PredictiveModel {
+class DeBroglieModel extends PredictiveModel {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = merge( {}, options );
+    options = merge( {}, options );
 
-      assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths'  );
-      options.hasTransitionWavelengths = true;
+    assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
+    options.hasTransitionWavelengths = true;
 
-      super( deBroglieString, deBroglieButtonImage, options );
-    }
+    super( deBroglieString, deBroglieButtonImage, options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'DeBroglieModel', DeBroglieModel );
-} );
+modelsOfTheHydrogenAtom.register( 'DeBroglieModel', DeBroglieModel );
+export default DeBroglieModel;

@@ -17,35 +17,31 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const merge = require( 'PHET_CORE/merge' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const PredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModel' );
+import merge from '../../../../phet-core/js/merge.js';
+import schrodingerButtonImage from '../../../images/schrodingerButton_png.js';
+import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import PredictiveModel from './PredictiveModel.js';
 
-  // strings
-  const schrodingerString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/schrodinger' );
+const schrodingerString = modelsOfTheHydrogenAtomStrings.schrodinger;
 
-  // images
-  const schrodingerButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/schrodingerButton.png' );
 
-  class SchrodingerModel extends PredictiveModel {
+class SchrodingerModel extends PredictiveModel {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = merge( {}, options );
+    options = merge( {}, options );
 
-      assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
-      options.hasTransitionWavelengths = true;
+    assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
+    options.hasTransitionWavelengths = true;
 
-      super( schrodingerString, schrodingerButtonImage, options );
-    }
+    super( schrodingerString, schrodingerButtonImage, options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'SchrodingerModel', SchrodingerModel );
-} );
+modelsOfTheHydrogenAtom.register( 'SchrodingerModel', SchrodingerModel );
+export default SchrodingerModel;

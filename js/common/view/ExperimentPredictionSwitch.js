@@ -5,47 +5,44 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ABSwitch = require( 'SUN/ABSwitch' );
-  const Dimension2 = require( 'DOT/Dimension2' );
-  const merge = require( 'PHET_CORE/merge' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAColorProfile = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/MOTHAColorProfile' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import merge from '../../../../phet-core/js/merge.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import ABSwitch from '../../../../sun/js/ABSwitch.js';
+import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAColorProfile from '../MOTHAColorProfile.js';
 
-  // strings
-  const experimentString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/experiment' );
-  const predictionString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/prediction' );
+const experimentString = modelsOfTheHydrogenAtomStrings.experiment;
+const predictionString = modelsOfTheHydrogenAtomStrings.prediction;
 
-  class ExperimentPredictionSwitch extends ABSwitch {
+class ExperimentPredictionSwitch extends ABSwitch {
 
-    /**
-     * @param {BooleanProperty} experimentEnabledProperty
-     * @param {Object} [options]
-     */
-    constructor( experimentEnabledProperty, options ) {
+  /**
+   * @param {BooleanProperty} experimentEnabledProperty
+   * @param {Object} [options]
+   */
+  constructor( experimentEnabledProperty, options ) {
 
-      options = merge( {
-        centerOnButton: true,
-        toggleSwitchOptions: { size: new Dimension2( 50, 25 ) }
-      }, options );
+    options = merge( {
+      centerOnButton: true,
+      toggleSwitchOptions: { size: new Dimension2( 50, 25 ) }
+    }, options );
 
-      const labelOptions = {
-        font: new PhetFont( { size: 16, weight: 'bold' } ),
-        fill: MOTHAColorProfile.abSwitchTextFillProperty,
-        maxWidth: 100
-      };
+    const labelOptions = {
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      fill: MOTHAColorProfile.abSwitchTextFillProperty,
+      maxWidth: 100
+    };
 
-      super( experimentEnabledProperty,
-        true, new Text( experimentString, labelOptions ),
-        false, new Text( predictionString, labelOptions ),
-        options );
-    }
+    super( experimentEnabledProperty,
+      true, new Text( experimentString, labelOptions ),
+      false, new Text( predictionString, labelOptions ),
+      options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'ExperimentPredictionSwitch', ExperimentPredictionSwitch );
-} );
+modelsOfTheHydrogenAtom.register( 'ExperimentPredictionSwitch', ExperimentPredictionSwitch );
+export default ExperimentPredictionSwitch;

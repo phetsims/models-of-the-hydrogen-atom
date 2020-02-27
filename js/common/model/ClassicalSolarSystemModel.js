@@ -17,28 +17,24 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const PredictiveModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/model/PredictiveModel' );
+import classicalSolarSystemButtonImage from '../../../images/classicalSolarSystemButton_png.js';
+import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import PredictiveModel from './PredictiveModel.js';
 
-  // strings
-  const classicalSolarSystemString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystem' );
+const classicalSolarSystemString = modelsOfTheHydrogenAtomStrings.classicalSolarSystem;
 
-  // images
-  const classicalSolarSystemButtonImage = require( 'image!MODELS_OF_THE_HYDROGEN_ATOM/classicalSolarSystemButton.png' );
 
-  class ClassicalSolarSystemModel extends PredictiveModel {
+class ClassicalSolarSystemModel extends PredictiveModel {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
-      super( classicalSolarSystemString, classicalSolarSystemButtonImage, options );
-    }
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+    super( classicalSolarSystemString, classicalSolarSystemButtonImage, options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'ClassicalSolarSystemModel', ClassicalSolarSystemModel );
-} );
+modelsOfTheHydrogenAtom.register( 'ClassicalSolarSystemModel', ClassicalSolarSystemModel );
+export default ClassicalSolarSystemModel;

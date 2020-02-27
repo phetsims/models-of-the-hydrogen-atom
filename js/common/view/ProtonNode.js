@@ -5,31 +5,28 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
-  const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-  // constants
-  const DIAMETER = 11;
+// constants
+const DIAMETER = 11;
 
-  class ProtonNode extends ShadedSphereNode {
+class ProtonNode extends ShadedSphereNode {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = options || {};
-      options.mainColor = PhetColorScheme.RED_COLORBLIND;
-      options.highlightColor = 'rgb( 255, 130, 130 )'; // lighter red
+    options = options || {};
+    options.mainColor = PhetColorScheme.RED_COLORBLIND;
+    options.highlightColor = 'rgb( 255, 130, 130 )'; // lighter red
 
-      super( DIAMETER, options );
-    }
+    super( DIAMETER, options );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'ProtonNode', ProtonNode );
-} );
+modelsOfTheHydrogenAtom.register( 'ProtonNode', ProtonNode );
+export default ProtonNode;

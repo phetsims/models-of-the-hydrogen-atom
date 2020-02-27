@@ -5,33 +5,29 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
+import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
-  // constants used to compute other constants
-  const ELECTRON_DIAMETER = 9;
-  const PHOTON_DIAMETER = 30;
+// constants used to compute other constants
+const ELECTRON_DIAMETER = 9;
+const PHOTON_DIAMETER = 30;
 
-  const MOTHAConstants = {
+const MOTHAConstants = {
 
-    // margins for all ScreenView instances
-    SCREEN_VIEW_X_MARGIN: 20,
-    SCREEN_VIEW_Y_MARGIN: 20,
+  // margins for all ScreenView instances
+  SCREEN_VIEW_X_MARGIN: 20,
+  SCREEN_VIEW_Y_MARGIN: 20,
 
-    ELECTRON_DIAMETER: ELECTRON_DIAMETER,
-    NEUTRON_DIAMETER: 11,
-    PHOTON_DIAMETER: PHOTON_DIAMETER,
+  ELECTRON_DIAMETER: ELECTRON_DIAMETER,
+  NEUTRON_DIAMETER: 11,
+  PHOTON_DIAMETER: PHOTON_DIAMETER,
 
-    // how close a photon and electron (treated as points) must be for them to collide
-    COLLISION_THRESHOLD: ( PHOTON_DIAMETER / 2 ) + ( ELECTRON_DIAMETER / 2 ),
+  // how close a photon and electron (treated as points) must be for them to collide
+  COLLISION_THRESHOLD: ( PHOTON_DIAMETER / 2 ) + ( ELECTRON_DIAMETER / 2 ),
 
-    MAX_SPECTROMETER_SNAPSHOTS: 3
-  };
+  MAX_SPECTROMETER_SNAPSHOTS: 3
+};
 
-  modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );
+modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );
 
-  return MOTHAConstants;
-} );
+export default MOTHAConstants;

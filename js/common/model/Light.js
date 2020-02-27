@@ -5,48 +5,45 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const Range = require( 'DOT/Range' );
-  const VisibleColor = require( 'SCENERY_PHET/VisibleColor' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Range from '../../../../dot/js/Range.js';
+import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-  class Light {
+class Light {
 
-    constructor() {
+  constructor() {
 
-      // @public is the light on?
-      this.onProperty = new BooleanProperty( false );
+    // @public is the light on?
+    this.onProperty = new BooleanProperty( false );
 
-      // @public whether the light is monochromatic (true) or full spectrum (false)
-      this.monochromaticEnabledProperty = new BooleanProperty( false );
+    // @public whether the light is monochromatic (true) or full spectrum (false)
+    this.monochromaticEnabledProperty = new BooleanProperty( false );
 
-      // @public wavelength in nm, relevant only for monochromatic mode
-      this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
-        range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH )
-      } );
+    // @public wavelength in nm, relevant only for monochromatic mode
+    this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
+      range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH )
+    } );
 
-      // @public {Color} color displayed by the view
-      this.colorProperty = new DerivedProperty(
-        [ this.monochromaticEnabledProperty, this.wavelengthProperty ],
-        ( monochromaticEnabled, wavelength ) => {
-          return monochromaticEnabled ? VisibleColor.wavelengthToColor( wavelength ) : 'white';
-        }
-      );
-    }
-
-    // @public
-    reset() {
-      this.onProperty.reset();
-      this.monochromaticEnabledProperty.reset();
-      this.wavelengthProperty.reset();
-    }
+    // @public {Color} color displayed by the view
+    this.colorProperty = new DerivedProperty(
+      [ this.monochromaticEnabledProperty, this.wavelengthProperty ],
+      ( monochromaticEnabled, wavelength ) => {
+        return monochromaticEnabled ? VisibleColor.wavelengthToColor( wavelength ) : 'white';
+      }
+    );
   }
 
-  return modelsOfTheHydrogenAtom.register( 'Light', Light );
-} );
+  // @public
+  reset() {
+    this.onProperty.reset();
+    this.monochromaticEnabledProperty.reset();
+    this.wavelengthProperty.reset();
+  }
+}
+
+modelsOfTheHydrogenAtom.register( 'Light', Light );
+export default Light;

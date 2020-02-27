@@ -5,34 +5,31 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const modelsOfTheHydrogenAtom = require( 'MODELS_OF_THE_HYDROGEN_ATOM/modelsOfTheHydrogenAtom' );
-  const MOTHAScreen = require( 'MODELS_OF_THE_HYDROGEN_ATOM/common/view/MOTHAScreen' );
-  const SpectraModel = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/model/SpectraModel' );
-  const SpectraScreenView = require( 'MODELS_OF_THE_HYDROGEN_ATOM/spectra/view/SpectraScreenView' );
+import MOTHAScreen from '../common/view/MOTHAScreen.js';
+import modelsOfTheHydrogenAtomStrings from '../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import SpectraModel from './model/SpectraModel.js';
+import SpectraScreenView from './view/SpectraScreenView.js';
 
-  // strings
-  const screenSpectraString = require( 'string!MODELS_OF_THE_HYDROGEN_ATOM/screen.spectra' );
+const screenSpectraString = modelsOfTheHydrogenAtomStrings.screen.spectra;
 
-  class SpectraScreen extends MOTHAScreen {
+class SpectraScreen extends MOTHAScreen {
 
-    constructor() {
+  constructor() {
 
-      const options = {
-        name: screenSpectraString
-        //TODO add homeScreenIcon
-      };
+    const options = {
+      name: screenSpectraString
+      //TODO add homeScreenIcon
+    };
 
-      super(
-        () => new SpectraModel(),
-        model => new SpectraScreenView( model ),
-        options
-      );
-    }
+    super(
+      () => new SpectraModel(),
+      model => new SpectraScreenView( model ),
+      options
+    );
   }
+}
 
-  return modelsOfTheHydrogenAtom.register( 'SpectraScreen', SpectraScreen );
-} );
+modelsOfTheHydrogenAtom.register( 'SpectraScreen', SpectraScreen );
+export default SpectraScreen;
