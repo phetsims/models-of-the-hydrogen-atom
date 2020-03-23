@@ -24,7 +24,7 @@ const fastString = modelsOfTheHydrogenAtomStrings.fast;
 const normalString = modelsOfTheHydrogenAtomStrings.normal;
 const slowString = modelsOfTheHydrogenAtomStrings.slow;
 
-class TimeControls extends HBox {
+class MOTHATimeControlNode extends HBox {
 
   /**
    * @param {Property.<boolean>} runningProperty - is the sim running?
@@ -77,5 +77,5 @@ class TimeControls extends HBox {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'TimeControls', TimeControls );
-export default TimeControls;
+modelsOfTheHydrogenAtom.register( 'TimeControls', MOTHATimeControlNode );
+export default MOTHATimeControlNode;

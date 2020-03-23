@@ -24,10 +24,10 @@ import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSw
 import LegendNode from '../../common/view/LegendNode.js';
 import LightModeControl from '../../common/view/LightModeControl.js';
 import MonochromaticControls from '../../common/view/MonochromaticControls.js';
+import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import PredictiveModelPanel from '../../common/view/PredictiveModelPanel.js';
 import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
-import TimeControls from '../../common/view/TimeControls.js';
 import TinyBox from '../../common/view/TinyBox.js';
 import ZoomBoxNode from '../../common/view/ZoomBoxNode.js';
 import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
@@ -99,7 +99,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Time controls
-    const timeControls = new TimeControls( viewProperties.runningProperty, viewProperties.clockSpeedProperty, this, {
+    const timeControlNode = new MOTHATimeControlNode( viewProperties.runningProperty, viewProperties.clockSpeedProperty, this, {
       left: monochromaticControls.left,
       top: monochromaticControls.bottom + 20
     } );
@@ -173,7 +173,7 @@ class SpectraScreenView extends ScreenView {
     this.addChild( monochromaticControls );
     this.addChild( boxOfHydrogenNode );
     this.addChild( tinyBoxNode );
-    this.addChild( timeControls );
+    this.addChild( timeControlNode );
     this.addChild( zoomBoxNode );
     this.addChild( dashedLines );
     this.addChild( beamNode );
