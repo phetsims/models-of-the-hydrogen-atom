@@ -99,9 +99,9 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Time controls
-    const timeControlNode = new MOTHATimeControlNode( viewProperties.runningProperty, viewProperties.clockSpeedProperty, this, {
+    const timeControlNode = new MOTHATimeControlNode( viewProperties.runningProperty, viewProperties.timeSpeedProperty, {
       left: monochromaticControls.left,
-      top: monochromaticControls.bottom + 20
+      top: monochromaticControls.bottom + 8
     } );
 
     // Box that shows the zoomed-in view

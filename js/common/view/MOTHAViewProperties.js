@@ -9,16 +9,16 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TimeControlSpeed from '../../../../scenery-phet/js/TimeControlSpeed.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ClockSpeeds from '../model/ClockSpeeds.js';
 
 class MOTHAViewProperties {
 
   constructor() {
 
     //TODO should clock-related stuff be in model?
-    // @public clock speed
-    this.clockSpeedProperty = new EnumerationProperty( ClockSpeeds, ClockSpeeds.NORMAL );
+    // @public time speed
+    this.timeSpeedProperty = new EnumerationProperty( TimeControlSpeed, TimeControlSpeed.NORMAL );
 
     // @public {boolean} is the simulation running?
     this.runningProperty = new BooleanProperty( true );
@@ -43,7 +43,7 @@ class MOTHAViewProperties {
 
   // @public
   reset() {
-    this.clockSpeedProperty.reset();
+    this.timeSpeedProperty.reset();
     this.runningProperty.reset();
     this.experimentEnabledProperty.reset();
     this.absorptionWavelengthsVisibleProperty.reset();
