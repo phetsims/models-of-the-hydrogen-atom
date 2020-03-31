@@ -13,7 +13,7 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import MOTHAColorProfile from '../../common/MOTHAColorProfile.js';
-import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 const electronEnergyLevelString = modelsOfTheHydrogenAtomStrings.electronEnergyLevel;

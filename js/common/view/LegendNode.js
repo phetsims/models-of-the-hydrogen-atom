@@ -13,7 +13,7 @@ import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
 import ElectronNode from './ElectronNode.js';

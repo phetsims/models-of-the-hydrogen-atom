@@ -7,7 +7,7 @@
  */
 
 import MOTHAScreen from '../common/view/MOTHAScreen.js';
-import modelsOfTheHydrogenAtomStrings from '../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';

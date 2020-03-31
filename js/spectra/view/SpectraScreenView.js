@@ -30,7 +30,7 @@ import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
 import ZoomBoxNode from '../../common/view/ZoomBoxNode.js';
-import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
 

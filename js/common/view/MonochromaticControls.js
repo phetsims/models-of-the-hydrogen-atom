@@ -13,7 +13,7 @@ import WavelengthSlider from '../../../../scenery-phet/js/WavelengthSlider.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
-import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
 

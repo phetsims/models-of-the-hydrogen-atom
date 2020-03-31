@@ -20,7 +20,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import deBroglieButtonImage from '../../../images/deBroglieButton_png.js';
-import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PredictiveModel from './PredictiveModel.js';
 

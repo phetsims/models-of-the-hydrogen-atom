@@ -19,7 +19,7 @@
  */
 
 import classicalSolarSystemButtonImage from '../../../images/classicalSolarSystemButton_png.js';
-import modelsOfTheHydrogenAtomStrings from '../../models-of-the-hydrogen-atom-strings.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PredictiveModel from './PredictiveModel.js';
 
