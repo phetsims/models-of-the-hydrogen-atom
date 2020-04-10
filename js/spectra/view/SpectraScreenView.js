@@ -131,7 +131,8 @@ class SpectraScreenView extends ScreenView {
       align: 'center',
       spacing: 10,
       left: zoomBoxNode.right + 30,
-      top: zoomBoxNode.top
+      top: zoomBoxNode.top,
+      excludeInvisibleChildrenFromBounds: false
     } );
 
     // Spectrometer

@@ -83,7 +83,8 @@ class SpectrometerAccordionBox extends AccordionBox {
       align: 'bottom',
       spacing: 12,
       children: [ titleNode, subtitleNode ],
-      maxWidth: 290 // i18n, determined empirically
+      maxWidth: 290, // i18n, determined empirically
+      excludeInvisibleChildrenFromBounds: false
     } );
 
     //TODO placeholder

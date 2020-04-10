@@ -32,7 +32,8 @@ class MonochromaticControls extends VBox {
 
     options = merge( {
       align: 'center',
-      spacing: 10
+      spacing: 10,
+      excludeInvisibleChildrenFromBounds: false
     }, options );
 
     // wavelength slider
