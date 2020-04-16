@@ -19,12 +19,9 @@
  */
 
 import plumPuddingButtonImage from '../../../images/plumPuddingButton_png.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import PredictiveModel from './PredictiveModel.js';
-
-const plumPuddingString = modelsOfTheHydrogenAtomStrings.plumPudding;
-
 
 class PlumPuddingModel extends PredictiveModel {
 
@@ -32,7 +29,7 @@ class PlumPuddingModel extends PredictiveModel {
    * @param {Object} [options]
    */
   constructor( options ) {
-    super( plumPuddingString, plumPuddingButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButtonImage, options );
   }
 }
 

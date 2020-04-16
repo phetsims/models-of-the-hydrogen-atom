@@ -13,8 +13,6 @@ import EnergyLevelsScreen from './energylevels/EnergyLevelsScreen.js';
 import modelsOfTheHydrogenAtomStrings from './modelsOfTheHydrogenAtomStrings.js';
 import SpectraScreen from './spectra/SpectraScreen.js';
 
-const modelsOfTheHydrogenAtomTitleString = modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].title;
-
 const simOptions = {
 
   // Creates content for the Options dialog, accessible via the PhET menu
@@ -33,6 +31,10 @@ const simOptions = {
 };
 
 SimLauncher.launch( () => {
-  const sim = new Sim( modelsOfTheHydrogenAtomTitleString, [ new SpectraScreen(), new EnergyLevelsScreen() ], simOptions );
+  const sim = new Sim(
+    modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].title,
+    [ new SpectraScreen(), new EnergyLevelsScreen() ],
+    simOptions
+  );
   sim.start();
 } );

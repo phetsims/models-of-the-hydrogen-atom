@@ -7,19 +7,17 @@
  */
 
 import MOTHAScreen from '../common/view/MOTHAScreen.js';
-import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
-
-const screenEnergyLevelsString = modelsOfTheHydrogenAtomStrings.screen.energyLevels;
 
 class EnergyLevelsScreen extends MOTHAScreen {
 
   constructor() {
 
     const options = {
-      name: screenEnergyLevelsString
+      name: modelsOfTheHydrogenAtomStrings.screen.energyLevels
       //TODO add homeScreenIcon
     };
 

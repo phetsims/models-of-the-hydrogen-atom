@@ -19,13 +19,10 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-
-const photonsEmittedNmString = modelsOfTheHydrogenAtomStrings.photonsEmittedNm;
-const spectrometerString = modelsOfTheHydrogenAtomStrings.spectrometer;
 
 // constants
 const BUTTON_COLOR = 'rgb( 245, 245, 245 )';
@@ -62,13 +59,13 @@ class SpectrometerAccordionBox extends AccordionBox {
 
     options.expandedProperty = expandedProperty;
 
-    const titleNode = new Text( spectrometerString, {
+    const titleNode = new Text( modelsOfTheHydrogenAtomStrings.spectrometer, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColorProfile.spectrometerTitleFillProperty
     } );
 
     //TODO order of title and subtitle is not localized
-    const subtitleNode = new Text( photonsEmittedNmString, {
+    const subtitleNode = new Text( modelsOfTheHydrogenAtomStrings.photonsEmittedNm, {
       font: new PhetFont( 14 ),
       fill: MOTHAColorProfile.spectrometerSubtitleFillProperty
     } );

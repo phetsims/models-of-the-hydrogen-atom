@@ -20,11 +20,9 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import bohrButtonImage from '../../../images/bohrButton_png.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import PredictiveModel from './PredictiveModel.js';
-
-const bohrString = modelsOfTheHydrogenAtomStrings.bohr;
 
 class BohrModel extends PredictiveModel {
 
@@ -38,7 +36,7 @@ class BohrModel extends PredictiveModel {
     assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
     options.hasTransitionWavelengths = true;
 
-    super( bohrString, bohrButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.bohr, bohrButtonImage, options );
   }
 }
 

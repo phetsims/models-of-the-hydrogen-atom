@@ -13,17 +13,12 @@ import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
 import ElectronNode from './ElectronNode.js';
 import NeutronNode from './NeutronNode.js';
 import ProtonNode from './ProtonNode.js';
-
-const electronString = modelsOfTheHydrogenAtomStrings.electron;
-const legendString = modelsOfTheHydrogenAtomStrings.legend;
-const neutronString = modelsOfTheHydrogenAtomStrings.neutron;
-const protonString = modelsOfTheHydrogenAtomStrings.proton;
 
 // constants
 const LABEL_OPTIONS = {
@@ -45,7 +40,7 @@ class LegendNode extends VBox {
     }, options );
 
     // title
-    const titleNode = new Text( legendString, {
+    const titleNode = new Text( modelsOfTheHydrogenAtomStrings.legend, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColorProfile.legendTitleFillProperty,
       maxWidth: 100 // i18n, determined empirically
@@ -53,9 +48,9 @@ class LegendNode extends VBox {
 
     // items that appear in the legend, { icon: {Node}, label: {string} }
     const items = [
-      { icon: new ElectronNode(), label: electronString },
-      { icon: new ProtonNode(), label: protonString },
-      { icon: new NeutronNode(), label: neutronString }
+      { icon: new ElectronNode(), label: modelsOfTheHydrogenAtomStrings.electron },
+      { icon: new ProtonNode(), label: modelsOfTheHydrogenAtomStrings.proton },
+      { icon: new NeutronNode(), label: modelsOfTheHydrogenAtomStrings.neutron }
     ];
 
     // widest icon, used to horizontally center all icons and left-align all labels

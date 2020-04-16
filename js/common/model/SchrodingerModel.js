@@ -20,12 +20,9 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import schrodingerButtonImage from '../../../images/schrodingerButton_png.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import PredictiveModel from './PredictiveModel.js';
-
-const schrodingerString = modelsOfTheHydrogenAtomStrings.schrodinger;
-
 
 class SchrodingerModel extends PredictiveModel {
 
@@ -39,7 +36,7 @@ class SchrodingerModel extends PredictiveModel {
     assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
     options.hasTransitionWavelengths = true;
 
-    super( schrodingerString, schrodingerButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.schrodinger, schrodingerButtonImage, options );
   }
 }
 

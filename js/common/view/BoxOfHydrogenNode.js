@@ -14,10 +14,8 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-
-const hydrogenSymbolString = modelsOfTheHydrogenAtomStrings.hydrogenSymbol;
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 
 // constants
 const BACK_DEPTH = 10;
@@ -53,7 +51,7 @@ class BoxOfHydrogenNode extends Node {
     } );
 
     // hydrogen symbol, in lower-left corner of front face
-    const hydrogenSymbol = new Text( hydrogenSymbolString, {
+    const hydrogenSymbol = new Text( modelsOfTheHydrogenAtomStrings.hydrogenSymbol, {
       font: new PhetFont( { weight: 'bold', size: 24 } ),
       left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
       bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),

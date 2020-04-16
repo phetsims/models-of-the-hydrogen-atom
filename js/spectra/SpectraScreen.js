@@ -7,19 +7,17 @@
  */
 
 import MOTHAScreen from '../common/view/MOTHAScreen.js';
-import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
-
-const screenSpectraString = modelsOfTheHydrogenAtomStrings.screen.spectra;
 
 class SpectraScreen extends MOTHAScreen {
 
   constructor() {
 
     const options = {
-      name: screenSpectraString
+      name: modelsOfTheHydrogenAtomStrings.screen.spectra
       //TODO add homeScreenIcon
     };
 

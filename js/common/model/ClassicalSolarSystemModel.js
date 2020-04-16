@@ -19,12 +19,9 @@
  */
 
 import classicalSolarSystemButtonImage from '../../../images/classicalSolarSystemButton_png.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import PredictiveModel from './PredictiveModel.js';
-
-const classicalSolarSystemString = modelsOfTheHydrogenAtomStrings.classicalSolarSystem;
-
 
 class ClassicalSolarSystemModel extends PredictiveModel {
 
@@ -32,7 +29,7 @@ class ClassicalSolarSystemModel extends PredictiveModel {
    * @param {Object} [options]
    */
   constructor( options ) {
-    super( classicalSolarSystemString, classicalSolarSystemButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.classicalSolarSystem, classicalSolarSystemButtonImage, options );
   }
 }
 

@@ -20,12 +20,9 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import deBroglieButtonImage from '../../../images/deBroglieButton_png.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import PredictiveModel from './PredictiveModel.js';
-
-const deBroglieString = modelsOfTheHydrogenAtomStrings.deBroglie;
-
 
 class DeBroglieModel extends PredictiveModel {
 
@@ -39,7 +36,7 @@ class DeBroglieModel extends PredictiveModel {
     assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
     options.hasTransitionWavelengths = true;
 
-    super( deBroglieString, deBroglieButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.deBroglie, deBroglieButtonImage, options );
   }
 }
 

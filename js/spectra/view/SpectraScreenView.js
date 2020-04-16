@@ -30,11 +30,9 @@ import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
 import ZoomBoxNode from '../../common/view/ZoomBoxNode.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
-
-const viewSnapshotsString = modelsOfTheHydrogenAtomStrings.viewSnapshots;
 
 class SpectraScreenView extends ScreenView {
 
@@ -147,7 +145,7 @@ class SpectraScreenView extends ScreenView {
 
     // View Snapshots button, above upper-right corner of spectrometer
     const viewSnapshotsButton = new RectangularPushButton( {
-      content: new Text( viewSnapshotsString, { font: new PhetFont( 16 ) } ),
+      content: new Text( modelsOfTheHydrogenAtomStrings.viewSnapshots, { font: new PhetFont( 16 ) } ),
       listener: () => {
         if ( !dialog ) {
           dialog = new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty );

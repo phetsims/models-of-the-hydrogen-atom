@@ -13,11 +13,9 @@ import WavelengthSlider from '../../../../scenery-phet/js/WavelengthSlider.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
-
-const showAbsorptionWavelengthsString = modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths;
 
 class MonochromaticControls extends VBox {
 
@@ -51,7 +49,7 @@ class MonochromaticControls extends VBox {
     } );
 
     // 'Show absorption wavelengths' checkbox
-    const showLabel = new Text( showAbsorptionWavelengthsString, {
+    const showLabel = new Text( modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
       font: new PhetFont( 14 ),
       fill: MOTHAColorProfile.showAbsorptionWavelengthTextFillProperty,
       maxWidth: 0.85 * wavelengthSlider.width

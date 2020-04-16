@@ -12,12 +12,9 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
-
-const classicalString = modelsOfTheHydrogenAtomStrings.classical;
-const quantumString = modelsOfTheHydrogenAtomStrings.quantum;
 
 class ContinuumBarNode extends Node {
 
@@ -42,8 +39,8 @@ class ContinuumBarNode extends Node {
       rotation: Math.PI / 2,
       maxWidth: 0.4 * barHeight
     };
-    const classicalText = new Text( classicalString, textOptions );
-    const quantumText = new Text( quantumString, textOptions );
+    const classicalText = new Text( modelsOfTheHydrogenAtomStrings.classical, textOptions );
+    const quantumText = new Text( modelsOfTheHydrogenAtomStrings.quantum, textOptions );
 
     const barWidth = Math.max( classicalText.width, quantumText.width ) + ( 2 * options.xMargin );
     const barNode = new Rectangle( 0, 0, barWidth, barHeight, {

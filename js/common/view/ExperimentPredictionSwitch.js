@@ -11,12 +11,9 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
-
-const experimentString = modelsOfTheHydrogenAtomStrings.experiment;
-const predictionString = modelsOfTheHydrogenAtomStrings.prediction;
 
 class ExperimentPredictionSwitch extends ABSwitch {
 
@@ -38,8 +35,8 @@ class ExperimentPredictionSwitch extends ABSwitch {
     };
 
     super( experimentEnabledProperty,
-      true, new Text( experimentString, labelOptions ),
-      false, new Text( predictionString, labelOptions ),
+      true, new Text( modelsOfTheHydrogenAtomStrings.experiment, labelOptions ),
+      false, new Text( modelsOfTheHydrogenAtomStrings.prediction, labelOptions ),
       options );
   }
 }

@@ -13,10 +13,8 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import MOTHAColorProfile from '../../common/MOTHAColorProfile.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-
-const electronEnergyLevelString = modelsOfTheHydrogenAtomStrings.electronEnergyLevel;
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 
 // constants
 const DIAGRAM_SIZE = new Dimension2( 220, 420 );
@@ -53,7 +51,7 @@ class ElectronEnergyLevelAccordionBox extends AccordionBox {
     options.expandedProperty = expandedProperty;
 
     assert && assert( !options.titleNode, 'ElectronEnergyLevelAccordionBox sets titleNode' );
-    options.titleNode = new Text( electronEnergyLevelString, {
+    options.titleNode = new Text( modelsOfTheHydrogenAtomStrings.electronEnergyLevel, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColorProfile.electronEnergyLevelTitleFillProperty,
       maxWidth: 150 // i18n, determined empirically

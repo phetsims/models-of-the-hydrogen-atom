@@ -21,13 +21,10 @@
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import billiardBallButtonImage from '../../../images/billiardBallButton_png.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import RandomUtils from '../RandomUtils.js';
 import PredictiveModel from './PredictiveModel.js';
-
-const billiardBallString = modelsOfTheHydrogenAtomStrings.billiardBall;
-
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 120 );
@@ -44,7 +41,7 @@ class BilliardBallModel extends PredictiveModel {
       radius: 30
     }, options );
 
-    super( billiardBallString, billiardBallButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButtonImage, options );
 
     // @public (read-only)
     this.radius = options.radius;
