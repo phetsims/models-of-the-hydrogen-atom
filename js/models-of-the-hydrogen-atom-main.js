@@ -7,7 +7,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import MOTHAOptionsNode from './common/view/MOTHAOptionsNode.js';
 import EnergyLevelsScreen from './energylevels/EnergyLevelsScreen.js';
 import modelsOfTheHydrogenAtomStrings from './modelsOfTheHydrogenAtomStrings.js';
@@ -30,7 +30,7 @@ const simOptions = {
   }
 };
 
-SimLauncher.launch( () => {
+simLauncher.launch( () => {
   const sim = new Sim(
     modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].title,
     [ new SpectraScreen(), new EnergyLevelsScreen() ],
