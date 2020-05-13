@@ -36,5 +36,5 @@ class MOTHATimeControlNode extends TimeControlNode {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'TimeControls', MOTHATimeControlNode );
+modelsOfTheHydrogenAtom.register( 'MOTHATimeControlNode', MOTHATimeControlNode );
 export default MOTHATimeControlNode;
