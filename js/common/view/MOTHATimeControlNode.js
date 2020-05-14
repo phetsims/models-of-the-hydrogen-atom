@@ -9,21 +9,21 @@
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import TimeControlSpeed from '../../../../scenery-phet/js/TimeControlSpeed.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 class MOTHATimeControlNode extends TimeControlNode {
 
   /**
    * @param {Property.<boolean>} runningProperty - is the sim running?
-   * @param {EnumerationProperty.<TimeControlSpeed>} timeSpeedProperty
+   * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
    * @param {Object} [options]
    */
   constructor( runningProperty, timeSpeedProperty, options ) {
 
     options = merge( {
-      timeControlSpeedProperty: timeSpeedProperty,
-      timeControlSpeeds: [ TimeControlSpeed.FAST, TimeControlSpeed.NORMAL, TimeControlSpeed.SLOW ],
+      timeSpeedProperty: timeSpeedProperty,
+      timeSpeeds: [ TimeSpeed.FAST, TimeSpeed.NORMAL, TimeSpeed.SLOW ],
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: new PhetFont( 14 ),
