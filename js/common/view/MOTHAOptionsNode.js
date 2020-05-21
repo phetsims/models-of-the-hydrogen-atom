@@ -35,6 +35,20 @@ class MOTHAOptionsNode extends VBox {
     options.children = [ projectorModeCheckbox ];
 
     super( options );
+
+    // @private
+    this.disposeMOTHAOptionsNode = () => {
+      projectorModeCheckbox.dispose();
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposeMOTHAOptionsNode();
+    super.dispose();
   }
 }
 
