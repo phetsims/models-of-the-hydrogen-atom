@@ -55,7 +55,7 @@ class SnapshotsDialog extends Dialog {
     };
   }
 
-  //TODO this never gets called because of https://github.com/phetsims/joist/issues/424#issuecomment-314214885
+  //TODO verify whether this calls and whether it works correctly, because Dialog.dispose has been suspect
   /**
    * @public
    * @override
