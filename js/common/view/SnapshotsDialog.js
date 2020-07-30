@@ -14,6 +14,7 @@ import MOTHAColorProfile from '../MOTHAColorProfile.js';
 import SnapshotNode from './SnapshotNode.js';
 
 class SnapshotsDialog extends Dialog {
+
   /**
    * @param numberOfSnapshotsProperty
    * @param {Object} [options]

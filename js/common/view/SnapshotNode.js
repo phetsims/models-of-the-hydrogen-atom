@@ -42,7 +42,7 @@ class SnapshotNode extends Node {
     } );
 
     const trashButton = new RectangularPushButton( {
-      content: new FontAwesomeNode( 'trash', { scale: 0.5 } ),
+      content: new FontAwesomeNode( 'trash', { scale: 0.65 } ),
       baseColor: 'rgb( 200, 200, 200 )',
       listener: () => {
         numberOfSnapshotsProperty.value--;
