@@ -13,7 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
 
@@ -28,7 +28,7 @@ const LASER_POINTER_OPTIONS = {
   lineWidth: 0.5
 };
 
-class LightModeControl extends RadioButtonGroup {
+class LightModeControl extends RectangularRadioButtonGroup {
 
   /**
    * @param {BooleanProperty} monochromaticEnabledProperty

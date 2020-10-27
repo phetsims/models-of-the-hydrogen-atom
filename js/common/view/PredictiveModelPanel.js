@@ -12,7 +12,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Panel from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PredictiveModel from '../model/PredictiveModel.js';
@@ -42,7 +42,7 @@ class PredictiveModelPanel extends Panel {
     }
 
     // radio buttons
-    const radioButtonGroup = new RadioButtonGroup( predictiveModelProperty, contentArray, {
+    const radioButtonGroup = new RectangularRadioButtonGroup( predictiveModelProperty, contentArray, {
       baseColor: options.fill,
       disabledBaseColor: MOTHAColorProfile.modelsRadioButtonFillProperty,
       selectedStroke: MOTHAColorProfile.modelsRadioButtonSelectedStrokeProperty,
