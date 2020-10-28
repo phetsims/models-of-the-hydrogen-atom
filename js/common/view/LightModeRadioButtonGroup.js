@@ -2,7 +2,7 @@
 
 //TODO on mouseDown in projector mode, radio buttons go gray
 /**
- * LightModeControl provides controls (radio buttons) for selecting between monochromatic and full spectrum (white) light.
+ * LightModeRadioButtonGroup provides radio buttons for selecting between monochromatic and full spectrum (white) light.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -28,7 +28,7 @@ const LASER_POINTER_OPTIONS = {
   lineWidth: 0.5
 };
 
-class LightModeControl extends RectangularRadioButtonGroup {
+class LightModeRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
    * @param {BooleanProperty} monochromaticEnabledProperty
@@ -75,5 +75,5 @@ function createModeIcon( beamColor ) {
   return new Node( { children: [ beamNode, laserNode ] } );
 }
 
-modelsOfTheHydrogenAtom.register( 'LightModeControl', LightModeControl );
-export default LightModeControl;
+modelsOfTheHydrogenAtom.register( 'LightModeRadioButtonGroup', LightModeRadioButtonGroup );
+export default LightModeRadioButtonGroup;

@@ -22,7 +22,7 @@ import BeamNode from '../../common/view/BeamNode.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSwitch.js';
 import LegendNode from '../../common/view/LegendNode.js';
-import LightModeControl from '../../common/view/LightModeControl.js';
+import LightModeRadioButtonGroup from '../../common/view/LightModeRadioButtonGroup.js';
 import MonochromaticControls from '../../common/view/MonochromaticControls.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import PredictiveModelPanel from '../../common/view/PredictiveModelPanel.js';
@@ -51,8 +51,8 @@ class SpectraScreenView extends ScreenView {
       top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN
     } );
 
-    // Light mode control (radio buttons)
-    const lightModeControl = new LightModeControl( model.light.monochromaticEnabledProperty, {
+    // Light Mode radio button group
+    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( model.light.monochromaticEnabledProperty, {
       left: this.layoutBounds.left + 30,
       bottom: 415
     } );
@@ -63,8 +63,8 @@ class SpectraScreenView extends ScreenView {
       model.predictiveModelProperty,
       model.light.wavelengthProperty,
       viewProperties.absorptionWavelengthsVisibleProperty, {
-        left: lightModeControl.left,
-        top: lightModeControl.bottom + 15
+        left: lightModeRadioButtonGroup.left,
+        top: lightModeRadioButtonGroup.bottom + 15
       } );
 
     // Light
@@ -73,8 +73,8 @@ class SpectraScreenView extends ScreenView {
       nozzleSize: new Dimension2( 18, 50 ),
       buttonRadius: 19,
       rotation: -Math.PI / 2, // pointing up
-      left: lightModeControl.right + 20,
-      bottom: lightModeControl.bottom
+      left: lightModeRadioButtonGroup.right + 20,
+      bottom: lightModeRadioButtonGroup.bottom
     } );
 
     // Beam of light
@@ -168,7 +168,7 @@ class SpectraScreenView extends ScreenView {
 
     // rendering order
     this.addChild( legendNode );
-    this.addChild( lightModeControl );
+    this.addChild( lightModeRadioButtonGroup );
     this.addChild( monochromaticControls );
     this.addChild( boxOfHydrogenNode );
     this.addChild( tinyBoxNode );
