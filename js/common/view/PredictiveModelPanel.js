@@ -44,7 +44,6 @@ class PredictiveModelPanel extends Panel {
     // radio buttons
     const radioButtonGroup = new RectangularRadioButtonGroup( predictiveModelProperty, contentArray, {
       baseColor: options.fill,
-      disabledBaseColor: MOTHAColorProfile.modelsRadioButtonFillProperty,
       selectedStroke: MOTHAColorProfile.modelsRadioButtonSelectedStrokeProperty,
       deselectedStroke: MOTHAColorProfile.modelsRadioButtonFillProperty,
       overFill: MOTHAColorProfile.modelsRadioButtonFillProperty,

@@ -42,7 +42,6 @@ class LightModeRadioButtonGroup extends RectangularRadioButtonGroup {
       buttonContentXMargin: 15,
       buttonContentYMargin: 6,
       baseColor: MOTHAColorProfile.lightModeRadioButtonFillProperty,
-      disabledBaseColor: MOTHAColorProfile.lightModeRadioButtonFillProperty,
       selectedStroke: MOTHAColorProfile.lightModeRadioButtonSelectedStrokeProperty,
       deselectedStroke: MOTHAColorProfile.lightModeRadioButtonDeselectedStrokeProperty,
       overFill: MOTHAColorProfile.lightModeRadioButtonFillProperty,
