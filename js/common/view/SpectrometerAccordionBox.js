@@ -99,6 +99,8 @@ class SpectrometerAccordionBox extends AccordionBox {
 
     const recordStopButton = new RecordStopButton( recordingProperty, {
       radius: 15,
+      xMargin: 8.25,
+      yMargin: 8.25,
       baseColor: BUTTON_COLOR,
       touchAreaDilation: 5
     } );
@@ -107,6 +109,8 @@ class SpectrometerAccordionBox extends AccordionBox {
       baseColor: BUTTON_COLOR,
       arrowColor: 'black',
       radius: recordStopButton.height / 2,
+      xMargin: 4,
+      yMargin: 4,
       touchAreaDilation: 5,
       listener: () => {
         //TODO
