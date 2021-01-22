@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import dotRandom from '../../../dot/js/dotRandom.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const RandomUtils = {
@@ -20,7 +21,7 @@ const RandomUtils = {
    */
   nextDouble( min, max ) {
     assert( max > min );
-    return min + ( phet.joist.random.nextDouble() * ( max - min ) );
+    return min + ( dotRandom.nextDouble() * ( max - min ) );
   },
 
   /**
@@ -29,7 +30,7 @@ const RandomUtils = {
    * @public
    */
   nextBoolean() {
-    return phet.joist.random.nextBoolean();
+    return dotRandom.nextBoolean();
   },
 
   /**
@@ -38,7 +39,7 @@ const RandomUtils = {
    * @public
    */
   nextSign() {
-    return ( phet.joist.random.nextBoolean() ? +1 : -1 );
+    return ( dotRandom.nextBoolean() ? +1 : -1 );
   },
 
   /**
@@ -47,7 +48,7 @@ const RandomUtils = {
    * @public
    */
   nextAngle() {
-    return phet.joist.random.nextDouble( 0, 2 * Math.PI );
+    return dotRandom.nextDouble( 0, 2 * Math.PI );
   }
 };
 
