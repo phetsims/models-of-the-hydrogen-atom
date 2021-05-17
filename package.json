@@ -7,7 +7,7 @@
     "url": "https://github.com/phetsims/models-of-the-hydrogen-atom.git"
   },
   "devDependencies": {
-    "grunt": "~1.1.0"
+    "grunt": "~1.4.0"
   },
   "phet": {
     "requirejsNamespace": "MODELS_OF_THE_HYDROGEN_ATOM",
