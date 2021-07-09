@@ -13,12 +13,13 @@ import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButt
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
+import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColorProfile from '../MOTHAColorProfile.js';
@@ -120,7 +121,10 @@ class SpectrometerAccordionBox extends AccordionBox {
     const snapshotButton = new RectangularPushButton( {
       maxHeight: recordStopButton.height,
       baseColor: BUTTON_COLOR,
-      content: new FontAwesomeNode( 'camera' ),
+      content: new Path( cameraSolidShape, {
+        fill: 'black',
+        scale: 0.08
+      } ),
       touchAreaXDilation: 10,
       touchAreaYDilation: 5,
       listener: () => {
