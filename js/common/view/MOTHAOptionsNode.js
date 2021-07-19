@@ -11,7 +11,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
 
 class MOTHAOptionsNode extends VBox {
 
@@ -27,7 +26,7 @@ class MOTHAOptionsNode extends VBox {
     }, options );
 
     // Projector Mode checkbox
-    const projectorModeCheckbox = new ProjectorModeCheckbox( MOTHAColorProfile, {
+    const projectorModeCheckbox = new ProjectorModeCheckbox( null, {
       tandem: options.tandem.createTandem( 'projectorModeCheckbox' )
     } );
 

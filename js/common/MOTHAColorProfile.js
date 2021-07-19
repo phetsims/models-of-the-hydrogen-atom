@@ -8,188 +8,187 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ColorProfile from '../../../scenery-phet/js/ColorProfile.js';
+import ProfileColorProperty from '../../../scenery/js/util/ProfileColorProperty.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
-const MOTHAColorProfile = new ColorProfile( [ 'default', 'projector' ], {
+const MOTHAColorProfile = {
 
-  screenBackgroundColor: {
+  screenBackgroundColorProperty: new ProfileColorProperty( 'screenBackgroundColor', {
     default: 'black',
     projector: 'white'
-  },
+  } ),
 
   //------------------------------------------------------------------------------------------------------------------
   // Box
   //------------------------------------------------------------------------------------------------------------------
 
-  boxFill: {
+  boxFillProperty: new ProfileColorProperty( 'boxFill', {
     default: 'black',
     projector: 'white'
-  },
+  } ),
 
-  boxStroke: {
+  boxStrokeProperty: new ProfileColorProperty( 'boxStroke', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
   //------------------------------------------------------------------------------------------------------------------
   // Legend
   //------------------------------------------------------------------------------------------------------------------
 
-  legendTitleFill: {
+  legendTitleFillProperty: new ProfileColorProperty( 'legendTitleFill', {
     default: 'rgb( 235, 235, 0 )', // yellow
     projector: 'black'
-  },
+  } ),
 
-  legendTextFill: {
+  legendTextFillProperty: new ProfileColorProperty( 'legendTextFill', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
   //------------------------------------------------------------------------------------------------------------------
   // Light
   //------------------------------------------------------------------------------------------------------------------
 
-  lightModeRadioButtonFill: {
+  lightModeRadioButtonFillProperty: new ProfileColorProperty( 'lightModeRadioButtonFill', {
     default: 'black',
     projector: 'white'
-  },
+  } ),
 
-  lightModeRadioButtonSelectedStroke: {
+  lightModeRadioButtonSelectedStrokeProperty: new ProfileColorProperty( 'lightModeRadioButtonSelectedStroke', {
     default: 'rgb( 235, 235, 0 )'
-  },
+  } ),
 
-  lightModeRadioButtonDeselectedStroke: {
+  lightModeRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( 'lightModeRadioButtonDeselectedStroke', {
     default: 'rgb( 200, 200, 200 )'
-  },
+  } ),
 
-  showAbsorptionWavelengthTextFill: {
+  showAbsorptionWavelengthTextFillProperty: new ProfileColorProperty( 'showAbsorptionWavelengthTextFill', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
-  showAbsorptionWavelengthCheckboxFill: {
+  showAbsorptionWavelengthCheckboxFillProperty: new ProfileColorProperty( 'showAbsorptionWavelengthCheckboxFill', {
     default: 'black',
     projector: 'white'
-  },
+  } ),
 
-  showAbsorptionWavelengthCheckboxStroke: {
+  showAbsorptionWavelengthCheckboxStrokeProperty: new ProfileColorProperty( 'showAbsorptionWavelengthCheckboxStroke', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
   //------------------------------------------------------------------------------------------------------------------
   // Models panel
   //------------------------------------------------------------------------------------------------------------------
 
-  abSwitchTextFill: {
+  abSwitchTextFillProperty: new ProfileColorProperty( 'abSwitchTextFill', {
     default: 'rgb( 235, 235, 0 )', // yellow
     projector: 'black'
-  },
+  } ),
 
-  modelsPanelFill: {
+  modelsPanelFillProperty: new ProfileColorProperty( 'modelsPanelFill', {
     default: 'black',
     projector: 'white'
-  },
+  } ),
 
-  modelsPanelStroke: {
+  modelsPanelStrokeProperty: new ProfileColorProperty( 'modelsPanelStroke', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
-  modelsRadioButtonTextFill: {
+  modelsRadioButtonTextFillProperty: new ProfileColorProperty( 'modelsRadioButtonTextFill', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
-  modelsRadioButtonFill: {
+  modelsRadioButtonFillProperty: new ProfileColorProperty( 'modelsRadioButtonFill', {
     default: 'black',
     projector: 'white'
-  },
+  } ),
 
-  modelsRadioButtonSelectedStroke: {
+  modelsRadioButtonSelectedStrokeProperty: new ProfileColorProperty( 'modelsRadioButtonSelectedStroke', {
     default: 'rgb( 235, 235, 0 )'
-  },
+  } ),
 
-  modelsRadioButtonDeselectedStroke: {
+  modelsRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( 'modelsRadioButtonDeselectedStroke', {
     default: 'rgb( 200, 200, 200 )'
-  },
+  } ),
 
-  continuumBarFill: {
+  continuumBarFillProperty: new ProfileColorProperty( 'continuumBarFill', {
     default: 'rgb( 220, 220, 220 )'
-  },
+  } ),
 
-  continuumBarTextFill: {
+  continuumBarTextFillProperty: new ProfileColorProperty( 'continuumBarTextFill', {
     default: 'black'
-  },
+  } ),
 
   //------------------------------------------------------------------------------------------------------------------
   // Spectrometer
   //------------------------------------------------------------------------------------------------------------------
 
-  spectrometerTitleFill: {
+  spectrometerTitleFillProperty: new ProfileColorProperty( 'spectrometerTitleFill', {
     default: 'rgb( 235, 235, 0 )', // yellow
     projector: 'black'
-  },
+  } ),
 
-  spectrometerSubtitleFill: {
+  spectrometerSubtitleFillProperty: new ProfileColorProperty( 'spectrometerSubtitleFill', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
-  spectrometerAccordionBoxFill: {
+  spectrometerAccordionBoxFillProperty: new ProfileColorProperty( 'spectrometerAccordionBoxFill', {
     default: 'rgb( 80, 80, 80 )',
     projector: 'white'
-  },
+  } ),
 
-  spectrometerAccordionBoxStroke: {
+  spectrometerAccordionBoxStrokeProperty: new ProfileColorProperty( 'spectrometerAccordionBoxStroke', {
     default: 'rgb( 140, 140, 140 )',
     projector: 'black'
-  },
+  } ),
 
-  spectrometerFill: {
+  spectrometerFillProperty: new ProfileColorProperty( 'spectrometerFill', {
     default: 'black',
     projector: 'white'
-  },
+  } ),
 
-  spectrometerStroke: {
+  spectrometerStrokeProperty: new ProfileColorProperty( 'spectrometerStroke', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
   //------------------------------------------------------------------------------------------------------------------
   // Snapshots dialog
   //------------------------------------------------------------------------------------------------------------------
 
-  snapshotsDialogFill: {
+  snapshotsDialogFillProperty: new ProfileColorProperty( 'snapshotsDialogFill', {
     default: 'white'
-  },
+  } ),
 
-  snapshotTextFill: {
+  snapshotTextFillProperty: new ProfileColorProperty( 'snapshotTextFill', {
     default: 'white',
     projector: 'black'
-  },
+  } ),
 
   //------------------------------------------------------------------------------------------------------------------
   // Electron Energy Level
   //------------------------------------------------------------------------------------------------------------------
 
-  electronEnergyLevelTitleFill: {
+  electronEnergyLevelTitleFillProperty: new ProfileColorProperty( 'electronEnergyLevelTitleFill', {
     default: 'rgb( 235, 235, 0 )', // yellow
     projector: 'black'
-  },
+  } ),
 
-  electronEnergyLevelAccordionBoxFill: {
+  electronEnergyLevelAccordionBoxFillProperty: new ProfileColorProperty( 'electronEnergyLevelAccordionBoxFill', {
     default: 'rgb( 80, 80, 80 )',
     projector: 'white'
-  },
+  } ),
 
-  electronEnergyLevelAccordionBoxStroke: {
+  electronEnergyLevelAccordionBoxStrokeProperty: new ProfileColorProperty( 'electronEnergyLevelAccordionBoxStroke', {
     default: 'rgb( 140, 140, 140 )',
     projector: 'black'
-  }
-
-} );
+  } )
+};
 
 //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/7 should these be changeable?
 MOTHAColorProfile.UV_COLOR = 'rgb( 160, 160, 160 )';
