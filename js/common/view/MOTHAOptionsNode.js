@@ -26,7 +26,7 @@ class MOTHAOptionsNode extends VBox {
     }, options );
 
     // Projector Mode checkbox
-    const projectorModeCheckbox = new ProjectorModeCheckbox( null, {
+    const projectorModeCheckbox = new ProjectorModeCheckbox( {
       tandem: options.tandem.createTandem( 'projectorModeCheckbox' )
     } );
 
