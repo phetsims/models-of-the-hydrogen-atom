@@ -16,7 +16,7 @@ import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularR
 import Panel from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PredictiveModel from '../model/PredictiveModel.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 
 class PredictiveModelPanel extends Panel {
@@ -29,8 +29,8 @@ class PredictiveModelPanel extends Panel {
   constructor( predictiveModelProperty, predictiveModels, options ) {
 
     options = merge( {
-      fill: MOTHAColorProfile.modelsPanelFillProperty,
-      stroke: MOTHAColorProfile.modelsPanelStrokeProperty,
+      fill: MOTHAColors.modelsPanelFillProperty,
+      stroke: MOTHAColors.modelsPanelStrokeProperty,
       xMargin: 10,
       yMargin: 10
     }, options );
@@ -44,10 +44,10 @@ class PredictiveModelPanel extends Panel {
     // radio buttons
     const radioButtonGroup = new RectangularRadioButtonGroup( predictiveModelProperty, contentArray, {
       baseColor: options.fill,
-      selectedStroke: MOTHAColorProfile.modelsRadioButtonSelectedStrokeProperty,
-      deselectedStroke: MOTHAColorProfile.modelsRadioButtonFillProperty,
-      overFill: MOTHAColorProfile.modelsRadioButtonFillProperty,
-      overStroke: MOTHAColorProfile.modelsRadioButtonDeselectedStrokeProperty,
+      selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
+      deselectedStroke: MOTHAColors.modelsRadioButtonFillProperty,
+      overFill: MOTHAColors.modelsRadioButtonFillProperty,
+      overStroke: MOTHAColors.modelsRadioButtonDeselectedStrokeProperty,
       overLineWidth: 2,
       selectedLineWidth: 2,
       labelAlign: 'left',
@@ -93,7 +93,7 @@ function createRadioButtonContent( predictiveModel ) {
           scale: 0.2
         } ),
         new Text( predictiveModel.displayName, {
-          fill: MOTHAColorProfile.modelsRadioButtonTextFillProperty,
+          fill: MOTHAColors.modelsRadioButtonTextFillProperty,
           font: new PhetFont( 16 ),
           maxWidth: 200 // i18n, determined empirically
         } )

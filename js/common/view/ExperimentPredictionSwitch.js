@@ -13,7 +13,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 class ExperimentPredictionSwitch extends ABSwitch {
 
@@ -30,7 +30,7 @@ class ExperimentPredictionSwitch extends ABSwitch {
 
     const labelOptions = {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColorProfile.abSwitchTextFillProperty,
+      fill: MOTHAColors.abSwitchTextFillProperty,
       maxWidth: 100
     };
 

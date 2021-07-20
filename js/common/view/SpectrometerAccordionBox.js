@@ -22,7 +22,7 @@ import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 // constants
@@ -38,8 +38,8 @@ class SpectrometerAccordionBox extends AccordionBox {
   constructor( expandedProperty, numberOfSnapshotsProperty, options ) {
 
     options = merge( {
-      fill: MOTHAColorProfile.spectrometerAccordionBoxFillProperty,
-      stroke: MOTHAColorProfile.spectrometerAccordionBoxStrokeProperty,
+      fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
+      stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 5,
@@ -62,13 +62,13 @@ class SpectrometerAccordionBox extends AccordionBox {
 
     const titleNode = new Text( modelsOfTheHydrogenAtomStrings.spectrometer, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColorProfile.spectrometerTitleFillProperty
+      fill: MOTHAColors.spectrometerTitleFillProperty
     } );
 
     //TODO order of title and subtitle is not localized
     const subtitleNode = new Text( modelsOfTheHydrogenAtomStrings.photonsEmittedNm, {
       font: new PhetFont( 14 ),
-      fill: MOTHAColorProfile.spectrometerSubtitleFillProperty
+      fill: MOTHAColors.spectrometerSubtitleFillProperty
     } );
 
     // show subtitle only when expanded
@@ -88,8 +88,8 @@ class SpectrometerAccordionBox extends AccordionBox {
     //TODO placeholder
     const displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
       cornerRadius: options.cornerRadius,
-      fill: MOTHAColorProfile.spectrometerFillProperty,
-      stroke: MOTHAColorProfile.spectrometerStrokeProperty
+      fill: MOTHAColors.spectrometerFillProperty,
+      stroke: MOTHAColors.spectrometerStrokeProperty
     } );
 
     //TODO relocate, handle reset

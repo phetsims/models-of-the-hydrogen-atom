@@ -15,7 +15,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 class MonochromaticControls extends VBox {
 
@@ -51,12 +51,12 @@ class MonochromaticControls extends VBox {
     // 'Show absorption wavelengths' checkbox
     const showLabel = new Text( modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
       font: new PhetFont( 14 ),
-      fill: MOTHAColorProfile.showAbsorptionWavelengthTextFillProperty,
+      fill: MOTHAColors.showAbsorptionWavelengthTextFillProperty,
       maxWidth: 0.85 * wavelengthSlider.width
     } );
     const showCheckbox = new Checkbox( showLabel, absorptionWavelengthsVisibleProperty, {
-      checkboxColor: MOTHAColorProfile.showAbsorptionWavelengthCheckboxStrokeProperty,
-      checkboxColorBackground: MOTHAColorProfile.showAbsorptionWavelengthCheckboxFillProperty
+      checkboxColor: MOTHAColors.showAbsorptionWavelengthCheckboxStrokeProperty,
+      checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty
     } );
 
     assert && assert( !options.children, 'MonochromaticControls sets children' );

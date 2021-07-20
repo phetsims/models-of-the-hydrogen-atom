@@ -15,7 +15,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 import ElectronNode from './ElectronNode.js';
 import NeutronNode from './NeutronNode.js';
 import ProtonNode from './ProtonNode.js';
@@ -23,7 +23,7 @@ import ProtonNode from './ProtonNode.js';
 // constants
 const LABEL_OPTIONS = {
   font: new PhetFont( 16 ),
-  fill: MOTHAColorProfile.legendTextFillProperty,
+  fill: MOTHAColors.legendTextFillProperty,
   maxWidth: 120 // i18n, determined empirically
 };
 
@@ -42,7 +42,7 @@ class LegendNode extends VBox {
     // title
     const titleNode = new Text( modelsOfTheHydrogenAtomStrings.legend, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColorProfile.legendTitleFillProperty,
+      fill: MOTHAColors.legendTitleFillProperty,
       maxWidth: 100 // i18n, determined empirically
     } );
 

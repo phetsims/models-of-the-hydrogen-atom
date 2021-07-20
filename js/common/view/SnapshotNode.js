@@ -16,7 +16,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import trashAltRegularShape from '../../../../sherpa/js/fontawesome-5/trashAltRegularShape.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 class SnapshotNode extends Node {
 
@@ -30,14 +30,14 @@ class SnapshotNode extends Node {
 
     const backgroundNode = new Rectangle( 0, 0, 500, 150, {
       cornerRadius: 5,
-      fill: MOTHAColorProfile.spectrometerFillProperty,
-      stroke: MOTHAColorProfile.spectrometerStrokeProperty
+      fill: MOTHAColors.spectrometerFillProperty,
+      stroke: MOTHAColors.spectrometerStrokeProperty
     } );
 
     //TODO i18n
     const titleNode = new Text( 'Snapshot', {
       font: new PhetFont( 16 ),
-      fill: MOTHAColorProfile.snapshotTextFillProperty,
+      fill: MOTHAColors.snapshotTextFillProperty,
       left: backgroundNode.left + 10,
       top: backgroundNode.top + 10
     } );

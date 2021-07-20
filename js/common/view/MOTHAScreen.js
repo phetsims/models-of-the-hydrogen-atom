@@ -9,7 +9,7 @@
 import Screen from '../../../../joist/js/Screen.js';
 import merge from '../../../../phet-core/js/merge.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 class MOTHAScreen extends Screen {
 
@@ -25,7 +25,7 @@ class MOTHAScreen extends Screen {
     options = merge( {
 
       // superclass options
-      backgroundColorProperty: MOTHAColorProfile.screenBackgroundColorProperty,
+      backgroundColorProperty: MOTHAColors.screenBackgroundColorProperty,
 
       // put a gray border around unselected icons on the home screen
       showUnselectedHomeScreenIconFrame: true,

@@ -12,7 +12,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
-import MOTHAColorProfile from '../../common/MOTHAColorProfile.js';
+import MOTHAColors from '../../common/MOTHAColors.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 
@@ -28,8 +28,8 @@ class ElectronEnergyLevelAccordionBox extends AccordionBox {
   constructor( expandedProperty, options ) {
 
     options = merge( {
-      fill: MOTHAColorProfile.electronEnergyLevelAccordionBoxFillProperty,
-      stroke: MOTHAColorProfile.electronEnergyLevelAccordionBoxStrokeProperty,
+      fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
+      stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 5,
@@ -53,7 +53,7 @@ class ElectronEnergyLevelAccordionBox extends AccordionBox {
     assert && assert( !options.titleNode, 'ElectronEnergyLevelAccordionBox sets titleNode' );
     options.titleNode = new Text( modelsOfTheHydrogenAtomStrings.electronEnergyLevel, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColorProfile.electronEnergyLevelTitleFillProperty,
+      fill: MOTHAColors.electronEnergyLevelTitleFillProperty,
       maxWidth: 150 // i18n, determined empirically
     } );
 

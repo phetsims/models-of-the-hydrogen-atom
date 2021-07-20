@@ -16,7 +16,7 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import MOTHAColorProfile from '../../common/MOTHAColorProfile.js';
+import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import BeamNode from '../../common/view/BeamNode.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
@@ -114,7 +114,7 @@ class SpectraScreenView extends ScreenView {
       .lineTo( zoomBoxNode.left, zoomBoxNode.top )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
       .lineTo( zoomBoxNode.left, zoomBoxNode.bottom ), {
-      stroke: MOTHAColorProfile.boxStrokeProperty,
+      stroke: MOTHAColors.boxStrokeProperty,
       lineDash: [ 5, 5 ]
     } );
 

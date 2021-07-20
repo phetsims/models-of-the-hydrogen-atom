@@ -11,7 +11,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 import Particle from './Particle.js';
 
 class Photon extends Particle {
@@ -44,8 +44,8 @@ class Photon extends Particle {
    */
   getColor() {
     return VisibleColor.wavelengthToColor( this.wavelength, {
-      uvColor: MOTHAColorProfile.UV_COLOR,
-      irColor: MOTHAColorProfile.IR_COLOR
+      uvColor: MOTHAColors.UV_COLOR,
+      irColor: MOTHAColors.IR_COLOR
     } );
   }
 }

@@ -10,7 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 import SnapshotNode from './SnapshotNode.js';
 
 class SnapshotsDialog extends Dialog {
@@ -25,7 +25,7 @@ class SnapshotsDialog extends Dialog {
 
     options = merge( {
 
-      fill: MOTHAColorProfile.snapshotsDialogFillProperty,
+      fill: MOTHAColors.snapshotsDialogFillProperty,
       topMargin: 15,
       bottomMargin: 15,
       leftMargin: 15

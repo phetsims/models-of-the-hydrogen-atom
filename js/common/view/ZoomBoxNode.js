@@ -11,7 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 //TODO extends Rectangle?
 class ZoomBoxNode extends Node {
@@ -24,8 +24,8 @@ class ZoomBoxNode extends Node {
     options = merge( {}, options );
 
     const outlineNode = new Rectangle( 0, 0, 400, 400, {
-      fill: MOTHAColorProfile.boxFillProperty,
-      stroke: MOTHAColorProfile.boxStrokeProperty,
+      fill: MOTHAColors.boxFillProperty,
+      stroke: MOTHAColors.boxStrokeProperty,
       lineWidth: 1
     } );
 

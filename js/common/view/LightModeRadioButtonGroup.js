@@ -15,7 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 // constants
 const BEAM_SIZE = new Dimension2( 5, 10 );
@@ -41,11 +41,11 @@ class LightModeRadioButtonGroup extends RectangularRadioButtonGroup {
       spacing: 8,
       buttonContentXMargin: 15,
       buttonContentYMargin: 6,
-      baseColor: MOTHAColorProfile.lightModeRadioButtonFillProperty,
-      selectedStroke: MOTHAColorProfile.lightModeRadioButtonSelectedStrokeProperty,
-      deselectedStroke: MOTHAColorProfile.lightModeRadioButtonDeselectedStrokeProperty,
-      overFill: MOTHAColorProfile.lightModeRadioButtonFillProperty,
-      overStroke: MOTHAColorProfile.lightModeRadioButtonDeselectedStrokeProperty,
+      baseColor: MOTHAColors.lightModeRadioButtonFillProperty,
+      selectedStroke: MOTHAColors.lightModeRadioButtonSelectedStrokeProperty,
+      deselectedStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
+      overFill: MOTHAColors.lightModeRadioButtonFillProperty,
+      overStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
       selectedLineWidth: 2,
       deselectedLineWidth: 2
     }, options );

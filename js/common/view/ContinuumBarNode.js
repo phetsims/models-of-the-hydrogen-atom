@@ -14,7 +14,7 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 class ContinuumBarNode extends Node {
 
@@ -28,8 +28,8 @@ class ContinuumBarNode extends Node {
       xMargin: 5,
       yMargin: 6,
       font: new PhetFont( 14 ),
-      barFill: MOTHAColorProfile.continuumBarFillProperty,
-      textFill: MOTHAColorProfile.continuumBarTextFillProperty
+      barFill: MOTHAColors.continuumBarFillProperty,
+      textFill: MOTHAColors.continuumBarTextFillProperty
     }, options );
 
     // labels

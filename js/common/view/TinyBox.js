@@ -10,7 +10,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColorProfile from '../MOTHAColorProfile.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 // constants
 const TINY_BOX_SIZE = new Dimension2( 6, 6 );
@@ -23,8 +23,8 @@ class TinyBox extends Rectangle {
   constructor( options ) {
 
     options = merge( {
-      fill: MOTHAColorProfile.boxFillProperty,
-      stroke: MOTHAColorProfile.boxStrokeProperty,
+      fill: MOTHAColors.boxFillProperty,
+      stroke: MOTHAColors.boxStrokeProperty,
       lineWidth: 2
     }, options );
 
