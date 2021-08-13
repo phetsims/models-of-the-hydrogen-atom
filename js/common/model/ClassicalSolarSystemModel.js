@@ -18,7 +18,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import classicalSolarSystemButtonImage from '../../../images/classicalSolarSystemButton_png.js';
+import classicalSolarSystemButton_png from '../../../images/classicalSolarSystemButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import PredictiveModel from './PredictiveModel.js';
@@ -29,7 +29,7 @@ class ClassicalSolarSystemModel extends PredictiveModel {
    * @param {Object} [options]
    */
   constructor( options ) {
-    super( modelsOfTheHydrogenAtomStrings.classicalSolarSystem, classicalSolarSystemButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.classicalSolarSystem, classicalSolarSystemButton_png, options );
   }
 }
 

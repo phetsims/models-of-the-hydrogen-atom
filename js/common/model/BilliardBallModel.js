@@ -20,7 +20,7 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
-import billiardBallButtonImage from '../../../images/billiardBallButton_png.js';
+import billiardBallButton_png from '../../../images/billiardBallButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import RandomUtils from '../RandomUtils.js';
@@ -41,7 +41,7 @@ class BilliardBallModel extends PredictiveModel {
       radius: 30
     }, options );
 
-    super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButton_png, options );
 
     // @public (read-only)
     this.radius = options.radius;

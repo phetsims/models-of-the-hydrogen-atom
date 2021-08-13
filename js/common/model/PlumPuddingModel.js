@@ -18,7 +18,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import plumPuddingButtonImage from '../../../images/plumPuddingButton_png.js';
+import plumPuddingButton_png from '../../../images/plumPuddingButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import PredictiveModel from './PredictiveModel.js';
@@ -29,7 +29,7 @@ class PlumPuddingModel extends PredictiveModel {
    * @param {Object} [options]
    */
   constructor( options ) {
-    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButtonImage, options );
+    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, options );
   }
 }
 
