@@ -1,4 +1,4 @@
-// Copyright 2016-2020, University of Colorado Boulder
+// Copyright 2016-2021, University of Colorado Boulder
 
 /**
  * BilliardBallModel is a predictive model that models the hydrogen atom as a billiard ball.
