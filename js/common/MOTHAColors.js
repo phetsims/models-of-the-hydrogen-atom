@@ -11,7 +11,7 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const MOTHAColors = {
 
-  screenBackgroundColorProperty: new ProfileColorProperty( 'screenBackgroundColor', {
+  screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
     default: 'black',
     projector: 'white'
   } ),
@@ -20,12 +20,12 @@ const MOTHAColors = {
   // Box
   //------------------------------------------------------------------------------------------------------------------
 
-  boxFillProperty: new ProfileColorProperty( 'boxFill', {
+  boxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxFill', {
     default: 'black',
     projector: 'white'
   } ),
 
-  boxStrokeProperty: new ProfileColorProperty( 'boxStroke', {
+  boxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxStroke', {
     default: 'white',
     projector: 'black'
   } ),
@@ -34,12 +34,12 @@ const MOTHAColors = {
   // Legend
   //------------------------------------------------------------------------------------------------------------------
 
-  legendTitleFillProperty: new ProfileColorProperty( 'legendTitleFill', {
+  legendTitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'legendTitleFill', {
     default: 'rgb( 235, 235, 0 )', // yellow
     projector: 'black'
   } ),
 
-  legendTextFillProperty: new ProfileColorProperty( 'legendTextFill', {
+  legendTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'legendTextFill', {
     default: 'white',
     projector: 'black'
   } ),
@@ -48,30 +48,30 @@ const MOTHAColors = {
   // Light
   //------------------------------------------------------------------------------------------------------------------
 
-  lightModeRadioButtonFillProperty: new ProfileColorProperty( 'lightModeRadioButtonFill', {
+  lightModeRadioButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonFill', {
     default: 'black',
     projector: 'white'
   } ),
 
-  lightModeRadioButtonSelectedStrokeProperty: new ProfileColorProperty( 'lightModeRadioButtonSelectedStroke', {
+  lightModeRadioButtonSelectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonSelectedStroke', {
     default: 'rgb( 235, 235, 0 )'
   } ),
 
-  lightModeRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( 'lightModeRadioButtonDeselectedStroke', {
+  lightModeRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonDeselectedStroke', {
     default: 'rgb( 200, 200, 200 )'
   } ),
 
-  showAbsorptionWavelengthTextFillProperty: new ProfileColorProperty( 'showAbsorptionWavelengthTextFill', {
+  showAbsorptionWavelengthTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'showAbsorptionWavelengthTextFill', {
     default: 'white',
     projector: 'black'
   } ),
 
-  showAbsorptionWavelengthCheckboxFillProperty: new ProfileColorProperty( 'showAbsorptionWavelengthCheckboxFill', {
+  showAbsorptionWavelengthCheckboxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'showAbsorptionWavelengthCheckboxFill', {
     default: 'black',
     projector: 'white'
   } ),
 
-  showAbsorptionWavelengthCheckboxStrokeProperty: new ProfileColorProperty( 'showAbsorptionWavelengthCheckboxStroke', {
+  showAbsorptionWavelengthCheckboxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'showAbsorptionWavelengthCheckboxStroke', {
     default: 'white',
     projector: 'black'
   } ),
@@ -80,44 +80,44 @@ const MOTHAColors = {
   // Models panel
   //------------------------------------------------------------------------------------------------------------------
 
-  abSwitchTextFillProperty: new ProfileColorProperty( 'abSwitchTextFill', {
+  abSwitchTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'abSwitchTextFill', {
     default: 'rgb( 235, 235, 0 )', // yellow
     projector: 'black'
   } ),
 
-  modelsPanelFillProperty: new ProfileColorProperty( 'modelsPanelFill', {
+  modelsPanelFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsPanelFill', {
     default: 'black',
     projector: 'white'
   } ),
 
-  modelsPanelStrokeProperty: new ProfileColorProperty( 'modelsPanelStroke', {
+  modelsPanelStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsPanelStroke', {
     default: 'white',
     projector: 'black'
   } ),
 
-  modelsRadioButtonTextFillProperty: new ProfileColorProperty( 'modelsRadioButtonTextFill', {
+  modelsRadioButtonTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonTextFill', {
     default: 'white',
     projector: 'black'
   } ),
 
-  modelsRadioButtonFillProperty: new ProfileColorProperty( 'modelsRadioButtonFill', {
+  modelsRadioButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonFill', {
     default: 'black',
     projector: 'white'
   } ),
 
-  modelsRadioButtonSelectedStrokeProperty: new ProfileColorProperty( 'modelsRadioButtonSelectedStroke', {
+  modelsRadioButtonSelectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonSelectedStroke', {
     default: 'rgb( 235, 235, 0 )'
   } ),
 
-  modelsRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( 'modelsRadioButtonDeselectedStroke', {
+  modelsRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonDeselectedStroke', {
     default: 'rgb( 200, 200, 200 )'
   } ),
 
-  continuumBarFillProperty: new ProfileColorProperty( 'continuumBarFill', {
+  continuumBarFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'continuumBarFill', {
     default: 'rgb( 220, 220, 220 )'
   } ),
 
-  continuumBarTextFillProperty: new ProfileColorProperty( 'continuumBarTextFill', {
+  continuumBarTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'continuumBarTextFill', {
     default: 'black'
   } ),
 
@@ -125,32 +125,32 @@ const MOTHAColors = {
   // Spectrometer
   //------------------------------------------------------------------------------------------------------------------
 
-  spectrometerTitleFillProperty: new ProfileColorProperty( 'spectrometerTitleFill', {
+  spectrometerTitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerTitleFill', {
     default: 'rgb( 235, 235, 0 )', // yellow
     projector: 'black'
   } ),
 
-  spectrometerSubtitleFillProperty: new ProfileColorProperty( 'spectrometerSubtitleFill', {
+  spectrometerSubtitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerSubtitleFill', {
     default: 'white',
     projector: 'black'
   } ),
 
-  spectrometerAccordionBoxFillProperty: new ProfileColorProperty( 'spectrometerAccordionBoxFill', {
+  spectrometerAccordionBoxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerAccordionBoxFill', {
     default: 'rgb( 80, 80, 80 )',
     projector: 'white'
   } ),
 
-  spectrometerAccordionBoxStrokeProperty: new ProfileColorProperty( 'spectrometerAccordionBoxStroke', {
+  spectrometerAccordionBoxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerAccordionBoxStroke', {
     default: 'rgb( 140, 140, 140 )',
     projector: 'black'
   } ),
 
-  spectrometerFillProperty: new ProfileColorProperty( 'spectrometerFill', {
+  spectrometerFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerFill', {
     default: 'black',
     projector: 'white'
   } ),
 
-  spectrometerStrokeProperty: new ProfileColorProperty( 'spectrometerStroke', {
+  spectrometerStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerStroke', {
     default: 'white',
     projector: 'black'
   } ),
@@ -159,11 +159,11 @@ const MOTHAColors = {
   // Snapshots dialog
   //------------------------------------------------------------------------------------------------------------------
 
-  snapshotsDialogFillProperty: new ProfileColorProperty( 'snapshotsDialogFill', {
+  snapshotsDialogFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'snapshotsDialogFill', {
     default: 'white'
   } ),
 
-  snapshotTextFillProperty: new ProfileColorProperty( 'snapshotTextFill', {
+  snapshotTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'snapshotTextFill', {
     default: 'white',
     projector: 'black'
   } ),
@@ -172,17 +172,17 @@ const MOTHAColors = {
   // Electron Energy Level
   //------------------------------------------------------------------------------------------------------------------
 
-  electronEnergyLevelTitleFillProperty: new ProfileColorProperty( 'electronEnergyLevelTitleFill', {
+  electronEnergyLevelTitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelTitleFill', {
     default: 'rgb( 235, 235, 0 )', // yellow
     projector: 'black'
   } ),
 
-  electronEnergyLevelAccordionBoxFillProperty: new ProfileColorProperty( 'electronEnergyLevelAccordionBoxFill', {
+  electronEnergyLevelAccordionBoxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelAccordionBoxFill', {
     default: 'rgb( 80, 80, 80 )',
     projector: 'white'
   } ),
 
-  electronEnergyLevelAccordionBoxStrokeProperty: new ProfileColorProperty( 'electronEnergyLevelAccordionBoxStroke', {
+  electronEnergyLevelAccordionBoxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelAccordionBoxStroke', {
     default: 'rgb( 140, 140, 140 )',
     projector: 'black'
   } )
