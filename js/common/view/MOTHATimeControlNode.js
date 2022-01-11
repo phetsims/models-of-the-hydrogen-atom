@@ -16,7 +16,7 @@ class MOTHATimeControlNode extends TimeControlNode {
 
   /**
    * @param {Property.<boolean>} runningProperty - is the sim running?
-   * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
+   * @param {EnumerationDeprecatedProperty.<TimeSpeed>} timeSpeedProperty
    * @param {Object} [options]
    */
   constructor( runningProperty, timeSpeedProperty, options ) {
