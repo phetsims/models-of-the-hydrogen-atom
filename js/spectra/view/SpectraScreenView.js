@@ -8,7 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
-import Shape from '../../../../kite/js/Shape.js';
+import { Shape } from '../../../../kite/js/imports.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
