@@ -1,6 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BilliardBallModel is a predictive model that models the hydrogen atom as a billiard ball.
  *
@@ -20,79 +19,76 @@
  */
 
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import billiardBallButton_png from '../../../images/billiardBallButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import RandomUtils from '../RandomUtils.js';
-import PredictiveModel from './PredictiveModel.js';
+import AlphaParticle from './AlphaParticle.js';
+import Photon from './Photon.js';
+import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 120 );
 const MAX_DEFLECTION_ANGLE = Utils.toRadians( 170 );
 
-class BilliardBallModel extends PredictiveModel {
+type SelfOptions = {
+  radius?: number;
+};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type BilliardBallModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
 
-    options = merge( {
+export default class BilliardBallModel extends PredictiveModel {
+
+  public readonly radius: number;
+
+  constructor( providedOptions?: BilliardBallModelOptions ) {
+
+    const options = optionize<BilliardBallModelOptions, SelfOptions, PredictiveModelOptions>( {
       radius: 30
-    }, options );
+    }, providedOptions );
 
     super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButton_png, options );
 
-    // @public (read-only)
     this.radius = options.radius;
   }
 
   /**
    * Moves a photon. If the photon collides with the atom, the photon bounces back at
    * a 'steep but random' angle. Otherwise it continues to move in its current direction.
-   * @param {Photon} photon
-   * @param {number} dt
-   * @public
-   * @override
    */
-  movePhoton( photon, dt ) {
+  public override stepPhoton( photon: Photon, dt: number ): void {
 
     // detect collision and adjust particle direction
     if ( !photon.collided ) {
       if ( photon.position.distance( this.position ) <= this.radius ) {
         const sign = ( photon.position.x > this.position.x ) ? 1 : -1;
         const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-        photon.direction = photon.direction + deflection;
+        photon.directionProperty.value = photon.direction + deflection;
         photon.collided = true;
       }
     }
 
     // move particle
-    super.movePhoton( photon, dt );
+    super.stepPhoton( photon, dt );
   }
 
   /**
    * Moves an alpha particle. If the alpha particle collides with the atom, the alpha particle
    * bounces back at a 'steep but random' angle. Otherwise it continues to move in its current direction.
-   * @param {AlphaParticle} alphaParticle
-   * @param {number} dt
-   * @public
-   * @override
    */
-  moveAlphaParticle( alphaParticle, dt ) {
+  public override stepAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
 
     // detect collision and adjust particle direction
     if ( alphaParticle.position.distance( this.position ) <= this.radius ) {
       const sign = ( alphaParticle.position.x > this.position.x ) ? 1 : -1;
       const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-      alphaParticle.direction = alphaParticle.direction + deflection;
+      alphaParticle.directionProperty.value = alphaParticle.direction + deflection;
     }
 
     // move particle
-    super.moveAlphaParticle( alphaParticle, dt );
+    super.stepAlphaParticle( alphaParticle, dt );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'BilliardBallModel', BilliardBallModel );
-export default BilliardBallModel;

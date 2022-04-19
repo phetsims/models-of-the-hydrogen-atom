@@ -19,27 +19,26 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel from './PredictiveModel.js';
+import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
 
-class DeBroglieModel extends PredictiveModel {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type DeBroglieModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
 
-    options = merge( {}, options );
+export default class DeBroglieModel extends PredictiveModel {
 
-    assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
-    options.hasTransitionWavelengths = true;
+  constructor( providedOptions?: DeBroglieModelOptions ) {
+
+    const options = optionize<DeBroglieModelOptions, SelfOptions, PredictiveModelOptions>( {
+      hasTransitionWavelengths: true
+    }, providedOptions );
 
     super( modelsOfTheHydrogenAtomStrings.deBroglie, deBroglieButton_png, options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'DeBroglieModel', DeBroglieModel );
-export default DeBroglieModel;

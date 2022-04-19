@@ -1,6 +1,5 @@
-// Copyright 2016-2020, University of Colorado Boulder
+// Copyright 2016-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Particle is the base class for particles.
  *
@@ -9,25 +8,35 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-class Particle {
+export default class Particle {
+
+  public readonly positionProperty: Property<Vector2>;
+  public readonly speedProperty: Property<number>;
+  public readonly directionProperty: Property<number>;
 
   /**
-   * @param {Vector2} position - position in model coordinate frame
-   * @param {number} speed - distance per dt
-   * @param {number} direction - direction of motion, in radians
+   * @param position - position in model coordinate frame
+   * @param speed - distance per dt
+   * @param direction - direction of motion, in radians
    */
-  constructor( position, speed, direction ) {
-
-    // @public
-    this.positionProperty = new Property( position );
+  constructor( position: Vector2, speed: number, direction: number ) {
+    this.positionProperty = new Vector2Property( position );
     this.speedProperty = new NumberProperty( speed );
     this.directionProperty = new NumberProperty( direction );
   }
 
-  // @public
-  reset() {
+  // Convenience getters
+  get position() { return this.positionProperty.value; }
+
+  get speed() { return this.speedProperty.value; }
+
+  get direction() { return this.directionProperty.value; }
+
+  public reset(): void {
     this.positionProperty.reset();
     this.speedProperty.reset();
     this.directionProperty.reset();
@@ -35,4 +44,3 @@ class Particle {
 }
 
 modelsOfTheHydrogenAtom.register( 'Particle', Particle );
-export default Particle;

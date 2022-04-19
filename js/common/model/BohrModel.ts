@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BohrModel is a predictive model that models the hydrogen atom as TODO
  *
@@ -19,27 +18,26 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import bohrButton_png from '../../../images/bohrButton_png.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel from './PredictiveModel.js';
+import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
 
-class BohrModel extends PredictiveModel {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type BohrModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
 
-    options = merge( {}, options );
+export default class BohrModel extends PredictiveModel {
 
-    assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
-    options.hasTransitionWavelengths = true;
+  constructor( providedOptions?: BohrModelOptions ) {
+
+    const options = optionize<BohrModelOptions, SelfOptions, PredictiveModelOptions>( {
+      hasTransitionWavelengths: true
+    }, providedOptions );
 
     super( modelsOfTheHydrogenAtomStrings.bohr, bohrButton_png, options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'BohrModel', BohrModel );
-export default BohrModel;

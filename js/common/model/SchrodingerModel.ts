@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SchrodingerModel is a predictive model that models the hydrogen atom as TODO
  *
@@ -19,27 +18,26 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import schrodingerButton_png from '../../../images/schrodingerButton_png.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel from './PredictiveModel.js';
+import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
 
-class SchrodingerModel extends PredictiveModel {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type SchrodingerModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
 
-    options = merge( {}, options );
+export default class SchrodingerModel extends PredictiveModel {
 
-    assert && assert( options.hasTransitionWavelengths === undefined, 'BohrModel sets hasTransitionWavelengths' );
-    options.hasTransitionWavelengths = true;
+  constructor( providedOptions?: SchrodingerModelOptions ) {
+
+    const options = optionize<SchrodingerModelOptions, SelfOptions, PredictiveModelOptions>( {
+      hasTransitionWavelengths: true
+    }, providedOptions );
 
     super( modelsOfTheHydrogenAtomStrings.schrodinger, schrodingerButton_png, options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerModel', SchrodingerModel );
-export default SchrodingerModel;

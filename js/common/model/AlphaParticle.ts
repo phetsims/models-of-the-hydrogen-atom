@@ -1,6 +1,5 @@
-// Copyright 2016-2020, University of Colorado Boulder
+// Copyright 2016-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * AlphaParticle is the model of an alpha particle.
  * An alpha particle has a position and direction of motion.
@@ -8,20 +7,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Vector2 from '../../../../dot/js/Vector2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle from './Particle.js';
 
-class AlphaParticle extends Particle {
+export default class AlphaParticle extends Particle {
 
-  /**
-   * @param {Vector2} position - position in model coordinate frame
-   * @param {number} speed - distance per dt
-   * @param {number} direction - direction of motion, in radians
-   */
-  constructor( position, speed, direction ) {
+  constructor( position: Vector2, speed: number, direction: number ) {
     super( position, speed, direction );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'AlphaParticle', AlphaParticle );
-export default AlphaParticle;

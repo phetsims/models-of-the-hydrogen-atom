@@ -1,6 +1,5 @@
 // Copyright 2015-2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MOTHAModel is the base class for the model in all screens.
  *
@@ -14,38 +13,31 @@ import PredictiveModel from './PredictiveModel.js';
 
 class MOTHAModel {
 
-  /**
-   * @param {PredictiveModel[]} predictiveModels
-   * @param {PredictiveModel} initialPredictiveModel - an element in predictiveModels
-   */
-  constructor( predictiveModels, initialPredictiveModel ) {
+  // the supported set of  predictive models
+  public readonly predictiveModels: PredictiveModel[];
 
-    // @public (read-only)
+  // which predictive model is selected
+  public readonly predictiveModelProperty: Property<any>;
+
+  public readonly light: Light;
+
+  constructor( predictiveModels: PredictiveModel[], initialPredictiveModel: PredictiveModel ) {
+
     this.predictiveModels = predictiveModels;
 
-    // @public {Property.<PredictiveModel>} which predictive model is selected
-    this.predictiveModelProperty = new Property( initialPredictiveModel, {
-      valueType: PredictiveModel,
-      isValidValue: value => _.includes( predictiveModels, value )
+    this.predictiveModelProperty = new Property<PredictiveModel>( initialPredictiveModel, {
+      validValues: predictiveModels
     } );
 
-    // @public (read-only)
     this.light = new Light();
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.predictiveModelProperty.reset();
     this.light.reset();
   }
 
-  /**
-   * @param {number} dt
-   * @public
-   */
-  step( dt ) {
+  public step( dt: number ): void {
     //TODO
   }
 }

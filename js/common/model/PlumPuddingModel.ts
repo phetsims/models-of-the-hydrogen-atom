@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PlumPudding is a predictive model that models the hydrogen atom as TODO
  *
@@ -22,15 +21,16 @@
 import plumPuddingButton_png from '../../../images/plumPuddingButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel from './PredictiveModel.js';
+import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
+
+type SelfOptions = {};
+
+type PlumPuddingModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
 
 class PlumPuddingModel extends PredictiveModel {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
-    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, options );
+  constructor( providedOptions?: PlumPuddingModelOptions ) {
+    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, providedOptions );
   }
 }
 

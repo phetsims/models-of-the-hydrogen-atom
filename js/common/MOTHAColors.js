@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MOTHAColors defines the colors for this simulation.
  *
@@ -11,6 +10,10 @@ import { ProfileColorProperty } from '../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const MOTHAColors = {
+
+  //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/7 should these be changeable?
+  UV_COLOR: 'rgb( 160, 160, 160 )',
+  IR_COLOR: 'rgb( 160, 160, 160 )',
 
   screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
     default: 'black',
@@ -188,10 +191,6 @@ const MOTHAColors = {
     projector: 'black'
   } )
 };
-
-//TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/7 should these be changeable?
-MOTHAColors.UV_COLOR = 'rgb( 160, 160, 160 )';
-MOTHAColors.IR_COLOR = 'rgb( 160, 160, 160 )';
 
 modelsOfTheHydrogenAtom.register( 'MOTHAColors', MOTHAColors );
 export default MOTHAColors;

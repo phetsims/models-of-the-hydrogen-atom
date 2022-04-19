@@ -1,6 +1,5 @@
-// Copyright 2015-2020, University of Colorado Boulder
+// Copyright 2015-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Light is the model of a light that shines into the box of hydrogen.
  *
@@ -9,37 +8,46 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import { IColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-class Light {
+export default class Light {
+
+  // is the light on?
+  public readonly onProperty: BooleanProperty;
+
+  // whether the light is monochromatic (true) or full spectrum (false)
+  public readonly monochromaticEnabledProperty: BooleanProperty;
+
+  // wavelength in nm, relevant only for monochromatic mode
+  public readonly wavelengthProperty: NumberProperty;
+
+  // color displayed by the view
+  public readonly colorProperty: IReadOnlyProperty<IColor>;
 
   constructor() {
 
-    // @public is the light on?
     this.onProperty = new BooleanProperty( false );
 
-    // @public whether the light is monochromatic (true) or full spectrum (false)
     this.monochromaticEnabledProperty = new BooleanProperty( false );
 
-    // @public wavelength in nm, relevant only for monochromatic mode
     this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
       range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH )
     } );
 
-    // @public {Color} color displayed by the view
     this.colorProperty = new DerivedProperty(
       [ this.monochromaticEnabledProperty, this.wavelengthProperty ],
-      ( monochromaticEnabled, wavelength ) => {
+      ( monochromaticEnabled: boolean, wavelength: number ) => {
         return monochromaticEnabled ? VisibleColor.wavelengthToColor( wavelength ) : 'white';
       }
     );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.onProperty.reset();
     this.monochromaticEnabledProperty.reset();
     this.wavelengthProperty.reset();
@@ -47,4 +55,3 @@ class Light {
 }
 
 modelsOfTheHydrogenAtom.register( 'Light', Light );
-export default Light;

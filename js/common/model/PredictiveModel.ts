@@ -1,6 +1,5 @@
 // Copyright 2016-2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PredictiveModel is the base class for all predictive models.
  *
@@ -11,27 +10,45 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import AlphaParticle from './AlphaParticle.js';
+import Photon from './Photon.js';
 
-class PredictiveModel {
+type SelfOptions = {
+  position?: Vector2; // position in the model coordinate frame
+  orientation?: number; // rotation angle, in radians
+  numberOfStates?: number; // number of electron states, not relevant to all hydrogen atom models
+  groundState?: number; // index of ground state, not relevant to all hydrogen atom models
+  hasTransitionWavelengths?: boolean; // does this model include the concept of transition wavelengths?
+};
 
-  /**
-   * @param {string} displayName
-   * @param {HTMLImageElement} icon
-   * @param {Object} [options]
-   */
-  constructor( displayName, icon, options ) {
-    assert && assert( typeof displayName === 'string', `invalid displayName: ${displayName}` );
-    assert && assert( icon instanceof HTMLImageElement, `invalid icon: ${icon}` );
+export type PredictiveModelOptions = SelfOptions;
 
-    options = merge( {
+export default class PredictiveModel {
+
+  public readonly displayName: string;
+  public readonly icon: HTMLImageElement;
+  public readonly position: Vector2;
+  public readonly orientation: number;
+  public readonly numberOfStates: number;
+  public readonly groundState: number;
+  public readonly hasTransitionWavelengths: boolean;
+
+  // emits when a photon is absorbed
+  public readonly photonAbsorbedEmitter: Emitter<[]>;
+
+  // emits when a photon is emitted (an unfortunate name)
+  public readonly photonEmittedEmitter: Emitter<[]>;
+
+  constructor( displayName: string, icon: HTMLImageElement, providedOptions?: PredictiveModelOptions ) {
+
+    const options = merge( {
       position: Vector2.ZERO, // {Vector2} position in the model coordinate frame
       orientation: 0, // {number} rotation angle, in radians
       numberOfStates: 0, // {number} number of electron states, not relevant to all hydrogen atom models
       groundState: 1, // {number} index of ground state, not relevant to all hydrogen atom models
       hasTransitionWavelengths: false // does this model include the concept of transition wavelengths?
-    }, options );
+    }, providedOptions );
 
-    // @public (read-only)
     this.displayName = displayName;
     this.icon = icon;
     this.position = options.position;
@@ -39,56 +56,38 @@ class PredictiveModel {
     this.numberOfStates = options.numberOfStates;
     this.groundState = options.groundState;
     this.hasTransitionWavelengths = options.hasTransitionWavelengths;
-
-    //TODO add options.parameters
-    // @public emit1 when a photon is absorbed
     this.photonAbsorbedEmitter = new Emitter();
-
-    //TODO add options.parameters
-    // @public emit1 when a photon is emitted (an unfortunate name)
     this.photonEmittedEmitter = new Emitter();
   }
 
-  // @public
-  dispose() {
+  public dispose(): void {
     //TODO anything else? is this necessary?
     this.photonAbsorbedEmitter.removeAllListeners();
     this.photonEmittedEmitter.removeAllListeners();
   }
 
   /**
-   * Called when time has advanced by some delta.
-   * The default implementation does nothing.
-   * @param {number} dt
-   * @public
+   * Called when time has advanced by some delta. The default implementation does nothing.
    */
-  step( dt ) {
+  public step( dt: number ): void {
     //TODO @abstract?
   }
 
   /**
    * Gets the transition wavelengths for a specified state.
-   * The default implementation returns null.
+   * The default implementation returns an empty array.
    * The notion of 'transition wavelength' does not apply to all
    * hydrogen atom models, but it is convenient to have it here.
-   *
-   * @param {number} state
-   * @returns {number[]}
-   * @public
    */
-  getTransitionWavelengths( state ) {
-    return null; //TODO @abstract?
+  public getTransitionWavelengths( state: number ): number[] {
+    return []; //TODO @abstract?
   }
 
   /**
    * Moves a photon by the specified time step.
    * In this default implementation, the atom has no influence on the photon's movement.
-   *
-   * @param {Photon} photon
-   * @param {number} dt
-   * @public
    */
-  stepPhoton( photon, dt ) {
+  public stepPhoton( photon: Photon, dt: number ): void {
     const distance = photon.speed * dt;
     const dx = Math.cos( photon.direction ) * distance;
     const dy = Math.sin( photon.direction ) * distance;
@@ -100,12 +99,8 @@ class PredictiveModel {
   /**
    * Moves an alpha particle by the specified time step.
    * In this default implementation, the atom has no influence on the alpha particle's movement.
-   *
-   * @param {AlphaParticle} alphaParticle
-   * @param {number} dt
-   * @public
    */
-  stepAlphaParticle( alphaParticle, dt ) {
+  public stepAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
     const distance = alphaParticle.speed * dt;
     const dx = Math.cos( alphaParticle.direction ) * distance;
     const dy = Math.sin( alphaParticle.direction ) * distance;
@@ -117,17 +112,10 @@ class PredictiveModel {
   /**
    * Determines if two points collide.
    * Any distance between the points that is <= threshold is considered a collision.
-   *
-   * @param {Vector2} p1
-   * @param {Vector2} p2
-   * @param {number} threshold
-   * @returns {boolean}
-   * @protected
    */
-  pointsCollide( p1, p2, threshold ) {
-    return p1.distance( p2 ) <= threshold;
+  protected pointsCollide( position1: Vector2, position2: Vector2, threshold: number ): boolean {
+    return position1.distance( position2 ) <= threshold;
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'PredictiveModel', PredictiveModel );
-export default PredictiveModel;
