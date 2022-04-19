@@ -10,10 +10,13 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import LaserPointerNode, { LaserPointerNodeOptions } from '../../../../scenery-phet/js/LaserPointerNode.js';
 import { IColor, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
@@ -30,13 +33,15 @@ const LASER_POINTER_OPTIONS = {
 
 type SelfOptions = {};
 
-type LightModeRadioButtonGroupOptions = SelfOptions & RectangularRadioButtonGroupOptions;
+type LightModeRadioButtonGroupOptions = SelfOptions &
+  PickRequired<RectangularRadioButtonGroupOptions, 'tandem'> &
+  PickOptional<RectangularRadioButtonGroupOptions, 'left' | 'bottom'>;
 
 export default class LightModeRadioButtonGroup extends RectangularRadioButtonGroup<boolean> {
 
-  constructor( monochromaticEnabledProperty: IProperty<boolean>, providedOptions?: LightModeRadioButtonGroupOptions ) {
+  constructor( monochromaticEnabledProperty: IProperty<boolean>, providedOptions: LightModeRadioButtonGroupOptions ) {
 
-    const options = merge( {
+    const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>( {
 
       // RectangularRadioButtonGroupOptions
       orientation: 'vertical',
@@ -46,15 +51,18 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
       baseColor: MOTHAColors.lightModeRadioButtonFillProperty,
       selectedStroke: MOTHAColors.lightModeRadioButtonSelectedStrokeProperty,
       deselectedStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
-      overFill: MOTHAColors.lightModeRadioButtonFillProperty,
-      overStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
+
+      //TODO these options are undefined in RectangularRadioButtonGroupOptions
+      // overFill: MOTHAColors.lightModeRadioButtonFillProperty,
+      // overStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
+
       selectedLineWidth: 2,
       deselectedLineWidth: 2
     }, providedOptions );
 
     super( monochromaticEnabledProperty, [
-      { value: false, node: createModeIcon( 'white' ) },
-      { value: true, node: createModeIcon( 'red' ) }
+      { value: false, node: createModeIcon( 'white' ), tandemName: 'whiteRadioButton' },
+      { value: true, node: createModeIcon( 'red' ), tandemName: 'monochromaticRadioButton' }
     ], options );
   }
 }
@@ -63,7 +71,14 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
  * Creates an icon for a light mode.
  */
 function createModeIcon( beamColor: IColor ): Node {
-  const laserNode = new LaserPointerNode( new BooleanProperty( true ), LASER_POINTER_OPTIONS );
+
+  const laserNode = new LaserPointerNode( new BooleanProperty( true ),
+    optionize<LaserPointerNodeOptions, {}, LaserPointerNodeOptions>( {
+      pickable: false,
+      tandem: Tandem.OPT_OUT // opt out because this is a non-interactive icon
+    }, LASER_POINTER_OPTIONS )
+  );
+
   const beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
     fill: beamColor,
     stroke: 'black',
@@ -71,6 +86,7 @@ function createModeIcon( beamColor: IColor ): Node {
     centerX: laserNode.centerX,
     bottom: laserNode.top + 1
   } );
+
   return new Node( { children: [ beamNode, laserNode ] } );
 }
 

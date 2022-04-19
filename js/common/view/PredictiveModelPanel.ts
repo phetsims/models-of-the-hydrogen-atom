@@ -9,6 +9,8 @@
 
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, Image, Text } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
@@ -20,12 +22,14 @@ import ContinuumBarNode from './ContinuumBarNode.js';
 
 type SelfOptions = {};
 
-type PredictiveModelPanelOptions = SelfOptions & PanelOptions;
+type PredictiveModelPanelOptions = SelfOptions &
+  PickRequired<PanelOptions, 'tandem'> &
+  PickOptional<PanelOptions, 'left' | 'top'>;
 
 export default class PredictiveModelPanel extends Panel {
 
   constructor( predictiveModelProperty: IProperty<PredictiveModel>, predictiveModels: PredictiveModel[],
-               providedOptions?: PredictiveModelPanelOptions ) {
+               providedOptions: PredictiveModelPanelOptions ) {
 
     const options = optionize<PredictiveModelPanelOptions, SelfOptions, PanelOptions>( {
       fill: MOTHAColors.modelsPanelFillProperty,
@@ -41,7 +45,7 @@ export default class PredictiveModelPanel extends Panel {
     }
 
     // radio buttons
-    const radioButtonGroup = new RectangularRadioButtonGroup( predictiveModelProperty, contentArray, {
+    const modelRadioButtonGroup = new RectangularRadioButtonGroup( predictiveModelProperty, contentArray, {
       baseColor: options.fill,
       selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
       deselectedStroke: MOTHAColors.modelsRadioButtonFillProperty,
@@ -62,16 +66,17 @@ export default class PredictiveModelPanel extends Panel {
       selectedContentOpacity: 1,
       deselectedContentOpacity: 1,
       overButtonOpacity: 1,
-      overContentOpacity: 1
+      overContentOpacity: 1,
+      tandem: options.tandem.createTandem( 'modelRadioButtonGroup' )
     } );
 
     // continuum bar, 'Classical' to 'Quantum'
-    const continuumBarNode = new ContinuumBarNode( radioButtonGroup.height );
+    const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height );
 
     // panel content
     const contentNode = new HBox( {
       spacing: 10,
-      children: [ continuumBarNode, radioButtonGroup ]
+      children: [ continuumBarNode, modelRadioButtonGroup ]
     } );
 
     super( contentNode, options );
@@ -99,7 +104,8 @@ function createRadioButtonContent( predictiveModel: PredictiveModel ): Rectangul
 
   return {
     value: predictiveModel,
-    node: node
+    node: node,
+    tandemName: `${predictiveModel.tandem.name}RadioButton` //TODO too clever?
   };
 }
 

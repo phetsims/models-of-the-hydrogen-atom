@@ -8,7 +8,9 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
@@ -18,12 +20,12 @@ type SelfOptions = {
   orientation?: number; // rotation angle, in radians
   numberOfStates?: number; // number of electron states, not relevant to all hydrogen atom models
   groundState?: number; // index of ground state, not relevant to all hydrogen atom models
-  hasTransitionWavelengths?: boolean; // does this model include the concept of transition wavelengths?
+  hasTransitionWavelengths: boolean; // does this model include the concept of transition wavelengths?
 };
 
-export type PredictiveModelOptions = SelfOptions;
+export type PredictiveModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class PredictiveModel {
+export default class PredictiveModel extends PhetioObject {
 
   public readonly displayName: string;
   public readonly icon: HTMLImageElement;
@@ -39,15 +41,21 @@ export default class PredictiveModel {
   // emits when a photon is emitted (an unfortunate name)
   public readonly photonEmittedEmitter: Emitter<[]>;
 
-  constructor( displayName: string, icon: HTMLImageElement, providedOptions?: PredictiveModelOptions ) {
+  constructor( displayName: string, icon: HTMLImageElement, providedOptions: PredictiveModelOptions ) {
 
-    const options = merge( {
-      position: Vector2.ZERO, // {Vector2} position in the model coordinate frame
-      orientation: 0, // {number} rotation angle, in radians
-      numberOfStates: 0, // {number} number of electron states, not relevant to all hydrogen atom models
-      groundState: 1, // {number} index of ground state, not relevant to all hydrogen atom models
-      hasTransitionWavelengths: false // does this model include the concept of transition wavelengths?
+    const options = optionize<PredictiveModelOptions, SelfOptions, PhetioObjectOptions>( {
+
+      // SelfOptions
+      position: Vector2.ZERO,
+      orientation: 0,
+      numberOfStates: 0,
+      groundState: 1,
+
+      // PhetioObjectOptions
+      phetioState: false
     }, providedOptions );
+
+    super( options );
 
     this.displayName = displayName;
     this.icon = icon;
@@ -56,14 +64,21 @@ export default class PredictiveModel {
     this.numberOfStates = options.numberOfStates;
     this.groundState = options.groundState;
     this.hasTransitionWavelengths = options.hasTransitionWavelengths;
-    this.photonAbsorbedEmitter = new Emitter();
-    this.photonEmittedEmitter = new Emitter();
+
+    this.photonAbsorbedEmitter = new Emitter( {
+      tandem: options.tandem.createTandem( 'photonAbsorbedEmitter' )
+    } );
+
+    this.photonEmittedEmitter = new Emitter( {
+      tandem: options.tandem.createTandem( 'photonEmittedEmitter' )
+    } );
   }
 
-  public dispose(): void {
+  public override dispose(): void {
     //TODO anything else? is this necessary?
     this.photonAbsorbedEmitter.removeAllListeners();
     this.photonEmittedEmitter.removeAllListeners();
+    super.dispose();
   }
 
   /**

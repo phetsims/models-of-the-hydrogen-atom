@@ -42,10 +42,15 @@ export default class BilliardBallModel extends PredictiveModel {
 
   public readonly radius: number;
 
-  constructor( providedOptions?: BilliardBallModelOptions ) {
+  constructor( providedOptions: BilliardBallModelOptions ) {
 
-    const options = optionize<BilliardBallModelOptions, SelfOptions, PredictiveModelOptions>( {
-      radius: 30
+    const options = optionize<BilliardBallModelOptions, SelfOptions, PredictiveModelOptions, 'hasTransitionWavelengths'>( {
+
+      // SelfOptions
+      radius: 30,
+
+      // PredictiveModelOptions
+      hasTransitionWavelengths: false
     }, providedOptions );
 
     super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButton_png, options );

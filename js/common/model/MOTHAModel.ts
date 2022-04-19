@@ -7,6 +7,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -29,13 +30,21 @@ class MOTHAModel {
 
   constructor( predictiveModels: PredictiveModel[], initialPredictiveModel: PredictiveModel, providedOptions: MOTHAModelOptions ) {
 
+    const options = optionize<MOTHAModelOptions, SelfOptions>( {
+      //TODO
+    }, providedOptions );
+
     this.predictiveModels = predictiveModels;
 
     this.predictiveModelProperty = new Property<PredictiveModel>( initialPredictiveModel, {
       validValues: predictiveModels
+      //TODO tandem
+      //TODO phetioType
     } );
 
-    this.light = new Light();
+    this.light = new Light( {
+      tandem: options.tandem.createTandem( 'light' )
+    } );
   }
 
   public reset(): void {

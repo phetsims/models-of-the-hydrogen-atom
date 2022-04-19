@@ -11,6 +11,8 @@ import IProperty from '../../../../axon/js/IProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -29,7 +31,9 @@ const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
 type SelfOptions = {};
 
-type SpectrometerAccordionBoxOptions = SelfOptions & Omit<AccordionBoxOptions, 'titleNode'>;
+type SpectrometerAccordionBoxOptions = SelfOptions &
+  PickRequired<AccordionBoxOptions, 'tandem'> &
+  PickOptional<AccordionBoxOptions, 'left' | 'top'>;
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 
@@ -94,7 +98,10 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } );
 
     //TODO relocate, handle reset
-    const recordingProperty = new BooleanProperty( false );
+    //TODO does this belong here?
+    const recordingProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'recordingProperty' )
+    } );
     recordingProperty.link( recording => {
       //TODO
     } );
@@ -104,7 +111,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       xMargin: 8.25,
       yMargin: 8.25,
       baseColor: BUTTON_COLOR,
-      touchAreaDilation: 5
+      touchAreaDilation: 5,
+      tandem: options.tandem.createTandem( 'recordStopButton' )
     } );
 
     const resetButton = new ResetButton( {
@@ -116,7 +124,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       touchAreaDilation: 5,
       listener: () => {
         //TODO
-      }
+      },
+      tandem: options.tandem.createTandem( 'resetButton' )
     } );
 
     const snapshotButton = new RectangularPushButton( {
@@ -131,7 +140,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       listener: () => {
         numberOfSnapshotsProperty.value =
           Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.value + 1 );
-      }
+      },
+      tandem: options.tandem.createTandem( 'snapshotButton' )
     } );
 
     const buttonGroup = new VBox( {

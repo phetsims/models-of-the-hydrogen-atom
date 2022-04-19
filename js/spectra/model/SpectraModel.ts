@@ -28,16 +28,28 @@ export default class SpectraModel extends MOTHAModel {
       //TODO
     }, providedOptions );
 
-    const initialModel = new PlumPuddingModel();
+    const initialModel = new PlumPuddingModel( {
+      tandem: options.tandem.createTandem( 'plumPuddingModel' )
+    } );
 
     // Predictive models supported by this screen, in the order that they will appear in the UI
     const predictiveModels = [
-      new BilliardBallModel(),
+      new BilliardBallModel( {
+        tandem: options.tandem.createTandem( 'billiardBallModel' )
+      } ),
       initialModel,
-      new ClassicalSolarSystemModel(),
-      new BohrModel(),
-      new DeBroglieModel(),
-      new SchrodingerModel()
+      new ClassicalSolarSystemModel( {
+        tandem: options.tandem.createTandem( 'classicalSolarSystemModel' )
+      } ),
+      new BohrModel( {
+        tandem: options.tandem.createTandem( 'bohrModel' )
+      } ),
+      new DeBroglieModel( {
+        tandem: options.tandem.createTandem( 'deBroglieModel' )
+      } ),
+      new SchrodingerModel( {
+        tandem: options.tandem.createTandem( 'schrodingerModel' )
+      } )
     ];
 
     super( predictiveModels, initialModel, options );

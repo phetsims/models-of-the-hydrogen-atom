@@ -7,14 +7,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Vector2 from '../../../../dot/js/Vector2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Particle from './Particle.js';
+import Particle, { ParticleOptions } from './Particle.js';
+
+type SelfOptions = {};
+
+type AlphaParticleOptions = SelfOptions & ParticleOptions;
 
 export default class AlphaParticle extends Particle {
 
-  constructor( position: Vector2, speed: number, direction: number ) {
-    super( position, speed, direction );
+  constructor( providedOptions: AlphaParticleOptions ) {
+    super( providedOptions );
   }
 }
 

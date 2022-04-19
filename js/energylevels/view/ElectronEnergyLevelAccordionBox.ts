@@ -9,6 +9,7 @@
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Rectangle, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
@@ -21,7 +22,7 @@ const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
 type SelfOptions = {};
 
-type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & AccordionBoxOptions;
+type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem' | 'center'>;
 
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
@@ -34,6 +35,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       //TODO these options are undefined for AccordionBoxOptions
       // xMargin: 5,
       // yMargin: 5,
+
       cornerRadius: 5,
       buttonXMargin: 5,
       buttonYMargin: 5,

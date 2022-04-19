@@ -44,14 +44,37 @@ export default class MOTHAViewProperties {
   public readonly numberOfSnapshotsProperty: NumberProperty;
 
   constructor( providedOptions: MOTHAViewPropertiesOptions ) {
+
+    const options = providedOptions;
+
     // @ts-ignore TODO port TimeSpeed to Enumeration
-    this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL );
-    this.runningProperty = new BooleanProperty( true );
-    this.experimentEnabledProperty = new BooleanProperty( true );
-    this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false );
-    this.spectrometerExpandedProperty = new BooleanProperty( false );
-    this.electronEnergyLevelExpandedProperty = new BooleanProperty( false );
-    this.numberOfSnapshotsProperty = new NumberProperty( 0 );
+    this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL, {
+      tandem: options.tandem.createTandem( 'timeSpeedProperty' )
+    } );
+
+    this.runningProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'runningProperty' )
+    } );
+
+    this.experimentEnabledProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'experimentEnabledProperty' )
+    } );
+
+    this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'absorptionWavelengthsVisibleProperty' )
+    } );
+
+    this.spectrometerExpandedProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'spectrometerExpandedProperty' )
+    } );
+
+    this.electronEnergyLevelExpandedProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'electronEnergyLevelExpandedProperty' )
+    } );
+
+    this.numberOfSnapshotsProperty = new NumberProperty( 0, {
+      tandem: options.tandem.createTandem( 'numberOfSnapshotsProperty' )
+    } );
   }
 
   public reset(): void {

@@ -31,9 +31,11 @@ type DeBroglieModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTran
 
 export default class DeBroglieModel extends PredictiveModel {
 
-  constructor( providedOptions?: DeBroglieModelOptions ) {
+  constructor( providedOptions: DeBroglieModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, PredictiveModelOptions>( {
+
+      // PredictiveModelOptions
       hasTransitionWavelengths: true
     }, providedOptions );
 

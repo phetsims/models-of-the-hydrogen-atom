@@ -10,15 +10,19 @@
 import IProperty from '../../../../axon/js/IProperty.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { IPaint, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Color, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 type SelfOptions = {
-  beamSize: Dimension2;
+  beamSize?: Dimension2;
 };
 
-type BeamNodeOptions = SelfOptions & RectangleOptions;
+type BeamNodeOptions = SelfOptions &
+  PickRequired<RectangleOptions, 'tandem'> &
+  PickOptional<RectangleOptions, 'centerX' | 'bottom'>;
 
 export default class BeamNode extends Rectangle {
 
@@ -27,9 +31,10 @@ export default class BeamNode extends Rectangle {
    * @param colorProperty - the beam's color
    * @param providedOptions
    */
-  constructor( visibleProperty: IProperty<boolean>, colorProperty: IReadOnlyProperty<IPaint>, providedOptions?: BeamNodeOptions ) {
+  constructor( visibleProperty: IProperty<boolean>, colorProperty: IReadOnlyProperty<Color | string>,
+               providedOptions: BeamNodeOptions ) {
 
-    const options = merge( {
+    const options = optionize<BeamNodeOptions, SelfOptions, RectangleOptions>( {
 
       // SelfOptions
       beamSize: new Dimension2( 10, 50 ),

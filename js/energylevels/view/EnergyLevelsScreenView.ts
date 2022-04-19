@@ -35,13 +35,15 @@ export default class EnergyLevelsScreenView extends ScreenView {
     } );
 
     const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
-      center: this.layoutBounds.center
+      center: this.layoutBounds.center,
+      tandem: options.tandem.createTandem( 'electronEnergyLevelAccordionBox' )
     } );
 
     // panel that contains radio buttons for selecting a predictive model
     const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty, model.predictiveModels, {
+      left: electronEnergyLevelAccordionBox.right + 20,
       top: electronEnergyLevelAccordionBox.top,
-      left: electronEnergyLevelAccordionBox.right + 20
+      tandem: options.tandem.createTandem( 'predictiveModelPanel' )
     } );
 
     // Reset All button
@@ -51,7 +53,8 @@ export default class EnergyLevelsScreenView extends ScreenView {
         viewProperties.reset();
       },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
-      bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN
+      bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
+      tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
     //TODO add other UI components

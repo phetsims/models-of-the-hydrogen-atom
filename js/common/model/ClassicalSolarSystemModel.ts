@@ -18,6 +18,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import optionize from '../../../../phet-core/js/optionize.js';
 import classicalSolarSystemButton_png from '../../../images/classicalSolarSystemButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -29,8 +30,15 @@ type ClassicalSolarSystemModelOptions = SelfOptions & Omit<PredictiveModelOption
 
 export default class ClassicalSolarSystemModel extends PredictiveModel {
 
-  constructor( providedOptions?: ClassicalSolarSystemModelOptions ) {
-    super( modelsOfTheHydrogenAtomStrings.classicalSolarSystem, classicalSolarSystemButton_png, providedOptions );
+  constructor( providedOptions: ClassicalSolarSystemModelOptions ) {
+
+    const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, PredictiveModelOptions, 'hasTransitionWavelengths'>( {
+
+      // PredictiveModelOptions
+      hasTransitionWavelengths: false
+    }, providedOptions );
+
+    super( modelsOfTheHydrogenAtomStrings.classicalSolarSystem, classicalSolarSystemButton_png, options );
   }
 }
 

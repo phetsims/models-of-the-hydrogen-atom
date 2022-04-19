@@ -10,7 +10,24 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+
+type SelfOptions = {
+
+  // position in model coordinate frame
+  position?: Vector2;
+
+  // distance per dt
+  speed?: number;
+
+  // direction of motion, in radians
+  direction?: number;
+};
+
+export type ParticleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Particle {
 
@@ -18,15 +35,25 @@ export default class Particle {
   public readonly speedProperty: Property<number>;
   public readonly directionProperty: Property<number>;
 
-  /**
-   * @param position - position in model coordinate frame
-   * @param speed - distance per dt
-   * @param direction - direction of motion, in radians
-   */
-  constructor( position: Vector2, speed: number, direction: number ) {
-    this.positionProperty = new Vector2Property( position );
-    this.speedProperty = new NumberProperty( speed );
-    this.directionProperty = new NumberProperty( direction );
+  constructor( providedOptions: ParticleOptions ) {
+
+    const options = optionize<ParticleOptions, SelfOptions>( {
+      position: Vector2.ZERO,
+      speed: 0,
+      direction: 0
+    }, providedOptions );
+
+    this.positionProperty = new Vector2Property( options.position, {
+      tandem: options.tandem.createTandem( 'positionProperty' )
+    } );
+
+    this.speedProperty = new NumberProperty( options.speed, {
+      tandem: options.tandem.createTandem( 'speedProperty' )
+    } );
+
+    this.directionProperty = new NumberProperty( options.direction, {
+      tandem: options.tandem.createTandem( 'directionProperty' )
+    } );
   }
 
   // Convenience getters

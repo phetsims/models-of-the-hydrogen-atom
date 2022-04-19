@@ -27,9 +27,15 @@ export default class EnergyLevelsModel extends MOTHAModel {
 
     // Predictive models supported by this screen, in the order that they will appear in the UI
     const predictiveModels = [
-      new BohrModel(),
-      new DeBroglieModel(),
-      new SchrodingerModel()
+      new BohrModel( {
+        tandem: options.tandem.createTandem( 'bohrModel' )
+      } ),
+      new DeBroglieModel( {
+        tandem: options.tandem.createTandem( 'deBroglieModel' )
+      } ),
+      new SchrodingerModel( {
+        tandem: options.tandem.createTandem( 'schrodingerModel' )
+      } )
     ];
 
     //TODO address this with an interface?

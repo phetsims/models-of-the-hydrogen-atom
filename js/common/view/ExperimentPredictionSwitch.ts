@@ -9,6 +9,7 @@
 import IProperty from '../../../../axon/js/IProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
@@ -18,11 +19,11 @@ import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = {};
 
-type ExperimentPredictionSwitchOptions = SelfOptions & Omit<ABSwitchOptions, 'centerOnButton' | 'toggleSwitchOptions'>;
+type ExperimentPredictionSwitchOptions = SelfOptions & PickRequired<ABSwitchOptions, 'tandem'>
 
 class ExperimentPredictionSwitch extends ABSwitch<boolean> {
 
-  constructor( experimentEnabledProperty: IProperty<boolean>, providedOptions?: ExperimentPredictionSwitchOptions ) {
+  constructor( experimentEnabledProperty: IProperty<boolean>, providedOptions: ExperimentPredictionSwitchOptions ) {
 
     const options = optionize<ExperimentPredictionSwitchOptions, SelfOptions, ABSwitchOptions>( {
       centerOnButton: true,
@@ -36,8 +37,8 @@ class ExperimentPredictionSwitch extends ABSwitch<boolean> {
     };
 
     super( experimentEnabledProperty,
-      true, new Text( modelsOfTheHydrogenAtomStrings.experiment, labelOptions ),
-      false, new Text( modelsOfTheHydrogenAtomStrings.prediction, labelOptions ),
+      true, new Text( modelsOfTheHydrogenAtomStrings.experiment, labelOptions ), //TODO instrument
+      false, new Text( modelsOfTheHydrogenAtomStrings.prediction, labelOptions ), //TODO instrument
       options );
   }
 }

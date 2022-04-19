@@ -11,9 +11,16 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { IPaint } from '../../../../scenery/js/imports.js';
+import { Color } from '../../../../scenery/js/imports.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+
+type SelfOptions = {};
+
+type LightOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Light {
 
@@ -27,24 +34,35 @@ export default class Light {
   public readonly wavelengthProperty: NumberProperty;
 
   // color displayed by the view
-  public readonly colorProperty: IReadOnlyProperty<IPaint>;
+  public readonly colorProperty: IReadOnlyProperty<Color | string>;
 
-  constructor() {
+  constructor( providedOptions: LightOptions ) {
 
-    this.onProperty = new BooleanProperty( false );
+    const options = optionize<LightOptions, SelfOptions>( {
+      //TODO
+    }, providedOptions );
 
-    this.monochromaticEnabledProperty = new BooleanProperty( false );
+    this.onProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'onProperty' )
+    } );
+
+    this.monochromaticEnabledProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'monochromaticEnabledProperty' )
+    } );
 
     this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
-      range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH )
+      range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH ),
+      tandem: options.tandem.createTandem( 'wavelengthProperty' )
     } );
 
     this.colorProperty = new DerivedProperty(
       [ this.monochromaticEnabledProperty, this.wavelengthProperty ],
       ( monochromaticEnabled: boolean, wavelength: number ) => {
-        return monochromaticEnabled ? VisibleColor.wavelengthToColor( wavelength ) : 'white';
-      }
-    );
+        return monochromaticEnabled ? VisibleColor.wavelengthToColor( wavelength ) : Color.WHITE;
+      }, {
+        tandem: options.tandem.createTandem( 'colorProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( Color.ColorIO )
+      } );
   }
 
   public reset(): void {

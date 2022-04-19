@@ -9,16 +9,19 @@
 
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import trashAltRegularShape from '../../../../sherpa/js/fontawesome-5/trashAltRegularShape.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = {};
 
-type SnapshotNodeOptions = SelfOptions & Omit<NodeOptions, 'children'>;
+type SnapshotNodeOptions = SelfOptions &
+  PickOptional<NodeOptions, 'scale'>;
 
 export default class SnapshotNode extends Node {
 
@@ -52,7 +55,8 @@ export default class SnapshotNode extends Node {
         numberOfSnapshotsProperty.value--;
       },
       right: backgroundNode.right - 10,
-      bottom: backgroundNode.bottom - 10
+      bottom: backgroundNode.bottom - 10,
+      tandem: Tandem.OPT_OUT //TODO ShapshotNode is dynamically created
     } );
 
     options.children = [ backgroundNode, titleNode, trashButton ];

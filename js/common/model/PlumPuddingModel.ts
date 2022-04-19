@@ -18,6 +18,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import optionize from '../../../../phet-core/js/optionize.js';
 import plumPuddingButton_png from '../../../images/plumPuddingButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -29,8 +30,15 @@ type PlumPuddingModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTr
 
 class PlumPuddingModel extends PredictiveModel {
 
-  constructor( providedOptions?: PlumPuddingModelOptions ) {
-    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, providedOptions );
+  constructor( providedOptions: PlumPuddingModelOptions ) {
+
+    const options = optionize<PlumPuddingModelOptions, SelfOptions, PredictiveModelOptions, 'hasTransitionWavelengths'>( {
+
+      // PredictiveModelOptions
+      hasTransitionWavelengths: false
+    }, providedOptions );
+
+    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, options );
   }
 }
 

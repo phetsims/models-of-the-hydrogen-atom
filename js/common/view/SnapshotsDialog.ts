@@ -8,9 +8,11 @@
  */
 
 import IProperty from '../../../../axon/js/IProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { IPaint, VBox } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SnapshotNode from './SnapshotNode.js';
@@ -21,11 +23,12 @@ type DialogOptions = {
   topMargin: number;
   bottomMargin: number;
   leftMargin: number;
+  tandem: Tandem;
 };
 
 type SelfOptions = {};
 
-type SnapshotsDialogOptions = SelfOptions & DialogOptions;
+type SnapshotsDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'>;
 
 export default class SnapshotsDialog extends Dialog {
 
@@ -33,9 +36,7 @@ export default class SnapshotsDialog extends Dialog {
 
   constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
 
-    assert && assert( numberOfSnapshotsProperty.value > 0 );
-
-    const options = merge( {
+    const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>( {
 
       // DialogOptions
       fill: MOTHAColors.snapshotsDialogFillProperty,

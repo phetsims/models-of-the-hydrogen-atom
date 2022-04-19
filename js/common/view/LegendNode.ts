@@ -7,6 +7,8 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, HStrut, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -25,11 +27,11 @@ const LABEL_OPTIONS = {
 
 type SelfOptions = {};
 
-type LegendNodeOptions = SelfOptions & Omit<VBoxOptions, 'children'>;
+type LegendNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'> & PickOptional<VBoxOptions, 'top' | 'left'>;
 
 export default class LegendNode extends VBox {
 
-  constructor( providedOptions?: LegendNodeOptions ) {
+  constructor( providedOptions: LegendNodeOptions ) {
 
     const options = optionize<LegendNodeOptions, SelfOptions, VBoxOptions>( {
 

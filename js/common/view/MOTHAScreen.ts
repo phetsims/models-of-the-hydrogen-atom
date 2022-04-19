@@ -19,8 +19,6 @@ export type MOTHAScreenOptions = SelfOptions & ScreenOptions;
 export default class MOTHAScreen<M, V extends ScreenView> extends Screen<M, V> {
 
   constructor( createModel: () => M, createView: ( model: M ) => V, providedOptions: MOTHAScreenOptions ) {
-    assert && assert( typeof createModel === 'function', `invalid createModel: ${createModel}` );
-    assert && assert( typeof createView === 'function', `invalid createView: ${createView}` );
 
     const options = optionize<MOTHAScreenOptions, SelfOptions, ScreenOptions>( {
 

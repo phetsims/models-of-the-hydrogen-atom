@@ -8,24 +8,35 @@
 
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 //TODO get from TimeControlNode
-type TimeControlNodeOptions = {};
+type TimeControlNodeOptions = {
+  tandem: Tandem;
+  left: number;
+  top: number;
+};
 
 type SelfOptions = {};
 
-type MOTHATimeControlNodeOptions = SelfOptions & TimeControlNodeOptions;
+type MOTHATimeControlNodeOptions = SelfOptions &
+  PickRequired<TimeControlNodeOptions, 'tandem'> &
+  PickOptional<TimeControlNodeOptions, 'left' | 'top'>;
 
 export default class MOTHATimeControlNode extends TimeControlNode {
 
   // @ts-ignore TODO convert TimeControlNode to TypeScript
-  constructor( runningProperty: IProperty<boolean>, timeSpeedProperty, providedOptions?: MOTHATimeControlNodeOptions ) {
+  constructor( runningProperty: IProperty<boolean>, timeSpeedProperty, providedOptions: MOTHATimeControlNodeOptions ) {
 
     const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>( {
+
+      // @ts-ignore TODO convert TimeControlNode to TypeScript
       timeSpeedProperty: timeSpeedProperty,
 
       // @ts-ignore TODO convert TimeSpeed to TypeScript

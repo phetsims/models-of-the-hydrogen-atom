@@ -30,9 +30,11 @@ type BohrModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitio
 
 export default class BohrModel extends PredictiveModel {
 
-  constructor( providedOptions?: BohrModelOptions ) {
+  constructor( providedOptions: BohrModelOptions ) {
 
-    const options = optionize<BohrModelOptions, SelfOptions, PredictiveModelOptions>( {
+    const options = optionize<BohrModelOptions, SelfOptions, PredictiveModelOptions, 'hasTransitionWavelengths'>( {
+
+      // PredictiveModelOptions
       hasTransitionWavelengths: true
     }, providedOptions );
 

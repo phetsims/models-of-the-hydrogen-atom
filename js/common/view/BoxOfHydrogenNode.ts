@@ -9,6 +9,8 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { LinearGradient, Node, NodeOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -23,11 +25,13 @@ const SHADOW_COLOR = 'rgb( 100, 100, 100 )';
 
 type SelfOptions = {};
 
-type BoxOfHydrogenNodeOptions = SelfOptions & Omit<NodeOptions, 'children'>;
+type BoxOfHydrogenNodeOptions = SelfOptions &
+  PickRequired<NodeOptions, 'tandem'> &
+  PickOptional<NodeOptions, 'centerX' | 'bottom'>;
 
 export default class BoxOfHydrogenNode extends Node {
 
-  constructor( providedOptions?: BoxOfHydrogenNodeOptions ) {
+  constructor( providedOptions: BoxOfHydrogenNodeOptions ) {
 
     // top face, in perspective
     const topNode = new Path( new Shape()

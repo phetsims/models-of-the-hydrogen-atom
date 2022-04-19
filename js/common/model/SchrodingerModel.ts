@@ -30,9 +30,11 @@ type SchrodingerModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTr
 
 export default class SchrodingerModel extends PredictiveModel {
 
-  constructor( providedOptions?: SchrodingerModelOptions ) {
+  constructor( providedOptions: SchrodingerModelOptions ) {
 
-    const options = optionize<SchrodingerModelOptions, SelfOptions, PredictiveModelOptions>( {
+    const options = optionize<SchrodingerModelOptions, SelfOptions, PredictiveModelOptions, 'hasTransitionWavelengths'>( {
+
+      // PredictiveModelOptions
       hasTransitionWavelengths: true
     }, providedOptions );
 

@@ -17,16 +17,20 @@ import MOTHAColors from '../MOTHAColors.js';
 import PredictiveModel from '../model/PredictiveModel.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 type SelfOptions = {};
 
-type MonochromaticControlsOptions = SelfOptions & Omit<VBoxOptions, 'children'>;
+type MonochromaticControlsOptions = SelfOptions &
+  PickRequired<VBoxOptions, 'tandem'> &
+  PickOptional<VBoxOptions, 'left' | 'top'>;
 
 export default class MonochromaticControls extends VBox {
 
   constructor( experimentEnabledProperty: IProperty<boolean>, predictiveModelProperty: IProperty<PredictiveModel>,
                wavelengthProperty: IProperty<number>, absorptionWavelengthsVisibleProperty: IProperty<boolean>,
-               providedOptions?: MonochromaticControlsOptions ) {
+               providedOptions: MonochromaticControlsOptions ) {
 
     const options = optionize<MonochromaticControlsOptions, SelfOptions, VBoxOptions>( {
       align: 'center',
@@ -45,21 +49,24 @@ export default class MonochromaticControls extends VBox {
       thumbHeight: 25,
       valueYSpacing: 6,
       valueFill: 'white',
-      valueFont: new PhetFont( 16 )
+      valueFont: new PhetFont( 16 ),
+      tandem: options.tandem.createTandem( 'wavelengthSlider' )
     } );
 
     // 'Show absorption wavelengths' checkbox
-    const showLabel = new Text( modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
+    const showAbsorptionsWavelengthText = new Text( modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.showAbsorptionWavelengthTextFillProperty,
-      maxWidth: 0.85 * wavelengthSlider.width
+      maxWidth: 0.85 * wavelengthSlider.width,
+      tandem: options.tandem.createTandem( 'showAbsorptionsWavelengthText' )
     } );
-    const showCheckbox = new Checkbox( showLabel, absorptionWavelengthsVisibleProperty, {
+    const showAbsorptionsWavelengthCheckbox = new Checkbox( showAbsorptionsWavelengthText, absorptionWavelengthsVisibleProperty, {
       checkboxColor: MOTHAColors.showAbsorptionWavelengthCheckboxStrokeProperty,
-      checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty
+      checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty,
+      tandem: options.tandem.createTandem( 'showAbsorptionsWavelengthCheckbox' )
     } );
 
-    options.children = [ wavelengthSlider, showCheckbox ];
+    options.children = [ wavelengthSlider, showAbsorptionsWavelengthCheckbox ];
 
     super( options );
 
@@ -67,7 +74,7 @@ export default class MonochromaticControls extends VBox {
     Property.multilink(
       [ experimentEnabledProperty, predictiveModelProperty ],
       ( experimentEnabled: boolean, predictiveModel: PredictiveModel ) => {
-        showCheckbox.visible = ( experimentEnabled || predictiveModel.hasTransitionWavelengths );
+        showAbsorptionsWavelengthCheckbox.visible = ( experimentEnabled || predictiveModel.hasTransitionWavelengths );
       } );
 
     // show absorption wavelengths for relevant models

@@ -8,18 +8,22 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = {};
 
-type ZoomBoxNodeOptions = SelfOptions & Omit<NodeOptions, 'children'>;
+type ZoomBoxNodeOptions = SelfOptions &
+  PickRequired<NodeOptions, 'tandem'> &
+  PickOptional<NodeOptions, 'left' | 'top'>;
 
 //TODO extends Rectangle?
 export default class ZoomBoxNode extends Node {
 
-  constructor( providedOptions?: ZoomBoxNodeOptions ) {
+  constructor( providedOptions: ZoomBoxNodeOptions ) {
 
     const options = optionize<ZoomBoxNodeOptions, SelfOptions, NodeOptions>( {
       //TODO
