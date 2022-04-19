@@ -36,7 +36,7 @@ export default class SnapshotsDialog extends Dialog {
 
   constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
 
-    const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>( {
+    const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>()( {
 
       // DialogOptions
       fill: MOTHAColors.snapshotsDialogFillProperty,

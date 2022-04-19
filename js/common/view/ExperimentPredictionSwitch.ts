@@ -25,7 +25,7 @@ class ExperimentPredictionSwitch extends ABSwitch<boolean> {
 
   constructor( experimentEnabledProperty: IProperty<boolean>, providedOptions: ExperimentPredictionSwitchOptions ) {
 
-    const options = optionize<ExperimentPredictionSwitchOptions, SelfOptions, ABSwitchOptions>( {
+    const options = optionize<ExperimentPredictionSwitchOptions, SelfOptions, ABSwitchOptions>()( {
       centerOnButton: true,
       toggleSwitchOptions: { size: new Dimension2( 50, 25 ) }
     }, providedOptions );

@@ -34,7 +34,7 @@ export default class MOTHATimeControlNode extends TimeControlNode {
   // @ts-ignore TODO convert TimeControlNode to TypeScript
   constructor( runningProperty: IProperty<boolean>, timeSpeedProperty, providedOptions: MOTHATimeControlNodeOptions ) {
 
-    const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>( {
+    const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>()( {
 
       // @ts-ignore TODO convert TimeControlNode to TypeScript
       timeSpeedProperty: timeSpeedProperty,

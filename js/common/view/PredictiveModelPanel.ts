@@ -31,7 +31,7 @@ export default class PredictiveModelPanel extends Panel {
   constructor( predictiveModelProperty: IProperty<PredictiveModel>, predictiveModels: PredictiveModel[],
                providedOptions: PredictiveModelPanelOptions ) {
 
-    const options = optionize<PredictiveModelPanelOptions, SelfOptions, PanelOptions>( {
+    const options = optionize<PredictiveModelPanelOptions, SelfOptions, PanelOptions>()( {
       fill: MOTHAColors.modelsPanelFillProperty,
       stroke: MOTHAColors.modelsPanelStrokeProperty,
       xMargin: 10,

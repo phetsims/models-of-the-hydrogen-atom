@@ -21,7 +21,7 @@ export default class ElectronNode extends ShadedSphereNode {
 
   constructor( providedOptions?: ElectronNodeOptions ) {
 
-    const options = optionize<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>( {
+    const options = optionize<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
       mainColor: 'rgb( 120, 120, 255 )',

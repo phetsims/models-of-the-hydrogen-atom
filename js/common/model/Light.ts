@@ -38,7 +38,7 @@ export default class Light {
 
   constructor( providedOptions: LightOptions ) {
 
-    const options = optionize<LightOptions, SelfOptions>( {
+    const options = optionize<LightOptions, SelfOptions>()( {
       //TODO
     }, providedOptions );
 

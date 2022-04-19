@@ -22,7 +22,7 @@ export default class ProtonNode extends ShadedSphereNode {
 
   constructor( providedOptions?: ProtonNodeOptions ) {
 
-    const options = optionize<ProtonNodeOptions, SelfOptions, ShadedSphereNodeOptions>( {
+    const options = optionize<ProtonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
       mainColor: PhetColorScheme.RED_COLORBLIND,

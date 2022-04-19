@@ -21,7 +21,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
 
   constructor( providedOptions: EnergyLevelsModelOptions ) {
 
-    const options = optionize<EnergyLevelsModelOptions, SelfOptions, MOTHAModelOptions>( {
+    const options = optionize<EnergyLevelsModelOptions, SelfOptions, MOTHAModelOptions>()( {
       //TODO
     }, providedOptions );
 

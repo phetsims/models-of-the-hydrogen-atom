@@ -33,7 +33,7 @@ export default class LegendNode extends VBox {
 
   constructor( providedOptions: LegendNodeOptions ) {
 
-    const options = optionize<LegendNodeOptions, SelfOptions, VBoxOptions>( {
+    const options = optionize<LegendNodeOptions, SelfOptions, VBoxOptions>()( {
 
       // VBoxOptions
       spacing: 8,

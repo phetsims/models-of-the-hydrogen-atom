@@ -37,7 +37,7 @@ export default class Particle {
 
   constructor( providedOptions: ParticleOptions ) {
 
-    const options = optionize<ParticleOptions, SelfOptions>( {
+    const options = optionize<ParticleOptions, SelfOptions>()( {
       position: Vector2.ZERO,
       speed: 0,
       direction: 0

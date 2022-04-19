@@ -22,7 +22,7 @@ export default class MOTHAOptionsNode extends VBox {
 
   constructor( providedOptions?: MOTHAOptionsNodeOptions ) {
 
-    const options = optionize<MOTHAOptionsNodeOptions, SelfOptions, VBoxOptions, 'tandem'>( {
+    const options = optionize<MOTHAOptionsNodeOptions, SelfOptions, VBoxOptions>()( {
 
       // phet-io
       tandem: Tandem.REQUIRED //TODO replace with PickRequired

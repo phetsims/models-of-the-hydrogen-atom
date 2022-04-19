@@ -32,7 +32,7 @@ export default class ClassicalSolarSystemModel extends PredictiveModel {
 
   constructor( providedOptions: ClassicalSolarSystemModelOptions ) {
 
-    const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, PredictiveModelOptions, 'hasTransitionWavelengths'>( {
+    const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, PredictiveModelOptions>()( {
 
       // PredictiveModelOptions
       hasTransitionWavelengths: false

@@ -21,7 +21,7 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
 
   constructor( providedOptions: EnergyLevelsScreenOptions ) {
 
-    const options = optionize<EnergyLevelsScreenOptions, SelfOptions, MOTHAScreenOptions>( {
+    const options = optionize<EnergyLevelsScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
       name: modelsOfTheHydrogenAtomStrings.screen.energyLevels
       //TODO add homeScreenIcon
     }, providedOptions );

@@ -25,7 +25,7 @@ export default class ZoomBoxNode extends Node {
 
   constructor( providedOptions: ZoomBoxNodeOptions ) {
 
-    const options = optionize<ZoomBoxNodeOptions, SelfOptions, NodeOptions>( {
+    const options = optionize<ZoomBoxNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO
     }, providedOptions );
 

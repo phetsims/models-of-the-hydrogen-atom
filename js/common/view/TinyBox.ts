@@ -27,7 +27,7 @@ export default class TinyBox extends Rectangle {
 
   constructor( providedOptions: TinyBoxOptions ) {
 
-    const options = optionize<TinyBoxOptions, SelfOptions, RectangleOptions>( {
+    const options = optionize<TinyBoxOptions, SelfOptions, RectangleOptions>()( {
 
       // RectangleOptions
       fill: MOTHAColors.boxFillProperty,

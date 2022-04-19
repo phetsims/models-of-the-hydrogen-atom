@@ -32,7 +32,7 @@ export default class MonochromaticControls extends VBox {
                wavelengthProperty: IProperty<number>, absorptionWavelengthsVisibleProperty: IProperty<boolean>,
                providedOptions: MonochromaticControlsOptions ) {
 
-    const options = optionize<MonochromaticControlsOptions, SelfOptions, VBoxOptions>( {
+    const options = optionize<MonochromaticControlsOptions, SelfOptions, VBoxOptions>()( {
       align: 'center',
       spacing: 10,
       excludeInvisibleChildrenFromBounds: false

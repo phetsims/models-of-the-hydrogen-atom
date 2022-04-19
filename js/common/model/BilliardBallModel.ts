@@ -44,7 +44,7 @@ export default class BilliardBallModel extends PredictiveModel {
 
   constructor( providedOptions: BilliardBallModelOptions ) {
 
-    const options = optionize<BilliardBallModelOptions, SelfOptions, PredictiveModelOptions, 'hasTransitionWavelengths'>( {
+    const options = optionize<BilliardBallModelOptions, SelfOptions, PredictiveModelOptions>()( {
 
       // SelfOptions
       radius: 30,

@@ -30,7 +30,7 @@ class MOTHAModel {
 
   constructor( predictiveModels: PredictiveModel[], initialPredictiveModel: PredictiveModel, providedOptions: MOTHAModelOptions ) {
 
-    const options = optionize<MOTHAModelOptions, SelfOptions>( {
+    const options = optionize<MOTHAModelOptions, SelfOptions>()( {
       //TODO
     }, providedOptions );
 

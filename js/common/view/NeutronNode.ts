@@ -21,7 +21,7 @@ export default class NeutronNode extends ShadedSphereNode {
 
   constructor( providedOptions?: NeutronNodeOptions ) {
 
-    const options = optionize<NeutronNodeOptions, SelfOptions, ShadedSphereNodeOptions>( {
+    const options = optionize<NeutronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
       mainColor: 'rgb( 128, 128, 128 )',

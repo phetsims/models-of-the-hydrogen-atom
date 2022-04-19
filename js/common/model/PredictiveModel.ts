@@ -43,7 +43,7 @@ export default class PredictiveModel extends PhetioObject {
 
   constructor( displayName: string, icon: HTMLImageElement, providedOptions: PredictiveModelOptions ) {
 
-    const options = optionize<PredictiveModelOptions, SelfOptions, PhetioObjectOptions>( {
+    const options = optionize<PredictiveModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       position: Vector2.ZERO,

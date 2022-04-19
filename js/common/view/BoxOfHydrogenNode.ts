@@ -60,7 +60,7 @@ export default class BoxOfHydrogenNode extends Node {
       maxWidth: 0.65 * BOX_SIZE.width
     } );
 
-    const options = optionize<BoxOfHydrogenNodeOptions, SelfOptions, NodeOptions>( {
+    const options = optionize<BoxOfHydrogenNodeOptions, SelfOptions, NodeOptions>()( {
       children: [ frontNode, topNode, hydrogenSymbol ]
     }, providedOptions );
 

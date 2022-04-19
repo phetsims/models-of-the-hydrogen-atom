@@ -32,7 +32,7 @@ export default class ContinuumBarNode extends Node {
    */
   constructor( barHeight: number, providedOptions?: ContinuumBarNodeOptions ) {
 
-    const options = optionize<ContinuumBarNodeOptions, SelfOptions, NodeOptions>( {
+    const options = optionize<ContinuumBarNodeOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
       xMargin: 5,

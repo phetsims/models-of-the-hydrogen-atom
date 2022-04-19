@@ -24,7 +24,7 @@ export default class SpectraModel extends MOTHAModel {
 
   constructor( providedOptions: SpectraModelOptions ) {
 
-    const options = optionize<SpectraModelOptions, SelfOptions, MOTHAModelOptions>( {
+    const options = optionize<SpectraModelOptions, SelfOptions, MOTHAModelOptions>()( {
       //TODO
     }, providedOptions );
 

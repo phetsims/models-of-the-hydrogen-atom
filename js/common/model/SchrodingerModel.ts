@@ -32,7 +32,7 @@ export default class SchrodingerModel extends PredictiveModel {
 
   constructor( providedOptions: SchrodingerModelOptions ) {
 
-    const options = optionize<SchrodingerModelOptions, SelfOptions, PredictiveModelOptions, 'hasTransitionWavelengths'>( {
+    const options = optionize<SchrodingerModelOptions, SelfOptions, PredictiveModelOptions>()( {
 
       // PredictiveModelOptions
       hasTransitionWavelengths: true

@@ -21,7 +21,7 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
 
   constructor( providedOptions: SpectraScreenOptions ) {
 
-    const options = optionize<SpectraScreenOptions, SelfOptions, MOTHAScreenOptions>( {
+    const options = optionize<SpectraScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
       name: modelsOfTheHydrogenAtomStrings.screen.spectra
       //TODO add homeScreenIcon
     }, providedOptions );

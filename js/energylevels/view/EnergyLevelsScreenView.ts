@@ -24,7 +24,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
   constructor( model: EnergyLevelsModel, providedOptions: EnergyLevelsScreenViewOptions ) {
 
-    const options = optionize<EnergyLevelsScreenViewOptions, SelfOptions, ScreenViewOptions, 'tandem'>( {
+    const options = optionize<EnergyLevelsScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       //TODO
     }, providedOptions );
 

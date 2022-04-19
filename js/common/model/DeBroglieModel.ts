@@ -33,7 +33,7 @@ export default class DeBroglieModel extends PredictiveModel {
 
   constructor( providedOptions: DeBroglieModelOptions ) {
 
-    const options = optionize<DeBroglieModelOptions, SelfOptions, PredictiveModelOptions>( {
+    const options = optionize<DeBroglieModelOptions, SelfOptions, PredictiveModelOptions>()( {
 
       // PredictiveModelOptions
       hasTransitionWavelengths: true

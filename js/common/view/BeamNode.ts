@@ -34,7 +34,7 @@ export default class BeamNode extends Rectangle {
   constructor( visibleProperty: IProperty<boolean>, colorProperty: IReadOnlyProperty<Color | string>,
                providedOptions: BeamNodeOptions ) {
 
-    const options = optionize<BeamNodeOptions, SelfOptions, RectangleOptions>( {
+    const options = optionize<BeamNodeOptions, SelfOptions, RectangleOptions>()( {
 
       // SelfOptions
       beamSize: new Dimension2( 10, 50 ),

@@ -41,7 +41,7 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
 
   constructor( monochromaticEnabledProperty: IProperty<boolean>, providedOptions: LightModeRadioButtonGroupOptions ) {
 
-    const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>( {
+    const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 
       // RectangularRadioButtonGroupOptions
       orientation: 'vertical',
@@ -73,7 +73,7 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
 function createModeIcon( beamColor: IColor ): Node {
 
   const laserNode = new LaserPointerNode( new BooleanProperty( true ),
-    optionize<LaserPointerNodeOptions, {}, LaserPointerNodeOptions>( {
+    optionize<LaserPointerNodeOptions, {}, LaserPointerNodeOptions>()( {
       pickable: false,
       tandem: Tandem.OPT_OUT // opt out because this is a non-interactive icon
     }, LASER_POINTER_OPTIONS )

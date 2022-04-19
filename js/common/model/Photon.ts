@@ -31,7 +31,7 @@ export default class Photon extends Particle {
 
   constructor( providedOptions?: PhotonOptions ) {
 
-    const options = optionize<PhotonOptions, SelfOptions, ParticleOptions>( {
+    const options = optionize<PhotonOptions, SelfOptions, ParticleOptions>()( {
 
       // SelfOptions
       emitted: false,

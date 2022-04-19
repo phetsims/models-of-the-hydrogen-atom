@@ -40,7 +40,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
   constructor( expandedProperty: Property<boolean>, numberOfSnapshotsProperty: IProperty<number>,
                providedOptions?: SpectrometerAccordionBoxOptions ) {
 
-    const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>( {
+    const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
       fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
       stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
 

@@ -28,7 +28,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
   constructor( expandedProperty: Property<boolean>, providedOptions?: ElectronEnergyLevelAccordionBoxOptions ) {
 
-    const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>( {
+    const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
 
