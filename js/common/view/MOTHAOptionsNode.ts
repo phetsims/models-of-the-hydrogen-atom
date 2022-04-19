@@ -8,13 +8,13 @@
 
 import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 type SelfOptions = {};
 
-type MOTHAOptionsNodeOptions = SelfOptions & Omit<VBoxOptions, 'children'>;
+type MOTHAOptionsNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class MOTHAOptionsNode extends VBox {
 
@@ -23,9 +23,7 @@ export default class MOTHAOptionsNode extends VBox {
   constructor( providedOptions?: MOTHAOptionsNodeOptions ) {
 
     const options = optionize<MOTHAOptionsNodeOptions, SelfOptions, VBoxOptions>()( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED //TODO replace with PickRequired
+      //TODO
     }, providedOptions );
 
     // Projector Mode checkbox
