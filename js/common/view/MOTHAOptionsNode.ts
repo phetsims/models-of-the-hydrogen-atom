@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MOTHAOptionsNode is the user interface for global options, accessed via PhET > Options.
  *
@@ -8,49 +7,45 @@
  */
 
 import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-class MOTHAOptionsNode extends VBox {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type MOTHAOptionsNodeOptions = SelfOptions & Omit<VBoxOptions, 'children'>;
 
-    options = merge( {
+export default class MOTHAOptionsNode extends VBox {
+
+  private readonly disposeMOTHAOptionsNode: () => void;
+
+  constructor( providedOptions?: MOTHAOptionsNodeOptions ) {
+
+    const options = optionize<MOTHAOptionsNodeOptions, SelfOptions, VBoxOptions, 'tandem'>( {
 
       // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      tandem: Tandem.REQUIRED //TODO replace with PickRequired
+    }, providedOptions );
 
     // Projector Mode checkbox
     const projectorModeCheckbox = new ProjectorModeCheckbox( {
       tandem: options.tandem.createTandem( 'projectorModeCheckbox' )
     } );
 
-    assert && assert( !options.children, 'MOTHAOptionsNode sets children' );
     options.children = [ projectorModeCheckbox ];
 
     super( options );
 
-    // @private
     this.disposeMOTHAOptionsNode = () => {
       projectorModeCheckbox.dispose();
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeMOTHAOptionsNode();
     super.dispose();
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'MOTHAOptionsNode', MOTHAOptionsNode );
-export default MOTHAOptionsNode;

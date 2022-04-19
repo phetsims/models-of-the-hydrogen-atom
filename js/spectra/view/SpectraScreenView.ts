@@ -1,6 +1,5 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SpectraScreenView is the view for the 'Spectra' screen.
  *
@@ -8,14 +7,13 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import ScreenView from '../../../../joist/js/ScreenView.js';
+import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { Path, Text, VBox } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
@@ -33,18 +31,26 @@ import TinyBox from '../../common/view/TinyBox.js';
 import ZoomBoxNode from '../../common/view/ZoomBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
+
+type SelfOptions = {};
+
+type SpectraScreenViewOptions = SelfOptions & ScreenViewOptions;
 
 class SpectraScreenView extends ScreenView {
 
-  /**
-   * @param {SpectraModel} model
-   */
-  constructor( model ) {
+  constructor( model: SpectraModel, providedOptions: SpectraScreenViewOptions ) {
 
-    super();
+    const options = optionize<SpectraScreenViewOptions, SelfOptions, ScreenViewOptions, 'tandem'>( {
+      //TODO
+    }, providedOptions );
 
-    const viewProperties = new SpectraViewProperties();
+    super( options );
+
+    const viewProperties = new SpectraViewProperties( {
+      tandem: options.tandem.createTandem( 'viewProperties' )
+    } );
 
     // Legend
     const legendNode = new LegendNode( {
@@ -142,7 +148,7 @@ class SpectraScreenView extends ScreenView {
       } );
 
     // reused and constructed lazily because Dialog requires sim bounds during construction
-    let dialog = null;
+    let dialog: SnapshotsDialog | null = null;
 
     // View Snapshots button, above upper-right corner of spectrometer
     const viewSnapshotsButton = new RectangularPushButton( {
@@ -198,12 +204,8 @@ class SpectraScreenView extends ScreenView {
     } );
   }
 
-  /**
-   * @param {number} dt
-   * @public
-   */
-  step( dt ) {
-    //TODO Handle view animation here.
+  public step( dt: number ): void {
+    //TODO
   }
 }
 

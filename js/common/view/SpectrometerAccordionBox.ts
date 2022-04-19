@@ -1,6 +1,5 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SpectrometerAccordionBox is the accordion box that contains the spectrometer.
  *
@@ -8,18 +7,16 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import IProperty from '../../../../axon/js/IProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -30,19 +27,23 @@ import MOTHAConstants from '../MOTHAConstants.js';
 const BUTTON_COLOR = 'rgb( 245, 245, 245 )';
 const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
-class SpectrometerAccordionBox extends AccordionBox {
-  /**
-   * @param {Property.<boolean>} expandedProperty
-   * @param {Property.<number>} numberOfSnapshotsProperty
-   * @param {Object} [options]
-   */
-  constructor( expandedProperty, numberOfSnapshotsProperty, options ) {
+type SelfOptions = {};
 
-    options = merge( {
+type SpectrometerAccordionBoxOptions = SelfOptions & Omit<AccordionBoxOptions, 'titleNode'>;
+
+export default class SpectrometerAccordionBox extends AccordionBox {
+
+  constructor( expandedProperty: Property<boolean>, numberOfSnapshotsProperty: IProperty<number>,
+               providedOptions?: SpectrometerAccordionBoxOptions ) {
+
+    const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>( {
       fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
       stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
-      xMargin: 5,
-      yMargin: 5,
+
+      // TODO these options do not exist in AccordionBoxOptions
+      // xMargin: 5,
+      // yMargin: 5,
+
       cornerRadius: 5,
       buttonXMargin: 8,
       buttonYMargin: 5,
@@ -57,7 +58,7 @@ class SpectrometerAccordionBox extends AccordionBox {
         touchAreaXDilation: 10,
         touchAreaYDilation: 10
       }
-    }, options );
+    }, providedOptions );
 
     options.expandedProperty = expandedProperty;
 
@@ -77,7 +78,6 @@ class SpectrometerAccordionBox extends AccordionBox {
       subtitleNode.visible = expanded;
     } );
 
-    assert && assert( !options.titleNode, 'SpectrometerAccordionBox sets titleNode' );
     options.titleNode = new HBox( {
       align: 'bottom',
       spacing: 12,
@@ -151,4 +151,3 @@ class SpectrometerAccordionBox extends AccordionBox {
 }
 
 modelsOfTheHydrogenAtom.register( 'SpectrometerAccordionBox', SpectrometerAccordionBox );
-export default SpectrometerAccordionBox;

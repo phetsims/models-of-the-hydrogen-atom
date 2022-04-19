@@ -1,6 +1,5 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MOTHAViewProperties is the base class that defines Properties that are common to all screen.
  *
@@ -10,40 +9,52 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-class MOTHAViewProperties {
+type SelfOptions = {};
 
-  constructor() {
+export type MOTHAViewPropertiesOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-    //TODO should clock-related stuff be in model?
-    // @public time speed
+export default class MOTHAViewProperties {
+
+  public readonly timeSpeedProperty: EnumerationDeprecatedProperty;
+
+  //TODO should clock-related stuff be in model?
+  // is the simulation running?
+  public readonly runningProperty: BooleanProperty;
+
+  //TODO should mode be in model?
+  // whether we're viewing an experiment (true) or predictive (false) model
+  public readonly experimentEnabledProperty: BooleanProperty;
+
+  // are absorption wavelengths indicated on the wavelength slider?
+  public readonly absorptionWavelengthsVisibleProperty: BooleanProperty;
+
+  // is the Spectrometer accordion box expanded?
+  public readonly spectrometerExpandedProperty: BooleanProperty;
+
+  //  is the Electron Energy Level accordion box expanded?
+  public readonly electronEnergyLevelExpandedProperty: BooleanProperty;
+
+  //TODO for prototyping
+  // number of spectrometer snapshots
+  public readonly numberOfSnapshotsProperty: NumberProperty;
+
+  constructor( providedOptions: MOTHAViewPropertiesOptions ) {
+    // @ts-ignore TODO port TimeSpeed to Enumeration
     this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL );
-
-    // @public {boolean} is the simulation running?
     this.runningProperty = new BooleanProperty( true );
-
-    //TODO should mode be in model?
-    // @public whether we're viewing an experiment (true) or predictive (false) model
     this.experimentEnabledProperty = new BooleanProperty( true );
-
-    // @public {boolean} are absorption wavelengths indicated on the wavelength slider?
     this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false );
-
-    // @public {boolean} is the Spectrometer accordion box expanded?
     this.spectrometerExpandedProperty = new BooleanProperty( false );
-
-    // @public {boolean} is the Electron Energy Level accordion box expanded?
     this.electronEnergyLevelExpandedProperty = new BooleanProperty( false );
-
-    //TODO for prototyping
-    // @public {number} number of spectrometer snapshots
     this.numberOfSnapshotsProperty = new NumberProperty( 0 );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.timeSpeedProperty.reset();
     this.runningProperty.reset();
     this.experimentEnabledProperty.reset();
@@ -55,4 +66,3 @@ class MOTHAViewProperties {
 }
 
 modelsOfTheHydrogenAtom.register( 'MOTHAViewProperties', MOTHAViewProperties );
-export default MOTHAViewProperties;

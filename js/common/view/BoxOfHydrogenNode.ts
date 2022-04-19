@@ -1,6 +1,5 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BoxOfHydrogenNode is the box of hydrogen into which the light emits photons and alpha particles.
  *
@@ -9,12 +8,9 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { LinearGradient } from '../../../../scenery/js/imports.js';
+import { LinearGradient, Node, NodeOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 
@@ -25,12 +21,13 @@ const BOX_SIZE = new Dimension2( 50, 40 );
 const LIGHT_COLOR = 'rgb( 249, 249, 249 )';
 const SHADOW_COLOR = 'rgb( 100, 100, 100 )';
 
-class BoxOfHydrogenNode extends Node {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type BoxOfHydrogenNodeOptions = SelfOptions & Omit<NodeOptions, 'children'>;
+
+export default class BoxOfHydrogenNode extends Node {
+
+  constructor( providedOptions?: BoxOfHydrogenNodeOptions ) {
 
     // top face, in perspective
     const topNode = new Path( new Shape()
@@ -59,12 +56,12 @@ class BoxOfHydrogenNode extends Node {
       maxWidth: 0.65 * BOX_SIZE.width
     } );
 
-    assert && assert( !options.children, 'BoxOfHydrogenNode sets children' );
-    options.children = [ frontNode, topNode, hydrogenSymbol ];
+    const options = optionize<BoxOfHydrogenNodeOptions, SelfOptions, NodeOptions>( {
+      children: [ frontNode, topNode, hydrogenSymbol ]
+    }, providedOptions );
 
     super( options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'BoxOfHydrogenNode', BoxOfHydrogenNode );
-export default BoxOfHydrogenNode;

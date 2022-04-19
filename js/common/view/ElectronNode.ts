@@ -1,32 +1,35 @@
 // Copyright 2015-2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ElectronNode is the visual representation of an electron.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 // constants
 const DIAMETER = 9;
 
-class ElectronNode extends ShadedSphereNode {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type ElectronNodeOptions = SelfOptions & Omit<ShadedSphereNodeOptions, 'mainColor' | 'highlightColor'>;
 
-    options = options || {};
-    options.mainColor = 'rgb( 120, 120, 255 )';
-    options.highlightColor = 'rgb( 140, 140, 255 )';
+export default class ElectronNode extends ShadedSphereNode {
+
+  constructor( providedOptions?: ElectronNodeOptions ) {
+
+    const options = optionize<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>( {
+
+      // ShadedSphereNodeOptions
+      mainColor: 'rgb( 120, 120, 255 )',
+      highlightColor: 'rgb( 140, 140, 255 )'
+    }, providedOptions );
 
     super( DIAMETER, options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'ElectronNode', ElectronNode );
-export default ElectronNode;

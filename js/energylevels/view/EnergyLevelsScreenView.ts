@@ -1,30 +1,38 @@
 // Copyright 2016-2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnergyLevelsScreenView is the view for the 'Energy Levels' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ScreenView from '../../../../joist/js/ScreenView.js';
+import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import PredictiveModelPanel from '../../common/view/PredictiveModelPanel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import EnergyLevelsViewProperties from './EnergyLevelsViewProperties.js';
 
-class EnergyLevelsScreenView extends ScreenView {
+type SelfOptions = {};
 
-  /**
-   * @param {EnergyLevelsModel} model
-   */
-  constructor( model ) {
+type EnergyLevelsScreenViewOptions = SelfOptions & ScreenViewOptions;
 
-    super();
+export default class EnergyLevelsScreenView extends ScreenView {
 
-    const viewProperties = new EnergyLevelsViewProperties();
+  constructor( model: EnergyLevelsModel, providedOptions: EnergyLevelsScreenViewOptions ) {
+
+    const options = optionize<EnergyLevelsScreenViewOptions, SelfOptions, ScreenViewOptions, 'tandem'>( {
+      //TODO
+    }, providedOptions );
+
+    super( options );
+
+    const viewProperties = new EnergyLevelsViewProperties( {
+      tandem: options.tandem.createTandem( 'viewProperties' )
+    } );
 
     const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
       center: this.layoutBounds.center
@@ -54,14 +62,9 @@ class EnergyLevelsScreenView extends ScreenView {
     this.addChild( resetAllButton );
   }
 
-  /**
-   * @param {number} dt
-   * @public
-   */
-  step( dt ) {
+  public step( dt: number ): void {
     //TODO
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenView', EnergyLevelsScreenView );
-export default EnergyLevelsScreenView;

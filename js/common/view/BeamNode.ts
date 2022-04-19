@@ -1,6 +1,5 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 //TODO white beam is not visible on white background in projector mode
 /**
  * BeamNode is the beam the comes out of the gun.
@@ -8,31 +7,40 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import IProperty from '../../../../axon/js/IProperty.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import { IPaint, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-class BeamNode extends Rectangle {
+type SelfOptions = {
+  beamSize: Dimension2;
+};
+
+type BeamNodeOptions = SelfOptions & RectangleOptions;
+
+export default class BeamNode extends Rectangle {
 
   /**
-   * @param {Property.<boolean>} visibleProperty - is the beam visible?
-   * @param {Property.<Color|string>} colorProperty - the beam's color
-   * @param {Object} [options]
+   * @param visibleProperty - is the beam visible?
+   * @param colorProperty - the beam's color
+   * @param providedOptions
    */
-  constructor( visibleProperty, colorProperty, options ) {
+  constructor( visibleProperty: IProperty<boolean>, colorProperty: IReadOnlyProperty<IPaint>, providedOptions?: BeamNodeOptions ) {
 
-    options = merge( {
-      beamSize: new Dimension2( 10, 50 )
-    }, options );
+    const options = merge( {
+
+      // SelfOptions
+      beamSize: new Dimension2( 10, 50 ),
+
+      // RectangleOptions
+      visibleProperty: visibleProperty,
+      fill: colorProperty
+    }, providedOptions );
 
     super( 0, 0, options.beamSize.width, options.beamSize.height, options );
-
-    // no need to unlink, this instance exists for the lifetime of the sim
-    visibleProperty.linkAttribute( this, 'visible' );
-    colorProperty.linkAttribute( this, 'fill' );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'BeamNode', BeamNode );
-export default BeamNode;

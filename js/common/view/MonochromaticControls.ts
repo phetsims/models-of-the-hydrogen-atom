@@ -1,6 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MonochromaticControls provides controls for the monochromatic light.
  *
@@ -8,32 +7,32 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import WavelengthSlider from '../../../../scenery-phet/js/WavelengthSlider.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
+import PredictiveModel from '../model/PredictiveModel.js';
+import IProperty from '../../../../axon/js/IProperty.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 
-class MonochromaticControls extends VBox {
+type SelfOptions = {};
 
-  /**
-   * @param {Property.<boolean>} experimentEnabledProperty
-   * @param {Property.<PredictiveModel>} predictiveModelProperty
-   * @param {Property.<number>} wavelengthProperty
-   * @param {Property.<boolean>} absorptionWavelengthsVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( experimentEnabledProperty, predictiveModelProperty, wavelengthProperty, absorptionWavelengthsVisibleProperty, options ) {
+type MonochromaticControlsOptions = SelfOptions & Omit<VBoxOptions, 'children'>;
 
-    options = merge( {
+export default class MonochromaticControls extends VBox {
+
+  constructor( experimentEnabledProperty: IProperty<boolean>, predictiveModelProperty: IProperty<PredictiveModel>,
+               wavelengthProperty: IProperty<number>, absorptionWavelengthsVisibleProperty: IProperty<boolean>,
+               providedOptions?: MonochromaticControlsOptions ) {
+
+    const options = optionize<MonochromaticControlsOptions, SelfOptions, VBoxOptions>( {
       align: 'center',
       spacing: 10,
       excludeInvisibleChildrenFromBounds: false
-    }, options );
+    }, providedOptions );
 
     // wavelength slider
     const wavelengthSlider = new WavelengthSlider( wavelengthProperty, {
@@ -60,7 +59,6 @@ class MonochromaticControls extends VBox {
       checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty
     } );
 
-    assert && assert( !options.children, 'MonochromaticControls sets children' );
     options.children = [ wavelengthSlider, showCheckbox ];
 
     super( options );
@@ -68,14 +66,14 @@ class MonochromaticControls extends VBox {
     // show the checkbox only if it's relevant
     Property.multilink(
       [ experimentEnabledProperty, predictiveModelProperty ],
-      ( experimentEnabled, predictiveModel ) => {
+      ( experimentEnabled: boolean, predictiveModel: PredictiveModel ) => {
         showCheckbox.visible = ( experimentEnabled || predictiveModel.hasTransitionWavelengths );
       } );
 
     // show absorption wavelengths for relevant models
     Property.multilink(
       [ predictiveModelProperty, absorptionWavelengthsVisibleProperty ],
-      ( predictiveModel, absorptionWavelengthsVisible ) => {
+      ( predictiveModel: PredictiveModel, absorptionWavelengthsVisible: boolean ) => {
         //TODO
         // wavelengthSlider.absorptionWavelengthsVisible = predictiveModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
       } );
@@ -83,4 +81,3 @@ class MonochromaticControls extends VBox {
 }
 
 modelsOfTheHydrogenAtom.register( 'MonochromaticControls', MonochromaticControls );
-export default MonochromaticControls;

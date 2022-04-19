@@ -12,7 +12,7 @@ import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { IColor } from '../../../../scenery/js/imports.js';
+import { IPaint } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class Light {
@@ -27,7 +27,7 @@ export default class Light {
   public readonly wavelengthProperty: NumberProperty;
 
   // color displayed by the view
-  public readonly colorProperty: IReadOnlyProperty<IColor>;
+  public readonly colorProperty: IReadOnlyProperty<IPaint>;
 
   constructor() {
 

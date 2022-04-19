@@ -1,18 +1,17 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ElectronEnergyLevelAccordionBox is the accordion box that contains the electron energy level diagram.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import { Rectangle, Text } from '../../../../scenery/js/imports.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -20,19 +19,21 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 // constants
 const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
-class ElectronEnergyLevelAccordionBox extends AccordionBox {
+type SelfOptions = {};
 
-  /**
-   * @param {Property.<boolean>} expandedProperty
-   * @param {Object} [options]
-   */
-  constructor( expandedProperty, options ) {
+type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & AccordionBoxOptions;
 
-    options = merge( {
+export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
+
+  constructor( expandedProperty: Property<boolean>, providedOptions?: ElectronEnergyLevelAccordionBoxOptions ) {
+
+    const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>( {
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
-      xMargin: 5,
-      yMargin: 5,
+
+      //TODO these options are undefined for AccordionBoxOptions
+      // xMargin: 5,
+      // yMargin: 5,
       cornerRadius: 5,
       buttonXMargin: 5,
       buttonYMargin: 5,
@@ -46,7 +47,7 @@ class ElectronEnergyLevelAccordionBox extends AccordionBox {
       buttonAlign: 'left',
       titleAlignX: 'left',
       titleXSpacing: 10
-    }, options );
+    }, providedOptions );
 
     assert && assert( !options.expandedProperty, 'ElectronEnergyLevelAccordionBox sets expandedProperty' );
     options.expandedProperty = expandedProperty;
@@ -69,4 +70,3 @@ class ElectronEnergyLevelAccordionBox extends AccordionBox {
 }
 
 modelsOfTheHydrogenAtom.register( 'ElectronEnergyLevelAccordionBox', ElectronEnergyLevelAccordionBox );
-export default ElectronEnergyLevelAccordionBox;

@@ -1,6 +1,5 @@
-// Copyright 2015-2020, University of Colorado Boulder
+// Copyright 2015-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Creates the namespace for this simulation.
  *

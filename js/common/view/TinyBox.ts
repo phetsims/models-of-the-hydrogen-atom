@@ -1,6 +1,5 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * TinyBox indicates the portion of the box of hydrogen that is shown in the exploded view.
  *
@@ -8,30 +7,32 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 // constants
 const TINY_BOX_SIZE = new Dimension2( 6, 6 );
 
-class TinyBox extends Rectangle {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type TinyBoxOptions = SelfOptions & RectangleOptions;
 
-    options = merge( {
+export default class TinyBox extends Rectangle {
+
+  constructor( providedOptions?: TinyBoxOptions ) {
+
+    const options = optionize<TinyBoxOptions, SelfOptions, RectangleOptions>( {
+
+      // RectangleOptions
       fill: MOTHAColors.boxFillProperty,
       stroke: MOTHAColors.boxStrokeProperty,
       lineWidth: 2
-    }, options );
+    }, providedOptions );
 
     super( 0, 0, TINY_BOX_SIZE.width, TINY_BOX_SIZE.height, options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'TinyBox', TinyBox );
-export default TinyBox;

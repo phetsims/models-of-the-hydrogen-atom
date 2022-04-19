@@ -1,19 +1,14 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LegendNode displays a legend, identifying the particle types that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { HStrut } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { HBox, HStrut, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -28,17 +23,20 @@ const LABEL_OPTIONS = {
   maxWidth: 120 // i18n, determined empirically
 };
 
-class LegendNode extends VBox {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type LegendNodeOptions = SelfOptions & Omit<VBoxOptions, 'children'>;
 
-    options = merge( {
+export default class LegendNode extends VBox {
+
+  constructor( providedOptions?: LegendNodeOptions ) {
+
+    const options = optionize<LegendNodeOptions, SelfOptions, VBoxOptions>( {
+
+      // VBoxOptions
       spacing: 8,
       align: 'left'
-    }, options );
+    }, providedOptions );
 
     // title
     const titleNode = new Text( modelsOfTheHydrogenAtomStrings.legend, {
@@ -48,16 +46,20 @@ class LegendNode extends VBox {
     } );
 
     // items that appear in the legend, { icon: {Node}, label: {string} }
-    const items = [
+    type LegendItem = {
+      icon: Node;
+      label: string;
+    };
+    const items: LegendItem[] = [
       { icon: new ElectronNode(), label: modelsOfTheHydrogenAtomStrings.electron },
       { icon: new ProtonNode(), label: modelsOfTheHydrogenAtomStrings.proton },
       { icon: new NeutronNode(), label: modelsOfTheHydrogenAtomStrings.neutron }
     ];
 
     // widest icon, used to horizontally center all icons and left-align all labels
-    const maxIconWidth = _.maxBy( items, item => item.icon.width ).icon.width;
+    const maxIconWidth = _.maxBy( items, ( item: LegendItem ) => item.icon.width )!.icon.width;
 
-    const itemNodes = []; // {Node[]}
+    const itemNodes: Node[] = [];
     items.forEach( item => {
 
       // pad the icon with a strut, so that all icons occupy the same amount of horizontal space
@@ -74,7 +76,6 @@ class LegendNode extends VBox {
 
     } );
 
-    assert && assert( !options.children, 'LegendNode sets children' );
     options.children = [
       titleNode,
       new VBox( {
@@ -89,4 +90,3 @@ class LegendNode extends VBox {
 }
 
 modelsOfTheHydrogenAtom.register( 'LegendNode', LegendNode );
-export default LegendNode;

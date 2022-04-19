@@ -1,6 +1,5 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 //TODO on mouseDown in projector mode, radio buttons go gray
 /**
  * PredictiveModelPanel contains controls (radio buttons) for choosing one of the predictive models.
@@ -8,36 +7,35 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import IProperty from '../../../../axon/js/IProperty.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { Image } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import Panel from '../../../../sun/js/Panel.js';
+import { HBox, Image, Text } from '../../../../scenery/js/imports.js';
+import RectangularRadioButtonGroup, { RectangularRadioButtonItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PredictiveModel from '../model/PredictiveModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 
-class PredictiveModelPanel extends Panel {
+type SelfOptions = {};
 
-  /**
-   * @param {Property.<PredictiveModel>} predictiveModelProperty
-   * @param {PredictiveModel[]} predictiveModels
-   * @param {Object} [options]
-   */
-  constructor( predictiveModelProperty, predictiveModels, options ) {
+type PredictiveModelPanelOptions = SelfOptions & PanelOptions;
 
-    options = merge( {
+export default class PredictiveModelPanel extends Panel {
+
+  constructor( predictiveModelProperty: IProperty<PredictiveModel>, predictiveModels: PredictiveModel[],
+               providedOptions?: PredictiveModelPanelOptions ) {
+
+    const options = optionize<PredictiveModelPanelOptions, SelfOptions, PanelOptions>( {
       fill: MOTHAColors.modelsPanelFillProperty,
       stroke: MOTHAColors.modelsPanelStrokeProperty,
       xMargin: 10,
       yMargin: 10
-    }, options );
+    }, providedOptions );
 
     // content that appears on the radio buttons
-    const contentArray = [];
+    const contentArray: RectangularRadioButtonItem<PredictiveModel>[] = [];
     for ( let i = 0; i < predictiveModels.length; i++ ) {
       contentArray.push( createRadioButtonContent( predictiveModels[ i ] ) );
     }
@@ -47,9 +45,12 @@ class PredictiveModelPanel extends Panel {
       baseColor: options.fill,
       selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
       deselectedStroke: MOTHAColors.modelsRadioButtonFillProperty,
-      overFill: MOTHAColors.modelsRadioButtonFillProperty,
-      overStroke: MOTHAColors.modelsRadioButtonDeselectedStrokeProperty,
-      overLineWidth: 2,
+
+      //TODO these are not defined for RectangularRadioButtonGroup
+      // overFill: MOTHAColors.modelsRadioButtonFillProperty,
+      // overStroke: MOTHAColors.modelsRadioButtonDeselectedStrokeProperty,
+      // overLineWidth: 2,
+
       selectedLineWidth: 2,
       labelAlign: 'left',
       spacing: 2,
@@ -79,29 +80,27 @@ class PredictiveModelPanel extends Panel {
 
 /**
  * Creates the content for one of the radio buttons.
- * @param {PredictiveModel} predictiveModel
- * @returns {{value:string, node:Node}}
  */
-function createRadioButtonContent( predictiveModel ) {
-  assert && assert( predictiveModel instanceof PredictiveModel, `invalid predictiveModel: ${predictiveModel}` );
+function createRadioButtonContent( predictiveModel: PredictiveModel ): RectangularRadioButtonItem<PredictiveModel> {
+
+  const node = new HBox( {
+    spacing: 10,
+    children: [
+      new Image( predictiveModel.icon, {
+        scale: 0.2
+      } ),
+      new Text( predictiveModel.displayName, {
+        fill: MOTHAColors.modelsRadioButtonTextFillProperty,
+        font: new PhetFont( 16 ),
+        maxWidth: 200 // i18n, determined empirically
+      } )
+    ]
+  } );
 
   return {
     value: predictiveModel,
-    node: new HBox( {
-      spacing: 10,
-      children: [
-        new Image( predictiveModel.icon, {
-          scale: 0.2
-        } ),
-        new Text( predictiveModel.displayName, {
-          fill: MOTHAColors.modelsRadioButtonTextFillProperty,
-          font: new PhetFont( 16 ),
-          maxWidth: 200 // i18n, determined empirically
-        } )
-      ]
-    } )
+    node: node
   };
 }
 
 modelsOfTheHydrogenAtom.register( 'PredictiveModelPanel', PredictiveModelPanel );
-export default PredictiveModelPanel;

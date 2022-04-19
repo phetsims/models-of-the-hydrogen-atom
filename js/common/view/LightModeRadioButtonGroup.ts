@@ -1,6 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-// @ts-nocheck
 //TODO on mouseDown in projector mode, radio buttons go gray
 /**
  * LightModeRadioButtonGroup provides radio buttons for selecting between monochromatic and full spectrum (white) light.
@@ -9,12 +8,12 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import IProperty from '../../../../axon/js/IProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import { IColor, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
@@ -29,15 +28,17 @@ const LASER_POINTER_OPTIONS = {
   lineWidth: 0.5
 };
 
-class LightModeRadioButtonGroup extends RectangularRadioButtonGroup {
+type SelfOptions = {};
 
-  /**
-   * @param {BooleanProperty} monochromaticEnabledProperty
-   * @param {Object} [options]
-   */
-  constructor( monochromaticEnabledProperty, options ) {
+type LightModeRadioButtonGroupOptions = SelfOptions & RectangularRadioButtonGroupOptions;
 
-    options = merge( {
+export default class LightModeRadioButtonGroup extends RectangularRadioButtonGroup<boolean> {
+
+  constructor( monochromaticEnabledProperty: IProperty<boolean>, providedOptions?: LightModeRadioButtonGroupOptions ) {
+
+    const options = merge( {
+
+      // RectangularRadioButtonGroupOptions
       orientation: 'vertical',
       spacing: 8,
       buttonContentXMargin: 15,
@@ -49,7 +50,7 @@ class LightModeRadioButtonGroup extends RectangularRadioButtonGroup {
       overStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
       selectedLineWidth: 2,
       deselectedLineWidth: 2
-    }, options );
+    }, providedOptions );
 
     super( monochromaticEnabledProperty, [
       { value: false, node: createModeIcon( 'white' ) },
@@ -59,11 +60,9 @@ class LightModeRadioButtonGroup extends RectangularRadioButtonGroup {
 }
 
 /**
- * Creates an icon for a mode.
- * @param {Color|string} beamColor
- * @returns {Node}
+ * Creates an icon for a light mode.
  */
-function createModeIcon( beamColor ) {
+function createModeIcon( beamColor: IColor ): Node {
   const laserNode = new LaserPointerNode( new BooleanProperty( true ), LASER_POINTER_OPTIONS );
   const beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
     fill: beamColor,
@@ -76,4 +75,3 @@ function createModeIcon( beamColor ) {
 }
 
 modelsOfTheHydrogenAtom.register( 'LightModeRadioButtonGroup', LightModeRadioButtonGroup );
-export default LightModeRadioButtonGroup;

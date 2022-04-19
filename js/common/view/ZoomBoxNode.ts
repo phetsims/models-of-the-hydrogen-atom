@@ -1,6 +1,5 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ZoomBoxNode provides the zoomed-in view of part of the box of hydrogen.
  * This is the box in which animation of atoms, photons and alpha particles takes place.
@@ -8,21 +7,23 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
+type SelfOptions = {};
+
+type ZoomBoxNodeOptions = SelfOptions & Omit<NodeOptions, 'children'>;
+
 //TODO extends Rectangle?
-class ZoomBoxNode extends Node {
+export default class ZoomBoxNode extends Node {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  constructor( providedOptions?: ZoomBoxNodeOptions ) {
 
-    options = merge( {}, options );
+    const options = optionize<ZoomBoxNodeOptions, SelfOptions, NodeOptions>( {
+      //TODO
+    }, providedOptions );
 
     const outlineNode = new Rectangle( 0, 0, 400, 400, {
       fill: MOTHAColors.boxFillProperty,
@@ -30,7 +31,6 @@ class ZoomBoxNode extends Node {
       lineWidth: 1
     } );
 
-    assert && assert( !options.children, 'ZoomBoxNode sets children' );
     options.children = [ outlineNode ];
 
     super( options );
@@ -38,4 +38,3 @@ class ZoomBoxNode extends Node {
 }
 
 modelsOfTheHydrogenAtom.register( 'ZoomBoxNode', ZoomBoxNode );
-export default ZoomBoxNode;

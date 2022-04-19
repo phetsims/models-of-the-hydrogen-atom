@@ -1,6 +1,5 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Main entry point for the sim.
  *
@@ -9,6 +8,7 @@
 
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
+import Tandem from '../../tandem/js/Tandem.js';
 import MOTHAOptionsNode from './common/view/MOTHAOptionsNode.js';
 import EnergyLevelsScreen from './energylevels/EnergyLevelsScreen.js';
 import modelsOfTheHydrogenAtomStrings from './modelsOfTheHydrogenAtomStrings.js';
@@ -17,7 +17,7 @@ import SpectraScreen from './spectra/SpectraScreen.js';
 const simOptions = {
 
   // Creates content for the Options dialog, accessible via the PhET menu
-  createOptionsDialogContent: tandem => new MOTHAOptionsNode( {
+  createOptionsDialogContent: ( tandem: Tandem ) => new MOTHAOptionsNode( {
     tandem: tandem
   } ),
 
@@ -34,7 +34,10 @@ const simOptions = {
 simLauncher.launch( () => {
   const sim = new Sim(
     modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].title,
-    [ new SpectraScreen(), new EnergyLevelsScreen() ],
+    [
+      new SpectraScreen( { tandem: Tandem.ROOT.createTandem( 'spectraScreen' ) } ),
+      new EnergyLevelsScreen( { tandem: Tandem.ROOT.createTandem( 'energyLevelsScreen' ) } )
+    ],
     simOptions
   );
   sim.start();

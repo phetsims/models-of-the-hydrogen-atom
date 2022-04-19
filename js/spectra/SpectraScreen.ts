@@ -1,34 +1,41 @@
 // Copyright 2016-2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SpectraScreen is the 'Spectra' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import MOTHAScreen from '../common/view/MOTHAScreen.js';
+import optionize from '../../../phet-core/js/optionize.js';
+import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
 
-class SpectraScreen extends MOTHAScreen {
+type SelfOptions = {};
 
-  constructor() {
+type SpectraScreenOptions = SelfOptions & Omit<MOTHAScreenOptions, 'name' | 'homeScreenIcon'>;
 
-    const options = {
+export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScreenView> {
+
+  constructor( providedOptions: SpectraScreenOptions ) {
+
+    const options = optionize<SpectraScreenOptions, SelfOptions, MOTHAScreenOptions>( {
       name: modelsOfTheHydrogenAtomStrings.screen.spectra
       //TODO add homeScreenIcon
-    };
+    }, providedOptions );
 
     super(
-      () => new SpectraModel(),
-      model => new SpectraScreenView( model ),
+      () => new SpectraModel( {
+        tandem: options.tandem.createTandem( 'model' )
+      } ),
+      ( model: SpectraModel ) => new SpectraScreenView( model, {
+        tandem: options.tandem.createTandem( 'view' )
+      } ),
       options
     );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'SpectraScreen', SpectraScreen );
-export default SpectraScreen;

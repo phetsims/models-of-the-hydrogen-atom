@@ -1,43 +1,37 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MOTHAScreen is the base class for all Screens in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Screen from '../../../../joist/js/Screen.js';
-import merge from '../../../../phet-core/js/merge.js';
+import Screen, { ScreenOptions } from '../../../../joist/js/Screen.js';
+import ScreenView from '../../../../joist/js/ScreenView.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-class MOTHAScreen extends Screen {
+type SelfOptions = {};
 
-  /**
-   * @param {function: Object} createModel
-   * @param {function( model:Object ): ScreenView } createView
-   * @param {Object} [options]
-   */
-  constructor( createModel, createView, options ) {
+export type MOTHAScreenOptions = SelfOptions & ScreenOptions;
+
+export default class MOTHAScreen<M, V extends ScreenView> extends Screen<M, V> {
+
+  constructor( createModel: () => M, createView: ( model: M ) => V, providedOptions: MOTHAScreenOptions ) {
     assert && assert( typeof createModel === 'function', `invalid createModel: ${createModel}` );
     assert && assert( typeof createView === 'function', `invalid createView: ${createView}` );
 
-    options = merge( {
+    const options = optionize<MOTHAScreenOptions, SelfOptions, ScreenOptions>( {
 
-      // superclass options
+      // MOTHAScreenOptions
       backgroundColorProperty: MOTHAColors.screenBackgroundColorProperty,
-
-      // put a gray border around unselected icons on the home screen
       showUnselectedHomeScreenIconFrame: true,
-
-      // put a gray border around screen icons when the navigation bar is black
       showScreenIconFrameForNavigationBarFill: 'black'
-    }, options );
+    }, providedOptions );
 
     super( createModel, createView, options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'MOTHAScreen', MOTHAScreen );
-export default MOTHAScreen;

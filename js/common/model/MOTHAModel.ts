@@ -7,9 +7,15 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from './Light.js';
 import PredictiveModel from './PredictiveModel.js';
+
+type SelfOptions = {};
+
+export type MOTHAModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 class MOTHAModel {
 
@@ -21,7 +27,7 @@ class MOTHAModel {
 
   public readonly light: Light;
 
-  constructor( predictiveModels: PredictiveModel[], initialPredictiveModel: PredictiveModel ) {
+  constructor( predictiveModels: PredictiveModel[], initialPredictiveModel: PredictiveModel, providedOptions: MOTHAModelOptions ) {
 
     this.predictiveModels = predictiveModels;
 

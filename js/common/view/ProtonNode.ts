@@ -1,33 +1,36 @@
 // Copyright 2015-2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ProtonNode is the visual representation of a proton.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
+import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 // constants
 const DIAMETER = 11;
 
-class ProtonNode extends ShadedSphereNode {
+type SelfOptions = {};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type ProtonNodeOptions = SelfOptions & Omit<ShadedSphereNodeOptions, 'mainColor' | 'highlightColor'>;
 
-    options = options || {};
-    options.mainColor = PhetColorScheme.RED_COLORBLIND;
-    options.highlightColor = 'rgb( 255, 130, 130 )'; // lighter red
+export default class ProtonNode extends ShadedSphereNode {
+
+  constructor( providedOptions?: ProtonNodeOptions ) {
+
+    const options = optionize<ProtonNodeOptions, SelfOptions, ShadedSphereNodeOptions>( {
+
+      // ShadedSphereNodeOptions
+      mainColor: PhetColorScheme.RED_COLORBLIND,
+      highlightColor: 'rgb( 255, 130, 130 )' // lighter red
+    }, providedOptions );
 
     super( DIAMETER, options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'ProtonNode', ProtonNode );
-export default ProtonNode;

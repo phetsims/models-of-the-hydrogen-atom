@@ -1,29 +1,34 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * TimeControls provides the controls for simulation time.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import IProperty from '../../../../axon/js/IProperty.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-class MOTHATimeControlNode extends TimeControlNode {
+//TODO get from TimeControlNode
+type TimeControlNodeOptions = {};
 
-  /**
-   * @param {Property.<boolean>} runningProperty - is the sim running?
-   * @param {EnumerationDeprecatedProperty.<TimeSpeed>} timeSpeedProperty
-   * @param {Object} [options]
-   */
-  constructor( runningProperty, timeSpeedProperty, options ) {
+type SelfOptions = {};
 
-    options = merge( {
+type MOTHATimeControlNodeOptions = SelfOptions & TimeControlNodeOptions;
+
+export default class MOTHATimeControlNode extends TimeControlNode {
+
+  // @ts-ignore TODO convert TimeControlNode to TypeScript
+  constructor( runningProperty: IProperty<boolean>, timeSpeedProperty, providedOptions?: MOTHATimeControlNodeOptions ) {
+
+    const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>( {
       timeSpeedProperty: timeSpeedProperty,
+
+      // @ts-ignore TODO convert TimeSpeed to TypeScript
       timeSpeeds: [ TimeSpeed.FAST, TimeSpeed.NORMAL, TimeSpeed.SLOW ],
       speedRadioButtonGroupOptions: {
         labelOptions: {
@@ -31,11 +36,10 @@ class MOTHATimeControlNode extends TimeControlNode {
           fill: 'white'
         }
       }
-    }, options );
+    }, providedOptions );
 
     super( runningProperty, options );
   }
 }
 
 modelsOfTheHydrogenAtom.register( 'MOTHATimeControlNode', MOTHATimeControlNode );
-export default MOTHATimeControlNode;

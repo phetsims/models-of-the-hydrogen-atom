@@ -1,36 +1,48 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-// @ts-nocheck
+//TODO reuse 1 instance of SnapshotsDialog for PhET-iO
 /**
  * SnapshotsDialog is a dialog that displays spectrometer snapshots.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import IProperty from '../../../../axon/js/IProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { IPaint, VBox } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SnapshotNode from './SnapshotNode.js';
 
-class SnapshotsDialog extends Dialog {
+//TODO get this from Dialog
+type DialogOptions = {
+  fill: IPaint;
+  topMargin: number;
+  bottomMargin: number;
+  leftMargin: number;
+};
 
-  /**
-   * @param numberOfSnapshotsProperty
-   * @param {Object} [options]
-   */
-  constructor( numberOfSnapshotsProperty, options ) {
+type SelfOptions = {};
+
+type SnapshotsDialogOptions = SelfOptions & DialogOptions;
+
+export default class SnapshotsDialog extends Dialog {
+
+  private readonly disposeSnapshotsDialog: () => void;
+
+  constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
 
     assert && assert( numberOfSnapshotsProperty.value > 0 );
 
-    options = merge( {
+    const options = merge( {
 
+      // DialogOptions
       fill: MOTHAColors.snapshotsDialogFillProperty,
       topMargin: 15,
       bottomMargin: 15,
       leftMargin: 15
-    }, options );
+    }, providedOptions );
 
     const content = new VBox( {
       spacing: 10,
@@ -40,7 +52,7 @@ class SnapshotsDialog extends Dialog {
     super( content, options );
 
     //TODO remove a specific snapshot, rather than rebuilding them all
-    const numberOfSnapshotsObserver = numberOfSnapshots => {
+    const numberOfSnapshotsObserver = ( numberOfSnapshots: number ) => {
       if ( numberOfSnapshots === 0 ) {
         this.hide();
       }
@@ -51,18 +63,13 @@ class SnapshotsDialog extends Dialog {
     };
     numberOfSnapshotsProperty.lazyLink( numberOfSnapshotsObserver );
 
-    // @private
     this.disposeSnapshotsDialog = () => {
       numberOfSnapshotsProperty.unlink( numberOfSnapshotsObserver );
     };
   }
 
-  //TODO verify whether this calls and whether it works correctly, because Dialog.dispose has been suspect
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  //TODO verify whether this gets called and whether it works correctly, because Dialog.dispose has been suspect
+  public override dispose(): void {
     this.disposeSnapshotsDialog();
     super.dispose();
   }
@@ -70,10 +77,8 @@ class SnapshotsDialog extends Dialog {
 
 /**
  * Creates the snapshots.
- * @param numberOfSnapshotsProperty
- * @returns {Array}
  */
-function createSnapshotNodes( numberOfSnapshotsProperty ) {
+function createSnapshotNodes( numberOfSnapshotsProperty: IProperty<number> ): SnapshotNode[] {
   const snapshots = [];
   for ( let i = 0; i < numberOfSnapshotsProperty.value; i++ ) {
     snapshots.push( new SnapshotNode( numberOfSnapshotsProperty, {
@@ -84,4 +89,3 @@ function createSnapshotNodes( numberOfSnapshotsProperty ) {
 }
 
 modelsOfTheHydrogenAtom.register( 'SnapshotsDialog', SnapshotsDialog );
-export default SnapshotsDialog;
