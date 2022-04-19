@@ -1,6 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * RandomUtils is a collection of static utility functions related to random number generation.
  *
@@ -14,42 +13,31 @@ const RandomUtils = {
 
   /**
    * Gets a random value >= min and < max.
-   *
-   * @param {number} min
-   * @param {number} max
-   * @returns {number}
-   * @public
    */
-  nextDouble( min, max ) {
-    assert( max > min );
+  nextDouble( min: number, max: number ): number {
+    assert && assert( max > min );
     return min + ( dotRandom.nextDouble() * ( max - min ) );
   },
 
   /**
    * Gets a random boolean.
-   * @returns {boolean}
-   * @public
    */
-  nextBoolean() {
+  nextBoolean(): boolean {
     return dotRandom.nextBoolean();
   },
 
   /**
    * Gets a random sign.
-   * @returns {number} +1 or -1
-   * @public
    */
-  nextSign() {
+  nextSign(): 1 | -1 {
     return ( dotRandom.nextBoolean() ? +1 : -1 );
   },
 
   /**
-   * Gets a random angle >= 0 and < 2 * PI.
-   * @returns {number} angle, in radians
-   * @public
+   * Gets a random angle >= 0 and < 2 * PI, in radians.
    */
-  nextAngle() {
-    return dotRandom.nextDouble( 0, 2 * Math.PI );
+  nextAngle(): number {
+    return dotRandom.nextDouble() * ( 2 * Math.PI );
   }
 };
 
