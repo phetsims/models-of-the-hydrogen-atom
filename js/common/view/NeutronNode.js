@@ -1,5 +1,6 @@
 // Copyright 2015-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * NeutronNode is the visual representation of a neutron.
  *

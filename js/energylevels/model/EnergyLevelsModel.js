@@ -1,5 +1,6 @@
 // Copyright 2015-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnergyLevelsModel is the model for the 'Energy Levels' screen.
  *

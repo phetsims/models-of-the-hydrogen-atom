@@ -1,5 +1,6 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * RandomUtils is a collection of static utility functions related to random number generation.
  *

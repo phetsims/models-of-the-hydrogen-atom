@@ -1,5 +1,6 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Photon is the model of a photon.
  * A photon has a wavelength, position and direction of motion.

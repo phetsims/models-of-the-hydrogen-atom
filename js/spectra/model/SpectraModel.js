@@ -1,5 +1,6 @@
 // Copyright 2015-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * SpectraModel is the model for the 'Spectra' screen.
  *

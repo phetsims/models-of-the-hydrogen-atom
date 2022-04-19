@@ -1,5 +1,6 @@
 // Copyright 2015-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * MOTHAModel is the base class for the model in all screens.
  *

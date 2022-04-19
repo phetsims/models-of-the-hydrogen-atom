@@ -1,5 +1,6 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
+// @ts-nocheck
 //TODO on mouseDown in projector mode, radio buttons go gray
 /**
  * LightModeRadioButtonGroup provides radio buttons for selecting between monochromatic and full spectrum (white) light.

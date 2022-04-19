@@ -1,5 +1,6 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * MOTHAScreen is the base class for all Screens in this sim.
  *

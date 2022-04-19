@@ -1,5 +1,6 @@
 // Copyright 2016-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * AlphaParticle is the model of an alpha particle.
  * An alpha particle has a position and direction of motion.

@@ -1,5 +1,6 @@
 // Copyright 2016-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * MOTHAConstants is the collection of constants used throughout this simulation.
  *

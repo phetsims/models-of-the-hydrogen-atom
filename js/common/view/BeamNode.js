@@ -1,5 +1,6 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
+// @ts-nocheck
 //TODO white beam is not visible on white background in projector mode
 /**
  * BeamNode is the beam the comes out of the gun.

@@ -1,5 +1,6 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
+// @ts-nocheck
 //TODO this is a placeholder
 /**
  * SnapshotNode is a snapshot from the spectrometer.

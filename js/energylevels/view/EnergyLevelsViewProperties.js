@@ -1,5 +1,6 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnergyLevelsViewProperties defines Properties that are specific to the view in the 'Energy Levels' screen.
  *

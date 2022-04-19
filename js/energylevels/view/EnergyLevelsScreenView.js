@@ -1,5 +1,6 @@
 // Copyright 2016-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnergyLevelsScreenView is the view for the 'Energy Levels' screen.
  *

@@ -1,5 +1,6 @@
 // Copyright 2016-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PredictiveModel is the base class for all predictive models.
  *

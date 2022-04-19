@@ -1,5 +1,6 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * MOTHAOptionsNode is the user interface for global options, accessed via PhET > Options.
  *

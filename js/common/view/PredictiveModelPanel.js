@@ -1,5 +1,6 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
+// @ts-nocheck
 //TODO on mouseDown in projector mode, radio buttons go gray
 /**
  * PredictiveModelPanel contains controls (radio buttons) for choosing one of the predictive models.

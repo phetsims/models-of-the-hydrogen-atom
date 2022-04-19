@@ -1,5 +1,6 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * TimeControls provides the controls for simulation time.
  *

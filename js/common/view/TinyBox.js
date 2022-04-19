@@ -1,5 +1,6 @@
 // Copyright 2015-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * TinyBox indicates the portion of the box of hydrogen that is shown in the exploded view.
  *
