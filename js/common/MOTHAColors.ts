@@ -12,6 +12,7 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 const MOTHAColors = {
 
   //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/7 should these be changeable?
+  //TODO why are these the same color?
   UV_COLOR: 'rgb( 160, 160, 160 )',
   IR_COLOR: 'rgb( 160, 160, 160 )',
 
