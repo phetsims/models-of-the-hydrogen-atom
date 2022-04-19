@@ -11,13 +11,21 @@
   },
   "phet": {
     "requirejsNamespace": "MODELS_OF_THE_HYDROGEN_ATOM",
+    "simulation": true,
     "runnable": true,
-    "colorProfiles": [ "default", "projector" ],
+    "colorProfiles": [
+      "default",
+      "projector"
+    ],
     "supportedBrands": [
       "phet",
+      "phet-io",
       "adapted-from-phet"
     ],
-    "simulation": true,
+    "simFeatures": {
+      "supportsSound": true,
+      "supportsInteractiveDescription": true
+    },
     "supportsOutputJS": true
   },
   "eslintConfig": {
