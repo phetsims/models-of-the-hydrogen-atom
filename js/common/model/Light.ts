@@ -10,6 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -17,6 +18,7 @@ import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import { LightMode, LightModeValues } from './LightMode.js';
 
 type SelfOptions = {};
 
@@ -28,7 +30,7 @@ export default class Light {
   public readonly onProperty: BooleanProperty;
 
   // whether the light is monochromatic (true) or full spectrum (false)
-  public readonly monochromaticEnabledProperty: BooleanProperty;
+  public readonly lightModeProperty: Property<LightMode>;
 
   // wavelength in nm, relevant only for monochromatic mode
   public readonly wavelengthProperty: NumberProperty;
@@ -46,8 +48,9 @@ export default class Light {
       tandem: options.tandem.createTandem( 'onProperty' )
     } );
 
-    this.monochromaticEnabledProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'monochromaticEnabledProperty' )
+    this.lightModeProperty = new Property<LightMode>( 'white', {
+      validValues: LightModeValues,
+      tandem: options.tandem.createTandem( 'lightModeProperty' )
     } );
 
     this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
@@ -56,10 +59,9 @@ export default class Light {
     } );
 
     this.colorProperty = new DerivedProperty(
-      [ this.monochromaticEnabledProperty, this.wavelengthProperty ],
-      ( monochromaticEnabled: boolean, wavelength: number ) => {
-        return monochromaticEnabled ? VisibleColor.wavelengthToColor( wavelength ) : Color.WHITE;
-      }, {
+      [ this.lightModeProperty, this.wavelengthProperty ],
+      ( lightMode: LightMode, wavelength: number ) =>
+        ( lightMode === 'white' ) ? Color.WHITE : VisibleColor.wavelengthToColor( wavelength ), {
         tandem: options.tandem.createTandem( 'colorProperty' ),
         phetioType: DerivedProperty.DerivedPropertyIO( Color.ColorIO )
       } );
@@ -67,7 +69,7 @@ export default class Light {
 
   public reset(): void {
     this.onProperty.reset();
-    this.monochromaticEnabledProperty.reset();
+    this.lightModeProperty.reset();
     this.wavelengthProperty.reset();
   }
 }

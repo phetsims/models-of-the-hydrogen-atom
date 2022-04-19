@@ -60,7 +60,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Light Mode radio button group
-    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( model.light.monochromaticEnabledProperty, {
+    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( model.light.lightModeProperty, {
       left: this.layoutBounds.left + 30,
       bottom: 415,
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
@@ -208,8 +208,8 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Visibility of monochromatic light controls
-    model.light.monochromaticEnabledProperty.link( monochromaticEnabled => {
-      monochromaticControls.visible = monochromaticEnabled;
+    model.light.lightModeProperty.link( lightMode => {
+      monochromaticControls.visible = ( lightMode === 'monochromatic' );
     } );
 
     // Show 'View snapshots' button when there are snapshots available

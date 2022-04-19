@@ -18,6 +18,7 @@ import { IColor, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 // constants
@@ -37,9 +38,9 @@ type LightModeRadioButtonGroupOptions = SelfOptions &
   PickRequired<RectangularRadioButtonGroupOptions, 'tandem'> &
   PickOptional<RectangularRadioButtonGroupOptions, 'left' | 'bottom'>;
 
-export default class LightModeRadioButtonGroup extends RectangularRadioButtonGroup<boolean> {
+export default class LightModeRadioButtonGroup extends RectangularRadioButtonGroup<LightMode> {
 
-  constructor( monochromaticEnabledProperty: IProperty<boolean>, providedOptions: LightModeRadioButtonGroupOptions ) {
+  constructor( lightModeProperty: IProperty<LightMode>, providedOptions: LightModeRadioButtonGroupOptions ) {
 
     const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 
@@ -60,9 +61,9 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
       deselectedLineWidth: 2
     }, providedOptions );
 
-    super( monochromaticEnabledProperty, [
-      { value: false, node: createModeIcon( 'white' ), tandemName: 'whiteRadioButton' },
-      { value: true, node: createModeIcon( 'red' ), tandemName: 'monochromaticRadioButton' }
+    super( lightModeProperty, [
+      { value: 'white', node: createModeIcon( 'white' ), tandemName: 'whiteRadioButton' },
+      { value: 'monochromatic', node: createModeIcon( 'red' ), tandemName: 'monochromaticRadioButton' }
     ], options );
   }
 }
