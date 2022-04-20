@@ -16,12 +16,22 @@ import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import { Font, IPaint } from '../../../../scenery/js/imports.js';
 
 //TODO get from TimeControlNode
 type TimeControlNodeOptions = {
-  tandem: Tandem;
-  left: number;
-  top: number;
+  tandem?: Tandem;
+  left?: number;
+  top?: number;
+  timeSpeedProperty?: EnumerationProperty<TimeSpeed>;
+  timeSpeeds?: TimeSpeed[];
+  speedRadioButtonGroupOptions?: {
+    labelOptions: {
+      font?: Font;
+      fill?: IPaint;
+    };
+  };
 };
 
 type SelfOptions = {};
@@ -32,15 +42,11 @@ type MOTHATimeControlNodeOptions = SelfOptions &
 
 export default class MOTHATimeControlNode extends TimeControlNode {
 
-  // @ts-ignore TODO convert TimeControlNode to TypeScript
-  constructor( runningProperty: IProperty<boolean>, timeSpeedProperty, providedOptions: MOTHATimeControlNodeOptions ) {
+  constructor( runningProperty: IProperty<boolean>, timeSpeedProperty: EnumerationProperty<TimeSpeed>,
+               providedOptions: MOTHATimeControlNodeOptions ) {
 
     const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>()( {
-
-      // @ts-ignore TODO convert TimeControlNode to TypeScript
       timeSpeedProperty: timeSpeedProperty,
-
-      // @ts-ignore TODO convert TimeSpeed to TypeScript
       timeSpeeds: [ TimeSpeed.FAST, TimeSpeed.NORMAL, TimeSpeed.SLOW ],
       speedRadioButtonGroupOptions: {
         labelOptions: {

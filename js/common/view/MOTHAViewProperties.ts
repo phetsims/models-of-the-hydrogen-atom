@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
@@ -20,7 +20,7 @@ export type MOTHAViewPropertiesOptions = SelfOptions & PickRequired<PhetioObject
 
 export default class MOTHAViewProperties {
 
-  public readonly timeSpeedProperty: EnumerationDeprecatedProperty;
+  public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
 
   //TODO should clock-related stuff be in model?
   // is the simulation running?
@@ -47,8 +47,7 @@ export default class MOTHAViewProperties {
 
     const options = providedOptions;
 
-    // @ts-ignore TODO port TimeSpeed to Enumeration
-    this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL, {
+    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       tandem: options.tandem.createTandem( 'timeSpeedProperty' )
     } );
 
