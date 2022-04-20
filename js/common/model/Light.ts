@@ -30,7 +30,7 @@ export default class Light {
   // is the light on?
   public readonly onProperty: BooleanProperty;
 
-  // whether the light is monochromatic (true) or full spectrum (false)
+  // whether the light is full spectrum (white) or monochromatic
   public readonly lightModeProperty: Property<LightMode>;
 
   // wavelength in nm, relevant only for monochromatic mode
