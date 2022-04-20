@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * SchrodingerModel is a predictive model that models the hydrogen atom as TODO

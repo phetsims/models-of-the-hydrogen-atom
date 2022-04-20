@@ -1,4 +1,4 @@
-// Copyright 2015-2021, University of Colorado Boulder
+// Copyright 2015-2022, University of Colorado Boulder
 
 /**
  * LegendNode displays a legend, identifying the particle types that appear in the sim.

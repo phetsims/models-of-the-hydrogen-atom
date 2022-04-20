@@ -1,4 +1,4 @@
-// Copyright 2015-2020, University of Colorado Boulder
+// Copyright 2015-2022, University of Colorado Boulder
 
 /**
  * MOTHAModel is the base class for the model in all screens.
