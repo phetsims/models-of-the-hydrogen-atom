@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DeBroglieModel is a predictive model that models the hydrogen atom as TODO
  *
