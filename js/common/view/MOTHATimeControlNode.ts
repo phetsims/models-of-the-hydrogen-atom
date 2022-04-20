@@ -15,6 +15,7 @@ import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 //TODO get from TimeControlNode
 type TimeControlNodeOptions = {
@@ -44,7 +45,7 @@ export default class MOTHATimeControlNode extends TimeControlNode {
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: new PhetFont( 14 ),
-          fill: 'white'
+          fill: MOTHAColors.timeControlRadioButtonFillProperty
         }
       }
     }, providedOptions );

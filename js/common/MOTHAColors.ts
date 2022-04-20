@@ -126,6 +126,11 @@ const MOTHAColors = {
     default: 'black'
   } ),
 
+  timeControlRadioButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'timeControlRadioButtonFill', {
+    default: 'white',
+    projector: 'black'
+  } ),
+
   //------------------------------------------------------------------------------------------------------------------
   // Spectrometer
   //------------------------------------------------------------------------------------------------------------------
