@@ -17,6 +17,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import StringIO from '../../../../tandem/js/types/StringIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LightMode, LightModeValues } from './LightMode.js';
 
@@ -50,7 +51,8 @@ export default class Light {
 
     this.lightModeProperty = new Property<LightMode>( 'white', {
       validValues: LightModeValues,
-      tandem: options.tandem.createTandem( 'lightModeProperty' )
+      tandem: options.tandem.createTandem( 'lightModeProperty' ),
+      phetioType: Property.PropertyIO( StringIO )
     } );
 
     this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
