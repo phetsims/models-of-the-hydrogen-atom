@@ -218,7 +218,7 @@ class SpectraScreenView extends ScreenView {
     } );
   }
 
-  public step( dt: number ): void {
+  public override step( dt: number ): void {
     //TODO
   }
 }

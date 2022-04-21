@@ -65,7 +65,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     this.addChild( resetAllButton );
   }
 
-  public step( dt: number ): void {
+  public override step( dt: number ): void {
     //TODO
   }
 }
