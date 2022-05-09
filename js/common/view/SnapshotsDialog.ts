@@ -58,7 +58,6 @@ export default class SnapshotsDialog extends Dialog {
         this.hide();
       }
       else {
-        assert && assert( content instanceof VBox );
         content.children = createSnapshotNodes( numberOfSnapshotsProperty );
       }
     };
