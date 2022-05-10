@@ -6,12 +6,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -22,11 +21,12 @@ const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
 type SelfOptions = {};
 
-type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem' | 'center'>;
+type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
+  PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
-  constructor( expandedProperty: Property<boolean>, providedOptions?: ElectronEnergyLevelAccordionBoxOptions ) {
+  constructor( providedOptions?: ElectronEnergyLevelAccordionBoxOptions ) {
 
     const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
@@ -51,10 +51,6 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       titleXSpacing: 10
     }, providedOptions );
 
-    assert && assert( !options.expandedProperty, 'ElectronEnergyLevelAccordionBox sets expandedProperty' );
-    options.expandedProperty = expandedProperty;
-
-    assert && assert( !options.titleNode, 'ElectronEnergyLevelAccordionBox sets titleNode' );
     options.titleNode = new Text( modelsOfTheHydrogenAtomStrings.electronEnergyLevel, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.electronEnergyLevelTitleFillProperty,

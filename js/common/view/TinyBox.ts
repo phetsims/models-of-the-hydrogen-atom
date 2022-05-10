@@ -8,9 +8,8 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
@@ -19,9 +18,7 @@ const TINY_BOX_SIZE = new Dimension2( 6, 6 );
 
 type SelfOptions = {};
 
-type TinyBoxOptions = SelfOptions &
-  PickRequired<RectangleOptions, 'tandem'> &
-  PickOptional<RectangleOptions, 'right' | 'top'>;
+type TinyBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<RectangleOptions, 'tandem'>;
 
 export default class TinyBox extends Rectangle {
 

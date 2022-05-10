@@ -34,7 +34,8 @@ export default class EnergyLevelsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'viewProperties' )
     } );
 
-    const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( viewProperties.electronEnergyLevelExpandedProperty, {
+    const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( {
+      expandedProperty: viewProperties.electronEnergyLevelExpandedProperty,
       center: this.layoutBounds.center,
       tandem: options.tandem.createTandem( 'electronEnergyLevelAccordionBox' )
     } );

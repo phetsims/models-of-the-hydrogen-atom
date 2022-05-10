@@ -11,12 +11,11 @@ import IProperty from '../../../../axon/js/IProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, NodeTranslationOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -31,9 +30,7 @@ const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
 type SelfOptions = {};
 
-type SpectrometerAccordionBoxOptions = SelfOptions &
-  PickRequired<AccordionBoxOptions, 'tandem'> &
-  PickOptional<AccordionBoxOptions, 'left' | 'top'>;
+type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 

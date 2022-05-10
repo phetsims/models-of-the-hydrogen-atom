@@ -8,17 +8,14 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = {};
 
-type ZoomBoxNodeOptions = SelfOptions &
-  PickRequired<NodeOptions, 'tandem'> &
-  PickOptional<NodeOptions, 'left' | 'top'>;
+type ZoomBoxNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
 //TODO extends Rectangle?
 export default class ZoomBoxNode extends Node {

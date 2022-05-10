@@ -11,10 +11,9 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { assignOptions } from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import LaserPointerNode, { LaserPointerNodeOptions } from '../../../../scenery-phet/js/LaserPointerNode.js';
-import { IColor, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import { IColor, Node, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -34,9 +33,8 @@ const LASER_POINTER_OPTIONS = {
 
 type SelfOptions = {};
 
-type LightModeRadioButtonGroupOptions = SelfOptions &
-  PickRequired<RectangularRadioButtonGroupOptions, 'tandem'> &
-  PickOptional<RectangularRadioButtonGroupOptions, 'left' | 'bottom'>;
+type LightModeRadioButtonGroupOptions = SelfOptions & NodeTranslationOptions &
+  PickRequired<RectangularRadioButtonGroupOptions, 'tandem'>;
 
 export default class LightModeRadioButtonGroup extends RectangularRadioButtonGroup<LightMode> {
 

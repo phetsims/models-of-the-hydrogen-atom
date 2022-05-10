@@ -11,18 +11,15 @@ import IProperty from '../../../../axon/js/IProperty.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Color, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
+import { Color, NodeTranslationOptions, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 type SelfOptions = {
   beamSize?: Dimension2;
 };
 
-type BeamNodeOptions = SelfOptions &
-  PickRequired<RectangleOptions, 'tandem'> &
-  PickOptional<RectangleOptions, 'centerX' | 'bottom'>;
+type BeamNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<RectangleOptions, 'tandem'>;
 
 export default class BeamNode extends Rectangle {
 

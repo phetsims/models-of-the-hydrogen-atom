@@ -7,7 +7,6 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import TimeControlNode, { TimeControlNodeOptions } from '../../../../scenery-phet/js/TimeControlNode.js';
@@ -16,12 +15,11 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 
 type SelfOptions = {};
 
-type MOTHATimeControlNodeOptions = SelfOptions &
-  PickRequired<TimeControlNodeOptions, 'tandem'> &
-  PickOptional<TimeControlNodeOptions, 'left' | 'top'>;
+type MOTHATimeControlNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<TimeControlNodeOptions, 'tandem'>;
 
 export default class MOTHATimeControlNode extends TimeControlNode {
 

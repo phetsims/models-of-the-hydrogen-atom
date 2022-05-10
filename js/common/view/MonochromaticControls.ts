@@ -9,7 +9,7 @@
 import Property from '../../../../axon/js/Property.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import WavelengthSlider from '../../../../scenery-phet/js/WavelengthSlider.js';
-import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -18,13 +18,10 @@ import PredictiveModel from '../model/PredictiveModel.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 type SelfOptions = {};
 
-type MonochromaticControlsOptions = SelfOptions &
-  PickRequired<VBoxOptions, 'tandem'> &
-  PickOptional<VBoxOptions, 'left' | 'top'>;
+type MonochromaticControlsOptions = SelfOptions & NodeTranslationOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class MonochromaticControls extends VBox {
 

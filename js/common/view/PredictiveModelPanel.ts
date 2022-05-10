@@ -9,10 +9,9 @@
 
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Image, Text } from '../../../../scenery/js/imports.js';
+import { HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -22,9 +21,7 @@ import ContinuumBarNode from './ContinuumBarNode.js';
 
 type SelfOptions = {};
 
-type PredictiveModelPanelOptions = SelfOptions &
-  PickRequired<PanelOptions, 'tandem'> &
-  PickOptional<PanelOptions, 'left' | 'top'>;
+type PredictiveModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class PredictiveModelPanel extends Panel {
 
