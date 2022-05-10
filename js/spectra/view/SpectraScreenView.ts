@@ -12,9 +12,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Path, Text, VBox } from '../../../../scenery/js/imports.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import { Path, VBox } from '../../../../scenery/js/imports.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import BeamNode from '../../common/view/BeamNode.js';
@@ -30,9 +28,9 @@ import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox
 import TinyBox from '../../common/view/TinyBox.js';
 import ZoomBoxNode from '../../common/view/ZoomBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
+import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 
 type SelfOptions = {};
 
@@ -168,8 +166,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // View Snapshots button, above upper-right corner of spectrometer
-    const viewSnapshotsButton = new RectangularPushButton( {
-      content: new Text( modelsOfTheHydrogenAtomStrings.viewSnapshots, { font: new PhetFont( 16 ) } ),
+    const viewSnapshotsButton = new ViewSnapshotsButton( {
       listener: () => snapshotsDialog.show(),
       right: spectrometerAccordionBox.right,
       bottom: spectrometerAccordionBox.top - 10,
