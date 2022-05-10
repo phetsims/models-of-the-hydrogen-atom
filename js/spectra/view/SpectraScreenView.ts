@@ -87,8 +87,9 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Beam of light
-    const beamNode = new BeamNode( model.light.onProperty, model.light.colorProperty, {
-      beamSize: new Dimension2( 30, 66 ),
+    const beamNode = new BeamNode( {
+      visibleProperty: model.light.onProperty,
+      fill: model.light.colorProperty,
       centerX: lightNode.centerX,
       bottom: lightNode.top + 1,
       tandem: options.tandem.createTandem( 'beamNode' )
