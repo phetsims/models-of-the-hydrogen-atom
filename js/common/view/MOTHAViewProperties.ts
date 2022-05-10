@@ -7,10 +7,9 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
@@ -20,40 +19,23 @@ export type MOTHAViewPropertiesOptions = SelfOptions & PickRequired<PhetioObject
 
 export default class MOTHAViewProperties {
 
-  public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
-
-  //TODO should clock-related stuff be in model?
-  // is the simulation running?
-  public readonly runningProperty: BooleanProperty;
-
   //TODO should mode be in model?
   // whether we're viewing an experiment (true) or predictive (false) model
-  public readonly experimentEnabledProperty: BooleanProperty;
+  public readonly experimentEnabledProperty: Property<boolean>;
 
   // are absorption wavelengths indicated on the wavelength slider?
-  public readonly absorptionWavelengthsVisibleProperty: BooleanProperty;
+  public readonly absorptionWavelengthsVisibleProperty: Property<boolean>;
 
   // is the Spectrometer accordion box expanded?
-  public readonly spectrometerExpandedProperty: BooleanProperty;
-
-  //  is the Electron Energy Level accordion box expanded?
-  public readonly electronEnergyLevelExpandedProperty: BooleanProperty;
+  public readonly spectrometerExpandedProperty: Property<boolean>;
 
   //TODO for prototyping
   // number of spectrometer snapshots
-  public readonly numberOfSnapshotsProperty: NumberProperty;
+  public readonly numberOfSnapshotsProperty: Property<number>;
 
   constructor( providedOptions: MOTHAViewPropertiesOptions ) {
 
     const options = providedOptions;
-
-    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
-      tandem: options.tandem.createTandem( 'timeSpeedProperty' )
-    } );
-
-    this.runningProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'runningProperty' )
-    } );
 
     this.experimentEnabledProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'experimentEnabledProperty' )
@@ -67,22 +49,15 @@ export default class MOTHAViewProperties {
       tandem: options.tandem.createTandem( 'spectrometerExpandedProperty' )
     } );
 
-    this.electronEnergyLevelExpandedProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'electronEnergyLevelExpandedProperty' )
-    } );
-
     this.numberOfSnapshotsProperty = new NumberProperty( 0, {
       tandem: options.tandem.createTandem( 'numberOfSnapshotsProperty' )
     } );
   }
 
   public reset(): void {
-    this.timeSpeedProperty.reset();
-    this.runningProperty.reset();
     this.experimentEnabledProperty.reset();
     this.absorptionWavelengthsVisibleProperty.reset();
     this.spectrometerExpandedProperty.reset();
-    this.electronEnergyLevelExpandedProperty.reset();
     this.numberOfSnapshotsProperty.reset();
   }
 }

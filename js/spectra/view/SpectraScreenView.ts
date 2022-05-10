@@ -109,7 +109,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Time controls
-    const timeControlNode = new MOTHATimeControlNode( viewProperties.runningProperty, viewProperties.timeSpeedProperty, {
+    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty, {
       left: monochromaticControls.left,
       top: monochromaticControls.bottom + 8,
       tandem: options.tandem.createTandem( 'timeControlNode' )

@@ -6,6 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import MOTHAViewProperties, { MOTHAViewPropertiesOptions } from '../../common/view/MOTHAViewProperties.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
@@ -15,8 +17,20 @@ type EnergyLevelsViewPropertiesOptions = SelfOptions & MOTHAViewPropertiesOption
 
 export default class EnergyLevelsViewProperties extends MOTHAViewProperties {
 
+  //  is the Electron Energy Level accordion box expanded?
+  public readonly electronEnergyLevelExpandedProperty: Property<boolean>;
+
   constructor( providedOptions: EnergyLevelsViewPropertiesOptions ) {
     super( providedOptions );
+
+    this.electronEnergyLevelExpandedProperty = new BooleanProperty( false, {
+      tandem: providedOptions.tandem.createTandem( 'electronEnergyLevelExpandedProperty' )
+    } );
+  }
+
+  public override reset(): void {
+    super.reset();
+    this.electronEnergyLevelExpandedProperty.reset();
   }
 }
 
