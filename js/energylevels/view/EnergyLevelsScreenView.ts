@@ -59,6 +59,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
+    // rendering order
     const screenViewRootNode = new Node( {
       children: [
         electronEnergyLevelAccordionBox,
@@ -68,7 +69,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     } );
     this.addChild( screenViewRootNode );
 
-    // pdom -traversal order
+    // pdom - traversal order
     screenViewRootNode.pdomOrder = [
       electronEnergyLevelAccordionBox,
       predictiveModelPanel,

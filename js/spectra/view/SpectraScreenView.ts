@@ -184,6 +184,7 @@ class SpectraScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
+    // rendering order
     const screenViewRootNode = new Node( {
       children: [
         legendNode,
@@ -204,7 +205,7 @@ class SpectraScreenView extends ScreenView {
     } );
     this.addChild( screenViewRootNode );
 
-    // pdom -traversal order
+    // pdom - traversal order
     screenViewRootNode.pdomOrder = [
       lightModeRadioButtonGroup,
       lightNode,
