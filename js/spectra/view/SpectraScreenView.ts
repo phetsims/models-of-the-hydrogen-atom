@@ -12,7 +12,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
-import { Path, VBox } from '../../../../scenery/js/imports.js';
+import { Node, Path, VBox } from '../../../../scenery/js/imports.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import BeamNode from '../../common/view/BeamNode.js';
@@ -184,21 +184,35 @@ class SpectraScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
-    // rendering order
-    this.addChild( legendNode );
-    this.addChild( lightModeRadioButtonGroup );
-    this.addChild( monochromaticControls );
-    this.addChild( boxOfHydrogenNode );
-    this.addChild( tinyBoxNode );
-    this.addChild( timeControlNode );
-    this.addChild( zoomBoxNode );
-    this.addChild( dashedLines );
-    this.addChild( beamNode );
-    this.addChild( lightNode );
-    this.addChild( modelVBox );
-    this.addChild( spectrometerAccordionBox );
-    this.addChild( viewSnapshotsButton );
-    this.addChild( resetAllButton );
+    const screenViewRootNode = new Node( {
+      children: [
+        legendNode,
+        lightModeRadioButtonGroup,
+        monochromaticControls,
+        boxOfHydrogenNode,
+        tinyBoxNode,
+        timeControlNode,
+        zoomBoxNode,
+        dashedLines,
+        beamNode,
+        lightNode,
+        modelVBox,
+        spectrometerAccordionBox,
+        viewSnapshotsButton,
+        resetAllButton
+      ]
+    } );
+    this.addChild( screenViewRootNode );
+
+    // pdom -traversal order
+    screenViewRootNode.pdomOrder = [
+      lightModeRadioButtonGroup,
+      lightNode,
+      modelVBox,
+      timeControlNode,
+      spectrometerAccordionBox,
+      viewSnapshotsButton
+    ];
 
     viewProperties.experimentEnabledProperty.link( experimentEnabled => {
       predictiveModelPanel.visible = !experimentEnabled;
