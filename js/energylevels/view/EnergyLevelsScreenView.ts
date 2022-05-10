@@ -15,6 +15,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import EnergyLevelsViewProperties from './EnergyLevelsViewProperties.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 type SelfOptions = {};
 
@@ -58,12 +59,21 @@ export default class EnergyLevelsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
-    //TODO add other UI components
+    const screenViewRootNode = new Node( {
+      children: [
+        electronEnergyLevelAccordionBox,
+        predictiveModelPanel,
+        resetAllButton
+      ]
+    } );
+    this.addChild( screenViewRootNode );
 
-    // rendering order
-    this.addChild( electronEnergyLevelAccordionBox );
-    this.addChild( predictiveModelPanel );
-    this.addChild( resetAllButton );
+    // pdom -traversal order
+    screenViewRootNode.pdomOrder = [
+      electronEnergyLevelAccordionBox,
+      predictiveModelPanel,
+      resetAllButton
+    ];
   }
 
   public override step( dt: number ): void {
