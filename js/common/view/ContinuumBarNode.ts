@@ -26,10 +26,6 @@ type ContinuumBarNodeOptions = SelfOptions & Omit<NodeOptions, 'children'>;
 
 export default class ContinuumBarNode extends Node {
 
-  /**
-   * @param barHeight - height of the bar, width is computed based on text size
-   * @param providedOptions
-   */
   constructor( barHeight: number, providedOptions?: ContinuumBarNodeOptions ) {
 
     const options = optionize<ContinuumBarNodeOptions, SelfOptions, NodeOptions>()( {

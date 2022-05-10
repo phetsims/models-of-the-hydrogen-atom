@@ -41,6 +41,11 @@ export default class PredictiveModel extends PhetioObject {
   // emits when a photon is emitted (an unfortunate name)
   public readonly photonEmittedEmitter: Emitter<[]>;
 
+  /**
+   * @param displayName - name of the model shown in the UI
+   * @param icon - icon used to represent the model in the UI
+   * @param providedOptions
+   */
   constructor( displayName: string, icon: HTMLImageElement, providedOptions: PredictiveModelOptions ) {
 
     const options = optionize<PredictiveModelOptions, SelfOptions, PhetioObjectOptions>()( {
