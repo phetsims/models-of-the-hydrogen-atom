@@ -10,7 +10,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import optionize, { assignOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import LaserPointerNode, { LaserPointerNodeOptions } from '../../../../scenery-phet/js/LaserPointerNode.js';
 import { IColor, Node, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
@@ -72,7 +72,7 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
 function createModeIcon( beamColor: IColor ): Node {
 
   const laserNode = new LaserPointerNode( new BooleanProperty( true ),
-    assignOptions<LaserPointerNodeOptions>( {
+    combineOptions<LaserPointerNodeOptions>( {
       pickable: false,
       tandem: Tandem.OPT_OUT // opt out because this is a non-interactive icon
     }, LASER_POINTER_OPTIONS )
