@@ -62,7 +62,7 @@ export default class Light {
 
     this.colorProperty = new DerivedProperty(
       [ this.lightModeProperty, this.wavelengthProperty ],
-      ( lightMode: LightMode, wavelength: number ) =>
+      ( lightMode, wavelength ) =>
         ( lightMode === 'white' ) ? Color.WHITE : VisibleColor.wavelengthToColor( wavelength ), {
         tandem: options.tandem.createTandem( 'colorProperty' ),
         phetioType: DerivedProperty.DerivedPropertyIO( Color.ColorIO )
