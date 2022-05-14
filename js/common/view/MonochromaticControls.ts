@@ -70,14 +70,14 @@ export default class MonochromaticControls extends VBox {
     // show the checkbox only if it's relevant
     Property.multilink(
       [ experimentEnabledProperty, predictiveModelProperty ],
-      ( experimentEnabled: boolean, predictiveModel: PredictiveModel ) => {
+      ( experimentEnabled, predictiveModel ) => {
         showAbsorptionsWavelengthCheckbox.visible = ( experimentEnabled || predictiveModel.hasTransitionWavelengths );
       } );
 
     // show absorption wavelengths for relevant models
     Property.multilink(
       [ predictiveModelProperty, absorptionWavelengthsVisibleProperty ],
-      ( predictiveModel: PredictiveModel, absorptionWavelengthsVisible: boolean ) => {
+      ( predictiveModel, absorptionWavelengthsVisible ) => {
         //TODO
         // wavelengthSlider.absorptionWavelengthsVisible = predictiveModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
       } );
