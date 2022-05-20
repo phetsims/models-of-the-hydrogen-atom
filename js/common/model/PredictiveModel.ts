@@ -25,7 +25,7 @@ type SelfOptions = {
 
 export type PredictiveModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class PredictiveModel extends PhetioObject {
+export default abstract class PredictiveModel extends PhetioObject {
 
   public readonly displayName: string;
   public readonly icon: HTMLImageElement;
@@ -41,12 +41,15 @@ export default class PredictiveModel extends PhetioObject {
   // emits when a photon is emitted (an unfortunate name)
   public readonly photonEmittedEmitter: Emitter<[]>;
 
+  // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.
+  public static readonly GROUND_STATE = 0;
+
   /**
    * @param displayName - name of the model shown in the UI
    * @param icon - icon used to represent the model in the UI
    * @param providedOptions
    */
-  constructor( displayName: string, icon: HTMLImageElement, providedOptions: PredictiveModelOptions ) {
+  protected constructor( displayName: string, icon: HTMLImageElement, providedOptions: PredictiveModelOptions ) {
 
     const options = optionize<PredictiveModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
@@ -80,27 +83,21 @@ export default class PredictiveModel extends PhetioObject {
   }
 
   public override dispose(): void {
-    //TODO anything else? is this necessary?
-    this.photonAbsorbedEmitter.removeAllListeners();
-    this.photonEmittedEmitter.removeAllListeners();
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Called when time has advanced by some delta. The default implementation does nothing.
    */
-  public step( dt: number ): void {
-    //TODO @abstract?
-  }
+  public step( dt: number ): void {}
 
   /**
-   * Gets the transition wavelengths for a specified state.
-   * The default implementation returns an empty array.
-   * The notion of 'transition wavelength' does not apply to all
-   * hydrogen atom models, but it is convenient to have it here.
+   * Gets the transition wavelengths for a specified state. The notion of 'transition wavelength' does not apply to all
+   * hydrogen atom models, so the default implementation returns null.
    */
-  public getTransitionWavelengths( state: number ): number[] {
-    return []; //TODO @abstract?
+  public getTransitionWavelengths( state: number ): number[] | null {
+    return null;
   }
 
   /**
@@ -135,6 +132,14 @@ export default class PredictiveModel extends PhetioObject {
    */
   protected pointsCollide( position1: Vector2, position2: Vector2, threshold: number ): boolean {
     return position1.distance( position2 ) <= threshold;
+  }
+
+  /**
+   * Gets the number of electron states that the model supports.
+   * The default is zero, since some models have no notion of "state".
+   */
+  public static getNumberOfStates(): number {
+    return 0;
   }
 }
 

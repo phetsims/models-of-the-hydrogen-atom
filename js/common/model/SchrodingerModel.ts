@@ -26,7 +26,7 @@ import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
 
 type SelfOptions = {};
 
-type SchrodingerModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
+export type SchrodingerModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
 
 export default class SchrodingerModel extends PredictiveModel {
 
