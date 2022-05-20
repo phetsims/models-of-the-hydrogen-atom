@@ -8,12 +8,13 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import LaserPointerNode, { LaserPointerNodeOptions } from '../../../../scenery-phet/js/LaserPointerNode.js';
-import { IColor, Node, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import { Color, Node, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -60,8 +61,8 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
     }, providedOptions );
 
     super( lightModeProperty, [
-      { value: 'white', node: createModeIcon( 'white' ), tandemName: 'whiteRadioButton' },
-      { value: 'monochromatic', node: createModeIcon( 'red' ), tandemName: 'monochromaticRadioButton' }
+      { value: 'white', node: createModeIcon( Color.white ), tandemName: 'whiteRadioButton' },
+      { value: 'monochromatic', node: createModeIcon( Color.red ), tandemName: 'monochromaticRadioButton' }
     ], options );
   }
 }
@@ -69,7 +70,7 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
 /**
  * Creates an icon for a light mode.
  */
-function createModeIcon( beamColor: IColor ): Node {
+function createModeIcon( beamColor: Color ): Node {
 
   const laserNode = new LaserPointerNode( new BooleanProperty( true ),
     combineOptions<LaserPointerNodeOptions>( {
@@ -78,9 +79,14 @@ function createModeIcon( beamColor: IColor ): Node {
     }, LASER_POINTER_OPTIONS )
   );
 
+  // If the beam color is the same as the radio button fill, stroke the beam.
+  const strokeProperty = new DerivedProperty( [ MOTHAColors.lightModeRadioButtonFillProperty ],
+    lightModeRadioButtonFill => ( lightModeRadioButtonFill.equals( beamColor ) ) ? 'black' : null
+  );
+
   const beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
     fill: beamColor,
-    stroke: 'black',
+    stroke: strokeProperty,
     lineWidth: 0.5,
     centerX: laserNode.centerX,
     bottom: laserNode.top + 1
