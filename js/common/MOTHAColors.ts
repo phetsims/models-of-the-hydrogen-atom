@@ -9,10 +9,6 @@
 import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
-const DEFAULT_PANEL_FILL = Color.grayColor( 80 );
-const PROJECTOR_PANEL_FILL = Color.grayColor( 235 );
-const DEFAULT_PANEL_STROKE = Color.grayColor( 180 );
-const PROJECTOR_PANEL_STROKE = 'black';
 const YELLOW = 'rgb( 235, 235, 0 )';
 
 const MOTHAColors = {
@@ -23,7 +19,7 @@ const MOTHAColors = {
   IR_COLOR: 'rgb( 160, 160, 160 )',
 
   screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
-    default: Color.grayColor( 115 ),
+    default: 'black',
     projector: 'white'
   } ),
 
@@ -96,13 +92,13 @@ const MOTHAColors = {
   } ),
 
   modelsPanelFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsPanelFill', {
-    default: DEFAULT_PANEL_FILL,
-    projector: PROJECTOR_PANEL_FILL
+    default: 'black',
+    projector: 'white'
   } ),
 
   modelsPanelStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsPanelStroke', {
-    default: DEFAULT_PANEL_STROKE,
-    projector: PROJECTOR_PANEL_STROKE
+    default: Color.grayColor( 180 ),
+    projector: 'black'
   } ),
 
   modelsRadioButtonTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonTextFill', {
@@ -151,13 +147,13 @@ const MOTHAColors = {
   } ),
 
   spectrometerAccordionBoxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerAccordionBoxFill', {
-    default: DEFAULT_PANEL_FILL,
-    projector: PROJECTOR_PANEL_FILL
+    default: Color.grayColor( 80 ),
+    projector: Color.grayColor( 235 )
   } ),
 
   spectrometerAccordionBoxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerAccordionBoxStroke', {
-    default: DEFAULT_PANEL_STROKE,
-    projector: PROJECTOR_PANEL_STROKE
+    default: Color.grayColor( 180 ),
+    projector: 'black'
   } ),
 
   spectrometerFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerFill', {
@@ -166,7 +162,7 @@ const MOTHAColors = {
   } ),
 
   spectrometerStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerStroke', {
-    default: 'white',
+    default: Color.grayColor( 117 ),
     projector: 'black'
   } ),
 
@@ -193,13 +189,13 @@ const MOTHAColors = {
   } ),
 
   electronEnergyLevelAccordionBoxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelAccordionBoxFill', {
-    default: DEFAULT_PANEL_FILL,
-    projector: PROJECTOR_PANEL_FILL
+    default: Color.grayColor( 80 ),
+    projector: Color.grayColor( 235 )
   } ),
 
   electronEnergyLevelAccordionBoxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelAccordionBoxStroke', {
-    default: DEFAULT_PANEL_STROKE,
-    projector: PROJECTOR_PANEL_STROKE
+    default: Color.grayColor( 180 ),
+    projector: 'black'
   } )
 };
 
