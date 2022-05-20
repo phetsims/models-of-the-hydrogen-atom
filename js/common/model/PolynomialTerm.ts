@@ -1,8 +1,8 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * PolynomialTerm is a minimal/incomplete implementation of a polynomial, as needed for solving associated Legendre
- * polynomials. See solveAssociatedLegrendePolynomials.ts
+ * PolynomialTerm is a minimal/incomplete implementation of a polynomial term, as needed for solving
+ * associated Legendre polynomials. See solveAssociatedLegrendePolynomials.ts
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
