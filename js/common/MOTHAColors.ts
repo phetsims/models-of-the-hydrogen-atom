@@ -56,7 +56,8 @@ const MOTHAColors = {
   //------------------------------------------------------------------------------------------------------------------
 
   lightModeRadioButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonFill', {
-    default: 'black'
+    default: 'black',
+    projector: 'white'
   } ),
 
   lightModeRadioButtonSelectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonSelectedStroke', {
@@ -79,6 +80,11 @@ const MOTHAColors = {
 
   showAbsorptionWavelengthCheckboxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'showAbsorptionWavelengthCheckboxStroke', {
     default: 'white',
+    projector: 'black'
+  } ),
+
+  beamStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'beamStroke', {
+    default: 'transparent',
     projector: 'black'
   } ),
 
