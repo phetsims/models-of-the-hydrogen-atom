@@ -1,8 +1,8 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * Solves the associated Legendre polynomial.
- * TODO Say something about how this is relevant to MOTHA.
+ * Solves the associated Legendre polynomial.  This is needed to compute the wave function for the Schrodinger
+ * model of the hydrogen atom.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
