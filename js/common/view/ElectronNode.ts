@@ -2,6 +2,7 @@
 
 /**
  * ElectronNode is the visual representation of an electron.
+ * An electron is blue, and has a specular highlight with the light source coming from below.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

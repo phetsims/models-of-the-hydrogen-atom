@@ -31,6 +31,7 @@ export type ParticleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 
 export default class Particle {
 
+  // See SelfOptions for documentation.
   public readonly positionProperty: Property<Vector2>;
   public readonly speedProperty: Property<number>;
   public readonly directionProperty: Property<number>;
