@@ -27,7 +27,7 @@ class MOTHAModel {
   public readonly predictiveModels: PredictiveModel[];
 
   // which predictive model is selected
-  public readonly predictiveModelProperty: Property<any>;
+  public readonly predictiveModelProperty: Property<PredictiveModel>;
 
   public readonly light: Light;
 

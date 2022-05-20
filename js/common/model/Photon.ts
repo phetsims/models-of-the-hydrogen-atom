@@ -1,9 +1,7 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
 /**
- * Photon is the model of a photon.
- * A photon has a wavelength, position and direction of motion.
- * Photons move with constant speed.
+ * Photon is the model of a photon. A photon has a wavelength, position, direction, and moves with constant speed.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -25,9 +23,9 @@ type PhotonOptions = SelfOptions & ParticleOptions;
 
 export default class Photon extends Particle {
 
-  public readonly wavelength: any;
+  public readonly wavelength: number;
   public readonly emitted: boolean;
-  public collided: any;
+  public collided: boolean;
 
   constructor( providedOptions?: PhotonOptions ) {
 
