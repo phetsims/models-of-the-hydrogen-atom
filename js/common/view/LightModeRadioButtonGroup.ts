@@ -11,26 +11,15 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import LaserPointerNode, { LaserPointerNodeOptions } from '../../../../scenery-phet/js/LaserPointerNode.js';
+import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import { Color, Node, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
-
-// constants
-const BEAM_SIZE = new Dimension2( 5, 10 );
-const LASER_POINTER_OPTIONS = {
-  hasButton: false,
-  rotation: -Math.PI / 2, // pointing up
-  bodySize: new Dimension2( 18, 17 ), // height x width (due to rotation)
-  nozzleSize: new Dimension2( 5, 13 ), // height x width (due to rotation)
-  cornerRadius: 2,
-  lineWidth: 0.5
-};
 
 type SelfOptions = {};
 
@@ -72,19 +61,23 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
  */
 function createModeIcon( beamColor: Color ): Node {
 
-  const laserNode = new LaserPointerNode( new BooleanProperty( true ),
-    combineOptions<LaserPointerNodeOptions>( {
-      pickable: false,
-      tandem: Tandem.OPT_OUT // opt out because this is a non-interactive icon
-    }, LASER_POINTER_OPTIONS )
-  );
+  const laserNode = new LaserPointerNode( new BooleanProperty( true ), {
+    hasButton: false,
+    rotation: -Math.PI / 2, // pointing up
+    bodySize: new Dimension2( 18, 17 ), // height x width (due to rotation)
+    nozzleSize: new Dimension2( 5, 13 ), // height x width (due to rotation)
+    cornerRadius: 2,
+    lineWidth: 0.5,
+    pickable: false,
+    tandem: Tandem.OPT_OUT // opt out because this is a non-interactive icon
+  } );
 
   // If the beam color is the same as the radio button fill, stroke the beam.
   const strokeProperty = new DerivedProperty( [ MOTHAColors.lightModeRadioButtonFillProperty ],
     lightModeRadioButtonFill => ( lightModeRadioButtonFill.equals( beamColor ) ) ? 'black' : null
   );
 
-  const beamNode = new Rectangle( 0, 0, BEAM_SIZE.width, BEAM_SIZE.height, {
+  const beamNode = new Rectangle( 0, 0, 5, 10, {
     fill: beamColor,
     stroke: strokeProperty,
     lineWidth: 0.5,
