@@ -22,37 +22,62 @@ type SpectraModelOptions = SelfOptions & MOTHAModelOptions;
 
 export default class SpectraModel extends MOTHAModel {
 
+  // predictive models supported by this screen
+  public readonly billiardBallModel: BilliardBallModel;
+  public readonly plumPuddingModel: PlumPuddingModel;
+  public readonly classicalSolarSystemModel: ClassicalSolarSystemModel;
+  public readonly bohrModel: BohrModel;
+  public readonly deBroglieModel: DeBroglieModel;
+  public readonly schrodingerModel: SchrodingerModel;
+
   constructor( providedOptions: SpectraModelOptions ) {
 
     const options = optionize<SpectraModelOptions, SelfOptions, MOTHAModelOptions>()( {
       //TODO
     }, providedOptions );
 
-    const initialModel = new PlumPuddingModel( {
+    const billiardBallModel = new BilliardBallModel( {
+      tandem: options.tandem.createTandem( 'billiardBallModel' )
+    } );
+
+    const plumPuddingModel = new PlumPuddingModel( {
       tandem: options.tandem.createTandem( 'plumPuddingModel' )
+    } );
+
+    const classicalSolarSystemModel = new ClassicalSolarSystemModel( {
+      tandem: options.tandem.createTandem( 'classicalSolarSystemModel' )
+    } );
+
+    const bohrModel = new BohrModel( {
+      tandem: options.tandem.createTandem( 'bohrModel' )
+    } );
+
+    const deBroglieModel = new DeBroglieModel( {
+      tandem: options.tandem.createTandem( 'deBroglieModel' )
+    } );
+
+    const schrodingerModel = new SchrodingerModel( {
+      tandem: options.tandem.createTandem( 'schrodingerModel' )
     } );
 
     // Predictive models supported by this screen, in the order that they will appear in the UI
     const predictiveModels = [
-      new BilliardBallModel( {
-        tandem: options.tandem.createTandem( 'billiardBallModel' )
-      } ),
-      initialModel,
-      new ClassicalSolarSystemModel( {
-        tandem: options.tandem.createTandem( 'classicalSolarSystemModel' )
-      } ),
-      new BohrModel( {
-        tandem: options.tandem.createTandem( 'bohrModel' )
-      } ),
-      new DeBroglieModel( {
-        tandem: options.tandem.createTandem( 'deBroglieModel' )
-      } ),
-      new SchrodingerModel( {
-        tandem: options.tandem.createTandem( 'schrodingerModel' )
-      } )
+      billiardBallModel,
+      plumPuddingModel,
+      classicalSolarSystemModel,
+      bohrModel,
+      deBroglieModel,
+      schrodingerModel
     ];
 
-    super( predictiveModels, initialModel, options );
+    super( predictiveModels, plumPuddingModel, options );
+
+    this.billiardBallModel = billiardBallModel;
+    this.plumPuddingModel = plumPuddingModel;
+    this.classicalSolarSystemModel = classicalSolarSystemModel;
+    this.bohrModel = bohrModel;
+    this.deBroglieModel = deBroglieModel;
+    this.schrodingerModel = schrodingerModel;
   }
 }
 

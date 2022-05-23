@@ -19,30 +19,45 @@ type EnergyLevelsModelOptions = SelfOptions & MOTHAModelOptions;
 
 export default class EnergyLevelsModel extends MOTHAModel {
 
+  // predictive models supported by this screen
+  public readonly bohrModel: BohrModel;
+  public readonly deBroglieModel: DeBroglieModel;
+  public readonly schrodingerModel: SchrodingerModel;
+
   constructor( providedOptions: EnergyLevelsModelOptions ) {
 
     const options = optionize<EnergyLevelsModelOptions, SelfOptions, MOTHAModelOptions>()( {
       //TODO
     }, providedOptions );
 
+    const bohrModel = new BohrModel( {
+      tandem: options.tandem.createTandem( 'bohrModel' )
+    } );
+
+    const deBroglieModel = new DeBroglieModel( {
+      tandem: options.tandem.createTandem( 'deBroglieModel' )
+    } );
+
+    const schrodingerModel = new SchrodingerModel( {
+      tandem: options.tandem.createTandem( 'schrodingerModel' )
+    } );
+
     // Predictive models supported by this screen, in the order that they will appear in the UI
     const predictiveModels = [
-      new BohrModel( {
-        tandem: options.tandem.createTandem( 'bohrModel' )
-      } ),
-      new DeBroglieModel( {
-        tandem: options.tandem.createTandem( 'deBroglieModel' )
-      } ),
-      new SchrodingerModel( {
-        tandem: options.tandem.createTandem( 'schrodingerModel' )
-      } )
+      bohrModel,
+      deBroglieModel,
+      schrodingerModel
     ];
 
     //TODO address this with an interface?
     assert && assert( _.every( predictiveModels, model => model.hasTransitionWavelengths ),
       'all models in this screen must include the concept of transition wavelengths' );
 
-    super( predictiveModels, predictiveModels[ 0 ], options );
+    super( predictiveModels, bohrModel, options );
+
+    this.bohrModel = bohrModel;
+    this.deBroglieModel = deBroglieModel;
+    this.schrodingerModel = schrodingerModel;
   }
 }
 
