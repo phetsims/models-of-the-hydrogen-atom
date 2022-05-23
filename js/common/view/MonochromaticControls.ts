@@ -18,6 +18,7 @@ import HydrogenAtomModel from '../model/HydrogenAtomModel.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { ModelMode } from '../model/ModelMode.js';
 
 type SelfOptions = {};
 
@@ -25,7 +26,7 @@ type MonochromaticControlsOptions = SelfOptions & NodeTranslationOptions & PickR
 
 export default class MonochromaticControls extends VBox {
 
-  constructor( experimentEnabledProperty: IProperty<boolean>, hydrogenAtomModelProperty: IProperty<HydrogenAtomModel>,
+  constructor( modelModeProperty: IProperty<ModelMode>, hydrogenAtomModelProperty: IProperty<HydrogenAtomModel>,
                wavelengthProperty: IProperty<number>, absorptionWavelengthsVisibleProperty: IProperty<boolean>,
                providedOptions: MonochromaticControlsOptions ) {
 
@@ -69,9 +70,9 @@ export default class MonochromaticControls extends VBox {
 
     // show the checkbox only if it's relevant
     Property.multilink(
-      [ experimentEnabledProperty, hydrogenAtomModelProperty ],
-      ( experimentEnabled, hydrogenAtomModel ) => {
-        showAbsorptionsWavelengthCheckbox.visible = ( experimentEnabled || hydrogenAtomModel.hasTransitionWavelengths );
+      [ modelModeProperty, hydrogenAtomModelProperty ],
+      ( modelMode, hydrogenAtomModel ) => {
+        showAbsorptionsWavelengthCheckbox.visible = ( modelMode === 'experiment' || hydrogenAtomModel.hasTransitionWavelengths );
       } );
 
     // show absorption wavelengths for relevant models

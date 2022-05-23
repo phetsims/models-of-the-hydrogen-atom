@@ -16,14 +16,15 @@ import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
+import { ModelMode } from '../model/ModelMode.js';
 
 type SelfOptions = {};
 
 type ExperimentPredictionSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>
 
-class ExperimentPredictionSwitch extends ABSwitch<boolean> {
+class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 
-  constructor( experimentEnabledProperty: IProperty<boolean>, providedOptions: ExperimentPredictionSwitchOptions ) {
+  constructor( modelModeProperty: IProperty<ModelMode>, providedOptions: ExperimentPredictionSwitchOptions ) {
 
     const options = optionize<ExperimentPredictionSwitchOptions, SelfOptions, ABSwitchOptions>()( {
       centerOnButton: true,
@@ -36,9 +37,9 @@ class ExperimentPredictionSwitch extends ABSwitch<boolean> {
       maxWidth: 100
     };
 
-    super( experimentEnabledProperty,
-      true, new Text( modelsOfTheHydrogenAtomStrings.experiment, labelOptions ), //TODO instrument
-      false, new Text( modelsOfTheHydrogenAtomStrings.prediction, labelOptions ), //TODO instrument
+    super( modelModeProperty,
+      'experiment', new Text( modelsOfTheHydrogenAtomStrings.experiment, labelOptions ), //TODO instrument
+      'prediction', new Text( modelsOfTheHydrogenAtomStrings.prediction, labelOptions ), //TODO instrument
       options );
   }
 }

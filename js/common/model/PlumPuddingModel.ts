@@ -30,7 +30,7 @@ type PlumPuddingModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'has
 
 class PlumPuddingModel extends HydrogenAtomModel {
 
-  public readonly radius = 30;
+  public readonly radius = 50;
 
   constructor( providedOptions: PlumPuddingModelOptions ) {
 

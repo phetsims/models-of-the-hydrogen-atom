@@ -33,6 +33,8 @@ import SpectraViewProperties from './SpectraViewProperties.js';
 import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = {};
 
@@ -73,7 +75,7 @@ class SpectraScreenView extends ScreenView {
 
     // Controls for monochromatic light
     const monochromaticControls = new MonochromaticControls(
-      viewProperties.experimentEnabledProperty,
+      model.modelModeProperty,
       model.predictiveModelProperty,
       model.light.wavelengthProperty,
       viewProperties.absorptionWavelengthsVisibleProperty, {
@@ -141,8 +143,15 @@ class SpectraScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'dashedLines' )
     } );
 
+    const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, modelViewTransform, {
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomModelProperty ],
+        hydrogenAtomModel => ( hydrogenAtomModel === model.plumPuddingModel ) ),
+      center: zoomedInBoxNode.center, //TODO
+      tandem: options.tandem.createTandem( 'plumPuddingNode' )
+    } );
+
     // switches between Experiment and Prediction
-    const experimentPredictionSwitch = new ExperimentPredictionSwitch( viewProperties.experimentEnabledProperty, {
+    const experimentPredictionSwitch = new ExperimentPredictionSwitch( model.modelModeProperty, {
       tandem: options.tandem.createTandem( 'experimentPredictionSwitch' )
     } );
 
@@ -205,6 +214,7 @@ class SpectraScreenView extends ScreenView {
         tinyBoxNode,
         dashedLines,
         zoomedInBoxNode,
+        plumPuddingNode,
         modelVBox,
         spectrometerAccordionBox,
         viewSnapshotsButton,
@@ -223,8 +233,8 @@ class SpectraScreenView extends ScreenView {
       viewSnapshotsButton
     ];
 
-    viewProperties.experimentEnabledProperty.link( experimentEnabled => {
-      predictiveModelPanel.visible = !experimentEnabled;
+    model.modelModeProperty.link( modelMode => {
+      predictiveModelPanel.visible = ( modelMode === 'prediction' );
     } );
 
     // Visibility of monochromatic light controls

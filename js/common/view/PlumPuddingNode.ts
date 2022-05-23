@@ -8,15 +8,16 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Image, Node, NodeTranslationOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
+import { Image, Node, NodeOptions, NodeTranslationOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import ElectronNode from './ElectronNode.js';
 
 type SelfOptions = {};
 
-type PlumPuddingNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<RectangleOptions, 'tandem'>;
+type PlumPuddingNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class PlumPuddingNode extends Node {
 
@@ -32,7 +33,9 @@ export default class PlumPuddingNode extends Node {
     const imageScale = atomHeight / imageHeight;
     plumPuddingImage.scale( imageScale );
 
-    options.children = [ plumPuddingImage ];
+    const electronNode = new ElectronNode();
+
+    options.children = [ plumPuddingImage, electronNode ];
 
     super( options );
   }

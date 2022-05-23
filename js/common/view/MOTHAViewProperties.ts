@@ -19,10 +19,6 @@ export type MOTHAViewPropertiesOptions = SelfOptions & PickRequired<PhetioObject
 
 export default class MOTHAViewProperties {
 
-  //TODO should mode be in model?
-  // whether we're viewing an experiment (true) or predictive (false) model
-  public readonly experimentEnabledProperty: Property<boolean>;
-
   // are absorption wavelengths indicated on the wavelength slider?
   public readonly absorptionWavelengthsVisibleProperty: Property<boolean>;
 
@@ -36,10 +32,6 @@ export default class MOTHAViewProperties {
   constructor( providedOptions: MOTHAViewPropertiesOptions ) {
 
     const options = providedOptions;
-
-    this.experimentEnabledProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'experimentEnabledProperty' )
-    } );
 
     this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'absorptionWavelengthsVisibleProperty' )
@@ -55,7 +47,6 @@ export default class MOTHAViewProperties {
   }
 
   public reset(): void {
-    this.experimentEnabledProperty.reset();
     this.absorptionWavelengthsVisibleProperty.reset();
     this.spectrometerExpandedProperty.reset();
     this.numberOfSnapshotsProperty.reset();
