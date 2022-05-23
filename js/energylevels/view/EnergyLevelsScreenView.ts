@@ -10,7 +10,7 @@ import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.j
 import optionize from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import PredictiveModelPanel from '../../common/view/PredictiveModelPanel.js';
+import PredictionPanel from '../../common/view/PredictionPanel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
@@ -42,7 +42,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     } );
 
     // panel that contains radio buttons for selecting a predictive model
-    const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty, model.predictiveModels, {
+    const predictiveModelPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, {
       left: electronEnergyLevelAccordionBox.right + 20,
       top: electronEnergyLevelAccordionBox.top,
       tandem: options.tandem.createTandem( 'predictiveModelPanel' )

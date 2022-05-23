@@ -22,7 +22,7 @@ import LegendNode from '../../common/view/LegendNode.js';
 import LightModeRadioButtonGroup from '../../common/view/LightModeRadioButtonGroup.js';
 import MonochromaticControls from '../../common/view/MonochromaticControls.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
-import PredictiveModelPanel from '../../common/view/PredictiveModelPanel.js';
+import PredictionPanel from '../../common/view/PredictionPanel.js';
 import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
@@ -150,18 +150,18 @@ class SpectraScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'plumPuddingNode' )
     } );
 
-    // switches between Experiment and Prediction
+    // switches the model mode between Experiment and Prediction
     const experimentPredictionSwitch = new ExperimentPredictionSwitch( model.modelModeProperty, {
       tandem: options.tandem.createTandem( 'experimentPredictionSwitch' )
     } );
 
     // panel that contains radio buttons for selecting a predictive model
-    const predictiveModelPanel = new PredictiveModelPanel( model.predictiveModelProperty, model.predictiveModels, {
-      tandem: options.tandem.createTandem( 'predictiveModelPanel' )
+    const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, {
+      tandem: options.tandem.createTandem( 'predictionPanel' )
     } );
 
     const modelVBox = new VBox( {
-      children: [ experimentPredictionSwitch, predictiveModelPanel ],
+      children: [ experimentPredictionSwitch, predictionPanel ],
       align: 'center',
       spacing: 10,
       left: zoomedInBoxNode.right + 30,
@@ -234,7 +234,7 @@ class SpectraScreenView extends ScreenView {
     ];
 
     model.modelModeProperty.link( modelMode => {
-      predictiveModelPanel.visible = ( modelMode === 'prediction' );
+      predictionPanel.visible = ( modelMode === 'prediction' );
     } );
 
     // Visibility of monochromatic light controls

@@ -2,7 +2,8 @@
 
 //TODO on mouseDown in projector mode, radio buttons go gray
 /**
- * PredictiveModelPanel contains controls (radio buttons) for choosing one of the predictive models.
+ * PredictionPanel contains controls (radio buttons) for choosing one of the predictive models.
+ * It is shown when the AB-switch is set to 'Prediction'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,7 +24,7 @@ type SelfOptions = {};
 
 type PredictiveModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class PredictiveModelPanel extends Panel {
+export default class PredictionPanel extends Panel {
 
   constructor( predictiveModelProperty: IProperty<HydrogenAtomModel>, predictiveModels: HydrogenAtomModel[],
                providedOptions: PredictiveModelPanelOptions ) {
@@ -106,4 +107,4 @@ function createRadioButtonContent( predictiveModel: HydrogenAtomModel ): Rectang
   };
 }
 
-modelsOfTheHydrogenAtom.register( 'PredictiveModelPanel', PredictiveModelPanel );
+modelsOfTheHydrogenAtom.register( 'PredictionPanel', PredictionPanel );
