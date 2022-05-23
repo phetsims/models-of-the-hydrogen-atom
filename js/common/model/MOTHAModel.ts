@@ -18,7 +18,7 @@ import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from './Light.js';
 import HydrogenAtomModel from './HydrogenAtomModel.js';
-import Space from './Space.js';
+import ZoomBox from './ZoomBox.js';
 import Photon from './Photon.js';
 import AlphaParticle from './AlphaParticle.js';
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
@@ -47,8 +47,8 @@ class MOTHAModel {
   // the hydrogen-atom model that is currently selected
   public readonly hydrogenAtomModelProperty: Property<HydrogenAtomModel>;
 
-  // the part of the box of hydrogen that we're viewing, where the hydrogen atom and particles exist
-  public readonly space: Space;
+  // the zoomed-in part of the box of hydrogen that we're viewing
+  public readonly zoomBox: ZoomBox;
 
   // the light that is shining into the box of hydrogen
   public readonly light: Light;
@@ -95,7 +95,7 @@ class MOTHAModel {
         //TODO phetioType
       } );
 
-    this.space = new Space( new Dimension2( 500, 500 ) );
+    this.zoomBox = new ZoomBox( new Dimension2( 800, 800 ) );
 
     this.light = new Light( {
       tandem: options.tandem.createTandem( 'light' )
@@ -157,13 +157,13 @@ class MOTHAModel {
   }
 
   /**
-   * Culls photons and alpha particles that have left the bounds of space.
+   * Culls photons and alpha particles that have left the bounds of zoomBox.
    */
   private cullParticles(): void {
 
     // Changes this.photons, so operate on a copy of the array.
     this.photons.getArrayCopy().forEach( photon => {
-      if ( !this.space.containsPhoton( photon ) ) {
+      if ( !this.zoomBox.containsPhoton( photon ) ) {
         photon.dispose();
         this.photons.remove( photon );
       }
@@ -171,7 +171,7 @@ class MOTHAModel {
 
     // Changes this.alphaParticles, so operate on a copy of the array.
     this.alphaParticles.getArrayCopy().forEach( alphaParticle => {
-      if ( !this.space.containsAlphaParticle( alphaParticle ) ) {
+      if ( !this.zoomBox.containsAlphaParticle( alphaParticle ) ) {
         alphaParticle.dispose();
         this.alphaParticles.remove( alphaParticle );
       }

@@ -30,6 +30,8 @@ type PlumPuddingModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'has
 
 class PlumPuddingModel extends HydrogenAtomModel {
 
+  public readonly radius = 30;
+
   constructor( providedOptions: PlumPuddingModelOptions ) {
 
     const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {

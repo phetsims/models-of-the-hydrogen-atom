@@ -9,24 +9,25 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node, NodeOptions, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ZoomBox from '../model/ZoomBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = {};
 
 type ZoomBoxNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
-//TODO extends Rectangle?
 export default class ZoomBoxNode extends Node {
 
-  constructor( providedOptions: ZoomBoxNodeOptions ) {
+  constructor( zoomBox: ZoomBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomBoxNodeOptions ) {
 
     const options = optionize<ZoomBoxNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO
     }, providedOptions );
 
-    const outlineNode = new Rectangle( 0, 0, 400, 400, {
+    const outlineNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
       fill: MOTHAColors.boxFillProperty,
       stroke: MOTHAColors.boxStrokeProperty,
       lineWidth: 1

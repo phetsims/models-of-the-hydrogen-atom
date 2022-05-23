@@ -1,7 +1,8 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * Space models the space that particles travel through. The origin (0,0) is at the center of the Space.
+ * ZoomBox is the part of the box of hydrogen that we're seeing in the zoomed-in view.
+ * The origin (0,0) is at the bottom-center.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,10 +13,10 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 
-export default class Space extends Bounds2 {
+export default class ZoomBox extends Bounds2 {
 
   constructor( size: Dimension2 ) {
-    super( -size.width / 2, -size.height / 2, size.width, size.height );
+    super( -size.width / 2, 0, size.width / 2, size.height );
   }
 
   public containsPhoton( photon: Photon ): boolean {
@@ -27,4 +28,4 @@ export default class Space extends Bounds2 {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'Space', Space );
+modelsOfTheHydrogenAtom.register( 'ZoomBox', ZoomBox );

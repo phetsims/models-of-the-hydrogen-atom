@@ -31,6 +31,8 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
 import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 type SelfOptions = {};
 
@@ -49,6 +51,11 @@ class SpectraScreenView extends ScreenView {
     const viewProperties = new SpectraViewProperties( {
       tandem: options.tandem.createTandem( 'viewProperties' )
     } );
+
+    // +y is up in the model, down in the view.
+    // We're using a non-unity scale to be certain that the transform is being used where it should be.
+    const modelToViewScale = 0.5;
+    const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( Vector2.ZERO, modelToViewScale, -modelToViewScale );
 
     // Legend
     const legendNode = new LegendNode( {
@@ -117,7 +124,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Box that shows the zoomed-in view
-    const zoomBoxNode = new ZoomBoxNode( {
+    const zoomBoxNode = new ZoomBoxNode( model.zoomBox, modelViewTransform, {
       left: lightNode.right + 50,
       top: this.layoutBounds.top + 15,
       tandem: options.tandem.createTandem( 'zoomBoxNode' )
