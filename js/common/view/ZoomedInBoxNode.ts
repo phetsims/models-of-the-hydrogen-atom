@@ -1,7 +1,7 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
 /**
- * ZoomBoxNode provides the zoomed-in view of part of the box of hydrogen.
+ * ZoomedInBoxNode provides the zoomed-in view of part of the box of hydrogen.
  * This is the box in which animation of atoms, photons and alpha particles takes place.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -12,16 +12,16 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node, NodeOptions, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ZoomBox from '../model/ZoomBox.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = {};
 
 type ZoomBoxNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
-export default class ZoomBoxNode extends Node {
+export default class ZoomedInBoxNode extends Node {
 
-  constructor( zoomBox: ZoomBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomBoxNodeOptions ) {
+  constructor( zoomBox: ZoomedInBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomBoxNodeOptions ) {
 
     const options = optionize<ZoomBoxNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO
@@ -39,4 +39,4 @@ export default class ZoomBoxNode extends Node {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'ZoomBoxNode', ZoomBoxNode );
+modelsOfTheHydrogenAtom.register( 'ZoomedInBoxNode', ZoomedInBoxNode );

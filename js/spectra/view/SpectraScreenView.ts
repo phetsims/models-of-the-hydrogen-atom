@@ -26,7 +26,7 @@ import PredictiveModelPanel from '../../common/view/PredictiveModelPanel.js';
 import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
-import ZoomBoxNode from '../../common/view/ZoomBoxNode.js';
+import ZoomedInBoxNode from '../../common/view/ZoomedInBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
@@ -123,19 +123,19 @@ class SpectraScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'timeControlNode' )
     } );
 
-    // Box that shows the zoomed-in view
-    const zoomBoxNode = new ZoomBoxNode( model.zoomBox, modelViewTransform, {
+    // The zoomed-in view of the box of hydrogen
+    const zoomedInBoxNode = new ZoomedInBoxNode( model.zoomedInBox, modelViewTransform, {
       left: lightNode.right + 50,
       top: this.layoutBounds.top + 15,
-      tandem: options.tandem.createTandem( 'zoomBoxNode' )
+      tandem: options.tandem.createTandem( 'zoomedInBoxNode' )
     } );
 
     // Dashed lines that connect the tiny box and zoom box
     const dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )
-      .lineTo( zoomBoxNode.left, zoomBoxNode.top )
+      .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.top )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
-      .lineTo( zoomBoxNode.left, zoomBoxNode.bottom ), {
+      .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.bottom ), {
       stroke: MOTHAColors.boxStrokeProperty,
       lineDash: [ 5, 5 ],
       tandem: options.tandem.createTandem( 'dashedLines' )
@@ -155,8 +155,8 @@ class SpectraScreenView extends ScreenView {
       children: [ experimentPredictionSwitch, predictiveModelPanel ],
       align: 'center',
       spacing: 10,
-      left: zoomBoxNode.right + 30,
-      top: zoomBoxNode.top,
+      left: zoomedInBoxNode.right + 30,
+      top: zoomedInBoxNode.top,
       excludeInvisibleChildrenFromBounds: false
     } );
 
@@ -204,7 +204,7 @@ class SpectraScreenView extends ScreenView {
         boxOfHydrogenNode,
         tinyBoxNode,
         dashedLines,
-        zoomBoxNode,
+        zoomedInBoxNode,
         modelVBox,
         spectrometerAccordionBox,
         viewSnapshotsButton,

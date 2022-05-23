@@ -18,7 +18,7 @@ import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from './Light.js';
 import HydrogenAtomModel from './HydrogenAtomModel.js';
-import ZoomBox from './ZoomBox.js';
+import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import AlphaParticle from './AlphaParticle.js';
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
@@ -48,7 +48,7 @@ class MOTHAModel {
   public readonly hydrogenAtomModelProperty: Property<HydrogenAtomModel>;
 
   // the zoomed-in part of the box of hydrogen that we're viewing
-  public readonly zoomBox: ZoomBox;
+  public readonly zoomedInBox: ZoomedInBox;
 
   // the light that is shining into the box of hydrogen
   public readonly light: Light;
@@ -95,7 +95,7 @@ class MOTHAModel {
         //TODO phetioType
       } );
 
-    this.zoomBox = new ZoomBox( new Dimension2( 800, 800 ) );
+    this.zoomedInBox = new ZoomedInBox( new Dimension2( 800, 800 ) );
 
     this.light = new Light( {
       tandem: options.tandem.createTandem( 'light' )
@@ -163,7 +163,7 @@ class MOTHAModel {
 
     // Changes this.photons, so operate on a copy of the array.
     this.photons.getArrayCopy().forEach( photon => {
-      if ( !this.zoomBox.containsPhoton( photon ) ) {
+      if ( !this.zoomedInBox.containsPhoton( photon ) ) {
         photon.dispose();
         this.photons.remove( photon );
       }
@@ -171,7 +171,7 @@ class MOTHAModel {
 
     // Changes this.alphaParticles, so operate on a copy of the array.
     this.alphaParticles.getArrayCopy().forEach( alphaParticle => {
-      if ( !this.zoomBox.containsAlphaParticle( alphaParticle ) ) {
+      if ( !this.zoomedInBox.containsAlphaParticle( alphaParticle ) ) {
         alphaParticle.dispose();
         this.alphaParticles.remove( alphaParticle );
       }

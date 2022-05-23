@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * ZoomBox is the part of the box of hydrogen that we're seeing in the zoomed-in view.
+ * ZoomedInBox is the part of the box of hydrogen that we're seeing in the zoomed-in view.
  * The origin (0,0) is at the bottom-center.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -13,7 +13,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 
-export default class ZoomBox extends Bounds2 {
+export default class ZoomedInBox extends Bounds2 {
 
   constructor( size: Dimension2 ) {
     super( -size.width / 2, 0, size.width / 2, size.height );
@@ -28,4 +28,4 @@ export default class ZoomBox extends Bounds2 {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'ZoomBox', ZoomBox );
+modelsOfTheHydrogenAtom.register( 'ZoomedInBox', ZoomedInBox );
