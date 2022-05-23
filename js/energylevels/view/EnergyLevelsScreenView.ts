@@ -42,10 +42,10 @@ export default class EnergyLevelsScreenView extends ScreenView {
     } );
 
     // panel that contains radio buttons for selecting a predictive model
-    const predictiveModelPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, {
+    const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, {
       left: electronEnergyLevelAccordionBox.right + 20,
       top: electronEnergyLevelAccordionBox.top,
-      tandem: options.tandem.createTandem( 'predictiveModelPanel' )
+      tandem: options.tandem.createTandem( 'predictionPanel' )
     } );
 
     // Reset All button
@@ -63,7 +63,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     const screenViewRootNode = new Node( {
       children: [
         electronEnergyLevelAccordionBox,
-        predictiveModelPanel,
+        predictionPanel,
         resetAllButton
       ]
     } );
@@ -72,7 +72,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     // pdom - traversal order
     screenViewRootNode.pdomOrder = [
       electronEnergyLevelAccordionBox,
-      predictiveModelPanel,
+      predictionPanel,
       resetAllButton
     ];
   }
