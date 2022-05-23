@@ -8,7 +8,7 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Image, Node, NodeOptions, NodeTranslationOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
+import { Image, Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
@@ -17,23 +17,28 @@ import ElectronNode from './ElectronNode.js';
 
 type SelfOptions = {};
 
-type PlumPuddingNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+type PlumPuddingNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class PlumPuddingNode extends Node {
 
-  constructor( atom: PlumPuddingModel, modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingNodeOptions ) {
+  constructor( hydrogenAtom: PlumPuddingModel, modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingNodeOptions ) {
 
     const options = optionize<PlumPuddingNodeOptions, SelfOptions, RectangleOptions>()( {
       //TODO
     }, providedOptions );
 
+    const viewPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+
     const plumPuddingImage = new Image( plumPudding_png );
     const imageHeight = plumPuddingImage.height;
-    const atomHeight = 2 * modelViewTransform.modelToViewDeltaY( atom.radius );
+    const atomHeight = 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.radius );
     const imageScale = atomHeight / imageHeight;
     plumPuddingImage.scale( imageScale );
+    plumPuddingImage.center = viewPosition;
 
-    const electronNode = new ElectronNode();
+    const electronNode = new ElectronNode( {
+      center: viewPosition
+    } );
 
     options.children = [ plumPuddingImage, electronNode ];
 

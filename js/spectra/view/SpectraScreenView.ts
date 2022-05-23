@@ -26,15 +26,13 @@ import PredictionPanel from '../../common/view/PredictionPanel.js';
 import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
-import ZoomedInBoxNode from '../../common/view/ZoomedInBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
 import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 
 type SelfOptions = {};
 
@@ -126,7 +124,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // The zoomed-in view of the box of hydrogen
-    const zoomedInBoxNode = new ZoomedInBoxNode( model.zoomedInBox, modelViewTransform, {
+    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, modelViewTransform, {
       left: lightNode.right + 50,
       top: this.layoutBounds.top + 15,
       tandem: options.tandem.createTandem( 'zoomedInBoxNode' )
@@ -141,13 +139,6 @@ class SpectraScreenView extends ScreenView {
       stroke: MOTHAColors.boxStrokeProperty,
       lineDash: [ 5, 5 ],
       tandem: options.tandem.createTandem( 'dashedLines' )
-    } );
-
-    const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, modelViewTransform, {
-      visibleProperty: new DerivedProperty( [ model.hydrogenAtomModelProperty ],
-        hydrogenAtomModel => ( hydrogenAtomModel === model.plumPuddingModel ) ),
-      center: zoomedInBoxNode.center, //TODO
-      tandem: options.tandem.createTandem( 'plumPuddingNode' )
     } );
 
     // switches the model mode between Experiment and Prediction
@@ -214,7 +205,6 @@ class SpectraScreenView extends ScreenView {
         tinyBoxNode,
         dashedLines,
         zoomedInBoxNode,
-        plumPuddingNode,
         modelVBox,
         spectrometerAccordionBox,
         viewSnapshotsButton,

@@ -1,8 +1,9 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
 /**
- * ZoomedInBoxNode provides the zoomed-in view of part of the box of hydrogen.
+ * ZoomedInBoxNode is a base class that provides the zoomed-in view of part of the box of hydrogen.
  * This is the box in which animation of atoms, photons and alpha particles takes place.
+ * Subclasses are expected to add views of specific hydrogen-atoms.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,13 +18,13 @@ import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = {};
 
-type ZoomBoxNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+export type ZoomedInBoxNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class ZoomedInBoxNode extends Node {
 
-  constructor( zoomBox: ZoomedInBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomBoxNodeOptions ) {
+  constructor( zoomBox: ZoomedInBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomedInBoxNodeOptions ) {
 
-    const options = optionize<ZoomBoxNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO
     }, providedOptions );
 
