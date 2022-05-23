@@ -32,24 +32,31 @@ export type MOTHAModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 
 
 class MOTHAModel {
 
+  // whether we're dealing with the experiment or a predictive hydrogen-atom model
   public readonly modelModeProperty: Property<ModelMode>;
 
+  // the experiment hydrogen-atom model
   public readonly experimentModel: ExperimentModel;
 
-  // the supported set of predictive models
+  // the supported set of predictive hydrogen-atom models
   public readonly predictiveModels: HydrogenAtomModel[];
 
+  // the predictive hydrogen-atom model that is currently selected
   public readonly predictiveModelProperty: Property<HydrogenAtomModel>;
 
-  // which predictive model is selected
+  // the hydrogen-atom model that is currently selected
   public readonly hydrogenAtomModelProperty: Property<HydrogenAtomModel>;
 
+  // the part of the box of hydrogen that we're viewing, where the hydrogen atom and particles exist
   public readonly space: Space;
 
+  // the light that is shining into the box of hydrogen
   public readonly light: Light;
 
+  // photons inside the box
   public readonly photons: ObservableArray<Photon>;
 
+  // alpha particles inside the box
   public readonly alphaParticles: ObservableArray<AlphaParticle>;
 
   // is the simulation playing?
