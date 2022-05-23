@@ -71,7 +71,8 @@ class MOTHAModel {
       //TODO
     }, providedOptions );
 
-    this.modelModeProperty = new StringEnumerationProperty( 'experiment', {
+    //TODO default should be 'experiment'
+    this.modelModeProperty = new StringEnumerationProperty( 'prediction', {
       validValues: ModelModeValues,
       tandem: options.tandem.createTandem( 'modelModeProperty' )
     } );
