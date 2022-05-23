@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
 
@@ -17,7 +18,14 @@ type AlphaParticleOptions = SelfOptions & ParticleOptions;
 export default class AlphaParticle extends Particle {
 
   constructor( providedOptions: AlphaParticleOptions ) {
-    super( providedOptions );
+
+    const options = optionize<AlphaParticleOptions, SelfOptions, ParticleOptions>()( {
+
+      //TODO phetioType: AlphaParticle.AlphaParticleIO,
+      //TODO phetioDynamicElement: true
+    }, providedOptions );
+
+    super( options );
   }
 }
 

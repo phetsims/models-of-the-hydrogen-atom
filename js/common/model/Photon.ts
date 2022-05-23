@@ -34,6 +34,9 @@ export default class Photon extends Particle {
       // SelfOptions
       emitted: false,
       collided: false
+
+      //TODO phetioType: Photon.PhotonIO,
+      //TODO phetioDynamicElement: true
     }, providedOptions );
 
     super( options );
