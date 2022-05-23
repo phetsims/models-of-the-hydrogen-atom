@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import WavelengthSlider from '../../../../scenery-phet/js/WavelengthSlider.js';
 import { NodeTranslationOptions, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
@@ -19,6 +18,7 @@ import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { ModelMode } from '../model/ModelMode.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 type SelfOptions = {};
 
@@ -69,14 +69,14 @@ export default class MonochromaticControls extends VBox {
     super( options );
 
     // show the checkbox only if it's relevant
-    Property.multilink(
+    Multilink.multilink(
       [ modelModeProperty, hydrogenAtomModelProperty ],
       ( modelMode, hydrogenAtomModel ) => {
         showAbsorptionsWavelengthCheckbox.visible = ( modelMode === 'experiment' || hydrogenAtomModel.hasTransitionWavelengths );
       } );
 
     // show absorption wavelengths for relevant models
-    Property.multilink(
+    Multilink.multilink(
       [ hydrogenAtomModelProperty, absorptionWavelengthsVisibleProperty ],
       ( hydrogenAtomModel, absorptionWavelengthsVisible ) => {
         //TODO
