@@ -14,7 +14,7 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
-import PredictiveModel from '../model/PredictiveModel.js';
+import HydrogenAtomModel from '../model/HydrogenAtomModel.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -25,7 +25,7 @@ type MonochromaticControlsOptions = SelfOptions & NodeTranslationOptions & PickR
 
 export default class MonochromaticControls extends VBox {
 
-  constructor( experimentEnabledProperty: IProperty<boolean>, predictiveModelProperty: IProperty<PredictiveModel>,
+  constructor( experimentEnabledProperty: IProperty<boolean>, hydrogenAtomModelProperty: IProperty<HydrogenAtomModel>,
                wavelengthProperty: IProperty<number>, absorptionWavelengthsVisibleProperty: IProperty<boolean>,
                providedOptions: MonochromaticControlsOptions ) {
 
@@ -69,17 +69,17 @@ export default class MonochromaticControls extends VBox {
 
     // show the checkbox only if it's relevant
     Property.multilink(
-      [ experimentEnabledProperty, predictiveModelProperty ],
-      ( experimentEnabled, predictiveModel ) => {
-        showAbsorptionsWavelengthCheckbox.visible = ( experimentEnabled || predictiveModel.hasTransitionWavelengths );
+      [ experimentEnabledProperty, hydrogenAtomModelProperty ],
+      ( experimentEnabled, hydrogenAtomModel ) => {
+        showAbsorptionsWavelengthCheckbox.visible = ( experimentEnabled || hydrogenAtomModel.hasTransitionWavelengths );
       } );
 
     // show absorption wavelengths for relevant models
     Property.multilink(
-      [ predictiveModelProperty, absorptionWavelengthsVisibleProperty ],
-      ( predictiveModel, absorptionWavelengthsVisible ) => {
+      [ hydrogenAtomModelProperty, absorptionWavelengthsVisibleProperty ],
+      ( hydrogenAtomModel, absorptionWavelengthsVisible ) => {
         //TODO
-        // wavelengthSlider.absorptionWavelengthsVisible = predictiveModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
+        // wavelengthSlider.absorptionWavelengthsVisible = hydrogenAtomModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
       } );
   }
 }

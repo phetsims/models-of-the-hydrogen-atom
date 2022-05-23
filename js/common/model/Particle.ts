@@ -12,7 +12,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 type SelfOptions = {
@@ -29,7 +29,7 @@ type SelfOptions = {
 
 export type ParticleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class Particle {
+export default class Particle extends PhetioObject {
 
   // See SelfOptions for documentation.
   public readonly positionProperty: Property<Vector2>;
@@ -38,11 +38,14 @@ export default class Particle {
 
   constructor( providedOptions: ParticleOptions ) {
 
-    const options = optionize<ParticleOptions, SelfOptions>()( {
+    const options = optionize<ParticleOptions, SelfOptions, PhetioObjectOptions>()( {
       position: Vector2.ZERO,
       speed: 0,
-      direction: 0
+      direction: 0,
+      phetioState: false
     }, providedOptions );
+
+    super( options );
 
     this.positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' )
@@ -57,17 +60,17 @@ export default class Particle {
     } );
   }
 
-  // Convenience getters
-  get position() { return this.positionProperty.value; }
-
-  get speed() { return this.speedProperty.value; }
-
-  get direction() { return this.directionProperty.value; }
-
   public reset(): void {
     this.positionProperty.reset();
     this.speedProperty.reset();
     this.directionProperty.reset();
+  }
+
+  public override dispose(): void {
+    super.dispose();
+    this.positionProperty.dispose();
+    this.speedProperty.dispose();
+    this.directionProperty.dispose();
   }
 }
 

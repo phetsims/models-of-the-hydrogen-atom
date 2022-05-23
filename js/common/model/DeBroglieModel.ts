@@ -22,19 +22,19 @@ import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
+import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
 
 type SelfOptions = {};
 
-type DeBroglieModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
+type DeBroglieModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
-export default class DeBroglieModel extends PredictiveModel {
+export default class DeBroglieModel extends HydrogenAtomModel {
 
   constructor( providedOptions: DeBroglieModelOptions ) {
 
-    const options = optionize<DeBroglieModelOptions, SelfOptions, PredictiveModelOptions>()( {
+    const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
-      // PredictiveModelOptions
+      // HydrogenAtomModelOptions
       hasTransitionWavelengths: true
     }, providedOptions );
 

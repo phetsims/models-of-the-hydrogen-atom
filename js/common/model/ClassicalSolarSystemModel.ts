@@ -22,19 +22,19 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import classicalSolarSystemButton_png from '../../../images/classicalSolarSystemButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
+import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
 
 type SelfOptions = {};
 
-type ClassicalSolarSystemModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
+type ClassicalSolarSystemModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
-export default class ClassicalSolarSystemModel extends PredictiveModel {
+export default class ClassicalSolarSystemModel extends HydrogenAtomModel {
 
   constructor( providedOptions: ClassicalSolarSystemModelOptions ) {
 
-    const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, PredictiveModelOptions>()( {
+    const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
-      // PredictiveModelOptions
+      // HydrogenAtomModelOptions
       hasTransitionWavelengths: false
     }, providedOptions );
 

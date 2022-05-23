@@ -22,19 +22,19 @@ import bohrButton_png from '../../../images/bohrButton_png.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
+import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
 
 type SelfOptions = {};
 
-type BohrModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
+type BohrModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
-export default class BohrModel extends PredictiveModel {
+export default class BohrModel extends HydrogenAtomModel {
 
   constructor( providedOptions: BohrModelOptions ) {
 
-    const options = optionize<BohrModelOptions, SelfOptions, PredictiveModelOptions>()( {
+    const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
-      // PredictiveModelOptions
+      // HydrogenAtomModelOptions
       hasTransitionWavelengths: true
     }, providedOptions );
 

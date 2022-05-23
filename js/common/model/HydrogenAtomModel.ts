@@ -1,7 +1,7 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
 /**
- * PredictiveModel is the base class for all predictive models.
+ * PredictiveModel is the base class for all hydrogen-atom models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,9 +23,9 @@ type SelfOptions = {
   hasTransitionWavelengths: boolean; // does this model include the concept of transition wavelengths?
 };
 
-export type PredictiveModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type HydrogenAtomModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default abstract class PredictiveModel extends PhetioObject {
+export default abstract class HydrogenAtomModel extends PhetioObject {
 
   public readonly displayName: string;
   public readonly icon: HTMLImageElement;
@@ -49,9 +49,9 @@ export default abstract class PredictiveModel extends PhetioObject {
    * @param icon - icon used to represent the model in the UI
    * @param providedOptions
    */
-  protected constructor( displayName: string, icon: HTMLImageElement, providedOptions: PredictiveModelOptions ) {
+  protected constructor( displayName: string, icon: HTMLImageElement, providedOptions: HydrogenAtomModelOptions ) {
 
-    const options = optionize<PredictiveModelOptions, SelfOptions, PhetioObjectOptions>()( {
+    const options = optionize<HydrogenAtomModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       position: Vector2.ZERO,
@@ -87,6 +87,10 @@ export default abstract class PredictiveModel extends PhetioObject {
     super.dispose();
   }
 
+  public reset(): void {
+    //TODO
+  }
+
   /**
    * Called when time has advanced by some delta. The default implementation does nothing.
    */
@@ -105,11 +109,11 @@ export default abstract class PredictiveModel extends PhetioObject {
    * In this default implementation, the atom has no influence on the photon's movement.
    */
   public stepPhoton( photon: Photon, dt: number ): void {
-    const distance = photon.speed * dt;
-    const dx = Math.cos( photon.direction ) * distance;
-    const dy = Math.sin( photon.direction ) * distance;
-    const x = photon.position.x + dx;
-    const y = photon.position.y + dy;
+    const distance = photon.speedProperty.value * dt;
+    const dx = Math.cos( photon.directionProperty.value ) * distance;
+    const dy = Math.sin( photon.directionProperty.value ) * distance;
+    const x = photon.positionProperty.value.x + dx;
+    const y = photon.positionProperty.value.y + dy;
     photon.positionProperty.value = new Vector2( x, y );
   }
 
@@ -118,11 +122,11 @@ export default abstract class PredictiveModel extends PhetioObject {
    * In this default implementation, the atom has no influence on the alpha particle's movement.
    */
   public stepAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
-    const distance = alphaParticle.speed * dt;
-    const dx = Math.cos( alphaParticle.direction ) * distance;
-    const dy = Math.sin( alphaParticle.direction ) * distance;
-    const x = alphaParticle.position.x + dx;
-    const y = alphaParticle.position.y + dy;
+    const distance = alphaParticle.speedProperty.value * dt;
+    const dx = Math.cos( alphaParticle.directionProperty.value ) * distance;
+    const dy = Math.sin( alphaParticle.directionProperty.value ) * distance;
+    const x = alphaParticle.positionProperty.value.x + dx;
+    const y = alphaParticle.positionProperty.value.y + dy;
     alphaParticle.positionProperty.value = new Vector2( x, y );
   }
 
@@ -143,4 +147,4 @@ export default abstract class PredictiveModel extends PhetioObject {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'PredictiveModel', PredictiveModel );
+modelsOfTheHydrogenAtom.register( 'HydrogenAtomModel', HydrogenAtomModel );

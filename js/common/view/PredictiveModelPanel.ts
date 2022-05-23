@@ -15,7 +15,7 @@ import { HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/j
 import RectangularRadioButtonGroup, { RectangularRadioButtonItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import PredictiveModel from '../model/PredictiveModel.js';
+import HydrogenAtomModel from '../model/HydrogenAtomModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 
@@ -25,7 +25,7 @@ type PredictiveModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRe
 
 export default class PredictiveModelPanel extends Panel {
 
-  constructor( predictiveModelProperty: IProperty<PredictiveModel>, predictiveModels: PredictiveModel[],
+  constructor( predictiveModelProperty: IProperty<HydrogenAtomModel>, predictiveModels: HydrogenAtomModel[],
                providedOptions: PredictiveModelPanelOptions ) {
 
     const options = optionize<PredictiveModelPanelOptions, SelfOptions, PanelOptions>()( {
@@ -36,7 +36,7 @@ export default class PredictiveModelPanel extends Panel {
     }, providedOptions );
 
     // content that appears on the radio buttons
-    const contentArray: RectangularRadioButtonItem<PredictiveModel>[] = [];
+    const contentArray: RectangularRadioButtonItem<HydrogenAtomModel>[] = [];
     for ( let i = 0; i < predictiveModels.length; i++ ) {
       contentArray.push( createRadioButtonContent( predictiveModels[ i ] ) );
     }
@@ -83,7 +83,7 @@ export default class PredictiveModelPanel extends Panel {
 /**
  * Creates the content for one of the radio buttons.
  */
-function createRadioButtonContent( predictiveModel: PredictiveModel ): RectangularRadioButtonItem<PredictiveModel> {
+function createRadioButtonContent( predictiveModel: HydrogenAtomModel ): RectangularRadioButtonItem<HydrogenAtomModel> {
 
   const node = new HBox( {
     spacing: 10,

@@ -22,19 +22,19 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import plumPuddingButton_png from '../../../images/plumPuddingButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
+import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
 
 type SelfOptions = {};
 
-type PlumPuddingModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
+type PlumPuddingModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
-class PlumPuddingModel extends PredictiveModel {
+class PlumPuddingModel extends HydrogenAtomModel {
 
   constructor( providedOptions: PlumPuddingModelOptions ) {
 
-    const options = optionize<PlumPuddingModelOptions, SelfOptions, PredictiveModelOptions>()( {
+    const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
-      // PredictiveModelOptions
+      // HydrogenAtomModelOptions
       hasTransitionWavelengths: false
     }, providedOptions );
 

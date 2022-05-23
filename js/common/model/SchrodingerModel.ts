@@ -22,19 +22,19 @@ import schrodingerButton_png from '../../../images/schrodingerButton_png.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
+import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
 
 type SelfOptions = {};
 
-export type SchrodingerModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
+export type SchrodingerModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
-export default class SchrodingerModel extends PredictiveModel {
+export default class SchrodingerModel extends HydrogenAtomModel {
 
   constructor( providedOptions: SchrodingerModelOptions ) {
 
-    const options = optionize<SchrodingerModelOptions, SelfOptions, PredictiveModelOptions>()( {
+    const options = optionize<SchrodingerModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
-      // PredictiveModelOptions
+      // HydrogenAtomModelOptions
       hasTransitionWavelengths: true
     }, providedOptions );
 

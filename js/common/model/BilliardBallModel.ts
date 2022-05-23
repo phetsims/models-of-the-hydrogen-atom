@@ -26,7 +26,7 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 import RandomUtils from '../RandomUtils.js';
 import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
-import PredictiveModel, { PredictiveModelOptions } from './PredictiveModel.js';
+import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 120 );
@@ -36,15 +36,15 @@ type SelfOptions = {
   radius?: number;
 };
 
-type BilliardBallModelOptions = SelfOptions & Omit<PredictiveModelOptions, 'hasTransitionWavelengths'>;
+type BilliardBallModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
-export default class BilliardBallModel extends PredictiveModel {
+export default class BilliardBallModel extends HydrogenAtomModel {
 
   public readonly radius: number;
 
   constructor( providedOptions: BilliardBallModelOptions ) {
 
-    const options = optionize<BilliardBallModelOptions, SelfOptions, PredictiveModelOptions>()( {
+    const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
       // SelfOptions
       radius: 30,
@@ -66,10 +66,10 @@ export default class BilliardBallModel extends PredictiveModel {
 
     // detect collision and adjust particle direction
     if ( !photon.collided ) {
-      if ( photon.position.distance( this.position ) <= this.radius ) {
-        const sign = ( photon.position.x > this.position.x ) ? 1 : -1;
+      if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
+        const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
         const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-        photon.directionProperty.value = photon.direction + deflection;
+        photon.directionProperty.value = photon.directionProperty.value + deflection;
         photon.collided = true;
       }
     }
@@ -85,10 +85,10 @@ export default class BilliardBallModel extends PredictiveModel {
   public override stepAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
 
     // detect collision and adjust particle direction
-    if ( alphaParticle.position.distance( this.position ) <= this.radius ) {
-      const sign = ( alphaParticle.position.x > this.position.x ) ? 1 : -1;
+    if ( alphaParticle.positionProperty.value.distance( this.position ) <= this.radius ) {
+      const sign = ( alphaParticle.positionProperty.value.x > this.position.x ) ? 1 : -1;
       const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-      alphaParticle.directionProperty.value = alphaParticle.direction + deflection;
+      alphaParticle.directionProperty.value = alphaParticle.directionProperty.value + deflection;
     }
 
     // move particle
