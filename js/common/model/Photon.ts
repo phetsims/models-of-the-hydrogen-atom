@@ -6,6 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { IColor } from '../../../../scenery/js/imports.js';
@@ -15,26 +17,27 @@ import Particle, { ParticleOptions } from './Particle.js';
 
 type SelfOptions = {
   wavelength: number; // the photon's immutable wavelength
-  emitted?: boolean; // was this photon emitted by the atom?
-  collided?: boolean; // did this photon already collide with the atom?
+  wasEmitted?: boolean; // was this photon emitted by the atom?
+  hasCollided?: boolean; // did this photon already collide with the atom?
 };
 
-type PhotonOptions = SelfOptions & ParticleOptions;
+type PhotonOptions = SelfOptions & Omit<ParticleOptions, 'radius'>;
 
 export default class Photon extends Particle {
 
   public readonly wavelength: number;
-  public readonly emitted: boolean;
-  public collided: boolean;
+  public readonly wasEmitted: boolean;
+  public hasCollidedProperty: IProperty<boolean>;
 
   constructor( providedOptions?: PhotonOptions ) {
 
     const options = optionize<PhotonOptions, SelfOptions, ParticleOptions>()( {
 
       // SelfOptions
-      emitted: false,
-      collided: false
+      wasEmitted: false,
+      hasCollided: false,
 
+      radius: 15
       //TODO phetioType: Photon.PhotonIO,
       //TODO phetioDynamicElement: true
     }, providedOptions );
@@ -42,8 +45,15 @@ export default class Photon extends Particle {
     super( options );
 
     this.wavelength = options.wavelength;
-    this.emitted = options.emitted;
-    this.collided = options.collided;
+    this.wasEmitted = options.wasEmitted;
+    this.hasCollidedProperty = new BooleanProperty( options.hasCollided, {
+      tandem: options.tandem.createTandem( 'hasCollidedProperty' )
+    } );
+  }
+
+  public override dispose(): void {
+    super.dispose();
+    this.hasCollidedProperty.dispose();
   }
 
   /**

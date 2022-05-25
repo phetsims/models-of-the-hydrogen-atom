@@ -146,15 +146,15 @@ class MOTHAModel {
 
     const hydrogenAtomModel = this.hydrogenAtomModelProperty.value;
 
-    // Move photons
-    for ( let i = 0; i < this.photons.length; i++ ) {
-      hydrogenAtomModel.stepPhoton( this.photons.get( i )!, dt ); //TODO does this potentially change this.photons?
-    }
+    // Move photons. May change this.photons, so operate on a copy of the array.
+    this.photons.getArrayCopy().forEach( photon => {
+      hydrogenAtomModel.movePhoton( photon, dt );
+    } );
 
-    // Move alpha particles
-    for ( let i = 0; i < this.alphaParticles.length; i++ ) {
-      hydrogenAtomModel.stepAlphaParticle( this.alphaParticles.get( i )!, dt ); //TODO does this potentially change this.alphaParticles?
-    }
+    // Move alpha particles. May change this.alphaParticles, so operate on a copy of the array.
+    this.alphaParticles.forEach( alphaParticle => {
+      hydrogenAtomModel.moveAlphaParticle( alphaParticle, dt );
+    } );
   }
 
   /**

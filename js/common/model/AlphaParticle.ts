@@ -21,6 +21,7 @@ export default class AlphaParticle extends Particle {
 
     const options = optionize<AlphaParticleOptions, SelfOptions, ParticleOptions>()( {
 
+      radius: 20 //TODO what is the correct value?
       //TODO phetioType: AlphaParticle.AlphaParticleIO,
       //TODO phetioDynamicElement: true
     }, providedOptions );

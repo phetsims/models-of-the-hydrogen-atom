@@ -36,10 +36,10 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
   public readonly hasTransitionWavelengths: boolean;
 
   // emits when a photon is absorbed
-  public readonly photonAbsorbedEmitter: Emitter<[]>;
+  public readonly photonAbsorbedEmitter: Emitter<[ Photon ]>;
 
   // emits when a photon is emitted (an unfortunate name)
-  public readonly photonEmittedEmitter: Emitter<[]>;
+  public readonly photonEmittedEmitter: Emitter<[ Photon ]>;
 
   // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.
   public static readonly GROUND_STATE = 0;
@@ -73,11 +73,13 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
     this.groundState = options.groundState;
     this.hasTransitionWavelengths = options.hasTransitionWavelengths;
 
-    this.photonAbsorbedEmitter = new Emitter( {
+    this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
+      parameters: [ { valueType: Photon } ],
       tandem: options.tandem.createTandem( 'photonAbsorbedEmitter' )
     } );
 
-    this.photonEmittedEmitter = new Emitter( {
+    this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
+      parameters: [ { valueType: Photon } ],
       tandem: options.tandem.createTandem( 'photonEmittedEmitter' )
     } );
   }
@@ -106,28 +108,16 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
 
   /**
    * Moves a photon by the specified time step.
-   * In this default implementation, the atom has no influence on the photon's movement.
    */
-  public stepPhoton( photon: Photon, dt: number ): void {
-    const distance = photon.speedProperty.value * dt;
-    const dx = Math.cos( photon.directionProperty.value ) * distance;
-    const dy = Math.sin( photon.directionProperty.value ) * distance;
-    const x = photon.positionProperty.value.x + dx;
-    const y = photon.positionProperty.value.y + dy;
-    photon.positionProperty.value = new Vector2( x, y );
+  public movePhoton( photon: Photon, dt: number ): void {
+    photon.move( dt );
   }
 
   /**
    * Moves an alpha particle by the specified time step.
-   * In this default implementation, the atom has no influence on the alpha particle's movement.
    */
-  public stepAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
-    const distance = alphaParticle.speedProperty.value * dt;
-    const dx = Math.cos( alphaParticle.directionProperty.value ) * distance;
-    const dy = Math.sin( alphaParticle.directionProperty.value ) * distance;
-    const x = alphaParticle.positionProperty.value.x + dx;
-    const y = alphaParticle.positionProperty.value.y + dy;
-    alphaParticle.positionProperty.value = new Vector2( x, y );
+  public moveAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
+    alphaParticle.move( dt );
   }
 
   /**

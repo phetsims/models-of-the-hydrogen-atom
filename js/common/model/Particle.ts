@@ -11,11 +11,14 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 type SelfOptions = {
+
+  radius: number;
 
   // position in model coordinate frame
   position?: Vector2;
@@ -27,9 +30,11 @@ type SelfOptions = {
   direction?: number;
 };
 
-export type ParticleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type ParticleOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'tandem'>; //TODO PickRequired tandem
 
 export default class Particle extends PhetioObject {
+
+  public readonly radius: number;
 
   // See SelfOptions for documentation.
   public readonly positionProperty: Property<Vector2>;
@@ -42,10 +47,12 @@ export default class Particle extends PhetioObject {
       position: Vector2.ZERO,
       speed: 0,
       direction: 0,
-      phetioState: false
+      tandem: Tandem.OPT_OUT //TODO
     }, providedOptions );
 
     super( options );
+
+    this.radius = options.radius;
 
     this.positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' )
@@ -71,6 +78,16 @@ export default class Particle extends PhetioObject {
     this.positionProperty.dispose();
     this.speedProperty.dispose();
     this.directionProperty.dispose();
+  }
+
+  public move( dt: number ): void {
+    const speed = this.speedProperty.value;
+    const distance = speed * dt;
+    const dx = Math.cos( this.directionProperty.value ) * distance;
+    const dy = Math.sin( this.directionProperty.value ) * distance;
+    const x = this.positionProperty.value.x + dx;
+    const y = this.positionProperty.value.y + dy;
+    this.positionProperty.value = new Vector2( x, y );
   }
 }
 

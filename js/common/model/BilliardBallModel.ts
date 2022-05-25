@@ -62,27 +62,27 @@ export default class BilliardBallModel extends HydrogenAtomModel {
    * Moves a photon. If the photon collides with the atom, the photon bounces back at
    * a 'steep but random' angle. Otherwise it continues to move in its current direction.
    */
-  public override stepPhoton( photon: Photon, dt: number ): void {
+  public override movePhoton( photon: Photon, dt: number ): void {
 
     // detect collision and adjust particle direction
-    if ( !photon.collided ) {
+    if ( !photon.hasCollidedProperty.value ) {
       if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
         const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
         const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
         photon.directionProperty.value = photon.directionProperty.value + deflection;
-        photon.collided = true;
+        photon.hasCollidedProperty.value = true;
       }
     }
 
     // move particle
-    super.stepPhoton( photon, dt );
+    super.movePhoton( photon, dt );
   }
 
   /**
    * Moves an alpha particle. If the alpha particle collides with the atom, the alpha particle
    * bounces back at a 'steep but random' angle. Otherwise it continues to move in its current direction.
    */
-  public override stepAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
+  public override moveAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
 
     // detect collision and adjust particle direction
     if ( alphaParticle.positionProperty.value.distance( this.position ) <= this.radius ) {
@@ -92,7 +92,7 @@ export default class BilliardBallModel extends HydrogenAtomModel {
     }
 
     // move particle
-    super.stepAlphaParticle( alphaParticle, dt );
+    super.moveAlphaParticle( alphaParticle, dt );
   }
 }
 
