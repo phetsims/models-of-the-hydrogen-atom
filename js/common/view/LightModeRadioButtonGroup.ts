@@ -74,7 +74,7 @@ function createModeIcon( beamColor: Color ): Node {
 
   // If the beam color is the same as the radio button fill, stroke the beam.
   const strokeProperty = new DerivedProperty( [ MOTHAColors.lightModeRadioButtonFillProperty ],
-    lightModeRadioButtonFill => ( lightModeRadioButtonFill.equals( beamColor ) ) ? 'black' : null
+    lightModeRadioButtonFill => ( lightModeRadioButtonFill.equals( beamColor ) ) ? 'black' : 'transparent'
   );
 
   const beamNode = new Rectangle( 0, 0, 5, 10, {
