@@ -74,13 +74,11 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
     this.hasTransitionWavelengths = options.hasTransitionWavelengths;
 
     this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { valueType: Photon } ],
-      tandem: options.tandem.createTandem( 'photonAbsorbedEmitter' )
+      parameters: [ { valueType: Photon } ]
     } );
 
     this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { valueType: Photon } ],
-      tandem: options.tandem.createTandem( 'photonEmittedEmitter' )
+      parameters: [ { valueType: Photon } ]
     } );
   }
 
