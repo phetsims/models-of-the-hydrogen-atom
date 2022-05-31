@@ -19,6 +19,7 @@
  */
 
 import bohrButton_png from '../../../images/bohrButton_png.js';
+import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -26,7 +27,7 @@ import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel
 
 type SelfOptions = {};
 
-type BohrModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type BohrModelOptions = SelfOptions & OmitStrict<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
 export default class BohrModel extends HydrogenAtomModel {
 

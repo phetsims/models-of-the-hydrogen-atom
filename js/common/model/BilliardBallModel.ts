@@ -19,6 +19,7 @@
  */
 
 import Utils from '../../../../dot/js/Utils.js';
+import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import billiardBallButton_png from '../../../images/billiardBallButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -36,7 +37,7 @@ type SelfOptions = {
   radius?: number;
 };
 
-type BilliardBallModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type BilliardBallModelOptions = SelfOptions & OmitStrict<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
 export default class BilliardBallModel extends HydrogenAtomModel {
 

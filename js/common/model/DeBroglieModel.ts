@@ -19,6 +19,7 @@
  */
 
 import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
+import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -26,7 +27,7 @@ import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel
 
 type SelfOptions = {};
 
-type DeBroglieModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type DeBroglieModelOptions = SelfOptions & OmitStrict<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
 export default class DeBroglieModel extends HydrogenAtomModel {
 

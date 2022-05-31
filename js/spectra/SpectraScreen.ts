@@ -7,6 +7,7 @@
  */
 
 import optionize from '../../../phet-core/js/optionize.js';
+import OmitStrict from '../../../phet-core/js/types/OmitStrict.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
@@ -15,7 +16,7 @@ import SpectraScreenView from './view/SpectraScreenView.js';
 
 type SelfOptions = {};
 
-type SpectraScreenOptions = SelfOptions & Omit<MOTHAScreenOptions, 'name' | 'homeScreenIcon'>;
+type SpectraScreenOptions = SelfOptions & OmitStrict<MOTHAScreenOptions, 'name' | 'homeScreenIcon'>;
 
 export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScreenView> {
 

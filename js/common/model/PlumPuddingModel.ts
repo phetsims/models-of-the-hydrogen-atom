@@ -25,6 +25,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -52,7 +53,7 @@ const ELECTRON_LINE_SEGMENTS = 30; // number of discrete steps in the electron l
 
 type SelfOptions = {};
 
-type PlumPuddingModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type PlumPuddingModelOptions = SelfOptions & OmitStrict<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
 class PlumPuddingModel extends HydrogenAtomModel {
 

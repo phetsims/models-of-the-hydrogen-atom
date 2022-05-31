@@ -19,6 +19,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
 import classicalSolarSystemButton_png from '../../../images/classicalSolarSystemButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -26,7 +27,7 @@ import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel
 
 type SelfOptions = {};
 
-type ClassicalSolarSystemModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type ClassicalSolarSystemModelOptions = SelfOptions & OmitStrict<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
 export default class ClassicalSolarSystemModel extends HydrogenAtomModel {
 

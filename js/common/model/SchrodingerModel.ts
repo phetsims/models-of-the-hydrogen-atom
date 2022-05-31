@@ -19,6 +19,7 @@
  */
 
 import schrodingerButton_png from '../../../images/schrodingerButton_png.js';
+import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -26,7 +27,7 @@ import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel
 
 type SelfOptions = {};
 
-export type SchrodingerModelOptions = SelfOptions & Omit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+export type SchrodingerModelOptions = SelfOptions & OmitStrict<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
 
 export default class SchrodingerModel extends HydrogenAtomModel {
 
