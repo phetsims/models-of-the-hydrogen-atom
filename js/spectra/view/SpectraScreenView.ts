@@ -33,6 +33,8 @@ import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = {};
 
@@ -58,10 +60,15 @@ class SpectraScreenView extends ScreenView {
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( Vector2.ZERO, modelToViewScale, -modelToViewScale );
 
     // Legend
+    const legendNodeTandem = options.tandem.createTandem( 'legendNode' );
     const legendNode = new LegendNode( {
+      visibleProperty: new DerivedProperty( [ model.modelModeProperty ], modelMode => ( modelMode === 'prediction' ), {
+        tandem: legendNodeTandem.createTandem( 'visibleProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+      } ),
       left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'legendNode' )
+      tandem: legendNodeTandem
     } );
 
     // Light Mode radio button group

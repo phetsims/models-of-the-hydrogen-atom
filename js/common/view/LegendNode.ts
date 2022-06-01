@@ -26,7 +26,7 @@ const LABEL_OPTIONS = {
 
 type SelfOptions = {};
 
-type LegendNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<VBoxOptions, 'tandem'>;
+type LegendNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<VBoxOptions, 'visibleProperty' | 'tandem'>;
 
 export default class LegendNode extends VBox {
 
