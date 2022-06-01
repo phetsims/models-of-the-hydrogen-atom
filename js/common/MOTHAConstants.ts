@@ -6,7 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import Range from '../../../dot/js/Range.js';
 
 // constants used to compute other constants
 const ELECTRON_DIAMETER = 9;
@@ -24,6 +26,11 @@ const MOTHAConstants = {
 
   // how close a photon and electron (treated as points) must be for them to collide
   COLLISION_THRESHOLD: ( PHOTON_DIAMETER / 2 ) + ( ELECTRON_DIAMETER / 2 ),
+
+  MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
+
+  PHOTON_INITIAL_SPEED: 5,
+  ALPHA_PARTICLE_INITIAL_SPEED: 5,
 
   MAX_SPECTROMETER_SNAPSHOTS: 3
 };

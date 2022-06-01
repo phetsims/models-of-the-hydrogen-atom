@@ -50,7 +50,6 @@ import ZoomedInBox from './ZoomedInBox.js';
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 const PHOTON_EMISSION_PROBABILITY = 0.1; // probability [0,1] that a photon will be emitted
-const PHOTON_EMISSION_SPEED = 5; // initial speed of emitted photon
 const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon will be absorbed
 const ELECTRON_LINE_SEGMENTS = 30; // number of discrete steps in the electron line
 
@@ -262,7 +261,6 @@ class PlumPuddingModel extends HydrogenAtom {
       this.photonEmittedEmitter.emit( new Photon( {
         position: this.electronPositionProperty.value, // at the electron's position
         wavelength: PHOTON_EMISSION_WAVELENGTH,
-        speed: PHOTON_EMISSION_SPEED,
         direction: nextAngle(),
         wasEmitted: true
       } ) );

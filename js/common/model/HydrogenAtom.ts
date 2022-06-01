@@ -46,7 +46,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly photonAbsorbedEmitter: Emitter<[ Photon ]>;
 
   // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.
-  public static readonly GROUND_STATE = 0;
+  public static readonly GROUND_STATE = 1;
 
   /**
    * @param displayName - name of the model shown in the UI

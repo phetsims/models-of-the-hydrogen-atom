@@ -46,7 +46,7 @@ export default class Particle extends PhetioObject {
     const options = optionize<ParticleOptions, SelfOptions, PhetioObjectOptions>()( {
       position: Vector2.ZERO,
       speed: 0,
-      direction: 0,
+      direction: Math.PI / 2, // straight up, in the direction of +y
       tandem: Tandem.OPT_OUT //TODO
     }, providedOptions );
 

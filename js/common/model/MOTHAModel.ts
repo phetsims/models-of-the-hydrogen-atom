@@ -109,7 +109,7 @@ class MOTHAModel {
         //TODO phetioType
       } );
 
-    this.light = new Light( {
+    this.light = new Light( zoomedInBox, {
       tandem: options.tandem.createTandem( 'light' )
     } );
 
@@ -160,7 +160,10 @@ class MOTHAModel {
    */
   public step( dt: number ): void {
 
-    // Step the atom. Do this first because it may influence the particles.
+    // Step the light.
+    this.light.step( dt );
+
+    // Step the atom.
     this.hydrogenAtomProperty.value.step( dt );
 
     // Move alpha particles and photons, which may be influenced by the atom.

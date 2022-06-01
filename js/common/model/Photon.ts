@@ -22,13 +22,15 @@ type SelfOptions = {
   hasCollided?: boolean; // did this photon already collide with the atom?
 };
 
-type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
+type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius' | 'speed'>;
 
 export default class Photon extends Particle {
 
   public readonly wavelength: number;
   public readonly wasEmitted: boolean;
   public hasCollidedProperty: IProperty<boolean>;
+
+  public static INITIAL_SPEED = 5;
 
   constructor( providedOptions?: PhotonOptions ) {
 
@@ -38,7 +40,10 @@ export default class Photon extends Particle {
       wasEmitted: false,
       hasCollided: false,
 
-      radius: 15
+      // ParticleOptions
+      radius: 15,
+      speed: Photon.INITIAL_SPEED
+
       //TODO phetioType: Photon.PhotonIO,
       //TODO phetioDynamicElement: true
     }, providedOptions );
@@ -48,7 +53,7 @@ export default class Photon extends Particle {
     this.wavelength = options.wavelength;
     this.wasEmitted = options.wasEmitted;
     this.hasCollidedProperty = new BooleanProperty( options.hasCollided, {
-      tandem: options.tandem.createTandem( 'hasCollidedProperty' )
+      //TODO tandem: options.tandem.createTandem( 'hasCollidedProperty' )
     } );
   }
 

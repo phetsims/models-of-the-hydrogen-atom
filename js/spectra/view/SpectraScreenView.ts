@@ -82,7 +82,7 @@ class SpectraScreenView extends ScreenView {
     const monochromaticControls = new MonochromaticControls(
       model.modelModeProperty,
       model.predictiveModelProperty,
-      model.light.wavelengthProperty,
+      model.light.monochromaticWavelengthProperty,
       viewProperties.absorptionWavelengthsVisibleProperty, {
         left: lightModeRadioButtonGroup.left,
         top: lightModeRadioButtonGroup.bottom + 15,

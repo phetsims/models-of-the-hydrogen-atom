@@ -8,18 +8,32 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Emitter from '../../../../axon/js/Emitter.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import BohrModel from './BohrModel.js';
 import { LightMode, LightModeValues } from './LightMode.js';
+import Photon from './Photon.js';
+import ZoomedInBox from './ZoomedInBox.js';
+
+// probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
+const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
+assert && assert( TRANSITION_WAVELENGTHS_WEIGHT >= 0 && TRANSITION_WAVELENGTHS_WEIGHT <= 1 );
+
+// Maximum number of photons in the zoomed-in box
+const MAX_PHOTONS = 20;
 
 type SelfOptions = {};
 
@@ -27,23 +41,43 @@ type LightOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Light {
 
+  private readonly zoomedInBox: ZoomedInBox;
+
   // is the light on?
   public readonly onProperty: BooleanProperty;
 
   // whether the light is full spectrum (white) or monochromatic
   public readonly lightModeProperty: Property<LightMode>;
 
-  // wavelength in nm, relevant only for monochromatic mode
-  public readonly wavelengthProperty: NumberProperty;
+  // wavelength for monochromatic mode, in nm
+  public readonly monochromaticWavelengthRange: Range;
+  public readonly monochromaticWavelengthProperty: NumberProperty;
+
+  // wavelength of the light, where 0 is white light
+  public readonly wavelengthProperty: IReadOnlyProperty<number>;
 
   // color displayed by the view
   public readonly colorProperty: IReadOnlyProperty<Color | string>;
 
-  constructor( providedOptions: LightOptions ) {
+  // emits when a photon is created
+  public readonly photonCreatedEmitter: Emitter<[ Photon ]>;
+
+  // time between creation of photons
+  private readonly dtPerPhotonCreated: number;
+
+  // elapsed time since a photon was created
+  private readonly dtSincePhotonCreatedProperty: Property<number>;
+
+  // wavelengths that cause a state transition
+  private readonly transitionWavelengths: number[];
+
+  constructor( zoomedInBox: ZoomedInBox, providedOptions: LightOptions ) {
 
     const options = optionize<LightOptions, SelfOptions>()( {
       //TODO
     }, providedOptions );
+
+    this.zoomedInBox = zoomedInBox;
 
     this.onProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'onProperty' )
@@ -55,24 +89,128 @@ export default class Light {
       phetioType: Property.PropertyIO( StringIO )
     } );
 
-    this.wavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
-      range: new Range( VisibleColor.MIN_WAVELENGTH, VisibleColor.MAX_WAVELENGTH ),
-      tandem: options.tandem.createTandem( 'wavelengthProperty' )
+    // Range goes from UV to max visible wavelength
+    this.monochromaticWavelengthRange = new Range( 92, VisibleColor.MAX_WAVELENGTH );
+    assert && assert( this.monochromaticWavelengthRange.min < VisibleColor.MIN_WAVELENGTH );
+
+    this.monochromaticWavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
+      range: this.monochromaticWavelengthRange,
+      tandem: options.tandem.createTandem( 'monochromaticWavelengthProperty' )
     } );
+
+    this.wavelengthProperty = new DerivedProperty( [ this.lightModeProperty, this.monochromaticWavelengthProperty ],
+      ( lightMode, monochromaticWavelength ) =>
+        ( lightMode === 'white' ) ? VisibleColor.WHITE_WAVELENGTH : monochromaticWavelength, {
+        tandem: options.tandem.createTandem( 'wavelengthProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+      } );
 
     this.colorProperty = new DerivedProperty(
       [ this.lightModeProperty, this.wavelengthProperty ],
-      ( lightMode, wavelength ) =>
-        ( lightMode === 'white' ) ? Color.WHITE : VisibleColor.wavelengthToColor( wavelength ), {
+      ( lightMode, wavelength ) => VisibleColor.wavelengthToColor( wavelength ), {
         tandem: options.tandem.createTandem( 'colorProperty' ),
         phetioType: DerivedProperty.DerivedPropertyIO( Color.ColorIO )
       } );
+
+    this.photonCreatedEmitter = new Emitter<[ Photon ]>( {
+      parameters: [ { valueType: Photon } ]
+    } );
+
+    this.dtPerPhotonCreated = ( zoomedInBox.height / Photon.INITIAL_SPEED ) / MAX_PHOTONS;
+
+    this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
+      tandem: options.tandem.createTandem( 'dtSincePhotonCreatedProperty' ),
+      phetioReadOnly: true
+    } );
+
+    // Get transition wavelengths for state 1, which are all UV.
+    this.transitionWavelengths =
+      BohrModel.getTransitionWavelengths( this.monochromaticWavelengthRange.min, VisibleColor.MIN_WAVELENGTH );
   }
 
   public reset(): void {
     this.onProperty.reset();
     this.lightModeProperty.reset();
-    this.wavelengthProperty.reset();
+    this.monochromaticWavelengthProperty.reset();
+    this.dtSincePhotonCreatedProperty.reset();
+  }
+
+  /**
+   * Steps the light, and creates a photon when it's time to do so.
+   * @param dt - the time step, in seconds
+   */
+  public step( dt: number ): void {
+    if ( this.onProperty.value ) {
+      this.dtSincePhotonCreatedProperty.value += dt;
+      if ( this.dtSincePhotonCreatedProperty.value >= this.dtPerPhotonCreated ) {
+
+        // Save the remainder.
+        this.dtSincePhotonCreatedProperty.value = this.dtSincePhotonCreatedProperty.value % this.dtPerPhotonCreated;
+
+        // Create a photon.
+        this.createPhoton();
+      }
+    }
+  }
+
+  /**
+   * Creates a photon when it's time to do so, at a random location along the bottom edge of the zoomed-in box.
+   */
+  private createPhoton(): void {
+    this.photonCreatedEmitter.emit( new Photon( {
+      position: this.getNextParticlePosition(),
+      wavelength: this.getNextPhotonWavelength()
+    } ) );
+  }
+
+  /**
+   * Creates a photon at the bottom-center of the zoomed-in box. This is used when we want to ensure that a
+   * photon hits the atom, which is centered in the zoomed-in box.
+   */
+  public createPhotonAtCenter( wavelength: number ): void {
+    this.photonCreatedEmitter.emit( new Photon( {
+      position: new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ),
+      wavelength: wavelength
+    } ) );
+  }
+
+  /**
+   * Gets the next random position for a new particle, along the bottom edge of the zoomed-in box.
+   */
+  private getNextParticlePosition(): Vector2 {
+    const x = dotRandom.nextDoubleBetween( this.zoomedInBox.minX, this.zoomedInBox.maxX );
+    const y = this.zoomedInBox.minY;
+    return new Vector2( x, y );
+  }
+
+  /**
+   * Gets a wavelength that would be appropriate for a new photon.
+   *
+   * For monochromatic light, we simply use the value of the gun's monochromatic wavelength.
+   *
+   * For white light, the wavelength is randomly chosen. Instead of simply picking a wavelength from the light's
+   * entire range, we give a higher weight to those wavelengths that would cause a transition from state 1 to some
+   * other state. We consider only the wavelengths relevant to state=1 because all other transitions are very
+   * improbable in practice. This increases the probability that our photon will interact with the atom.
+   */
+  private getNextPhotonWavelength(): number {
+
+    let wavelength = this.monochromaticWavelengthProperty.value;
+
+    if ( this.lightModeProperty.value === 'white' ) {
+      if ( dotRandom.nextDouble() < TRANSITION_WAVELENGTHS_WEIGHT ) {
+
+        // choose a random transition wavelength
+        const i = dotRandom.nextIntBetween( 0, this.transitionWavelengths.length - 1 );
+        wavelength = this.transitionWavelengths[ i ];
+      }
+      else {
+
+        // choose a random visible wavelength
+        wavelength = dotRandom.nextDoubleBetween( this.monochromaticWavelengthRange.min, this.monochromaticWavelengthRange.max );
+      }
+    }
+    return wavelength;
   }
 }
 
