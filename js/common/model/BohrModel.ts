@@ -1,8 +1,7 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * BohrModel is a predictive model of the hydrogen atom. (While PhET typically does not name model elements with
- * a 'Model' suffix, we're using the terminology that appears in the literature.)
+ * BohrModel is a predictive model of the hydrogen atom.
  *
  * Physical representation:
  * Electron orbiting a proton. Each orbit corresponds to a different electron state. See createOrbitRadii for details

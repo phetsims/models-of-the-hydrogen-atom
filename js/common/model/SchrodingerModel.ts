@@ -1,8 +1,7 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * SchrodingerModel is a predictive model of the hydrogen atom. (While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
- * in the literature.)
+ * SchrodingerModel is a predictive model of the hydrogen atom.
  *
  * Physical representation:
  * Electron is a probability density field. Proton is at the center, visible only when the probability density
