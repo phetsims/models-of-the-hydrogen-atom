@@ -53,11 +53,11 @@ class MOTHAModel {
   // the light that is shining into the box of hydrogen
   public readonly light: Light;
 
-  // photons inside zoomedInBox
-  public readonly photons: ObservableArray<Photon>;
-
   // alpha particles inside zoomedInBox
   public readonly alphaParticles: ObservableArray<AlphaParticle>;
+
+  // photons inside zoomedInBox
+  public readonly photons: ObservableArray<Photon>;
 
   // is the simulation playing?
   public readonly isPlayingProperty: Property<boolean>;
@@ -113,12 +113,12 @@ class MOTHAModel {
       tandem: options.tandem.createTandem( 'light' )
     } );
 
-    this.photons = createObservableArray<Photon>( {
+    this.alphaParticles = createObservableArray<AlphaParticle>( {
       //TODO tandem
       //TODO phetioType
     } );
 
-    this.alphaParticles = createObservableArray<AlphaParticle>( {
+    this.photons = createObservableArray<Photon>( {
       //TODO tandem
       //TODO phetioType
     } );
@@ -130,6 +130,16 @@ class MOTHAModel {
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       tandem: options.tandem.createTandem( 'timeSpeedProperty' )
     } );
+
+    this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
+      if ( oldHydrogenAtom !== null ) {
+        oldHydrogenAtom.reset();
+      }
+      this.alphaParticles.clear();
+      this.photons.clear();
+      hydrogenAtom.photonEmittedEmitter.addListener( this.photonEmittedListener.bind( this ) );
+      hydrogenAtom.photonAbsorbedEmitter.addListener( this.photonAbsorbedListener.bind( this ) );
+    } );
   }
 
   public reset(): void {
@@ -138,20 +148,31 @@ class MOTHAModel {
     this.predictiveModels.forEach( predictiveModel => predictiveModel.reset() );
     this.predictiveModelProperty.reset();
     this.light.reset();
-    this.photons.clear();
     this.alphaParticles.clear();
+    this.photons.clear();
     this.isPlayingProperty.reset();
     this.timeSpeedProperty.reset();
   }
 
+  /**
+   * Steps the model.
+   * @param dt - the time step, in seconds
+   */
   public step( dt: number ): void {
+
+    // Step the atom. Do this first because it may influence the particles.
     this.hydrogenAtomProperty.value.step( dt );
+
+    // Move alpha particles and photons, which may be influenced by the atom.
     this.moveParticles( dt );
+
+    // Cull alpha particles and photons that have left the bounds of zoomedInBox.
     this.cullParticles();
   }
 
   /**
    * Moves photons and alpha particles.
+   * @param dt - the time step, in seconds
    */
   private moveParticles( dt: number ): void {
 
@@ -169,7 +190,7 @@ class MOTHAModel {
   }
 
   /**
-   * Culls photons and alpha particles that have left the bounds of zoomBox.
+   * Culls photons and alpha particles that have left the bounds of zoomedInBox.
    */
   private cullParticles(): void {
 
@@ -188,6 +209,14 @@ class MOTHAModel {
         this.alphaParticles.remove( alphaParticle );
       }
     } );
+  }
+
+  private photonEmittedListener( photon: Photon ): void {
+    this.photons.add( photon );
+  }
+
+  private photonAbsorbedListener( photon: Photon ): void {
+    this.photons.remove( photon );
   }
 }
 

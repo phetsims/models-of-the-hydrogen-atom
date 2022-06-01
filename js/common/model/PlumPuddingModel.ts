@@ -168,6 +168,10 @@ class PlumPuddingModel extends HydrogenAtom {
     this.previousAmplitudeProperty.reset();
   }
 
+  public override step( dt: number ): void {
+    //TODO
+  }
+
   /**
    * Updates the line that determines the electron's oscillation path when the electron is moving at maximum amplitude.
    * The line is specified in coordinates relative to the atom (in the atom's local coordinate frame).

@@ -44,6 +44,10 @@ export default class DeBroglieModel extends HydrogenAtom {
 
     super( modelsOfTheHydrogenAtomStrings.deBroglie, deBroglieButton_png, zoomedInBox, options );
   }
+
+  public override step( dt: number ): void {
+    // do nothing for this model
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'DeBroglieModel', DeBroglieModel );

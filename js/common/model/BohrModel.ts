@@ -44,6 +44,10 @@ export default class BohrModel extends HydrogenAtom {
 
     super( modelsOfTheHydrogenAtomStrings.bohr, bohrButton_png, zoomedInBox, options );
   }
+
+  public override step( dt: number ): void {
+    //TODO
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'BohrModel', BohrModel );

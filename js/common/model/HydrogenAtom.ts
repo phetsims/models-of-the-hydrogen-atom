@@ -17,7 +17,7 @@ import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
-//TODO move numberOfStates, groundState, and hasTransitionWavelengths to another base class for those models
+//TODO move numberOfStates, groundState, hasTransitionWavelengths, GROUND_STATE to another base class for those models
 type SelfOptions = {
   position?: Vector2; // position in the model coordinate frame
   orientation?: number; // rotation angle, in radians
@@ -39,11 +39,11 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly groundState: number;
   public readonly hasTransitionWavelengths: boolean;
 
-  // emits when a photon is absorbed
-  public readonly photonAbsorbedEmitter: Emitter<[ Photon ]>;
-
   // emits when a photon is emitted (an unfortunate name)
   public readonly photonEmittedEmitter: Emitter<[ Photon ]>;
+
+  // emits when a photon is absorbed
+  public readonly photonAbsorbedEmitter: Emitter<[ Photon ]>;
 
   // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.
   public static readonly GROUND_STATE = 0;
@@ -80,11 +80,11 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this.groundState = options.groundState;
     this.hasTransitionWavelengths = options.hasTransitionWavelengths;
 
-    this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
+    this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
       parameters: [ { valueType: Photon } ]
     } );
 
-    this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
+    this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
       parameters: [ { valueType: Photon } ]
     } );
   }
@@ -95,15 +95,15 @@ export default abstract class HydrogenAtom extends PhetioObject {
   }
 
   public reset(): void {
-    //TODO
+    this.photonEmittedEmitter.removeAllListeners();
+    this.photonAbsorbedEmitter.removeAllListeners();
   }
 
   /**
-   * Called when time has advanced by some delta. The default implementation does nothing.
+   * Called when time has advanced by some delta.
+   * @param dt - time step, in seconds
    */
-  public step( dt: number ): void {
-    //TODO
-  }
+  public abstract step( dt: number ): void;
 
   /**
    * Gets the transition wavelengths for a specified state. The notion of 'transition wavelength' does not apply to all

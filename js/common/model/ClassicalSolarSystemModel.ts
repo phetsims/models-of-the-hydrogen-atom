@@ -44,6 +44,10 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
     super( modelsOfTheHydrogenAtomStrings.classicalSolarSystem, classicalSolarSystemButton_png, zoomedInBox, options );
   }
+
+  public override step( dt: number ): void {
+    //TODO
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'ClassicalSolarSystemModel', ClassicalSolarSystemModel );

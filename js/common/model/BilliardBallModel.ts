@@ -62,6 +62,10 @@ export default class BilliardBallModel extends HydrogenAtom {
     this.radius = options.radius;
   }
 
+  public override step( dt: number ): void {
+    // do nothing for this model
+  }
+
   /**
    * Moves a photon. If the photon collides with the atom, the photon bounces back at
    * a 'steep but random' angle. Otherwise it continues to move in its current direction.
