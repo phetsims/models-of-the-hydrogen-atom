@@ -71,6 +71,13 @@ export default class Photon extends Particle {
       irColor: MOTHAColors.IR_COLOR
     } );
   }
+
+  /**
+   * For debugging and logging only. Do not rely on the format of this string!
+   */
+  public override toString(): string {
+    return super.toString() + ` wavelength=${this.wavelength}`;
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'Photon', Photon );

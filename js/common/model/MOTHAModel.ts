@@ -113,6 +113,10 @@ class MOTHAModel {
       tandem: options.tandem.createTandem( 'light' )
     } );
 
+    phet.log && this.light.photonCreatedEmitter.addListener( photon => {
+      phet.log && phet.log( `photon created: ${photon.toString()}` );
+    } );
+
     this.alphaParticles = createObservableArray<AlphaParticle>( {
       //TODO tandem
       //TODO phetioType
@@ -202,6 +206,7 @@ class MOTHAModel {
       if ( !this.zoomedInBox.containsPhoton( photon ) ) {
         photon.dispose();
         this.photons.remove( photon );
+        phet.log && phet.log( `culled photon: ${photon.toString()}` );
       }
     } );
 

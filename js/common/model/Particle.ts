@@ -89,6 +89,16 @@ export default class Particle extends PhetioObject {
     const y = this.positionProperty.value.y + dy;
     this.positionProperty.value = new Vector2( x, y );
   }
+
+  /**
+   * For debugging and logging only. Do not rely on the format of this string!
+   */
+  public override toString(): string {
+    return `radius=${this.radius} ` +
+           ` position=${this.positionProperty.value}` +
+           ` speed=${this.speedProperty.value}` +
+           ` direction=${this.directionProperty.value}`;
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'Particle', Particle );
