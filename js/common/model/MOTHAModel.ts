@@ -153,8 +153,12 @@ class MOTHAModel {
     this.predictiveModels.forEach( predictiveModel => predictiveModel.reset() );
     this.predictiveModelProperty.reset();
     this.light.reset();
-    this.alphaParticles.clear();
-    this.photons.clear();
+    while ( this.alphaParticles.length > 0 ) {
+      this.alphaParticles.pop()!.dispose();
+    }
+    while ( this.photons.length > 0 ) {
+      this.photons.pop()!.dispose();
+    }
     this.isPlayingProperty.reset();
     this.timeSpeedProperty.reset();
   }

@@ -58,8 +58,8 @@ export default class Photon extends Particle {
   }
 
   public override dispose(): void {
-    super.dispose();
     this.hasCollidedProperty.dispose();
+    super.dispose();
   }
 
   /**

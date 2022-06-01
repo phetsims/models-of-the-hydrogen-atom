@@ -74,10 +74,10 @@ export default class Particle extends PhetioObject {
   }
 
   public override dispose(): void {
-    super.dispose();
     this.positionProperty.dispose();
     this.speedProperty.dispose();
     this.directionProperty.dispose();
+    super.dispose();
   }
 
   public move( dt: number ): void {
