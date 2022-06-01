@@ -47,16 +47,16 @@ class MOTHAModel {
   // the hydrogen-atom model that is currently selected: either the Experiment model, or the selected predictive model.
   public readonly hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>;
 
-  // the zoomed-in part of the box of hydrogen that we're viewing
+  // the zoomed-in part of the box of hydrogen
   public readonly zoomedInBox: ZoomedInBox;
 
   // the light that is shining into the box of hydrogen
   public readonly light: Light;
 
-  // photons inside the box
+  // photons inside zoomedInBox
   public readonly photons: ObservableArray<Photon>;
 
-  // alpha particles inside the box
+  // alpha particles inside zoomedInBox
   public readonly alphaParticles: ObservableArray<AlphaParticle>;
 
   // is the simulation playing?
