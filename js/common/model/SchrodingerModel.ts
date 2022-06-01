@@ -14,14 +14,14 @@
  * Identical to the "brightness" views of deBroglie, which is why this class is an extension of DeBroglieModel.
  *
  * Absorption behavior:
- * Identical to Borh and deBroglie.
+ * Identical to Bohr and deBroglie.
  *
  * Emission behavior:
  * Both spontaneous and stimulated emission are similar to Bohr and deBroglie, but the rules for transitions (see below)
  * are more complicated.
  *
  * Transition rules:
- * All of the following rules must be obeyed when choosing a transition. Note that transitions from state nlm=(2,0,0)
+ * All the following rules must be obeyed when choosing a transition. Note that transitions from state nlm=(2,0,0)
  * are a special case. The lower state (1,0,0) is not possible since it violates the abs(l-l')=1 rule. The only way to
  * get out of this state (2,0,0) is by going to a higher state.
  *
