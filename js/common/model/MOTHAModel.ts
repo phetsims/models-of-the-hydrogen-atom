@@ -177,7 +177,7 @@ class MOTHAModel {
 
     const hydrogenAtom = this.hydrogenAtomProperty.value;
 
-    // Move photons. May change this.photons, so operate on a copy of the array.
+    // Move and cull photons. May change this.photons, so operate on a copy of the array.
     this.photons.getArrayCopy().forEach( photon => {
       hydrogenAtom.movePhoton( photon, dt );
 
@@ -189,7 +189,7 @@ class MOTHAModel {
       }
     } );
 
-    // Move alpha particles. May change this.alphaParticles, so operate on a copy of the array.
+    // Move and cull alpha particles. May change this.alphaParticles, so operate on a copy of the array.
     this.alphaParticles.forEach( alphaParticle => {
       hydrogenAtom.moveAlphaParticle( alphaParticle, dt );
 
