@@ -64,10 +64,18 @@ class MOTHAModel {
   // speed that the simulation is running at
   public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
 
+  /**
+   * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
+   * @param predictiveModels
+   * @param initialPredictiveModel
+   * @param providedOptions
+   */
   constructor( zoomedInBox: ZoomedInBox,
                predictiveModels: HydrogenAtomModel[],
                initialPredictiveModel: HydrogenAtomModel,
                providedOptions: MOTHAModelOptions ) {
+
+    assert && assert( predictiveModels.includes( initialPredictiveModel ) );
 
     const options = optionize<MOTHAModelOptions, SelfOptions>()( {
       //TODO
