@@ -8,7 +8,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Font, IPaint, Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -23,7 +23,7 @@ type SelfOptions = {
   textFill?: IPaint;
 };
 
-type ContinuumBarNodeOptions = SelfOptions & OmitStrict<NodeOptions, 'children'>;
+type ContinuumBarNodeOptions = SelfOptions & StrictOmit<NodeOptions, 'children'>;
 
 export default class ContinuumBarNode extends Node {
 

@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
@@ -22,7 +22,7 @@ type SelfOptions = {
   hasCollided?: boolean; // did this photon already collide with the atom?
 };
 
-type PhotonOptions = SelfOptions & OmitStrict<ParticleOptions, 'radius'>;
+type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
 
 export default class Photon extends Particle {
 

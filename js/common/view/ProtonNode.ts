@@ -7,7 +7,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import OmitStrict from '../../../../phet-core/js/types/OmitStrict.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -17,7 +17,7 @@ const DIAMETER = 11;
 
 type SelfOptions = {};
 
-type ProtonNodeOptions = SelfOptions & OmitStrict<ShadedSphereNodeOptions, 'mainColor' | 'highlightColor'>;
+type ProtonNodeOptions = SelfOptions & StrictOmit<ShadedSphereNodeOptions, 'mainColor' | 'highlightColor'>;
 
 export default class ProtonNode extends ShadedSphereNode {
 
