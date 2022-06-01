@@ -1,7 +1,7 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
 /**
- * HydrogenAtomModel is the base class for all hydrogen-atom models.
+ * HydrogenAtom is the abstract base class for all hydrogen-atom models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,9 +24,9 @@ type SelfOptions = {
   hasTransitionWavelengths: boolean; // does this model include the concept of transition wavelengths?
 };
 
-export type HydrogenAtomModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type HydrogenAtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default abstract class HydrogenAtomModel extends PhetioObject {
+export default abstract class HydrogenAtom extends PhetioObject {
 
   public readonly displayName: string;
   public readonly icon: HTMLImageElement;
@@ -53,9 +53,9 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
    * @param providedOptions
    */
   protected constructor( displayName: string, icon: HTMLImageElement, zoomedInBox: ZoomedInBox,
-                         providedOptions: HydrogenAtomModelOptions ) {
+                         providedOptions: HydrogenAtomOptions ) {
 
-    const options = optionize<HydrogenAtomModelOptions, SelfOptions, PhetioObjectOptions>()( {
+    const options = optionize<HydrogenAtomOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       position: Vector2.ZERO,
@@ -142,4 +142,4 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'HydrogenAtomModel', HydrogenAtomModel );
+modelsOfTheHydrogenAtom.register( 'HydrogenAtom', HydrogenAtom );

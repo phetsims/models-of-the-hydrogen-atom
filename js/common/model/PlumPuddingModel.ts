@@ -38,7 +38,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import plumPuddingButton_png from '../../../images/plumPuddingButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Electron from './Electron.js';
 import Photon from './Photon.js';
 import AlphaParticle from './AlphaParticle.js';
@@ -54,11 +54,11 @@ const ELECTRON_LINE_SEGMENTS = 30; // number of discrete steps in the electron l
 
 type SelfOptions = {};
 
-type PlumPuddingModelOptions = SelfOptions & StrictOmit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type PlumPuddingModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
-class PlumPuddingModel extends HydrogenAtomModel {
+class PlumPuddingModel extends HydrogenAtom {
 
-  public readonly hydrogenAtomRadius = 50;
+  public readonly radius = 50;
 
   // number of photons the atom has absorbed and is "holding"
   private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
@@ -90,9 +90,9 @@ class PlumPuddingModel extends HydrogenAtomModel {
 
   constructor( zoomedInBox: ZoomedInBox, providedOptions: PlumPuddingModelOptions ) {
 
-    const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
+    const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
-      // HydrogenAtomModelOptions
+      // HydrogenAtomOptions
       hasTransitionWavelengths: false
     }, providedOptions );
 
@@ -173,8 +173,8 @@ class PlumPuddingModel extends HydrogenAtomModel {
   private updateElectronLine(): void {
 
     const angle = nextAngle();
-    const x = Math.abs( this.hydrogenAtomRadius * Math.sin( angle ) );
-    const y = nextSign() * this.hydrogenAtomRadius * Math.cos( angle );
+    const x = Math.abs( this.radius * Math.sin( angle ) );
+    const y = nextSign() * this.radius * Math.cos( angle );
     this.electronLineEndpoint1Property.value = new Vector2( -x, -y );
     this.electronLineEndpoint2Property.value = new Vector2( x, y );
 
@@ -308,9 +308,9 @@ class PlumPuddingModel extends HydrogenAtomModel {
     const electronOffset = this.electronOffsetProperty.value;
 
     // Determine dx and dy
-    const distanceDelta = dt * ( amplitude * ( 2 * this.hydrogenAtomRadius ) / ELECTRON_LINE_SEGMENTS );
-    let dx = Math.abs( endpoint1.x ) * ( distanceDelta / this.hydrogenAtomRadius );
-    let dy = Math.abs( endpoint1.y ) * ( distanceDelta / this.hydrogenAtomRadius );
+    const distanceDelta = dt * ( amplitude * ( 2 * this.radius ) / ELECTRON_LINE_SEGMENTS );
+    let dx = Math.abs( endpoint1.x ) * ( distanceDelta / this.radius );
+    let dy = Math.abs( endpoint1.y ) * ( distanceDelta / this.radius );
 
     // Adjust signs for electron's horizontal direction
     const sign = this.electronDirectionProperty.value;

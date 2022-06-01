@@ -29,8 +29,8 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
     super( model.zoomedInBox, modelViewTransform, options );
 
     const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, modelViewTransform, {
-      visibleProperty: new DerivedProperty( [ model.hydrogenAtomModelProperty ],
-        hydrogenAtomModel => ( hydrogenAtomModel === model.plumPuddingModel ) ),
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ],
+        hydrogenAtom => ( hydrogenAtom === model.plumPuddingModel ) ),
       tandem: options.tandem.createTandem( 'plumPuddingNode' )
     } );
     this.addChild( plumPuddingNode );

@@ -16,7 +16,7 @@ import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from './Light.js';
-import HydrogenAtomModel from './HydrogenAtomModel.js';
+import HydrogenAtom from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import AlphaParticle from './AlphaParticle.js';
@@ -38,13 +38,13 @@ class MOTHAModel {
   public readonly experimentModel: ExperimentModel;
 
   // the supported set of predictive hydrogen-atom models
-  public readonly predictiveModels: HydrogenAtomModel[];
+  public readonly predictiveModels: HydrogenAtom[];
 
   // the predictive hydrogen-atom model that is currently selected
-  public readonly predictiveModelProperty: Property<HydrogenAtomModel>;
+  public readonly predictiveModelProperty: Property<HydrogenAtom>;
 
   // the hydrogen-atom model that is currently selected
-  public readonly hydrogenAtomModelProperty: Property<HydrogenAtomModel>;
+  public readonly hydrogenAtomProperty: Property<HydrogenAtom>;
 
   // the zoomed-in part of the box of hydrogen that we're viewing
   public readonly zoomedInBox: ZoomedInBox;
@@ -71,8 +71,8 @@ class MOTHAModel {
    * @param providedOptions
    */
   constructor( zoomedInBox: ZoomedInBox,
-               predictiveModels: HydrogenAtomModel[],
-               initialPredictiveModel: HydrogenAtomModel,
+               predictiveModels: HydrogenAtom[],
+               initialPredictiveModel: HydrogenAtom,
                providedOptions: MOTHAModelOptions ) {
 
     assert && assert( predictiveModels.includes( initialPredictiveModel ) );
@@ -95,13 +95,13 @@ class MOTHAModel {
 
     this.predictiveModels = predictiveModels;
 
-    this.predictiveModelProperty = new Property<HydrogenAtomModel>( initialPredictiveModel, {
+    this.predictiveModelProperty = new Property<HydrogenAtom>( initialPredictiveModel, {
       validValues: predictiveModels
       //TODO tandem
       //TODO phetioType
     } );
 
-    this.hydrogenAtomModelProperty = new DerivedProperty(
+    this.hydrogenAtomProperty = new DerivedProperty(
       [ this.modelModeProperty, this.predictiveModelProperty ],
       ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experimentModel : predictiveModel, {
         //TODO tandem
@@ -144,7 +144,7 @@ class MOTHAModel {
   }
 
   public step( dt: number ): void {
-    this.hydrogenAtomModelProperty.value.step( dt );
+    this.hydrogenAtomProperty.value.step( dt );
     this.moveParticles( dt );
     this.cullParticles();
   }
@@ -154,16 +154,16 @@ class MOTHAModel {
    */
   private moveParticles( dt: number ): void {
 
-    const hydrogenAtomModel = this.hydrogenAtomModelProperty.value;
+    const hydrogenAtom = this.hydrogenAtomProperty.value;
 
     // Move photons. May change this.photons, so operate on a copy of the array.
     this.photons.getArrayCopy().forEach( photon => {
-      hydrogenAtomModel.movePhoton( photon, dt );
+      hydrogenAtom.movePhoton( photon, dt );
     } );
 
     // Move alpha particles. May change this.alphaParticles, so operate on a copy of the array.
     this.alphaParticles.forEach( alphaParticle => {
-      hydrogenAtomModel.moveAlphaParticle( alphaParticle, dt );
+      hydrogenAtom.moveAlphaParticle( alphaParticle, dt );
     } );
   }
 

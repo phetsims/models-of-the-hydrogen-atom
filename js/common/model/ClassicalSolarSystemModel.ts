@@ -23,20 +23,20 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import classicalSolarSystemButton_png from '../../../images/classicalSolarSystemButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = {};
 
-type ClassicalSolarSystemModelOptions = SelfOptions & StrictOmit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type ClassicalSolarSystemModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
-export default class ClassicalSolarSystemModel extends HydrogenAtomModel {
+export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
   constructor( zoomedInBox: ZoomedInBox, providedOptions: ClassicalSolarSystemModelOptions ) {
 
-    const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
+    const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
-      // HydrogenAtomModelOptions
+      // HydrogenAtomOptions
       hasTransitionWavelengths: false
     }, providedOptions );
 

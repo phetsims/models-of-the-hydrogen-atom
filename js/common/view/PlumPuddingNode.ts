@@ -31,7 +31,7 @@ export default class PlumPuddingNode extends Node {
 
     const plumPuddingImage = new Image( plumPudding_png );
     const imageHeight = plumPuddingImage.height;
-    const atomHeight = 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.hydrogenAtomRadius );
+    const atomHeight = 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.radius );
     const imageScale = atomHeight / imageHeight;
     plumPuddingImage.scale( imageScale );
     plumPuddingImage.center = viewPosition;

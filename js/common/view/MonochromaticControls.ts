@@ -13,7 +13,7 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
-import HydrogenAtomModel from '../model/HydrogenAtomModel.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -26,7 +26,7 @@ type MonochromaticControlsOptions = SelfOptions & NodeTranslationOptions & PickR
 
 export default class MonochromaticControls extends VBox {
 
-  constructor( modelModeProperty: IProperty<ModelMode>, hydrogenAtomModelProperty: IProperty<HydrogenAtomModel>,
+  constructor( modelModeProperty: IProperty<ModelMode>, hydrogenAtomModelProperty: IProperty<HydrogenAtom>,
                wavelengthProperty: IProperty<number>, absorptionWavelengthsVisibleProperty: IProperty<boolean>,
                providedOptions: MonochromaticControlsOptions ) {
 

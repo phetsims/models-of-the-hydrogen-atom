@@ -27,7 +27,7 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 import RandomUtils from '../RandomUtils.js';
 import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
-import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
 // constants
@@ -38,15 +38,15 @@ type SelfOptions = {
   radius?: number;
 };
 
-type BilliardBallModelOptions = SelfOptions & StrictOmit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type BilliardBallModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
-export default class BilliardBallModel extends HydrogenAtomModel {
+export default class BilliardBallModel extends HydrogenAtom {
 
   public readonly radius: number;
 
   constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {
 
-    const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
+    const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // SelfOptions
       radius: 30,

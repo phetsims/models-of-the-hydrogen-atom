@@ -9,7 +9,7 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import AlphaParticle from './AlphaParticle.js';
-import HydrogenAtomModel from './HydrogenAtomModel.js';
+import HydrogenAtom from './HydrogenAtom.js';
 import PlumPuddingModel from './PlumPuddingModel.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
@@ -36,20 +36,20 @@ const RutherfordScattering = {
    * (5) Using "phi=arctan(-x,y)" as described in the specification causes particles to jump discontinuously when they
    * go above the y-axis. This is fixed by using Math.atan2 instead.
    *
-   * @param atom - the hydrogen atom
-   * @param alphaParticle - the alpha particle
+   * @param hydrogenAtom
+   * @param alphaParticle
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
    * @param dt - the time step, in seconds
    */
-  moveParticle( atom: HydrogenAtomModel, alphaParticle: AlphaParticle, zoomedInBox: ZoomedInBox, dt: number ): void {
+  moveParticle( hydrogenAtom: HydrogenAtom, alphaParticle: AlphaParticle, zoomedInBox: ZoomedInBox, dt: number ): void {
     assert && assert( dt > 0 );
 
-    const D = getD( atom, alphaParticle, zoomedInBox );
+    const D = getD( hydrogenAtom, alphaParticle, zoomedInBox );
 
     // particle's initial position, relative to the atom's center.
-    const x0 = getX0( atom, alphaParticle );
+    const x0 = getX0( hydrogenAtom, alphaParticle );
     assert && assert( x0 > 0 );
-    let y0 = alphaParticle.positionProperty.initialValue!.y - atom.position.y; //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
+    let y0 = alphaParticle.positionProperty.initialValue!.y - hydrogenAtom.position.y; //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
 
     // b, horizontal distance to atom's center at y == negative infinity
     const b1 = Math.sqrt( ( x0 * x0 ) + ( y0 * y0 ) );
@@ -63,8 +63,8 @@ const RutherfordScattering = {
     const v0 = alphaParticle.speedProperty.initialValue!; //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
 
     // Adjust for the atom's position.
-    x -= atom.position.x;
-    y -= atom.position.y;
+    x -= hydrogenAtom.position.x;
+    y -= hydrogenAtom.position.y;
 
     // This algorithm fails for x < 0, so adjust accordingly.
     let sign = 1;
@@ -99,8 +99,8 @@ const RutherfordScattering = {
     yNew *= -1;
 
     // Adjust for atom position.
-    xNew += atom.position.x;
-    yNew += atom.position.y;
+    xNew += hydrogenAtom.position.x;
+    yNew += hydrogenAtom.position.y;
 
     // Update the particle.
     alphaParticle.positionProperty.value = new Vector2( xNew, yNew );
@@ -112,10 +112,10 @@ const RutherfordScattering = {
 /**
  * Gets the value x0. This value must be > 0, and is adjusted accordingly.
  */
-function getX0( atom: HydrogenAtomModel, alphaParticle: AlphaParticle ) {
+function getX0( hydrogenAtom: HydrogenAtom, alphaParticle: AlphaParticle ) {
 
   //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
-  let x0 = Math.abs( alphaParticle.positionProperty.getInitialValue()!.x - atom.position.x );
+  let x0 = Math.abs( alphaParticle.positionProperty.getInitialValue()!.x - hydrogenAtom.position.x );
   if ( x0 === 0 ) {
     x0 = X_MIN;
   }
@@ -125,14 +125,14 @@ function getX0( atom: HydrogenAtomModel, alphaParticle: AlphaParticle ) {
 /*
  * Gets the constant D.
  */
-function getD( atom: HydrogenAtomModel, alphaParticle: AlphaParticle, zoomedInBoxSize: ZoomedInBox ) {
+function getD( hydrogenAtom: HydrogenAtom, alphaParticle: AlphaParticle, zoomedInBoxSize: ZoomedInBox ) {
   let D = 0;
   const L = zoomedInBoxSize.height;
   const DB = L / 16;
-  if ( atom instanceof PlumPuddingModel ) {
-    const plumPuddingAtom = atom as PlumPuddingModel;
+  if ( hydrogenAtom instanceof PlumPuddingModel ) {
+    const plumPuddingAtom = hydrogenAtom as PlumPuddingModel;
     const x0 = getX0( plumPuddingAtom, alphaParticle );
-    const R = plumPuddingAtom.hydrogenAtomRadius;
+    const R = plumPuddingAtom.radius;
     D = ( x0 <= R ) ? ( ( DB * x0 * x0 ) / ( R * R ) ) : DB;
   }
   else {

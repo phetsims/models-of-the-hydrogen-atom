@@ -23,20 +23,20 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = {};
 
-type DeBroglieModelOptions = SelfOptions & StrictOmit<HydrogenAtomModelOptions, 'hasTransitionWavelengths'>;
+type DeBroglieModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
-export default class DeBroglieModel extends HydrogenAtomModel {
+export default class DeBroglieModel extends HydrogenAtom {
 
   constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
-    const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
+    const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
-      // HydrogenAtomModelOptions
+      // HydrogenAtomOptions
       hasTransitionWavelengths: true
     }, providedOptions );
 
