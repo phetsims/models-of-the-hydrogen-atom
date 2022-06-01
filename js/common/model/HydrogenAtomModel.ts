@@ -1,7 +1,7 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
 /**
- * PredictiveModel is the base class for all hydrogen-atom models.
+ * HydrogenAtomModel is the base class for all hydrogen-atom models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
