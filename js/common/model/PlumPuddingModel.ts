@@ -1,9 +1,8 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * PlumPudding is a predictive model that models the hydrogen atom as TODO
- * While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
- * in the literature.
+ * PlumPudding is a predictive model of the hydrogen atom. (While PhET typically does not name model elements with
+ * a 'Model' suffix, we're using the terminology that appears in the literature.)
  *
  * Physical representation:
  * The proton is a blob of pudding (or "goo"), modeled as a circle. An electron oscillates inside the goo along a

@@ -1,12 +1,8 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * BohrModel is a predictive model that models the hydrogen atom as system consisting of a small, dense nucleus
- * surrounded by orbiting electrons - similar to the structure of the Solar System, but with attraction provided
- * by electrostatic forces in place of gravity.
- *
- * While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
- * in the literature.
+ * BohrModel is a predictive model of the hydrogen atom. (While PhET typically does not name model elements with
+ * a 'Model' suffix, we're using the terminology that appears in the literature.)
  *
  * Physical representation:
  * Electron orbiting a proton. Each orbit corresponds to a different electron state. See createOrbitRadii for details
@@ -43,7 +39,7 @@ const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 
 type SelfOptions = {};
 
-type BohrModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
+export type BohrModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
 export default class BohrModel extends HydrogenAtom {
 

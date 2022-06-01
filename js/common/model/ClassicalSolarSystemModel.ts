@@ -1,21 +1,24 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * ClassicalSolarSystemModel is a predictive model that models the hydrogen atom as TODO
- * While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
- * in the literature.
+ * ClassicalSolarSystemModel is a predictive model of the hydrogen atom. (While PhET typically does not name model
+ * elements with a 'Model' suffix, we're using the terminology that appears in the literature.)
  *
  * Physical representation:
- * TODO
+ * Proton at the center, electron spirals towards the proton. Our spiral is clockwise to be consistent with all other
+ * orbits in this sim. The electron starts at a fixed distance and random angle from the proton. The radius of the
+ * spiral decreases linearly and the electron accelerates as the electron moves closer to the proton. The final state
+ * shows the electron on top of the proton. In this final state, the atom is considered "destroyed".
  *
  * Collision behavior:
- * TODO
+ * The spiraling behavior should occur fast enough so that the atom is  destroyed before any photons or alpha particles
+ * reach it. Therefore, there are no collisions.
  *
  * Absorption behavior:
- * TODO
+ * Atom is destroyed, so it does not absorb photons or alpha particles.
  *
  * Emission behavior:
- * TODO
+ * Atom is destroyed, so it does not emit photons or alpha particles.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

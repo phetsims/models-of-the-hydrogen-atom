@@ -1,21 +1,38 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * SchrodingerModel is a predictive model that models the hydrogen atom as TODO
- * While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
- * in the literature.
+ * SchrodingerModel is a predictive model of the hydrogen atom. (While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
+ * in the literature.)
  *
  * Physical representation:
- * TODO
+ * Electron is a probability density field. Proton is at the center, visible only when the probability density
+ * field strength is below a threshold value. The atom's state has 3 components (n,l,m). See transition rules below.
+ *
+ * Wavefunction:
+ * This implementation solves the 3D Schrodinger wavefunction, used to compute probability density values in 3D space.
  *
  * Collision behavior:
- * TODO
+ * Identical to the "brightness" views of deBroglie, which is why this class is an extension of DeBroglieModel.
  *
  * Absorption behavior:
- * TODO
+ * Identical to Borh and deBroglie.
  *
  * Emission behavior:
- * TODO
+ * Both spontaneous and stimulated emission are similar to Bohr and deBroglie, but the rules for transitions (see below)
+ * are more complicated.
+ *
+ * Transition rules:
+ * All of the following rules must be obeyed when choosing a transition. Note that transitions from state nlm=(2,0,0)
+ * are a special case. The lower state (1,0,0) is not possible since it violates the abs(l-l')=1 rule. The only way to
+ * get out of this state (2,0,0) is by going to a higher state.
+ *
+ *   n = [1...6] as in Bohr and deBroglie
+ *   l = [0...n-1]
+ *   m = [-l...+l]
+ *   abs(l-l') = 1
+ *   abs(m-m') < 1
+ *   n transitions have varying transition strengths
+ *   valid l and m transitions have equal probability
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

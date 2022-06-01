@@ -1,21 +1,15 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * DeBroglieModel is a predictive model that models the hydrogen atom as TODO
- * While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
- * in the literature.
+ * DeBroglieModel is a predictive model of the hydrogen atom. (While PhET typically does not name model elements with
+ * a 'Model' suffix, we're using the terminology that appears in the literature.)
  *
- * Physical representation:
- * TODO
- *
- * Collision behavior:
- * TODO
- *
- * Absorption behavior:
- * TODO
- *
- * Emission behavior:
- * TODO
+ * DeBroglieModel is identical to BohrModel, but has different visual representations. The different visual
+ * representations mean that it requires different methods of handling collision detection and determining electron
+ * position. The algorithms for collision detection and calculation of electron position differ greatly for 2D and 3D
+ * views. Therefore, this model needs to know something about the view in order to make things look right in 3D. So
+ * this model cannot be shown in both 2D and 3D views simultaneously. There are undoubtedly ways to do this, but this
+ * simulation does not require multiple simultaneous views of the model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -32,6 +26,7 @@ type SelfOptions = {};
 
 type DeBroglieModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
+//TODO extends BohrModel
 export default class DeBroglieModel extends HydrogenAtom {
 
   constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {

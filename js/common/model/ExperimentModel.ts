@@ -17,6 +17,8 @@ type ExperimentModelOptions = SelfOptions & SchrodingerModelOptions;
 export default class ExperimentModel extends SchrodingerModel {
 
   constructor( zoomedInBox: ZoomedInBox, providedOptions: ExperimentModelOptions ) {
+
+    //TODO provide different displayName and icon
     super( zoomedInBox, providedOptions );
   }
 }
