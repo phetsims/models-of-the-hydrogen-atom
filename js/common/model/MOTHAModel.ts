@@ -113,10 +113,6 @@ class MOTHAModel {
       tandem: options.tandem.createTandem( 'light' )
     } );
 
-    phet.log && this.light.photonCreatedEmitter.addListener( photon => {
-      phet.log && phet.log( `photon created: ${photon.toString()}` );
-    } );
-
     this.alphaParticles = createObservableArray<AlphaParticle>( {
       //TODO tandem
       //TODO phetioType
@@ -144,6 +140,11 @@ class MOTHAModel {
       hydrogenAtom.photonEmittedEmitter.addListener( this.photonEmittedListener.bind( this ) );
       hydrogenAtom.photonAbsorbedEmitter.addListener( this.photonAbsorbedListener.bind( this ) );
     } );
+
+    this.light.photonCreatedEmitter.addListener( photon => {
+      this.photons.add( photon );
+      phet.log && phet.log( `photon created: ${photon.toString()}` );
+    } );
   }
 
   public reset(): void {
@@ -163,68 +164,52 @@ class MOTHAModel {
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {
-
-    // Step the light.
     this.light.step( dt );
-
-    // Step the atom.
     this.hydrogenAtomProperty.value.step( dt );
-
-    // Move alpha particles and photons, which may be influenced by the atom.
-    this.moveParticles( dt );
-
-    // Cull alpha particles and photons that have left the bounds of zoomedInBox.
-    this.cullParticles();
+    this.moveAndCullParticles( dt );
   }
 
   /**
-   * Moves photons and alpha particles.
+   * Moves photons and alpha particles. Particles that move outside the zoomed-in box are culled.
    * @param dt - the time step, in seconds
    */
-  private moveParticles( dt: number ): void {
+  private moveAndCullParticles( dt: number ): void {
 
     const hydrogenAtom = this.hydrogenAtomProperty.value;
 
     // Move photons. May change this.photons, so operate on a copy of the array.
     this.photons.getArrayCopy().forEach( photon => {
       hydrogenAtom.movePhoton( photon, dt );
+
+      // If the photon leaves the zoomed-in box, cull it.
+      if ( !this.zoomedInBox.containsPhoton( photon ) ) {
+        photon.dispose();
+        this.photons.remove( photon );
+        phet.log && phet.log( `photon culled: ${photon.toString()}` );
+      }
     } );
 
     // Move alpha particles. May change this.alphaParticles, so operate on a copy of the array.
     this.alphaParticles.forEach( alphaParticle => {
       hydrogenAtom.moveAlphaParticle( alphaParticle, dt );
-    } );
-  }
 
-  /**
-   * Culls photons and alpha particles that have left the bounds of zoomedInBox.
-   */
-  private cullParticles(): void {
-
-    // Changes this.photons, so operate on a copy of the array.
-    this.photons.getArrayCopy().forEach( photon => {
-      if ( !this.zoomedInBox.containsPhoton( photon ) ) {
-        photon.dispose();
-        this.photons.remove( photon );
-        phet.log && phet.log( `culled photon: ${photon.toString()}` );
-      }
-    } );
-
-    // Changes this.alphaParticles, so operate on a copy of the array.
-    this.alphaParticles.getArrayCopy().forEach( alphaParticle => {
+      // If the alpha particle leaves the zoomed-in box, cull it.
       if ( !this.zoomedInBox.containsAlphaParticle( alphaParticle ) ) {
         alphaParticle.dispose();
         this.alphaParticles.remove( alphaParticle );
+        phet.log && phet.log( `alpha particle culled: ${alphaParticle.toString()}` );
       }
     } );
   }
 
   private photonEmittedListener( photon: Photon ): void {
     this.photons.add( photon );
+    phet.log && phet.log( `photon emitted: ${photon.toString()}` );
   }
 
   private photonAbsorbedListener( photon: Photon ): void {
     this.photons.remove( photon );
+    phet.log && phet.log( `photon absorbed: ${photon.toString()}` );
   }
 }
 
