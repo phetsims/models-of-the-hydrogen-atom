@@ -8,6 +8,7 @@
 
 import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = {};
 
@@ -15,8 +16,8 @@ type ExperimentModelOptions = SelfOptions & SchrodingerModelOptions;
 
 export default class ExperimentModel extends SchrodingerModel {
 
-  constructor( providedOptions: ExperimentModelOptions ) {
-    super( providedOptions );
+  constructor( zoomedInBox: ZoomedInBox, providedOptions: ExperimentModelOptions ) {
+    super( zoomedInBox, providedOptions );
   }
 }
 

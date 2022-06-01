@@ -24,6 +24,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = {};
 
@@ -31,7 +32,7 @@ type BohrModelOptions = SelfOptions & StrictOmit<HydrogenAtomModelOptions, 'hasT
 
 export default class BohrModel extends HydrogenAtomModel {
 
-  constructor( providedOptions: BohrModelOptions ) {
+  constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
 
     const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
@@ -39,7 +40,7 @@ export default class BohrModel extends HydrogenAtomModel {
       hasTransitionWavelengths: true
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.bohr, bohrButton_png, options );
+    super( modelsOfTheHydrogenAtomStrings.bohr, bohrButton_png, zoomedInBox, options );
   }
 }
 

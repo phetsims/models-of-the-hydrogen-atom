@@ -1,25 +1,145 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * RutherfordScattering is the algorithm for computing the alpha particle trajectories for Plum Pudding, Bohr,
- * deBroglie and Schrodinger hydrogen-atom models. The only difference between models is the value of the constant D.
- *
- * This algorithm was specified by Sam McKagan in "Trajectories for Rutherford Scattering", which can be found at
- * doc/Trajectories_for_Rutherford_Scattering.pdf.
+ * RutherfordScattering is responsible for moving alpha particles, under the influence of a hydrogen atom.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Vector2 from '../../../../dot/js/Vector2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import AlphaParticle from './AlphaParticle.js';
 import HydrogenAtomModel from './HydrogenAtomModel.js';
+import PlumPuddingModel from './PlumPuddingModel.js';
+import ZoomedInBox from './ZoomedInBox.js';
+
+// Value of x used when x === 0 (this algorithm fails when x === 0)
+const X_MIN = 0.01;
 
 const RutherfordScattering = {
 
-  moveParticle( hydrogenAtomModel: HydrogenAtomModel, alphaParticle: AlphaParticle, dt: number ): void {
-    //TODO
+  /**
+   * Moves an alpha particle under the influence of a hydrogen atom.
+   *
+   * This algorithm computes particle trajectories for Plum Pudding, Bohr, deBroglie and Schrodinger hydrogen-atom
+   * models. The only difference between models is the value of the constant D. This algorithm was specified by
+   * Sam McKagan in "Trajectories for Rutherford Scattering", which can be found at
+   * doc/Trajectories_for_Rutherford_Scattering.pdf.
+   *
+   * ASSUMPTIONS MADE IN THIS ALGORITHM:
+   * (1) The atom is located at (0,0). This is not the case in our model. So coordinates are adjusted as described.
+   * //TODO +y is now up in our model, so does this sign change need to be removed?
+   * (2) +y is up. Our model has +y down. So we must adjust the sign on y coordinates, as described in the comments.
+   * (3) Particles are moving from bottom to top
+   * (4) x values are positive. The algorithm fails for negative values of x. This is not mentioned in the specification
+   * document. So we must convert to positive values of x, then convert back.
+   * (5) Using "phi=arctan(-x,y)" as described in the specification causes particles to jump discontinuously when they
+   * go above the y-axis. This is fixed by using Math.atan2 instead.
+   *
+   * @param atom - the hydrogen atom
+   * @param alphaParticle - the alpha particle
+   * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
+   * @param dt - the time step, in seconds
+   */
+  moveParticle( atom: HydrogenAtomModel, alphaParticle: AlphaParticle, zoomedInBox: ZoomedInBox, dt: number ): void {
+    assert && assert( dt > 0 );
+
+    const D = getD( atom, alphaParticle, zoomedInBox );
+
+    // particle's initial position, relative to the atom's center.
+    const x0 = getX0( atom, alphaParticle );
+    assert && assert( x0 > 0 );
+    let y0 = alphaParticle.positionProperty.initialValue!.y - atom.position.y; //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
+
+    // b, horizontal distance to atom's center at y == negative infinity
+    const b1 = Math.sqrt( ( x0 * x0 ) + ( y0 * y0 ) );
+    const b = 0.5 * ( x0 + Math.sqrt( ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 ) ) );
+    assert && assert( b > 0 );
+
+    // particle's current position and speed
+    let x = alphaParticle.positionProperty.value.x;
+    let y = alphaParticle.positionProperty.value.y;
+    const v = alphaParticle.speedProperty.value;
+    const v0 = alphaParticle.speedProperty.initialValue!; //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
+
+    // Adjust for the atom's position.
+    x -= atom.position.x;
+    y -= atom.position.y;
+
+    // This algorithm fails for x < 0, so adjust accordingly.
+    let sign = 1;
+    if ( x < 0 ) {
+      x *= -1;
+      sign = -1;
+    }
+    assert && assert( x >= 0 );
+
+    // Flip the sign of y from model to algorithm.
+    y0 *= -1;
+    y *= -1;
+
+    // Convert the current position to Polar coordinates, measured counterclockwise from the -y axis.
+    const r = Math.sqrt( ( x * x ) + ( y * y ) );
+    const phi = Math.atan2( x, -y );
+
+    // new position (in Polar coordinates) and speed
+    const t1 = ( ( b * Math.cos( phi ) ) - ( ( D / 2 ) * Math.sin( phi ) ) );
+    const phiNew = phi + ( ( b * b * v * dt ) / ( r * Math.sqrt( Math.pow( b, 4 ) + ( r * r * t1 * t1 ) ) ) );
+    const rNew = Math.abs( ( b * b ) / ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) ) );
+    const vNew = v0 * Math.sqrt( 1 - ( D / rNew ) );
+
+    // Convert the new position to Cartesian coordinates.
+    let xNew = rNew * Math.sin( phiNew );
+    let yNew = -rNew * Math.cos( phiNew );
+
+    // Adjust the sign of x.
+    xNew *= sign;
+
+    // Flip the sign of y from algorithm to model.
+    yNew *= -1;
+
+    // Adjust for atom position.
+    xNew += atom.position.x;
+    yNew += atom.position.y;
+
+    // Update the particle.
+    alphaParticle.positionProperty.value = new Vector2( xNew, yNew );
+    alphaParticle.speedProperty.value = vNew;
+    alphaParticle.directionProperty.value = phiNew;
   }
 };
+
+/**
+ * Gets the value x0. This value must be > 0, and is adjusted accordingly.
+ */
+function getX0( atom: HydrogenAtomModel, alphaParticle: AlphaParticle ) {
+
+  //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
+  let x0 = Math.abs( alphaParticle.positionProperty.getInitialValue()!.x - atom.position.x );
+  if ( x0 === 0 ) {
+    x0 = X_MIN;
+  }
+  return x0;
+}
+
+/*
+ * Gets the constant D.
+ */
+function getD( atom: HydrogenAtomModel, alphaParticle: AlphaParticle, zoomedInBoxSize: ZoomedInBox ) {
+  let D = 0;
+  const L = zoomedInBoxSize.height;
+  const DB = L / 16;
+  if ( atom instanceof PlumPuddingModel ) {
+    const plumPuddingAtom = atom as PlumPuddingModel;
+    const x0 = getX0( plumPuddingAtom, alphaParticle );
+    const R = plumPuddingAtom.hydrogenAtomRadius;
+    D = ( x0 <= R ) ? ( ( DB * x0 * x0 ) / ( R * R ) ) : DB;
+  }
+  else {
+    D = DB;
+  }
+  return D;
+}
 
 modelsOfTheHydrogenAtom.register( 'RutherfordScattering', RutherfordScattering );
 export default RutherfordScattering;

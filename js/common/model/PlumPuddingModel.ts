@@ -43,6 +43,7 @@ import Electron from './Electron.js';
 import Photon from './Photon.js';
 import AlphaParticle from './AlphaParticle.js';
 import RutherfordScattering from './RutherfordScattering.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -87,7 +88,7 @@ class PlumPuddingModel extends HydrogenAtomModel {
   // the amplitude of the electron just before emitting its last photon
   private readonly previousAmplitudeProperty: Property<number>;
 
-  constructor( providedOptions: PlumPuddingModelOptions ) {
+  constructor( zoomedInBox: ZoomedInBox, providedOptions: PlumPuddingModelOptions ) {
 
     const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
@@ -95,7 +96,7 @@ class PlumPuddingModel extends HydrogenAtomModel {
       hasTransitionWavelengths: false
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, options );
+    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, zoomedInBox, options );
 
     this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
       numberType: 'Integer',
@@ -286,7 +287,7 @@ class PlumPuddingModel extends HydrogenAtomModel {
       super.moveAlphaParticle( alphaParticle, dt );
     }
     else {
-      RutherfordScattering.moveParticle( this, alphaParticle, dt );
+      RutherfordScattering.moveParticle( this, alphaParticle, this.zoomedInBox, dt );
     }
   }
 

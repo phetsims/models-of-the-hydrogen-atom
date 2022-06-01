@@ -15,6 +15,7 @@ import Photon from './Photon.js';
 
 export default class ZoomedInBox extends Bounds2 {
 
+  //TODO Java implementation (see HAConstants.ANIMATION_BOX_SIZE) indicates that this needs to be square, is that true?
   constructor( size: Dimension2 ) {
     super( -size.width / 2, -size.height / 2, size.width / 2, size.height / 2 );
   }

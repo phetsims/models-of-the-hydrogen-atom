@@ -12,6 +12,8 @@ import DeBroglieModel from '../../common/model/DeBroglieModel.js';
 import MOTHAModel, { MOTHAModelOptions } from '../../common/model/MOTHAModel.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ZoomedInBox from '../../common/model/ZoomedInBox.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 
 type SelfOptions = {};
 
@@ -30,15 +32,17 @@ export default class EnergyLevelsModel extends MOTHAModel {
       //TODO
     }, providedOptions );
 
-    const bohrModel = new BohrModel( {
+    const zoomedInBox = new ZoomedInBox( new Dimension2( 800, 800 ) );
+
+    const bohrModel = new BohrModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'bohrModel' )
     } );
 
-    const deBroglieModel = new DeBroglieModel( {
+    const deBroglieModel = new DeBroglieModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'deBroglieModel' )
     } );
 
-    const schrodingerModel = new SchrodingerModel( {
+    const schrodingerModel = new SchrodingerModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'schrodingerModel' )
     } );
 
@@ -53,7 +57,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
     assert && assert( _.every( predictiveModels, model => model.hasTransitionWavelengths ),
       'all models in this screen must include the concept of transition wavelengths' );
 
-    super( predictiveModels, bohrModel, options );
+    super( zoomedInBox, predictiveModels, bohrModel, options );
 
     this.bohrModel = bohrModel;
     this.deBroglieModel = deBroglieModel;

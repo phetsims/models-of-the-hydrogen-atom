@@ -28,6 +28,7 @@ import RandomUtils from '../RandomUtils.js';
 import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 120 );
@@ -43,7 +44,7 @@ export default class BilliardBallModel extends HydrogenAtomModel {
 
   public readonly radius: number;
 
-  constructor( providedOptions: BilliardBallModelOptions ) {
+  constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {
 
     const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
@@ -54,7 +55,7 @@ export default class BilliardBallModel extends HydrogenAtomModel {
       hasTransitionWavelengths: false
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButton_png, options );
+    super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButton_png, zoomedInBox, options );
 
     this.radius = options.radius;
   }

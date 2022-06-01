@@ -14,6 +14,7 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = {
   position?: Vector2; // position in the model coordinate frame
@@ -29,6 +30,7 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
 
   public readonly displayName: string;
   public readonly icon: HTMLImageElement;
+  public readonly zoomedInBox: ZoomedInBox; //TODO do all hydrogen-atom models need this?
   public readonly position: Vector2;
   public readonly orientation: number;
   public readonly numberOfStates: number;
@@ -47,9 +49,11 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
   /**
    * @param displayName - name of the model shown in the UI
    * @param icon - icon used to represent the model in the UI
+   * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
    * @param providedOptions
    */
-  protected constructor( displayName: string, icon: HTMLImageElement, providedOptions: HydrogenAtomModelOptions ) {
+  protected constructor( displayName: string, icon: HTMLImageElement, zoomedInBox: ZoomedInBox,
+                         providedOptions: HydrogenAtomModelOptions ) {
 
     const options = optionize<HydrogenAtomModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
@@ -67,6 +71,7 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
 
     this.displayName = displayName;
     this.icon = icon;
+    this.zoomedInBox = zoomedInBox;
     this.position = options.position;
     this.orientation = options.orientation;
     this.numberOfStates = options.numberOfStates;

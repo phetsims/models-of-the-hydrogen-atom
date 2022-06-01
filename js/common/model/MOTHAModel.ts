@@ -10,7 +10,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
@@ -65,11 +64,16 @@ class MOTHAModel {
   // speed that the simulation is running at
   public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
 
-  constructor( predictiveModels: HydrogenAtomModel[], initialPredictiveModel: HydrogenAtomModel, providedOptions: MOTHAModelOptions ) {
+  constructor( zoomedInBox: ZoomedInBox,
+               predictiveModels: HydrogenAtomModel[],
+               initialPredictiveModel: HydrogenAtomModel,
+               providedOptions: MOTHAModelOptions ) {
 
     const options = optionize<MOTHAModelOptions, SelfOptions>()( {
       //TODO
     }, providedOptions );
+
+    this.zoomedInBox = zoomedInBox;
 
     //TODO default should be 'experiment'
     this.modelModeProperty = new StringEnumerationProperty( 'prediction', {
@@ -77,7 +81,7 @@ class MOTHAModel {
       tandem: options.tandem.createTandem( 'modelModeProperty' )
     } );
 
-    this.experimentModel = new ExperimentModel( {
+    this.experimentModel = new ExperimentModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'experimentModel' )
     } );
 
@@ -95,8 +99,6 @@ class MOTHAModel {
         //TODO tandem
         //TODO phetioType
       } );
-
-    this.zoomedInBox = new ZoomedInBox( new Dimension2( 800, 800 ) );
 
     this.light = new Light( {
       tandem: options.tandem.createTandem( 'light' )

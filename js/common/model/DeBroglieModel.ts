@@ -24,6 +24,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = {};
 
@@ -31,7 +32,7 @@ type DeBroglieModelOptions = SelfOptions & StrictOmit<HydrogenAtomModelOptions, 
 
 export default class DeBroglieModel extends HydrogenAtomModel {
 
-  constructor( providedOptions: DeBroglieModelOptions ) {
+  constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
@@ -39,7 +40,7 @@ export default class DeBroglieModel extends HydrogenAtomModel {
       hasTransitionWavelengths: true
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.deBroglie, deBroglieButton_png, options );
+    super( modelsOfTheHydrogenAtomStrings.deBroglie, deBroglieButton_png, zoomedInBox, options );
   }
 }
 

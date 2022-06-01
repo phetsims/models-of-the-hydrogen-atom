@@ -24,6 +24,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = {};
 
@@ -31,7 +32,7 @@ export type SchrodingerModelOptions = SelfOptions & StrictOmit<HydrogenAtomModel
 
 export default class SchrodingerModel extends HydrogenAtomModel {
 
-  constructor( providedOptions: SchrodingerModelOptions ) {
+  constructor( zoomedInBox: ZoomedInBox, providedOptions: SchrodingerModelOptions ) {
 
     const options = optionize<SchrodingerModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
@@ -39,7 +40,7 @@ export default class SchrodingerModel extends HydrogenAtomModel {
       hasTransitionWavelengths: true
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.schrodinger, schrodingerButton_png, options );
+    super( modelsOfTheHydrogenAtomStrings.schrodinger, schrodingerButton_png, zoomedInBox, options );
   }
 }
 

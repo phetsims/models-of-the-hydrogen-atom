@@ -15,6 +15,8 @@ import MOTHAModel, { MOTHAModelOptions } from '../../common/model/MOTHAModel.js'
 import PlumPuddingModel from '../../common/model/PlumPuddingModel.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ZoomedInBox from '../../common/model/ZoomedInBox.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 
 type SelfOptions = {};
 
@@ -36,27 +38,29 @@ export default class SpectraModel extends MOTHAModel {
       //TODO
     }, providedOptions );
 
-    const billiardBallModel = new BilliardBallModel( {
+    const zoomedInBox = new ZoomedInBox( new Dimension2( 800, 800 ) );
+
+    const billiardBallModel = new BilliardBallModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'billiardBallModel' )
     } );
 
-    const plumPuddingModel = new PlumPuddingModel( {
+    const plumPuddingModel = new PlumPuddingModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'plumPuddingModel' )
     } );
 
-    const classicalSolarSystemModel = new ClassicalSolarSystemModel( {
+    const classicalSolarSystemModel = new ClassicalSolarSystemModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'classicalSolarSystemModel' )
     } );
 
-    const bohrModel = new BohrModel( {
+    const bohrModel = new BohrModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'bohrModel' )
     } );
 
-    const deBroglieModel = new DeBroglieModel( {
+    const deBroglieModel = new DeBroglieModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'deBroglieModel' )
     } );
 
-    const schrodingerModel = new SchrodingerModel( {
+    const schrodingerModel = new SchrodingerModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'schrodingerModel' )
     } );
 
@@ -70,7 +74,7 @@ export default class SpectraModel extends MOTHAModel {
       schrodingerModel
     ];
 
-    super( predictiveModels, plumPuddingModel, options );
+    super( zoomedInBox, predictiveModels, plumPuddingModel, options );
 
     this.billiardBallModel = billiardBallModel;
     this.plumPuddingModel = plumPuddingModel;

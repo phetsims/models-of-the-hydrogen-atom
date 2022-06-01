@@ -24,6 +24,7 @@ import classicalSolarSystemButton_png from '../../../images/classicalSolarSystem
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtomModel, { HydrogenAtomModelOptions } from './HydrogenAtomModel.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = {};
 
@@ -31,7 +32,7 @@ type ClassicalSolarSystemModelOptions = SelfOptions & StrictOmit<HydrogenAtomMod
 
 export default class ClassicalSolarSystemModel extends HydrogenAtomModel {
 
-  constructor( providedOptions: ClassicalSolarSystemModelOptions ) {
+  constructor( zoomedInBox: ZoomedInBox, providedOptions: ClassicalSolarSystemModelOptions ) {
 
     const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, HydrogenAtomModelOptions>()( {
 
@@ -39,7 +40,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtomModel {
       hasTransitionWavelengths: false
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.classicalSolarSystem, classicalSolarSystemButton_png, options );
+    super( modelsOfTheHydrogenAtomStrings.classicalSolarSystem, classicalSolarSystemButton_png, zoomedInBox, options );
   }
 }
 
