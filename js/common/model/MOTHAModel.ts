@@ -24,6 +24,7 @@ import createObservableArray, { ObservableArray } from '../../../../axon/js/crea
 import ExperimentModel from './ExperimentModel.js';
 import { ModelMode, ModelModeValues } from './ModelMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 
 type SelfOptions = {};
 
@@ -43,8 +44,8 @@ class MOTHAModel {
   // the predictive hydrogen-atom model that is currently selected
   public readonly predictiveModelProperty: Property<HydrogenAtom>;
 
-  // the hydrogen-atom model that is currently selected
-  public readonly hydrogenAtomProperty: Property<HydrogenAtom>;
+  // the hydrogen-atom model that is currently selected: either the Experiment model, or the selected predictive model.
+  public readonly hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>;
 
   // the zoomed-in part of the box of hydrogen that we're viewing
   public readonly zoomedInBox: ZoomedInBox;
