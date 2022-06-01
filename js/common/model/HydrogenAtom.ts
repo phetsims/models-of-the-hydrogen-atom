@@ -17,6 +17,7 @@ import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
+//TODO move numberOfStates, groundState, and hasTransitionWavelengths to another base class for those models
 type SelfOptions = {
   position?: Vector2; // position in the model coordinate frame
   orientation?: number; // rotation angle, in radians
