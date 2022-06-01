@@ -94,7 +94,9 @@ export default abstract class HydrogenAtomModel extends PhetioObject {
   /**
    * Called when time has advanced by some delta. The default implementation does nothing.
    */
-  public step( dt: number ): void {}
+  public step( dt: number ): void {
+    //TODO
+  }
 
   /**
    * Gets the transition wavelengths for a specified state. The notion of 'transition wavelength' does not apply to all
