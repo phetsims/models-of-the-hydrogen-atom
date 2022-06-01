@@ -2,6 +2,8 @@
 
 /**
  * BilliardBallModel is a predictive model that models the hydrogen atom as a billiard ball.
+ * While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
+ * in the literature.
  *
  * Physical representation:
  * The ball is spherical, with its local origin at its center.

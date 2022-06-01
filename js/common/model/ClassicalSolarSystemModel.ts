@@ -2,6 +2,8 @@
 
 /**
  * ClassicalSolarSystemModel is a predictive model that models the hydrogen atom as TODO
+ * While PhET typically does not name model elements with a 'Model' suffix, we're using the terminology that appears
+ * in the literature.
  *
  * Physical representation:
  * TODO

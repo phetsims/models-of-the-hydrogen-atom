@@ -2,6 +2,7 @@
 
 /**
  * HydrogenAtom is the abstract base class for all hydrogen-atom models.
+ * Subclass names have a 'Model' suffix (e.g. PlumPuddingModel) to match the terminology used in the literature.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
