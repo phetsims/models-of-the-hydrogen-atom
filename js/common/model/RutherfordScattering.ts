@@ -49,7 +49,7 @@ const RutherfordScattering = {
     // particle's initial position, relative to the atom's center.
     const x0 = getX0( hydrogenAtom, alphaParticle );
     assert && assert( x0 > 0 );
-    let y0 = alphaParticle.positionProperty.initialValue!.y - hydrogenAtom.position.y; //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
+    let y0 = alphaParticle.positionProperty.initialValue.y - hydrogenAtom.position.y;
 
     // b, horizontal distance to atom's center at y == negative infinity
     const b1 = Math.sqrt( ( x0 * x0 ) + ( y0 * y0 ) );
@@ -60,7 +60,7 @@ const RutherfordScattering = {
     let x = alphaParticle.positionProperty.value.x;
     let y = alphaParticle.positionProperty.value.y;
     const v = alphaParticle.speedProperty.value;
-    const v0 = alphaParticle.speedProperty.initialValue!; //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
+    const v0 = alphaParticle.speedProperty.initialValue;
 
     // Adjust for the atom's position.
     x -= hydrogenAtom.position.x;
@@ -114,8 +114,7 @@ const RutherfordScattering = {
  */
 function getX0( hydrogenAtom: HydrogenAtom, alphaParticle: AlphaParticle ) {
 
-  //TODO https://github.com/phetsims/axon/issues/193 remove non-null assertion operator
-  let x0 = Math.abs( alphaParticle.positionProperty.getInitialValue()!.x - hydrogenAtom.position.x );
+  let x0 = Math.abs( alphaParticle.positionProperty.getInitialValue().x - hydrogenAtom.position.x );
   if ( x0 === 0 ) {
     x0 = X_MIN;
   }
