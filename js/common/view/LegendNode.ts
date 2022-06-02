@@ -30,7 +30,7 @@ type LegendNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<VBo
 
 export default class LegendNode extends VBox {
 
-  constructor( providedOptions: LegendNodeOptions ) {
+  public constructor( providedOptions: LegendNodeOptions ) {
 
     const options = optionize<LegendNodeOptions, SelfOptions, VBoxOptions>()( {
 

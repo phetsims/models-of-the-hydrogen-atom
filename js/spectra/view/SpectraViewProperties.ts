@@ -16,7 +16,7 @@ type SpectraViewPropertiesOptions = SelfOptions & MOTHAViewPropertiesOptions;
 
 class SpectraViewProperties extends MOTHAViewProperties {
 
-  constructor( providedOptions: SpectraViewPropertiesOptions ) {
+  public constructor( providedOptions: SpectraViewPropertiesOptions ) {
     super( providedOptions );
   }
 }

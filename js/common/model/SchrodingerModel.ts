@@ -50,7 +50,7 @@ export type SchrodingerModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptio
 
 export default class SchrodingerModel extends HydrogenAtom {
 
-  constructor( zoomedInBox: ZoomedInBox, providedOptions: SchrodingerModelOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, providedOptions: SchrodingerModelOptions ) {
 
     const options = optionize<SchrodingerModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 

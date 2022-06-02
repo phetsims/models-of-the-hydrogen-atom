@@ -41,7 +41,7 @@ export default class Particle extends PhetioObject {
   public readonly speedProperty: Property<number>;
   public readonly directionProperty: Property<number>;
 
-  constructor( providedOptions: ParticleOptions ) {
+  public constructor( providedOptions: ParticleOptions ) {
 
     const options = optionize<ParticleOptions, SelfOptions, PhetioObjectOptions>()( {
       position: Vector2.ZERO,

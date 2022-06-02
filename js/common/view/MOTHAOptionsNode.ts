@@ -20,7 +20,7 @@ export default class MOTHAOptionsNode extends VBox {
 
   private readonly disposeMOTHAOptionsNode: () => void;
 
-  constructor( providedOptions?: MOTHAOptionsNodeOptions ) {
+  public constructor( providedOptions?: MOTHAOptionsNodeOptions ) {
 
     const options = optionize<MOTHAOptionsNodeOptions, SelfOptions, VBoxOptions>()( {
       //TODO

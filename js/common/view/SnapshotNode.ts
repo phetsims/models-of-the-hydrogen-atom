@@ -25,7 +25,7 @@ type SnapshotNodeOptions = SelfOptions &
 
 export default class SnapshotNode extends Node {
 
-  constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotNodeOptions ) {
+  public constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotNodeOptions ) {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO

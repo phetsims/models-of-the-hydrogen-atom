@@ -20,7 +20,7 @@ export default class AlphaParticle extends Particle {
 
   public static INITIAL_SPEED = 5;
 
-  constructor( providedOptions: AlphaParticleOptions ) {
+  public constructor( providedOptions: AlphaParticleOptions ) {
 
     const options = optionize<AlphaParticleOptions, SelfOptions, ParticleOptions>()( {
 

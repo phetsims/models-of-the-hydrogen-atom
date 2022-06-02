@@ -32,7 +32,7 @@ export default class SpectraModel extends MOTHAModel {
   public readonly deBroglieModel: DeBroglieModel;
   public readonly schrodingerModel: SchrodingerModel;
 
-  constructor( providedOptions: SpectraModelOptions ) {
+  public constructor( providedOptions: SpectraModelOptions ) {
 
     const options = optionize<SpectraModelOptions, SelfOptions, MOTHAModelOptions>()( {
       //TODO

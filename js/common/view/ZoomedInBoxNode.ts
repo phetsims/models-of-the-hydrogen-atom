@@ -22,7 +22,7 @@ export type ZoomedInBoxNodeOptions = SelfOptions & NodeTranslationOptions & Pick
 
 export default class ZoomedInBoxNode extends Node {
 
-  constructor( zoomBox: ZoomedInBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomedInBoxNodeOptions ) {
+  public constructor( zoomBox: ZoomedInBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomedInBoxNodeOptions ) {
 
     const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO

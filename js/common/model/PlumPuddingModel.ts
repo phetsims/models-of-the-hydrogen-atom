@@ -87,7 +87,7 @@ class PlumPuddingModel extends HydrogenAtom {
   // the amplitude of the electron just before emitting its last photon
   private readonly previousAmplitudeProperty: Property<number>;
 
-  constructor( zoomedInBox: ZoomedInBox, providedOptions: PlumPuddingModelOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, providedOptions: PlumPuddingModelOptions ) {
 
     const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 

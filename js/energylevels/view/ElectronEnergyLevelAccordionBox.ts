@@ -26,7 +26,7 @@ type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & NodeTranslationOptio
 
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
-  constructor( providedOptions?: ElectronEnergyLevelAccordionBoxOptions ) {
+  public constructor( providedOptions?: ElectronEnergyLevelAccordionBoxOptions ) {
 
     const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,

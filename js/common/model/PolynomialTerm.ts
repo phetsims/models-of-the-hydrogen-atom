@@ -15,7 +15,7 @@ export default class PolynomialTerm {
   public readonly power: number;
   public static readonly ZERO = new PolynomialTerm( 0, 0 );
 
-  constructor( coefficient: number, power: number ) {
+  public constructor( coefficient: number, power: number ) {
     assert && assert( Number.isInteger( coefficient ) );
     assert && assert( Number.isInteger( power ) && power >= 0 );
 

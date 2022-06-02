@@ -28,7 +28,7 @@ type LightModeRadioButtonGroupOptions = SelfOptions & NodeTranslationOptions &
 
 export default class LightModeRadioButtonGroup extends RectangularRadioButtonGroup<LightMode> {
 
-  constructor( lightModeProperty: IProperty<LightMode>, providedOptions: LightModeRadioButtonGroupOptions ) {
+  public constructor( lightModeProperty: IProperty<LightMode>, providedOptions: LightModeRadioButtonGroupOptions ) {
 
     const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 

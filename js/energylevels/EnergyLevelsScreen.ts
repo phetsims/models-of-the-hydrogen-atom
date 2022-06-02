@@ -20,7 +20,7 @@ type EnergyLevelsScreenOptions = SelfOptions & StrictOmit<MOTHAScreenOptions, 'n
 
 export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, EnergyLevelsScreenView> {
 
-  constructor( providedOptions: EnergyLevelsScreenOptions ) {
+  public constructor( providedOptions: EnergyLevelsScreenOptions ) {
 
     const options = optionize<EnergyLevelsScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
       name: modelsOfTheHydrogenAtomStrings.screen.energyLevels

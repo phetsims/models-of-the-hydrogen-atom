@@ -27,7 +27,7 @@ type ContinuumBarNodeOptions = SelfOptions & StrictOmit<NodeOptions, 'children'>
 
 export default class ContinuumBarNode extends Node {
 
-  constructor( barHeight: number, providedOptions?: ContinuumBarNodeOptions ) {
+  public constructor( barHeight: number, providedOptions?: ContinuumBarNodeOptions ) {
 
     const options = optionize<ContinuumBarNodeOptions, SelfOptions, NodeOptions>()( {
 

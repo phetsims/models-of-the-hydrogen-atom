@@ -16,7 +16,7 @@ type ElectronOptions = SelfOptions & ParticleOptions;
 
 export default class Electron extends Particle {
 
-  constructor( providedOptions?: ElectronOptions ) {
+  public constructor( providedOptions?: ElectronOptions ) {
 
     const options = optionize<ElectronOptions, SelfOptions, ParticleOptions>()( {
 

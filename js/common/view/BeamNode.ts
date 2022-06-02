@@ -22,7 +22,7 @@ type BeamNodeOptions = SelfOptions & NodeTranslationOptions &
 
 export default class BeamNode extends Rectangle {
 
-  constructor( providedOptions: BeamNodeOptions ) {
+  public constructor( providedOptions: BeamNodeOptions ) {
 
     const options = optionize<BeamNodeOptions, SelfOptions, RectangleOptions>()( {
 

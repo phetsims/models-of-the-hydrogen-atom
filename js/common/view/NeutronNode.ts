@@ -20,7 +20,7 @@ type NeutronNodeOptions = SelfOptions & StrictOmit<ShadedSphereNodeOptions, 'mai
 
 export default class NeutronNode extends ShadedSphereNode {
 
-  constructor( providedOptions?: NeutronNodeOptions ) {
+  public constructor( providedOptions?: NeutronNodeOptions ) {
 
     const options = optionize<NeutronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 

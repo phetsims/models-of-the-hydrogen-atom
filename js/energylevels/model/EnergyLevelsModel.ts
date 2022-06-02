@@ -26,7 +26,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
   public readonly deBroglieModel: DeBroglieModel;
   public readonly schrodingerModel: SchrodingerModel;
 
-  constructor( providedOptions: EnergyLevelsModelOptions ) {
+  public constructor( providedOptions: EnergyLevelsModelOptions ) {
 
     const options = optionize<EnergyLevelsModelOptions, SelfOptions, MOTHAModelOptions>()( {
       //TODO

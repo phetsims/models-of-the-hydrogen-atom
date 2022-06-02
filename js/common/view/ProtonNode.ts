@@ -21,7 +21,7 @@ type ProtonNodeOptions = SelfOptions & StrictOmit<ShadedSphereNodeOptions, 'main
 
 export default class ProtonNode extends ShadedSphereNode {
 
-  constructor( providedOptions?: ProtonNodeOptions ) {
+  public constructor( providedOptions?: ProtonNodeOptions ) {
 
     const options = optionize<ProtonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 

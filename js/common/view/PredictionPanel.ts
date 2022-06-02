@@ -26,8 +26,8 @@ type PredictiveModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRe
 
 export default class PredictionPanel extends Panel {
 
-  constructor( predictiveModelProperty: IProperty<HydrogenAtom>, predictiveModels: HydrogenAtom[],
-               providedOptions: PredictiveModelPanelOptions ) {
+  public constructor( predictiveModelProperty: IProperty<HydrogenAtom>, predictiveModels: HydrogenAtom[],
+                      providedOptions: PredictiveModelPanelOptions ) {
 
     const options = optionize<PredictiveModelPanelOptions, SelfOptions, PanelOptions>()( {
       fill: MOTHAColors.modelsPanelFillProperty,

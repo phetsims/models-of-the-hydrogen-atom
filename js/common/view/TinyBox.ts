@@ -22,7 +22,7 @@ type TinyBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<Rectan
 
 export default class TinyBox extends Rectangle {
 
-  constructor( providedOptions: TinyBoxOptions ) {
+  public constructor( providedOptions: TinyBoxOptions ) {
 
     const options = optionize<TinyBoxOptions, SelfOptions, RectangleOptions>()( {
 

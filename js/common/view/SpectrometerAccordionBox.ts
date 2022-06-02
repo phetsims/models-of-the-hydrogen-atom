@@ -34,8 +34,8 @@ type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions & Pi
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 
-  constructor( expandedProperty: Property<boolean>, numberOfSnapshotsProperty: IProperty<number>,
-               providedOptions?: SpectrometerAccordionBoxOptions ) {
+  public constructor( expandedProperty: Property<boolean>, numberOfSnapshotsProperty: IProperty<number>,
+                      providedOptions?: SpectrometerAccordionBoxOptions ) {
 
     const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
       fill: MOTHAColors.spectrometerAccordionBoxFillProperty,

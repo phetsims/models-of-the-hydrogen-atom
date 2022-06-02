@@ -29,7 +29,7 @@ export default class MOTHAViewProperties {
   // number of spectrometer snapshots
   public readonly numberOfSnapshotsProperty: Property<number>;
 
-  constructor( providedOptions: MOTHAViewPropertiesOptions ) {
+  public constructor( providedOptions: MOTHAViewPropertiesOptions ) {
 
     const options = providedOptions;
 

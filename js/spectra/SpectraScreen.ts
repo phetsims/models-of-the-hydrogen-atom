@@ -20,7 +20,7 @@ type SpectraScreenOptions = SelfOptions & StrictOmit<MOTHAScreenOptions, 'name' 
 
 export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScreenView> {
 
-  constructor( providedOptions: SpectraScreenOptions ) {
+  public constructor( providedOptions: SpectraScreenOptions ) {
 
     const options = optionize<SpectraScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
       name: modelsOfTheHydrogenAtomStrings.screen.spectra

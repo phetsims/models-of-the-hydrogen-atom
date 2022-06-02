@@ -21,7 +21,7 @@ type ViewSnapshotsButtonOptions = SelfOptions & NodeTranslationOptions &
 
 export default class ViewSnapshotsButton extends RectangularPushButton {
 
-  constructor( providedOptions: ViewSnapshotsButtonOptions ) {
+  public constructor( providedOptions: ViewSnapshotsButtonOptions ) {
     super( optionize<ViewSnapshotsButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
 
       // RectangularPushButtonOptions

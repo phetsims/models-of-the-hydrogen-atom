@@ -24,7 +24,7 @@ type ExperimentPredictionSwitchOptions = SelfOptions & NodeTranslationOptions & 
 
 class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 
-  constructor( modelModeProperty: IProperty<ModelMode>, providedOptions: ExperimentPredictionSwitchOptions ) {
+  public constructor( modelModeProperty: IProperty<ModelMode>, providedOptions: ExperimentPredictionSwitchOptions ) {
 
     const options = optionize<ExperimentPredictionSwitchOptions, SelfOptions, ABSwitchOptions>()( {
       centerOnButton: true,

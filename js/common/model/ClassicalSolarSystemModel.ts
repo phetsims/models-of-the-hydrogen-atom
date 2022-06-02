@@ -36,7 +36,7 @@ type ClassicalSolarSystemModelOptions = SelfOptions & StrictOmit<HydrogenAtomOpt
 
 export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
-  constructor( zoomedInBox: ZoomedInBox, providedOptions: ClassicalSolarSystemModelOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, providedOptions: ClassicalSolarSystemModelOptions ) {
 
     const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 

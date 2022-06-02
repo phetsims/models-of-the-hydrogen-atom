@@ -28,7 +28,7 @@ type DeBroglieModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasT
 //TODO extends BohrModel
 export default class DeBroglieModel extends HydrogenAtom {
 
-  constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 

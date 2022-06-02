@@ -42,7 +42,7 @@ type SpectraScreenViewOptions = SelfOptions & ScreenViewOptions;
 
 class SpectraScreenView extends ScreenView {
 
-  constructor( model: SpectraModel, providedOptions: SpectraScreenViewOptions ) {
+  public constructor( model: SpectraModel, providedOptions: SpectraScreenViewOptions ) {
 
     const options = optionize<SpectraScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       //TODO

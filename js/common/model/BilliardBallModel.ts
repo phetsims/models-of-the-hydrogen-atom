@@ -44,7 +44,7 @@ export default class BilliardBallModel extends HydrogenAtom {
 
   public readonly radius: number;
 
-  constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {
 
     const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 

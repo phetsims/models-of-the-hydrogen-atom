@@ -21,7 +21,7 @@ type PlumPuddingNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' |
 
 export default class PlumPuddingNode extends Node {
 
-  constructor( hydrogenAtom: PlumPuddingModel, modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingNodeOptions ) {
+  public constructor( hydrogenAtom: PlumPuddingModel, modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingNodeOptions ) {
 
     const options = optionize<PlumPuddingNodeOptions, SelfOptions, RectangleOptions>()( {
       //TODO

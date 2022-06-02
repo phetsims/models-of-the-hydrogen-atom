@@ -20,7 +20,7 @@ type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
-  constructor( model: SpectraModel, modelViewTransform: ModelViewTransform2, providedOptions: SpectraZoomedInBoxNodeOptions ) {
+  public constructor( model: SpectraModel, modelViewTransform: ModelViewTransform2, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
     const options = optionize<SpectraZoomedInBoxNodeOptions, SelfOptions, ZoomedInBoxNodeOptions>()( {
       //TODO

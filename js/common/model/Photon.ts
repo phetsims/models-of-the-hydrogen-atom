@@ -32,7 +32,7 @@ export default class Photon extends Particle {
 
   public static INITIAL_SPEED = 5;
 
-  constructor( providedOptions?: PhotonOptions ) {
+  public constructor( providedOptions?: PhotonOptions ) {
 
     const options = optionize<PhotonOptions, SelfOptions, ParticleOptions>()( {
 

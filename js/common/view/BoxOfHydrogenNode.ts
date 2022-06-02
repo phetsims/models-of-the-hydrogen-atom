@@ -28,7 +28,7 @@ type BoxOfHydrogenNodeOptions = SelfOptions & NodeTranslationOptions & PickRequi
 
 export default class BoxOfHydrogenNode extends Node {
 
-  constructor( providedOptions: BoxOfHydrogenNodeOptions ) {
+  public constructor( providedOptions: BoxOfHydrogenNodeOptions ) {
 
     // top face, in perspective
     const topNode = new Path( new Shape()

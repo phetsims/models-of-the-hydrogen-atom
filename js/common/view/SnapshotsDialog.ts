@@ -34,7 +34,7 @@ export default class SnapshotsDialog extends Dialog {
 
   private readonly disposeSnapshotsDialog: () => void;
 
-  constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
+  public constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
 
     const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>()( {
 

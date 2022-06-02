@@ -20,7 +20,7 @@ export default class EnergyLevelsViewProperties extends MOTHAViewProperties {
   //  is the Electron Energy Level accordion box expanded?
   public readonly electronEnergyLevelExpandedProperty: Property<boolean>;
 
-  constructor( providedOptions: EnergyLevelsViewPropertiesOptions ) {
+  public constructor( providedOptions: EnergyLevelsViewPropertiesOptions ) {
     super( providedOptions );
 
     this.electronEnergyLevelExpandedProperty = new BooleanProperty( false, {

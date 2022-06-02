@@ -42,7 +42,7 @@ export type BohrModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'ha
 
 export default class BohrModel extends HydrogenAtom {
 
-  constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
 
     const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 

@@ -71,7 +71,7 @@ export default class Light {
   // wavelengths that cause a state transition
   private readonly transitionWavelengths: number[];
 
-  constructor( zoomedInBox: ZoomedInBox, providedOptions: LightOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, providedOptions: LightOptions ) {
 
     const options = optionize<LightOptions, SelfOptions>()( {
       //TODO
