@@ -86,7 +86,7 @@ export default class BilliardBallModel extends HydrogenAtom {
 
   /**
    * Moves an alpha particle. If the alpha particle collides with the atom, the alpha particle
-   * bounces back at a 'steep but random' angle. Otherwise it continues to move in its current direction.
+   * bounces back at a 'steep but random' angle. Otherwise, it continues to move in its current direction.
    */
   public override moveAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
 
