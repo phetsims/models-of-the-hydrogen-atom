@@ -7,23 +7,26 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Image, Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
+import { Image } from '../../../../scenery/js/imports.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ElectronNode from './ElectronNode.js';
+import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 
 type SelfOptions = {};
 
-type PlumPuddingNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+type PlumPuddingNodeOptions = SelfOptions & HydrogenAtomNodeOptions;
 
-export default class PlumPuddingNode extends Node {
+export default class PlumPuddingNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: PlumPuddingModel, modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingNodeOptions ) {
+  public constructor( hydrogenAtom: PlumPuddingModel, hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingNodeOptions ) {
 
-    const options = optionize<PlumPuddingNodeOptions, SelfOptions, RectangleOptions>()( {
+    const options = optionize<PlumPuddingNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
       //TODO
     }, providedOptions );
 
@@ -42,7 +45,7 @@ export default class PlumPuddingNode extends Node {
 
     options.children = [ plumPuddingImage, electronNode ];
 
-    super( options );
+    super( hydrogenAtom, hydrogenAtomProperty, options );
   }
 }
 

@@ -202,6 +202,18 @@ const MOTHAColors = {
   electronEnergyLevelAccordionBoxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelAccordionBoxStroke', {
     default: Color.grayColor( 180 ),
     projector: 'black'
+  } ),
+
+  //------------------------------------------------------------------------------------------------------------------
+  // Electron Energy Level
+  //------------------------------------------------------------------------------------------------------------------
+
+  billiardBallColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'billiardBallColor', {
+    default: 'rgb( 196, 78, 14 )'
+  } ),
+
+  billiardBallHighlightColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'billiardBallHighlightColor', {
+    default: 'rgb( 255, 141, 21 )'
   } )
 };
 

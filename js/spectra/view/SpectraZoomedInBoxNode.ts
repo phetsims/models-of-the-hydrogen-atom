@@ -12,7 +12,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/ZoomedInBoxNode.js';
 import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BilliardBallNode from '../../common/view/BilliardBallNode.js';
 
 type SelfOptions = {};
 
@@ -28,9 +28,12 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
     super( model.zoomedInBox, modelViewTransform, options );
 
-    const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, modelViewTransform, {
-      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ],
-        hydrogenAtom => ( hydrogenAtom === model.plumPuddingModel ) ),
+    const billiardBallNode = new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'billiardBallNode' )
+    } );
+    this.addChild( billiardBallNode );
+
+    const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform, {
       tandem: options.tandem.createTandem( 'plumPuddingNode' )
     } );
     this.addChild( plumPuddingNode );
