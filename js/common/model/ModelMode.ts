@@ -3,6 +3,7 @@
 /**
  * ModelMode is a union type that determines whether we are running an experiment or viewing a predictive model.
  * We could have used a boolean for this, but a union type presents better in Studio and the PhET-iO API.
+ * The string names correspond to the English labels used on the ABSwitch that controls this setting.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
