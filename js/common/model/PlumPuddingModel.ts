@@ -362,7 +362,7 @@ class PlumPuddingModel extends HydrogenAtom {
         if ( dotRandom.nextDouble() < PHOTON_EMISSION_PROBABILITY ) {
           this.emitPhoton();
           if ( this.numberOfPhotonsAbsorbedProperty.value === 0 ) {
-            // If we have not more photons, remember amplitude so we can complete oscillation.
+            // If we have not more photons, remember amplitude, so we can complete oscillation.
             this.previousAmplitudeProperty.value = amplitude;
           }
         }

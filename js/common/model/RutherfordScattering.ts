@@ -27,10 +27,10 @@ const RutherfordScattering = {
    * doc/Trajectories_for_Rutherford_Scattering.pdf.
    *
    * ASSUMPTIONS MADE IN THIS ALGORITHM:
-   * (1) The atom is located at (0,0), so we do calculations relative to the atom position.
+   * (1) The atom is located at (0,0), so calculations are done relative to the atom's position.
    * (2) Particles are moving from bottom to top of zoomedInBox, in +y direction.
-   * (3) x values are positive. The algorithm fails for negative values of x. This is not mentioned in the specification
-   * document. Our x value are not necessarily positive, so we must convert to positive values of x, then convert back.
+   * (3) x values are non-negative. The algorithm fails for negative values of x. This is not mentioned in the specification
+   * document. Our x values may be negative, so we must convert to non-negative values of x, then convert back.
    * (4) Using "phi=arctan(-x,y)" as described in the specification causes particles to jump discontinuously when they
    * go above the y-axis. This is fixed by using Math.atan2 instead.
    *
@@ -54,29 +54,22 @@ const RutherfordScattering = {
     const b = 0.5 * ( x0 + Math.sqrt( ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 ) ) );
     assert && assert( b > 0 );
 
-    // particle's current position and speed
-    let x = alphaParticle.positionProperty.value.x;
-    let y = alphaParticle.positionProperty.value.y;
+    // particle's current position (relative to atom) and speed
+    let x = alphaParticle.positionProperty.value.x - hydrogenAtom.position.x;
+    const y = alphaParticle.positionProperty.value.y - hydrogenAtom.position.y;
     const v = alphaParticle.speedProperty.value;
     const v0 = alphaParticle.speedProperty.initialValue;
 
-    // Adjust for the atom's position.
-    x -= hydrogenAtom.position.x;
-    y -= hydrogenAtom.position.y;
-
     // This algorithm fails for x < 0, so adjust accordingly.
-    let sign = 1;
-    if ( x < 0 ) {
-      x *= -1;
-      sign = -1;
-    }
+    const xSign = ( x < 0 ) ? -1 : 1;
+    x *= xSign;
     assert && assert( x >= 0 );
 
-    // Convert the current position to Polar coordinates, measured counterclockwise from the -y axis.
+    // Convert the particle's current position to Polar coordinates.
     const r = Math.sqrt( ( x * x ) + ( y * y ) );
     const phi = Math.atan2( x, -y );
 
-    // new position (in Polar coordinates) and speed
+    // Compute the new position (in Polar coordinates) and speed.
     const t1 = ( ( b * Math.cos( phi ) ) - ( ( D / 2 ) * Math.sin( phi ) ) );
     const phiNew = phi + ( ( b * b * v * dt ) / ( r * Math.sqrt( Math.pow( b, 4 ) + ( r * r * t1 * t1 ) ) ) );
     const rNew = Math.abs( ( b * b ) / ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) ) );
@@ -87,7 +80,7 @@ const RutherfordScattering = {
     let yNew = -rNew * Math.cos( phiNew );
 
     // Adjust the sign of x.
-    xNew *= sign;
+    xNew *= xSign;
 
     // Adjust for atom position.
     xNew += hydrogenAtom.position.x;
