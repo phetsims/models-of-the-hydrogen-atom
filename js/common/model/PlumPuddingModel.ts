@@ -262,6 +262,8 @@ class PlumPuddingModel extends HydrogenAtom {
     }
   }
 
+  //TODO Decouple interacting with photon from moving it. super.move() always seems to be the means of moving it,
+  // which calls photon.move( dt ), so make that the responsibility of MOTHAModel.
   /**
    * Tries to absorb a photon. If it is not absorbed, the photon is moved.
    */
@@ -271,6 +273,8 @@ class PlumPuddingModel extends HydrogenAtom {
     }
   }
 
+  //TODO Decouple interacting with alpha particle from moving it. super.move() always seems to be the means of moving it,
+  // which calls alphaParticle.move( dt ), so make that the responsibility of MOTHAModel.
   /**
    * Moves an alpha particle using a Rutherford Scattering algorithm.
    *
