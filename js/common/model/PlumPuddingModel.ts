@@ -274,10 +274,10 @@ class PlumPuddingModel extends HydrogenAtom {
    * Moves an alpha particle using a Rutherford Scattering algorithm.
    *
    * WORKAROUND - If the particle is "close" to the atom's center, then it simply passes through at constant speed.
-   * This is a workaround for a problem in Rutherford Scattering; particles get stuck at the center of the plum pudding
+   * This is a workaround for a problem in Rutherford Scattering. Particles get stuck at the center of the plum pudding
    * atom, or they seem to stick slightly and then accelerate off.  The value of "closeness" was set through trial and
    * error, to eliminate these problems while still making the motion look continuous. This workaround assumes that
-   * alpha particles are moving vertically from bottom to top.
+   * alpha particles are moving in the +y direction (from bottom to top of zoomedInBox).
    */
   public override moveAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
     const closeness = 10;
