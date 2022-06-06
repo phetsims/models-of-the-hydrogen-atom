@@ -23,7 +23,7 @@ type SelfOptions = {
   // position in model coordinate frame
   position?: Vector2;
 
-  // distance per dt
+  // distance per second
   speed?: number;
 
   // direction of motion, in radians
