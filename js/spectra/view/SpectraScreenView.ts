@@ -54,7 +54,8 @@ class SpectraScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'viewProperties' )
     } );
 
-    // +y is up in the model, down in the view.
+    // Our model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise
+    // Our view uses a left-handed coordinate system: +x right, +y down, +angle clockwise
     // We're using a non-unity scale to be certain that the transform is being used where it should be.
     const modelToViewScale = 0.5;
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( Vector2.ZERO, modelToViewScale, -modelToViewScale );
