@@ -10,7 +10,6 @@
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 
 export default class ZoomedInBox extends Bounds2 {
@@ -22,10 +21,6 @@ export default class ZoomedInBox extends Bounds2 {
 
   public containsPhoton( photon: Photon ): boolean {
     return this.containsPoint( photon.positionProperty.value );
-  }
-
-  public containsAlphaParticle( alphaParticle: AlphaParticle ): boolean {
-    return this.containsPoint( alphaParticle.positionProperty.value );
   }
 }
 

@@ -1,7 +1,7 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
 /**
- * BoxOfHydrogenNode is the box of hydrogen into which the light emits photons and alpha particles.
+ * BoxOfHydrogenNode is the box of hydrogen into which the light emits photons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

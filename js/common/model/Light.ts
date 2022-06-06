@@ -158,7 +158,7 @@ export default class Light {
    */
   private createPhoton(): void {
     this.photonCreatedEmitter.emit( new Photon( {
-      position: this.getNextParticlePosition(),
+      position: this.getNextPhotonPosition(),
       wavelength: this.getNextPhotonWavelength()
     } ) );
   }
@@ -175,9 +175,9 @@ export default class Light {
   }
 
   /**
-   * Gets the next random position for a new particle, along the bottom edge of the zoomed-in box.
+   * Gets the next random position for a photon, along the bottom edge of the zoomed-in box.
    */
-  private getNextParticlePosition(): Vector2 {
+  private getNextPhotonPosition(): Vector2 {
     const x = dotRandom.nextDoubleBetween( this.zoomedInBox.minX, this.zoomedInBox.maxX );
     const y = this.zoomedInBox.minY;
     return new Vector2( x, y );

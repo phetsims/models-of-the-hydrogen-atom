@@ -2,7 +2,7 @@
 
 /**
  * ZoomedInBoxNode is a base class that provides the zoomed-in view of part of the box of hydrogen.
- * This is the box in which animation of atoms, photons and alpha particles takes place.
+ * This is the box in which animation of atoms and photons takes place.
  * Subclasses are expected to add views of specific hydrogen-atoms.
  *
  * @author Chris Malley (PixelZoom, Inc.)

@@ -10,14 +10,14 @@
  * shows the electron on top of the proton. In this final state, the atom is considered "destroyed".
  *
  * Collision behavior:
- * The spiraling behavior should occur fast enough so that the atom is  destroyed before any photons or alpha particles
- * reach it. Therefore, there are no collisions.
+ * The spiraling behavior should occur fast enough so that the atom is  destroyed before any photons reach it.
+ * Therefore, there are no collisions.
  *
  * Absorption behavior:
- * Atom is destroyed, so it does not absorb photons or alpha particles.
+ * Atom is destroyed, so it does not absorb photons.
  *
  * Emission behavior:
- * Atom is destroyed, so it does not emit photons or alpha particles.
+ * Atom is destroyed, so it does not emit photons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -7,13 +7,13 @@
  * The ball is spherical, with its local origin at its center.
  *
  * Collision behavior:
- * When photons and alpha particles collide with the ball, they bounce off as if the ball were a rigid body.
+ * When photons collide with the ball, they bounce off as if the ball were a rigid body.
  *
  * Absorption behavior:
- * Does not absorb photons or alpha particles.
+ * Does not absorb photons.
  *
  * Emission behavior:
- * Does not emit photons or alpha particles.
+ * Does not emit photons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,7 +24,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import billiardBallButton_png from '../../../images/billiardBallButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
@@ -82,23 +81,6 @@ export default class BilliardBallModel extends HydrogenAtom {
 
     // move particle
     super.movePhoton( photon, dt );
-  }
-
-  /**
-   * Moves an alpha particle. If the alpha particle collides with the atom, the alpha particle
-   * bounces back at a 'steep but random' angle. Otherwise, it continues to move in its current direction.
-   */
-  public override moveAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
-
-    // detect collision and adjust particle direction
-    if ( alphaParticle.positionProperty.value.distance( this.position ) <= this.radius ) {
-      const sign = ( alphaParticle.positionProperty.value.x > this.position.x ) ? 1 : -1;
-      const deflection = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-      alphaParticle.directionProperty.value = alphaParticle.directionProperty.value + deflection;
-    }
-
-    // move particle
-    super.moveAlphaParticle( alphaParticle, dt );
   }
 }
 

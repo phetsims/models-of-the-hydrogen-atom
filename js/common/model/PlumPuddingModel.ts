@@ -8,18 +8,16 @@
  * straight line that passes through the center of the goo and has its end points on the circle.
  *
  * Collision behavior:
- * Photons collide with the electron when they are "close". Alpha particles collide with the goo and are deflected
- * using a Rutherford scattering algorithm.
+ * Photons collide with the electron when they are "close".
  *
  * Absorption behavior:
  * The electron can absorb N photons. When any photon collides with the electron, it is absorbed with some probability,
- * and (if absorbed) causes the electron to start oscillating. Alpha particles are not absorbed.
+ * and (if absorbed) causes the electron to start oscillating.
  *
  * Emission behavior:
  * The electron can emit one UV photon for each photon absorbed. Photons are emitted at the electron's location.
  * No photons are emitted until the electron has completed one oscillation cycle, and after emitting its last photon,
- * the electron completes its current oscillation cycles, coming to rest at the atoms center. Alpha particles are not
- * emitted.
+ * the electron completes its current oscillation cycles, coming to rest at the atoms center.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -41,8 +39,6 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Electron from './Electron.js';
 import Photon from './Photon.js';
-import AlphaParticle from './AlphaParticle.js';
-import RutherfordScattering from './RutherfordScattering.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 
@@ -270,27 +266,6 @@ class PlumPuddingModel extends HydrogenAtom {
   public override movePhoton( photon: Photon, dt: number ): void {
     if ( !this.absorbPhoton( photon ) ) {
       super.movePhoton( photon, dt );
-    }
-  }
-
-  //TODO Decouple interacting with alpha particle from moving it. super.move() always seems to be the means of moving it,
-  // which calls alphaParticle.move( dt ), so make that the responsibility of MOTHAModel.
-  /**
-   * Moves an alpha particle using a Rutherford Scattering algorithm.
-   *
-   * WORKAROUND - If the particle is "close" to the atom's center, then it simply passes through at constant speed.
-   * This is a workaround for a problem in Rutherford Scattering. Particles get stuck at the center of the plum pudding
-   * atom, or they seem to stick slightly and then accelerate off.  The value of "closeness" was set through trial and
-   * error, to eliminate these problems while still making the motion look continuous. This workaround assumes that
-   * alpha particles are moving in the +y direction (from bottom to top of zoomedInBox).
-   */
-  public override moveAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
-    const closeness = 10;
-    if ( Math.abs( alphaParticle.positionProperty.value.x - this.position.x ) < closeness ) {
-      super.moveAlphaParticle( alphaParticle, dt );
-    }
-    else {
-      RutherfordScattering.moveParticle( this, alphaParticle, this.zoomedInBox, dt );
     }
   }
 

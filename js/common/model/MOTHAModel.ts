@@ -19,7 +19,6 @@ import Light from './Light.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
-import AlphaParticle from './AlphaParticle.js';
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import ExperimentModel from './ExperimentModel.js';
 import { ModelMode, ModelModeValues } from './ModelMode.js';
@@ -52,9 +51,6 @@ class MOTHAModel {
 
   // the light that is shining into the box of hydrogen
   public readonly light: Light;
-
-  // alpha particles inside zoomedInBox
-  public readonly alphaParticles: ObservableArray<AlphaParticle>;
 
   // photons inside zoomedInBox
   public readonly photons: ObservableArray<Photon>;
@@ -113,11 +109,6 @@ class MOTHAModel {
       tandem: options.tandem.createTandem( 'light' )
     } );
 
-    this.alphaParticles = createObservableArray<AlphaParticle>( {
-      //TODO tandem
-      //TODO phetioType
-    } );
-
     this.photons = createObservableArray<Photon>( {
       //TODO tandem
       //TODO phetioType
@@ -135,7 +126,6 @@ class MOTHAModel {
       if ( oldHydrogenAtom !== null ) {
         oldHydrogenAtom.reset();
       }
-      this.alphaParticles.clear();
       this.photons.clear();
       hydrogenAtom.photonEmittedEmitter.addListener( this.photonEmittedListener.bind( this ) );
       hydrogenAtom.photonAbsorbedEmitter.addListener( this.photonAbsorbedListener.bind( this ) );
@@ -153,9 +143,6 @@ class MOTHAModel {
     this.predictiveModels.forEach( predictiveModel => predictiveModel.reset() );
     this.predictiveModelProperty.reset();
     this.light.reset();
-    while ( this.alphaParticles.length > 0 ) {
-      this.alphaParticles.pop()!.dispose();
-    }
     while ( this.photons.length > 0 ) {
       this.photons.pop()!.dispose();
     }
@@ -170,14 +157,14 @@ class MOTHAModel {
   public step( dt: number ): void {
     this.light.step( dt );
     this.hydrogenAtomProperty.value.step( dt );
-    this.moveAndCullParticles( dt );
+    this.moveAndCullPhotons( dt );
   }
 
   /**
-   * Moves photons and alpha particles. Particles that move outside the zoomed-in box are culled.
+   * Moves photons. Photons that move outside the zoomed-in box are culled.
    * @param dt - the time step, in seconds
    */
-  private moveAndCullParticles( dt: number ): void {
+  private moveAndCullPhotons( dt: number ): void {
 
     const hydrogenAtom = this.hydrogenAtomProperty.value;
 
@@ -190,18 +177,6 @@ class MOTHAModel {
         photon.dispose();
         this.photons.remove( photon );
         phet.log && phet.log( `photon culled: ${photon.toString()}` );
-      }
-    } );
-
-    // Move and cull alpha particles. May change this.alphaParticles, so operate on a copy of the array.
-    this.alphaParticles.forEach( alphaParticle => {
-      hydrogenAtom.moveAlphaParticle( alphaParticle, dt );
-
-      // If the alpha particle leaves the zoomed-in box, cull it.
-      if ( !this.zoomedInBox.containsAlphaParticle( alphaParticle ) ) {
-        alphaParticle.dispose();
-        this.alphaParticles.remove( alphaParticle );
-        phet.log && phet.log( `alpha particle culled: ${alphaParticle.toString()}` );
       }
     } );
   }

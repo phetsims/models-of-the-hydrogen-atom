@@ -13,7 +13,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
@@ -118,13 +117,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
    */
   public movePhoton( photon: Photon, dt: number ): void {
     photon.move( dt );
-  }
-
-  /**
-   * Moves an alpha particle by the specified time step.
-   */
-  public moveAlphaParticle( alphaParticle: AlphaParticle, dt: number ): void {
-    alphaParticle.move( dt );
   }
 
   /**

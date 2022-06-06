@@ -8,8 +8,7 @@
  * on how orbit radii are calculated.
  *
  * Collision behavior:
- * Alpha particles are repelled by the electron using a Rutherford Scattering algorithm. Photons may be absorbed
- * if they collide with the electron.
+ * Photons may be absorbed if they collide with the electron.
  *
  * Absorption behavior:
  * Photons that match the transition wavelength of the electron's state are absorbed with some probability. Other
