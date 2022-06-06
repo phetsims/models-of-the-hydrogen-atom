@@ -1,7 +1,7 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
 /**
- * RandomUtils is a collection of static utility functions related to random number generation.
+ * MOTHAUtils is a collection of static utility functions used in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +9,7 @@
 import dotRandom from '../../../dot/js/dotRandom.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
-const RandomUtils = {
+const MOTHAUtils = {
 
   /**
    * Gets a random sign.
@@ -33,5 +33,5 @@ const RandomUtils = {
   }
 };
 
-modelsOfTheHydrogenAtom.register( 'RandomUtils', RandomUtils );
-export default RandomUtils;
+modelsOfTheHydrogenAtom.register( 'MOTHAUtils', MOTHAUtils );
+export default MOTHAUtils;

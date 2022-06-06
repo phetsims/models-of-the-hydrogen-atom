@@ -44,7 +44,7 @@ import Photon from './Photon.js';
 import AlphaParticle from './AlphaParticle.js';
 import RutherfordScattering from './RutherfordScattering.js';
 import ZoomedInBox from './ZoomedInBox.js';
-import RandomUtils from '../RandomUtils.js';
+import MOTHAUtils from '../MOTHAUtils.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -172,16 +172,16 @@ class PlumPuddingModel extends HydrogenAtom {
    */
   private updateElectronLine(): void {
 
-    const angle = RandomUtils.nextAngle();
+    const angle = MOTHAUtils.nextAngle();
     const x = Math.abs( this.radius * Math.sin( angle ) );
-    const y = RandomUtils.nextSign() * this.radius * Math.cos( angle );
+    const y = MOTHAUtils.nextSign() * this.radius * Math.cos( angle );
     this.electronLineEndpoint1Property.value = new Vector2( -x, -y );
     this.electronLineEndpoint2Property.value = new Vector2( x, y );
 
     // required by moveElectron()
     assert && assert( this.electronLineEndpoint1Property.value.x < this.electronLineEndpoint2Property.value.x );
 
-    this.electronDirectionProperty.value = RandomUtils.nextSign();
+    this.electronDirectionProperty.value = MOTHAUtils.nextSign();
 
     // move electron back to center
     this.electronOffsetProperty.value = new Vector2( 0, 0 );
@@ -256,7 +256,7 @@ class PlumPuddingModel extends HydrogenAtom {
       this.photonEmittedEmitter.emit( new Photon( {
         position: this.electronPositionProperty.value, // at the electron's position
         wavelength: PHOTON_EMISSION_WAVELENGTH,
-        direction: RandomUtils.nextAngle(),
+        direction: MOTHAUtils.nextAngle(),
         wasEmitted: true
       } ) );
     }
@@ -339,8 +339,8 @@ class PlumPuddingModel extends HydrogenAtom {
     // Did we cross the origin?
     //TODO is ( x === 0 && y === 0 ) needed?
     if ( ( x === 0 && y === 0 ) ||
-         RandomUtils.signIsDifferent( x, electronOffset.x ) ||
-         RandomUtils.signIsDifferent( y, electronOffset.y ) ) {
+         MOTHAUtils.signIsDifferent( x, electronOffset.x ) ||
+         MOTHAUtils.signIsDifferent( y, electronOffset.y ) ) {
       this.numberOfZeroCrossingsProperty.value += 1;
     }
 
