@@ -337,6 +337,7 @@ class PlumPuddingModel extends HydrogenAtom {
     }
 
     // Did we cross the origin?
+    //TODO why is ( x === 0 && y === 0 ) considered a zero crossing?
     if ( ( x === 0 && y === 0 ) ||
          MOTHAUtils.signIsDifferent( x, electronOffset.x ) ||
          MOTHAUtils.signIsDifferent( y, electronOffset.y ) ) {
