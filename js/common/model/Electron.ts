@@ -10,11 +10,15 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
 
+let electronCounter = 0; //TODO delete this
+
 type SelfOptions = {};
 
 type ElectronOptions = SelfOptions & ParticleOptions;
 
 export default class Electron extends Particle {
+
+  private readonly id: number;
 
   public constructor( providedOptions?: ElectronOptions ) {
 
@@ -26,6 +30,10 @@ export default class Electron extends Particle {
     }, providedOptions );
 
     super( options );
+
+    this.id = electronCounter++;
+
+    phet.log && this.positionProperty.lazyLink( position => phet.log( `electron ${this.id} moved: ${position}` ) );
   }
 }
 

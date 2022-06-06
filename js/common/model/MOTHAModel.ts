@@ -155,9 +155,11 @@ class MOTHAModel {
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {
-    this.light.step( dt );
-    this.hydrogenAtomProperty.value.step( dt );
-    this.moveAndCullPhotons( dt );
+    if ( this.isPlayingProperty.value ) {
+      this.light.step( dt );
+      this.hydrogenAtomProperty.value.step( dt );
+      this.moveAndCullPhotons( dt );
+    }
   }
 
   /**
