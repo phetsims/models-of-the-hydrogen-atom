@@ -24,11 +24,11 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import billiardBallButton_png from '../../../images/billiardBallButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import RandomUtils from '../RandomUtils.js';
 import AlphaParticle from './AlphaParticle.js';
 import Photon from './Photon.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 120 );
@@ -74,7 +74,7 @@ export default class BilliardBallModel extends HydrogenAtom {
     if ( !photon.hasCollidedProperty.value ) {
       if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
         const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
-        const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
+        const deflection = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
         photon.directionProperty.value = photon.directionProperty.value + deflection;
         photon.hasCollidedProperty.value = true;
       }
@@ -93,7 +93,7 @@ export default class BilliardBallModel extends HydrogenAtom {
     // detect collision and adjust particle direction
     if ( alphaParticle.positionProperty.value.distance( this.position ) <= this.radius ) {
       const sign = ( alphaParticle.positionProperty.value.x > this.position.x ) ? 1 : -1;
-      const deflection = sign * RandomUtils.nextDouble( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
+      const deflection = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
       alphaParticle.directionProperty.value = alphaParticle.directionProperty.value + deflection;
     }
 

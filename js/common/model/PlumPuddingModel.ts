@@ -44,6 +44,7 @@ import Photon from './Photon.js';
 import AlphaParticle from './AlphaParticle.js';
 import RutherfordScattering from './RutherfordScattering.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import RandomUtils from '../RandomUtils.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -171,16 +172,16 @@ class PlumPuddingModel extends HydrogenAtom {
    */
   private updateElectronLine(): void {
 
-    const angle = nextAngle();
+    const angle = RandomUtils.nextAngle();
     const x = Math.abs( this.radius * Math.sin( angle ) );
-    const y = nextSign() * this.radius * Math.cos( angle );
+    const y = RandomUtils.nextSign() * this.radius * Math.cos( angle );
     this.electronLineEndpoint1Property.value = new Vector2( -x, -y );
     this.electronLineEndpoint2Property.value = new Vector2( x, y );
 
     // required by moveElectron()
     assert && assert( this.electronLineEndpoint1Property.value.x < this.electronLineEndpoint2Property.value.x );
 
-    this.electronDirectionProperty.value = nextSign();
+    this.electronDirectionProperty.value = RandomUtils.nextSign();
 
     // move electron back to center
     this.electronOffsetProperty.value = new Vector2( 0, 0 );
@@ -255,7 +256,7 @@ class PlumPuddingModel extends HydrogenAtom {
       this.photonEmittedEmitter.emit( new Photon( {
         position: this.electronPositionProperty.value, // at the electron's position
         wavelength: PHOTON_EMISSION_WAVELENGTH,
-        direction: nextAngle(),
+        direction: RandomUtils.nextAngle(),
         wasEmitted: true
       } ) );
     }
@@ -336,7 +337,10 @@ class PlumPuddingModel extends HydrogenAtom {
     }
 
     // Did we cross the origin?
-    if ( ( x === 0 && y === 0 ) || signIsDifferent( x, electronOffset.x ) || signIsDifferent( y, electronOffset.y ) ) {
+    //TODO is ( x === 0 && y === 0 ) needed?
+    if ( ( x === 0 && y === 0 ) ||
+         RandomUtils.signIsDifferent( x, electronOffset.x ) ||
+         RandomUtils.signIsDifferent( y, electronOffset.y ) ) {
       this.numberOfZeroCrossingsProperty.value += 1;
     }
 
@@ -387,27 +391,6 @@ class PlumPuddingModel extends HydrogenAtom {
       }
     }
   }
-}
-
-/**
- * Gets the next random sign, +1 or -1.
- */
-function nextSign(): 1 | -1 {
-  return dotRandom.nextBoolean() ? 1 : -1;
-}
-
-/**
- * Gets the next random angle.
- */
-function nextAngle() {
-  return dotRandom.nextDoubleBetween( 0, 2 * Math.PI );
-}
-
-/**
- * Determines if the sign of two numbers is different.
- */
-function signIsDifferent( n1: number, n2: number ): boolean {
-  return Math.sign( n1 ) !== Math.sign( n2 );
 }
 
 modelsOfTheHydrogenAtom.register( 'PlumPuddingModel', PlumPuddingModel );

@@ -12,32 +12,24 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 const RandomUtils = {
 
   /**
-   * Gets a random value >= min and < max.
-   */
-  nextDouble( min: number, max: number ): number {
-    assert && assert( max > min );
-    return min + ( dotRandom.nextDouble() * ( max - min ) );
-  },
-
-  /**
-   * Gets a random boolean.
-   */
-  nextBoolean(): boolean {
-    return dotRandom.nextBoolean();
-  },
-
-  /**
    * Gets a random sign.
    */
   nextSign(): 1 | -1 {
-    return ( dotRandom.nextBoolean() ? +1 : -1 );
+    return ( dotRandom.nextBoolean() ? 1 : -1 );
   },
 
   /**
    * Gets a random angle >= 0 and < 2 * PI, in radians.
    */
   nextAngle(): number {
-    return dotRandom.nextDouble() * ( 2 * Math.PI );
+    return dotRandom.nextDoubleBetween( 0, 2 * Math.PI );
+  },
+
+  /**
+   * Determines if the sign of two numbers is different.
+   */
+  signIsDifferent( n1: number, n2: number ): boolean {
+    return Math.sign( n1 ) !== Math.sign( n2 );
   }
 };
 
