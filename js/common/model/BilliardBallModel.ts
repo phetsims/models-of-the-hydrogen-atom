@@ -65,8 +65,8 @@ export default class BilliardBallModel extends HydrogenAtom {
   }
 
   /**
-   * Moves a photon. If the photon collides with the atom, the photon bounces back at
-   * a 'steep but random' angle. Otherwise it continues to move in its current direction.
+   * Moves a photon. If the photon collides with the atom, the photon bounces back at a 'steep but random' angle.
+   * Otherwise, it continues to move in its current direction.
    */
   public override movePhoton( photon: Photon, dt: number ): void {
 
