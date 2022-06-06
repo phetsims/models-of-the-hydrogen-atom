@@ -337,10 +337,7 @@ class PlumPuddingModel extends HydrogenAtom {
     }
 
     // Did we cross the origin?
-    //TODO is ( x === 0 && y === 0 ) needed?
-    if ( ( x === 0 && y === 0 ) ||
-         MOTHAUtils.signIsDifferent( x, electronOffset.x ) ||
-         MOTHAUtils.signIsDifferent( y, electronOffset.y ) ) {
+    if ( MOTHAUtils.signIsDifferent( x, electronOffset.x ) || MOTHAUtils.signIsDifferent( y, electronOffset.y ) ) {
       this.numberOfZeroCrossingsProperty.value += 1;
     }
 
