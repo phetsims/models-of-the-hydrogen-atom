@@ -44,7 +44,7 @@ export default class Photon extends Particle {
       hasCollided: false,
 
       // ParticleOptions
-      radius: 15,
+      radius: 25,
       speed: Photon.INITIAL_SPEED
 
       //TODO phetioType: Photon.PhotonIO,

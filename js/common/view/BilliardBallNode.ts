@@ -32,8 +32,9 @@ export default class BilliardBallNode extends HydrogenAtomNode {
     }, providedOptions );
 
     const viewPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    const viewRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.radius );
 
-    const shadedSphereNode = new ShadedSphereNode( 2 * hydrogenAtom.radius, {
+    const shadedSphereNode = new ShadedSphereNode( 2 * viewRadius, {
       mainColor: MOTHAColors.billiardBallColorProperty,
       highlightColor: MOTHAColors.billiardBallHighlightColorProperty,
       center: viewPosition
@@ -41,7 +42,7 @@ export default class BilliardBallNode extends HydrogenAtomNode {
 
     //TODO delete this test of PhotonNode
     const photon = new Photon( { wavelength: 640 } );
-    const photonNode = new PhotonNode( photon );
+    const photonNode = new PhotonNode( photon, modelViewTransform );
     photonNode.centerX = shadedSphereNode.x;
     photonNode.top = shadedSphereNode.bottom + 50;
 

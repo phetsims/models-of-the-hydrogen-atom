@@ -17,6 +17,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Circle, Color, IColor, Node, NodeOptions, Path, RadialGradient } from '../../../../scenery/js/imports.js';
@@ -41,7 +42,7 @@ type PhotonNodeOptions = SelfOptions & PickOptional<NodeOptions, 'tandem'>; //TO
 
 export default class PhotonNode extends Node {
 
-  public constructor( photon: Photon, providedOptions?: PhotonNodeOptions ) {
+  public constructor( photon: Photon, modelViewTransform: ModelViewTransform2, providedOptions?: PhotonNodeOptions ) {
 
     const options = optionize<PhotonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
       //TODO
@@ -49,17 +50,19 @@ export default class PhotonNode extends Node {
 
     const wavelength = photon.wavelength;
 
-    const haloRadius = photon.radius;
+    const photonRadius = modelViewTransform.modelToViewDeltaX( photon.radius );
+
+    const haloRadius = photonRadius;
     const haloNode = new Circle( haloRadius, {
       fill: getHaloColor( wavelength, haloRadius )
     } );
 
-    const orbRadius = 0.5 * photon.radius;
+    const orbRadius = 0.5 * photonRadius;
     const orbNode = new Circle( orbRadius, {
       fill: getOrbColor( wavelength, orbRadius )
     } );
 
-    const sparkleRadius = 0.575 * photon.radius;
+    const sparkleRadius = 0.575 * photonRadius;
     const sparkleNode = new SparkleNode( wavelength, sparkleRadius );
 
     options.children = [ haloNode, orbNode, sparkleNode ];

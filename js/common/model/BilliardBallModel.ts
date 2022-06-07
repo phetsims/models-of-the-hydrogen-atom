@@ -48,7 +48,7 @@ export default class BilliardBallModel extends HydrogenAtom {
     const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // SelfOptions
-      radius: 30,
+      radius: 50,
 
       // PredictiveModelOptions
       hasTransitionWavelengths: false
