@@ -1,4 +1,4 @@
-// Copyright 2015-2022, University of Colorado Boulder
+// Copyright 2022, University of Colorado Boulder
 
 /**
  * PhotonNode is the visual representation of a photon. A round "orb" has an outer "halo" and a whimsical "sparkle"
