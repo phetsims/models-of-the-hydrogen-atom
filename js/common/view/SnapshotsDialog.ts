@@ -10,21 +10,11 @@
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { IPaint, VBox } from '../../../../scenery/js/imports.js';
-import Dialog from '../../../../sun/js/Dialog.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { VBox } from '../../../../scenery/js/imports.js';
+import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SnapshotNode from './SnapshotNode.js';
-
-//TODO get this from Dialog
-type DialogOptions = {
-  fill: IPaint;
-  topMargin: number;
-  bottomMargin: number;
-  leftMargin: number;
-  tandem: Tandem;
-};
 
 type SelfOptions = {};
 
