@@ -15,6 +15,8 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import MOTHAColors from '../MOTHAColors.js';
+import Photon from '../model/Photon.js';
+import PhotonNode from './PhotonNode.js';
 
 type SelfOptions = {};
 
@@ -37,7 +39,13 @@ export default class BilliardBallNode extends HydrogenAtomNode {
       center: viewPosition
     } );
 
-    options.children = [ shadedSphereNode ];
+    //TODO delete this test of PhotonNode
+    const photon = new Photon( { wavelength: 640 } );
+    const photonNode = new PhotonNode( photon );
+    photonNode.centerX = shadedSphereNode.x;
+    photonNode.top = shadedSphereNode.bottom + 50;
+
+    options.children = [ shadedSphereNode, photonNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }
