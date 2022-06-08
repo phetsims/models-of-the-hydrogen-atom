@@ -17,8 +17,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-const LINE_WIDTH = 3;
-
 type SelfOptions = {};
 
 export type ZoomedInBoxNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
@@ -40,7 +38,7 @@ export default class ZoomedInBoxNode extends Node {
 
     const outlineNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
       stroke: MOTHAColors.boxStrokeProperty,
-      lineWidth: LINE_WIDTH
+      lineWidth: 3
     } );
 
     const contentsNode = new Node( {
