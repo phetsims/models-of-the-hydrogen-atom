@@ -59,8 +59,6 @@ export default class Photon extends Particle {
     this.hasCollidedProperty = new BooleanProperty( options.hasCollided, {
       //TODO tandem: options.tandem.createTandem( 'hasCollidedProperty' )
     } );
-
-    phet.log && this.positionProperty.lazyLink( position => phet.log( `photon ${this.id} moved: ${position}` ) );
   }
 
   public override dispose(): void {

@@ -32,8 +32,6 @@ export default class Electron extends Particle {
     super( options );
 
     this.id = electronCounter++;
-
-    phet.log && this.positionProperty.lazyLink( position => phet.log( `electron ${this.id} moved: ${position}` ) );
   }
 }
 

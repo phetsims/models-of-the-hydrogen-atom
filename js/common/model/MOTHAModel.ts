@@ -133,7 +133,6 @@ class MOTHAModel {
 
     this.light.photonCreatedEmitter.addListener( photon => {
       this.photons.add( photon );
-      phet.log && phet.log( `photon created: ${photon.toString()}` );
     } );
   }
 
@@ -182,19 +181,16 @@ class MOTHAModel {
       if ( !this.zoomedInBox.containsPhoton( photon ) ) {
         photon.dispose();
         this.photons.remove( photon );
-        phet.log && phet.log( `photon culled: ${photon.toString()}` );
       }
     } );
   }
 
   private photonEmittedListener( photon: Photon ): void {
     this.photons.add( photon );
-    phet.log && phet.log( `photon emitted: ${photon.toString()}` );
   }
 
   private photonAbsorbedListener( photon: Photon ): void {
     this.photons.remove( photon );
-    phet.log && phet.log( `photon absorbed: ${photon.toString()}` );
   }
 }
 
