@@ -25,6 +25,11 @@ import { ModelMode, ModelModeValues } from './ModelMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 
+const STEP_ONCE_NORMAL_DT = 0.1;
+const SLOW_SPEED_SCALE = 0.5;
+const NORMAL_SPEED_SCALE = 1;
+const FAST_SPEED_SCALE = 2;
+
 type SelfOptions = {};
 
 export type MOTHAModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
@@ -60,6 +65,9 @@ class MOTHAModel {
 
   // speed that the simulation is running at
   public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
+
+  // scale factor applied to dt, based on timeSpeedProperty
+  private readonly dtScaleProperty: IReadOnlyProperty<number>;
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
@@ -122,6 +130,12 @@ class MOTHAModel {
       tandem: options.tandem.createTandem( 'timeSpeedProperty' )
     } );
 
+    this.dtScaleProperty = new DerivedProperty( [ this.timeSpeedProperty ],
+      timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? NORMAL_SPEED_SCALE :
+                   ( timeSpeed === TimeSpeed.FAST ) ? FAST_SPEED_SCALE :
+                   SLOW_SPEED_SCALE
+    );
+
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
       if ( oldHydrogenAtom !== null ) {
         oldHydrogenAtom.reset();
@@ -154,15 +168,32 @@ class MOTHAModel {
   }
 
   /**
-   * Steps the model.
+   * Steps the model if it's playing.
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {
     if ( this.isPlayingProperty.value ) {
-      this.light.step( dt );
-      this.hydrogenAtomProperty.value.step( dt );
-      this.moveAndCullPhotons( dt );
+      this.stepPrivate( dt );
     }
+  }
+
+  /**
+   * Steps the model by one time step. Used by the Step button in the time controls.
+   */
+  public stepOnce(): void {
+    assert && assert( !this.isPlayingProperty.value );
+    this.stepPrivate( STEP_ONCE_NORMAL_DT );
+  }
+
+  /**
+   * Steps the model, scaled by the setting of the time controls.
+   * @param dt - the time step, in seconds
+   */
+  private stepPrivate( dt: number ): void {
+    const dtScaled = dt * this.dtScaleProperty.value;
+    this.light.step( dtScaled );
+    this.hydrogenAtomProperty.value.step( dtScaled );
+    this.moveAndCullPhotons( dtScaled );
   }
 
   /**

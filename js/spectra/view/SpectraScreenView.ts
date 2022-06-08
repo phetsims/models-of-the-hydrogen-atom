@@ -117,11 +117,12 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Time controls
-    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty, {
-      left: monochromaticControls.left,
-      top: monochromaticControls.bottom + 8,
-      tandem: options.tandem.createTandem( 'timeControlNode' )
-    } );
+    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty,
+      model.stepOnce.bind( model ), {
+        left: monochromaticControls.left,
+        top: monochromaticControls.bottom + 8,
+        tandem: options.tandem.createTandem( 'timeControlNode' )
+      } );
 
     // The zoomed-in view of the box of hydrogen
     const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, {

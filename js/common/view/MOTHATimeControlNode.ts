@@ -24,7 +24,7 @@ type MOTHATimeControlNodeOptions = SelfOptions & NodeTranslationOptions & PickRe
 export default class MOTHATimeControlNode extends TimeControlNode {
 
   public constructor( isPlayingProperty: Property<boolean>, timeSpeedProperty: EnumerationProperty<TimeSpeed>,
-                      providedOptions: MOTHATimeControlNodeOptions ) {
+                      stepOnce: () => void, providedOptions: MOTHATimeControlNodeOptions ) {
 
     const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>()( {
       timeSpeedProperty: timeSpeedProperty,
@@ -33,6 +33,15 @@ export default class MOTHATimeControlNode extends TimeControlNode {
         labelOptions: {
           font: new PhetFont( 14 ),
           fill: MOTHAColors.timeControlRadioButtonFillProperty
+        }
+      },
+      playPauseStepButtonOptions: {
+        playPauseButtonOptions: {
+          //TODO https://github.com/phetsims/scenery-phet/issues/682 workaround, we do not want partial hotkey support for TimeControlNode
+          includeGlobalHotkey: false
+        },
+        stepForwardButtonOptions: {
+          listener: () => stepOnce()
         }
       }
     }, providedOptions );
