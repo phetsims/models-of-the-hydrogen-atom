@@ -28,7 +28,7 @@ export default class ZoomedInBoxNode extends Node {
   // Subclasses should add things that are "inside" the box to this Node.
   protected readonly contentsNode: Node;
 
-  public constructor( zoomBox: ZoomedInBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomedInBoxNodeOptions ) {
+  protected constructor( zoomBox: ZoomedInBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomedInBoxNodeOptions ) {
 
     const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO
