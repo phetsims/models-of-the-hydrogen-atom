@@ -30,8 +30,8 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 
 // constants
-const MIN_DEFLECTION_ANGLE = Utils.toRadians( 0 );
-const MAX_DEFLECTION_ANGLE = Utils.toRadians( 50 );
+const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
+const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 
 type SelfOptions = {
   radius?: number;
@@ -74,7 +74,7 @@ export default class BilliardBallModel extends HydrogenAtom {
       if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
         const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
         const deflectionAngle = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-        photon.directionProperty.value = photon.directionProperty.value + Math.PI + deflectionAngle;
+        photon.directionProperty.value += ( Math.PI + deflectionAngle );
         photon.hasCollidedProperty.value = true;
       }
     }
