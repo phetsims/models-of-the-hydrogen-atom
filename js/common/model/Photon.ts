@@ -16,8 +16,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Particle, { ParticleOptions } from './Particle.js';
 
-let photonCounter = 0; //TODO delete this
-
 type SelfOptions = {
   wavelength: number; // the photon's immutable wavelength
   wasEmitted?: boolean; // was this photon emitted by the atom?
@@ -28,7 +26,6 @@ type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius' | 'speed
 
 export default class Photon extends Particle {
 
-  public readonly id: number;
   public readonly wavelength: number;
   public readonly wasEmitted: boolean;
   public hasCollidedProperty: IProperty<boolean>;
@@ -53,7 +50,6 @@ export default class Photon extends Particle {
 
     super( options );
 
-    this.id = photonCounter++;
     this.wavelength = options.wavelength;
     this.wasEmitted = options.wasEmitted;
     this.hasCollidedProperty = new BooleanProperty( options.hasCollided, {

@@ -11,15 +11,11 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
 
-let electronCounter = 0; //TODO delete this
-
 type SelfOptions = {};
 
 type ElectronOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
 
 export default class Electron extends Particle {
-
-  private readonly id: number;
 
   public constructor( providedOptions?: ElectronOptions ) {
 
@@ -31,8 +27,6 @@ export default class Electron extends Particle {
     }, providedOptions );
 
     super( options );
-
-    this.id = electronCounter++;
   }
 }
 
