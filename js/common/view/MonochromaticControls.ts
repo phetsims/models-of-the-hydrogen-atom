@@ -62,26 +62,27 @@ export default class MonochromaticControls extends VBox {
     } );
     //TODO wavelengthSlider.absorptionWavelengthsVisible = hydrogenAtomModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
 
+    //TODO factor out ShowAbsorptionsWavelengthsCheckbox.ts
     // 'Show absorption wavelengths' checkbox
-    const showAbsorptionsWavelengthCheckboxTandem = options.tandem.createTandem( 'showAbsorptionsWavelengthCheckbox' );
+    const showAbsorptionWavelengthsCheckboxTandem = options.tandem.createTandem( 'showAbsorptionWavelengthsCheckbox' );
     const labelNode = new Text( modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.showAbsorptionWavelengthTextFillProperty,
       maxWidth: 0.85 * wavelengthSlider.width,
-      tandem: showAbsorptionsWavelengthCheckboxTandem.createTandem( 'labelNode' )
+      tandem: showAbsorptionWavelengthsCheckboxTandem.createTandem( 'labelNode' )
     } );
-    const showAbsorptionsWavelengthCheckbox = new Checkbox( labelNode, absorptionWavelengthsVisibleProperty, {
+    const showAbsorptionWavelengthsCheckbox = new Checkbox( labelNode, absorptionWavelengthsVisibleProperty, {
       visibleProperty: new DerivedProperty( [ modelModeProperty, hydrogenAtomModelProperty ],
         ( modelMode, hydrogenAtomModel ) => ( modelMode === 'experiment' || hydrogenAtomModel.hasTransitionWavelengths ), {
-          tandem: showAbsorptionsWavelengthCheckboxTandem.createTandem( 'visibleProperty' ),
+          tandem: showAbsorptionWavelengthsCheckboxTandem.createTandem( 'visibleProperty' ),
           phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
         } ),
       checkboxColor: MOTHAColors.showAbsorptionWavelengthCheckboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty,
-      tandem: showAbsorptionsWavelengthCheckboxTandem
+      tandem: showAbsorptionWavelengthsCheckboxTandem
     } );
 
-    options.children = [ wavelengthSlider, showAbsorptionsWavelengthCheckbox ];
+    options.children = [ wavelengthSlider, showAbsorptionWavelengthsCheckbox ];
 
     super( options );
   }
