@@ -9,15 +9,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
+import { ModelMode } from '../model/ModelMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 
@@ -28,9 +32,16 @@ type PredictiveModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRe
 export default class PredictionPanel extends Panel {
 
   public constructor( predictiveModelProperty: IProperty<HydrogenAtom>, predictiveModels: HydrogenAtom[],
+                      modelModeProperty: IReadOnlyProperty<ModelMode>,
                       providedOptions: PredictiveModelPanelOptions ) {
 
     const options = optionize<PredictiveModelPanelOptions, SelfOptions, PanelOptions>()( {
+
+      // Visible when model mode is 'prediction'
+      visibleProperty: new DerivedProperty( [ modelModeProperty ], modelMode => ( modelMode === 'prediction' ), {
+        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+      } ),
       fill: MOTHAColors.modelsPanelFillProperty,
       stroke: MOTHAColors.modelsPanelStrokeProperty,
       xMargin: 10,

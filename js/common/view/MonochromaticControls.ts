@@ -18,7 +18,10 @@ import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { ModelMode } from '../model/ModelMode.js';
-import Multilink from '../../../../axon/js/Multilink.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import { LightMode } from '../model/LightMode.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = {};
 
@@ -27,10 +30,17 @@ type MonochromaticControlsOptions = SelfOptions & NodeTranslationOptions & PickR
 export default class MonochromaticControls extends VBox {
 
   public constructor( modelModeProperty: IProperty<ModelMode>, hydrogenAtomModelProperty: IProperty<HydrogenAtom>,
-                      wavelengthProperty: IProperty<number>, absorptionWavelengthsVisibleProperty: IProperty<boolean>,
+                      wavelengthProperty: IProperty<number>, lightModeProperty: IReadOnlyProperty<LightMode>,
+                      absorptionWavelengthsVisibleProperty: IProperty<boolean>,
                       providedOptions: MonochromaticControlsOptions ) {
 
     const options = optionize<MonochromaticControlsOptions, SelfOptions, VBoxOptions>()( {
+
+      // Visible when light mode is 'monochromatic'
+      visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
+        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+      } ),
       align: 'center',
       spacing: 10,
       excludeInvisibleChildrenFromBounds: false
@@ -50,38 +60,30 @@ export default class MonochromaticControls extends VBox {
       valueFont: new PhetFont( 16 ),
       tandem: options.tandem.createTandem( 'wavelengthSlider' )
     } );
+    //TODO wavelengthSlider.absorptionWavelengthsVisible = hydrogenAtomModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
 
     // 'Show absorption wavelengths' checkbox
-    const showAbsorptionsWavelengthText = new Text( modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
+    const showAbsorptionsWavelengthCheckboxTandem = options.tandem.createTandem( 'showAbsorptionsWavelengthCheckbox' );
+    const labelNode = new Text( modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.showAbsorptionWavelengthTextFillProperty,
       maxWidth: 0.85 * wavelengthSlider.width,
-      tandem: options.tandem.createTandem( 'showAbsorptionsWavelengthText' )
+      tandem: showAbsorptionsWavelengthCheckboxTandem.createTandem( 'labelNode' )
     } );
-    const showAbsorptionsWavelengthCheckbox = new Checkbox( showAbsorptionsWavelengthText, absorptionWavelengthsVisibleProperty, {
+    const showAbsorptionsWavelengthCheckbox = new Checkbox( labelNode, absorptionWavelengthsVisibleProperty, {
+      visibleProperty: new DerivedProperty( [ modelModeProperty, hydrogenAtomModelProperty ],
+        ( modelMode, hydrogenAtomModel ) => ( modelMode === 'experiment' || hydrogenAtomModel.hasTransitionWavelengths ), {
+          tandem: showAbsorptionsWavelengthCheckboxTandem.createTandem( 'visibleProperty' ),
+          phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+        } ),
       checkboxColor: MOTHAColors.showAbsorptionWavelengthCheckboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty,
-      tandem: options.tandem.createTandem( 'showAbsorptionsWavelengthCheckbox' )
+      tandem: showAbsorptionsWavelengthCheckboxTandem
     } );
 
     options.children = [ wavelengthSlider, showAbsorptionsWavelengthCheckbox ];
 
     super( options );
-
-    // show the checkbox only if it's relevant
-    Multilink.multilink(
-      [ modelModeProperty, hydrogenAtomModelProperty ],
-      ( modelMode, hydrogenAtomModel ) => {
-        showAbsorptionsWavelengthCheckbox.visible = ( modelMode === 'experiment' || hydrogenAtomModel.hasTransitionWavelengths );
-      } );
-
-    // show absorption wavelengths for relevant models
-    Multilink.multilink(
-      [ hydrogenAtomModelProperty, absorptionWavelengthsVisibleProperty ],
-      ( hydrogenAtomModel, absorptionWavelengthsVisible ) => {
-        //TODO
-        // wavelengthSlider.absorptionWavelengthsVisible = hydrogenAtomModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
-      } );
   }
 
   public override dispose(): void {

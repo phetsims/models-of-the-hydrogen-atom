@@ -42,11 +42,12 @@ export default class EnergyLevelsScreenView extends ScreenView {
     } );
 
     // panel that contains radio buttons for selecting a predictive model
-    const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, {
-      left: electronEnergyLevelAccordionBox.right + 20,
-      top: electronEnergyLevelAccordionBox.top,
-      tandem: options.tandem.createTandem( 'predictionPanel' )
-    } );
+    const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels,
+      model.modelModeProperty, {
+        left: electronEnergyLevelAccordionBox.right + 20,
+        top: electronEnergyLevelAccordionBox.top,
+        tandem: options.tandem.createTandem( 'predictionPanel' )
+      } );
 
     // Reset All button
     const resetAllButton = new ResetAllButton( {

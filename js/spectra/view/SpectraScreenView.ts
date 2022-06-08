@@ -70,6 +70,7 @@ class SpectraScreenView extends ScreenView {
       model.modelModeProperty,
       model.predictiveModelProperty,
       model.light.monochromaticWavelengthProperty,
+      model.light.lightModeProperty,
       viewProperties.absorptionWavelengthsVisibleProperty, {
         left: lightModeRadioButtonGroup.left,
         top: lightModeRadioButtonGroup.bottom + 15,
@@ -142,7 +143,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // panel that contains radio buttons for selecting a predictive model
-    const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, {
+    const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, model.modelModeProperty, {
       tandem: options.tandem.createTandem( 'predictionPanel' )
     } );
 
@@ -169,7 +170,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // View Snapshots button, above upper-right corner of spectrometer
-    const viewSnapshotsButton = new ViewSnapshotsButton( {
+    const viewSnapshotsButton = new ViewSnapshotsButton( viewProperties.numberOfSnapshotsProperty, {
       listener: () => snapshotsDialog.show(),
       right: spectrometerAccordionBox.right,
       bottom: spectrometerAccordionBox.top - 10,
@@ -217,20 +218,6 @@ class SpectraScreenView extends ScreenView {
       spectrometerAccordionBox,
       viewSnapshotsButton
     ];
-
-    model.modelModeProperty.link( modelMode => {
-      predictionPanel.visible = ( modelMode === 'prediction' );
-    } );
-
-    // Visibility of monochromatic light controls
-    model.light.lightModeProperty.link( lightMode => {
-      monochromaticControls.visible = ( lightMode === 'monochromatic' );
-    } );
-
-    // Show 'View snapshots' button when there are snapshots available
-    viewProperties.numberOfSnapshotsProperty.link( numberOfSnapshots => {
-      viewSnapshotsButton.visible = ( numberOfSnapshots > 0 );
-    } );
   }
 
   public override step( dt: number ): void {

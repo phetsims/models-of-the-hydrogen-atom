@@ -36,7 +36,7 @@ export default class MOTHAViewProperties {
 
     const options = providedOptions;
 
-    this.legendExpandedProperty = new BooleanProperty( false, {
+    this.legendExpandedProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'legendExpandedProperty' )
     } );
 
