@@ -9,7 +9,8 @@
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, HStrut, Node, NodeTranslationOptions, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { HBox, HStrut, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -28,21 +29,24 @@ const ICON_SCALE = 0.5;
 
 type SelfOptions = {};
 
-type LegendNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<VBoxOptions, 'visibleProperty' | 'tandem'>;
+type LegendNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'visibleProperty' | 'tandem'>;
 
-export default class LegendNode extends VBox {
+export default class LegendNode extends AccordionBox {
 
   public constructor( providedOptions: LegendNodeOptions ) {
 
-    const options = optionize<LegendNodeOptions, SelfOptions, VBoxOptions>()( {
+    const options = optionize<LegendNodeOptions, SelfOptions, AccordionBoxOptions>()( {
 
-      // VBoxOptions
-      spacing: 8,
-      align: 'left'
+      // AccordionBoxOptions
+      fill: null,
+      stroke: null,
+      titleAlignX: 'left',
+      titleXSpacing: 10,
+      contentXMargin: 0,
+      buttonXMargin: 0
     }, providedOptions );
 
-    // title
-    const titleNode = new Text( modelsOfTheHydrogenAtomStrings.legend, {
+    options.titleNode = new Text( modelsOfTheHydrogenAtomStrings.legend, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.legendTitleFillProperty,
       maxWidth: 100 // i18n, determined empirically
@@ -81,16 +85,13 @@ export default class LegendNode extends VBox {
 
     } );
 
-    options.children = [
-      titleNode,
-      new VBox( {
-        spacing: 5,
-        align: 'left',
-        children: itemNodes
-      } )
-    ];
+    const content = new VBox( {
+      spacing: 5,
+      align: 'left',
+      children: itemNodes
+    } );
 
-    super( options );
+    super( content, options );
   }
 }
 
