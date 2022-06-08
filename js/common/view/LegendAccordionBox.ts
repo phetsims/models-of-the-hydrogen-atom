@@ -9,7 +9,7 @@
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, HStrut, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -26,6 +26,12 @@ const LABEL_OPTIONS = {
   maxWidth: 120 // i18n, determined empirically
 };
 const ICON_SCALE = 0.5;
+
+// Describes an item in the legend
+type LegendItem = {
+  icon: Node;
+  label: string;
+};
 
 type SelfOptions = {};
 
@@ -53,37 +59,22 @@ export default class LegendAccordionBox extends AccordionBox {
       maxWidth: 100 // i18n, determined empirically
     } );
 
-    // items that appear in the legend, { icon: {Node}, label: {string} }
-    type LegendItem = {
-      icon: Node;
-      label: string;
-    };
     const items: LegendItem[] = [
       { icon: ElectronNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.electron },
       { icon: ProtonNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.proton },
       { icon: NeutronNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.neutron },
-      { icon: PhotonNode.createIcon( 480, ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.photon },
-      { icon: PhotonNode.createIcon( 200, ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.uvPhoton }
+      { icon: PhotonNode.createIcon( 480, ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.photon }
     ];
 
-    // widest icon, used to horizontally center all icons and left-align all labels
-    const maxIconWidth = _.maxBy( items, ( item: LegendItem ) => item.icon.width )!.icon.width;
-
+    const iconGroup = new AlignGroup(); // to make all icons have the same effective dimensions
     const itemNodes: Node[] = [];
     items.forEach( item => {
-
-      // pad the icon with a strut, so that all icons occupy the same amount of horizontal space
-      const strut = new HStrut( maxIconWidth );
-      const paddedIcon = new Node( { children: [ strut, item.icon ] } );
-      strut.center = item.icon.center;
-
       itemNodes.push( new HBox( {
-        spacing: 10,
+        spacing: 5,
         children: [
-          paddedIcon,
+          new AlignBox( item.icon, { group: iconGroup } ),
           new Text( item.label, LABEL_OPTIONS ) ]
       } ) );
-
     } );
 
     const content = new VBox( {

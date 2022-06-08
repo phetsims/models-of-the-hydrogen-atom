@@ -89,9 +89,6 @@
   "spectrometer": {
     "value": "Spectrometer"
   },
-  "uvPhoton": {
-    "value": "UV photon"
-  },
   "viewSnapshots": {
     "value": "View snapshots"
   }
