@@ -26,10 +26,12 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 import Photon from './Photon.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
+import Utils from '../../../../dot/js/Utils.js';
 
 // constants
-// const MIN_DEFLECTION_ANGLE = Utils.toRadians( 120 );
-// const MAX_DEFLECTION_ANGLE = Utils.toRadians( 170 );
+const MIN_DEFLECTION_ANGLE = Utils.toRadians( 120 );
+const MAX_DEFLECTION_ANGLE = Utils.toRadians( 170 );
 
 type SelfOptions = {
   radius?: number;
@@ -67,17 +69,15 @@ export default class BilliardBallModel extends HydrogenAtom {
    */
   public override movePhoton( photon: Photon, dt: number ): void {
 
-    //TODO uncomment this after I get basic photon movement working
-
     // detect collision and adjust particle direction
-    // if ( !photon.hasCollidedProperty.value ) {
-    //   if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
-    //     const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
-    //     const deflection = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-    //     photon.directionProperty.value = photon.directionProperty.value + deflection;
-    //     photon.hasCollidedProperty.value = true;
-    //   }
-    // }
+    if ( !photon.hasCollidedProperty.value ) {
+      if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
+        const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
+        const deflection = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
+        photon.directionProperty.value = photon.directionProperty.value + deflection;
+        photon.hasCollidedProperty.value = true;
+      }
+    }
 
     // move particle
     super.movePhoton( photon, dt );
