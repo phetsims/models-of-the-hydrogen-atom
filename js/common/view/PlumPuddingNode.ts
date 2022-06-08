@@ -35,19 +35,13 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
     const atomHeight = 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.radius );
     const imageScale = atomHeight / imageHeight;
     plumPuddingImage.scale( imageScale );
+    plumPuddingImage.center = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
 
-    const electronNode = new ElectronNode();
+    const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
 
     options.children = [ plumPuddingImage, electronNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
-
-    plumPuddingImage.center = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
-
-    //TODO should this be handled by ElectronNode?
-    hydrogenAtom.electron.positionProperty.link( electronPosition => {
-      electronNode.translation = modelViewTransform.modelToViewPosition( electronPosition );
-    } );
   }
 }
 

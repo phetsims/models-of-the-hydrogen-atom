@@ -52,9 +52,9 @@ export default class LegendNode extends VBox {
       label: string;
     };
     const items: LegendItem[] = [
-      { icon: new ElectronNode(), label: modelsOfTheHydrogenAtomStrings.electron },
-      { icon: new ProtonNode(), label: modelsOfTheHydrogenAtomStrings.proton },
-      { icon: new NeutronNode(), label: modelsOfTheHydrogenAtomStrings.neutron }
+      { icon: ElectronNode.createIcon(), label: modelsOfTheHydrogenAtomStrings.electron },
+      { icon: ProtonNode.createIcon(), label: modelsOfTheHydrogenAtomStrings.proton },
+      { icon: NeutronNode.createIcon(), label: modelsOfTheHydrogenAtomStrings.neutron }
     ];
 
     // widest icon, used to horizontally center all icons and left-align all labels

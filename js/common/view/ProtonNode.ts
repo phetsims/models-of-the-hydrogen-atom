@@ -8,12 +8,12 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-
-// constants
-const DIAMETER = 11;
+import Proton from '../model/Proton.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 type SelfOptions = {};
 
@@ -21,7 +21,7 @@ type ProtonNodeOptions = SelfOptions & StrictOmit<ShadedSphereNodeOptions, 'main
 
 export default class ProtonNode extends ShadedSphereNode {
 
-  public constructor( providedOptions?: ProtonNodeOptions ) {
+  public constructor( proton: Proton, modelViewTransform: ModelViewTransform2, providedOptions?: ProtonNodeOptions ) {
 
     const options = optionize<ProtonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
@@ -30,7 +30,20 @@ export default class ProtonNode extends ShadedSphereNode {
       highlightColor: 'rgb( 255, 130, 130 )' // lighter red
     }, providedOptions );
 
-    super( DIAMETER, options );
+    super( 2 * proton.radius, options );
+
+    proton.positionProperty.link( position => {
+      this.translation = modelViewTransform.modelToViewPosition( position );
+    } );
+  }
+
+  /**
+   * Creates a proton icon, used in the Legend.
+   */
+  public static createIcon(): Node {
+    const proton = new Proton();
+    const modelViewTransform = ModelViewTransform2.createIdentity();
+    return new ProtonNode( proton, modelViewTransform );
   }
 }
 

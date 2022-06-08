@@ -24,15 +24,12 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import plumPuddingButton_png from '../../../images/plumPuddingButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -61,19 +58,10 @@ class PlumPuddingModel extends HydrogenAtom {
 
   public readonly electron: Electron;
 
-  // offset of the electron relative to the atom's position
-  private readonly electronOffsetProperty: Property<Vector2>;
-
-  // the electron's position
-  private readonly electronPositionProperty: IReadOnlyProperty<Vector2>;
-
-  // Endpoints of the line on which the electron oscillates, relative to atom's center.
+  // Endpoints of the line on which the electron oscillates, relative to atom's position.
   // It would be preferable to use kite.Line, but there is no LineIO type for PhET-iO.
   private readonly electronLineEndpoint1Property: Property<Vector2>;
   private readonly electronLineEndpoint2Property: Property<Vector2>;
-
-  // the electron's direction of motion, relative to the x (horizontal) axis: 1 is positive, -1 is negative
-  private readonly electronDirectionProperty: Property<1 | -1>;
 
   // Is the electron moving?
   private readonly electronIsMovingProperty: Property<boolean>;
@@ -102,18 +90,6 @@ class PlumPuddingModel extends HydrogenAtom {
 
     this.electron = new Electron();
 
-    this.electronOffsetProperty = new Vector2Property( Vector2.ZERO, {
-      tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
-      phetioReadOnly: true
-    } );
-
-    this.electronPositionProperty = new DerivedProperty( [ this.electronOffsetProperty ],
-      electronOffset => this.position.plus( electronOffset ), {
-        tandem: options.tandem.createTandem( 'electronPositionProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
-        phetioReadOnly: true
-      } );
-
     this.electronLineEndpoint1Property = new Vector2Property( Vector2.ZERO, {
       tandem: options.tandem.createTandem( 'electronLineEndpoint1Property' ),
       phetioReadOnly: true
@@ -121,13 +97,6 @@ class PlumPuddingModel extends HydrogenAtom {
 
     this.electronLineEndpoint2Property = new Vector2Property( Vector2.ZERO, {
       tandem: options.tandem.createTandem( 'electronLineEndpoint2Property' ),
-      phetioReadOnly: true
-    } );
-
-    this.electronDirectionProperty = new Property( 1, {
-      validValues: [ 1, -1 ],
-      tandem: options.tandem.createTandem( 'electronDirectionProperty' ),
-      phetioType: Property.PropertyIO( NumberIO ),
       phetioReadOnly: true
     } );
 
@@ -152,11 +121,10 @@ class PlumPuddingModel extends HydrogenAtom {
 
   public override reset(): void {
     super.reset();
+    this.electron.reset();
     this.numberOfPhotonsAbsorbedProperty.reset();
-    this.electronOffsetProperty.reset();
     this.electronLineEndpoint1Property.reset();
     this.electronLineEndpoint2Property.reset();
-    this.electronDirectionProperty.reset();
     this.electronIsMovingProperty.reset();
     this.numberOfZeroCrossingsProperty.reset();
     this.previousAmplitudeProperty.reset();
@@ -173,21 +141,19 @@ class PlumPuddingModel extends HydrogenAtom {
     const y = MOTHAUtils.nextSign() * this.radius * Math.cos( angle );
     this.electronLineEndpoint1Property.value = new Vector2( -x, -y );
     this.electronLineEndpoint2Property.value = new Vector2( x, y );
+    assert && assert( this.electronLineEndpoint1Property.value.x < this.electronLineEndpoint2Property.value.x,
+      'required by moveElectron()' );
 
-    // required by moveElectron()
-    assert && assert( this.electronLineEndpoint1Property.value.x < this.electronLineEndpoint2Property.value.x );
-
-    this.electronDirectionProperty.value = MOTHAUtils.nextSign();
-
-    // move electron back to center
-    this.electronOffsetProperty.value = new Vector2( 0, 0 );
+    // move electron back to center of the atom, set a random direction
+    this.electron.positionProperty.value = this.position;
+    this.electron.directionProperty.value *= MOTHAUtils.nextAngle();
   }
 
   /**
    * Changes the electron's direction.
    */
   private changeElectronDirection(): void {
-    this.electronDirectionProperty.value *= -1;
+    this.electron.directionProperty.value *= -1;
   }
 
   /**
@@ -226,9 +192,12 @@ class PlumPuddingModel extends HydrogenAtom {
   private absorbPhoton( photon: Photon ): boolean {
     let absorbed = false;
     if ( this.canAbsorb( photon ) ) {
+
+      const electronPosition = this.electron.positionProperty.value;
       const photonPosition = photon.positionProperty.value;
       const collisionCloseness = photon.radius + this.electron.radius;
-      if ( this.pointsCollide( this.electronPositionProperty.value, photonPosition, collisionCloseness ) ) {
+
+      if ( this.pointsCollide( electronPosition, photonPosition, collisionCloseness ) ) {
         if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
           this.numberOfPhotonsAbsorbedProperty.value += 1;
           assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );
@@ -250,7 +219,7 @@ class PlumPuddingModel extends HydrogenAtom {
 
       // Create and emit a photon
       this.photonEmittedEmitter.emit( new Photon( {
-        position: this.electronPositionProperty.value, // at the electron's position
+        position: this.electron.positionProperty.value, // at the electron's position
         wavelength: PHOTON_EMISSION_WAVELENGTH,
         direction: MOTHAUtils.nextAngle(),
         wasEmitted: true
@@ -283,7 +252,7 @@ class PlumPuddingModel extends HydrogenAtom {
     assert && assert( Math.abs( endpoint1.y ) === Math.abs( endpoint2.y ) );
 
     // Remember the old offset
-    const electronOffset = this.electronOffsetProperty.value;
+    const electronOffset = this.electron.positionProperty.value.minus( this.position );
 
     // Determine dx and dy
     const distanceDelta = dt * ( amplitude * ( 2 * this.radius ) / ELECTRON_LINE_SEGMENTS );
@@ -291,39 +260,40 @@ class PlumPuddingModel extends HydrogenAtom {
     let dy = Math.abs( endpoint1.y ) * ( distanceDelta / this.radius );
 
     // Adjust signs for electron's horizontal direction
-    const sign = this.electronDirectionProperty.value;
-    dx *= sign;
-    dy *= sign;
+    const xSign = Math.sign( MOTHAUtils.polarToCartesian( 1, this.electron.directionProperty.value ).x );
+    assert && assert( xSign !== 0 );
+    dx *= xSign;
+    dy *= xSign; //TODO why are we adjusting dy using xSign?
     if ( endpoint1.y > endpoint2.y ) {
       dy *= -1;
     }
 
     // Electron's new offset
-    let x = electronOffset.x + dx;
-    let y = electronOffset.y + dy;
+    let newXOffset = electronOffset.x + dx;
+    let newYOffset = electronOffset.y + dy;
 
     // Is the new offset past the ends of the oscillation line?
-    if ( Math.abs( x ) > Math.abs( endpoint1.x ) || Math.abs( y ) > Math.abs( endpoint1.y ) ) {
-      if ( this.electronDirectionProperty.value === 1 ) {
-        x = endpoint2.x;
-        y = endpoint2.y;
+    if ( Math.abs( newXOffset ) > Math.abs( endpoint1.x ) || Math.abs( newYOffset ) > Math.abs( endpoint1.y ) ) {
+      if ( xSign === 1 ) {
+        newXOffset = endpoint2.x;
+        newYOffset = endpoint2.y;
       }
       else {
-        x = endpoint1.x;
-        y = endpoint1.y;
+        newXOffset = endpoint1.x;
+        newYOffset = endpoint1.y;
       }
       this.changeElectronDirection();
     }
 
     // Did we cross the origin?
-    //TODO why is ( x === 0 && y === 0 ) considered a zero crossing?
-    if ( ( x === 0 && y === 0 ) ||
-         MOTHAUtils.signIsDifferent( x, electronOffset.x ) ||
-         MOTHAUtils.signIsDifferent( y, electronOffset.y ) ) {
+    //TODO why is ( newXOffset === 0 && newYOffset === 0 ) considered a zero crossing?
+    if ( ( newXOffset === 0 && newYOffset === 0 ) ||
+         MOTHAUtils.signIsDifferent( newXOffset, electronOffset.x ) ||
+         MOTHAUtils.signIsDifferent( newYOffset, electronOffset.y ) ) {
       this.numberOfZeroCrossingsProperty.value += 1;
     }
 
-    this.electronOffsetProperty.value = new Vector2( x, y );
+    this.electron.positionProperty.value = new Vector2( newXOffset, newYOffset ).plus( this.position );
   }
 
   /**
@@ -344,8 +314,9 @@ class PlumPuddingModel extends HydrogenAtom {
       if ( this.getNumberOfElectronOscillations() !== 0 ) {
         if ( dotRandom.nextDouble() < PHOTON_EMISSION_PROBABILITY ) {
           this.emitPhoton();
+
+          // If we have not more photons, remember amplitude, so we can complete oscillation.
           if ( this.numberOfPhotonsAbsorbedProperty.value === 0 ) {
-            // If we have not more photons, remember amplitude, so we can complete oscillation.
             this.previousAmplitudeProperty.value = amplitude;
           }
         }
@@ -366,7 +337,7 @@ class PlumPuddingModel extends HydrogenAtom {
         this.numberOfZeroCrossingsProperty.value = 0;
         this.previousAmplitudeProperty.value = 0;
         this.updateElectronLine();
-        this.electronOffsetProperty.value = new Vector2( 0, 0 );
+        this.electron.positionProperty.value = this.position;
       }
     }
   }

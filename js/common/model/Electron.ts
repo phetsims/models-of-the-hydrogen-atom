@@ -7,6 +7,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
 
@@ -14,7 +15,7 @@ let electronCounter = 0; //TODO delete this
 
 type SelfOptions = {};
 
-type ElectronOptions = SelfOptions & ParticleOptions;
+type ElectronOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
 
 export default class Electron extends Particle {
 

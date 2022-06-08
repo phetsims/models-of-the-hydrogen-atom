@@ -9,8 +9,11 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import Electron from '../model/Electron.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 // constants
 const DIAMETER = 9;
@@ -21,7 +24,7 @@ type ElectronNodeOptions = SelfOptions & StrictOmit<ShadedSphereNodeOptions, 'ma
 
 export default class ElectronNode extends ShadedSphereNode {
 
-  public constructor( providedOptions?: ElectronNodeOptions ) {
+  public constructor( electron: Electron, modelViewTransform: ModelViewTransform2, providedOptions?: ElectronNodeOptions ) {
 
     const options = optionize<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
@@ -31,6 +34,19 @@ export default class ElectronNode extends ShadedSphereNode {
     }, providedOptions );
 
     super( DIAMETER, options );
+
+    electron.positionProperty.link( position => {
+      this.translation = modelViewTransform.modelToViewPosition( position );
+    } );
+  }
+
+  /**
+   * Creates an electron icon, used in the Legend.
+   */
+  public static createIcon(): Node {
+    const electron = new Electron();
+    const modelViewTransform = ModelViewTransform2.createIdentity();
+    return new ElectronNode( electron, modelViewTransform );
   }
 }
 

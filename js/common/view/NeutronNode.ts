@@ -8,11 +8,11 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-
-// constants
-const DIAMETER = 11;
+import Neutron from '../model/Neutron.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 type SelfOptions = {};
 
@@ -20,7 +20,7 @@ type NeutronNodeOptions = SelfOptions & StrictOmit<ShadedSphereNodeOptions, 'mai
 
 export default class NeutronNode extends ShadedSphereNode {
 
-  public constructor( providedOptions?: NeutronNodeOptions ) {
+  public constructor( neutron: Neutron, modelViewTransform: ModelViewTransform2, providedOptions?: NeutronNodeOptions ) {
 
     const options = optionize<NeutronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
@@ -29,7 +29,16 @@ export default class NeutronNode extends ShadedSphereNode {
       highlightColor: 'rgb( 175, 175, 175 )'
     }, providedOptions );
 
-    super( DIAMETER, options );
+    super( 2 * neutron.radius, options );
+  }
+
+  /**
+   * Creates a neutron icon, used in the Legend.
+   */
+  public static createIcon(): Node {
+    const neutron = new Neutron();
+    const modelViewTransform = ModelViewTransform2.createIdentity();
+    return new NeutronNode( neutron, modelViewTransform );
   }
 }
 

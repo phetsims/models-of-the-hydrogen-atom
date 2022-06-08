@@ -7,6 +7,7 @@
  */
 
 import dotRandom from '../../../dot/js/dotRandom.js';
+import Vector2 from '../../../dot/js/Vector2.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const MOTHAUtils = {
@@ -31,6 +32,16 @@ const MOTHAUtils = {
    */
   signIsDifferent( n1: number, n2: number ): boolean {
     return Math.sign( n1 ) !== Math.sign( n2 );
+  },
+
+  /**
+   * Converts from polar to Cartesian coordinates.
+   */
+  polarToCartesian( radius: number, angle: number ): Vector2 {
+    assert && assert( isFinite( radius ) && radius >= 0 );
+    const x = radius * Math.cos( angle );
+    const y = radius * Math.sin( angle );
+    return new Vector2( x, y );
   }
 };
 
