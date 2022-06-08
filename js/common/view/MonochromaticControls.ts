@@ -8,11 +8,8 @@
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import WavelengthSlider from '../../../../scenery-phet/js/WavelengthSlider.js';
-import { NodeTranslationOptions, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
+import { NodeTranslationOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import MOTHAColors from '../MOTHAColors.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -22,6 +19,7 @@ import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import { LightMode } from '../model/LightMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import ShowAbsorptionWavelengthsCheckbox from './ShowAbsorptionWavelengthsCheckbox.js';
 
 type SelfOptions = {};
 
@@ -62,25 +60,11 @@ export default class MonochromaticControls extends VBox {
     } );
     //TODO wavelengthSlider.absorptionWavelengthsVisible = hydrogenAtomModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
 
-    //TODO factor out ShowAbsorptionsWavelengthsCheckbox.ts
     // 'Show absorption wavelengths' checkbox
-    const showAbsorptionWavelengthsCheckboxTandem = options.tandem.createTandem( 'showAbsorptionWavelengthsCheckbox' );
-    const labelNode = new Text( modelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
-      font: new PhetFont( 14 ),
-      fill: MOTHAColors.showAbsorptionWavelengthTextFillProperty,
-      maxWidth: 0.85 * wavelengthSlider.width,
-      tandem: showAbsorptionWavelengthsCheckboxTandem.createTandem( 'labelNode' )
-    } );
-    const showAbsorptionWavelengthsCheckbox = new Checkbox( labelNode, absorptionWavelengthsVisibleProperty, {
-      visibleProperty: new DerivedProperty( [ modelModeProperty, hydrogenAtomModelProperty ],
-        ( modelMode, hydrogenAtomModel ) => ( modelMode === 'experiment' || hydrogenAtomModel.hasTransitionWavelengths ), {
-          tandem: showAbsorptionWavelengthsCheckboxTandem.createTandem( 'visibleProperty' ),
-          phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
-        } ),
-      checkboxColor: MOTHAColors.showAbsorptionWavelengthCheckboxStrokeProperty,
-      checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty,
-      tandem: showAbsorptionWavelengthsCheckboxTandem
-    } );
+    const showAbsorptionWavelengthsCheckbox = new ShowAbsorptionWavelengthsCheckbox(
+      absorptionWavelengthsVisibleProperty, hydrogenAtomModelProperty, {
+        tandem: options.tandem.createTandem( 'showAbsorptionWavelengthsCheckbox' )
+      } );
 
     options.children = [ wavelengthSlider, showAbsorptionWavelengthsCheckbox ];
 
