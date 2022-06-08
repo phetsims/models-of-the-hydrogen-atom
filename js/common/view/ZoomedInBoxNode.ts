@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -16,11 +17,16 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 
+const LINE_WIDTH = 3;
+
 type SelfOptions = {};
 
 export type ZoomedInBoxNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class ZoomedInBoxNode extends Node {
+
+  // Subclasses should add things that are "inside" the box to this Node.
+  protected readonly contentsNode: Node;
 
   public constructor( zoomBox: ZoomedInBox, modelViewTransform: ModelViewTransform2, providedOptions: ZoomedInBoxNodeOptions ) {
 
@@ -28,15 +34,26 @@ export default class ZoomedInBoxNode extends Node {
       //TODO
     }, providedOptions );
 
-    const outlineNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
-      fill: MOTHAColors.boxFillProperty,
-      stroke: MOTHAColors.boxStrokeProperty,
-      lineWidth: 1
+    const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
+      fill: MOTHAColors.boxFillProperty
     } );
 
-    options.children = [ outlineNode ];
+    const outlineNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
+      stroke: MOTHAColors.boxStrokeProperty,
+      lineWidth: LINE_WIDTH
+    } );
+
+    const contentsNode = new Node( {
+
+      // Clip contents to the bounds of the box.
+      clipArea: modelViewTransform.modelToViewShape( Shape.rectangle( zoomBox.minX, zoomBox.minY, zoomBox.width, zoomBox.height ) )
+    } );
+
+    options.children = [ backgroundNode, contentsNode, outlineNode ];
 
     super( options );
+
+    this.contentsNode = contentsNode;
   }
 }
 

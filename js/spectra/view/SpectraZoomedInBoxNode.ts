@@ -46,12 +46,12 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
     const billiardBallNode = new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
       tandem: options.tandem.createTandem( 'billiardBallNode' )
     } );
-    this.addChild( billiardBallNode );
+    this.contentsNode.addChild( billiardBallNode );
 
     const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform, {
       tandem: options.tandem.createTandem( 'plumPuddingNode' )
     } );
-    this.addChild( plumPuddingNode );
+    this.contentsNode.addChild( plumPuddingNode );
 
     const photonNodes: PhotonNode[] = [];
 
@@ -59,7 +59,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
     model.photons.addItemAddedListener( photon => {
       const photonNode = new PhotonNode( photon, modelViewTransform );
       photonNodes.push( photonNode );
-      this.addChild( photonNode );
+      this.contentsNode.addChild( photonNode );
     } );
 
     // Remove the PhotonNode for a Photon.
@@ -67,7 +67,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       const photonNode = _.find( photonNodes, photonNode => ( photonNode.photon === photon ) )!;
       assert && assert( photonNode );
       photonNodes.splice( photonNodes.indexOf( photonNode ), 1 );
-      this.removeChild( photonNode );
+      this.contentsNode.removeChild( photonNode );
       photonNode.dispose();
     } );
   }
