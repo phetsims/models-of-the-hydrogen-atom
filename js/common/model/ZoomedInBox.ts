@@ -2,7 +2,7 @@
 
 /**
  * ZoomedInBox is the part of the box of hydrogen that we're seeing in the zoomed-in view.
- * The origin (0,0) is at the center.
+ * The origin (0,0) is at the center of the box.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -14,6 +14,7 @@
  */
 
 import Utils from '../../../../dot/js/Utils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -42,6 +43,9 @@ type PhotonNodeOptions = SelfOptions & PickOptional<NodeOptions, 'tandem'>; //TO
 
 export default class PhotonNode extends Node {
 
+  public readonly photon: Photon;
+  private readonly disposePhotonNode: () => void;
+
   public constructor( photon: Photon, modelViewTransform: ModelViewTransform2, providedOptions?: PhotonNodeOptions ) {
 
     const options = optionize<PhotonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
@@ -68,6 +72,24 @@ export default class PhotonNode extends Node {
     options.children = [ haloNode, orbNode, sparkleNode ];
 
     super( options );
+
+    const positionListener = ( position: Vector2 ) => {
+      this.translation = modelViewTransform.modelToViewPosition( position );
+    };
+    photon.positionProperty.link( positionListener );
+
+    this.photon = photon;
+
+    this.disposePhotonNode = () => {
+      if ( photon.positionProperty.hasListener( positionListener ) ) {
+        photon.positionProperty.unlink( positionListener );
+      }
+    };
+  }
+
+  public override dispose(): void {
+    this.disposePhotonNode();
+    super.dispose();
   }
 }
 

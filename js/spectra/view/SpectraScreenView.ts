@@ -30,8 +30,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
 import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -53,12 +51,6 @@ class SpectraScreenView extends ScreenView {
     const viewProperties = new SpectraViewProperties( {
       tandem: options.tandem.createTandem( 'viewProperties' )
     } );
-
-    // Our model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise
-    // Our view uses a left-handed coordinate system: +x right, +y down, +angle clockwise
-    // We're using a non-unity scale to be certain that the transform is being used where it should be.
-    const modelToViewScale = 0.5;
-    const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( Vector2.ZERO, modelToViewScale, -modelToViewScale );
 
     // Legend
     const legendNodeTandem = options.tandem.createTandem( 'legendNode' );
@@ -132,7 +124,7 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // The zoomed-in view of the box of hydrogen
-    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, modelViewTransform, {
+    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, {
       left: lightNode.right + 50,
       top: this.layoutBounds.top + 15,
       tandem: options.tandem.createTandem( 'zoomedInBoxNode' )

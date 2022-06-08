@@ -28,7 +28,7 @@ type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius' | 'speed
 
 export default class Photon extends Particle {
 
-  private readonly id: number;
+  public readonly id: number;
   public readonly wavelength: number;
   public readonly wasEmitted: boolean;
   public hasCollidedProperty: IProperty<boolean>;
