@@ -18,7 +18,7 @@ import MOTHAConstants from '../../common/MOTHAConstants.js';
 import BeamNode from '../../common/view/BeamNode.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSwitch.js';
-import LegendNode from '../../common/view/LegendNode.js';
+import LegendAccordionBox from '../../common/view/LegendAccordionBox.js';
 import LightModeRadioButtonGroup from '../../common/view/LightModeRadioButtonGroup.js';
 import MonochromaticControls from '../../common/view/MonochromaticControls.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
@@ -31,8 +31,6 @@ import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
 import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = {};
 
@@ -53,15 +51,11 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Legend
-    const legendNodeTandem = options.tandem.createTandem( 'legendNode' );
-    const legendNode = new LegendNode( {
-      visibleProperty: new DerivedProperty( [ model.modelModeProperty ], modelMode => ( modelMode === 'prediction' ), {
-        tandem: legendNodeTandem.createTandem( 'visibleProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
-      } ),
+    const legendAccordionBox = new LegendAccordionBox( {
+      expandedProperty: viewProperties.legendExpandedProperty,
       left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: legendNodeTandem
+      tandem: options.tandem.createTandem( 'legendAccordionBox' )
     } );
 
     // Light Mode radio button group
@@ -162,12 +156,12 @@ class SpectraScreenView extends ScreenView {
     } );
 
     // Spectrometer
-    const spectrometerAccordionBox = new SpectrometerAccordionBox(
-      viewProperties.spectrometerExpandedProperty, viewProperties.numberOfSnapshotsProperty, {
-        left: monochromaticControls.right + 10,
-        top: monochromaticControls.top,
-        tandem: options.tandem.createTandem( 'spectrometerAccordionBox' )
-      } );
+    const spectrometerAccordionBox = new SpectrometerAccordionBox( viewProperties.numberOfSnapshotsProperty, {
+      expandedProperty: viewProperties.spectrometerExpandedProperty,
+      left: monochromaticControls.right + 10,
+      top: monochromaticControls.top,
+      tandem: options.tandem.createTandem( 'spectrometerAccordionBox' )
+    } );
 
     // Constructed eagerly and reused to appease PhET-iO.
     const snapshotsDialog = new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty, {
@@ -196,7 +190,7 @@ class SpectraScreenView extends ScreenView {
     // rendering order
     const screenViewRootNode = new Node( {
       children: [
-        legendNode,
+        legendAccordionBox,
         timeControlNode,
         beamNode,
         lightNode,

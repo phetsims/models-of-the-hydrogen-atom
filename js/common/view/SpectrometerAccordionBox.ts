@@ -8,7 +8,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -30,21 +29,19 @@ const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
 type SelfOptions = {};
 
-type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
+  PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 
-  public constructor( expandedProperty: Property<boolean>, numberOfSnapshotsProperty: IProperty<number>,
+  public constructor( numberOfSnapshotsProperty: IProperty<number>,
                       providedOptions?: SpectrometerAccordionBoxOptions ) {
 
     const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+
+      // AccordionBoxOptions
       fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
       stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
-
-      // TODO these options do not exist in AccordionBoxOptions
-      // xMargin: 5,
-      // yMargin: 5,
-
       cornerRadius: 5,
       buttonXMargin: 8,
       buttonYMargin: 5,
@@ -61,22 +58,15 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       }
     }, providedOptions );
 
-    options.expandedProperty = expandedProperty;
-
     const titleNode = new Text( modelsOfTheHydrogenAtomStrings.spectrometer, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty
     } );
 
-    //TODO order of title and subtitle is not localized
+    //TODO order of title and subtitle is not localized, change to expandedTitle and collapsedTitle
     const subtitleNode = new Text( modelsOfTheHydrogenAtomStrings.photonsEmittedNm, {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.spectrometerSubtitleFillProperty
-    } );
-
-    // show subtitle only when expanded
-    expandedProperty.link( expanded => {
-      subtitleNode.visible = expanded;
     } );
 
     options.titleNode = new HBox( {
@@ -154,6 +144,11 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } );
 
     super( contentNode, options );
+
+    // show subtitle only when expanded
+    this.expandedProperty.link( expanded => {
+      subtitleNode.visible = expanded;
+    } );
   }
 
   public override dispose(): void {

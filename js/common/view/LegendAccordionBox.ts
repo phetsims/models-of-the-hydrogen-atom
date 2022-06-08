@@ -1,7 +1,7 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
 /**
- * LegendNode displays a legend, identifying the particle types that appear in the sim.
+ * LegendAccordionBox displays a legend, identifying the particle types that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -29,13 +29,14 @@ const ICON_SCALE = 0.5;
 
 type SelfOptions = {};
 
-type LegendNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'visibleProperty' | 'tandem'>;
+type LegendAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
+  PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
-export default class LegendNode extends AccordionBox {
+export default class LegendAccordionBox extends AccordionBox {
 
-  public constructor( providedOptions: LegendNodeOptions ) {
+  public constructor( providedOptions: LegendAccordionBoxOptions ) {
 
-    const options = optionize<LegendNodeOptions, SelfOptions, AccordionBoxOptions>()( {
+    const options = optionize<LegendAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
 
       // AccordionBoxOptions
       fill: null,
@@ -95,4 +96,4 @@ export default class LegendNode extends AccordionBox {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'LegendNode', LegendNode );
+modelsOfTheHydrogenAtom.register( 'LegendAccordionBox', LegendAccordionBox );

@@ -19,11 +19,14 @@ export type MOTHAViewPropertiesOptions = SelfOptions & PickRequired<PhetioObject
 
 export default class MOTHAViewProperties {
 
-  // are absorption wavelengths indicated on the wavelength slider?
-  public readonly absorptionWavelengthsVisibleProperty: Property<boolean>;
+  // is the Legend accordion box expanded?
+  public readonly legendExpandedProperty: Property<boolean>;
 
   // is the Spectrometer accordion box expanded?
   public readonly spectrometerExpandedProperty: Property<boolean>;
+
+  // are absorption wavelengths indicated on the wavelength slider?
+  public readonly absorptionWavelengthsVisibleProperty: Property<boolean>;
 
   //TODO for prototyping
   // number of spectrometer snapshots
@@ -33,12 +36,16 @@ export default class MOTHAViewProperties {
 
     const options = providedOptions;
 
-    this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'absorptionWavelengthsVisibleProperty' )
+    this.legendExpandedProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'legendExpandedProperty' )
     } );
 
     this.spectrometerExpandedProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'spectrometerExpandedProperty' )
+    } );
+
+    this.absorptionWavelengthsVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'absorptionWavelengthsVisibleProperty' )
     } );
 
     this.numberOfSnapshotsProperty = new NumberProperty( 0, {
@@ -47,8 +54,9 @@ export default class MOTHAViewProperties {
   }
 
   public reset(): void {
-    this.absorptionWavelengthsVisibleProperty.reset();
+    this.legendExpandedProperty.reset();
     this.spectrometerExpandedProperty.reset();
+    this.absorptionWavelengthsVisibleProperty.reset();
     this.numberOfSnapshotsProperty.reset();
   }
 }
