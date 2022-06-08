@@ -39,7 +39,7 @@ const IR_SPARKLE_COLOR = VisibleColor.wavelengthToColor( 715, WAVELENGTH_TO_COLO
 
 type SelfOptions = {};
 
-type PhotonNodeOptions = SelfOptions & PickOptional<NodeOptions, 'tandem'>; //TODO PickRequired<NodeOptions, 'tandem'>
+type PhotonNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'> & PickOptional<NodeOptions, 'tandem'>; //TODO PickRequired<NodeOptions, 'tandem'>
 
 export default class PhotonNode extends Node {
 
@@ -90,6 +90,19 @@ export default class PhotonNode extends Node {
   public override dispose(): void {
     this.disposePhotonNode();
     super.dispose();
+  }
+
+  /**
+   * Creates a photon icon, used in the Legend.
+   */
+  public static createIcon( wavelength: number, scale = 1 ): Node {
+    const photon = new Photon( {
+      wavelength: wavelength
+    } );
+    const modelViewTransform = ModelViewTransform2.createIdentity();
+    return new PhotonNode( photon, modelViewTransform, {
+      scale: scale
+    } );
   }
 }
 

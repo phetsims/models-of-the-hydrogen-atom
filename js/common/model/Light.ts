@@ -27,6 +27,7 @@ import BohrModel from './BohrModel.js';
 import { LightMode, LightModeValues } from './LightMode.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -90,7 +91,7 @@ export default class Light {
     } );
 
     // Range goes from UV to max visible wavelength
-    this.monochromaticWavelengthRange = new Range( 92, VisibleColor.MAX_WAVELENGTH );
+    this.monochromaticWavelengthRange = MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE;
     assert && assert( this.monochromaticWavelengthRange.min < VisibleColor.MIN_WAVELENGTH );
 
     this.monochromaticWavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {

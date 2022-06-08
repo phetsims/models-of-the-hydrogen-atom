@@ -29,16 +29,18 @@ export default class NeutronNode extends ShadedSphereNode {
       highlightColor: 'rgb( 175, 175, 175 )'
     }, providedOptions );
 
-    super( 2 * neutron.radius, options );
+    super( 2 * modelViewTransform.modelToViewDeltaX( neutron.radius ), options );
   }
 
   /**
    * Creates a neutron icon, used in the Legend.
    */
-  public static createIcon(): Node {
+  public static createIcon( scale = 1 ): Node {
     const neutron = new Neutron();
     const modelViewTransform = ModelViewTransform2.createIdentity();
-    return new NeutronNode( neutron, modelViewTransform );
+    return new NeutronNode( neutron, modelViewTransform, {
+      scale: scale
+    } );
   }
 }
 

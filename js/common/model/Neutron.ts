@@ -10,6 +10,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {};
 
@@ -21,7 +22,7 @@ export default class Neutron extends Particle {
 
     const options = optionize<NeutronOptions, SelfOptions, ParticleOptions>()( {
 
-      radius: 5.5
+      radius: MOTHAConstants.NEUTRON_RADIUS
       //TODO phetioType: Neutron.NeutronIO,
       //TODO phetioDynamicElement: true
     }, providedOptions );

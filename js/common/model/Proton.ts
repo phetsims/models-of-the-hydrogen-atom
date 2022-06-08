@@ -9,6 +9,7 @@
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {};
 
@@ -20,7 +21,7 @@ export default class Proton extends Particle {
 
     const options = optionize<ProtonOptions, SelfOptions, ParticleOptions>()( {
 
-      radius: 5.5
+      radius: MOTHAConstants.PROTON_RADIUS
       //TODO phetioType: Proton.ProtonIO,
       //TODO phetioDynamicElement: true
     }, providedOptions );

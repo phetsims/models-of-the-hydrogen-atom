@@ -15,6 +15,7 @@ import { IColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Particle, { ParticleOptions } from './Particle.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {
   wavelength: number; // the photon's immutable wavelength
@@ -32,7 +33,7 @@ export default class Photon extends Particle {
 
   public static INITIAL_SPEED = 400; // distance per second
 
-  public constructor( providedOptions?: PhotonOptions ) {
+  public constructor( providedOptions: PhotonOptions ) {
 
     const options = optionize<PhotonOptions, SelfOptions, ParticleOptions>()( {
 
@@ -41,7 +42,7 @@ export default class Photon extends Particle {
       hasCollided: false,
 
       // ParticleOptions
-      radius: 25,
+      radius: MOTHAConstants.PHOTON_RADIUS,
       speed: Photon.INITIAL_SPEED
 
       //TODO phetioType: Photon.PhotonIO,

@@ -15,6 +15,7 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 import MOTHAColors from '../MOTHAColors.js';
 import ElectronNode from './ElectronNode.js';
 import NeutronNode from './NeutronNode.js';
+import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
 
 // constants
@@ -23,6 +24,7 @@ const LABEL_OPTIONS = {
   fill: MOTHAColors.legendTextFillProperty,
   maxWidth: 120 // i18n, determined empirically
 };
+const ICON_SCALE = 0.5;
 
 type SelfOptions = {};
 
@@ -52,9 +54,11 @@ export default class LegendNode extends VBox {
       label: string;
     };
     const items: LegendItem[] = [
-      { icon: ElectronNode.createIcon(), label: modelsOfTheHydrogenAtomStrings.electron },
-      { icon: ProtonNode.createIcon(), label: modelsOfTheHydrogenAtomStrings.proton },
-      { icon: NeutronNode.createIcon(), label: modelsOfTheHydrogenAtomStrings.neutron }
+      { icon: ElectronNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.electron },
+      { icon: ProtonNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.proton },
+      { icon: NeutronNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.neutron },
+      { icon: PhotonNode.createIcon( 480, ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.photon },
+      { icon: PhotonNode.createIcon( 200, ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.uvPhoton }
     ];
 
     // widest icon, used to horizontally center all icons and left-align all labels

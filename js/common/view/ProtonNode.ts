@@ -30,7 +30,7 @@ export default class ProtonNode extends ShadedSphereNode {
       highlightColor: 'rgb( 255, 130, 130 )' // lighter red
     }, providedOptions );
 
-    super( 2 * proton.radius, options );
+    super( 2 * modelViewTransform.modelToViewDeltaX( proton.radius ), options );
 
     proton.positionProperty.link( position => {
       this.translation = modelViewTransform.modelToViewPosition( position );
@@ -40,10 +40,12 @@ export default class ProtonNode extends ShadedSphereNode {
   /**
    * Creates a proton icon, used in the Legend.
    */
-  public static createIcon(): Node {
+  public static createIcon( scale = 1 ): Node {
     const proton = new Proton();
     const modelViewTransform = ModelViewTransform2.createIdentity();
-    return new ProtonNode( proton, modelViewTransform );
+    return new ProtonNode( proton, modelViewTransform, {
+      scale: scale
+    } );
   }
 }
 

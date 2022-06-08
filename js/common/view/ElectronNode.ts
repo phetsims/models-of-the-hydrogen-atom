@@ -15,9 +15,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron from '../model/Electron.js';
 import { Node } from '../../../../scenery/js/imports.js';
 
-// constants
-const DIAMETER = 9;
-
 type SelfOptions = {};
 
 type ElectronNodeOptions = SelfOptions & StrictOmit<ShadedSphereNodeOptions, 'mainColor' | 'highlightColor'>;
@@ -33,7 +30,7 @@ export default class ElectronNode extends ShadedSphereNode {
       highlightColor: 'rgb( 140, 140, 255 )'
     }, providedOptions );
 
-    super( DIAMETER, options );
+    super( 2 * modelViewTransform.modelToViewDeltaX( electron.radius ), options );
 
     electron.positionProperty.link( position => {
       this.translation = modelViewTransform.modelToViewPosition( position );
@@ -43,10 +40,12 @@ export default class ElectronNode extends ShadedSphereNode {
   /**
    * Creates an electron icon, used in the Legend.
    */
-  public static createIcon(): Node {
+  public static createIcon( scale = 1 ): Node {
     const electron = new Electron();
     const modelViewTransform = ModelViewTransform2.createIdentity();
-    return new ElectronNode( electron, modelViewTransform );
+    return new ElectronNode( electron, modelViewTransform, {
+      scale: scale
+    } );
   }
 }
 

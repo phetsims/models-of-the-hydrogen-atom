@@ -42,6 +42,7 @@ type StringsType = {
   'showAbsorptionWavelengths': string;
   'slow': string;
   'spectrometer': string;
+  'uvPhoton': string;
   'viewSnapshots': string;
 };
 
