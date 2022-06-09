@@ -20,6 +20,7 @@ import { LightMode } from '../model/LightMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import ShowAbsorptionWavelengthsCheckbox from './ShowAbsorptionWavelengthsCheckbox.js';
+import Property from '../../../../axon/js/Property.js';
 
 type SelfOptions = {};
 
@@ -29,7 +30,7 @@ export default class MonochromaticControls extends VBox {
 
   public constructor( modelModeProperty: IProperty<ModelMode>, hydrogenAtomModelProperty: IProperty<HydrogenAtom>,
                       wavelengthProperty: IProperty<number>, lightModeProperty: IReadOnlyProperty<LightMode>,
-                      absorptionWavelengthsVisibleProperty: IProperty<boolean>,
+                      absorptionWavelengthsVisibleProperty: Property<boolean>,
                       providedOptions: MonochromaticControlsOptions ) {
 
     const options = optionize<MonochromaticControlsOptions, SelfOptions, VBoxOptions>()( {

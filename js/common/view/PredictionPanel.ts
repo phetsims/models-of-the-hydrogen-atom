@@ -10,8 +10,8 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import IProperty from '../../../../axon/js/IProperty.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -31,7 +31,7 @@ type PredictiveModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRe
 
 export default class PredictionPanel extends Panel {
 
-  public constructor( predictiveModelProperty: IProperty<HydrogenAtom>, predictiveModels: HydrogenAtom[],
+  public constructor( predictiveModelProperty: Property<HydrogenAtom>, predictiveModels: HydrogenAtom[],
                       modelModeProperty: IReadOnlyProperty<ModelMode>,
                       providedOptions: PredictiveModelPanelOptions ) {
 

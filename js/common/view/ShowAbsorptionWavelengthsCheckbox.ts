@@ -9,7 +9,6 @@
 
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text } from '../../../../scenery/js/imports.js';
@@ -20,6 +19,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
+import Property from '../../../../axon/js/Property.js';
 
 type SelfOptions = {};
 
@@ -27,7 +27,7 @@ type ShowAbsorptionWavelengthsCheckboxOptions = SelfOptions & PickRequired<Check
 
 export default class ShowAbsorptionWavelengthsCheckbox extends Checkbox {
 
-  public constructor( absorptionWavelengthsVisibleProperty: IProperty<boolean>,
+  public constructor( absorptionWavelengthsVisibleProperty: Property<boolean>,
                       hydrogenAtomModelProperty: IReadOnlyProperty<HydrogenAtom>,
                       providedOptions: ShowAbsorptionWavelengthsCheckboxOptions ) {
 

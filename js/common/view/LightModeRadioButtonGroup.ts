@@ -9,7 +9,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import IProperty from '../../../../axon/js/IProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -28,7 +28,7 @@ type LightModeRadioButtonGroupOptions = SelfOptions & NodeTranslationOptions &
 
 export default class LightModeRadioButtonGroup extends RectangularRadioButtonGroup<LightMode> {
 
-  public constructor( lightModeProperty: IProperty<LightMode>, providedOptions: LightModeRadioButtonGroupOptions ) {
+  public constructor( lightModeProperty: Property<LightMode>, providedOptions: LightModeRadioButtonGroupOptions ) {
 
     const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 
