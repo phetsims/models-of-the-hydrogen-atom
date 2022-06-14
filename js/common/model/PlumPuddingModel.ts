@@ -53,9 +53,6 @@ class PlumPuddingModel extends HydrogenAtom {
 
   public readonly radius = 50;
 
-  // number of photons the atom has absorbed and is "holding"
-  private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
-
   public readonly electron: Electron;
 
   // Endpoints of the line on which the electron oscillates, relative to atom's position.
@@ -72,6 +69,9 @@ class PlumPuddingModel extends HydrogenAtom {
   // the amplitude of the electron just before emitting its last photon
   private readonly previousAmplitudeProperty: Property<number>;
 
+  // number of photons the atom has absorbed and is "holding"
+  private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
+
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: PlumPuddingModelOptions ) {
 
     const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomOptions>()( {
@@ -82,13 +82,9 @@ class PlumPuddingModel extends HydrogenAtom {
 
     super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, zoomedInBox, options );
 
-    this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
-      tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
-      phetioReadOnly: true
+    this.electron = new Electron( {
+      tandem: options.tandem.createTandem( 'electron' )
     } );
-
-    this.electron = new Electron();
 
     this.electronLineEndpoint1Property = new Vector2Property( Vector2.ZERO, {
       tandem: options.tandem.createTandem( 'electronLineEndpoint1Property' ),
@@ -116,18 +112,24 @@ class PlumPuddingModel extends HydrogenAtom {
       phetioReadOnly: true
     } );
 
+    this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
+      numberType: 'Integer',
+      tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
+      phetioReadOnly: true
+    } );
+
     this.updateElectronLine();
   }
 
   public override reset(): void {
     super.reset();
     this.electron.reset();
-    this.numberOfPhotonsAbsorbedProperty.reset();
     this.electronLineEndpoint1Property.reset();
     this.electronLineEndpoint2Property.reset();
     this.electronIsMovingProperty.reset();
     this.numberOfZeroCrossingsProperty.reset();
     this.previousAmplitudeProperty.reset();
+    this.numberOfPhotonsAbsorbedProperty.reset();
   }
 
   /**
