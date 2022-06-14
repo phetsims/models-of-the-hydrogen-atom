@@ -17,7 +17,7 @@
  * Emission behavior:
  * The electron can emit one UV photon for each photon absorbed. Photons are emitted at the electron's location.
  * No photons are emitted until the electron has completed one oscillation cycle, and after emitting its last photon,
- * the electron completes its current oscillation cycles, coming to rest at the atoms center.
+ * the electron completes its current oscillation cycles, coming to rest at the atom's center.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
