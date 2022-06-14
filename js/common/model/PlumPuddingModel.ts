@@ -87,6 +87,7 @@ class PlumPuddingModel extends HydrogenAtom {
     super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, zoomedInBox, options );
 
     this.electron = new Electron( {
+      //TODO position is not properly initialized
       tandem: options.tandem.createTandem( 'electron' )
     } );
 

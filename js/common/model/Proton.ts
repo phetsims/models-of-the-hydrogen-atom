@@ -10,10 +10,11 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = {};
 
-type ProtonOptions = SelfOptions & ParticleOptions;
+type ProtonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
 
 export default class Proton extends Particle {
 

@@ -15,10 +15,11 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import MOTHAColors from '../MOTHAColors.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = {};
 
-type BilliardBallNodeOptions = SelfOptions & HydrogenAtomNodeOptions;
+type BilliardBallNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
 
 export default class BilliardBallNode extends HydrogenAtomNode {
 

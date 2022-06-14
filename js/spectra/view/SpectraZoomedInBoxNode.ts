@@ -16,6 +16,7 @@ import BilliardBallNode from '../../common/view/BilliardBallNode.js';
 import PhotonNode from '../../common/view/PhotonNode.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import ClassicalSolarSystemNode from '../../common/view/ClassicalSolarSystemNode.js';
 
 const VIEW_BOX_SIZE = new Dimension2( 400, 400 );
 
@@ -52,6 +53,12 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       tandem: options.tandem.createTandem( 'plumPuddingNode' )
     } );
     this.contentsNode.addChild( plumPuddingNode );
+
+    const classicalSolarSystemNode = new ClassicalSolarSystemNode( model.classicalSolarSystemModel,
+      model.hydrogenAtomProperty, modelViewTransform, {
+        tandem: options.tandem.createTandem( 'classicalSolarSystemNode' )
+      } );
+    this.contentsNode.addChild( classicalSolarSystemNode );
 
     const photonNodes: PhotonNode[] = [];
 
