@@ -146,7 +146,6 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
         newElectronDistance = 0;
       }
       this.electronDistanceProperty.value = newElectronDistance;
-      console.log( `step: electronDistanceProperty=${this.electronDistanceProperty.value}` );
     }
   }
 }
