@@ -75,10 +75,10 @@ class MOTHAModel {
    * @param initialPredictiveModel
    * @param providedOptions
    */
-  public constructor( zoomedInBox: ZoomedInBox,
-                      predictiveModels: HydrogenAtom[],
-                      initialPredictiveModel: HydrogenAtom,
-                      providedOptions: MOTHAModelOptions ) {
+  protected constructor( zoomedInBox: ZoomedInBox,
+                         predictiveModels: HydrogenAtom[],
+                         initialPredictiveModel: HydrogenAtom,
+                         providedOptions: MOTHAModelOptions ) {
 
     assert && assert( predictiveModels.includes( initialPredictiveModel ) );
 
