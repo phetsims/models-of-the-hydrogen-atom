@@ -47,6 +47,9 @@
   "legend": {
     "value": "Legend"
   },
+  "nEqualsValue": {
+    "value": "n = {{value}}"
+  },
   "neutron": {
     "value": "neutron"
   },

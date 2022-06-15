@@ -26,6 +26,7 @@ type StringsType = {
   'fast': string;
   'hydrogenSymbol': string;
   'legend': string;
+  'nEqualsValue': string;
   'neutron': string;
   'normal': string;
   'photon': string;
@@ -42,7 +43,6 @@ type StringsType = {
   'showAbsorptionWavelengths': string;
   'slow': string;
   'spectrometer': string;
-  'uvPhoton': string;
   'viewSnapshots': string;
 };
 

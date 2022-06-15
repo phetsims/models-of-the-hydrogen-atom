@@ -23,6 +23,7 @@ import ZoomedInBox from '../model/ZoomedInBox.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import MOTHAColors from '../MOTHAColors.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 
 // margin between the state display and zoomed-in box
 const STATE_DISPLAY_MARGIN = 15;
@@ -68,13 +69,13 @@ export default class BohrNode extends HydrogenAtomNode {
 
     assert && assert( hydrogenAtom.electronStateProperty.range );
     const stateDisplayNode = new NumberDisplay( hydrogenAtom.electronStateProperty, hydrogenAtom.electronStateProperty.range!, {
-      valuePattern: 'n = {{value}}',
+      backgroundFill: null,
+      backgroundStroke: null,
+      valuePattern: modelsOfTheHydrogenAtomStrings.nEqualsValue,
       textOptions: {
         font: new PhetFont( 16 ),
         fill: MOTHAColors.stateDisplayFillProperty
-      },
-      backgroundFill: null,
-      backgroundStroke: null
+      }
     } );
 
     // Keep the state display positions in the lower-right corner.
