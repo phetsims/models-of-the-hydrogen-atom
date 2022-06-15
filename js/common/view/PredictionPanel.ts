@@ -102,9 +102,7 @@ export default class PredictionPanel extends Panel {
  */
 function createRadioButtonContent( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup ): RectangularRadioButtonItem<HydrogenAtom> {
 
-  const icon = new AlignBox( new Image( predictiveModel.iconHTMLImageElement, {
-    scale: 0.2
-  } ), {
+  const icon = new AlignBox( new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ), {
     group: iconAlignGroup
   } );
 
