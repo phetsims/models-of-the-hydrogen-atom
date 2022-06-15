@@ -10,6 +10,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import { Node, Path, VBox } from '../../../../scenery/js/imports.js';
@@ -32,7 +33,7 @@ import SpectraViewProperties from './SpectraViewProperties.js';
 import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type SpectraScreenViewOptions = SelfOptions & ScreenViewOptions;
 

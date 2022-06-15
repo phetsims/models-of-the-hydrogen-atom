@@ -9,6 +9,7 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { LinearGradient, Node, NodeOptions, NodeTranslationOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
@@ -22,7 +23,7 @@ const BOX_SIZE = new Dimension2( 50, 40 );
 const LIGHT_COLOR = 'rgb( 249, 249, 249 )';
 const SHADOW_COLOR = 'rgb( 100, 100, 100 )';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type BoxOfHydrogenNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 

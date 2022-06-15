@@ -16,6 +16,7 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Color } from '../../../../scenery/js/imports.js';
@@ -36,7 +37,7 @@ assert && assert( TRANSITION_WAVELENGTHS_WEIGHT >= 0 && TRANSITION_WAVELENGTHS_W
 // Maximum number of photons in the zoomed-in box
 const MAX_PHOTONS = 20;
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type LightOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 

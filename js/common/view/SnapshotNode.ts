@@ -9,6 +9,7 @@
 
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
@@ -18,7 +19,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type SnapshotNodeOptions = SelfOptions &
   PickOptional<NodeOptions, 'scale'>;

@@ -27,6 +27,7 @@
 import bohrButton_png from '../../../images/bohrButton_png.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
@@ -35,7 +36,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 // Radius of each orbit supported by this model. These are distorted to fit in zoomedInBox.
 const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 export type BohrModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 

@@ -8,10 +8,11 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import MOTHAViewProperties, { MOTHAViewPropertiesOptions } from '../../common/view/MOTHAViewProperties.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type EnergyLevelsViewPropertiesOptions = SelfOptions & MOTHAViewPropertiesOptions;
 

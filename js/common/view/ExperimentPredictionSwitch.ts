@@ -8,6 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
@@ -18,7 +19,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import { ModelMode } from '../model/ModelMode.js';
 import Property from '../../../../axon/js/Property.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type ExperimentPredictionSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>
 

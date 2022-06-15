@@ -7,6 +7,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import BilliardBallModel from '../model/BilliardBallModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -16,7 +17,7 @@ import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type BilliardBallNodeOptions = SelfOptions & HydrogenAtomNodeOptions;
 
