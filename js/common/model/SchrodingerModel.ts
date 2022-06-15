@@ -69,6 +69,7 @@ export default class SchrodingerModel extends HydrogenAtom {
 
   public override movePhoton( photon: Photon, dt: number ): void {
     //TODO
+    photon.move( dt );
   }
 }
 

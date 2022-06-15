@@ -47,6 +47,7 @@ export default class DeBroglieModel extends HydrogenAtom {
 
   public override movePhoton( photon: Photon, dt: number ): void {
     //TODO
+    photon.move( dt );
   }
 }
 
