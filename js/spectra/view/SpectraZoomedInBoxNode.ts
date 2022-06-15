@@ -7,6 +7,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
@@ -20,7 +21,7 @@ import ClassicalSolarSystemNode from '../../common/view/ClassicalSolarSystemNode
 
 const VIEW_BOX_SIZE = new Dimension2( 400, 400 );
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
 

@@ -9,8 +9,9 @@
 import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type ExperimentModelOptions = SelfOptions & SchrodingerModelOptions;
 

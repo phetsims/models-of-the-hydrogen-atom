@@ -10,6 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
@@ -27,7 +28,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 const BUTTON_COLOR = 'rgb( 245, 245, 245 )';
 const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
   PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;

@@ -27,6 +27,7 @@
 import bohrButton_png from '../../../images/bohrButton_png.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
@@ -65,7 +66,7 @@ const WAVELENGTH_CLOSENESS_THRESHOLD = 0.5;
 // How close an emitted photon is placed to the photon that causes stimulated emission
 const STIMULATED_EMISSION_X_OFFSET = 10;
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 export type BohrModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
@@ -149,7 +150,7 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   //----------------------------------------------------------------------------
-  // HydrogenAtom overrides
+  // HydrogenAtom implementation
   //----------------------------------------------------------------------------
 
   public override reset(): void {
@@ -188,7 +189,7 @@ export default class BohrModel extends HydrogenAtom {
     const absorbed = this.attemptAbsorption( photon );
     if ( !absorbed ) {
       this.attemptStimulatedEmission( photon );
-      super.movePhoton( photon, dt );
+      photon.move( dt );
     }
   }
 

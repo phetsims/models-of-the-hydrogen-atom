@@ -25,6 +25,7 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import classicalSolarSystemButton_png from '../../../images/classicalSolarSystemButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -39,6 +40,7 @@ import Property from '../../../../axon/js/Property.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Proton from './Proton.js';
+import Photon from './Photon.js';
 
 const ELECTRON_DISTANCE = 300; // initial distance from electron to proton
 const ELECTRON_DISTANCE_DELTA = 100; // amount the distance between the proton and electron is reduced per second
@@ -46,7 +48,7 @@ const MIN_ELECTRON_DISTANCE = 5; // any distance smaller than this is effectivel
 const ELECTRON_ANGLE_DELTA = Utils.toRadians( 120 ); // initial change in electron's rotation angle per second
 const ELECTRON_ACCELERATION = 1.008; // scaling of electronAngleDeltaProperty each time step is called
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type ClassicalSolarSystemModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
@@ -149,6 +151,10 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       }
       this.electronDistanceProperty.value = newElectronDistance;
     }
+  }
+
+  public override movePhoton( photon: Photon, dt: number ): void {
+    photon.move( dt );
   }
 }
 

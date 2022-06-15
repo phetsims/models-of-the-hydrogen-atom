@@ -7,6 +7,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -18,7 +19,7 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type PlumPuddingNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
 

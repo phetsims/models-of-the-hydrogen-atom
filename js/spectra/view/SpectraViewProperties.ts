@@ -7,10 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import MOTHAViewProperties, { MOTHAViewPropertiesOptions } from '../../common/view/MOTHAViewProperties.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type SpectraViewPropertiesOptions = SelfOptions & MOTHAViewPropertiesOptions;
 

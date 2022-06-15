@@ -8,6 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
@@ -19,7 +20,7 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 // constants
 const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
   PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;

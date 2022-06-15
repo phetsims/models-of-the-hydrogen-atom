@@ -12,6 +12,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import { Color, Node, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
@@ -21,7 +22,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type LightModeRadioButtonGroupOptions = SelfOptions & NodeTranslationOptions &
   PickRequired<RectangularRadioButtonGroupOptions, 'tandem'>;

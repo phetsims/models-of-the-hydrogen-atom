@@ -105,18 +105,16 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public abstract step( dt: number ): void;
 
   /**
+   * Moves a photon by the specified time step.
+   */
+  public abstract movePhoton( photon: Photon, dt: number ): void;
+
+  /**
    * Gets the transition wavelengths for a specified state. The notion of 'transition wavelength' does not apply to all
    * hydrogen atom models, so the default implementation returns null.
    */
   public getTransitionWavelengths( state: number ): number[] | null {
     return null;
-  }
-
-  /**
-   * Moves a photon by the specified time step.
-   */
-  public movePhoton( photon: Photon, dt: number ): void {
-    photon.move( dt );
   }
 
   /**

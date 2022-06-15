@@ -7,6 +7,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import BilliardBallModel from '../../common/model/BilliardBallModel.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import ClassicalSolarSystemModel from '../../common/model/ClassicalSolarSystemModel.js';
@@ -18,7 +19,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type SpectraModelOptions = SelfOptions & MOTHAModelOptions;
 

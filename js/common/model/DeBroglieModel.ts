@@ -16,12 +16,14 @@
 import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import Photon from './Photon.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type DeBroglieModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
@@ -40,7 +42,11 @@ export default class DeBroglieModel extends HydrogenAtom {
   }
 
   public override step( dt: number ): void {
-    // do nothing for this model
+    //TODO
+  }
+
+  public override movePhoton( photon: Photon, dt: number ): void {
+    //TODO
   }
 }
 

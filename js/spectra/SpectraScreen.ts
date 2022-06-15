@@ -7,6 +7,7 @@
  */
 
 import optionize from '../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../phet-core/js/types/EmptyObjectType.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
@@ -14,7 +15,7 @@ import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type SpectraScreenOptions = SelfOptions & StrictOmit<MOTHAScreenOptions, 'name' | 'homeScreenIcon'>;
 

@@ -31,6 +31,7 @@ import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import plumPuddingButton_png from '../../../images/plumPuddingButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -46,7 +47,7 @@ const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 const PHOTON_EMISSION_PROBABILITY = 0.1; // probability [0,1] that a photon will be emitted
 const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon will be absorbed
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type PlumPuddingModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
@@ -225,14 +226,13 @@ class PlumPuddingModel extends HydrogenAtom {
     }
   }
 
-  //TODO Decouple interacting with photon from moving it. super.move() always seems to be the means of moving it,
-  // which calls photon.move( dt ), so make that the responsibility of MOTHAModel.
+  //TODO Decouple interacting with photon from moving it.
   /**
    * Tries to absorb a photon. If it is not absorbed, the photon is moved.
    */
   public override movePhoton( photon: Photon, dt: number ): void {
     if ( !this.absorbPhoton( photon ) ) {
-      super.movePhoton( photon, dt );
+      photon.move( dt );
     }
   }
 

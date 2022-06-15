@@ -7,12 +7,13 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type ProtonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
 
