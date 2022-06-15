@@ -13,7 +13,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 type SelfOptions = {
@@ -46,8 +45,7 @@ export default class Particle extends PhetioObject {
     const options = optionize<ParticleOptions, SelfOptions, PhetioObjectOptions>()( {
       position: Vector2.ZERO,
       speed: 0,
-      direction: Math.PI / 2, // straight up, in the direction of +y
-      tandem: Tandem.OPT_OUT //TODO
+      direction: Math.PI / 2 // straight up, in the direction of +y
     }, providedOptions );
 
     super( options );

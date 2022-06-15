@@ -16,6 +16,7 @@ import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-p
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Proton from '../model/Proton.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -43,7 +44,9 @@ export default class ProtonNode extends ShadedSphereNode {
    * Creates a proton icon, used in the Legend.
    */
   public static createIcon( scale = 1 ): Node {
-    const proton = new Proton();
+    const proton = new Proton( {
+      tandem: Tandem.OPT_OUT
+    } );
     const modelViewTransform = ModelViewTransform2.createIdentity();
     return new ProtonNode( proton, modelViewTransform, {
       scale: scale

@@ -150,89 +150,53 @@ class PlumPuddingModel extends HydrogenAtom {
     this.numberOfZeroCrossingsProperty.reset();
     this.previousAmplitudeProperty.reset();
     this.numberOfPhotonsAbsorbedProperty.reset();
-
     super.reset();
   }
 
   /**
-   * Gets the number of oscillations that the electron has completed since it started moving. This is a function of
-   * the number of times the electron has crossed the center of the atom.
+   * Oscillates the electron inside the atom. Emits a photon at a random time.
+   * After emitting its last photon, the electron completes its oscillation and returns to (0,0).
    */
-  private getNumberOfElectronOscillations(): number {
-    return ( this.numberOfZeroCrossingsProperty.value % 2 );
-  }
+  public override step( dt: number ): void {
 
-  /**
-   * Gets the electron's amplitude. This is ratio of the number of photons actually absorbed to the number of photons
-   * the electron is capable of absorbing.
-   */
-  private getElectronAmplitude(): number {
-    return ( this.numberOfPhotonsAbsorbedProperty.value / MAX_PHOTONS_ABSORBED );
-  }
+    if ( this.numberOfPhotonsAbsorbedProperty.value > 0 ) {
 
-  /**
-   * Cannot absorb a photon if any of these are true:
-   * - the photon was emitted by the atom
-   * - we've already absorbed the max
-   * - we've emitted out last photon and haven't completed oscillation.
-   */
-  private canAbsorb( photon: Photon ): boolean {
-    return !( photon.wasEmitted ||
-              this.numberOfPhotonsAbsorbedProperty.value === MAX_PHOTONS_ABSORBED ||
-              ( this.numberOfPhotonsAbsorbedProperty.value === 0 && this.electronIsMovingProperty.value ) );
-  }
+      this.electronIsMovingProperty.value = true;
 
-  /**
-   * Attempts to absorb the specified photon.
-   * @param photon
-   * @returns true if the photon was absorbed, false if it was not absorbed
-   */
-  private absorbPhoton( photon: Photon ): boolean {
-    let absorbed = false;
-    if ( this.canAbsorb( photon ) ) {
+      // Move the electron
+      const amplitude = this.getElectronAmplitude();
+      this.moveElectron( dt, amplitude );
 
-      const electronPosition = this.electron.positionProperty.value;
-      const photonPosition = photon.positionProperty.value;
-      const collisionCloseness = photon.radius + this.electron.radius;
+      // Randomly emit a photon after completing an oscillation cycle
+      if ( this.getNumberOfElectronOscillations() !== 0 ) {
+        if ( dotRandom.nextDouble() < PHOTON_EMISSION_PROBABILITY ) {
+          this.emitPhoton();
 
-      if ( this.pointsCollide( electronPosition, photonPosition, collisionCloseness ) ) {
-        if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
-          this.numberOfPhotonsAbsorbedProperty.value += 1;
-          assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );
-          this.photonAbsorbedEmitter.emit( photon );
-          absorbed = true;
+          // If we have not more photons, remember amplitude, so we can complete oscillation.
+          if ( this.numberOfPhotonsAbsorbedProperty.value === 0 ) {
+            this.previousAmplitudeProperty.value = amplitude;
+          }
         }
       }
     }
-    return absorbed;
-  }
+    else if ( this.electronIsMovingProperty.value && this.numberOfPhotonsAbsorbedProperty.value === 0 ) {
 
-  /**
-   * Emits a photon from the electron's location, at a random orientation.
-   */
-  private emitPhoton(): void {
-    if ( this.numberOfPhotonsAbsorbedProperty.value > 0 ) {
+      // Before moving the electron
+      const before = this.getNumberOfElectronOscillations();
 
-      this.numberOfPhotonsAbsorbedProperty.value -= 1;
+      // After moving the electron
+      this.moveElectron( dt, this.previousAmplitudeProperty.value );
+      const after = this.getNumberOfElectronOscillations();
 
-      // Create and emit a photon
-      this.photonEmittedEmitter.emit( new Photon( {
-        position: this.electron.positionProperty.value, // at the electron's position
-        wavelength: PHOTON_EMISSION_WAVELENGTH,
-        direction: MOTHAUtils.nextAngle(),
-        wasEmitted: true,
-        tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
-      } ) );
-    }
-  }
-
-  //TODO Decouple interacting with photon from moving it.
-  /**
-   * Tries to absorb a photon. If it is not absorbed, the photon is moved.
-   */
-  public override movePhoton( photon: Photon, dt: number ): void {
-    if ( !this.absorbPhoton( photon ) ) {
-      photon.move( dt );
+      // Stop the electron when it completes its current oscillation
+      if ( before !== after ) {
+        this.electronIsMovingProperty.value = false;
+        this.numberOfZeroCrossingsProperty.value = 0;
+        this.previousAmplitudeProperty.value = 0;
+        this.electronLineProperty.value = nextElectronLine( this.radius );
+        this.electronOffsetProperty.value = Vector2.ZERO;
+        this.electronDirectionPositiveProperty.value = dotRandom.nextBoolean();
+      }
     }
   }
 
@@ -293,50 +257,93 @@ class PlumPuddingModel extends HydrogenAtom {
     this.electronOffsetProperty.value = new Vector2( x, y );
   }
 
+  //TODO Decouple interacting with photon from moving it.
   /**
-   * Oscillates the electron inside the atom. Emits a photon at a random time.
-   * After emitting its last photon, the electron completes its oscillation and returns to (0,0).
+   * Tries to absorb a photon. If it is not absorbed, the photon is moved.
    */
-  public override step( dt: number ): void {
+  public override movePhoton( photon: Photon, dt: number ): void {
+    if ( !this.absorbPhoton( photon ) ) {
+      photon.move( dt );
+    }
+  }
 
-    if ( this.numberOfPhotonsAbsorbedProperty.value > 0 ) {
+  /**
+   * Gets the electron's amplitude. This is ratio of the number of photons actually absorbed to the number of photons
+   * the electron is capable of absorbing.
+   */
+  private getElectronAmplitude(): number {
+    return ( this.numberOfPhotonsAbsorbedProperty.value / MAX_PHOTONS_ABSORBED );
+  }
 
-      this.electronIsMovingProperty.value = true;
+  /**
+   * Gets the number of oscillations that the electron has completed since it started moving. This is a function of
+   * the number of times the electron has crossed the center of the atom.
+   */
+  private getNumberOfElectronOscillations(): number {
+    return ( this.numberOfZeroCrossingsProperty.value % 2 );
+  }
 
-      // Move the electron
-      const amplitude = this.getElectronAmplitude();
-      this.moveElectron( dt, amplitude );
+  //--------------------------------------------------------------------------------------------------------------------
+  // Photon Absorption
+  //--------------------------------------------------------------------------------------------------------------------
 
-      // Randomly emit a photon after completing an oscillation cycle
-      if ( this.getNumberOfElectronOscillations() !== 0 ) {
-        if ( dotRandom.nextDouble() < PHOTON_EMISSION_PROBABILITY ) {
-          this.emitPhoton();
+  /**
+   * Cannot absorb a photon if any of these are true:
+   * - the photon was emitted by the atom
+   * - we've already absorbed the max
+   * - we've emitted out last photon and haven't completed oscillation.
+   */
+  private canAbsorb( photon: Photon ): boolean {
+    return !( photon.wasEmitted ||
+              this.numberOfPhotonsAbsorbedProperty.value === MAX_PHOTONS_ABSORBED ||
+              ( this.numberOfPhotonsAbsorbedProperty.value === 0 && this.electronIsMovingProperty.value ) );
+  }
 
-          // If we have not more photons, remember amplitude, so we can complete oscillation.
-          if ( this.numberOfPhotonsAbsorbedProperty.value === 0 ) {
-            this.previousAmplitudeProperty.value = amplitude;
-          }
+  /**
+   * Attempts to absorb the specified photon.
+   * @param photon
+   * @returns true if the photon was absorbed, false if it was not absorbed
+   */
+  private absorbPhoton( photon: Photon ): boolean {
+    let absorbed = false;
+    if ( this.canAbsorb( photon ) ) {
+
+      const electronPosition = this.electron.positionProperty.value;
+      const photonPosition = photon.positionProperty.value;
+      const collisionCloseness = photon.radius + this.electron.radius;
+
+      if ( this.pointsCollide( electronPosition, photonPosition, collisionCloseness ) ) {
+        if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
+          this.numberOfPhotonsAbsorbedProperty.value += 1;
+          assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );
+          this.photonAbsorbedEmitter.emit( photon );
+          absorbed = true;
         }
       }
     }
-    else if ( this.electronIsMovingProperty.value && this.numberOfPhotonsAbsorbedProperty.value === 0 ) {
+    return absorbed;
+  }
 
-      // Before moving the electron
-      const before = this.getNumberOfElectronOscillations();
+  //--------------------------------------------------------------------------------------------------------------------
+  // Photon Emission
+  //--------------------------------------------------------------------------------------------------------------------
 
-      // After moving the electron
-      this.moveElectron( dt, this.previousAmplitudeProperty.value );
-      const after = this.getNumberOfElectronOscillations();
+  /**
+   * Emits a photon from the electron's location, at a random orientation.
+   */
+  private emitPhoton(): void {
+    if ( this.numberOfPhotonsAbsorbedProperty.value > 0 ) {
 
-      // Stop the electron when it completes its current oscillation
-      if ( before !== after ) {
-        this.electronIsMovingProperty.value = false;
-        this.numberOfZeroCrossingsProperty.value = 0;
-        this.previousAmplitudeProperty.value = 0;
-        this.electronLineProperty.value = nextElectronLine( this.radius );
-        this.electronOffsetProperty.value = Vector2.ZERO;
-        this.electronDirectionPositiveProperty.value = dotRandom.nextBoolean();
-      }
+      this.numberOfPhotonsAbsorbedProperty.value -= 1;
+
+      // Create and emit a photon
+      this.photonEmittedEmitter.emit( new Photon( {
+        position: this.electron.positionProperty.value, // at the electron's position
+        wavelength: PHOTON_EMISSION_WAVELENGTH,
+        direction: MOTHAUtils.nextAngle(),
+        wasEmitted: true,
+        tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
+      } ) );
     }
   }
 }

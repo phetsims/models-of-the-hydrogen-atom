@@ -149,17 +149,12 @@ export default class BohrModel extends HydrogenAtom {
     } );
   }
 
-  //----------------------------------------------------------------------------
-  // HydrogenAtom implementation
-  //----------------------------------------------------------------------------
-
   public override reset(): void {
     this.proton.reset();
     this.electron.reset();
     this.electronStateProperty.reset();
     this.timeInStateProperty.reset();
     this.electronAngleProperty.reset();
-
     super.reset();
   }
 
@@ -201,9 +196,9 @@ export default class BohrModel extends HydrogenAtom {
     return ORBIT_RADII.length;
   }
 
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
   // Orbit methods
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Gets the radius for a specified state.
@@ -223,9 +218,9 @@ export default class BohrModel extends HydrogenAtom {
     return BohrModel.getOrbitRadius( this.electronStateProperty.value );
   }
 
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
   // Wavelength methods
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Gets the wavelength that must be absorbed for the electron to transition from state nOld to state nNew,
@@ -290,9 +285,9 @@ export default class BohrModel extends HydrogenAtom {
     return wavelengths;
   }
 
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
   // Collision detection
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Determines whether a photon collides with this atom. In this case, we treat the photon and electron as points,
@@ -305,9 +300,9 @@ export default class BohrModel extends HydrogenAtom {
     return this.pointsCollide( electronPosition, photonPosition, collisionCloseness );
   }
 
-  //----------------------------------------------------------------------------
-  // Absorption
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
+  // Photon Absorption
+  //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Attempts to absorb a specified photon.
@@ -371,9 +366,9 @@ export default class BohrModel extends HydrogenAtom {
     return true;
   }
 
-  //----------------------------------------------------------------------------
-  // Stimulated Emission
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
+  // Photon Stimulated Emission
+  //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Attempts to stimulate emission with a specified photon.
@@ -457,9 +452,9 @@ export default class BohrModel extends HydrogenAtom {
     return ( ( nOld !== nNew ) && ( nNew >= HydrogenAtom.GROUND_STATE ) );
   }
 
-  //----------------------------------------------------------------------------
-  // Spontaneous Emission
-  //----------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
+  // Photon Spontaneous Emission
+  //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Attempts to emit a photon from the electron's location, in a random direction.
@@ -502,7 +497,7 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   /**
-   * Probabilistically determines whether not the atom will spontaneously emit a photon.
+   * Probabilistically determines whether the atom will spontaneously emit a photon.
    */
   private static spontaneousEmissionIsCertain(): boolean {
     return dotRandom.nextDouble() < PHOTON_SPONTANEOUS_EMISSION_PROBABILITY;

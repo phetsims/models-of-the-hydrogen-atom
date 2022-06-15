@@ -15,6 +15,7 @@ import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-p
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron from '../model/Electron.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -42,10 +43,13 @@ export default class ElectronNode extends ShadedSphereNode {
    * Creates an electron icon, used in the Legend.
    */
   public static createIcon( scale = 1 ): Node {
-    const electron = new Electron();
+    const electron = new Electron( {
+      tandem: Tandem.OPT_OUT
+    } );
     const modelViewTransform = ModelViewTransform2.createIdentity();
     return new ElectronNode( electron, modelViewTransform, {
-      scale: scale
+      scale: scale,
+      tandem: Tandem.OPT_OUT
     } );
   }
 }

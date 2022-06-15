@@ -19,7 +19,7 @@ type NeutronOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
 
 export default class Neutron extends Particle {
 
-  public constructor( providedOptions?: NeutronOptions ) {
+  public constructor( providedOptions: NeutronOptions ) {
 
     const options = optionize<NeutronOptions, SelfOptions, ParticleOptions>()( {
 

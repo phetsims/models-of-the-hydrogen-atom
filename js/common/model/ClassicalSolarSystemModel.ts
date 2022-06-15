@@ -131,7 +131,6 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     this.electronDistanceProperty.reset();
     this.electronAngleProperty.reset();
     this.electronAngleDeltaProperty.reset();
-
     super.reset();
   }
 

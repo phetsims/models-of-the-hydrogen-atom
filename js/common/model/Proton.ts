@@ -19,7 +19,7 @@ type ProtonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
 
 export default class Proton extends Particle {
 
-  public constructor( providedOptions?: ProtonOptions ) {
+  public constructor( providedOptions: ProtonOptions ) {
 
     const options = optionize<ProtonOptions, SelfOptions, ParticleOptions>()( {
 

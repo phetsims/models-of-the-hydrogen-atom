@@ -15,6 +15,7 @@ import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-p
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Neutron from '../model/Neutron.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -38,7 +39,9 @@ export default class NeutronNode extends ShadedSphereNode {
    * Creates a neutron icon, used in the Legend.
    */
   public static createIcon( scale = 1 ): Node {
-    const neutron = new Neutron();
+    const neutron = new Neutron( {
+      tandem: Tandem.OPT_OUT
+    } );
     const modelViewTransform = ModelViewTransform2.createIdentity();
     return new NeutronNode( neutron, modelViewTransform, {
       scale: scale

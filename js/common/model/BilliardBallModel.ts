@@ -54,10 +54,6 @@ export default class BilliardBallModel extends HydrogenAtom {
     super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButton_png, zoomedInBox, options );
   }
 
-  //----------------------------------------------------------------------------
-  // HydrogenAtom implementation
-  //----------------------------------------------------------------------------
-
   public override step( dt: number ): void {
     // do nothing for this model
   }

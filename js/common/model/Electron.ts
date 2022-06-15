@@ -19,7 +19,7 @@ type ElectronOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
 
 export default class Electron extends Particle {
 
-  public constructor( providedOptions?: ElectronOptions ) {
+  public constructor( providedOptions: ElectronOptions ) {
 
     const options = optionize<ElectronOptions, SelfOptions, ParticleOptions>()( {
 
