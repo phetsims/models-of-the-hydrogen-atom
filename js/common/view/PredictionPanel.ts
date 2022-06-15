@@ -16,7 +16,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -49,10 +49,13 @@ export default class PredictionPanel extends Panel {
       yMargin: 10
     }, providedOptions );
 
+    // So that all icons have the same effective size
+    const iconAlignGroup = new AlignGroup();
+
     // content that appears on the radio buttons
     const contentArray: RectangularRadioButtonItem<HydrogenAtom>[] = [];
     for ( let i = 0; i < predictiveModels.length; i++ ) {
-      contentArray.push( createRadioButtonContent( predictiveModels[ i ] ) );
+      contentArray.push( createRadioButtonContent( predictiveModels[ i ], iconAlignGroup ) );
     }
 
     // radio buttons
@@ -97,20 +100,23 @@ export default class PredictionPanel extends Panel {
 /**
  * Creates the content for one of the radio buttons.
  */
-function createRadioButtonContent( predictiveModel: HydrogenAtom ): RectangularRadioButtonItem<HydrogenAtom> {
+function createRadioButtonContent( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup ): RectangularRadioButtonItem<HydrogenAtom> {
+
+  const icon = new AlignBox( new Image( predictiveModel.iconHTMLImageElement, {
+    scale: 0.2
+  } ), {
+    group: iconAlignGroup
+  } );
+
+  const text = new Text( predictiveModel.displayName, {
+    fill: MOTHAColors.modelsRadioButtonTextFillProperty,
+    font: new PhetFont( 16 ),
+    maxWidth: 200 // determined empirically
+  } );
 
   const node = new HBox( {
     spacing: 10,
-    children: [
-      new Image( predictiveModel.iconHTMLImageElement, {
-        scale: 0.2
-      } ),
-      new Text( predictiveModel.displayName, {
-        fill: MOTHAColors.modelsRadioButtonTextFillProperty,
-        font: new PhetFont( 16 ),
-        maxWidth: 200 // i18n, determined empirically
-      } )
-    ]
+    children: [ icon, text ]
   } );
 
   return {
