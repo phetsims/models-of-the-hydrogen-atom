@@ -17,7 +17,7 @@
  * Emission behavior:
  * The electron can emit one UV photon for each photon absorbed. Photons are emitted at the electron's location.
  * No photons are emitted until the electron has completed one oscillation cycle, and after emitting its last photon,
- * the electron completes its current oscillation cycles, coming to rest at the atoms center.
+ * the electron completes its current oscillation cycles, coming to rest at the atom's center.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -27,6 +27,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
+import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -44,7 +45,6 @@ const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbe
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 const PHOTON_EMISSION_PROBABILITY = 0.1; // probability [0,1] that a photon will be emitted
 const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon will be absorbed
-const ELECTRON_LINE_SEGMENTS = 30; // number of discrete steps in the electron line
 
 type SelfOptions = EmptyObjectType;
 
@@ -54,15 +54,16 @@ class PlumPuddingModel extends HydrogenAtom {
 
   public readonly radius = 50;
 
-  // number of photons the atom has absorbed and is "holding"
-  private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
-
   public readonly electron: Electron;
 
-  // Endpoints of the line on which the electron oscillates, relative to atom's position.
-  // It would be preferable to use kite.Line, but there is no LineIO type for PhET-iO.
-  private readonly electronLineEndpoint1Property: Property<Vector2>;
-  private readonly electronLineEndpoint2Property: Property<Vector2>;
+  // the line on which the electron oscillates, in coordinates relative to the atom's position
+  private readonly electronLineProperty: Property<ElectronLine>;
+
+  // offset of the electron relative to the atom's position
+  private readonly electronOffsetProperty: Property<Vector2>;
+
+  // the electron's direction of motion, relative to the (horizontal) x-axis
+  private readonly electronDirectionPositiveProperty: Property<boolean>;
 
   // Is the electron moving?
   private readonly electronIsMovingProperty: Property<boolean>;
@@ -72,6 +73,9 @@ class PlumPuddingModel extends HydrogenAtom {
 
   // the amplitude of the electron just before emitting its last photon
   private readonly previousAmplitudeProperty: Property<number>;
+
+  // the number of photons the atom has absorbed and is "holding"
+  private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: PlumPuddingModelOptions ) {
 
@@ -83,24 +87,33 @@ class PlumPuddingModel extends HydrogenAtom {
 
     super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, zoomedInBox, options );
 
-    this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
-      tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
+    this.electron = new Electron( {
+      //TODO position is not properly initialized
+      tandem: options.tandem.createTandem( 'electron' )
+    } );
+
+    //TODO make this go away, just set electron.positionProperty directly
+    this.electronOffsetProperty = new Vector2Property( Vector2.ZERO, {
+      tandem: options.tandem.createTandem( 'electronOffsetProperty' )
+    } );
+
+    this.electronOffsetProperty.link( electronOffset => {
+      this.electron.positionProperty.value = this.position.plus( electronOffset );
+    } );
+
+    this.electronLineProperty = new Property<ElectronLine>( nextElectronLine( this.radius ), {
+      //TODO tandem
+      //TODO phetioType: ElectronLineIO
+      //TODO phetioReadOnly: true
+    } );
+
+    //TODO this.electron.directionProperty is unused
+    this.electronDirectionPositiveProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'electronDirectionPositiveProperty' ),
       phetioReadOnly: true
     } );
 
-    this.electron = new Electron();
-
-    this.electronLineEndpoint1Property = new Vector2Property( Vector2.ZERO, {
-      tandem: options.tandem.createTandem( 'electronLineEndpoint1Property' ),
-      phetioReadOnly: true
-    } );
-
-    this.electronLineEndpoint2Property = new Vector2Property( Vector2.ZERO, {
-      tandem: options.tandem.createTandem( 'electronLineEndpoint2Property' ),
-      phetioReadOnly: true
-    } );
-
+    //TODO this.electron.speedProperty is unused
     this.electronIsMovingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'electronIsMovingProperty' ),
       phetioReadOnly: true
@@ -112,49 +125,31 @@ class PlumPuddingModel extends HydrogenAtom {
       phetioReadOnly: true
     } );
 
+    //TODO should this affect this.electron.speedProperty?
     this.previousAmplitudeProperty = new NumberProperty( 0, {
+      range: new Range( 0, 1 ),
       tandem: options.tandem.createTandem( 'previousAmplitudeProperty' ),
       phetioReadOnly: true
     } );
 
-    this.updateElectronLine();
+    this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
+      numberType: 'Integer',
+      tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
+      phetioReadOnly: true
+    } );
   }
 
   public override reset(): void {
-    super.reset();
     this.electron.reset();
-    this.numberOfPhotonsAbsorbedProperty.reset();
-    this.electronLineEndpoint1Property.reset();
-    this.electronLineEndpoint2Property.reset();
+    this.electronLineProperty.reset();
+    this.electronOffsetProperty.reset();
+    this.electronDirectionPositiveProperty.reset();
     this.electronIsMovingProperty.reset();
     this.numberOfZeroCrossingsProperty.reset();
     this.previousAmplitudeProperty.reset();
-  }
+    this.numberOfPhotonsAbsorbedProperty.reset();
 
-  /**
-   * Updates the line that determines the electron's oscillation path when the electron is moving at maximum amplitude.
-   * The line is specified in coordinates relative to the atom (in the atom's local coordinate frame).
-   */
-  private updateElectronLine(): void {
-
-    const angle = MOTHAUtils.nextAngle();
-    const x = Math.abs( this.radius * Math.sin( angle ) );
-    const y = MOTHAUtils.nextSign() * this.radius * Math.cos( angle );
-    this.electronLineEndpoint1Property.value = new Vector2( -x, -y );
-    this.electronLineEndpoint2Property.value = new Vector2( x, y );
-    assert && assert( this.electronLineEndpoint1Property.value.x < this.electronLineEndpoint2Property.value.x,
-      'required by moveElectron()' );
-
-    // move electron back to center of the atom, set a random direction
-    this.electron.positionProperty.value = this.position;
-    this.electron.directionProperty.value *= MOTHAUtils.nextAngle();
-  }
-
-  /**
-   * Changes the electron's direction.
-   */
-  private changeElectronDirection(): void {
-    this.electron.directionProperty.value *= -1;
+    super.reset();
   }
 
   /**
@@ -244,57 +239,56 @@ class PlumPuddingModel extends HydrogenAtom {
    */
   private moveElectron( dt: number, amplitude: number ): void {
 
-    const endpoint1 = this.electronLineEndpoint1Property.value;
-    const endpoint2 = this.electronLineEndpoint2Property.value;
+    const electronLine = this.electronLineProperty.value;
 
     // Assumptions about the electron's oscillation line
-    assert && assert( endpoint1.x < endpoint2.x );
-    assert && assert( Math.abs( endpoint1.x ) === Math.abs( endpoint2.x ) );
-    assert && assert( Math.abs( endpoint1.y ) === Math.abs( endpoint2.y ) );
+    assert && assert( electronLine.x1 < electronLine.x2 );
+    assert && assert( Math.abs( electronLine.x1 ) === Math.abs( electronLine.x2 ) );
+    assert && assert( Math.abs( electronLine.y1 ) === Math.abs( electronLine.y2 ) );
 
     // Remember the old offset
-    const electronOffset = this.electron.positionProperty.value.minus( this.position );
+    const x0 = this.electronOffsetProperty.value.x;
+    const y0 = this.electronOffsetProperty.value.y;
 
     // Determine dx and dy
-    const distanceDelta = dt * ( amplitude * ( 2 * this.radius ) / ELECTRON_LINE_SEGMENTS );
-    let dx = Math.abs( endpoint1.x ) * ( distanceDelta / this.radius );
-    let dy = Math.abs( endpoint1.y ) * ( distanceDelta / this.radius );
+    const distanceDelta = dt * amplitude * ( 2 * this.radius ); //TODO include electron speed?
+    let dx = Math.abs( electronLine.x1 ) * ( distanceDelta / this.radius );
+    let dy = Math.abs( electronLine.y1 ) * ( distanceDelta / this.radius );
 
     // Adjust signs for electron's horizontal direction
-    const xSign = Math.sign( MOTHAUtils.polarToCartesian( 1, this.electron.directionProperty.value ).x );
-    assert && assert( xSign !== 0 );
-    dx *= xSign;
-    dy *= xSign; //TODO why are we adjusting dy using xSign?
-    if ( endpoint1.y > endpoint2.y ) {
+    const sign = ( this.electronDirectionPositiveProperty.value ? 1 : -1 );
+    dx *= sign;
+    dy *= sign; //TODO why are we adjusting dy?
+    if ( electronLine.y1 > electronLine.y2 ) {
       dy *= -1;
     }
 
     // Electron's new offset
-    let newXOffset = electronOffset.x + dx;
-    let newYOffset = electronOffset.y + dy;
+    let x = x0 + dx;
+    let y = y0 + dy;
 
-    // Is the new offset past the ends of the oscillation line?
-    if ( Math.abs( newXOffset ) > Math.abs( endpoint1.x ) || Math.abs( newYOffset ) > Math.abs( endpoint1.y ) ) {
-      if ( xSign === 1 ) {
-        newXOffset = endpoint2.x;
-        newYOffset = endpoint2.y;
+    // If the new offset is past the end of the oscillation line, limit the electron position and change direction.
+    if ( Math.abs( x ) > Math.abs( electronLine.x1 ) || Math.abs( y ) > Math.abs( electronLine.y1 ) ) {
+      if ( this.electronDirectionPositiveProperty.value ) {
+        x = electronLine.x2;
+        y = electronLine.y2;
       }
       else {
-        newXOffset = endpoint1.x;
-        newYOffset = endpoint1.y;
+        x = electronLine.x1;
+        y = electronLine.y1;
       }
-      this.changeElectronDirection();
+
+      // Change direction
+      this.electronDirectionPositiveProperty.value = !this.electronDirectionPositiveProperty.value;
     }
 
     // Did we cross the origin?
-    //TODO why is ( newXOffset === 0 && newYOffset === 0 ) considered a zero crossing?
-    if ( ( newXOffset === 0 && newYOffset === 0 ) ||
-         MOTHAUtils.signIsDifferent( newXOffset, electronOffset.x ) ||
-         MOTHAUtils.signIsDifferent( newYOffset, electronOffset.y ) ) {
+    //TODO why is ( x === 0 && y === 0 ) considered a zero crossing?
+    if ( ( x === 0 && y === 0 ) || signIsDifferent( x, x0 ) || signIsDifferent( y, y0 ) ) {
       this.numberOfZeroCrossingsProperty.value += 1;
     }
 
-    this.electron.positionProperty.value = new Vector2( newXOffset, newYOffset ).plus( this.position );
+    this.electronOffsetProperty.value = new Vector2( x, y );
   }
 
   /**
@@ -337,11 +331,46 @@ class PlumPuddingModel extends HydrogenAtom {
         this.electronIsMovingProperty.value = false;
         this.numberOfZeroCrossingsProperty.value = 0;
         this.previousAmplitudeProperty.value = 0;
-        this.updateElectronLine();
-        this.electron.positionProperty.value = this.position;
+        this.electronLineProperty.value = nextElectronLine( this.radius );
+        this.electronOffsetProperty.value = Vector2.ZERO;
+        this.electronDirectionPositiveProperty.value = dotRandom.nextBoolean();
       }
     }
   }
+}
+
+// Defines the straight-line path that the electron follows.
+class ElectronLine {
+
+  public readonly x1: number;
+  public readonly y1: number;
+  public readonly x2: number;
+  public readonly y2: number;
+
+  public constructor( x1: number, y1: number, x2: number, y2: number ) {
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = x2;
+    this.y2 = y2;
+  }
+}
+
+/**
+ * Gets the next random line that describes the electron's oscillation path.
+ * The line is specified in coordinates relative to the atom (in the atom's local coordinate frame).
+ */
+function nextElectronLine( radius: number ): ElectronLine {
+  const angle = MOTHAUtils.nextAngle();
+  const x = Math.abs( radius * Math.sin( angle ) );
+  const y = MOTHAUtils.nextSign() * radius * Math.cos( angle );
+  return new ElectronLine( -x, -y, x, y );
+}
+
+/**
+ * Determines if the sign of two numbers is different. False if either value is zero.
+ */
+function signIsDifferent( n1: number, n2: number ): boolean {
+  return ( ( n1 > 0 && n2 < 0 ) || ( n1 < 0 && n2 > 0 ) );
 }
 
 modelsOfTheHydrogenAtom.register( 'PlumPuddingModel', PlumPuddingModel );

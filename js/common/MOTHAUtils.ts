@@ -27,14 +27,6 @@ const MOTHAUtils = {
   },
 
   /**
-   * Determines if the sign of two numbers is different.
-   * Note that this conforms to the Math.sign API, where zero is unsigned.
-   */
-  signIsDifferent( n1: number, n2: number ): boolean {
-    return Math.sign( n1 ) !== Math.sign( n2 );
-  },
-
-  /**
    * Converts from polar to Cartesian coordinates.
    */
   polarToCartesian( radius: number, angle: number ): Vector2 {

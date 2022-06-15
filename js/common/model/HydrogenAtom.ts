@@ -38,10 +38,10 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly groundState: number;
   public readonly hasTransitionWavelengths: boolean;
 
-  // emits when a photon is emitted (an unfortunate name)
+  // Notifies listeners by emitting when a photon is emitted (an unfortunate name)
   public readonly photonEmittedEmitter: Emitter<[ Photon ]>;
 
-  // emits when a photon is absorbed
+  // Notifies listeners by emitting when a photon is absorbed
   public readonly photonAbsorbedEmitter: Emitter<[ Photon ]>;
 
   // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.

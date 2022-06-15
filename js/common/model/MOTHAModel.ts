@@ -76,10 +76,10 @@ class MOTHAModel {
    * @param initialPredictiveModel
    * @param providedOptions
    */
-  public constructor( zoomedInBox: ZoomedInBox,
-                      predictiveModels: HydrogenAtom[],
-                      initialPredictiveModel: HydrogenAtom,
-                      providedOptions: MOTHAModelOptions ) {
+  protected constructor( zoomedInBox: ZoomedInBox,
+                         predictiveModels: HydrogenAtom[],
+                         initialPredictiveModel: HydrogenAtom,
+                         providedOptions: MOTHAModelOptions ) {
 
     assert && assert( predictiveModels.includes( initialPredictiveModel ) );
 
@@ -174,7 +174,7 @@ class MOTHAModel {
    */
   public step( dt: number ): void {
     if ( this.isPlayingProperty.value ) {
-      this.stepPrivate( dt );
+      this._step( dt );
     }
   }
 
@@ -183,14 +183,14 @@ class MOTHAModel {
    */
   public stepOnce(): void {
     assert && assert( !this.isPlayingProperty.value );
-    this.stepPrivate( STEP_ONCE_NORMAL_DT );
+    this._step( STEP_ONCE_NORMAL_DT );
   }
 
   /**
    * Steps the model, scaled by the setting of the time controls.
    * @param dt - the time step, in seconds
    */
-  private stepPrivate( dt: number ): void {
+  private _step( dt: number ): void {
     const dtScaled = dt * this.dtScaleProperty.value;
     this.light.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );

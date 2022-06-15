@@ -33,30 +33,24 @@ import Utils from '../../../../dot/js/Utils.js';
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
 const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 
-type SelfOptions = {
-  radius?: number;
-};
+type SelfOptions = {};
 
 type BilliardBallModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
 export default class BilliardBallModel extends HydrogenAtom {
 
-  public readonly radius: number;
+  //TODO do all HydrogenAtom subclasses have radius?
+  public readonly radius = 50;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {
 
     const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomOptions>()( {
-
-      // SelfOptions
-      radius: 50,
 
       // PredictiveModelOptions
       hasTransitionWavelengths: false
     }, providedOptions );
 
     super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButton_png, zoomedInBox, options );
-
-    this.radius = options.radius;
   }
 
   public override step( dt: number ): void {

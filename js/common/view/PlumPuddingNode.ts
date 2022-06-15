@@ -17,10 +17,11 @@ import ElectronNode from './ElectronNode.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = EmptyObjectType;
 
-type PlumPuddingNodeOptions = SelfOptions & HydrogenAtomNodeOptions;
+type PlumPuddingNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
 
 export default class PlumPuddingNode extends HydrogenAtomNode {
 
