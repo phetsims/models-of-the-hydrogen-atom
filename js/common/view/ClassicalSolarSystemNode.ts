@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * ClassicalSolarSystemNode shows the "Classical Solar System" representation of the hydrogen atom.
+ * ClassicalSolarSystemNode shows the "Classical Solar System" model of the hydrogen atom.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

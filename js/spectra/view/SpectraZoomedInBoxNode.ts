@@ -18,6 +18,8 @@ import PhotonNode from '../../common/view/PhotonNode.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ClassicalSolarSystemNode from '../../common/view/ClassicalSolarSystemNode.js';
+import BohrNode from '../../common/view/BohrNode.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 const VIEW_BOX_SIZE = new Dimension2( 400, 400 );
 
@@ -45,21 +47,22 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
     super( model.zoomedInBox, modelViewTransform, options );
 
-    const billiardBallNode = new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'billiardBallNode' )
-    } );
-    this.contentsNode.addChild( billiardBallNode );
-
-    const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'plumPuddingNode' )
-    } );
-    this.contentsNode.addChild( plumPuddingNode );
-
-    const classicalSolarSystemNode = new ClassicalSolarSystemNode( model.classicalSolarSystemModel,
-      model.hydrogenAtomProperty, modelViewTransform, {
-        tandem: options.tandem.createTandem( 'classicalSolarSystemNode' )
-      } );
-    this.contentsNode.addChild( classicalSolarSystemNode );
+    this.contentsNode.addChild( new Node( {
+      children: [
+        new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
+          tandem: options.tandem.createTandem( 'billiardBallNode' )
+        } ),
+        new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform, {
+          tandem: options.tandem.createTandem( 'plumPuddingNode' )
+        } ),
+        new ClassicalSolarSystemNode( model.classicalSolarSystemModel, model.hydrogenAtomProperty, modelViewTransform, {
+          tandem: options.tandem.createTandem( 'classicalSolarSystemNode' )
+        } ),
+        new BohrNode( model.bohrModel, model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform, {
+          tandem: options.tandem.createTandem( 'bohrNode' )
+        } )
+      ]
+    } ) );
 
     const photonNodes: PhotonNode[] = [];
 

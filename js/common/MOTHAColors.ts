@@ -214,6 +214,20 @@ const MOTHAColors = {
 
   billiardBallHighlightColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'billiardBallHighlightColor', {
     default: 'rgb( 255, 141, 21 )'
+  } ),
+
+  //------------------------------------------------------------------------------------------------------------------
+  // Miscellaneous
+  //------------------------------------------------------------------------------------------------------------------
+
+  orbitStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'orbitStroke', {
+    default: 'white',
+    projector: 'black'
+  } ),
+
+  stateDisplayFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'stateDisplayFill', {
+    default: 'white',
+    projector: 'black'
   } )
 };
 

@@ -36,6 +36,7 @@ import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import MOTHAUtils from '../MOTHAUtils.js';
+import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
 import Proton from './Proton.js';
@@ -79,7 +80,7 @@ export default class BohrModel extends HydrogenAtom {
   public readonly electron: Electron;
 
   // electron state number
-  public readonly electronStateProperty: Property<number>;
+  public readonly electronStateProperty: NumberProperty;
 
   // time that the electron has been in its current state
   private readonly timeInStateProperty: Property<number>;
@@ -117,6 +118,7 @@ export default class BohrModel extends HydrogenAtom {
 
     this.electronStateProperty = new NumberProperty( HydrogenAtom.GROUND_STATE, {
       numberType: 'Integer',
+      range: new Range( HydrogenAtom.GROUND_STATE, HydrogenAtom.GROUND_STATE + ORBIT_RADII.length ),
       tandem: options.tandem.createTandem( 'electronStateProperty' ),
       phetioReadOnly: true
     } );
@@ -210,7 +212,7 @@ export default class BohrModel extends HydrogenAtom {
    */
   public static getOrbitRadius( state: number ): number {
     assert && assert( isFinite( state ) && Number.isInteger( state ) );
-    assert && assert( state >= 0 && state < ORBIT_RADII.length );
+    assert && assert( state >= HydrogenAtom.GROUND_STATE && state <= HydrogenAtom.GROUND_STATE + ORBIT_RADII.length );
     return ORBIT_RADII[ state - HydrogenAtom.GROUND_STATE ];
   }
 

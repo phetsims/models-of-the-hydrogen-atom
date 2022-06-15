@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * BilliardBallNode shows the billiard-ball representation of the hydrogen atom.
+ * BilliardBallNode shows the "Billiard Ball" model of the hydrogen atom.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
