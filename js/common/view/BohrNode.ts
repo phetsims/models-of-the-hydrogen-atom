@@ -40,20 +40,18 @@ export default class BohrNode extends HydrogenAtomNode {
     }, providedOptions );
 
     // Orbits, centered at the atom's position
-    const orbitCenter = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     const orbitNodes = [];
     const groundState = HydrogenAtom.GROUND_STATE;
     const numberOfStates = BohrModel.getNumberOfStates();
     for ( let state = groundState; state < ( groundState + numberOfStates ); state++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getOrbitRadius( state ) );
-      const orbitNode = new OrbitNode( radius, {
-        center: orbitCenter,
-        tandem: options.tandem.createTandem( `orbit${state}Node` )
-      } );
+      const orbitNode = new OrbitNode( radius );
       orbitNodes.push( orbitNode );
     }
-    const orbitsParent = new Node( {
-      children: orbitNodes
+    const orbitsNode = new Node( {
+      children: orbitNodes,
+      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ),
+      tandem: options.tandem.createTandem( 'orbitsNode' )
     } );
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
@@ -75,7 +73,7 @@ export default class BohrNode extends HydrogenAtomNode {
       electronStateDisplay.bottom = zoomedInBoxBounds.bottom - STATE_DISPLAY_MARGIN;
     } );
 
-    options.children = [ orbitsParent, protonNode, electronNode, electronStateDisplay ];
+    options.children = [ orbitsNode, protonNode, electronNode, electronStateDisplay ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }

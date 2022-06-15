@@ -8,8 +8,7 @@
 
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { NodeTranslationOptions, Path, PathOptions } from '../../../../scenery/js/imports.js';
+import { Path, PathOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
@@ -23,7 +22,7 @@ type SelfOptions = {
   yScale?: number;
 };
 
-type OrbitNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<PathOptions, 'tandem'>;
+type OrbitNodeOptions = SelfOptions; // PathOptions not supported
 
 export default class OrbitNode extends Path {
 
