@@ -69,7 +69,7 @@ export default class BohrNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'electronStateDisplay' )
     } );
 
-    // Keep the state display positions in the lower-right corner.
+    // Keep the state display positioned in the lower-right corner of the zoomed-in box.
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
     electronStateDisplay.boundsProperty.link( bounds => {
       electronStateDisplay.right = zoomedInBoxBounds.right - STATE_DISPLAY_MARGIN;
