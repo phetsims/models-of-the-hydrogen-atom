@@ -11,7 +11,7 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -30,7 +30,7 @@ type SelfOptions = {
   direction?: number;
 };
 
-export type ParticleOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'tandem'>; //TODO PickRequired tandem
+export type ParticleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Particle extends PhetioObject {
 
@@ -55,15 +55,18 @@ export default class Particle extends PhetioObject {
     this.radius = options.radius;
 
     this.positionProperty = new Vector2Property( options.position, {
-      tandem: options.tandem.createTandem( 'positionProperty' )
+      tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioReadOnly: true
     } );
 
     this.speedProperty = new NumberProperty( options.speed, {
-      tandem: options.tandem.createTandem( 'speedProperty' )
+      tandem: options.tandem.createTandem( 'speedProperty' ),
+      phetioReadOnly: true
     } );
 
     this.directionProperty = new NumberProperty( options.direction, {
-      tandem: options.tandem.createTandem( 'directionProperty' )
+      tandem: options.tandem.createTandem( 'directionProperty' ),
+      phetioReadOnly: true
     } );
   }
 

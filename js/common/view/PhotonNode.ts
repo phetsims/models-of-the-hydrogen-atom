@@ -18,10 +18,12 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Circle, Color, IColor, Node, NodeOptions, Path, RadialGradient } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from '../model/Photon.js';
 
@@ -39,7 +41,7 @@ const IR_SPARKLE_COLOR = VisibleColor.wavelengthToColor( 715, WAVELENGTH_TO_COLO
 
 type SelfOptions = {};
 
-type PhotonNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'> & PickOptional<NodeOptions, 'tandem'>; //TODO PickRequired<NodeOptions, 'tandem'>
+type PhotonNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'> & PickRequired<NodeOptions, 'tandem'>;
 
 export default class PhotonNode extends Node {
 
@@ -97,11 +99,13 @@ export default class PhotonNode extends Node {
    */
   public static createIcon( wavelength: number, scale = 1 ): Node {
     const photon = new Photon( {
-      wavelength: wavelength
+      wavelength: wavelength,
+      tandem: Tandem.OPT_OUT
     } );
     const modelViewTransform = ModelViewTransform2.createIdentity();
     return new PhotonNode( photon, modelViewTransform, {
-      scale: scale
+      scale: scale,
+      tandem: Tandem.OPT_OUT
     } );
   }
 }

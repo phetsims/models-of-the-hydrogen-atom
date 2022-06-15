@@ -31,15 +31,63 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import Utils from '../../../../dot/js/Utils.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import MOTHAUtils from '../MOTHAUtils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Electron from './Electron.js';
+import Proton from './Proton.js';
+import Photon from './Photon.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // Radius of each orbit supported by this model. These are distorted to fit in zoomedInBox.
 const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
+
+// Probability that a photon will be absorbed, [0,1]
+const PHOTON_ABSORPTION_PROBABILITY = 1.0;
+
+// Probability that a photon will cause stimulated emission, [0,1]
+const PHOTON_STIMULATED_EMISSION_PROBABILITY = PHOTON_ABSORPTION_PROBABILITY;
+
+// Probability that a photon will be emitted, [0,1]
+const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
+
+// Change in orbit angle per dt for ground state orbit
+const ELECTRON_ANGLE_DELTA = Utils.toRadians( 10 );
+
+// Wavelengths must be less than this close to be considered equal
+const WAVELENGTH_CLOSENESS_THRESHOLD = 0.5;
+
+// How close an emitted photon is placed to the photon that causes stimulated emission
+const STIMULATED_EMISSION_X_OFFSET = 10;
 
 type SelfOptions = {};
 
 export type BohrModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 
 export default class BohrModel extends HydrogenAtom {
+
+  public readonly proton: Proton;
+  public readonly electron: Electron;
+
+  // electron state number
+  public readonly electronStateProperty: Property<number>;
+
+  // time that the electron has been in its current state
+  private readonly timeInStateProperty: Property<number>;
+
+  // current angle of electron
+  private readonly electronAngleProperty: Property<number>;
+
+  // offset of the electron from the atom's center
+  private readonly electronOffsetProperty: IReadOnlyProperty<Vector2>;
+
+  // minimum time (simulation clock time) that electron stays in a state before emission can occur
+  public static MIN_TIME_IN_STATE = 50;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
 
@@ -50,18 +98,173 @@ export default class BohrModel extends HydrogenAtom {
     }, providedOptions );
 
     super( modelsOfTheHydrogenAtomStrings.bohr, bohrButton_png, zoomedInBox, options );
+
+    this.proton = new Proton( {
+      position: this.position,
+      tandem: options.tandem.createTandem( 'proton' )
+    } );
+
+    this.electron = new Electron( {
+      //TODO position is not properly initialized
+      tandem: options.tandem.createTandem( 'electron' )
+    } );
+
+    this.electronStateProperty = new NumberProperty( HydrogenAtom.GROUND_STATE, {
+      numberType: 'Integer',
+      tandem: options.tandem.createTandem( 'electronStateProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this.timeInStateProperty = new NumberProperty( 0, {
+      tandem: options.tandem.createTandem( 'timeInStateProperty' ),
+      phetioReadOnly: true
+    } );
+
+    // When the electron changes state, reset timeInStateProperty.
+    //TODO this is an ordering problem for restoring PhET-iO state
+    this.electronStateProperty.link( electronState => {
+      this.timeInStateProperty.value = 0;
+    } );
+
+    //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
+    this.electronAngleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
+      tandem: options.tandem.createTandem( 'timeInStateProperty' ),
+      phetioReadOnly: true
+    } );
+
+    //TODO make this go away, just set electron.positionProperty directly
+    this.electronOffsetProperty = new DerivedProperty(
+      [ this.electronStateProperty, this.electronAngleProperty ],
+      ( state, angle ) => {
+        const radius = BohrModel.getOrbitRadius( state );
+        return MOTHAUtils.polarToCartesian( radius, angle );
+      }, {
+        tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO )
+      } );
+
+    this.electronOffsetProperty.link( electronOffset => {
+      this.electron.positionProperty.value = this.position.plus( electronOffset );
+    } );
+  }
+
+  //----------------------------------------------------------------------------
+  // HydrogenAtom overrides
+  //----------------------------------------------------------------------------
+
+  public override reset(): void {
+    this.proton.reset();
+    this.electron.reset();
+    this.electronStateProperty.reset();
+    this.timeInStateProperty.reset();
+    this.electronAngleProperty.reset();
+
+    super.reset();
   }
 
   public override step( dt: number ): void {
-    //TODO
+
+    // Keep track of how long the electron has been in its current state.
+    this.timeInStateProperty.value += dt;
+
+    // Advance the electron along its orbit
+    this.electronAngleProperty.value = this.calculateNewElectronAngle( dt );
+
+    // Attempt to emit a photon
+    this.attemptSpontaneousEmission();
+  }
+
+  /**
+   * Calculates the new electron angle for some time step.
+   * Subclasses may override this to produce different oscillation behavior.
+   */
+  protected calculateNewElectronAngle( dt: number ): number {
+    const electronState = this.electronStateProperty.value;
+    const deltaAngle = dt * ( ELECTRON_ANGLE_DELTA / ( electronState * electronState ) );
+    return this.electronAngleProperty.value - deltaAngle; // clockwise
+  }
+
+  public override movePhoton( photon: Photon, dt: number ): void {
+    const absorbed = this.attemptAbsorption( photon );
+    if ( !absorbed ) {
+      this.attemptStimulatedEmission( photon );
+      super.movePhoton( photon, dt );
+    }
   }
 
   /**
    * Gets the number of electron states that the model supports.
-   * For this model, it's the same as the number of orbits.
+   * This is the same as the number of orbits.
    */
   public static override getNumberOfStates(): number {
     return ORBIT_RADII.length;
+  }
+
+  //----------------------------------------------------------------------------
+  // Orbit methods
+  //----------------------------------------------------------------------------
+
+  /**
+   * Gets the radius for a specified state.
+   */
+  public static getOrbitRadius( state: number ): number {
+    assert && assert( isFinite( state ) && Number.isInteger( state ) );
+    assert && assert( state >= 0 && state < ORBIT_RADII.length );
+    return ORBIT_RADII[ state - HydrogenAtom.GROUND_STATE ];
+  }
+
+  //TODO should we add DerivedProperty this.electronOrbitRadiusProperty?
+  /**
+   * Gets the radius of the electron's orbit. The orbit radius and the electron's angle determine the electron's offset
+   * in Polar coordinates.
+   */
+  public getElectronOrbitRadius(): number {
+    return BohrModel.getOrbitRadius( this.electronStateProperty.value );
+  }
+
+  //----------------------------------------------------------------------------
+  // Wavelength methods
+  //----------------------------------------------------------------------------
+
+  /**
+   * Gets the wavelength that must be absorbed for the electron to transition from state nOld to state nNew,
+   * where nOld < nNew. This algorithm assumes that the ground state is 1.
+   */
+  public static getWavelengthAbsorbed( nOld: number, nNew: number ): number {
+    assert && assert( Number.isInteger( nOld ) && Number.isInteger( nNew ) );
+    assert && assert( HydrogenAtom.GROUND_STATE === 1 );
+    assert && assert( nOld >= HydrogenAtom.GROUND_STATE );
+    assert && assert( nOld < nNew );
+    assert && assert( nNew <= HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() );
+    return 1240.0 / ( 13.6 * ( ( 1.0 / ( nOld * nOld ) ) - ( 1.0 / ( nNew * nNew ) ) ) );
+  }
+
+  /**
+   * Gets the wavelength that is emitted when the electron transitions from state nOld to state nNew,
+   * where newNew < nOld.
+   */
+  public static getWavelengthEmitted( nOld: number, nNew: number ): number {
+    return BohrModel.getWavelengthAbsorbed( nNew, nOld );
+  }
+
+  /**
+   * Gets the wavelength that causes a transition between 2 specified states.
+   */
+  public static getTransitionWavelength( nOld: number, nNew: number ): number {
+    assert && assert( nOld !== nNew );
+    if ( nNew < nOld ) {
+      return this.getWavelengthEmitted( nOld, nNew );
+    }
+    else {
+      return this.getWavelengthAbsorbed( nOld, nNew );
+    }
+  }
+
+  /**
+   * Determines if two wavelengths are "close enough" for the purposes of absorption and emission.
+   */
+  private closeEnough( wavelength1: number, wavelength2: number ): boolean {
+    return ( Math.abs( wavelength1 - wavelength2 ) < WAVELENGTH_CLOSENESS_THRESHOLD );
   }
 
   /**
@@ -86,17 +289,247 @@ export default class BohrModel extends HydrogenAtom {
     return wavelengths;
   }
 
+  //----------------------------------------------------------------------------
+  // Collision detection
+  //----------------------------------------------------------------------------
+
   /**
-   * Gets the wavelength that must be absorbed for the electron to transition from state nOld to state nNew,
-   * where nOld < nNew. This algorithm assumes that the ground state is 1.
+   * Determines whether a photon collides with this atom. In this case, we treat the photon and electron as points,
+   * and see if the points are close enough to cause a collision.
    */
-  public static getWavelengthAbsorbed( nOld: number, nNew: number ): number {
-    assert && assert( Number.isInteger( nOld ) && Number.isInteger( nNew ) );
-    assert && assert( HydrogenAtom.GROUND_STATE === 1 );
-    assert && assert( nOld >= HydrogenAtom.GROUND_STATE );
-    assert && assert( nOld < nNew );
-    assert && assert( nNew <= HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() );
-    return 1240.0 / ( 13.6 * ( ( 1.0 / ( nOld * nOld ) ) - ( 1.0 / ( nNew * nNew ) ) ) );
+  protected collides( photon: Photon ): boolean {
+    const electronPosition = this.electron.positionProperty.value;
+    const photonPosition = photon.positionProperty.value;
+    const collisionCloseness = photon.radius + this.electron.radius;
+    return this.pointsCollide( electronPosition, photonPosition, collisionCloseness );
+  }
+
+  //----------------------------------------------------------------------------
+  // Absorption
+  //----------------------------------------------------------------------------
+
+  /**
+   * Attempts to absorb a specified photon.
+   */
+  private attemptAbsorption( photon: Photon ): boolean {
+
+    let success = false;
+    const currentState = this.electronStateProperty.value;
+
+    // Has the electron been in this state long enough? And was this photon produced by the light?
+    if ( this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE && !photon.wasEmitted ) {
+
+      // Do the photon and electron collide?
+      const collide = this.collides( photon );
+      if ( collide ) {
+
+        // Is the photon absorbable, does it have a transition wavelength?
+        let canAbsorb = false;
+        let newState = 0;
+        const maxState = HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
+        for ( let n = currentState + 1; n <= maxState && !canAbsorb; n++ ) {
+          const transitionWavelength = BohrModel.getWavelengthAbsorbed( currentState, n );
+          if ( this.closeEnough( photon.wavelength, transitionWavelength ) ) {
+            canAbsorb = true;
+            newState = n;
+          }
+        }
+
+        // Is the transition that would occur allowed?
+        if ( !BohrModel.absorptionIsAllowed( currentState, newState ) ) {
+          return false;
+        }
+
+        // Absorb the photon with some probability...
+        if ( canAbsorb && BohrModel.absorptionIsCertain() ) {
+
+          // absorb photon
+          success = true;
+          this.photonAbsorbedEmitter.emit( photon );
+
+          // move electron to new state
+          this.electronStateProperty.value = newState;
+        }
+      }
+    }
+
+    return success;
+  }
+
+  /**
+   * Probabilistically determines whether to absorb a photon.
+   */
+  protected static absorptionIsCertain(): boolean {
+    return dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY;
+  }
+
+  /**
+   * Determines if a proposed state transition caused by absorption is legal. Always true for Bohr.
+   */
+  private static absorptionIsAllowed( nOld: number, nNew: number ): boolean {
+    return true;
+  }
+
+  //----------------------------------------------------------------------------
+  // Stimulated Emission
+  //----------------------------------------------------------------------------
+
+  /**
+   * Attempts to stimulate emission with a specified photon.
+   *
+   * Definition of stimulated emission, for state m < n:
+   * If an electron in state n gets hit by a photon whose absorption
+   * would cause a transition from state m to n, then the electron
+   * should drop to state m and emit a photon.  The emitted photon
+   * should be the same wavelength and be traveling alongside the
+   * original photon.
+   */
+  private attemptStimulatedEmission( photon: Photon ): boolean {
+
+    let success = false;
+    const currentState = this.electronStateProperty.value;
+
+    // Are we in some state other than the ground state?
+    // Has the electron been in this state long enough?
+    // Was this photon produced by the light?
+    if ( currentState > HydrogenAtom.GROUND_STATE &&
+         this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE &&
+         !photon.wasEmitted ) {
+
+      // Do the photon and electron collide?
+      const collide = this.collides( photon );
+      if ( collide ) {
+
+        // Can this photon stimulate emission, does it have a transition wavelength?
+        let canStimulateEmission = false;
+        let newState = 0;
+        for ( let state = HydrogenAtom.GROUND_STATE; state < currentState && !canStimulateEmission; state++ ) {
+          const transitionWavelength = BohrModel.getWavelengthAbsorbed( state, currentState );
+          if ( this.closeEnough( photon.wavelength, transitionWavelength ) ) {
+            canStimulateEmission = true;
+            newState = state;
+          }
+        }
+
+        // Is the transition that would occur allowed?
+        if ( !this.stimulatedEmissionIsAllowed( currentState, newState ) ) {
+          return false;
+        }
+
+        // Emit a photon with some probability...
+        if ( canStimulateEmission && BohrModel.stimulatedEmissionIsCertain() ) {
+
+          // This algorithm assumes that photons are moving vertically from bottom to top.
+          assert && assert( photon.directionProperty.value === Utils.toRadians( -90 ) );
+
+          // Create and emit a photon
+          success = true;
+          this.photonEmittedEmitter.emit( new Photon( {
+            wavelength: photon.wavelength,
+            direction: photon.directionProperty.value,
+            position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
+            wasEmitted: true,
+            tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
+          } ) );
+
+          // move electron to new state
+          this.electronStateProperty.value = newState;
+        }
+      }
+    }
+
+    return success;
+  }
+
+  /**
+   * Probabilistically determines whether the atom will emit a photon via stimulated emission.
+   */
+  private static stimulatedEmissionIsCertain(): boolean {
+    return dotRandom.nextDouble() < PHOTON_STIMULATED_EMISSION_PROBABILITY;
+  }
+
+  /**
+   * Determines if a proposed state transition caused by stimulated emission is legal.
+   * A Bohr transition is legal if the 2 states are different and n >= ground state.
+   */
+  protected stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
+    return ( ( nOld !== nNew ) && ( nNew >= HydrogenAtom.GROUND_STATE ) );
+  }
+
+  //----------------------------------------------------------------------------
+  // Spontaneous Emission
+  //----------------------------------------------------------------------------
+
+  /**
+   * Attempts to emit a photon from the electron's location, in a random direction.
+   */
+  private attemptSpontaneousEmission(): boolean {
+
+    let success = false;
+    const currentState = this.electronStateProperty.value;
+
+    // Are we in some state other than the ground state?
+    // Has the electron been in this state long enough?
+    if ( currentState > HydrogenAtom.GROUND_STATE &&
+         this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE ) {
+
+      //  Emit a photon with some probability...
+      if ( BohrModel.spontaneousEmissionIsCertain() ) {
+
+        const newState = this.chooseLowerElectronState();
+        if ( newState === -1 ) {
+          // For some subclasses, there may be no valid transition.
+          return false;
+        }
+
+        // Create and emit a photon
+        success = true;
+        this.photonEmittedEmitter.emit( new Photon( {
+          wavelength: BohrModel.getWavelengthEmitted( currentState, newState ),
+          position: this.getSpontaneousEmissionPosition(),
+          direction: MOTHAUtils.nextAngle(),
+          wasEmitted: true,
+          tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
+        } ) );
+
+        // move electron to new state
+        this.electronStateProperty.value = newState;
+      }
+    }
+
+    return success;
+  }
+
+  /**
+   * Probabilistically determines whether not the atom will spontaneously emit a photon.
+   */
+  private static spontaneousEmissionIsCertain(): boolean {
+    return dotRandom.nextDouble() < PHOTON_SPONTANEOUS_EMISSION_PROBABILITY;
+  }
+
+  /**
+   * Chooses a new state for the electron.
+   * The state chosen is a lower state.
+   * This is used when moving to a lower state, during spontaneous emission.
+   * Each lower state has the same probability of being chosen.
+   *
+   * @returns positive state number, -1 if there is no state could be chosen
+   */
+  protected chooseLowerElectronState(): number {
+    const currentState = this.electronStateProperty.value;
+    let newState = HydrogenAtom.GROUND_STATE;
+    if ( currentState > HydrogenAtom.GROUND_STATE + 1 ) {
+      newState = HydrogenAtom.GROUND_STATE + dotRandom.nextIntBetween( 0, currentState - HydrogenAtom.GROUND_STATE );
+    }
+    return newState;
+  }
+
+  /**
+   * Gets the position of a photon created via spontaneous emission.
+   * The default behavior is to create the photon at the electron's position.
+   */
+  protected getSpontaneousEmissionPosition(): Vector2 {
+    return this.electron.positionProperty.value;
   }
 }
 

@@ -28,6 +28,7 @@ import { LightMode, LightModeValues } from './LightMode.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -160,7 +161,8 @@ export default class Light {
   private createPhoton(): void {
     this.photonCreatedEmitter.emit( new Photon( {
       position: this.getNextPhotonPosition(),
-      wavelength: this.getNextPhotonWavelength()
+      wavelength: this.getNextPhotonWavelength(),
+      tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
     } ) );
   }
 
@@ -171,7 +173,8 @@ export default class Light {
   public createPhotonAtCenter( wavelength: number ): void {
     this.photonCreatedEmitter.emit( new Photon( {
       position: new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ),
-      wavelength: wavelength
+      wavelength: wavelength,
+      tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
     } ) );
   }
 

@@ -102,8 +102,10 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     //TODO make this go away, just set electron.positionProperty directly
     this.electronOffsetProperty = new DerivedProperty(
       [ this.electronDistanceProperty, this.electronAngleProperty ],
-      ( distance, angle ) => MOTHAUtils.polarToCartesian( distance, angle )
-    );
+      ( distance, angle ) => MOTHAUtils.polarToCartesian( distance, angle ), {
+        tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO )
+      } );
 
     this.electronOffsetProperty.link( electronOffset => {
       this.electron.positionProperty.value = this.position.plus( electronOffset );
@@ -134,8 +136,8 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
   public override step( dt: number ): void {
     if ( !this.isDestroyedProperty.value ) {
 
-      // increment the orbit angle
-      this.electronAngleProperty.value += ( this.electronAngleDeltaProperty.value * dt );
+      // decrement the orbit angle, so the orbit is clockwise
+      this.electronAngleProperty.value -= ( this.electronAngleDeltaProperty.value * dt );
 
       // increase the rate of change of the orbit angle
       this.electronAngleDeltaProperty.value *= ELECTRON_ACCELERATION;

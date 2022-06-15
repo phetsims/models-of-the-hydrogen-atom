@@ -39,6 +39,7 @@ import Electron from './Electron.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -93,7 +94,8 @@ class PlumPuddingModel extends HydrogenAtom {
 
     //TODO make this go away, just set electron.positionProperty directly
     this.electronOffsetProperty = new Vector2Property( Vector2.ZERO, {
-      tandem: options.tandem.createTandem( 'electronOffsetProperty' )
+      tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
+      phetioReadOnly: true
     } );
 
     this.electronOffsetProperty.link( electronOffset => {
@@ -217,7 +219,8 @@ class PlumPuddingModel extends HydrogenAtom {
         position: this.electron.positionProperty.value, // at the electron's position
         wavelength: PHOTON_EMISSION_WAVELENGTH,
         direction: MOTHAUtils.nextAngle(),
-        wasEmitted: true
+        wasEmitted: true,
+        tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
       } ) );
     }
   }

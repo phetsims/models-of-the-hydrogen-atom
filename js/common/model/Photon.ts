@@ -53,8 +53,10 @@ export default class Photon extends Particle {
 
     this.wavelength = options.wavelength;
     this.wasEmitted = options.wasEmitted;
+
     this.hasCollidedProperty = new BooleanProperty( options.hasCollided, {
-      //TODO tandem: options.tandem.createTandem( 'hasCollidedProperty' )
+      tandem: options.tandem.createTandem( 'hasCollidedProperty' ),
+      phetioReadOnly: true
     } );
   }
 
