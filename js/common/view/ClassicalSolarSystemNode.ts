@@ -53,8 +53,6 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
     options.children = [ kaboomNode, protonNode, electronNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
-
-    // this.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
   }
 }
 
