@@ -39,7 +39,7 @@ export default class BohrNode extends HydrogenAtomNode {
       //TODO
     }, providedOptions );
 
-    // Orbits
+    // Orbits, centered at the atom's position
     const orbitCenter = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     const orbitNodes = [];
     const groundState = HydrogenAtom.GROUND_STATE;
