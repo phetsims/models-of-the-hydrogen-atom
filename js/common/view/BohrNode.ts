@@ -20,10 +20,7 @@ import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import BohrModel from '../model/BohrModel.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
-import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
-import MOTHAColors from '../MOTHAColors.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ElectronStateDisplay from './ElectronStateDisplay.js';
 
 // margin between the state display and zoomed-in box
 const STATE_DISPLAY_MARGIN = 15;
@@ -68,24 +65,18 @@ export default class BohrNode extends HydrogenAtomNode {
     } );
 
     assert && assert( hydrogenAtom.electronStateProperty.range );
-    const stateDisplayNode = new NumberDisplay( hydrogenAtom.electronStateProperty, hydrogenAtom.electronStateProperty.range!, {
-      backgroundFill: null,
-      backgroundStroke: null,
-      valuePattern: modelsOfTheHydrogenAtomStrings.nEqualsValue,
-      textOptions: {
-        font: new PhetFont( 16 ),
-        fill: MOTHAColors.stateDisplayFillProperty
-      }
+    const electronStateDisplay = new ElectronStateDisplay( hydrogenAtom.electronStateProperty, {
+      tandem: options.tandem.createTandem( 'electronStateDisplay' )
     } );
 
     // Keep the state display positions in the lower-right corner.
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
-    stateDisplayNode.boundsProperty.link( bounds => {
-      stateDisplayNode.right = zoomedInBoxBounds.right - STATE_DISPLAY_MARGIN;
-      stateDisplayNode.bottom = zoomedInBoxBounds.bottom - STATE_DISPLAY_MARGIN;
+    electronStateDisplay.boundsProperty.link( bounds => {
+      electronStateDisplay.right = zoomedInBoxBounds.right - STATE_DISPLAY_MARGIN;
+      electronStateDisplay.bottom = zoomedInBoxBounds.bottom - STATE_DISPLAY_MARGIN;
     } );
 
-    options.children = [ orbitsParent, protonNode, electronNode, stateDisplayNode ];
+    options.children = [ orbitsParent, protonNode, electronNode, electronStateDisplay ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }
