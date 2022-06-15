@@ -25,7 +25,6 @@
  */
 
 import bohrButton_png from '../../../images/bohrButton_png.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -44,6 +43,8 @@ import Photon from './Photon.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 // Radius of each orbit supported by this model. These are distorted to fit in zoomedInBox.
 const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
@@ -68,7 +69,9 @@ const STIMULATED_EMISSION_X_OFFSET = 10;
 
 type SelfOptions = EmptyObjectType;
 
-export type BohrModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
+export type BohrModelOptions = SelfOptions &
+  PickOptional<HydrogenAtomOptions, 'displayName' | 'iconHTMLImageElement'> &
+  PickRequired<HydrogenAtomOptions, 'tandem'>;
 
 export default class BohrModel extends HydrogenAtom {
 
@@ -95,10 +98,12 @@ export default class BohrModel extends HydrogenAtom {
     const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
+      displayName: modelsOfTheHydrogenAtomStrings.bohr,
+      iconHTMLImageElement: bohrButton_png,
       hasTransitionWavelengths: true
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.bohr, bohrButton_png, zoomedInBox, options );
+    super( zoomedInBox, options );
 
     this.proton = new Proton( {
       position: this.position,

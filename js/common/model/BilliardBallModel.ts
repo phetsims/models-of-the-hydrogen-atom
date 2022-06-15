@@ -36,7 +36,8 @@ const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 
 type SelfOptions = EmptyObjectType;
 
-type BilliardBallModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
+type BilliardBallModelOptions = SelfOptions &
+  StrictOmit<HydrogenAtomOptions, 'displayName' | 'iconHTMLImageElement' | 'hasTransitionWavelengths'>;
 
 export default class BilliardBallModel extends HydrogenAtom {
 
@@ -47,11 +48,13 @@ export default class BilliardBallModel extends HydrogenAtom {
 
     const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
-      // PredictiveModelOptions
+      // HydrogenAtomOptions
+      displayName: modelsOfTheHydrogenAtomStrings.billiardBall,
+      iconHTMLImageElement: billiardBallButton_png,
       hasTransitionWavelengths: false
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.billiardBall, billiardBallButton_png, zoomedInBox, options );
+    super( zoomedInBox, options );
   }
 
   public override step( dt: number ): void {

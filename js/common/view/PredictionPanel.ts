@@ -102,7 +102,7 @@ function createRadioButtonContent( predictiveModel: HydrogenAtom ): RectangularR
   const node = new HBox( {
     spacing: 10,
     children: [
-      new Image( predictiveModel.icon, {
+      new Image( predictiveModel.iconHTMLImageElement, {
         scale: 0.2
       } ),
       new Text( predictiveModel.displayName, {

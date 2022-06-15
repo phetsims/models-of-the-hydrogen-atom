@@ -14,31 +14,31 @@
  */
 
 import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
-import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
+import { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
+import BohrModel, { BohrModelOptions } from './BohrModel.js';
 
 type SelfOptions = EmptyObjectType;
 
-type DeBroglieModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
+export type DeBroglieModelOptions = SelfOptions & BohrModelOptions;
 
-//TODO extends BohrModel
-export default class DeBroglieModel extends HydrogenAtom {
+export default class DeBroglieModel extends BohrModel {
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
-      // HydrogenAtomOptions
-      hasTransitionWavelengths: true
+      // DeBroglieModelOptions
+      displayName: modelsOfTheHydrogenAtomStrings.deBroglie,
+      iconHTMLImageElement: deBroglieButton_png
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.deBroglie, deBroglieButton_png, zoomedInBox, options );
+    super( zoomedInBox, options );
   }
 
   public override step( dt: number ): void {

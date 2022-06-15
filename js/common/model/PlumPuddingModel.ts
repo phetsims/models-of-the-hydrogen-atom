@@ -49,7 +49,8 @@ const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon wi
 
 type SelfOptions = EmptyObjectType;
 
-type PlumPuddingModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
+type PlumPuddingModelOptions = SelfOptions &
+  StrictOmit<HydrogenAtomOptions, 'displayName' | 'iconHTMLImageElement' | 'hasTransitionWavelengths'>;
 
 class PlumPuddingModel extends HydrogenAtom {
 
@@ -83,10 +84,12 @@ class PlumPuddingModel extends HydrogenAtom {
     const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
+      displayName: modelsOfTheHydrogenAtomStrings.plumPudding,
+      iconHTMLImageElement: plumPuddingButton_png,
       hasTransitionWavelengths: false
     }, providedOptions );
 
-    super( modelsOfTheHydrogenAtomStrings.plumPudding, plumPuddingButton_png, zoomedInBox, options );
+    super( zoomedInBox, options );
 
     this.electron = new Electron( {
       //TODO position is not properly initialized

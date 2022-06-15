@@ -18,6 +18,8 @@ import ZoomedInBox from './ZoomedInBox.js';
 
 //TODO move numberOfStates, groundState, hasTransitionWavelengths, GROUND_STATE to another base class for those models
 type SelfOptions = {
+  displayName: string; // name of the model shown in the UI
+  iconHTMLImageElement: HTMLImageElement; // icon used to represent the model in the UI
   position?: Vector2; // position in the model coordinate frame
   orientation?: number; // rotation angle, in radians
   numberOfStates?: number; // number of electron states, not relevant to all hydrogen atom models
@@ -29,9 +31,9 @@ export type HydrogenAtomOptions = SelfOptions & PickRequired<PhetioObjectOptions
 
 export default abstract class HydrogenAtom extends PhetioObject {
 
-  public readonly displayName: string;
-  public readonly icon: HTMLImageElement;
   public readonly zoomedInBox: ZoomedInBox; //TODO do all hydrogen-atom models need this?
+  public readonly displayName: string;
+  public readonly iconHTMLImageElement: HTMLImageElement;
   public readonly position: Vector2;
   public readonly orientation: number;
   public readonly numberOfStates: number;
@@ -48,13 +50,10 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public static readonly GROUND_STATE = 1;
 
   /**
-   * @param displayName - name of the model shown in the UI
-   * @param icon - icon used to represent the model in the UI
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
    * @param providedOptions
    */
-  protected constructor( displayName: string, icon: HTMLImageElement, zoomedInBox: ZoomedInBox,
-                         providedOptions: HydrogenAtomOptions ) {
+  protected constructor( zoomedInBox: ZoomedInBox, providedOptions: HydrogenAtomOptions ) {
 
     const options = optionize<HydrogenAtomOptions, SelfOptions, PhetioObjectOptions>()( {
 
@@ -70,9 +69,9 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
     super( options );
 
-    this.displayName = displayName;
-    this.icon = icon;
     this.zoomedInBox = zoomedInBox;
+    this.displayName = options.displayName;
+    this.iconHTMLImageElement = options.iconHTMLImageElement;
     this.position = options.position;
     this.orientation = options.orientation;
     this.numberOfStates = options.numberOfStates;
