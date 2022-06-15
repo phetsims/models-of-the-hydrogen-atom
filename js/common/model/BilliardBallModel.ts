@@ -28,12 +28,13 @@ import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
 const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type BilliardBallModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'hasTransitionWavelengths'>;
 

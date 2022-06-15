@@ -19,8 +19,9 @@ import kaboom_png from '../../../images/kaboom_png.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 
-type SelfOptions = {};
+type SelfOptions = EmptyObjectType;
 
 type ClassicalSolarSystemNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
 
