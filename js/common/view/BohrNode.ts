@@ -64,7 +64,6 @@ export default class BohrNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'electronNode' )
     } );
 
-    assert && assert( hydrogenAtom.electronStateProperty.range );
     const electronStateDisplay = new ElectronStateDisplay( hydrogenAtom.electronStateProperty, {
       tandem: options.tandem.createTandem( 'electronStateDisplay' )
     } );
