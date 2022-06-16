@@ -19,7 +19,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import BohrModel from '../model/BohrModel.js';
 import { Node } from '../../../../scenery/js/imports.js';
-import ZoomedInBox from '../model/ZoomedInBox.js';
 import ElectronStateDisplay from './ElectronStateDisplay.js';
 
 // margin between the state display and zoomed-in box
@@ -32,8 +31,7 @@ type BohrNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'childr
 export default class BohrNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: BohrModel, hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
-                      zoomedInBox: ZoomedInBox, modelViewTransform: ModelViewTransform2,
-                      providedOptions: BohrNodeOptions ) {
+                      modelViewTransform: ModelViewTransform2, providedOptions: BohrNodeOptions ) {
 
     const options = optionize<BohrNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
       //TODO
@@ -66,16 +64,16 @@ export default class BohrNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'electronStateDisplay' )
     } );
 
+    options.children = [ orbitsNode, protonNode, electronNode, electronStateDisplay ];
+
+    super( hydrogenAtom, hydrogenAtomProperty, options );
+
     // Keep the state display positioned in the lower-right corner of the zoomed-in box.
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
     electronStateDisplay.boundsProperty.link( bounds => {
       electronStateDisplay.right = zoomedInBoxBounds.right - STATE_DISPLAY_MARGIN;
       electronStateDisplay.bottom = zoomedInBoxBounds.bottom - STATE_DISPLAY_MARGIN;
     } );
-
-    options.children = [ orbitsNode, protonNode, electronNode, electronStateDisplay ];
-
-    super( hydrogenAtom, hydrogenAtomProperty, options );
   }
 }
 

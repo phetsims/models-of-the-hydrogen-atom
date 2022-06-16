@@ -58,7 +58,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
         new ClassicalSolarSystemNode( model.classicalSolarSystemModel, model.hydrogenAtomProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'classicalSolarSystemNode' )
         } ),
-        new BohrNode( model.bohrModel, model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform, {
+        new BohrNode( model.bohrModel, model.hydrogenAtomProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'bohrNode' )
         } )
       ]
