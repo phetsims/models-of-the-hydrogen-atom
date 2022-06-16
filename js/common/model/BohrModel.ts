@@ -136,7 +136,7 @@ export default class BohrModel extends HydrogenAtom {
 
     //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
     this.electronAngleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
-      tandem: options.tandem.createTandem( 'timeInStateProperty' ),
+      tandem: options.tandem.createTandem( 'electronAngleProperty' ),
       phetioReadOnly: true
     } );
 
