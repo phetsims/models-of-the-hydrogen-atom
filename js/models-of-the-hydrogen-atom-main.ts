@@ -14,31 +14,32 @@ import EnergyLevelsScreen from './energylevels/EnergyLevelsScreen.js';
 import modelsOfTheHydrogenAtomStrings from './modelsOfTheHydrogenAtomStrings.js';
 import SpectraScreen from './spectra/SpectraScreen.js';
 
-const simOptions: SimOptions = {
-
-  // Creates content for the Options dialog, accessible via the PhET menu
-  createOptionsDialogContent: ( tandem: Tandem ) => new MOTHAOptionsNode( {
-    tandem: tandem
-  } ),
-
-  credits: {
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/23 update credits
-    leadDesign: 'Amy Hanson, Sam McKagan',
-    softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-    team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
-          'Noah Podolefsky, Carl Wieman',
-    qualityAssurance: ''
-  }
-};
-
 simLauncher.launch( () => {
-  const sim = new Sim(
-    modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].title,
-    [
-      new SpectraScreen( { tandem: Tandem.ROOT.createTandem( 'spectraScreen' ) } ),
-      new EnergyLevelsScreen( { tandem: Tandem.ROOT.createTandem( 'energyLevelsScreen' ) } )
-    ],
-    simOptions
-  );
+
+  const title = modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].title;
+
+  const screens = [
+    new SpectraScreen( { tandem: Tandem.ROOT.createTandem( 'spectraScreen' ) } ),
+    new EnergyLevelsScreen( { tandem: Tandem.ROOT.createTandem( 'energyLevelsScreen' ) } )
+  ];
+
+  const options: SimOptions = {
+
+    // Creates content for the Options dialog, accessible via the PhET menu
+    createOptionsDialogContent: ( tandem: Tandem ) => new MOTHAOptionsNode( {
+      tandem: tandem
+    } ),
+
+    credits: {
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/23 update credits
+      leadDesign: 'Amy Hanson, Sam McKagan',
+      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
+      team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
+            'Noah Podolefsky, Carl Wieman',
+      qualityAssurance: ''
+    }
+  };
+
+  const sim = new Sim( title, screens, options );
   sim.start();
 } );
