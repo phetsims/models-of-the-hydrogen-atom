@@ -43,9 +43,14 @@ export default class Particle extends PhetioObject {
   public constructor( providedOptions: ParticleOptions ) {
 
     const options = optionize<ParticleOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // SelfOptions
       position: Vector2.ZERO,
       speed: 0,
-      direction: Math.PI / 2 // straight up, in the direction of +y
+      direction: Math.PI / 2, // straight up, in the direction of +y
+
+      // PhetioObjectOptions
+      phetioState: false //TODO
     }, providedOptions );
 
     super( options );
