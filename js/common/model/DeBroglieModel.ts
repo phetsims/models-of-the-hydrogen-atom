@@ -4,11 +4,11 @@
  * DeBroglieModel is a predictive model of the hydrogen atom.
  *
  * DeBroglieModel is identical to BohrModel, but has different visual representations. The different visual
- * representations mean that it requires different methods of handling collision detection and determining electron
- * position. The algorithms for collision detection and calculation of electron position differ greatly for 2D and 3D
- * views. Therefore, this model needs to know something about the view in order to make things look right in 3D. So
- * this model cannot be shown in both 2D and 3D views simultaneously. There are undoubtedly ways to do this, but this
- * simulation does not require multiple simultaneous views of the model.
+ * representations (see DeBroglieView) mean that it requires different methods of handling collision detection
+ * and determining electron position. The algorithms for collision detection and calculation of electron position
+ * differ greatly for 2D and 3D views. Therefore, this model needs to know something about the view in order to
+ * make things look right in 3D. So this model cannot be shown in both 2D and 3D views simultaneously. There are
+ * undoubtedly ways to do this, but this simulation does not require multiple simultaneous views of the model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,12 +22,22 @@ import { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+
+// the different "view" representations for the deBroglie model, selectable via a combo box
+const DeBroglieViewValues = [ 'radial', 'threeD', 'brightness' ] as const;
+export type DeBroglieView = ( typeof DeBroglieViewValues )[number];
 
 type SelfOptions = EmptyObjectType;
 
 export type DeBroglieModelOptions = SelfOptions & BohrModelOptions;
 
 export default class DeBroglieModel extends BohrModel {
+
+  // How much to scale the y dimension for 3D orbits
+  public static ORBIT_3D_Y_SCALE = 0.35;
+
+  public readonly deBroglieViewProperty: StringEnumerationProperty<DeBroglieView>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
@@ -39,6 +49,16 @@ export default class DeBroglieModel extends BohrModel {
     }, providedOptions );
 
     super( zoomedInBox, options );
+
+    this.deBroglieViewProperty = new StringEnumerationProperty( 'radial', {
+      validValues: DeBroglieViewValues,
+      tandem: options.tandem.createTandem( 'deBroglieViewProperty' )
+    } );
+  }
+
+  public override reset(): void {
+    this.deBroglieViewProperty.reset();
+    super.reset();
   }
 
   public override step( dt: number ): void {
