@@ -17,7 +17,8 @@ const MOTHAConstants = {
   SCREEN_VIEW_Y_MARGIN: 20,
 
   // This value is the same as the Java version, to preserve the same relative sizes of things in the model.
-  ZOOM_IN_BOX_MODEL_SIZE: 450,
+  // See ANIMATION_BOX_SIZE in HAConstants.java.
+  ZOOM_IN_BOX_MODEL_SIZE: 475,
 
   // This value is specific to the HTML5 version.
   ZOOM_IN_BOX_VIEW_SIZE: 400,
