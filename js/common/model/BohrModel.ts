@@ -61,7 +61,7 @@ const PHOTON_STIMULATED_EMISSION_PROBABILITY = PHOTON_ABSORPTION_PROBABILITY;
 const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 
 // Change in orbit angle per dt for ground state orbit
-const ELECTRON_ANGLE_DELTA = Utils.toRadians( 10 );
+const ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
 
 // Wavelengths must be less than this close to be considered equal
 const WAVELENGTH_CLOSENESS_THRESHOLD = 0.5;
