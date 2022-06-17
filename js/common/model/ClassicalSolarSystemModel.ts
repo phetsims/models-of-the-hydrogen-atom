@@ -43,9 +43,9 @@ import Proton from './Proton.js';
 import Photon from './Photon.js';
 
 const ELECTRON_DISTANCE = 150; // initial distance from electron to proton
-const ELECTRON_DISTANCE_DELTA = 100; // amount the distance between the proton and electron is reduced per second
+const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the proton and electron is reduced per second
 const MIN_ELECTRON_DISTANCE = 5; // any distance smaller than this is effectively zero
-const ELECTRON_ANGLE_DELTA = Utils.toRadians( 120 ); // initial change in electron's rotation angle per second
+const ELECTRON_ANGLE_DELTA = Utils.toRadians( 600 ); // initial change in electron's rotation angle per second
 const ELECTRON_ACCELERATION = 1.008; // scaling of electronAngleDeltaProperty each time step is called
 
 type SelfOptions = EmptyObjectType;
