@@ -31,8 +31,6 @@ export default class Photon extends Particle {
   public readonly wasEmitted: boolean;
   public hasCollidedProperty: IProperty<boolean>;
 
-  public static INITIAL_SPEED = 300; // distance per second
-
   public constructor( providedOptions: PhotonOptions ) {
 
     const options = optionize<PhotonOptions, SelfOptions, ParticleOptions>()( {
@@ -43,7 +41,7 @@ export default class Photon extends Particle {
 
       // ParticleOptions
       radius: MOTHAConstants.PHOTON_RADIUS,
-      speed: Photon.INITIAL_SPEED
+      speed: MOTHAConstants.PHOTON_INITIAL_SPEED
 
       //TODO phetioType: Photon.PhotonIO,
       //TODO phetioDynamicElement: true

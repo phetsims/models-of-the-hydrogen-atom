@@ -23,13 +23,16 @@ const MOTHAConstants = {
   // This value is specific to the HTML5 version.
   ZOOMED_IN_BOX_VIEW_SIZE: 400,
 
-  // radii in model coordinates, unitless
+  // radii, in model coordinates, unitless
   ELECTRON_RADIUS: 5,
   PROTON_RADIUS: 6,
   NEUTRON_RADIUS: 6,
   PHOTON_RADIUS: 15,
   BILLIARD_BALL_RADIUS: 30,
   PLUM_PUDDING_RADIUS: 30,
+
+  // speeds, in distance per second
+  PHOTON_INITIAL_SPEED: 300,
 
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
 
