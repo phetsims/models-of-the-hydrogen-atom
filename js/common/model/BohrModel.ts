@@ -145,7 +145,7 @@ export default class BohrModel extends HydrogenAtom {
     this.electronOffsetProperty = new DerivedProperty(
       [ this.electronStateProperty, this.electronAngleProperty ],
       ( state, angle ) => {
-        const radius = BohrModel.getOrbitRadius( state );
+        const radius = this.getElectronOrbitRadius( state );
         return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
@@ -209,21 +209,10 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Gets the radius for a specified state.
+   * Gets the radius of an electron's orbit when it's in a specified state.
    */
-  public static getOrbitRadius( state: number ): number {
-    assert && assert( isFinite( state ) && Number.isInteger( state ) );
-    assert && assert( state >= HydrogenAtom.GROUND_STATE && state <= HydrogenAtom.GROUND_STATE + ORBIT_RADII.length );
+  public getElectronOrbitRadius( state: number ): number {
     return ORBIT_RADII[ state - HydrogenAtom.GROUND_STATE ];
-  }
-
-  //TODO should we add DerivedProperty this.electronOrbitRadiusProperty?
-  /**
-   * Gets the radius of the electron's orbit. The orbit radius and the electron's angle determine the electron's offset
-   * in Polar coordinates.
-   */
-  public getElectronOrbitRadius(): number {
-    return BohrModel.getOrbitRadius( this.electronStateProperty.value );
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -231,36 +220,36 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Gets the wavelength that must be absorbed for the electron to transition from state nOld to state nNew,
-   * where nOld < nNew. This algorithm assumes that the ground state is 1.
+   * Gets the wavelength that must be absorbed for the electron to transition from state oldState to state newState,
+   * where oldState < newState. This algorithm assumes that the ground state is 1.
    */
-  public static getWavelengthAbsorbed( nOld: number, nNew: number ): number {
-    assert && assert( Number.isInteger( nOld ) && Number.isInteger( nNew ) );
+  public static getWavelengthAbsorbed( oldState: number, newState: number ): number {
+    assert && assert( Number.isInteger( oldState ) && Number.isInteger( newState ) );
     assert && assert( HydrogenAtom.GROUND_STATE === 1 );
-    assert && assert( nOld >= HydrogenAtom.GROUND_STATE );
-    assert && assert( nOld < nNew );
-    assert && assert( nNew <= HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() );
-    return 1240.0 / ( 13.6 * ( ( 1.0 / ( nOld * nOld ) ) - ( 1.0 / ( nNew * nNew ) ) ) );
+    assert && assert( oldState >= HydrogenAtom.GROUND_STATE );
+    assert && assert( oldState < newState );
+    assert && assert( newState <= HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() );
+    return 1240.0 / ( 13.6 * ( ( 1.0 / ( oldState * oldState ) ) - ( 1.0 / ( newState * newState ) ) ) );
   }
 
   /**
-   * Gets the wavelength that is emitted when the electron transitions from state nOld to state nNew,
-   * where newNew < nOld.
+   * Gets the wavelength that is emitted when the electron transitions from state oldState to state newState,
+   * where newNew < oldState.
    */
-  public static getWavelengthEmitted( nOld: number, nNew: number ): number {
-    return BohrModel.getWavelengthAbsorbed( nNew, nOld );
+  public static getWavelengthEmitted( oldState: number, newState: number ): number {
+    return BohrModel.getWavelengthAbsorbed( newState, oldState );
   }
 
   /**
    * Gets the wavelength that causes a transition between 2 specified states.
    */
-  public static getTransitionWavelength( nOld: number, nNew: number ): number {
-    assert && assert( nOld !== nNew );
-    if ( nNew < nOld ) {
-      return this.getWavelengthEmitted( nOld, nNew );
+  public static getTransitionWavelength( oldState: number, newState: number ): number {
+    assert && assert( oldState !== newState );
+    if ( newState < oldState ) {
+      return this.getWavelengthEmitted( oldState, newState );
     }
     else {
-      return this.getWavelengthAbsorbed( nOld, nNew );
+      return this.getWavelengthAbsorbed( oldState, newState );
     }
   }
 
@@ -340,12 +329,12 @@ export default class BohrModel extends HydrogenAtom {
         }
 
         // Is the transition that would occur allowed?
-        if ( !BohrModel.absorptionIsAllowed( currentState, newState ) ) {
+        if ( !this.absorptionIsAllowed( currentState, newState ) ) {
           return false;
         }
 
         // Absorb the photon with some probability...
-        if ( canAbsorb && BohrModel.absorptionIsCertain() ) {
+        if ( canAbsorb && this.absorptionIsCertain() ) {
 
           // absorb photon
           success = true;
@@ -363,14 +352,14 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Probabilistically determines whether to absorb a photon.
    */
-  protected static absorptionIsCertain(): boolean {
+  protected absorptionIsCertain(): boolean {
     return dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY;
   }
 
   /**
    * Determines if a proposed state transition caused by absorption is legal. Always true for Bohr.
    */
-  private static absorptionIsAllowed( nOld: number, nNew: number ): boolean {
+  private absorptionIsAllowed( oldState: number, newState: number ): boolean {
     return true;
   }
 
@@ -421,7 +410,7 @@ export default class BohrModel extends HydrogenAtom {
         }
 
         // Emit a photon with some probability...
-        if ( canStimulateEmission && BohrModel.stimulatedEmissionIsCertain() ) {
+        if ( canStimulateEmission && this.stimulatedEmissionIsCertain() ) {
 
           // This algorithm assumes that photons are moving vertically from bottom to top.
           assert && assert( photon.directionProperty.value === Utils.toRadians( -90 ) );
@@ -448,7 +437,7 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Probabilistically determines whether the atom will emit a photon via stimulated emission.
    */
-  private static stimulatedEmissionIsCertain(): boolean {
+  private stimulatedEmissionIsCertain(): boolean {
     return dotRandom.nextDouble() < PHOTON_STIMULATED_EMISSION_PROBABILITY;
   }
 
@@ -456,8 +445,8 @@ export default class BohrModel extends HydrogenAtom {
    * Determines if a proposed state transition caused by stimulated emission is legal.
    * A Bohr transition is legal if the 2 states are different and n >= ground state.
    */
-  protected stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
-    return ( ( nOld !== nNew ) && ( nNew >= HydrogenAtom.GROUND_STATE ) );
+  protected stimulatedEmissionIsAllowed( oldState: number, newState: number ): boolean {
+    return ( ( oldState !== newState ) && ( newState >= HydrogenAtom.GROUND_STATE ) );
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -478,7 +467,7 @@ export default class BohrModel extends HydrogenAtom {
          this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE ) {
 
       //  Emit a photon with some probability...
-      if ( BohrModel.spontaneousEmissionIsCertain() ) {
+      if ( this.spontaneousEmissionIsCertain() ) {
 
         const newState = this.chooseLowerElectronState();
         if ( newState === -1 ) {
@@ -507,7 +496,7 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Probabilistically determines whether the atom will spontaneously emit a photon.
    */
-  private static spontaneousEmissionIsCertain(): boolean {
+  private spontaneousEmissionIsCertain(): boolean {
     return dotRandom.nextDouble() < PHOTON_SPONTANEOUS_EMISSION_PROBABILITY;
   }
 

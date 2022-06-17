@@ -42,7 +42,7 @@ export default class BohrNode extends HydrogenAtomNode {
     const minState = HydrogenAtom.GROUND_STATE;
     const maxState = HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
     for ( let state = minState; state <= maxState; state++ ) {
-      const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getOrbitRadius( state ) );
+      const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( state ) );
       const orbitNode = new OrbitNode( radius );
       orbitNodes.push( orbitNode );
     }
