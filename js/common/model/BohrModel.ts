@@ -233,7 +233,7 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   /**
-   * Gets the wavelength that is emitted when the electron transitions from state oldState to state newState,
+   * Gets the wavelength that is emitted when the electron transitions from oldState to newState,
    * where newNew < oldState.
    */
   public static getWavelengthEmitted( oldState: number, newState: number ): number {
@@ -443,7 +443,7 @@ export default class BohrModel extends HydrogenAtom {
 
   /**
    * Determines if a proposed state transition caused by stimulated emission is legal.
-   * A Bohr transition is legal if the 2 states are different and n >= ground state.
+   * A Bohr transition is legal if the 2 states are different and newState >= ground state.
    */
   protected stimulatedEmissionIsAllowed( oldState: number, newState: number ): boolean {
     return ( ( oldState !== newState ) && ( newState >= HydrogenAtom.GROUND_STATE ) );
@@ -501,10 +501,8 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   /**
-   * Chooses a new state for the electron.
-   * The state chosen is a lower state.
-   * This is used when moving to a lower state, during spontaneous emission.
-   * Each lower state has the same probability of being chosen.
+   * Chooses a new state for the electron. The state chosen is a lower state. This is used when moving to
+   * a lower state, during spontaneous emission. Each lower state has the same probability of being chosen.
    *
    * @returns positive state number, -1 if there is no state could be chosen
    */
