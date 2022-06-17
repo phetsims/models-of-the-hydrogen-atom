@@ -2,21 +2,19 @@
 
 /**
  * ZoomedInBox is the part of the box of hydrogen that we're seeing in the zoomed-in view.
- * The origin (0,0) is at the center of the box.
+ * The box is square, and its origin (0,0) is at the center of the box.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
 
 export default class ZoomedInBox extends Bounds2 {
 
-  //TODO Java implementation (see HAConstants.ANIMATION_BOX_SIZE) indicates that this needs to be square, is that true?
-  public constructor( size: Dimension2 ) {
-    super( -size.width / 2, -size.height / 2, size.width / 2, size.height / 2 );
+  public constructor( size: number ) {
+    super( -size / 2, -size / 2, size / 2, size / 2 );
   }
 
   public containsPhoton( photon: Photon ): boolean {

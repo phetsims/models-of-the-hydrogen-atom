@@ -29,6 +29,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
@@ -42,7 +43,7 @@ type BilliardBallModelOptions = SelfOptions &
 export default class BilliardBallModel extends HydrogenAtom {
 
   //TODO do all HydrogenAtom subclasses have radius?
-  public readonly radius = 50;
+  public readonly radius = MOTHAConstants.BILLIARD_BALL_RADIUS;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {
 

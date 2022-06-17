@@ -47,7 +47,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
-// Radius of each orbit supported by this model. These are distorted to fit in zoomedInBox.
+// Radius of each electron orbit, ordered by increasing electron state number.
+// These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOM_IN_BOX_MODEL_SIZE.
 const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 
 // Probability that a photon will be absorbed, [0,1]

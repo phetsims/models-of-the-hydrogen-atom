@@ -41,6 +41,7 @@ import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -54,7 +55,7 @@ type PlumPuddingModelOptions = SelfOptions &
 
 class PlumPuddingModel extends HydrogenAtom {
 
-  public readonly radius = 50;
+  public readonly radius = MOTHAConstants.PLUM_PUDDING_RADIUS;
 
   public readonly electron: Electron;
 

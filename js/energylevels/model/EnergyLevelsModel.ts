@@ -14,7 +14,7 @@ import MOTHAModel, { MOTHAModelOptions } from '../../common/model/MOTHAModel.js'
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
+import MOTHAConstants from '../../common/MOTHAConstants.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -33,7 +33,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
       //TODO
     }, providedOptions );
 
-    const zoomedInBox = new ZoomedInBox( new Dimension2( 800, 800 ) );
+    const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOM_IN_BOX_MODEL_SIZE );
 
     const bohrModel = new BohrModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'bohrModel' )

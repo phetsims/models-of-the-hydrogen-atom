@@ -7,7 +7,6 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
@@ -19,6 +18,7 @@ import ElectronNode from './ElectronNode.js';
 import NeutronNode from './NeutronNode.js';
 import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 // constants
 const LABEL_OPTIONS = {
@@ -26,7 +26,6 @@ const LABEL_OPTIONS = {
   fill: MOTHAColors.legendTextFillProperty,
   maxWidth: 120 // i18n, determined empirically
 };
-const ICON_SCALE = 0.5;
 
 // Describes an item in the legend
 type LegendItem = {
@@ -34,7 +33,9 @@ type LegendItem = {
   label: string;
 };
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = {
+  iconScale?: number;
+};
 
 type LegendAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
   PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
@@ -44,6 +45,9 @@ export default class LegendAccordionBox extends AccordionBox {
   public constructor( providedOptions: LegendAccordionBoxOptions ) {
 
     const options = optionize<LegendAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+
+      // SelfOptions
+      iconScale: MOTHAConstants.ZOOM_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOM_IN_BOX_MODEL_SIZE,
 
       // AccordionBoxOptions
       fill: null,
@@ -61,10 +65,10 @@ export default class LegendAccordionBox extends AccordionBox {
     } );
 
     const items: LegendItem[] = [
-      { icon: ElectronNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.electron },
-      { icon: ProtonNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.proton },
-      { icon: NeutronNode.createIcon( ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.neutron },
-      { icon: PhotonNode.createIcon( 480, ICON_SCALE ), label: modelsOfTheHydrogenAtomStrings.photon }
+      { icon: ElectronNode.createIcon( options.iconScale ), label: modelsOfTheHydrogenAtomStrings.electron },
+      { icon: ProtonNode.createIcon( options.iconScale ), label: modelsOfTheHydrogenAtomStrings.proton },
+      { icon: NeutronNode.createIcon( options.iconScale ), label: modelsOfTheHydrogenAtomStrings.neutron },
+      { icon: PhotonNode.createIcon( 480, options.iconScale ), label: modelsOfTheHydrogenAtomStrings.photon }
     ];
 
     const iconGroup = new AlignGroup(); // to make all icons have the same effective dimensions

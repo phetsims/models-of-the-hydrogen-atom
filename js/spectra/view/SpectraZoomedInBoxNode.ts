@@ -16,12 +16,12 @@ import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
 import BilliardBallNode from '../../common/view/BilliardBallNode.js';
 import PhotonNode from '../../common/view/PhotonNode.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ClassicalSolarSystemNode from '../../common/view/ClassicalSolarSystemNode.js';
 import BohrNode from '../../common/view/BohrNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import MOTHAConstants from '../../common/MOTHAConstants.js';
 
-const VIEW_BOX_SIZE = new Dimension2( 400, 400 );
+const VIEW_SIZE = MOTHAConstants.ZOOM_IN_BOX_VIEW_SIZE;
 
 type SelfOptions = EmptyObjectType;
 
@@ -39,9 +39,9 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
     // Our model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.
     // Our view uses a left-handed coordinate system: +x right, +y down, +angle clockwise.
     // The origin is at the center of the zoomed-in box.
-    const viewOffset = new Vector2( VIEW_BOX_SIZE.width / 2, VIEW_BOX_SIZE.height );
-    const xScale = VIEW_BOX_SIZE.width / model.zoomedInBox.width;
-    const yScale = VIEW_BOX_SIZE.height / model.zoomedInBox.height;
+    const viewOffset = new Vector2( VIEW_SIZE / 2, VIEW_SIZE );
+    const xScale = VIEW_SIZE / model.zoomedInBox.width;
+    const yScale = VIEW_SIZE / model.zoomedInBox.height;
     assert && assert( xScale === yScale, 'box is not scaled the same in both dimensions, is your box square?' );
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( viewOffset, xScale, -yScale );
 

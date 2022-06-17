@@ -16,11 +16,19 @@ const MOTHAConstants = {
   SCREEN_VIEW_X_MARGIN: 20,
   SCREEN_VIEW_Y_MARGIN: 20,
 
+  // This value is the same as the Java version, to preserve the same relative sizes of things in the model.
+  ZOOM_IN_BOX_MODEL_SIZE: 450,
+
+  // This value is specific to the HTML5 version.
+  ZOOM_IN_BOX_VIEW_SIZE: 400,
+
   // radii in model coordinates, unitless
-  ELECTRON_RADIUS: 10,
-  PROTON_RADIUS: 11,
-  NEUTRON_RADIUS: 11,
-  PHOTON_RADIUS: 25,
+  ELECTRON_RADIUS: 5,
+  PROTON_RADIUS: 6,
+  NEUTRON_RADIUS: 6,
+  PHOTON_RADIUS: 15,
+  BILLIARD_BALL_RADIUS: 30,
+  PLUM_PUDDING_RADIUS: 30,
 
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
 
