@@ -31,7 +31,7 @@ export default class Photon extends Particle {
   public readonly wasEmitted: boolean;
   public hasCollidedProperty: IProperty<boolean>;
 
-  public static INITIAL_SPEED = 400; // distance per second
+  public static INITIAL_SPEED = 300; // distance per second
 
   public constructor( providedOptions: PhotonOptions ) {
 
