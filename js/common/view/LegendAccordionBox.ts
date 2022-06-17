@@ -47,7 +47,7 @@ export default class LegendAccordionBox extends AccordionBox {
     const options = optionize<LegendAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
 
       // SelfOptions
-      iconScale: MOTHAConstants.ZOOM_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOM_IN_BOX_MODEL_SIZE,
+      iconScale: MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE,
 
       // AccordionBoxOptions
       fill: null,

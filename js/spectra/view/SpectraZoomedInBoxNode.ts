@@ -21,7 +21,7 @@ import BohrNode from '../../common/view/BohrNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 
-const VIEW_SIZE = MOTHAConstants.ZOOM_IN_BOX_VIEW_SIZE;
+const VIEW_SIZE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE;
 
 type SelfOptions = EmptyObjectType;
 

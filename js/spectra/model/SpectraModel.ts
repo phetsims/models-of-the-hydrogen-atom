@@ -39,7 +39,7 @@ export default class SpectraModel extends MOTHAModel {
       //TODO
     }, providedOptions );
 
-    const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOM_IN_BOX_MODEL_SIZE );
+    const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
 
     const billiardBallModel = new BilliardBallModel( zoomedInBox, {
       tandem: options.tandem.createTandem( 'billiardBallModel' )
