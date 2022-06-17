@@ -221,7 +221,9 @@ class PlumPuddingModel extends HydrogenAtom {
     const y0 = this.electronOffsetProperty.value.y;
 
     // Determine dx and dy
-    const distanceDelta = dt * amplitude * ( 2 * this.radius ); //TODO include electron speed?
+    //TODO include electron speed?
+    //TODO should electron move faster, to match the Java version?
+    const distanceDelta = dt * amplitude * ( 2 * this.radius );
     let dx = Math.abs( electronLine.x1 ) * ( distanceDelta / this.radius );
     let dy = Math.abs( electronLine.y1 ) * ( distanceDelta / this.radius );
 
