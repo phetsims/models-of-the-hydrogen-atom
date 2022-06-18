@@ -46,19 +46,22 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'protonNode' )
     } );
 
+    // Organize the view Nodes under a common parent, to improve presentation in Studio.
     // These Nodes control their own visibility, based on the value of hydrogenAtom.deBroglieViewProperty.
+    const viewNodesTandem = options.tandem.createTandem( 'viewNodes' );
     const viewNodes = new Node( {
       children: [
         new DeBroglieRadialNode( hydrogenAtom, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'radialNode' )
+          tandem: viewNodesTandem.createTandem( 'radialNode' )
         } ),
         new DeBroglieThreeDNode( hydrogenAtom, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'threeDNode' )
+          tandem: viewNodesTandem.createTandem( 'threeDNode' )
         } ),
         new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'brightnessNode' )
+          tandem: viewNodesTandem.createTandem( 'brightnessNode' )
         } )
       ]
+      // No need to PhET-iO instrument this Node.
     } );
 
     const deBroglieViewComboBox = new DeBroglieViewComboBox( hydrogenAtom.deBroglieViewProperty, listboxParent, {

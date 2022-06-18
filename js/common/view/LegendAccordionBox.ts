@@ -57,22 +57,24 @@ export default class LegendAccordionBox extends AccordionBox {
 
     const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
 
-    // A Node for each item described in the Legend
+    // A Node for each item described in the Legend, organized under a parent tandem
+    const contentTandem = options.tandem.createTandem( 'content' );
     const legendNodes: LegendNode[] = [
       new LegendNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.electron, options.tandem.createTandem( 'electronLegendNode' ) ),
+        modelsOfTheHydrogenAtomStrings.electron, contentTandem.createTandem( 'electronLegendNode' ) ),
       new LegendNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.proton, options.tandem.createTandem( 'protonLegendNode' ) ),
+        modelsOfTheHydrogenAtomStrings.proton, contentTandem.createTandem( 'protonLegendNode' ) ),
       new LegendNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.neutron, options.tandem.createTandem( 'neutronLegendNode' ) ),
+        modelsOfTheHydrogenAtomStrings.neutron, contentTandem.createTandem( 'neutronLegendNode' ) ),
       new LegendNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.photon, options.tandem.createTandem( 'photonLegendNode' ) )
+        modelsOfTheHydrogenAtomStrings.photon, contentTandem.createTandem( 'photonLegendNode' ) )
     ];
 
     const content = new VBox( {
       spacing: 5,
       align: 'left',
       children: legendNodes
+      // No need to PhET-iO instrument this Node.
     } );
 
     super( content, options );
