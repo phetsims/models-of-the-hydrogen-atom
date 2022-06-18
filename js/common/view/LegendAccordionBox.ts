@@ -19,19 +19,9 @@ import NeutronNode from './NeutronNode.js';
 import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
-// constants
-const LABEL_OPTIONS = {
-  font: new PhetFont( 16 ),
-  fill: MOTHAColors.legendTextFillProperty,
-  maxWidth: 120 // i18n, determined empirically
-};
-
-// Describes an item in the legend
-type LegendItem = {
-  icon: Node;
-  label: string;
-};
+const ITEM_FONT = new PhetFont( 16 );
 
 type SelfOptions = {
   iconScale?: number;
@@ -65,25 +55,15 @@ export default class LegendAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
-    const items: LegendItem[] = [
-      { icon: ElectronNode.createIcon( options.iconScale ), label: modelsOfTheHydrogenAtomStrings.electron },
-      { icon: ProtonNode.createIcon( options.iconScale ), label: modelsOfTheHydrogenAtomStrings.proton },
-      { icon: NeutronNode.createIcon( options.iconScale ), label: modelsOfTheHydrogenAtomStrings.neutron },
-      { icon: PhotonNode.createIcon( 480, options.iconScale ), label: modelsOfTheHydrogenAtomStrings.photon }
-    ];
-
     const iconGroup = new AlignGroup(); // to make all icons have the same effective dimensions
-    const itemNodes: Node[] = [];
-    items.forEach( item => {
 
-      //TODO factor out LegendItemNode and add PhET-iO instrumentation
-      itemNodes.push( new HBox( {
-        spacing: 5,
-        children: [
-          new AlignBox( item.icon, { group: iconGroup } ),
-          new Text( item.label, LABEL_OPTIONS ) ]
-      } ) );
-    } );
+    // A Node for each item described in the legend
+    const itemNodes: LegendItemNode[] = [
+      new LegendItemNode( ElectronNode.createIcon( options.iconScale ), iconGroup, modelsOfTheHydrogenAtomStrings.electron, options.tandem ),
+      new LegendItemNode( ProtonNode.createIcon( options.iconScale ), iconGroup, modelsOfTheHydrogenAtomStrings.proton, options.tandem ),
+      new LegendItemNode( NeutronNode.createIcon( options.iconScale ), iconGroup, modelsOfTheHydrogenAtomStrings.neutron, options.tandem ),
+      new LegendItemNode( PhotonNode.createIcon( 480, options.iconScale ), iconGroup, modelsOfTheHydrogenAtomStrings.photon, options.tandem )
+    ];
 
     const content = new VBox( {
       spacing: 5,
@@ -92,6 +72,35 @@ export default class LegendAccordionBox extends AccordionBox {
     } );
 
     super( content, options );
+  }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+}
+
+/**
+ * Describes one item in the Legend, with an icon and text.
+ */
+class LegendItemNode extends HBox {
+
+  public constructor( iconNode: Node, iconGroup: AlignGroup, label: string, parentTandem: Tandem ) {
+    super( {
+      spacing: 5,
+      children: [
+        new AlignBox( iconNode, {
+          group: iconGroup,
+          tandem: parentTandem.createTandem( 'iconNode' )
+        } ),
+        new Text( label, {
+          font: ITEM_FONT,
+          fill: MOTHAColors.legendTextFillProperty,
+          maxWidth: 120, // determined empirically
+          tandem: parentTandem.createTandem( 'textNode' )
+        } )
+      ]
+    } );
   }
 
   public override dispose(): void {
