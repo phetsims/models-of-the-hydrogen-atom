@@ -16,6 +16,10 @@ import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
+import ElectronStateDisplay from './ElectronStateDisplay.js';
+
+// margin between the state display and zoomed-in box
+const STATE_DISPLAY_MARGIN = 15;
 
 type SelfOptions = EmptyObjectType;
 
@@ -34,9 +38,20 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'protonNode' )
     } );
 
-    options.children = [ protonNode ];
+    const electronStateDisplay = new ElectronStateDisplay( hydrogenAtom.electronStateProperty, {
+      tandem: options.tandem.createTandem( 'electronStateDisplay' )
+    } );
+
+    options.children = [ protonNode, electronStateDisplay ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
+
+    // Keep the state display positioned in the lower-right corner of the zoomed-in box.
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
+    electronStateDisplay.boundsProperty.link( bounds => {
+      electronStateDisplay.right = zoomedInBoxBounds.right - STATE_DISPLAY_MARGIN;
+      electronStateDisplay.bottom = zoomedInBoxBounds.bottom - STATE_DISPLAY_MARGIN;
+    } );
   }
 }
 
