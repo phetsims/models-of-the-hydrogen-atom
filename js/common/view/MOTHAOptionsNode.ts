@@ -1,7 +1,7 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * MOTHAOptionsNode is the user interface for global options, accessed via PhET > Options.
+ * MOTHAOptionsNode is content for the Options dialog, accessed via PhET > Options.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
