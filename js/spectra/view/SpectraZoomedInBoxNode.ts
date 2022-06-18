@@ -21,6 +21,7 @@ import BohrNode from '../../common/view/BohrNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import SchrodingerNode from '../../common/view/SchrodingerNode.js';
+import DeBroglieNode from '../../common/view/DeBroglieNode.js';
 
 const VIEW_SIZE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE;
 
@@ -61,6 +62,9 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
         } ),
         new BohrNode( model.bohrModel, model.hydrogenAtomProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'bohrNode' )
+        } ),
+        new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform, {
+          tandem: options.tandem.createTandem( 'deBroglieNode' )
         } ),
         new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'schrodingerNode' )
