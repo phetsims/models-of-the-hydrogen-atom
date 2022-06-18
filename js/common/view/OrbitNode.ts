@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * OrbitNode draws an electron orbits for the Bohr and deBroglie models.
+ * OrbitNode draws one electron orbit for the Bohr and de Broglie models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

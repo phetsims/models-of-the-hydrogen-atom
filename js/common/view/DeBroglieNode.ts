@@ -20,6 +20,9 @@ import ElectronStateDisplay from './ElectronStateDisplay.js';
 import DeBroglieViewComboBox from './DeBroglieViewComboBox.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import DeBroglieRadialNode from './DeBroglieRadialNode.js';
+import DeBroglieThreeDNode from './DeBroglieThreeDNode.js';
+import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -43,6 +46,21 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'protonNode' )
     } );
 
+    // These Nodes control their own visibility, based on the value of hydrogenAtom.deBroglieViewProperty.
+    const viewNodes = new Node( {
+      children: [
+        new DeBroglieRadialNode( hydrogenAtom, modelViewTransform, {
+          tandem: options.tandem.createTandem( 'radialNode' )
+        } ),
+        new DeBroglieThreeDNode( hydrogenAtom, modelViewTransform, {
+          tandem: options.tandem.createTandem( 'threeDNode' )
+        } ),
+        new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform, {
+          tandem: options.tandem.createTandem( 'brightnessNode' )
+        } )
+      ]
+    } );
+
     const deBroglieViewComboBox = new DeBroglieViewComboBox( hydrogenAtom.deBroglieViewProperty, listboxParent, {
       leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
       tandem: options.tandem.createTandem( 'deBroglieViewComboBox' )
@@ -52,7 +70,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'electronStateDisplay' )
     } );
 
-    options.children = [ protonNode, deBroglieViewComboBox, electronStateDisplay ];
+    options.children = [ protonNode, viewNodes, deBroglieViewComboBox, electronStateDisplay ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 

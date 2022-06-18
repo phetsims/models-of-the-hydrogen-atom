@@ -88,7 +88,7 @@ export default class DeBroglieModel extends BohrModel {
   }
 
   /**
-   * Calculates the new electron angle for some time step. For deBroglie, the change in angle (and thus
+   * Calculates the new electron angle for some time step. For de Broglie, the change in angle (and thus
    * the oscillation frequency) is the same for all states of the electron.
    */
   protected override calculateNewElectronAngle( dt: number ): number {

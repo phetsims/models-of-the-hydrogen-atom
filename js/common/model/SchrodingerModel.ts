@@ -11,13 +11,13 @@
  * This implementation solves the 3D Schrodinger wavefunction, used to compute probability density values in 3D space.
  *
  * Collision behavior:
- * Identical to the "brightness" views of deBroglie, which is why this class is an extension of DeBroglieModel.
+ * Identical to the "brightness" views of de Broglie, which is why this class is an extension of DeBroglieModel.
  *
  * Absorption behavior:
- * Identical to Bohr and deBroglie.
+ * Identical to Bohr and de Broglie.
  *
  * Emission behavior:
- * Both spontaneous and stimulated emission are similar to Bohr and deBroglie, but the rules for transitions (see below)
+ * Both spontaneous and stimulated emission are similar to Bohr and de Broglie, but the rules for transitions (see below)
  * are more complicated.
  *
  * Transition rules:
@@ -25,7 +25,7 @@
  * are a special case. The lower state (1,0,0) is not possible since it violates the abs(l-l')=1 rule. The only way to
  * get out of this state (2,0,0) is by going to a higher state.
  *
- *   n = [1...6] as in Bohr and deBroglie
+ *   n = [1...6] as in Bohr and de Broglie
  *   l = [0...n-1]
  *   m = [-l...+l]
  *   abs(l-l') = 1

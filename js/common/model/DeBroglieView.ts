@@ -2,7 +2,7 @@
 
 //TODO rename to DeBroglieRepresentation or DeBrogliePresentation
 /**
- * DeBroglieView is a union type for the different representations of the deBroglie model.
+ * DeBroglieView is a union type for the different representations of the de Broglie model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
