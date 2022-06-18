@@ -11,7 +11,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -38,10 +38,17 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
       maxWidth: 100
     };
 
-    super( modelModeProperty,
-      'experiment', new Text( modelsOfTheHydrogenAtomStrings.experiment, labelOptions ), //TODO instrument
-      'prediction', new Text( modelsOfTheHydrogenAtomStrings.prediction, labelOptions ), //TODO instrument
-      options );
+    const experimentNode = new Text( modelsOfTheHydrogenAtomStrings.experiment,
+      optionize<TextOptions, EmptyObjectType, TextOptions>()( {
+        tandem: options.tandem.createTandem( 'experimentNode' )
+      }, labelOptions ) );
+
+    const predictionNode = new Text( modelsOfTheHydrogenAtomStrings.prediction,
+      optionize<TextOptions, EmptyObjectType, TextOptions>()( {
+        tandem: options.tandem.createTandem( 'predictionNode' )
+      }, labelOptions ) );
+
+    super( modelModeProperty, 'experiment', experimentNode, 'prediction', predictionNode, options );
   }
 
   public override dispose(): void {
