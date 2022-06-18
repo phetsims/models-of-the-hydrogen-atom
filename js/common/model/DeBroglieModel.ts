@@ -24,8 +24,7 @@ import Photon from './Photon.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import Electron from './Electron.js';
 
 // the different "view" representations for the deBroglie model, selectable via a combo box
 const DeBroglieViewValues = [ 'radial', 'threeD', 'brightness' ] as const;
@@ -43,8 +42,10 @@ export default class DeBroglieModel extends BohrModel {
   // radial width of the ring for 'brightness' representation,
   public static BRIGHTNESS_RING_WIDTH = 5;
 
+  // electron for the 'threeD' view
+  public readonly electron3D: Electron;
+
   public readonly deBroglieViewProperty: StringEnumerationProperty<DeBroglieView>;
-  public readonly electron3DOffsetProperty: IReadOnlyProperty<Vector2>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
@@ -57,24 +58,25 @@ export default class DeBroglieModel extends BohrModel {
 
     super( zoomedInBox, options );
 
+    this.electron3D = new Electron( {
+      //TODO position is not properly initialized
+      tandem: options.tandem.createTandem( 'electron3D' )
+    } );
+
     this.deBroglieViewProperty = new StringEnumerationProperty( 'radial', {
       validValues: DeBroglieViewValues,
       tandem: options.tandem.createTandem( 'deBroglieViewProperty' )
     } );
 
-    //TODO set this.electron.positionProperty based on whether the view is 2D or 3D
-    this.electron3DOffsetProperty = new DerivedProperty( [ this.electronOffsetProperty ],
-      electronOffset => {
-        const xOffset = electronOffset.x;
-        const yOffset = ( ( electronOffset.y - this.position.y ) * DeBroglieModel.ORBIT_3D_Y_SCALE );
-        return this.position.plusXY( xOffset, yOffset );
-      }, {
-        tandem: options.tandem.createTandem( 'electron3DOffsetProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO )
-      } );
+    this.electronOffsetProperty.link( electronOffset => {
+      const xOffset = electronOffset.x;
+      const yOffset = ( ( electronOffset.y - this.position.y ) * DeBroglieModel.ORBIT_3D_Y_SCALE );
+      this.electron3D.positionProperty.value = this.position.plusXY( xOffset, yOffset );
+    } );
   }
 
   public override reset(): void {
+    this.electron3D.reset();
     this.deBroglieViewProperty.reset();
     super.reset();
   }
