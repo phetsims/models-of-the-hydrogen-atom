@@ -42,7 +42,7 @@ class SpectraScreenView extends ScreenView {
   public constructor( model: SpectraModel, providedOptions: SpectraScreenViewOptions ) {
 
     const options = optionize<SpectraScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     super( options );
@@ -226,7 +226,7 @@ class SpectraScreenView extends ScreenView {
   }
 
   public override step( dt: number ): void {
-    //TODO
+    //TODO implement step
   }
 
   public override dispose(): void {

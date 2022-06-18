@@ -37,7 +37,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
                       providedOptions: DeBroglieNodeOptions ) {
 
     const options = optionize<DeBroglieNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );

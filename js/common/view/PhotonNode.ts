@@ -52,7 +52,7 @@ export default class PhotonNode extends Node {
   public constructor( photon: Photon, modelViewTransform: ModelViewTransform2, providedOptions?: PhotonNodeOptions ) {
 
     const options = optionize<PhotonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const wavelength = photon.wavelength;

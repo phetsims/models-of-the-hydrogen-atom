@@ -30,7 +30,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
   public constructor( providedOptions: EnergyLevelsModelOptions ) {
 
     const options = optionize<EnergyLevelsModelOptions, SelfOptions, MOTHAModelOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );

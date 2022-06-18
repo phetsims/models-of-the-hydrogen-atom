@@ -24,7 +24,7 @@ export default class MOTHAOptionsNode extends VBox {
   public constructor( providedOptions?: MOTHAOptionsNodeOptions ) {
 
     const options = optionize<MOTHAOptionsNodeOptions, SelfOptions, VBoxOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     // Projector Mode checkbox

@@ -29,7 +29,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
                       providedOptions: SchrodingerNodeOptions ) {
 
     const options = optionize<SchrodingerNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {

@@ -36,7 +36,7 @@ export default class SpectraModel extends MOTHAModel {
   public constructor( providedOptions: SpectraModelOptions ) {
 
     const options = optionize<SpectraModelOptions, SelfOptions, MOTHAModelOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );

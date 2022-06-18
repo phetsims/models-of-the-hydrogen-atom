@@ -27,7 +27,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
   public constructor( model: EnergyLevelsModel, providedOptions: EnergyLevelsScreenViewOptions ) {
 
     const options = optionize<EnergyLevelsScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     super( options );
@@ -85,7 +85,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
   }
 
   public override step( dt: number ): void {
-    //TODO
+    //TODO implement step
   }
 }
 

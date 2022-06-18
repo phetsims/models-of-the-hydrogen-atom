@@ -31,7 +31,7 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
                       providedOptions: PlumPuddingNodeOptions ) {
 
     const options = optionize<PlumPuddingNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const plumPuddingImage = new Image( plumPudding_png );

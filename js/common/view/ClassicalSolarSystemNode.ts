@@ -33,7 +33,7 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
                       providedOptions: ClassicalSolarSystemNodeOptions ) {
 
     const options = optionize<ClassicalSolarSystemNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {

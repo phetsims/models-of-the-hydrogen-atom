@@ -34,7 +34,7 @@ export default class BohrNode extends HydrogenAtomNode {
                       providedOptions: BohrNodeOptions ) {
 
     const options = optionize<BohrNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     // Orbits, centered at the atom's position

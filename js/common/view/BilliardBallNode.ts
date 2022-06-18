@@ -30,7 +30,7 @@ export default class BilliardBallNode extends HydrogenAtomNode {
                       providedOptions: BilliardBallNodeOptions ) {
 
     const options = optionize<BilliardBallNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const viewRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.radius );

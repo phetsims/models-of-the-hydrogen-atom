@@ -29,7 +29,7 @@ export default class SnapshotNode extends Node {
   public constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotNodeOptions ) {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const backgroundNode = new Rectangle( 0, 0, 500, 150, {

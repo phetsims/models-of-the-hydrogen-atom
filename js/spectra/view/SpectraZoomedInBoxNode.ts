@@ -34,7 +34,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
   public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
     const options = optionize<SpectraZoomedInBoxNodeOptions, SelfOptions, ZoomedInBoxNodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     // All of the model-view transform action takes place in the zoomed-in box.

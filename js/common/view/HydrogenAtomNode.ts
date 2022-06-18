@@ -34,7 +34,7 @@ export default class HydrogenAtomNode extends Node {
                          providedOptions: HydrogenAtomNodeOptions ) {
 
     const options = optionize<HydrogenAtomNodeOptions, SelfOptions, RectangleOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     options.visibleProperty = new DerivedProperty( [ hydrogenAtomProperty ],

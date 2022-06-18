@@ -32,7 +32,7 @@ export default class ZoomedInBoxNode extends Node {
                          providedOptions: ZoomedInBoxNodeOptions ) {
 
     const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO
+      //TODO default values for options
     }, providedOptions );
 
     const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {

@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * TODO
+ * DeBroglieViewComboBox is the combo box for selecting which view of the de Broglie model show be displayed.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
