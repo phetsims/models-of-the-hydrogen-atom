@@ -23,6 +23,9 @@ import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 
 // the different "view" representations for the deBroglie model, selectable via a combo box
 const DeBroglieViewValues = [ 'radial', 'threeD', 'brightness' ] as const;
@@ -37,7 +40,11 @@ export default class DeBroglieModel extends BohrModel {
   // How much to scale the y dimension for 3D orbits
   public static ORBIT_3D_Y_SCALE = 0.35;
 
+  // radial width of the ring for 'brightness' representation,
+  public static BRIGHTNESS_RING_WIDTH = 5;
+
   public readonly deBroglieViewProperty: StringEnumerationProperty<DeBroglieView>;
+  public readonly electron3DOffsetProperty: IReadOnlyProperty<Vector2>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
@@ -54,6 +61,17 @@ export default class DeBroglieModel extends BohrModel {
       validValues: DeBroglieViewValues,
       tandem: options.tandem.createTandem( 'deBroglieViewProperty' )
     } );
+
+    //TODO set this.electron.positionProperty based on whether the view is 2D or 3D
+    this.electron3DOffsetProperty = new DerivedProperty( [ this.electronOffsetProperty ],
+      electronOffset => {
+        const xOffset = electronOffset.x;
+        const yOffset = ( ( electronOffset.y - this.position.y ) * DeBroglieModel.ORBIT_3D_Y_SCALE );
+        return this.position.plusXY( xOffset, yOffset );
+      }, {
+        tandem: options.tandem.createTandem( 'electron3DOffsetProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO )
+      } );
   }
 
   public override reset(): void {
@@ -61,13 +79,96 @@ export default class DeBroglieModel extends BohrModel {
     super.reset();
   }
 
-  public override step( dt: number ): void {
-    //TODO
+  /**
+   * Gets the amplitude [-1,1] of a standing wave at some angle, in some specified state of the electron.
+   */
+  public getAmplitude( angle: number, state: number ): number {
+    const amplitude = Math.sin( state * angle ) * Math.sin( this.electronAngleProperty.value );
+    assert && assert( amplitude >= -1 && amplitude <= 1 );
+    return amplitude;
   }
 
-  public override movePhoton( photon: Photon, dt: number ): void {
-    //TODO
-    photon.move( dt );
+  /**
+   * Calculates the new electron angle for some time step. For deBroglie, the change in angle (and thus
+   * the oscillation frequency) is the same for all states of the electron.
+   */
+  protected override calculateNewElectronAngle( dt: number ): number {
+    const deltaAngle = dt * BohrModel.ELECTRON_ANGLE_DELTA;
+    return this.electronAngleProperty.value - deltaAngle; //TODO clockwise
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Collision Detection
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Determines whether a photon collides with this atom.
+   * Uses different algorithms depending on whether the view is 2D or 3D.
+   */
+  protected override collides( photon: Photon ): boolean {
+    if ( this.deBroglieViewProperty.value === 'threeD' ) {
+      return this.collides3D( photon );
+    }
+    else {
+      return this.collides2D( photon );
+    }
+  }
+
+  /**
+   * Determines whether a photon collides with this atom in the 3D view. In this case, the photon collides with
+   * the atom if it hits the ellipse that is the 2D projection of the electron's 3D orbit.
+   */
+  private collides3D( photon: Photon ): boolean {
+
+    // position of photon relative to atom's center
+    const photonOffset = this.getPhotonOffset( photon );
+    const angle = Math.atan( photonOffset.y / photonOffset.x );
+
+    // position on orbit at corresponding angle
+    const orbitRadius = this.getElectronOrbitRadius( this.electronStateProperty.value );
+    const orbitX = orbitRadius * Math.cos( angle );
+    const orbitY = DeBroglieModel.ORBIT_3D_Y_SCALE * orbitRadius * Math.sin( angle );
+
+    // distance from electron to the closest point on orbit
+    const distance = photonOffset.distanceXY( orbitX, orbitY );
+
+    // how close the photon's center must be to a point on the electron's orbit
+    const closeness = ( photon.radius + this.electron.radius ) + ( DeBroglieModel.BRIGHTNESS_RING_WIDTH / 2 );
+
+    return ( distance <= closeness );
+  }
+
+  /**
+   * Determines whether a photon collides with this atom in one of the 2D views.
+   * In all 2D views (including "radial distance"), the photon collides with
+   * the atom if it hits the ring used to represent the standing wave in one
+   * of the brightness views.
+   */
+  private collides2D( photon: Photon ): boolean {
+
+    // position of photon relative to atom's center
+    const photonOffset = this.getPhotonOffset( photon );
+
+    // distance of photon and electron from atom's center
+    const photonRadius = Math.sqrt( ( photonOffset.x * photonOffset.x ) + ( photonOffset.y * photonOffset.y ) );
+    const orbitRadius = this.getElectronOrbitRadius( this.electronStateProperty.value );
+
+    return ( Math.abs( photonRadius - orbitRadius ) <= this.getClosenessForCollision( photon ) );
+  }
+
+  /**
+   * Gets the offset of a photon from the atom's position.
+   */
+  private getPhotonOffset( photon: Photon ): Vector2 {
+    return photon.positionProperty.value.minus( this.position );
+  }
+
+  //TODO why isn't this adjusted for 'threeD' view?
+  /**
+   * How close the photon's center must be to a point on the electron's orbit in order for a collision to occur.
+   */
+  private getClosenessForCollision( photon: Photon ): number {
+    return ( photon.radius + this.electron.radius ) + ( DeBroglieModel.BRIGHTNESS_RING_WIDTH / 2 );
   }
 }
 

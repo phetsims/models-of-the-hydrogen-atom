@@ -60,9 +60,6 @@ const PHOTON_STIMULATED_EMISSION_PROBABILITY = PHOTON_ABSORPTION_PROBABILITY;
 // Probability that a photon will be emitted, [0,1]
 const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 
-// Change in orbit angle per dt for ground state orbit
-const ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
-
 // Wavelengths must be less than this close to be considered equal
 const WAVELENGTH_CLOSENESS_THRESHOLD = 0.5;
 
@@ -87,13 +84,16 @@ export default class BohrModel extends HydrogenAtom {
   private readonly timeInStateProperty: Property<number>;
 
   // current angle of electron
-  private readonly electronAngleProperty: Property<number>;
+  protected readonly electronAngleProperty: Property<number>;
 
   // offset of the electron from the atom's center
-  private readonly electronOffsetProperty: IReadOnlyProperty<Vector2>;
+  protected readonly electronOffsetProperty: IReadOnlyProperty<Vector2>;
 
   // minimum time (simulation clock time) that electron stays in a state before emission can occur
   public static MIN_TIME_IN_STATE = 50;
+
+  // Change in orbit angle per dt for ground state orbit
+  public static ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
 
@@ -184,7 +184,7 @@ export default class BohrModel extends HydrogenAtom {
    */
   protected calculateNewElectronAngle( dt: number ): number {
     const electronState = this.electronStateProperty.value;
-    const deltaAngle = dt * ( ELECTRON_ANGLE_DELTA / ( electronState * electronState ) );
+    const deltaAngle = dt * ( BohrModel.ELECTRON_ANGLE_DELTA / ( electronState * electronState ) );
     return this.electronAngleProperty.value - deltaAngle; // clockwise
   }
 
