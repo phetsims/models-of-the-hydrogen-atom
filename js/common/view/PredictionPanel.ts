@@ -53,22 +53,16 @@ export default class PredictionPanel extends Panel {
     const iconAlignGroup = new AlignGroup();
 
     // content that appears on the radio buttons
-    const contentArray: RectangularRadioButtonItem<HydrogenAtom>[] = [];
+    const items: RectangularRadioButtonItem<HydrogenAtom>[] = [];
     for ( let i = 0; i < predictiveModels.length; i++ ) {
-      contentArray.push( createRadioButtonContent( predictiveModels[ i ], iconAlignGroup ) );
+      items.push( createRadioButtonItem( predictiveModels[ i ], iconAlignGroup ) );
     }
 
     // radio buttons
-    const modelRadioButtonGroup = new RectangularRadioButtonGroup( predictiveModelProperty, contentArray, {
+    const modelRadioButtonGroup = new RectangularRadioButtonGroup( predictiveModelProperty, items, {
       baseColor: options.fill,
       selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
       deselectedStroke: MOTHAColors.modelsRadioButtonFillProperty,
-
-      //TODO these are not defined for RectangularRadioButtonGroup
-      // overFill: MOTHAColors.modelsRadioButtonFillProperty,
-      // overStroke: MOTHAColors.modelsRadioButtonDeselectedStrokeProperty,
-      // overLineWidth: 2,
-
       selectedLineWidth: 2,
       labelAlign: 'left',
       spacing: 2,
@@ -103,9 +97,9 @@ export default class PredictionPanel extends Panel {
 }
 
 /**
- * Creates the content for one of the radio buttons.
+ * Creates the item for one radio buttons.
  */
-function createRadioButtonContent( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup ): RectangularRadioButtonItem<HydrogenAtom> {
+function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup ): RectangularRadioButtonItem<HydrogenAtom> {
 
   const icon = new AlignBox( new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ), {
     group: iconAlignGroup
