@@ -8,6 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
+import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
@@ -15,10 +16,12 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, NodeTranslationOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, NodeTranslationOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import ToggleNode from '../../../../sun/js/ToggleNode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -59,24 +62,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       }
     }, providedOptions );
 
-    const titleNode = new Text( modelsOfTheHydrogenAtomStrings.spectrometer, {
-      font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.spectrometerTitleFillProperty
-    } );
-
-    //TODO order of title and subtitle is not localized, change to expandedTitle and collapsedTitle
-    const subtitleNode = new Text( modelsOfTheHydrogenAtomStrings.photonsEmittedNm, {
-      font: new PhetFont( 14 ),
-      fill: MOTHAColors.spectrometerSubtitleFillProperty
-    } );
-
-    options.titleNode = new HBox( {
-      align: 'bottom',
-      spacing: 12,
-      children: [ titleNode, subtitleNode ],
-      maxWidth: 290, // i18n, determined empirically
-      excludeInvisibleChildrenFromBounds: false
-    } );
+    options.titleNode = new TitleNode( options.expandedProperty, options.tandem.createTandem( 'titleNode' ) );
 
     //TODO placeholder
     const displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
@@ -145,10 +131,47 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } );
 
     super( contentNode, options );
+  }
 
-    // show subtitle only when expanded
-    this.expandedProperty.link( expanded => {
-      subtitleNode.visible = expanded;
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+}
+
+class TitleNode extends ToggleNode<boolean> {
+
+  public constructor( expandedProperty: IReadOnlyProperty<boolean>, tandem: Tandem ) {
+
+    // to ensure that both titles have the same effective size, and are left aligned
+    const alignBoxOptions: AlignBoxOptions = {
+      group: new AlignGroup(),
+      xAlign: 'left'
+    };
+
+    const titleExpandedNode = new AlignBox( new Text( modelsOfTheHydrogenAtomStrings.spectrometerExpanded, {
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      fill: MOTHAColors.spectrometerTitleFillProperty,
+      maxWidth: 290,
+      tandem: tandem.createTandem( 'titleExpandedText' ),
+      phetioVisiblePropertyInstrumented: false
+    } ), alignBoxOptions );
+
+    const titleCollapsedNode = new AlignBox( new Text( modelsOfTheHydrogenAtomStrings.spectrometerCollapsed, {
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      fill: MOTHAColors.spectrometerTitleFillProperty,
+      maxWidth: 290,
+      tandem: tandem.createTandem( 'titleCollapsedText' ),
+      phetioVisiblePropertyInstrumented: false
+    } ), alignBoxOptions );
+
+    const items = [
+      { value: true, node: titleExpandedNode },
+      { value: false, node: titleCollapsedNode }
+    ];
+
+    super( expandedProperty, items, {
+      tandem: tandem
     } );
   }
 

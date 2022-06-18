@@ -56,9 +56,6 @@
   "photon": {
     "value": "photon"
   },
-  "photonsEmittedNm": {
-    "value": "photons emitted / nm"
-  },
   "plumPudding": {
     "value": "Plum Pudding"
   },
@@ -86,8 +83,11 @@
   "slow": {
     "value": "slow motion"
   },
-  "spectrometer": {
+  "spectrometerCollapsed": {
     "value": "Spectrometer"
+  },
+  "spectrometerExpanded": {
+    "value": "Spectrometer (photons emitted / nm)"
   },
   "threeDView": {
     "value": "3D view"

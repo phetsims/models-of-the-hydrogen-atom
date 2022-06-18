@@ -29,7 +29,6 @@ type StringsType = {
   'neutron': string;
   'normal': string;
   'photon': string;
-  'photonsEmittedNm': string;
   'plumPudding': string;
   'proton': string;
   'quantum': string;
@@ -41,7 +40,8 @@ type StringsType = {
   };
   'showAbsorptionWavelengths': string;
   'slow': string;
-  'spectrometer': string;
+  'spectrometerCollapsed': string;
+  'spectrometerExpanded': string;
   'threeDView': string;
   'viewSnapshots': string;
 };
