@@ -31,7 +31,7 @@ type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
-  public constructor( model: SpectraModel, providedOptions: SpectraZoomedInBoxNodeOptions ) {
+  public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
     const options = optionize<SpectraZoomedInBoxNodeOptions, SelfOptions, ZoomedInBoxNodeOptions>()( {
       //TODO
@@ -63,7 +63,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
         new BohrNode( model.bohrModel, model.hydrogenAtomProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'bohrNode' )
         } ),
-        new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform, {
+        new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform, popupParent, {
           tandem: options.tandem.createTandem( 'deBroglieNode' )
         } ),
         new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, modelViewTransform, {

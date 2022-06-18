@@ -17,9 +17,9 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import ElectronStateDisplay from './ElectronStateDisplay.js';
-
-// margin between the state display and zoomed-in box
-const STATE_DISPLAY_MARGIN = 15;
+import DeBroglieViewComboBox from './DeBroglieViewComboBox.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -27,30 +27,38 @@ type DeBroglieNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'c
 
 export default class DeBroglieNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: DeBroglieModel, hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
-                      modelViewTransform: ModelViewTransform2, providedOptions: DeBroglieNodeOptions ) {
+  public constructor( hydrogenAtom: DeBroglieModel,
+                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      modelViewTransform: ModelViewTransform2,
+                      listboxParent: Node,
+                      providedOptions: DeBroglieNodeOptions ) {
 
     const options = optionize<DeBroglieNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
       //TODO
     }, providedOptions );
 
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
+
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
       tandem: options.tandem.createTandem( 'protonNode' )
+    } );
+
+    const deBroglieViewComboBox = new DeBroglieViewComboBox( hydrogenAtom.deBroglieViewProperty, listboxParent, {
+      leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
+      tandem: options.tandem.createTandem( 'deBroglieViewComboBox' )
     } );
 
     const electronStateDisplay = new ElectronStateDisplay( hydrogenAtom.electronStateProperty, {
       tandem: options.tandem.createTandem( 'electronStateDisplay' )
     } );
 
-    options.children = [ protonNode, electronStateDisplay ];
+    options.children = [ protonNode, deBroglieViewComboBox, electronStateDisplay ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     // Keep the state display positioned in the lower-right corner of the zoomed-in box.
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
     electronStateDisplay.boundsProperty.link( bounds => {
-      electronStateDisplay.right = zoomedInBoxBounds.right - STATE_DISPLAY_MARGIN;
-      electronStateDisplay.bottom = zoomedInBoxBounds.bottom - STATE_DISPLAY_MARGIN;
+      electronStateDisplay.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
   }
 }

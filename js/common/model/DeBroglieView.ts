@@ -1,7 +1,8 @@
 // Copyright 2022, University of Colorado Boulder
 
+//TODO rename to DeBroglieRepresentation or DeBrogliePresentation
 /**
- * DeBroglieView a union type for the different "view" representations for the deBroglie model.
+ * DeBroglieView is a union type for the different representations of the deBroglie model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

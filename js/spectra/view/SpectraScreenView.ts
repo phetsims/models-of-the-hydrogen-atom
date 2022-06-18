@@ -51,6 +51,9 @@ class SpectraScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'viewProperties' )
     } );
 
+    // Parent for any popups
+    const popupsParent = new Node();
+
     // Legend
     const legendAccordionBox = new LegendAccordionBox( {
       expandedProperty: viewProperties.legendExpandedProperty,
@@ -121,7 +124,7 @@ class SpectraScreenView extends ScreenView {
       } );
 
     // The zoomed-in view of the box of hydrogen
-    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, {
+    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {
       left: lightNode.right + 50,
       top: this.layoutBounds.top + 15,
       tandem: options.tandem.createTandem( 'zoomedInBoxNode' )
@@ -205,7 +208,8 @@ class SpectraScreenView extends ScreenView {
         modelVBox,
         spectrometerAccordionBox,
         viewSnapshotsButton,
-        resetAllButton
+        resetAllButton,
+        popupsParent
       ]
     } );
     this.addChild( screenViewRootNode );

@@ -25,10 +25,7 @@ import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
-
-// the different "view" representations for the deBroglie model, selectable via a combo box
-const DeBroglieViewValues = [ 'radial', 'threeD', 'brightness' ] as const;
-export type DeBroglieView = ( typeof DeBroglieViewValues )[number];
+import { DeBroglieView, DeBroglieViewValues } from './DeBroglieView.js';
 
 type SelfOptions = EmptyObjectType;
 

@@ -11,7 +11,6 @@ type StringsType = {
   'models-of-the-hydrogen-atom': {
     'title': string;
   };
-  '3DView': string;
   'billiardBall': string;
   'bohr': string;
   'brightnessView': string;
@@ -43,6 +42,7 @@ type StringsType = {
   'showAbsorptionWavelengths': string;
   'slow': string;
   'spectrometer': string;
+  'threeDView': string;
   'viewSnapshots': string;
 };
 

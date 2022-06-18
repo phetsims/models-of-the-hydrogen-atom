@@ -20,9 +20,7 @@ import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import BohrModel from '../model/BohrModel.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import ElectronStateDisplay from './ElectronStateDisplay.js';
-
-// margin between the state display and zoomed-in box
-const STATE_DISPLAY_MARGIN = 15;
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -71,8 +69,7 @@ export default class BohrNode extends HydrogenAtomNode {
     // Keep the state display positioned in the lower-right corner of the zoomed-in box.
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
     electronStateDisplay.boundsProperty.link( bounds => {
-      electronStateDisplay.right = zoomedInBoxBounds.right - STATE_DISPLAY_MARGIN;
-      electronStateDisplay.bottom = zoomedInBoxBounds.bottom - STATE_DISPLAY_MARGIN;
+      electronStateDisplay.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
   }
 }

@@ -9,6 +9,7 @@
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import Range from '../../../dot/js/Range.js';
+import Vector2 from '../../../dot/js/Vector2.js';
 
 const MOTHAConstants = {
 
@@ -36,7 +37,10 @@ const MOTHAConstants = {
 
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
 
-  MAX_SPECTROMETER_SNAPSHOTS: 3
+  MAX_SPECTROMETER_SNAPSHOTS: 3,
+
+  // margin between the state display and inside edge of zoomed-in box
+  STATE_DISPLAY_MARGINS: new Vector2( 8, 8 )
 };
 
 modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );
