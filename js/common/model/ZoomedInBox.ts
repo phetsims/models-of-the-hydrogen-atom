@@ -17,6 +17,10 @@ export default class ZoomedInBox extends Bounds2 {
     super( -size / 2, -size / 2, size / 2, size / 2 );
   }
 
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
   public containsPhoton( photon: Photon ): boolean {
     return this.containsPoint( photon.positionProperty.value );
   }

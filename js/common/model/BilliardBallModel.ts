@@ -58,6 +58,11 @@ export default class BilliardBallModel extends HydrogenAtom {
     super( zoomedInBox, options );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   public override step( dt: number ): void {
     // do nothing for this model
   }

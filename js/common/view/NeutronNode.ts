@@ -35,6 +35,11 @@ export default class NeutronNode extends ShadedSphereNode {
     super( 2 * modelViewTransform.modelToViewDeltaX( neutron.radius ), options );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Creates a neutron icon, used in the Legend.
    */

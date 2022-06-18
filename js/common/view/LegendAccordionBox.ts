@@ -61,7 +61,8 @@ export default class LegendAccordionBox extends AccordionBox {
     options.titleNode = new Text( modelsOfTheHydrogenAtomStrings.legend, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.legendTitleFillProperty,
-      maxWidth: 100 // i18n, determined empirically
+      maxWidth: 100, // i18n, determined empirically
+      tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
     const items: LegendItem[] = [
@@ -74,6 +75,8 @@ export default class LegendAccordionBox extends AccordionBox {
     const iconGroup = new AlignGroup(); // to make all icons have the same effective dimensions
     const itemNodes: Node[] = [];
     items.forEach( item => {
+
+      //TODO factor out LegendItemNode and add PhET-iO instrumentation
       itemNodes.push( new HBox( {
         spacing: 5,
         children: [
@@ -89,6 +92,11 @@ export default class LegendAccordionBox extends AccordionBox {
     } );
 
     super( content, options );
+  }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 

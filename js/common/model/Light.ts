@@ -131,6 +131,10 @@ export default class Light {
       BohrModel.getTransitionWavelengths( this.monochromaticWavelengthRange.min, VisibleColor.MIN_WAVELENGTH );
   }
 
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
   public reset(): void {
     this.onProperty.reset();
     this.lightModeProperty.reset();

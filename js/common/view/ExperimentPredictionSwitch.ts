@@ -43,6 +43,11 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
       'prediction', new Text( modelsOfTheHydrogenAtomStrings.prediction, labelOptions ), //TODO instrument
       options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'ExperimentPredictionSwitch', ExperimentPredictionSwitch );

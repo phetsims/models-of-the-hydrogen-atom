@@ -64,6 +64,8 @@ export default class SnapshotNode extends Node {
 
     super( options );
   }
+
+  //TODO dispose
 }
 
 modelsOfTheHydrogenAtom.register( 'SnapshotNode', SnapshotNode );

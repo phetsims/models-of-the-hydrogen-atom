@@ -60,6 +60,7 @@ export default class SnapshotsDialog extends Dialog {
   }
 
   //TODO verify whether this gets called and whether it works correctly, because Dialog.dispose has been suspect
+  //TODO should we not dispose, and reuse this Dialog, for PhET-iO?
   public override dispose(): void {
     this.disposeSnapshotsDialog();
     super.dispose();

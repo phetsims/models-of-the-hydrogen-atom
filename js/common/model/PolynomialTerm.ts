@@ -1,5 +1,6 @@
 // Copyright 2022, University of Colorado Boulder
 
+//TODO is this used?
 /**
  * PolynomialTerm is a minimal/incomplete implementation of a polynomial term, as needed for solving
  * associated Legendre polynomials. See solveAssociatedLegrendePolynomial.ts
@@ -21,6 +22,10 @@ export default class PolynomialTerm {
 
     this.coefficient = coefficient;
     this.power = power;
+  }
+
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
   }
 
   public evaluate( x: number ): number {

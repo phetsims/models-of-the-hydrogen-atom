@@ -32,6 +32,11 @@ export default class BeamNode extends Rectangle {
 
     super( 0, 0, options.beamSize.width, options.beamSize.height, options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'BeamNode', BeamNode );
