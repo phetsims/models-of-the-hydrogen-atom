@@ -38,15 +38,15 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Legend
+  // Key to symbols
   //------------------------------------------------------------------------------------------------------------------
 
-  legendTitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'legendTitleFill', {
+  keyTitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'keyTitleFill', {
     default: YELLOW,
     projector: 'black'
   } ),
 
-  legendTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'legendTextFill', {
+  keyTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'keyTextFill', {
     default: 'white',
     projector: 'black'
   } ),

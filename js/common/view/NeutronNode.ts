@@ -41,7 +41,7 @@ export default class NeutronNode extends ShadedSphereNode {
   }
 
   /**
-   * Creates a neutron icon, used in the Legend.
+   * Creates a neutron icon, used in the Key.
    */
   public static createIcon( scale = 1 ): Node {
     const neutron = new Neutron( {

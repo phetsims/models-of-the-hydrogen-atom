@@ -19,7 +19,7 @@ import MOTHAConstants from '../../common/MOTHAConstants.js';
 import BeamNode from '../../common/view/BeamNode.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSwitch.js';
-import LegendAccordionBox from '../../common/view/LegendAccordionBox.js';
+import KeyAccordionBox from '../../common/view/KeyAccordionBox.js';
 import LightModeRadioButtonGroup from '../../common/view/LightModeRadioButtonGroup.js';
 import MonochromaticControls from '../../common/view/MonochromaticControls.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
@@ -54,12 +54,12 @@ class SpectraScreenView extends ScreenView {
     // Parent for any popups
     const popupsParent = new Node();
 
-    // Legend
-    const legendAccordionBox = new LegendAccordionBox( {
-      expandedProperty: viewProperties.legendExpandedProperty,
+    // Key to symbols
+    const keyAccordionBox = new KeyAccordionBox( {
+      expandedProperty: viewProperties.keyExpandedProperty,
       left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'legendAccordionBox' )
+      tandem: options.tandem.createTandem( 'keyAccordionBox' )
     } );
 
     // Light Mode radio button group
@@ -195,7 +195,7 @@ class SpectraScreenView extends ScreenView {
     // rendering order
     const screenViewRootNode = new Node( {
       children: [
-        legendAccordionBox,
+        keyAccordionBox,
         timeControlNode,
         beamNode,
         lightNode,

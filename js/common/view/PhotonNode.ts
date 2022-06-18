@@ -96,7 +96,7 @@ export default class PhotonNode extends Node {
   }
 
   /**
-   * Creates a photon icon, used in the Legend.
+   * Creates a photon icon, used in the Key.
    */
   public static createIcon( wavelength: number, scale = 1 ): Node {
     const photon = new Photon( {

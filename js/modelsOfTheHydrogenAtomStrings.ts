@@ -24,7 +24,7 @@ type StringsType = {
   'prediction': string;
   'fast': string;
   'hydrogenSymbol': string;
-  'legend': string;
+  'key': string;
   'nEqualsValue': string;
   'neutron': string;
   'normal': string;

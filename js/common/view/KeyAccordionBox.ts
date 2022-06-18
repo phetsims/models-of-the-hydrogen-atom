@@ -1,7 +1,7 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
 /**
- * LegendAccordionBox displays a legend, identifying the particle types that appear in the sim.
+ * KeyAccordionBox displays a key to the symbols (particle types) that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -27,14 +27,14 @@ type SelfOptions = {
   iconScale?: number;
 };
 
-type LegendAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
+type KeyAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
   PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
-export default class LegendAccordionBox extends AccordionBox {
+export default class KeyAccordionBox extends AccordionBox {
 
-  public constructor( providedOptions: LegendAccordionBoxOptions ) {
+  public constructor( providedOptions: KeyAccordionBoxOptions ) {
 
-    const options = optionize<LegendAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+    const options = optionize<KeyAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
 
       // SelfOptions
       iconScale: MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE,
@@ -48,32 +48,32 @@ export default class LegendAccordionBox extends AccordionBox {
       buttonXMargin: 0
     }, providedOptions );
 
-    options.titleNode = new Text( modelsOfTheHydrogenAtomStrings.legend, {
+    options.titleNode = new Text( modelsOfTheHydrogenAtomStrings.key, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.legendTitleFillProperty,
+      fill: MOTHAColors.keyTitleFillProperty,
       maxWidth: 100, // i18n, determined empirically
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
     const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
 
-    // A Node for each item described in the Legend, organized under a parent tandem
+    // A Node for each item described in the Key, organized under a parent tandem
     const contentTandem = options.tandem.createTandem( 'content' );
-    const legendNodes: LegendNode[] = [
-      new LegendNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.electron, contentTandem.createTandem( 'electronLegendNode' ) ),
-      new LegendNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.proton, contentTandem.createTandem( 'protonLegendNode' ) ),
-      new LegendNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.neutron, contentTandem.createTandem( 'neutronLegendNode' ) ),
-      new LegendNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.photon, contentTandem.createTandem( 'photonLegendNode' ) )
+    const keyNodes: KeyNode[] = [
+      new KeyNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
+        modelsOfTheHydrogenAtomStrings.electron, contentTandem.createTandem( 'electronKeyNode' ) ),
+      new KeyNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
+        modelsOfTheHydrogenAtomStrings.proton, contentTandem.createTandem( 'protonKeyNode' ) ),
+      new KeyNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup,
+        modelsOfTheHydrogenAtomStrings.neutron, contentTandem.createTandem( 'neutronKeyNode' ) ),
+      new KeyNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
+        modelsOfTheHydrogenAtomStrings.photon, contentTandem.createTandem( 'photonKeyNode' ) )
     ];
 
     const content = new VBox( {
       spacing: 5,
       align: 'left',
-      children: legendNodes
+      children: keyNodes
       // No need to PhET-iO instrument this Node.
     } );
 
@@ -87,9 +87,9 @@ export default class LegendAccordionBox extends AccordionBox {
 }
 
 /**
- * Describes one item in the Legend, with an icon and text.
+ * The key for one symbol, described with text.
  */
-class LegendNode extends HBox {
+class KeyNode extends HBox {
 
   public constructor( iconNode: Node, iconAlignGroup: AlignGroup, label: string, parentTandem: Tandem ) {
     super( {
@@ -101,7 +101,7 @@ class LegendNode extends HBox {
         } ),
         new Text( label, {
           font: ITEM_FONT,
-          fill: MOTHAColors.legendTextFillProperty,
+          fill: MOTHAColors.keyTextFillProperty,
           maxWidth: 120, // determined empirically
           tandem: parentTandem.createTandem( 'textNode' )
         } )
@@ -116,4 +116,4 @@ class LegendNode extends HBox {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'LegendAccordionBox', LegendAccordionBox );
+modelsOfTheHydrogenAtom.register( 'KeyAccordionBox', KeyAccordionBox );

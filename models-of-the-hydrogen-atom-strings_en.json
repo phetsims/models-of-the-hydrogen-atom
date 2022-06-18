@@ -41,8 +41,8 @@
   "hydrogenSymbol": {
     "value": "H"
   },
-  "legend": {
-    "value": "Legend"
+  "key": {
+    "value": "Key"
   },
   "nEqualsValue": {
     "value": "n = {{value}}"
