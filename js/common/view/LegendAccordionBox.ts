@@ -58,17 +58,21 @@ export default class LegendAccordionBox extends AccordionBox {
     const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
 
     // A Node for each item described in the Legend
-    const itemNodes: LegendItemNode[] = [
-      new LegendItemNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup, modelsOfTheHydrogenAtomStrings.electron, options.tandem ),
-      new LegendItemNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup, modelsOfTheHydrogenAtomStrings.proton, options.tandem ),
-      new LegendItemNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup, modelsOfTheHydrogenAtomStrings.neutron, options.tandem ),
-      new LegendItemNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup, modelsOfTheHydrogenAtomStrings.photon, options.tandem )
+    const legendNodes: LegendNode[] = [
+      new LegendNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
+        modelsOfTheHydrogenAtomStrings.electron, options.tandem.createTandem( 'electronLegendNode' ) ),
+      new LegendNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
+        modelsOfTheHydrogenAtomStrings.proton, options.tandem.createTandem( 'protonLegendNode' ) ),
+      new LegendNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup,
+        modelsOfTheHydrogenAtomStrings.neutron, options.tandem.createTandem( 'neutronLegendNode' ) ),
+      new LegendNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
+        modelsOfTheHydrogenAtomStrings.photon, options.tandem.createTandem( 'photonLegendNode' ) )
     ];
 
     const content = new VBox( {
       spacing: 5,
       align: 'left',
-      children: itemNodes
+      children: legendNodes
     } );
 
     super( content, options );
@@ -83,7 +87,7 @@ export default class LegendAccordionBox extends AccordionBox {
 /**
  * Describes one item in the Legend, with an icon and text.
  */
-class LegendItemNode extends HBox {
+class LegendNode extends HBox {
 
   public constructor( iconNode: Node, iconAlignGroup: AlignGroup, label: string, parentTandem: Tandem ) {
     super( {
@@ -99,7 +103,8 @@ class LegendItemNode extends HBox {
           maxWidth: 120, // determined empirically
           tandem: parentTandem.createTandem( 'textNode' )
         } )
-      ]
+      ],
+      tandem: parentTandem
     } );
   }
 
