@@ -32,7 +32,8 @@ type PredictionPanelOptions = SelfOptions & NodeTranslationOptions & PickRequire
 
 export default class PredictionPanel extends Panel {
 
-  public constructor( predictiveModelProperty: Property<HydrogenAtom>, predictiveModels: HydrogenAtom[],
+  public constructor( predictiveModelProperty: Property<HydrogenAtom>,
+                      predictiveModels: HydrogenAtom[],
                       modelModeProperty: IReadOnlyProperty<ModelMode>,
                       providedOptions: PredictionPanelOptions ) {
 

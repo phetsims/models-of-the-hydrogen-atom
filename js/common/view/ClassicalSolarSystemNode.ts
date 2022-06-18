@@ -27,8 +27,10 @@ type ClassicalSolarSystemNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNode
 
 export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: ClassicalSolarSystemModel, hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
-                      modelViewTransform: ModelViewTransform2, providedOptions: ClassicalSolarSystemNodeOptions ) {
+  public constructor( hydrogenAtom: ClassicalSolarSystemModel,
+                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: ClassicalSolarSystemNodeOptions ) {
 
     const options = optionize<ClassicalSolarSystemNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
       //TODO

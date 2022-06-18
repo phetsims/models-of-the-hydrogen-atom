@@ -28,8 +28,10 @@ type BohrNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'childr
 
 export default class BohrNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: BohrModel, hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
-                      modelViewTransform: ModelViewTransform2, providedOptions: BohrNodeOptions ) {
+  public constructor( hydrogenAtom: BohrModel,
+                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: BohrNodeOptions ) {
 
     const options = optionize<BohrNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
       //TODO

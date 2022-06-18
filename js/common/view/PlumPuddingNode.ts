@@ -25,8 +25,10 @@ type PlumPuddingNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 
 
 export default class PlumPuddingNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: PlumPuddingModel, hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
-                      modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingNodeOptions ) {
+  public constructor( hydrogenAtom: PlumPuddingModel,
+                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: PlumPuddingNodeOptions ) {
 
     const options = optionize<PlumPuddingNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
       //TODO

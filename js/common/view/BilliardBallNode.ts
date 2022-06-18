@@ -24,8 +24,10 @@ type BilliardBallNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions,
 
 export default class BilliardBallNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: BilliardBallModel, hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
-                      modelViewTransform: ModelViewTransform2, providedOptions: BilliardBallNodeOptions ) {
+  public constructor( hydrogenAtom: BilliardBallModel,
+                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: BilliardBallNodeOptions ) {
 
     const options = optionize<BilliardBallNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
       //TODO

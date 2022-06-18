@@ -23,7 +23,9 @@ type ElectronNodeOptions = SelfOptions & StrictOmit<ShadedSphereNodeOptions, 'ma
 
 export default class ElectronNode extends ShadedSphereNode {
 
-  public constructor( electron: Electron, modelViewTransform: ModelViewTransform2, providedOptions?: ElectronNodeOptions ) {
+  public constructor( electron: Electron,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions?: ElectronNodeOptions ) {
 
     const options = optionize<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 

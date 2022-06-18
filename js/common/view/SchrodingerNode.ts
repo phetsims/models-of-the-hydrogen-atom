@@ -23,8 +23,10 @@ type SchrodingerNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 
 
 export default class SchrodingerNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: SchrodingerModel, hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
-                      modelViewTransform: ModelViewTransform2, providedOptions: SchrodingerNodeOptions ) {
+  public constructor( hydrogenAtom: SchrodingerModel,
+                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: SchrodingerNodeOptions ) {
 
     const options = optionize<SchrodingerNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
       //TODO

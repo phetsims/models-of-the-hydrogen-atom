@@ -24,8 +24,10 @@ type MOTHATimeControlNodeOptions = SelfOptions & NodeTranslationOptions & PickRe
 
 export default class MOTHATimeControlNode extends TimeControlNode {
 
-  public constructor( isPlayingProperty: Property<boolean>, timeSpeedProperty: EnumerationProperty<TimeSpeed>,
-                      stepOnce: () => void, providedOptions: MOTHATimeControlNodeOptions ) {
+  public constructor( isPlayingProperty: Property<boolean>,
+                      timeSpeedProperty: EnumerationProperty<TimeSpeed>,
+                      stepOnce: () => void,
+                      providedOptions: MOTHATimeControlNodeOptions ) {
 
     const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>()( {
       timeSpeedProperty: timeSpeedProperty,

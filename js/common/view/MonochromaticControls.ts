@@ -29,8 +29,10 @@ type MonochromaticControlsOptions = SelfOptions & NodeTranslationOptions & PickR
 
 export default class MonochromaticControls extends VBox {
 
-  public constructor( modelModeProperty: IProperty<ModelMode>, hydrogenAtomModelProperty: IProperty<HydrogenAtom>,
-                      wavelengthProperty: IProperty<number>, lightModeProperty: IReadOnlyProperty<LightMode>,
+  public constructor( modelModeProperty: IProperty<ModelMode>,
+                      hydrogenAtomModelProperty: IProperty<HydrogenAtom>,
+                      wavelengthProperty: IProperty<number>,
+                      lightModeProperty: IReadOnlyProperty<LightMode>,
                       absorptionWavelengthsVisibleProperty: Property<boolean>,
                       providedOptions: MonochromaticControlsOptions ) {
 
