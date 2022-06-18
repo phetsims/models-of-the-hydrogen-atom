@@ -28,15 +28,15 @@ import ContinuumBarNode from './ContinuumBarNode.js';
 
 type SelfOptions = EmptyObjectType;
 
-type PredictiveModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
+type PredictionPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class PredictionPanel extends Panel {
 
   public constructor( predictiveModelProperty: Property<HydrogenAtom>, predictiveModels: HydrogenAtom[],
                       modelModeProperty: IReadOnlyProperty<ModelMode>,
-                      providedOptions: PredictiveModelPanelOptions ) {
+                      providedOptions: PredictionPanelOptions ) {
 
-    const options = optionize<PredictiveModelPanelOptions, SelfOptions, PanelOptions>()( {
+    const options = optionize<PredictionPanelOptions, SelfOptions, PanelOptions>()( {
 
       // Visible when model mode is 'prediction'
       visibleProperty: new DerivedProperty( [ modelModeProperty ], modelMode => ( modelMode === 'prediction' ), {
