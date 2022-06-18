@@ -55,14 +55,14 @@ export default class LegendAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
-    const iconGroup = new AlignGroup(); // to make all icons have the same effective dimensions
+    const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
 
-    // A Node for each item described in the legend
+    // A Node for each item described in the Legend
     const itemNodes: LegendItemNode[] = [
-      new LegendItemNode( ElectronNode.createIcon( options.iconScale ), iconGroup, modelsOfTheHydrogenAtomStrings.electron, options.tandem ),
-      new LegendItemNode( ProtonNode.createIcon( options.iconScale ), iconGroup, modelsOfTheHydrogenAtomStrings.proton, options.tandem ),
-      new LegendItemNode( NeutronNode.createIcon( options.iconScale ), iconGroup, modelsOfTheHydrogenAtomStrings.neutron, options.tandem ),
-      new LegendItemNode( PhotonNode.createIcon( 480, options.iconScale ), iconGroup, modelsOfTheHydrogenAtomStrings.photon, options.tandem )
+      new LegendItemNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup, modelsOfTheHydrogenAtomStrings.electron, options.tandem ),
+      new LegendItemNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup, modelsOfTheHydrogenAtomStrings.proton, options.tandem ),
+      new LegendItemNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup, modelsOfTheHydrogenAtomStrings.neutron, options.tandem ),
+      new LegendItemNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup, modelsOfTheHydrogenAtomStrings.photon, options.tandem )
     ];
 
     const content = new VBox( {
@@ -85,12 +85,12 @@ export default class LegendAccordionBox extends AccordionBox {
  */
 class LegendItemNode extends HBox {
 
-  public constructor( iconNode: Node, iconGroup: AlignGroup, label: string, parentTandem: Tandem ) {
+  public constructor( iconNode: Node, iconAlignGroup: AlignGroup, label: string, parentTandem: Tandem ) {
     super( {
       spacing: 5,
       children: [
         new AlignBox( iconNode, {
-          group: iconGroup,
+          group: iconAlignGroup,
           tandem: parentTandem.createTandem( 'iconNode' )
         } ),
         new Text( label, {
