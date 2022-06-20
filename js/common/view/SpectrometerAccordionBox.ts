@@ -28,7 +28,6 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 // constants
-const BUTTON_COLOR = 'rgb( 245, 245, 245 )';
 const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
 type SelfOptions = EmptyObjectType;
@@ -84,13 +83,13 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       radius: 15,
       xMargin: 8.25,
       yMargin: 8.25,
-      baseColor: BUTTON_COLOR,
+      baseColor: MOTHAColors.pushButtonBaseColorProperty,
       touchAreaDilation: 5,
       tandem: options.tandem.createTandem( 'recordStopButton' )
     } );
 
     const resetButton = new ResetButton( {
-      baseColor: BUTTON_COLOR,
+      baseColor: MOTHAColors.pushButtonBaseColorProperty,
       arrowColor: 'black',
       radius: recordStopButton.height / 2,
       xMargin: 4,
@@ -104,7 +103,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     const snapshotButton = new RectangularPushButton( {
       maxHeight: recordStopButton.height,
-      baseColor: BUTTON_COLOR,
+      baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( cameraSolidShape, {
         fill: 'black',
         scale: 0.08

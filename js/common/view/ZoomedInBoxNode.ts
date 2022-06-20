@@ -36,11 +36,11 @@ export default class ZoomedInBoxNode extends Node {
     }, providedOptions );
 
     const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
-      fill: MOTHAColors.boxFillProperty
+      fill: MOTHAColors.zoomedInBoxFillProperty
     } );
 
     const outlineNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
-      stroke: MOTHAColors.boxStrokeProperty,
+      stroke: MOTHAColors.zoomedInBoxStrokeProperty,
       lineWidth: 3
     } );
 

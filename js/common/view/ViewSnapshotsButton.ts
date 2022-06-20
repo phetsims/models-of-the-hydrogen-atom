@@ -17,6 +17,7 @@ import RectangularPushButton, { RectangularPushButtonOptions } from '../../../..
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -29,6 +30,7 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
     super( optionize<ViewSnapshotsButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
 
       // RectangularPushButtonOptions
+      baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Text( modelsOfTheHydrogenAtomStrings.viewSnapshots, {
         font: new PhetFont( 16 )
       } ),

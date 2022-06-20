@@ -51,7 +51,7 @@ export default class SnapshotNode extends Node {
         scale: 0.052,
         fill: 'black'
       } ),
-      baseColor: 'rgb( 200, 200, 200 )',
+      baseColor: MOTHAColors.pushButtonBaseColorProperty,
       listener: () => {
         numberOfSnapshotsProperty.value--;
       },

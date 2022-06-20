@@ -15,13 +15,12 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { LinearGradient, Node, NodeOptions, NodeTranslationOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 // constants
 const BACK_DEPTH = 10;
 const BACK_OFFSET = 0.15;
 const BOX_SIZE = new Dimension2( 50, 40 );
-const LIGHT_COLOR = 'rgb( 249, 249, 249 )';
-const SHADOW_COLOR = 'rgb( 100, 100, 100 )';
 
 type SelfOptions = EmptyObjectType;
 
@@ -38,20 +37,25 @@ export default class BoxOfHydrogenNode extends Node {
       .lineTo( BOX_SIZE.width, BACK_DEPTH )
       .lineTo( 0, BACK_DEPTH )
       .close(), {
-      fill: new LinearGradient( 0, 0, BOX_SIZE.width, BACK_DEPTH ).addColorStop( 0, LIGHT_COLOR ).addColorStop( 1, SHADOW_COLOR ),
-      stroke: 'black',
+      fill: new LinearGradient( 0, 0, BOX_SIZE.width, BACK_DEPTH )
+        .addColorStop( 0, MOTHAColors.boxOfHydrogenLightFillProperty )
+        .addColorStop( 1, MOTHAColors.boxOfHydrogenDarkFillProperty ),
+      stroke: MOTHAColors.boxOfHydrogenStrokeProperty,
       lineWidth: 1
     } );
 
     // front face
     const frontNode = new Rectangle( 0, BACK_DEPTH, BOX_SIZE.width, BOX_SIZE.height, {
-      fill: new LinearGradient( 0, 0, BOX_SIZE.width, 0 ).addColorStop( 0, LIGHT_COLOR ).addColorStop( 1, SHADOW_COLOR ),
-      stroke: 'black',
+      fill: new LinearGradient( 0, 0, BOX_SIZE.width, 0 )
+        .addColorStop( 0, MOTHAColors.boxOfHydrogenLightFillProperty )
+        .addColorStop( 1, MOTHAColors.boxOfHydrogenDarkFillProperty ),
+      stroke: MOTHAColors.boxOfHydrogenStrokeProperty,
       lineWidth: 1
     } );
 
     // hydrogen symbol, in lower-left corner of front face
     const hydrogenSymbol = new Text( modelsOfTheHydrogenAtomStrings.hydrogenSymbol, {
+      fill: MOTHAColors.boxOfHydrogenSymbolColorProperty,
       font: new PhetFont( { weight: 'bold', size: 24 } ),
       left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
       bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),

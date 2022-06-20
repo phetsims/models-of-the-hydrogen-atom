@@ -139,7 +139,7 @@ class SpectraScreenView extends ScreenView {
       .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.top )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
       .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.bottom ), {
-      stroke: MOTHAColors.boxStrokeProperty,
+      stroke: MOTHAColors.zoomedInBoxStrokeProperty,
       lineDash: [ 5, 5 ],
       tandem: options.tandem.createTandem( 'dashedLines' )
     } );

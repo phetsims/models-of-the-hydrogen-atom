@@ -34,7 +34,7 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 
     const labelOptions = {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.abSwitchTextFillProperty,
+      fill: MOTHAColors.switchTextFillProperty,
       maxWidth: 100
     };
 

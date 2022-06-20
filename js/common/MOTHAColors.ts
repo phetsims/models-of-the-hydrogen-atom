@@ -25,15 +25,31 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Box
+  // Boxes
   //------------------------------------------------------------------------------------------------------------------
 
-  boxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxFill', {
+  boxOfHydrogenLightFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxOfHydrogenLightFill', {
+    default: 'rgb( 249, 249, 249 )'
+  } ),
+
+  boxOfHydrogenDarkFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxOfHydrogenDarkFill', {
+    default: Color.grayColor( 100 )
+  } ),
+
+  boxOfHydrogenStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxOfHydrogenStroke', {
+    default: 'black'
+  } ),
+
+  boxOfHydrogenSymbolColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxOfHydrogenSymbolColor', {
+    default: 'black'
+  } ),
+
+  zoomedInBoxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'zoomedInBoxFill', {
     default: 'black',
     projector: 'white'
   } ),
 
-  boxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxStroke', {
+  zoomedInBoxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'zoomedInBoxStroke', {
     default: 'white',
     projector: 'black'
   } ),
@@ -121,7 +137,7 @@ const MOTHAColors = {
   // Models panel
   //------------------------------------------------------------------------------------------------------------------
 
-  abSwitchTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'abSwitchTextFill', {
+  switchTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'switchTextFill', {
     default: YELLOW,
     projector: 'black'
   } ),
@@ -234,7 +250,7 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Electron Energy Level
+  // Hydrogen Atom models
   //------------------------------------------------------------------------------------------------------------------
 
   billiardBallColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'billiardBallColor', {
@@ -245,9 +261,9 @@ const MOTHAColors = {
     default: 'rgb( 255, 141, 21 )'
   } ),
 
-  //------------------------------------------------------------------------------------------------------------------
-  // Miscellaneous
-  //------------------------------------------------------------------------------------------------------------------
+  deBroglieNegativeAmplitudeColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'deBroglieNegativeAmplitudeColor', {
+    default: 'black'
+  } ),
 
   orbitStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'orbitStroke', {
     default: 'white',
@@ -259,8 +275,12 @@ const MOTHAColors = {
     projector: 'black'
   } ),
 
-  deBroglieNegativeAmplitudeColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'deBroglieNegativeAmplitudeColor', {
-    default: 'black'
+  //------------------------------------------------------------------------------------------------------------------
+  // Miscellaneous
+  //------------------------------------------------------------------------------------------------------------------
+
+  pushButtonBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'pushButtonBaseColor', {
+    default: Color.grayColor( 245 )
   } )
 };
 
