@@ -165,8 +165,9 @@ export default class Light {
    */
   private createPhoton(): void {
     this.photonCreatedEmitter.emit( new Photon( {
-      position: this.getNextPhotonPosition(),
       wavelength: this.getNextPhotonWavelength(),
+      position: this.getNextPhotonPosition(),
+      direction: Math.PI / 2, // in the direction of +y
       tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
     } ) );
   }
@@ -177,8 +178,9 @@ export default class Light {
    */
   public createPhotonAtCenter( wavelength: number ): void {
     this.photonCreatedEmitter.emit( new Photon( {
-      position: new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ),
       wavelength: wavelength,
+      position: new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ),
+      direction: Math.PI / 2, // in the direction of +y
       tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
     } ) );
   }
