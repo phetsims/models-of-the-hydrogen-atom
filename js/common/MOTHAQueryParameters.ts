@@ -20,7 +20,7 @@ const SCHEMA_MAP = {
   // Internal query parameters
   //----------------------------------------------------------------------------------------------------------------
 
-  // puts a red rectangle around emitted photons
+  // Draws a red rectangle around emitted photons.
   debugEmission: {
     type: 'flag'
   }

@@ -75,6 +75,7 @@ export default class PhotonNode extends Node {
 
     options.children = [ haloNode, orbNode, sparkleNode ];
 
+    // Draw a red rectangle around emitted photons.
     if ( MOTHAQueryParameters.debugEmission && photon.wasEmitted ) {
       const size = 2 * haloRadius;
       options.children.push( new Rectangle( -size / 2, -size / 2, size, size, {
