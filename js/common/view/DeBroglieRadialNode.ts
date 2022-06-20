@@ -15,6 +15,7 @@ import { Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/j
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
+import OrbitsNode from './OrbitsNode.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -35,6 +36,13 @@ export default class DeBroglieRadialNode extends Node {
           phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
         } )
     }, providedOptions );
+
+    // Electron orbits
+    const orbitsNode = new OrbitsNode( hydrogenAtom, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'orbitsNode' )
+    } );
+
+    options.children = [ orbitsNode ];
 
     super( options );
   }

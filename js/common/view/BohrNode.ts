@@ -14,13 +14,12 @@ import ProtonNode from './ProtonNode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import ElectronNode from './ElectronNode.js';
-import OrbitNode from './OrbitNode.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import BohrModel from '../model/BohrModel.js';
-import { Node } from '../../../../scenery/js/imports.js';
 import ElectronStateDisplay from './ElectronStateDisplay.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import OrbitsNode from './OrbitsNode.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -37,18 +36,8 @@ export default class BohrNode extends HydrogenAtomNode {
       //TODO default values for options
     }, providedOptions );
 
-    // Orbits, centered at the atom's position
-    const orbitNodes = [];
-    const minState = HydrogenAtom.GROUND_STATE;
-    const maxState = HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
-    for ( let state = minState; state <= maxState; state++ ) {
-      const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( state ) );
-      const orbitNode = new OrbitNode( radius );
-      orbitNodes.push( orbitNode );
-    }
-    const orbitsNode = new Node( {
-      children: orbitNodes,
-      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ),
+    // Electron orbits
+    const orbitsNode = new OrbitsNode( hydrogenAtom, modelViewTransform, {
       tandem: options.tandem.createTandem( 'orbitsNode' )
     } );
 
