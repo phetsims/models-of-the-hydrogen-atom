@@ -16,6 +16,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron from '../model/Electron.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -30,8 +31,8 @@ export default class ElectronNode extends ShadedSphereNode {
     const options = optionize<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
-      mainColor: 'rgb( 120, 120, 255 )',
-      highlightColor: 'rgb( 140, 140, 255 )'
+      mainColor: MOTHAColors.electronBaseColorProperty,
+      highlightColor: MOTHAColors.electronHighlightColorProperty
     }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( electron.radius ), options );

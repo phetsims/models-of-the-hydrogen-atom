@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
@@ -35,6 +36,34 @@ const MOTHAColors = {
   boxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'boxStroke', {
     default: 'white',
     projector: 'black'
+  } ),
+
+  //------------------------------------------------------------------------------------------------------------------
+  // Particles
+  //------------------------------------------------------------------------------------------------------------------
+
+  electronBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronBaseColor', {
+    default: 'rgb( 120, 120, 255 )'
+  } ),
+
+  electronHighlightColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronHighlightColor', {
+    default: 'rgb( 140, 140, 255 )'
+  } ),
+
+  neutronBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'neutronBaseColor', {
+    default: 'rgb( 128, 128, 128 )'
+  } ),
+
+  neutronHighlightColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'neutronHighlightColor', {
+    default: 'rgb( 175, 175, 175 )'
+  } ),
+
+  protonBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'protonBaseColor', {
+    default: PhetColorScheme.RED_COLORBLIND
+  } ),
+
+  protonHighlightColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'protonHighlightColor', {
+    default: 'rgb( 255, 130, 130 )'
   } ),
 
   //------------------------------------------------------------------------------------------------------------------

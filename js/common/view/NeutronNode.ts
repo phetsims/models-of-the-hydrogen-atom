@@ -16,6 +16,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Neutron from '../model/Neutron.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -28,8 +29,8 @@ export default class NeutronNode extends ShadedSphereNode {
     const options = optionize<NeutronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
-      mainColor: 'rgb( 128, 128, 128 )',
-      highlightColor: 'rgb( 175, 175, 175 )'
+      mainColor: MOTHAColors.neutronBaseColorProperty,
+      highlightColor: MOTHAColors.neutronHighlightColorProperty
     }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( neutron.radius ), options );

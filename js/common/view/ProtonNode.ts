@@ -11,12 +11,12 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Proton from '../model/Proton.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -29,8 +29,8 @@ export default class ProtonNode extends ShadedSphereNode {
     const options = optionize<ProtonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
-      mainColor: PhetColorScheme.RED_COLORBLIND,
-      highlightColor: 'rgb( 255, 130, 130 )' // lighter red
+      mainColor: MOTHAColors.protonBaseColorProperty,
+      highlightColor: MOTHAColors.protonHighlightColorProperty
     }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( proton.radius ), options );
