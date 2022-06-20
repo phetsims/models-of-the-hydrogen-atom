@@ -92,6 +92,7 @@ export default class DeBroglieModel extends BohrModel {
     return amplitude;
   }
 
+  //TODO normalize the return value to [0,2*Math.PI]
   /**
    * Calculates the new electron angle for some time step. For de Broglie, the change in angle (and thus
    * the oscillation frequency) is the same for all states of the electron.

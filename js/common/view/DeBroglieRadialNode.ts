@@ -103,6 +103,7 @@ export default class DeBroglieRadialNode extends Node {
 
       const maxRadialOffset = RADIAL_OFFSET_FACTOR * this.groundStateOrbitRadius;
       const radialOffset = maxRadialOffset * amplitude;
+      console.log( `amplitude=${amplitude} radialOffset=${radialOffset}` );//XXX
       const x = ( electronOrbitRadius + radialOffset ) * Math.cos( angle );
       const y = ( electronOrbitRadius + radialOffset ) * Math.sin( angle );
       if ( i === 0 ) {
