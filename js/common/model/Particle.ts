@@ -47,7 +47,7 @@ export default class Particle extends PhetioObject {
       // SelfOptions
       position: Vector2.ZERO,
       speed: 0,
-      direction: Math.PI / 2, // straight up, in the direction of +y
+      direction: 0,
 
       // PhetioObjectOptions
       phetioState: false //TODO
