@@ -23,10 +23,11 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { Circle, Color, IColor, Node, NodeOptions, Path, RadialGradient } from '../../../../scenery/js/imports.js';
+import { Circle, Color, IColor, Node, NodeOptions, Path, RadialGradient, Rectangle } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from '../model/Photon.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 // constants
 const INVISIBLE_WAVELENGTH_COLOR = new Color( 160, 160, 160 );
@@ -73,6 +74,14 @@ export default class PhotonNode extends Node {
     const sparkleNode = new SparkleNode( wavelength, sparkleRadius );
 
     options.children = [ haloNode, orbNode, sparkleNode ];
+
+    if ( MOTHAQueryParameters.debugEmission && photon.wasEmitted ) {
+      const size = 2 * haloRadius;
+      options.children.push( new Rectangle( -size / 2, -size / 2, size, size, {
+        stroke: 'red',
+        lineWidth: 2
+      } ) );
+    }
 
     super( options );
 
