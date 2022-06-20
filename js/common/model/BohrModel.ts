@@ -89,8 +89,8 @@ export default class BohrModel extends HydrogenAtom {
   // offset of the electron from the atom's center
   protected readonly electronOffsetProperty: IReadOnlyProperty<Vector2>;
 
-  // minimum time (simulation clock time) that electron stays in a state before emission can occur
-  public static MIN_TIME_IN_STATE = 50;
+  // minimum time (in sec) that electron stays in a state before emission can occur
+  public static MIN_TIME_IN_STATE = 1;
 
   // Change in orbit angle per dt for ground state orbit
   public static ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
@@ -232,9 +232,9 @@ export default class BohrModel extends HydrogenAtom {
   public static getWavelengthAbsorbed( oldState: number, newState: number ): number {
     assert && assert( Number.isInteger( oldState ) && Number.isInteger( newState ) );
     assert && assert( HydrogenAtom.GROUND_STATE === 1 );
-    assert && assert( oldState >= HydrogenAtom.GROUND_STATE );
-    assert && assert( oldState < newState );
-    assert && assert( newState <= HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() );
+    assert && assert( oldState >= HydrogenAtom.GROUND_STATE, `oldState=${oldState}` );
+    assert && assert( oldState < newState, `oldState=${oldState} newState=${newState}` );
+    assert && assert( newState <= HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates(), `newState=${newState}` );
     return 1240.0 / ( 13.6 * ( ( 1.0 / ( oldState * oldState ) ) - ( 1.0 / ( newState * newState ) ) ) );
   }
 
@@ -419,14 +419,14 @@ export default class BohrModel extends HydrogenAtom {
         if ( canStimulateEmission && this.stimulatedEmissionIsCertain() ) {
 
           // This algorithm assumes that photons are moving vertically from bottom to top.
-          assert && assert( photon.directionProperty.value === Utils.toRadians( -90 ) );
+          assert && assert( photon.directionProperty.value === Math.PI / 2 );
 
           // Create and emit a photon
           success = true;
           this.photonEmittedEmitter.emit( new Photon( {
             wavelength: photon.wavelength,
-            direction: photon.directionProperty.value,
             position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
+            direction: photon.directionProperty.value,
             wasEmitted: true,
             tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
           } ) );
@@ -486,7 +486,7 @@ export default class BohrModel extends HydrogenAtom {
         this.photonEmittedEmitter.emit( new Photon( {
           wavelength: BohrModel.getWavelengthEmitted( currentState, newState ),
           position: this.getSpontaneousEmissionPosition(),
-          direction: MOTHAUtils.nextAngle(),
+          direction: MOTHAUtils.nextAngle(), // in a random direction
           wasEmitted: true,
           tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
         } ) );
@@ -509,16 +509,16 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Chooses a new state for the electron. The state chosen is a lower state. This is used when moving to
    * a lower state, during spontaneous emission. Each lower state has the same probability of being chosen.
-   *
-   * @returns positive state number, -1 if there is no state could be chosen
+   * @returns positive state number, -1 if there is no lower state
    */
   protected chooseLowerElectronState(): number {
     const currentState = this.electronStateProperty.value;
-    let newState = HydrogenAtom.GROUND_STATE;
-    if ( currentState > HydrogenAtom.GROUND_STATE + 1 ) {
-      newState = HydrogenAtom.GROUND_STATE + dotRandom.nextIntBetween( 0, currentState - HydrogenAtom.GROUND_STATE );
+    if ( currentState === HydrogenAtom.GROUND_STATE ) {
+      return -1;
     }
-    return newState;
+    else {
+      return dotRandom.nextIntBetween( HydrogenAtom.GROUND_STATE, currentState - HydrogenAtom.GROUND_STATE );
+    }
   }
 
   /**
