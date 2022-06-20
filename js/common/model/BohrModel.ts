@@ -84,7 +84,7 @@ export default class BohrModel extends HydrogenAtom {
   private readonly timeInStateProperty: Property<number>;
 
   // current angle of electron
-  protected readonly electronAngleProperty: Property<number>;
+  public readonly electronAngleProperty: Property<number>;
 
   // offset of the electron from the atom's center
   protected readonly electronOffsetProperty: IReadOnlyProperty<Vector2>;
@@ -183,6 +183,7 @@ export default class BohrModel extends HydrogenAtom {
     this.attemptSpontaneousEmission();
   }
 
+  //TODO normalize the return value to [0,2*Math.PI]
   /**
    * Calculates the new electron angle for some time step.
    * Subclasses may override this to produce different oscillation behavior.
@@ -190,7 +191,7 @@ export default class BohrModel extends HydrogenAtom {
   protected calculateNewElectronAngle( dt: number ): number {
     const electronState = this.electronStateProperty.value;
     const deltaAngle = dt * ( BohrModel.ELECTRON_ANGLE_DELTA / ( electronState * electronState ) );
-    return this.electronAngleProperty.value - deltaAngle; // clockwise
+    return this.electronAngleProperty.value - deltaAngle; //TODO clockwise
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {

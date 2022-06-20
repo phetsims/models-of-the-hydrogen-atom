@@ -53,7 +53,7 @@ export default class DeBroglieBrightnessNode extends Node {
   }
 
   public step( dt: number ): void {
-    //TODO
+    //TODO implement step
   }
 }
 
