@@ -46,6 +46,7 @@ export default class SnapshotNode extends Node {
       top: backgroundNode.top + 10
     } );
 
+    //TODO https://github.com/phetsims/scenery-phet/issues/320 need TrashButton in common code
     const trashButton = new RectangularPushButton( {
       content: new Path( trashAltRegularShape, {
         scale: 0.052,
