@@ -12,9 +12,8 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
-import trashAltRegularShape from '../../../../sherpa/js/fontawesome-5/trashAltRegularShape.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import { Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import TrashButton from '../../../../scenery-phet/js/buttons/TrashButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -46,12 +45,7 @@ export default class SnapshotNode extends Node {
       top: backgroundNode.top + 10
     } );
 
-    //TODO https://github.com/phetsims/scenery-phet/issues/320 need TrashButton in common code
-    const trashButton = new RectangularPushButton( {
-      content: new Path( trashAltRegularShape, {
-        scale: 0.052,
-        fill: 'black'
-      } ),
+    const trashButton = new TrashButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       listener: () => {
         numberOfSnapshotsProperty.value--;
