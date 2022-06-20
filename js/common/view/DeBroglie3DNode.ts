@@ -7,6 +7,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -37,6 +38,11 @@ export default class DeBroglie3DNode extends Node {
     }, providedOptions );
 
     super( options );
+
+    //TODO add other dependencies
+    Multilink.multilink( [ this.visibleProperty ], visible => {
+      visible && this.update();
+    } );
   }
 
   public override dispose(): void {
@@ -45,8 +51,13 @@ export default class DeBroglie3DNode extends Node {
   }
 
   public step( dt: number ): void {
-    //TODO implement step
+    //TODO implement or delete step
   }
+
+  private update(): void {
+    //TODO
+  }
+
 }
 
 modelsOfTheHydrogenAtom.register( 'DeBroglie3DNode', DeBroglie3DNode );

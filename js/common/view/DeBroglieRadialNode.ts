@@ -91,10 +91,6 @@ export default class DeBroglieRadialNode extends Node {
     super.dispose();
   }
 
-  public step( dt: number ): void {
-    //TODO implement step, or can this be deleted?
-  }
-
   /**
    * Updates the ring that represents the standing wave. The shape is computed in global model coordinates.
    */

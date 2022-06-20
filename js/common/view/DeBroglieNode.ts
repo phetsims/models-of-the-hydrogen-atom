@@ -104,18 +104,8 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
   //TODO a better way to step the selected view
   public step( dt: number ): void {
-    const deBroglieView = this.deBroglieViewProperty.value;
-    if ( deBroglieView === 'radial' ) {
-      this.deBroglieRadialNode.step( dt );
-    }
-    else if ( deBroglieView === '3D' ) {
+    if ( this.deBroglieViewProperty.value === '3D' ) {
       this.deBroglie3DNode.step( dt );
-    }
-    else if ( deBroglieView === 'brightness' ) {
-      this.deBroglieBrightnessNode.step( dt );
-    }
-    else {
-      assert && assert( false, `unsupported DeBroglieView: ${deBroglieView}` );
     }
   }
 }

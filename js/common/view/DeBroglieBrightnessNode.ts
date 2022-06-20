@@ -102,10 +102,6 @@ export default class DeBroglieBrightnessNode extends Node {
     super.dispose();
   }
 
-  public step( dt: number ): void {
-    //TODO implement step, or can this be deleted?
-  }
-
   //TODO this is not displaying anything
   /**
    * Updates the ring's geometry and color to match the specified state.
