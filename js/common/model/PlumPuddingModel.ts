@@ -349,9 +349,9 @@ class PlumPuddingModel extends HydrogenAtom {
 
       // Create and emit a photon
       this.photonEmittedEmitter.emit( new Photon( {
-        position: this.electron.positionProperty.value, // at the electron's position
         wavelength: PHOTON_EMISSION_WAVELENGTH,
-        direction: MOTHAUtils.nextAngle(),
+        position: this.electron.positionProperty.value, // at the electron's position
+        direction: MOTHAUtils.nextAngle(), // in a random direction
         wasEmitted: true,
         tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
       } ) );
