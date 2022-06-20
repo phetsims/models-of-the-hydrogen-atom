@@ -21,6 +21,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 // multiply the ground state orbit radius by this number to determine max amplitude
 const RADIAL_OFFSET_FACTOR = 0.45;
@@ -79,9 +80,10 @@ export default class DeBroglieRadialNode extends Node {
     this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( HydrogenAtom.GROUND_STATE ) );
     this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( hydrogenAtom.position );
 
-    hydrogenAtom.electronAngleProperty.link( electronAngle => {
-      this.update();
-    } );
+    Multilink.multilink( [ hydrogenAtom.electronAngleProperty, this.visibleProperty ],
+      ( electronAngle, visible ) => {
+        visible && this.update();
+      } );
   }
 
   public override dispose(): void {
@@ -97,6 +99,7 @@ export default class DeBroglieRadialNode extends Node {
    * Updates the ring that represents the standing wave. The shape is computed in global model coordinates.
    */
   private update(): void {
+    assert && assert( this.visible );
 
     // Get the radius for the electron's current state.
     const electronState = this.hydrogenAtom.electronStateProperty.value;

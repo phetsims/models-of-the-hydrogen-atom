@@ -90,8 +90,10 @@ export default class DeBroglieBrightnessNode extends Node {
     );
 
     //TODO are these dependencies correct?
-    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, hydrogenAtom.electronAngleProperty ],
-      ( electronState, electronAngle ) => this.update( electronState )
+    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, hydrogenAtom.electronAngleProperty, this.visibleProperty ],
+      ( electronState, electronAngle, visible ) => {
+        visible && this.update( electronState );
+      }
     );
   }
 
@@ -109,6 +111,7 @@ export default class DeBroglieBrightnessNode extends Node {
    * Updates the ring's geometry and color to match the specified state.
    */
   private update( electronState: number ): void {
+    assert && assert( this.visible );
 
     // Compute the number of polygons needed to represent this electron state.
     this.previousElectronStateProperty.value = electronState;
