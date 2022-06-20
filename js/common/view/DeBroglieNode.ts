@@ -21,7 +21,7 @@ import DeBroglieViewComboBox from './DeBroglieViewComboBox.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import DeBroglieRadialNode from './DeBroglieRadialNode.js';
-import DeBroglieThreeDNode from './DeBroglieThreeDNode.js';
+import DeBroglie3DNode from './DeBroglie3DNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import { DeBroglieView } from '../model/DeBroglieView.js';
 
@@ -33,7 +33,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
   private readonly deBroglieViewProperty: IReadOnlyProperty<DeBroglieView>;
   private readonly deBroglieRadialNode: DeBroglieRadialNode;
-  private readonly deBroglieThreeDNode: DeBroglieThreeDNode;
+  private readonly deBroglie3DNode: DeBroglie3DNode;
   private readonly deBroglieBrightnessNode: DeBroglieBrightnessNode;
 
   public constructor( hydrogenAtom: DeBroglieModel,
@@ -57,19 +57,19 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     const viewNodesTandem = options.tandem.createTandem( 'viewNodes' );
 
     const deBroglieRadialNode = new DeBroglieRadialNode( hydrogenAtom, modelViewTransform, {
-      tandem: viewNodesTandem.createTandem( 'radialNode' )
+      tandem: viewNodesTandem.createTandem( 'deBroglieRadialNode' )
     } );
 
-    const deBroglieThreeDNode = new DeBroglieThreeDNode( hydrogenAtom, modelViewTransform, {
-      tandem: viewNodesTandem.createTandem( 'threeDNode' )
+    const deBroglie3DNode = new DeBroglie3DNode( hydrogenAtom, modelViewTransform, {
+      tandem: viewNodesTandem.createTandem( 'deBroglie3DNode' )
     } );
 
     const deBroglieBrightnessNode = new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform, {
-      tandem: viewNodesTandem.createTandem( 'brightnessNode' )
+      tandem: viewNodesTandem.createTandem( 'deBroglieBrightnessNode' )
     } );
 
     const viewNodes = new Node( {
-      children: [ deBroglieRadialNode, deBroglieThreeDNode, deBroglieBrightnessNode ]
+      children: [ deBroglieRadialNode, deBroglie3DNode, deBroglieBrightnessNode ]
       // No need to PhET-iO instrument this Node.
     } );
 
@@ -93,7 +93,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
     this.deBroglieViewProperty = hydrogenAtom.deBroglieViewProperty;
     this.deBroglieRadialNode = deBroglieRadialNode;
-    this.deBroglieThreeDNode = deBroglieThreeDNode;
+    this.deBroglie3DNode = deBroglie3DNode;
     this.deBroglieBrightnessNode = deBroglieBrightnessNode;
   }
 
@@ -109,7 +109,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       this.deBroglieRadialNode.step( dt );
     }
     else if ( deBroglieView === '3D' ) {
-      this.deBroglieThreeDNode.step( dt );
+      this.deBroglie3DNode.step( dt );
     }
     else if ( deBroglieView === 'brightness' ) {
       this.deBroglieBrightnessNode.step( dt );

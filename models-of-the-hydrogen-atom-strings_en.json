@@ -2,6 +2,9 @@
   "models-of-the-hydrogen-atom.title": {
     "value": "Models of the Hydrogen Atom"
   },
+  "3DView": {
+    "value": "3D view"
+  },
   "billiardBall": {
     "value": "Billiard Ball"
   },
@@ -88,9 +91,6 @@
   },
   "spectrometerExpanded": {
     "value": "Spectrometer (photons emitted / nm)"
-  },
-  "threeDView": {
-    "value": "3D view"
   },
   "viewSnapshots": {
     "value": "View snapshots"

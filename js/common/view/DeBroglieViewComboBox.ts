@@ -45,9 +45,10 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
         tandem: options.tandem.createTandem( 'radialViewText' )
       }, textOptions ) );
 
-    const threeDViewText = new Text( modelsOfTheHydrogenAtomStrings.threeDView,
+    // threeDViewText does not match '3DViewText' tandem name because JavaScript identifiers cannot begin with a number.
+    const threeDViewText = new Text( modelsOfTheHydrogenAtomStrings[ '3DView' ],
       optionize<TextOptions, EmptyObjectType, TextOptions>()( {
-        tandem: options.tandem.createTandem( 'threeDViewText' )
+        tandem: options.tandem.createTandem( '3DViewText' )
       }, textOptions ) );
 
     const brightnessViewText = new Text( modelsOfTheHydrogenAtomStrings.brightnessView,

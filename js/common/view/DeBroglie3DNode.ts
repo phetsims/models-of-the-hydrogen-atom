@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * DeBroglieThreeDNode show the '3D' view for the de Broglie model.
+ * DeBroglie3DNode show the '3D' view for the de Broglie model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,15 +18,15 @@ import DeBroglieModel from '../model/DeBroglieModel.js';
 
 type SelfOptions = EmptyObjectType;
 
-type DeBroglieThreeDNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+type DeBroglie3DNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
-export default class DeBroglieThreeDNode extends Node {
+export default class DeBroglie3DNode extends Node {
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
-                      providedOptions: DeBroglieThreeDNodeOptions ) {
+                      providedOptions: DeBroglie3DNodeOptions ) {
 
-    const options = optionize<DeBroglieThreeDNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<DeBroglie3DNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieViewProperty ],
@@ -49,4 +49,4 @@ export default class DeBroglieThreeDNode extends Node {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'DeBroglieThreeDNode', DeBroglieThreeDNode );
+modelsOfTheHydrogenAtom.register( 'DeBroglie3DNode', DeBroglie3DNode );
