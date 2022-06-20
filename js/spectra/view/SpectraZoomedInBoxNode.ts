@@ -31,6 +31,9 @@ type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
+  private readonly model: SpectraModel;
+  private readonly deBroglieNode: DeBroglieNode;
+
   public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
     const options = optionize<SpectraZoomedInBoxNodeOptions, SelfOptions, ZoomedInBoxNodeOptions>()( {
@@ -49,6 +52,10 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
     super( model.zoomedInBox, modelViewTransform, options );
 
+    const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform, popupParent, {
+      tandem: options.tandem.createTandem( 'deBroglieNode' )
+    } );
+
     this.contentsNode.addChild( new Node( {
       children: [
         new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
@@ -63,9 +70,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
         new BohrNode( model.bohrModel, model.hydrogenAtomProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'bohrNode' )
         } ),
-        new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform, popupParent, {
-          tandem: options.tandem.createTandem( 'deBroglieNode' )
-        } ),
+        deBroglieNode,
         new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'schrodingerNode' )
         } )
@@ -89,11 +94,22 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       this.contentsNode.removeChild( photonNode );
       photonNode.dispose();
     } );
+
+    this.model = model;
+    this.deBroglieNode = deBroglieNode;
   }
 
   public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  public step( dt: number ): void {
+
+    //TODO a better way to step the selected view
+    if ( this.model.hydrogenAtomProperty.value === this.model.bohrModel ) {
+      this.deBroglieNode.step( dt );
+    }
   }
 }
 

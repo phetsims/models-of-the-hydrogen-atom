@@ -39,6 +39,9 @@ type SpectraScreenViewOptions = SelfOptions & ScreenViewOptions;
 
 class SpectraScreenView extends ScreenView {
 
+  private readonly model: SpectraModel;
+  private readonly zoomedInBoxNode: SpectraZoomedInBoxNode;
+
   public constructor( model: SpectraModel, providedOptions: SpectraScreenViewOptions ) {
 
     const options = optionize<SpectraScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
@@ -223,10 +226,15 @@ class SpectraScreenView extends ScreenView {
       spectrometerAccordionBox,
       viewSnapshotsButton
     ];
+
+    this.model = model;
+    this.zoomedInBoxNode = zoomedInBoxNode;
   }
 
   public override step( dt: number ): void {
-    //TODO implement step
+    if ( this.model.isPlayingProperty.value ) {
+      this.zoomedInBoxNode.step( dt );
+    }
   }
 
   public override dispose(): void {
