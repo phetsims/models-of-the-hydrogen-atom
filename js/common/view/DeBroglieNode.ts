@@ -108,7 +108,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     if ( deBroglieView === 'radial' ) {
       this.deBroglieRadialNode.step( dt );
     }
-    else if ( deBroglieView === 'threeD' ) {
+    else if ( deBroglieView === '3D' ) {
       this.deBroglieThreeDNode.step( dt );
     }
     else if ( deBroglieView === 'brightness' ) {

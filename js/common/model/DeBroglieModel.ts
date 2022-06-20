@@ -39,7 +39,7 @@ export default class DeBroglieModel extends BohrModel {
   // radial width of the ring for 'brightness' representation,
   public static BRIGHTNESS_RING_WIDTH = 5;
 
-  // electron for the 'threeD' view
+  // electron for the '3D' view
   public readonly electron3D: Electron;
 
   public readonly deBroglieViewProperty: StringEnumerationProperty<DeBroglieView>;
@@ -110,7 +110,7 @@ export default class DeBroglieModel extends BohrModel {
    * Uses different algorithms depending on whether the view is 2D or 3D.
    */
   protected override collides( photon: Photon ): boolean {
-    if ( this.deBroglieViewProperty.value === 'threeD' ) {
+    if ( this.deBroglieViewProperty.value === '3D' ) {
       return this.collides3D( photon );
     }
     else {
@@ -167,7 +167,7 @@ export default class DeBroglieModel extends BohrModel {
     return photon.positionProperty.value.minus( this.position );
   }
 
-  //TODO why isn't this adjusted for 'threeD' view?
+  //TODO why isn't this adjusted for '3D' view?
   /**
    * How close the photon's center must be to a point on the electron's orbit in order for a collision to occur.
    */
