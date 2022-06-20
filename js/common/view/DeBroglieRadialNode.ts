@@ -76,11 +76,11 @@ export default class DeBroglieRadialNode extends Node {
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
     this.ringPath = ringPath;
-    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( this.hydrogenAtom.getElectronOrbitRadius( HydrogenAtom.GROUND_STATE ) );
-    this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( this.hydrogenAtom.position );
+    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( HydrogenAtom.GROUND_STATE ) );
+    this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( hydrogenAtom.position );
 
     hydrogenAtom.electronAngleProperty.link( electronAngle => {
-      this.updateRingPath();
+      this.update();
     } );
   }
 
@@ -90,13 +90,13 @@ export default class DeBroglieRadialNode extends Node {
   }
 
   public step( dt: number ): void {
-    //TODO implement step - is it needed for this view?
+    //TODO implement step, or can this be deleted?
   }
 
   /**
    * Updates the ring that represents the standing wave. The shape is computed in global model coordinates.
    */
-  private updateRingPath(): void {
+  private update(): void {
 
     // Get the radius for the electron's current state.
     const electronState = this.hydrogenAtom.electronStateProperty.value;

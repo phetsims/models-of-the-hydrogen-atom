@@ -257,6 +257,10 @@ const MOTHAColors = {
   stateDisplayFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'stateDisplayFill', {
     default: 'white',
     projector: 'black'
+  } ),
+
+  deBroglieNegativeAmplitudeColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'deBroglieNegativeAmplitudeColor', {
+    default: 'black'
   } )
 };
 
