@@ -20,6 +20,7 @@ import OrbitsNode from './OrbitsNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 // multiply the ground state orbit radius by this number to determine max amplitude
 const RADIAL_OFFSET_FACTOR = 0.45;
@@ -36,7 +37,12 @@ export default class DeBroglieRadialNode extends Node {
   private readonly hydrogenAtom: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly ringPath: Path;
+
+  // radius of the ground state orbit, in view coordinates
   private readonly groundStateOrbitRadius: number;
+
+  // position of the hydrogen atom, in view coordinates
+  private readonly hydrogenAtomPosition: Vector2;
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
@@ -59,7 +65,8 @@ export default class DeBroglieRadialNode extends Node {
 
     // Ring that represents the standing wave
     const ringPath = new Path( null, {
-      stroke: MOTHAColors.electronBaseColorProperty
+      stroke: MOTHAColors.electronBaseColorProperty,
+      lineWidth: 2
     } );
 
     options.children = [ orbitsNode, ringPath ];
@@ -70,6 +77,7 @@ export default class DeBroglieRadialNode extends Node {
     this.modelViewTransform = modelViewTransform;
     this.ringPath = ringPath;
     this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( this.hydrogenAtom.getElectronOrbitRadius( HydrogenAtom.GROUND_STATE ) );
+    this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( this.hydrogenAtom.position );
 
     hydrogenAtom.electronAngleProperty.link( electronAngle => {
       this.updateRingPath();
@@ -85,9 +93,8 @@ export default class DeBroglieRadialNode extends Node {
     //TODO implement step - is it needed for this view?
   }
 
-  //TODO this is not behaving like the Java version
   /**
-   * Updates the ring that represents the standing wave.
+   * Updates the ring that represents the standing wave. The shape is computed in global model coordinates.
    */
   private updateRingPath(): void {
 
@@ -95,7 +102,7 @@ export default class DeBroglieRadialNode extends Node {
     const electronState = this.hydrogenAtom.electronStateProperty.value;
     const electronOrbitRadius = this.modelViewTransform.modelToViewDeltaX( this.hydrogenAtom.getElectronOrbitRadius( electronState ) );
 
-    const ringShape = new Shape(); //TODO reuse one Shape instance?
+    const ringShape = new Shape();
     for ( let i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
 
       const angle = ( 2 * Math.PI ) * ( i / NUMBER_OF_SEGMENTS );
@@ -103,9 +110,8 @@ export default class DeBroglieRadialNode extends Node {
 
       const maxRadialOffset = RADIAL_OFFSET_FACTOR * this.groundStateOrbitRadius;
       const radialOffset = maxRadialOffset * amplitude;
-      console.log( `amplitude=${amplitude} radialOffset=${radialOffset}` );//XXX
-      const x = ( electronOrbitRadius + radialOffset ) * Math.cos( angle );
-      const y = ( electronOrbitRadius + radialOffset ) * Math.sin( angle );
+      const x = ( electronOrbitRadius + radialOffset ) * Math.cos( angle ) + this.hydrogenAtomPosition.x;
+      const y = ( electronOrbitRadius + radialOffset ) * Math.sin( angle ) + this.hydrogenAtomPosition.y;
       if ( i === 0 ) {
         ringShape.moveTo( x, y );
       }
@@ -115,9 +121,6 @@ export default class DeBroglieRadialNode extends Node {
     }
     ringShape.close();
     this.ringPath.shape = ringShape;
-
-    // Center the ring at the atom's position.
-    this.ringPath.center = this.modelViewTransform.modelToViewPosition( this.hydrogenAtom.position );
   }
 }
 
