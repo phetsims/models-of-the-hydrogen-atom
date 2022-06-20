@@ -80,7 +80,7 @@ export default class PhotonNode extends Node {
       const size = 2 * haloRadius;
       options.children.push( new Rectangle( -size / 2, -size / 2, size, size, {
         stroke: 'red',
-        lineWidth: 2
+        lineWidth: 4
       } ) );
     }
 
