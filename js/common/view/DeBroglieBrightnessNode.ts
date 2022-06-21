@@ -119,7 +119,6 @@ export default class DeBroglieBrightnessNode extends Node {
     const electronOrbitRadius = this.hydrogenAtom.getElectronOrbitRadius( electronState );
     const radius = this.modelViewTransform.modelToViewDeltaX( electronOrbitRadius );
     const numberOfPolygons = calculateNumberOfPolygons( radius );
-    console.log( `numberOfPolygons=${numberOfPolygons}` );//XXX
 
     // Create the polygons, each with its own fill color that corresponds to amplitude.
     const polygonNodes: Node[] = [];
