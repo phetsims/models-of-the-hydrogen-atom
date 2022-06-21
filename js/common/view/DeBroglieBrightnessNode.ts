@@ -59,7 +59,8 @@ export default class DeBroglieBrightnessNode extends Node {
     const ringNode = new RingNode( hydrogenAtom, modelViewTransform, {
 
       // Synchronize visibility with the parent Node, because RingNode is optimized to update only when visible.
-      visibleProperty: options.visibleProperty
+      visibleProperty: options.visibleProperty,
+      tandem: options.tandem.createTandem( 'ringNode' )
     } );
 
     options.children = [ orbitsNode, ringNode ];
@@ -74,7 +75,7 @@ export default class DeBroglieBrightnessNode extends Node {
 }
 
 type RingNodeSelfOptions = EmptyObjectType;
-type RingNodeOptions = RingNodeSelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
+type RingNodeOptions = RingNodeSelfOptions & PickRequired<NodeOptions, 'visibleProperty' | 'tandem'>;
 
 /**
  * RingNode is the brightness ring that represents the standing wave.
