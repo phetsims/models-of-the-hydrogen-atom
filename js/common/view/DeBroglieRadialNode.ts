@@ -12,7 +12,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions, NodeTranslationOptions, Path, PathOptions } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Path, PathOptions } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -31,7 +31,7 @@ const NUMBER_OF_SEGMENTS = 200;
 
 type SelfOptions = EmptyObjectType;
 
-type DeBroglieRadialNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+type DeBroglieRadialNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class DeBroglieRadialNode extends Node {
 

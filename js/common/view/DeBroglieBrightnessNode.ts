@@ -12,7 +12,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Color, IColor, Node, NodeOptions, NodeTranslationOptions, Path } from '../../../../scenery/js/imports.js';
+import { Color, IColor, Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -32,7 +32,7 @@ const POLYGON_SIZE = 3;
 
 type SelfOptions = EmptyObjectType;
 
-type DeBroglieBrightnessNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+type DeBroglieBrightnessNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class DeBroglieBrightnessNode extends Node {
 
