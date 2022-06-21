@@ -42,9 +42,12 @@ export default class DeBroglieBrightnessNode extends Node {
   private readonly hydrogenAtom: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly hydrogenAtomPosition: Vector2; // in view coordinates
-  private readonly ringNode: Node; // parent node for all geometry that approximates the ring
-  private readonly polygonNodes: Path[];
-  private readonly previousElectronStateProperty: Property<number | null>; // previous state of the atom's electron
+  private readonly polygonNodes: Path[]; // polygons used to approximate the ring
+  private readonly ringNode: Node; // parent for all nodes that make up the ring
+  private readonly previousElectronStateProperty: Property<number | null>; // previous state of the electron
+  private readonly ringThickness: number; // radial width of the ring, in view coordinates
+
+  // range of colors used for the ring, based on electron amplitude
   private readonly positiveAmplitudeColorProperty: IReadOnlyProperty<Color>;
   private readonly negativeAmplitudeColorProperty: IReadOnlyProperty<Color>;
   private readonly zeroAmplitudeColorProperty: IReadOnlyProperty<Color>;
@@ -88,6 +91,7 @@ export default class DeBroglieBrightnessNode extends Node {
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     this.ringNode = ringNode;
+    this.ringThickness = modelViewTransform.modelToViewDeltaX( DeBroglieModel.BRIGHTNESS_RING_THICKNESS );
 
     // pre-allocate the maximum number of polygon (Path) nodes
     const maxState = HydrogenAtom.GROUND_STATE + DeBroglieModel.getNumberOfStates() - 1;
@@ -106,19 +110,16 @@ export default class DeBroglieBrightnessNode extends Node {
         Color.interpolateRGBA( negativeAmplitudeColor, positiveAmplitudeColor, 0.5 )
     );
 
-    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, this.visibleProperty ],
-      ( electronState, visible ) => {
+    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, this.hydrogenAtom.electronAngleProperty, this.visibleProperty ],
+      ( electronState, electronAngle, visible ) => {
         if ( visible ) {
-          this.updateRingGeometry( hydrogenAtom.electronStateProperty.value );
-          this.updateRingColor( hydrogenAtom.electronStateProperty.value );
+          if ( electronState !== this.previousElectronStateProperty.value ) {
+            this.updateRingGeometry( electronState );
+            this.previousElectronStateProperty.value = electronState;
+          }
+          this.updateRingColor( electronState );
         }
       } );
-
-    this.hydrogenAtom.electronAngleProperty.link( electronAngle => {
-      if ( this.visible ) {
-        this.updateRingColor( hydrogenAtom.electronStateProperty.value );
-      }
-    } );
   }
 
   public override dispose(): void {
@@ -127,16 +128,19 @@ export default class DeBroglieBrightnessNode extends Node {
   }
 
   /**
-   * Updates the ring's geometry. This should be called when the electron state changes.
+   * Updates the ring's geometry. Polygon (Path) nodes are reused, and new Shapes are computed.
+   * This should be called only when the electron state changes, resulting in the electron moving
+   * to a different orbit, and therefore requiring the ring to be revised to match that orbit.
    */
   private updateRingGeometry( electronState: number ): void {
-    assert && assert( this.visible );
+    assert && assert( this.visible, 'should only be called when visible' );
+    assert && assert( electronState !== this.previousElectronStateProperty.value,
+      'should only be called when electron state has changed' );
 
     // Compute the number of polygons needed to represent this electron state.
-    this.previousElectronStateProperty.value = electronState;
-    const electronOrbitRadius = this.hydrogenAtom.getElectronOrbitRadius( electronState );
-    const radius = this.modelViewTransform.modelToViewDeltaX( electronOrbitRadius );
-    const numberOfPolygons = calculateNumberOfPolygons( radius );
+    const modelRadius = this.hydrogenAtom.getElectronOrbitRadius( electronState );
+    const viewRadius = this.modelViewTransform.modelToViewDeltaX( modelRadius );
+    const numberOfPolygons = calculateNumberOfPolygons( viewRadius );
     assert && assert( numberOfPolygons <= this.polygonNodes.length );
 
     // Create the polygon Shapes
@@ -145,8 +149,8 @@ export default class DeBroglieBrightnessNode extends Node {
 
       const a1 = ( 2 * Math.PI ) * ( i / numberOfPolygons );
       const a2 = a1 + ( 2 * Math.PI / numberOfPolygons ) + 0.001; // add a tiny bit of overlap, to hide seams
-      const r1 = radius - DeBroglieModel.BRIGHTNESS_RING_RADIUS;
-      const r2 = radius + DeBroglieModel.BRIGHTNESS_RING_RADIUS;
+      const r1 = viewRadius - this.ringThickness;
+      const r2 = viewRadius + this.ringThickness;
       const cos1 = Math.cos( a1 );
       const sin1 = Math.sin( a1 );
       const cos2 = Math.cos( a2 );
@@ -176,10 +180,11 @@ export default class DeBroglieBrightnessNode extends Node {
   }
 
   /**
-   * Updates the ring color. This should be called when the electron state or atom angle changes.
+   * Updates the ring color. The color for each polygon (Path) in the ring is computed based on the amplitude at
+   * that polygon's position. This should be called when the electron's state or angle changes.
    */
   private updateRingColor( electronState: number ): void {
-    assert && assert( this.visible );
+    assert && assert( this.visible, 'should only be called when visible' );
     const numberOfPolygons = this.ringNode.getChildrenCount();
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       assert && assert( this.polygonNodes[ i ] instanceof Path );

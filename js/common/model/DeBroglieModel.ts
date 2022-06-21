@@ -37,7 +37,7 @@ export default class DeBroglieModel extends BohrModel {
   public static ORBIT_3D_Y_SCALE = 0.35;
 
   // radial width of the ring for 'brightness' representation,
-  public static BRIGHTNESS_RING_RADIUS = 3;
+  public static BRIGHTNESS_RING_THICKNESS = 3;
 
   // electron for the '3D' view
   public readonly electron3D: Electron;
@@ -138,7 +138,7 @@ export default class DeBroglieModel extends BohrModel {
     const distance = photonOffset.distanceXY( orbitX, orbitY );
 
     // how close the photon's center must be to a point on the electron's orbit
-    //TODO why is getClosenessForCollision used for '3D' when it's a function of BRIGHTNESS_RING_RADIUS?
+    //TODO why is getClosenessForCollision used for '3D' when it's a function of BRIGHTNESS_RING_THICKNESS?
     const closeness = this.getClosenessForCollision( photon );
 
     return ( distance <= closeness );
@@ -159,7 +159,7 @@ export default class DeBroglieModel extends BohrModel {
     const photonRadius = Math.sqrt( ( photonOffset.x * photonOffset.x ) + ( photonOffset.y * photonOffset.y ) );
     const orbitRadius = this.getElectronOrbitRadius( this.electronStateProperty.value );
 
-    //TODO why is getClosenessForCollision used for 'radial' when it's a function of BRIGHTNESS_RING_RADIUS?
+    //TODO why is getClosenessForCollision used for 'radial' when it's a function of BRIGHTNESS_RING_THICKNESS?
     return ( Math.abs( photonRadius - orbitRadius ) <= this.getClosenessForCollision( photon ) );
   }
 
@@ -175,7 +175,7 @@ export default class DeBroglieModel extends BohrModel {
    * How close the photon's center must be to a point on the electron's orbit in order for a collision to occur.
    */
   private getClosenessForCollision( photon: Photon ): number {
-    return ( photon.radius + this.electron.radius + DeBroglieModel.BRIGHTNESS_RING_RADIUS );
+    return ( photon.radius + this.electron.radius + DeBroglieModel.BRIGHTNESS_RING_THICKNESS );
   }
 }
 
