@@ -27,8 +27,10 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 
-// distance along the ring's circumference that each polygon occupies, in view coordinates
-const POLYGON_SIZE = 2.5;
+// Distance along the ring's circumference that each polygon occupies, in view coordinates.
+// This value was tuned empirically. Since larger values result in creation of more polygons (Path nodes), it's
+// important to keep this value as small as possible.
+const POLYGON_SIZE = 3;
 
 type SelfOptions = EmptyObjectType;
 
@@ -117,6 +119,7 @@ export default class DeBroglieBrightnessNode extends Node {
     const electronOrbitRadius = this.hydrogenAtom.getElectronOrbitRadius( electronState );
     const radius = this.modelViewTransform.modelToViewDeltaX( electronOrbitRadius );
     const numberOfPolygons = calculateNumberOfPolygons( radius );
+    console.log( `numberOfPolygons=${numberOfPolygons}` );//XXX
 
     // Create the polygons, each with its own fill color that corresponds to amplitude.
     const polygonNodes: Node[] = [];
