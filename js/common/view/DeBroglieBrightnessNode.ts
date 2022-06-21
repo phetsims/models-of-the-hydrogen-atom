@@ -28,7 +28,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 
 // distance along the ring's circumference that each polygon occupies, in view coordinates
-const POLYGON_SIZE = 3;
+const POLYGON_SIZE = 2.5;
 
 type SelfOptions = EmptyObjectType;
 
@@ -96,7 +96,7 @@ export default class DeBroglieBrightnessNode extends Node {
     //TODO are these dependencies correct?
     Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, hydrogenAtom.electronAngleProperty, this.visibleProperty ],
       ( electronState, electronAngle, visible ) => {
-        visible && this.update( electronState );
+        visible && this.updateRing( electronState );
       }
     );
   }
@@ -109,7 +109,7 @@ export default class DeBroglieBrightnessNode extends Node {
   /**
    * Updates the ring's geometry and color to match the specified state.
    */
-  private update( electronState: number ): void {
+  private updateRing( electronState: number ): void {
     assert && assert( this.visible );
 
     // Compute the number of polygons needed to represent this electron state.
