@@ -1,9 +1,8 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * DeBroglieBrightnessNode represents the de Broglie model as a standing wave. The amplitude [-1,+1] of the standing
- * wave is represented by the brightness of color in a ring that is positioned at the electron's orbit. The ring is
- * approximated using a set of polygons.
+ * DeBroglieBrightnessNode represents the de Broglie model as a standing wave. The amplitude of the standing wave
+ * is represented by the brightness of color in a ring that is positioned at the electron's orbit.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
