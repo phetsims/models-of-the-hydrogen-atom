@@ -1,8 +1,9 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * DeBroglieRadialNode show the 'radial' view for the de Broglie model. This view represents the deBroglie model
- * as a standing wave whose amplitude is proportional to the radial distance from the electron's orbit.
+ * DeBroglieRadialNodeOptions represents the de Broglie model as a standing wave. A ring is drawn that corresponds
+ * to the electron's orbit. The radial offset of that ring from the electron's orbit is a function of the amplitude
+ * of the standing wave.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
