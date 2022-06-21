@@ -12,7 +12,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Color, IColor, Node, NodeOptions, NodeTranslationOptions, Path } from '../../../../scenery/js/imports.js';
+import { Color, IColor, Node, NodeOptions, NodeTransformOptions, NodeTranslationOptions, Path } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -25,9 +25,9 @@ import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 
-// Distance along the ring's circumference that each polygon occupies, in view coordinates.
-// This value was tuned empirically. Since larger values result in creation of more polygons (Path nodes), it's
-// important to keep this value as small as possible.
+// Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
+// tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of
+// more polygons (Path nodes), it's important to keep this value as small as possible.
 const POLYGON_SIZE = 3;
 
 type SelfOptions = EmptyObjectType;
@@ -36,25 +36,13 @@ type DeBroglieBrightnessNodeOptions = SelfOptions & NodeTranslationOptions & Pic
 
 export default class DeBroglieBrightnessNode extends Node {
 
-  private readonly hydrogenAtom: DeBroglieModel;
-  private readonly modelViewTransform: ModelViewTransform2;
-  private readonly hydrogenAtomPosition: Vector2; // in view coordinates
-  private readonly polygonNodes: Path[]; // polygons used to approximate the ring
-  private readonly ringNode: Node; // parent for all nodes that make up the ring
-  private readonly ringThickness: number; // radial width of the ring, in view coordinates
-
-  // range of colors used for the ring, based on electron amplitude
-  private readonly positiveAmplitudeColorProperty: IReadOnlyProperty<Color>;
-  private readonly negativeAmplitudeColorProperty: IReadOnlyProperty<Color>;
-  private readonly zeroAmplitudeColorProperty: IReadOnlyProperty<Color>;
-
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: DeBroglieBrightnessNodeOptions ) {
 
     const options = optionize<DeBroglieBrightnessNodeOptions, SelfOptions, NodeOptions>()( {
 
-      // NodeOptions
+      // visible when the view choice is 'brightness'
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieViewProperty ],
         deBroglieView => ( deBroglieView === 'brightness' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
@@ -68,18 +56,52 @@ export default class DeBroglieBrightnessNode extends Node {
     } );
 
     // Ring whose brightness represents the standing wave
-    const ringNode = new Node( {
-      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position )
+    const ringNode = new RingNode( hydrogenAtom, modelViewTransform, {
+
+      // Synchronize visibility with the parent Node, because RingNode is optimized to update only when visible.
+      visibleProperty: options.visibleProperty,
+      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ) //TODO delete?
     } );
 
     options.children = [ orbitsNode, ringNode ];
 
     super( options );
+  }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+}
+
+type RingNodeSelfOptions = EmptyObjectType;
+type RingNodeOptions = RingNodeSelfOptions & NodeTransformOptions & PickRequired<NodeOptions, 'visibleProperty'>;
+
+/**
+ * RingNode is the brightness ring that represents the standing wave.
+ */
+class RingNode extends Node {
+
+  private readonly hydrogenAtom: DeBroglieModel;
+  private readonly modelViewTransform: ModelViewTransform2;
+  private readonly hydrogenAtomPosition: Vector2; // in view coordinates
+  private readonly ringThickness: number; // radial width of the ring, in view coordinates
+  private readonly polygonNodes: Path[]; // an ordered pool of polygons, used to approximate the ring
+
+  // range of colors used for the ring, based on electron amplitude
+  private readonly positiveAmplitudeColorProperty: IReadOnlyProperty<Color>;
+  private readonly negativeAmplitudeColorProperty: IReadOnlyProperty<Color>;
+  private readonly zeroAmplitudeColorProperty: IReadOnlyProperty<Color>;
+
+  public constructor( hydrogenAtom: DeBroglieModel,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: RingNodeOptions ) {
+
+    super( providedOptions );
 
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
-    this.ringNode = ringNode;
     this.ringThickness = modelViewTransform.modelToViewDeltaX( DeBroglieModel.BRIGHTNESS_RING_THICKNESS );
 
     // Pre-allocate the maximum number of polygon (Path) nodes. Based on the radius of the electron's current orbit,
@@ -141,7 +163,7 @@ export default class DeBroglieBrightnessNode extends Node {
       children.push( polygonNode );
     }
 
-    this.ringNode.children = children;
+    this.children = children;
   }
 
   /**
@@ -155,7 +177,8 @@ export default class DeBroglieBrightnessNode extends Node {
     const electronState = this.hydrogenAtom.electronStateProperty.value;
 
     // the number of relevant polygons, NOT this.polygonNodes.length
-    const numberOfPolygons = this.ringNode.getChildrenCount();
+    assert && assert( _.every( this.children, child => child instanceof Path ) );
+    const numberOfPolygons = this.getChildrenCount();
 
     // Visit polygons in the same order as updateRingGeometry.
     for ( let i = 0; i < numberOfPolygons; i++ ) {
@@ -218,7 +241,7 @@ class RingPolygonShape extends Shape {
 }
 
 /**
- * Calculates the number of polygons required to approximate the ring.
+ * Calculates the number of polygons required to approximate a ring with the specified radius.
  */
 function calculateNumberOfPolygons( radius: number ) {
   const circumference = Math.PI * ( 2 * radius );
