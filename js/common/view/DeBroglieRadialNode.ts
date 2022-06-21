@@ -12,7 +12,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions, NodeTranslationOptions, Path } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, NodeTranslationOptions, Path, PathOptions } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -23,10 +23,10 @@ import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 
-// multiply the ground state orbit radius by this number to determine max amplitude
+// multiply the ground state orbit radius by this number to determine the radial offset at max amplitude
 const RADIAL_OFFSET_FACTOR = 0.45;
 
-// number of line segments used to approximate the ring
+// number of line segments used to approximate the ring, empirically tunes to make the ring look smooth
 const NUMBER_OF_SEGMENTS = 200;
 
 type SelfOptions = EmptyObjectType;
@@ -35,23 +35,13 @@ type DeBroglieRadialNodeOptions = SelfOptions & NodeTranslationOptions & PickReq
 
 export default class DeBroglieRadialNode extends Node {
 
-  private readonly hydrogenAtom: DeBroglieModel;
-  private readonly modelViewTransform: ModelViewTransform2;
-  private readonly ringPath: Path;
-
-  // radius of the ground state orbit, in view coordinates
-  private readonly groundStateOrbitRadius: number;
-
-  // position of the hydrogen atom, in view coordinates
-  private readonly hydrogenAtomPosition: Vector2;
-
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: DeBroglieRadialNodeOptions ) {
 
     const options = optionize<DeBroglieRadialNodeOptions, SelfOptions, NodeOptions>()( {
 
-      // NodeOptions
+      // visible when the view choice is 'radial'
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieViewProperty ],
         deBroglieView => ( deBroglieView === 'radial' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
@@ -65,20 +55,59 @@ export default class DeBroglieRadialNode extends Node {
     } );
 
     // Ring that represents the standing wave
-    const ringPath = new Path( null, {
-      stroke: MOTHAColors.electronBaseColorProperty,
-      lineWidth: 2
+    const ringNode = new RingNode( hydrogenAtom, modelViewTransform, {
+
+      // Synchronize visibility with the parent Node, because RingNode is optimized to update only when visible.
+      visibleProperty: options.visibleProperty,
+      tandem: options.tandem.createTandem( 'ringNode' )
     } );
 
-    options.children = [ orbitsNode, ringPath ];
+    options.children = [ orbitsNode, ringNode ];
 
     super( options );
+  }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+}
+
+type RingNodeSelfOptions = EmptyObjectType;
+type RingNodeOptions = RingNodeSelfOptions & PickRequired<PathOptions, 'visibleProperty' | 'tandem'>;
+
+/**
+ * RingNode is the ring that represents the standing wave.
+ * It's radial distance from the electron's orbit is a function of amplitude.
+ */
+class RingNode extends Path {
+
+  private readonly hydrogenAtom: DeBroglieModel;
+  private readonly modelViewTransform: ModelViewTransform2;
+
+  // position of the hydrogen atom, in view coordinates
+  private readonly hydrogenAtomPosition: Vector2;
+
+  // radius of the ground state orbit, in view coordinates
+  private readonly groundStateOrbitRadius: number;
+
+  public constructor( hydrogenAtom: DeBroglieModel,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: RingNodeOptions ) {
+
+    const options = optionize<RingNodeOptions, RingNodeSelfOptions, PathOptions>()( {
+
+      // PathOptions
+      stroke: MOTHAColors.electronBaseColorProperty,
+      lineWidth: 2
+    }, providedOptions );
+
+    super( null, options );
 
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
-    this.ringPath = ringPath;
-    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( HydrogenAtom.GROUND_STATE ) );
     this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( HydrogenAtom.GROUND_STATE ) );
 
     Multilink.multilink( [ hydrogenAtom.electronAngleProperty, this.visibleProperty ],
       ( electronAngle, visible ) => {
@@ -92,7 +121,7 @@ export default class DeBroglieRadialNode extends Node {
   }
 
   /**
-   * Updates the ring that represents the standing wave. The shape is computed in global model coordinates.
+   * Updates the shape of the ring.
    */
   private update(): void {
     assert && assert( this.visible );
@@ -119,7 +148,8 @@ export default class DeBroglieRadialNode extends Node {
       }
     }
     ringShape.close();
-    this.ringPath.shape = ringShape;
+
+    this.shape = ringShape;
   }
 }
 
