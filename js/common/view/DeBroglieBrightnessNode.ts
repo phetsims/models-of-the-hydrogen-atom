@@ -26,6 +26,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 // distance along the ring's circumference that each polygon occupies, in view coordinates
 const POLYGON_SIZE = 3;
@@ -38,6 +39,7 @@ export default class DeBroglieBrightnessNode extends Node {
 
   private readonly hydrogenAtom: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
+  private readonly hydrogenAtomPosition: Vector2; // in view coordinates
   private readonly ringNode: Node; // parent node for all geometry that approximates the ring
   private readonly previousElectronStateProperty: Property<number | null>; // previous state of the atom's electron
   private readonly positiveAmplitudeColorProperty: IReadOnlyProperty<Color>;
@@ -64,7 +66,9 @@ export default class DeBroglieBrightnessNode extends Node {
     } );
 
     // Ring whose brightness represents the standing wave
-    const ringNode = new Node();
+    const ringNode = new Node( {
+      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position )
+    } );
 
     options.children = [ orbitsNode, ringNode ];
 
@@ -79,6 +83,7 @@ export default class DeBroglieBrightnessNode extends Node {
 
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
+    this.hydrogenAtomPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     this.ringNode = ringNode;
 
     this.positiveAmplitudeColorProperty = MOTHAColors.electronBaseColorProperty;
@@ -102,7 +107,6 @@ export default class DeBroglieBrightnessNode extends Node {
     super.dispose();
   }
 
-  //TODO this is not displaying anything
   /**
    * Updates the ring's geometry and color to match the specified state.
    */
@@ -129,8 +133,8 @@ export default class DeBroglieBrightnessNode extends Node {
       const sin2 = Math.sin( a2 );
 
       // Points that define the polygon
-      const xAtom = this.hydrogenAtom.position.x;
-      const yAtom = this.hydrogenAtom.position.y;
+      const xAtom = this.hydrogenAtomPosition.x;
+      const yAtom = this.hydrogenAtomPosition.y;
       const x1 = r1 * cos1 + xAtom;
       const y1 = r1 * sin1 + yAtom;
       const x2 = r2 * cos1 + xAtom;
