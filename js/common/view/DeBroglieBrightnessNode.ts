@@ -133,7 +133,7 @@ export default class DeBroglieBrightnessNode extends Node {
     const numberOfPolygons = calculateNumberOfPolygons( viewRadius );
     assert && assert( numberOfPolygons <= this.polygonNodes.length );
 
-    // Create the polygon Shapes
+    // Select polygons in order from the pool, and create their Shapes.
     const children = [];
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       const polygonNode = this.polygonNodes[ i ];
@@ -157,6 +157,7 @@ export default class DeBroglieBrightnessNode extends Node {
     // the number of relevant polygons, NOT this.polygonNodes.length
     const numberOfPolygons = this.ringNode.getChildrenCount();
 
+    // Visit polygons in the same order as updateRingGeometry.
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
       const amplitude = this.hydrogenAtom.getAmplitude( angle, electronState );
