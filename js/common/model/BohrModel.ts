@@ -210,6 +210,13 @@ export default class BohrModel extends HydrogenAtom {
     return ORBIT_RADII.length;
   }
 
+  /**
+   * Gets the maximum electron state number.
+   */
+  public static getMaxElectronState(): number {
+    return HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   // Orbit methods
   //--------------------------------------------------------------------------------------------------------------------
