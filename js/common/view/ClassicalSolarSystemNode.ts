@@ -20,6 +20,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -36,20 +37,28 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
       //TODO default values for options
     }, providedOptions );
 
+    const protonNodeTandem = options.tandem.createTandem( 'protonNode' );
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
-      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
-      // PhET-iO instrumentation is not needed.
+      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty, {
+        tandem: protonNodeTandem.createTandem( 'visibleProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+      } ),
+      tandem: protonNodeTandem
     } );
 
+    const electronNodeTandem = options.tandem.createTandem( 'electronNode' );
     const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform, {
-      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
-      // PhET-iO instrumentation is not needed.
+      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty, {
+        tandem: electronNodeTandem.createTandem( 'visibleProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+      } ),
+      tandem: electronNodeTandem
     } );
 
     const kaboomNode = new Image( kaboom_png, {
       visibleProperty: hydrogenAtom.isDestroyedProperty,
-      center: protonNode.center
-      // PhET-iO instrumentation is not needed.
+      center: protonNode.center,
+      tandem: options.tandem.createTandem( 'kaboomNode' )
     } );
 
     options.children = [ kaboomNode, protonNode, electronNode ];
