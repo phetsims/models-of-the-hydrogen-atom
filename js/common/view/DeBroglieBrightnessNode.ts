@@ -42,6 +42,7 @@ export default class DeBroglieBrightnessNode extends Node {
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly hydrogenAtomPosition: Vector2; // in view coordinates
   private readonly ringNode: Node; // parent node for all geometry that approximates the ring
+  private polygonNodes: Path[];
   private readonly previousElectronStateProperty: Property<number | null>; // previous state of the atom's electron
   private readonly positiveAmplitudeColorProperty: IReadOnlyProperty<Color>;
   private readonly negativeAmplitudeColorProperty: IReadOnlyProperty<Color>;
@@ -86,6 +87,7 @@ export default class DeBroglieBrightnessNode extends Node {
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     this.ringNode = ringNode;
+    this.polygonNodes = [];
 
     this.positiveAmplitudeColorProperty = MOTHAColors.electronBaseColorProperty;
     this.negativeAmplitudeColorProperty = MOTHAColors.deBroglieNegativeAmplitudeColorProperty;
@@ -95,12 +97,19 @@ export default class DeBroglieBrightnessNode extends Node {
         Color.interpolateRGBA( negativeAmplitudeColor, positiveAmplitudeColor, 0.5 )
     );
 
-    //TODO are these dependencies correct?
-    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, hydrogenAtom.electronAngleProperty, this.visibleProperty ],
-      ( electronState, electronAngle, visible ) => {
-        visible && this.updateRing( electronState );
+    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, this.visibleProperty ],
+      ( electronState, visible ) => {
+        if ( visible ) {
+          this.updateRingGeometry( hydrogenAtom.electronStateProperty.value );
+          this.updateRingColor( hydrogenAtom.electronStateProperty.value );
+        }
+      } );
+
+    this.hydrogenAtom.electronAngleProperty.link( electronAngle => {
+      if ( this.visible ) {
+        this.updateRingColor( hydrogenAtom.electronStateProperty.value );
       }
-    );
+    } );
   }
 
   public override dispose(): void {
@@ -109,9 +118,9 @@ export default class DeBroglieBrightnessNode extends Node {
   }
 
   /**
-   * Updates the ring's geometry and color to match the specified state.
+   * Updates the ring's geometry and color. This should be called when the electron state changes.
    */
-  private updateRing( electronState: number ): void {
+  private updateRingGeometry( electronState: number ): void {
     assert && assert( this.visible );
 
     // Compute the number of polygons needed to represent this electron state.
@@ -121,7 +130,7 @@ export default class DeBroglieBrightnessNode extends Node {
     const numberOfPolygons = calculateNumberOfPolygons( radius );
 
     // Create the polygons, each with its own fill color that corresponds to amplitude.
-    const polygonNodes: Node[] = [];
+    this.polygonNodes = [];
     for ( let i = 0; i < numberOfPolygons; i++ ) {
 
       const a1 = ( 2 * Math.PI ) * ( i / numberOfPolygons );
@@ -148,17 +157,24 @@ export default class DeBroglieBrightnessNode extends Node {
       // Shape for the polygon
       const shape = new Shape().moveTo( x1, y1 ).lineTo( x2, y2 ).lineTo( x3, y3 ).lineTo( x4, y4 ).close();
 
-      // Fill color
-      const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
-      const amplitude = this.hydrogenAtom.getAmplitude( angle, electronState );
-      const polygonFill = this.amplitudeToColor( amplitude );
-
-      polygonNodes.push( new Path( shape, {
-        fill: polygonFill
-      } ) );
+      this.polygonNodes.push( new Path( shape ) );
     }
 
-    this.ringNode.children = polygonNodes;
+    this.ringNode.children = this.polygonNodes;
+  }
+
+  /**
+   * Updates the ring color. This should be called when the electron state or atom angle changes.
+   */
+  private updateRingColor( electronState: number ): void {
+    assert && assert( this.visible );
+    const numberOfPolygons = this.polygonNodes.length;
+    for ( let i = 0; i < numberOfPolygons; i++ ) {
+      assert && assert( this.polygonNodes[ i ] instanceof Path );
+      const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
+      const amplitude = this.hydrogenAtom.getAmplitude( angle, electronState );
+      this.polygonNodes[ i ].fill = this.amplitudeToColor( amplitude );
+    }
   }
 
   /**
