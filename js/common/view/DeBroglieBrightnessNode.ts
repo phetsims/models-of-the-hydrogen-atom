@@ -20,9 +20,6 @@ import OrbitsNode from './OrbitsNode.js';
 import Utils from '../../../../dot/js/Utils.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import MOTHAColors from '../MOTHAColors.js';
-import Property from '../../../../axon/js/Property.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -44,7 +41,6 @@ export default class DeBroglieBrightnessNode extends Node {
   private readonly hydrogenAtomPosition: Vector2; // in view coordinates
   private readonly polygonNodes: Path[]; // polygons used to approximate the ring
   private readonly ringNode: Node; // parent for all nodes that make up the ring
-  private readonly previousElectronStateProperty: Property<number | null>; // previous state of the electron
   private readonly ringThickness: number; // radial width of the ring, in view coordinates
 
   // range of colors used for the ring, based on electron amplitude
@@ -80,20 +76,14 @@ export default class DeBroglieBrightnessNode extends Node {
 
     super( options );
 
-    this.previousElectronStateProperty = new Property<number | null>( null, {
-      //TODO isValidValue
-      tandem: options.tandem.createTandem( 'previousElectronStateProperty' ),
-      phetioReadOnly: true,
-      phetioType: Property.PropertyIO( NullableIO( NumberIO ) )
-    } );
-
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     this.ringNode = ringNode;
     this.ringThickness = modelViewTransform.modelToViewDeltaX( DeBroglieModel.BRIGHTNESS_RING_THICKNESS );
 
-    // pre-allocate the maximum number of polygon (Path) nodes
+    // Pre-allocate the maximum number of polygon (Path) nodes. Based on the radius of the electron's current orbit,
+    // some subset of these polygons will actually be added to the scene graph.
     const maxState = HydrogenAtom.GROUND_STATE + DeBroglieModel.getNumberOfStates() - 1;
     const maxRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( maxState ) );
     const maxPolygons = calculateNumberOfPolygons( maxRadius );
@@ -110,16 +100,17 @@ export default class DeBroglieBrightnessNode extends Node {
         Color.interpolateRGBA( negativeAmplitudeColor, positiveAmplitudeColor, 0.5 )
     );
 
-    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, this.hydrogenAtom.electronAngleProperty, this.visibleProperty ],
-      ( electronState, electronAngle, visible ) => {
+    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, this.visibleProperty ],
+      ( electronState, visible ) => {
         if ( visible ) {
-          if ( electronState !== this.previousElectronStateProperty.value ) {
-            this.updateRingGeometry( electronState );
-            this.previousElectronStateProperty.value = electronState;
-          }
-          this.updateRingColor( electronState );
+          this.updateRingGeometry();
+          this.updateRingColor();
         }
       } );
+
+    this.hydrogenAtom.electronAngleProperty.link( electronAngle => {
+      this.visible && this.updateRingColor();
+    } );
   }
 
   public override dispose(): void {
@@ -128,16 +119,15 @@ export default class DeBroglieBrightnessNode extends Node {
   }
 
   /**
-   * Updates the ring's geometry. Polygon (Path) nodes are reused, and new Shapes are computed.
+   * Updates the ring's geometry. Polygons (Paths) are reused, and new Shapes are computed.
    * This should be called only when the electron state changes, resulting in the electron moving
    * to a different orbit, and therefore requiring the ring to be revised to match that orbit.
    */
-  private updateRingGeometry( electronState: number ): void {
+  private updateRingGeometry(): void {
     assert && assert( this.visible, 'should only be called when visible' );
-    assert && assert( electronState !== this.previousElectronStateProperty.value,
-      'should only be called when electron state has changed' );
 
     // Compute the number of polygons needed to represent this electron state.
+    const electronState = this.hydrogenAtom.electronStateProperty.value;
     const modelRadius = this.hydrogenAtom.getElectronOrbitRadius( electronState );
     const viewRadius = this.modelViewTransform.modelToViewDeltaX( modelRadius );
     const numberOfPolygons = calculateNumberOfPolygons( viewRadius );
@@ -146,33 +136,8 @@ export default class DeBroglieBrightnessNode extends Node {
     // Create the polygon Shapes
     const children = [];
     for ( let i = 0; i < numberOfPolygons; i++ ) {
-
-      const a1 = ( 2 * Math.PI ) * ( i / numberOfPolygons );
-      const a2 = a1 + ( 2 * Math.PI / numberOfPolygons ) + 0.001; // add a tiny bit of overlap, to hide seams
-      const r1 = viewRadius - this.ringThickness;
-      const r2 = viewRadius + this.ringThickness;
-      const cos1 = Math.cos( a1 );
-      const sin1 = Math.sin( a1 );
-      const cos2 = Math.cos( a2 );
-      const sin2 = Math.sin( a2 );
-
-      // Points that define the polygon
-      const xAtom = this.hydrogenAtomPosition.x;
-      const yAtom = this.hydrogenAtomPosition.y;
-      const x1 = r1 * cos1 + xAtom;
-      const y1 = r1 * sin1 + yAtom;
-      const x2 = r2 * cos1 + xAtom;
-      const y2 = r2 * sin1 + yAtom;
-      const x3 = r2 * cos2 + xAtom;
-      const y3 = r2 * sin2 + yAtom;
-      const x4 = r1 * cos2 + xAtom;
-      const y4 = r1 * sin2 + yAtom;
-
-      // Shape for the polygon
-      const shape = new Shape().moveTo( x1, y1 ).lineTo( x2, y2 ).lineTo( x3, y3 ).lineTo( x4, y4 ).close();
-
       const polygonNode = this.polygonNodes[ i ];
-      polygonNode.shape = shape;
+      polygonNode.shape = new RingPolygonShape( i, numberOfPolygons, viewRadius, this.ringThickness, this.hydrogenAtomPosition );
       children.push( polygonNode );
     }
 
@@ -182,16 +147,20 @@ export default class DeBroglieBrightnessNode extends Node {
   /**
    * Updates the ring color. The color for each polygon (Path) in the ring is computed based on the amplitude at
    * that polygon's position. This should be called when the electron's state or angle changes.
+   * NOTE: This assumes that updateRingGeometry and updateRingColor use the same ordering for this.polygonNodes.
    */
-  private updateRingColor( electronState: number ): void {
+  private updateRingColor(): void {
     assert && assert( this.visible, 'should only be called when visible' );
+
+    const electronState = this.hydrogenAtom.electronStateProperty.value;
+
+    // the number of relevant polygons, NOT this.polygonNodes.length
     const numberOfPolygons = this.ringNode.getChildrenCount();
+
     for ( let i = 0; i < numberOfPolygons; i++ ) {
-      assert && assert( this.polygonNodes[ i ] instanceof Path );
-      const polygonNode = this.polygonNodes[ i ] as Path;
       const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
       const amplitude = this.hydrogenAtom.getAmplitude( angle, electronState );
-      polygonNode.fill = this.amplitudeToColor( amplitude );
+      this.polygonNodes[ i ].fill = this.amplitudeToColor( amplitude );
     }
   }
 
@@ -209,6 +178,41 @@ export default class DeBroglieBrightnessNode extends Node {
     else {
       return Color.interpolateRGBA( this.zeroAmplitudeColorProperty.value, this.negativeAmplitudeColorProperty.value, -amplitude );
     }
+  }
+}
+
+/**
+ * RingPolygonShape is the Shape of one of the polygons used to approximate the ring.
+ */
+class RingPolygonShape extends Shape {
+
+  // All quantities are in view coordinates.
+  public constructor( index: number, numberOfPolygons: number, radius: number, ringThickness: number, hydrogenAtomPosition: Vector2 ) {
+
+    super();
+
+    const a1 = ( 2 * Math.PI ) * ( index / numberOfPolygons );
+    const a2 = a1 + ( 2 * Math.PI / numberOfPolygons ) + 0.001; // add a tiny bit of overlap, to hide seams
+    const r1 = radius - ringThickness;
+    const r2 = radius + ringThickness;
+    const cos1 = Math.cos( a1 );
+    const sin1 = Math.sin( a1 );
+    const cos2 = Math.cos( a2 );
+    const sin2 = Math.sin( a2 );
+
+    // Points that define the polygon
+    const xAtom = hydrogenAtomPosition.x;
+    const yAtom = hydrogenAtomPosition.y;
+    const x1 = r1 * cos1 + xAtom;
+    const y1 = r1 * sin1 + yAtom;
+    const x2 = r2 * cos1 + xAtom;
+    const y2 = r2 * sin1 + yAtom;
+    const x3 = r2 * cos2 + xAtom;
+    const y3 = r2 * sin2 + yAtom;
+    const x4 = r1 * cos2 + xAtom;
+    const y4 = r1 * sin2 + yAtom;
+
+    this.moveTo( x1, y1 ).lineTo( x2, y2 ).lineTo( x3, y3 ).lineTo( x4, y4 ).close();
   }
 }
 
