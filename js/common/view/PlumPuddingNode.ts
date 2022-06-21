@@ -34,14 +34,19 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
       //TODO default values for options
     }, providedOptions );
 
-    const plumPuddingImage = new Image( plumPudding_png );
+    // Plum pudding image, centered at the atom's position
+    const plumPuddingImage = new Image( plumPudding_png, {
+      tandem: options.tandem.createTandem( 'plumPuddingImage' )
+    } );
     const imageHeight = plumPuddingImage.height;
     const atomHeight = 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.radius );
     const imageScale = atomHeight / imageHeight;
     plumPuddingImage.scale( imageScale );
     plumPuddingImage.center = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
 
-    const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
+    const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'electronNode' )
+    } );
 
     options.children = [ plumPuddingImage, electronNode ];
 
