@@ -37,19 +37,19 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
     }, providedOptions );
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
-      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty ),
-      tandem: options.tandem.createTandem( 'protonNode' )
+      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
+      // PhET-iO instrumentation is not needed.
     } );
 
     const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform, {
-      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty ),
-      tandem: options.tandem.createTandem( 'electronNode' )
+      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
+      // PhET-iO instrumentation is not needed.
     } );
 
     const kaboomNode = new Image( kaboom_png, {
       visibleProperty: hydrogenAtom.isDestroyedProperty,
-      center: protonNode.center,
-      tandem: options.tandem.createTandem( 'kaboomNode' )
+      center: protonNode.center
+      // PhET-iO instrumentation is not needed.
     } );
 
     options.children = [ kaboomNode, protonNode, electronNode ];
