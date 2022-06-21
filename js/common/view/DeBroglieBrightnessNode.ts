@@ -12,7 +12,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Color, IColor, Node, NodeOptions, NodeTransformOptions, NodeTranslationOptions, Path } from '../../../../scenery/js/imports.js';
+import { Color, IColor, Node, NodeOptions, NodeTranslationOptions, Path } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -59,8 +59,7 @@ export default class DeBroglieBrightnessNode extends Node {
     const ringNode = new RingNode( hydrogenAtom, modelViewTransform, {
 
       // Synchronize visibility with the parent Node, because RingNode is optimized to update only when visible.
-      visibleProperty: options.visibleProperty,
-      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ) //TODO delete?
+      visibleProperty: options.visibleProperty
     } );
 
     options.children = [ orbitsNode, ringNode ];
@@ -75,7 +74,7 @@ export default class DeBroglieBrightnessNode extends Node {
 }
 
 type RingNodeSelfOptions = EmptyObjectType;
-type RingNodeOptions = RingNodeSelfOptions & NodeTransformOptions & PickRequired<NodeOptions, 'visibleProperty'>;
+type RingNodeOptions = RingNodeSelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
 
 /**
  * RingNode is the brightness ring that represents the standing wave.
