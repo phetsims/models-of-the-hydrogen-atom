@@ -215,10 +215,17 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Gets the radius of an electron's orbit when it's in a specified state.
+   * Gets the radius of the electron's orbit when it's in a specified state.
    */
   public getElectronOrbitRadius( state: number ): number {
     return ORBIT_RADII[ state - HydrogenAtom.GROUND_STATE ];
+  }
+
+  /**
+   * Gets the maximum radius of the electron's orbit.
+   */
+  public getMaxElectronOrbitRadius(): number {
+    return ORBIT_RADII[ ORBIT_RADII.length - 1 ];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
