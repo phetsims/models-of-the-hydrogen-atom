@@ -26,6 +26,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates.
 // This value was tuned empirically. Since larger values result in creation of more polygons (Path nodes), it's
@@ -42,7 +43,7 @@ export default class DeBroglieBrightnessNode extends Node {
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly hydrogenAtomPosition: Vector2; // in view coordinates
   private readonly ringNode: Node; // parent node for all geometry that approximates the ring
-  private polygonNodes: Path[];
+  private readonly polygonNodes: Path[];
   private readonly previousElectronStateProperty: Property<number | null>; // previous state of the atom's electron
   private readonly positiveAmplitudeColorProperty: IReadOnlyProperty<Color>;
   private readonly negativeAmplitudeColorProperty: IReadOnlyProperty<Color>;
@@ -87,7 +88,15 @@ export default class DeBroglieBrightnessNode extends Node {
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     this.ringNode = ringNode;
+
+    // pre-allocate the maximum number of polygon (Path) nodes
+    const maxState = HydrogenAtom.GROUND_STATE + DeBroglieModel.getNumberOfStates() - 1;
+    const maxRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( maxState ) );
+    const maxPolygons = calculateNumberOfPolygons( maxRadius );
     this.polygonNodes = [];
+    for ( let i = 0; i < maxPolygons; i++ ) {
+      this.polygonNodes.push( new Path( null ) );
+    }
 
     this.positiveAmplitudeColorProperty = MOTHAColors.electronBaseColorProperty;
     this.negativeAmplitudeColorProperty = MOTHAColors.deBroglieNegativeAmplitudeColorProperty;
@@ -128,9 +137,10 @@ export default class DeBroglieBrightnessNode extends Node {
     const electronOrbitRadius = this.hydrogenAtom.getElectronOrbitRadius( electronState );
     const radius = this.modelViewTransform.modelToViewDeltaX( electronOrbitRadius );
     const numberOfPolygons = calculateNumberOfPolygons( radius );
+    assert && assert( numberOfPolygons <= this.polygonNodes.length );
 
-    // Create the polygons, each with its own fill color that corresponds to amplitude.
-    this.polygonNodes = [];
+    // Create the polygon Shapes
+    const children = [];
     for ( let i = 0; i < numberOfPolygons; i++ ) {
 
       const a1 = ( 2 * Math.PI ) * ( i / numberOfPolygons );
@@ -157,10 +167,12 @@ export default class DeBroglieBrightnessNode extends Node {
       // Shape for the polygon
       const shape = new Shape().moveTo( x1, y1 ).lineTo( x2, y2 ).lineTo( x3, y3 ).lineTo( x4, y4 ).close();
 
-      this.polygonNodes.push( new Path( shape ) );
+      const polygonNode = this.polygonNodes[ i ];
+      polygonNode.shape = shape;
+      children.push( polygonNode );
     }
 
-    this.ringNode.children = this.polygonNodes;
+    this.ringNode.children = children;
   }
 
   /**
@@ -168,12 +180,13 @@ export default class DeBroglieBrightnessNode extends Node {
    */
   private updateRingColor( electronState: number ): void {
     assert && assert( this.visible );
-    const numberOfPolygons = this.polygonNodes.length;
+    const numberOfPolygons = this.ringNode.getChildrenCount();
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       assert && assert( this.polygonNodes[ i ] instanceof Path );
+      const polygonNode = this.polygonNodes[ i ] as Path;
       const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
       const amplitude = this.hydrogenAtom.getAmplitude( angle, electronState );
-      this.polygonNodes[ i ].fill = this.amplitudeToColor( amplitude );
+      polygonNode.fill = this.amplitudeToColor( amplitude );
     }
   }
 
