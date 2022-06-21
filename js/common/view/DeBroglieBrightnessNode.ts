@@ -124,13 +124,13 @@ class RingNode extends Node {
     Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, this.visibleProperty ],
       ( electronState, visible ) => {
         if ( visible ) {
-          this.updateRingGeometry();
-          this.updateRingColor();
+          this.updateGeometry();
+          this.updateColor();
         }
       } );
 
     this.hydrogenAtom.electronAngleProperty.link( electronAngle => {
-      this.visible && this.updateRingColor();
+      this.visible && this.updateColor();
     } );
   }
 
@@ -144,7 +144,7 @@ class RingNode extends Node {
    * This should be called only when the electron state changes, resulting in the electron moving
    * to a different orbit, and therefore requiring the ring to be revised to match that orbit.
    */
-  private updateRingGeometry(): void {
+  private updateGeometry(): void {
     assert && assert( this.visible, 'should only be called when visible' );
 
     // Compute the number of polygons needed to represent this electron state.
@@ -168,9 +168,9 @@ class RingNode extends Node {
   /**
    * Updates the ring color. The color for each polygon (Path) in the ring is computed based on the amplitude at
    * that polygon's position. This should be called when the electron's state or angle changes.
-   * NOTE: This assumes that updateRingGeometry and updateRingColor use the same ordering for this.polygonNodes.
+   * NOTE: This assumes that updateGeometry and updateColor use the same ordering for this.polygonNodes.
    */
-  private updateRingColor(): void {
+  private updateColor(): void {
     assert && assert( this.visible, 'should only be called when visible' );
 
     const electronState = this.hydrogenAtom.electronStateProperty.value;
@@ -179,7 +179,7 @@ class RingNode extends Node {
     assert && assert( _.every( this.children, child => child instanceof Path ) );
     const numberOfPolygons = this.getChildrenCount();
 
-    // Visit polygons in the same order as updateRingGeometry.
+    // Visit polygons in the same order as updateGeometry.
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
       const amplitude = this.hydrogenAtom.getAmplitude( angle, electronState );
