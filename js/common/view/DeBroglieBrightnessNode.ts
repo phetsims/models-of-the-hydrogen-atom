@@ -118,7 +118,7 @@ export default class DeBroglieBrightnessNode extends Node {
   }
 
   /**
-   * Updates the ring's geometry and color. This should be called when the electron state changes.
+   * Updates the ring's geometry. This should be called when the electron state changes.
    */
   private updateRingGeometry( electronState: number ): void {
     assert && assert( this.visible );
