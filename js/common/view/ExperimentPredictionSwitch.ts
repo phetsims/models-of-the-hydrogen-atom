@@ -28,7 +28,7 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
   public constructor( modelModeProperty: Property<ModelMode>, providedOptions: ExperimentPredictionSwitchOptions ) {
 
     const options = optionize<ExperimentPredictionSwitchOptions, SelfOptions, ABSwitchOptions>()( {
-      centerOnButton: true,
+      centerOnSwitch: true,
       toggleSwitchOptions: { size: new Dimension2( 50, 25 ) }
     }, providedOptions );
 
