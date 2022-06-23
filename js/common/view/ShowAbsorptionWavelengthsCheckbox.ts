@@ -51,7 +51,7 @@ export default class ShowAbsorptionWavelengthsCheckbox extends Checkbox {
       tandem: options.tandem.createTandem( 'labelNode' )
     } );
 
-    super( labelNode, absorptionWavelengthsVisibleProperty, options );
+    super( absorptionWavelengthsVisibleProperty, labelNode, options );
   }
 
   public override dispose(): void {
