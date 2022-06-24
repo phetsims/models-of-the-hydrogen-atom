@@ -62,7 +62,7 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
       new ComboBoxItem( brightnessViewText, 'brightness', { tandemName: 'brightnessItem' } )
     ];
 
-    super( items, deBroglieViewProperty, listboxParent, options );
+    super( deBroglieViewProperty, items, listboxParent, options );
   }
 
   public override dispose(): void {
