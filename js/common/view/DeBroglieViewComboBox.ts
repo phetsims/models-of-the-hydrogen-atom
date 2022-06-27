@@ -6,14 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ComboBox, { ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
+import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeTranslationOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { DeBroglieView } from '../model/DeBroglieView.js';
 import Property from '../../../../axon/js/Property.js';
-import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
@@ -57,9 +56,9 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
       }, textOptions ) );
 
     const items: ComboBoxItem<DeBroglieView>[] = [
-      new ComboBoxItem( radialViewText, 'radial', { tandemName: 'radialItem' } ),
-      new ComboBoxItem( threeDViewText, '3D', { tandemName: '3DItem' } ),
-      new ComboBoxItem( brightnessViewText, 'brightness', { tandemName: 'brightnessItem' } )
+      { value: 'radial', node: radialViewText, tandemName: `radial${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },
+      { value: '3D', node: threeDViewText, tandemName: `3D${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },
+      { value: 'brightness', node: brightnessViewText, tandemName: `brightness${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` }
     ];
 
     super( deBroglieViewProperty, items, listboxParent, options );
