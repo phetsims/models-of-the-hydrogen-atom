@@ -36,18 +36,17 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
       // RectangularRadioButtonGroupOptions
       orientation: 'vertical',
       spacing: 8,
-      buttonContentXMargin: 15,
-      buttonContentYMargin: 6,
-      baseColor: MOTHAColors.lightModeRadioButtonFillProperty,
-      selectedStroke: MOTHAColors.lightModeRadioButtonSelectedStrokeProperty,
-      deselectedStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
-
-      //TODO these options are undefined in RectangularRadioButtonGroupOptions
-      // overFill: MOTHAColors.lightModeRadioButtonFillProperty,
-      // overStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
-
-      selectedLineWidth: 2,
-      deselectedLineWidth: 2
+      radioButtonOptions: {
+        xMargin: 15,
+        yMargin: 6,
+        baseColor: MOTHAColors.lightModeRadioButtonFillProperty,
+        selectedLineWidth: 2,
+        deselectedLineWidth: 2,
+        selectedStroke: MOTHAColors.lightModeRadioButtonSelectedStrokeProperty,
+        deselectedStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty,
+        overFill: MOTHAColors.lightModeRadioButtonFillProperty,
+        overStroke: MOTHAColors.lightModeRadioButtonDeselectedStrokeProperty
+      }
     }, providedOptions );
 
     super( lightModeProperty, [
