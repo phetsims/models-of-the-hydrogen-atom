@@ -45,6 +45,28 @@ import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import BohrModel from './BohrModel.js';
+
+/*
+ * This table defines the transition strengths for the primary state component (n).
+ * Some entries in this table are nonsensical, but their strengths are zero, and it helps to have a symmetrical table.
+ * This table was taken from the Java simulation design document.
+ *
+ * Note that the table indexing is zero-indexed, while transitions are 1-based.
+ * Here's an example that shows how the table is indexed:
+ * TRANSITION_STRENGTH[5][0] is the transition strength from n=6 to n=1
+ */
+const TRANSITION_STRENGTH = [
+  [ 0, 0, 0, 0, 0 ],
+  [ 12.53, 0, 0, 0, 0 ],
+  [ 3.34, 0.87, 0, 0, 0 ],
+  [ 1.36, 0.24, 0.07, 0, 0 ],
+  [ 0.69, 0.11, 0, 0.04, 0 ],
+  [ 0.39, 0.06, 0.02, 0, 0 ]
+];
+assert && assert( TRANSITION_STRENGTH.length === BohrModel.getNumberOfStates() );
 
 type SelfOptions = EmptyObjectType;
 
@@ -99,6 +121,142 @@ export default class SchrodingerModel extends DeBroglieModel {
     //TODO
     photon.move( dt );
   }
+}
+
+/*
+ * Chooses a value for the secondary electron state (l) based on the primary state (n).
+ * The new value l' must be in [0,...n-1], and l-l' must be in [-1,1].
+ * This is a direct port from the Java version.
+ *
+ * @param nNew - the new primary state
+ * @param lOld - the existing secondary state
+ */
+//TODO delete when this function is used
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getNewSecondaryElectronState( nNew: number, lOld: number ): number {
+  assert && assert( Number.isInteger( nNew ) );
+  assert && assert( Number.isInteger( lOld ) );
+
+  let lNew = 0;
+
+  if ( lOld === 0 ) {
+    lNew = 1;
+  }
+  else if ( lOld === nNew ) {
+    lNew = lOld - 1;
+  }
+  else if ( lOld === nNew - 1 ) {
+    lNew = lOld - 1;
+  }
+  else {
+    if ( dotRandom.nextBoolean() ) {
+      lNew = lOld + 1;
+    }
+    else {
+      lNew = lOld - 1;
+    }
+  }
+
+  assert && assert( Number.isInteger( lNew ) );
+  assert && assert( Math.abs( lNew - lOld ) === 1 );
+  return lNew;
+}
+
+/*
+ * Chooses a value for the tertiary electron state (m) based on the primary state (l).
+ * The new value m' must be in [-l,...,+l], and m-m' must be in [-1,0,1].
+ * This is a direct port from the Java version.
+ *
+ * @param lNew - the new secondary state
+ * @param mOld - the existing tertiary state
+ */
+//TODO delete when this function is used
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getNewTertiaryElectronState( lNew: number, mOld: number ) {
+  assert && assert( Number.isInteger( lNew ) );
+  assert && assert( Number.isInteger( mOld ) );
+
+  let mNew = 0;
+
+  if ( lNew === 0 ) {
+    mNew = 0;
+  }
+  else if ( mOld > lNew ) {
+    mNew = lNew;
+  }
+  else if ( mOld < -lNew ) {
+    mNew = -lNew;
+  }
+  else if ( mOld === lNew ) {
+    const a = dotRandom.nextInt( 2 );
+    if ( a === 0 ) {
+      mNew = mOld;
+    }
+    else {
+      mNew = mOld - 1;
+    }
+  }
+  else if ( mOld === -lNew ) {
+    const a = dotRandom.nextInt( 2 );
+    if ( a === 0 ) {
+      mNew = mOld;
+    }
+    else {
+      mNew = mOld + 1;
+    }
+  }
+  else {
+    const a = dotRandom.nextInt( 3 );
+    if ( a === 0 ) {
+      mNew = mOld + 1;
+    }
+    else if ( a === 1 ) {
+      mNew = mOld - 1;
+    }
+    else {
+      mNew = mOld;
+    }
+  }
+
+  assert && assert( Number.isInteger( mNew ) );
+  assert && assert( mNew >= -lNew && mNew <= lNew );
+  assert && assert( mNew === -1 || mNew === 0 || mNew === 1 );
+  return mNew;
+}
+
+/**
+ * Checks state transition rules to see if a proposed transition is valid.
+ */
+//TODO delete when this function is used
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function isaValidTransition( nOld: number, lOld: number, mOld: number, nNew: number, lNew: number, mNew: number, numberOfStates: number ) {
+  assert && assert( Number.isInteger( nOld ) );
+  assert && assert( Number.isInteger( lOld ) );
+  assert && assert( Number.isInteger( mOld ) );
+  assert && assert( Number.isInteger( nNew ) );
+  assert && assert( Number.isInteger( lNew ) );
+  assert && assert( Number.isInteger( mNew ) );
+  assert && assert( Number.isInteger( numberOfStates ) && numberOfStates > 0 );
+
+  return isValidState( nNew, lNew, mNew, numberOfStates ) &&
+         ( nOld !== nNew ) &&
+         ( lNew >= 0 && lNew <= nNew - 1 ) &&
+         ( Math.abs( lOld - lNew ) === 1 ) &&
+         ( Math.abs( mOld - mNew ) <= 1 );
+}
+
+/**
+ * Validates an electron state.
+ */
+function isValidState( n: number, l: number, m: number, numberOfStates: number ) {
+  assert && assert( Number.isInteger( n ) );
+  assert && assert( Number.isInteger( l ) );
+  assert && assert( Number.isInteger( m ) );
+  assert && assert( Number.isInteger( numberOfStates ) && numberOfStates > 0 );
+
+  return ( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.GROUND_STATE + numberOfStates ) &&
+         ( l >= 0 && l <= n - 1 ) &&
+         ( m >= -l && m <= l );
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerModel', SchrodingerModel );
