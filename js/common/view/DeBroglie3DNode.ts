@@ -106,8 +106,8 @@ export default class DeBroglie3DNode extends Node {
     );
 
     this.waveFrontColorProperty = MOTHAColors.electronBaseColorProperty;
-    this.waveBackColorProperty = new DerivedProperty( [ this.orbitFrontColorProperty ],
-      orbitFrontColor => orbitFrontColor.darkerColor().darkerColor().darkerColor()
+    this.waveBackColorProperty = new DerivedProperty( [ this.waveFrontColorProperty ],
+      waveFrontColor => waveFrontColor.darkerColor().darkerColor().darkerColor()
     );
 
     // 3D orbits
