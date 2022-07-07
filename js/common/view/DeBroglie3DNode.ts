@@ -23,9 +23,9 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import WireframeMatrix from './WireframeMatrix.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 import WireframeModel from './WireframeModel.js';
 import WireframeNode from './WireframeNode.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
 const NUMBER_OF_ORBIT_VERTICES = 200;
@@ -112,7 +112,7 @@ export default class DeBroglie3DNode extends Node {
 
     // 3D orbits
     const orbitNodes: WireframeNode[] = [];
-    const groundState = HydrogenAtom.GROUND_STATE;
+    const groundState = MOTHAConstants.GROUND_STATE;
     const maxState = DeBroglieModel.getMaxElectronState();
     for ( let state = groundState; state < maxState; state++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( state ) );

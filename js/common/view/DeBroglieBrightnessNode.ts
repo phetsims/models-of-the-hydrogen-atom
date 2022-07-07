@@ -23,7 +23,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
 // tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of
@@ -106,7 +106,7 @@ class RingNode extends Node {
 
     // Pre-allocate the maximum number of polygon (Path) nodes. Based on the radius of the electron's current orbit,
     // some subset of these polygons will actually be added to the scene graph.
-    const maxState = HydrogenAtom.GROUND_STATE + DeBroglieModel.getNumberOfStates() - 1;
+    const maxState = MOTHAConstants.GROUND_STATE + DeBroglieModel.getNumberOfStates() - 1;
     const maxRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( maxState ) );
     const maxPolygons = calculateNumberOfPolygons( maxRadius );
     this.polygonNodes = [];

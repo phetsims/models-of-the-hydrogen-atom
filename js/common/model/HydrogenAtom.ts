@@ -16,7 +16,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
-//TODO move numberOfStates, groundState, hasTransitionWavelengths, GROUND_STATE to another base class for those models
+//TODO move numberOfStates, groundState, hasTransitionWavelengths to another base class for those models
 type SelfOptions = {
   displayName: string; // name of the model shown in the UI
   iconHTMLImageElement: HTMLImageElement; // icon used to represent the model in the UI
@@ -45,9 +45,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
   // Notifies listeners by emitting when a photon is absorbed
   public readonly photonAbsorbedEmitter: Emitter<[ Photon ]>;
-
-  // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.
-  public static readonly GROUND_STATE = 1;
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place

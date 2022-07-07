@@ -11,10 +11,10 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import OrbitNode from './OrbitNode.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -30,8 +30,8 @@ export default class OrbitsNode extends Node {
     }, providedOptions );
 
     const orbitNodes = [];
-    const minState = HydrogenAtom.GROUND_STATE;
-    const maxState = HydrogenAtom.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
+    const minState = MOTHAConstants.GROUND_STATE;
+    const maxState = MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
     for ( let state = minState; state <= maxState; state++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( state ) );
       const orbitNode = new OrbitNode( radius );

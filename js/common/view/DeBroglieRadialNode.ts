@@ -19,10 +19,10 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import OrbitsNode from './OrbitsNode.js';
 import MOTHAColors from '../MOTHAColors.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 // multiply the ground state orbit radius by this number to determine the radial offset at max amplitude
 const RADIAL_OFFSET_FACTOR = 0.45;
@@ -108,7 +108,7 @@ class RingNode extends Path {
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( hydrogenAtom.position );
-    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( HydrogenAtom.GROUND_STATE ) );
+    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE ) );
 
     Multilink.multilink( [ hydrogenAtom.electronAngleProperty, this.visibleProperty ],
       ( electronAngle, visible ) => {

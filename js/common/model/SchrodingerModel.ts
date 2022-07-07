@@ -45,7 +45,6 @@ import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import HydrogenAtom from './HydrogenAtom.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -70,17 +69,17 @@ export default class SchrodingerModel extends DeBroglieModel {
 
     super( zoomedInBox, options );
 
-    this.secondaryElectronStateProperty = new NumberProperty( HydrogenAtom.GROUND_STATE, {
+    this.secondaryElectronStateProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      range: this.electronStateRange,
+      //TODO range is dynamic [0,n-1]
       tandem: options.tandem.createTandem( 'secondaryElectronStateProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'secondary electron state (l)'
     } );
 
-    this.tertiaryElectronStateProperty = new NumberProperty( HydrogenAtom.GROUND_STATE, {
+    this.tertiaryElectronStateProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      range: this.electronStateRange,
+      //TODO range is dynamic [-l,+l]
       tandem: options.tandem.createTandem( 'tertiaryElectronStateProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'tertiary electron state (m)'

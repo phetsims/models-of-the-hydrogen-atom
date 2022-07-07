@@ -24,6 +24,9 @@ const MOTHAConstants = {
   // This value is specific to the HTML5 version.
   ZOOMED_IN_BOX_VIEW_SIZE: 400,
 
+  // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.
+  GROUND_STATE: 1,
+
   // radii, in model coordinates, unitless
   ELECTRON_RADIUS: 5,
   PROTON_RADIUS: 6,
@@ -42,6 +45,8 @@ const MOTHAConstants = {
   // margin between the state display and inside edge of zoomed-in box
   STATE_DISPLAY_MARGINS: new Vector2( 10, 10 )
 };
+
+assert && assert( MOTHAConstants.GROUND_STATE === 1, 'This is a fundamental assumption of this implementation.' );
 
 modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );
 
