@@ -77,6 +77,8 @@ export type SchrodingerModelOptions = SelfOptions & DeBroglieModelOptions;
 
 export default class SchrodingerModel extends DeBroglieModel {
 
+  //TODO electronStateTupleProperty: Property<{ n: number, l: number, m: number }>
+
   // secondary electron state number (l)
   public readonly secondaryElectronStateProperty: NumberProperty;
 
