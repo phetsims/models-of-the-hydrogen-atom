@@ -48,6 +48,9 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import BohrModel from './BohrModel.js';
+import ProbabilisticChooser, { ProbabilisticChooserEntry } from './ProbabilisticChooser.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import MOTHAUtils from '../MOTHAUtils.js';
 
 /*
  * This table defines the transition strengths for the primary state component (n).
@@ -121,6 +124,170 @@ export default class SchrodingerModel extends DeBroglieModel {
     //TODO
     photon.move( dt );
   }
+
+  /**
+   * Is this atom's electron in the specified state?
+   */
+  public isInState( n: number, l: number, m: number ): boolean {
+    return ( this.electronStateProperty.value === n ) &&
+           ( this.secondaryElectronStateProperty.value === l ) &&
+           ( this.tertiaryElectronStateProperty.value === m );
+  }
+
+  /**
+   * Probabilistically determines whether to absorb a photon.
+   * Typically, we defer to the superclass implementation. But if we're in state (2,0,0), the probability is 100%.
+   * This is not physically correct, but we want to make it easier to get out of state (2,0,0).
+   */
+  protected override absorptionIsCertain(): boolean {
+    if ( this.electronStateProperty.value === 2 && this.secondaryElectronStateProperty.value === 0 ) {
+      return true;
+    }
+    return super.absorptionIsCertain();
+  }
+
+  /**
+   * Determines if a proposed state transition caused by stimulated emission is allowed.
+   */
+  protected override stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
+    let allowed = true;
+    if ( nNew === nOld ) {
+      allowed = false;
+    }
+    else if ( nNew === 1 && this.secondaryElectronStateProperty.value === 0 ) {
+
+      // transition from (n,0,0) to (1,?,?) cannot satisfy the abs(l-l')=1 rule
+      allowed = false;
+    }
+    else if ( nNew === 1 && this.secondaryElectronStateProperty.value !== 1 ) {
+
+      // the only way to get to (1,0,0) is from (n,1,?)
+      allowed = false;
+    }
+
+    return allowed;
+  }
+
+  /**
+   * Chooses a new primary state (n) for the electron, -1 if there is no valid transition.
+   */
+  protected override chooseLowerElectronState(): number {
+    return getLowerPrimaryState( this.electronStateProperty.value, this.secondaryElectronStateProperty.value );
+  }
+
+  /**
+   * Sets the electron's primary state. Randomly chooses the values for the secondary and tertiary states,
+   * according to state transition rules.
+   */
+  protected setElectronState( nNew: number ): void {
+
+    const n = this.electronStateProperty.value;
+    const l = this.secondaryElectronStateProperty.value;
+    const m = this.tertiaryElectronStateProperty.value;
+
+    const lNew = getNewSecondaryElectronState( nNew, l );
+    const mNew = getNewTertiaryElectronState( lNew, m );
+
+    // Verify that no transition rules have been broken.
+    const valid = isaValidTransition( n, l, m, nNew, lNew, mNew, BohrModel.getNumberOfStates() );
+    if ( valid ) {
+      this.electronStateProperty.value = nNew;
+      this.secondaryElectronStateProperty.value = lNew;
+      this.tertiaryElectronStateProperty.value = mNew;
+    }
+    else {
+
+      // There's a bug in the implementation of the transition rules.
+      // Fall back to (1,0,0) if running without assertions.
+      assert && assert( false, `bad transition attempted from (${n},${l},${m}) to (${nNew},${lNew},${mNew})` );
+      this.electronStateProperty.value = 1;
+      this.secondaryElectronStateProperty.value = 0;
+      this.tertiaryElectronStateProperty.value = 0;
+    }
+  }
+
+  /**
+   * Our Schrodinger model emits photons from a random point on the first Bohr orbit.
+   */
+  protected override getSpontaneousEmissionPosition(): Vector2 {
+
+    // random point on the orbit, in polar coordinates
+    const radius = this.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE );
+    const angle = MOTHAUtils.nextAngle();
+
+    // convert to Cartesian coordinates, adjust for atom's position
+    const x = ( radius * Math.cos( angle ) ) + this.position.x;
+    const y = ( radius * Math.sin( angle ) ) + this.position.y;
+    return new Vector2( x, y );
+  }
+}
+
+/**
+ * Chooses a new lower value for the primary state (n).
+ * The possible values of n are limited by the current value of l, since abs(l-l') must be 1.
+ * The probability of each possible n transition is determined by its transition strength.
+ *
+ * @param nOld - the existing primary state
+ * @param l - the current secondary state
+ * @returns the new primary state, -1 there is no valid transition
+ */
+function getLowerPrimaryState( nOld: number, l: number ): number {
+
+  let nNew = -1;
+
+  if ( nOld < 2 ) {
+    // no state is lower than (1,0,0)
+    return -1;
+  }
+  else if ( nOld === 2 ) {
+    if ( l === 0 ) {
+
+      // transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
+      return -1;
+    }
+    else {
+
+      // the only transition from (2,1,?) is (1,0,0)
+      nNew = 1;
+    }
+  }
+  else if ( nOld > 2 ) {
+
+    // determine the possible range of n
+    const nMax = nOld - 1;
+    let nMin = Math.max( l, 1 );
+    if ( l === 0 ) {
+
+      // transition from (n,0,0) to (1,?,?) cannot satisfy the abs(l-l')=1 rule
+      nMin = 2;
+    }
+
+    // Get the strengths for each possible transition.
+    const numberOfEntries = nMax - nMin + 1;
+    const entries: ProbabilisticChooserEntry<number>[] = [];
+    let strengthSum = 0;
+    for ( let i = 0; i < numberOfEntries; i++ ) {
+      const state = nMin + i;
+      const transitionStrength = TRANSITION_STRENGTH[ nOld - 1 ][ state - 1 ];
+      entries.push( { value: state, weight: transitionStrength } );
+      strengthSum += transitionStrength;
+    }
+
+    // all transitions had zero strength, none are possible
+    if ( strengthSum === 0 ) {
+      return -1;
+    }
+
+    // choose a transition
+    const chooser = new ProbabilisticChooser( entries );
+    const value = chooser.getNext();
+    if ( value === null ) {
+      return -1;
+    }
+    nNew = value;
+  }
+
+  return nNew;
 }
 
 /*
@@ -131,8 +298,6 @@ export default class SchrodingerModel extends DeBroglieModel {
  * @param nNew - the new primary state
  * @param lOld - the existing secondary state
  */
-//TODO delete when this function is used
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getNewSecondaryElectronState( nNew: number, lOld: number ): number {
   assert && assert( Number.isInteger( nNew ) );
   assert && assert( Number.isInteger( lOld ) );
@@ -170,8 +335,6 @@ function getNewSecondaryElectronState( nNew: number, lOld: number ): number {
  * @param lNew - the new secondary state
  * @param mOld - the existing tertiary state
  */
-//TODO delete when this function is used
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getNewTertiaryElectronState( lNew: number, mOld: number ) {
   assert && assert( Number.isInteger( lNew ) );
   assert && assert( Number.isInteger( mOld ) );
@@ -227,8 +390,6 @@ function getNewTertiaryElectronState( lNew: number, mOld: number ) {
 /**
  * Checks state transition rules to see if a proposed transition is valid.
  */
-//TODO delete when this function is used
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function isaValidTransition( nOld: number, lOld: number, mOld: number, nNew: number, lNew: number, mNew: number, numberOfStates: number ) {
   assert && assert( Number.isInteger( nOld ) );
   assert && assert( Number.isInteger( lOld ) );
