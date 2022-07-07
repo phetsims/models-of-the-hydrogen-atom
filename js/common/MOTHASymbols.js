@@ -11,7 +11,6 @@ import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 
-// constants
 const SYMBOL_PATTERN = `<i style='font-family: ${new MathSymbolFont( 10 ).family}'>{{symbol}}</i>`;
 
 const GQSymbols = {
