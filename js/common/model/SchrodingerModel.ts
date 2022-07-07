@@ -44,12 +44,20 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import HydrogenAtom from './HydrogenAtom.js';
 
 type SelfOptions = EmptyObjectType;
 
 export type SchrodingerModelOptions = SelfOptions & DeBroglieModelOptions;
 
 export default class SchrodingerModel extends DeBroglieModel {
+
+  // secondary electron state number (l)
+  public readonly secondaryElectronStateProperty: NumberProperty;
+
+  // tertiary electron state number (m)
+  public readonly tertiaryElectronStateProperty: NumberProperty;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: SchrodingerModelOptions ) {
 
@@ -61,6 +69,22 @@ export default class SchrodingerModel extends DeBroglieModel {
     }, providedOptions );
 
     super( zoomedInBox, options );
+
+    this.secondaryElectronStateProperty = new NumberProperty( HydrogenAtom.GROUND_STATE, {
+      numberType: 'Integer',
+      range: this.electronStateRange,
+      tandem: options.tandem.createTandem( 'secondaryElectronStateProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'secondary electron state (l)'
+    } );
+
+    this.tertiaryElectronStateProperty = new NumberProperty( HydrogenAtom.GROUND_STATE, {
+      numberType: 'Integer',
+      range: this.electronStateRange,
+      tandem: options.tandem.createTandem( 'tertiaryElectronStateProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'tertiary electron state (m)'
+    } );
   }
 
   public override dispose(): void {

@@ -18,6 +18,8 @@ import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
+import FullElectronStateNode from './FullElectronStateNode.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -47,9 +49,19 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'xzAxesNode' )
     } );
 
-    options.children = [ protonNode, xzAxesNode ];
+    const electronStateNode = new FullElectronStateNode( hydrogenAtom.electronStateProperty,
+      hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
+        tandem: options.tandem.createTandem( 'electronStateNode' )
+      } );
+
+    options.children = [ protonNode, xzAxesNode, electronStateNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
+
+    // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
+    electronStateNode.boundsProperty.link( bounds => {
+      electronStateNode.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+    } );
   }
 
   public override dispose(): void {

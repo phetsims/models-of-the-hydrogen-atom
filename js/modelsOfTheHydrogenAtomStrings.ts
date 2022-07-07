@@ -26,7 +26,8 @@ type StringsType = {
   'fast': string;
   'hydrogenSymbol': string;
   'key': string;
-  'nEqualsValue': string;
+  'nEquals': string;
+  'nlmEquals': string;
   'neutron': string;
   'normal': string;
   'photon': string;

@@ -77,6 +77,9 @@ export default class BohrModel extends HydrogenAtom {
   public readonly proton: Proton;
   public readonly electron: Electron;
 
+  // range of the number used to indicate electron state(s)
+  protected readonly electronStateRange: Range;
+
   // electron state number
   public readonly electronStateProperty: NumberProperty;
 
@@ -117,11 +120,14 @@ export default class BohrModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
+    this.electronStateRange = new Range( HydrogenAtom.GROUND_STATE, HydrogenAtom.GROUND_STATE + ORBIT_RADII.length );
+
     this.electronStateProperty = new NumberProperty( HydrogenAtom.GROUND_STATE, {
       numberType: 'Integer',
-      range: new Range( HydrogenAtom.GROUND_STATE, HydrogenAtom.GROUND_STATE + ORBIT_RADII.length ),
+      range: this.electronStateRange,
       tandem: options.tandem.createTandem( 'electronStateProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'primary electron state (n)'
     } );
 
     this.timeInStateProperty = new NumberProperty( 0, {

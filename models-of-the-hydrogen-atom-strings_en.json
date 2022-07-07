@@ -47,8 +47,11 @@
   "key": {
     "value": "Key"
   },
-  "nEqualsValue": {
-    "value": "n = {{value}}"
+  "nEquals": {
+    "value": "n = {{n}}"
+  },
+  "nlmEquals": {
+    "value": "(n,l,m) = ({{n}},{{l}},{{m}})"
   },
   "neutron": {
     "value": "neutron"

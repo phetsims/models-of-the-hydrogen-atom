@@ -40,7 +40,7 @@ const MOTHAConstants = {
   MAX_SPECTROMETER_SNAPSHOTS: 3,
 
   // margin between the state display and inside edge of zoomed-in box
-  STATE_DISPLAY_MARGINS: new Vector2( 8, 8 )
+  STATE_DISPLAY_MARGINS: new Vector2( 10, 10 )
 };
 
 modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );

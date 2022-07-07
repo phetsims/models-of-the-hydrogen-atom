@@ -16,7 +16,7 @@ import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
-import ElectronStateDisplay from './ElectronStateDisplay.js';
+import PrimaryElectronStateNode from './PrimaryElectronStateNode.js';
 import DeBroglieViewComboBox from './DeBroglieViewComboBox.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -43,7 +43,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
                       providedOptions: DeBroglieNodeOptions ) {
 
     const options = optionize<DeBroglieNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options
+      // No default values, but we modify options below.
     }, providedOptions );
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
@@ -78,17 +78,17 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'deBroglieViewComboBox' )
     } );
 
-    const electronStateDisplay = new ElectronStateDisplay( hydrogenAtom.electronStateProperty, {
-      tandem: options.tandem.createTandem( 'electronStateDisplay' )
+    const electronStateNode = new PrimaryElectronStateNode( hydrogenAtom.electronStateProperty, {
+      tandem: options.tandem.createTandem( 'electronStateNode' )
     } );
 
-    options.children = [ protonNode, viewNodes, deBroglieViewComboBox, electronStateDisplay ];
+    options.children = [ protonNode, viewNodes, deBroglieViewComboBox, electronStateNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
-    // Keep the state display positioned in the lower-right corner of the zoomed-in box.
-    electronStateDisplay.boundsProperty.link( bounds => {
-      electronStateDisplay.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+    // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
+    electronStateNode.boundsProperty.link( bounds => {
+      electronStateNode.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
 
     this.deBroglieViewProperty = hydrogenAtom.deBroglieViewProperty;

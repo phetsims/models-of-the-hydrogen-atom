@@ -17,7 +17,7 @@ import ElectronNode from './ElectronNode.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import BohrModel from '../model/BohrModel.js';
-import ElectronStateDisplay from './ElectronStateDisplay.js';
+import PrimaryElectronStateNode from './PrimaryElectronStateNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import OrbitsNode from './OrbitsNode.js';
 
@@ -33,7 +33,7 @@ export default class BohrNode extends HydrogenAtomNode {
                       providedOptions: BohrNodeOptions ) {
 
     const options = optionize<BohrNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options
+      // No default values, but we modify options below.
     }, providedOptions );
 
     // Electron orbits
@@ -49,18 +49,18 @@ export default class BohrNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'electronNode' )
     } );
 
-    const electronStateDisplay = new ElectronStateDisplay( hydrogenAtom.electronStateProperty, {
-      tandem: options.tandem.createTandem( 'electronStateDisplay' )
+    const electronStateNode = new PrimaryElectronStateNode( hydrogenAtom.electronStateProperty, {
+      tandem: options.tandem.createTandem( 'electronStateNode' )
     } );
 
-    options.children = [ orbitsNode, protonNode, electronNode, electronStateDisplay ];
+    options.children = [ orbitsNode, protonNode, electronNode, electronStateNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
-    // Keep the state display positioned in the lower-right corner of the zoomed-in box.
+    // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
-    electronStateDisplay.boundsProperty.link( bounds => {
-      electronStateDisplay.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+    electronStateNode.boundsProperty.link( bounds => {
+      electronStateNode.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
   }
 
