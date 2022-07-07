@@ -13,23 +13,24 @@ import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { NodeTranslationOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHASymbols from '../MOTHASymbols.js';
 
 type SelfOptions = EmptyObjectType;
 
-type FullElectronStateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<TextOptions, 'tandem'>;
+type FullElectronStateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<RichTextOptions, 'tandem'>;
 
-export default class FullElectronStateNode extends Text {
+export default class FullElectronStateNode extends RichText {
 
   public constructor( primaryStateProperty: IReadOnlyProperty<number>,
                       secondaryStateProperty: IReadOnlyProperty<number>,
                       tertiaryStateProperty: IReadOnlyProperty<number>,
                       providedOptions: FullElectronStateNodeOptions ) {
 
-    const options = optionize<FullElectronStateNodeOptions, SelfOptions, TextOptions>()( {
+    const options = optionize<FullElectronStateNodeOptions, SelfOptions, RichTextOptions>()( {
 
       // TextOptions
       font: new PhetFont( 16 ),
@@ -41,9 +42,12 @@ export default class FullElectronStateNode extends Text {
     Multilink.multilink( [ primaryStateProperty, secondaryStateProperty, tertiaryStateProperty ],
       ( n, l, m ) => {
         this.text = StringUtils.fillIn( modelsOfTheHydrogenAtomStrings.nlmEquals, {
-          n: n,
-          l: l,
-          m: m
+          nSymbol: MOTHASymbols.n,
+          nValue: n,
+          lSymbol: MOTHASymbols.l,
+          lValue: l,
+          mSymbol: MOTHASymbols.m,
+          mValue: m
         } );
       } );
   }

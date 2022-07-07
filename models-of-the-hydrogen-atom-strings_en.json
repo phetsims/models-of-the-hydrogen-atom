@@ -48,10 +48,10 @@
     "value": "Key"
   },
   "nEquals": {
-    "value": "n = {{n}}"
+    "value": "{{nSymbol}} = {{nValue}}"
   },
   "nlmEquals": {
-    "value": "(n,l,m) = ({{n}},{{l}},{{m}})"
+    "value": "({{nSymbol}},{{lSymbol}},{{mSymbol}}) = ({{nValue}},{{lValue}},{{mValue}})"
   },
   "neutron": {
     "value": "neutron"
@@ -97,6 +97,15 @@
   },
   "viewSnapshots": {
     "value": "View snapshots"
+  },
+  "n": {
+    "value": "n"
+  },
+  "l": {
+    "value": "l"
+  },
+  "m": {
+    "value": "m"
   },
   "x": {
     "value": "x"

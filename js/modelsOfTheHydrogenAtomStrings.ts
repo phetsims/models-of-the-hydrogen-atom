@@ -45,6 +45,9 @@ type StringsType = {
   'spectrometerCollapsed': string;
   'spectrometerExpanded': string;
   'viewSnapshots': string;
+  'n': string;
+  'l': string;
+  'm': string;
   'x': string;
   'z': string;
 };

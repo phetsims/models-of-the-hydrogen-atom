@@ -12,20 +12,21 @@ import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { NodeTranslationOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHASymbols from '../MOTHASymbols.js';
 
 type SelfOptions = EmptyObjectType;
 
-type PrimaryElectronStateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<TextOptions, 'tandem'>;
+type PrimaryElectronStateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<RichTextOptions, 'tandem'>;
 
-export default class PrimaryElectronStateNode extends Text {
+export default class PrimaryElectronStateNode extends RichText {
 
   public constructor( electronStateProperty: IReadOnlyProperty<number>, providedOptions: PrimaryElectronStateNodeOptions ) {
 
-    const options = optionize<PrimaryElectronStateNodeOptions, SelfOptions, TextOptions>()( {
+    const options = optionize<PrimaryElectronStateNodeOptions, SelfOptions, RichTextOptions>()( {
 
       // TextOptions
       font: new PhetFont( 16 ),
@@ -36,7 +37,8 @@ export default class PrimaryElectronStateNode extends Text {
 
     electronStateProperty.link( n => {
       this.text = StringUtils.fillIn( modelsOfTheHydrogenAtomStrings.nEquals, {
-        n: n
+        nSymbol: MOTHASymbols.n,
+        nValue: n
       } );
     } );
   }
