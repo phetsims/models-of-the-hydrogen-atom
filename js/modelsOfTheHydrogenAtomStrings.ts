@@ -44,6 +44,8 @@ type StringsType = {
   'spectrometerCollapsed': string;
   'spectrometerExpanded': string;
   'viewSnapshots': string;
+  'x': string;
+  'z': string;
 };
 
 const modelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;

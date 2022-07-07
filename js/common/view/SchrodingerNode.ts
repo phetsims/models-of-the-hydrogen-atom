@@ -16,6 +16,8 @@ import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
+import XZAxesNode from './XZAxesNode.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -32,11 +34,20 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       //TODO default values for options
     }, providedOptions );
 
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
+
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
       tandem: options.tandem.createTandem( 'protonNode' )
     } );
 
-    options.children = [ protonNode ];
+    const xzAxesNode = new XZAxesNode( {
+      color: MOTHAColors.xzAxesColorProperty,
+      left: zoomedInBoxBounds.left + 15,
+      bottom: zoomedInBoxBounds.bottom - 10,
+      tandem: options.tandem.createTandem( 'xzAxesNode' )
+    } );
+
+    options.children = [ protonNode, xzAxesNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }

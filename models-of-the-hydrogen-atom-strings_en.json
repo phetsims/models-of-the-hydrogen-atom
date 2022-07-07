@@ -94,5 +94,11 @@
   },
   "viewSnapshots": {
     "value": "View snapshots"
+  },
+  "x": {
+    "value": "x"
+  },
+  "z": {
+    "value": "z"
   }
 }
