@@ -14,6 +14,9 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
+import energyLevelsScreenIcon_png from '../../images/energyLevelsScreenIcon_png.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
+import { Image } from '../../../scenery/js/imports.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -24,8 +27,11 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
   public constructor( providedOptions: EnergyLevelsScreenOptions ) {
 
     const options = optionize<EnergyLevelsScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
-      name: modelsOfTheHydrogenAtomStrings.screen.energyLevels
-      //TODO add homeScreenIcon
+      name: modelsOfTheHydrogenAtomStrings.screen.energyLevels,
+      homeScreenIcon: new ScreenIcon( new Image( energyLevelsScreenIcon_png ), {
+        maxIconWidthProportion: 1,
+        maxIconHeightProportion: 1
+      } )
     }, providedOptions );
 
     super(

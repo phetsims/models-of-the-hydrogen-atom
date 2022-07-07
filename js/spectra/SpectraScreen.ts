@@ -14,6 +14,9 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
+import spectraScreenIcon_png from '../../images/spectraScreenIcon_png.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
+import { Image } from '../../../scenery/js/imports.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -24,8 +27,11 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
   public constructor( providedOptions: SpectraScreenOptions ) {
 
     const options = optionize<SpectraScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
-      name: modelsOfTheHydrogenAtomStrings.screen.spectra
-      //TODO add homeScreenIcon
+      name: modelsOfTheHydrogenAtomStrings.screen.spectra,
+      homeScreenIcon: new ScreenIcon( new Image( spectraScreenIcon_png ), {
+        maxIconWidthProportion: 1,
+        maxIconHeightProportion: 1
+      } )
     }, providedOptions );
 
     super(
