@@ -79,7 +79,7 @@ export default class BohrModel extends HydrogenAtom {
   public readonly electron: Electron;
 
   // electron state number
-  public readonly electronStateProperty: NumberProperty;
+  private readonly electronStateProperty: NumberProperty;
 
   // time that the electron has been in its current state
   private readonly timeInStateProperty: Property<number>;
@@ -217,6 +217,24 @@ export default class BohrModel extends HydrogenAtom {
    */
   public static getMaxElectronState(): number {
     return MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
+  }
+
+  protected setElectronState( n: number ): void {
+    assert && assert( Number.isInteger( n ) );
+    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates() - 1 );
+
+    if ( n !== this.electronStateProperty.value ) {
+      this.electronStateProperty.value = n;
+      this.timeInStateProperty.value = 0;
+    }
+  }
+
+  public getElectronState(): number {
+    return this.electronStateProperty.value;
+  }
+
+  public getElectronStateProperty(): IReadOnlyProperty<number> {
+    return this.electronStateProperty;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -364,6 +382,7 @@ export default class BohrModel extends HydrogenAtom {
 
           // move electron to new state
           this.electronStateProperty.value = newState;
+          this.timeInStateProperty.value = 0;
         }
       }
     }

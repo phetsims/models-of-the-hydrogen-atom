@@ -49,7 +49,7 @@ export default class BohrNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'electronNode' )
     } );
 
-    const electronStateNode = new PrimaryElectronStateNode( hydrogenAtom.electronStateProperty, {
+    const electronStateNode = new PrimaryElectronStateNode( hydrogenAtom.getElectronStateProperty(), {
       tandem: options.tandem.createTandem( 'electronStateNode' )
     } );
 

@@ -129,7 +129,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * Is this atom's electron in the specified state?
    */
   public isInState( n: number, l: number, m: number ): boolean {
-    return ( this.electronStateProperty.value === n ) &&
+    return ( this.getElectronState() === n ) &&
            ( this.secondaryElectronStateProperty.value === l ) &&
            ( this.tertiaryElectronStateProperty.value === m );
   }
@@ -140,7 +140,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * This is not physically correct, but we want to make it easier to get out of state (2,0,0).
    */
   protected override absorptionIsCertain(): boolean {
-    if ( this.electronStateProperty.value === 2 && this.secondaryElectronStateProperty.value === 0 ) {
+    if ( this.getElectronState() === 2 && this.secondaryElectronStateProperty.value === 0 ) {
       return true;
     }
     return super.absorptionIsCertain();
@@ -172,16 +172,16 @@ export default class SchrodingerModel extends DeBroglieModel {
    * Chooses a new primary state (n) for the electron, -1 if there is no valid transition.
    */
   protected override chooseLowerElectronState(): number {
-    return getLowerPrimaryState( this.electronStateProperty.value, this.secondaryElectronStateProperty.value );
+    return getLowerPrimaryState( this.getElectronState(), this.secondaryElectronStateProperty.value );
   }
 
   /**
    * Sets the electron's primary state. Randomly chooses the values for the secondary and tertiary states,
    * according to state transition rules.
    */
-  protected setElectronState( nNew: number ): void {
+  protected override setElectronState( nNew: number ): void {
 
-    const n = this.electronStateProperty.value;
+    const n = this.getElectronState();
     const l = this.secondaryElectronStateProperty.value;
     const m = this.tertiaryElectronStateProperty.value;
 
@@ -191,7 +191,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     // Verify that no transition rules have been broken.
     const valid = isaValidTransition( n, l, m, nNew, lNew, mNew, BohrModel.getNumberOfStates() );
     if ( valid ) {
-      this.electronStateProperty.value = nNew;
+      super.setElectronState( nNew );
       this.secondaryElectronStateProperty.value = lNew;
       this.tertiaryElectronStateProperty.value = mNew;
     }
@@ -200,7 +200,7 @@ export default class SchrodingerModel extends DeBroglieModel {
       // There's a bug in the implementation of the transition rules.
       // Fall back to (1,0,0) if running without assertions.
       assert && assert( false, `bad transition attempted from (${n},${l},${m}) to (${nNew},${lNew},${mNew})` );
-      this.electronStateProperty.value = 1;
+      super.setElectronState( 1 );
       this.secondaryElectronStateProperty.value = 0;
       this.tertiaryElectronStateProperty.value = 0;
     }
