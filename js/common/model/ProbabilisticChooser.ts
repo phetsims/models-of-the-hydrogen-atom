@@ -11,7 +11,7 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 export type ProbabilisticChooserEntry<T> = {
   value: T;
   weight: number;
-}
+};
 
 export default class ProbabilisticChooser<T> {
 

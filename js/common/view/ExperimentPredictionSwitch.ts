@@ -21,7 +21,7 @@ import Property from '../../../../axon/js/Property.js';
 
 type SelfOptions = EmptyObjectType;
 
-type ExperimentPredictionSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>
+type ExperimentPredictionSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>;
 
 class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 
