@@ -50,6 +50,7 @@ type StringsType = {
   'm': string;
   'x': string;
   'z': string;
+  'exciteAtom': string;
 };
 
 const modelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;

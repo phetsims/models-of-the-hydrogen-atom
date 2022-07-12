@@ -51,6 +51,7 @@ import BohrModel from './BohrModel.js';
 import ProbabilisticChooser, { ProbabilisticChooserEntry } from './ProbabilisticChooser.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
+import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
 
 /*
  * This table defines the transition strengths for the primary state component (n).
@@ -221,6 +222,65 @@ export default class SchrodingerModel extends DeBroglieModel {
     const x = ( radius * Math.cos( angle ) ) + this.position.x;
     const y = ( radius * Math.sin( angle ) ) + this.position.y;
     return new Vector2( x, y );
+  }
+
+  public fireOneAbsorbablePhoton(): void {
+    //TODO port MetastableHandler
+  }
+
+  //----------------------------------------------------------------------------
+  // Wave function
+  //----------------------------------------------------------------------------
+
+  /**
+   * Probability Density. This algorithm is undefined for (x,y,z) = (0,0,0).
+   * @param n primary state
+   * @param l secondary state
+   * @param m tertiary state
+   * @param x coordinate on horizontal axis
+   * @param y coordinate on axis the is perpendicular to the screen
+   * @param z coordinate on vertical axis
+   */
+  public getProbabilityDensity( n: number, l: number, m: number, x: number, y: number, z: number ): number {
+    //TODO validate state (n,l,m)
+    assert && assert( !( x === 0 && y === 0 && z === 0 ), 'undefined for (x,y,z)=(0,0,0)' );
+
+    // convert to Polar coordinates
+    const r = Math.sqrt( ( x * x ) + ( y * y ) + ( z * z ) );
+    const cosTheta = Math.abs( z ) / r;
+
+    // calculate wave function
+    const w = this.getWaveFunction( n, l, m, r, cosTheta );
+
+    // square the wave function
+    return ( w * w );
+  }
+
+  /**
+   * Wavefunction.
+   */
+  private getWaveFunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
+    const t1 = this.getGeneralizedLaguerrePolynomial( n, l, r );
+    const t2 = solveAssociatedLegendrePolynomial( l, Math.abs( m ), cosTheta );
+    return ( t1 * t2 );
+  }
+
+  /**
+   * Generalized Laguerre Polynomial.
+   * Codified from design document.
+   */
+  private getGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
+    const a = this.getElectronOrbitRadius( n ) / ( n * n );
+    const multiplier = Math.pow( r, l ) * Math.exp( -r / ( n * a ) );
+    const b0 = 2.0 * Math.pow( ( n * a ), ( -1.5 ) ); // b0
+    const limit = n - l - 1;
+    let bj = b0;
+    let sum = b0; // j==0
+    for ( let j = 1; j <= limit; j++ ) {
+      bj = ( 2.0 / ( n * a ) ) * ( ( j + l - n ) / ( j * ( j + ( 2.0 * l ) + 1.0 ) ) ) * bj;
+      sum += ( bj * Math.pow( r, j ) );
+    }
+    return ( multiplier * sum );
   }
 }
 

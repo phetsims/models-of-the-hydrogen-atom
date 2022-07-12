@@ -26,12 +26,12 @@ import PolynomialTerm from './PolynomialTerm.js';
  * @param m - electron's tertiary state
  * @param x - coordinate on horizontal (x) axis
  */
-function solveAssociatedLegrendePolynomial( l: number, m: number, x: number ) {
+function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ) {
 
   // For large l, the brute-force solution below encounters instabilities.
-  assert && assert( Number.isInteger( l ) && l > 0 && l <= 6, `invalid l: ${l}` );
+  assert && assert( Number.isInteger( l ) && l >= 0 && l <= 6, `invalid l: ${l}` );
   assert && assert( Number.isInteger( m ) && m >= 0 && m <= l, `invalid m: ${m}` );
-  assert && assert( Math.abs( x ) <= 1, `x is out of bounds: ${x}` );
+  assert && assert( Math.abs( x ) <= 1, `invalid x: ${x}` );
 
   let productTerms = [ new PolynomialTerm( 1, 0 ) ]; // 1x^0
 
@@ -79,4 +79,4 @@ function factorial( n: number ): number {
   return f;
 }
 
-export default solveAssociatedLegrendePolynomial;
+export default solveAssociatedLegendrePolynomial;

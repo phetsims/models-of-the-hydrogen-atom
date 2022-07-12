@@ -286,6 +286,10 @@ const MOTHAColors = {
   xzAxesColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'xzAxesColor', {
     default: 'white',
     projector: 'black'
+  } ),
+
+  exciteButtonColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'exciteButtonColor', {
+    default: PhetColorScheme.BUTTON_YELLOW
   } )
 };
 

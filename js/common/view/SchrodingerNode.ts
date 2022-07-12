@@ -3,6 +3,8 @@
 /**
  * SchrodingerNode shows the Schrodinger model of the hydrogen atom.
  *
+ * TODO copy details from SchrodingerNode.java
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
@@ -20,6 +22,11 @@ import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import FullElectronStateNode from './FullElectronStateNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import { Text, VBox } from '../../../../scenery/js/imports.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 
 type SelfOptions = EmptyObjectType;
 
@@ -42,6 +49,10 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'protonNode' )
     } );
 
+    const fieldNode = new SchrodingerFieldNode( hydrogenAtom, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'fieldNode' )
+    } );
+
     const xzAxesNode = new XZAxesNode( {
       color: MOTHAColors.xzAxesColorProperty,
       left: zoomedInBoxBounds.left + 15,
@@ -49,18 +60,33 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'xzAxesNode' )
     } );
 
+    const exciteAtomButton = new RectangularPushButton( {
+      baseColor: MOTHAColors.exciteButtonColorProperty,
+      content: new Text( modelsOfTheHydrogenAtomStrings.exciteAtom, {
+        font: new PhetFont( 16 ),
+        maxWidth: 100
+      } ),
+      listener: () => hydrogenAtom.fireOneAbsorbablePhoton()
+    } );
+
     const electronStateNode = new FullElectronStateNode( hydrogenAtom.getElectronStateProperty(),
       hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
         tandem: options.tandem.createTandem( 'electronStateNode' )
       } );
 
-    options.children = [ protonNode, xzAxesNode, electronStateNode ];
+    const vBox = new VBox( {
+      align: 'right',
+      spacing: 15,
+      children: [ exciteAtomButton, electronStateNode ]
+    } );
+
+    options.children = [ protonNode, fieldNode, xzAxesNode, vBox ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
-    // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
-    electronStateNode.boundsProperty.link( bounds => {
-      electronStateNode.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+    // Keep the 'Excite Atom' button and electron state positioned in the lower-right corner of the zoomed-in box.
+    vBox.boundsProperty.link( bounds => {
+      vBox.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
   }
 

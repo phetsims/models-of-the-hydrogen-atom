@@ -3,7 +3,7 @@
 //TODO is this used?
 /**
  * PolynomialTerm is a minimal/incomplete implementation of a polynomial term, as needed for solving
- * associated Legendre polynomials. See solveAssociatedLegrendePolynomial.ts
+ * associated Legendre polynomials. See solveAssociatedLegendrePolynomial.ts
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
