@@ -36,8 +36,8 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly iconHTMLImageElement: HTMLImageElement;
   public readonly position: Vector2;
   public readonly orientation: number;
-  public readonly numberOfStates: number;
-  public readonly groundState: number;
+  public readonly numberOfStates: number; //TODO unused
+  public readonly groundState: number; //TODO unused
   public readonly hasTransitionWavelengths: boolean;
 
   // Notifies listeners by emitting when a photon is emitted (an unfortunate name)
