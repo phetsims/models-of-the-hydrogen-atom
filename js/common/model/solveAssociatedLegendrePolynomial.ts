@@ -1,6 +1,5 @@
 // Copyright 2022, University of Colorado Boulder
 
-//TODO is this used?
 /**
  * Solves the associated Legendre polynomial.  This is needed to compute the wave function for the Schrodinger
  * model of the hydrogen atom.
