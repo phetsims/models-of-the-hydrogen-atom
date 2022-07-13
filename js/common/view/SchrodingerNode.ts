@@ -66,7 +66,8 @@ export default class SchrodingerNode extends HydrogenAtomNode {
         font: new PhetFont( 16 ),
         maxWidth: 100
       } ),
-      listener: () => hydrogenAtom.fireOneAbsorbablePhoton()
+      listener: () => hydrogenAtom.fireOneAbsorbablePhoton(),
+      tandem: options.tandem.createTandem( 'exciteAtomButton' )
     } );
 
     const electronStateNode = new FullElectronStateNode( hydrogenAtom.getElectronStateProperty(),
