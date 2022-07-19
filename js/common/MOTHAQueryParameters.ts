@@ -24,7 +24,7 @@ const SCHEMA_MAP = {
   debugEmission: {
     type: 'flag'
   }
-};
+} as const;
 
 const MOTHAQueryParameters = QueryStringMachine.getAll( SCHEMA_MAP );
 MOTHAQueryParameters.SCHEMA_MAP = SCHEMA_MAP;
