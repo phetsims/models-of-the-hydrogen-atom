@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import IModel from '../../../../joist/js/IModel.js';
 import Screen, { ScreenOptions } from '../../../../joist/js/Screen.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -17,7 +18,7 @@ type SelfOptions = EmptyObjectType;
 
 export type MOTHAScreenOptions = SelfOptions & ScreenOptions;
 
-export default class MOTHAScreen<M, V extends ScreenView> extends Screen<M, V> {
+export default class MOTHAScreen<M extends IModel, V extends ScreenView> extends Screen<M, V> {
 
   public constructor( createModel: () => M, createView: ( model: M ) => V, providedOptions: MOTHAScreenOptions ) {
 
