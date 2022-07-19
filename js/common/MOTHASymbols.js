@@ -6,19 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringUtils from '../../../phetcommon/js/util/StringUtils.js';
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
 
-const SYMBOL_PATTERN = `<i style='font-family: ${new MathSymbolFont( 10 ).family}'>{{symbol}}</i>`;
-
 const GQSymbols = {
-  n: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: modelsOfTheHydrogenAtomStrings.n } ),
-  l: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: modelsOfTheHydrogenAtomStrings.l } ),
-  m: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: modelsOfTheHydrogenAtomStrings.m } ),
-  x: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: modelsOfTheHydrogenAtomStrings.x } ),
-  z: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: modelsOfTheHydrogenAtomStrings.z } )
+  n: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.n ),
+  l: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.l ),
+  m: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.m ),
+  x: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.x ),
+  z: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.z )
 };
 
 modelsOfTheHydrogenAtom.register( 'GQSymbols', GQSymbols );
