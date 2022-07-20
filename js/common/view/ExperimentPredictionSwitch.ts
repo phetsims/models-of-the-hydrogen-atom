@@ -8,7 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { NodeTranslationOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
@@ -19,7 +19,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import { ModelMode } from '../model/ModelMode.js';
 import Property from '../../../../axon/js/Property.js';
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 type ExperimentPredictionSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>;
 
@@ -39,12 +39,12 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
     };
 
     const experimentNode = new Text( modelsOfTheHydrogenAtomStrings.experiment,
-      optionize<TextOptions, EmptyObjectType, TextOptions>()( {
+      optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'experimentNode' )
       }, labelOptions ) );
 
     const predictionNode = new Text( modelsOfTheHydrogenAtomStrings.prediction,
-      optionize<TextOptions, EmptyObjectType, TextOptions>()( {
+      optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'predictionNode' )
       }, labelOptions ) );
 

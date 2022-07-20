@@ -17,7 +17,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -41,7 +41,7 @@ const SPARKLE_COLOR = new Color( 255, 255, 255, 0.4 ); // sparkle color for visi
 const UV_SPARKLE_COLOR = VisibleColor.wavelengthToColor( 400, WAVELENGTH_TO_COLOR_OPTIONS );
 const IR_SPARKLE_COLOR = VisibleColor.wavelengthToColor( 715, WAVELENGTH_TO_COLOR_OPTIONS );
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 type PhotonNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'> & PickRequired<NodeOptions, 'tandem'>;
 

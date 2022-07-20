@@ -38,7 +38,7 @@
 
 import schrodingerButton_png from '../../../images/schrodingerButton_png.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import ZoomedInBox from './ZoomedInBox.js';
@@ -72,7 +72,7 @@ const TRANSITION_STRENGTH = [
 ];
 assert && assert( TRANSITION_STRENGTH.length === BohrModel.getNumberOfStates() );
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 export type SchrodingerModelOptions = SelfOptions & DeBroglieModelOptions;
 

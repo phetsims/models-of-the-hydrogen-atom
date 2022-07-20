@@ -14,7 +14,7 @@ import ProtonNode from './ProtonNode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import PrimaryElectronStateNode from './PrimaryElectronStateNode.js';
 import DeBroglieViewComboBox from './DeBroglieViewComboBox.js';
@@ -25,7 +25,7 @@ import DeBroglie3DNode from './DeBroglie3DNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import { DeBroglieView } from '../model/DeBroglieView.js';
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 type DeBroglieNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
 

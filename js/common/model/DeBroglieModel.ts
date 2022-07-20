@@ -15,7 +15,7 @@
 
 import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import { HydrogenAtomOptions } from './HydrogenAtom.js';
@@ -27,7 +27,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
 import { DeBroglieView, DeBroglieViewValues } from './DeBroglieView.js';
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 export type DeBroglieModelOptions = SelfOptions & BohrModelOptions;
 

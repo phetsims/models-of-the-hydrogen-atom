@@ -8,7 +8,7 @@
 
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import PredictionPanel from '../../common/view/PredictionPanel.js';
@@ -18,7 +18,7 @@ import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.j
 import EnergyLevelsViewProperties from './EnergyLevelsViewProperties.js';
 import { Node } from '../../../../scenery/js/imports.js';
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 type EnergyLevelsScreenViewOptions = SelfOptions & ScreenViewOptions;
 

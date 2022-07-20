@@ -10,7 +10,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node, NodeOptions, Path, PathOptions } from '../../../../scenery/js/imports.js';
@@ -30,7 +30,7 @@ const RADIAL_OFFSET_FACTOR = 0.45;
 // number of line segments used to approximate the ring, empirically tunes to make the ring look smooth
 const NUMBER_OF_SEGMENTS = 200;
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 type DeBroglieRadialNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
@@ -74,7 +74,7 @@ export default class DeBroglieRadialNode extends Node {
   }
 }
 
-type RingNodeSelfOptions = EmptyObjectType;
+type RingNodeSelfOptions = EmptySelfOptions;
 type RingNodeOptions = RingNodeSelfOptions & PickRequired<PathOptions, 'visibleProperty' | 'tandem'>;
 
 /**

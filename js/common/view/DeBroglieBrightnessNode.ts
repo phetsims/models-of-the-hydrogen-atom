@@ -9,7 +9,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Color, IColor, Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
@@ -30,7 +30,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 // more polygons (Path nodes), it's important to keep this value as small as possible.
 const POLYGON_SIZE = 3;
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 type DeBroglieBrightnessNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
@@ -74,7 +74,7 @@ export default class DeBroglieBrightnessNode extends Node {
   }
 }
 
-type RingNodeSelfOptions = EmptyObjectType;
+type RingNodeSelfOptions = EmptySelfOptions;
 type RingNodeOptions = RingNodeSelfOptions & PickRequired<NodeOptions, 'visibleProperty' | 'tandem'>;
 
 /**

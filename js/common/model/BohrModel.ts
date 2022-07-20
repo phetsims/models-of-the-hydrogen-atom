@@ -26,7 +26,7 @@
 
 import bohrButton_png from '../../../images/bohrButton_png.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import EmptyObjectType from '../../../../phet-core/js/types/EmptyObjectType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
@@ -67,7 +67,7 @@ const WAVELENGTH_CLOSENESS_THRESHOLD = 0.5;
 // How close an emitted photon is placed to the photon that causes stimulated emission
 const STIMULATED_EMISSION_X_OFFSET = 10;
 
-type SelfOptions = EmptyObjectType;
+type SelfOptions = EmptySelfOptions;
 
 export type BohrModelOptions = SelfOptions &
   PickOptional<HydrogenAtomOptions, 'displayName' | 'iconHTMLImageElement'> &
