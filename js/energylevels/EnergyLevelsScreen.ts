@@ -38,7 +38,7 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
       () => new EnergyLevelsModel( {
         tandem: options.tandem.createTandem( 'model' )
       } ),
-      ( model: EnergyLevelsModel ) => new EnergyLevelsScreenView( model, {
+      model => new EnergyLevelsScreenView( model, {
         tandem: options.tandem.createTandem( 'view' )
       } ),
       options
