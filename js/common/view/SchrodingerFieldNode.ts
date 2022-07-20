@@ -9,9 +9,8 @@
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { CanvasNode, Color, Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
-import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';

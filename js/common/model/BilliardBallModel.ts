@@ -19,7 +19,7 @@
  */
 
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import billiardBallButton_png from '../../../images/billiardBallButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -28,7 +28,6 @@ import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 // constants

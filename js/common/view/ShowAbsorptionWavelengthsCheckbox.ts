@@ -9,8 +9,7 @@
 
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';

@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
@@ -15,7 +15,6 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
 import ElectronNode from './ElectronNode.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BohrModel from '../model/BohrModel.js';
 import PrimaryElectronStateNode from './PrimaryElectronStateNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';

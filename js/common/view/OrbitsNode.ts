@@ -7,10 +7,9 @@
  */
 
 import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BohrModel from '../model/BohrModel.js';
 import OrbitNode from './OrbitNode.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';

@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
@@ -19,7 +19,6 @@ import kaboom_png from '../../../images/kaboom_png.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = EmptySelfOptions;

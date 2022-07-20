@@ -8,8 +8,7 @@
  */
 
 import IProperty from '../../../../axon/js/IProperty.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';

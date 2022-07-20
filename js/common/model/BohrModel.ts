@@ -25,8 +25,7 @@
  */
 
 import bohrButton_png from '../../../images/bohrButton_png.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';

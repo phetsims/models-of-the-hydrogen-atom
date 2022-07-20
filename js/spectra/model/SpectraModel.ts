@@ -6,8 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BilliardBallModel from '../../common/model/BilliardBallModel.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import ClassicalSolarSystemModel from '../../common/model/ClassicalSolarSystemModel.js';

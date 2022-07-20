@@ -6,8 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import DeBroglieModel from '../../common/model/DeBroglieModel.js';
 import MOTHAModel, { MOTHAModelOptions } from '../../common/model/MOTHAModel.js';

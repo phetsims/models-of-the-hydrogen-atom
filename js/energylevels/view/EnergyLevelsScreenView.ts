@@ -7,8 +7,7 @@
  */
 
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import PredictionPanel from '../../common/view/PredictionPanel.js';

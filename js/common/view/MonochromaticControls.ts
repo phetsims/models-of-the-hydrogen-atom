@@ -12,8 +12,7 @@ import { NodeTranslationOptions, VBox, VBoxOptions } from '../../../../scenery/j
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import IProperty from '../../../../axon/js/IProperty.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { ModelMode } from '../model/ModelMode.js';
 import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
