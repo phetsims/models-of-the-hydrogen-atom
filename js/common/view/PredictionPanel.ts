@@ -64,18 +64,22 @@ export default class PredictionPanel extends Panel {
       labelAlign: 'left',
       radioButtonOptions: {
         baseColor: options.fill,
-        selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
-        deselectedStroke: MOTHAColors.modelsRadioButtonFillProperty,
-        selectedLineWidth: 2,
         xMargin: 12,
         yMargin: 10,
         xAlign: 'left',
-        selectedButtonOpacity: 1,
-        deselectedButtonOpacity: 1,
-        selectedContentOpacity: 1,
-        deselectedContentOpacity: 1,
-        overButtonOpacity: 1,
-        overContentOpacity: 1
+        buttonAppearanceStrategyOptions: {
+          selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
+          deselectedStroke: MOTHAColors.modelsRadioButtonFillProperty,
+          selectedLineWidth: 2,
+          selectedButtonOpacity: 1,
+          deselectedButtonOpacity: 1,
+          overButtonOpacity: 1
+        },
+        contentAppearanceStrategyOptions: {
+          selectedContentOpacity: 1,
+          deselectedContentOpacity: 1,
+          overContentOpacity: 1
+        }
       },
       tandem: options.tandem.createTandem( 'modelRadioButtonGroup' )
     } );
