@@ -22,7 +22,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { Circle, Color, IColor, Node, NodeOptions, Path, RadialGradient, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, Color, TColor, Node, NodeOptions, Path, RadialGradient, Rectangle } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from '../model/Photon.js';
@@ -133,7 +133,7 @@ class SparkleNode extends Node {
 }
 
 class CrosshairsNode extends Node {
-  public constructor( radius: number, fill: IColor, rotation = 0 ) {
+  public constructor( radius: number, fill: TColor, rotation = 0 ) {
 
     const crosshairShape = Shape.ellipse( 0, 0, radius, 0.1 * radius, 0 );
 

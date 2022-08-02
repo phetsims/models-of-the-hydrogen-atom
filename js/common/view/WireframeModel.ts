@@ -10,14 +10,14 @@
 
 import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import { Color, IColor, RectangleOptions } from '../../../../scenery/js/imports.js';
+import { Color, TColor, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import WireframeMatrix from './WireframeMatrix.js';
 
 type SelfOptions = {
   vertices?: Vector3[];
-  frontColor?: IColor;
-  backColor?: IColor;
+  frontColor?: TColor;
+  backColor?: TColor;
   lineWidth?: number;
 };
 
@@ -27,8 +27,8 @@ export default class WireframeModel {
 
   private matrix: WireframeMatrix;
   private vertices: Vector3[];
-  private frontColor: IColor;
-  private backColor: IColor;
+  private frontColor: TColor;
+  private backColor: TColor;
   private lineWidth: number;
 
   public constructor( providedOptions: WireframeModelOptions ) {

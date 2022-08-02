@@ -11,7 +11,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Color, IColor, Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
+import { Color, TColor, Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -190,7 +190,7 @@ class RingNode extends Node {
   /**
    * Maps the specified amplitude to a color.
    */
-  private amplitudeToColor( amplitude: number ): IColor {
+  private amplitudeToColor( amplitude: number ): TColor {
     assert && assert( amplitude >= -1 && amplitude <= 1, `amplitude=${amplitude}` );
     if ( amplitude === 0 ) {
       return this.zeroAmplitudeColorProperty.value;

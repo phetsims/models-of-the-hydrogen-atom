@@ -11,7 +11,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import IProperty from '../../../../axon/js/IProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { IColor } from '../../../../scenery/js/imports.js';
+import { TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Particle, { ParticleOptions } from './Particle.js';
@@ -66,7 +66,7 @@ export default class Photon extends Particle {
   /**
    * Gets the Color associated with the photon's wavelength.
    */
-  public getColor(): IColor {
+  public getColor(): TColor {
     return VisibleColor.wavelengthToColor( this.wavelength, {
       uvColor: MOTHAColors.UV_COLOR,
       irColor: MOTHAColors.IR_COLOR

@@ -7,7 +7,7 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { IColor, Node, NodeOptions, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
+import { TColor, Node, NodeOptions, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
@@ -19,7 +19,7 @@ const LABEL_FONT = new MathSymbolFont( 18 );
 const LABEL_OFFSET = 4;
 
 type SelfOptions = {
-  color?: IColor; // color for the axes and labels
+  color?: TColor; // color for the axes and labels
 };
 
 type XZAxesNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
