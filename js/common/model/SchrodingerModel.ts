@@ -111,6 +111,7 @@ export default class SchrodingerModel extends DeBroglieModel {
       tandem: options.tandem.createTandem( 'tertiaryElectronStateProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'tertiary electron state (m)',
+      //TODO do we need to opt out here?
       rangePropertyOptions: {
         tandem: Tandem.OPT_OUT
       }
