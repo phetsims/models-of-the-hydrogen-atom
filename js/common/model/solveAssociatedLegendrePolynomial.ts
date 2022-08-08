@@ -25,7 +25,7 @@ import PolynomialTerm from './PolynomialTerm.js';
  * @param m - electron's tertiary state
  * @param x - coordinate on horizontal (x) axis
  */
-function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ) {
+function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): number {
 
   // For large l, the brute-force solution below encounters instabilities.
   assert && assert( Number.isInteger( l ) && l >= 0 && l <= 6, `invalid l: ${l}` );
