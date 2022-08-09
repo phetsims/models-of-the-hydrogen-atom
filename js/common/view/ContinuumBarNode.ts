@@ -10,7 +10,7 @@
 import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Font, IPaint, Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Font, TPaint, Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -19,8 +19,8 @@ type SelfOptions = {
   xMargin?: number;
   yMargin?: number;
   font?: Font;
-  barFill?: IPaint;
-  textFill?: IPaint;
+  barFill?: TPaint;
+  textFill?: TPaint;
 };
 
 type ContinuumBarNodeOptions = SelfOptions & StrictOmit<NodeOptions, 'children'>;
