@@ -10,7 +10,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -33,7 +33,7 @@ export default class PredictionPanel extends Panel {
 
   public constructor( predictiveModelProperty: Property<HydrogenAtom>,
                       predictiveModels: HydrogenAtom[],
-                      modelModeProperty: IReadOnlyProperty<ModelMode>,
+                      modelModeProperty: TReadOnlyProperty<ModelMode>,
                       providedOptions: PredictionPanelOptions ) {
 
     const options = optionize<PredictionPanelOptions, SelfOptions, PanelOptions>()( {

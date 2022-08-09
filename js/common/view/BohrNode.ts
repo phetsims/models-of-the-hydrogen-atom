@@ -12,7 +12,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ElectronNode from './ElectronNode.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BohrModel from '../model/BohrModel.js';
@@ -27,7 +27,7 @@ type BohrNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'childr
 export default class BohrNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: BohrModel,
-                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: BohrNodeOptions ) {
 

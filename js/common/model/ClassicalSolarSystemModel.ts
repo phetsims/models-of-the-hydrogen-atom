@@ -36,7 +36,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import Electron from './Electron.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Proton from './Proton.js';
 import Photon from './Photon.js';
@@ -58,7 +58,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
   public readonly electron: Electron;
 
   // offset of the electron relative to the atom's position
-  private readonly electronOffsetProperty: IReadOnlyProperty<Vector2>;
+  private readonly electronOffsetProperty: TReadOnlyProperty<Vector2>;
 
   // distance between electron and proton
   private readonly electronDistanceProperty: Property<number>;
@@ -70,7 +70,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
   private readonly electronAngleDeltaProperty: Property<number>;
 
   // Has the atom been destroyed?
-  public readonly isDestroyedProperty: IReadOnlyProperty<boolean>;
+  public readonly isDestroyedProperty: TReadOnlyProperty<boolean>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: ClassicalSolarSystemModelOptions ) {
 

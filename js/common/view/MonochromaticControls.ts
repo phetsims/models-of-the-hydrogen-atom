@@ -15,7 +15,7 @@ import IProperty from '../../../../axon/js/IProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { ModelMode } from '../model/ModelMode.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { LightMode } from '../model/LightMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -31,7 +31,7 @@ export default class MonochromaticControls extends VBox {
   public constructor( modelModeProperty: IProperty<ModelMode>,
                       hydrogenAtomModelProperty: IProperty<HydrogenAtom>,
                       wavelengthProperty: IProperty<number>,
-                      lightModeProperty: IReadOnlyProperty<LightMode>,
+                      lightModeProperty: TReadOnlyProperty<LightMode>,
                       absorptionWavelengthsVisibleProperty: Property<boolean>,
                       providedOptions: MonochromaticControlsOptions ) {
 

@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -23,7 +23,7 @@ type PrimaryElectronStateNodeOptions = SelfOptions & NodeTranslationOptions & Pi
 
 export default class PrimaryElectronStateNode extends RichText {
 
-  public constructor( electronStateProperty: IReadOnlyProperty<number>, providedOptions: PrimaryElectronStateNodeOptions ) {
+  public constructor( electronStateProperty: TReadOnlyProperty<number>, providedOptions: PrimaryElectronStateNodeOptions ) {
 
     const options = optionize<PrimaryElectronStateNodeOptions, SelfOptions, RichTextOptions>()( {
 

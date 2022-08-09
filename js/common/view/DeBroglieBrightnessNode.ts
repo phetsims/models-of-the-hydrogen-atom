@@ -17,7 +17,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import OrbitsNode from './OrbitsNode.js';
 import Utils from '../../../../dot/js/Utils.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
@@ -88,9 +88,9 @@ class RingNode extends Node {
   private readonly polygonNodes: Path[]; // an ordered pool of polygons, used to approximate the ring
 
   // range of colors used for the ring, based on electron amplitude
-  private readonly positiveAmplitudeColorProperty: IReadOnlyProperty<Color>;
-  private readonly negativeAmplitudeColorProperty: IReadOnlyProperty<Color>;
-  private readonly zeroAmplitudeColorProperty: IReadOnlyProperty<Color>;
+  private readonly positiveAmplitudeColorProperty: TReadOnlyProperty<Color>;
+  private readonly negativeAmplitudeColorProperty: TReadOnlyProperty<Color>;
+  private readonly zeroAmplitudeColorProperty: TReadOnlyProperty<Color>;
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,

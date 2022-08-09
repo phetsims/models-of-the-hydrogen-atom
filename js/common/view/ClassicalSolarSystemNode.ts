@@ -12,7 +12,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ClassicalSolarSystemModel from '../model/ClassicalSolarSystemModel.js';
 import ElectronNode from './ElectronNode.js';
 import kaboom_png from '../../../images/kaboom_png.js';
@@ -28,7 +28,7 @@ type ClassicalSolarSystemNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNode
 export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: ClassicalSolarSystemModel,
-                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: ClassicalSolarSystemNodeOptions ) {
 

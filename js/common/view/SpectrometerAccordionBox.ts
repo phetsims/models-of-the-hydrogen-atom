@@ -8,7 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import IProperty from '../../../../axon/js/IProperty.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -139,7 +139,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
 class TitleNode extends ToggleNode<boolean> {
 
-  public constructor( expandedProperty: IReadOnlyProperty<boolean>, tandem: Tandem ) {
+  public constructor( expandedProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
 
     // to ensure that both titles have the same effective size, and are left aligned
     const alignBoxOptions: AlignBoxOptions = {

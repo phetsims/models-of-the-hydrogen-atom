@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
@@ -57,10 +57,10 @@ export default class Light {
   public readonly monochromaticWavelengthProperty: NumberProperty;
 
   // wavelength of the light, where 0 is white light
-  public readonly wavelengthProperty: IReadOnlyProperty<number>;
+  public readonly wavelengthProperty: TReadOnlyProperty<number>;
 
   // color displayed by the view
-  public readonly colorProperty: IReadOnlyProperty<Color | string>;
+  public readonly colorProperty: TReadOnlyProperty<Color | string>;
 
   // emits when a photon is created
   public readonly photonCreatedEmitter: IEmitter<[ Photon ]>;

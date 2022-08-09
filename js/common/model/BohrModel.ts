@@ -31,7 +31,7 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Utils from '../../../../dot/js/Utils.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import MOTHAUtils from '../MOTHAUtils.js';
@@ -87,7 +87,7 @@ export default class BohrModel extends HydrogenAtom {
   public readonly electronAngleProperty: Property<number>;
 
   // offset of the electron from the atom's center
-  protected readonly electronOffsetProperty: IReadOnlyProperty<Vector2>;
+  protected readonly electronOffsetProperty: TReadOnlyProperty<Vector2>;
 
   // minimum time (in sec) that electron stays in a state before emission can occur
   public static MIN_TIME_IN_STATE = 1;
@@ -232,7 +232,7 @@ export default class BohrModel extends HydrogenAtom {
     return this.electronStateProperty.value;
   }
 
-  public getElectronStateProperty(): IReadOnlyProperty<number> {
+  public getElectronStateProperty(): TReadOnlyProperty<number> {
     return this.electronStateProperty;
   }
 

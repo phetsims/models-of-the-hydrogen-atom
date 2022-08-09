@@ -12,7 +12,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
@@ -24,7 +24,7 @@ type BilliardBallNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions,
 export default class BilliardBallNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: BilliardBallModel,
-                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: BilliardBallNodeOptions ) {
 

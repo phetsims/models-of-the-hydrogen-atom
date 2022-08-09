@@ -23,7 +23,7 @@ import createObservableArray, { ObservableArray } from '../../../../axon/js/crea
 import ExperimentModel from './ExperimentModel.js';
 import { ModelMode, ModelModeValues } from './ModelMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 const SLOW_SPEED_SCALE = 0.5;
@@ -49,7 +49,7 @@ class MOTHAModel {
   public readonly predictiveModelProperty: Property<HydrogenAtom>;
 
   // the hydrogen-atom model that is currently selected: either the Experiment model, or the selected predictive model.
-  public readonly hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>;
+  public readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
   // the zoomed-in part of the box of hydrogen
   public readonly zoomedInBox: ZoomedInBox;
@@ -67,7 +67,7 @@ class MOTHAModel {
   public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
 
   // scale factor applied to dt, based on timeSpeedProperty
-  private readonly dtScaleProperty: IReadOnlyProperty<number>;
+  private readonly dtScaleProperty: TReadOnlyProperty<number>;
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place

@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -24,9 +24,9 @@ type FullElectronStateNodeOptions = SelfOptions & NodeTranslationOptions & PickR
 
 export default class FullElectronStateNode extends RichText {
 
-  public constructor( primaryStateProperty: IReadOnlyProperty<number>,
-                      secondaryStateProperty: IReadOnlyProperty<number>,
-                      tertiaryStateProperty: IReadOnlyProperty<number>,
+  public constructor( primaryStateProperty: TReadOnlyProperty<number>,
+                      secondaryStateProperty: TReadOnlyProperty<number>,
+                      tertiaryStateProperty: TReadOnlyProperty<number>,
                       providedOptions: FullElectronStateNodeOptions ) {
 
     const options = optionize<FullElectronStateNodeOptions, SelfOptions, RichTextOptions>()( {

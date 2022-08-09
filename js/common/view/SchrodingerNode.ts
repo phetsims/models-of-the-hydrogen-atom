@@ -14,7 +14,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import XZAxesNode from './XZAxesNode.js';
@@ -34,7 +34,7 @@ type SchrodingerNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 
 export default class SchrodingerNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: SchrodingerModel,
-                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: SchrodingerNodeOptions ) {
 

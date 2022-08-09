@@ -12,7 +12,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import PrimaryElectronStateNode from './PrimaryElectronStateNode.js';
@@ -30,13 +30,13 @@ type DeBroglieNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'c
 
 export default class DeBroglieNode extends HydrogenAtomNode {
 
-  private readonly deBroglieViewProperty: IReadOnlyProperty<DeBroglieView>;
+  private readonly deBroglieViewProperty: TReadOnlyProperty<DeBroglieView>;
   private readonly deBroglieRadialNode: DeBroglieRadialNode;
   private readonly deBroglie3DNode: DeBroglie3DNode;
   private readonly deBroglieBrightnessNode: DeBroglieBrightnessNode;
 
   public constructor( hydrogenAtom: DeBroglieModel,
-                      hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2,
                       listboxParent: Node,
                       providedOptions: DeBroglieNodeOptions ) {

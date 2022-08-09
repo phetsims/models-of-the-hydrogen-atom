@@ -12,7 +12,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -29,7 +29,7 @@ export default class HydrogenAtomNode extends Node {
    * @param providedOptions
    */
   protected constructor( hydrogenAtom: HydrogenAtom,
-                         hydrogenAtomProperty: IReadOnlyProperty<HydrogenAtom>,
+                         hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                          providedOptions: HydrogenAtomNodeOptions ) {
 
     const options = optionize<HydrogenAtomNodeOptions, SelfOptions, RectangleOptions>()( {

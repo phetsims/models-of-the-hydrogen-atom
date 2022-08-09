@@ -7,7 +7,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -55,10 +55,10 @@ export default class DeBroglie3DNode extends Node {
   private readonly orbitVertices: Vector3[]; // reusable vertices for orbits
   private waveVertices: Vector3[]; // reusable vertices for wave
 
-  private readonly orbitFrontColorProperty: IReadOnlyProperty<Color>;
-  private readonly orbitBackColorProperty: IReadOnlyProperty<Color>;
-  private readonly waveFrontColorProperty: IReadOnlyProperty<Color>;
-  private readonly waveBackColorProperty: IReadOnlyProperty<Color>;
+  private readonly orbitFrontColorProperty: TReadOnlyProperty<Color>;
+  private readonly orbitBackColorProperty: TReadOnlyProperty<Color>;
+  private readonly waveFrontColorProperty: TReadOnlyProperty<Color>;
+  private readonly waveBackColorProperty: TReadOnlyProperty<Color>;
 
   private readonly waveModel: WireframeModel; //TODO does this have PhET-iO state?
   private readonly waveNode: WireframeNode; //TODO does this have PhET-iO state?

@@ -17,7 +17,7 @@ import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings
 import MOTHAColors from '../MOTHAColors.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import IReadOnlyProperty from '../../../../axon/js/IReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import Property from '../../../../axon/js/Property.js';
 
@@ -28,7 +28,7 @@ type ShowAbsorptionWavelengthsCheckboxOptions = SelfOptions & PickRequired<Check
 export default class ShowAbsorptionWavelengthsCheckbox extends Checkbox {
 
   public constructor( absorptionWavelengthsVisibleProperty: Property<boolean>,
-                      hydrogenAtomModelProperty: IReadOnlyProperty<HydrogenAtom>,
+                      hydrogenAtomModelProperty: TReadOnlyProperty<HydrogenAtom>,
                       providedOptions: ShowAbsorptionWavelengthsCheckboxOptions ) {
 
     const options = optionize<ShowAbsorptionWavelengthsCheckboxOptions, SelfOptions, CheckboxOptions>()( {
