@@ -89,7 +89,7 @@ export default class Light {
     this.lightModeProperty = new Property<LightMode>( 'white', {
       validValues: LightModeValues,
       tandem: options.tandem.createTandem( 'lightModeProperty' ),
-      phetioType: Property.PropertyIO( StringIO )
+      phetioValueType: StringIO
     } );
 
     // Range goes from UV to max visible wavelength
@@ -105,14 +105,14 @@ export default class Light {
       ( lightMode, monochromaticWavelength ) =>
         ( lightMode === 'white' ) ? VisibleColor.WHITE_WAVELENGTH : monochromaticWavelength, {
         tandem: options.tandem.createTandem( 'wavelengthProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+        phetioValueType: NumberIO
       } );
 
     this.colorProperty = new DerivedProperty(
       [ this.lightModeProperty, this.wavelengthProperty ],
       ( lightMode, wavelength ) => VisibleColor.wavelengthToColor( wavelength ), {
         tandem: options.tandem.createTandem( 'colorProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( Color.ColorIO )
+        phetioValueType: Color.ColorIO
       } );
 
     this.photonCreatedEmitter = new Emitter<[ Photon ]>( {

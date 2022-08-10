@@ -37,7 +37,7 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
       // Visible when we have snapshots
       visibleProperty: new DerivedProperty( [ numberOfSnapshotsProperty ], n => ( n > 0 ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+        phetioValueType: BooleanIO
       } )
     }, providedOptions ) );
   }

@@ -40,7 +40,7 @@ export default class MonochromaticControls extends VBox {
       // Visible when light mode is 'monochromatic'
       visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+        phetioValueType: BooleanIO
       } ),
       align: 'center',
       spacing: 10,

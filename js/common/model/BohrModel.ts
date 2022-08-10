@@ -150,7 +150,7 @@ export default class BohrModel extends HydrogenAtom {
         return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO )
+        phetioValueType: Vector2.Vector2IO
       } );
 
     this.electronOffsetProperty.link( electronOffset => {

@@ -41,7 +41,7 @@ export default class PredictionPanel extends Panel {
       // Visible when model mode is 'prediction'
       visibleProperty: new DerivedProperty( [ modelModeProperty ], modelMode => ( modelMode === 'prediction' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+        phetioValueType: BooleanIO
       } ),
       fill: MOTHAColors.modelsPanelFillProperty,
       stroke: MOTHAColors.modelsPanelStrokeProperty,

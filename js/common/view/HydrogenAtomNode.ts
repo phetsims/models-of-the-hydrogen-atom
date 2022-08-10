@@ -39,7 +39,7 @@ export default class HydrogenAtomNode extends Node {
     options.visibleProperty = new DerivedProperty( [ hydrogenAtomProperty ],
       value => ( value === hydrogenAtom ), {
         tandem: options.tandem.createTandem( 'visibleProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+        phetioValueType: BooleanIO
       } );
 
     super( options );

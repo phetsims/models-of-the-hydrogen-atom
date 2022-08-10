@@ -40,7 +40,7 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
       visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty, {
         tandem: protonNodeTandem.createTandem( 'visibleProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+        phetioValueType: BooleanIO
       } ),
       tandem: protonNodeTandem
     } );
@@ -49,7 +49,7 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
     const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform, {
       visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty, {
         tandem: electronNodeTandem.createTandem( 'visibleProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+        phetioValueType: BooleanIO
       } ),
       tandem: electronNodeTandem
     } );

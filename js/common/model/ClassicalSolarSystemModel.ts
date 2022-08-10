@@ -108,7 +108,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       [ this.electronDistanceProperty, this.electronAngleProperty ],
       ( distance, angle ) => MOTHAUtils.polarToCartesian( distance, angle ), {
         tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO )
+        phetioValueType: Vector2.Vector2IO
       } );
 
     this.electronOffsetProperty.link( electronOffset => {
@@ -123,7 +123,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     this.isDestroyedProperty = new DerivedProperty( [ this.electronDistanceProperty ],
       electronDistance => ( electronDistance === 0 ), {
         tandem: options.tandem.createTandem( 'isDestroyedProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+        phetioValueType: BooleanIO
       } );
   }
 

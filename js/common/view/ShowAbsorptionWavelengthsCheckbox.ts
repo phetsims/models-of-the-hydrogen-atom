@@ -37,7 +37,7 @@ export default class ShowAbsorptionWavelengthsCheckbox extends Checkbox {
       visibleProperty: new DerivedProperty( [ hydrogenAtomModelProperty ],
         hydrogenAtomModel => hydrogenAtomModel.hasTransitionWavelengths, {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-          phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO )
+          phetioValueType: BooleanIO
         } ),
       checkboxColor: MOTHAColors.showAbsorptionWavelengthCheckboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty
