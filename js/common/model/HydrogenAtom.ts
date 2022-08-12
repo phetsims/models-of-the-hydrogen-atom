@@ -8,7 +8,7 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
-import IEmitter from '../../../../axon/js/IEmitter.js';
+import TEmitter from '../../../../axon/js/TEmitter.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -42,10 +42,10 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly hasTransitionWavelengths: boolean;
 
   // Notifies listeners by emitting when a photon is emitted (an unfortunate name)
-  public readonly photonEmittedEmitter: IEmitter<[ Photon ]>;
+  public readonly photonEmittedEmitter: TEmitter<[ Photon ]>;
 
   // Notifies listeners by emitting when a photon is absorbed
-  public readonly photonAbsorbedEmitter: IEmitter<[ Photon ]>;
+  public readonly photonAbsorbedEmitter: TEmitter<[ Photon ]>;
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place

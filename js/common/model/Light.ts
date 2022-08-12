@@ -29,7 +29,7 @@ import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import IEmitter from '../../../../axon/js/IEmitter.js';
+import TEmitter from '../../../../axon/js/TEmitter.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -63,7 +63,7 @@ export default class Light {
   public readonly colorProperty: TReadOnlyProperty<Color | string>;
 
   // emits when a photon is created
-  public readonly photonCreatedEmitter: IEmitter<[ Photon ]>;
+  public readonly photonCreatedEmitter: TEmitter<[ Photon ]>;
 
   // time between creation of photons
   private readonly dtPerPhotonCreated: number;
