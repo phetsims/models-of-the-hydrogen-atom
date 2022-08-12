@@ -242,7 +242,7 @@ class RingPolygonShape extends Shape {
 /**
  * Calculates the number of polygons required to approximate a ring with the specified radius.
  */
-function calculateNumberOfPolygons( radius: number ) {
+function calculateNumberOfPolygons( radius: number ): number {
   const circumference = Math.PI * ( 2 * radius );
   return Utils.toFixedNumber( circumference / POLYGON_SIZE, 0 ) + 1;
 }

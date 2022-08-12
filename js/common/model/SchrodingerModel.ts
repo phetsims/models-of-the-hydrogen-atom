@@ -401,7 +401,7 @@ function getNewSecondaryElectronState( nNew: number, lOld: number ): number {
  * @param lNew - the new secondary state
  * @param mOld - the existing tertiary state
  */
-function getNewTertiaryElectronState( lNew: number, mOld: number ) {
+function getNewTertiaryElectronState( lNew: number, mOld: number ): number {
   assert && assert( Number.isInteger( lNew ) );
   assert && assert( Number.isInteger( mOld ) );
 
@@ -456,7 +456,7 @@ function getNewTertiaryElectronState( lNew: number, mOld: number ) {
 /**
  * Checks state transition rules to see if a proposed transition is valid.
  */
-function isaValidTransition( nOld: number, lOld: number, mOld: number, nNew: number, lNew: number, mNew: number, numberOfStates: number ) {
+function isaValidTransition( nOld: number, lOld: number, mOld: number, nNew: number, lNew: number, mNew: number, numberOfStates: number ): boolean {
   assert && assert( Number.isInteger( nOld ) );
   assert && assert( Number.isInteger( lOld ) );
   assert && assert( Number.isInteger( mOld ) );
@@ -475,7 +475,7 @@ function isaValidTransition( nOld: number, lOld: number, mOld: number, nNew: num
 /**
  * Validates an electron state.
  */
-function isValidState( n: number, l: number, m: number, numberOfStates: number ) {
+function isValidState( n: number, l: number, m: number, numberOfStates: number ): boolean {
   assert && assert( Number.isInteger( n ) );
   assert && assert( Number.isInteger( l ) );
   assert && assert( Number.isInteger( m ) );

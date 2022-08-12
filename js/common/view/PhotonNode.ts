@@ -172,7 +172,7 @@ function getOrbColor( wavelength: number, radius: number ): RadialGradient {
 /*
  * Returns the color for the 'sparkle' in the center of the photon.
  */
-function getSparkleColor( wavelength: number ) {
+function getSparkleColor( wavelength: number ): Color {
   if ( wavelength < VisibleColor.MIN_WAVELENGTH ) {
     return UV_SPARKLE_COLOR;
   }
