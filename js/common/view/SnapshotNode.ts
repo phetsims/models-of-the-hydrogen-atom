@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import IProperty from '../../../../axon/js/IProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -24,7 +24,7 @@ type SnapshotNodeOptions = SelfOptions &
 
 export default class SnapshotNode extends Node {
 
-  public constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotNodeOptions ) {
+  public constructor( numberOfSnapshotsProperty: TProperty<number>, providedOptions?: SnapshotNodeOptions ) {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO default values for options

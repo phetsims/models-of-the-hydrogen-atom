@@ -11,7 +11,7 @@ import WavelengthSlider from '../../../../scenery-phet/js/WavelengthSlider.js';
 import { NodeTranslationOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import IProperty from '../../../../axon/js/IProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { ModelMode } from '../model/ModelMode.js';
@@ -28,9 +28,9 @@ type MonochromaticControlsOptions = SelfOptions & NodeTranslationOptions & PickR
 
 export default class MonochromaticControls extends VBox {
 
-  public constructor( modelModeProperty: IProperty<ModelMode>,
-                      hydrogenAtomModelProperty: IProperty<HydrogenAtom>,
-                      wavelengthProperty: IProperty<number>,
+  public constructor( modelModeProperty: TProperty<ModelMode>,
+                      hydrogenAtomModelProperty: TProperty<HydrogenAtom>,
+                      wavelengthProperty: TProperty<number>,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
                       absorptionWavelengthsVisibleProperty: Property<boolean>,
                       providedOptions: MonochromaticControlsOptions ) {

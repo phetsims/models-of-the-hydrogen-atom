@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import IProperty from '../../../../axon/js/IProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
@@ -24,7 +24,7 @@ export default class SnapshotsDialog extends Dialog {
 
   private readonly disposeSnapshotsDialog: () => void;
 
-  public constructor( numberOfSnapshotsProperty: IProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
+  public constructor( numberOfSnapshotsProperty: TProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
 
     const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>()( {
 
@@ -69,7 +69,7 @@ export default class SnapshotsDialog extends Dialog {
 /**
  * Creates the snapshots.
  */
-function createSnapshotNodes( numberOfSnapshotsProperty: IProperty<number> ): SnapshotNode[] {
+function createSnapshotNodes( numberOfSnapshotsProperty: TProperty<number> ): SnapshotNode[] {
   const snapshots = [];
   for ( let i = 0; i < numberOfSnapshotsProperty.value; i++ ) {
     snapshots.push( new SnapshotNode( numberOfSnapshotsProperty, {

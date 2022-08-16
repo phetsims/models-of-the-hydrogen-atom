@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import IProperty from '../../../../axon/js/IProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -36,7 +36,7 @@ type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 
-  public constructor( numberOfSnapshotsProperty: IProperty<number>,
+  public constructor( numberOfSnapshotsProperty: TProperty<number>,
                       providedOptions?: SpectrometerAccordionBoxOptions ) {
 
     const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {

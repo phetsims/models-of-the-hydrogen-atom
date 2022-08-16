@@ -8,7 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import IProperty from '../../../../axon/js/IProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { TColor } from '../../../../scenery/js/imports.js';
@@ -29,7 +29,7 @@ export default class Photon extends Particle {
 
   public readonly wavelength: number;
   public readonly wasEmitted: boolean;
-  public hasCollidedProperty: IProperty<boolean>;
+  public hasCollidedProperty: TProperty<boolean>;
 
   public constructor( providedOptions: PhotonOptions ) {
 
