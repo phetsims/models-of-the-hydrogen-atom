@@ -6,10 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import Sim, { SimOptions } from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
-import MOTHAOptionsNode from './common/view/MOTHAOptionsNode.js';
 import EnergyLevelsScreen from './energylevels/EnergyLevelsScreen.js';
 import modelsOfTheHydrogenAtomStrings from './modelsOfTheHydrogenAtomStrings.js';
 import SpectraScreen from './spectra/SpectraScreen.js';
@@ -25,9 +25,11 @@ simLauncher.launch( () => {
 
   const options: SimOptions = {
 
-    // Creates content for the Options dialog, accessible via the PhET menu
-    createOptionsDialogContent: ( tandem: Tandem ) => new MOTHAOptionsNode( {
-      tandem: tandem
+
+    preferencesModel: new PreferencesModel( {
+      visualOptions: {
+        supportsProjectorMode: true
+      }
     } ),
 
     credits: {
