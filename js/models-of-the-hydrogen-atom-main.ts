@@ -16,7 +16,7 @@ import SpectraScreen from './spectra/SpectraScreen.js';
 
 simLauncher.launch( () => {
 
-  const title = modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].title;
+  const titleStringProperty = modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].titleStringProperty;
 
   const screens = [
     new SpectraScreen( { tandem: Tandem.ROOT.createTandem( 'spectraScreen' ) } ),
@@ -42,6 +42,6 @@ simLauncher.launch( () => {
     }
   };
 
-  const sim = new Sim( title, screens, options );
+  const sim = new Sim( titleStringProperty, screens, options );
   sim.start();
 } );
