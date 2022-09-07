@@ -39,7 +39,7 @@
 import schrodingerButton_png from '../../../images/schrodingerButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
@@ -91,7 +91,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     const options = optionize<SchrodingerModelOptions, SelfOptions, DeBroglieModelOptions>()( {
 
       // DeBroglieModelOptions
-      displayName: modelsOfTheHydrogenAtomStrings.schrodinger,
+      displayName: ModelsOfTheHydrogenAtomStrings.schrodinger,
       iconHTMLImageElement: schrodingerButton_png
     }, providedOptions );
 

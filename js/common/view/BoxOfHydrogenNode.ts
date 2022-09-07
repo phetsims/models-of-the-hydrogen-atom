@@ -13,7 +13,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { LinearGradient, Node, NodeOptions, NodeTranslationOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 // constants
@@ -53,7 +53,7 @@ export default class BoxOfHydrogenNode extends Node {
     } );
 
     // hydrogen symbol, in lower-left corner of front face
-    const hydrogenSymbol = new Text( modelsOfTheHydrogenAtomStrings.hydrogenSymbol, {
+    const hydrogenSymbol = new Text( ModelsOfTheHydrogenAtomStrings.hydrogenSymbol, {
       fill: MOTHAColors.boxOfHydrogenSymbolColorProperty,
       font: new PhetFont( { weight: 'bold', size: 24 } ),
       left: frontNode.left + ( 0.15 * BOX_SIZE.width ),

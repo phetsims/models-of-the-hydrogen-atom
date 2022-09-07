@@ -22,7 +22,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import billiardBallButton_png from '../../../images/billiardBallButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Photon from './Photon.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
@@ -49,7 +49,7 @@ export default class BilliardBallModel extends HydrogenAtom {
     const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
-      displayName: modelsOfTheHydrogenAtomStrings.billiardBall,
+      displayName: ModelsOfTheHydrogenAtomStrings.billiardBall,
       iconHTMLImageElement: billiardBallButton_png,
       hasTransitionWavelengths: false
     }, providedOptions );

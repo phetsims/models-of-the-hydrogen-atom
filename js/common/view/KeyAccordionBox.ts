@@ -12,7 +12,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ElectronNode from './ElectronNode.js';
 import NeutronNode from './NeutronNode.js';
@@ -48,7 +48,7 @@ export default class KeyAccordionBox extends AccordionBox {
       buttonXMargin: 0
     }, providedOptions );
 
-    options.titleNode = new Text( modelsOfTheHydrogenAtomStrings.key, {
+    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.key, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.keyTitleFillProperty,
       maxWidth: 100, // i18n, determined empirically
@@ -61,13 +61,13 @@ export default class KeyAccordionBox extends AccordionBox {
     const contentTandem = options.tandem.createTandem( 'content' );
     const keyNodes: KeyNode[] = [
       new KeyNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.electron, contentTandem.createTandem( 'electronKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.electron, contentTandem.createTandem( 'electronKeyNode' ) ),
       new KeyNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.proton, contentTandem.createTandem( 'protonKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.proton, contentTandem.createTandem( 'protonKeyNode' ) ),
       new KeyNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.neutron, contentTandem.createTandem( 'neutronKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.neutron, contentTandem.createTandem( 'neutronKeyNode' ) ),
       new KeyNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
-        modelsOfTheHydrogenAtomStrings.photon, contentTandem.createTandem( 'photonKeyNode' ) )
+        ModelsOfTheHydrogenAtomStrings.photon, contentTandem.createTandem( 'photonKeyNode' ) )
     ];
 
     const content = new VBox( {

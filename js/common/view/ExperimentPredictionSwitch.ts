@@ -13,7 +13,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { NodeTranslationOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import { ModelMode } from '../model/ModelMode.js';
 import Property from '../../../../axon/js/Property.js';
@@ -37,12 +37,12 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
       maxWidth: 100
     };
 
-    const experimentNode = new Text( modelsOfTheHydrogenAtomStrings.experiment,
+    const experimentNode = new Text( ModelsOfTheHydrogenAtomStrings.experiment,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'experimentNode' )
       }, labelOptions ) );
 
-    const predictionNode = new Text( modelsOfTheHydrogenAtomStrings.prediction,
+    const predictionNode = new Text( ModelsOfTheHydrogenAtomStrings.prediction,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'predictionNode' )
       }, labelOptions ) );

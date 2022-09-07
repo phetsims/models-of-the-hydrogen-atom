@@ -10,7 +10,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { TColor, Node, NodeOptions, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 
@@ -44,7 +44,7 @@ export default class XZAxesNode extends Node {
     const xAxisNode = new ArrowNode( 0, 0, ARROW_LENGTH, 0, arrowNodeOptions );
     const zAxisNode = new ArrowNode( 0, 0, 0, -ARROW_LENGTH, arrowNodeOptions );
 
-    const xText = new Text( modelsOfTheHydrogenAtomStrings.x, {
+    const xText = new Text( ModelsOfTheHydrogenAtomStrings.x, {
       font: LABEL_FONT,
       fill: options.color,
       left: xAxisNode.right + LABEL_OFFSET,
@@ -52,7 +52,7 @@ export default class XZAxesNode extends Node {
       tandem: options.tandem.createTandem( 'xText' )
     } );
 
-    const zText = new Text( modelsOfTheHydrogenAtomStrings.z, {
+    const zText = new Text( ModelsOfTheHydrogenAtomStrings.z, {
       font: LABEL_FONT,
       fill: options.color,
       centerX: zAxisNode.centerX,

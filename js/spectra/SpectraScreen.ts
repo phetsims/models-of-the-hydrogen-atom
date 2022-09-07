@@ -10,7 +10,7 @@ import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js'
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
 import spectraScreenIcon_png from '../../images/spectraScreenIcon_png.js';
@@ -26,7 +26,7 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
   public constructor( providedOptions: SpectraScreenOptions ) {
 
     const options = optionize<SpectraScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
-      name: modelsOfTheHydrogenAtomStrings.screen.spectra,
+      name: ModelsOfTheHydrogenAtomStrings.screen.spectra,
       homeScreenIcon: new ScreenIcon( new Image( spectraScreenIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

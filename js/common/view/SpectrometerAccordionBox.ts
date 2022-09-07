@@ -22,7 +22,7 @@ import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushBut
 import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
@@ -147,7 +147,7 @@ class TitleNode extends ToggleNode<boolean> {
       xAlign: 'left'
     };
 
-    const titleExpandedNode = new AlignBox( new Text( modelsOfTheHydrogenAtomStrings.spectrometerExpanded, {
+    const titleExpandedNode = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerExpanded, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,
       maxWidth: 290,
@@ -155,7 +155,7 @@ class TitleNode extends ToggleNode<boolean> {
       phetioVisiblePropertyInstrumented: false
     } ), alignBoxOptions );
 
-    const titleCollapsedNode = new AlignBox( new Text( modelsOfTheHydrogenAtomStrings.spectrometerCollapsed, {
+    const titleCollapsedNode = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerCollapsed, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,
       maxWidth: 290,

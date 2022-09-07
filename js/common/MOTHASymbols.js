@@ -8,14 +8,14 @@
 
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 
 const GQSymbols = {
-  n: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.n ),
-  l: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.l ),
-  m: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.m ),
-  x: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.x ),
-  z: MathSymbolFont.getRichTextMarkup( modelsOfTheHydrogenAtomStrings.z )
+  n: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.n ),
+  l: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.l ),
+  m: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.m ),
+  x: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.x ),
+  z: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.z )
 };
 
 modelsOfTheHydrogenAtom.register( 'GQSymbols', GQSymbols );

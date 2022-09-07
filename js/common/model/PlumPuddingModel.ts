@@ -33,7 +33,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import plumPuddingButton_png from '../../../images/plumPuddingButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Electron from './Electron.js';
 import Photon from './Photon.js';
@@ -84,7 +84,7 @@ class PlumPuddingModel extends HydrogenAtom {
     const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
-      displayName: modelsOfTheHydrogenAtomStrings.plumPudding,
+      displayName: ModelsOfTheHydrogenAtomStrings.plumPudding,
       iconHTMLImageElement: plumPuddingButton_png,
       hasTransitionWavelengths: false
     }, providedOptions );

@@ -14,7 +14,7 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { NodeTranslationOptions, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
@@ -40,7 +40,7 @@ export default class FullElectronStateNode extends RichText {
 
     Multilink.multilink( [ primaryStateProperty, secondaryStateProperty, tertiaryStateProperty ],
       ( n, l, m ) => {
-        this.text = StringUtils.fillIn( modelsOfTheHydrogenAtomStrings.nlmEquals, {
+        this.text = StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nlmEquals, {
           nSymbol: MOTHASymbols.n,
           nValue: n,
           lSymbol: MOTHASymbols.l,

@@ -10,7 +10,7 @@ import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js'
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
 import energyLevelsScreenIcon_png from '../../images/energyLevelsScreenIcon_png.js';
@@ -26,7 +26,7 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
   public constructor( providedOptions: EnergyLevelsScreenOptions ) {
 
     const options = optionize<EnergyLevelsScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
-      name: modelsOfTheHydrogenAtomStrings.screen.energyLevels,
+      name: ModelsOfTheHydrogenAtomStrings.screen.energyLevels,
       homeScreenIcon: new ScreenIcon( new Image( energyLevelsScreenIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

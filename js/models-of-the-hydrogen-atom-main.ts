@@ -11,12 +11,12 @@ import Sim, { SimOptions } from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import EnergyLevelsScreen from './energylevels/EnergyLevelsScreen.js';
-import modelsOfTheHydrogenAtomStrings from './modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from './ModelsOfTheHydrogenAtomStrings.js';
 import SpectraScreen from './spectra/SpectraScreen.js';
 
 simLauncher.launch( () => {
 
-  const titleStringProperty = modelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].titleStringProperty;
+  const titleStringProperty = ModelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].titleStringProperty;
 
   const screens = [
     new SpectraScreen( { tandem: Tandem.ROOT.createTandem( 'spectraScreen' ) } ),

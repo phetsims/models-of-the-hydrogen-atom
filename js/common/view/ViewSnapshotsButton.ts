@@ -15,7 +15,7 @@ import { NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js'
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -30,7 +30,7 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
 
       // RectangularPushButtonOptions
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      content: new Text( modelsOfTheHydrogenAtomStrings.viewSnapshots, {
+      content: new Text( ModelsOfTheHydrogenAtomStrings.viewSnapshots, {
         font: new PhetFont( 16 )
       } ),
 

@@ -12,7 +12,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Font, TPaint, Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = {
@@ -46,8 +46,8 @@ export default class ContinuumBarNode extends Node {
       rotation: Math.PI / 2,
       maxWidth: 0.4 * barHeight
     };
-    const classicalText = new Text( modelsOfTheHydrogenAtomStrings.classical, textOptions );
-    const quantumText = new Text( modelsOfTheHydrogenAtomStrings.quantum, textOptions );
+    const classicalText = new Text( ModelsOfTheHydrogenAtomStrings.classical, textOptions );
+    const quantumText = new Text( ModelsOfTheHydrogenAtomStrings.quantum, textOptions );
 
     const barWidth = Math.max( classicalText.width, quantumText.width ) + ( 2 * options.xMargin );
     const barNode = new Rectangle( 0, 0, barWidth, barHeight, {

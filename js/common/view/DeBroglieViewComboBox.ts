@@ -14,7 +14,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { DeBroglieView } from '../model/DeBroglieView.js';
 import Property from '../../../../axon/js/Property.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -38,18 +38,18 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
       maxWidth: 150
     };
 
-    const radialViewText = new Text( modelsOfTheHydrogenAtomStrings.radialView,
+    const radialViewText = new Text( ModelsOfTheHydrogenAtomStrings.radialView,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'radialViewText' )
       }, textOptions ) );
 
     // threeDViewText does not match '3DViewText' tandem name because JavaScript identifiers cannot begin with a number.
-    const threeDViewText = new Text( modelsOfTheHydrogenAtomStrings[ '3DView' ],
+    const threeDViewText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DView' ],
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( '3DViewText' )
       }, textOptions ) );
 
-    const brightnessViewText = new Text( modelsOfTheHydrogenAtomStrings.brightnessView,
+    const brightnessViewText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessView,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'brightnessViewText' )
       }, textOptions ) );

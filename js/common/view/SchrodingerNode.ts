@@ -22,7 +22,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import FullElectronStateNode from './FullElectronStateNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SchrodingerFieldNode from './SchrodingerFieldNode.js';
@@ -61,7 +61,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const exciteAtomButton = new RectangularPushButton( {
       baseColor: MOTHAColors.exciteButtonColorProperty,
-      content: new Text( modelsOfTheHydrogenAtomStrings.exciteAtom, {
+      content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtom, {
         font: new PhetFont( 16 ),
         maxWidth: 100
       } ),

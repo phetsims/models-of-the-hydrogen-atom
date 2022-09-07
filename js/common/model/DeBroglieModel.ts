@@ -16,7 +16,7 @@
 import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
@@ -48,7 +48,7 @@ export default class DeBroglieModel extends BohrModel {
     const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // DeBroglieModelOptions
-      displayName: modelsOfTheHydrogenAtomStrings.deBroglie,
+      displayName: ModelsOfTheHydrogenAtomStrings.deBroglie,
       iconHTMLImageElement: deBroglieButton_png
     }, providedOptions );
 

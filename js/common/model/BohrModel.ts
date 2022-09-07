@@ -27,7 +27,7 @@
 import bohrButton_png from '../../../images/bohrButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import modelsOfTheHydrogenAtomStrings from '../../modelsOfTheHydrogenAtomStrings.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -100,7 +100,7 @@ export default class BohrModel extends HydrogenAtom {
     const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
-      displayName: modelsOfTheHydrogenAtomStrings.bohr,
+      displayName: ModelsOfTheHydrogenAtomStrings.bohr,
       iconHTMLImageElement: bohrButton_png,
       hasTransitionWavelengths: true
     }, providedOptions );

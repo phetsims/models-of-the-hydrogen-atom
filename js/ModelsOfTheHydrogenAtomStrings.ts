@@ -93,8 +93,8 @@ type StringsType = {
   'exciteAtomStringProperty': TReadOnlyProperty<string>;
 };
 
-const modelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;
+const ModelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;
 
-modelsOfTheHydrogenAtom.register( 'modelsOfTheHydrogenAtomStrings', modelsOfTheHydrogenAtomStrings );
+modelsOfTheHydrogenAtom.register( 'ModelsOfTheHydrogenAtomStrings', ModelsOfTheHydrogenAtomStrings );
 
-export default modelsOfTheHydrogenAtomStrings;
+export default ModelsOfTheHydrogenAtomStrings;
