@@ -151,16 +151,14 @@ class TitleNode extends ToggleNode<boolean> {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,
       maxWidth: 290,
-      tandem: tandem.createTandem( 'titleExpandedText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: tandem.createTandem( 'titleExpandedText' )
     } ), alignBoxOptions );
 
     const titleCollapsedNode = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerCollapsed, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,
       maxWidth: 290,
-      tandem: tandem.createTandem( 'titleCollapsedText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: tandem.createTandem( 'titleCollapsedText' )
     } ), alignBoxOptions );
 
     const items = [
