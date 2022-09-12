@@ -52,7 +52,7 @@ export default class KeyAccordionBox extends AccordionBox {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.keyTitleFillProperty,
       maxWidth: 100, // i18n, determined empirically
-      tandem: options.tandem.createTandem( 'titleNode' )
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
@@ -103,7 +103,7 @@ class KeyNode extends HBox {
           font: ITEM_FONT,
           fill: MOTHAColors.keyTextFillProperty,
           maxWidth: 120, // determined empirically
-          tandem: parentTandem.createTandem( 'textNode' )
+          tandem: parentTandem.createTandem( 'text' )
         } )
       ],
       tandem: parentTandem

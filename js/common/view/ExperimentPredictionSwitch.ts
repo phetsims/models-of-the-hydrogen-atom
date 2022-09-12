@@ -37,17 +37,17 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
       maxWidth: 100
     };
 
-    const experimentNode = new Text( ModelsOfTheHydrogenAtomStrings.experiment,
+    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experiment,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
-        tandem: options.tandem.createTandem( 'experimentNode' )
+        tandem: options.tandem.createTandem( 'experimentText' )
       }, labelOptions ) );
 
-    const predictionNode = new Text( ModelsOfTheHydrogenAtomStrings.prediction,
+    const predictionText = new Text( ModelsOfTheHydrogenAtomStrings.prediction,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
-        tandem: options.tandem.createTandem( 'predictionNode' )
+        tandem: options.tandem.createTandem( 'predictionText' )
       }, labelOptions ) );
 
-    super( modelModeProperty, 'experiment', experimentNode, 'prediction', predictionNode, options );
+    super( modelModeProperty, 'experiment', experimentText, 'prediction', predictionText, options );
   }
 
   public override dispose(): void {

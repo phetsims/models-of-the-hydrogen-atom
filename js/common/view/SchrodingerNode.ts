@@ -69,15 +69,15 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'exciteAtomButton' )
     } );
 
-    const electronStateNode = new FullElectronStateNode( hydrogenAtom.getElectronStateProperty(),
+    const electronStateText = new FullElectronStateNode( hydrogenAtom.getElectronStateProperty(),
       hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
-        tandem: options.tandem.createTandem( 'electronStateNode' )
+        tandem: options.tandem.createTandem( 'electronStateText' )
       } );
 
     const vBox = new VBox( {
       align: 'right',
       spacing: 15,
-      children: [ exciteAtomButton, electronStateNode ]
+      children: [ exciteAtomButton, electronStateText ]
     } );
 
     options.children = [ protonNode, fieldNode, xzAxesNode, vBox ];

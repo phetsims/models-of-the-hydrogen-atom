@@ -77,17 +77,17 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'deBroglieViewComboBox' )
     } );
 
-    const electronStateNode = new PrimaryElectronStateNode( hydrogenAtom.getElectronStateProperty(), {
-      tandem: options.tandem.createTandem( 'electronStateNode' )
+    const electronStateText = new PrimaryElectronStateNode( hydrogenAtom.getElectronStateProperty(), {
+      tandem: options.tandem.createTandem( 'electronStateText' )
     } );
 
-    options.children = [ protonNode, viewNodes, deBroglieViewComboBox, electronStateNode ];
+    options.children = [ protonNode, viewNodes, deBroglieViewComboBox, electronStateText ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
-    electronStateNode.boundsProperty.link( bounds => {
-      electronStateNode.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+    electronStateText.boundsProperty.link( bounds => {
+      electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
 
     this.deBroglieViewProperty = hydrogenAtom.deBroglieViewProperty;
