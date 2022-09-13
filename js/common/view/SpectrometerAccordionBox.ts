@@ -147,14 +147,14 @@ class TitleNode extends ToggleNode<boolean> {
       xAlign: 'left'
     };
 
-    const titleExpandedNode = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerExpandedStringProperty, {
+    const titleExpandedText = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerExpandedStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,
       maxWidth: 290,
       tandem: tandem.createTandem( 'titleExpandedText' )
     } ), alignBoxOptions );
 
-    const titleCollapsedNode = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerCollapsedStringProperty, {
+    const titleCollapsedText = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerCollapsedStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,
       maxWidth: 290,
@@ -162,8 +162,8 @@ class TitleNode extends ToggleNode<boolean> {
     } ), alignBoxOptions );
 
     const items = [
-      { value: true, node: titleExpandedNode },
-      { value: false, node: titleCollapsedNode }
+      { value: true, node: titleExpandedText },
+      { value: false, node: titleCollapsedText }
     ];
 
     super( expandedProperty, items, {

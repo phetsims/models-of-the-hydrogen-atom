@@ -63,7 +63,8 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       baseColor: MOTHAColors.exciteButtonColorProperty,
       content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
         font: new PhetFont( 16 ),
-        maxWidth: 100
+        maxWidth: 100,
+        tandem: options.tandem.createTandem( 'text' )
       } ),
       listener: () => hydrogenAtom.fireOneAbsorbablePhoton(),
       tandem: options.tandem.createTandem( 'exciteAtomButton' )

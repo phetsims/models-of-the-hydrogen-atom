@@ -31,7 +31,8 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
       // RectangularPushButtonOptions
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Text( ModelsOfTheHydrogenAtomStrings.viewSnapshotsStringProperty, {
-        font: new PhetFont( 16 )
+        font: new PhetFont( 16 ),
+        tandem: providedOptions.tandem.createTandem( 'text' )
       } ),
 
       // Visible when we have snapshots

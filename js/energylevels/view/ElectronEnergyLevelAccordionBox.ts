@@ -29,13 +29,10 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
   public constructor( providedOptions?: ElectronEnergyLevelAccordionBoxOptions ) {
 
     const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+
+      // AccordionBoxOptions
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
-
-      //TODO these options are undefined for AccordionBoxOptions
-      // xMargin: 5,
-      // yMargin: 5,
-
       cornerRadius: 5,
       buttonXMargin: 5,
       buttonYMargin: 5,
@@ -54,7 +51,8 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.electronEnergyLevelTitleFillProperty,
-      maxWidth: 150 // i18n, determined empirically
+      maxWidth: 150, // i18n, determined empirically
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     //TODO this is a placeholder

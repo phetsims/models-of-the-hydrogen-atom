@@ -37,11 +37,12 @@ export default class SnapshotNode extends Node {
     } );
 
     //TODO i18n
-    const titleNode = new Text( 'Snapshot', {
+    const titleText = new Text( 'Snapshot', {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.snapshotTextFillProperty,
       left: backgroundNode.left + 10,
-      top: backgroundNode.top + 10
+      top: backgroundNode.top + 10,
+      tandem: Tandem.OPT_OUT //TODO SnapshotNode is dynamically created
     } );
 
     const trashButton = new TrashButton( {
@@ -51,10 +52,10 @@ export default class SnapshotNode extends Node {
       },
       right: backgroundNode.right - 10,
       bottom: backgroundNode.bottom - 10,
-      tandem: Tandem.OPT_OUT //TODO ShapshotNode is dynamically created
+      tandem: Tandem.OPT_OUT //TODO SnapshotNode is dynamically created
     } );
 
-    options.children = [ backgroundNode, titleNode, trashButton ];
+    options.children = [ backgroundNode, titleText, trashButton ];
 
     super( options );
   }
