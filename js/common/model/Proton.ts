@@ -22,6 +22,7 @@ export default class Proton extends Particle {
 
     const options = optionize<ProtonOptions, SelfOptions, ParticleOptions>()( {
 
+      // ParticleOptions
       radius: MOTHAConstants.PROTON_RADIUS
       //TODO phetioType: Proton.ProtonIO,
       //TODO phetioDynamicElement: true

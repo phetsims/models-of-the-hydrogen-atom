@@ -22,6 +22,7 @@ export default class Neutron extends Particle {
 
     const options = optionize<NeutronOptions, SelfOptions, ParticleOptions>()( {
 
+      // ParticleOptions
       radius: MOTHAConstants.NEUTRON_RADIUS
       //TODO phetioType: Neutron.NeutronIO,
       //TODO phetioDynamicElement: true
