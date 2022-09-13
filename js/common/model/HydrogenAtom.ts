@@ -9,6 +9,7 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import TEmitter from '../../../../axon/js/TEmitter.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -19,7 +20,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 
 //TODO move numberOfStates, groundState, hasTransitionWavelengths to another base class for those models
 type SelfOptions = {
-  displayName: string; // name of the model shown in the UI
+  displayNameProperty: TReadOnlyProperty<string>; // name of the model shown in the UI
   iconHTMLImageElement: HTMLImageElement; // icon used to represent the model in the UI
   position?: Vector2; // position in the model coordinate frame
   orientation?: number; // rotation angle, in radians
@@ -33,7 +34,7 @@ export type HydrogenAtomOptions = SelfOptions & PickRequired<PhetioObjectOptions
 export default abstract class HydrogenAtom extends PhetioObject {
 
   public readonly zoomedInBox: ZoomedInBox; //TODO do all hydrogen-atom models need this?
-  public readonly displayName: string;
+  public readonly displayNameProperty: TReadOnlyProperty<string>;
   public readonly iconHTMLImageElement: HTMLImageElement;
   public readonly position: Vector2;
   public readonly orientation: number;
@@ -68,7 +69,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
     super( options );
 
     this.zoomedInBox = zoomedInBox;
-    this.displayName = options.displayName;
+    this.displayNameProperty = options.displayNameProperty;
     this.iconHTMLImageElement = options.iconHTMLImageElement;
     this.position = options.position;
     this.orientation = options.orientation;

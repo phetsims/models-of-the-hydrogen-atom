@@ -111,7 +111,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
     group: iconAlignGroup
   } );
 
-  const text = new Text( predictiveModel.displayName, {
+  const text = new Text( predictiveModel.displayNameProperty, {
     fill: MOTHAColors.modelsRadioButtonTextFillProperty,
     font: new PhetFont( 16 ),
     maxWidth: 200 // determined empirically

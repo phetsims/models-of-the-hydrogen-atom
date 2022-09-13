@@ -23,7 +23,7 @@ export default class ExperimentModel extends SchrodingerModel {
     const options = optionize<ExperimentModelOptions, SelfOptions, SchrodingerModelOptions>()( {
 
       // SchrodingerModelOptions
-      displayName: ModelsOfTheHydrogenAtomStrings.experiment
+      displayNameProperty: ModelsOfTheHydrogenAtomStrings.experimentStringProperty
     }, providedOptions );
 
     super( zoomedInBox, options );

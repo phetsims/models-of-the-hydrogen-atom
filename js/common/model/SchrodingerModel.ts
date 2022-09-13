@@ -91,7 +91,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     const options = optionize<SchrodingerModelOptions, SelfOptions, DeBroglieModelOptions>()( {
 
       // DeBroglieModelOptions
-      displayName: ModelsOfTheHydrogenAtomStrings.schrodinger,
+      displayNameProperty: ModelsOfTheHydrogenAtomStrings.schrodingerStringProperty,
       iconHTMLImageElement: schrodingerButton_png
     }, providedOptions );
 

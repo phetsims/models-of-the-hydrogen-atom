@@ -48,7 +48,7 @@ export default class DeBroglieModel extends BohrModel {
     const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // DeBroglieModelOptions
-      displayName: ModelsOfTheHydrogenAtomStrings.deBroglie,
+      displayNameProperty: ModelsOfTheHydrogenAtomStrings.deBroglieStringProperty,
       iconHTMLImageElement: deBroglieButton_png
     }, providedOptions );
 

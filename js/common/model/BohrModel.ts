@@ -69,7 +69,7 @@ const STIMULATED_EMISSION_X_OFFSET = 10;
 type SelfOptions = EmptySelfOptions;
 
 export type BohrModelOptions = SelfOptions &
-  PickOptional<HydrogenAtomOptions, 'displayName' | 'iconHTMLImageElement'> &
+  PickOptional<HydrogenAtomOptions, 'displayNameProperty' | 'iconHTMLImageElement'> &
   PickRequired<HydrogenAtomOptions, 'tandem'>;
 
 export default class BohrModel extends HydrogenAtom {
@@ -100,7 +100,7 @@ export default class BohrModel extends HydrogenAtom {
     const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
-      displayName: ModelsOfTheHydrogenAtomStrings.bohr,
+      displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
       iconHTMLImageElement: bohrButton_png,
       hasTransitionWavelengths: true
     }, providedOptions );

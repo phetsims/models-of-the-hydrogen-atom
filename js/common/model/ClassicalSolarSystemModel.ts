@@ -50,7 +50,7 @@ const ELECTRON_ACCELERATION = 1.008; // scaling of electronAngleDeltaProperty ea
 type SelfOptions = EmptySelfOptions;
 
 type ClassicalSolarSystemModelOptions = SelfOptions &
-  StrictOmit<HydrogenAtomOptions, 'displayName' | 'iconHTMLImageElement' | 'hasTransitionWavelengths'>;
+  StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'iconHTMLImageElement' | 'hasTransitionWavelengths'>;
 
 export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
@@ -77,7 +77,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
-      displayName: ModelsOfTheHydrogenAtomStrings.classicalSolarSystem,
+      displayNameProperty: ModelsOfTheHydrogenAtomStrings.classicalSolarSystemStringProperty,
       iconHTMLImageElement: classicalSolarSystemButton_png,
       hasTransitionWavelengths: false
     }, providedOptions );

@@ -53,7 +53,7 @@ export default class BoxOfHydrogenNode extends Node {
     } );
 
     // hydrogen symbol, in lower-left corner of front face
-    const hydrogenSymbol = new Text( ModelsOfTheHydrogenAtomStrings.hydrogenSymbol, {
+    const hydrogenSymbol = new Text( ModelsOfTheHydrogenAtomStrings.hydrogenSymbolStringProperty, {
       fill: MOTHAColors.boxOfHydrogenSymbolColorProperty,
       font: new PhetFont( { weight: 'bold', size: 24 } ),
       left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
