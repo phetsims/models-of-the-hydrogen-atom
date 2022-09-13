@@ -1,5 +1,6 @@
 // Copyright 2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Strings for mathematical symbols, with markup for RichText.
  *
