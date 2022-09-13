@@ -10,7 +10,9 @@
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
-const MOTHAQueryParameters = QueryStringMachine.getAll( {
+// QueryStringMachineSchema is an ambient type, defined in phet-types.d.ts.
+// eslint-disable-next-line no-undef
+const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
 
   //----------------------------------------------------------------------------------------------------------------
   // Public-facing query parameters
@@ -35,7 +37,11 @@ const MOTHAQueryParameters = QueryStringMachine.getAll( {
     defaultValue: [ 1, 2 ],
     isValidValue: ( array: number[] ) => ( array.length === 2 ) && ( array[ 0 ] < array[ 1 ] )
   }
-} );
+};
+
+const MOTHAQueryParameters = QueryStringMachine.getAll( SCHEMA_MAP );
+
+MOTHAQueryParameters.SCHEMA_MAP = SCHEMA_MAP;
 
 modelsOfTheHydrogenAtom.register( 'MOTHAQueryParameters', MOTHAQueryParameters );
 
