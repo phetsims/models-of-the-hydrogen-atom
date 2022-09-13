@@ -26,7 +26,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
-const SLOW_SPEED_SCALE = 0.5;
 const NORMAL_SPEED_SCALE = 1;
 const FAST_SPEED_SCALE = 2;
 
@@ -131,9 +130,7 @@ class MOTHAModel {
     } );
 
     this.dtScaleProperty = new DerivedProperty( [ this.timeSpeedProperty ],
-      timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? NORMAL_SPEED_SCALE :
-                   ( timeSpeed === TimeSpeed.FAST ) ? FAST_SPEED_SCALE :
-                   SLOW_SPEED_SCALE
+      timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? NORMAL_SPEED_SCALE : FAST_SPEED_SCALE
     );
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
