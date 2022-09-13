@@ -10,7 +10,7 @@ import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 
-const GQSymbols = {
+const MOTHASymbols = {
   n: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.n ),
   l: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.l ),
   m: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.m ),
@@ -18,5 +18,5 @@ const GQSymbols = {
   z: MathSymbolFont.getRichTextMarkup( ModelsOfTheHydrogenAtomStrings.z )
 };
 
-modelsOfTheHydrogenAtom.register( 'GQSymbols', GQSymbols );
-export default GQSymbols;
+modelsOfTheHydrogenAtom.register( 'MOTHASymbols', MOTHASymbols );
+export default MOTHASymbols;
