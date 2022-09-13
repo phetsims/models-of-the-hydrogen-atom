@@ -1,6 +1,5 @@
 // Copyright 2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Strings for mathematical symbols, with markup for RichText.
  *
@@ -8,6 +7,7 @@
  */
 
 import DerivedProperty from '../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../axon/js/TReadOnlyProperty.js';
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
@@ -20,7 +20,10 @@ const MOTHASymbols = {
   zStringProperty: createDerivedProperty( ModelsOfTheHydrogenAtomStrings.zStringProperty )
 };
 
-function createDerivedProperty( symbolStringProperty ) {
+/**
+ * Wraps a symbol in RichText markup so that it will be rendered in MathSymbolFont.
+ */
+function createDerivedProperty( symbolStringProperty: TReadOnlyProperty<string> ): TReadOnlyProperty<string> {
   return new DerivedProperty( [ symbolStringProperty ],
       symbolString => MathSymbolFont.getRichTextMarkup( symbolString ) );
 }
