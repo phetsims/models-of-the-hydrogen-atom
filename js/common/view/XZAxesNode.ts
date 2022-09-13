@@ -7,12 +7,12 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { TColor, Node, NodeOptions, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, NodeTranslationOptions, RichText, TColor } from '../../../../scenery/js/imports.js';
 import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import MOTHASymbols from '../MOTHASymbols.js';
 
 const ARROW_LENGTH = 100;
 const LABEL_FONT = new MathSymbolFont( 18 );
@@ -44,7 +44,7 @@ export default class XZAxesNode extends Node {
     const xAxisNode = new ArrowNode( 0, 0, ARROW_LENGTH, 0, arrowNodeOptions );
     const zAxisNode = new ArrowNode( 0, 0, 0, -ARROW_LENGTH, arrowNodeOptions );
 
-    const xText = new Text( ModelsOfTheHydrogenAtomStrings.xStringProperty, {
+    const xText = new RichText( MOTHASymbols.xStringProperty, {
       font: LABEL_FONT,
       fill: options.color,
       left: xAxisNode.right + LABEL_OFFSET,
@@ -52,7 +52,7 @@ export default class XZAxesNode extends Node {
       tandem: options.tandem.createTandem( 'xText' )
     } );
 
-    const zText = new Text( ModelsOfTheHydrogenAtomStrings.zStringProperty, {
+    const zText = new RichText( MOTHASymbols.zStringProperty, {
       font: LABEL_FONT,
       fill: options.color,
       centerX: zAxisNode.centerX,

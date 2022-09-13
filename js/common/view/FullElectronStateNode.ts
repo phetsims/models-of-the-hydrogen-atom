@@ -7,7 +7,6 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -17,6 +16,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -36,19 +36,24 @@ export default class FullElectronStateNode extends RichText {
       fill: MOTHAColors.stateDisplayFillProperty
     }, providedOptions );
 
-    super( '', options );
-
-    Multilink.multilink( [ primaryStateProperty, secondaryStateProperty, tertiaryStateProperty ],
-      ( n, l, m ) => {
-        this.text = StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty, {
-          nSymbol: MOTHASymbols.n,
+    const stringProperty = new DerivedProperty( [
+        ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty,
+        MOTHASymbols.nStringProperty,
+        MOTHASymbols.lStringProperty,
+        MOTHASymbols.mStringProperty,
+        primaryStateProperty, secondaryStateProperty, tertiaryStateProperty
+      ], ( pattern, nString, lString, mString, n, l, m ) =>
+        StringUtils.fillIn( pattern, {
+          nSymbol: nString,
           nValue: n,
-          lSymbol: MOTHASymbols.l,
+          lSymbol: lString,
           lValue: l,
-          mSymbol: MOTHASymbols.m,
+          mSymbol: mString,
           mValue: m
-        } );
-      } );
+        } )
+    );
+
+    super( stringProperty, options );
   }
 
   public override dispose(): void {

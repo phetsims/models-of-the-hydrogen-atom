@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -32,14 +33,15 @@ export default class PrimaryElectronStateNode extends RichText {
       fill: MOTHAColors.stateDisplayFillProperty
     }, providedOptions );
 
-    super( '', options );
-
-    electronStateProperty.link( n => {
-      this.text = StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
-        nSymbol: MOTHASymbols.n,
+    const stringProperty = new DerivedProperty(
+      [ ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, MOTHASymbols.nStringProperty, electronStateProperty ],
+      ( pattern, nString, n ) => StringUtils.fillIn( pattern, {
+        nSymbol: nString,
         nValue: n
-      } );
-    } );
+      } )
+    );
+
+    super( stringProperty, options );
   }
 
   public override dispose(): void {
