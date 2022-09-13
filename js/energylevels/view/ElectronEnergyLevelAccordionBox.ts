@@ -51,7 +51,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       titleXSpacing: 10
     }, providedOptions );
 
-    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevel, {
+    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.electronEnergyLevelTitleFillProperty,
       maxWidth: 150 // i18n, determined empirically

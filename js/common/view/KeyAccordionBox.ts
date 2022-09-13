@@ -20,6 +20,7 @@ import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const ITEM_FONT = new PhetFont( 16 );
 
@@ -48,7 +49,7 @@ export default class KeyAccordionBox extends AccordionBox {
       buttonXMargin: 0
     }, providedOptions );
 
-    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.key, {
+    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.keyStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.keyTitleFillProperty,
       maxWidth: 100, // i18n, determined empirically
@@ -61,13 +62,13 @@ export default class KeyAccordionBox extends AccordionBox {
     const contentTandem = options.tandem.createTandem( 'content' );
     const keyNodes: KeyNode[] = [
       new KeyNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.electron, contentTandem.createTandem( 'electronKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.electronStringProperty, contentTandem.createTandem( 'electronKeyNode' ) ),
       new KeyNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.proton, contentTandem.createTandem( 'protonKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.protonStringProperty, contentTandem.createTandem( 'protonKeyNode' ) ),
       new KeyNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.neutron, contentTandem.createTandem( 'neutronKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.neutronStringProperty, contentTandem.createTandem( 'neutronKeyNode' ) ),
       new KeyNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.photon, contentTandem.createTandem( 'photonKeyNode' ) )
+        ModelsOfTheHydrogenAtomStrings.photonStringProperty, contentTandem.createTandem( 'photonKeyNode' ) )
     ];
 
     const content = new VBox( {
@@ -91,7 +92,7 @@ export default class KeyAccordionBox extends AccordionBox {
  */
 class KeyNode extends HBox {
 
-  public constructor( iconNode: Node, iconAlignGroup: AlignGroup, label: string, parentTandem: Tandem ) {
+  public constructor( iconNode: Node, iconAlignGroup: AlignGroup, labelStringProperty: TReadOnlyProperty<string>, parentTandem: Tandem ) {
     super( {
       spacing: 5,
       children: [
@@ -99,7 +100,7 @@ class KeyNode extends HBox {
           group: iconAlignGroup,
           tandem: parentTandem.createTandem( 'iconNode' )
         } ),
-        new Text( label, {
+        new Text( labelStringProperty, {
           font: ITEM_FONT,
           fill: MOTHAColors.keyTextFillProperty,
           maxWidth: 120, // determined empirically

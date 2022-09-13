@@ -37,12 +37,12 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
       maxWidth: 100
     };
 
-    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experiment,
+    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'experimentText' )
       }, labelOptions ) );
 
-    const predictionText = new Text( ModelsOfTheHydrogenAtomStrings.prediction,
+    const predictionText = new Text( ModelsOfTheHydrogenAtomStrings.predictionStringProperty,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'predictionText' )
       }, labelOptions ) );

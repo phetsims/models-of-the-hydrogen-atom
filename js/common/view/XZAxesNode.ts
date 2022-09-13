@@ -44,7 +44,7 @@ export default class XZAxesNode extends Node {
     const xAxisNode = new ArrowNode( 0, 0, ARROW_LENGTH, 0, arrowNodeOptions );
     const zAxisNode = new ArrowNode( 0, 0, 0, -ARROW_LENGTH, arrowNodeOptions );
 
-    const xText = new Text( ModelsOfTheHydrogenAtomStrings.x, {
+    const xText = new Text( ModelsOfTheHydrogenAtomStrings.xStringProperty, {
       font: LABEL_FONT,
       fill: options.color,
       left: xAxisNode.right + LABEL_OFFSET,
@@ -52,7 +52,7 @@ export default class XZAxesNode extends Node {
       tandem: options.tandem.createTandem( 'xText' )
     } );
 
-    const zText = new Text( ModelsOfTheHydrogenAtomStrings.z, {
+    const zText = new Text( ModelsOfTheHydrogenAtomStrings.zStringProperty, {
       font: LABEL_FONT,
       fill: options.color,
       centerX: zAxisNode.centerX,

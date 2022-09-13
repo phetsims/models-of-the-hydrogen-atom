@@ -35,7 +35,7 @@ export default class PrimaryElectronStateNode extends RichText {
     super( '', options );
 
     electronStateProperty.link( n => {
-      this.text = StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nEquals, {
+      this.text = StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
         nSymbol: MOTHASymbols.n,
         nValue: n
       } );

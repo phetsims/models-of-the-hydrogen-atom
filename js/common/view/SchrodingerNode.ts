@@ -61,7 +61,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const exciteAtomButton = new RectangularPushButton( {
       baseColor: MOTHAColors.exciteButtonColorProperty,
-      content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtom, {
+      content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
         font: new PhetFont( 16 ),
         maxWidth: 100
       } ),

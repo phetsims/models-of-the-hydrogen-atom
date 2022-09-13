@@ -40,7 +40,7 @@ export default class FullElectronStateNode extends RichText {
 
     Multilink.multilink( [ primaryStateProperty, secondaryStateProperty, tertiaryStateProperty ],
       ( n, l, m ) => {
-        this.text = StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nlmEquals, {
+        this.text = StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty, {
           nSymbol: MOTHASymbols.n,
           nValue: n,
           lSymbol: MOTHASymbols.l,

@@ -46,8 +46,8 @@ export default class ContinuumBarNode extends Node {
       rotation: Math.PI / 2,
       maxWidth: 0.4 * barHeight
     };
-    const classicalText = new Text( ModelsOfTheHydrogenAtomStrings.classical, textOptions );
-    const quantumText = new Text( ModelsOfTheHydrogenAtomStrings.quantum, textOptions );
+    const classicalText = new Text( ModelsOfTheHydrogenAtomStrings.classicalStringProperty, textOptions );
+    const quantumText = new Text( ModelsOfTheHydrogenAtomStrings.quantumStringProperty, textOptions );
 
     const barWidth = Math.max( classicalText.width, quantumText.width ) + ( 2 * options.xMargin );
     const barNode = new Rectangle( 0, 0, barWidth, barHeight, {

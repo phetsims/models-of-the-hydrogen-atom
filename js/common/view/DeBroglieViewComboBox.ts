@@ -38,18 +38,18 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
       maxWidth: 150
     };
 
-    const radialViewText = new Text( ModelsOfTheHydrogenAtomStrings.radialView,
+    const radialViewText = new Text( ModelsOfTheHydrogenAtomStrings.radialViewStringProperty,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'radialViewText' )
       }, textOptions ) );
 
     // threeDViewText does not match '3DViewText' tandem name because JavaScript identifiers cannot begin with a number.
-    const threeDViewText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DView' ],
+    const threeDViewText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DViewStringProperty' ],
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( '3DViewText' )
       }, textOptions ) );
 
-    const brightnessViewText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessView,
+    const brightnessViewText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessViewStringProperty,
       optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
         tandem: options.tandem.createTandem( 'brightnessViewText' )
       }, textOptions ) );

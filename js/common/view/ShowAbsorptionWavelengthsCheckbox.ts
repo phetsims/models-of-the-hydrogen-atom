@@ -43,7 +43,7 @@ export default class ShowAbsorptionWavelengthsCheckbox extends Checkbox {
       checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty
     }, providedOptions );
 
-    const labelText = new Text( ModelsOfTheHydrogenAtomStrings.showAbsorptionWavelengths, {
+    const labelText = new Text( ModelsOfTheHydrogenAtomStrings.showAbsorptionWavelengthsStringProperty, {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.showAbsorptionWavelengthTextFillProperty,
       maxWidth: 250,
