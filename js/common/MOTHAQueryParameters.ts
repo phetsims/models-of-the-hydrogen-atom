@@ -25,6 +25,7 @@ const MOTHAQueryParameters = QueryStringMachine.getAll( {
     type: 'flag'
   },
 
+  // Specifies how much to scale time (dt) for 'Normal' and 'Fast' time speeds, in that order.
   timeScale: {
     type: 'array',
     elementSchema: {
