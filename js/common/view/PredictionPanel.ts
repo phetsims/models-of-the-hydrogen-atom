@@ -24,6 +24,7 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import { ModelMode } from '../model/ModelMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -55,7 +56,7 @@ export default class PredictionPanel extends Panel {
     // content that appears on the radio buttons
     const items: RectangularRadioButtonItem<HydrogenAtom>[] = [];
     for ( let i = 0; i < predictiveModels.length; i++ ) {
-      items.push( createRadioButtonItem( predictiveModels[ i ], iconAlignGroup ) );
+      items.push( createRadioButtonItem( predictiveModels[ i ], iconAlignGroup, options.tandem ) );
     }
 
     // radio buttons
@@ -105,7 +106,10 @@ export default class PredictionPanel extends Panel {
 /**
  * Creates the item for one radio buttons.
  */
-function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup ): RectangularRadioButtonItem<HydrogenAtom> {
+function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup, groupTandem: Tandem ):
+  RectangularRadioButtonItem<HydrogenAtom> {
+
+  const radioButtonTandemName = `${predictiveModel.tandem.name}RadioButton`; //TODO too clever?
 
   const icon = new AlignBox( new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ), {
     group: iconAlignGroup
@@ -114,7 +118,8 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
   const text = new Text( predictiveModel.displayNameProperty, {
     fill: MOTHAColors.modelsRadioButtonTextFillProperty,
     font: new PhetFont( 16 ),
-    maxWidth: 200 // determined empirically
+    maxWidth: 200, // determined empirically
+    tandem: groupTandem.createTandem( radioButtonTandemName ).createTandem( 'text' )
   } );
 
   const node = new HBox( {
@@ -125,7 +130,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
   return {
     value: predictiveModel,
     node: node,
-    tandemName: `${predictiveModel.tandem.name}RadioButton` //TODO too clever?
+    tandemName: radioButtonTandemName
   };
 }
 
