@@ -24,10 +24,11 @@ import ExperimentModel from './ExperimentModel.js';
 import { ModelMode, ModelModeValues } from './ModelMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
-const NORMAL_SPEED_SCALE = 1;
-const FAST_SPEED_SCALE = 2;
+const NORMAL_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 0 ];
+const FAST_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 1 ];
 
 type SelfOptions = EmptySelfOptions;
 

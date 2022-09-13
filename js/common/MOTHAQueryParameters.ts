@@ -10,7 +10,7 @@
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
-const SCHEMA_MAP = {
+const MOTHAQueryParameters = QueryStringMachine.getAll( {
 
   //----------------------------------------------------------------------------------------------------------------
   // Public-facing query parameters
@@ -23,11 +23,18 @@ const SCHEMA_MAP = {
   // Draws a red rectangle around emitted photons.
   debugEmission: {
     type: 'flag'
-  }
-} as const;
+  },
 
-const MOTHAQueryParameters = QueryStringMachine.getAll( SCHEMA_MAP );
-MOTHAQueryParameters.SCHEMA_MAP = SCHEMA_MAP;
+  timeScale: {
+    type: 'array',
+    elementSchema: {
+      type: 'number',
+      isValidValue: ( scale: number ) => ( scale > 0 )
+    },
+    defaultValue: [ 1, 2 ],
+    isValidValue: ( array: number[] ) => ( array.length === 2 ) && ( array[ 0 ] < array[ 1 ] )
+  }
+} );
 
 modelsOfTheHydrogenAtom.register( 'MOTHAQueryParameters', MOTHAQueryParameters );
 
