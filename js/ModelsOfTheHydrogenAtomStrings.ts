@@ -26,7 +26,7 @@ type StringsType = {
   'predictionStringProperty': TReadOnlyProperty<string>;
   'fastStringProperty': TReadOnlyProperty<string>;
   'hydrogenSymbolStringProperty': TReadOnlyProperty<string>;
-  'keyStringProperty': TReadOnlyProperty<string>;
+  'legendStringProperty': TReadOnlyProperty<string>;
   'nEqualsStringProperty': TReadOnlyProperty<string>;
   'nlmEqualsStringProperty': TReadOnlyProperty<string>;
   'neutronStringProperty': TReadOnlyProperty<string>;

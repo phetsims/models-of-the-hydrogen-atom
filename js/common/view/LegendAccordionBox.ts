@@ -1,7 +1,7 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
 /**
- * KeyAccordionBox displays a key to the symbols (particle types) that appear in the sim.
+ * LegendAccordionBox displays a legend (sic) to the particle types that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -28,14 +28,14 @@ type SelfOptions = {
   iconScale?: number;
 };
 
-type KeyAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
+type LegendAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
   PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
-export default class KeyAccordionBox extends AccordionBox {
+export default class LegendAccordionBox extends AccordionBox {
 
-  public constructor( providedOptions: KeyAccordionBoxOptions ) {
+  public constructor( providedOptions: LegendAccordionBoxOptions ) {
 
-    const options = optionize<KeyAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+    const options = optionize<LegendAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
 
       // SelfOptions
       iconScale: MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE,
@@ -49,9 +49,9 @@ export default class KeyAccordionBox extends AccordionBox {
       buttonXMargin: 0
     }, providedOptions );
 
-    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.keyStringProperty, {
+    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.legendStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.keyTitleFillProperty,
+      fill: MOTHAColors.legendTitleFillProperty,
       maxWidth: 100, // i18n, determined empirically
       tandem: options.tandem.createTandem( 'titleText' )
     } );
@@ -102,7 +102,7 @@ class KeyNode extends HBox {
         } ),
         new Text( labelStringProperty, {
           font: ITEM_FONT,
-          fill: MOTHAColors.keyTextFillProperty,
+          fill: MOTHAColors.legendTextFillProperty,
           maxWidth: 120, // determined empirically
           tandem: parentTandem.createTandem( 'text' )
         } )
@@ -117,4 +117,4 @@ class KeyNode extends HBox {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'KeyAccordionBox', KeyAccordionBox );
+modelsOfTheHydrogenAtom.register( 'LegendAccordionBox', LegendAccordionBox );
