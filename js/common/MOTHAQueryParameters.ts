@@ -10,8 +10,6 @@
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
-// QueryStringMachineSchema is an ambient type, defined in phet-types.d.ts.
-// eslint-disable-next-line no-undef
 const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
 
   //----------------------------------------------------------------------------------------------------------------
