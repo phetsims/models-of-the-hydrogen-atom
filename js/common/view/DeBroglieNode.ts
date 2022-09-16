@@ -15,7 +15,7 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
-import PrimaryElectronStateNode from './PrimaryElectronStateNode.js';
+import PrimaryElectronStateText from './PrimaryElectronStateText.js';
 import DeBroglieViewComboBox from './DeBroglieViewComboBox.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -77,7 +77,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'deBroglieViewComboBox' )
     } );
 
-    const electronStateText = new PrimaryElectronStateNode( hydrogenAtom.getElectronStateProperty(), {
+    const electronStateText = new PrimaryElectronStateText( hydrogenAtom.getElectronStateProperty(), {
       tandem: options.tandem.createTandem( 'electronStateText' )
     } );
 

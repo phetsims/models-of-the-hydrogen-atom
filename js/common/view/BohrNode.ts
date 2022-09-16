@@ -16,7 +16,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ElectronNode from './ElectronNode.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BohrModel from '../model/BohrModel.js';
-import PrimaryElectronStateNode from './PrimaryElectronStateNode.js';
+import PrimaryElectronStateText from './PrimaryElectronStateText.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import OrbitsNode from './OrbitsNode.js';
 
@@ -48,7 +48,7 @@ export default class BohrNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'electronNode' )
     } );
 
-    const electronStateText = new PrimaryElectronStateNode( hydrogenAtom.getElectronStateProperty(), {
+    const electronStateText = new PrimaryElectronStateText( hydrogenAtom.getElectronStateProperty(), {
       tandem: options.tandem.createTandem( 'electronStateText' )
     } );
 

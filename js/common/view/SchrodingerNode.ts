@@ -19,7 +19,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
-import FullElectronStateNode from './FullElectronStateNode.js';
+import FullElectronStateText from './FullElectronStateText.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -70,7 +70,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'exciteAtomButton' )
     } );
 
-    const electronStateText = new FullElectronStateNode( hydrogenAtom.getElectronStateProperty(),
+    const electronStateText = new FullElectronStateText( hydrogenAtom.getElectronStateProperty(),
       hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
         tandem: options.tandem.createTandem( 'electronStateText' )
       } );

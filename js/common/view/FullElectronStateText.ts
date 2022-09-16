@@ -1,7 +1,7 @@
 // Copyright 2022, University of Colorado Boulder
 
 /**
- * FullElectronStateNode displays the full state (n,l,m) of the electron, used for the Schrodinger model.
+ * FullElectronStateText displays the full state (n,l,m) of the electron, used for the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,7 +22,7 @@ type SelfOptions = EmptySelfOptions;
 
 type FullElectronStateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<RichTextOptions, 'tandem'>;
 
-export default class FullElectronStateNode extends RichText {
+export default class FullElectronStateText extends RichText {
 
   public constructor( primaryStateProperty: TReadOnlyProperty<number>,
                       secondaryStateProperty: TReadOnlyProperty<number>,
@@ -62,4 +62,4 @@ export default class FullElectronStateNode extends RichText {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'FullElectronStateNode', FullElectronStateNode );
+modelsOfTheHydrogenAtom.register( 'FullElectronStateText', FullElectronStateText );
