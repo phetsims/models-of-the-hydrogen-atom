@@ -6,27 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../axon/js/DerivedProperty.js';
-import TReadOnlyProperty from '../../../axon/js/TReadOnlyProperty.js';
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 
 const MOTHASymbols = {
-  nStringProperty: createDerivedProperty( ModelsOfTheHydrogenAtomStrings.nStringProperty ),
-  lStringProperty: createDerivedProperty( ModelsOfTheHydrogenAtomStrings.lStringProperty ),
-  mStringProperty: createDerivedProperty( ModelsOfTheHydrogenAtomStrings.mStringProperty ),
-  xStringProperty: createDerivedProperty( ModelsOfTheHydrogenAtomStrings.xStringProperty ),
-  zStringProperty: createDerivedProperty( ModelsOfTheHydrogenAtomStrings.zStringProperty )
+  nStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.nStringProperty ),
+  lStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.lStringProperty ),
+  mStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.mStringProperty ),
+  xStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.xStringProperty ),
+  zStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.zStringProperty )
 };
-
-/**
- * Wraps a symbol in RichText markup so that it will be rendered in MathSymbolFont.
- */
-function createDerivedProperty( symbolStringProperty: TReadOnlyProperty<string> ): TReadOnlyProperty<string> {
-  return new DerivedProperty( [ symbolStringProperty ],
-      symbolString => MathSymbolFont.getRichTextMarkup( symbolString ) );
-}
 
 modelsOfTheHydrogenAtom.register( 'MOTHASymbols', MOTHASymbols );
 export default MOTHASymbols;
