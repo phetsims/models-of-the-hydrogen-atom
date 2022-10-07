@@ -109,28 +109,22 @@ export default class PredictionPanel extends Panel {
 function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup, groupTandem: Tandem ):
   RectangularRadioButtonItem<HydrogenAtom> {
 
-  const radioButtonTandemName = `${predictiveModel.tandem.name}RadioButton`; //TODO too clever?
-
-  const icon = new AlignBox( new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ), {
-    group: iconAlignGroup
-  } );
-
-  const text = new Text( predictiveModel.displayNameProperty, {
-    fill: MOTHAColors.modelsRadioButtonTextFillProperty,
-    font: new PhetFont( 16 ),
-    maxWidth: 200, // determined empirically
-    tandem: groupTandem.createTandem( radioButtonTandemName ).createTandem( 'text' )
-  } );
-
-  const node = new HBox( {
-    spacing: 10,
-    children: [ icon, text ]
-  } );
-
   return {
     value: predictiveModel,
-    node: node,
-    tandemName: radioButtonTandemName
+    createNode: tandem => new HBox( {
+      spacing: 10,
+      children: [
+        new AlignBox( new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ), {
+          group: iconAlignGroup
+        } ),
+        new Text( predictiveModel.displayNameProperty, {
+          fill: MOTHAColors.modelsRadioButtonTextFillProperty,
+          font: new PhetFont( 16 ),
+          maxWidth: 200, // determined empirically
+          tandem: tandem.createTandem( 'text' )
+        } ) ]
+    } ),
+    tandemName: `${predictiveModel.tandem.name}RadioButton` //TODO too clever?
   };
 }
 
