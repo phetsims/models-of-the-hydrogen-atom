@@ -162,8 +162,8 @@ class TitleNode extends ToggleNode<boolean> {
     } ), alignBoxOptions );
 
     const items = [
-      { value: true, node: titleExpandedText },
-      { value: false, node: titleCollapsedText }
+      { value: true, createNode: ( tandem: Tandem ) => titleExpandedText },
+      { value: false, createNode: ( tandem: Tandem ) => titleCollapsedText }
     ];
 
     super( expandedProperty, items, {
