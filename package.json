@@ -13,10 +13,6 @@
     "requirejsNamespace": "MODELS_OF_THE_HYDROGEN_ATOM",
     "simulation": true,
     "runnable": true,
-    "colorProfiles": [
-      "default",
-      "projector"
-    ],
     "supportedBrands": [
       "phet",
       "phet-io",
@@ -24,10 +20,14 @@
     ],
     "simFeatures": {
       "supportsSound": true,
-      "supportsInteractiveDescription": true
+      "supportsInteractiveDescription": true,
+      "supportsDynamicLocale": true,
+      "colorProfiles": [
+        "default",
+        "projector"
+      ]
     },
-    "supportsOutputJS": true,
-    "supportsDynamicLocale": true
+    "supportsOutputJS": true
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js",
