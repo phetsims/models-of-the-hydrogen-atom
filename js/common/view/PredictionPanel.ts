@@ -16,7 +16,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
-import RectangularRadioButtonGroup, { RectangularRadioButtonItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -54,7 +54,7 @@ export default class PredictionPanel extends Panel {
     const iconAlignGroup = new AlignGroup();
 
     // content that appears on the radio buttons
-    const items: RectangularRadioButtonItem<HydrogenAtom>[] = [];
+    const items: RectangularRadioButtonGroupItem<HydrogenAtom>[] = [];
     for ( let i = 0; i < predictiveModels.length; i++ ) {
       items.push( createRadioButtonItem( predictiveModels[ i ], iconAlignGroup, options.tandem ) );
     }
@@ -107,7 +107,7 @@ export default class PredictionPanel extends Panel {
  * Creates the item for one radio buttons.
  */
 function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup, groupTandem: Tandem ):
-  RectangularRadioButtonItem<HydrogenAtom> {
+  RectangularRadioButtonGroupItem<HydrogenAtom> {
 
   return {
     value: predictiveModel,
