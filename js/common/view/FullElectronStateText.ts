@@ -9,14 +9,13 @@
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { NodeTranslationOptions, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -36,22 +35,14 @@ export default class FullElectronStateText extends RichText {
       fill: MOTHAColors.stateDisplayFillProperty
     }, providedOptions );
 
-    const stringProperty = new DerivedProperty( [
-        ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty,
-        MOTHASymbols.nStringProperty,
-        MOTHASymbols.lStringProperty,
-        MOTHASymbols.mStringProperty,
-        primaryStateProperty, secondaryStateProperty, tertiaryStateProperty
-      ], ( pattern, nString, lString, mString, n, l, m ) =>
-        StringUtils.fillIn( pattern, {
-          nSymbol: nString,
-          nValue: n,
-          lSymbol: lString,
-          lValue: l,
-          mSymbol: mString,
-          mValue: m
-        } )
-    );
+    const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty, {
+      nSymbol: MOTHASymbols.nStringProperty,
+      nValue: primaryStateProperty,
+      lSymbol: MOTHASymbols.lStringProperty,
+      lValue: secondaryStateProperty,
+      mSymbol: MOTHASymbols.mStringProperty,
+      mValue: tertiaryStateProperty
+    } );
 
     super( stringProperty, options );
   }

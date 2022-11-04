@@ -6,11 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { NodeTranslationOptions, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -33,13 +32,10 @@ export default class PrimaryElectronStateText extends RichText {
       fill: MOTHAColors.stateDisplayFillProperty
     }, providedOptions );
 
-    const stringProperty = new DerivedProperty(
-      [ ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, MOTHASymbols.nStringProperty, electronStateProperty ],
-      ( pattern, nString, n ) => StringUtils.fillIn( pattern, {
-        nSymbol: nString,
-        nValue: n
-      } )
-    );
+    const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
+      nSymbol: MOTHASymbols.nStringProperty,
+      nValue: electronStateProperty
+    } );
 
     super( stringProperty, options );
   }
