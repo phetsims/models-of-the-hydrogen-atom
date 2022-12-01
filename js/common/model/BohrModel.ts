@@ -90,10 +90,10 @@ export default class BohrModel extends HydrogenAtom {
   protected readonly electronOffsetProperty: TReadOnlyProperty<Vector2>;
 
   // minimum time (in sec) that electron stays in a state before emission can occur
-  public static MIN_TIME_IN_STATE = 1;
+  public static readonly MIN_TIME_IN_STATE = 1;
 
   // Change in orbit angle per dt for ground state orbit
-  public static ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
+  public static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
 

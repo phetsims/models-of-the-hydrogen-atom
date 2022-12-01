@@ -33,10 +33,10 @@ export type DeBroglieModelOptions = SelfOptions & BohrModelOptions;
 export default class DeBroglieModel extends BohrModel {
 
   // How much to scale the y dimension for 3D orbits
-  public static ORBIT_3D_Y_SCALE = 0.35;
+  public static readonly ORBIT_3D_Y_SCALE = 0.35;
 
   // radial width of the ring for 'brightness' representation,
-  public static BRIGHTNESS_RING_THICKNESS = 3;
+  public static readonly BRIGHTNESS_RING_THICKNESS = 3;
 
   // electron for the '3D' view
   public readonly electron3D: Electron;
