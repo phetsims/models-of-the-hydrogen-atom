@@ -7,6 +7,7 @@
  */
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export type ProbabilisticChooserEntry<T> = {
   value: T;
@@ -55,3 +56,5 @@ export default class ProbabilisticChooser<T> {
     return value;
   }
 }
+
+modelsOfTheHydrogenAtom.register( 'ProbabilisticChooser', ProbabilisticChooser );
