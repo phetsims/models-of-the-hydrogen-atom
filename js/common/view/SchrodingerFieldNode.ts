@@ -61,7 +61,7 @@ export default class SchrodingerFieldNode extends Node {
  */
 class QuadrantNode extends CanvasNode {
 
-  private static PERCENT_CELL_OVERLAP = 0.1; // 1.0 = 100%
+  private static readonly PERCENT_CELL_OVERLAP = 0.1; // 1.0 = 100%
 
   private readonly quadrantWidth: number;
   private readonly quadrantHeight: number;
