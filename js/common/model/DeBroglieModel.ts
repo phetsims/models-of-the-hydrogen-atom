@@ -21,7 +21,7 @@ import { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
 import { DeBroglieView, DeBroglieViewValues } from './DeBroglieView.js';
@@ -41,7 +41,7 @@ export default class DeBroglieModel extends BohrModel {
   // electron for the '3D' view
   public readonly electron3D: Electron;
 
-  public readonly deBroglieViewProperty: StringEnumerationProperty<DeBroglieView>;
+  public readonly deBroglieViewProperty: StringUnionProperty<DeBroglieView>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
@@ -59,7 +59,7 @@ export default class DeBroglieModel extends BohrModel {
       tandem: options.tandem.createTandem( 'electron3D' )
     } );
 
-    this.deBroglieViewProperty = new StringEnumerationProperty( 'radial', {
+    this.deBroglieViewProperty = new StringUnionProperty( 'radial', {
       validValues: DeBroglieViewValues,
       tandem: options.tandem.createTandem( 'deBroglieViewProperty' )
     } );

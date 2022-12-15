@@ -8,7 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -89,7 +89,7 @@ class MOTHAModel {
     this.zoomedInBox = zoomedInBox;
 
     //TODO default should be 'experiment'
-    this.modelModeProperty = new StringEnumerationProperty( 'prediction', {
+    this.modelModeProperty = new StringUnionProperty( 'prediction', {
       validValues: ModelModeValues,
       tandem: options.tandem.createTandem( 'modelModeProperty' )
     } );
