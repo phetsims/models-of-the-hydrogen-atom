@@ -55,9 +55,9 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
       }, textOptions ) );
 
     const items: ComboBoxItem<DeBroglieView>[] = [
-      { value: 'radial', createNode: tandem => radialViewText, tandemName: `radial${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },
-      { value: '3D', createNode: tandem => threeDViewText, tandemName: `3D${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },
-      { value: 'brightness', createNode: tandem => brightnessViewText, tandemName: `brightness${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` }
+      { value: 'radial', createNode: () => radialViewText, tandemName: `radial${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },
+      { value: '3D', createNode: () => threeDViewText, tandemName: `3D${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },
+      { value: 'brightness', createNode: () => brightnessViewText, tandemName: `brightness${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` }
     ];
 
     super( deBroglieViewProperty, items, listboxParent, options );

@@ -51,8 +51,8 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
     }, providedOptions );
 
     super( lightModeProperty, [
-      { value: 'white', createNode: tandem => createModeIcon( Color.white ), tandemName: 'whiteRadioButton' },
-      { value: 'monochromatic', createNode: tandem => createModeIcon( Color.red ), tandemName: 'monochromaticRadioButton' }
+      { value: 'white', createNode: () => createModeIcon( Color.white ), tandemName: 'whiteRadioButton' },
+      { value: 'monochromatic', createNode: () => createModeIcon( Color.red ), tandemName: 'monochromaticRadioButton' }
     ], options );
   }
 
