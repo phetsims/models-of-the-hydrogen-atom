@@ -40,6 +40,9 @@
           "@typescript-eslint/ban-ts-comment": "error"
         }
       }
-    ]
+    ],
+    "rules": {
+      "todo-should-have-issue": "off"
+    }
   }
 }
