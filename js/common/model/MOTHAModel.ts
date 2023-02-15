@@ -25,6 +25,7 @@ import { ModelMode, ModelModeValues } from './ModelMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import TModel from '../../../../joist/js/TModel.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 const NORMAL_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 0 ];
@@ -34,7 +35,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type MOTHAModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-class MOTHAModel {
+class MOTHAModel implements TModel {
 
   // whether we're dealing with the experiment or a predictive hydrogen-atom model
   public readonly modelModeProperty: Property<ModelMode>;
