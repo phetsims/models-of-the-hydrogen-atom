@@ -62,7 +62,10 @@
               "@typescript-eslint/ban-ts-comment": "error"
             }
           }
-        ]
+        ],
+        "rules": {
+          "todo-should-have-issue": "off"
+        }
       }
     };
   window.phet.chipper.stringRepos =
@@ -92,6 +95,7 @@
         "requirejsNamespace": "TWIXT"
       }
     ];
+  window.phet.chipper.allowLocaleSwitching = true;
 
   // Identify the brand (assume generated brand if not provided with query parameters)
   const brandMatch = location.search.match( /brand=([^&]+)/ );
