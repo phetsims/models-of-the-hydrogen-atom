@@ -15,7 +15,7 @@ type SelfOptions = EmptySelfOptions;
 
 type SpectraViewPropertiesOptions = SelfOptions & MOTHAViewPropertiesOptions;
 
-class SpectraViewProperties extends MOTHAViewProperties {
+export default class SpectraViewProperties extends MOTHAViewProperties {
 
   public constructor( providedOptions: SpectraViewPropertiesOptions ) {
     super( providedOptions );
@@ -28,4 +28,3 @@ class SpectraViewProperties extends MOTHAViewProperties {
 }
 
 modelsOfTheHydrogenAtom.register( 'SpectraViewProperties', SpectraViewProperties );
-export default SpectraViewProperties;

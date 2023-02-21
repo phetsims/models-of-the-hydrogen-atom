@@ -52,7 +52,7 @@ type SelfOptions = EmptySelfOptions;
 type PlumPuddingModelOptions = SelfOptions &
   StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'iconHTMLImageElement' | 'hasTransitionWavelengths'>;
 
-class PlumPuddingModel extends HydrogenAtom {
+export default class PlumPuddingModel extends HydrogenAtom {
 
   public readonly radius = MOTHAConstants.PLUM_PUDDING_RADIUS;
 
@@ -393,4 +393,3 @@ function signIsDifferent( n1: number, n2: number ): boolean {
 }
 
 modelsOfTheHydrogenAtom.register( 'PlumPuddingModel', PlumPuddingModel );
-export default PlumPuddingModel;

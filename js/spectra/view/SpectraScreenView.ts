@@ -36,7 +36,7 @@ type SelfOptions = EmptySelfOptions;
 
 type SpectraScreenViewOptions = SelfOptions & ScreenViewOptions;
 
-class SpectraScreenView extends ScreenView {
+export default class SpectraScreenView extends ScreenView {
 
   private readonly model: SpectraModel;
   private readonly zoomedInBoxNode: SpectraZoomedInBoxNode;
@@ -243,4 +243,3 @@ class SpectraScreenView extends ScreenView {
 }
 
 modelsOfTheHydrogenAtom.register( 'SpectraScreenView', SpectraScreenView );
-export default SpectraScreenView;

@@ -22,7 +22,7 @@ type SelfOptions = EmptySelfOptions;
 
 type ExperimentPredictionSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>;
 
-class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
+export default class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 
   public constructor( modelModeProperty: Property<ModelMode>, providedOptions: ExperimentPredictionSwitchOptions ) {
 
@@ -57,4 +57,3 @@ class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 }
 
 modelsOfTheHydrogenAtom.register( 'ExperimentPredictionSwitch', ExperimentPredictionSwitch );
-export default ExperimentPredictionSwitch;

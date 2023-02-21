@@ -35,7 +35,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type MOTHAModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-class MOTHAModel implements TModel {
+export default class MOTHAModel implements TModel {
 
   // whether we're dealing with the experiment or a predictive hydrogen-atom model
   public readonly modelModeProperty: Property<ModelMode>;
@@ -225,4 +225,3 @@ class MOTHAModel implements TModel {
 }
 
 modelsOfTheHydrogenAtom.register( 'MOTHAModel', MOTHAModel );
-export default MOTHAModel;
