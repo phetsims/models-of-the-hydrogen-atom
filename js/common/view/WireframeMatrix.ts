@@ -1,6 +1,6 @@
 // Copyright 2022, University of Colorado Boulder
 
-//TODO replace with dot.Matrix3
+//TODO replace with phet.dot.Matrix3
 /**
  * WireframeMatrix implements some features of a 3D matrix.
  * This is a partial port of edu.colorado.phet.hydrogenatom.wireframe.Matrix3D.java.
