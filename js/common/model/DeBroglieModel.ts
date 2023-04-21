@@ -17,7 +17,6 @@ import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
@@ -45,8 +44,7 @@ export default class DeBroglieModel extends BohrModel {
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
-    // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
-    const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomOptions>()( {
+    const options = optionize<DeBroglieModelOptions, SelfOptions, BohrModelOptions>()( {
 
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.deBroglieStringProperty,
