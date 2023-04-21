@@ -45,6 +45,7 @@ export default class DeBroglieModel extends BohrModel {
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
+    // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
     const options = optionize<DeBroglieModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // DeBroglieModelOptions
