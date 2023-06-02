@@ -16,6 +16,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -35,7 +36,7 @@ export default class PrimaryElectronStateText extends RichText {
     const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
       nSymbol: MOTHASymbols.nStringProperty,
       nValue: electronStateProperty
-    } );
+    }, { tandem: Tandem.OPT_OUT } );
 
     super( stringProperty, options );
   }
