@@ -1,4 +1,4 @@
-// Copyright 2022, University of Colorado Boulder
+// Copyright 2022-2023, University of Colorado Boulder
 
 /**
  * PrimaryElectronStateText displays the primary state (n) of the electron, used for the Bohr and de Broglie models.
