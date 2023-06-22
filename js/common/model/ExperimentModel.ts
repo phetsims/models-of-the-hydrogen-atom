@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from 'axon/js/Disposable.js';
+import Disposable from '../../../../axon/js/Disposable.js';
 import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
