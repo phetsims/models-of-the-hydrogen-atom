@@ -8,9 +8,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import { Color, TColor, RectangleOptions } from '../../../../scenery/js/imports.js';
+import { Color, RectangleOptions, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import WireframeMatrix from './WireframeMatrix.js';
 
@@ -52,7 +53,7 @@ export default class WireframeModel {
   }
 
   public dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
   }
 
   public reset(): void {
