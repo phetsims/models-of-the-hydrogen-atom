@@ -1,4 +1,4 @@
-// Copyright 2015-2022, University of Colorado Boulder
+// Copyright 2015-2023, University of Colorado Boulder
 
 /**
  * LegendAccordionBox displays a legend (sic) to the particle types that appear in the sim.

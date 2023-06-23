@@ -1,4 +1,4 @@
-// Copyright 2015-2022, University of Colorado Boulder
+// Copyright 2015-2023, University of Colorado Boulder
 
 /**
  * ElectronEnergyLevelAccordionBox is the accordion box that contains the electron energy level diagram.

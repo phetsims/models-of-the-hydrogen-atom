@@ -1,4 +1,4 @@
-// Copyright 2022, University of Colorado Boulder
+// Copyright 2022-2023, University of Colorado Boulder
 
 /**
  * PlumPuddingNode shows the "Plum Pudding" model of the hydrogen atom.

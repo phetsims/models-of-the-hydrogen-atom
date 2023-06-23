@@ -1,4 +1,4 @@
-// Copyright 2022, University of Colorado Boulder
+// Copyright 2022-2023, University of Colorado Boulder
 
 /**
  * ExperimentModel is the model when we are in "Experiment" mode. It is identical to the Schrodinger model.
