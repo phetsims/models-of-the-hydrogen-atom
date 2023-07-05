@@ -13,7 +13,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -69,11 +68,6 @@ export default class DeBroglieModel extends BohrModel {
       const yOffset = ( ( electronOffset.y - this.position.y ) * DeBroglieModel.ORBIT_3D_Y_SCALE );
       this.electron3D.positionProperty.value = this.position.plusXY( xOffset, yOffset );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

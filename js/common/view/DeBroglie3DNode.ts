@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
@@ -75,7 +74,8 @@ export default class DeBroglie3DNode extends Node {
         deBroglieView => ( deBroglieView === '3D' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
-        } )
+        } ),
+      isDisposable: false
     }, providedOptions );
 
     super( options );
@@ -140,11 +140,6 @@ export default class DeBroglie3DNode extends Node {
       ( electronState, electronAngle, visible ) => {
         visible && this.update();
       } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public step( dt: number ): void {

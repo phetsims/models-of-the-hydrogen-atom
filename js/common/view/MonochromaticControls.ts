@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import WavelengthSlider from '../../../../scenery-phet/js/WavelengthSlider.js';
 import { NodeTranslationOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
@@ -45,7 +44,8 @@ export default class MonochromaticControls extends VBox {
       } ),
       align: 'center',
       spacing: 10,
-      excludeInvisibleChildrenFromBounds: false
+      excludeInvisibleChildrenFromBounds: false,
+      isDisposable: false
     }, providedOptions );
 
     // wavelength slider
@@ -73,11 +73,6 @@ export default class MonochromaticControls extends VBox {
     options.children = [ wavelengthSlider, showAbsorptionWavelengthsCheckbox ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

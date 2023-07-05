@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -33,6 +32,9 @@ export default class ZoomedInBoxNode extends Node {
 
     const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO default values for options
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
@@ -55,11 +57,6 @@ export default class ZoomedInBoxNode extends Node {
     super( options );
 
     this.contentsNode = contentsNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

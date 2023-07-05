@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -63,15 +62,11 @@ export default class BoxOfHydrogenNode extends Node {
     } );
 
     const options = optionize<BoxOfHydrogenNodeOptions, SelfOptions, NodeOptions>()( {
-      children: [ frontNode, topNode, hydrogenSymbol ]
+      children: [ frontNode, topNode, hydrogenSymbol ],
+      isDisposable: false
     }, providedOptions );
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

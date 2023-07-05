@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
@@ -51,11 +50,6 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
     options.children = [ plumPuddingImage, electronNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

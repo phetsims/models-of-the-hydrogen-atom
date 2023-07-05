@@ -9,7 +9,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -48,7 +47,8 @@ export default class PredictionPanel extends Panel {
       fill: MOTHAColors.modelsPanelFillProperty,
       stroke: MOTHAColors.modelsPanelStrokeProperty,
       xMargin: 10,
-      yMargin: 10
+      yMargin: 10,
+      isDisposable: false
     }, providedOptions );
 
     // So that all icons have the same effective size
@@ -96,11 +96,6 @@ export default class PredictionPanel extends Panel {
     } );
 
     super( contentNode, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

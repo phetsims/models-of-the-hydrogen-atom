@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -41,7 +40,8 @@ export default class ShowAbsorptionWavelengthsCheckbox extends Checkbox {
           phetioValueType: BooleanIO
         } ),
       checkboxColor: MOTHAColors.showAbsorptionWavelengthCheckboxStrokeProperty,
-      checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty
+      checkboxColorBackground: MOTHAColors.showAbsorptionWavelengthCheckboxFillProperty,
+      isDisposable: false
     }, providedOptions );
 
     const text = new Text( ModelsOfTheHydrogenAtomStrings.showAbsorptionWavelengthsStringProperty, {
@@ -52,11 +52,6 @@ export default class ShowAbsorptionWavelengthsCheckbox extends Checkbox {
     } );
 
     super( absorptionWavelengthsVisibleProperty, text, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

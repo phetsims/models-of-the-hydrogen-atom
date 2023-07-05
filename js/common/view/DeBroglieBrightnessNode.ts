@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -47,7 +46,8 @@ export default class DeBroglieBrightnessNode extends Node {
         deBroglieView => ( deBroglieView === 'brightness' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
-        } )
+        } ),
+      isDisposable: false
     }, providedOptions );
 
     // Electron orbits
@@ -66,11 +66,6 @@ export default class DeBroglieBrightnessNode extends Node {
     options.children = [ orbitsNode, ringNode ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 
@@ -97,7 +92,13 @@ class RingNode extends Node {
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: RingNodeOptions ) {
 
-    super( providedOptions );
+    const options = optionize<RingNodeOptions, RingNodeSelfOptions, NodeOptions>()( {
+
+      // NodeOptions
+      isDisposable: false
+    }, providedOptions );
+
+    super( options );
 
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
@@ -133,11 +134,6 @@ class RingNode extends Node {
     this.hydrogenAtom.electronAngleProperty.link( electronAngle => {
       this.visible && this.updateColor();
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

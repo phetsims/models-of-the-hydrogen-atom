@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -26,7 +25,8 @@ export default class OrbitsNode extends Node {
   public constructor( hydrogenAtom: BohrModel, modelViewTransform: ModelViewTransform2, providedOptions: OrbitsNodeOptions ) {
 
     const options = optionize<OrbitsNodeOptions, SelfOptions, NodeOptions>()( {
-      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position )
+      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ),
+      isDisposable: false
     }, providedOptions );
 
     const orbitNodes = [];
@@ -40,11 +40,6 @@ export default class OrbitsNode extends Node {
     options.children = orbitNodes;
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

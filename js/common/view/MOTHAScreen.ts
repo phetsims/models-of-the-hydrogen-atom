@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import TModel from '../../../../joist/js/TModel.js';
 import Screen, { ScreenOptions } from '../../../../joist/js/Screen.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
@@ -24,18 +23,14 @@ export default class MOTHAScreen<M extends TModel, V extends ScreenView> extends
 
     const options = optionize<MOTHAScreenOptions, SelfOptions, ScreenOptions>()( {
 
-      // MOTHAScreenOptions
+      // ScreenOptions
       backgroundColorProperty: MOTHAColors.screenBackgroundColorProperty,
       showUnselectedHomeScreenIconFrame: true,
-      showScreenIconFrameForNavigationBarFill: 'black'
+      showScreenIconFrameForNavigationBarFill: 'black',
+      isDisposable: false
     }, providedOptions );
 
     super( createModel, createView, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

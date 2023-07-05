@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
@@ -28,11 +27,6 @@ export default class ExperimentModel extends SchrodingerModel {
     }, providedOptions );
 
     super( zoomedInBox, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

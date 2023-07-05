@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -28,6 +27,9 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
     const options = optionize<EnergyLevelsScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       //TODO default values for options
+
+      // ScreenViewOptions
+      isDisposable: false
     }, providedOptions );
 
     super( options );
@@ -77,11 +79,6 @@ export default class EnergyLevelsScreenView extends ScreenView {
       predictionPanel,
       resetAllButton
     ];
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override step( dt: number ): void {

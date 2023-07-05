@@ -36,7 +36,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import schrodingerButton_png from '../../../images/schrodingerButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -117,11 +116,6 @@ export default class SchrodingerModel extends DeBroglieModel {
         tandem: Tandem.OPT_OUT
       }
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override step( dt: number ): void {

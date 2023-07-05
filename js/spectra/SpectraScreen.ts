@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
@@ -31,7 +30,8 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
       homeScreenIcon: new ScreenIcon( new Image( spectraScreenIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
-      } )
+      } ),
+      isDisposable: false
     }, providedOptions );
 
     super(
@@ -43,11 +43,6 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
       } ),
       options
     );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

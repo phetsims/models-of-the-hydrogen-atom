@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import TEmitter from '../../../../axon/js/TEmitter.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -64,6 +63,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
       groundState: 1,
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioState: false
     }, providedOptions );
 
@@ -85,11 +85,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
       parameters: [ { valueType: Photon } ]
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

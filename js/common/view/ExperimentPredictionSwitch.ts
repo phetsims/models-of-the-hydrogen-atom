@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -29,7 +28,8 @@ export default class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 
     const options = optionize<ExperimentPredictionSwitchOptions, SelfOptions, ABSwitchOptions>()( {
       centerOnSwitch: true,
-      toggleSwitchOptions: { size: new Dimension2( 50, 25 ) }
+      toggleSwitchOptions: { size: new Dimension2( 50, 25 ) },
+      isDisposable: false
     }, providedOptions );
 
     const labelOptions = {
@@ -49,11 +49,6 @@ export default class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
       }, labelOptions ) );
 
     super( modelModeProperty, 'experiment', experimentText, 'prediction', predictionText, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

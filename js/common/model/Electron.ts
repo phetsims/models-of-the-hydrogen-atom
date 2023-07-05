@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -24,17 +23,13 @@ export default class Electron extends Particle {
     const options = optionize<ElectronOptions, SelfOptions, ParticleOptions>()( {
 
       // ParticleOptions
-      radius: MOTHAConstants.ELECTRON_RADIUS
+      radius: MOTHAConstants.ELECTRON_RADIUS,
+      isDisposable: false
       //TODO phetioType: Photon.PhotonIO,
       //TODO phetioDynamicElement: true
     }, providedOptions );
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

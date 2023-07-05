@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import DeBroglieModel from '../../common/model/DeBroglieModel.js';
@@ -63,11 +62,6 @@ export default class EnergyLevelsModel extends MOTHAModel {
     this.bohrModel = bohrModel;
     this.deBroglieModel = deBroglieModel;
     this.schrodingerModel = schrodingerModel;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

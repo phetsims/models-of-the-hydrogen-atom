@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
@@ -16,10 +15,6 @@ export default class ZoomedInBox extends Bounds2 {
 
   public constructor( size: number ) {
     super( -size / 2, -size / 2, size / 2, size / 2 );
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 
   public containsPhoton( photon: Photon ): boolean {

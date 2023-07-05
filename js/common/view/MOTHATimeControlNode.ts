@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -46,15 +45,11 @@ export default class MOTHATimeControlNode extends TimeControlNode {
         stepForwardButtonOptions: {
           listener: () => stepOnce()
         }
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     super( isPlayingProperty, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

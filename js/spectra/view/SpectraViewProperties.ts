@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAViewProperties, { MOTHAViewPropertiesOptions } from '../../common/view/MOTHAViewProperties.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -20,11 +19,6 @@ export default class SpectraViewProperties extends MOTHAViewProperties {
 
   public constructor( providedOptions: SpectraViewPropertiesOptions ) {
     super( providedOptions );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -35,6 +34,7 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
         font: new PhetFont( 16 ),
         tandem: providedOptions.tandem.createTandem( 'text' )
       } ),
+      isDisposable: false,
 
       // Visible when we have snapshots
       visibleProperty: new DerivedProperty( [ numberOfSnapshotsProperty ], n => ( n > 0 ), {
@@ -42,11 +42,6 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
         phetioValueType: BooleanIO
       } )
     }, providedOptions ) );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

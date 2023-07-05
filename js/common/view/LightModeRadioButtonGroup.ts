@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -36,6 +35,7 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
       // RectangularRadioButtonGroupOptions
       orientation: 'vertical',
       spacing: 8,
+      isDisposable: false,
       radioButtonOptions: {
         xMargin: 15,
         yMargin: 6,
@@ -55,11 +55,6 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
       { value: 'white', createNode: () => createModeIcon( Color.white ), tandemName: 'whiteRadioButton' },
       { value: 'monochromatic', createNode: () => createModeIcon( Color.red ), tandemName: 'monochromaticRadioButton' }
     ], options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

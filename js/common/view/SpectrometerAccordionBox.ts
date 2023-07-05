@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import TProperty from '../../../../axon/js/TProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -58,7 +57,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         sideLength: 22,
         touchAreaXDilation: 10,
         touchAreaYDilation: 10
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     options.titleNode = new TitleNode( options.expandedProperty, options.tandem.createTandem( 'titleNode' ) );
@@ -131,11 +131,6 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     super( contentNode, options );
   }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
 }
 
 class TitleNode extends ToggleNode<boolean> {
@@ -168,13 +163,9 @@ class TitleNode extends ToggleNode<boolean> {
     ];
 
     super( expandedProperty, items, {
+      isDisposable: false,
       tandem: tandem
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

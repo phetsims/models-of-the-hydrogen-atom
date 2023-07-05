@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -46,7 +45,8 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       },
       buttonAlign: 'left',
       titleAlignX: 'left',
-      titleXSpacing: 10
+      titleXSpacing: 10,
+      isDisposable: false
     }, providedOptions );
 
     options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {
@@ -63,11 +63,6 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     } );
 
     super( diagramNode, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

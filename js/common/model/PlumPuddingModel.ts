@@ -22,7 +22,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -143,11 +142,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
       phetioReadOnly: true
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

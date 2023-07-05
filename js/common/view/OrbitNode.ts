@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Path, PathOptions } from '../../../../scenery/js/imports.js';
@@ -41,7 +40,8 @@ export default class OrbitNode extends Path {
       // PathOptions
       stroke: MOTHAColors.orbitStrokeProperty,
       lineWidth: 1,
-      lineDash: [ 3, 3 ]
+      lineDash: [ 3, 3 ],
+      isDisposable: false
     }, providedOptions );
 
     assert && assert( options.yScale > 0 && options.yScale <= 1 );
@@ -49,11 +49,6 @@ export default class OrbitNode extends Path {
     const shape = Shape.ellipse( 0, 0, radius, radius * options.yScale, 0 );
 
     super( shape, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

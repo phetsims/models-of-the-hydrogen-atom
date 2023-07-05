@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -37,7 +36,10 @@ export default class ContinuumBarNode extends Node {
       yMargin: 6,
       font: new PhetFont( 14 ),
       barFill: MOTHAColors.continuumBarFillProperty,
-      textFill: MOTHAColors.continuumBarTextFillProperty
+      textFill: MOTHAColors.continuumBarTextFillProperty,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // labels
@@ -67,11 +69,6 @@ export default class ContinuumBarNode extends Node {
     options.children = [ barNode, classicalText, quantumText ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

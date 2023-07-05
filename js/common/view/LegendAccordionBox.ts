@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -47,7 +46,8 @@ export default class LegendAccordionBox extends AccordionBox {
       titleAlignX: 'left',
       titleXSpacing: 10,
       contentXMargin: 0,
-      buttonXMargin: 0
+      buttonXMargin: 0,
+      isDisposable: false
     }, providedOptions );
 
     options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.legendStringProperty, {
@@ -81,11 +81,6 @@ export default class LegendAccordionBox extends AccordionBox {
 
     super( content, options );
   }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
 }
 
 /**
@@ -108,13 +103,9 @@ class KeyNode extends HBox {
           tandem: parentTandem.createTandem( 'text' )
         } )
       ],
+      isDisposable: false,
       tandem: parentTandem
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

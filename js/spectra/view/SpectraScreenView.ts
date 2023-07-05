@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import { Shape } from '../../../../kite/js/imports.js';
@@ -46,6 +45,9 @@ export default class SpectraScreenView extends ScreenView {
 
     const options = optionize<SpectraScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       //TODO default values for options
+
+      // ScreenViewOptions
+      isDisposable: false
     }, providedOptions );
 
     super( options );
@@ -235,11 +237,6 @@ export default class SpectraScreenView extends ScreenView {
     if ( this.model.isPlayingProperty.value ) {
       this.zoomedInBoxNode.step( dt );
     }
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

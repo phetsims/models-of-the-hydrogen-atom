@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -28,15 +27,13 @@ export default class BeamNode extends Rectangle {
     const options = optionize<BeamNodeOptions, SelfOptions, RectangleOptions>()( {
 
       // SelfOptions
-      beamSize: new Dimension2( 30, 65 )
+      beamSize: new Dimension2( 30, 65 ),
+
+      // RectangleOptions
+      isDisposable: false
     }, providedOptions );
 
     super( 0, 0, options.beamSize.width, options.beamSize.height, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

@@ -14,6 +14,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 type SelfOptions = {
 
@@ -29,7 +30,7 @@ type SelfOptions = {
   direction?: number;
 };
 
-export type ParticleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type ParticleOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'isDisposable'> & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Particle extends PhetioObject {
 

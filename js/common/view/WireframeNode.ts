@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
@@ -27,16 +26,14 @@ export default class WireframeNode extends Node {
 
     const options = optionize<WireframeNodeOptions, SelfOptions, RectangleOptions>()( {
       //TODO
+
+      // RectangleOptions
+      isDisposable: false
     }, providedOptions );
 
     super( options );
 
     this.model = model;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

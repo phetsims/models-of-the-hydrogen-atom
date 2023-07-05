@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -30,15 +29,11 @@ export default class TinyBox extends Rectangle {
       // RectangleOptions
       fill: MOTHAColors.zoomedInBoxFillProperty,
       stroke: MOTHAColors.zoomedInBoxStrokeProperty,
-      lineWidth: 2
+      lineWidth: 2,
+      isDisposable: false
     }, providedOptions );
 
     super( 0, 0, TINY_BOX_SIZE.width, TINY_BOX_SIZE.height, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

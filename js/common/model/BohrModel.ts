@@ -24,7 +24,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import bohrButton_png from '../../../images/bohrButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -157,11 +156,6 @@ export default class BohrModel extends HydrogenAtom {
     this.electronOffsetProperty.link( electronOffset => {
       this.electron.positionProperty.value = this.position.plus( electronOffset );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

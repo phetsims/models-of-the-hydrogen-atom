@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -95,11 +94,6 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     this.deBroglieRadialNode = deBroglieRadialNode;
     this.deBroglie3DNode = deBroglie3DNode;
     this.deBroglieBrightnessNode = deBroglieBrightnessNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   //TODO a better way to step the selected view

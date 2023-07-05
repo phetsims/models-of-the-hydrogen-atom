@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
@@ -35,6 +34,9 @@ export default class HydrogenAtomNode extends Node {
 
     const options = optionize<HydrogenAtomNodeOptions, SelfOptions, RectangleOptions>()( {
       //TODO default values for options
+
+      // RectangleOptions
+      isDisposable: false
     }, providedOptions );
 
     options.visibleProperty = new DerivedProperty( [ hydrogenAtomProperty ],
@@ -44,11 +46,6 @@ export default class HydrogenAtomNode extends Node {
       } );
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

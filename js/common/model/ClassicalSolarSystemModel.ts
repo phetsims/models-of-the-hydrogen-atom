@@ -22,7 +22,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -126,11 +125,6 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
         tandem: options.tandem.createTandem( 'isDestroyedProperty' ),
         phetioValueType: BooleanIO
       } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

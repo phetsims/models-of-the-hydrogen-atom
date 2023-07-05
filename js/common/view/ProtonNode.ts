@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -30,7 +29,8 @@ export default class ProtonNode extends ShadedSphereNode {
 
       // ShadedSphereNodeOptions
       mainColor: MOTHAColors.protonBaseColorProperty,
-      highlightColor: MOTHAColors.protonHighlightColorProperty
+      highlightColor: MOTHAColors.protonHighlightColorProperty,
+      isDisposable: false
     }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( proton.radius ), options );
@@ -38,11 +38,6 @@ export default class ProtonNode extends ShadedSphereNode {
     proton.positionProperty.link( position => {
       this.translation = modelViewTransform.modelToViewPosition( position );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

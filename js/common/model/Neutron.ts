@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -24,17 +23,13 @@ export default class Neutron extends Particle {
     const options = optionize<NeutronOptions, SelfOptions, ParticleOptions>()( {
 
       // ParticleOptions
-      radius: MOTHAConstants.NEUTRON_RADIUS
+      radius: MOTHAConstants.NEUTRON_RADIUS,
+      isDisposable: false
       //TODO phetioType: Neutron.NeutronIO,
       //TODO phetioDynamicElement: true
     }, providedOptions );
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

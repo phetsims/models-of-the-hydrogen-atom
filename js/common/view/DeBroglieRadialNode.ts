@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -47,7 +46,8 @@ export default class DeBroglieRadialNode extends Node {
         deBroglieView => ( deBroglieView === 'radial' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
-        } )
+        } ),
+      isDisposable: false
     }, providedOptions );
 
     // Electron orbits
@@ -67,20 +67,16 @@ export default class DeBroglieRadialNode extends Node {
 
     super( options );
   }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
 }
-
-type RingNodeSelfOptions = EmptySelfOptions;
-type RingNodeOptions = RingNodeSelfOptions & PickRequired<PathOptions, 'visibleProperty' | 'tandem'>;
 
 /**
  * RingNode is the ring that represents the standing wave.
  * It's radial distance from the electron's orbit is a function of amplitude.
  */
+
+type RingNodeSelfOptions = EmptySelfOptions;
+type RingNodeOptions = RingNodeSelfOptions & PickRequired<PathOptions, 'visibleProperty' | 'tandem'>;
+
 class RingNode extends Path {
 
   private readonly hydrogenAtom: DeBroglieModel;
@@ -100,7 +96,8 @@ class RingNode extends Path {
 
       // PathOptions
       stroke: MOTHAColors.electronBaseColorProperty,
-      lineWidth: 2
+      lineWidth: 2,
+      isDisposable: false
     }, providedOptions );
 
     super( null, options );
@@ -114,11 +111,6 @@ class RingNode extends Path {
       ( electronAngle, visible ) => {
         visible && this.update();
       } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

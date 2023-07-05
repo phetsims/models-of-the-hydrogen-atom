@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -29,9 +28,10 @@ export default class PrimaryElectronStateText extends RichText {
 
     const options = optionize<PrimaryElectronStateNodeOptions, SelfOptions, RichTextOptions>()( {
 
-      // TextOptions
+      // RichTextOptions
       font: new PhetFont( 16 ),
-      fill: MOTHAColors.stateDisplayFillProperty
+      fill: MOTHAColors.stateDisplayFillProperty,
+      isDisposable: false
     }, providedOptions );
 
     const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
@@ -40,11 +40,6 @@ export default class PrimaryElectronStateText extends RichText {
     }, { tandem: Tandem.OPT_OUT } );
 
     super( stringProperty, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

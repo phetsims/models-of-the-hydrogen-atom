@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -30,15 +29,11 @@ export default class NeutronNode extends ShadedSphereNode {
 
       // ShadedSphereNodeOptions
       mainColor: MOTHAColors.neutronBaseColorProperty,
-      highlightColor: MOTHAColors.neutronHighlightColorProperty
+      highlightColor: MOTHAColors.neutronHighlightColorProperty,
+      isDisposable: false
     }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( neutron.radius ), options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

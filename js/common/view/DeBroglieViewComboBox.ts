@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -31,7 +30,8 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
 
       // ComboBoxOptions
       xMargin: 10,
-      yMargin: 6
+      yMargin: 6,
+      isDisposable: false
     }, providedOptions );
 
     const textOptions = {
@@ -62,11 +62,6 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
     ];
 
     super( deBroglieViewProperty, items, listboxParent, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 
