@@ -48,16 +48,14 @@ export default class XZAxesNode extends Node {
       font: LABEL_FONT,
       fill: options.color,
       left: xAxisNode.right + LABEL_OFFSET,
-      centerY: xAxisNode.centerY,
-      tandem: options.tandem.createTandem( 'xText' )
+      centerY: xAxisNode.centerY
     } );
 
     const zText = new RichText( MOTHASymbols.zStringProperty, {
       font: LABEL_FONT,
       fill: options.color,
       centerX: zAxisNode.centerX,
-      bottom: zAxisNode.top - LABEL_OFFSET,
-      tandem: options.tandem.createTandem( 'zText' )
+      bottom: zAxisNode.top - LABEL_OFFSET
     } );
 
     options.children = [ xAxisNode, zAxisNode, xText, zText ];

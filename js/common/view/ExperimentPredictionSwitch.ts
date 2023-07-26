@@ -10,7 +10,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { NodeTranslationOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -32,21 +32,15 @@ export default class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
       isDisposable: false
     }, providedOptions );
 
-    const labelOptions = {
+    const textOptions = {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.switchTextFillProperty,
       maxWidth: 100
     };
 
-    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty,
-      optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
-        tandem: options.tandem.createTandem( 'experimentText' )
-      }, labelOptions ) );
+    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, textOptions );
 
-    const predictionText = new Text( ModelsOfTheHydrogenAtomStrings.predictionStringProperty,
-      optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
-        tandem: options.tandem.createTandem( 'predictionText' )
-      }, labelOptions ) );
+    const predictionText = new Text( ModelsOfTheHydrogenAtomStrings.predictionStringProperty, textOptions );
 
     super( modelModeProperty, 'experiment', experimentText, 'prediction', predictionText, options );
   }

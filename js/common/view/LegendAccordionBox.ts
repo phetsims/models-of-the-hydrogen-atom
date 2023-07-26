@@ -53,8 +53,7 @@ export default class LegendAccordionBox extends AccordionBox {
     options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.legendStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.legendTitleFillProperty,
-      maxWidth: 100, // i18n, determined empirically
-      tandem: options.tandem.createTandem( 'titleText' )
+      maxWidth: 100 // i18n, determined empirically
     } );
 
     const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
@@ -99,8 +98,7 @@ class KeyNode extends HBox {
         new Text( labelStringProperty, {
           font: ITEM_FONT,
           fill: MOTHAColors.legendTextFillProperty,
-          maxWidth: 120, // determined empirically
-          tandem: parentTandem.createTandem( 'text' )
+          maxWidth: 120 // determined empirically
         } )
       ],
       isDisposable: false,

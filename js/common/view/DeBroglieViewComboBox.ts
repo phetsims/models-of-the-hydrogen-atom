@@ -9,7 +9,7 @@
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeTranslationOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { Node, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { DeBroglieView } from '../model/DeBroglieView.js';
 import Property from '../../../../axon/js/Property.js';
@@ -39,21 +39,12 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
       maxWidth: 150
     };
 
-    const radialViewText = new Text( ModelsOfTheHydrogenAtomStrings.radialViewStringProperty,
-      optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
-        tandem: options.tandem.createTandem( 'radialViewText' )
-      }, textOptions ) );
+    const radialViewText = new Text( ModelsOfTheHydrogenAtomStrings.radialViewStringProperty, textOptions );
 
     // threeDViewText does not match '3DViewText' tandem name because JavaScript identifiers cannot begin with a number.
-    const threeDViewText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DViewStringProperty' ],
-      optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
-        tandem: options.tandem.createTandem( '3DViewText' )
-      }, textOptions ) );
+    const threeDViewText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DViewStringProperty' ], textOptions );
 
-    const brightnessViewText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessViewStringProperty,
-      optionize<TextOptions, EmptySelfOptions, TextOptions>()( {
-        tandem: options.tandem.createTandem( 'brightnessViewText' )
-      }, textOptions ) );
+    const brightnessViewText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessViewStringProperty, textOptions );
 
     const items: ComboBoxItem<DeBroglieView>[] = [
       { value: 'radial', createNode: () => radialViewText, tandemName: `radial${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },

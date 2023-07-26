@@ -116,8 +116,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
         new Text( predictiveModel.displayNameProperty, {
           fill: MOTHAColors.modelsRadioButtonTextFillProperty,
           font: new PhetFont( 16 ),
-          maxWidth: 200, // determined empirically
-          tandem: tandem.createTandem( 'text' )
+          maxWidth: 200 // determined empirically
         } ) ]
     } ),
     tandemName: `${predictiveModel.tandem.name}RadioButton` //TODO too clever?

@@ -41,8 +41,7 @@ export default class SnapshotNode extends Node {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.snapshotTextFillProperty,
       left: backgroundNode.left + 10,
-      top: backgroundNode.top + 10,
-      tandem: Tandem.OPT_OUT //TODO SnapshotNode is dynamically created
+      top: backgroundNode.top + 10
     } );
 
     const trashButton = new TrashButton( {

@@ -63,17 +63,14 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       baseColor: MOTHAColors.exciteButtonColorProperty,
       content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
         font: new PhetFont( 16 ),
-        maxWidth: 100,
-        tandem: options.tandem.createTandem( 'text' )
+        maxWidth: 100
       } ),
       listener: () => hydrogenAtom.fireOneAbsorbablePhoton(),
       tandem: options.tandem.createTandem( 'exciteAtomButton' )
     } );
 
     const electronStateText = new FullElectronStateText( hydrogenAtom.getElectronStateProperty(),
-      hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
-        tandem: options.tandem.createTandem( 'electronStateText' )
-      } );
+      hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty );
 
     const vBox = new VBox( {
       align: 'right',

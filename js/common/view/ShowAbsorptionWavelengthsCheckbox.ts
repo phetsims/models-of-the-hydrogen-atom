@@ -47,8 +47,7 @@ export default class ShowAbsorptionWavelengthsCheckbox extends Checkbox {
     const text = new Text( ModelsOfTheHydrogenAtomStrings.showAbsorptionWavelengthsStringProperty, {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.showAbsorptionWavelengthTextFillProperty,
-      maxWidth: 250,
-      tandem: options.tandem.createTandem( 'text' )
+      maxWidth: 250
     } );
 
     super( absorptionWavelengthsVisibleProperty, text, options );

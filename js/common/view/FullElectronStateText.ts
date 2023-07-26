@@ -7,10 +7,8 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { NodeTranslationOptions, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
+import { RichText } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -18,24 +16,11 @@ import MOTHASymbols from '../MOTHASymbols.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type FullElectronStateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<RichTextOptions, 'tandem'>;
-
 export default class FullElectronStateText extends RichText {
 
   public constructor( primaryStateProperty: TReadOnlyProperty<number>,
                       secondaryStateProperty: TReadOnlyProperty<number>,
-                      tertiaryStateProperty: TReadOnlyProperty<number>,
-                      providedOptions: FullElectronStateNodeOptions ) {
-
-    const options = optionize<FullElectronStateNodeOptions, SelfOptions, RichTextOptions>()( {
-
-      // TextOptions
-      font: new PhetFont( 16 ),
-      fill: MOTHAColors.stateDisplayFillProperty,
-      isDisposable: false
-    }, providedOptions );
+                      tertiaryStateProperty: TReadOnlyProperty<number> ) {
 
     const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty, {
       nSymbol: MOTHASymbols.nStringProperty,
@@ -46,7 +31,11 @@ export default class FullElectronStateText extends RichText {
       mValue: tertiaryStateProperty
     }, { tandem: Tandem.OPT_OUT } );
 
-    super( stringProperty, options );
+    super( stringProperty, {
+      font: new PhetFont( 16 ),
+      fill: MOTHAColors.stateDisplayFillProperty,
+      isDisposable: false
+    } );
   }
 }
 

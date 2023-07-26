@@ -146,15 +146,13 @@ class TitleNode extends ToggleNode<boolean> {
     const titleExpandedText = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerExpandedStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,
-      maxWidth: 290,
-      tandem: tandem.createTandem( 'titleExpandedText' )
+      maxWidth: 290
     } ), alignBoxOptions );
 
     const titleCollapsedText = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerCollapsedStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,
-      maxWidth: 290,
-      tandem: tandem.createTandem( 'titleCollapsedText' )
+      maxWidth: 290
     } ), alignBoxOptions );
 
     const items = [
