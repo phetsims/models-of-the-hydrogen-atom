@@ -2,102 +2,102 @@
   "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.4 Mon May 22 2023 10:18:30 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "2b2495994e1a001ed46ba1e2147f70aacb5732d2",
-    "branch": "master"
+    "branch": "main"
   },
   "axon": {
     "sha": "1499ba242059be3badb4561db3baeeef90c7e9b3",
-    "branch": "master"
+    "branch": "main"
   },
   "brand": {
     "sha": "d2b54ef4d29edc31e64adb2f9488803811cad03a",
-    "branch": "master"
+    "branch": "main"
   },
   "chipper": {
     "sha": "388e6fa1b54dbc686408782530afc6731bd1b53c",
-    "branch": "master"
+    "branch": "main"
   },
   "dot": {
     "sha": "bf884f163ad77fe3304c5cf88e912db47ce0f1a5",
-    "branch": "master"
+    "branch": "main"
   },
   "joist": {
     "sha": "b14ad37888d5298e15e3df665f463c299ed21329",
-    "branch": "master"
+    "branch": "main"
   },
   "kite": {
     "sha": "6d73294fed87923841ed105935bc6c1b45fbb609",
-    "branch": "master"
+    "branch": "main"
   },
   "models-of-the-hydrogen-atom": {
     "sha": "2d91c3453c4ff94e0df6919eccec746457a25bd0",
-    "branch": "master"
+    "branch": "main"
   },
   "perennial-alias": {
     "sha": "89ea3ce64cc6c5cfe2959dd52619891057cc1be9",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-core": {
     "sha": "9c08308eeb142aa0422ef0dbfb5916a9da6036ca",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-io": {
     "sha": "1ff7527753da135a131622c8f13b41d791c27978",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-io-sim-specific": {
     "sha": "697e65770dd55bcf9642cb6865df8d796318266d",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-io-wrappers": {
     "sha": "85161550f95844adb59c5c443686ca9ebd61f263",
-    "branch": "master"
+    "branch": "main"
   },
   "phetcommon": {
     "sha": "6688af7d6170c16dab08d4c0551e3c93d89336c9",
-    "branch": "master"
+    "branch": "main"
   },
   "phetmarks": {
     "sha": "b9890ffa84e9e182b0501d6a1b6e36e7c1787aeb",
-    "branch": "master"
+    "branch": "main"
   },
   "query-string-machine": {
     "sha": "b6549bb6e56dcec96fd900179ea7c4f421e06335",
-    "branch": "master"
+    "branch": "main"
   },
   "scenery": {
     "sha": "a1a7bb4e043321e54d02e7f10595f925ae5e3c4e",
-    "branch": "master"
+    "branch": "main"
   },
   "scenery-phet": {
     "sha": "ee3c56bbb01dbc7cb48c141d300d85de4b8455c8",
-    "branch": "master"
+    "branch": "main"
   },
   "sherpa": {
     "sha": "74fc8b7c3ef8dc6f5d69383fbd20dd6aacffa3f1",
-    "branch": "master"
+    "branch": "main"
   },
   "studio": {
     "sha": "a391e62c31a0de9f5ab984fd1db8b3ff60a8fc1a",
-    "branch": "master"
+    "branch": "main"
   },
   "sun": {
     "sha": "4b67ae27743f3333f48732c58054e3d50e757d10",
-    "branch": "master"
+    "branch": "main"
   },
   "tambo": {
     "sha": "a7b5b026d4082875d5a48575d5d74725cdf59a92",
-    "branch": "master"
+    "branch": "main"
   },
   "tandem": {
     "sha": "e7309c608e13e9cac00393203ce4e8b4136a6059",
-    "branch": "master"
+    "branch": "main"
   },
   "twixt": {
     "sha": "f70e162706a12e1959c171b62b46641183314e96",
-    "branch": "master"
+    "branch": "main"
   },
   "utterance-queue": {
     "sha": "27e4a55d426537943133478dd0ce6619b555c70f",
-    "branch": "master"
+    "branch": "main"
   }
 }
