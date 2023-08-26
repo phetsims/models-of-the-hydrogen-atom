@@ -7,9 +7,8 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
+import ScreenView from '../../../../joist/js/ScreenView.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import { Node, Path, VBox } from '../../../../scenery/js/imports.js';
@@ -31,29 +30,22 @@ import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
 import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type SpectraScreenViewOptions = SelfOptions & ScreenViewOptions;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class SpectraScreenView extends ScreenView {
 
   private readonly model: SpectraModel;
   private readonly zoomedInBoxNode: SpectraZoomedInBoxNode;
 
-  public constructor( model: SpectraModel, providedOptions: SpectraScreenViewOptions ) {
+  public constructor( model: SpectraModel, tandem: Tandem ) {
 
-    const options = optionize<SpectraScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
-      //TODO default values for options
-
-      // ScreenViewOptions
-      isDisposable: false
-    }, providedOptions );
-
-    super( options );
+    super( {
+      isDisposable: false,
+      tandem: tandem
+    } );
 
     const viewProperties = new SpectraViewProperties( {
-      tandem: options.tandem.createTandem( 'viewProperties' )
+      tandem: tandem.createTandem( 'viewProperties' )
     } );
 
     // Parent for any popups
@@ -64,14 +56,14 @@ export default class SpectraScreenView extends ScreenView {
       expandedProperty: viewProperties.keyExpandedProperty,
       left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'legendAccordionBox' )
+      tandem: tandem.createTandem( 'legendAccordionBox' )
     } );
 
     // Light Mode radio button group
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( model.light.lightModeProperty, {
       left: this.layoutBounds.left + 30,
       bottom: 415,
-      tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
+      tandem: tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
     // Controls for monochromatic light
@@ -83,7 +75,7 @@ export default class SpectraScreenView extends ScreenView {
       viewProperties.absorptionWavelengthsVisibleProperty, {
         left: lightModeRadioButtonGroup.left,
         top: lightModeRadioButtonGroup.bottom + 15,
-        tandem: options.tandem.createTandem( 'monochromaticControls' )
+        tandem: tandem.createTandem( 'monochromaticControls' )
       } );
 
     // Light
@@ -94,7 +86,7 @@ export default class SpectraScreenView extends ScreenView {
       rotation: -Math.PI / 2, // pointing up
       left: lightModeRadioButtonGroup.right + 20,
       bottom: lightModeRadioButtonGroup.bottom,
-      tandem: options.tandem.createTandem( 'lightNode' )
+      tandem: tandem.createTandem( 'lightNode' )
     } );
 
     // Beam of light
@@ -103,21 +95,21 @@ export default class SpectraScreenView extends ScreenView {
       fill: model.light.colorProperty,
       centerX: lightNode.centerX,
       bottom: lightNode.top + 1,
-      tandem: options.tandem.createTandem( 'beamNode' )
+      tandem: tandem.createTandem( 'beamNode' )
     } );
 
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode( {
       centerX: beamNode.centerX,
       bottom: beamNode.top + 1,
-      tandem: options.tandem.createTandem( 'boxOfHydrogenNode' )
+      tandem: tandem.createTandem( 'boxOfHydrogenNode' )
     } );
 
     // Tiny box that indicates what will be zoomed
     const tinyBoxNode = new TinyBox( {
       right: boxOfHydrogenNode.right - 10,
       top: boxOfHydrogenNode.top + 20,
-      tandem: options.tandem.createTandem( 'tinyBoxNode' )
+      tandem: tandem.createTandem( 'tinyBoxNode' )
     } );
 
     // Time controls
@@ -125,14 +117,14 @@ export default class SpectraScreenView extends ScreenView {
       model.stepOnce.bind( model ), {
         left: monochromaticControls.left,
         top: monochromaticControls.bottom + 8,
-        tandem: options.tandem.createTandem( 'timeControlNode' )
+        tandem: tandem.createTandem( 'timeControlNode' )
       } );
 
     // The zoomed-in view of the box of hydrogen
     const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {
       left: lightNode.right + 50,
       top: this.layoutBounds.top + 15,
-      tandem: options.tandem.createTandem( 'zoomedInBoxNode' )
+      tandem: tandem.createTandem( 'zoomedInBoxNode' )
     } );
 
     // Dashed lines that connect the tiny box and zoom box
@@ -143,17 +135,17 @@ export default class SpectraScreenView extends ScreenView {
       .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.bottom ), {
       stroke: MOTHAColors.zoomedInBoxStrokeProperty,
       lineDash: [ 5, 5 ],
-      tandem: options.tandem.createTandem( 'dashedLines' )
+      tandem: tandem.createTandem( 'dashedLines' )
     } );
 
     // switches the model mode between Experiment and Prediction
     const experimentPredictionSwitch = new ExperimentPredictionSwitch( model.modelModeProperty, {
-      tandem: options.tandem.createTandem( 'experimentPredictionSwitch' )
+      tandem: tandem.createTandem( 'experimentPredictionSwitch' )
     } );
 
     // panel that contains radio buttons for selecting a predictive model
     const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, model.modelModeProperty, {
-      tandem: options.tandem.createTandem( 'predictionPanel' )
+      tandem: tandem.createTandem( 'predictionPanel' )
     } );
 
     const modelVBox = new VBox( {
@@ -170,12 +162,12 @@ export default class SpectraScreenView extends ScreenView {
       expandedProperty: viewProperties.spectrometerExpandedProperty,
       left: monochromaticControls.right + 10,
       top: monochromaticControls.top,
-      tandem: options.tandem.createTandem( 'spectrometerAccordionBox' )
+      tandem: tandem.createTandem( 'spectrometerAccordionBox' )
     } );
 
     // Constructed eagerly and reused to appease PhET-iO.
     const snapshotsDialog = new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty, {
-      tandem: options.tandem.createTandem( 'snapshotsDialog' )
+      tandem: tandem.createTandem( 'snapshotsDialog' )
     } );
 
     // View Snapshots button, above upper-right corner of spectrometer
@@ -183,7 +175,7 @@ export default class SpectraScreenView extends ScreenView {
       listener: () => snapshotsDialog.show(),
       right: spectrometerAccordionBox.right,
       bottom: spectrometerAccordionBox.top - 10,
-      tandem: options.tandem.createTandem( 'viewSnapshotsButton' )
+      tandem: tandem.createTandem( 'viewSnapshotsButton' )
     } );
 
     // Reset All button
@@ -194,7 +186,7 @@ export default class SpectraScreenView extends ScreenView {
       },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'resetAllButton' )
+      tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     // rendering order

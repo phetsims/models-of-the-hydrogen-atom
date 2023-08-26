@@ -6,21 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BilliardBallModel from '../../common/model/BilliardBallModel.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import ClassicalSolarSystemModel from '../../common/model/ClassicalSolarSystemModel.js';
 import DeBroglieModel from '../../common/model/DeBroglieModel.js';
-import MOTHAModel, { MOTHAModelOptions } from '../../common/model/MOTHAModel.js';
+import MOTHAModel from '../../common/model/MOTHAModel.js';
 import PlumPuddingModel from '../../common/model/PlumPuddingModel.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type SpectraModelOptions = SelfOptions & MOTHAModelOptions;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class SpectraModel extends MOTHAModel {
 
@@ -32,36 +28,32 @@ export default class SpectraModel extends MOTHAModel {
   public readonly deBroglieModel: DeBroglieModel;
   public readonly schrodingerModel: SchrodingerModel;
 
-  public constructor( providedOptions: SpectraModelOptions ) {
-
-    const options = optionize<SpectraModelOptions, SelfOptions, MOTHAModelOptions>()( {
-      //TODO default values for options
-    }, providedOptions );
+  public constructor( tandem: Tandem ) {
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
 
     const billiardBallModel = new BilliardBallModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'billiardBallModel' )
+      tandem: tandem.createTandem( 'billiardBallModel' )
     } );
 
     const plumPuddingModel = new PlumPuddingModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'plumPuddingModel' )
+      tandem: tandem.createTandem( 'plumPuddingModel' )
     } );
 
     const classicalSolarSystemModel = new ClassicalSolarSystemModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'classicalSolarSystemModel' )
+      tandem: tandem.createTandem( 'classicalSolarSystemModel' )
     } );
 
     const bohrModel = new BohrModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'bohrModel' )
+      tandem: tandem.createTandem( 'bohrModel' )
     } );
 
     const deBroglieModel = new DeBroglieModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'deBroglieModel' )
+      tandem: tandem.createTandem( 'deBroglieModel' )
     } );
 
     const schrodingerModel = new SchrodingerModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'schrodingerModel' )
+      tandem: tandem.createTandem( 'schrodingerModel' )
     } );
 
     // Predictive models supported by this screen, in the order that they will appear in the UI
@@ -75,7 +67,7 @@ export default class SpectraModel extends MOTHAModel {
     ];
 
     //TODO default should be billiardBallModel
-    super( zoomedInBox, predictiveModels, schrodingerModel, options );
+    super( zoomedInBox, predictiveModels, schrodingerModel, tandem );
 
     this.billiardBallModel = billiardBallModel;
     this.plumPuddingModel = plumPuddingModel;

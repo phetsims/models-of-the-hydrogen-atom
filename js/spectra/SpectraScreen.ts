@@ -35,12 +35,8 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
     }, providedOptions );
 
     super(
-      () => new SpectraModel( {
-        tandem: options.tandem.createTandem( 'model' )
-      } ),
-      model => new SpectraScreenView( model, {
-        tandem: options.tandem.createTandem( 'view' )
-      } ),
+      () => new SpectraModel( options.tandem.createTandem( 'model' ) ),
+      model => new SpectraScreenView( model, options.tandem.createTandem( 'view' ) ),
       options
     );
   }

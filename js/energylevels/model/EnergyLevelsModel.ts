@@ -6,18 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import DeBroglieModel from '../../common/model/DeBroglieModel.js';
-import MOTHAModel, { MOTHAModelOptions } from '../../common/model/MOTHAModel.js';
+import MOTHAModel from '../../common/model/MOTHAModel.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type EnergyLevelsModelOptions = SelfOptions & MOTHAModelOptions;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class EnergyLevelsModel extends MOTHAModel {
 
@@ -26,24 +22,20 @@ export default class EnergyLevelsModel extends MOTHAModel {
   public readonly deBroglieModel: DeBroglieModel;
   public readonly schrodingerModel: SchrodingerModel;
 
-  public constructor( providedOptions: EnergyLevelsModelOptions ) {
-
-    const options = optionize<EnergyLevelsModelOptions, SelfOptions, MOTHAModelOptions>()( {
-      //TODO default values for options
-    }, providedOptions );
+  public constructor( tandem: Tandem ) {
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
 
     const bohrModel = new BohrModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'bohrModel' )
+      tandem: tandem.createTandem( 'bohrModel' )
     } );
 
     const deBroglieModel = new DeBroglieModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'deBroglieModel' )
+      tandem: tandem.createTandem( 'deBroglieModel' )
     } );
 
     const schrodingerModel = new SchrodingerModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'schrodingerModel' )
+      tandem: tandem.createTandem( 'schrodingerModel' )
     } );
 
     // Predictive models supported by this screen, in the order that they will appear in the UI
@@ -57,7 +49,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
     assert && assert( _.every( predictiveModels, model => model.hasTransitionWavelengths ),
       'all models in this screen must include the concept of transition wavelengths' );
 
-    super( zoomedInBox, predictiveModels, bohrModel, options );
+    super( zoomedInBox, predictiveModels, bohrModel, tandem );
 
     this.bohrModel = bohrModel;
     this.deBroglieModel = deBroglieModel;

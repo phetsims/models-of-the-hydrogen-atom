@@ -6,8 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import PredictionPanel from '../../common/view/PredictionPanel.js';
@@ -16,32 +15,25 @@ import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import EnergyLevelsViewProperties from './EnergyLevelsViewProperties.js';
 import { Node } from '../../../../scenery/js/imports.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type EnergyLevelsScreenViewOptions = SelfOptions & ScreenViewOptions;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class EnergyLevelsScreenView extends ScreenView {
 
-  public constructor( model: EnergyLevelsModel, providedOptions: EnergyLevelsScreenViewOptions ) {
+  public constructor( model: EnergyLevelsModel, tandem: Tandem ) {
 
-    const options = optionize<EnergyLevelsScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
-      //TODO default values for options
-
-      // ScreenViewOptions
-      isDisposable: false
-    }, providedOptions );
-
-    super( options );
+    super( {
+      isDisposable: false,
+      tandem: tandem
+    } );
 
     const viewProperties = new EnergyLevelsViewProperties( {
-      tandem: options.tandem.createTandem( 'viewProperties' )
+      tandem: tandem.createTandem( 'viewProperties' )
     } );
 
     const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( {
       expandedProperty: viewProperties.electronEnergyLevelExpandedProperty,
       center: this.layoutBounds.center,
-      tandem: options.tandem.createTandem( 'electronEnergyLevelAccordionBox' )
+      tandem: tandem.createTandem( 'electronEnergyLevelAccordionBox' )
     } );
 
     // panel that contains radio buttons for selecting a predictive model
@@ -49,7 +41,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       model.modelModeProperty, {
         left: electronEnergyLevelAccordionBox.right + 20,
         top: electronEnergyLevelAccordionBox.top,
-        tandem: options.tandem.createTandem( 'predictionPanel' )
+        tandem: tandem.createTandem( 'predictionPanel' )
       } );
 
     // Reset All button
@@ -60,7 +52,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'resetAllButton' )
+      tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     // rendering order

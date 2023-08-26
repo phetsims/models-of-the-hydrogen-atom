@@ -11,10 +11,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from './Light.js';
 import HydrogenAtom from './HydrogenAtom.js';
@@ -27,14 +24,11 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import TModel from '../../../../joist/js/TModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 const NORMAL_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 0 ];
 const FAST_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 1 ];
-
-type SelfOptions = EmptySelfOptions;
-
-export type MOTHAModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class MOTHAModel implements TModel {
 
@@ -75,29 +69,25 @@ export default class MOTHAModel implements TModel {
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
    * @param predictiveModels
    * @param initialPredictiveModel
-   * @param providedOptions
+   * @param tandem
    */
   protected constructor( zoomedInBox: ZoomedInBox,
                          predictiveModels: HydrogenAtom[],
                          initialPredictiveModel: HydrogenAtom,
-                         providedOptions: MOTHAModelOptions ) {
+                         tandem: Tandem ) {
 
     assert && assert( predictiveModels.includes( initialPredictiveModel ) );
-
-    const options = optionize<MOTHAModelOptions, SelfOptions>()( {
-      //TODO
-    }, providedOptions );
 
     this.zoomedInBox = zoomedInBox;
 
     //TODO default should be 'experiment'
     this.modelModeProperty = new StringUnionProperty( 'prediction', {
       validValues: ModelModeValues,
-      tandem: options.tandem.createTandem( 'modelModeProperty' )
+      tandem: tandem.createTandem( 'modelModeProperty' )
     } );
 
     this.experimentModel = new ExperimentModel( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'experimentModel' )
+      tandem: tandem.createTandem( 'experimentModel' )
     } );
 
     this.predictiveModels = predictiveModels;
@@ -116,7 +106,7 @@ export default class MOTHAModel implements TModel {
       } );
 
     this.light = new Light( zoomedInBox, {
-      tandem: options.tandem.createTandem( 'light' )
+      tandem: tandem.createTandem( 'light' )
     } );
 
     this.photons = createObservableArray<Photon>( {
@@ -125,11 +115,11 @@ export default class MOTHAModel implements TModel {
     } );
 
     this.isPlayingProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'isPlayingProperty' )
+      tandem: tandem.createTandem( 'isPlayingProperty' )
     } );
 
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
-      tandem: options.tandem.createTandem( 'timeSpeedProperty' )
+      tandem: tandem.createTandem( 'timeSpeedProperty' )
     } );
 
     this.dtScaleProperty = new DerivedProperty( [ this.timeSpeedProperty ],
