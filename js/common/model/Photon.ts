@@ -1,4 +1,4 @@
-// Copyright 2016-2022, University of Colorado Boulder
+// Copyright 2016-2023, University of Colorado Boulder
 
 /**
  * Photon is the model of a photon. A photon has a wavelength, position, direction, and moves with constant speed.

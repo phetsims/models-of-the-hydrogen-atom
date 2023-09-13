@@ -1,4 +1,4 @@
-// Copyright 2016-2022, University of Colorado Boulder
+// Copyright 2016-2023, University of Colorado Boulder
 
 //TODO reuse 1 instance of SnapshotsDialog for PhET-iO https://github.com/phetsims/tasks/issues/1129
 /**
