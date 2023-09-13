@@ -63,20 +63,20 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     options.titleNode = new TitleNode( options.expandedProperty, options.tandem.createTandem( 'titleNode' ) );
 
-    //TODO placeholder
+    //TODO placeholder https://github.com/phetsims/tasks/issues/1129
     const displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
       cornerRadius: options.cornerRadius,
       fill: MOTHAColors.spectrometerFillProperty,
       stroke: MOTHAColors.spectrometerStrokeProperty
     } );
 
-    //TODO relocate, handle reset
-    //TODO does this belong here?
+    //TODO relocate, handle reset https://github.com/phetsims/tasks/issues/1129
+    //TODO does this belong here? https://github.com/phetsims/tasks/issues/1129
     const recordingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'recordingProperty' )
     } );
     recordingProperty.link( recording => {
-      //TODO
+      //TODO https://github.com/phetsims/tasks/issues/1129
     } );
 
     const recordStopButton = new RecordStopButton( recordingProperty, {
@@ -96,7 +96,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       yMargin: 4,
       touchAreaDilation: 5,
       listener: () => {
-        //TODO
+        //TODO https://github.com/phetsims/tasks/issues/1129
       },
       tandem: options.tandem.createTandem( 'resetButton' )
     } );

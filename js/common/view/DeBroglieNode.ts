@@ -94,7 +94,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     this.deBroglieBrightnessNode = deBroglieBrightnessNode;
   }
 
-  //TODO a better way to step the selected view
+  //TODO a better way to step the selected view https://github.com/phetsims/tasks/issues/1129
   public step( dt: number ): void {
     if ( this.deBroglieViewProperty.value === '3D' ) {
       this.deBroglie3DNode.step( dt );

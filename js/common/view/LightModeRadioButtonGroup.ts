@@ -1,6 +1,6 @@
 // Copyright 2016-2023, University of Colorado Boulder
 
-//TODO on mouseDown in projector mode, radio buttons go gray
+//TODO on mouseDown in projector mode, radio buttons go gray https://github.com/phetsims/tasks/issues/1129
 /**
  * LightModeRadioButtonGroup provides radio buttons for selecting between monochromatic and full spectrum (white) light.
  *

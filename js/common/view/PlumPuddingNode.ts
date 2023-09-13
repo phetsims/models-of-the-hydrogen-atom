@@ -30,7 +30,7 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
                       providedOptions: PlumPuddingNodeOptions ) {
 
     const options = optionize<PlumPuddingNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options
+      //TODO default values for options https://github.com/phetsims/tasks/issues/1129
     }, providedOptions );
 
     // Plum pudding image, centered at the atom's position

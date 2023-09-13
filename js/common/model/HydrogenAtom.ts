@@ -18,7 +18,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
-//TODO move numberOfStates, groundState, hasTransitionWavelengths to another base class for those models
+//TODO move numberOfStates, groundState, hasTransitionWavelengths to another base class for those models https://github.com/phetsims/tasks/issues/1129
 type SelfOptions = {
   displayNameProperty: TReadOnlyProperty<string>; // name of the model shown in the UI
   iconHTMLImageElement: HTMLImageElement; // icon used to represent the model in the UI
@@ -33,13 +33,13 @@ export type HydrogenAtomOptions = SelfOptions & PickRequired<PhetioObjectOptions
 
 export default abstract class HydrogenAtom extends PhetioObject {
 
-  public readonly zoomedInBox: ZoomedInBox; //TODO do all hydrogen-atom models need this?
+  public readonly zoomedInBox: ZoomedInBox; //TODO do all hydrogen-atom models need this? https://github.com/phetsims/tasks/issues/1129
   public readonly displayNameProperty: TReadOnlyProperty<string>;
   public readonly iconHTMLImageElement: HTMLImageElement;
   public readonly position: Vector2;
   public readonly orientation: number;
-  public readonly numberOfStates: number; //TODO unused
-  public readonly groundState: number; //TODO unused
+  public readonly numberOfStates: number; //TODO unused https://github.com/phetsims/tasks/issues/1129
+  public readonly groundState: number; //TODO unused https://github.com/phetsims/tasks/issues/1129
   public readonly hasTransitionWavelengths: boolean;
 
   // Notifies listeners by emitting when a photon is emitted (an unfortunate name)

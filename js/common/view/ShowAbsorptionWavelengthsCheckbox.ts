@@ -1,6 +1,6 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
-//TODO white beam is not visible on white background in projector mode
+//TODO white beam is not visible on white background in projector mode https://github.com/phetsims/tasks/issues/1129
 /**
  * BeamNode is the beam the comes out of the gun.
  *

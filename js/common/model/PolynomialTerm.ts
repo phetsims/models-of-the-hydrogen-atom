@@ -1,6 +1,6 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
-//TODO is this used?
+//TODO is this used? https://github.com/phetsims/tasks/issues/1129
 /**
  * PolynomialTerm is a minimal/incomplete implementation of a polynomial term, as needed for solving
  * associated Legendre polynomials. See solveAssociatedLegendrePolynomial.ts

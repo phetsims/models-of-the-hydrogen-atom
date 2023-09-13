@@ -78,7 +78,7 @@ export type SchrodingerModelOptions = SelfOptions & DeBroglieModelOptions;
 
 export default class SchrodingerModel extends DeBroglieModel {
 
-  //TODO electronStateTupleProperty: Property<{ n: number, l: number, m: number }>
+  //TODO electronStateTupleProperty: Property<{ n: number, l: number, m: number }> https://github.com/phetsims/tasks/issues/1129
 
   // secondary electron state number (l)
   public readonly secondaryElectronStateProperty: NumberProperty;
@@ -99,7 +99,7 @@ export default class SchrodingerModel extends DeBroglieModel {
 
     this.secondaryElectronStateProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      //TODO range is dynamic [0,n-1]
+      //TODO range is dynamic [0,n-1] https://github.com/phetsims/tasks/issues/1129
       tandem: options.tandem.createTandem( 'secondaryElectronStateProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'secondary electron state (l)'
@@ -107,11 +107,11 @@ export default class SchrodingerModel extends DeBroglieModel {
 
     this.tertiaryElectronStateProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      //TODO range is dynamic [-l,+l]
+      //TODO range is dynamic [-l,+l] https://github.com/phetsims/tasks/issues/1129
       tandem: options.tandem.createTandem( 'tertiaryElectronStateProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'tertiary electron state (m)',
-      //TODO do we need to opt out here?
+      //TODO do we need to opt out here? https://github.com/phetsims/tasks/issues/1129
       rangePropertyOptions: {
         tandem: Tandem.OPT_OUT
       }
@@ -119,11 +119,11 @@ export default class SchrodingerModel extends DeBroglieModel {
   }
 
   public override step( dt: number ): void {
-    //TODO
+    //TODO https://github.com/phetsims/tasks/issues/1129
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
-    //TODO
+    //TODO https://github.com/phetsims/tasks/issues/1129
     photon.move( dt );
   }
 
@@ -224,7 +224,7 @@ export default class SchrodingerModel extends DeBroglieModel {
   }
 
   public fireOneAbsorbablePhoton(): void {
-    //TODO port MetastableHandler
+    //TODO port MetastableHandler https://github.com/phetsims/tasks/issues/1129
   }
 
   //----------------------------------------------------------------------------
@@ -241,7 +241,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * @param z coordinate on vertical axis
    */
   public getProbabilityDensity( n: number, l: number, m: number, x: number, y: number, z: number ): number {
-    //TODO validate state (n,l,m)
+    //TODO validate state (n,l,m) https://github.com/phetsims/tasks/issues/1129
     assert && assert( !( x === 0 && y === 0 && z === 0 ), 'undefined for (x,y,z)=(0,0,0)' );
 
     // convert to Polar coordinates

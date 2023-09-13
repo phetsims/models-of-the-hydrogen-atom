@@ -1,6 +1,6 @@
 // Copyright 2022, University of Colorado Boulder
 
-//TODO rename to DeBroglieRepresentation or DeBrogliePresentation
+//TODO rename to DeBroglieRepresentation or DeBrogliePresentation https://github.com/phetsims/tasks/issues/1129
 /**
  * DeBroglieView is a union type for the different representations of the de Broglie model.
  *

@@ -80,7 +80,7 @@ export default class MOTHAModel implements TModel {
 
     this.zoomedInBox = zoomedInBox;
 
-    //TODO default should be 'experiment'
+    //TODO default should be 'experiment' https://github.com/phetsims/tasks/issues/1129
     this.modelModeProperty = new StringUnionProperty( 'prediction', {
       validValues: ModelModeValues,
       tandem: tandem.createTandem( 'modelModeProperty' )
@@ -94,15 +94,15 @@ export default class MOTHAModel implements TModel {
 
     this.predictiveModelProperty = new Property<HydrogenAtom>( initialPredictiveModel, {
       validValues: predictiveModels
-      //TODO tandem
-      //TODO phetioType
+      //TODO tandem https://github.com/phetsims/tasks/issues/1129
+      //TODO phetioType https://github.com/phetsims/tasks/issues/1129
     } );
 
     this.hydrogenAtomProperty = new DerivedProperty(
       [ this.modelModeProperty, this.predictiveModelProperty ],
       ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experimentModel : predictiveModel, {
-        //TODO tandem
-        //TODO phetioType
+        //TODO tandem https://github.com/phetsims/tasks/issues/1129
+        //TODO phetioType https://github.com/phetsims/tasks/issues/1129
       } );
 
     this.light = new Light( zoomedInBox, {
@@ -110,8 +110,8 @@ export default class MOTHAModel implements TModel {
     } );
 
     this.photons = createObservableArray<Photon>( {
-      //TODO tandem
-      //TODO phetioType
+      //TODO tandem https://github.com/phetsims/tasks/issues/1129
+      //TODO phetioType https://github.com/phetsims/tasks/issues/1129
     } );
 
     this.isPlayingProperty = new BooleanProperty( true, {

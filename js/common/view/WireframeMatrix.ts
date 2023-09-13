@@ -1,6 +1,6 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
-//TODO replace with phet.dot.Matrix3
+//TODO replace with phet.dot.Matrix3 https://github.com/phetsims/tasks/issues/1129
 /**
  * WireframeMatrix implements some features of a 3D matrix.
  * This is a partial port of edu.colorado.phet.hydrogenatom.wireframe.Matrix3D.java.
@@ -29,7 +29,7 @@ export default class WireframeMatrix {
   private zo = 0;
 
   public constructor() {
-    //TODO
+    //TODO https://github.com/phetsims/tasks/issues/1129
   }
 
   /**

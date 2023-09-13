@@ -92,11 +92,11 @@ export default class PlumPuddingModel extends HydrogenAtom {
     super( zoomedInBox, options );
 
     this.electron = new Electron( {
-      //TODO position is not properly initialized
+      //TODO position is not properly initialized https://github.com/phetsims/tasks/issues/1129
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
-    //TODO make this go away, just set electron.positionProperty directly
+    //TODO make this go away, just set electron.positionProperty directly https://github.com/phetsims/tasks/issues/1129
     this.electronOffsetProperty = new Vector2Property( Vector2.ZERO, {
       tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
       phetioReadOnly: true
@@ -107,18 +107,18 @@ export default class PlumPuddingModel extends HydrogenAtom {
     } );
 
     this.electronLineProperty = new Property<ElectronLine>( nextElectronLine( this.radius ), {
-      //TODO tandem
-      //TODO phetioType: ElectronLineIO
-      //TODO phetioReadOnly: true
+      //TODO tandem https://github.com/phetsims/tasks/issues/1129
+      //TODO phetioType: ElectronLineIO https://github.com/phetsims/tasks/issues/1129
+      //TODO phetioReadOnly: true https://github.com/phetsims/tasks/issues/1129
     } );
 
-    //TODO this.electron.directionProperty is unused
+    //TODO this.electron.directionProperty is unused https://github.com/phetsims/tasks/issues/1129
     this.electronDirectionPositiveProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'electronDirectionPositiveProperty' ),
       phetioReadOnly: true
     } );
 
-    //TODO this.electron.speedProperty is unused
+    //TODO this.electron.speedProperty is unused https://github.com/phetsims/tasks/issues/1129
     this.electronIsMovingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'electronIsMovingProperty' ),
       phetioReadOnly: true
@@ -130,7 +130,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       phetioReadOnly: true
     } );
 
-    //TODO should this affect this.electron.speedProperty?
+    //TODO should this affect this.electron.speedProperty? https://github.com/phetsims/tasks/issues/1129
     this.previousAmplitudeProperty = new NumberProperty( 0, {
       range: new Range( 0, 1 ),
       tandem: options.tandem.createTandem( 'previousAmplitudeProperty' ),
@@ -220,8 +220,8 @@ export default class PlumPuddingModel extends HydrogenAtom {
     const y0 = this.electronOffsetProperty.value.y;
 
     // Determine dx and dy
-    //TODO include electron speed?
-    //TODO should electron move faster, to match the Java version?
+    //TODO include electron speed? https://github.com/phetsims/tasks/issues/1129
+    //TODO should electron move faster, to match the Java version? https://github.com/phetsims/tasks/issues/1129
     const distanceDelta = dt * amplitude * ( 2 * this.radius );
     let dx = Math.abs( electronLine.x1 ) * ( distanceDelta / this.radius );
     let dy = Math.abs( electronLine.y1 ) * ( distanceDelta / this.radius );
@@ -229,7 +229,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
     // Adjust signs for electron's horizontal direction
     const sign = ( this.electronDirectionPositiveProperty.value ? 1 : -1 );
     dx *= sign;
-    dy *= sign; //TODO why are we adjusting dy?
+    dy *= sign; //TODO why are we adjusting dy? https://github.com/phetsims/tasks/issues/1129
     if ( electronLine.y1 > electronLine.y2 ) {
       dy *= -1;
     }
@@ -254,7 +254,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
     }
 
     // Did we cross the origin?
-    //TODO why is ( x === 0 && y === 0 ) considered a zero crossing?
+    //TODO why is ( x === 0 && y === 0 ) considered a zero crossing? https://github.com/phetsims/tasks/issues/1129
     if ( ( x === 0 && y === 0 ) || signIsDifferent( x, x0 ) || signIsDifferent( y, y0 ) ) {
       this.numberOfZeroCrossingsProperty.value += 1;
     }
@@ -262,7 +262,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
     this.electronOffsetProperty.value = new Vector2( x, y );
   }
 
-  //TODO Decouple interacting with photon from moving it.
+  //TODO Decouple interacting with photon from moving it. https://github.com/phetsims/tasks/issues/1129
   /**
    * Tries to absorb a photon. If it is not absorbed, the photon is moved.
    */
@@ -347,7 +347,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         position: this.electron.positionProperty.value, // at the electron's position
         direction: MOTHAUtils.nextAngle(), // in a random direction
         wasEmitted: true,
-        tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
+        tandem: Tandem.OPT_OUT //TODO create via PhetioGroup https://github.com/phetsims/tasks/issues/1129
       } ) );
     }
   }

@@ -14,7 +14,7 @@ const YELLOW = 'rgb( 235, 235, 0 )';
 
 const MOTHAColors = {
 
-  //TODO Should these be changeable? Why are these the same color?
+  //TODO Should these be changeable? Why are these the same color? https://github.com/phetsims/tasks/issues/1129
   UV_COLOR: 'rgb( 160, 160, 160 )',
   IR_COLOR: 'rgb( 160, 160, 160 )',
 

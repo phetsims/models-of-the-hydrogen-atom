@@ -1,6 +1,6 @@
 // Copyright 2016-2023, University of Colorado Boulder
 
-//TODO this is a placeholder
+//TODO this is a placeholder https://github.com/phetsims/tasks/issues/1129
 /**
  * SnapshotNode is a snapshot from the spectrometer.
  *
@@ -27,7 +27,7 @@ export default class SnapshotNode extends Node {
   public constructor( numberOfSnapshotsProperty: TProperty<number>, providedOptions?: SnapshotNodeOptions ) {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO default values for options
+      //TODO default values for options https://github.com/phetsims/tasks/issues/1129
     }, providedOptions );
 
     const backgroundNode = new Rectangle( 0, 0, 500, 150, {
@@ -36,7 +36,7 @@ export default class SnapshotNode extends Node {
       stroke: MOTHAColors.spectrometerStrokeProperty
     } );
 
-    //TODO i18n
+    //TODO i18n https://github.com/phetsims/tasks/issues/1129
     const titleText = new Text( 'Snapshot', {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.snapshotTextFillProperty,
@@ -51,7 +51,7 @@ export default class SnapshotNode extends Node {
       },
       right: backgroundNode.right - 10,
       bottom: backgroundNode.bottom - 10,
-      tandem: Tandem.OPT_OUT //TODO SnapshotNode is dynamically created
+      tandem: Tandem.OPT_OUT //TODO SnapshotNode is dynamically created https://github.com/phetsims/tasks/issues/1129
     } );
 
     options.children = [ backgroundNode, titleText, trashButton ];
@@ -59,7 +59,7 @@ export default class SnapshotNode extends Node {
     super( options );
   }
 
-  //TODO dispose
+  //TODO dispose https://github.com/phetsims/tasks/issues/1129
 }
 
 modelsOfTheHydrogenAtom.register( 'SnapshotNode', SnapshotNode );

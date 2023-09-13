@@ -90,7 +90,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     } );
 
     this.electron = new Electron( {
-      //TODO position is not properly initialized
+      //TODO position is not properly initialized https://github.com/phetsims/tasks/issues/1129
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
@@ -98,12 +98,12 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electronDistanceProperty' )
     } );
 
-    //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
+    //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO https://github.com/phetsims/tasks/issues/1129
     this.electronAngleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
       tandem: options.tandem.createTandem( 'electronAngleProperty' )
     } );
 
-    //TODO make this go away, just set electron.positionProperty directly
+    //TODO make this go away, just set electron.positionProperty directly https://github.com/phetsims/tasks/issues/1129
     this.electronOffsetProperty = new DerivedProperty(
       [ this.electronDistanceProperty, this.electronAngleProperty ],
       ( distance, angle ) => MOTHAUtils.polarToCartesian( distance, angle ), {

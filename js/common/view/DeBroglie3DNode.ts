@@ -31,7 +31,7 @@ const NUMBER_OF_ORBIT_VERTICES = 200;
 const NUMBER_OF_WAVE_VERTICES = 200;
 
 // The final view angle (rotation about the x-axis), after the model has rotated into place.
-// If you change this value, you must also change DeBroglieModel.ORBIT_3D_Y_SCALE !! TODO why?
+// If you change this value, you must also change DeBroglieModel.ORBIT_3D_Y_SCALE !! TODO why? https://github.com/phetsims/tasks/issues/1129
 const FINAL_VIEW_ANGLE = Utils.toRadians( 70 );
 
 // change is angle during view animation
@@ -46,10 +46,10 @@ export default class DeBroglie3DNode extends Node {
   private readonly hydrogenAtom: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
 
-  //TODO viewMatrix needs to be a Property to save state, switch to Property<Matrix3>
+  //TODO viewMatrix needs to be a Property to save state, switch to Property<Matrix3> https://github.com/phetsims/tasks/issues/1129
   private readonly viewMatrix: WireframeMatrix; // matrix used to set the view angle
 
-  //TODO can we get this from viewMatrix?
+  //TODO can we get this from viewMatrix? https://github.com/phetsims/tasks/issues/1129
   private currentViewAngleProperty: Property<number>; // the current view angle
 
   private readonly orbitVertices: Vector3[]; // reusable vertices for orbits
@@ -60,8 +60,8 @@ export default class DeBroglie3DNode extends Node {
   private readonly waveFrontColorProperty: TReadOnlyProperty<Color>;
   private readonly waveBackColorProperty: TReadOnlyProperty<Color>;
 
-  private readonly waveModel: WireframeModel; //TODO does this have PhET-iO state?
-  private readonly waveNode: WireframeNode; //TODO does this have PhET-iO state?
+  private readonly waveModel: WireframeModel; //TODO does this have PhET-iO state? https://github.com/phetsims/tasks/issues/1129
+  private readonly waveNode: WireframeNode; //TODO does this have PhET-iO state? https://github.com/phetsims/tasks/issues/1129
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
@@ -85,7 +85,7 @@ export default class DeBroglie3DNode extends Node {
 
     this.viewMatrix = new WireframeMatrix();
 
-    //TODO needs to be reset
+    //TODO needs to be reset https://github.com/phetsims/tasks/issues/1129
     this.currentViewAngleProperty = new NumberProperty( 0, {
       tandem: options.tandem.createTandem( 'currentViewAngleProperty' )
     } );
@@ -135,7 +135,7 @@ export default class DeBroglie3DNode extends Node {
       tandem: options.tandem.createTandem( 'waveNode' )
     } );
 
-    //TODO are these dependencies correct?
+    //TODO are these dependencies correct? https://github.com/phetsims/tasks/issues/1129
     Multilink.multilink( [ hydrogenAtom.getElectronStateProperty(), hydrogenAtom.electronAngleProperty, this.visibleProperty ],
       ( electronState, electronAngle, visible ) => {
         visible && this.update();
@@ -143,7 +143,7 @@ export default class DeBroglie3DNode extends Node {
   }
 
   public step( dt: number ): void {
-    //TODO implement or delete step
+    //TODO implement or delete step https://github.com/phetsims/tasks/issues/1129
   }
 
   private update(): void {
@@ -179,7 +179,7 @@ export default class DeBroglie3DNode extends Node {
     matrix.multiply( this.viewMatrix );
     this.waveModel.setMatrix( matrix );
 
-    //TODO how does this.waveNode get notified to update?
+    //TODO how does this.waveNode get notified to update? https://github.com/phetsims/tasks/issues/1129
   }
 
   /*
@@ -191,11 +191,11 @@ export default class DeBroglie3DNode extends Node {
       this.viewMatrix.unit();
       this.viewMatrix.rotateX( this.currentViewAngleProperty.value );
 
-      //TODO what needs to be notified that the.viewMatrix has changed?
+      //TODO what needs to be notified that the.viewMatrix has changed? https://github.com/phetsims/tasks/issues/1129
     }
   }
 
-  //TODO convert this to: class OrbitNode extends WireframeNode
+  //TODO convert this to: class OrbitNode extends WireframeNode https://github.com/phetsims/tasks/issues/1129
   /**
    * Creates a Node for an electron orbit.
    */

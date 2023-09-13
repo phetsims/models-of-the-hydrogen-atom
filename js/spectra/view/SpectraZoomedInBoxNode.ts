@@ -36,7 +36,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
   public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
     const options = optionize<SpectraZoomedInBoxNodeOptions, SelfOptions, ZoomedInBoxNodeOptions>()( {
-      //TODO default values for options
+      //TODO default values for options https://github.com/phetsims/tasks/issues/1129
     }, providedOptions );
 
     // All of the model-view transform action takes place in the zoomed-in box.
@@ -100,7 +100,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
   public step( dt: number ): void {
 
-    //TODO a better way to step the selected view
+    //TODO a better way to step the selected view https://github.com/phetsims/tasks/issues/1129
     if ( this.model.hydrogenAtomProperty.value === this.model.bohrModel ) {
       this.deBroglieNode.step( dt );
     }

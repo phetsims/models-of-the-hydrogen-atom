@@ -45,7 +45,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
       schrodingerModel
     ];
 
-    //TODO address this with an interface?
+    //TODO address this with an interface? https://github.com/phetsims/tasks/issues/1129
     assert && assert( _.every( predictiveModels, model => model.hasTransitionWavelengths ),
       'all models in this screen must include the concept of transition wavelengths' );
 

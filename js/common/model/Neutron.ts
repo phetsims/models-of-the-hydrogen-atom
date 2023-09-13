@@ -25,8 +25,8 @@ export default class Neutron extends Particle {
       // ParticleOptions
       radius: MOTHAConstants.NEUTRON_RADIUS,
       isDisposable: false
-      //TODO phetioType: Neutron.NeutronIO,
-      //TODO phetioDynamicElement: true
+      //TODO phetioType: Neutron.NeutronIO, https://github.com/phetsims/tasks/issues/1129
+      //TODO phetioDynamicElement: true https://github.com/phetsims/tasks/issues/1129
     }, providedOptions );
 
     super( options );

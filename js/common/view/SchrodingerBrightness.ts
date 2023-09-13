@@ -40,7 +40,7 @@ export default class SchrodingerBrightness {
     const nMax = SchrodingerModel.getNumberOfStates();
 
     // Initialize brightness entries to null
-    //TODO this is so ugly, ported from Java
+    //TODO this is so ugly, ported from Java https://github.com/phetsims/tasks/issues/1129
     this.cache = Array( nMax );
     for ( let n = 1; n <= nMax; n++ ) {
       const lSize = n;
@@ -61,7 +61,7 @@ export default class SchrodingerBrightness {
     }
 
     // Initialize sums with zeros
-    //TODO this is so ugly
+    //TODO this is so ugly https://github.com/phetsims/tasks/issues/1129
     this.sums = Array( NUMBER_OF_VERTICAL_CELLS );
     for ( let i = 0; i < NUMBER_OF_VERTICAL_CELLS; i++ ) {
       this.sums[ i ] = Array( NUMBER_OF_HORIZONTAL_CELLS ).fill( 0 );

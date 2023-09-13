@@ -3,7 +3,7 @@
 /**
  * SchrodingerNode shows the Schrodinger model of the hydrogen atom.
  *
- * TODO copy details from SchrodingerNode.java
+ * TODO copy details from SchrodingerNode.java https://github.com/phetsims/tasks/issues/1129
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -39,7 +39,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
                       providedOptions: SchrodingerNodeOptions ) {
 
     const options = optionize<SchrodingerNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options
+      //TODO default values for options https://github.com/phetsims/tasks/issues/1129
     }, providedOptions );
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );

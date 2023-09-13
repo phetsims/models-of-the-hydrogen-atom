@@ -41,7 +41,7 @@ type BilliardBallModelOptions = SelfOptions &
 
 export default class BilliardBallModel extends HydrogenAtom {
 
-  //TODO do all HydrogenAtom subclasses have radius?
+  //TODO do all HydrogenAtom subclasses have radius? https://github.com/phetsims/tasks/issues/1129
   public readonly radius = MOTHAConstants.BILLIARD_BALL_RADIUS;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {
@@ -61,7 +61,7 @@ export default class BilliardBallModel extends HydrogenAtom {
     // do nothing for this model
   }
 
-  //TODO This does not look good in 'Fast' speed, because photos are inside the atom. Especially noticeable when stepping.
+  //TODO This does not look good in 'Fast' speed, because photos are inside the atom. Especially noticeable when stepping. https://github.com/phetsims/tasks/issues/1129
   /**
    * Moves a photon. If the photon collides with the atom, the photon bounces back at a 'steep but random' angle.
    * Otherwise, it continues to move in its current direction.

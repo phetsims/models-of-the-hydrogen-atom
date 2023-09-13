@@ -31,7 +31,7 @@ export default class ZoomedInBoxNode extends Node {
                          providedOptions: ZoomedInBoxNodeOptions ) {
 
     const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO default values for options
+      //TODO default values for options https://github.com/phetsims/tasks/issues/1129
 
       // NodeOptions
       isDisposable: false
