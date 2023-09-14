@@ -66,7 +66,7 @@ export default class SpectraModel extends MOTHAModel {
       schrodingerModel
     ];
 
-    //TODO default should be billiardBallModel https://github.com/phetsims/tasks/issues/1129
+    //TODO default should be billiardBallModel
     super( zoomedInBox, predictiveModels, schrodingerModel, tandem );
 
     this.billiardBallModel = billiardBallModel;

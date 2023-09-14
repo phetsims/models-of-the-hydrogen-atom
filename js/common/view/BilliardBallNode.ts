@@ -29,7 +29,7 @@ export default class BilliardBallNode extends HydrogenAtomNode {
                       providedOptions: BilliardBallNodeOptions ) {
 
     const options = optionize<BilliardBallNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options https://github.com/phetsims/tasks/issues/1129
+      //TODO default values for options
     }, providedOptions );
 
     const viewRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.radius );

@@ -30,7 +30,7 @@ export default class MOTHAViewProperties {
   // are absorption wavelengths indicated on the wavelength slider?
   public readonly absorptionWavelengthsVisibleProperty: Property<boolean>;
 
-  //TODO for prototyping https://github.com/phetsims/tasks/issues/1129
+  //TODO for prototyping
   // number of spectrometer snapshots
   public readonly numberOfSnapshotsProperty: Property<number>;
 

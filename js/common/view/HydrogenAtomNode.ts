@@ -1,6 +1,6 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
-//TODO should this Node be responsible for position? https://github.com/phetsims/tasks/issues/1129
+//TODO should this Node be responsible for position?
 /**
  * HydrogenAtomNode is the base class for all hydrogen-atom views.
  *
@@ -33,7 +33,7 @@ export default class HydrogenAtomNode extends Node {
                          providedOptions: HydrogenAtomNodeOptions ) {
 
     const options = optionize<HydrogenAtomNodeOptions, SelfOptions, RectangleOptions>()( {
-      //TODO default values for options https://github.com/phetsims/tasks/issues/1129
+      //TODO default values for options
 
       // RectangleOptions
       isDisposable: false

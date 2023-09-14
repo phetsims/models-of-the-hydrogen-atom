@@ -25,8 +25,8 @@ export default class Electron extends Particle {
       // ParticleOptions
       radius: MOTHAConstants.ELECTRON_RADIUS,
       isDisposable: false
-      //TODO phetioType: Photon.PhotonIO, https://github.com/phetsims/tasks/issues/1129
-      //TODO phetioDynamicElement: true https://github.com/phetsims/tasks/issues/1129
+      //TODO phetioType: Photon.PhotonIO,
+      //TODO phetioDynamicElement: true
     }, providedOptions );
 
     super( options );

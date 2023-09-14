@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * TODO https://github.com/phetsims/tasks/issues/1129
+ * TODO
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,7 +20,7 @@ type SelfOptions = EmptySelfOptions;
 
 type SchrodingerFieldNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-//TODO this was SchrodingerNode.AtomNode is Java https://github.com/phetsims/tasks/issues/1129
+//TODO this was SchrodingerNode.AtomNode is Java
 export default class SchrodingerFieldNode extends Node {
 
   private readonly upperLeftQuadrantNode: QuadrantNode;
@@ -30,13 +30,13 @@ export default class SchrodingerFieldNode extends Node {
                       providedOptions: SchrodingerFieldNodeOptions ) {
 
     const options = optionize<SchrodingerFieldNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO https://github.com/phetsims/tasks/issues/1129
+      //TODO
     }, providedOptions );
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
 
     const upperLeftQuadrantNode = new QuadrantNode( zoomedInBoxBounds.width / 2, zoomedInBoxBounds.height / 2 );
-    //TODO wrap upperLeftQuadrantNode in 4 other Nodes, transformed for each quadrant https://github.com/phetsims/tasks/issues/1129
+    //TODO wrap upperLeftQuadrantNode in 4 other Nodes, transformed for each quadrant
 
     options.children = [ upperLeftQuadrantNode ];
 
@@ -55,7 +55,7 @@ export default class SchrodingerFieldNode extends Node {
   }
 }
 
-//TODO this was SchrodingerNode.GridNode is Java, one quadrant of the field https://github.com/phetsims/tasks/issues/1129
+//TODO this was SchrodingerNode.GridNode is Java, one quadrant of the field
 /**
  * QuadrantNode renders one quadrant of the 2D Schrodinger field.
  */
@@ -97,7 +97,7 @@ class QuadrantNode extends CanvasNode {
     this.invalidatePaint(); // results in a call to paintCanvas
   }
 
-  //TODO Should this be protected in CanvasNode? https://github.com/phetsims/tasks/issues/1129
+  //TODO Should this be protected in CanvasNode?
   public paintCanvas( context: CanvasRenderingContext2D ): void {
 
     let x: number;

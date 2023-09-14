@@ -54,7 +54,7 @@ export default class DeBroglieModel extends BohrModel {
     super( zoomedInBox, options );
 
     this.electron3D = new Electron( {
-      //TODO position is not properly initialized https://github.com/phetsims/tasks/issues/1129
+      //TODO position is not properly initialized
       tandem: options.tandem.createTandem( 'electron3D' )
     } );
 
@@ -85,14 +85,14 @@ export default class DeBroglieModel extends BohrModel {
     return amplitude;
   }
 
-  //TODO normalize the return value to [0,2*Math.PI] https://github.com/phetsims/tasks/issues/1129
+  //TODO normalize the return value to [0,2*Math.PI]
   /**
    * Calculates the new electron angle for some time step. For de Broglie, the change in angle (and thus
    * the oscillation frequency) is the same for all states of the electron.
    */
   protected override calculateNewElectronAngle( dt: number ): number {
     const deltaAngle = dt * BohrModel.ELECTRON_ANGLE_DELTA;
-    return this.electronAngleProperty.value - deltaAngle; //TODO clockwise https://github.com/phetsims/tasks/issues/1129
+    return this.electronAngleProperty.value - deltaAngle; //TODO clockwise
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ export default class DeBroglieModel extends BohrModel {
     const distance = photonOffset.distanceXY( orbitX, orbitY );
 
     // how close the photon's center must be to a point on the electron's orbit
-    //TODO why is getClosenessForCollision used for '3D' when it's a function of BRIGHTNESS_RING_THICKNESS? https://github.com/phetsims/tasks/issues/1129
+    //TODO why is getClosenessForCollision used for '3D' when it's a function of BRIGHTNESS_RING_THICKNESS?
     const closeness = this.getClosenessForCollision( photon );
 
     return ( distance <= closeness );
@@ -152,7 +152,7 @@ export default class DeBroglieModel extends BohrModel {
     const photonRadius = Math.sqrt( ( photonOffset.x * photonOffset.x ) + ( photonOffset.y * photonOffset.y ) );
     const orbitRadius = this.getElectronOrbitRadius( this.getElectronState() );
 
-    //TODO why is getClosenessForCollision used for 'radial' when it's a function of BRIGHTNESS_RING_THICKNESS? https://github.com/phetsims/tasks/issues/1129
+    //TODO why is getClosenessForCollision used for 'radial' when it's a function of BRIGHTNESS_RING_THICKNESS?
     return ( Math.abs( photonRadius - orbitRadius ) <= this.getClosenessForCollision( photon ) );
   }
 
@@ -163,7 +163,7 @@ export default class DeBroglieModel extends BohrModel {
     return photon.positionProperty.value.minus( this.position );
   }
 
-  //TODO why isn't this adjusted for '3D' view? https://github.com/phetsims/tasks/issues/1129
+  //TODO why isn't this adjusted for '3D' view?
   /**
    * How close the photon's center must be to a point on the electron's orbit in order for a collision to occur.
    */

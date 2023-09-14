@@ -1,7 +1,7 @@
 // Copyright 2015-2023, University of Colorado Boulder
 
-//TODO on mouseDown in projector mode, radio buttons go gray https://github.com/phetsims/tasks/issues/1129
-//TODO colors of Billiard Ball icon do not match BilliardBallNode https://github.com/phetsims/tasks/issues/1129
+//TODO on mouseDown in projector mode, radio buttons go gray
+//TODO colors of Billiard Ball icon do not match BilliardBallNode
 /**
  * PredictionPanel contains controls (radio buttons) for choosing one of the predictive models.
  * It is shown when the AB-switch is set to 'Prediction'.
@@ -119,7 +119,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
           maxWidth: 200 // determined empirically
         } ) ]
     } ),
-    tandemName: `${predictiveModel.tandem.name}RadioButton` //TODO too clever? https://github.com/phetsims/tasks/issues/1129
+    tandemName: `${predictiveModel.tandem.name}RadioButton` //TODO too clever?
   };
 }
 

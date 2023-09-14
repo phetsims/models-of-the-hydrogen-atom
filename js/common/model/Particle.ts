@@ -51,7 +51,7 @@ export default class Particle extends PhetioObject {
       direction: 0,
 
       // PhetioObjectOptions
-      phetioState: false //TODO https://github.com/phetsims/tasks/issues/1129
+      phetioState: false //TODO
     }, providedOptions );
 
     super( options );

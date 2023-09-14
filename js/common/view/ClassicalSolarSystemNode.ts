@@ -33,7 +33,7 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
                       providedOptions: ClassicalSolarSystemNodeOptions ) {
 
     const options = optionize<ClassicalSolarSystemNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options https://github.com/phetsims/tasks/issues/1129
+      //TODO default values for options
     }, providedOptions );
 
     const protonNodeTandem = options.tandem.createTandem( 'protonNode' );

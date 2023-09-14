@@ -55,7 +55,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       maxWidth: 150 // i18n, determined empirically
     } );
 
-    //TODO this is a placeholder https://github.com/phetsims/tasks/issues/1129
+    //TODO this is a placeholder
     const diagramNode = new Rectangle( 0, 0, DIAGRAM_SIZE.width, DIAGRAM_SIZE.height, {
       fill: 'white',
       stroke: 'black'

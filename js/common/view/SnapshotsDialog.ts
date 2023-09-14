@@ -1,6 +1,6 @@
 // Copyright 2016-2023, University of Colorado Boulder
 
-//TODO reuse 1 instance of SnapshotsDialog for PhET-iO https://github.com/phetsims/tasks/issues/1129
+//TODO reuse 1 instance of SnapshotsDialog for PhET-iO
 /**
  * SnapshotsDialog is a dialog that displays spectrometer snapshots.
  *
@@ -42,7 +42,7 @@ export default class SnapshotsDialog extends Dialog {
 
     super( content, options );
 
-    //TODO remove a specific snapshot, rather than rebuilding them all https://github.com/phetsims/tasks/issues/1129
+    //TODO remove a specific snapshot, rather than rebuilding them all
     const numberOfSnapshotsObserver = ( numberOfSnapshots: number ) => {
       if ( numberOfSnapshots === 0 ) {
         this.hide();
@@ -58,8 +58,8 @@ export default class SnapshotsDialog extends Dialog {
     };
   }
 
-  //TODO verify whether this gets called and whether it works correctly, because Dialog.dispose has been suspect https://github.com/phetsims/tasks/issues/1129
-  //TODO should we not dispose, and reuse this Dialog, for PhET-iO? https://github.com/phetsims/tasks/issues/1129
+  //TODO verify whether this gets called and whether it works correctly, because Dialog.dispose has been suspect
+  //TODO should we not dispose, and reuse this Dialog, for PhET-iO?
   public override dispose(): void {
     this.disposeSnapshotsDialog();
     super.dispose();

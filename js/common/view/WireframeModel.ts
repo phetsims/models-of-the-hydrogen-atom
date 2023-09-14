@@ -57,18 +57,18 @@ export default class WireframeModel {
   }
 
   public reset(): void {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
   }
 
   public addVertices( vertices: Vector3[] ): void {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
   }
 
   /**
    * Adds a line between 2 vertices.
    */
   public addLine( index1: number, index2: number ): void {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
   }
 
   public getMatrix(): WireframeMatrix {
@@ -78,37 +78,37 @@ export default class WireframeModel {
   public setMatrix( matrix: WireframeMatrix ): void {
     if ( this.matrix !== matrix ) {
       this.matrix = matrix;
-      //TODO https://github.com/phetsims/tasks/issues/1129
+      //TODO
     }
   }
 
   public getXMin(): number {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
     return 0;
   }
 
   public getXMax(): number {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
     return 0;
   }
 
   public getYMin(): number {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
     return 0;
   }
 
   public getYMax(): number {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
     return 0;
   }
 
   public getZMin(): number {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
     return 0;
   }
 
   public getZMax(): number {
-    //TODO https://github.com/phetsims/tasks/issues/1129
+    //TODO
     return 0;
   }
 }

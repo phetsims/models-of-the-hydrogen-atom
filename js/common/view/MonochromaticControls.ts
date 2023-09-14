@@ -62,7 +62,7 @@ export default class MonochromaticControls extends VBox {
       valueFont: new PhetFont( 16 ),
       tandem: options.tandem.createTandem( 'wavelengthSlider' )
     } );
-    //TODO wavelengthSlider.absorptionWavelengthsVisible = hydrogenAtomModel.hasTransitionWavelengths && absorptionWavelengthsVisible; https://github.com/phetsims/tasks/issues/1129
+    //TODO wavelengthSlider.absorptionWavelengthsVisible = hydrogenAtomModel.hasTransitionWavelengths && absorptionWavelengthsVisible;
 
     // 'Show absorption wavelengths' checkbox
     const showAbsorptionWavelengthsCheckbox = new ShowAbsorptionWavelengthsCheckbox(

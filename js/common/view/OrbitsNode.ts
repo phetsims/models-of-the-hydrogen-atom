@@ -21,7 +21,7 @@ type OrbitsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class OrbitsNode extends Node {
 
-  //TODO BohrModel is not quite the right type here https://github.com/phetsims/tasks/issues/1129
+  //TODO BohrModel is not quite the right type here
   public constructor( hydrogenAtom: BohrModel, modelViewTransform: ModelViewTransform2, providedOptions: OrbitsNodeOptions ) {
 
     const options = optionize<OrbitsNodeOptions, SelfOptions, NodeOptions>()( {

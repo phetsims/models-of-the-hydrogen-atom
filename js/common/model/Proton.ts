@@ -25,8 +25,8 @@ export default class Proton extends Particle {
       // ParticleOptions
       radius: MOTHAConstants.PROTON_RADIUS,
       isDisposable: false
-      //TODO phetioType: Proton.ProtonIO, https://github.com/phetsims/tasks/issues/1129
-      //TODO phetioDynamicElement: true https://github.com/phetsims/tasks/issues/1129
+      //TODO phetioType: Proton.ProtonIO,
+      //TODO phetioDynamicElement: true
     }, providedOptions );
 
     super( options );

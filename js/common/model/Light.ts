@@ -78,7 +78,7 @@ export default class Light {
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: LightOptions ) {
 
     const options = optionize<LightOptions, SelfOptions>()( {
-      //TODO https://github.com/phetsims/tasks/issues/1129
+      //TODO
     }, providedOptions );
 
     this.zoomedInBox = zoomedInBox;
@@ -169,7 +169,7 @@ export default class Light {
       wavelength: this.getNextPhotonWavelength(),
       position: this.getNextPhotonPosition(),
       direction: Math.PI / 2, // in the direction of +y
-      tandem: Tandem.OPT_OUT //TODO create via PhetioGroup https://github.com/phetsims/tasks/issues/1129
+      tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
     } ) );
   }
 
@@ -182,7 +182,7 @@ export default class Light {
       wavelength: wavelength,
       position: new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ),
       direction: Math.PI / 2, // in the direction of +y
-      tandem: Tandem.OPT_OUT //TODO create via PhetioGroup https://github.com/phetsims/tasks/issues/1129
+      tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
     } ) );
   }
 

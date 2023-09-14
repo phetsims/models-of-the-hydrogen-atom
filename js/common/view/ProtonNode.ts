@@ -1,6 +1,6 @@
 // Copyright 2015-2023, University of Colorado Boulder
 
-//TODO duplication with ElectronNode https://github.com/phetsims/tasks/issues/1129
+//TODO duplication with ElectronNode
 /**
  * ProtonNode is the visual representation of a proton.
  *

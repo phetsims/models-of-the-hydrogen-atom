@@ -43,8 +43,8 @@ export default class Photon extends Particle {
       radius: MOTHAConstants.PHOTON_RADIUS,
       speed: MOTHAConstants.PHOTON_INITIAL_SPEED
 
-      //TODO phetioType: Photon.PhotonIO, https://github.com/phetsims/tasks/issues/1129
-      //TODO phetioDynamicElement: true https://github.com/phetsims/tasks/issues/1129
+      //TODO phetioType: Photon.PhotonIO,
+      //TODO phetioDynamicElement: true
     }, providedOptions );
 
     super( options );

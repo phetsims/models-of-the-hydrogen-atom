@@ -19,7 +19,7 @@ export default class ProbabilisticChooser<T> {
   private readonly normalizedEntries: ProbabilisticChooserEntry<T>[];
 
   public constructor( entries: ProbabilisticChooserEntry<T>[] ) {
-    assert && assert( _.every( entries, entry => ( entry.weight >= 0 ) ) ); //TODO correct? https://github.com/phetsims/tasks/issues/1129
+    assert && assert( _.every( entries, entry => ( entry.weight >= 0 ) ) ); //TODO correct?
 
     // Compute the normalization factor for the weights.
     let totalWeight = 0;
@@ -37,13 +37,13 @@ export default class ProbabilisticChooser<T> {
       p += entries[ i ].weight * normalizationFactor;
       this.normalizedEntries.push( { value: entries[ i ].value, weight: p } );
     }
-    assert && assert( _.every( this.normalizedEntries, entry => ( entry.weight >= 0 && entry.weight <= 1 ) ) ); //TODO correct? https://github.com/phetsims/tasks/issues/1129
+    assert && assert( _.every( this.normalizedEntries, entry => ( entry.weight >= 0 && entry.weight <= 1 ) ) ); //TODO correct?
   }
 
   /**
    * Gets a value using a random probability of selection.
    */
-  public getNext(): T | null { //TODO should always return T, never null https://github.com/phetsims/tasks/issues/1129
+  public getNext(): T | null { //TODO should always return T, never null
     const weight = dotRandom.nextDouble();
     let value: T | null = null;
     for ( let i = 0; i < this.normalizedEntries.length && value === null; i++ ) {

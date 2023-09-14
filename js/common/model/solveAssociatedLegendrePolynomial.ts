@@ -36,7 +36,7 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
 
   for ( let i = 0; i < l; i++ ) {
 
-    // x^2-1 times each term on left side TODO what does this mean? https://github.com/phetsims/tasks/issues/1129
+    // x^2-1 times each term on left side TODO what does this mean?
     const terms: PolynomialTerm[] = [];
     for ( let k = 0; k < productTerms.length; k++ ) {
       const term = productTerms[ k ];
@@ -50,7 +50,7 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
     productTerms[ i ] = productTerms[ i ].derive( l + m );
   }
 
-  // Wolfram says there is a sign convention difference here. TODO clarify this? https://github.com/phetsims/tasks/issues/1129
+  // Wolfram says there is a sign convention difference here. TODO clarify this?
   return ( Math.pow( -1, m ) / ( Math.pow( 2, l ) * factorial( l ) ) )
          * Math.pow( 1 - x * x, m / 2 ) * evaluate( productTerms, x );
 }

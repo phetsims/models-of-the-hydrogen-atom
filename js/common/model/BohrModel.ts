@@ -113,7 +113,7 @@ export default class BohrModel extends HydrogenAtom {
     } );
 
     this.electron = new Electron( {
-      //TODO position is not properly initialized https://github.com/phetsims/tasks/issues/1129
+      //TODO position is not properly initialized
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
@@ -131,18 +131,18 @@ export default class BohrModel extends HydrogenAtom {
     } );
 
     // When the electron changes state, reset timeInStateProperty.
-    //TODO this is an ordering problem for restoring PhET-iO state https://github.com/phetsims/tasks/issues/1129
+    //TODO this is an ordering problem for restoring PhET-iO state
     this.electronStateProperty.link( electronState => {
       this.timeInStateProperty.value = 0;
     } );
 
-    //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO https://github.com/phetsims/tasks/issues/1129
+    //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
     this.electronAngleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
       tandem: options.tandem.createTandem( 'electronAngleProperty' ),
       phetioReadOnly: true
     } );
 
-    //TODO make this go away, just set electron.positionProperty directly https://github.com/phetsims/tasks/issues/1129
+    //TODO make this go away, just set electron.positionProperty directly
     this.electronOffsetProperty = new DerivedProperty(
       [ this.electronStateProperty, this.electronAngleProperty ],
       ( state, angle ) => {
@@ -179,7 +179,7 @@ export default class BohrModel extends HydrogenAtom {
     this.attemptSpontaneousEmission();
   }
 
-  //TODO normalize the return value to [0,2*Math.PI] https://github.com/phetsims/tasks/issues/1129
+  //TODO normalize the return value to [0,2*Math.PI]
   /**
    * Calculates the new electron angle for some time step.
    * Subclasses may override this to produce different oscillation behavior.
@@ -187,7 +187,7 @@ export default class BohrModel extends HydrogenAtom {
   protected calculateNewElectronAngle( dt: number ): number {
     const electronState = this.electronStateProperty.value;
     const deltaAngle = dt * ( BohrModel.ELECTRON_ANGLE_DELTA / ( electronState * electronState ) );
-    return this.electronAngleProperty.value - deltaAngle; //TODO clockwise https://github.com/phetsims/tasks/issues/1129
+    return this.electronAngleProperty.value - deltaAngle; //TODO clockwise
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
@@ -457,7 +457,7 @@ export default class BohrModel extends HydrogenAtom {
             position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
             direction: photon.directionProperty.value,
             wasEmitted: true,
-            tandem: Tandem.OPT_OUT //TODO create via PhetioGroup https://github.com/phetsims/tasks/issues/1129
+            tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
           } ) );
 
           // move electron to new state
@@ -517,7 +517,7 @@ export default class BohrModel extends HydrogenAtom {
           position: this.getSpontaneousEmissionPosition(),
           direction: MOTHAUtils.nextAngle(), // in a random direction
           wasEmitted: true,
-          tandem: Tandem.OPT_OUT //TODO create via PhetioGroup https://github.com/phetsims/tasks/issues/1129
+          tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
         } ) );
 
         // move electron to new state

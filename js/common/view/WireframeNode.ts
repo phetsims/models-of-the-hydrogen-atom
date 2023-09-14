@@ -25,7 +25,7 @@ export default class WireframeNode extends Node {
   public constructor( model: WireframeModel, providedOptions?: WireframeNodeOptions ) {
 
     const options = optionize<WireframeNodeOptions, SelfOptions, RectangleOptions>()( {
-      //TODO https://github.com/phetsims/tasks/issues/1129
+      //TODO
 
       // RectangleOptions
       isDisposable: false
