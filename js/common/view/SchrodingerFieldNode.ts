@@ -15,6 +15,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import MOTHAColors from '../MOTHAColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import SchrodingerBrightness from './SchrodingerBrightness.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -95,6 +96,17 @@ class QuadrantNode extends CanvasNode {
     this.cellWidth = this.quadrantWidth / brightness[ 0 ].length;
     this.cellHeight = this.quadrantHeight / brightness.length;
     this.invalidatePaint(); // results in a call to paintCanvas
+
+    // Compute the canvasBounds, the region to which we draw, see
+    // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/43
+    const numberOfRows = this.brightness.length;
+    const numberOfColumns = Math.max( ...this.brightness.map( row => row.length ) );
+    this.canvasBounds = new Bounds2(
+      0,
+      0,
+      ( ( numberOfColumns - 1 ) * this.cellWidth ) + ( 1 + QuadrantNode.PERCENT_CELL_OVERLAP ) * this.cellWidth,
+      ( ( numberOfRows - 1 ) * this.cellHeight ) + ( 1 + QuadrantNode.PERCENT_CELL_OVERLAP ) * this.cellHeight
+    );
   }
 
   //TODO Should this be protected in CanvasNode?
