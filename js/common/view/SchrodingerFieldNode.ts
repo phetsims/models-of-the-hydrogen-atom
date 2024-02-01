@@ -97,8 +97,8 @@ class QuadrantNode extends CanvasNode {
     this.cellHeight = this.quadrantHeight / brightness.length;
     this.invalidatePaint(); // results in a call to paintCanvas
 
-    // Compute the canvasBounds, the region to which we draw, see
-    // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/43
+    // Compute the canvasBounds, the region to which we draw. This needs to be done before the animation frame happens.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/43
     const numberOfRows = this.brightness.length;
     const numberOfColumns = Math.max( ...this.brightness.map( row => row.length ) );
     this.canvasBounds = new Bounds2(
