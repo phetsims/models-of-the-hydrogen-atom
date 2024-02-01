@@ -95,7 +95,6 @@ class QuadrantNode extends CanvasNode {
     this.brightness = brightness;
     this.cellWidth = this.quadrantWidth / brightness[ 0 ].length;
     this.cellHeight = this.quadrantHeight / brightness.length;
-    this.invalidatePaint(); // results in a call to paintCanvas
 
     // Compute the canvasBounds, the region to which we draw. This needs to be done before the animation frame happens.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/43
@@ -107,6 +106,8 @@ class QuadrantNode extends CanvasNode {
       ( ( numberOfColumns - 1 ) * this.cellWidth ) + ( 1 + QuadrantNode.PERCENT_CELL_OVERLAP ) * this.cellWidth,
       ( ( numberOfRows - 1 ) * this.cellHeight ) + ( 1 + QuadrantNode.PERCENT_CELL_OVERLAP ) * this.cellHeight
     );
+
+    this.invalidatePaint(); // results in a call to paintCanvas
   }
 
   //TODO Should this be protected in CanvasNode?
