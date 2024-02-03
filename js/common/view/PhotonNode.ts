@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * PhotonNode is the visual snackType of a photon. A round "orb" has an outer "halo" and a whimsical "sparkle"
+ * PhotonNode is the visual representation of a photon. A round "orb" has an outer "halo" and a whimsical "sparkle"
  * in the middle. Origin is at center of the Node's bounding rectangle. The look is loosely based on examples that
  * Wendy Adams found on a Disney website at http://disney.go.com/fairies/meetfairies.html.
  *

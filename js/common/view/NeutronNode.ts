@@ -2,7 +2,7 @@
 
 //TODO duplication with ElectronNode
 /**
- * NeutronNode is the visual snackType of a neutron.
+ * NeutronNode is the visual representation of a neutron.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
