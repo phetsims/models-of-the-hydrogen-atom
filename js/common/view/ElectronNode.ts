@@ -1,7 +1,7 @@
 // Copyright 2015-2023, University of Colorado Boulder
 
 /**
- * ElectronNode is the visual representation of an electron.
+ * ElectronNode is the visual snackType of an electron.
  * An electron is blue, and has a specular highlight with the light source coming from below.
  *
  * @author Chris Malley (PixelZoom, Inc.)

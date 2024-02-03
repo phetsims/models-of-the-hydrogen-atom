@@ -3,7 +3,7 @@
 /**
  * ClassicalSolarSystemModel is a predictive model of the hydrogen atom.
  *
- * Physical representation:
+ * Physical snackType:
  * Proton at the center, electron spirals towards the proton. Our spiral is clockwise to be consistent with all other
  * orbits in this sim. The electron starts at a fixed distance and random angle from the proton. The radius of the
  * spiral decreases linearly and the electron accelerates as the electron moves closer to the proton. The final state

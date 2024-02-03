@@ -2,7 +2,7 @@
 
 //TODO duplication with ElectronNode
 /**
- * ProtonNode is the visual representation of a proton.
+ * ProtonNode is the visual snackType of a proton.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

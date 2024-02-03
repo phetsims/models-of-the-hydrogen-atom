@@ -3,7 +3,7 @@
 /**
  * SchrodingerModel is a predictive model of the hydrogen atom.
  *
- * Physical representation:
+ * Physical snackType:
  * Electron is a probability density field. Proton is at the center, visible only when the probability density
  * field strength is below a threshold value. The atom's state has 3 components (n,l,m). See transition rules below.
  *

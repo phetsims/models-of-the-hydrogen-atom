@@ -3,7 +3,7 @@
 /**
  * BilliardBallModel is a predictive model of the hydrogen atom.
  *
- * Physical representation:
+ * Physical snackType:
  * The ball is spherical, with its local origin at its center.
  *
  * Collision behavior:

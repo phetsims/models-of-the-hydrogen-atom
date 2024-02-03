@@ -3,7 +3,7 @@
 /**
  * PlumPudding is a predictive model of the hydrogen atom.
  *
- * Physical representation:
+ * Physical snackType:
  * The proton is a blob of pudding (or "goo"), modeled as a circle. An electron oscillates inside the goo along a
  * straight line that passes through the center of the goo and has its end points on the circle.
  *

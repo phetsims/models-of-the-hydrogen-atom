@@ -3,7 +3,7 @@
 /**
  * BohrModel is a predictive model of the hydrogen atom.
  *
- * Physical representation:
+ * Physical snackType:
  * Electron orbiting a proton. Each orbit corresponds to a different electron state. See createOrbitRadii for details
  * on how orbit radii are calculated.
  *
