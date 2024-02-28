@@ -47,9 +47,9 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
     const brightnessViewText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessViewStringProperty, textOptions );
 
     const items: ComboBoxItem<DeBroglieView>[] = [
-      { value: 'radial', createNode: () => radialViewText, tandemName: `radial${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },
-      { value: '3D', createNode: () => threeDViewText, tandemName: `3D${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` },
-      { value: 'brightness', createNode: () => brightnessViewText, tandemName: `brightness${ComboBox.ITEM_TANDEM_NAME_SUFFIX}` }
+      { value: 'radial', createNode: () => radialViewText, tandemName: 'radialItem' },
+      { value: '3D', createNode: () => threeDViewText, tandemName: '3DItem' },
+      { value: 'brightness', createNode: () => brightnessViewText, tandemName: 'brightnessItem' }
     ];
 
     super( deBroglieViewProperty, items, listboxParent, options );
