@@ -110,6 +110,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
     createNode: tandem => new HBox( {
       spacing: 10,
       justify: 'left',
+      sizable: false,
       children: [
         new AlignBox( new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ), {
           group: iconAlignGroup
