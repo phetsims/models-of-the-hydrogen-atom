@@ -15,7 +15,7 @@ import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
+import { HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -24,7 +24,6 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import { ModelMode } from '../model/ModelMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -51,13 +50,10 @@ export default class PredictionPanel extends Panel {
       isDisposable: false
     }, providedOptions );
 
-    // So that all icons have the same effective size
-    const iconAlignGroup = new AlignGroup();
-
     // content that appears on the radio buttons
     const items: RectangularRadioButtonGroupItem<HydrogenAtom>[] = [];
     for ( let i = 0; i < predictiveModels.length; i++ ) {
-      items.push( createRadioButtonItem( predictiveModels[ i ], iconAlignGroup, options.tandem ) );
+      items.push( createRadioButtonItem( predictiveModels[ i ] ) );
     }
 
     // radio buttons
@@ -102,7 +98,7 @@ export default class PredictionPanel extends Panel {
 /**
  * Creates the item for one radio buttons.
  */
-function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup, groupTandem: Tandem ):
+function createRadioButtonItem( predictiveModel: HydrogenAtom ):
   RectangularRadioButtonGroupItem<HydrogenAtom> {
 
   return {
@@ -112,9 +108,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
       justify: 'left',
       sizable: false,
       children: [
-        new AlignBox( new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ), {
-          group: iconAlignGroup
-        } ),
+        new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ),
         new Text( predictiveModel.displayNameProperty, {
           fill: MOTHAColors.modelsRadioButtonTextFillProperty,
           font: new PhetFont( 16 ),
