@@ -173,9 +173,11 @@ export default class SpectraScreenView extends ScreenView {
     // View Snapshots button, above upper-right corner of spectrometer
     const viewSnapshotsButton = new ViewSnapshotsButton( viewProperties.numberOfSnapshotsProperty, {
       listener: () => snapshotsDialog.show(),
-      right: spectrometerAccordionBox.right,
-      bottom: spectrometerAccordionBox.top - 10,
       tandem: tandem.createTandem( 'viewSnapshotsButton' )
+    } );
+    viewSnapshotsButton.localBoundsProperty.link( () => {
+      viewSnapshotsButton.right = spectrometerAccordionBox.right;
+      viewSnapshotsButton.bottom = spectrometerAccordionBox.top - 10;
     } );
 
     // Reset All button
