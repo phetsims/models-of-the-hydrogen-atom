@@ -59,12 +59,16 @@ export default class ContinuumBarNode extends Node {
     } );
 
     // 'Classical' at top
-    classicalText.centerX = barNode.centerX;
-    classicalText.top = barNode.top + options.yMargin;
+    classicalText.localBoundsProperty.link( () => {
+      classicalText.centerX = barNode.centerX;
+      classicalText.top = barNode.top + options.yMargin;
+    } );
 
     // 'Quantum' at bottom
-    quantumText.centerX = barNode.centerX;
-    quantumText.bottom = barNode.bottom - options.yMargin;
+    quantumText.localBoundsProperty.link( () => {
+      quantumText.centerX = barNode.centerX;
+      quantumText.bottom = barNode.bottom - options.yMargin;
+    } );
 
     options.children = [ barNode, classicalText, quantumText ];
 
