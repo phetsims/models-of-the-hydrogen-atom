@@ -66,11 +66,17 @@ export default class EnergyLevelsScreenView extends ScreenView {
     } );
     this.addChild( screenViewRootNode );
 
-    // pdom - traversal order
-    screenViewRootNode.pdomOrder = [
+    // Play Area focus order
+    this.pdomPlayAreaNode.pdomOrder = [
+      //TODO
       electronEnergyLevelAccordionBox,
       predictionPanel,
       resetAllButton
+    ];
+
+    // Control Area focus order
+    this.pdomControlAreaNode.pdomOrder = [
+      //TODO
     ];
   }
 

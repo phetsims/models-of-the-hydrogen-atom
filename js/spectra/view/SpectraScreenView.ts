@@ -214,14 +214,20 @@ export default class SpectraScreenView extends ScreenView {
     } );
     this.addChild( screenViewRootNode );
 
-    // pdom - traversal order
-    screenViewRootNode.pdomOrder = [
+    // Play Area focus order
+    this.pdomPlayAreaNode.pdomOrder = [
+      //TODO
       lightModeRadioButtonGroup,
       lightNode,
       modelVBox,
       timeControlNode,
       spectrometerAccordionBox,
       viewSnapshotsButton
+    ];
+
+    // Control Area focus order
+    this.pdomControlAreaNode.pdomOrder = [
+      //TODO
     ];
 
     this.model = model;
