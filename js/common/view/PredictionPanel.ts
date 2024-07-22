@@ -1,6 +1,7 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
 //TODO on mouseDown in projector mode, radio buttons go gray
+//TODO on mouseDown in default mode, radio buttons have no visible stroke and no background color change
 //TODO colors of Billiard Ball icon do not match BilliardBallNode
 /**
  * PredictionPanel contains controls (radio buttons) for choosing one of the predictive models.
