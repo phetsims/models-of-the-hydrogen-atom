@@ -28,7 +28,8 @@ export default class PrimaryElectronStateText extends RichText {
     super( stringProperty, {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.stateDisplayFillProperty,
-      isDisposable: false
+      isDisposable: false,
+      maxWidth: 200
     } );
   }
 }
