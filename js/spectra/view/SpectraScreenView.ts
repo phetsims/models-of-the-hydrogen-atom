@@ -112,14 +112,6 @@ export default class SpectraScreenView extends ScreenView {
       tandem: tandem.createTandem( 'tinyBoxNode' )
     } );
 
-    // Time controls
-    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty,
-      model.stepOnce.bind( model ), {
-        left: monochromaticControls.left,
-        top: monochromaticControls.bottom + 8,
-        tandem: tandem.createTandem( 'timeControlNode' )
-      } );
-
     // The zoomed-in view of the box of hydrogen
     const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {
       left: lightNode.right + 50,
@@ -179,6 +171,14 @@ export default class SpectraScreenView extends ScreenView {
       viewSnapshotsButton.right = spectrometerAccordionBox.right;
       viewSnapshotsButton.bottom = spectrometerAccordionBox.top - 10;
     } );
+
+    // Time controls
+    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty,
+      model.stepOnce.bind( model ), {
+        left: modelVBox.left,
+        centerY: modelVBox.bottom + ( spectrometerAccordionBox.top - modelVBox.bottom ) / 2,
+        tandem: tandem.createTandem( 'timeControlNode' )
+      } );
 
     // Reset All button
     const resetAllButton = new ResetAllButton( {
