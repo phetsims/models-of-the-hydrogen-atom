@@ -112,17 +112,27 @@ const MOTHAColors = {
     default: Color.grayColor( 200 )
   } ),
 
-  showAbsorptionWavelengthTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'showAbsorptionWavelengthTextFill', {
+  wavelengthSliderThumbStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'wavelengthSliderThumbStroke', {
     default: 'white',
     projector: 'black'
   } ),
 
-  showAbsorptionWavelengthCheckboxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'showAbsorptionWavelengthCheckboxFill', {
+  wavelengthTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'wavelengthTextFill', {
+    default: 'white',
+    projector: 'black'
+  } ),
+
+  wavelengthNumberDisplayFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'wavelengthNumberDisplayFill', {
     default: 'black',
     projector: 'white'
   } ),
 
-  showAbsorptionWavelengthCheckboxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'showAbsorptionWavelengthCheckboxStroke', {
+  wavelengthNumberDisplayStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'wavelengthNumberDisplayStroke', {
+    default: 'white',
+    projector: 'black'
+  } ),
+
+  absorptionWavelengthTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'absorptionWavelengthTextFill', {
     default: 'white',
     projector: 'black'
   } ),

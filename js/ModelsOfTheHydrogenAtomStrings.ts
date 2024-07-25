@@ -41,7 +41,7 @@ type StringsType = {
     'spectraStringProperty': LocalizedStringProperty;
     'energyLevelsStringProperty': LocalizedStringProperty;
   };
-  'showAbsorptionWavelengthsStringProperty': LocalizedStringProperty;
+  'absorptionWavelengthsStringProperty': LocalizedStringProperty;
   'slowStringProperty': LocalizedStringProperty;
   'spectrometerCollapsedStringProperty': LocalizedStringProperty;
   'spectrometerExpandedStringProperty': LocalizedStringProperty;
