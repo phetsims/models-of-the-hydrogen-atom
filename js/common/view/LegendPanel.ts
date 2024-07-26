@@ -1,7 +1,7 @@
 // Copyright 2015-2023, University of Colorado Boulder
 
 /**
- * LegendAccordionBox displays a legend (sic) to the particle types that appear in the sim.
+ * LegendPanel displays a legend (sic) to the particle types that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -31,7 +31,7 @@ type SelfOptions = {
 type LegendAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
   PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
-export default class LegendAccordionBox extends AccordionBox {
+export default class LegendPanel extends AccordionBox {
 
   public constructor( providedOptions: LegendAccordionBoxOptions ) {
 
@@ -52,7 +52,7 @@ export default class LegendAccordionBox extends AccordionBox {
 
     options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.legendStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.legendTitleFillProperty,
+      fill: 'yellow',
       maxWidth: 100 // i18n, determined empirically
     } );
 
@@ -107,4 +107,4 @@ class KeyNode extends HBox {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'LegendAccordionBox', LegendAccordionBox );
+modelsOfTheHydrogenAtom.register( 'LegendPanel', LegendPanel );

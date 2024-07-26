@@ -17,7 +17,7 @@ import MOTHAConstants from '../../common/MOTHAConstants.js';
 import BeamNode from '../../common/view/BeamNode.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSwitch.js';
-import LegendAccordionBox from '../../common/view/LegendAccordionBox.js';
+import LegendPanel from '../../common/view/LegendPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import PredictionPanel from '../../common/view/PredictionPanel.js';
 import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
@@ -50,12 +50,12 @@ export default class SpectraScreenView extends ScreenView {
     // Parent for any popups
     const popupsParent = new Node();
 
-    // Legend (sic) to symbols
-    const legendAccordionBox = new LegendAccordionBox( {
+    // Legend (sic) for symbols
+    const legendPanel = new LegendPanel( {
       expandedProperty: viewProperties.keyExpandedProperty,
       left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: tandem.createTandem( 'legendAccordionBox' )
+      tandem: tandem.createTandem( 'legendPanel' )
     } );
 
     // Light
@@ -184,7 +184,7 @@ export default class SpectraScreenView extends ScreenView {
     // rendering order
     const screenViewRootNode = new Node( {
       children: [
-        legendAccordionBox,
+        legendPanel,
         timeControlNode,
         beamNode,
         lightNode,
