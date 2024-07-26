@@ -69,6 +69,8 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
+    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/35 Add 'UV' label on slider.
+
     // Wavelength control
     const wavelengthControl = new WavelengthNumberControl( monochromaticWavelengthProperty, {
       layoutFunction: layoutFunction,
