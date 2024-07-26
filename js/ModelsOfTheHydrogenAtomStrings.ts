@@ -54,6 +54,8 @@ type StringsType = {
   'exciteAtomStringProperty': LocalizedStringProperty;
   'whiteStringProperty': LocalizedStringProperty;
   'monochromaticStringProperty': LocalizedStringProperty;
+  'uvStringProperty': LocalizedStringProperty;
+  'irStringProperty': LocalizedStringProperty;
 };
 
 const ModelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;

@@ -121,5 +121,11 @@
   },
   "monochromatic": {
     "value": "Monochromatic"
+  },
+  "uv": {
+    "value": "UV"
+  },
+  "ir": {
+    "value": "IR"
   }
 }
