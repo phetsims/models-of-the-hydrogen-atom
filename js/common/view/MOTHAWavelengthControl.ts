@@ -53,7 +53,7 @@ export class MOTHAWavelengthControl extends WavelengthNumberControl {
 
     super( wavelengthProperty, options );
 
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/35 Add 'UV' label on slider.
+    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/35 Add 'UV' label on slider, via layoutFunction?
   }
 }
 
