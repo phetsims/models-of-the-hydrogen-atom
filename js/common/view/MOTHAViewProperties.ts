@@ -21,9 +21,6 @@ export type MOTHAViewPropertiesOptions = SelfOptions & PickRequired<PhetioObject
 
 export default class MOTHAViewProperties {
 
-  // is the Key accordion box expanded?
-  public readonly keyExpandedProperty: Property<boolean>;
-
   // is the Spectrometer accordion box expanded?
   public readonly spectrometerExpandedProperty: Property<boolean>;
 
@@ -35,10 +32,6 @@ export default class MOTHAViewProperties {
 
     const options = providedOptions;
 
-    this.keyExpandedProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'keyExpandedProperty' )
-    } );
-
     this.spectrometerExpandedProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'spectrometerExpandedProperty' )
     } );
@@ -49,7 +42,6 @@ export default class MOTHAViewProperties {
   }
 
   public reset(): void {
-    this.keyExpandedProperty.reset();
     this.spectrometerExpandedProperty.reset();
     this.numberOfSnapshotsProperty.reset();
   }

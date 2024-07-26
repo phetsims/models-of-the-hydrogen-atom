@@ -1,7 +1,7 @@
-// Copyright 2015-2023, University of Colorado Boulder
+// Copyright 2015-2024, University of Colorado Boulder
 
 /**
- * LegendPanel displays a legend (sic) to the particle types that appear in the sim.
+ * LegendPanel displays a legend for the particle types that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,7 +10,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
-import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -21,6 +20,7 @@ import ProtonNode from './ProtonNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 
 const ITEM_FONT = new PhetFont( 16 );
 
@@ -28,33 +28,24 @@ type SelfOptions = {
   iconScale?: number;
 };
 
-type LegendAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
-  PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
+type LegendPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class LegendPanel extends AccordionBox {
+export default class LegendPanel extends Panel {
 
-  public constructor( providedOptions: LegendAccordionBoxOptions ) {
+  public constructor( providedOptions: LegendPanelOptions ) {
 
-    const options = optionize<LegendAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+    const options = optionize<LegendPanelOptions, SelfOptions, PanelOptions>()( {
 
       // SelfOptions
       iconScale: MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE,
 
-      // AccordionBoxOptions
+      // PanelOptions
       fill: null,
       stroke: null,
-      titleAlignX: 'left',
-      titleXSpacing: 10,
-      contentXMargin: 0,
-      buttonXMargin: 0,
+      xMargin: 0,
+      yMargin: 0,
       isDisposable: false
     }, providedOptions );
-
-    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.legendStringProperty, {
-      font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: 'yellow',
-      maxWidth: 100 // i18n, determined empirically
-    } );
 
     const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
 
@@ -72,10 +63,9 @@ export default class LegendPanel extends AccordionBox {
     ];
 
     const content = new VBox( {
-      spacing: 5,
+      spacing: 4,
       align: 'left',
       children: keyNodes
-      // No need to PhET-iO instrument this Node.
     } );
 
     super( content, options );
@@ -98,7 +88,7 @@ class KeyNode extends HBox {
         new Text( labelStringProperty, {
           font: ITEM_FONT,
           fill: MOTHAColors.invertibleTextFillProperty,
-          maxWidth: 120 // determined empirically
+          maxWidth: 100 // determined empirically
         } )
       ],
       isDisposable: false,

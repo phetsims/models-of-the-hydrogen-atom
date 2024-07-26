@@ -50,9 +50,8 @@ export default class SpectraScreenView extends ScreenView {
     // Parent for any popups
     const popupsParent = new Node();
 
-    // Legend (sic) for symbols
+    // Legend for particle types
     const legendPanel = new LegendPanel( {
-      expandedProperty: viewProperties.keyExpandedProperty,
       left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: tandem.createTandem( 'legendPanel' )
