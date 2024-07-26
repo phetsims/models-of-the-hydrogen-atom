@@ -55,6 +55,8 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       tandem: options.tandem.createTandem( 'deBroglieNode' )
     } );
 
+    const photonsLayer = new Node();
+
     this.contentsNode.addChild( new Node( {
       children: [
         new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
@@ -72,7 +74,8 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
         deBroglieNode,
         new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'schrodingerNode' )
-        } )
+        } ),
+        photonsLayer
       ]
     } ) );
 
@@ -82,7 +85,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
     model.photons.addItemAddedListener( photon => {
       const photonNode = new PhotonNode( photon, modelViewTransform );
       photonNodes.push( photonNode );
-      this.contentsNode.addChild( photonNode );
+      photonsLayer.addChild( photonNode );
     } );
 
     // Remove the PhotonNode for a Photon.
@@ -90,7 +93,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       const photonNode = _.find( photonNodes, photonNode => ( photonNode.photon === photon ) )!;
       assert && assert( photonNode );
       photonNodes.splice( photonNodes.indexOf( photonNode ), 1 );
-      this.contentsNode.removeChild( photonNode );
+      photonsLayer.removeChild( photonNode );
       photonNode.dispose();
     } );
 
