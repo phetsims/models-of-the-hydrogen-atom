@@ -1,64 +1,61 @@
-// Copyright 2016-2024, University of Colorado Boulder
+// Copyright 2024, University of Colorado Boulder
 
 /**
- * MonochromaticControls provides controls for the monochromatic light.
+ * TODO
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Color, HBox, Node, NodeTranslationOptions, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
-import TProperty from '../../../../axon/js/TProperty.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import { Color, HBox, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
+import Property from '../../../../axon/js/Property.js';
+import { LightMode } from '../model/LightMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { ModelMode } from '../model/ModelMode.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { LightMode } from '../model/LightMode.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import Property from '../../../../axon/js/Property.js';
-import WavelengthNumberControl from '../../../../scenery-phet/js/WavelengthNumberControl.js';
 import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
+import WavelengthNumberControl from '../../../../scenery-phet/js/WavelengthNumberControl.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import Slider from '../../../../sun/js/Slider.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
+import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type MonochromaticControlsOptions = SelfOptions & NodeTranslationOptions & PickRequired<VBoxOptions, 'tandem'>;
+type LightControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class MonochromaticControls extends VBox {
+export class LightControlPanel extends Panel {
 
-  public constructor( modelModeProperty: TProperty<ModelMode>,
-                      hydrogenAtomModelProperty: TProperty<HydrogenAtom>,
-                      wavelengthProperty: Property<number>,
-                      lightModeProperty: TReadOnlyProperty<LightMode>,
-                      absorptionWavelengthsVisibleProperty: Property<boolean>,
-                      providedOptions: MonochromaticControlsOptions ) {
+  public constructor( lightModeProperty: Property<LightMode>,
+                      monochromaticWavelengthProperty: Property<number>,
+                      providedOptions: LightControlPanelOptions ) {
 
-    const options = optionize<MonochromaticControlsOptions, SelfOptions, VBoxOptions>()( {
+    const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
 
-      // Visible when light mode is 'monochromatic'
+      //TODO PanelOptions
+      fill: MOTHAColors.panelFillColorProperty,
+      stroke: MOTHAColors.panelStrokeColorProperty
+    }, providedOptions );
+
+    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightModeProperty, {
+      tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
+    } );
+
+    // Wavelength control
+    const wavelengthControl = new WavelengthNumberControl( monochromaticWavelengthProperty, {
+      layoutFunction: layoutFunction,
       visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
-      align: 'left',
-      spacing: 10,
-      excludeInvisibleChildrenFromBounds: false,
-      isDisposable: false
-    }, providedOptions );
-
-    // Wavelength control
-    const wavelengthControl = new WavelengthNumberControl( wavelengthProperty, {
-      layoutFunction: layoutFunction,
       spectrumSliderTrackOptions: {
         valueToColor: valueToColor,
         size: new Dimension2( 250, 15 )
@@ -83,6 +80,7 @@ export default class MonochromaticControls extends VBox {
 
     // 'Absorption Wavelengths' info button
     const absorptionWavelengthsInfoButton = new HBox( {
+      visibleProperty: wavelengthControl.visibleProperty,
       spacing: 5,
       children: [
         new InfoButton( {
@@ -99,9 +97,14 @@ export default class MonochromaticControls extends VBox {
       ]
     } );
 
-    options.children = [ wavelengthControl, absorptionWavelengthsInfoButton ];
+    const content = new VBox( {
+      excludeInvisibleChildrenFromBounds: false,
+      align: 'center',
+      spacing: 5,
+      children: [ lightModeRadioButtonGroup, wavelengthControl, absorptionWavelengthsInfoButton ]
+    } );
 
-    super( options );
+    super( content, options );
   }
 }
 
@@ -133,4 +136,4 @@ function layoutFunction( titleNode: Node, numberDisplay: NumberDisplay, slider: 
   } );
 }
 
-modelsOfTheHydrogenAtom.register( 'MonochromaticControls', MonochromaticControls );
+modelsOfTheHydrogenAtom.register( 'LightControlPanel', LightControlPanel );

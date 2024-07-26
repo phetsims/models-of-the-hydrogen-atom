@@ -19,7 +19,6 @@ import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSwitch.js';
 import LegendAccordionBox from '../../common/view/LegendAccordionBox.js';
 import LightModeRadioButtonGroup from '../../common/view/LightModeRadioButtonGroup.js';
-import MonochromaticControls from '../../common/view/MonochromaticControls.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import PredictionPanel from '../../common/view/PredictionPanel.js';
 import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
@@ -31,6 +30,7 @@ import SpectraViewProperties from './SpectraViewProperties.js';
 import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import { LightControlPanel } from '../../common/view/LightControlPanel.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -67,15 +67,12 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Controls for monochromatic light
-    const monochromaticControls = new MonochromaticControls(
-      model.modelModeProperty,
-      model.predictiveModelProperty,
-      model.light.monochromaticWavelengthProperty,
+    const lightControlPanel = new LightControlPanel(
       model.light.lightModeProperty,
-      viewProperties.absorptionWavelengthsVisibleProperty, {
+      model.light.monochromaticWavelengthProperty, {
         left: lightModeRadioButtonGroup.left,
         top: lightModeRadioButtonGroup.bottom + 15,
-        tandem: tandem.createTandem( 'monochromaticControls' )
+        tandem: tandem.createTandem( 'lightControlPanel' )
       } );
 
     // Light
@@ -152,8 +149,8 @@ export default class SpectraScreenView extends ScreenView {
     // Spectrometer
     const spectrometerAccordionBox = new SpectrometerAccordionBox( viewProperties.numberOfSnapshotsProperty, {
       expandedProperty: viewProperties.spectrometerExpandedProperty,
-      left: monochromaticControls.right + 10,
-      top: monochromaticControls.top,
+      left: lightControlPanel.right + 10,
+      top: lightControlPanel.top,
       tandem: tandem.createTandem( 'spectrometerAccordionBox' )
     } );
 
@@ -199,8 +196,7 @@ export default class SpectraScreenView extends ScreenView {
         timeControlNode,
         beamNode,
         lightNode,
-        lightModeRadioButtonGroup,
-        monochromaticControls,
+        lightControlPanel,
         boxOfHydrogenNode,
         tinyBoxNode,
         dashedLines,

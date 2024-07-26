@@ -23,6 +23,16 @@ const MOTHAColors = {
     projector: 'white'
   } ),
 
+  panelFillColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'panelFillColor', {
+    default: 'black',
+    projector: 'white'
+  } ),
+
+  panelStrokeColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'panelStrokeColor', {
+    default: 'white',
+    projector: 'black'
+  } ),
+
   //------------------------------------------------------------------------------------------------------------------
   // Boxes
   //------------------------------------------------------------------------------------------------------------------

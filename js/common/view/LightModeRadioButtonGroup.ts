@@ -33,7 +33,7 @@ export default class LightModeRadioButtonGroup extends RectangularRadioButtonGro
     const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 
       // RectangularRadioButtonGroupOptions
-      orientation: 'vertical',
+      orientation: 'horizontal',
       spacing: 8,
       isDisposable: false,
       radioButtonOptions: {
