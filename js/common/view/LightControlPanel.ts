@@ -72,7 +72,7 @@ export class LightControlPanel extends Panel {
     //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/35 Add 'UV' label on slider.
 
     // Wavelength control
-    const wavelengthControl = new WavelengthNumberControl( monochromaticWavelengthProperty, {
+    const monochromaticWavelengthControl = new WavelengthNumberControl( monochromaticWavelengthProperty, {
       layoutFunction: layoutFunction,
       visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
@@ -97,12 +97,12 @@ export class LightControlPanel extends Panel {
           fill: MOTHAColors.wavelengthTextFillProperty
         }
       },
-      tandem: options.tandem.createTandem( 'wavelengthControl' )
+      tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
 
     // 'Absorption Wavelengths' info button
     const absorptionWavelengthsInfoButton = new HBox( {
-      visibleProperty: wavelengthControl.visibleProperty,
+      visibleProperty: monochromaticWavelengthControl.visibleProperty,
       spacing: 5,
       children: [
         new InfoButton( {
@@ -123,7 +123,7 @@ export class LightControlPanel extends Panel {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
       spacing: 15,
-      children: [ lightModeRadioButtonGroup, wavelengthControl, absorptionWavelengthsInfoButton ]
+      children: [ lightModeRadioButtonGroup, monochromaticWavelengthControl, absorptionWavelengthsInfoButton ]
     } );
 
     super( content, options );
