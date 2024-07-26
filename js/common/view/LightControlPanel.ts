@@ -79,11 +79,11 @@ export class LightControlPanel extends Panel {
         phetioValueType: BooleanIO
       } ),
       spectrumSliderTrackOptions: {
-        valueToColor: valueToColor,
+        valueToColor: wavelengthToColor,
         size: new Dimension2( 250, 15 )
       },
       spectrumSliderThumbOptions: {
-        valueToColor: valueToColor,
+        valueToColor: wavelengthToColor,
         width: 20,
         height: 25,
         stroke: MOTHAColors.wavelengthSliderThumbStrokeProperty
@@ -130,13 +130,19 @@ export class LightControlPanel extends Panel {
   }
 }
 
-function valueToColor( wavelength: number ): Color {
+/**
+ * Converts a wavelength (in nm) to a Color.
+ */
+function wavelengthToColor( wavelength: number ): Color {
   return VisibleColor.wavelengthToColor( wavelength, {
     irColor: MOTHAColors.IR_COLOR,
     uvColor: MOTHAColors.UV_COLOR
   } );
 }
 
+/**
+ * Layout for monochromaticWavelengthControl.
+ */
 function layoutFunction( titleNode: Node, numberDisplay: NumberDisplay, slider: Slider, decrementButton: ArrowButton | null, incrementButton: ArrowButton | null ): Node {
   assert && assert( decrementButton, 'There is no decrementButton!' );
   assert && assert( incrementButton, 'There is no incrementButton!' );
