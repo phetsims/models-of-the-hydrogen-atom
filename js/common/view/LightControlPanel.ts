@@ -8,26 +8,20 @@
 
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { Color, HBox, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import Property from '../../../../axon/js/Property.js';
 import { LightMode } from '../model/LightMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAColors from '../MOTHAColors.js';
-import WavelengthNumberControl from '../../../../scenery-phet/js/WavelengthNumberControl.js';
-import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
-import Slider from '../../../../sun/js/Slider.js';
-import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
-import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
+import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
 
 const RADIO_BUTTON_TEXT_OPTIONS = {
   font: new PhetFont( 16 ),
@@ -69,34 +63,12 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/35 Add 'UV' label on slider.
-
     // Wavelength control
-    const monochromaticWavelengthControl = new WavelengthNumberControl( monochromaticWavelengthProperty, {
-      layoutFunction: layoutFunction,
+    const monochromaticWavelengthControl = new MOTHAWavelengthControl( monochromaticWavelengthProperty, {
       visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
-      spectrumSliderTrackOptions: {
-        valueToColor: wavelengthToColor,
-        size: new Dimension2( 250, 15 )
-      },
-      spectrumSliderThumbOptions: {
-        valueToColor: wavelengthToColor,
-        width: 20,
-        height: 25,
-        stroke: MOTHAColors.wavelengthSliderThumbStrokeProperty
-      },
-      range: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE,
-      numberDisplayOptions: {
-        cornerRadius: 3,
-        backgroundFill: MOTHAColors.wavelengthNumberDisplayFillProperty,
-        backgroundStroke: MOTHAColors.wavelengthNumberDisplayStrokeProperty,
-        textOptions: {
-          fill: MOTHAColors.wavelengthTextFillProperty
-        }
-      },
       tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
 
@@ -128,40 +100,6 @@ export class LightControlPanel extends Panel {
 
     super( content, options );
   }
-}
-
-/**
- * Converts a wavelength (in nm) to a Color.
- */
-function wavelengthToColor( wavelength: number ): Color {
-  return VisibleColor.wavelengthToColor( wavelength, {
-    irColor: MOTHAColors.IR_COLOR,
-    uvColor: MOTHAColors.UV_COLOR
-  } );
-}
-
-/**
- * Layout for monochromaticWavelengthControl.
- */
-function layoutFunction( titleNode: Node, numberDisplay: NumberDisplay, slider: Slider, decrementButton: ArrowButton | null, incrementButton: ArrowButton | null ): Node {
-  assert && assert( decrementButton, 'There is no decrementButton!' );
-  assert && assert( incrementButton, 'There is no incrementButton!' );
-
-  slider.mutateLayoutOptions( {
-    grow: 1
-  } );
-
-  return new VBox( {
-    align: 'center',
-    spacing: 5,
-    children: [
-      new HBox( {
-        spacing: 5,
-        children: [ decrementButton!, numberDisplay, incrementButton! ]
-      } ),
-      slider
-    ]
-  } );
 }
 
 modelsOfTheHydrogenAtom.register( 'LightControlPanel', LightControlPanel );
