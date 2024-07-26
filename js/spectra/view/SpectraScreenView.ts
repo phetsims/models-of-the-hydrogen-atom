@@ -18,7 +18,6 @@ import BeamNode from '../../common/view/BeamNode.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSwitch.js';
 import LegendAccordionBox from '../../common/view/LegendAccordionBox.js';
-import LightModeRadioButtonGroup from '../../common/view/LightModeRadioButtonGroup.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import PredictionPanel from '../../common/view/PredictionPanel.js';
 import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
@@ -59,30 +58,14 @@ export default class SpectraScreenView extends ScreenView {
       tandem: tandem.createTandem( 'legendAccordionBox' )
     } );
 
-    // Light Mode radio button group
-    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( model.light.lightModeProperty, {
-      left: this.layoutBounds.left + 30,
-      bottom: 415,
-      tandem: tandem.createTandem( 'lightModeRadioButtonGroup' )
-    } );
-
-    // Controls for monochromatic light
-    const lightControlPanel = new LightControlPanel(
-      model.light.lightModeProperty,
-      model.light.monochromaticWavelengthProperty, {
-        left: lightModeRadioButtonGroup.left,
-        top: lightModeRadioButtonGroup.bottom + 15,
-        tandem: tandem.createTandem( 'lightControlPanel' )
-      } );
-
     // Light
     const lightNode = new LaserPointerNode( model.light.onProperty, {
       bodySize: new Dimension2( 88, 64 ),
       nozzleSize: new Dimension2( 18, 50 ),
       buttonRadius: 19,
       rotation: -Math.PI / 2, // pointing up
-      left: lightModeRadioButtonGroup.right + 20,
-      bottom: lightModeRadioButtonGroup.bottom,
+      left: this.layoutBounds.left + 100,
+      bottom: 415,
       tandem: tandem.createTandem( 'lightNode' )
     } );
 
@@ -94,6 +77,15 @@ export default class SpectraScreenView extends ScreenView {
       bottom: lightNode.top + 1,
       tandem: tandem.createTandem( 'beamNode' )
     } );
+
+    // Controls for the light
+    const lightControlPanel = new LightControlPanel(
+      model.light.lightModeProperty,
+      model.light.monochromaticWavelengthProperty, {
+        left: this.layoutBounds.left + 30,
+        top: lightNode.bottom + 10,
+        tandem: tandem.createTandem( 'lightControlPanel' )
+      } );
 
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode( {
@@ -213,7 +205,7 @@ export default class SpectraScreenView extends ScreenView {
     // Play Area focus order
     this.pdomPlayAreaNode.pdomOrder = [
       //TODO
-      lightModeRadioButtonGroup,
+      lightControlPanel,
       lightNode,
       modelVBox,
       timeControlNode,

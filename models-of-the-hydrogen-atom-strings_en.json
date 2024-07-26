@@ -115,5 +115,11 @@
   },
   "exciteAtom": {
     "value": "Excite Atom"
+  },
+  "white": {
+    "value": "White"
+  },
+  "monochromatic": {
+    "value": "Monochromatic"
   }
 }

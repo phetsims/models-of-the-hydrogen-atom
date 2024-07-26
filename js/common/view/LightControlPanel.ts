@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * TODO
+ * LightControlPanel contains the controls for configuring the mode and wavelength of the light.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +9,6 @@
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { Color, HBox, Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
-import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import Property from '../../../../axon/js/Property.js';
 import { LightMode } from '../model/LightMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -27,6 +26,8 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
+import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -42,10 +43,30 @@ export class LightControlPanel extends Panel {
 
       //TODO PanelOptions
       fill: MOTHAColors.panelFillColorProperty,
-      stroke: MOTHAColors.panelStrokeColorProperty
+      stroke: MOTHAColors.panelStrokeColorProperty,
+      xMargin: 10,
+      yMargin: 10
     }, providedOptions );
 
-    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightModeProperty, {
+    const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
+      {
+        createNode: () => new Text( 'White', {
+          font: new PhetFont( 16 ),
+          fill: 'white'
+        } ),
+        value: 'white'
+      },
+      {
+        createNode: () => new Text( 'Monochromatic', {
+          font: new PhetFont( 16 ),
+          fill: 'white'
+        } ),
+        value: 'monochromatic'
+      }
+    ];
+
+    const lightModeRadioButtonGroup = new HorizontalAquaRadioButtonGroup( lightModeProperty, radioButtonGroupItems, {
+      spacing: 15,
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
@@ -100,7 +121,7 @@ export class LightControlPanel extends Panel {
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
-      spacing: 5,
+      spacing: 15,
       children: [ lightModeRadioButtonGroup, wavelengthControl, absorptionWavelengthsInfoButton ]
     } );
 
