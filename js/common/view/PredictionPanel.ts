@@ -68,7 +68,7 @@ export default class PredictionPanel extends Panel {
         xAlign: 'left',
         buttonAppearanceStrategyOptions: {
           selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
-          deselectedStroke: MOTHAColors.modelsRadioButtonFillProperty,
+          deselectedStroke: null,
           selectedLineWidth: 2,
           selectedButtonOpacity: 1,
           deselectedButtonOpacity: 1,
@@ -111,7 +111,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom ):
       children: [
         new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ),
         new Text( predictiveModel.displayNameProperty, {
-          fill: MOTHAColors.modelsRadioButtonTextFillProperty,
+          fill: MOTHAColors.invertibleTextFillProperty,
           font: new PhetFont( 16 ),
           maxWidth: 200 // determined empirically
         } ) ]

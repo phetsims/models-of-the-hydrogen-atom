@@ -100,19 +100,9 @@ const MOTHAColors = {
     projector: 'black'
   } ),
 
-  legendTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'legendTextFill', {
-    default: 'white',
-    projector: 'black'
-  } ),
-
   //------------------------------------------------------------------------------------------------------------------
   // Light
   //------------------------------------------------------------------------------------------------------------------
-
-  lightModeRadioButtonTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonTextFill', {
-    default: 'white',
-    projector: 'black'
-  } ),
 
   wavelengthSliderThumbStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'wavelengthSliderThumbStroke', {
     default: 'white',
@@ -130,11 +120,6 @@ const MOTHAColors = {
   } ),
 
   wavelengthNumberDisplayStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'wavelengthNumberDisplayStroke', {
-    default: 'white',
-    projector: 'black'
-  } ),
-
-  absorptionWavelengthTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'absorptionWavelengthTextFill', {
     default: 'white',
     projector: 'black'
   } ),
@@ -163,11 +148,6 @@ const MOTHAColors = {
     projector: 'black'
   } ),
 
-  modelsRadioButtonTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonTextFill', {
-    default: 'white',
-    projector: 'black'
-  } ),
-
   modelsRadioButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonFill', {
     default: 'black',
     projector: 'white'
@@ -177,21 +157,12 @@ const MOTHAColors = {
     default: YELLOW
   } ),
 
-  modelsRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonDeselectedStroke', {
-    default: Color.grayColor( 200 )
-  } ),
-
   continuumBarFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'continuumBarFill', {
     default: Color.grayColor( 220 )
   } ),
 
   continuumBarTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'continuumBarTextFill', {
     default: 'black'
-  } ),
-
-  timeControlRadioButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'timeControlRadioButtonFill', {
-    default: 'white',
-    projector: 'black'
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
@@ -234,11 +205,6 @@ const MOTHAColors = {
 
   snapshotsDialogFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'snapshotsDialogFill', {
     default: 'white'
-  } ),
-
-  snapshotTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'snapshotTextFill', {
-    default: 'white',
-    projector: 'black'
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
@@ -289,6 +255,12 @@ const MOTHAColors = {
   //------------------------------------------------------------------------------------------------------------------
   // Miscellaneous
   //------------------------------------------------------------------------------------------------------------------
+
+  // Catch-all for text that needs to switch between white and black.
+  invertibleTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'invertibleTextFill', {
+    default: 'white',
+    projector: 'black'
+  } ),
 
   pushButtonBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'pushButtonBaseColor', {
     default: Color.grayColor( 245 )

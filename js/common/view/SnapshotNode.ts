@@ -39,7 +39,7 @@ export default class SnapshotNode extends Node {
     //TODO i18n
     const titleText = new Text( 'Snapshot', {
       font: new PhetFont( 16 ),
-      fill: MOTHAColors.snapshotTextFillProperty,
+      fill: MOTHAColors.invertibleTextFillProperty,
       left: backgroundNode.left + 10,
       top: backgroundNode.top + 10
     } );

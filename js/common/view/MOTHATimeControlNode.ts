@@ -34,7 +34,7 @@ export default class MOTHATimeControlNode extends TimeControlNode {
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: new PhetFont( 14 ),
-          fill: MOTHAColors.timeControlRadioButtonFillProperty
+          fill: MOTHAColors.invertibleTextFillProperty
         }
       },
       playPauseStepButtonOptions: {

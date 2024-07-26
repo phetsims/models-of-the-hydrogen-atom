@@ -97,7 +97,7 @@ class KeyNode extends HBox {
         } ),
         new Text( labelStringProperty, {
           font: ITEM_FONT,
-          fill: MOTHAColors.legendTextFillProperty,
+          fill: MOTHAColors.invertibleTextFillProperty,
           maxWidth: 120 // determined empirically
         } )
       ],

@@ -31,7 +31,7 @@ import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRad
 
 const RADIO_BUTTON_TEXT_OPTIONS = {
   font: new PhetFont( 16 ),
-  fill: MOTHAColors.lightModeRadioButtonTextFillProperty
+  fill: MOTHAColors.invertibleTextFillProperty
 };
 
 type SelfOptions = EmptySelfOptions;
@@ -114,7 +114,7 @@ export class LightControlPanel extends Panel {
         } ),
         new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
           font: new PhetFont( 14 ),
-          fill: MOTHAColors.absorptionWavelengthTextFillProperty
+          fill: MOTHAColors.invertibleTextFillProperty
         } )
       ]
     } );
