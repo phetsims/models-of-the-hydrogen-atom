@@ -109,17 +109,9 @@ const MOTHAColors = {
   // Light
   //------------------------------------------------------------------------------------------------------------------
 
-  lightModeRadioButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonFill', {
-    default: 'black',
-    projector: 'white'
-  } ),
-
-  lightModeRadioButtonSelectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonSelectedStroke', {
-    default: YELLOW
-  } ),
-
-  lightModeRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonDeselectedStroke', {
-    default: Color.grayColor( 200 )
+  lightModeRadioButtonTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightModeRadioButtonTextFill', {
+    default: 'white',
+    projector: 'black'
   } ),
 
   wavelengthSliderThumbStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'wavelengthSliderThumbStroke', {

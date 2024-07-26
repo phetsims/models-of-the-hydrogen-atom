@@ -29,6 +29,11 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 
+const RADIO_BUTTON_TEXT_OPTIONS = {
+  font: new PhetFont( 16 ),
+  fill: MOTHAColors.lightModeRadioButtonTextFillProperty
+};
+
 type SelfOptions = EmptySelfOptions;
 
 type LightControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
@@ -50,18 +55,12 @@ export class LightControlPanel extends Panel {
 
     const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
       {
-        createNode: () => new Text( 'White', {
-          font: new PhetFont( 16 ),
-          fill: 'white'
-        } ),
-        value: 'white'
+        value: 'white',
+        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
       },
       {
-        createNode: () => new Text( 'Monochromatic', {
-          font: new PhetFont( 16 ),
-          fill: 'white'
-        } ),
-        value: 'monochromatic'
+        value: 'monochromatic',
+        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
       }
     ];
 
