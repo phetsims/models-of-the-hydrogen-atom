@@ -22,6 +22,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -43,12 +44,13 @@ export class LightControlPanel extends Panel {
     }, providedOptions );
 
     // Wavelength control
+    const monochromaticWavelengthControlTandem = options.tandem.createTandem( 'monochromaticWavelengthControl' );
     const monochromaticWavelengthControl = new MOTHAWavelengthControl( monochromaticWavelengthProperty, {
       visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
-        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+        tandem: monochromaticWavelengthControlTandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
-      tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
+      tandem: monochromaticWavelengthControlTandem
     } );
 
     // 'Absorption Wavelengths' info button
@@ -61,7 +63,8 @@ export class LightControlPanel extends Panel {
           scale: 0.4,
           listener: () => {
             //TODO
-          }
+          },
+          tandem: Tandem.OPT_OUT // because we're instrumenting the button + label
         } ),
         new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
           font: new PhetFont( 14 ),
@@ -80,11 +83,13 @@ export class LightControlPanel extends Panel {
     const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
       {
         value: 'white',
-        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, textOptions )
+        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, textOptions ),
+        tandemName: 'whiteRadioButton'
       },
       {
         value: 'monochromatic',
-        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, textOptions )
+        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, textOptions ),
+        tandemName: 'monochromaticRadioButton'
       }
     ];
 
