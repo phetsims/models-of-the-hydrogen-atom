@@ -23,11 +23,6 @@ import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGrou
 import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
 
-const RADIO_BUTTON_TEXT_OPTIONS = {
-  font: new PhetFont( 16 ),
-  fill: MOTHAColors.invertibleTextFillProperty
-};
-
 type SelfOptions = EmptySelfOptions;
 
 type LightControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
@@ -46,22 +41,6 @@ export class LightControlPanel extends Panel {
       xMargin: 10,
       yMargin: 10
     }, providedOptions );
-
-    const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
-      {
-        value: 'white',
-        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
-      },
-      {
-        value: 'monochromatic',
-        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
-      }
-    ];
-
-    const lightModeRadioButtonGroup = new HorizontalAquaRadioButtonGroup( lightModeProperty, radioButtonGroupItems, {
-      spacing: 15,
-      tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
-    } );
 
     // Wavelength control
     const monochromaticWavelengthControl = new MOTHAWavelengthControl( monochromaticWavelengthProperty, {
@@ -86,9 +65,33 @@ export class LightControlPanel extends Panel {
         } ),
         new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
           font: new PhetFont( 14 ),
-          fill: MOTHAColors.invertibleTextFillProperty
+          fill: MOTHAColors.invertibleTextFillProperty,
+          maxWidth: 0.8 * monochromaticWavelengthControl.width
         } )
       ]
+    } );
+
+    const textOptions = {
+      font: new PhetFont( 16 ),
+      fill: MOTHAColors.invertibleTextFillProperty,
+      maxWidth: 0.4 * monochromaticWavelengthControl.width
+    };
+
+    const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
+      {
+        value: 'white',
+        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, textOptions )
+      },
+      {
+        value: 'monochromatic',
+        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, textOptions )
+      }
+    ];
+
+    const lightModeRadioButtonGroup = new HorizontalAquaRadioButtonGroup( lightModeProperty, radioButtonGroupItems, {
+      maxWidth: monochromaticWavelengthControl.width,
+      spacing: 15,
+      tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
     const content = new VBox( {
