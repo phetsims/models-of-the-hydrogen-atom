@@ -9,7 +9,6 @@
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { HBox, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
-import Property from '../../../../axon/js/Property.js';
 import { LightMode } from '../model/LightMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -23,6 +22,7 @@ import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGrou
 import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Light from '../model/Light.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -30,9 +30,7 @@ type LightControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequi
 
 export class LightControlPanel extends Panel {
 
-  public constructor( lightModeProperty: Property<LightMode>,
-                      monochromaticWavelengthProperty: Property<number>,
-                      providedOptions: LightControlPanelOptions ) {
+  public constructor( light: Light, providedOptions: LightControlPanelOptions ) {
 
     const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
 
@@ -45,8 +43,8 @@ export class LightControlPanel extends Panel {
 
     // Wavelength control
     const monochromaticWavelengthControlTandem = options.tandem.createTandem( 'monochromaticWavelengthControl' );
-    const monochromaticWavelengthControl = new MOTHAWavelengthControl( monochromaticWavelengthProperty, {
-      visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
+    const monochromaticWavelengthControl = new MOTHAWavelengthControl( light.monochromaticWavelengthProperty, {
+      visibleProperty: new DerivedProperty( [ light.lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
         tandem: monochromaticWavelengthControlTandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
@@ -93,7 +91,7 @@ export class LightControlPanel extends Panel {
       }
     ];
 
-    const lightModeRadioButtonGroup = new HorizontalAquaRadioButtonGroup( lightModeProperty, radioButtonGroupItems, {
+    const lightModeRadioButtonGroup = new HorizontalAquaRadioButtonGroup( light.lightModeProperty, radioButtonGroupItems, {
       maxWidth: monochromaticWavelengthControl.width,
       spacing: 15,
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
@@ -107,6 +105,8 @@ export class LightControlPanel extends Panel {
     } );
 
     super( content, options );
+
+    this.addLinkedElement( light );
   }
 }
 

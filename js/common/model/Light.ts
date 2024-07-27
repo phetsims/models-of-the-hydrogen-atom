@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
@@ -20,7 +19,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Color } from '../../../../scenery/js/imports.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -44,7 +43,7 @@ type SelfOptions = EmptySelfOptions;
 
 type LightOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class Light {
+export default class Light extends PhetioObject {
 
   private readonly zoomedInBox: ZoomedInBox;
 
@@ -78,9 +77,14 @@ export default class Light {
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: LightOptions ) {
 
-    const options = optionize<LightOptions, SelfOptions>()( {
-      //TODO
+    const options = optionize<LightOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioState: false
     }, providedOptions );
+
+    super( options );
 
     this.zoomedInBox = zoomedInBox;
 
@@ -128,10 +132,6 @@ export default class Light {
     // Get transition wavelengths for state 1, which are all UV.
     this.transitionWavelengths =
       BohrModel.getTransitionWavelengths( this.monochromaticWavelengthRange.min, VisibleColor.MIN_WAVELENGTH );
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 
   public reset(): void {

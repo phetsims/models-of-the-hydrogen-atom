@@ -62,13 +62,11 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Controls for the light
-    const lightControlPanel = new LightControlPanel(
-      model.light.lightModeProperty,
-      model.light.monochromaticWavelengthProperty, {
-        left: this.layoutBounds.left + 30,
-        top: lightNode.bottom + 10,
-        tandem: tandem.createTandem( 'lightControlPanel' )
-      } );
+    const lightControlPanel = new LightControlPanel( model.light, {
+      left: this.layoutBounds.left + 30,
+      top: lightNode.bottom + 10,
+      tandem: tandem.createTandem( 'lightControlPanel' )
+    } );
 
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode( {

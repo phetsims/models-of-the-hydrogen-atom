@@ -43,6 +43,8 @@ export class LightNode extends Node {
     options.children = [ beamNode, laserPointerNode ];
 
     super( options );
+
+    this.addLinkedElement( light );
   }
 }
 
