@@ -26,16 +26,18 @@ export default class EnergyLevelsModel extends MOTHAModel {
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
 
+    const hydrogenAtomModelsTandem = tandem.createTandem( 'hydrogenAtomModels' );
+
     const bohrModel = new BohrModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'bohrModel' )
+      tandem: hydrogenAtomModelsTandem.createTandem( 'bohrModel' )
     } );
 
     const deBroglieModel = new DeBroglieModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'deBroglieModel' )
+      tandem: hydrogenAtomModelsTandem.createTandem( 'deBroglieModel' )
     } );
 
     const schrodingerModel = new SchrodingerModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'schrodingerModel' )
+      tandem: hydrogenAtomModelsTandem.createTandem( 'schrodingerModel' )
     } );
 
     // Predictive models supported by this screen, in the order that they will appear in the UI

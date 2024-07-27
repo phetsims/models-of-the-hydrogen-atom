@@ -32,28 +32,30 @@ export default class SpectraModel extends MOTHAModel {
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
 
+    const hydrogenAtomModels = tandem.createTandem( 'hydrogenAtomModels' );
+
     const billiardBallModel = new BilliardBallModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'billiardBallModel' )
+      tandem: hydrogenAtomModels.createTandem( 'billiardBallModel' )
     } );
 
     const plumPuddingModel = new PlumPuddingModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'plumPuddingModel' )
+      tandem: hydrogenAtomModels.createTandem( 'plumPuddingModel' )
     } );
 
     const classicalSolarSystemModel = new ClassicalSolarSystemModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'classicalSolarSystemModel' )
+      tandem: hydrogenAtomModels.createTandem( 'classicalSolarSystemModel' )
     } );
 
     const bohrModel = new BohrModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'bohrModel' )
+      tandem: hydrogenAtomModels.createTandem( 'bohrModel' )
     } );
 
     const deBroglieModel = new DeBroglieModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'deBroglieModel' )
+      tandem: hydrogenAtomModels.createTandem( 'deBroglieModel' )
     } );
 
     const schrodingerModel = new SchrodingerModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'schrodingerModel' )
+      tandem: hydrogenAtomModels.createTandem( 'schrodingerModel' )
     } );
 
     // Predictive models supported by this screen, in the order that they will appear in the UI

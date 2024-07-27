@@ -18,7 +18,7 @@ import HydrogenAtom from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
-import ExperimentModel from './ExperimentModel.js';
+import Experiment from './Experiment.js';
 import { ModelMode, ModelModeValues } from './ModelMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -36,7 +36,7 @@ export default class MOTHAModel implements TModel {
   public readonly modelModeProperty: Property<ModelMode>;
 
   // the experiment hydrogen-atom model
-  public readonly experimentModel: ExperimentModel;
+  public readonly experiment: Experiment;
 
   // the supported set of predictive hydrogen-atom models
   public readonly predictiveModels: HydrogenAtom[];
@@ -86,8 +86,8 @@ export default class MOTHAModel implements TModel {
       tandem: tandem.createTandem( 'modelModeProperty' )
     } );
 
-    this.experimentModel = new ExperimentModel( zoomedInBox, {
-      tandem: tandem.createTandem( 'experimentModel' )
+    this.experiment = new Experiment( zoomedInBox, {
+      tandem: tandem.createTandem( 'experiment' )
     } );
 
     this.predictiveModels = predictiveModels;
@@ -100,7 +100,7 @@ export default class MOTHAModel implements TModel {
 
     this.hydrogenAtomProperty = new DerivedProperty(
       [ this.modelModeProperty, this.predictiveModelProperty ],
-      ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experimentModel : predictiveModel, {
+      ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experiment : predictiveModel, {
         //TODO tandem
         //TODO phetioType
       } );
@@ -146,7 +146,7 @@ export default class MOTHAModel implements TModel {
 
   public reset(): void {
     this.modelModeProperty.reset();
-    this.experimentModel.reset();
+    this.experiment.reset();
     this.predictiveModels.forEach( predictiveModel => predictiveModel.reset() );
     this.predictiveModelProperty.reset();
     this.light.reset();

@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * ExperimentModel is the model when we are in "Experiment" mode. It is identical to the Schrodinger model.
+ * Experiment is the model when we are in "Experiment" mode. It is identical to the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,13 +14,13 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 
 type SelfOptions = EmptySelfOptions;
 
-type ExperimentModelOptions = SelfOptions & SchrodingerModelOptions;
+type ExperimentOptions = SelfOptions & SchrodingerModelOptions;
 
-export default class ExperimentModel extends SchrodingerModel {
+export default class Experiment extends SchrodingerModel {
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: ExperimentModelOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, providedOptions: ExperimentOptions ) {
 
-    const options = optionize<ExperimentModelOptions, SelfOptions, SchrodingerModelOptions>()( {
+    const options = optionize<ExperimentOptions, SelfOptions, SchrodingerModelOptions>()( {
 
       // SchrodingerModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.experimentStringProperty
@@ -30,4 +30,4 @@ export default class ExperimentModel extends SchrodingerModel {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'ExperimentModel', ExperimentModel );
+modelsOfTheHydrogenAtom.register( 'Experiment', Experiment );
