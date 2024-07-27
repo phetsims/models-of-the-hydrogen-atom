@@ -70,7 +70,9 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     } );
 
     const electronStateText = new FullElectronStateText( hydrogenAtom.getElectronStateProperty(),
-      hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty );
+      hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
+        tandem: options.tandem.createTandem( 'electronStateText' )
+      } );
 
     const vBox = new VBox( {
       align: 'right',

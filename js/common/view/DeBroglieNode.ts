@@ -77,7 +77,9 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'deBroglieViewComboBox' )
     } );
 
-    const electronStateText = new PrimaryElectronStateText( hydrogenAtom.getElectronStateProperty() );
+    const electronStateText = new PrimaryElectronStateText( hydrogenAtom.getElectronStateProperty(), {
+      tandem: options.tandem.createTandem( 'electronStateText' )
+    } );
 
     options.children = [ protonNode, viewNodes, deBroglieViewComboBox, electronStateText ];
 
