@@ -57,7 +57,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Light
-    const lightNode = new LaserPointerNode( model.light.onProperty, {
+    const lightNode = new LaserPointerNode( model.light.isOnProperty, {
       bodySize: new Dimension2( 88, 64 ),
       nozzleSize: new Dimension2( 18, 50 ),
       buttonRadius: 19,
@@ -69,7 +69,7 @@ export default class SpectraScreenView extends ScreenView {
 
     // Beam of light
     const beamNode = new BeamNode( {
-      visibleProperty: model.light.onProperty,
+      visibleProperty: model.light.isOnProperty,
       fill: model.light.colorProperty,
       centerX: lightNode.centerX,
       bottom: lightNode.top + 1,

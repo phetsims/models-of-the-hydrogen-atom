@@ -49,7 +49,7 @@ export default class Light {
   private readonly zoomedInBox: ZoomedInBox;
 
   // is the light on?
-  public readonly onProperty: BooleanProperty;
+  public readonly isOnProperty: BooleanProperty;
 
   // whether the light is full spectrum (white) or monochromatic
   public readonly lightModeProperty: Property<LightMode>;
@@ -84,8 +84,8 @@ export default class Light {
 
     this.zoomedInBox = zoomedInBox;
 
-    this.onProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'onProperty' )
+    this.isOnProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'isOnProperty' )
     } );
 
     this.lightModeProperty = new Property<LightMode>( 'white', {
@@ -106,13 +106,11 @@ export default class Light {
     this.wavelengthProperty = new DerivedProperty( [ this.lightModeProperty, this.monochromaticWavelengthProperty ],
       ( lightMode, monochromaticWavelength ) =>
         ( lightMode === 'white' ) ? VisibleColor.WHITE_WAVELENGTH : monochromaticWavelength, {
-        tandem: options.tandem.createTandem( 'wavelengthProperty' ),
         phetioValueType: NumberIO
       } );
 
     this.colorProperty = new DerivedProperty( [ this.wavelengthProperty ],
       wavelength => Light.wavelengthToColor( wavelength ), {
-        tandem: options.tandem.createTandem( 'colorProperty' ),
         phetioValueType: Color.ColorIO
       } );
 
@@ -137,7 +135,7 @@ export default class Light {
   }
 
   public reset(): void {
-    this.onProperty.reset();
+    this.isOnProperty.reset();
     this.lightModeProperty.reset();
     this.monochromaticWavelengthProperty.reset();
     this.dtSincePhotonCreatedProperty.reset();
@@ -148,7 +146,7 @@ export default class Light {
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {
-    if ( this.onProperty.value ) {
+    if ( this.isOnProperty.value ) {
       this.dtSincePhotonCreatedProperty.value += dt;
       if ( this.dtSincePhotonCreatedProperty.value >= this.dtPerPhotonCreated ) {
 
