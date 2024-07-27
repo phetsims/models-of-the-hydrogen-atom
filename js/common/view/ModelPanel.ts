@@ -1,8 +1,5 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
-//TODO on over in default mode, radio button fill is gray
-//TODO on press in default mode, radio buttons have no visible stroke or fill
-//TODO on press in projector mode, radio buttons have no stroke and gray fill
 //TODO colors of Billiard Ball icon do not match BilliardBallNode
 /**
  * ModelPanel contains controls (radio buttons) for choosing one of the predictive models.
@@ -67,6 +64,10 @@ export default class ModelPanel extends Panel {
         xMargin: 12,
         yMargin: 10,
         xAlign: 'left',
+
+        //TODO on over in default mode, radio button fill is gray
+        //TODO on press in default mode, radio buttons have no visible stroke or fill
+        //TODO on press in projector mode, radio buttons have no stroke and gray fill
         buttonAppearanceStrategyOptions: {
           selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
           overStroke: MOTHAColors.modelsRadioButtonOverStrokeProperty,
