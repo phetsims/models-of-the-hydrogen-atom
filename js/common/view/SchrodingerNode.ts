@@ -3,7 +3,7 @@
 /**
  * SchrodingerNode displays the Schrodinger model of the hydrogen atom.
  *
- * TODO copy details from SchrodingerNode.java
+ * TODO port SchrodingerNode.java
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
