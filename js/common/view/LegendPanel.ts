@@ -50,16 +50,15 @@ export default class LegendPanel extends Panel {
     const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
 
     // A Node for each item described in the Key, organized under a parent tandem
-    const contentTandem = options.tandem.createTandem( 'content' );
     const keyNodes: KeyNode[] = [
       new KeyNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.electronStringProperty, contentTandem.createTandem( 'electronKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.electronStringProperty, options.tandem.createTandem( 'electronNode' ) ),
       new KeyNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.protonStringProperty, contentTandem.createTandem( 'protonKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.protonStringProperty, options.tandem.createTandem( 'protonNode' ) ),
       new KeyNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.neutronStringProperty, contentTandem.createTandem( 'neutronKeyNode' ) ),
+        ModelsOfTheHydrogenAtomStrings.neutronStringProperty, options.tandem.createTandem( 'neutronNode' ) ),
       new KeyNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.photonStringProperty, contentTandem.createTandem( 'photonKeyNode' ) )
+        ModelsOfTheHydrogenAtomStrings.photonStringProperty, options.tandem.createTandem( 'photonNode' ) )
     ];
 
     const content = new VBox( {
@@ -77,13 +76,12 @@ export default class LegendPanel extends Panel {
  */
 class KeyNode extends HBox {
 
-  public constructor( iconNode: Node, iconAlignGroup: AlignGroup, labelStringProperty: TReadOnlyProperty<string>, parentTandem: Tandem ) {
+  public constructor( iconNode: Node, iconAlignGroup: AlignGroup, labelStringProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
     super( {
       spacing: 5,
       children: [
         new AlignBox( iconNode, {
-          group: iconAlignGroup,
-          tandem: parentTandem.createTandem( 'iconNode' )
+          group: iconAlignGroup
         } ),
         new Text( labelStringProperty, {
           font: ITEM_FONT,
@@ -92,7 +90,7 @@ class KeyNode extends HBox {
         } )
       ],
       isDisposable: false,
-      tandem: parentTandem
+      tandem: tandem
     } );
   }
 }
