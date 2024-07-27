@@ -4,7 +4,7 @@
 //TODO on mouseDown in default mode, radio buttons have no visible stroke and no background color change
 //TODO colors of Billiard Ball icon do not match BilliardBallNode
 /**
- * PredictionPanel contains controls (radio buttons) for choosing one of the predictive models.
+ * ModelPanel contains controls (radio buttons) for choosing one of the predictive models.
  * It is shown when the AB-switch is set to 'Prediction'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -30,7 +30,7 @@ type SelfOptions = EmptySelfOptions;
 
 type PredictionPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class PredictionPanel extends Panel {
+export default class ModelPanel extends Panel {
 
   public constructor( predictiveModelProperty: Property<HydrogenAtom>,
                       predictiveModels: HydrogenAtom[],
@@ -120,4 +120,4 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom ):
   };
 }
 
-modelsOfTheHydrogenAtom.register( 'PredictionPanel', PredictionPanel );
+modelsOfTheHydrogenAtom.register( 'ModelPanel', ModelPanel );

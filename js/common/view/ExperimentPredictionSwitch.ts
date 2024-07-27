@@ -40,9 +40,9 @@ export default class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 
     const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, textOptions );
 
-    const predictionText = new Text( ModelsOfTheHydrogenAtomStrings.predictionStringProperty, textOptions );
+    const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, textOptions );
 
-    super( modelModeProperty, 'experiment', experimentText, 'prediction', predictionText, options );
+    super( modelModeProperty, 'experiment', experimentText, 'prediction', modelText, options );
   }
 }
 

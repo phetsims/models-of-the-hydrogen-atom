@@ -23,7 +23,7 @@ type StringsType = {
   'electronStringProperty': LocalizedStringProperty;
   'electronEnergyLevelStringProperty': LocalizedStringProperty;
   'experimentStringProperty': LocalizedStringProperty;
-  'predictionStringProperty': LocalizedStringProperty;
+  'modelStringProperty': LocalizedStringProperty;
   'fastStringProperty': LocalizedStringProperty;
   'hydrogenSymbolStringProperty': LocalizedStringProperty;
   'legendStringProperty': LocalizedStringProperty;

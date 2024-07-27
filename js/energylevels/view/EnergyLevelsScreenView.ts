@@ -9,7 +9,7 @@
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import PredictionPanel from '../../common/view/PredictionPanel.js';
+import ModelPanel from '../../common/view/ModelPanel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
@@ -37,11 +37,11 @@ export default class EnergyLevelsScreenView extends ScreenView {
     } );
 
     // panel that contains radio buttons for selecting a predictive model
-    const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels,
+    const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels,
       model.modelModeProperty, {
         left: electronEnergyLevelAccordionBox.right + 20,
         top: electronEnergyLevelAccordionBox.top,
-        tandem: tandem.createTandem( 'predictionPanel' )
+        tandem: tandem.createTandem( 'modelPanel' )
       } );
 
     // Reset All button
@@ -60,7 +60,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     const screenViewRootNode = new Node( {
       children: [
         electronEnergyLevelAccordionBox,
-        predictionPanel,
+        modelPanel,
         resetAllButton
       ]
     } );
@@ -70,7 +70,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     this.pdomPlayAreaNode.pdomOrder = [
       //TODO
       electronEnergyLevelAccordionBox,
-      predictionPanel,
+      modelPanel,
       resetAllButton
     ];
 

@@ -19,7 +19,7 @@ import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
-import PredictionPanel from '../../common/view/PredictionPanel.js';
+import ModelPanel from '../../common/view/ModelPanel.js';
 import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
@@ -124,12 +124,12 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // panel that contains radio buttons for selecting a predictive model
-    const predictionPanel = new PredictionPanel( model.predictiveModelProperty, model.predictiveModels, model.modelModeProperty, {
-      tandem: tandem.createTandem( 'predictionPanel' )
+    const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.modelModeProperty, {
+      tandem: tandem.createTandem( 'modelPanel' )
     } );
 
     const modelVBox = new VBox( {
-      children: [ experimentPredictionSwitch, predictionPanel ],
+      children: [ experimentPredictionSwitch, modelPanel ],
       align: 'center',
       spacing: 10,
       left: zoomedInBoxNode.right + 30,
