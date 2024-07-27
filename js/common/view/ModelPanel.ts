@@ -5,7 +5,7 @@
 //TODO colors of Billiard Ball icon do not match BilliardBallNode
 /**
  * ModelPanel contains controls (radio buttons) for choosing one of the predictive models.
- * It is shown when the AB-switch is set to 'Prediction'.
+ * It is shown when the AB-switch is set to 'Model'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -28,19 +28,19 @@ import ContinuumBarNode from './ContinuumBarNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type PredictionPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
+type ModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class ModelPanel extends Panel {
 
   public constructor( predictiveModelProperty: Property<HydrogenAtom>,
                       predictiveModels: HydrogenAtom[],
                       modelModeProperty: TReadOnlyProperty<ModelMode>,
-                      providedOptions: PredictionPanelOptions ) {
+                      providedOptions: ModelPanelOptions ) {
 
-    const options = optionize<PredictionPanelOptions, SelfOptions, PanelOptions>()( {
+    const options = optionize<ModelPanelOptions, SelfOptions, PanelOptions>()( {
 
-      // Visible when model mode is 'prediction'
-      visibleProperty: new DerivedProperty( [ modelModeProperty ], modelMode => ( modelMode === 'prediction' ), {
+      // Visible when model mode is 'model'
+      visibleProperty: new DerivedProperty( [ modelModeProperty ], modelMode => ( modelMode === 'model' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),

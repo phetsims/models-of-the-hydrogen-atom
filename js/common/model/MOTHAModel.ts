@@ -81,7 +81,7 @@ export default class MOTHAModel implements TModel {
     this.zoomedInBox = zoomedInBox;
 
     //TODO default should be 'experiment'
-    this.modelModeProperty = new StringUnionProperty( 'prediction', {
+    this.modelModeProperty = new StringUnionProperty( 'model', {
       validValues: ModelModeValues,
       tandem: tandem.createTandem( 'modelModeProperty' )
     } );

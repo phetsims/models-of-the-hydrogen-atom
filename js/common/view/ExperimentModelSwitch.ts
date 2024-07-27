@@ -1,7 +1,7 @@
 // Copyright 2015-2023, University of Colorado Boulder
 
 /**
- * ExperimentPredictionSwitch is an AB switch that determines whether we are viewing an experiment or a predictive model.
+ * ExperimentModelSwitch is an AB switch that determines whether we are viewing an experiment or a predictive model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,13 +20,13 @@ import Property from '../../../../axon/js/Property.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ExperimentPredictionSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>;
+type ExperimentModelSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>;
 
-export default class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
+export default class ExperimentModelSwitch extends ABSwitch<ModelMode> {
 
-  public constructor( modelModeProperty: Property<ModelMode>, providedOptions: ExperimentPredictionSwitchOptions ) {
+  public constructor( modelModeProperty: Property<ModelMode>, providedOptions: ExperimentModelSwitchOptions ) {
 
-    const options = optionize<ExperimentPredictionSwitchOptions, SelfOptions, ABSwitchOptions>()( {
+    const options = optionize<ExperimentModelSwitchOptions, SelfOptions, ABSwitchOptions>()( {
       centerOnSwitch: true,
       toggleSwitchOptions: { size: new Dimension2( 50, 25 ) },
       isDisposable: false
@@ -42,8 +42,8 @@ export default class ExperimentPredictionSwitch extends ABSwitch<ModelMode> {
 
     const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, textOptions );
 
-    super( modelModeProperty, 'experiment', experimentText, 'prediction', modelText, options );
+    super( modelModeProperty, 'experiment', experimentText, 'model', modelText, options );
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'ExperimentPredictionSwitch', ExperimentPredictionSwitch );
+modelsOfTheHydrogenAtom.register( 'ExperimentModelSwitch', ExperimentModelSwitch );

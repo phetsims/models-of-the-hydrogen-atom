@@ -8,5 +8,5 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-export const ModelModeValues = [ 'experiment', 'prediction' ] as const;
+export const ModelModeValues = [ 'experiment', 'model' ] as const;
 export type ModelMode = ( typeof ModelModeValues )[number];

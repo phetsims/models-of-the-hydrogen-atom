@@ -16,7 +16,7 @@ import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import BeamNode from '../../common/view/BeamNode.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
-import ExperimentPredictionSwitch from '../../common/view/ExperimentPredictionSwitch.js';
+import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import ModelPanel from '../../common/view/ModelPanel.js';
@@ -118,9 +118,9 @@ export default class SpectraScreenView extends ScreenView {
       tandem: tandem.createTandem( 'dashedLines' )
     } );
 
-    // switches the model mode between Experiment and Prediction
-    const experimentPredictionSwitch = new ExperimentPredictionSwitch( model.modelModeProperty, {
-      tandem: tandem.createTandem( 'experimentPredictionSwitch' )
+    // switches the model mode between Experiment and Model
+    const experimentModelSwitch = new ExperimentModelSwitch( model.modelModeProperty, {
+      tandem: tandem.createTandem( 'experimentModelSwitch' )
     } );
 
     // panel that contains radio buttons for selecting a predictive model
@@ -129,7 +129,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     const modelVBox = new VBox( {
-      children: [ experimentPredictionSwitch, modelPanel ],
+      children: [ experimentModelSwitch, modelPanel ],
       align: 'center',
       spacing: 10,
       left: zoomedInBoxNode.right + 30,
