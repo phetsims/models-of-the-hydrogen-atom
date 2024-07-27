@@ -14,7 +14,6 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class FullElectronStateText extends RichText {
 
@@ -29,7 +28,7 @@ export default class FullElectronStateText extends RichText {
       lValue: secondaryStateProperty,
       mSymbol: MOTHASymbols.mStringProperty,
       mValue: tertiaryStateProperty
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
 
     super( stringProperty, {
       font: new PhetFont( 16 ),

@@ -21,7 +21,6 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import Light from '../model/Light.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -52,19 +51,23 @@ export class LightControlPanel extends Panel {
     } );
 
     // 'Absorption Wavelengths' info button
-    const absorptionWavelengthsInfoButton = new HBox( {
+    const absorptionWavelengthsInfoButton = new InfoButton( {
+      iconFill: 'rgb( 41, 106, 163 )',
+      scale: 0.4,
+      listener: () => {
+        //TODO
+      },
+      tandem: options.tandem.createTandem( 'absorptionWavelengthsInfoButton' ),
+      phetioEnabledPropertyInstrumented: false
+    } );
+
+    const hBox = new HBox( {
       visibleProperty: monochromaticWavelengthControl.visibleProperty,
       spacing: 5,
       children: [
-        new InfoButton( {
-          iconFill: 'rgb( 41, 106, 163 )',
-          scale: 0.4,
-          listener: () => {
-            //TODO
-          },
-          tandem: Tandem.OPT_OUT // because we're instrumenting the button + label
-        } ),
+        absorptionWavelengthsInfoButton,
         new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
+          visibleProperty: absorptionWavelengthsInfoButton.visibleProperty,
           font: new PhetFont( 14 ),
           fill: MOTHAColors.invertibleTextFillProperty,
           maxWidth: 0.8 * monochromaticWavelengthControl.width
@@ -101,7 +104,7 @@ export class LightControlPanel extends Panel {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
       spacing: 15,
-      children: [ lightModeRadioButtonGroup, monochromaticWavelengthControl, absorptionWavelengthsInfoButton ]
+      children: [ lightModeRadioButtonGroup, monochromaticWavelengthControl, hBox ]
     } );
 
     super( content, options );
