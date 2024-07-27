@@ -52,7 +52,6 @@ import ProbabilisticChooser, { ProbabilisticChooserEntry } from './Probabilistic
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 /*
  * This table defines the transition strengths for the primary state component (n).
@@ -100,22 +99,20 @@ export default class SchrodingerModel extends DeBroglieModel {
 
     this.secondaryElectronStateProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      //TODO range is dynamic [0,n-1]
+      //TODO range is dynamic [0,n-1] and range option cannot be a DerivedProperty
       tandem: options.tandem.createTandem( 'secondaryElectronStateProperty' ),
       phetioReadOnly: true,
+      phetioFeatured: true,
       phetioDocumentation: 'secondary electron state (l)'
     } );
 
     this.tertiaryElectronStateProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      //TODO range is dynamic [-l,+l]
+      //TODO range is dynamic [-l,+l] and range option cannot be a DerivedProperty
       tandem: options.tandem.createTandem( 'tertiaryElectronStateProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'tertiary electron state (m)',
-      //TODO do we need to opt out here?
-      rangePropertyOptions: {
-        tandem: Tandem.OPT_OUT
-      }
+      phetioFeatured: true,
+      phetioDocumentation: 'tertiary electron state (m)'
     } );
   }
 

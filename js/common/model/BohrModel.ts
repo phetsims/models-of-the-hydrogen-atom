@@ -78,7 +78,7 @@ export default class BohrModel extends HydrogenAtom {
   public readonly electron: Electron;
 
   // electron state number
-  private readonly electronStateProperty: NumberProperty;
+  protected readonly electronStateProperty: NumberProperty;
 
   // time that the electron has been in its current state
   private readonly timeInStateProperty: Property<number>;
@@ -122,6 +122,7 @@ export default class BohrModel extends HydrogenAtom {
       range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.GROUND_STATE + ORBIT_RADII.length ),
       tandem: options.tandem.createTandem( 'electronStateProperty' ),
       phetioReadOnly: true,
+      phetioFeatured: true,
       phetioDocumentation: 'primary electron state (n)'
     } );
 
