@@ -23,7 +23,7 @@ export type ZoomedInBoxNodeOptions = SelfOptions & NodeTranslationOptions & Pick
 
 export default class ZoomedInBoxNode extends Node {
 
-  // Subclasses should add things that are "inside" the box to this Node.
+  // Subclasses should add things that are "inside" the box to this Node, because it is clipped to the bounds of the box.
   protected readonly contentsNode: Node;
 
   protected constructor( zoomBox: ZoomedInBox,
