@@ -16,7 +16,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import PrimaryElectronStateText from './PrimaryElectronStateText.js';
-import DeBroglieViewComboBox from './DeBroglieViewComboBox.js';
+import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import DeBroglieRadialNode from './DeBroglieRadialNode.js';
@@ -72,16 +72,16 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       // No need to PhET-iO instrument this Node.
     } );
 
-    const deBroglieViewComboBox = new DeBroglieViewComboBox( hydrogenAtom.deBroglieRepresentationProperty, listboxParent, {
+    const deBroglieRepresentationComboBox = new DeBroglieRepresentationComboBox( hydrogenAtom.deBroglieRepresentationProperty, listboxParent, {
       leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
-      tandem: options.tandem.createTandem( 'deBroglieViewComboBox' )
+      tandem: options.tandem.createTandem( 'deBroglieRepresentationComboBox' )
     } );
 
     const electronStateText = new PrimaryElectronStateText( hydrogenAtom.getElectronStateProperty(), {
       tandem: options.tandem.createTandem( 'electronStateText' )
     } );
 
-    options.children = [ protonNode, viewNodes, deBroglieViewComboBox, electronStateText ];
+    options.children = [ protonNode, viewNodes, deBroglieRepresentationComboBox, electronStateText ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 

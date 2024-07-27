@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * DeBroglieViewComboBox is the combo box for selecting which view of the de Broglie model show be displayed.
+ * DeBroglieRepresentationComboBox is the combo box for selecting which representation of the de Broglie model show be displayed.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,7 +20,7 @@ type SelfOptions = EmptySelfOptions;
 
 type DeBroglieViewComboBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<ComboBoxOptions, 'tandem'>;
 
-export default class DeBroglieViewComboBox extends ComboBox<DeBroglieRepresentation> {
+export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieRepresentation> {
 
   public constructor( deBroglieRepresentationProperty: Property<DeBroglieRepresentation>,
                       listboxParent: Node,
@@ -56,4 +56,4 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieRepresentat
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'DeBroglieViewComboBox', DeBroglieViewComboBox );
+modelsOfTheHydrogenAtom.register( 'DeBroglieRepresentationComboBox', DeBroglieRepresentationComboBox );
