@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * PlumPuddingNode shows the "Plum Pudding" model of the hydrogen atom.
+ * PlumPuddingNode displays the "Plum Pudding" model of the hydrogen atom.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

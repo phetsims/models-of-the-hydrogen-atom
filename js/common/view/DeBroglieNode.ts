@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * DeBroglieNode shows the de Broglie model of the hydrogen atom.
+ * DeBroglieNode displays the de Broglie model of the hydrogen atom.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * SpectraZoomedInBoxNode shows what's inside the zoomed-in box for the 'Spectra' screen.
+ * SpectraZoomedInBoxNode displays what's inside the zoomed-in box for the 'Spectra' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

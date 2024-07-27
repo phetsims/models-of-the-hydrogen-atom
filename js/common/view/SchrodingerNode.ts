@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * SchrodingerNode shows the Schrodinger model of the hydrogen atom.
+ * SchrodingerNode displays the Schrodinger model of the hydrogen atom.
  *
  * TODO copy details from SchrodingerNode.java
  *

@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * DeBroglie3DNode show the '3D' view for the de Broglie model.
+ * DeBroglie3DNode displays the '3D' view for the de Broglie model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

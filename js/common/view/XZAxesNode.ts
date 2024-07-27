@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * XZAxesNode shows the x and z axes for the Schrodinger model.
+ * XZAxesNode displays the x and z axes for the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * BohrNode shows the Bohr model of the hydrogen atom.
+ * BohrNode displays the Bohr model of the hydrogen atom.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
