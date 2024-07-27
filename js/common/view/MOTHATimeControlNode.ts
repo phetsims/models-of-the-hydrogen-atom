@@ -31,6 +31,7 @@ export default class MOTHATimeControlNode extends TimeControlNode {
     const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>()( {
       timeSpeedProperty: timeSpeedProperty,
       timeSpeeds: [ TimeSpeed.FAST, TimeSpeed.NORMAL ],
+      buttonGroupXSpacing: 30,
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: new PhetFont( 14 ),
