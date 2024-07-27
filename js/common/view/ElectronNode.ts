@@ -30,9 +30,9 @@ export default class ElectronNode extends ShadedSphereNode {
     const options = optionize<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
+      isDisposable: false,
       mainColor: MOTHAColors.electronBaseColorProperty,
-      highlightColor: MOTHAColors.electronHighlightColorProperty,
-      isDisposable: false
+      highlightColor: MOTHAColors.electronHighlightColorProperty
     }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( electron.radius ), options );

@@ -28,9 +28,9 @@ export default class NeutronNode extends ShadedSphereNode {
     const options = optionize<NeutronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
+      isDisposable: false,
       mainColor: MOTHAColors.neutronBaseColorProperty,
-      highlightColor: MOTHAColors.neutronHighlightColorProperty,
-      isDisposable: false
+      highlightColor: MOTHAColors.neutronHighlightColorProperty
     }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( neutron.radius ), options );

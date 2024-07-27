@@ -38,10 +38,10 @@ export default class OrbitNode extends Path {
       yScale: 1,
 
       // PathOptions
+      isDisposable: false,
       stroke: MOTHAColors.orbitStrokeProperty,
       lineWidth: 1,
-      lineDash: [ 3, 3 ],
-      isDisposable: false
+      lineDash: [ 3, 3 ]
     }, providedOptions );
 
     assert && assert( options.yScale > 0 && options.yScale <= 1 );

@@ -41,13 +41,15 @@ export default class DeBroglieRadialNode extends Node {
 
     const options = optionize<DeBroglieRadialNodeOptions, SelfOptions, NodeOptions>()( {
 
+      // NodeOptions
+      isDisposable: false,
+
       // visible when the view choice is 'radial'
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === 'radial' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
-        } ),
-      isDisposable: false
+        } )
     }, providedOptions );
 
     // Electron orbits
@@ -95,9 +97,9 @@ class RingNode extends Path {
     const options = optionize<RingNodeOptions, RingNodeSelfOptions, PathOptions>()( {
 
       // PathOptions
+      isDisposable: false,
       stroke: MOTHAColors.electronBaseColorProperty,
-      lineWidth: 2,
-      isDisposable: false
+      lineWidth: 2
     }, providedOptions );
 
     super( null, options );

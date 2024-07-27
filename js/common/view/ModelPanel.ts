@@ -37,7 +37,8 @@ export default class ModelPanel extends Panel {
 
     const options = optionize<ModelPanelOptions, SelfOptions, PanelOptions>()( {
 
-      // Visible when model mode is 'model'
+      // PanelOptions
+      isDisposable: false,
       visibleProperty: new DerivedProperty( [ modelModeProperty ], modelMode => ( modelMode === 'model' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
@@ -45,8 +46,7 @@ export default class ModelPanel extends Panel {
       fill: MOTHAColors.modelsPanelFillProperty,
       stroke: MOTHAColors.modelsPanelStrokeProperty,
       xMargin: 10,
-      yMargin: 10,
-      isDisposable: false
+      yMargin: 10
     }, providedOptions );
 
     // content that appears on the radio buttons

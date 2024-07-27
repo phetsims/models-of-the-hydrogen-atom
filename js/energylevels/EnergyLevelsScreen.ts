@@ -26,12 +26,14 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
   public constructor( providedOptions: EnergyLevelsScreenOptions ) {
 
     const options = optionize<EnergyLevelsScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
+
+      // MOTHAScreenOptions
+      isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.energyLevelsStringProperty,
       homeScreenIcon: new ScreenIcon( new Image( energyLevelsScreenIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
-      } ),
-      isDisposable: false
+      } )
     }, providedOptions );
 
     super(

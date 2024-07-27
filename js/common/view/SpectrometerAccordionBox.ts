@@ -54,6 +54,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
 
       // AccordionBoxOptions
+      isDisposable: false,
       expandedProperty: expandedProperty,
       fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
       stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
@@ -70,8 +71,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         sideLength: 22,
         touchAreaXDilation: 10,
         touchAreaYDilation: 10
-      },
-      isDisposable: false
+      }
     }, providedOptions );
 
     options.titleNode = new TitleNode( expandedProperty, options.tandem.createTandem( 'titleNode' ) );
@@ -195,6 +195,8 @@ class TitleNode extends ToggleNode<boolean> {
     ];
 
     super( expandedProperty, items, {
+
+      // ToggleNodeOptions
       isDisposable: false,
       tandem: tandem
     } );

@@ -31,6 +31,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
 
       // AccordionBoxOptions
+      isDisposable: false,
       expandedDefaultValue: MOTHAQueryParameters.expandAll,
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
@@ -46,8 +47,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       },
       buttonAlign: 'left',
       titleAlignX: 'left',
-      titleXSpacing: 10,
-      isDisposable: false
+      titleXSpacing: 10
     }, providedOptions );
 
     options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {

@@ -33,9 +33,11 @@ export default class ExperimentModelSwitch extends ABSwitch<ModelMode> {
   public constructor( modelModeProperty: Property<ModelMode>, providedOptions: ExperimentModelSwitchOptions ) {
 
     const options = optionize<ExperimentModelSwitchOptions, SelfOptions, ABSwitchOptions>()( {
+
+      // ABSwitchOptions
+      isDisposable: false,
       centerOnSwitch: true,
-      toggleSwitchOptions: { size: new Dimension2( 50, 25 ) },
-      isDisposable: false
+      toggleSwitchOptions: { size: new Dimension2( 50, 25 ) }
     }, providedOptions );
 
     const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, TEXT_OPTIONS );

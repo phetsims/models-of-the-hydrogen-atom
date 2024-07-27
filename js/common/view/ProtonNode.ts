@@ -28,9 +28,9 @@ export default class ProtonNode extends ShadedSphereNode {
     const options = optionize<ProtonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
       // ShadedSphereNodeOptions
+      isDisposable: false,
       mainColor: MOTHAColors.protonBaseColorProperty,
-      highlightColor: MOTHAColors.protonHighlightColorProperty,
-      isDisposable: false
+      highlightColor: MOTHAColors.protonHighlightColorProperty
     }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( proton.radius ), options );

@@ -26,12 +26,14 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
   public constructor( providedOptions: SpectraScreenOptions ) {
 
     const options = optionize<SpectraScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
+
+      // MOTHAScreenOptions
+      isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.spectraStringProperty,
       homeScreenIcon: new ScreenIcon( new Image( spectraScreenIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
-      } ),
-      isDisposable: false
+      } )
     }, providedOptions );
 
     super(

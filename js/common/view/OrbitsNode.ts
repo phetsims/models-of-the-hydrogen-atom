@@ -25,8 +25,10 @@ export default class OrbitsNode extends Node {
   public constructor( hydrogenAtom: BohrModel, modelViewTransform: ModelViewTransform2, providedOptions: OrbitsNodeOptions ) {
 
     const options = optionize<OrbitsNodeOptions, SelfOptions, NodeOptions>()( {
-      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ),
-      isDisposable: false
+
+      // NodeOptions
+      isDisposable: false,
+      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position )
     }, providedOptions );
 
     const orbitNodes = [];

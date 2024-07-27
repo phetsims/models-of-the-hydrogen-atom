@@ -41,13 +41,15 @@ export default class DeBroglieBrightnessNode extends Node {
 
     const options = optionize<DeBroglieBrightnessNodeOptions, SelfOptions, NodeOptions>()( {
 
+      // NodeOptions
+      isDisposable: false,
+
       // visible when the view choice is 'brightness'
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === 'brightness' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
-        } ),
-      isDisposable: false
+        } )
     }, providedOptions );
 
     // Electron orbits

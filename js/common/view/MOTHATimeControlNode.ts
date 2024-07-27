@@ -30,6 +30,9 @@ export default class MOTHATimeControlNode extends TimeControlNode {
                       providedOptions: MOTHATimeControlNodeOptions ) {
 
     const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>()( {
+
+      // TimeControlNodeOptions
+      isDisposable: false,
       timeSpeedProperty: timeSpeedProperty,
       timeSpeeds: MOTHAConstants.TIME_SPEEDS,
       buttonGroupXSpacing: 30,
@@ -47,8 +50,7 @@ export default class MOTHATimeControlNode extends TimeControlNode {
         stepForwardButtonOptions: {
           listener: () => stepOnce()
         }
-      },
-      isDisposable: false
+      }
     }, providedOptions );
 
     super( isPlayingProperty, options );

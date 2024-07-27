@@ -23,8 +23,8 @@ export default class Electron extends Particle {
     const options = optionize<ElectronOptions, SelfOptions, ParticleOptions>()( {
 
       // ParticleOptions
-      radius: MOTHAConstants.ELECTRON_RADIUS,
-      isDisposable: false
+      isDisposable: false,
+      radius: MOTHAConstants.ELECTRON_RADIUS
       //TODO phetioType: Electron.ElectronIO,
       //TODO phetioDynamicElement: true
     }, providedOptions );

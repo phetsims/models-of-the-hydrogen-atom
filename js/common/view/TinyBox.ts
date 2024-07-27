@@ -27,10 +27,10 @@ export default class TinyBox extends Rectangle {
     const options = optionize<TinyBoxOptions, SelfOptions, RectangleOptions>()( {
 
       // RectangleOptions
+      isDisposable: false,
       fill: MOTHAColors.zoomedInBoxFillProperty,
       stroke: MOTHAColors.zoomedInBoxStrokeProperty,
-      lineWidth: 2,
-      isDisposable: false
+      lineWidth: 2
     }, providedOptions );
 
     super( 0, 0, TINY_BOX_SIZE.width, TINY_BOX_SIZE.height, options );

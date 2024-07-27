@@ -29,9 +29,9 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieRepresentat
     const options = optionize<DeBroglieViewComboBoxOptions, SelfOptions, ComboBoxOptions>()( {
 
       // ComboBoxOptions
+      isDisposable: false,
       xMargin: 10,
-      yMargin: 6,
-      isDisposable: false
+      yMargin: 6
     }, providedOptions );
 
     const textOptions = {

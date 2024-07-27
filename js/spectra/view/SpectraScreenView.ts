@@ -36,6 +36,8 @@ export default class SpectraScreenView extends ScreenView {
   public constructor( model: SpectraModel, tandem: Tandem ) {
 
     super( {
+
+      // ScreenViewOptions
       isDisposable: false,
       tandem: tandem
     } );

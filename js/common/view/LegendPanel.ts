@@ -40,11 +40,11 @@ export default class LegendPanel extends Panel {
       iconScale: MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE,
 
       // PanelOptions
+      isDisposable: false,
       fill: null,
       stroke: null,
       xMargin: 0,
-      yMargin: 0,
-      isDisposable: false
+      yMargin: 0
     }, providedOptions );
 
     const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
@@ -78,6 +78,9 @@ class KeyNode extends HBox {
 
   public constructor( iconNode: Node, iconAlignGroup: AlignGroup, labelStringProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
     super( {
+
+      // HBoxOptions
+      isDisposable: false,
       spacing: 5,
       children: [
         new AlignBox( iconNode, {
@@ -89,7 +92,6 @@ class KeyNode extends HBox {
           maxWidth: 100 // determined empirically
         } )
       ],
-      isDisposable: false,
       tandem: tandem
     } );
   }
