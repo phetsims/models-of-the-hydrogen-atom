@@ -17,6 +17,10 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
+import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
+
+export type HydrogenAtomStateObject = ReferenceIOState;
 
 //TODO move numberOfStates, groundState, hasTransitionWavelengths to another base class for those models
 type SelfOptions = {
@@ -126,6 +130,18 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public static getNumberOfStates(): number {
     return 0;
   }
+
+  /**
+   * HydrogenAtomIO handles PhET-iO serialization of HydrogenAtom. Since all HydrogenAtom instances are created at
+   * startup, exist for the lifetime of the sim, and are phetioState: false, it implements 'Reference type serialization',
+   * as described in the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  public static readonly HydrogenAtomIO = new IOType<HydrogenAtom, HydrogenAtomStateObject>( 'HydrogenAtomIO', {
+    valueType: HydrogenAtom,
+    supertype: ReferenceIO( IOType.ObjectIO ),
+    documentation: 'A model of the hydrogen atom'
+  } );
 }
 
 modelsOfTheHydrogenAtom.register( 'HydrogenAtom', HydrogenAtom );

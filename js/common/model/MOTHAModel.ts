@@ -98,10 +98,10 @@ export default class MOTHAModel implements TModel {
     this.predictiveModels = predictiveModels;
 
     this.predictiveModelProperty = new Property<HydrogenAtom>( initialPredictiveModel, {
-      validValues: predictiveModels
-      //TODO tandem
-      //TODO phetioType
-      //TODO phetioFeatured: true
+      validValues: predictiveModels,
+      tandem: tandem.createTandem( 'predictiveModelProperty' ),
+      phetioValueType: HydrogenAtom.HydrogenAtomIO,
+      phetioFeatured: true
     } );
 
     this.hydrogenAtomProperty = new DerivedProperty(
