@@ -45,7 +45,6 @@ type StringsType = {
   'slowStringProperty': LocalizedStringProperty;
   'spectrometerCollapsedStringProperty': LocalizedStringProperty;
   'spectrometerExpandedStringProperty': LocalizedStringProperty;
-  'viewSnapshotsStringProperty': LocalizedStringProperty;
   'nStringProperty': LocalizedStringProperty;
   'lStringProperty': LocalizedStringProperty;
   'mStringProperty': LocalizedStringProperty;

@@ -25,6 +25,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import TModel from '../../../../joist/js/TModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Spectrometer from './Spectrometer.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 const NORMAL_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 0 ];
@@ -52,6 +53,8 @@ export default class MOTHAModel implements TModel {
 
   // the light that is shining into the box of hydrogen
   public readonly light: Light;
+
+  public readonly spectrometer: Spectrometer;
 
   // photons inside zoomedInBox
   public readonly photons: ObservableArray<Photon>;
@@ -109,6 +112,8 @@ export default class MOTHAModel implements TModel {
       tandem: tandem.createTandem( 'light' )
     } );
 
+    this.spectrometer = new Spectrometer( tandem.createTandem( 'spectrometer' ) );
+
     this.photons = createObservableArray<Photon>( {
       //TODO tandem
       //TODO phetioType
@@ -150,6 +155,7 @@ export default class MOTHAModel implements TModel {
     this.predictiveModels.forEach( predictiveModel => predictiveModel.reset() );
     this.predictiveModelProperty.reset();
     this.light.reset();
+    this.spectrometer.reset();
     while ( this.photons.length > 0 ) {
       this.photons.pop()!.dispose();
     }

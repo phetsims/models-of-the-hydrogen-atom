@@ -7,7 +7,6 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import TProperty from '../../../../axon/js/TProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -29,6 +28,7 @@ import eyeSolidShape from '../../../../sherpa/js/fontawesome-5/eyeSolidShape.js'
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Dialog from '../../../../sun/js/Dialog.js';
+import Spectrometer from '../model/Spectrometer.js';
 
 // constants
 const DISPLAY_SIZE = new Dimension2( 510, 130 );
@@ -40,7 +40,7 @@ type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 
-  public constructor( numberOfSnapshotsProperty: TProperty<number>,
+  public constructor( spectrometer: Spectrometer,
                       snapshotsDialog: Dialog,
                       providedOptions?: SpectrometerAccordionBoxOptions ) {
 
@@ -99,8 +99,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         scale: 0.05
       } ),
       listener: () => {
-        numberOfSnapshotsProperty.value =
-          Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.value + 1 );
+        spectrometer.numberOfSnapshotsProperty.value =
+          Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, spectrometer.numberOfSnapshotsProperty.value + 1 );
       },
       tandem: options.tandem.createTandem( 'snapshotButton' )
     } );
@@ -114,7 +114,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       } ),
       listener: () => snapshotsDialog.show(),
       // Enabled when we have snapshots
-      enabledProperty: new DerivedProperty( [ numberOfSnapshotsProperty ], n => ( n > 0 ), {
+      enabledProperty: new DerivedProperty( [ spectrometer.numberOfSnapshotsProperty ], n => ( n > 0 ), {
         tandem: viewSnapshotsButtonTandem.createTandem( 'enabledProperty' ),
         phetioValueType: BooleanIO
       } ),
@@ -145,6 +145,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } );
 
     super( contentNode, options );
+
+    this.addLinkedElement( spectrometer );
   }
 }
 

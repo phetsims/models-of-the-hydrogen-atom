@@ -121,12 +121,12 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Constructed eagerly and reused to appease PhET-iO.
-    const snapshotsDialog = new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty, {
+    const snapshotsDialog = new SnapshotsDialog( model.spectrometer.numberOfSnapshotsProperty, {
       tandem: tandem.createTandem( 'snapshotsDialog' )
     } );
 
     // Spectrometer
-    const spectrometerAccordionBox = new SpectrometerAccordionBox( viewProperties.numberOfSnapshotsProperty, snapshotsDialog, {
+    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, snapshotsDialog, {
       expandedProperty: viewProperties.spectrometerExpandedProperty,
       left: lightControlPanel.right + 10,
       top: lightControlPanel.top,

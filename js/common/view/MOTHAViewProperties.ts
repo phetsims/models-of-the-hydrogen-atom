@@ -8,7 +8,6 @@
 
 import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -25,10 +24,6 @@ export default class MOTHAViewProperties {
   // is the Spectrometer accordion box expanded?
   public readonly spectrometerExpandedProperty: Property<boolean>;
 
-  //TODO for prototyping
-  // number of spectrometer snapshots
-  public readonly numberOfSnapshotsProperty: Property<number>;
-
   public constructor( providedOptions: MOTHAViewPropertiesOptions ) {
 
     const options = providedOptions;
@@ -36,15 +31,10 @@ export default class MOTHAViewProperties {
     this.spectrometerExpandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
       tandem: options.tandem.createTandem( 'spectrometerExpandedProperty' )
     } );
-
-    this.numberOfSnapshotsProperty = new NumberProperty( 0, {
-      tandem: options.tandem.createTandem( 'numberOfSnapshotsProperty' )
-    } );
   }
 
   public reset(): void {
     this.spectrometerExpandedProperty.reset();
-    this.numberOfSnapshotsProperty.reset();
   }
 
   public dispose(): void {
