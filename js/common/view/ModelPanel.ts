@@ -60,20 +60,16 @@ export default class ModelPanel extends Panel {
       spacing: 2,
       labelAlign: 'left',
       radioButtonOptions: {
-        baseColor: options.fill,
+        baseColor: null,
         xMargin: 12,
         yMargin: 10,
         xAlign: 'left',
-
-        //TODO on over in default mode, radio button fill is gray
-        //TODO on press in default mode, radio buttons have no visible stroke or fill
-        //TODO on press in projector mode, radio buttons have no stroke and gray fill
         buttonAppearanceStrategyOptions: {
           selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
+          deselectedStroke: MOTHAColors.modelsRadioButtonDeselectedStrokeProperty,
           overStroke: MOTHAColors.modelsRadioButtonOverStrokeProperty,
           overFill: null,
-          deselectedStroke: null,
-          selectedLineWidth: 2,
+          selectedLineWidth: 2.5,
           selectedButtonOpacity: 1,
           deselectedButtonOpacity: 1,
           overButtonOpacity: 1
