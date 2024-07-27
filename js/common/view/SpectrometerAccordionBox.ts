@@ -29,24 +29,32 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import Spectrometer from '../model/Spectrometer.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 // constants
 const DISPLAY_SIZE = new Dimension2( 510, 130 );
 
 type SelfOptions = EmptySelfOptions;
 
-type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
-  PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
+type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 
+  private readonly resetSpectrometerAccordionBox: () => void;
+
   public constructor( spectrometer: Spectrometer,
                       snapshotsDialog: Dialog,
-                      providedOptions?: SpectrometerAccordionBoxOptions ) {
+                      providedOptions: SpectrometerAccordionBoxOptions ) {
+
+    //TODO eliminate the need for this, used by TitleNode
+    const expandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
+      tandem: providedOptions.tandem.createTandem( 'expandedProperty' )
+    } );
 
     const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
 
       // AccordionBoxOptions
+      expandedProperty: expandedProperty,
       fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
       stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
       cornerRadius: 5,
@@ -66,7 +74,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       isDisposable: false
     }, providedOptions );
 
-    options.titleNode = new TitleNode( options.expandedProperty, options.tandem.createTandem( 'titleNode' ) );
+    options.titleNode = new TitleNode( expandedProperty, options.tandem.createTandem( 'titleNode' ) );
 
     //TODO placeholder
     const displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
@@ -146,7 +154,16 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     super( contentNode, options );
 
+    this.resetSpectrometerAccordionBox = () => {
+      expandedProperty.reset();
+    };
+
     this.addLinkedElement( spectrometer );
+  }
+
+  public override reset(): void {
+    super.reset();
+    this.resetSpectrometerAccordionBox();
   }
 }
 

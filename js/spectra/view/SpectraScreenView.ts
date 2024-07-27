@@ -22,7 +22,6 @@ import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox
 import TinyBox from '../../common/view/TinyBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
-import SpectraViewProperties from './SpectraViewProperties.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { LightControlPanel } from '../../common/view/LightControlPanel.js';
@@ -39,10 +38,6 @@ export default class SpectraScreenView extends ScreenView {
     super( {
       isDisposable: false,
       tandem: tandem
-    } );
-
-    const viewProperties = new SpectraViewProperties( {
-      tandem: tandem.createTandem( 'viewProperties' )
     } );
 
     // Parent for any popups
@@ -127,7 +122,6 @@ export default class SpectraScreenView extends ScreenView {
 
     // Spectrometer
     const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, snapshotsDialog, {
-      expandedProperty: viewProperties.spectrometerExpandedProperty,
       left: lightControlPanel.right + 10,
       top: lightControlPanel.top,
       tandem: tandem.createTandem( 'spectrometerAccordionBox' )
@@ -146,7 +140,7 @@ export default class SpectraScreenView extends ScreenView {
       listener: () => {
         this.interruptSubtreeInput();
         model.reset();
-        viewProperties.reset();
+        spectrometerAccordionBox.reset();
       },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN,

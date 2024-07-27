@@ -13,7 +13,6 @@ import ModelPanel from '../../common/view/ModelPanel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
-import EnergyLevelsViewProperties from './EnergyLevelsViewProperties.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
@@ -26,12 +25,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       tandem: tandem
     } );
 
-    const viewProperties = new EnergyLevelsViewProperties( {
-      tandem: tandem.createTandem( 'viewProperties' )
-    } );
-
     const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( {
-      expandedProperty: viewProperties.electronEnergyLevelExpandedProperty,
       center: this.layoutBounds.center,
       tandem: tandem.createTandem( 'electronEnergyLevelAccordionBox' )
     } );
@@ -49,7 +43,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       listener: () => {
         this.interruptSubtreeInput();
         model.reset();
-        viewProperties.reset();
+        electronEnergyLevelAccordionBox.reset();
       },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN,

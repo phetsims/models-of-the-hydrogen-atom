@@ -15,22 +15,23 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import MOTHAColors from '../../common/MOTHAColors.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 
 // constants
 const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
 type SelfOptions = EmptySelfOptions;
 
-type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
-  PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
+type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
 
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
-  public constructor( providedOptions?: ElectronEnergyLevelAccordionBoxOptions ) {
+  public constructor( providedOptions: ElectronEnergyLevelAccordionBoxOptions ) {
 
     const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
 
       // AccordionBoxOptions
+      expandedDefaultValue: MOTHAQueryParameters.expandAll,
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
       cornerRadius: 5,
