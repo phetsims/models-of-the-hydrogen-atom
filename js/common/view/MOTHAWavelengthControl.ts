@@ -14,13 +14,14 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import Slider from '../../../../sun/js/Slider.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
-import { Color, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Light from '../model/Light.js';
 
 const SLIDER_TRACK_SIZE = new Dimension2( 250, 15 );
 
@@ -74,11 +75,11 @@ export class MOTHAWavelengthControl extends WavelengthNumberControl {
     const options = optionize<MOTHAWavelengthControlOptions, SelfOptions, WavelengthNumberControlOptions>()( {
       layoutFunction: layoutFunction,
       spectrumSliderTrackOptions: {
-        valueToColor: wavelengthToColor,
+        valueToColor: Light.wavelengthToColor,
         size: SLIDER_TRACK_SIZE
       },
       spectrumSliderThumbOptions: {
-        valueToColor: wavelengthToColor,
+        valueToColor: Light.wavelengthToColor,
         cursorHeight: SLIDER_TRACK_SIZE.height,
         width: 20,
         height: 25,
@@ -97,16 +98,6 @@ export class MOTHAWavelengthControl extends WavelengthNumberControl {
 
     super( wavelengthProperty, options );
   }
-}
-
-/**
- * Converts a wavelength (in nm) to a Color.
- */
-function wavelengthToColor( wavelength: number ): Color {
-  return VisibleColor.wavelengthToColor( wavelength, {
-    irColor: MOTHAColors.IR_COLOR,
-    uvColor: MOTHAColors.UV_COLOR
-  } );
 }
 
 modelsOfTheHydrogenAtom.register( 'MOTHAWavelengthControl', MOTHAWavelengthControl );

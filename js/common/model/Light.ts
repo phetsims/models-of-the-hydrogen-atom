@@ -31,6 +31,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TEmitter from '../../../../axon/js/TEmitter.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -109,9 +110,8 @@ export default class Light {
         phetioValueType: NumberIO
       } );
 
-    this.colorProperty = new DerivedProperty(
-      [ this.lightModeProperty, this.wavelengthProperty ],
-      ( lightMode, wavelength ) => VisibleColor.wavelengthToColor( wavelength ), {
+    this.colorProperty = new DerivedProperty( [ this.wavelengthProperty ],
+      wavelength => Light.wavelengthToColor( wavelength ), {
         tandem: options.tandem.createTandem( 'colorProperty' ),
         phetioValueType: Color.ColorIO
       } );
@@ -223,6 +223,16 @@ export default class Light {
       }
     }
     return wavelength;
+  }
+
+  /**
+   * Converts a wavelength (in nm) to a Color.
+   */
+  public static wavelengthToColor( wavelength: number ): Color {
+    return VisibleColor.wavelengthToColor( wavelength, {
+      irColor: MOTHAColors.IR_COLOR,
+      uvColor: MOTHAColors.UV_COLOR
+    } );
   }
 }
 
