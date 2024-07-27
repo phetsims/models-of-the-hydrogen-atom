@@ -1,0 +1,49 @@
+// Copyright 2024, University of Colorado Boulder
+
+/**
+ * LightNode displays the light.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
+
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import { Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Light from '../model/Light.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import BeamNode from './BeamNode.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type LightNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+
+export class LightNode extends Node {
+
+  public constructor( light: Light, providedOptions: LightNodeOptions ) {
+
+    const options = optionize<LightNodeOptions, SelfOptions, NodeOptions>()( {}, providedOptions );
+
+    const laserPointerNode = new LaserPointerNode( light.isOnProperty, {
+      bodySize: new Dimension2( 88, 64 ),
+      nozzleSize: new Dimension2( 18, 50 ),
+      buttonRadius: 19,
+      rotation: -Math.PI / 2, // pointing up
+      tandem: options.tandem.createTandem( 'laserPointerNode' ),
+      phetioVisiblePropertyInstrumented: false
+    } );
+
+    // Beam of light
+    const beamNode = new BeamNode( light, {
+      centerX: laserPointerNode.centerX,
+      bottom: laserPointerNode.top + 1
+    } );
+
+    options.children = [ beamNode, laserPointerNode ];
+
+    super( options );
+  }
+}
+
+modelsOfTheHydrogenAtom.register( 'LightNode', LightNode );

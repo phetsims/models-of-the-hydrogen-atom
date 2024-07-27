@@ -9,20 +9,19 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { NodeTranslationOptions, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import Light from '../model/Light.js';
 
 type SelfOptions = {
   beamSize?: Dimension2;
 };
 
-type BeamNodeOptions = SelfOptions & NodeTranslationOptions &
-  PickRequired<RectangleOptions, 'tandem' | 'visibleProperty' | 'fill'>;
+type BeamNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class BeamNode extends Rectangle {
 
-  public constructor( providedOptions: BeamNodeOptions ) {
+  public constructor( light: Light, providedOptions?: BeamNodeOptions ) {
 
     const options = optionize<BeamNodeOptions, SelfOptions, RectangleOptions>()( {
 
@@ -30,7 +29,9 @@ export default class BeamNode extends Rectangle {
       beamSize: new Dimension2( 30, 65 ),
 
       // RectangleOptions
-      isDisposable: false
+      isDisposable: false,
+      visibleProperty: light.isOnProperty,
+      fill: light.colorProperty
     }, providedOptions );
 
     super( 0, 0, options.beamSize.width, options.beamSize.height, options );

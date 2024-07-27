@@ -6,15 +6,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import { Node, Path, VBox } from '../../../../scenery/js/imports.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import BeamNode from '../../common/view/BeamNode.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
@@ -29,6 +26,7 @@ import SpectraViewProperties from './SpectraViewProperties.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { LightControlPanel } from '../../common/view/LightControlPanel.js';
+import { LightNode } from '../../common/view/LightNode.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -57,23 +55,10 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Light
-    const lightNode = new LaserPointerNode( model.light.isOnProperty, {
-      bodySize: new Dimension2( 88, 64 ),
-      nozzleSize: new Dimension2( 18, 50 ),
-      buttonRadius: 19,
-      rotation: -Math.PI / 2, // pointing up
+    const lightNode = new LightNode( model.light, {
       left: this.layoutBounds.left + 100,
       bottom: 415,
       tandem: tandem.createTandem( 'lightNode' )
-    } );
-
-    // Beam of light
-    const beamNode = new BeamNode( {
-      visibleProperty: model.light.isOnProperty,
-      fill: model.light.colorProperty,
-      centerX: lightNode.centerX,
-      bottom: lightNode.top + 1,
-      tandem: tandem.createTandem( 'beamNode' )
     } );
 
     // Controls for the light
@@ -87,8 +72,8 @@ export default class SpectraScreenView extends ScreenView {
 
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode( {
-      centerX: beamNode.centerX,
-      bottom: beamNode.top + 1,
+      centerX: lightNode.centerX,
+      bottom: lightNode.top + 1,
       tandem: tandem.createTandem( 'boxOfHydrogenNode' )
     } );
 
@@ -174,7 +159,6 @@ export default class SpectraScreenView extends ScreenView {
       children: [
         legendPanel,
         timeControlNode,
-        beamNode,
         lightNode,
         lightControlPanel,
         boxOfHydrogenNode,
