@@ -26,6 +26,7 @@ import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import TModel from '../../../../joist/js/TModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Spectrometer from './Spectrometer.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 const NORMAL_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 0 ];
@@ -86,7 +87,8 @@ export default class MOTHAModel implements TModel {
     //TODO default should be 'experiment'
     this.modelModeProperty = new StringUnionProperty( 'model', {
       validValues: ModelModeValues,
-      tandem: tandem.createTandem( 'modelModeProperty' )
+      tandem: tandem.createTandem( 'modelModeProperty' ),
+      phetioFeatured: true
     } );
 
     this.experiment = new Experiment( zoomedInBox, {
@@ -99,14 +101,12 @@ export default class MOTHAModel implements TModel {
       validValues: predictiveModels
       //TODO tandem
       //TODO phetioType
+      //TODO phetioFeatured: true
     } );
 
     this.hydrogenAtomProperty = new DerivedProperty(
       [ this.modelModeProperty, this.predictiveModelProperty ],
-      ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experiment : predictiveModel, {
-        //TODO tandem
-        //TODO phetioType
-      } );
+      ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experiment : predictiveModel );
 
     this.light = new Light( zoomedInBox, {
       tandem: tandem.createTandem( 'light' )
@@ -120,11 +120,14 @@ export default class MOTHAModel implements TModel {
     } );
 
     this.isPlayingProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'isPlayingProperty' )
+      tandem: tandem.createTandem( 'isPlayingProperty' ),
+      phetioFeatured: true
     } );
 
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
-      tandem: tandem.createTandem( 'timeSpeedProperty' )
+      validValues: MOTHAConstants.TIME_SPEEDS,
+      tandem: tandem.createTandem( 'timeSpeedProperty' ),
+      phetioFeatured: true
     } );
 
     this.dtScaleProperty = new DerivedProperty( [ this.timeSpeedProperty ],

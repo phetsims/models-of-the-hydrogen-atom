@@ -10,6 +10,7 @@ import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import Range from '../../../dot/js/Range.js';
 import Vector2 from '../../../dot/js/Vector2.js';
+import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
 
 const MOTHAConstants = {
 
@@ -43,7 +44,9 @@ const MOTHAConstants = {
   MAX_SPECTROMETER_SNAPSHOTS: 3,
 
   // margin between the state display and inside edge of zoomed-in box
-  STATE_DISPLAY_MARGINS: new Vector2( 10, 10 )
+  STATE_DISPLAY_MARGINS: new Vector2( 10, 10 ),
+
+  TIME_SPEEDS: [ TimeSpeed.FAST, TimeSpeed.NORMAL ]
 };
 
 assert && assert( MOTHAConstants.GROUND_STATE === 1, 'This is a fundamental assumption of this implementation.' );

@@ -16,6 +16,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -30,7 +31,7 @@ export default class MOTHATimeControlNode extends TimeControlNode {
 
     const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>()( {
       timeSpeedProperty: timeSpeedProperty,
-      timeSpeeds: [ TimeSpeed.FAST, TimeSpeed.NORMAL ],
+      timeSpeeds: MOTHAConstants.TIME_SPEEDS,
       buttonGroupXSpacing: 30,
       speedRadioButtonGroupOptions: {
         labelOptions: {

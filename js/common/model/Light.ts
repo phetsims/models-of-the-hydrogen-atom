@@ -89,13 +89,15 @@ export default class Light extends PhetioObject {
     this.zoomedInBox = zoomedInBox;
 
     this.isOnProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'isOnProperty' )
+      tandem: options.tandem.createTandem( 'isOnProperty' ),
+      phetioFeatured: true
     } );
 
     this.lightModeProperty = new Property<LightMode>( 'white', {
       validValues: LightModeValues,
       tandem: options.tandem.createTandem( 'lightModeProperty' ),
-      phetioValueType: StringIO
+      phetioValueType: StringIO,
+      phetioFeatured: true
     } );
 
     // Range goes from UV to max visible wavelength
@@ -104,7 +106,8 @@ export default class Light extends PhetioObject {
 
     this.monochromaticWavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
       range: this.monochromaticWavelengthRange,
-      tandem: options.tandem.createTandem( 'monochromaticWavelengthProperty' )
+      tandem: options.tandem.createTandem( 'monochromaticWavelengthProperty' ),
+      phetioFeatured: true
     } );
 
     this.wavelengthProperty = new DerivedProperty( [ this.lightModeProperty, this.monochromaticWavelengthProperty ],
