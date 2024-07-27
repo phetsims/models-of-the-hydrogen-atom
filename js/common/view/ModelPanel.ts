@@ -84,7 +84,9 @@ export default class ModelPanel extends Panel {
     } );
 
     // continuum bar, 'Classical' to 'Quantum'
-    const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height );
+    const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height, {
+      tandem: options.tandem.createTandem( 'continuumBarNode' )
+    } );
 
     // panel content
     const contentNode = new HBox( {

@@ -8,12 +8,12 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Font, Node, NodeOptions, Rectangle, Text, TPaint } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = {
   xMargin?: number;
@@ -23,11 +23,11 @@ type SelfOptions = {
   textFill?: TPaint;
 };
 
-type ContinuumBarNodeOptions = SelfOptions & StrictOmit<NodeOptions, 'children'>;
+type ContinuumBarNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class ContinuumBarNode extends Node {
 
-  public constructor( barHeight: number, providedOptions?: ContinuumBarNodeOptions ) {
+  public constructor( barHeight: number, providedOptions: ContinuumBarNodeOptions ) {
 
     const options = optionize<ContinuumBarNodeOptions, SelfOptions, NodeOptions>()( {
 
