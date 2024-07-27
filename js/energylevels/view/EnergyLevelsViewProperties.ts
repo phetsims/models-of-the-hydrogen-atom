@@ -11,6 +11,7 @@ import Property from '../../../../axon/js/Property.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAViewProperties, { MOTHAViewPropertiesOptions } from '../../common/view/MOTHAViewProperties.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -24,7 +25,7 @@ export default class EnergyLevelsViewProperties extends MOTHAViewProperties {
   public constructor( providedOptions: EnergyLevelsViewPropertiesOptions ) {
     super( providedOptions );
 
-    this.electronEnergyLevelExpandedProperty = new BooleanProperty( false, {
+    this.electronEnergyLevelExpandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
       tandem: providedOptions.tandem.createTandem( 'electronEnergyLevelExpandedProperty' )
     } );
   }

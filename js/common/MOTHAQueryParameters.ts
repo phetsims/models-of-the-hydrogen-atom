@@ -34,6 +34,11 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     },
     defaultValue: [ 1, 2 ],
     isValidValue: ( array: number[] ) => ( array.length === 2 ) && ( array[ 0 ] < array[ 1 ] )
+  },
+
+  // Expand all accordion boxes
+  expandAll: {
+    type: 'flag'
   }
 };
 

@@ -13,7 +13,6 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
-import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, NodeTranslationOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
@@ -25,6 +24,11 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
+import eyeSolidShape from '../../../../sherpa/js/fontawesome-5/eyeSolidShape.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import Dialog from '../../../../sun/js/Dialog.js';
 
 // constants
 const DISPLAY_SIZE = new Dimension2( 510, 130 );
@@ -37,6 +41,7 @@ type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
 export default class SpectrometerAccordionBox extends AccordionBox {
 
   public constructor( numberOfSnapshotsProperty: TProperty<number>,
+                      snapshotsDialog: Dialog,
                       providedOptions?: SpectrometerAccordionBoxOptions ) {
 
     const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
@@ -76,7 +81,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'recordingProperty' )
     } );
     recordingProperty.link( recording => {
-      //TODO
+      //TODO Erase what is currently shown on the spectrometer and start recording.
     } );
 
     const recordStopButton = new RecordStopButton( recordingProperty, {
@@ -84,32 +89,15 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       xMargin: 8.25,
       yMargin: 8.25,
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      touchAreaDilation: 5,
       tandem: options.tandem.createTandem( 'recordStopButton' )
     } );
 
-    const resetButton = new ResetButton( {
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      arrowColor: 'black',
-      radius: recordStopButton.height / 2,
-      xMargin: 4,
-      yMargin: 4,
-      touchAreaDilation: 5,
-      listener: () => {
-        //TODO
-      },
-      tandem: options.tandem.createTandem( 'resetButton' )
-    } );
-
     const snapshotButton = new RectangularPushButton( {
-      maxHeight: recordStopButton.height,
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( cameraSolidShape, {
         fill: 'black',
-        scale: 0.08
+        scale: 0.05
       } ),
-      touchAreaXDilation: 10,
-      touchAreaYDilation: 5,
       listener: () => {
         numberOfSnapshotsProperty.value =
           Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, numberOfSnapshotsProperty.value + 1 );
@@ -117,14 +105,41 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'snapshotButton' )
     } );
 
+    const viewSnapshotsButtonTandem = options.tandem.createTandem( 'viewSnapshotsButton' );
+    const viewSnapshotsButton = new RectangularPushButton( {
+      baseColor: MOTHAColors.pushButtonBaseColorProperty,
+      content: new Path( eyeSolidShape, {
+        fill: 'black',
+        scale: 0.05
+      } ),
+      listener: () => snapshotsDialog.show(),
+      // Enabled when we have snapshots
+      enabledProperty: new DerivedProperty( [ numberOfSnapshotsProperty ], n => ( n > 0 ), {
+        tandem: viewSnapshotsButtonTandem.createTandem( 'enabledProperty' ),
+        phetioValueType: BooleanIO
+      } ),
+      tandem: viewSnapshotsButtonTandem
+    } );
+
+    const eraseButton = new EraserButton( {
+      baseColor: MOTHAColors.pushButtonBaseColorProperty,
+      xMargin: 6,
+      yMargin: 6,
+      listener: () => {
+        //TODO Erase what is currently show on the spectrometer.
+      },
+      tandem: options.tandem.createTandem( 'eraseButton' )
+    } );
+
     const buttonGroup = new VBox( {
-      spacing: 10,
+      stretch: true,
+      spacing: 7,
       align: 'center',
-      children: [ recordStopButton, resetButton, snapshotButton ]
+      children: [ recordStopButton, snapshotButton, viewSnapshotsButton, eraseButton ]
     } );
 
     const contentNode = new HBox( {
-      spacing: 12,
+      spacing: 10,
       align: 'bottom',
       children: [ displayNode, buttonGroup ]
     } );

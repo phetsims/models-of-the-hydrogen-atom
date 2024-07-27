@@ -26,7 +26,6 @@ import TinyBox from '../../common/view/TinyBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraViewProperties from './SpectraViewProperties.js';
-import ViewSnapshotsButton from '../../common/view/ViewSnapshotsButton.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { LightControlPanel } from '../../common/view/LightControlPanel.js';
@@ -137,27 +136,17 @@ export default class SpectraScreenView extends ScreenView {
       excludeInvisibleChildrenFromBounds: false
     } );
 
-    // Spectrometer
-    const spectrometerAccordionBox = new SpectrometerAccordionBox( viewProperties.numberOfSnapshotsProperty, {
-      expandedProperty: viewProperties.spectrometerExpandedProperty,
-      left: lightControlPanel.right + 10,
-      top: lightControlPanel.top,
-      tandem: tandem.createTandem( 'spectrometerAccordionBox' )
-    } );
-
     // Constructed eagerly and reused to appease PhET-iO.
     const snapshotsDialog = new SnapshotsDialog( viewProperties.numberOfSnapshotsProperty, {
       tandem: tandem.createTandem( 'snapshotsDialog' )
     } );
 
-    // View Snapshots button, above upper-right corner of spectrometer
-    const viewSnapshotsButton = new ViewSnapshotsButton( viewProperties.numberOfSnapshotsProperty, {
-      listener: () => snapshotsDialog.show(),
-      tandem: tandem.createTandem( 'viewSnapshotsButton' )
-    } );
-    viewSnapshotsButton.localBoundsProperty.link( () => {
-      viewSnapshotsButton.right = spectrometerAccordionBox.right;
-      viewSnapshotsButton.bottom = spectrometerAccordionBox.top - 10;
+    // Spectrometer
+    const spectrometerAccordionBox = new SpectrometerAccordionBox( viewProperties.numberOfSnapshotsProperty, snapshotsDialog, {
+      expandedProperty: viewProperties.spectrometerExpandedProperty,
+      left: lightControlPanel.right + 10,
+      top: lightControlPanel.top,
+      tandem: tandem.createTandem( 'spectrometerAccordionBox' )
     } );
 
     // Time controls
@@ -194,7 +183,6 @@ export default class SpectraScreenView extends ScreenView {
         zoomedInBoxNode,
         modelVBox,
         spectrometerAccordionBox,
-        viewSnapshotsButton,
         resetAllButton,
         popupsParent
       ]
@@ -208,8 +196,7 @@ export default class SpectraScreenView extends ScreenView {
       lightNode,
       modelVBox,
       timeControlNode,
-      spectrometerAccordionBox,
-      viewSnapshotsButton
+      spectrometerAccordionBox
     ];
 
     // Control Area focus order

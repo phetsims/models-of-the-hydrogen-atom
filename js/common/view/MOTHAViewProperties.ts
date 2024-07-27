@@ -14,6 +14,7 @@ import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -32,7 +33,7 @@ export default class MOTHAViewProperties {
 
     const options = providedOptions;
 
-    this.spectrometerExpandedProperty = new BooleanProperty( false, {
+    this.spectrometerExpandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
       tandem: options.tandem.createTandem( 'spectrometerExpandedProperty' )
     } );
 
