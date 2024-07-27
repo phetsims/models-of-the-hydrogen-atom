@@ -11,7 +11,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { DeBroglieView } from '../model/DeBroglieView.js';
+import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import Property from '../../../../axon/js/Property.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -20,9 +20,9 @@ type SelfOptions = EmptySelfOptions;
 
 type DeBroglieViewComboBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<ComboBoxOptions, 'tandem'>;
 
-export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
+export default class DeBroglieViewComboBox extends ComboBox<DeBroglieRepresentation> {
 
-  public constructor( deBroglieViewProperty: Property<DeBroglieView>,
+  public constructor( deBroglieRepresentationProperty: Property<DeBroglieRepresentation>,
                       listboxParent: Node,
                       providedOptions: DeBroglieViewComboBoxOptions ) {
 
@@ -39,20 +39,20 @@ export default class DeBroglieViewComboBox extends ComboBox<DeBroglieView> {
       maxWidth: 150
     };
 
-    const radialViewText = new Text( ModelsOfTheHydrogenAtomStrings.radialViewStringProperty, textOptions );
+    const radialText = new Text( ModelsOfTheHydrogenAtomStrings.radialStringProperty, textOptions );
 
-    // threeDViewText does not match '3DViewText' tandem name because JavaScript identifiers cannot begin with a number.
-    const threeDViewText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DViewStringProperty' ], textOptions );
+    // threeDText does not match '3DViewText' tandem name because JavaScript identifiers cannot begin with a number.
+    const threeDText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DStringProperty' ], textOptions );
 
-    const brightnessViewText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessViewStringProperty, textOptions );
+    const brightnessText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessStringProperty, textOptions );
 
-    const items: ComboBoxItem<DeBroglieView>[] = [
-      { value: 'radial', createNode: () => radialViewText, tandemName: 'radialItem' },
-      { value: '3D', createNode: () => threeDViewText, tandemName: '3DItem' },
-      { value: 'brightness', createNode: () => brightnessViewText, tandemName: 'brightnessItem' }
+    const items: ComboBoxItem<DeBroglieRepresentation>[] = [
+      { value: 'radial', createNode: () => radialText, tandemName: 'radialItem' },
+      { value: '3D', createNode: () => threeDText, tandemName: '3DItem' },
+      { value: 'brightness', createNode: () => brightnessText, tandemName: 'brightnessItem' }
     ];
 
-    super( deBroglieViewProperty, items, listboxParent, options );
+    super( deBroglieRepresentationProperty, items, listboxParent, options );
   }
 }
 

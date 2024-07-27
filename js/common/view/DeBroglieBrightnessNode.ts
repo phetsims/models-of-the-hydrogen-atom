@@ -42,7 +42,7 @@ export default class DeBroglieBrightnessNode extends Node {
     const options = optionize<DeBroglieBrightnessNodeOptions, SelfOptions, NodeOptions>()( {
 
       // visible when the view choice is 'brightness'
-      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieViewProperty ],
+      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === 'brightness' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO

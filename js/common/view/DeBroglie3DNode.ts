@@ -70,7 +70,7 @@ export default class DeBroglie3DNode extends Node {
     const options = optionize<DeBroglie3DNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieViewProperty ],
+      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === '3D' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO

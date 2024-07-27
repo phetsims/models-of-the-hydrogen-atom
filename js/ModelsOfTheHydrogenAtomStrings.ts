@@ -12,10 +12,10 @@ type StringsType = {
   'models-of-the-hydrogen-atom': {
     'titleStringProperty': LocalizedStringProperty;
   };
-  '3DViewStringProperty': LocalizedStringProperty;
+  '3DStringProperty': LocalizedStringProperty;
   'billiardBallStringProperty': LocalizedStringProperty;
   'bohrStringProperty': LocalizedStringProperty;
-  'brightnessViewStringProperty': LocalizedStringProperty;
+  'brightnessStringProperty': LocalizedStringProperty;
   'classicalStringProperty': LocalizedStringProperty;
   'classicalSolarSystemStringProperty': LocalizedStringProperty;
   'closeStringProperty': LocalizedStringProperty;
@@ -35,7 +35,7 @@ type StringsType = {
   'plumPuddingStringProperty': LocalizedStringProperty;
   'protonStringProperty': LocalizedStringProperty;
   'quantumStringProperty': LocalizedStringProperty;
-  'radialViewStringProperty': LocalizedStringProperty;
+  'radialStringProperty': LocalizedStringProperty;
   'schrodingerStringProperty': LocalizedStringProperty;
   'screen': {
     'spectraStringProperty': LocalizedStringProperty;

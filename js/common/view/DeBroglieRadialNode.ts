@@ -42,7 +42,7 @@ export default class DeBroglieRadialNode extends Node {
     const options = optionize<DeBroglieRadialNodeOptions, SelfOptions, NodeOptions>()( {
 
       // visible when the view choice is 'radial'
-      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieViewProperty ],
+      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === 'radial' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO

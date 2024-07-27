@@ -4,7 +4,7 @@
  * DeBroglieModel is a predictive model of the hydrogen atom.
  *
  * DeBroglieModel is identical to BohrModel, but has different visual representations. The different visual
- * representations (see DeBroglieView) mean that it requires different methods of handling collision detection
+ * representations (see DeBroglieRepresentation) mean that it requires different methods of handling collision detection
  * and determining electron position. The algorithms for collision detection and calculation of electron position
  * differ greatly for 2D and 3D views. Therefore, this model needs to know something about the view in order to
  * make things look right in 3D. So this model cannot be shown in both 2D and 3D views simultaneously. There are
@@ -23,7 +23,7 @@ import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
-import { DeBroglieView, DeBroglieViewValues } from './DeBroglieView.js';
+import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -40,7 +40,7 @@ export default class DeBroglieModel extends BohrModel {
   // electron for the '3D' view
   public readonly electron3D: Electron;
 
-  public readonly deBroglieViewProperty: StringUnionProperty<DeBroglieView>;
+  public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
@@ -58,9 +58,10 @@ export default class DeBroglieModel extends BohrModel {
       tandem: options.tandem.createTandem( 'electron3D' )
     } );
 
-    this.deBroglieViewProperty = new StringUnionProperty( 'radial', {
-      validValues: DeBroglieViewValues,
-      tandem: options.tandem.createTandem( 'deBroglieViewProperty' )
+    this.deBroglieRepresentationProperty = new StringUnionProperty( 'radial', {
+      validValues: DeBroglieRepresentationValues,
+      tandem: options.tandem.createTandem( 'deBroglieRepresentationProperty' ),
+      phetioFeatured: true
     } );
 
     this.electronOffsetProperty.link( electronOffset => {
@@ -72,7 +73,7 @@ export default class DeBroglieModel extends BohrModel {
 
   public override reset(): void {
     this.electron3D.reset();
-    this.deBroglieViewProperty.reset();
+    this.deBroglieRepresentationProperty.reset();
     super.reset();
   }
 
@@ -104,7 +105,7 @@ export default class DeBroglieModel extends BohrModel {
    * Uses different algorithms depending on whether the view is 2D or 3D.
    */
   protected override collides( photon: Photon ): boolean {
-    if ( this.deBroglieViewProperty.value === '3D' ) {
+    if ( this.deBroglieRepresentationProperty.value === '3D' ) {
       return this.collides3D( photon );
     }
     else {

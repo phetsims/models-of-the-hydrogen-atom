@@ -22,7 +22,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import DeBroglieRadialNode from './DeBroglieRadialNode.js';
 import DeBroglie3DNode from './DeBroglie3DNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
-import { DeBroglieView } from '../model/DeBroglieView.js';
+import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -30,7 +30,7 @@ type DeBroglieNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'c
 
 export default class DeBroglieNode extends HydrogenAtomNode {
 
-  private readonly deBroglieViewProperty: TReadOnlyProperty<DeBroglieView>;
+  private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
   private readonly deBroglieRadialNode: DeBroglieRadialNode;
   private readonly deBroglie3DNode: DeBroglie3DNode;
   private readonly deBroglieBrightnessNode: DeBroglieBrightnessNode;
@@ -52,7 +52,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     } );
 
     // Organize the view Nodes under a common parent, to improve presentation in Studio.
-    // These Nodes control their own visibility, based on the value of hydrogenAtom.deBroglieViewProperty.
+    // These Nodes control their own visibility, based on the value of hydrogenAtom.deBroglieRepresentationProperty.
     const viewNodesTandem = options.tandem.createTandem( 'viewNodes' );
 
     const deBroglieRadialNode = new DeBroglieRadialNode( hydrogenAtom, modelViewTransform, {
@@ -72,7 +72,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       // No need to PhET-iO instrument this Node.
     } );
 
-    const deBroglieViewComboBox = new DeBroglieViewComboBox( hydrogenAtom.deBroglieViewProperty, listboxParent, {
+    const deBroglieViewComboBox = new DeBroglieViewComboBox( hydrogenAtom.deBroglieRepresentationProperty, listboxParent, {
       leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
       tandem: options.tandem.createTandem( 'deBroglieViewComboBox' )
     } );
@@ -88,7 +88,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
 
-    this.deBroglieViewProperty = hydrogenAtom.deBroglieViewProperty;
+    this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
     this.deBroglieRadialNode = deBroglieRadialNode;
     this.deBroglie3DNode = deBroglie3DNode;
     this.deBroglieBrightnessNode = deBroglieBrightnessNode;
@@ -96,7 +96,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
   //TODO a better way to step the selected view
   public step( dt: number ): void {
-    if ( this.deBroglieViewProperty.value === '3D' ) {
+    if ( this.deBroglieRepresentationProperty.value === '3D' ) {
       this.deBroglie3DNode.step( dt );
     }
   }
