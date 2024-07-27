@@ -192,11 +192,13 @@ export default class SpectraScreenView extends ScreenView {
     // Play Area focus order
     this.pdomPlayAreaNode.pdomOrder = [
       //TODO
-      lightControlPanel,
       lightNode,
+      lightControlPanel,
+      zoomedInBoxNode,
       modelVBox,
       timeControlNode,
-      spectrometerAccordionBox
+      spectrometerAccordionBox,
+      resetAllButton
     ];
 
     // Control Area focus order
