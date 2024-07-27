@@ -27,6 +27,7 @@ import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { LightControlPanel } from '../../common/view/LightControlPanel.js';
 import { LightNode } from '../../common/view/LightNode.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -68,6 +69,13 @@ export default class SpectraScreenView extends ScreenView {
       tandem: tandem.createTandem( 'lightControlPanel' )
     } );
 
+    // The zoomed-in view of the box of hydrogen
+    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {
+      left: lightNode.right + 50,
+      top: this.layoutBounds.top + 15,
+      tandem: tandem.createTandem( 'zoomedInBoxNode' )
+    } );
+
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode( {
       centerX: lightNode.centerX,
@@ -79,14 +87,7 @@ export default class SpectraScreenView extends ScreenView {
     const tinyBoxNode = new TinyBox( {
       right: boxOfHydrogenNode.right - 10,
       top: boxOfHydrogenNode.top + 20,
-      tandem: tandem.createTandem( 'tinyBoxNode' )
-    } );
-
-    // The zoomed-in view of the box of hydrogen
-    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {
-      left: lightNode.right + 50,
-      top: this.layoutBounds.top + 15,
-      tandem: tandem.createTandem( 'zoomedInBoxNode' )
+      visibleProperty: boxOfHydrogenNode.visibleProperty
     } );
 
     // Dashed lines that connect the tiny box and zoom box
@@ -97,7 +98,7 @@ export default class SpectraScreenView extends ScreenView {
       .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.bottom ), {
       stroke: MOTHAColors.zoomedInBoxStrokeProperty,
       lineDash: [ 5, 5 ],
-      tandem: tandem.createTandem( 'dashedLines' )
+      visibleProperty: DerivedProperty.and( [ zoomedInBoxNode.visibleProperty, boxOfHydrogenNode.visibleProperty ] )
     } );
 
     // switches the model mode between Experiment and Model
