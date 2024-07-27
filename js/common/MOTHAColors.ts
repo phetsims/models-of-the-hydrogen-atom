@@ -148,6 +148,11 @@ const MOTHAColors = {
     default: YELLOW
   } ),
 
+  modelsRadioButtonOverStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonOverStroke', {
+    default: 'white',
+    projector: 'black'
+  } ),
+
   continuumBarFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'continuumBarFill', {
     default: Color.grayColor( 220 )
   } ),
