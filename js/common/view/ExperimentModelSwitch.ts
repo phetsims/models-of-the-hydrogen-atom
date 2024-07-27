@@ -18,6 +18,12 @@ import MOTHAColors from '../MOTHAColors.js';
 import { ModelMode } from '../model/ModelMode.js';
 import Property from '../../../../axon/js/Property.js';
 
+const TEXT_OPTIONS = {
+  font: new PhetFont( { size: 16, weight: 'bold' } ),
+  fill: MOTHAColors.switchTextFillProperty,
+  maxWidth: 100
+};
+
 type SelfOptions = EmptySelfOptions;
 
 type ExperimentModelSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>;
@@ -32,15 +38,9 @@ export default class ExperimentModelSwitch extends ABSwitch<ModelMode> {
       isDisposable: false
     }, providedOptions );
 
-    const textOptions = {
-      font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.switchTextFillProperty,
-      maxWidth: 100
-    };
+    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, TEXT_OPTIONS );
 
-    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, textOptions );
-
-    const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, textOptions );
+    const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, TEXT_OPTIONS );
 
     super( modelModeProperty, 'experiment', experimentText, 'model', modelText, options );
   }
