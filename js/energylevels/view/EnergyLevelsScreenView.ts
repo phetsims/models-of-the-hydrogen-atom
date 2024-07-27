@@ -62,7 +62,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
     // Play Area focus order
     this.pdomPlayAreaNode.pdomOrder = [
-      //TODO
+      //TODO pdomPlayAreaNode.pdomOrder
       electronEnergyLevelAccordionBox,
       modelPanel,
       resetAllButton
@@ -70,7 +70,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
     // Control Area focus order
     this.pdomControlAreaNode.pdomOrder = [
-      //TODO
+      //TODO pdomControlAreaNode.pdomOrder
     ];
   }
 

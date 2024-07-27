@@ -87,7 +87,8 @@ export default class DeBroglie3DNode extends Node {
 
     //TODO needs to be reset
     this.currentViewAngleProperty = new NumberProperty( 0, {
-      tandem: options.tandem.createTandem( 'currentViewAngleProperty' )
+      tandem: options.tandem.createTandem( 'currentViewAngleProperty' ),
+      phetioReadOnly: true
     } );
 
     this.orbitVertices = [];

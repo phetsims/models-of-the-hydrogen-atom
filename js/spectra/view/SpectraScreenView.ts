@@ -168,7 +168,7 @@ export default class SpectraScreenView extends ScreenView {
 
     // Play Area focus order
     this.pdomPlayAreaNode.pdomOrder = [
-      //TODO
+      //TODO pdomPlayAreaNode.pdomOrder
       lightNode,
       lightControlPanel,
       zoomedInBoxNode,
@@ -180,7 +180,7 @@ export default class SpectraScreenView extends ScreenView {
 
     // Control Area focus order
     this.pdomControlAreaNode.pdomOrder = [
-      //TODO
+      //TODO pdomControlAreaNode.pdomOrder
     ];
 
     this.model = model;

@@ -117,11 +117,11 @@ export default class SchrodingerModel extends DeBroglieModel {
   }
 
   public override step( dt: number ): void {
-    //TODO
+    //TODO implement step
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
-    //TODO
+    //TODO implement movePhoton
     photon.move( dt );
   }
 

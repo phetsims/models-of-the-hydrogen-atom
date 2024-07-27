@@ -32,7 +32,7 @@ export default class Spectrometer extends PhetioObject {
   }
 
   public reset(): void {
-    //TODO
+    //TODO implement reset
   }
 }
 
