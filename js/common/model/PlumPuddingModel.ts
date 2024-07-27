@@ -70,7 +70,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
   // Is the electron moving?
   private readonly electronIsMovingProperty: Property<boolean>;
 
-  // how many times the electron has crossed the atom's center since it started moving
+  // The number of times the electron has crossed the atom's center since it started moving.
   private readonly numberOfZeroCrossingsProperty: Property<number>;
 
   // the amplitude of the electron just before emitting its last photon
@@ -121,26 +121,33 @@ export default class PlumPuddingModel extends HydrogenAtom {
     //TODO this.electron.speedProperty is unused
     this.electronIsMovingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'electronIsMovingProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: true
     } );
 
     this.numberOfZeroCrossingsProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'numberOfZeroCrossingsProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: true,
+      phetioDocumentation: 'The number of times the electron has crossed the atom\'s center since it started moving.'
     } );
 
     //TODO should this affect this.electron.speedProperty?
     this.previousAmplitudeProperty = new NumberProperty( 0, {
       range: new Range( 0, 1 ),
       tandem: options.tandem.createTandem( 'previousAmplitudeProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: true,
+      phetioDocumentation: 'The amplitude of the electron just before emitting its last photon.'
     } );
 
     this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: true,
+      phetioDocumentation: 'The number of photons the atom has absorbed and is "holding".'
     } );
   }
 
