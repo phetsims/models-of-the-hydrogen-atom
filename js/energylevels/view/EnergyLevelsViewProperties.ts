@@ -1,4 +1,4 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * EnergyLevelsViewProperties defines Properties that are specific to the view in the 'Energy Levels' screen.

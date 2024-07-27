@@ -1,4 +1,4 @@
-// Copyright 2022-2023, University of Colorado Boulder
+// Copyright 2022-2024, University of Colorado Boulder
 
 /**
  * BilliardBallNode displays the "Billiard Ball" model of the hydrogen atom.

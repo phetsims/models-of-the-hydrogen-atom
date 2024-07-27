@@ -1,4 +1,4 @@
-// Copyright 2022, University of Colorado Boulder
+// Copyright 2022-2024, University of Colorado Boulder
 
 /**
  * ModelMode is a union type that determines whether we are running an experiment or viewing a predictive model.
