@@ -1,4 +1,4 @@
-// Copyright 2015-2023, University of Colorado Boulder
+// Copyright 2015-2024, University of Colorado Boulder
 
 /**
  * ZoomedInBoxNode is a base class that provides the zoomed-in view of part of the box of hydrogen.
