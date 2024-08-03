@@ -22,16 +22,22 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Light from '../model/Light.js';
+import { LightMode } from '../model/LightMode.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 const SLIDER_TRACK_SIZE = new Dimension2( 250, 15 );
 
 type SelfOptions = EmptySelfOptions;
 
-type MOTHAWavelengthControlOptions = SelfOptions & PickRequired<WavelengthNumberControlOptions, 'tandem' | 'visibleProperty'>;
+type MOTHAWavelengthControlOptions = SelfOptions & PickRequired<WavelengthNumberControlOptions, 'tandem'>;
 
 export class MOTHAWavelengthControl extends WavelengthNumberControl {
 
-  public constructor( wavelengthProperty: Property<number>, providedOptions: MOTHAWavelengthControlOptions ) {
+  public constructor( wavelengthProperty: Property<number>,
+                      lightModeProperty: TReadOnlyProperty<LightMode>,
+                      providedOptions: MOTHAWavelengthControlOptions ) {
 
     // 'UV' text shown in the UV section of the slider track.
     const uvText = new Text( ModelsOfTheHydrogenAtomStrings.uvStringProperty, {
@@ -74,6 +80,10 @@ export class MOTHAWavelengthControl extends WavelengthNumberControl {
 
     const options = optionize<MOTHAWavelengthControlOptions, SelfOptions, WavelengthNumberControlOptions>()( {
       layoutFunction: layoutFunction,
+      visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
+        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
+      } ),
       spectrumSliderTrackOptions: {
         valueToColor: Light.wavelengthToColor,
         size: SLIDER_TRACK_SIZE

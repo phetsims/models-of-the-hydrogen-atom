@@ -9,19 +9,15 @@
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { HBox, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
-import { LightMode } from '../model/LightMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAColors from '../MOTHAColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
-import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
 import Light from '../model/Light.js';
+import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -41,13 +37,13 @@ export class LightControlPanel extends Panel {
     }, providedOptions );
 
     // Wavelength control
-    const monochromaticWavelengthControlTandem = options.tandem.createTandem( 'monochromaticWavelengthControl' );
-    const monochromaticWavelengthControl = new MOTHAWavelengthControl( light.monochromaticWavelengthProperty, {
-      visibleProperty: new DerivedProperty( [ light.lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
-        tandem: monochromaticWavelengthControlTandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
-      tandem: monochromaticWavelengthControlTandem
+    const monochromaticWavelengthControl = new MOTHAWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty, {
+      tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
+    } );
+
+    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( light.lightModeProperty, {
+      maxWidth: monochromaticWavelengthControl.width,
+      tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
     // 'Absorption Wavelengths' info button
@@ -73,31 +69,6 @@ export class LightControlPanel extends Panel {
           maxWidth: 0.8 * monochromaticWavelengthControl.width
         } )
       ]
-    } );
-
-    const textOptions = {
-      font: new PhetFont( 16 ),
-      fill: MOTHAColors.invertibleTextFillProperty,
-      maxWidth: 0.4 * monochromaticWavelengthControl.width
-    };
-
-    const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
-      {
-        value: 'white',
-        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, textOptions ),
-        tandemName: 'whiteRadioButton'
-      },
-      {
-        value: 'monochromatic',
-        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, textOptions ),
-        tandemName: 'monochromaticRadioButton'
-      }
-    ];
-
-    const lightModeRadioButtonGroup = new HorizontalAquaRadioButtonGroup( light.lightModeProperty, radioButtonGroupItems, {
-      maxWidth: monochromaticWavelengthControl.width,
-      spacing: 15,
-      tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
     const content = new VBox( {
