@@ -124,5 +124,11 @@
   },
   "ir": {
     "value": "IR"
+  },
+  "nTransition": {
+    "value": "n transition"
+  },
+  "wavelengthNanometers": {
+    "value": "wavelength (nm)"
   }
 }

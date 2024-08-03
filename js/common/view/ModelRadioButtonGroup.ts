@@ -30,6 +30,7 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
     const options = optionize<ModelRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 
       // RectangularRadioButtonGroupOptions
+      isDisposable: false,
       spacing: 2,
       labelAlign: 'left',
       radioButtonOptions: {

@@ -18,6 +18,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
 import Light from '../model/Light.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
+import AbsorptionWavelengthsDialog from './AbsorptionWavelengthsDialog.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -46,13 +47,15 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
+    const absorptionWavelengthsDialog = new AbsorptionWavelengthsDialog( {
+      tandem: options.tandem.createTandem( 'absorptionWavelengthsDialog' )
+    } );
+
     // 'Absorption Wavelengths' info button
     const absorptionWavelengthsInfoButton = new InfoButton( {
       iconFill: 'rgb( 41, 106, 163 )',
       scale: 0.4,
-      listener: () => {
-        //TODO
-      },
+      listener: () => absorptionWavelengthsDialog.show(),
       tandem: options.tandem.createTandem( 'absorptionWavelengthsInfoButton' ),
       phetioEnabledPropertyInstrumented: false
     } );

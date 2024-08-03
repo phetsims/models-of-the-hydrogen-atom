@@ -55,6 +55,8 @@ type StringsType = {
   'monochromaticStringProperty': LocalizedStringProperty;
   'uvStringProperty': LocalizedStringProperty;
   'irStringProperty': LocalizedStringProperty;
+  'nTransitionStringProperty': LocalizedStringProperty;
+  'wavelengthNanometersStringProperty': LocalizedStringProperty;
 };
 
 const ModelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;
