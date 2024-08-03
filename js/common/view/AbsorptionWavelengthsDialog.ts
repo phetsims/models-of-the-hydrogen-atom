@@ -25,12 +25,13 @@ const TEXT_OPTIONS = {
   font: new PhetFont( 14 )
 };
 
-type Transition = {
+type StateTransition = {
   n1: number;
   n2: number;
 };
 
-const map = new Map<number, Transition>();
+// Absorption wavelengths and their associated state transition.
+const map = new Map<number, StateTransition>();
 map.set( 122, { n1: 1, n2: 2 } );
 map.set( 103, { n1: 1, n2: 3 } );
 map.set( 97, { n1: 1, n2: 4 } );
