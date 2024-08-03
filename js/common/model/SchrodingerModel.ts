@@ -221,7 +221,12 @@ export default class SchrodingerModel extends DeBroglieModel {
     return new Vector2( x, y );
   }
 
-  public fireOneAbsorbablePhoton(): void {
+  //TODO document
+  public excite(): void {
+    this.fireOneAbsorbablePhoton();
+  }
+
+  private fireOneAbsorbablePhoton(): void {
     //TODO port MetastableHandler
   }
 

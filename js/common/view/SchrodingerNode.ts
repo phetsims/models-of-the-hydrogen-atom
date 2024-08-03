@@ -21,11 +21,9 @@ import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import FullElectronStateText from './FullElectronStateText.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import SchrodingerFieldNode from './SchrodingerFieldNode.js';
+import ExciteAtomButton from './ExciteAtomButton.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -59,13 +57,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'xzAxesNode' )
     } );
 
-    const exciteAtomButton = new RectangularPushButton( {
-      baseColor: MOTHAColors.exciteButtonColorProperty,
-      content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
-        font: new PhetFont( 16 ),
-        maxWidth: 100
-      } ),
-      listener: () => hydrogenAtom.fireOneAbsorbablePhoton(),
+    const exciteAtomButton = new ExciteAtomButton( () => hydrogenAtom.excite(), {
       tandem: options.tandem.createTandem( 'exciteAtomButton' )
     } );
 
