@@ -1,6 +1,5 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
-//TODO colors of Billiard Ball icon do not match BilliardBallNode
 /**
  * ModelPanel contains controls (radio buttons) for choosing one of the predictive models.
  * It is shown when the AB-switch is set to 'Model'.
@@ -13,9 +12,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Image, NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
-import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import { HBox, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -23,6 +20,7 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import { ModelMode } from '../model/ModelMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
+import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -49,37 +47,8 @@ export default class ModelPanel extends Panel {
       yMargin: 10
     }, providedOptions );
 
-    // content that appears on the radio buttons
-    const items: RectangularRadioButtonGroupItem<HydrogenAtom>[] = [];
-    for ( let i = 0; i < predictiveModels.length; i++ ) {
-      items.push( createRadioButtonItem( predictiveModels[ i ] ) );
-    }
-
     // radio buttons
-    const modelRadioButtonGroup = new RectangularRadioButtonGroup( predictiveModelProperty, items, {
-      spacing: 2,
-      labelAlign: 'left',
-      radioButtonOptions: {
-        baseColor: null,
-        xMargin: 12,
-        yMargin: 10,
-        xAlign: 'left',
-        buttonAppearanceStrategyOptions: {
-          selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
-          deselectedStroke: MOTHAColors.modelsRadioButtonDeselectedStrokeProperty,
-          overStroke: MOTHAColors.modelsRadioButtonOverStrokeProperty,
-          overFill: null,
-          selectedLineWidth: 2.5,
-          selectedButtonOpacity: 1,
-          deselectedButtonOpacity: 1,
-          overButtonOpacity: 1
-        },
-        contentAppearanceStrategyOptions: {
-          selectedContentOpacity: 1,
-          deselectedContentOpacity: 1,
-          overContentOpacity: 1
-        }
-      },
+    const modelRadioButtonGroup = new ModelRadioButtonGroup( predictiveModelProperty, predictiveModels, {
       tandem: options.tandem.createTandem( 'modelRadioButtonGroup' )
     } );
 
@@ -96,30 +65,6 @@ export default class ModelPanel extends Panel {
 
     super( contentNode, options );
   }
-}
-
-/**
- * Creates the item for one radio buttons.
- */
-function createRadioButtonItem( predictiveModel: HydrogenAtom ):
-  RectangularRadioButtonGroupItem<HydrogenAtom> {
-
-  return {
-    value: predictiveModel,
-    createNode: tandem => new HBox( {
-      spacing: 10,
-      justify: 'left',
-      sizable: false,
-      children: [
-        new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ),
-        new Text( predictiveModel.displayNameProperty, {
-          fill: MOTHAColors.invertibleTextFillProperty,
-          font: new PhetFont( 16 ),
-          maxWidth: 200 // determined empirically
-        } ) ]
-    } ),
-    tandemName: `${predictiveModel.tandem.name}RadioButton` //TODO too clever?
-  };
 }
 
 modelsOfTheHydrogenAtom.register( 'ModelPanel', ModelPanel );
