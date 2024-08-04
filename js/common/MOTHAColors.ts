@@ -11,8 +11,6 @@ import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 
-const YELLOW = 'rgb( 235, 235, 0 )';
-
 const MOTHAColors = {
 
   screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
@@ -122,7 +120,7 @@ const MOTHAColors = {
   //------------------------------------------------------------------------------------------------------------------
 
   switchTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'switchTextFill', {
-    default: YELLOW,
+    default: 'white',
     projector: 'black'
   } ),
 
@@ -142,7 +140,7 @@ const MOTHAColors = {
   } ),
 
   modelsRadioButtonSelectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonSelectedStroke', {
-    default: YELLOW
+    default: PhetColorScheme.BUTTON_YELLOW
   } ),
 
   modelsRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonDeselectedStroke', {
@@ -168,7 +166,7 @@ const MOTHAColors = {
   //------------------------------------------------------------------------------------------------------------------
 
   spectrometerTitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerTitleFill', {
-    default: YELLOW,
+    default: 'white',
     projector: 'black'
   } ),
 
@@ -210,7 +208,7 @@ const MOTHAColors = {
   //------------------------------------------------------------------------------------------------------------------
 
   electronEnergyLevelTitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelTitleFill', {
-    default: YELLOW,
+    default: 'white',
     projector: 'black'
   } ),
 
