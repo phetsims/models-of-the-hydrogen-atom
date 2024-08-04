@@ -10,10 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import TProperty from '../../../../axon/js/TProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColors from '../MOTHAColors.js';
 import Particle, { ParticleOptions } from './Particle.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
@@ -61,16 +58,6 @@ export default class Photon extends Particle {
   public override dispose(): void {
     this.hasCollidedProperty.dispose();
     super.dispose();
-  }
-
-  /**
-   * Gets the Color associated with the photon's wavelength.
-   */
-  public getColor(): TColor {
-    return VisibleColor.wavelengthToColor( this.wavelength, {
-      uvColor: MOTHAColors.UV_COLOR,
-      irColor: MOTHAColors.IR_COLOR
-    } );
   }
 
   /**
