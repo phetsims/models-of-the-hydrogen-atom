@@ -1,5 +1,6 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
+//TODO Why is VisibleColor range [380,780]? Isn't the visible range [380,700]?
 /**
  * MOTHAColors defines the colors for this simulation.
  *

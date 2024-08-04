@@ -39,6 +39,7 @@ const MOTHAConstants = {
   // speeds, in distance per second
   PHOTON_INITIAL_SPEED: 300,
 
+  //TODO Why 92? Isn't UV range [100,400] nm?
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
 
   MAX_SPECTROMETER_SNAPSHOTS: 3,
