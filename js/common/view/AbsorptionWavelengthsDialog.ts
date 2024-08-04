@@ -1,5 +1,9 @@
 // Copyright 2024, University of Colorado Boulder
 
+//TODO Should we display the color for each wavelength?
+//TODO Should we display UV/Visible/IR labels?
+//TODO Should the UV and Visible wavelengths be selectable, and set the value of wavelengthProperty?
+
 /**
  * TODO
  *
