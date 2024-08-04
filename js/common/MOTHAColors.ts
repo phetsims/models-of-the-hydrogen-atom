@@ -15,15 +15,6 @@ const YELLOW = 'rgb( 235, 235, 0 )';
 
 const MOTHAColors = {
 
-  //TODO Should these be changeable? Why are these the same color?
-  UV_COLOR: 'rgb( 160, 160, 160 )',
-  IR_COLOR: 'rgb( 160, 160, 160 )',
-
-  // Sparkle in the center of photons
-  VISIBLE_SPARKLE_COLOR: 'rgba( 255, 255, 255, 0.4 )',
-  UV_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 400 ),
-  IR_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 ),
-
   screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
     default: 'black',
     projector: 'white'
@@ -280,7 +271,20 @@ const MOTHAColors = {
 
   exciteButtonColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'exciteButtonColor', {
     default: PhetColorScheme.BUTTON_YELLOW
-  } )
+  } ),
+
+  //------------------------------------------------------------------------------------------------------------------
+  // Static colors
+  //------------------------------------------------------------------------------------------------------------------
+
+  //TODO Should these be changeable? Why are these the same color?
+  UV_COLOR: 'rgb( 160, 160, 160 )',
+  IR_COLOR: 'rgb( 160, 160, 160 )',
+
+  // Sparkle in the center of photons
+  VISIBLE_SPARKLE_COLOR: 'rgba( 255, 255, 255, 0.4 )',
+  UV_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 400 ),
+  IR_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 )
 };
 
 modelsOfTheHydrogenAtom.register( 'MOTHAColors', MOTHAColors );
