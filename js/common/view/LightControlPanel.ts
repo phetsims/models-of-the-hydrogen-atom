@@ -52,11 +52,12 @@ export class LightControlPanel extends Panel {
     } );
 
     // 'Absorption Wavelengths' info button
-    const absorptionWavelengthsInfoButton = new InfoButton( {
+    //TODO Factor out absorptionWavelengthsButton
+    const absorptionWavelengthsButton = new InfoButton( {
       iconFill: 'rgb( 41, 106, 163 )',
       scale: 0.4,
       listener: () => absorptionWavelengthsDialog.show(),
-      tandem: options.tandem.createTandem( 'absorptionWavelengthsInfoButton' ),
+      tandem: options.tandem.createTandem( 'absorptionWavelengthsButton' ),
       phetioEnabledPropertyInstrumented: false
     } );
 
@@ -64,9 +65,11 @@ export class LightControlPanel extends Panel {
       visibleProperty: monochromaticWavelengthControl.visibleProperty,
       spacing: 5,
       children: [
-        absorptionWavelengthsInfoButton,
+        absorptionWavelengthsButton,
+
+        //TODO Should the button label be pressable?
         new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
-          visibleProperty: absorptionWavelengthsInfoButton.visibleProperty,
+          visibleProperty: absorptionWavelengthsButton.visibleProperty,
           font: new PhetFont( 14 ),
           fill: MOTHAColors.invertibleTextFillProperty,
           maxWidth: 0.8 * monochromaticWavelengthControl.width
