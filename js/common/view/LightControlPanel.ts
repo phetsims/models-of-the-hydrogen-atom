@@ -52,7 +52,8 @@ export class LightControlPanel extends Panel {
     } );
 
     // 'Absorption Wavelengths' info button
-    //TODO Factor out absorptionWavelengthsButton
+    //TODO Factor out absorptionWavelengthsButton.
+    //TODO Using InfoButton does not seem appropriate here.
     const absorptionWavelengthsButton = new InfoButton( {
       iconFill: 'rgb( 41, 106, 163 )',
       scale: 0.4,
