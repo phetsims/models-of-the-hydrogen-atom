@@ -9,7 +9,6 @@
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import WavelengthNumberControl, { WavelengthNumberControlOptions } from '../../../../scenery-phet/js/WavelengthNumberControl.js';
-import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
@@ -27,6 +26,7 @@ import { LightMode } from '../model/LightMode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 const SLIDER_TRACK_SIZE = new Dimension2( 250, 15 );
 
@@ -36,7 +36,7 @@ type MOTHAWavelengthControlOptions = SelfOptions & PickRequired<WavelengthNumber
 
 export class MOTHAWavelengthControl extends WavelengthNumberControl {
 
-  public constructor( wavelengthProperty: Property<number>,
+  public constructor( wavelengthProperty: NumberProperty,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
                       providedOptions: MOTHAWavelengthControlOptions ) {
 
@@ -80,6 +80,7 @@ export class MOTHAWavelengthControl extends WavelengthNumberControl {
     };
 
     const options = optionize<MOTHAWavelengthControlOptions, SelfOptions, WavelengthNumberControlOptions>()( {
+      range: wavelengthProperty.range,
       layoutFunction: layoutFunction,
       visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
@@ -91,12 +92,15 @@ export class MOTHAWavelengthControl extends WavelengthNumberControl {
       },
       spectrumSliderThumbOptions: {
         valueToColor: Light.wavelengthToColor,
-        cursorHeight: SLIDER_TRACK_SIZE.height,
         width: 20,
         height: 25,
-        stroke: MOTHAColors.wavelengthSliderThumbStrokeProperty
+        stroke: MOTHAColors.wavelengthSliderThumbStrokeProperty,
+        cursorHeight: SLIDER_TRACK_SIZE.height,
+        windowCursorOptions: {
+          stroke: MOTHAColors.wavelengthSliderThumbStrokeProperty,
+          cornerRadius: 0
+        }
       },
-      range: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE,
       numberDisplayOptions: {
         cornerRadius: 3,
         backgroundFill: MOTHAColors.wavelengthNumberDisplayFillProperty,
