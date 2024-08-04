@@ -1,6 +1,6 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO Should we indicate when wavelengthProperty is an absorption wavelength?
+//TODO Indicate when wavelengthProperty is an absorption wavelength?
 /**
  * MOTHAWavelengthControl is a specialization of WavelengthNumberControl that lets the user select a UR or visible wavelength.
  *
