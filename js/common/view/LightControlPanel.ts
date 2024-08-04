@@ -63,6 +63,8 @@ export class LightControlPanel extends Panel {
     } );
 
     const hBox = new HBox( {
+
+      //TODO Why is Absorption Wavelengths not relevant for white light?
       visibleProperty: monochromaticWavelengthControl.visibleProperty,
       spacing: 5,
       children: [
