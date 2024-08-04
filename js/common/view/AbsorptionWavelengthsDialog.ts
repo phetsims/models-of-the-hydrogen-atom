@@ -78,6 +78,7 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
       columnHeadings
     ];
 
+    //TODO Using a left-right arrow here implies absorption (right) AND emission (left). Should this dialog be retitled? Or use a right arrow here?
     for ( const [ wavelength, transition ] of map ) {
       rows.push( [
         new Text( `${transition.n1} \u2194 ${transition.n2}`, TEXT_OPTIONS ),
