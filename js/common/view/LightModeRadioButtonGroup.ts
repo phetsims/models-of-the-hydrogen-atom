@@ -38,6 +38,7 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
     const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, HorizontalAquaRadioButtonGroupOptions>()( {
 
       // HorizontalAquaRadioButtonGroupOptions
+      isDisposable: false,
       spacing: 15
     }, providedOptions );
 

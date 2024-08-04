@@ -80,6 +80,7 @@ export class MOTHAWavelengthControl extends WavelengthNumberControl {
     };
 
     const options = optionize<MOTHAWavelengthControlOptions, SelfOptions, WavelengthNumberControlOptions>()( {
+      isDisposable: false,
       range: wavelengthProperty.range,
       layoutFunction: layoutFunction,
       visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {

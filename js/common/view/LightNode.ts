@@ -23,7 +23,11 @@ export class LightNode extends Node {
 
   public constructor( light: Light, providedOptions: LightNodeOptions ) {
 
-    const options = optionize<LightNodeOptions, SelfOptions, NodeOptions>()( {}, providedOptions );
+    const options = optionize<LightNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
+      isDisposable: false
+    }, providedOptions );
 
     const laserPointerNode = new LaserPointerNode( light.isOnProperty, {
       bodySize: new Dimension2( 88, 64 ),

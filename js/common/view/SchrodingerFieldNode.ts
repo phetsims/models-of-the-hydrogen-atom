@@ -31,7 +31,9 @@ export default class SchrodingerFieldNode extends Node {
                       providedOptions: SchrodingerFieldNodeOptions ) {
 
     const options = optionize<SchrodingerFieldNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
