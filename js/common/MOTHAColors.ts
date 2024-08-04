@@ -277,7 +277,6 @@ const MOTHAColors = {
   // Static colors
   //------------------------------------------------------------------------------------------------------------------
 
-  //TODO Should these be changeable? Why are these the same color?
   UV_COLOR: 'rgb( 160, 160, 160 )',
   IR_COLOR: 'rgb( 160, 160, 160 )',
 
