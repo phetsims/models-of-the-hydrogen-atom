@@ -9,6 +9,7 @@
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 
 const YELLOW = 'rgb( 235, 235, 0 )';
 
@@ -17,6 +18,11 @@ const MOTHAColors = {
   //TODO Should these be changeable? Why are these the same color?
   UV_COLOR: 'rgb( 160, 160, 160 )',
   IR_COLOR: 'rgb( 160, 160, 160 )',
+
+  // Sparkle in the center of photons
+  VISIBLE_SPARKLE_COLOR: 'rgba( 255, 255, 255, 0.4 )',
+  UV_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 400 ),
+  IR_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 ),
 
   screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
     default: 'black',

@@ -22,23 +22,13 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { Circle, Color, TColor, Node, NodeOptions, Path, RadialGradient, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, Color, Node, NodeOptions, Path, RadialGradient, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from '../model/Photon.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
-
-// constants
-const INVISIBLE_WAVELENGTH_COLOR = new Color( 160, 160, 160 );
-const WAVELENGTH_TO_COLOR_OPTIONS = {
-  uvColor: INVISIBLE_WAVELENGTH_COLOR,
-  irColor: INVISIBLE_WAVELENGTH_COLOR
-};
-
-// Sparkle
-const SPARKLE_COLOR = new Color( 255, 255, 255, 0.4 ); // sparkle color for visible wavelengths
-const UV_SPARKLE_COLOR = VisibleColor.wavelengthToColor( 400, WAVELENGTH_TO_COLOR_OPTIONS );
-const IR_SPARKLE_COLOR = VisibleColor.wavelengthToColor( 715, WAVELENGTH_TO_COLOR_OPTIONS );
+import Light from '../model/Light.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -61,12 +51,12 @@ export default class PhotonNode extends Node {
 
     const haloRadius = photonRadius;
     const haloNode = new Circle( haloRadius, {
-      fill: getHaloColor( wavelength, haloRadius )
+      fill: createHaloColor( wavelength, haloRadius )
     } );
 
     const orbRadius = 0.5 * photonRadius;
     const orbNode = new Circle( orbRadius, {
-      fill: getOrbColor( wavelength, orbRadius )
+      fill: createOrbColor( wavelength, orbRadius )
     } );
 
     const sparkleRadius = 0.575 * photonRadius;
@@ -105,7 +95,7 @@ export default class PhotonNode extends Node {
   }
 
   /**
-   * Creates a photon icon, used in the Key.
+   * Creates a photon icon, used in the legend.
    */
   public static createIcon( wavelength: number, scale = 1 ): Node {
     const photon = new Photon( {
@@ -120,6 +110,9 @@ export default class PhotonNode extends Node {
   }
 }
 
+/**
+ * The sparkle in the middle of the photon, composed of a pair of crosshairs.
+ */
 class SparkleNode extends Node {
   public constructor( wavelength: number, radius: number ) {
     const fill = getSparkleColor( wavelength );
@@ -153,34 +146,40 @@ class CrosshairsNode extends Node {
   }
 }
 
-function getHaloColor( wavelength: number, radius: number ): RadialGradient {
-  const innerColor = VisibleColor.wavelengthToColor( wavelength, WAVELENGTH_TO_COLOR_OPTIONS );
+/**
+ * Creates the color for the orb, the main body of the photon.
+ */
+function createOrbColor( wavelength: number, radius: number ): RadialGradient {
+  const innerColor = new Color( 255, 255, 255, 0.7 );
+  const outerColor = Light.wavelengthToColor( wavelength ).withAlpha( 0.5 );
+  return new RadialGradient( 0, 0, 0, 0, 0, radius )
+    .addColorStop( 0.25, innerColor )
+    .addColorStop( 1, outerColor );
+}
+
+/**
+ * Creates the color for the halo that surrounds the orb.
+ */
+function createHaloColor( wavelength: number, radius: number ): RadialGradient {
+  const innerColor = Light.wavelengthToColor( wavelength );
   const outerColor = innerColor.withAlpha( 0 );
   return new RadialGradient( 0, 0, 0, 0, 0, radius )
     .addColorStop( 0.4, innerColor )
     .addColorStop( 1, outerColor );
 }
 
-function getOrbColor( wavelength: number, radius: number ): RadialGradient {
-  const innerColor = new Color( 255, 255, 255, 0.7 );
-  const outerColor = VisibleColor.wavelengthToColor( wavelength, WAVELENGTH_TO_COLOR_OPTIONS ).withAlpha( 0.5 );
-  return new RadialGradient( 0, 0, 0, 0, 0, radius )
-    .addColorStop( 0.25, innerColor )
-    .addColorStop( 1, outerColor );
-}
-
 /*
- * Returns the color for the 'sparkle' in the center of the photon.
+ * Gets the color for the 'sparkle' in the center of the photon.
  */
-function getSparkleColor( wavelength: number ): Color {
+function getSparkleColor( wavelength: number ): TColor {
   if ( wavelength < VisibleColor.MIN_WAVELENGTH ) {
-    return UV_SPARKLE_COLOR;
+    return MOTHAColors.UV_SPARKLE_COLOR;
   }
   else if ( wavelength > VisibleColor.MAX_WAVELENGTH ) {
-    return IR_SPARKLE_COLOR;
+    return MOTHAColors.IR_SPARKLE_COLOR;
   }
   else {
-    return SPARKLE_COLOR;
+    return MOTHAColors.VISIBLE_SPARKLE_COLOR;
   }
 }
 
