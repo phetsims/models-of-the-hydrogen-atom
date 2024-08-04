@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2015-2024, University of Colorado Boulder
 
 //TODO colors of Billiard Ball icon do not match BilliardBallNode
 /**
