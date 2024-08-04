@@ -31,6 +31,7 @@ type StateTransition = {
 };
 
 // Absorption wavelengths and their associated state transition.
+//TODO Should this map (and the dialog display) be ordered by increasing wavelength?
 const map = new Map<number, StateTransition>();
 map.set( 122, { n1: 1, n2: 2 } );
 map.set( 103, { n1: 1, n2: 3 } );
