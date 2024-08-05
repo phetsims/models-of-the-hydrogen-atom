@@ -36,6 +36,7 @@ export default class Particle extends PhetioObject {
   public readonly radius: number;
 
   // See SelfOptions for documentation.
+  //TODO Move these into subclasses. Some are static, some do not need to be Property.
   public readonly positionProperty: Property<Vector2>;
   public readonly speedProperty: Property<number>;
   public readonly directionProperty: Property<number>;
