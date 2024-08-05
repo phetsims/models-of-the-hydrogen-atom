@@ -1,7 +1,7 @@
 // Copyright 2016-2024, University of Colorado Boulder
 
 /**
- * Particle is the base class for particles.
+ * Particle is the base class for particles, including Electron, Neutron, Proton, and Photon.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
