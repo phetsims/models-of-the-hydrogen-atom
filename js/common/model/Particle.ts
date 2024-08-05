@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -30,7 +29,7 @@ type SelfOptions = {
   direction?: number;
 };
 
-export type ParticleOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'isDisposable'> & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type ParticleOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'isDisposable' | 'tandem'>;
 
 export default class Particle extends PhetioObject {
 
@@ -51,7 +50,7 @@ export default class Particle extends PhetioObject {
       direction: 0,
 
       // PhetioObjectOptions
-      phetioState: false //TODO
+      phetioState: false
     }, providedOptions );
 
     super( options );

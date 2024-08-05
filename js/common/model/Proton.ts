@@ -11,10 +11,11 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ProtonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
+type ProtonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'> & PickRequired<ParticleOptions, 'tandem'>;
 
 export default class Proton extends Particle {
 
@@ -25,8 +26,6 @@ export default class Proton extends Particle {
       // ParticleOptions
       isDisposable: false,
       radius: MOTHAConstants.PROTON_RADIUS
-      //TODO phetioType: Proton.ProtonIO,
-      //TODO phetioDynamicElement: true
     }, providedOptions );
 
     super( options );

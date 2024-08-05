@@ -11,10 +11,11 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type NeutronOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
+type NeutronOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'> & PickRequired<ParticleOptions, 'tandem'>;
 
 export default class Neutron extends Particle {
 
@@ -25,8 +26,6 @@ export default class Neutron extends Particle {
       // ParticleOptions
       isDisposable: false,
       radius: MOTHAConstants.NEUTRON_RADIUS
-      //TODO phetioType: Neutron.NeutronIO,
-      //TODO phetioDynamicElement: true
     }, providedOptions );
 
     super( options );
