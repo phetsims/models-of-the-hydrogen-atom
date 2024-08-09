@@ -6,9 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import TProperty from '../../../../axon/js/TProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Particle, { ParticleOptions } from './Particle.js';
@@ -20,8 +18,8 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 
 type SelfOptions = {
   wavelength: number; // the photon's immutable wavelength
-  wasEmitted?: boolean; // was this photon emitted by the atom?
-  hasCollided?: boolean; // did this photon already collide with the atom?
+  wasEmitted?: boolean; // Was this photon emitted by the atom?
+  hasCollided?: boolean; // Has the photon collided with the atom?
 };
 
 type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
@@ -54,7 +52,7 @@ export default class Photon extends Particle {
 
   public readonly wavelength: number;
   public readonly wasEmitted: boolean;
-  public hasCollidedProperty: TProperty<boolean>;
+  private _hasCollided: boolean;
 
   public constructor( providedOptions: PhotonOptions ) {
 
@@ -73,16 +71,16 @@ export default class Photon extends Particle {
 
     this.wavelength = options.wavelength;
     this.wasEmitted = options.wasEmitted;
-
-    this.hasCollidedProperty = new BooleanProperty( options.hasCollided, {
-      tandem: options.tandem.createTandem( 'hasCollidedProperty' ),
-      phetioReadOnly: true
-    } );
+    this._hasCollided = options.hasCollided;
   }
 
-  public override dispose(): void {
-    this.hasCollidedProperty.dispose();
-    super.dispose();
+  public get hasCollided(): boolean {
+    return this._hasCollided;
+  }
+
+  public set hasCollided( value: boolean ) {
+    assert && assert( value, 'cannot un-collide a particle' );
+    this._hasCollided = value;
   }
 
   /**
@@ -103,7 +101,7 @@ export default class Photon extends Particle {
       direction: this.directionProperty.value,
       wavelength: this.wavelength,
       wasEmitted: this.wasEmitted,
-      hasCollided: this.hasCollidedProperty.value
+      hasCollided: this.hasCollided
     };
   }
 
