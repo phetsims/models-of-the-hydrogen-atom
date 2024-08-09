@@ -139,7 +139,7 @@ export default class Photon extends Particle {
                    '<li>speed: speed, in distance per second' +
                    '<li>direction: direction of motion, in radians' +
                    '<li>wavelength: wavelength of the photon, in nm' +
-                   '<li>wasEmitted: whether the photon emitted by the hydrogen atom' +
+                   '<li>wasEmitted: whether the photon was emitted by the hydrogen atom' +
                    '<li>hasCollided: whether the photon has collided with the hydrogen atom' +
                    '</ul>'
   } );
