@@ -25,7 +25,6 @@ simLauncher.launch( () => {
 
   const options: SimOptions = {
 
-
     preferencesModel: new PreferencesModel( {
       visualOptions: {
         supportsProjectorMode: true
