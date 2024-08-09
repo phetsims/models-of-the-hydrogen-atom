@@ -58,7 +58,7 @@ import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomi
  * Some entries in this table are nonsensical, but their strengths are zero, and it helps to have a symmetrical table.
  * This table was taken from the Java simulation design document.
  *
- * Note that the table indexing is zero-indexed, while transitions are 1-based.
+ * Note that the table indexing is zero-based, while transitions are 1-based.
  * Here's an example that shows how the table is indexed:
  * TRANSITION_STRENGTH[5][0] is the transition strength from n=6 to n=1
  */
