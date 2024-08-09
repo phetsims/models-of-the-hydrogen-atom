@@ -61,11 +61,7 @@ export default class SchrodingerBrightness {
     }
 
     // Initialize sums with zeros
-    //TODO this is so ugly
-    this.sums = Array( NUMBER_OF_VERTICAL_CELLS );
-    for ( let i = 0; i < NUMBER_OF_VERTICAL_CELLS; i++ ) {
-      this.sums[ i ] = Array( NUMBER_OF_HORIZONTAL_CELLS ).fill( 0 );
-    }
+    this.sums = new Array( NUMBER_OF_VERTICAL_CELLS ).fill( 0 );
 
     // 3D cell size
     this.cellWidth = ( zoomedInBoxBounds.width / NUMBER_OF_HORIZONTAL_CELLS ) / 2;
