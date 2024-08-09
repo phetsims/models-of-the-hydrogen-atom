@@ -122,8 +122,8 @@ export default class Photon extends Particle {
   }
 
   /**
-   * PhotonIO handles serialization of a Photon. It implements 'Data Type Serialization',
-   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
+   * PhotonIO handles serialization of a Photon. It implements 'Data Type Serialization' as described in
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   public static readonly PhotonIO = new IOType<Photon, PhotonStateObject>( 'PhotonIO', {
     valueType: Photon,
