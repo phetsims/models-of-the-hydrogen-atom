@@ -112,13 +112,13 @@ export default class PlumPuddingModel extends HydrogenAtom {
       //TODO phetioReadOnly: true
     } );
 
-    //TODO this.electron.directionProperty is unused
+    //TODO Should be derived from this.electron.directionProperty, and directionProperty is not used.
     this.electronDirectionPositiveProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'electronDirectionPositiveProperty' ),
       phetioReadOnly: true
     } );
 
-    //TODO this.electron.speedProperty is unused
+    //TODO Should be derived from this.electron.speedProperty, and speedProperty is not used.
     this.electronIsMovingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'electronIsMovingProperty' ),
       phetioReadOnly: true,
