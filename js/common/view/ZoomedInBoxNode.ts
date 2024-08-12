@@ -26,7 +26,7 @@ export default class ZoomedInBoxNode extends Node {
   // Subclasses should add things that are "inside" the box to this Node, because it is clipped to the bounds of the box.
   protected readonly contentsNode: Node;
 
-  protected constructor( zoomBox: ZoomedInBox,
+  protected constructor( zoomedInBox: ZoomedInBox,
                          modelViewTransform: ModelViewTransform2,
                          providedOptions: ZoomedInBoxNodeOptions ) {
 
@@ -37,11 +37,11 @@ export default class ZoomedInBoxNode extends Node {
       isDisposable: false
     }, providedOptions );
 
-    const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
+    const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomedInBox ), {
       fill: MOTHAColors.zoomedInBoxFillProperty
     } );
 
-    const outlineNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomBox ), {
+    const outlineNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomedInBox ), {
       stroke: MOTHAColors.zoomedInBoxStrokeProperty,
       lineWidth: 3
     } );
@@ -49,7 +49,7 @@ export default class ZoomedInBoxNode extends Node {
     const contentsNode = new Node( {
 
       // Clip contents to the bounds of the box.
-      clipArea: modelViewTransform.modelToViewShape( Shape.rectangle( zoomBox.minX, zoomBox.minY, zoomBox.width, zoomBox.height ) )
+      clipArea: modelViewTransform.modelToViewShape( Shape.rectangle( zoomedInBox.minX, zoomedInBox.minY, zoomedInBox.width, zoomedInBox.height ) )
     } );
 
     options.children = [ backgroundNode, contentsNode, outlineNode ];
