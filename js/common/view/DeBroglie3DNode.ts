@@ -34,7 +34,7 @@ const NUMBER_OF_WAVE_VERTICES = 200;
 // If you change this value, you must also change DeBroglieModel.ORBIT_3D_Y_SCALE !! TODO why?
 const FINAL_VIEW_ANGLE = Utils.toRadians( 70 );
 
-// change is angle during view animation
+// Change in angle during view animation.
 const VIEW_ANGLE_DELTA = Utils.toRadians( 5 );
 
 type SelfOptions = EmptySelfOptions;
@@ -149,7 +149,7 @@ export default class DeBroglie3DNode extends Node {
 
   private update(): void {
     this.updateWaveNode();
-    if ( this.currentViewAngleProperty.value === FINAL_VIEW_ANGLE ) {
+    if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
       this.updateViewMatrix();
     }
   }
@@ -160,7 +160,7 @@ export default class DeBroglie3DNode extends Node {
   private updateWaveNode(): void {
 
     // Update the vertices
-    this.waveVertices = updateWaveVertices( this.hydrogenAtom, this.modelViewTransform, this.waveVertices );
+    this.waveVertices = getWaveVertices( this.hydrogenAtom, this.modelViewTransform, this.waveVertices );
 
     // Create the wireframe model
     this.waveModel.reset();
@@ -203,7 +203,7 @@ export default class DeBroglie3DNode extends Node {
   private createOrbitNode( radius: number, viewMatrix: WireframeMatrix, vertices: Vector3[] ): WireframeNode {
 
     // Update the vertices
-    vertices = updateOrbitVertices( radius, vertices );
+    vertices = getOrbitVertices( radius, vertices );
 
     // Create the wireframe model
     const wireframeModel: WireframeModel = new WireframeModel( {
@@ -233,9 +233,9 @@ export default class DeBroglie3DNode extends Node {
 }
 
 /**
- * Updates the vertices that approximate an electron orbit.
+ * Gets the vertices that approximate an electron orbit.
  */
-function updateOrbitVertices( orbitRadius: number, vertices: Vector3[] ): Vector3[] {
+function getOrbitVertices( orbitRadius: number, vertices: Vector3[] ): Vector3[] {
 
   const numberOfVertices = vertices.length;
   const deltaAngle = ( 2 * Math.PI ) / numberOfVertices;
@@ -251,9 +251,9 @@ function updateOrbitVertices( orbitRadius: number, vertices: Vector3[] ): Vector
 }
 
 /**
- * Updates the vertices that approximate the standing wave.
+ * Gets the vertices that approximate the standing wave.
  */
-function updateWaveVertices( hydrogenAtom: DeBroglieModel,
+function getWaveVertices( hydrogenAtom: DeBroglieModel,
                              modelViewTransform: ModelViewTransform2,
                              vertices: Vector3[] ): Vector3[] {
 
