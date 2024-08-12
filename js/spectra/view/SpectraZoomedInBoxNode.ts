@@ -39,7 +39,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       //TODO default values for options
     }, providedOptions );
 
-    // All of the model-view transform action takes place in the zoomed-in box.
+    // All model-view transform operations take place in the zoomed-in box.
     // Our model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.
     // Our view uses a left-handed coordinate system: +x right, +y down, +angle clockwise.
     // The origin is at the center of the zoomed-in box.
