@@ -212,7 +212,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     else {
 
       // There's a bug in the implementation of the transition rules.
-      // Fall back to (1,0,0) if running without assertions.
+      // Fall back to (n,l,m) = (1,0,0) if running without assertions.
       assert && assert( false, `bad transition attempted from (${n},${l},${m}) to (${nNew},${lNew},${mNew})` );
       super.setElectronState( 1 );
       this._secondaryElectronStateProperty.value = 0;
