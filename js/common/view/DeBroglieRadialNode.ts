@@ -122,7 +122,7 @@ class RingNode extends Path {
     assert && assert( this.visible );
 
     // Get the radius for the electron's current state.
-    const electronState = this.hydrogenAtom.getElectronState();
+    const electronState = this.hydrogenAtom.electronStateProperty.value;
     const electronOrbitRadius = this.modelViewTransform.modelToViewDeltaX( this.hydrogenAtom.getElectronOrbitRadius( electronState ) );
 
     const ringShape = new Shape();

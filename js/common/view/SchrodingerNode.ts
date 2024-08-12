@@ -61,7 +61,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'exciteAtomButton' )
     } );
 
-    const electronStateText = new FullElectronStateText( hydrogenAtom.getElectronStateProperty(),
+    const electronStateText = new FullElectronStateText( hydrogenAtom.electronStateProperty,
       hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
         tandem: options.tandem.createTandem( 'electronStateText' )
       } );

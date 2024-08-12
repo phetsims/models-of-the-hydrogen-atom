@@ -49,9 +49,11 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import BohrModel from './BohrModel.js';
 import ProbabilisticChooser, { ProbabilisticChooserEntry } from './ProbabilisticChooser.js';
+import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 /*
  * This table defines the transition strengths for the primary state component (n).
@@ -81,10 +83,12 @@ export default class SchrodingerModel extends DeBroglieModel {
   //TODO electronStateTupleProperty: Property<{ n: number, l: number, m: number }>
 
   // secondary electron state number (l)
-  public readonly secondaryElectronStateProperty: NumberProperty;
+  private readonly _secondaryElectronStateProperty: NumberProperty;
+  public readonly secondaryElectronStateProperty: TReadOnlyProperty<number>;
 
   // tertiary electron state number (m)
-  public readonly tertiaryElectronStateProperty: NumberProperty;
+  private readonly _tertiaryElectronStateProperty: NumberProperty;
+  public readonly tertiaryElectronStateProperty: TReadOnlyProperty<number>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: SchrodingerModelOptions ) {
 
@@ -97,22 +101,32 @@ export default class SchrodingerModel extends DeBroglieModel {
 
     super( zoomedInBox, options );
 
-    this.secondaryElectronStateProperty = new NumberProperty( 0, {
+    this._secondaryElectronStateProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      //TODO range is dynamic [0,n-1] and range option cannot be a DerivedProperty
       tandem: options.tandem.createTandem( 'secondaryElectronStateProperty' ),
       phetioReadOnly: true,
       phetioFeatured: true,
       phetioDocumentation: 'secondary electron state (l)'
     } );
+    this.secondaryElectronStateProperty = this._secondaryElectronStateProperty;
 
-    this.tertiaryElectronStateProperty = new NumberProperty( 0, {
+    //TODO range is dynamic [0,n-1] and range option cannot be a DerivedProperty
+    this.electronStateProperty.link( n => {
+      this._secondaryElectronStateProperty.rangeProperty.value = new Range( 0, n );
+    } );
+
+    this._tertiaryElectronStateProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      //TODO range is dynamic [-l,+l] and range option cannot be a DerivedProperty
       tandem: options.tandem.createTandem( 'tertiaryElectronStateProperty' ),
       phetioReadOnly: true,
       phetioFeatured: true,
       phetioDocumentation: 'tertiary electron state (m)'
+    } );
+    this.tertiaryElectronStateProperty = this._tertiaryElectronStateProperty;
+
+    //TODO range is dynamic [-l,+l] and range option cannot be a DerivedProperty
+    this.secondaryElectronStateProperty.link( l => {
+      this._tertiaryElectronStateProperty.rangeProperty.value = new Range( -l, l );
     } );
   }
 
@@ -129,7 +143,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * Is this atom's electron in the specified state?
    */
   public isInState( n: number, l: number, m: number ): boolean {
-    return ( this.getElectronState() === n ) &&
+    return ( this.electronStateProperty.value === n ) &&
            ( this.secondaryElectronStateProperty.value === l ) &&
            ( this.tertiaryElectronStateProperty.value === m );
   }
@@ -140,7 +154,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * This is not physically correct, but we want to make it easier to get out of state (2,0,0).
    */
   protected override absorptionIsCertain(): boolean {
-    if ( this.getElectronState() === 2 && this.secondaryElectronStateProperty.value === 0 ) {
+    if ( this.electronStateProperty.value === 2 && this.secondaryElectronStateProperty.value === 0 ) {
       return true;
     }
     return super.absorptionIsCertain();
@@ -172,7 +186,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * Chooses a new primary state (n) for the electron, -1 if there is no valid transition.
    */
   protected override chooseLowerElectronState(): number {
-    return getLowerPrimaryState( this.getElectronState(), this.secondaryElectronStateProperty.value );
+    return getLowerPrimaryState( this.electronStateProperty.value, this.secondaryElectronStateProperty.value );
   }
 
   /**
@@ -181,7 +195,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    */
   protected override setElectronState( nNew: number ): void {
 
-    const n = this.getElectronState();
+    const n = this.electronStateProperty.value;
     const l = this.secondaryElectronStateProperty.value;
     const m = this.tertiaryElectronStateProperty.value;
 
@@ -192,8 +206,8 @@ export default class SchrodingerModel extends DeBroglieModel {
     const valid = isaValidTransition( n, l, m, nNew, lNew, mNew, BohrModel.getNumberOfStates() );
     if ( valid ) {
       super.setElectronState( nNew );
-      this.secondaryElectronStateProperty.value = lNew;
-      this.tertiaryElectronStateProperty.value = mNew;
+      this._secondaryElectronStateProperty.value = lNew;
+      this._tertiaryElectronStateProperty.value = mNew;
     }
     else {
 
@@ -201,8 +215,8 @@ export default class SchrodingerModel extends DeBroglieModel {
       // Fall back to (1,0,0) if running without assertions.
       assert && assert( false, `bad transition attempted from (${n},${l},${m}) to (${nNew},${lNew},${mNew})` );
       super.setElectronState( 1 );
-      this.secondaryElectronStateProperty.value = 0;
-      this.tertiaryElectronStateProperty.value = 0;
+      this._secondaryElectronStateProperty.value = 0;
+      this._tertiaryElectronStateProperty.value = 0;
     }
   }
 

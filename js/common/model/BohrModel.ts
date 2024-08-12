@@ -77,8 +77,9 @@ export default class BohrModel extends HydrogenAtom {
   public readonly proton: Proton;
   public readonly electron: Electron;
 
-  // electron state number
-  protected readonly electronStateProperty: NumberProperty;
+  // electron state number (n)
+  private readonly _electronStateProperty: NumberProperty;
+  public readonly electronStateProperty: TReadOnlyProperty<number>;
 
   // time that the electron has been in its current state
   private readonly timeInStateProperty: Property<number>;
@@ -117,7 +118,7 @@ export default class BohrModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
-    this.electronStateProperty = new NumberProperty( MOTHAConstants.GROUND_STATE, {
+    this._electronStateProperty = new NumberProperty( MOTHAConstants.GROUND_STATE, {
       numberType: 'Integer',
       range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.GROUND_STATE + ORBIT_RADII.length ),
       tandem: options.tandem.createTandem( 'electronStateProperty' ),
@@ -125,6 +126,7 @@ export default class BohrModel extends HydrogenAtom {
       phetioFeatured: true,
       phetioDocumentation: 'primary electron state (n)'
     } );
+    this.electronStateProperty = this._electronStateProperty;
 
     this.timeInStateProperty = new NumberProperty( 0, {
       tandem: options.tandem.createTandem( 'timeInStateProperty' ),
@@ -162,7 +164,7 @@ export default class BohrModel extends HydrogenAtom {
   public override reset(): void {
     this.proton.reset();
     this.electron.reset();
-    this.electronStateProperty.reset();
+    this._electronStateProperty.reset();
     this.timeInStateProperty.reset();
     this.electronAngleProperty.reset();
     super.reset();
@@ -219,17 +221,9 @@ export default class BohrModel extends HydrogenAtom {
     assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates() - 1 );
 
     if ( n !== this.electronStateProperty.value ) {
-      this.electronStateProperty.value = n;
+      this._electronStateProperty.value = n;
       this.timeInStateProperty.value = 0;
     }
-  }
-
-  public getElectronState(): number {
-    return this.electronStateProperty.value;
-  }
-
-  public getElectronStateProperty(): TReadOnlyProperty<number> {
-    return this.electronStateProperty;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -376,8 +370,7 @@ export default class BohrModel extends HydrogenAtom {
           this.photonAbsorbedEmitter.emit( photon );
 
           // move electron to new state
-          this.electronStateProperty.value = newState;
-          this.timeInStateProperty.value = 0;
+          this.setElectronState( newState );
         }
       }
     }
@@ -462,7 +455,7 @@ export default class BohrModel extends HydrogenAtom {
           } ) );
 
           // move electron to new state
-          this.electronStateProperty.value = newState;
+          this.setElectronState( newState );
         }
       }
     }
@@ -522,7 +515,7 @@ export default class BohrModel extends HydrogenAtom {
         } ) );
 
         // move electron to new state
-        this.electronStateProperty.value = newState;
+        this.setElectronState( newState );
       }
     }
 

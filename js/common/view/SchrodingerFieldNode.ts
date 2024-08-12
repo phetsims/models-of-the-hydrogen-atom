@@ -48,7 +48,7 @@ export default class SchrodingerFieldNode extends Node {
     this.upperLeftQuadrantNode = upperLeftQuadrantNode;
     this.brightnessCache = new SchrodingerBrightness( hydrogenAtom, zoomedInBoxBounds );
 
-    Multilink.multilink( [ hydrogenAtom.getElectronStateProperty(), hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty ],
+    Multilink.multilink( [ hydrogenAtom.electronStateProperty, hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty ],
       ( n, l, m ) => this.update( n, l, m ) );
   }
 

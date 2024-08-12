@@ -137,7 +137,7 @@ export default class DeBroglie3DNode extends Node {
     } );
 
     //TODO are these dependencies correct?
-    Multilink.multilink( [ hydrogenAtom.getElectronStateProperty(), hydrogenAtom.electronAngleProperty, this.visibleProperty ],
+    Multilink.multilink( [ hydrogenAtom.electronStateProperty, hydrogenAtom.electronAngleProperty, this.visibleProperty ],
       ( electronState, electronAngle, visible ) => {
         visible && this.update();
       } );
@@ -254,10 +254,10 @@ function getOrbitVertices( orbitRadius: number, vertices: Vector3[] ): Vector3[]
  * Gets the vertices that approximate the standing wave.
  */
 function getWaveVertices( hydrogenAtom: DeBroglieModel,
-                             modelViewTransform: ModelViewTransform2,
-                             vertices: Vector3[] ): Vector3[] {
+                          modelViewTransform: ModelViewTransform2,
+                          vertices: Vector3[] ): Vector3[] {
 
-  const electronState = hydrogenAtom.getElectronState();
+  const electronState = hydrogenAtom.electronStateProperty.value;
   const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( electronState ) );
 
   const numberOfVertices = vertices.length;

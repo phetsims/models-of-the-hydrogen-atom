@@ -125,7 +125,7 @@ class RingNode extends Node {
         Color.interpolateRGBA( negativeAmplitudeColor, positiveAmplitudeColor, 0.5 )
     );
 
-    Multilink.multilink( [ this.hydrogenAtom.getElectronStateProperty(), this.visibleProperty ],
+    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, this.visibleProperty ],
       ( electronState, visible ) => {
         if ( visible ) {
           this.updateGeometry();
@@ -147,7 +147,7 @@ class RingNode extends Node {
     assert && assert( this.visible, 'should only be called when visible' );
 
     // Compute the number of polygons needed to represent this electron state.
-    const electronState = this.hydrogenAtom.getElectronState();
+    const electronState = this.hydrogenAtom.electronStateProperty.value;
     const modelRadius = this.hydrogenAtom.getElectronOrbitRadius( electronState );
     const viewRadius = this.modelViewTransform.modelToViewDeltaX( modelRadius );
     const numberOfPolygons = calculateNumberOfPolygons( viewRadius );
@@ -172,7 +172,7 @@ class RingNode extends Node {
   private updateColor(): void {
     assert && assert( this.visible, 'should only be called when visible' );
 
-    const electronState = this.hydrogenAtom.getElectronState();
+    const electronState = this.hydrogenAtom.electronStateProperty.value;
 
     // the number of relevant polygons, NOT this.polygonNodes.length
     assert && assert( _.every( this.children, child => child instanceof Path ) );
