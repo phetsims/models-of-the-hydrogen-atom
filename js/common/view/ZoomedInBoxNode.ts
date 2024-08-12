@@ -30,13 +30,6 @@ export default class ZoomedInBoxNode extends Node {
                          modelViewTransform: ModelViewTransform2,
                          providedOptions: ZoomedInBoxNodeOptions ) {
 
-    const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO default values for options
-
-      // NodeOptions
-      isDisposable: false
-    }, providedOptions );
-
     const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomedInBox ), {
       fill: MOTHAColors.zoomedInBoxFillProperty
     } );
@@ -52,7 +45,12 @@ export default class ZoomedInBoxNode extends Node {
       clipArea: modelViewTransform.modelToViewShape( Shape.rectangle( zoomedInBox.minX, zoomedInBox.minY, zoomedInBox.width, zoomedInBox.height ) )
     } );
 
-    options.children = [ backgroundNode, contentsNode, outlineNode ];
+    const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
+      isDisposable: false,
+      children: [ backgroundNode, contentsNode, outlineNode ]
+    }, providedOptions );
 
     super( options );
 
