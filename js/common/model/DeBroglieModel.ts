@@ -5,10 +5,12 @@
  *
  * DeBroglieModel is identical to BohrModel, but has different visual representations. The different visual
  * representations (see DeBroglieRepresentation) mean that it requires different methods of handling collision detection
- * and determining electron position. The algorithms for collision detection and calculation of electron position
- * differ greatly for 2D and 3D views. Therefore, this model needs to know something about the view in order to
- * make things look right in 3D. So this model cannot be shown in both 2D and 3D views simultaneously. There are
- * undoubtedly ways to do this, but this simulation does not require multiple simultaneous views of the model.
+ * and determining electron position.
+ *
+ * The algorithms for collision detection and calculation of electron position differ greatly for 2D and 3D views.
+ * Therefore, this model needs to know something about the view in order to make things look right in 3D. So this model
+ * cannot be shown in both 2D and 3D views simultaneously. There are undoubtedly ways to do this, but this simulation
+ * does not require multiple simultaneous views of the model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
