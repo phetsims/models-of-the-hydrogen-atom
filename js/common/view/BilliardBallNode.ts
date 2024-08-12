@@ -28,18 +28,18 @@ export default class BilliardBallNode extends HydrogenAtomNode {
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: BilliardBallNodeOptions ) {
 
-    const options = optionize<BilliardBallNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options
-    }, providedOptions );
-
     const viewRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.radius );
     const ballNode = new ShadedSphereNode( 2 * viewRadius, {
       mainColor: MOTHAColors.billiardBallColorProperty,
       highlightColor: MOTHAColors.billiardBallHighlightColorProperty,
-      tandem: options.tandem.createTandem( 'ballNode' )
+      tandem: providedOptions.tandem.createTandem( 'ballNode' )
     } );
 
-    options.children = [ ballNode ];
+    const options = optionize<BilliardBallNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
+
+      // HydrogenAtomNodeOptions
+      children: [ ballNode ]
+    }, providedOptions );
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 

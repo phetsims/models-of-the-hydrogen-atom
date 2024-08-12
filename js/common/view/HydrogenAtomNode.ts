@@ -33,17 +33,15 @@ export default class HydrogenAtomNode extends Node {
                          providedOptions: HydrogenAtomNodeOptions ) {
 
     const options = optionize<HydrogenAtomNodeOptions, SelfOptions, RectangleOptions>()( {
-      //TODO default values for options
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ],
+        selectedHydrogenAtom => ( selectedHydrogenAtom === hydrogenAtom ), {
+          tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+          phetioValueType: BooleanIO
+        } )
     }, providedOptions );
-
-    options.visibleProperty = new DerivedProperty( [ hydrogenAtomProperty ],
-      value => ( value === hydrogenAtom ), {
-        tandem: options.tandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } );
 
     super( options );
   }
