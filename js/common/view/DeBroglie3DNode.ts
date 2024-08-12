@@ -206,7 +206,7 @@ export default class DeBroglie3DNode extends Node {
     vertices = getOrbitVertices( radius, vertices );
 
     // Create the wireframe model
-    const wireframeModel: WireframeModel = new WireframeModel( {
+    const wireframeModel = new WireframeModel( {
       vertices: vertices,
       frontColor: this.orbitFrontColorProperty,
       backColor: this.orbitBackColorProperty,
