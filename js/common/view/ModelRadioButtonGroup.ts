@@ -36,7 +36,7 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
       radioButtonOptions: {
         baseColor: null,
         xMargin: 12,
-        yMargin: 10,
+        yMargin: 8,
         xAlign: 'left',
         buttonAppearanceStrategyOptions: {
           selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
