@@ -1,11 +1,11 @@
 {
-  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.5 Wed Jul 31 2024 10:41:45 GMT-0400 (Eastern Daylight Time)",
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.6 Tue Aug 13 2024 09:22:40 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "main"
   },
   "axon": {
-    "sha": "950a9a5da2d992d0834df8a984bcb8b5185b8448",
+    "sha": "7fc653baeca10f122b62e2ad8dcf803cc226decd",
     "branch": "main"
   },
   "brand": {
@@ -13,11 +13,11 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "c396fda9b7c9e8dd09adb1179c593e1bf10be45b",
+    "sha": "98270cbdd1fa240fc1da549ee0a98dba1afd5bbb",
     "branch": "main"
   },
   "dot": {
-    "sha": "4d87a36b8fe805cb9c39c9aa62302efbf450052a",
+    "sha": "3460f77ac03f9f65951f60e73889d6e2fb0d4fec",
     "branch": "main"
   },
   "joist": {
@@ -29,15 +29,15 @@
     "branch": "main"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "d032814c8e33db2f70e6f1225549ece9114550f2",
+    "sha": "64447427540b2cd26e0eeaf8aca9186db564d82f",
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "6f1d6114fcc21b262d9d091114e3de0c8c0e9d79",
+    "sha": "e54d7dc4a1a4e2af495917de0a0e282daf2d57c5",
     "branch": "main"
   },
   "phet-core": {
-    "sha": "923891320890a15e0f45b3fd328862684a2b5582",
+    "sha": "06c08405c5bbc6fb7d66acf2739c520f786a7e18",
     "branch": "main"
   },
   "phet-io": {
@@ -45,7 +45,7 @@
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "2af9627ca3d0bdd101c800e8a099c44dd0d109f6",
+    "sha": "6cfc494834754e02626f29612b2e7b6660a7f331",
     "branch": "main"
   },
   "phet-io-wrappers": {
@@ -65,15 +65,15 @@
     "branch": "main"
   },
   "scenery": {
-    "sha": "65b3ce0a1c203774e80ebfb50a01c13c1308a05f",
+    "sha": "1bd0dd6790ea9f3a0b4199d352075e8765146414",
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "4f946b5631d290b564361d5bd78bc7a547e56262",
+    "sha": "f4d27bbed759716bcda438e49a9a3316142262ef",
     "branch": "main"
   },
   "sherpa": {
-    "sha": "4217cf6bc893ecfacf509e54bc3a3c0e48934d01",
+    "sha": "e8465b41d5376e0ac613c56323defd2929ccf369",
     "branch": "main"
   },
   "studio": {
@@ -81,7 +81,7 @@
     "branch": "main"
   },
   "sun": {
-    "sha": "43ac9f1394995c5b5a1b9f6969c2b3ede9bab509",
+    "sha": "37d853660bc529a75e051979e68487db2db4bfc9",
     "branch": "main"
   },
   "tambo": {
@@ -89,7 +89,7 @@
     "branch": "main"
   },
   "tandem": {
-    "sha": "2fbf982207875b05d3441a8da059b0a8e7930097",
+    "sha": "05021a8bb062b2b926d5d95b9afcbfc23de120ba",
     "branch": "main"
   },
   "twixt": {
