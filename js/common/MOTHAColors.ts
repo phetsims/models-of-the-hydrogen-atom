@@ -144,7 +144,7 @@ const MOTHAColors = {
   } ),
 
   modelsRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonDeselectedStroke', {
-    default: Color.grayColor( 60 ),
+    default: Color.grayColor( 100 ),
     projector: Color.grayColor( 230 )
   } ),
 
