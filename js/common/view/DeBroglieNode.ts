@@ -19,7 +19,7 @@ import PrimaryElectronStateText from './PrimaryElectronStateText.js';
 import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
 import { Circle, Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import DeBroglieRadialNode from './DeBroglieRadialNode.js';
+import DeBroglieRadialDistanceNode from './DeBroglieRadialDistanceNode.js';
 import DeBroglie3DHeightNode from './DeBroglie3DHeightNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import OrbitNode from './OrbitNode.js';
@@ -51,7 +51,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     // These Nodes control their own visibility, based on the value of hydrogenAtom.deBroglieRepresentationProperty.
     const viewNodesTandem = options.tandem.createTandem( 'viewNodes' );
 
-    const deBroglieRadialDistanceNode = new DeBroglieRadialNode( hydrogenAtom, modelViewTransform, {
+    const deBroglieRadialDistanceNode = new DeBroglieRadialDistanceNode( hydrogenAtom, modelViewTransform, {
       tandem: viewNodesTandem.createTandem( 'deBroglieRadialDistanceNode' )
     } );
 

@@ -33,7 +33,7 @@ type SelfOptions = EmptySelfOptions;
 
 type DeBroglieRadialNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-export default class DeBroglieRadialNode extends Node {
+export default class DeBroglieRadialDistanceNode extends Node {
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
@@ -148,4 +148,4 @@ class RingNode extends Path {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'DeBroglieRadialNode', DeBroglieRadialNode );
+modelsOfTheHydrogenAtom.register( 'DeBroglieRadialDistanceNode', DeBroglieRadialDistanceNode );
