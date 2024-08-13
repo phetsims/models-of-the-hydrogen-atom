@@ -73,7 +73,7 @@ function createSnapshotNodes( numberOfSnapshotsProperty: TProperty<number> ): Sn
   const snapshots = [];
   for ( let i = 0; i < numberOfSnapshotsProperty.value; i++ ) {
     snapshots.push( new SnapshotNode( numberOfSnapshotsProperty, {
-      scale: 0.75
+      scale: 1 //TODO We may want to scale down the snapshots, to fit more of them on screen.
     } ) );
   }
   return snapshots;

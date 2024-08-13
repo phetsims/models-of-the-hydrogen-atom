@@ -49,6 +49,9 @@ export default class SnapshotNode extends Node {
       listener: () => {
         numberOfSnapshotsProperty.value--;
       },
+      iconOptions: {
+        scale: 0.04
+      },
       right: backgroundNode.right - 10,
       bottom: backgroundNode.bottom - 10,
       tandem: Tandem.OPT_OUT //TODO SnapshotNode is dynamically created
