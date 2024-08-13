@@ -10,7 +10,7 @@
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem, RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import { HBox, Text } from '../../../../scenery/js/imports.js';
+import { AlignGroup, HBox, Text } from '../../../../scenery/js/imports.js';
 import MOTHAColors from '../MOTHAColors.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Property from '../../../../axon/js/Property.js';
@@ -56,9 +56,12 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
       }
     }, providedOptions );
 
+    // To make all icons have the same effective size.
+    const iconAlignGroup = new AlignGroup();
+
     const items: RectangularRadioButtonGroupItem<HydrogenAtom>[] = [];
     for ( let i = 0; i < predictiveModels.length; i++ ) {
-      items.push( createRadioButtonItem( predictiveModels[ i ] ) );
+      items.push( createRadioButtonItem( predictiveModels[ i ], iconAlignGroup ) );
     }
 
     super( predictiveModelProperty, items, options );
@@ -68,7 +71,7 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
 /**
  * Creates the item for one radio button.
  */
-function createRadioButtonItem( predictiveModel: HydrogenAtom ): RectangularRadioButtonGroupItem<HydrogenAtom> {
+function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup ): RectangularRadioButtonGroupItem<HydrogenAtom> {
 
   return {
     value: predictiveModel,
@@ -77,7 +80,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom ): RectangularRadi
       justify: 'left',
       sizable: false,
       children: [
-        predictiveModel.icon,
+        iconAlignGroup.createBox( predictiveModel.icon ),
         new Text( predictiveModel.displayNameProperty, {
           fill: MOTHAColors.invertibleTextFillProperty,
           font: new PhetFont( 16 ),
