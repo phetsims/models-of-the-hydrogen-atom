@@ -7,7 +7,7 @@
  */
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { Image } from '../../../../scenery/js/imports.js';
+import { Image, Node } from '../../../../scenery/js/imports.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
@@ -35,9 +35,8 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
 
     // Plum pudding image, centered at the atom's position
     const plumPuddingImage = new Image( plumPudding_png );
-    const imageHeight = plumPuddingImage.height;
-    const atomHeight = 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.radius );
-    const imageScale = atomHeight / imageHeight;
+    const atomHeight = Math.abs( 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.radius ) );
+    const imageScale = atomHeight / plumPuddingImage.height;
     plumPuddingImage.scale( imageScale );
     plumPuddingImage.center = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
 
@@ -46,6 +45,16 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
     options.children = [ plumPuddingImage, electronNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
+  }
+
+  public static createIcon(): Node {
+    const plumPuddingImage = new Image( plumPudding_png );
+    const electronNode = ElectronNode.createIcon();
+    electronNode.center = plumPuddingImage.center;
+    return new Node( {
+      children: [ plumPuddingImage, electronNode ],
+      scale: 0.25
+    } );
   }
 }
 
