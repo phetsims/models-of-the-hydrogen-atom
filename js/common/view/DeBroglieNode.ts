@@ -22,7 +22,6 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import DeBroglieRadialNode from './DeBroglieRadialNode.js';
 import DeBroglie3DNode from './DeBroglie3DNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
-import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import OrbitNode from './OrbitNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 
@@ -31,11 +30,6 @@ type SelfOptions = EmptySelfOptions;
 type DeBroglieNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
 
 export default class DeBroglieNode extends HydrogenAtomNode {
-
-  private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
-  private readonly deBroglieRadialNode: DeBroglieRadialNode;
-  private readonly deBroglie3DNode: DeBroglie3DNode;
-  private readonly deBroglieBrightnessNode: DeBroglieBrightnessNode;
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
@@ -91,18 +85,6 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     electronStateText.boundsProperty.link( bounds => {
       electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
-
-    this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
-    this.deBroglieRadialNode = deBroglieRadialNode;
-    this.deBroglie3DNode = deBroglie3DNode;
-    this.deBroglieBrightnessNode = deBroglieBrightnessNode;
-  }
-
-  //TODO a better way to step the selected view
-  public step( dt: number ): void {
-    if ( this.deBroglieRepresentationProperty.value === '3D' ) {
-      this.deBroglie3DNode.step( dt );
-    }
   }
 
   /**

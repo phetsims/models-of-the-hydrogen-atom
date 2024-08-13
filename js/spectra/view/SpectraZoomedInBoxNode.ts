@@ -30,9 +30,6 @@ type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
-  private readonly model: SpectraModel;
-  private readonly deBroglieNode: DeBroglieNode;
-
   public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
     const options = optionize<SpectraZoomedInBoxNodeOptions, SelfOptions, ZoomedInBoxNodeOptions>()( {
@@ -96,17 +93,6 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       photonsLayer.removeChild( photonNode );
       photonNode.dispose();
     } );
-
-    this.model = model;
-    this.deBroglieNode = deBroglieNode;
-  }
-
-  public step( dt: number ): void {
-
-    //TODO a better way to step the selected view
-    if ( this.model.hydrogenAtomProperty.value === this.model.bohrModel ) {
-      this.deBroglieNode.step( dt );
-    }
   }
 }
 

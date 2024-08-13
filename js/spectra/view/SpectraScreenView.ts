@@ -182,12 +182,6 @@ export default class SpectraScreenView extends ScreenView {
     this.model = model;
     this.zoomedInBoxNode = zoomedInBoxNode;
   }
-
-  public override step( dt: number ): void {
-    if ( this.model.isPlayingProperty.value ) {
-      this.zoomedInBoxNode.step( dt );
-    }
-  }
 }
 
 modelsOfTheHydrogenAtom.register( 'SpectraScreenView', SpectraScreenView );

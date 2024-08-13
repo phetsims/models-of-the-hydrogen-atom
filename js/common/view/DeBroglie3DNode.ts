@@ -143,10 +143,6 @@ export default class DeBroglie3DNode extends Node {
       } );
   }
 
-  public step( dt: number ): void {
-    //TODO implement or delete step
-  }
-
   private update(): void {
     this.updateWaveNode();
     if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
