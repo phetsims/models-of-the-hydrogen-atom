@@ -32,7 +32,7 @@ import Spectrometer from '../model/Spectrometer.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 // constants
-const DISPLAY_SIZE = new Dimension2( 510, 130 );
+const DISPLAY_SIZE = new Dimension2( 535, 135 );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -143,7 +143,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       stretch: true,
       spacing: 7,
       align: 'center',
-      children: [ recordStopButton, snapshotButton, viewSnapshotsButton, eraseButton ]
+      children: [ recordStopButton, snapshotButton, viewSnapshotsButton, eraseButton ],
+      maxHeight: displayNode.height
     } );
 
     const contentNode = new HBox( {

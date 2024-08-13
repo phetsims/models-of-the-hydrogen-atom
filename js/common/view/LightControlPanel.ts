@@ -84,7 +84,7 @@ export class LightControlPanel extends Panel {
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
-      spacing: 15,
+      spacing: 20,
       children: [ lightModeRadioButtonGroup, monochromaticWavelengthControl, hBox ]
     } );
 

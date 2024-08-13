@@ -61,8 +61,8 @@ export default class SpectraScreenView extends ScreenView {
 
     // Controls for the light
     const lightControlPanel = new LightControlPanel( model.light, {
-      left: this.layoutBounds.left + 30,
-      top: lightNode.bottom + 10,
+      left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+      top: lightNode.bottom + 15,
       tandem: tandem.createTandem( 'lightControlPanel' )
     } );
 
@@ -124,7 +124,7 @@ export default class SpectraScreenView extends ScreenView {
 
     // Spectrometer
     const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, snapshotsDialog, {
-      left: lightControlPanel.right + 10,
+      left: lightControlPanel.right + 12,
       top: lightControlPanel.top,
       tandem: tandem.createTandem( 'spectrometerAccordionBox' )
     } );
