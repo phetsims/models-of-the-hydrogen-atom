@@ -21,7 +21,7 @@ import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import FullElectronStateText from './FullElectronStateText.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { Node, Rectangle, VBox } from '../../../../scenery/js/imports.js';
 import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
 
@@ -79,6 +79,39 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     // Keep the 'Excite Atom' button and electron state positioned in the lower-right corner of the zoomed-in box.
     vBox.boundsProperty.link( bounds => {
       vBox.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+    } );
+  }
+
+  public static createIcon(): Node {
+
+    const opacity = 0.4;
+    const d1 = 75;
+    const d2 = 50;
+    const d3 = 1.35 * d1;
+
+    const rect1 = new Rectangle( 0, 0, d1, d2, {
+      fill: MOTHAColors.electronBaseColorProperty,
+      opacity: opacity
+    } );
+    const rect2 = new Rectangle( 0, 0, d2, d1, {
+      fill: MOTHAColors.electronBaseColorProperty,
+      opacity: opacity,
+      center: rect1.center
+    } );
+    const rect3 = new Rectangle( 0, 0, d3, d1, {
+      fill: MOTHAColors.electronBaseColorProperty,
+      opacity: opacity,
+      center: rect1.center
+    } );
+    const rect4 = new Rectangle( 0, 0, d1, d3, {
+      fill: MOTHAColors.electronBaseColorProperty,
+      opacity: opacity,
+      center: rect1.center
+    } );
+
+    return new Node( {
+      children: [ rect1, rect2, rect3, rect4 ],
+      scale: 0.25
     } );
   }
 }

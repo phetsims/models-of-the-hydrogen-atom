@@ -37,7 +37,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import schrodingerButton_png from '../../../images/schrodingerButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -54,7 +53,8 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { Image } from '../../../../scenery/js/imports.js';
+/* eslint-disable no-view-imported-from-model */
+import SchrodingerNode from '../view/SchrodingerNode.js';
 
 /*
  * This table defines the transition strengths for the primary state component (n).
@@ -97,7 +97,7 @@ export default class SchrodingerModel extends DeBroglieModel {
 
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.schrodingerStringProperty,
-      icon: new Image( schrodingerButton_png, { scale: 0.2 } )
+      icon: SchrodingerNode.createIcon()
     }, providedOptions );
 
     super( zoomedInBox, options );
