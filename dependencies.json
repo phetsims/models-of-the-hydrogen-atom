@@ -1,5 +1,5 @@
 {
-  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.6 Tue Aug 13 2024 09:22:40 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.7 Tue Aug 13 2024 14:24:16 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "main"
@@ -29,7 +29,7 @@
     "branch": "main"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "64447427540b2cd26e0eeaf8aca9186db564d82f",
+    "sha": "f7be1fefd95b2b1e97f400716eaf82e35e36275a",
     "branch": "main"
   },
   "perennial-alias": {
