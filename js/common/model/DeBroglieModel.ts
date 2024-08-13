@@ -15,7 +15,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import deBroglieButton_png from '../../../images/deBroglieButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -26,7 +25,8 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
-import { Image } from '../../../../scenery/js/imports.js';
+/* eslint-disable no-view-imported-from-model */
+import DeBroglieNode from '../view/DeBroglieNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -51,7 +51,7 @@ export default class DeBroglieModel extends BohrModel {
 
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.deBroglieStringProperty,
-      icon: new Image( deBroglieButton_png, { scale: 0.2 } )
+      icon: DeBroglieNode.createIcon()
     }, providedOptions );
 
     super( zoomedInBox, options );

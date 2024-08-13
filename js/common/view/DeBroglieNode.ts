@@ -17,12 +17,14 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import PrimaryElectronStateText from './PrimaryElectronStateText.js';
 import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Circle, Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import DeBroglieRadialNode from './DeBroglieRadialNode.js';
 import DeBroglie3DNode from './DeBroglie3DNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
+import OrbitNode from './OrbitNode.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -101,6 +103,24 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     if ( this.deBroglieRepresentationProperty.value === '3D' ) {
       this.deBroglie3DNode.step( dt );
     }
+  }
+
+  /**
+   * This icon corresponds to the 'Radial' view.
+   */
+  public static createIcon(): Node {
+    const protonIcon = ProtonNode.createIcon();
+    protonIcon.setScaleMagnitude( 0.5 );
+    const orbitRadius = 1.5 * protonIcon.height;
+    const orbitNode = new OrbitNode( orbitRadius );
+    const electronIcon = new Circle( {
+      radius: orbitRadius,
+      stroke: MOTHAColors.electronBaseColorProperty,
+      top: orbitNode.top - 5
+    } );
+    return new Node( {
+      children: [ orbitNode, protonIcon, electronIcon ]
+    } );
   }
 }
 
