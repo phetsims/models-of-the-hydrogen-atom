@@ -34,6 +34,10 @@ export default class Spectrometer extends PhetioObject {
   public reset(): void {
     //TODO implement reset
   }
+
+  public clear(): void {
+    //TODO implement clear
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'Spectrometer', Spectrometer );

@@ -108,16 +108,18 @@ export default class MOTHAModel implements TModel {
       [ this.modelModeProperty, this.predictiveModelProperty ],
       ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experiment : predictiveModel );
 
-    this.light = new Light( zoomedInBox, {
-      tandem: tandem.createTandem( 'light' )
-    } );
-
-    this.spectrometer = new Spectrometer( tandem.createTandem( 'spectrometer' ) );
-
     this.photons = createObservableArray<Photon>( {
       //TODO tandem
       //TODO phetioType
     } );
+
+    this.light = new Light( zoomedInBox, {
+      tandem: tandem.createTandem( 'light' )
+    } );
+
+    this.light.photonCreatedEmitter.addListener( photon => this.photons.add( photon ) );
+
+    this.spectrometer = new Spectrometer( tandem.createTandem( 'spectrometer' ) );
 
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isPlayingProperty' ),
@@ -134,17 +136,23 @@ export default class MOTHAModel implements TModel {
       timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? NORMAL_SPEED_SCALE : FAST_SPEED_SCALE
     );
 
-    this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
-      if ( oldHydrogenAtom !== null ) {
-        oldHydrogenAtom.reset();
-      }
-      this.photons.clear();
-      hydrogenAtom.photonEmittedEmitter.addListener( this.photonEmittedListener.bind( this ) );
-      hydrogenAtom.photonAbsorbedEmitter.addListener( this.photonAbsorbedListener.bind( this ) );
-    } );
+    const photonEmittedListener = ( photon: Photon ) => this.photons.add( photon );
+    const photonAbsorbedEmitter = ( photon: Photon ) => this.photons.remove( photon );
 
-    this.light.photonCreatedEmitter.addListener( photon => {
-      this.photons.add( photon );
+    this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
+      this.photons.clear();
+      this.spectrometer.clear();
+
+      if ( oldHydrogenAtom ) {
+        if ( oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
+          oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
+        }
+        if ( oldHydrogenAtom.photonAbsorbedEmitter.hasListener( photonAbsorbedEmitter ) ) {
+          oldHydrogenAtom.photonAbsorbedEmitter.removeListener( photonAbsorbedEmitter );
+        }
+      }
+      hydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
+      hydrogenAtom.photonAbsorbedEmitter.addListener( photonAbsorbedEmitter );
     } );
   }
 
@@ -213,10 +221,6 @@ export default class MOTHAModel implements TModel {
         this.photons.remove( photon );
       }
     } );
-  }
-
-  private photonEmittedListener( photon: Photon ): void {
-    this.photons.add( photon );
   }
 
   private photonAbsorbedListener( photon: Photon ): void {
