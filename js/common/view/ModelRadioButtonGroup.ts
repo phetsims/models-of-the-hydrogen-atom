@@ -59,10 +59,7 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
     // To make all icons have the same effective size.
     const iconAlignGroup = new AlignGroup();
 
-    const items: RectangularRadioButtonGroupItem<HydrogenAtom>[] = [];
-    for ( let i = 0; i < predictiveModels.length; i++ ) {
-      items.push( createRadioButtonItem( predictiveModels[ i ], iconAlignGroup ) );
-    }
+    const items = predictiveModels.map( predictiveModel => createRadioButtonItem( predictiveModel, iconAlignGroup ) );
 
     super( predictiveModelProperty, items, options );
   }
