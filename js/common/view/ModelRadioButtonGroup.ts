@@ -1,6 +1,5 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
-//TODO colors of Billiard Ball icon do not match BilliardBallNode
 /**
  * ModelRadioButtonGroup is the radio button group for selecting a predictive model of the hydrogen atom.
  *
