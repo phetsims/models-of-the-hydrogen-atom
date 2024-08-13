@@ -46,6 +46,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import { Image } from '../../../../scenery/js/imports.js';
 
 // Radius of each electron orbit, ordered by increasing electron state number.
 // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
@@ -69,7 +70,7 @@ const STIMULATED_EMISSION_X_OFFSET = 10;
 type SelfOptions = EmptySelfOptions;
 
 export type BohrModelOptions = SelfOptions &
-  PickOptional<HydrogenAtomOptions, 'displayNameProperty' | 'iconHTMLImageElement'> &
+  PickOptional<HydrogenAtomOptions, 'displayNameProperty' | 'icon'> &
   PickRequired<HydrogenAtomOptions, 'tandem'>;
 
 export default class BohrModel extends HydrogenAtom {
@@ -102,7 +103,7 @@ export default class BohrModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
-      iconHTMLImageElement: bohrButton_png,
+      icon: new Image( bohrButton_png, { scale: 0.2 } ),
       hasTransitionWavelengths: true
     }, providedOptions );
 

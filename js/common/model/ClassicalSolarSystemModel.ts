@@ -40,6 +40,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Proton from './Proton.js';
 import Photon from './Photon.js';
+import { Image } from '../../../../scenery/js/imports.js';
 
 const ELECTRON_DISTANCE = 150; // initial distance from electron to proton
 const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the proton and electron is reduced per second
@@ -50,7 +51,7 @@ const ELECTRON_ACCELERATION = 1.008; // scaling of electronAngleDeltaProperty ea
 type SelfOptions = EmptySelfOptions;
 
 type ClassicalSolarSystemModelOptions = SelfOptions &
-  StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'iconHTMLImageElement' | 'hasTransitionWavelengths'>;
+  StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'icon' | 'hasTransitionWavelengths'>;
 
 export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
@@ -78,7 +79,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.classicalSolarSystemStringProperty,
-      iconHTMLImageElement: classicalSolarSystemButton_png,
+      icon: new Image( classicalSolarSystemButton_png, { scale: 0.2 } ),
       hasTransitionWavelengths: false
     }, providedOptions );
 

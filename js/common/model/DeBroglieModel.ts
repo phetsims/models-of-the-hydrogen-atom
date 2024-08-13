@@ -26,6 +26,7 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
+import { Image } from '../../../../scenery/js/imports.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -50,7 +51,7 @@ export default class DeBroglieModel extends BohrModel {
 
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.deBroglieStringProperty,
-      iconHTMLImageElement: deBroglieButton_png
+      icon: new Image( deBroglieButton_png, { scale: 0.2 } )
     }, providedOptions );
 
     super( zoomedInBox, options );

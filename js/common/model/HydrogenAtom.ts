@@ -19,13 +19,14 @@ import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
 
 //TODO move numberOfStates, groundState, hasTransitionWavelengths to another base class for those models
 type SelfOptions = {
   displayNameProperty: TReadOnlyProperty<string>; // name of the model shown in the UI
-  iconHTMLImageElement: HTMLImageElement; // icon used to represent the model in the UI
+  icon: Node; // icon used to represent the model in the UI
   position?: Vector2; // position in the model coordinate frame
   orientation?: number; // rotation angle, in radians
   numberOfStates?: number; // number of electron states, not relevant to all hydrogen atom models
@@ -39,7 +40,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
   public readonly zoomedInBox: ZoomedInBox; //TODO do all hydrogen-atom models need this?
   public readonly displayNameProperty: TReadOnlyProperty<string>;
-  public readonly iconHTMLImageElement: HTMLImageElement;
+  public readonly icon: Node;
   public readonly position: Vector2;
   public readonly orientation: number;
   public readonly numberOfStates: number; //TODO unused
@@ -75,7 +76,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
     this.zoomedInBox = zoomedInBox;
     this.displayNameProperty = options.displayNameProperty;
-    this.iconHTMLImageElement = options.iconHTMLImageElement;
+    this.icon = options.icon;
     this.position = options.position;
     this.orientation = options.orientation;
     this.numberOfStates = options.numberOfStates;

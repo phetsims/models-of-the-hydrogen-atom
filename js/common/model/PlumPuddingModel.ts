@@ -41,6 +41,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import { Image } from '../../../../scenery/js/imports.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -50,7 +51,7 @@ const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon wi
 type SelfOptions = EmptySelfOptions;
 
 type PlumPuddingModelOptions = SelfOptions &
-  StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'iconHTMLImageElement' | 'hasTransitionWavelengths'>;
+  StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'icon' | 'hasTransitionWavelengths'>;
 
 export default class PlumPuddingModel extends HydrogenAtom {
 
@@ -85,7 +86,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.plumPuddingStringProperty,
-      iconHTMLImageElement: plumPuddingButton_png,
+      icon: new Image( plumPuddingButton_png, { scale: 0.2 } ),
       hasTransitionWavelengths: false
     }, providedOptions );
 

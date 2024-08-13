@@ -54,6 +54,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { Image } from '../../../../scenery/js/imports.js';
 
 /*
  * This table defines the transition strengths for the primary state component (n).
@@ -96,7 +97,7 @@ export default class SchrodingerModel extends DeBroglieModel {
 
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.schrodingerStringProperty,
-      iconHTMLImageElement: schrodingerButton_png
+      icon: new Image( schrodingerButton_png, { scale: 0.2 } )
     }, providedOptions );
 
     super( zoomedInBox, options );

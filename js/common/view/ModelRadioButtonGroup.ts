@@ -10,7 +10,7 @@
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem, RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import { HBox, Image, Text } from '../../../../scenery/js/imports.js';
+import { HBox, Text } from '../../../../scenery/js/imports.js';
 import MOTHAColors from '../MOTHAColors.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Property from '../../../../axon/js/Property.js';
@@ -77,7 +77,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom ): RectangularRadi
       justify: 'left',
       sizable: false,
       children: [
-        new Image( predictiveModel.iconHTMLImageElement, { scale: 0.2 } ),
+        predictiveModel.icon,
         new Text( predictiveModel.displayNameProperty, {
           fill: MOTHAColors.invertibleTextFillProperty,
           font: new PhetFont( 16 ),

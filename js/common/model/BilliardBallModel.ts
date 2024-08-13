@@ -29,6 +29,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import { Image } from '../../../../scenery/js/imports.js';
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
@@ -37,7 +38,7 @@ const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 type SelfOptions = EmptySelfOptions;
 
 type BilliardBallModelOptions = SelfOptions &
-  StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'iconHTMLImageElement' | 'hasTransitionWavelengths'>;
+  StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'icon' | 'hasTransitionWavelengths'>;
 
 export default class BilliardBallModel extends HydrogenAtom {
 
@@ -50,7 +51,7 @@ export default class BilliardBallModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.billiardBallStringProperty,
-      iconHTMLImageElement: billiardBallButton_png,
+      icon: new Image( billiardBallButton_png, { scale: 0.2 } ),
       hasTransitionWavelengths: false
     }, providedOptions );
 
