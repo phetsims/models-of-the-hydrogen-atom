@@ -82,6 +82,9 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     } );
   }
 
+  /**
+   * Creates the icons for the Schrodinger model, consisting of 4 overlapping rectangles.
+   */
   public static createIcon(): Node {
 
     const opacity = 0.4;
@@ -89,6 +92,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     const d2 = 50;
     const d3 = 1.35 * d1;
 
+    // rect1 and rect2 have the same dimensions, 90 degrees different.
     const rect1 = new Rectangle( 0, 0, d1, d2, {
       fill: MOTHAColors.electronBaseColorProperty,
       opacity: opacity
@@ -98,6 +102,8 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       opacity: opacity,
       center: rect1.center
     } );
+
+    // rect3 and rect4 have the same dimensions, 90 degrees different.
     const rect3 = new Rectangle( 0, 0, d3, d1, {
       fill: MOTHAColors.electronBaseColorProperty,
       opacity: opacity,
