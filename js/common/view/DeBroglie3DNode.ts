@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * DeBroglie3DNode displays the '3D' view for the de Broglie model.
+ * DeBroglie3DNode displays the '3D Height' view for the de Broglie model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -71,8 +71,10 @@ export default class DeBroglie3DNode extends Node {
 
       // NodeOptions
       isDisposable: false,
+
+      // visible when the view choice is '3D Height'
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
-        deBroglieView => ( deBroglieView === '3D' ), {
+        deBroglieView => ( deBroglieView === '3DHeight' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
         } )

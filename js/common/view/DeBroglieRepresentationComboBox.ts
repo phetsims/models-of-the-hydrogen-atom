@@ -39,16 +39,15 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
       maxWidth: 150
     };
 
-    const radialText = new Text( ModelsOfTheHydrogenAtomStrings.radialStringProperty, textOptions );
+    const radialDistanceText = new Text( ModelsOfTheHydrogenAtomStrings.radialDistanceStringProperty, textOptions );
 
-    // threeDText does not match '3DViewText' tandem name because JavaScript identifiers cannot begin with a number.
-    const threeDText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DStringProperty' ], textOptions );
+    const threeDHeightText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DHeightStringProperty' ], textOptions );
 
     const brightnessText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessStringProperty, textOptions );
 
     const items: ComboBoxItem<DeBroglieRepresentation>[] = [
-      { value: 'radial', createNode: () => radialText, tandemName: 'radialItem' },
-      { value: '3D', createNode: () => threeDText, tandemName: '3DItem' },
+      { value: 'radialDistance', createNode: () => radialDistanceText, tandemName: 'radialDistanceItem' },
+      { value: '3DHeight', createNode: () => threeDHeightText, tandemName: '3DHeightItem' },
       { value: 'brightness', createNode: () => brightnessText, tandemName: 'brightnessItem' }
     ];
 

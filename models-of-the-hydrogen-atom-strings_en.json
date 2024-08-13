@@ -2,8 +2,8 @@
   "models-of-the-hydrogen-atom.title": {
     "value": "Models of the Hydrogen Atom"
   },
-  "3D": {
-    "value": "3D"
+  "3DHeight": {
+    "value": "3D Height"
   },
   "billiardBall": {
     "value": "Billiard Ball"
@@ -71,8 +71,8 @@
   "quantum": {
     "value": "Quantum"
   },
-  "radial": {
-    "value": "Radial"
+  "radialDistance": {
+    "value": "Radial Distance"
   },
   "schrodinger": {
     "value": "Schr\u00f6dinger"

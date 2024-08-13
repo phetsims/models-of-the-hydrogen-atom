@@ -40,7 +40,7 @@ export default class DeBroglieModel extends BohrModel {
   // radial width of the ring for 'brightness' representation,
   public static readonly BRIGHTNESS_RING_THICKNESS = 3;
 
-  // electron for the '3D' view
+  // electron for the '3D Height' view
   public readonly electron3D: Electron;
 
   public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
@@ -61,7 +61,7 @@ export default class DeBroglieModel extends BohrModel {
       tandem: options.tandem.createTandem( 'electron3D' )
     } );
 
-    this.deBroglieRepresentationProperty = new StringUnionProperty( 'radial', {
+    this.deBroglieRepresentationProperty = new StringUnionProperty( 'radialDistance', {
       validValues: DeBroglieRepresentationValues,
       tandem: options.tandem.createTandem( 'deBroglieRepresentationProperty' ),
       phetioFeatured: true
@@ -108,7 +108,7 @@ export default class DeBroglieModel extends BohrModel {
    * Uses different algorithms depending on whether the view is 2D or 3D.
    */
   protected override collides( photon: Photon ): boolean {
-    if ( this.deBroglieRepresentationProperty.value === '3D' ) {
+    if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {
       return this.collides3D( photon );
     }
     else {
@@ -135,17 +135,16 @@ export default class DeBroglieModel extends BohrModel {
     const distance = photonOffset.distanceXY( orbitX, orbitY );
 
     // how close the photon's center must be to a point on the electron's orbit
-    //TODO why is getClosenessForCollision used for '3D' when it's a function of BRIGHTNESS_RING_THICKNESS?
+    //TODO why is getClosenessForCollision used for '3D Height' when it's a function of BRIGHTNESS_RING_THICKNESS?
     const closeness = this.getClosenessForCollision( photon );
 
     return ( distance <= closeness );
   }
 
   /**
-   * Determines whether a photon collides with this atom in one of the 2D views.
-   * In all 2D views (including "radial distance"), the photon collides with
-   * the atom if it hits the ring used to represent the standing wave in one
-   * of the brightness views.
+   * Determines whether a photon collides with this atom in one of the 2D views. In all 2D views (including
+   * 'Radial Distance'), the photon collides with the atom if it hits the ring used to represent the standing wave
+   * in one of the brightness views.
    */
   private collides2D( photon: Photon ): boolean {
 
@@ -156,7 +155,7 @@ export default class DeBroglieModel extends BohrModel {
     const photonRadius = Math.sqrt( ( photonOffset.x * photonOffset.x ) + ( photonOffset.y * photonOffset.y ) );
     const orbitRadius = this.getElectronOrbitRadius( this.electronStateProperty.value );
 
-    //TODO why is getClosenessForCollision used for 'radial' when it's a function of BRIGHTNESS_RING_THICKNESS?
+    //TODO why is getClosenessForCollision used for 'radialDistance' when it's a function of BRIGHTNESS_RING_THICKNESS?
     return ( Math.abs( photonRadius - orbitRadius ) <= this.getClosenessForCollision( photon ) );
   }
 
@@ -167,7 +166,7 @@ export default class DeBroglieModel extends BohrModel {
     return photon.positionProperty.value.minus( this.position );
   }
 
-  //TODO why isn't this adjusted for '3D' view?
+  //TODO Why isn't this adjusted for '3D Height' view?
   /**
    * How close the photon's center must be to a point on the electron's orbit in order for a collision to occur.
    */

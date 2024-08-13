@@ -44,9 +44,9 @@ export default class DeBroglieRadialNode extends Node {
       // NodeOptions
       isDisposable: false,
 
-      // visible when the view choice is 'radial'
+      // visible when the view choice is 'Radial Distance'
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
-        deBroglieView => ( deBroglieView === 'radial' ), {
+        deBroglieView => ( deBroglieView === 'radialDistance' ), {
           tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
           phetioValueType: BooleanIO
         } )
