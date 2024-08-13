@@ -13,9 +13,11 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
-import spectraScreenIcon_png from '../../images/spectraScreenIcon_png.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { Image } from '../../../scenery/js/imports.js';
+import { Node, Path, TColor } from '../../../scenery/js/imports.js';
+import MOTHAColors from '../common/MOTHAColors.js';
+import { Shape } from '../../../kite/js/imports.js';
+import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -30,10 +32,7 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
       // MOTHAScreenOptions
       isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.spectraStringProperty,
-      homeScreenIcon: new ScreenIcon( new Image( spectraScreenIcon_png ), {
-        maxIconWidthProportion: 1,
-        maxIconHeightProportion: 1
-      } )
+      homeScreenIcon: createScreenIcon()
     }, providedOptions );
 
     super(
@@ -42,6 +41,45 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
       options
     );
   }
+}
+
+/**
+ * Creates the ScreenIcon for this Screen.
+ */
+function createScreenIcon(): ScreenIcon {
+
+  const photonRadius = 4;
+
+  const absorptionWavelengths = [ 410, 434, 486, 656 ]; //TODO These are duplicated.
+  const photonColumns: Node[] = [];
+
+  absorptionWavelengths.forEach( wavelength => {
+    const color = VisibleColor.wavelengthToColor( wavelength );
+    const photonColumn = createPhotonColumn( photonRadius, color );
+    photonColumn.centerX = ( wavelength - absorptionWavelengths[ 0 ] );
+    photonColumns.push( photonColumn );
+  } );
+
+  const iconNode = new Node( {
+    children: photonColumns
+  } );
+
+  return new ScreenIcon( iconNode, {
+    maxIconWidthProportion: 0.85,
+    maxIconHeightProportion: 0.85,
+    fill: MOTHAColors.screenBackgroundColorProperty
+  } );
+}
+
+function createPhotonColumn( photonRadius: number, fill: TColor, numberOfPhotons = 20 ): Node {
+  const shape = new Shape();
+  for ( let i = 0; i < numberOfPhotons; i++ ) {
+    shape.circle( 0, i * 2 * photonRadius, photonRadius );
+  }
+  shape.close();
+  return new Path( shape, {
+    fill: fill
+  } );
 }
 
 modelsOfTheHydrogenAtom.register( 'SpectraScreen', SpectraScreen );
