@@ -24,7 +24,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import bohrButton_png from '../../../images/bohrButton_png.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -46,7 +45,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { Image } from '../../../../scenery/js/imports.js';
+/* eslint-disable no-view-imported-from-model */
+import BohrNode from '../view/BohrNode.js';
 
 // Radius of each electron orbit, ordered by increasing electron state number.
 // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
@@ -103,7 +103,7 @@ export default class BohrModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
-      icon: new Image( bohrButton_png, { scale: 0.2 } ),
+      icon: BohrNode.createIcon(),
       hasTransitionWavelengths: true
     }, providedOptions );
 

@@ -19,6 +19,8 @@ import BohrModel from '../model/BohrModel.js';
 import PrimaryElectronStateText from './PrimaryElectronStateText.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import OrbitsNode from './OrbitsNode.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import OrbitNode from './OrbitNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -60,6 +62,21 @@ export default class BohrNode extends HydrogenAtomNode {
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
     electronStateText.boundsProperty.link( bounds => {
       electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+    } );
+  }
+
+  public static createIcon(): Node {
+    const protonIcon = ProtonNode.createIcon();
+    protonIcon.setScaleMagnitude( 0.5 );
+    const orbitRadius = 1.5 * protonIcon.height;
+    const orbitNode = new OrbitNode( orbitRadius );
+    const electronIcon = ElectronNode.createIcon();
+    electronIcon.setScaleMagnitude( 0.5 );
+    const electronAngle = 1.25 * Math.PI;
+    electronIcon.centerX = orbitRadius * Math.sin( electronAngle );
+    electronIcon.centerY = orbitRadius * Math.cos( electronAngle );
+    return new Node( {
+      children: [ orbitNode, protonIcon, electronIcon ]
     } );
   }
 }
