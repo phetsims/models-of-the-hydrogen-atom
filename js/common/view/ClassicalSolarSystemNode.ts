@@ -17,7 +17,7 @@ import ClassicalSolarSystemModel from '../model/ClassicalSolarSystemModel.js';
 import ElectronNode from './ElectronNode.js';
 import kaboom_png from '../../../images/kaboom_png.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { Image } from '../../../../scenery/js/imports.js';
+import { Image, Node } from '../../../../scenery/js/imports.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
@@ -63,6 +63,20 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
     options.children = [ kaboomNode, protonNode, electronNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
+  }
+
+  public static createIcon(): Node {
+    const protonIcon = ProtonNode.createIcon();
+    protonIcon.setScaleMagnitude( 0.5 );
+    const electronIcon = ElectronNode.createIcon();
+    electronIcon.setScaleMagnitude( 0.5 );
+    const electronAngle = 0.75 * Math.PI;
+    const orbitRadius = 1.5 * protonIcon.height;
+    electronIcon.centerX = orbitRadius * Math.sin( electronAngle );
+    electronIcon.centerY = orbitRadius * Math.cos( electronAngle );
+    return new Node( {
+      children: [ protonIcon, electronIcon ]
+    } );
   }
 }
 

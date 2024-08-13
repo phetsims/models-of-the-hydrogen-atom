@@ -26,7 +26,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import classicalSolarSystemButton_png from '../../../images/classicalSolarSystemButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
@@ -40,7 +39,8 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Proton from './Proton.js';
 import Photon from './Photon.js';
-import { Image } from '../../../../scenery/js/imports.js';
+/* eslint-disable no-view-imported-from-model */
+import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js';
 
 const ELECTRON_DISTANCE = 150; // initial distance from electron to proton
 const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the proton and electron is reduced per second
@@ -79,7 +79,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.classicalSolarSystemStringProperty,
-      icon: new Image( classicalSolarSystemButton_png, { scale: 0.2 } ),
+      icon: ClassicalSolarSystemNode.createIcon(),
       hasTransitionWavelengths: false
     }, providedOptions );
 
