@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * DeBroglie3DNode displays the '3D Height' view for the de Broglie model.
+ * DeBroglie3DHeightNode displays the '3D Height' view for the de Broglie model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -41,7 +41,7 @@ type SelfOptions = EmptySelfOptions;
 
 type DeBroglie3DNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-export default class DeBroglie3DNode extends Node {
+export default class DeBroglie3DHeightNode extends Node {
 
   private readonly hydrogenAtom: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
@@ -271,4 +271,4 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel,
   return vertices;
 }
 
-modelsOfTheHydrogenAtom.register( 'DeBroglie3DNode', DeBroglie3DNode );
+modelsOfTheHydrogenAtom.register( 'DeBroglie3DHeightNode', DeBroglie3DHeightNode );

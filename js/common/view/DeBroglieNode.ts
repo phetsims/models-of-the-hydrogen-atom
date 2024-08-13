@@ -20,7 +20,7 @@ import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.j
 import { Circle, Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import DeBroglieRadialNode from './DeBroglieRadialNode.js';
-import DeBroglie3DNode from './DeBroglie3DNode.js';
+import DeBroglie3DHeightNode from './DeBroglie3DHeightNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import OrbitNode from './OrbitNode.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -55,7 +55,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: viewNodesTandem.createTandem( 'deBroglieRadialDistanceNode' )
     } );
 
-    const deBroglie3DHeightNode = new DeBroglie3DNode( hydrogenAtom, modelViewTransform, {
+    const deBroglie3DHeightNode = new DeBroglie3DHeightNode( hydrogenAtom, modelViewTransform, {
       tandem: viewNodesTandem.createTandem( 'deBroglie3DHeightNode' )
     } );
 
