@@ -1,0 +1,2 @@
+These files were copied from the Java version of this sim, which was hosted at this URL (password required):
+https://phet.unfuddle.com/a#/projects/9404/repositories/23262/browse?path=%2Ftrunk%2Fsimulations-java%2Fsimulations%2Fhydrogen-atom%2Fdoc
