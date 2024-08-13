@@ -1,6 +1,5 @@
 // Copyright 2016-2023, University of Colorado Boulder
 
-//TODO reuse 1 instance of SnapshotsDialog for PhET-iO
 /**
  * SnapshotsDialog is a dialog that displays spectrometer snapshots.
  *

@@ -27,9 +27,9 @@ import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import eyeSolidShape from '../../../../sherpa/js/fontawesome-5/eyeSolidShape.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import Dialog from '../../../../sun/js/Dialog.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import SnapshotsDialog from './SnapshotsDialog.js';
 
 // constants
 const DISPLAY_SIZE = new Dimension2( 535, 135 );
@@ -42,9 +42,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
   private readonly resetSpectrometerAccordionBox: () => void;
 
-  public constructor( spectrometer: Spectrometer,
-                      snapshotsDialog: Dialog,
-                      providedOptions: SpectrometerAccordionBoxOptions ) {
+  public constructor( spectrometer: Spectrometer, providedOptions: SpectrometerAccordionBoxOptions ) {
 
     //TODO eliminate the need for this, used by TitleNode
     const expandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
@@ -113,6 +111,10 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       enabledProperty: new DerivedProperty( [ spectrometer.numberOfSnapshotsProperty ],
         numberOfSnapshots => numberOfSnapshots < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS ),
       tandem: options.tandem.createTandem( 'snapshotButton' )
+    } );
+
+    const snapshotsDialog = new SnapshotsDialog( spectrometer.numberOfSnapshotsProperty, {
+      tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
 
     const viewSnapshotsButtonTandem = options.tandem.createTandem( 'viewSnapshotsButton' );

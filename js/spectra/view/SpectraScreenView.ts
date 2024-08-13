@@ -17,7 +17,6 @@ import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import ModelPanel from '../../common/view/ModelPanel.js';
-import SnapshotsDialog from '../../common/view/SnapshotsDialog.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -117,13 +116,8 @@ export default class SpectraScreenView extends ScreenView {
       excludeInvisibleChildrenFromBounds: false
     } );
 
-    // Constructed eagerly and reused to appease PhET-iO.
-    const snapshotsDialog = new SnapshotsDialog( model.spectrometer.numberOfSnapshotsProperty, {
-      tandem: tandem.createTandem( 'snapshotsDialog' )
-    } );
-
     // Spectrometer
-    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, snapshotsDialog, {
+    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, {
       left: lightControlPanel.right + 12,
       top: lightControlPanel.top,
       tandem: tandem.createTandem( 'spectrometerAccordionBox' )
