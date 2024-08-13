@@ -50,7 +50,7 @@ const MOTHAConstants = {
   //TODO Why 92? Isn't UV range [100,400] nm?
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
 
-  MAX_SPECTROMETER_SNAPSHOTS: 3,
+  MAX_SPECTROMETER_SNAPSHOTS: 4,
 
   // margin between the state display and inside edge of zoomed-in box
   STATE_DISPLAY_MARGINS: new Vector2( 10, 10 ),

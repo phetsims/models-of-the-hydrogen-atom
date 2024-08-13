@@ -110,6 +110,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         spectrometer.numberOfSnapshotsProperty.value =
           Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, spectrometer.numberOfSnapshotsProperty.value + 1 );
       },
+      enabledProperty: new DerivedProperty( [ spectrometer.numberOfSnapshotsProperty ],
+        numberOfSnapshots => numberOfSnapshots < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS ),
       tandem: options.tandem.createTandem( 'snapshotButton' )
     } );
 
