@@ -20,7 +20,6 @@
 
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import billiardBallButton_png from '../../../images/billiardBallButton_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Photon from './Photon.js';
@@ -29,7 +28,8 @@ import ZoomedInBox from './ZoomedInBox.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { Image } from '../../../../scenery/js/imports.js';
+/* eslint-disable no-view-imported-from-model */
+import BilliardBallNode from '../view/BilliardBallNode.js';
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
@@ -51,7 +51,7 @@ export default class BilliardBallModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.billiardBallStringProperty,
-      icon: new Image( billiardBallButton_png, { scale: 0.2 } ),
+      icon: BilliardBallNode.createIcon(),
       hasTransitionWavelengths: false
     }, providedOptions );
 

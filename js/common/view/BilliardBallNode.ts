@@ -16,6 +16,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -44,6 +45,13 @@ export default class BilliardBallNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     this.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+  }
+
+  public static createIcon(): Node {
+    return new ShadedSphereNode( 15, {
+      mainColor: MOTHAColors.billiardBallColorProperty,
+      highlightColor: MOTHAColors.billiardBallHighlightColorProperty
+    } );
   }
 }
 
