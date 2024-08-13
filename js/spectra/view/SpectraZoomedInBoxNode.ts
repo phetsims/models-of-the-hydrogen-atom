@@ -46,7 +46,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
     assert && assert( xScale === yScale, 'box is not scaled the same in both dimensions, is your box square?' );
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( viewOffset, xScale, -yScale );
 
-    super( model.zoomedInBox, modelViewTransform, options );
+    super( model.zoomedInBox, modelViewTransform, model.modelModeProperty, options );
 
     const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform, popupParent, {
       tandem: options.tandem.createTandem( 'deBroglieNode' )

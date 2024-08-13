@@ -130,5 +130,8 @@
   },
   "wavelengthNanometers": {
     "value": "wavelength (nm)"
+  },
+  "questionMark": {
+    "value": "?"
   }
 }
