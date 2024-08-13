@@ -222,10 +222,6 @@ export default class MOTHAModel implements TModel {
       }
     } );
   }
-
-  private photonAbsorbedListener( photon: Photon ): void {
-    this.photons.remove( photon );
-  }
 }
 
 modelsOfTheHydrogenAtom.register( 'MOTHAModel', MOTHAModel );
