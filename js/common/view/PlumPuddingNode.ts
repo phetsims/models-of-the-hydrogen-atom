@@ -48,12 +48,14 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
   }
 
   public static createIcon(): Node {
-    const plumPuddingImage = new Image( plumPudding_png );
+    const plumPuddingImage = new Image( plumPudding_png, {
+      scale: 0.1
+    } );
     const electronNode = ElectronNode.createIcon();
     electronNode.center = plumPuddingImage.center;
     return new Node( {
       children: [ plumPuddingImage, electronNode ],
-      scale: 0.25
+      scale: 0.5
     } );
   }
 }
