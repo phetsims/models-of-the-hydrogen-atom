@@ -13,9 +13,12 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
-import energyLevelsScreenIcon_png from '../../images/energyLevelsScreenIcon_png.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { Image } from '../../../scenery/js/imports.js';
+import { Node } from '../../../scenery/js/imports.js';
+import ProtonNode from '../common/view/ProtonNode.js';
+import ElectronNode from '../common/view/ElectronNode.js';
+import OrbitNode from '../common/view/OrbitNode.js';
+import MOTHAColors from '../common/MOTHAColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -30,10 +33,7 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
       // MOTHAScreenOptions
       isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.energyLevelsStringProperty,
-      homeScreenIcon: new ScreenIcon( new Image( energyLevelsScreenIcon_png ), {
-        maxIconWidthProportion: 1,
-        maxIconHeightProportion: 1
-      } )
+      homeScreenIcon: createScreenIcon()
     }, providedOptions );
 
     super(
@@ -42,6 +42,33 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
       options
     );
   }
+}
+
+/**
+ * Creates the ScreenIcon for this Screen, a proton and electron with 2 orbits to represent 2 energy levels.
+ */
+function createScreenIcon(): ScreenIcon {
+
+  const protonNode = ProtonNode.createIcon();
+  const electronNode = ElectronNode.createIcon();
+  const orbit1Radius = 1.5 * protonNode.height;
+  const orbit1Node = new OrbitNode( orbit1Radius );
+  const orbit2Node = new OrbitNode( 2 * orbit1Radius );
+
+  orbit1Node.center = protonNode.center;
+  orbit2Node.center = protonNode.center;
+  electronNode.centerX = orbit1Node.centerX;
+  electronNode.centerY = -orbit1Radius;
+
+  const iconNode = new Node( {
+    children: [ orbit1Node, orbit2Node, protonNode, electronNode ]
+  } );
+
+  return new ScreenIcon( iconNode, {
+    maxIconWidthProportion: 1,
+    maxIconHeightProportion: 0.85,
+    fill: MOTHAColors.screenBackgroundColorProperty
+  } );
 }
 
 modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreen', EnergyLevelsScreen );
