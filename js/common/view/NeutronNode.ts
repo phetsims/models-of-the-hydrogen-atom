@@ -1,13 +1,12 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
-//TODO duplication with ElectronNode
 /**
  * NeutronNode is the visual representation of a neutron.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
@@ -16,6 +15,7 @@ import Neutron from '../model/Neutron.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -25,13 +25,14 @@ export default class NeutronNode extends ShadedSphereNode {
 
   public constructor( neutron: Neutron, modelViewTransform: ModelViewTransform2, providedOptions?: NeutronNodeOptions ) {
 
-    const options = optionize<NeutronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
+    const options = optionize4<NeutronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()(
+      {}, MOTHAConstants.SHADED_SPHERE_NODE_OPTIONS, {
 
-      // ShadedSphereNodeOptions
-      isDisposable: false,
-      mainColor: MOTHAColors.neutronBaseColorProperty,
-      highlightColor: MOTHAColors.neutronHighlightColorProperty
-    }, providedOptions );
+        // ShadedSphereNodeOptions
+        isDisposable: false,
+        mainColor: MOTHAColors.neutronBaseColorProperty,
+        highlightColor: MOTHAColors.neutronHighlightColorProperty
+      }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( neutron.radius ), options );
   }

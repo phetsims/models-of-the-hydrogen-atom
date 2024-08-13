@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
@@ -16,6 +16,7 @@ import Electron from '../model/Electron.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -27,13 +28,14 @@ export default class ElectronNode extends ShadedSphereNode {
                       modelViewTransform: ModelViewTransform2,
                       providedOptions?: ElectronNodeOptions ) {
 
-    const options = optionize<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
+    const options = optionize4<ElectronNodeOptions, SelfOptions, ShadedSphereNodeOptions>()(
+      {}, MOTHAConstants.SHADED_SPHERE_NODE_OPTIONS, {
 
-      // ShadedSphereNodeOptions
-      isDisposable: false,
-      mainColor: MOTHAColors.electronBaseColorProperty,
-      highlightColor: MOTHAColors.electronHighlightColorProperty
-    }, providedOptions );
+        // ShadedSphereNodeOptions
+        isDisposable: false,
+        mainColor: MOTHAColors.electronBaseColorProperty,
+        highlightColor: MOTHAColors.electronHighlightColorProperty
+      }, providedOptions );
 
     super( 2 * modelViewTransform.modelToViewDeltaX( electron.radius ), options );
 

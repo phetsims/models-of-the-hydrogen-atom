@@ -11,6 +11,14 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import Range from '../../../dot/js/Range.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
+import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNode.js';
+
+const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
+
+  // Lit from bottom center, which is where the light shines.
+  highlightXOffset: 0,
+  highlightYOffset: 0.4
+};
 
 const MOTHAConstants = {
 
@@ -47,7 +55,9 @@ const MOTHAConstants = {
   // margin between the state display and inside edge of zoomed-in box
   STATE_DISPLAY_MARGINS: new Vector2( 10, 10 ),
 
-  TIME_SPEEDS: [ TimeSpeed.FAST, TimeSpeed.NORMAL ]
+  TIME_SPEEDS: [ TimeSpeed.FAST, TimeSpeed.NORMAL ],
+
+  SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS
 };
 
 assert && assert( MOTHAConstants.GROUND_STATE === 1, 'This is a fundamental assumption of this implementation.' );
