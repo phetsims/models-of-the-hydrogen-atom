@@ -51,12 +51,12 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     // These Nodes control their own visibility, based on the value of hydrogenAtom.deBroglieRepresentationProperty.
     const viewNodesTandem = options.tandem.createTandem( 'viewNodes' );
 
-    const deBroglieRadialNode = new DeBroglieRadialNode( hydrogenAtom, modelViewTransform, {
-      tandem: viewNodesTandem.createTandem( 'deBroglieRadialNode' )
+    const deBroglieRadialDistanceNode = new DeBroglieRadialNode( hydrogenAtom, modelViewTransform, {
+      tandem: viewNodesTandem.createTandem( 'deBroglieRadialDistanceNode' )
     } );
 
-    const deBroglie3DNode = new DeBroglie3DNode( hydrogenAtom, modelViewTransform, {
-      tandem: viewNodesTandem.createTandem( 'deBroglie3DNode' )
+    const deBroglie3DHeightNode = new DeBroglie3DNode( hydrogenAtom, modelViewTransform, {
+      tandem: viewNodesTandem.createTandem( 'deBroglie3DHeightNode' )
     } );
 
     const deBroglieBrightnessNode = new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform, {
@@ -64,7 +64,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     } );
 
     const viewNodes = new Node( {
-      children: [ deBroglieRadialNode, deBroglie3DNode, deBroglieBrightnessNode ]
+      children: [ deBroglieRadialDistanceNode, deBroglie3DHeightNode, deBroglieBrightnessNode ]
       // No need to PhET-iO instrument this Node.
     } );
 
@@ -82,7 +82,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
-    electronStateText.boundsProperty.link( bounds => {
+    electronStateText.localBoundsProperty.link( () => {
       electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
   }
