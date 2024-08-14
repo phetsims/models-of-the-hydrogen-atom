@@ -24,6 +24,7 @@ import MOTHASymbols from '../MOTHASymbols.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import BohrModel from '../model/BohrModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -79,7 +80,8 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
           content: wavelengthText,
           listener: () => {
             monochromaticWavelengthProperty.value = wavelength;
-          }
+          },
+          tandem: Tandem.OPT_OUT
         } );
       }
       else {
