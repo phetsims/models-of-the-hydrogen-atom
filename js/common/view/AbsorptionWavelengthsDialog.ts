@@ -40,6 +40,7 @@ type StateTransition = {
   n2: number;
 };
 
+//TODO move this somewhere else
 // Absorption wavelengths and their associated state transition, ordered by ascending wavelength.
 const map = new Map<number, StateTransition>();
 map.set( 94, { n1: 1, n2: 6 } );
