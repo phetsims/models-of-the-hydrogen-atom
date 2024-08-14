@@ -8,21 +8,17 @@
 
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAColors from '../MOTHAColors.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
 import Light from '../model/Light.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import AbsorptionWavelengthsDialog from './AbsorptionWavelengthsDialog.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
+import AbsorptionWavelengthsButton from './AbsorptionWavelengthsButton.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -56,23 +52,8 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'absorptionWavelengthsDialog' )
     } );
 
-    // 'Absorption Wavelengths' button
-    const absorptionWavelengthsButtonTandem = options.tandem.createTandem( 'absorptionWavelengthsButton' );
-    const absorptionWavelengthsButton = new RectangularPushButton( {
-      content: new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
-        font: new PhetFont( 12 ),
-        maxWidth: 0.8 * monochromaticWavelengthControl.width
-      } ),
-      listener: () => absorptionWavelengthsDialog.show(),
-
-      //TODO Why is Absorption Wavelengths not relevant for white light?
-      visibleProperty: new DerivedProperty( [ light.lightModeProperty, hydrogenAtomProperty ],
-        ( lightMode, hydrogenAtom ) => ( lightMode === 'monochromatic' ) && hydrogenAtom.hasTransitionWavelengths, {
-          phetioValueType: BooleanIO,
-          tandem: absorptionWavelengthsButtonTandem.createTandem( 'visibleProperty' )
-        } ),
-      tandem: absorptionWavelengthsButtonTandem
-    } );
+    const absorptionWavelengthsButton = new AbsorptionWavelengthsButton( light.lightModeProperty, hydrogenAtomProperty,
+      absorptionWavelengthsDialog, options.tandem.createTandem( 'absorptionWavelengthsButton' ) );
 
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
