@@ -17,7 +17,7 @@ import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, GridBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, GridBox, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
@@ -25,6 +25,7 @@ import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushBut
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import BohrModel from '../model/BohrModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PhotonNode from './PhotonNode.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -34,7 +35,7 @@ const HEADING_TEXT_OPTIONS = {
 };
 
 const TEXT_OPTIONS = {
-  font: new PhetFont( 14 )
+  font: new PhetFont( 12 )
 };
 
 type SelfOptions = EmptySelfOptions;
@@ -67,7 +68,7 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
       columnHeadings
     ];
 
-    // So that all wavelengthText have the same effective size.
+    // So that these Nodes have the same effective size.
     const wavelengthTextAlignGroup = new AlignGroup();
     const wavelengthNodeAlignGroup = new AlignGroup();
 
@@ -88,9 +89,17 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
         waveLengthNode = wavelengthText;
       }
 
+      const photonAndWavelengthNode = new HBox( {
+        children: [
+          PhotonNode.createIcon( wavelength, 0.75 ),
+          wavelengthNodeAlignGroup.createBox( waveLengthNode )
+        ],
+        spacing: 8
+      } );
+
       rows.push( [
-        wavelengthNodeAlignGroup.createBox( waveLengthNode ),
-        new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, TEXT_OPTIONS )
+        photonAndWavelengthNode,
+        new Text( `${transition.n1} ${MOTHASymbols.rightArrow} ${transition.n2}`, TEXT_OPTIONS )
       ] );
     }
 
