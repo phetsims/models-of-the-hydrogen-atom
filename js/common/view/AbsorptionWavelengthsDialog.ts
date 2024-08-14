@@ -17,7 +17,7 @@ import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, Color, GridBox, HBox, HSeparator, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Color, GridBox, HBox, HSeparator, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
@@ -29,7 +29,7 @@ import PhotonNode from './PhotonNode.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
-    size: 14,
+    size: 12,
     weight: 'bold'
   } ),
   maxWidth: 150
@@ -80,10 +80,17 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
       columnSeparators
     ];
 
+    const ySpacing = 5;
+    rows.push( [
+      new Rectangle( 0, 0, 1, ySpacing ),
+      new Rectangle( 0, 0, 1, ySpacing )
+    ] );
+
     // So that these Nodes have the same effective size.
     const wavelengthTextAlignGroup = new AlignGroup();
     const wavelengthNodeAlignGroup = new AlignGroup();
 
+    let n1Previous = 1;
     for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
 
       const wavelengthText = wavelengthTextAlignGroup.createBox( new Text( wavelength, TEXT_OPTIONS ) );
@@ -110,6 +117,14 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
           wavelengthNodeAlignGroup.createBox( waveLengthNode )
         ]
       } );
+
+      if ( transition.n1 !== n1Previous ) {
+        n1Previous = transition.n1;
+        rows.push( [
+          new Rectangle( 0, 0, 1, ySpacing ),
+          new Rectangle( 0, 0, 1, ySpacing )
+        ] );
+      }
 
       rows.push( [
         photonAndWavelengthNode,
