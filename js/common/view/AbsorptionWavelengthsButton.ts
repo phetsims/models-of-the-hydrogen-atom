@@ -31,7 +31,7 @@ export default class AbsorptionWavelengthsButton extends RectangularPushButton {
       isDisposable: false,
       content: new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
         font: new PhetFont( 12 ),
-        maxWidth: 270
+        maxWidth: 200
       } ),
       listener: () => absorptionWavelengthsDialog.show(),
 
