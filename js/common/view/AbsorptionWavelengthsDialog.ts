@@ -38,22 +38,22 @@ type StateTransition = {
   n2: number;
 };
 
-// Absorption wavelengths and their associated state transition.
+// Absorption wavelengths and their associated state transition, ordered by ascending wavelength.
 const map = new Map<number, StateTransition>();
-map.set( 122, { n1: 1, n2: 2 } );
-map.set( 103, { n1: 1, n2: 3 } );
-map.set( 97, { n1: 1, n2: 4 } );
-map.set( 95, { n1: 1, n2: 5 } );
 map.set( 94, { n1: 1, n2: 6 } );
-map.set( 656, { n1: 2, n2: 3 } );
-map.set( 486, { n1: 2, n2: 4 } );
-map.set( 434, { n1: 2, n2: 5 } );
+map.set( 95, { n1: 1, n2: 5 } );
+map.set( 97, { n1: 1, n2: 4 } );
+map.set( 103, { n1: 1, n2: 3 } );
+map.set( 122, { n1: 1, n2: 2 } );
 map.set( 410, { n1: 2, n2: 6 } );
-map.set( 1876, { n1: 3, n2: 4 } );
-map.set( 1282, { n1: 3, n2: 5 } );
+map.set( 434, { n1: 2, n2: 5 } );
+map.set( 486, { n1: 2, n2: 4 } );
+map.set( 656, { n1: 2, n2: 3 } );
 map.set( 1094, { n1: 3, n2: 6 } );
-map.set( 4052, { n1: 4, n2: 5 } );
+map.set( 1282, { n1: 3, n2: 5 } );
+map.set( 1876, { n1: 3, n2: 4 } );
 map.set( 2626, { n1: 4, n2: 6 } );
+map.set( 4052, { n1: 4, n2: 5 } );
 map.set( 7460, { n1: 5, n2: 6 } );
 
 type SelfOptions = EmptySelfOptions;
@@ -78,8 +78,8 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
     } );
 
     const columnHeadings = [
-      new Text( ModelsOfTheHydrogenAtomStrings.nTransitionStringProperty, HEADING_TEXT_OPTIONS ),
-      new Text( ModelsOfTheHydrogenAtomStrings.wavelengthNanometersStringProperty, HEADING_TEXT_OPTIONS )
+      new Text( ModelsOfTheHydrogenAtomStrings.wavelengthNanometersStringProperty, HEADING_TEXT_OPTIONS ),
+      new Text( ModelsOfTheHydrogenAtomStrings.nTransitionStringProperty, HEADING_TEXT_OPTIONS )
     ];
 
     const rows = [
@@ -88,8 +88,8 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
 
     for ( const [ wavelength, transition ] of map ) {
       rows.push( [
-        new Text( `${transition.n1} \u2194 ${transition.n2}`, TEXT_OPTIONS ),
-        new Text( wavelength, TEXT_OPTIONS )
+        new Text( wavelength, TEXT_OPTIONS ),
+        new Text( `${transition.n1} \u2194 ${transition.n2}`, TEXT_OPTIONS )
       ] );
     }
 
