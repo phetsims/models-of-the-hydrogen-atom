@@ -107,8 +107,7 @@ export default class BohrModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
-      icon: BohrNode.createIcon(),
-      hasTransitionWavelengths: true
+      icon: BohrNode.createIcon()
     }, providedOptions );
 
     super( zoomedInBox, options );

@@ -50,8 +50,7 @@ const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon wi
 
 type SelfOptions = EmptySelfOptions;
 
-type PlumPuddingModelOptions = SelfOptions &
-  StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'icon' | 'hasTransitionWavelengths'>;
+type PlumPuddingModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'icon'>;
 
 export default class PlumPuddingModel extends HydrogenAtom {
 
@@ -86,8 +85,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.plumPuddingStringProperty,
-      icon: PlumPuddingNode.createIcon(),
-      hasTransitionWavelengths: false
+      icon: PlumPuddingNode.createIcon()
     }, providedOptions );
 
     super( zoomedInBox, options );

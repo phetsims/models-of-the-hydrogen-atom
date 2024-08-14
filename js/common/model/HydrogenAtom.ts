@@ -23,15 +23,10 @@ import { Node } from '../../../../scenery/js/imports.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
 
-//TODO move numberOfStates, groundState, hasTransitionWavelengths to another base class for those models
 type SelfOptions = {
   displayNameProperty: TReadOnlyProperty<string>; // name of the model shown in the UI
   icon: Node; // icon used to represent the model in the UI
   position?: Vector2; // position in the model coordinate frame
-  orientation?: number; // rotation angle, in radians
-  numberOfStates?: number; // number of electron states, not relevant to all hydrogen atom models
-  groundState?: number; // index of ground state, not relevant to all hydrogen atom models
-  hasTransitionWavelengths: boolean; // does this model include the concept of transition wavelengths?
 };
 
 export type HydrogenAtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
@@ -42,10 +37,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly displayNameProperty: TReadOnlyProperty<string>;
   public readonly icon: Node;
   public readonly position: Vector2;
-  public readonly orientation: number;
-  public readonly numberOfStates: number; //TODO unused
-  public readonly groundState: number; //TODO unused
-  public readonly hasTransitionWavelengths: boolean;
 
   // Notifies listeners by emitting when a photon is emitted (an unfortunate name)
   public readonly photonEmittedEmitter: TEmitter<[ Photon ]>;
@@ -63,9 +54,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
       // SelfOptions
       position: Vector2.ZERO,
-      orientation: 0,
-      numberOfStates: 0,
-      groundState: 1,
 
       // PhetioObjectOptions
       isDisposable: false,
@@ -78,10 +66,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this.displayNameProperty = options.displayNameProperty;
     this.icon = options.icon;
     this.position = options.position;
-    this.orientation = options.orientation;
-    this.numberOfStates = options.numberOfStates;
-    this.groundState = options.groundState;
-    this.hasTransitionWavelengths = options.hasTransitionWavelengths;
 
     this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
       parameters: [ { valueType: Photon } ]

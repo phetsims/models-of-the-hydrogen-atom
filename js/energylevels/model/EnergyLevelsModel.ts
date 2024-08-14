@@ -47,10 +47,8 @@ export default class EnergyLevelsModel extends MOTHAModel {
       deBroglieModel,
       schrodingerModel
     ];
-
-    //TODO address this with an interface?
-    assert && assert( _.every( predictiveModels, model => model.hasTransitionWavelengths ),
-      'all models in this screen must include the concept of transition wavelengths' );
+    assert && assert( _.every( predictiveModels, model => model instanceof BohrModel ),
+      'all models in this screen must include the concept of state transition wavelengths' );
 
     super( zoomedInBox, predictiveModels, bohrModel, tandem );
 

@@ -18,6 +18,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Dialog from '../../../../sun/js/Dialog.js';
+import BohrModel from '../model/BohrModel.js';
 
 export default class AbsorptionWavelengthsButton extends RectangularPushButton {
 
@@ -37,7 +38,7 @@ export default class AbsorptionWavelengthsButton extends RectangularPushButton {
 
       //TODO Why is Absorption Wavelengths not relevant for white light?
       visibleProperty: new DerivedProperty( [ lightModeProperty, hydrogenAtomProperty ],
-        ( lightMode, hydrogenAtom ) => ( lightMode === 'monochromatic' ) && hydrogenAtom.hasTransitionWavelengths, {
+        ( lightMode, hydrogenAtom ) => ( lightMode === 'monochromatic' ) && ( hydrogenAtom instanceof BohrModel ), {
           phetioValueType: BooleanIO,
           tandem: tandem.createTandem( 'visibleProperty' )
         } ),
