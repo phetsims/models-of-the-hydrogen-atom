@@ -51,6 +51,7 @@ import BohrNode from '../view/BohrNode.js';
 // Radius of each electron orbit, ordered by increasing electron state number.
 // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
 const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
+assert && assert( ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES );
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1.0;
@@ -96,6 +97,9 @@ export default class BohrModel extends HydrogenAtom {
 
   // Change in orbit angle per dt for ground state orbit
   public static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
+
+  // A map from absorption/emission wavelengths to state transitions.
+  public static readonly wavelengthToStateTransitionMap = createWavelengthToStateTransitionMap();
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
 
@@ -149,8 +153,8 @@ export default class BohrModel extends HydrogenAtom {
     //TODO make this go away, just set electron.positionProperty directly
     this.electronOffsetProperty = new DerivedProperty(
       [ this.electronStateProperty, this.electronAngleProperty ],
-      ( state, angle ) => {
-        const radius = this.getElectronOrbitRadius( state );
+      ( electronState, angle ) => {
+        const radius = this.getElectronOrbitRadius( electronState );
         return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
@@ -202,24 +206,9 @@ export default class BohrModel extends HydrogenAtom {
     }
   }
 
-  /**
-   * Gets the number of electron states that the model supports.
-   * This is the same as the number of orbits.
-   */
-  public static override getNumberOfStates(): number {
-    return ORBIT_RADII.length;
-  }
-
-  /**
-   * Gets the maximum electron state number.
-   */
-  public static getMaxElectronState(): number {
-    return MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
-  }
-
   protected setElectronState( n: number ): void {
     assert && assert( Number.isInteger( n ) );
-    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates() - 1 );
+    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE );
 
     if ( n !== this.electronStateProperty.value ) {
       this._electronStateProperty.value = n;
@@ -234,8 +223,8 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Gets the radius of the electron's orbit when it's in a specified state.
    */
-  public getElectronOrbitRadius( state: number ): number {
-    return ORBIT_RADII[ state - MOTHAConstants.GROUND_STATE ];
+  public getElectronOrbitRadius( n: number ): number {
+    return ORBIT_RADII[ n - MOTHAConstants.GROUND_STATE ];
   }
 
   //TODO Delete if unused.
@@ -255,14 +244,7 @@ export default class BohrModel extends HydrogenAtom {
    * where n2 > n1. This algorithm assumes that the ground state is 1.
    */
   public static getAbsorptionWavelength( n1: number, n2: number ): number {
-    assert && assert( Number.isInteger( n1 ) && Number.isInteger( n2 ) );
-    assert && assert( MOTHAConstants.GROUND_STATE === 1 );
-    assert && assert( n1 >= MOTHAConstants.GROUND_STATE, `oldState=${n1}` );
-    assert && assert( n1 < n2, `oldState=${n1} newState=${n2}` );
-    assert && assert( n2 <= MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates(), `newState=${n2}` );
-
-    // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.
-    return 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );
+    return getAbsorptionWavelength( n1, n2 );
   }
 
   /**
@@ -286,13 +268,14 @@ export default class BohrModel extends HydrogenAtom {
   public static getTransitionWavelengths( minWavelength: number, maxWavelength: number ): number[] {
     assert && assert( minWavelength < maxWavelength );
 
+    //TODO Get this from wavelengthToStateTransitionMap.
     // Create the set of wavelengths, include only those between min and max.
     const wavelengths = [];
-    const n = BohrModel.getNumberOfStates();
     const g = MOTHAConstants.GROUND_STATE;
-    for ( let i = g; i < g + n - 1; i++ ) {
-      for ( let j = i + 1; j < g + n; j++ ) {
-        const wavelength = this.getAbsorptionWavelength( i, j );
+    const n = MOTHAConstants.NUMBER_OF_STATES;
+    for ( let n1 = g; n1 < g + n - 1; n1++ ) {
+      for ( let n2 = n1 + 1; n2 < g + n; n2++ ) {
+        const wavelength = this.getAbsorptionWavelength( n1, n2 );
         if ( wavelength >= minWavelength && wavelength <= maxWavelength ) {
           wavelengths.push( wavelength );
         }
@@ -338,8 +321,7 @@ export default class BohrModel extends HydrogenAtom {
         // Is the photon absorbable, does it have a transition wavelength?
         let canAbsorb = false;
         let newState = 0;
-        const maxState = MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
-        for ( let n = currentState + 1; n <= maxState && !canAbsorb; n++ ) {
+        for ( let n = currentState + 1; n <= MOTHAConstants.MAX_STATE && !canAbsorb; n++ ) {
           const transitionWavelength = BohrModel.getAbsorptionWavelength( currentState, n );
           if ( this.closeEnough( photon.wavelength, transitionWavelength ) ) {
             canAbsorb = true;
@@ -399,12 +381,12 @@ export default class BohrModel extends HydrogenAtom {
   private attemptStimulatedEmission( photon: Photon ): boolean {
 
     let success = false;
-    const currentState = this.electronStateProperty.value;
+    const currentElectronState = this.electronStateProperty.value;
 
     // Are we in some state other than the ground state?
     // Has the electron been in this state long enough?
     // Was this photon produced by the light?
-    if ( currentState > MOTHAConstants.GROUND_STATE &&
+    if ( currentElectronState > MOTHAConstants.GROUND_STATE &&
          this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE &&
          !photon.wasEmitted ) {
 
@@ -414,17 +396,17 @@ export default class BohrModel extends HydrogenAtom {
 
         // Can this photon stimulate emission, does it have a transition wavelength?
         let canStimulateEmission = false;
-        let newState = 0;
-        for ( let state = MOTHAConstants.GROUND_STATE; state < currentState && !canStimulateEmission; state++ ) {
-          const transitionWavelength = BohrModel.getAbsorptionWavelength( state, currentState );
+        let newElectronState = 0;
+        for ( let electronState = MOTHAConstants.GROUND_STATE; electronState < currentElectronState && !canStimulateEmission; electronState++ ) {
+          const transitionWavelength = BohrModel.getAbsorptionWavelength( electronState, currentElectronState );
           if ( this.closeEnough( photon.wavelength, transitionWavelength ) ) {
             canStimulateEmission = true;
-            newState = state;
+            newElectronState = electronState;
           }
         }
 
         // Is the transition that would occur allowed?
-        if ( !this.stimulatedEmissionIsAllowed( currentState, newState ) ) {
+        if ( !this.stimulatedEmissionIsAllowed( currentElectronState, newElectronState ) ) {
           return false;
         }
 
@@ -445,7 +427,7 @@ export default class BohrModel extends HydrogenAtom {
           } ) );
 
           // move electron to new state
-          this.setElectronState( newState );
+          this.setElectronState( newElectronState );
         }
       }
     }
@@ -462,10 +444,10 @@ export default class BohrModel extends HydrogenAtom {
 
   /**
    * Determines if a proposed state transition caused by stimulated emission is legal.
-   * A Bohr transition is legal if the 2 states are different and newState >= ground state.
+   * A Bohr transition is legal if the 2 states are different and newElectronState >= ground state.
    */
-  protected stimulatedEmissionIsAllowed( oldState: number, newState: number ): boolean {
-    return ( ( oldState !== newState ) && ( newState >= MOTHAConstants.GROUND_STATE ) );
+  protected stimulatedEmissionIsAllowed( oldElectronState: number, newElectronState: number ): boolean {
+    return ( ( oldElectronState !== newElectronState ) && ( newElectronState >= MOTHAConstants.GROUND_STATE ) );
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -542,5 +524,40 @@ export default class BohrModel extends HydrogenAtom {
     return this.electron.positionProperty.value;
   }
 }
+
+/**
+ * Gets the wavelength that must be absorbed for the electron to transition from state n1 to state n2,
+ * where n2 > n1. This algorithm assumes that the ground state is 1.
+ */
+function getAbsorptionWavelength( n1: number, n2: number ): number {
+  assert && assert( Number.isInteger( n1 ) && Number.isInteger( n2 ) );
+  assert && assert( MOTHAConstants.GROUND_STATE === 1 );
+  assert && assert( n1 >= MOTHAConstants.GROUND_STATE, `bad n1=${n1}` );
+  assert && assert( n1 < n2, `bad n1=${n1} n2=${n2}` );
+  assert && assert( n2 <= MOTHAConstants.MAX_STATE, `bad n2=${n2}` );
+
+  // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.
+  return 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );
+}
+
+/**
+ * Creates a map from absorption/emission wavelengths to electron state transitions, ordered by ascending wavelength.
+ */
+type StateTransition = {
+  n1: number;
+  n2: number; // n2 > n1
+};
+
+function createWavelengthToStateTransitionMap(): Map<number, StateTransition> {
+  const map = new Map<number, StateTransition>();
+  for ( let n1 = MOTHAConstants.GROUND_STATE; n1 < MOTHAConstants.MAX_STATE; n1++ ) {
+    for ( let n2 = MOTHAConstants.MAX_STATE; n2 > n1; n2-- ) {
+      const wavelength = Utils.toFixedNumber( getAbsorptionWavelength( n1, n2 ), 0 );
+      map.set( wavelength, { n1: n1, n2: n2 } );
+    }
+  }
+  return map;
+}
+
 
 modelsOfTheHydrogenAtom.register( 'BohrModel', BohrModel );

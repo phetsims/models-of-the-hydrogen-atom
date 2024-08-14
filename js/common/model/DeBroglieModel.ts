@@ -83,8 +83,8 @@ export default class DeBroglieModel extends BohrModel {
   /**
    * Gets the amplitude [-1,1] of a standing wave at some angle, in some specified state of the electron.
    */
-  public getAmplitude( angle: number, state: number ): number {
-    const amplitude = Math.sin( state * angle ) * Math.sin( this.electronAngleProperty.value );
+  public getAmplitude( electronState: number, angle: number ): number {
+    const amplitude = Math.sin( electronState * angle ) * Math.sin( this.electronAngleProperty.value );
     assert && assert( amplitude >= -1 && amplitude <= 1 );
     return amplitude;
   }

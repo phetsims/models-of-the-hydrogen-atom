@@ -115,9 +115,7 @@ export default class DeBroglie3DHeightNode extends Node {
 
     // 3D orbits
     const orbitNodes: WireframeNode[] = [];
-    const groundState = MOTHAConstants.GROUND_STATE;
-    const maxState = DeBroglieModel.getMaxElectronState();
-    for ( let state = groundState; state < maxState; state++ ) {
+    for ( let state = MOTHAConstants.GROUND_STATE; state < MOTHAConstants.MAX_STATE; state++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( state ) );
       const orbitNode = this.createOrbitNode( radius, this.viewMatrix, this.orbitVertices );
       orbitNodes.push( orbitNode );
@@ -265,7 +263,7 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel,
     const angle = i * deltaAngle;
     const x = radius * Math.cos( angle );
     const y = radius * Math.sin( angle );
-    const z = MAX_WAVE_HEIGHT * hydrogenAtom.getAmplitude( angle, electronState );
+    const z = MAX_WAVE_HEIGHT * hydrogenAtom.getAmplitude( electronState, angle );
     vertices[ i ].setXYZ( x, y, z );
   }
   return vertices;

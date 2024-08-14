@@ -46,7 +46,6 @@ import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import BohrModel from './BohrModel.js';
 import ProbabilisticChooser, { ProbabilisticChooserEntry } from './ProbabilisticChooser.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -73,7 +72,7 @@ const TRANSITION_STRENGTH = [
   [ 0.69, 0.11, 0, 0.04, 0 ],
   [ 0.39, 0.06, 0.02, 0, 0 ]
 ];
-assert && assert( TRANSITION_STRENGTH.length === BohrModel.getNumberOfStates() );
+assert && assert( TRANSITION_STRENGTH.length === MOTHAConstants.NUMBER_OF_STATES );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -204,7 +203,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     const mNew = getNewTertiaryElectronState( lNew, m );
 
     // Verify that no transition rules have been broken.
-    const valid = isaValidTransition( n, l, m, nNew, lNew, mNew, BohrModel.getNumberOfStates() );
+    const valid = isaValidTransition( n, l, m, nNew, lNew, mNew, MOTHAConstants.NUMBER_OF_STATES );
     if ( valid ) {
       super.setElectronState( nNew );
       this._secondaryElectronStateProperty.value = lNew;

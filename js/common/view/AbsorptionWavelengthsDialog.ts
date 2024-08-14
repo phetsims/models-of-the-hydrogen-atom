@@ -23,6 +23,7 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import MOTHASymbols from '../MOTHASymbols.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import BohrModel from '../model/BohrModel.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -34,32 +35,6 @@ const HEADING_TEXT_OPTIONS = {
 const TEXT_OPTIONS = {
   font: new PhetFont( 14 )
 };
-
-type StateTransition = {
-  n1: number;
-  n2: number; // n2 > n1
-};
-
-//TODO move this somewhere else
-//TODO Generate this table using BohrModel.getAbsorptionWavelength
-// Absorption wavelengths and their associated state transition, ordered by ascending wavelength.
-const map = new Map<number, StateTransition>();
-map.set( 94, { n1: 1, n2: 6 } );
-map.set( 95, { n1: 1, n2: 5 } );
-map.set( 97, { n1: 1, n2: 4 } );
-map.set( 103, { n1: 1, n2: 3 } );
-map.set( 122, { n1: 1, n2: 2 } );
-map.set( 410, { n1: 2, n2: 6 } );
-map.set( 434, { n1: 2, n2: 5 } );
-map.set( 486, { n1: 2, n2: 4 } );
-map.set( 656, { n1: 2, n2: 3 } );
-map.set( 1094, { n1: 3, n2: 6 } );
-map.set( 1282, { n1: 3, n2: 5 } );
-map.set( 1876, { n1: 3, n2: 4 } );
-map.set( 2626, { n1: 4, n2: 6 } );
-map.set( 4052, { n1: 4, n2: 5 } );
-map.set( 7460, { n1: 5, n2: 6 } );
-//TODO validate n2 > n1 for all entries in map.
 
 type SelfOptions = EmptySelfOptions;
 
@@ -95,7 +70,7 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
     const wavelengthTextAlignGroup = new AlignGroup();
     const wavelengthNodeAlignGroup = new AlignGroup();
 
-    for ( const [ wavelength, transition ] of map ) {
+    for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
 
       const wavelengthText = wavelengthTextAlignGroup.createBox( new Text( wavelength, TEXT_OPTIONS ) );
       let waveLengthNode: Node;

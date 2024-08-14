@@ -109,27 +109,11 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public abstract movePhoton( photon: Photon, dt: number ): void;
 
   /**
-   * Gets the transition wavelengths for a specified state. The notion of 'transition wavelength' does not apply to all
-   * hydrogen atom models, so the default implementation returns null.
-   */
-  public getTransitionWavelengths( state: number ): number[] | null {
-    return null;
-  }
-
-  /**
    * Determines if two points collide.
    * Any distance between the points that is <= threshold is considered a collision.
    */
   protected pointsCollide( position1: Vector2, position2: Vector2, threshold: number ): boolean {
     return position1.distance( position2 ) <= threshold;
-  }
-
-  /**
-   * Gets the number of electron states that the model supports.
-   * The default is zero, since some models have no notion of "state".
-   */
-  public static getNumberOfStates(): number {
-    return 0;
   }
 
   /**

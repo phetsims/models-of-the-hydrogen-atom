@@ -129,7 +129,7 @@ class RingNode extends Path {
     for ( let i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
 
       const angle = ( 2 * Math.PI ) * ( i / NUMBER_OF_SEGMENTS );
-      const amplitude = this.hydrogenAtom.getAmplitude( angle, electronState );
+      const amplitude = this.hydrogenAtom.getAmplitude( electronState, angle );
 
       const maxRadialOffset = RADIAL_OFFSET_FACTOR * this.groundStateOrbitRadius;
       const radialOffset = maxRadialOffset * amplitude;

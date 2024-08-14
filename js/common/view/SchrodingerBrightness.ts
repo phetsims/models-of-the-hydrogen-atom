@@ -13,6 +13,7 @@
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 const NUMBER_OF_HORIZONTAL_CELLS = 40;
 const NUMBER_OF_VERTICAL_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
@@ -37,7 +38,7 @@ export default class SchrodingerBrightness {
 
     this.hydrogenAtom = hydrogenAtom;
 
-    const nMax = SchrodingerModel.getNumberOfStates();
+    const nMax = MOTHAConstants.MAX_STATE;
 
     // Initialize brightness entries to null
     //TODO this is so ugly, ported from Java

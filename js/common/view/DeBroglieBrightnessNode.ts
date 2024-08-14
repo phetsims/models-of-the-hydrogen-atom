@@ -109,8 +109,7 @@ class RingNode extends Node {
 
     // Pre-allocate the maximum number of polygon (Path) nodes. Based on the radius of the electron's current orbit,
     // some subset of these polygons will actually be added to the scene graph.
-    const maxState = MOTHAConstants.GROUND_STATE + DeBroglieModel.getNumberOfStates() - 1;
-    const maxRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( maxState ) );
+    const maxRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( MOTHAConstants.MAX_STATE ) );
     const maxPolygons = calculateNumberOfPolygons( maxRadius );
     this.polygonNodes = [];
     for ( let i = 0; i < maxPolygons; i++ ) {
@@ -181,7 +180,7 @@ class RingNode extends Node {
     // Visit polygons in the same order as updateGeometry.
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
-      const amplitude = this.hydrogenAtom.getAmplitude( angle, electronState );
+      const amplitude = this.hydrogenAtom.getAmplitude( electronState, angle );
       this.polygonNodes[ i ].fill = this.amplitudeToColor( amplitude );
     }
   }

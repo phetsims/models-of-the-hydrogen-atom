@@ -13,6 +13,9 @@ import Vector2 from '../../../dot/js/Vector2.js';
 import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
 import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNode.js';
 
+const GROUND_STATE = 1;
+const MAX_STATE = 6;
+
 const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
 
   // Lit from bottom center, which is where the light shines.
@@ -34,7 +37,9 @@ const MOTHAConstants = {
   ZOOMED_IN_BOX_VIEW_SIZE: 400,
 
   // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.
-  GROUND_STATE: 1,
+  GROUND_STATE: GROUND_STATE,
+  MAX_STATE: MAX_STATE,
+  NUMBER_OF_STATES: MAX_STATE - GROUND_STATE + 1,
 
   // radii, in model coordinates, unitless
   ELECTRON_RADIUS: 5,
