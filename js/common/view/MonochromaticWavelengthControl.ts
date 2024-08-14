@@ -107,7 +107,8 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
         backgroundFill: MOTHAColors.wavelengthNumberDisplayFillProperty,
         backgroundStroke: MOTHAColors.wavelengthNumberDisplayStrokeProperty,
         textOptions: {
-          fill: MOTHAColors.wavelengthTextFillProperty
+          fill: MOTHAColors.wavelengthTextFillProperty,
+          maxWidth: 50
         }
       }
     }, providedOptions );
