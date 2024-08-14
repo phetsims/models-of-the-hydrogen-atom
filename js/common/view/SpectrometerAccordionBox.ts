@@ -137,6 +137,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       xMargin: 6,
       yMargin: 6,
+      //TODO enabledProperty: spectrometer.hasDataProperty
       listener: () => {
         //TODO Erase what is currently show on the spectrometer.
       },
