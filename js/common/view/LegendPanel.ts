@@ -14,7 +14,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ElectronNode from './ElectronNode.js';
-import NeutronNode from './NeutronNode.js';
 import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -55,8 +54,6 @@ export default class LegendPanel extends Panel {
         ModelsOfTheHydrogenAtomStrings.electronStringProperty, options.tandem.createTandem( 'electronNode' ) ),
       new KeyNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.protonStringProperty, options.tandem.createTandem( 'protonNode' ) ),
-      new KeyNode( NeutronNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.neutronStringProperty, options.tandem.createTandem( 'neutronNode' ) ),
       new KeyNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.photonStringProperty, options.tandem.createTandem( 'photonNode' ) )
     ];
