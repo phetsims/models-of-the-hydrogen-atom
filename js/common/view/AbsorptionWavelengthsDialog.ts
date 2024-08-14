@@ -17,10 +17,12 @@ import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { GridBox, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, GridBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
+import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -62,7 +64,7 @@ type AbsorptionWavelengthsDialogOptions = SelfOptions & PickRequired<DialogOptio
 
 export default class AbsorptionWavelengthsDialog extends Dialog {
 
-  public constructor( providedOptions: AbsorptionWavelengthsDialogOptions ) {
+  public constructor( monochromaticWavelengthProperty: NumberProperty, providedOptions: AbsorptionWavelengthsDialogOptions ) {
 
     const options = optionize<AbsorptionWavelengthsDialogOptions, SelfOptions, DialogOptions>()( {
 
@@ -82,13 +84,32 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
       new Text( ModelsOfTheHydrogenAtomStrings.nTransitionStringProperty, HEADING_TEXT_OPTIONS )
     ];
 
-    const rows = [
+    const rows: Node[][] = [
       columnHeadings
     ];
 
+    // So that all wavelengthText have the same effective size.
+    const wavelengthTextAlignGroup = new AlignGroup();
+    const wavelengthNodeAlignGroup = new AlignGroup();
+
     for ( const [ wavelength, transition ] of map ) {
+
+      const wavelengthText = wavelengthTextAlignGroup.createBox( new Text( wavelength, TEXT_OPTIONS ) );
+      let waveLengthNode: Node;
+      if ( monochromaticWavelengthProperty.range.contains( wavelength ) ) {
+        waveLengthNode = new RectangularPushButton( {
+          content: wavelengthText,
+          listener: () => {
+            monochromaticWavelengthProperty.value = wavelength;
+          }
+        } );
+      }
+      else {
+        waveLengthNode = wavelengthText;
+      }
+
       rows.push( [
-        new Text( wavelength, TEXT_OPTIONS ),
+        wavelengthNodeAlignGroup.createBox( waveLengthNode ),
         new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, TEXT_OPTIONS )
       ] );
     }
@@ -96,7 +117,7 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
     const gridBox = new GridBox( {
       rows: rows,
       xSpacing: 15,
-      ySpacing: 8
+      ySpacing: 4
     } );
 
     const content = new VBox( {

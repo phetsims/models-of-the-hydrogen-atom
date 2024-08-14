@@ -48,7 +48,7 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
-    const absorptionWavelengthsDialog = new AbsorptionWavelengthsDialog( {
+    const absorptionWavelengthsDialog = new AbsorptionWavelengthsDialog( light.monochromaticWavelengthProperty, {
       tandem: options.tandem.createTandem( 'absorptionWavelengthsDialog' )
     } );
 
