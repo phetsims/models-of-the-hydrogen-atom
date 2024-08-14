@@ -238,6 +238,7 @@ export default class BohrModel extends HydrogenAtom {
     return ORBIT_RADII[ state - MOTHAConstants.GROUND_STATE ];
   }
 
+  //TODO Delete if unused.
   /**
    * Gets the maximum radius of the electron's orbit.
    */
