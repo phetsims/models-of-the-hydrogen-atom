@@ -2,7 +2,7 @@
 
 //TODO Indicate when wavelengthProperty is an absorption wavelength?
 /**
- * MOTHAWavelengthControl is a specialization of WavelengthNumberControl that lets the user select a UR or visible wavelength.
+ * MonochromaticWavelengthControl is a specialization of WavelengthNumberControl that lets the user select a UR or visible wavelength.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -34,7 +34,7 @@ type SelfOptions = EmptySelfOptions;
 
 type MOTHAWavelengthControlOptions = SelfOptions & PickRequired<WavelengthNumberControlOptions, 'tandem'>;
 
-export class MOTHAWavelengthControl extends WavelengthNumberControl {
+export class MonochromaticWavelengthControl extends WavelengthNumberControl {
 
   public constructor( wavelengthProperty: NumberProperty,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
@@ -116,4 +116,4 @@ export class MOTHAWavelengthControl extends WavelengthNumberControl {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'MOTHAWavelengthControl', MOTHAWavelengthControl );
+modelsOfTheHydrogenAtom.register( 'MonochromaticWavelengthControl', MonochromaticWavelengthControl );

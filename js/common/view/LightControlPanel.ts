@@ -14,7 +14,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
+import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
 import Light from '../model/Light.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import AbsorptionWavelengthsDialog from './AbsorptionWavelengthsDialog.js';
@@ -43,7 +43,7 @@ export class LightControlPanel extends Panel {
     }, providedOptions );
 
     // Wavelength control
-    const monochromaticWavelengthControl = new MOTHAWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty, {
+    const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty, {
       tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
 
