@@ -8,17 +8,21 @@
 
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { HBox, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAColors from '../MOTHAColors.js';
-import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { MOTHAWavelengthControl } from './MOTHAWavelengthControl.js';
 import Light from '../model/Light.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import AbsorptionWavelengthsDialog from './AbsorptionWavelengthsDialog.js';
+import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -26,7 +30,7 @@ type LightControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequi
 
 export class LightControlPanel extends Panel {
 
-  public constructor( light: Light, providedOptions: LightControlPanelOptions ) {
+  public constructor( light: Light, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: LightControlPanelOptions ) {
 
     const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
 
@@ -52,40 +56,29 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'absorptionWavelengthsDialog' )
     } );
 
-    // 'Absorption Wavelengths' info button
-    //TODO Factor out absorptionWavelengthsButton.
-    //TODO Using InfoButton does not seem appropriate here.
-    const absorptionWavelengthsButton = new InfoButton( {
-      iconFill: 'rgb( 41, 106, 163 )',
-      scale: 0.4,
+    // 'Absorption Wavelengths' button
+    const absorptionWavelengthsButtonTandem = options.tandem.createTandem( 'absorptionWavelengthsButton' );
+    const absorptionWavelengthsButton = new RectangularPushButton( {
+      content: new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
+        font: new PhetFont( 12 ),
+        maxWidth: 0.8 * monochromaticWavelengthControl.width
+      } ),
       listener: () => absorptionWavelengthsDialog.show(),
-      tandem: options.tandem.createTandem( 'absorptionWavelengthsButton' ),
-      phetioEnabledPropertyInstrumented: false
-    } );
-
-    const hBox = new HBox( {
 
       //TODO Why is Absorption Wavelengths not relevant for white light?
-      visibleProperty: monochromaticWavelengthControl.visibleProperty,
-      spacing: 5,
-      children: [
-        absorptionWavelengthsButton,
-
-        //TODO Should the button label be pressable?
-        new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
-          visibleProperty: absorptionWavelengthsButton.visibleProperty,
-          font: new PhetFont( 14 ),
-          fill: MOTHAColors.invertibleTextFillProperty,
-          maxWidth: 0.8 * monochromaticWavelengthControl.width
-        } )
-      ]
+      visibleProperty: new DerivedProperty( [ light.lightModeProperty, hydrogenAtomProperty ],
+        ( lightMode, hydrogenAtom ) => ( lightMode === 'monochromatic' ) && hydrogenAtom.hasTransitionWavelengths, {
+          phetioValueType: BooleanIO,
+          tandem: absorptionWavelengthsButtonTandem.createTandem( 'visibleProperty' )
+        } ),
+      tandem: absorptionWavelengthsButtonTandem
     } );
 
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
       spacing: 20,
-      children: [ lightModeRadioButtonGroup, monochromaticWavelengthControl, hBox ]
+      children: [ lightModeRadioButtonGroup, monochromaticWavelengthControl, absorptionWavelengthsButton ]
     } );
 
     super( content, options );
