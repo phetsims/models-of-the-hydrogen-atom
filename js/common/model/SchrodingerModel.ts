@@ -52,8 +52,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-/* eslint-disable no-view-imported-from-model */
-import SchrodingerNode from '../view/SchrodingerNode.js';
+import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line no-view-imported-from-model
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 /*

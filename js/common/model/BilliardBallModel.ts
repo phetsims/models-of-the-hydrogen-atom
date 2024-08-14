@@ -28,8 +28,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-/* eslint-disable no-view-imported-from-model */
-import BilliardBallNode from '../view/BilliardBallNode.js';
+import BilliardBallNode from '../view/BilliardBallNode.js'; // eslint-disable-line no-view-imported-from-model
 
 // constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );

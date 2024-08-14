@@ -39,8 +39,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Proton from './Proton.js';
 import Photon from './Photon.js';
-/* eslint-disable no-view-imported-from-model */
-import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js';
+import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line no-view-imported-from-model
 
 const ELECTRON_DISTANCE = 150; // initial distance from electron to proton
 const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the proton and electron is reduced per second

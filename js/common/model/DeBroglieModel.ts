@@ -25,8 +25,7 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
-/* eslint-disable no-view-imported-from-model */
-import DeBroglieNode from '../view/DeBroglieNode.js';
+import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line no-view-imported-from-model
 
 type SelfOptions = EmptySelfOptions;
 

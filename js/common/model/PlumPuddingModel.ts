@@ -40,8 +40,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-/* eslint-disable no-view-imported-from-model */
-import PlumPuddingNode from '../view/PlumPuddingNode.js';
+import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line no-view-imported-from-model
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons

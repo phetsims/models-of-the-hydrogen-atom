@@ -45,8 +45,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-/* eslint-disable no-view-imported-from-model */
-import BohrNode from '../view/BohrNode.js';
+import BohrNode from '../view/BohrNode.js'; // eslint-disable-line no-view-imported-from-model
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Radius of each electron orbit, ordered by increasing electron state number.
