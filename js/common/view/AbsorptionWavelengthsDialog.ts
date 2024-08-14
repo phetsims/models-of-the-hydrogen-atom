@@ -26,6 +26,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import BohrModel from '../model/BohrModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PhotonNode from './PhotonNode.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -99,6 +100,7 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
       let waveLengthNode: Node;
       if ( monochromaticWavelengthProperty.range.contains( wavelength ) ) {
         waveLengthNode = new RectangularPushButton( {
+          baseColor: MOTHAColors.pushButtonBaseColorProperty,
           content: wavelengthText,
           listener: () => {
             monochromaticWavelengthProperty.value = wavelength;

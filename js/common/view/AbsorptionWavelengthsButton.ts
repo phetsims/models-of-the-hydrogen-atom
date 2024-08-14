@@ -19,6 +19,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import BohrModel from '../model/BohrModel.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 export default class AbsorptionWavelengthsButton extends RectangularPushButton {
 
@@ -30,6 +31,7 @@ export default class AbsorptionWavelengthsButton extends RectangularPushButton {
 
       // RectangularPushButtonOptions
       isDisposable: false,
+      baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
         font: new PhetFont( 12 ),
         maxWidth: 200
