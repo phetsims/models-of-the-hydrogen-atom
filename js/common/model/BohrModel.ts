@@ -47,6 +47,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 /* eslint-disable no-view-imported-from-model */
 import BohrNode from '../view/BohrNode.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Radius of each electron orbit, ordered by increasing electron state number.
 // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
@@ -138,9 +139,10 @@ export default class BohrModel extends HydrogenAtom {
     } );
 
     // When the electron changes state, reset timeInStateProperty.
-    //TODO this is an ordering problem for restoring PhET-iO state
     this.electronStateProperty.link( electronState => {
-      this.timeInStateProperty.value = 0;
+      if ( !isSettingPhetioStateProperty.value ) {
+        this.timeInStateProperty.value = 0;
+      }
     } );
 
     //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
@@ -205,14 +207,12 @@ export default class BohrModel extends HydrogenAtom {
     }
   }
 
+  /**
+   * Sets the electron's primary state (n). Use this method exclusively to n.
+   * Subclasses with more complicated electron state, like Schrodinger's (n,l,m), should override this method.
+   */
   protected setElectronState( n: number ): void {
-    assert && assert( Number.isInteger( n ) );
-    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE );
-
-    if ( n !== this.electronStateProperty.value ) {
-      this._electronStateProperty.value = n;
-      this.timeInStateProperty.value = 0;
-    }
+    this._electronStateProperty.value = n;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

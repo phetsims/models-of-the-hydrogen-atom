@@ -190,7 +190,7 @@ export default class SchrodingerModel extends DeBroglieModel {
   }
 
   /**
-   * Sets the electron's primary state. Randomly chooses the values for the secondary and tertiary states,
+   * Sets the electron's primary state (n). Randomly chooses the values for the secondary and tertiary states,
    * according to state transition rules.
    */
   protected override setElectronState( nNew: number ): void {
