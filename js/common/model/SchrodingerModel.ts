@@ -54,6 +54,7 @@ import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomi
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 /* eslint-disable no-view-imported-from-model */
 import SchrodingerNode from '../view/SchrodingerNode.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 /*
  * This table defines the transition strengths for the primary state component (n).
@@ -112,7 +113,9 @@ export default class SchrodingerModel extends DeBroglieModel {
 
     //TODO range is dynamic [0,n-1] and range option cannot be a DerivedProperty
     this.electronStateProperty.link( n => {
-      this._secondaryElectronStateProperty.rangeProperty.value = new Range( 0, n );
+      if ( !isSettingPhetioStateProperty ) {
+        this._secondaryElectronStateProperty.rangeProperty.value = new Range( 0, n );
+      }
     } );
 
     this._tertiaryElectronStateProperty = new NumberProperty( 0, {
@@ -126,7 +129,9 @@ export default class SchrodingerModel extends DeBroglieModel {
 
     //TODO range is dynamic [-l,+l] and range option cannot be a DerivedProperty
     this.secondaryElectronStateProperty.link( l => {
-      this._tertiaryElectronStateProperty.rangeProperty.value = new Range( -l, l );
+      if ( !isSettingPhetioStateProperty.value ) {
+        this._tertiaryElectronStateProperty.rangeProperty.value = new Range( -l, l );
+      }
     } );
   }
 

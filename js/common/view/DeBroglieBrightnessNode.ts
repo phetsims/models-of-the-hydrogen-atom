@@ -132,7 +132,7 @@ class RingNode extends Node {
         }
       } );
 
-    this.hydrogenAtom.electronAngleProperty.link( electronAngle => {
+    this.hydrogenAtom.electronAngleProperty.link( () => {
       this.visible && this.updateColor();
     } );
   }

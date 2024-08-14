@@ -30,6 +30,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // constants
 const DISPLAY_SIZE = new Dimension2( 535, 135 );
@@ -87,7 +88,9 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'recordingProperty' )
     } );
     recordingProperty.link( recording => {
-      //TODO Erase what is currently shown on the spectrometer and start recording.
+      if ( !isSettingPhetioStateProperty.value ) {
+        //TODO Erase what is currently shown on the spectrometer and start recording.
+      }
     } );
 
     const recordStopButton = new RecordStopButton( recordingProperty, {

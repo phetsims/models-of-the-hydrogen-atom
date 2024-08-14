@@ -77,7 +77,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     // Keep the 'Excite Atom' button and electron state positioned in the lower-right corner of the zoomed-in box.
-    vBox.boundsProperty.link( bounds => {
+    vBox.localBoundsProperty.link( () => {
       vBox.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
   }
