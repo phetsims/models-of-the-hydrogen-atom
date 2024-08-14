@@ -251,37 +251,25 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Gets the wavelength that must be absorbed for the electron to transition from state oldState to state newState,
-   * where oldState < newState. This algorithm assumes that the ground state is 1.
+   * Gets the wavelength that must be absorbed for the electron to transition from state n1 to state n2,
+   * where n2 > n1. This algorithm assumes that the ground state is 1.
    */
-  public static getWavelengthAbsorbed( oldState: number, newState: number ): number {
-    assert && assert( Number.isInteger( oldState ) && Number.isInteger( newState ) );
+  public static getAbsorptionWavelength( n1: number, n2: number ): number {
+    assert && assert( Number.isInteger( n1 ) && Number.isInteger( n2 ) );
     assert && assert( MOTHAConstants.GROUND_STATE === 1 );
-    assert && assert( oldState >= MOTHAConstants.GROUND_STATE, `oldState=${oldState}` );
-    assert && assert( oldState < newState, `oldState=${oldState} newState=${newState}` );
-    assert && assert( newState <= MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates(), `newState=${newState}` );
-    return 1240.0 / ( 13.6 * ( ( 1.0 / ( oldState * oldState ) ) - ( 1.0 / ( newState * newState ) ) ) );
+    assert && assert( n1 >= MOTHAConstants.GROUND_STATE, `oldState=${n1}` );
+    assert && assert( n1 < n2, `oldState=${n1} newState=${n2}` );
+    assert && assert( n2 <= MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates(), `newState=${n2}` );
+
+    // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.
+    return 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );
   }
 
   /**
-   * Gets the wavelength that is emitted when the electron transitions from oldState to newState,
-   * where newNew < oldState.
+   * Gets the wavelength that is emitted when the electron transitions from n2 to n1, where n1 < n2.
    */
-  public static getWavelengthEmitted( oldState: number, newState: number ): number {
-    return BohrModel.getWavelengthAbsorbed( newState, oldState );
-  }
-
-  /**
-   * Gets the wavelength that causes a transition between 2 specified states.
-   */
-  public static getTransitionWavelength( oldState: number, newState: number ): number {
-    assert && assert( oldState !== newState );
-    if ( newState < oldState ) {
-      return this.getWavelengthEmitted( oldState, newState );
-    }
-    else {
-      return this.getWavelengthAbsorbed( oldState, newState );
-    }
+  public static getEmissionWavelength( n2: number, n1: number ): number {
+    return BohrModel.getAbsorptionWavelength( n1, n2 );
   }
 
   /**
@@ -304,7 +292,7 @@ export default class BohrModel extends HydrogenAtom {
     const g = MOTHAConstants.GROUND_STATE;
     for ( let i = g; i < g + n - 1; i++ ) {
       for ( let j = i + 1; j < g + n; j++ ) {
-        const wavelength = this.getWavelengthAbsorbed( i, j );
+        const wavelength = this.getAbsorptionWavelength( i, j );
         if ( wavelength >= minWavelength && wavelength <= maxWavelength ) {
           wavelengths.push( wavelength );
         }
@@ -352,7 +340,7 @@ export default class BohrModel extends HydrogenAtom {
         let newState = 0;
         const maxState = MOTHAConstants.GROUND_STATE + BohrModel.getNumberOfStates() - 1;
         for ( let n = currentState + 1; n <= maxState && !canAbsorb; n++ ) {
-          const transitionWavelength = BohrModel.getWavelengthAbsorbed( currentState, n );
+          const transitionWavelength = BohrModel.getAbsorptionWavelength( currentState, n );
           if ( this.closeEnough( photon.wavelength, transitionWavelength ) ) {
             canAbsorb = true;
             newState = n;
@@ -428,7 +416,7 @@ export default class BohrModel extends HydrogenAtom {
         let canStimulateEmission = false;
         let newState = 0;
         for ( let state = MOTHAConstants.GROUND_STATE; state < currentState && !canStimulateEmission; state++ ) {
-          const transitionWavelength = BohrModel.getWavelengthAbsorbed( state, currentState );
+          const transitionWavelength = BohrModel.getAbsorptionWavelength( state, currentState );
           if ( this.closeEnough( photon.wavelength, transitionWavelength ) ) {
             canStimulateEmission = true;
             newState = state;
@@ -509,7 +497,7 @@ export default class BohrModel extends HydrogenAtom {
         // Create and emit a photon
         success = true;
         this.photonEmittedEmitter.emit( new Photon( {
-          wavelength: BohrModel.getWavelengthEmitted( currentState, newState ),
+          wavelength: BohrModel.getEmissionWavelength( currentState, newState ),
           position: this.getSpontaneousEmissionPosition(),
           direction: MOTHAUtils.nextAngle(), // in a random direction
           wasEmitted: true,
