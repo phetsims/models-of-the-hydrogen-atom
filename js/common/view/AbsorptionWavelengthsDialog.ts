@@ -5,7 +5,6 @@
 //TODO Should the UV and Visible wavelengths be selectable, and set the value of wavelengthProperty?
 //TODO Using a left-right arrow implies absorption (right) AND emission (left). Should this dialog be retitled? Or use a right arrow only?
 //TODO Should we title this Absorption and Emission Spectra? See https://webbtelescope.org/contents/articles/spectroscopy-101--how-absorption-and-emission-spectra-work
-//TODO Should the display be ordered by increasing wavelength, with wavelength as the left column?
 //TODO Being a modal dialog, this is not very useful with Electron Energy Level accordion box.
 
 /**
