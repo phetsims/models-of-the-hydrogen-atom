@@ -17,7 +17,7 @@ import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, GridBox, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Color, GridBox, HBox, HSeparator, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
@@ -31,7 +31,8 @@ const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
     size: 14,
     weight: 'bold'
-  } )
+  } ),
+  maxWidth: 150
 };
 
 const TEXT_OPTIONS = {
@@ -59,13 +60,24 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
       } )
     } );
 
+    // Headings for the columns
     const columnHeadings = [
       new Text( ModelsOfTheHydrogenAtomStrings.wavelengthNanometersStringProperty, HEADING_TEXT_OPTIONS ),
       new Text( ModelsOfTheHydrogenAtomStrings.nTransitionStringProperty, HEADING_TEXT_OPTIONS )
     ];
 
+    // Separators below the column headings
+    const hSeparatorOptions = {
+      stroke: Color.grayColor( 200 )
+    };
+    const columnSeparators = [
+      new HSeparator( hSeparatorOptions ),
+      new HSeparator( hSeparatorOptions )
+    ];
+
     const rows: Node[][] = [
-      columnHeadings
+      columnHeadings,
+      columnSeparators
     ];
 
     // So that these Nodes have the same effective size.
@@ -75,6 +87,8 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
     for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
 
       const wavelengthText = wavelengthTextAlignGroup.createBox( new Text( wavelength, TEXT_OPTIONS ) );
+
+      // For wavelengths that can be set via monochromaticWavelengthProperty, use a push button. Otherwise, use Text.
       let waveLengthNode: Node;
       if ( monochromaticWavelengthProperty.range.contains( wavelength ) ) {
         waveLengthNode = new RectangularPushButton( {
@@ -90,11 +104,11 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
       }
 
       const photonAndWavelengthNode = new HBox( {
+        spacing: 10,
         children: [
           PhotonNode.createIcon( wavelength, 0.75 ),
           wavelengthNodeAlignGroup.createBox( waveLengthNode )
-        ],
-        spacing: 8
+        ]
       } );
 
       rows.push( [
