@@ -20,6 +20,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { GridBox, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import MOTHASymbols from '../MOTHASymbols.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -88,7 +89,7 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
     for ( const [ wavelength, transition ] of map ) {
       rows.push( [
         new Text( wavelength, TEXT_OPTIONS ),
-        new Text( `${transition.n1} \u2194 ${transition.n2}`, TEXT_OPTIONS )
+        new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, TEXT_OPTIONS )
       ] );
     }
 
