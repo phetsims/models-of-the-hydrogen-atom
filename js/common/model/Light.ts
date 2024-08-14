@@ -72,8 +72,8 @@ export default class Light extends PhetioObject {
   // elapsed time since a photon was created
   private readonly dtSincePhotonCreatedProperty: Property<number>;
 
-  // wavelengths (in nm) that cause a state transition from the ground state
-  private readonly groundStateTransitionWavelengths: number[];
+  // Wavelengths (in nm) that can be absorbed when the electron is in the ground state (n = 1).
+  private readonly groundStateAbsorptionWavelengths: number[];
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: LightOptions ) {
 
@@ -132,10 +132,7 @@ export default class Light extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    // Get transition wavelengths for state 1, which are all UV.
-    //TODO Replace this with a method that gets ground state transitions from BohrModel.wavelengthToStateTransitionMap
-    this.groundStateTransitionWavelengths =
-      BohrModel.getTransitionWavelengths( this.monochromaticWavelengthRange.min, VisibleColor.MIN_WAVELENGTH );
+    this.groundStateAbsorptionWavelengths = BohrModel.getAbsorptionWavelengths( MOTHAConstants.GROUND_STATE );
   }
 
   public reset(): void {
@@ -215,8 +212,8 @@ export default class Light extends PhetioObject {
       if ( dotRandom.nextDouble() < TRANSITION_WAVELENGTHS_WEIGHT ) {
 
         // choose a random transition wavelength
-        const i = dotRandom.nextIntBetween( 0, this.groundStateTransitionWavelengths.length - 1 );
-        wavelength = this.groundStateTransitionWavelengths[ i ];
+        const i = dotRandom.nextIntBetween( 0, this.groundStateAbsorptionWavelengths.length - 1 );
+        wavelength = this.groundStateAbsorptionWavelengths[ i ];
       }
       else {
 

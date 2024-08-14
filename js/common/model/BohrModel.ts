@@ -227,21 +227,12 @@ export default class BohrModel extends HydrogenAtom {
     return ORBIT_RADII[ n - MOTHAConstants.GROUND_STATE ];
   }
 
-  //TODO Delete if unused.
-  /**
-   * Gets the maximum radius of the electron's orbit.
-   */
-  public getMaxElectronOrbitRadius(): number {
-    return ORBIT_RADII[ ORBIT_RADII.length - 1 ];
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   // Wavelength methods
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Gets the wavelength that must be absorbed for the electron to transition from state n1 to state n2,
-   * where n2 > n1. This algorithm assumes that the ground state is 1.
+   * Gets the wavelength that is absorbed when the electron transitions from n1 to n2, where n2 > n1.
    */
   public static getAbsorptionWavelength( n1: number, n2: number ): number {
     return getAbsorptionWavelength( n1, n2 );
@@ -251,7 +242,24 @@ export default class BohrModel extends HydrogenAtom {
    * Gets the wavelength that is emitted when the electron transitions from n2 to n1, where n1 < n2.
    */
   public static getEmissionWavelength( n2: number, n1: number ): number {
-    return BohrModel.getAbsorptionWavelength( n1, n2 );
+    return getAbsorptionWavelength( n1, n2 );
+  }
+
+  /**
+   * Gets the wavelengths that can be absorbed in state n.
+   */
+  public static getAbsorptionWavelengths( n: number ): number[] {
+    assert && assert( Number.isInteger( n ) );
+    assert && assert( n >= MOTHAConstants.GROUND_STATE && n < MOTHAConstants.MAX_STATE, `bad n=${n}` );
+
+    const wavelengths: number[] = [];
+    for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
+      if ( n === transition.n1 ) {
+        wavelengths.push( wavelength );
+      }
+    }
+    assert && assert( wavelengths.length > 0 );
+    return wavelengths;
   }
 
   /**
@@ -259,29 +267,6 @@ export default class BohrModel extends HydrogenAtom {
    */
   private closeEnough( wavelength1: number, wavelength2: number ): boolean {
     return ( Math.abs( wavelength1 - wavelength2 ) < WAVELENGTH_CLOSENESS_THRESHOLD );
-  }
-
-  /**
-   * Gets the set of wavelengths that cause a state transition. With white light, the light prefers to fire
-   * these wavelengths so that the probability of seeing a photon absorbed is higher.
-   */
-  public static getTransitionWavelengths( minWavelength: number, maxWavelength: number ): number[] {
-    assert && assert( minWavelength < maxWavelength );
-
-    //TODO Get this from wavelengthToStateTransitionMap.
-    // Create the set of wavelengths, include only those between min and max.
-    const wavelengths = [];
-    const g = MOTHAConstants.GROUND_STATE;
-    const n = MOTHAConstants.NUMBER_OF_STATES;
-    for ( let n1 = g; n1 < g + n - 1; n1++ ) {
-      for ( let n2 = n1 + 1; n2 < g + n; n2++ ) {
-        const wavelength = this.getAbsorptionWavelength( n1, n2 );
-        if ( wavelength >= minWavelength && wavelength <= maxWavelength ) {
-          wavelengths.push( wavelength );
-        }
-      }
-    }
-    return wavelengths;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
