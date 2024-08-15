@@ -21,9 +21,10 @@ import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import FullElectronStateText from './FullElectronStateText.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { Node, Rectangle, VBox } from '../../../../scenery/js/imports.js';
+import { Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -72,7 +73,14 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       children: [ exciteAtomButton, electronStateText ]
     } );
 
-    options.children = [ protonNode, fieldNode, xzAxesNode, vBox ];
+    //TODO Under Construction
+    const underConstructionNode = new Text( 'Under Construction', {
+      font: new PhetFont( 24 ),
+      fill: 'red',
+      center: zoomedInBoxBounds.center
+    } );
+
+    options.children = [ protonNode, fieldNode, xzAxesNode, vBox, underConstructionNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 

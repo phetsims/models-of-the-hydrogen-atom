@@ -16,7 +16,7 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Color, Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import { Color, Node, NodeOptions, Text } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -25,6 +25,7 @@ import WireframeMatrix from './WireframeMatrix.js';
 import WireframeModel from './WireframeModel.js';
 import WireframeNode from './WireframeNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
 const NUMBER_OF_ORBIT_VERTICES = 200;
@@ -125,6 +126,14 @@ export default class DeBroglie3DHeightNode extends Node {
       tandem: options.tandem.createTandem( 'orbitsNode' )
     } );
     this.addChild( orbitsNode );
+
+    //TODO Under Construction
+    const underConstructionNode = new Text( 'Under Construction', {
+      font: new PhetFont( 24 ),
+      fill: 'red',
+      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ).minusXY( 0, 60 )
+    } );
+    this.addChild( underConstructionNode );
 
     this.waveModel = new WireframeModel( {
       frontColor: this.waveFrontColorProperty,
