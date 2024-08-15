@@ -51,6 +51,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'fieldNode' )
     } );
 
+    //TODO Should be in front of photons.
     const xzAxesNode = new XZAxesNode( {
       color: MOTHAColors.xzAxesColorProperty,
       left: zoomedInBoxBounds.left + 15,
@@ -67,6 +68,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
         tandem: options.tandem.createTandem( 'electronStateText' )
       } );
 
+    //TODO Should be in front of photons.
     const vBox = new VBox( {
       align: 'right',
       spacing: 15,

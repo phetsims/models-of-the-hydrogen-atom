@@ -68,11 +68,13 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       // No need to PhET-iO instrument this Node.
     } );
 
+    //TODO Should be in front of photons.
     const deBroglieRepresentationComboBox = new DeBroglieRepresentationComboBox( hydrogenAtom.deBroglieRepresentationProperty, listboxParent, {
       leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
       tandem: options.tandem.createTandem( 'deBroglieRepresentationComboBox' )
     } );
 
+    //TODO Should be in front of photons.
     const electronStateText = new PrimaryElectronStateText( hydrogenAtom.electronStateProperty, {
       tandem: options.tandem.createTandem( 'electronStateText' )
     } );
