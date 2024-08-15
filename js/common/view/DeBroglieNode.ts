@@ -74,7 +74,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'deBroglieRepresentationComboBox' )
     } );
 
-    //TODO Should be in front of photons.
+    //TODO Should be in front of photons?
     const electronStateText = new PrimaryElectronStateText( hydrogenAtom.electronStateProperty, {
       tandem: options.tandem.createTandem( 'electronStateText' )
     } );
