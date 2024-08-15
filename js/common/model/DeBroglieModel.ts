@@ -75,6 +75,8 @@ export default class DeBroglieModel extends BohrModel {
 
   public override reset(): void {
     this.electron3D.reset();
+
+    //TODO Calling reset when switching between models probably should not reset this.
     this.deBroglieRepresentationProperty.reset();
     super.reset();
   }
