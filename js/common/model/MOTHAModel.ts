@@ -144,6 +144,7 @@ export default class MOTHAModel implements TModel {
       this.spectrometer.clear();
 
       if ( oldHydrogenAtom ) {
+        oldHydrogenAtom.reset();
         if ( oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
           oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
         }
