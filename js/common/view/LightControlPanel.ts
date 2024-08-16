@@ -19,6 +19,7 @@ import AbsorptionWavelengthsDialog from './AbsorptionWavelengthsDialog.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import AbsorptionWavelengthsButton from './AbsorptionWavelengthsButton.js';
+import AbsorptionTransitionDisplay from './AbsorptionTransitionDisplay.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -43,6 +44,9 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
 
+    const absorptionTransitionDisplay = new AbsorptionTransitionDisplay( light.monochromaticWavelengthProperty,
+      options.tandem.createTandem( 'absorptionTransitionDisplay' ) );
+
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( light.lightModeProperty, {
       maxWidth: monochromaticWavelengthControl.width,
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
@@ -58,8 +62,19 @@ export class LightControlPanel extends Panel {
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
-      spacing: 20,
-      children: [ lightModeRadioButtonGroup, monochromaticWavelengthControl, absorptionWavelengthsButton ]
+      spacing: 10,
+      children: [
+        lightModeRadioButtonGroup,
+        new VBox( {
+          excludeInvisibleChildrenFromBounds: false,
+          spacing: 5,
+          children: [
+            absorptionTransitionDisplay,
+            monochromaticWavelengthControl
+          ]
+        } ),
+        absorptionWavelengthsButton
+      ]
     } );
 
     super( content, options );
