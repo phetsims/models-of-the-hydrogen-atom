@@ -98,9 +98,12 @@ export default class AbsorptionEmissionDialog extends Panel {
       //   stroke: 'black'
       // },
 
+      iconLength: 10,
       listener: () => {
         providedOptions.visibleProperty.value = false;
       },
+      touchAreaXDilation: 5,
+      touchAreaYDilation: 5,
       tandem: options.tandem.createTandem( 'closeButton' )
     } );
 
