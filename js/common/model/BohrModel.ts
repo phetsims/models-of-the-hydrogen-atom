@@ -322,6 +322,7 @@ export default class BohrModel extends HydrogenAtom {
 
           // absorb photon
           success = true;
+          phet.log && phet.log( `Bohr: absorbed \u03BB=${photon.wavelength}` );
           this.photonAbsorbedEmitter.emit( photon );
 
           // move electron to new state
@@ -401,13 +402,15 @@ export default class BohrModel extends HydrogenAtom {
 
           // Create and emit a photon
           success = true;
-          this.photonEmittedEmitter.emit( new Photon( {
+          const emittedPhoton = new Photon( {
             wavelength: photon.wavelength,
             position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
             direction: photon.directionProperty.value,
             wasEmitted: true,
             tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
-          } ) );
+          } );
+          phet.log && phet.log( `Bohr: stimulated emission of \u03BB=${Utils.toFixedNumber( emittedPhoton.wavelength, 2 )}` );
+          this.photonEmittedEmitter.emit( emittedPhoton );
 
           // move electron to new state
           this.setElectronState( newElectronState );
@@ -461,13 +464,15 @@ export default class BohrModel extends HydrogenAtom {
 
         // Create and emit a photon
         success = true;
-        this.photonEmittedEmitter.emit( new Photon( {
+        const emittedPhoton = new Photon( {
           wavelength: BohrModel.getEmissionWavelength( currentState, newState ),
           position: this.getSpontaneousEmissionPosition(),
           direction: MOTHAUtils.nextAngle(), // in a random direction
           wasEmitted: true,
           tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
-        } ) );
+        } );
+        phet.log && phet.log( `Bohr: spontaneous emission of \u03BB=${Utils.toFixedNumber( emittedPhoton.wavelength, 2 )}` );
+        this.photonEmittedEmitter.emit( emittedPhoton );
 
         // move electron to new state
         this.setElectronState( newState );
@@ -531,6 +536,9 @@ type StateTransition = {
   n2: number; // n2 > n1
 };
 
+//TODO We are populating this map with (and displaying) integer absorption/emission wavelengths.
+//TODO But getAbsorptionWavelength uses the Rydberg formula, which produces non-integer values.
+//TODO Should we use integers, or should we use Rydberg values? This is relevant for PhET-iO.
 function createWavelengthToStateTransitionMap(): Map<number, StateTransition> {
   const map = new Map<number, StateTransition>();
   for ( let n1 = MOTHAConstants.GROUND_STATE; n1 < MOTHAConstants.MAX_STATE; n1++ ) {

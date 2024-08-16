@@ -41,6 +41,7 @@ import MOTHAUtils from '../MOTHAUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import Utils from '../../../../dot/js/Utils.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -326,6 +327,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
           this.numberOfPhotonsAbsorbedProperty.value += 1;
           assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );
+          phet.log && phet.log( `Plum Pudding: absorbed \u03BB=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
           this.photonAbsorbedEmitter.emit( photon );
           absorbed = true;
         }
@@ -347,13 +349,15 @@ export default class PlumPuddingModel extends HydrogenAtom {
       this.numberOfPhotonsAbsorbedProperty.value -= 1;
 
       // Create and emit a photon
-      this.photonEmittedEmitter.emit( new Photon( {
+      const photon = new Photon( {
         wavelength: PHOTON_EMISSION_WAVELENGTH,
         position: this.electron.positionProperty.value, // at the electron's position
         direction: MOTHAUtils.nextAngle(), // in a random direction
         wasEmitted: true,
         tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
-      } ) );
+      } );
+      phet.log && phet.log( `Plum Pudding: emitted \u03BB=${photon.wavelength}` );
+      this.photonEmittedEmitter.emit( photon );
     }
   }
 }
