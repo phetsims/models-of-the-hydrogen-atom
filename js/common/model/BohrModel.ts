@@ -47,6 +47,7 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import MOTHASymbols from '../MOTHASymbols.js';
 
 // Radius of each electron orbit, ordered by increasing electron state number.
 // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
@@ -322,7 +323,7 @@ export default class BohrModel extends HydrogenAtom {
 
           // absorb photon
           success = true;
-          phet.log && phet.log( `Bohr: absorbed \u03BB=${photon.wavelength}` );
+          phet.log && phet.log( `Bohr: absorbed ${MOTHASymbols.lambda}=${photon.wavelength}` );
           this.photonAbsorbedEmitter.emit( photon );
 
           // move electron to new state
@@ -409,7 +410,7 @@ export default class BohrModel extends HydrogenAtom {
             wasEmitted: true,
             tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
           } );
-          phet.log && phet.log( `Bohr: stimulated emission of \u03BB=${Utils.toFixedNumber( emittedPhoton.wavelength, 2 )}` );
+          phet.log && phet.log( `Bohr: stimulated emission of ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
           this.photonEmittedEmitter.emit( emittedPhoton );
 
           // move electron to new state
@@ -471,7 +472,7 @@ export default class BohrModel extends HydrogenAtom {
           wasEmitted: true,
           tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
         } );
-        phet.log && phet.log( `Bohr: spontaneous emission of \u03BB=${Utils.toFixedNumber( emittedPhoton.wavelength, 2 )}` );
+        phet.log && phet.log( `Bohr: spontaneous emission of ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
         this.photonEmittedEmitter.emit( emittedPhoton );
 
         // move electron to new state

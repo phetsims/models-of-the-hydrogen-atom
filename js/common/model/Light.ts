@@ -161,25 +161,29 @@ export default class Light extends PhetioObject {
   }
 
   /**
-   * Creates a photon when it's time to do so, at a random location along the bottom edge of the zoomed-in box.
+   * Creates a photon at a random location along the bottom edge of the zoomed-in box.
    */
   private createPhoton(): void {
-    this.photonCreatedEmitter.emit( new Photon( {
-      wavelength: this.getNextPhotonWavelength(),
-      position: this.getNextPhotonPosition(),
-      direction: Math.PI / 2, // in the direction of +y
-      tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
-    } ) );
+    this.createPhotonAtPosition( this.getNextPhotonWavelength(), this.getNextPhotonPosition() );
   }
 
+  //TODO Delete if not used.
   /**
    * Creates a photon at the bottom-center of the zoomed-in box. This is used when we want to ensure that a
    * photon hits the atom, which is centered in the zoomed-in box.
    */
   public createPhotonAtCenter( wavelength: number ): void {
+    this.createPhotonAtPosition( wavelength, new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ) );
+  }
+
+  //TODO Should wavelength be integer?
+  /**
+   * Creates a photon with the specified wavelength and position.
+   */
+  private createPhotonAtPosition( wavelength: number, position: Vector2 ): void {
     this.photonCreatedEmitter.emit( new Photon( {
       wavelength: wavelength,
-      position: new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ),
+      position: position,
       direction: Math.PI / 2, // in the direction of +y
       tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
     } ) );
@@ -218,9 +222,12 @@ export default class Light extends PhetioObject {
       else {
 
         // choose a random visible wavelength
+        //TODO Should wavelength be integer, by using nextIntBetween?
         wavelength = dotRandom.nextDoubleBetween( this.monochromaticWavelengthRange.min, this.monochromaticWavelengthRange.max );
       }
     }
+
+    //TODO verify that wavelength is an integer?
     return wavelength;
   }
 

@@ -42,6 +42,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Utils from '../../../../dot/js/Utils.js';
+import MOTHASymbols from '../MOTHASymbols.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -327,7 +328,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
           this.numberOfPhotonsAbsorbedProperty.value += 1;
           assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );
-          phet.log && phet.log( `Plum Pudding: absorbed \u03BB=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
+          phet.log && phet.log( `Plum Pudding: absorbed ${MOTHASymbols.lambda}=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
           this.photonAbsorbedEmitter.emit( photon );
           absorbed = true;
         }
