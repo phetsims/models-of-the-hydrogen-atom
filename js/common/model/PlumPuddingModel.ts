@@ -23,7 +23,6 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
@@ -33,6 +32,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Electron from './Electron.js';
 import Photon from './Photon.js';
@@ -40,7 +40,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line no-view-imported-from-model
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -49,7 +49,7 @@ const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon wi
 
 type SelfOptions = EmptySelfOptions;
 
-type PlumPuddingModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'icon'>;
+type PlumPuddingModelOptions = SelfOptions & PickRequired<HydrogenAtomOptions, 'tandem'>;
 
 export default class PlumPuddingModel extends HydrogenAtom {
 

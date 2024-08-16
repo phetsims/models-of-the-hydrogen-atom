@@ -13,10 +13,11 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ExperimentOptions = SelfOptions & SchrodingerModelOptions;
+type ExperimentOptions = SelfOptions & PickRequired<SchrodingerModelOptions, 'tandem'>;
 
 export default class Experiment extends SchrodingerModel {
 

@@ -27,6 +27,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import BohrNode from '../view/BohrNode.js'; // eslint-disable-line no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -45,7 +46,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import BohrNode from '../view/BohrNode.js'; // eslint-disable-line no-view-imported-from-model
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Radius of each electron orbit, ordered by increasing electron state number.

@@ -18,6 +18,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line no-view-imported-from-model
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
@@ -25,7 +26,6 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Electron from './Electron.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
-import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line no-view-imported-from-model
 
 type SelfOptions = EmptySelfOptions;
 

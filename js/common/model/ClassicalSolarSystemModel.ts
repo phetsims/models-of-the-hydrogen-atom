@@ -25,9 +25,9 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
@@ -39,7 +39,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Proton from './Proton.js';
 import Photon from './Photon.js';
-import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line no-view-imported-from-model
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 const ELECTRON_DISTANCE = 150; // initial distance from electron to proton
 const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the electron and proton is reduced per second
@@ -49,7 +49,7 @@ const ELECTRON_ACCELERATION = 1.008; // scaling of electronAngleDeltaProperty ea
 
 type SelfOptions = EmptySelfOptions;
 
-type ClassicalSolarSystemModelOptions = SelfOptions & StrictOmit<HydrogenAtomOptions, 'displayNameProperty' | 'icon'>;
+type ClassicalSolarSystemModelOptions = SelfOptions & PickRequired<HydrogenAtomOptions, 'tandem'>;
 
 export default class ClassicalSolarSystemModel extends HydrogenAtom {
 

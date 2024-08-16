@@ -40,6 +40,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line no-view-imported-from-model
 import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
@@ -52,7 +53,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line no-view-imported-from-model
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 /*
