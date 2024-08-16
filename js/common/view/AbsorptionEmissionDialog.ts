@@ -107,6 +107,7 @@ export default class AbsorptionEmissionDialog extends Panel {
       tandem: options.tandem.createTandem( 'closeButton' )
     } );
 
+    //TODO Maybe make titleBarNode look like the accordion box titles in RPAL?
     const titleBarNode = new HBox( {
       spacing: 10,
       children: [ titleText, closeButton ]
