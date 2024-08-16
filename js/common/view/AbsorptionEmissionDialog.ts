@@ -1,8 +1,10 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/31 Support 'Absorption Wavelengths', 'Emission Wavelengths', and 'Absorption/Emission Wavelengths'
 /**
- * TODO
+ * AbsorptionEmissionDialog is a non-modal dialog that displays information about absorption/emission wavelengths
+ * and state transitions, and contains controls for setting wavelengths for the Light.
+ *
+ * Since PhET does not have support for non-modal Dialogs, we fake a dialog using a Panel.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -59,18 +61,18 @@ type SelfOptions = {
   visibleProperty: Property<boolean>; // our visibleProperty needs to be writable
 };
 
-type AbsorptionWavelengthsDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+type AbsorptionEmissionDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class AbsorptionWavelengthsPanel extends Panel {
+export default class AbsorptionEmissionDialog extends Panel {
 
   // Position of the panel's top-left corner.
   private readonly positionProperty: Property<Vector2>;
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
-                      providedOptions: AbsorptionWavelengthsDialogOptions ) {
+                      providedOptions: AbsorptionEmissionDialogOptions ) {
 
-    const options = optionize<AbsorptionWavelengthsDialogOptions, SelfOptions, PanelOptions>()( {
+    const options = optionize<AbsorptionEmissionDialogOptions, SelfOptions, PanelOptions>()( {
 
       // SelfOptions
       position: Vector2.ZERO,
@@ -82,7 +84,8 @@ export default class AbsorptionWavelengthsPanel extends Panel {
       cursor: 'pointer',
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener
-      groupFocusHighlight: true
+      groupFocusHighlight: true,
+      tandemNameSuffix: 'Dialog' // Yes it's a Panel, but we are OK with calling it a Dialog.
     }, providedOptions );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, TITLE_TEXT_OPTIONS );
@@ -263,4 +266,4 @@ export default class AbsorptionWavelengthsPanel extends Panel {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionWavelengthsPanel', AbsorptionWavelengthsPanel );
+modelsOfTheHydrogenAtom.register( 'AbsorptionEmissionDialog', AbsorptionEmissionDialog );

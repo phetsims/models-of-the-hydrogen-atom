@@ -26,14 +26,11 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import { LightControlPanel } from '../../common/view/LightControlPanel.js';
 import { LightNode } from '../../common/view/LightNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import AbsorptionWavelengthsPanel from '../../common/view/AbsorptionWavelengthsPanel.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
+import AbsorptionEmissionDialog from '../../common/view/AbsorptionEmissionDialog.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import AbsorptionEmissionCheckbox from '../../common/view/AbsorptionEmissionCheckbox.js';
 
 export default class SpectraScreenView extends ScreenView {
-
-  private readonly model: SpectraModel;
-  private readonly zoomedInBoxNode: SpectraZoomedInBoxNode;
 
   public constructor( model: SpectraModel, tandem: Tandem ) {
 
@@ -49,68 +46,39 @@ export default class SpectraScreenView extends ScreenView {
 
     // Legend for particle types
     const legendPanel = new LegendPanel( {
-      left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
-      top: this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: tandem.createTandem( 'legendPanel' )
     } );
 
-    const absorptionWavelengthsPanelVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'absorptionWavelengthsPanelVisibleProperty' )
-      //TODO phetioReadOnly: true?
-    } );
-
-    const absorptionWavelengthsPanelTandem = tandem.createTandem( 'absorptionWavelengthsPanel' );
-    const absorptionWavelengthsPanel = new AbsorptionWavelengthsPanel(
-      model.light.monochromaticWavelengthProperty, this.visibleBoundsProperty, {
-        visibleProperty: absorptionWavelengthsPanelVisibleProperty,
-        tandem: absorptionWavelengthsPanelTandem
-      } );
-
     // Light
     const lightNode = new LightNode( model.light, {
-      left: this.layoutBounds.left + 100,
-      bottom: 415,
       tandem: tandem.createTandem( 'lightNode' )
     } );
 
     // Controls for the light
-    const lightControlPanel = new LightControlPanel( model.light, model.hydrogenAtomProperty,
-      absorptionWavelengthsPanelVisibleProperty, {
-        left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
-        top: lightNode.bottom + 15,
-        tandem: tandem.createTandem( 'lightControlPanel' )
-      } );
+    const lightControlPanel = new LightControlPanel( model.light, {
+      tandem: tandem.createTandem( 'lightControlPanel' )
+    } );
+
+    const absorptionEmissionDialogVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'absorptionEmissionDialogVisibleProperty' )
+    } );
+
+    const absorptionEmissionCheckbox = new AbsorptionEmissionCheckbox( absorptionEmissionDialogVisibleProperty,
+      tandem.createTandem( 'absorptionEmissionCheckbox' ) );
 
     // The zoomed-in view of the box of hydrogen
     const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {
-      left: lightNode.right + 50,
-      top: this.layoutBounds.top + 15,
       tandem: tandem.createTandem( 'zoomedInBoxNode' )
     } );
 
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode( {
-      centerX: lightNode.centerX,
-      bottom: lightNode.top + 1,
       tandem: tandem.createTandem( 'boxOfHydrogenNode' )
     } );
 
     // Tiny box that indicates what will be zoomed
     const tinyBoxNode = new TinyBox( {
-      right: boxOfHydrogenNode.right - 10,
-      top: boxOfHydrogenNode.top + 20,
       visibleProperty: boxOfHydrogenNode.visibleProperty
-    } );
-
-    // Dashed lines that connect the tiny box and zoom box
-    const dashedLines = new Path( new Shape()
-      .moveTo( tinyBoxNode.left, tinyBoxNode.top )
-      .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.top )
-      .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
-      .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.bottom ), {
-      stroke: MOTHAColors.zoomedInBoxStrokeProperty,
-      lineDash: [ 5, 5 ],
-      visibleProperty: DerivedProperty.and( [ zoomedInBoxNode.visibleProperty, boxOfHydrogenNode.visibleProperty ] )
     } );
 
     // switches the model mode between Experiment and Model
@@ -127,39 +95,76 @@ export default class SpectraScreenView extends ScreenView {
       children: [ experimentModelSwitch, modelPanel ],
       align: 'center',
       spacing: 10,
-      left: zoomedInBoxNode.right + 30,
-      top: zoomedInBoxNode.top,
       excludeInvisibleChildrenFromBounds: false
     } );
 
     // Spectrometer
     const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, {
-      left: lightControlPanel.right + 12,
-      top: lightControlPanel.top,
       tandem: tandem.createTandem( 'spectrometerAccordionBox' )
     } );
 
     // Time controls
-    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty,
-      model.stepOnce.bind( model ), {
-        left: modelVBox.left,
-        centerY: modelVBox.bottom + ( spectrometerAccordionBox.top - modelVBox.bottom ) / 2,
-        tandem: tandem.createTandem( 'timeControlNode' )
-      } );
+    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty, model.stepOnce.bind( model ), {
+      tandem: tandem.createTandem( 'timeControlNode' )
+    } );
 
     // Reset All button
     const resetAllButton = new ResetAllButton( {
       listener: () => {
         this.interruptSubtreeInput();
         model.reset();
-        absorptionWavelengthsPanelVisibleProperty.reset();
-        absorptionWavelengthsPanel.reset();
+        absorptionEmissionDialogVisibleProperty.reset();
+        absorptionEmissionDialog.reset();
         spectrometerAccordionBox.reset();
       },
-      right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
-      bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
+
+    // Layout is complicated, so do it all in one place, rather than via NodeTranslationOptions.
+    legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
+    legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
+    lightNode.left = this.layoutBounds.left + 100;
+    lightControlPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
+    zoomedInBoxNode.left = lightNode.right + 50;
+    zoomedInBoxNode.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
+    lightNode.bottom = zoomedInBoxNode.bottom;
+    lightControlPanel.top = zoomedInBoxNode.bottom + 15;
+    boxOfHydrogenNode.centerX = lightNode.centerX;
+    boxOfHydrogenNode.bottom = lightNode.top + 1;
+    tinyBoxNode.right = boxOfHydrogenNode.right - 10;
+    tinyBoxNode.top = boxOfHydrogenNode.top + 20;
+    modelVBox.left = zoomedInBoxNode.right + 30;
+    modelVBox.top = zoomedInBoxNode.top;
+    spectrometerAccordionBox.left = lightControlPanel.right + 12;
+    spectrometerAccordionBox.top = lightControlPanel.top;
+    timeControlNode.left = modelVBox.left;
+    timeControlNode.centerY = modelVBox.bottom + ( spectrometerAccordionBox.top - modelVBox.bottom ) / 2;
+    absorptionEmissionCheckbox.localBoundsProperty.link( () => {
+      absorptionEmissionCheckbox.centerX = lightControlPanel.centerX;
+      absorptionEmissionCheckbox.top = lightControlPanel.bottom + 5;
+    } );
+    resetAllButton.right = this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN;
+    resetAllButton.bottom = this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
+
+    // Now continue with things that depend on the above layout.
+
+    // Dashed lines that connect the tiny box and zoom box. Do this after layout!
+    const dashedLines = new Path( new Shape()
+      .moveTo( tinyBoxNode.left, tinyBoxNode.top )
+      .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.top )
+      .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
+      .lineTo( zoomedInBoxNode.left, zoomedInBoxNode.bottom ), {
+      stroke: MOTHAColors.zoomedInBoxStrokeProperty,
+      lineDash: [ 5, 5 ],
+      visibleProperty: DerivedProperty.and( [ zoomedInBoxNode.visibleProperty, boxOfHydrogenNode.visibleProperty ] )
+    } );
+
+    const absorptionEmissionDialog = new AbsorptionEmissionDialog(
+      model.light.monochromaticWavelengthProperty, this.visibleBoundsProperty, {
+        position: modelVBox.leftTop,
+        visibleProperty: absorptionEmissionDialogVisibleProperty,
+        tandem: tandem.createTandem( 'absorptionEmissionDialog' )
+      } );
 
     // rendering order
     const screenViewRootNode = new Node( {
@@ -168,6 +173,7 @@ export default class SpectraScreenView extends ScreenView {
         timeControlNode,
         lightNode,
         lightControlPanel,
+        absorptionEmissionCheckbox,
         boxOfHydrogenNode,
         tinyBoxNode,
         dashedLines,
@@ -175,7 +181,7 @@ export default class SpectraScreenView extends ScreenView {
         modelVBox,
         spectrometerAccordionBox,
         resetAllButton,
-        absorptionWavelengthsPanel,
+        absorptionEmissionDialog,
         popupsParent
       ]
     } );
@@ -186,7 +192,8 @@ export default class SpectraScreenView extends ScreenView {
       //TODO pdomPlayAreaNode.pdomOrder
       lightNode,
       lightControlPanel,
-      absorptionWavelengthsPanel,
+      absorptionEmissionCheckbox,
+      absorptionEmissionDialog,
       zoomedInBoxNode,
       modelVBox,
       timeControlNode,
@@ -198,12 +205,6 @@ export default class SpectraScreenView extends ScreenView {
     this.pdomControlAreaNode.pdomOrder = [
       //TODO pdomControlAreaNode.pdomOrder
     ];
-
-    this.model = model;
-    this.zoomedInBoxNode = zoomedInBoxNode;
-
-    //TODO yuck
-    absorptionWavelengthsPanel.setInitialPosition( new Vector2( modelVBox.left, modelVBox.top ) );
   }
 }
 

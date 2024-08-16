@@ -15,12 +15,11 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type MOTHATimeControlNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<TimeControlNodeOptions, 'tandem'>;
+type MOTHATimeControlNodeOptions = SelfOptions & PickRequired<TimeControlNodeOptions, 'tandem'>;
 
 export default class MOTHATimeControlNode extends TimeControlNode {
 

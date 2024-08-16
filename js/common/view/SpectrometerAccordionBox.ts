@@ -13,7 +13,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, NodeTranslationOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -37,7 +37,7 @@ const DISPLAY_SIZE = new Dimension2( 535, 135 );
 
 type SelfOptions = EmptySelfOptions;
 
-type SpectrometerAccordionBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+type SpectrometerAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 

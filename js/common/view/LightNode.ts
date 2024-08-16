@@ -7,7 +7,7 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Light from '../model/Light.js';
@@ -17,7 +17,7 @@ import BeamNode from './BeamNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type LightNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+type LightNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export class LightNode extends Node {
 

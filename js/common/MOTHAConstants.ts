@@ -26,8 +26,8 @@ const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
 const MOTHAConstants = {
 
   // margins for all ScreenView instances
-  SCREEN_VIEW_X_MARGIN: 20,
-  SCREEN_VIEW_Y_MARGIN: 20,
+  SCREEN_VIEW_X_MARGIN: 15,
+  SCREEN_VIEW_Y_MARGIN: 15,
 
   // This value is the same as the Java version, to preserve the same relative sizes of things in the model.
   // See ANIMATION_BOX_SIZE in HAConstants.java.

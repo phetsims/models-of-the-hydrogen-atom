@@ -8,29 +8,23 @@
 
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAColors from '../MOTHAColors.js';
 import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
 import Light from '../model/Light.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
-import AbsorptionWavelengthsCheckbox from './AbsorptionWavelengthsCheckbox.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
-import Property from '../../../../axon/js/Property.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type LightControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
+type LightControlPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export class LightControlPanel extends Panel {
 
-  public constructor( light: Light,
-                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                      absorptionWavelengthsPanelVisibleProperty: Property<boolean>,
-                      providedOptions: LightControlPanelOptions ) {
+  public constructor( light: Light, providedOptions: LightControlPanelOptions ) {
 
     const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
 
@@ -42,28 +36,25 @@ export class LightControlPanel extends Panel {
       yMargin: 10
     }, providedOptions );
 
-    const absorptionWavelengthsCheckbox = new AbsorptionWavelengthsCheckbox( absorptionWavelengthsPanelVisibleProperty,
-      options.tandem.createTandem( 'absorptionWavelengthsCheckbox' ) );
-
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty, {
       tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
 
-    const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty,
-      options.tandem.createTandem( 'absorptionTransitionText' ) );
+    const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty, {
+      visibleProperty: new DerivedProperty( [ light.lightModeProperty ], lightMode => lightMode === 'monochromatic' ),
+      tandem: options.tandem.createTandem( 'absorptionTransitionText' )
+    } );
 
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( light.lightModeProperty, {
       maxWidth: monochromaticWavelengthControl.width,
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
-    //TODO Make dynamic layout work properly when PhET-iO is used to hide elements.
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
       spacing: 10,
       children: [
-        absorptionWavelengthsCheckbox,
         lightModeRadioButtonGroup,
         absorptionTransitionText,
         monochromaticWavelengthControl

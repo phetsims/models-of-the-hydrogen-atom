@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * AbsorptionWavelengthsCheckbox is the checkbox that shows the 'Absorption Wavelengths' panel.
+ * AbsorptionEmissionCheckbox is the checkbox that shows the 'Absorption Wavelengths' panel.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,9 +15,9 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import Property from '../../../../axon/js/Property.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-export default class AbsorptionWavelengthsCheckbox extends Checkbox {
+export default class AbsorptionEmissionCheckbox extends Checkbox {
 
-  public constructor( absorptionWavelengthsPanelVisibleProperty: Property<boolean>, tandem: Tandem ) {
+  public constructor( absorptionEmissionDialogVisibleProperty: Property<boolean>, tandem: Tandem ) {
 
     const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, {
       font: new PhetFont( 16 ),
@@ -25,7 +25,7 @@ export default class AbsorptionWavelengthsCheckbox extends Checkbox {
       maxWidth: 200
     } );
 
-    super( absorptionWavelengthsPanelVisibleProperty, text, {
+    super( absorptionEmissionDialogVisibleProperty, text, {
 
       // CheckboxOptions
       isDisposable: false,
@@ -34,4 +34,4 @@ export default class AbsorptionWavelengthsCheckbox extends Checkbox {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionWavelengthsCheckbox', AbsorptionWavelengthsCheckbox );
+modelsOfTheHydrogenAtom.register( 'AbsorptionEmissionCheckbox', AbsorptionEmissionCheckbox );
