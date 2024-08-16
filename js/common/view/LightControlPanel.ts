@@ -14,9 +14,12 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAColors from '../MOTHAColors.js';
 import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
 import Light from '../model/Light.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BohrModel from '../model/BohrModel.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -24,7 +27,7 @@ type LightControlPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem
 
 export class LightControlPanel extends Panel {
 
-  public constructor( light: Light, providedOptions: LightControlPanelOptions ) {
+  public constructor( light: Light, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: LightControlPanelOptions ) {
 
     const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
 
@@ -41,7 +44,8 @@ export class LightControlPanel extends Panel {
     } );
 
     const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty, {
-      visibleProperty: new DerivedProperty( [ light.lightModeProperty ], lightMode => lightMode === 'monochromatic' ),
+      visibleProperty: new DerivedProperty( [ light.lightModeProperty, hydrogenAtomProperty ],
+        ( lightMode, hydrogenAtom ) => ( lightMode === 'monochromatic' ) && ( hydrogenAtom instanceof BohrModel ) ),
       tandem: options.tandem.createTandem( 'absorptionTransitionText' )
     } );
 
