@@ -63,8 +63,9 @@ export default class SpectraScreenView extends ScreenView {
       tandem: tandem.createTandem( 'absorptionEmissionDialogVisibleProperty' )
     } );
 
-    const absorptionEmissionCheckbox = new AbsorptionEmissionCheckbox( absorptionEmissionDialogVisibleProperty,
-      tandem.createTandem( 'absorptionEmissionCheckbox' ) );
+    const absorptionEmissionCheckbox = new AbsorptionEmissionCheckbox( absorptionEmissionDialogVisibleProperty, {
+      tandem: tandem.createTandem( 'absorptionEmissionCheckbox' )
+    } );
 
     // The zoomed-in view of the box of hydrogen
     const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {

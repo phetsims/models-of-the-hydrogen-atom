@@ -6,27 +6,34 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import Property from '../../../../axon/js/Property.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type SpectrometerOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Spectrometer extends PhetioObject {
 
   public readonly numberOfSnapshotsProperty: Property<number>;
 
-  public constructor( tandem: Tandem ) {
-    super( {
+  public constructor( providedOptions: SpectrometerOptions ) {
+
+    const options = optionize<SpectrometerOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
       isDisposable: false,
-      tandem: tandem,
       phetioState: false
-    } );
+    }, providedOptions );
+
+    super( options );
 
     this.numberOfSnapshotsProperty = new NumberProperty( 0, {
-      tandem: tandem.createTandem( 'numberOfSnapshotsProperty' ),
+      tandem: options.tandem.createTandem( 'numberOfSnapshotsProperty' ),
       phetioReadOnly: true
     } );
   }

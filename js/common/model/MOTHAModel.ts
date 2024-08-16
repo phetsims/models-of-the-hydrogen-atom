@@ -119,7 +119,9 @@ export default class MOTHAModel implements TModel {
 
     this.light.photonCreatedEmitter.addListener( photon => this.photons.add( photon ) );
 
-    this.spectrometer = new Spectrometer( tandem.createTandem( 'spectrometer' ) );
+    this.spectrometer = new Spectrometer( {
+      tandem: tandem.createTandem( 'spectrometer' )
+    } );
 
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isPlayingProperty' ),
