@@ -60,6 +60,7 @@ const MOTHAConstants = {
   // margin between the state display and inside edge of zoomed-in box
   STATE_DISPLAY_MARGINS: new Vector2( 10, 10 ),
 
+  //TODO Java version had a wide range of speeds. Do we need 'Slow' to support making sense of the de Broglie views?
   TIME_SPEEDS: [ TimeSpeed.FAST, TimeSpeed.NORMAL ],
 
   SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS
