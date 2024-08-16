@@ -29,8 +29,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AbsorptionWavelengthsPanel from '../../common/view/AbsorptionWavelengthsPanel.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import BohrModel from '../../common/model/BohrModel.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -58,18 +56,13 @@ export default class SpectraScreenView extends ScreenView {
 
     const absorptionWavelengthsPanelVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'absorptionWavelengthsPanelVisibleProperty' )
+      //TODO phetioReadOnly: true?
     } );
 
     const absorptionWavelengthsPanelTandem = tandem.createTandem( 'absorptionWavelengthsPanel' );
     const absorptionWavelengthsPanel = new AbsorptionWavelengthsPanel(
       model.light.monochromaticWavelengthProperty, this.layoutBounds, {
-        visibleProperty: new DerivedProperty(
-          [ absorptionWavelengthsPanelVisibleProperty, model.light.lightModeProperty, model.hydrogenAtomProperty ],
-          ( absorptionWavelengthsPanelVisible, lightMode, hydrogenAtom ) =>
-            absorptionWavelengthsPanelVisible && lightMode === 'monochromatic' && hydrogenAtom instanceof BohrModel, {
-            tandem: absorptionWavelengthsPanelTandem.createTandem( 'visibleProperty' ),
-            phetioValueType: BooleanIO
-          } ),
+        visibleProperty: absorptionWavelengthsPanelVisibleProperty,
         tandem: absorptionWavelengthsPanelTandem
       } );
 

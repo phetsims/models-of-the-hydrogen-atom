@@ -42,7 +42,9 @@ export class LightControlPanel extends Panel {
       yMargin: 10
     }, providedOptions );
 
-    // Wavelength control
+    const absorptionWavelengthsCheckbox = new AbsorptionWavelengthsCheckbox( absorptionWavelengthsPanelVisibleProperty,
+      options.tandem.createTandem( 'absorptionWavelengthsCheckbox' ) );
+
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty, {
       tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
@@ -55,25 +57,16 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
-    const absorptionWavelengthsCheckbox = new AbsorptionWavelengthsCheckbox( absorptionWavelengthsPanelVisibleProperty,
-      light.lightModeProperty, hydrogenAtomProperty, options.tandem.createTandem( 'absorptionWavelengthsCheckbox' ) );
-
     //TODO Make dynamic layout work properly when PhET-iO is used to hide elements.
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
       spacing: 10,
       children: [
+        absorptionWavelengthsCheckbox,
         lightModeRadioButtonGroup,
-        new VBox( {
-          excludeInvisibleChildrenFromBounds: false,
-          spacing: 5,
-          children: [
-            absorptionTransitionText,
-            monochromaticWavelengthControl
-          ]
-        } ),
-        absorptionWavelengthsCheckbox
+        absorptionTransitionText,
+        monochromaticWavelengthControl
       ]
     } );
 

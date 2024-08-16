@@ -32,7 +32,7 @@ export default class AbsorptionTransitionText extends RichText {
       } );
 
     super( stringProperty, {
-      font: new PhetFont( 12 ),
+      font: new PhetFont( 14 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 100,
       tandem: tandem,
