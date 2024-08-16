@@ -7,7 +7,7 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
@@ -16,6 +16,7 @@ import MOTHAColors from '../../common/MOTHAColors.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
+import MOTHAConstants from '../../common/MOTHAConstants.js';
 
 // constants
 const DIAGRAM_SIZE = new Dimension2( 220, 420 );
@@ -28,26 +29,14 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
   public constructor( providedOptions: ElectronEnergyLevelAccordionBoxOptions ) {
 
-    const options = optionize<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+    const options = optionize4<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
+      {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
 
       // AccordionBoxOptions
       isDisposable: false,
       expandedDefaultValue: MOTHAQueryParameters.expandAll,
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
-      stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
-      cornerRadius: 5,
-      buttonXMargin: 5,
-      buttonYMargin: 5,
-      contentXMargin: 5,
-      contentYMargin: 5,
-      contentYSpacing: 0,
-      expandCollapseButtonOptions: {
-        touchAreaXDilation: 16,
-        touchAreaYDilation: 16
-      },
-      buttonAlign: 'left',
-      titleAlignX: 'left',
-      titleXSpacing: 10
+      stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty
     }, providedOptions );
 
     options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {

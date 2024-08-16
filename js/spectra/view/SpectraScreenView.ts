@@ -124,7 +124,7 @@ export default class SpectraScreenView extends ScreenView {
     // Layout is complicated, so do it all in one place, rather than via NodeTranslationOptions.
     legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
-    lightNode.left = this.layoutBounds.left + 100;
+    lightNode.left = this.layoutBounds.left + 125;
     lightControlPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     zoomedInBoxNode.left = lightNode.right + 50;
     zoomedInBoxNode.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;

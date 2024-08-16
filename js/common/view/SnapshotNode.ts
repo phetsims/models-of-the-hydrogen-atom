@@ -16,6 +16,7 @@ import TrashButton from '../../../../scenery-phet/js/buttons/TrashButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 const INSIDE_X_MARGIN = 6;
 const INSIDE_Y_MARGIN = 6;
@@ -34,7 +35,7 @@ export default class SnapshotNode extends Node {
     }, providedOptions );
 
     const backgroundNode = new Rectangle( 0, 0, 500, 150, {
-      cornerRadius: 5,
+      cornerRadius: MOTHAConstants.CORNER_RADIUS,
       fill: MOTHAColors.spectrometerFillProperty,
       stroke: MOTHAColors.spectrometerStrokeProperty
     } );

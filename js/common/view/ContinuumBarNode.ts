@@ -14,6 +14,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {
   xMargin?: number;
@@ -54,7 +55,7 @@ export default class ContinuumBarNode extends Node {
 
     const barWidth = Math.max( classicalText.width, quantumText.width ) + ( 2 * options.xMargin );
     const barNode = new Rectangle( 0, 0, barWidth, barHeight, {
-      cornerRadius: 5,
+      cornerRadius: MOTHAConstants.CORNER_RADIUS,
       fill: options.barFill
     } );
 

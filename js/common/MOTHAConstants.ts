@@ -12,9 +12,36 @@ import Range from '../../../dot/js/Range.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
 import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNode.js';
+import { PanelOptions } from '../../../sun/js/Panel.js';
+import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
 
 const GROUND_STATE = 1;
 const MAX_STATE = 6;
+
+const CORNER_RADIUS = 5;
+
+const ACCORDION_BOX_OPTIONS: AccordionBoxOptions = {
+  cornerRadius: CORNER_RADIUS,
+  buttonXMargin: 8,
+  buttonYMargin: 5,
+  contentXMargin: 5,
+  contentYMargin: 5,
+  contentYSpacing: 0,
+  buttonAlign: 'left',
+  titleAlignX: 'left',
+  titleXSpacing: 10,
+  expandCollapseButtonOptions: {
+    sideLength: 22,
+    touchAreaXDilation: 10,
+    touchAreaYDilation: 10
+  }
+};
+
+const PANEL_OPTIONS: PanelOptions = {
+  xMargin: 10,
+  yMargin: 10,
+  cornerRadius: CORNER_RADIUS
+};
 
 const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
 
@@ -63,6 +90,10 @@ const MOTHAConstants = {
   //TODO Java version had a wide range of speeds. Do we need 'Slow' to support making sense of the de Broglie views?
   TIME_SPEEDS: [ TimeSpeed.FAST, TimeSpeed.NORMAL ],
 
+  // Various shared options
+  CORNER_RADIUS: CORNER_RADIUS,
+  ACCORDION_BOX_OPTIONS: ACCORDION_BOX_OPTIONS,
+  PANEL_OPTIONS: PANEL_OPTIONS,
   SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS
 };
 

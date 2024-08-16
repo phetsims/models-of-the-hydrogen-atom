@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
@@ -33,7 +33,7 @@ export default class LegendPanel extends Panel {
 
   public constructor( providedOptions: LegendPanelOptions ) {
 
-    const options = optionize<LegendPanelOptions, SelfOptions, PanelOptions>()( {
+    const options = optionize4<LegendPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
 
       // SelfOptions
       iconScale: MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE,
@@ -41,9 +41,7 @@ export default class LegendPanel extends Panel {
       // PanelOptions
       isDisposable: false,
       fill: null,
-      stroke: null,
-      xMargin: 0,
-      yMargin: 0
+      stroke: null
     }, providedOptions );
 
     // To make all icons have the same effective size.

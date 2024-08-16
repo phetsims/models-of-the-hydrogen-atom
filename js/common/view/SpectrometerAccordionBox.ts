@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -33,7 +33,7 @@ import SnapshotsDialog from './SnapshotsDialog.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // constants
-const DISPLAY_SIZE = new Dimension2( 535, 135 );
+const DISPLAY_SIZE = new Dimension2( 575, 135 );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -50,34 +50,21 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: providedOptions.tandem.createTandem( 'expandedProperty' )
     } );
 
-    const options = optionize<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+    const options = optionize4<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
+      {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
 
-      // AccordionBoxOptions
-      isDisposable: false,
-      expandedProperty: expandedProperty,
-      fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
-      stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
-      cornerRadius: 5,
-      buttonXMargin: 8,
-      buttonYMargin: 5,
-      contentXMargin: 10,
-      contentYMargin: 5,
-      contentYSpacing: 0,
-      buttonAlign: 'left',
-      titleAlignX: 'left',
-      titleXSpacing: 10,
-      expandCollapseButtonOptions: {
-        sideLength: 22,
-        touchAreaXDilation: 10,
-        touchAreaYDilation: 10
-      }
-    }, providedOptions );
+        // AccordionBoxOptions
+        isDisposable: false,
+        expandedProperty: expandedProperty,
+        fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
+        stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty
+      }, providedOptions );
 
     options.titleNode = new TitleNode( expandedProperty, options.tandem.createTandem( 'titleNode' ) );
 
     //TODO placeholder
     const displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
-      cornerRadius: options.cornerRadius,
+      cornerRadius: MOTHAConstants.CORNER_RADIUS,
       fill: MOTHAColors.spectrometerFillProperty,
       stroke: MOTHAColors.spectrometerStrokeProperty
     } );
@@ -156,7 +143,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } );
 
     const contentNode = new HBox( {
-      spacing: 10,
+      spacing: 5,
       align: 'bottom',
       children: [ displayNode, buttonGroup ]
     } );

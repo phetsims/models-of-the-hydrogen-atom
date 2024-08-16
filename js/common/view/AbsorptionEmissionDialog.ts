@@ -10,7 +10,7 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignGroup, Color, GridBox, HBox, HSeparator, KeyboardListener, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -71,15 +71,13 @@ export default class AbsorptionEmissionDialog extends Panel {
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: AbsorptionEmissionDialogOptions ) {
 
-    const options = optionize<AbsorptionEmissionDialogOptions, SelfOptions, PanelOptions>()( {
+    const options = optionize4<AbsorptionEmissionDialogOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
 
       // SelfOptions
       position: Vector2.ZERO,
 
       // PanelOptions
       isDisposable: false,
-      xMargin: 10,
-      yMargin: 10,
       cursor: 'pointer',
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener

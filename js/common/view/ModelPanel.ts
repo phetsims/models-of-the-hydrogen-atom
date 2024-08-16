@@ -10,7 +10,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { HBox, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
@@ -21,6 +21,7 @@ import { ModelMode } from '../model/ModelMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -33,7 +34,7 @@ export default class ModelPanel extends Panel {
                       modelModeProperty: TReadOnlyProperty<ModelMode>,
                       providedOptions: ModelPanelOptions ) {
 
-    const options = optionize<ModelPanelOptions, SelfOptions, PanelOptions>()( {
+    const options = optionize4<ModelPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
 
       // PanelOptions
       isDisposable: false,
@@ -42,9 +43,7 @@ export default class ModelPanel extends Panel {
         phetioValueType: BooleanIO
       } ),
       fill: MOTHAColors.modelsPanelFillProperty,
-      stroke: MOTHAColors.modelsPanelStrokeProperty,
-      xMargin: 10,
-      yMargin: 10
+      stroke: MOTHAColors.modelsPanelStrokeProperty
     }, providedOptions );
 
     // radio buttons

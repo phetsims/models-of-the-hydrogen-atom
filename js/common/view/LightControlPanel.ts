@@ -9,7 +9,7 @@
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAColors from '../MOTHAColors.js';
 import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
@@ -20,6 +20,7 @@ import AbsorptionTransitionText from './AbsorptionTransitionText.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BohrModel from '../model/BohrModel.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -29,14 +30,12 @@ export class LightControlPanel extends Panel {
 
   public constructor( light: Light, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: LightControlPanelOptions ) {
 
-    const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
+    const options = optionize4<LightControlPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
 
       //TODO PanelOptions
       isDisposable: false,
       fill: MOTHAColors.panelFillColorProperty,
-      stroke: MOTHAColors.panelStrokeColorProperty,
-      xMargin: 10,
-      yMargin: 10
+      stroke: MOTHAColors.panelStrokeColorProperty
     }, providedOptions );
 
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty, {
