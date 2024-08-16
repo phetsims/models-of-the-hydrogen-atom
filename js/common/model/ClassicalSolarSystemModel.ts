@@ -42,9 +42,9 @@ import Photon from './Photon.js';
 import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line no-view-imported-from-model
 
 const ELECTRON_DISTANCE = 150; // initial distance from electron to proton
-const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the proton and electron is reduced per second
-const MIN_ELECTRON_DISTANCE = 5; // any distance smaller than this is effectively zero
-const ELECTRON_ANGLE_DELTA = Utils.toRadians( 600 ); // initial change in electron's rotation angle per second
+const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the electron and proton is reduced per second
+const MIN_ELECTRON_DISTANCE = 5; // any distance between the electron and proton that is smaller than this is effectively zero
+const ELECTRON_ANGLE_DELTA = Utils.toRadians( 600 ); // initial change in the electron's rotation angle per second
 const ELECTRON_ACCELERATION = 1.008; // scaling of electronAngleDeltaProperty each time step is called
 
 type SelfOptions = EmptySelfOptions;
