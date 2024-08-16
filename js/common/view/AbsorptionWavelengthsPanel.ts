@@ -10,7 +10,7 @@
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, Color, GridBox, HBox, HSeparator, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Color, GridBox, HBox, HSeparator, KeyboardListener, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
@@ -237,6 +237,17 @@ export default class AbsorptionWavelengthsPanel extends Panel {
       tandem: options.tandem.createTandem( 'keyboardDragListener' )
     } );
     this.addInputListener( keyboardDragListener );
+
+    // Hide the panel when the "escape" key is pressed.
+    const keyboardListener = new KeyboardListener( {
+      keys: [ 'escape', 'tab', 'shift+tab' ],
+      fire: ( event, keysPressed ) => {
+        if ( keysPressed === 'escape' ) {
+          providedOptions.visibleProperty.value = false;
+        }
+      }
+    } );
+    this.addInputListener( keyboardListener );
   }
 
   public reset(): void {
