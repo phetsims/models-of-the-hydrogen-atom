@@ -60,6 +60,7 @@ export class LightControlPanel extends Panel {
     const absorptionWavelengthsButton = new AbsorptionWavelengthsButton( light.lightModeProperty, hydrogenAtomProperty,
       absorptionWavelengthsDialog, options.tandem.createTandem( 'absorptionWavelengthsButton' ) );
 
+    //TODO Make dynamic layout work properly when PhET-iO is used to hide elements.
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
       align: 'center',
