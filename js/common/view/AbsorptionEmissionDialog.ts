@@ -34,7 +34,6 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
-import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -92,12 +91,12 @@ export default class AbsorptionEmissionDialog extends Panel {
 
     const closeButton = new CloseButton( {
 
-      // styled like Dialog
-      baseColor: 'transparent',
-      buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
-      pathOptions: {
-        stroke: 'black'
-      },
+      //TODO Use these options if we want the 'X' like in Dialog.
+      // baseColor: 'transparent',
+      // buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
+      // pathOptions: {
+      //   stroke: 'black'
+      // },
 
       listener: () => {
         providedOptions.visibleProperty.value = false;
