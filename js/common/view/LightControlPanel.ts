@@ -15,11 +15,11 @@ import MOTHAColors from '../MOTHAColors.js';
 import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
 import Light from '../model/Light.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
-import AbsorptionWavelengthsDialog from './AbsorptionWavelengthsDialog.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import AbsorptionWavelengthsButton from './AbsorptionWavelengthsButton.js';
+import AbsorptionWavelengthsCheckbox from './AbsorptionWavelengthsCheckbox.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
+import Property from '../../../../axon/js/Property.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -27,7 +27,10 @@ type LightControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequi
 
 export class LightControlPanel extends Panel {
 
-  public constructor( light: Light, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: LightControlPanelOptions ) {
+  public constructor( light: Light,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      absorptionWavelengthsPanelVisibleProperty: Property<boolean>,
+                      providedOptions: LightControlPanelOptions ) {
 
     const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
 
@@ -52,13 +55,8 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
-    const absorptionWavelengthsDialog = new AbsorptionWavelengthsDialog( light.monochromaticWavelengthProperty, {
-      tandem: options.tandem.createTandem( 'absorptionWavelengthsDialog' )
-    } );
-
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/31 Replace with a Checkbox
-    const absorptionWavelengthsButton = new AbsorptionWavelengthsButton( light.lightModeProperty, hydrogenAtomProperty,
-      absorptionWavelengthsDialog, options.tandem.createTandem( 'absorptionWavelengthsButton' ) );
+    const absorptionWavelengthsCheckbox = new AbsorptionWavelengthsCheckbox( absorptionWavelengthsPanelVisibleProperty,
+      light.lightModeProperty, hydrogenAtomProperty, options.tandem.createTandem( 'absorptionWavelengthsCheckbox' ) );
 
     //TODO Make dynamic layout work properly when PhET-iO is used to hide elements.
     const content = new VBox( {
@@ -75,7 +73,7 @@ export class LightControlPanel extends Panel {
             monochromaticWavelengthControl
           ]
         } ),
-        absorptionWavelengthsButton
+        absorptionWavelengthsCheckbox
       ]
     } );
 

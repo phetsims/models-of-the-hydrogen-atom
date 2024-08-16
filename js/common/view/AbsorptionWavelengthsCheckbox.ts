@@ -1,12 +1,11 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * AbsorptionWavelengthsButton is the button that opens the 'Absorption Wavelengths' dialog.
+ * AbsorptionWavelengthsCheckbox is the checkbox that shows the 'Absorption Wavelengths' panel.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
@@ -17,26 +16,28 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import Dialog from '../../../../sun/js/Dialog.js';
 import BohrModel from '../model/BohrModel.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
+import Property from '../../../../axon/js/Property.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-export default class AbsorptionWavelengthsButton extends RectangularPushButton {
+export default class AbsorptionWavelengthsCheckbox extends Checkbox {
 
-  public constructor( lightModeProperty: TReadOnlyProperty<LightMode>,
+  public constructor( absorptionWavelengthsPanelVisibleProperty: Property<boolean>,
+                      lightModeProperty: TReadOnlyProperty<LightMode>,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                      absorptionWavelengthsDialog: Dialog,
                       tandem: Tandem ) {
-    super( {
 
-      // RectangularPushButtonOptions
+    const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
+      font: new PhetFont( 12 ),
+      fill: MOTHAColors.invertibleTextFillProperty,
+      maxWidth: 200
+    } );
+
+    super( absorptionWavelengthsPanelVisibleProperty, text, {
+
+      // CheckboxOptions
       isDisposable: false,
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      content: new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
-        font: new PhetFont( 12 ),
-        maxWidth: 200
-      } ),
-      listener: () => absorptionWavelengthsDialog.show(),
 
       //TODO Why is Absorption Wavelengths not relevant for white light?
       visibleProperty: new DerivedProperty( [ lightModeProperty, hydrogenAtomProperty ],
@@ -49,4 +50,4 @@ export default class AbsorptionWavelengthsButton extends RectangularPushButton {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionWavelengthsButton', AbsorptionWavelengthsButton );
+modelsOfTheHydrogenAtom.register( 'AbsorptionWavelengthsCheckbox', AbsorptionWavelengthsCheckbox );

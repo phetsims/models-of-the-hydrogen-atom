@@ -26,6 +26,11 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import { LightControlPanel } from '../../common/view/LightControlPanel.js';
 import { LightNode } from '../../common/view/LightNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import AbsorptionWavelengthsPanel from '../../common/view/AbsorptionWavelengthsPanel.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import BohrModel from '../../common/model/BohrModel.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -51,6 +56,23 @@ export default class SpectraScreenView extends ScreenView {
       tandem: tandem.createTandem( 'legendPanel' )
     } );
 
+    const absorptionWavelengthsPanelVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'absorptionWavelengthsPanelVisibleProperty' )
+    } );
+
+    const absorptionWavelengthsPanelTandem = tandem.createTandem( 'absorptionWavelengthsPanel' );
+    const absorptionWavelengthsPanel = new AbsorptionWavelengthsPanel(
+      model.light.monochromaticWavelengthProperty, this.layoutBounds, {
+        visibleProperty: new DerivedProperty(
+          [ absorptionWavelengthsPanelVisibleProperty, model.light.lightModeProperty, model.hydrogenAtomProperty ],
+          ( absorptionWavelengthsPanelVisible, lightMode, hydrogenAtom ) =>
+            absorptionWavelengthsPanelVisible && lightMode === 'monochromatic' && hydrogenAtom instanceof BohrModel, {
+            tandem: absorptionWavelengthsPanelTandem.createTandem( 'visibleProperty' ),
+            phetioValueType: BooleanIO
+          } ),
+        tandem: absorptionWavelengthsPanelTandem
+      } );
+
     // Light
     const lightNode = new LightNode( model.light, {
       left: this.layoutBounds.left + 100,
@@ -59,11 +81,12 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Controls for the light
-    const lightControlPanel = new LightControlPanel( model.light, model.hydrogenAtomProperty, {
-      left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
-      top: lightNode.bottom + 15,
-      tandem: tandem.createTandem( 'lightControlPanel' )
-    } );
+    const lightControlPanel = new LightControlPanel( model.light, model.hydrogenAtomProperty,
+      absorptionWavelengthsPanelVisibleProperty, {
+        left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+        top: lightNode.bottom + 15,
+        tandem: tandem.createTandem( 'lightControlPanel' )
+      } );
 
     // The zoomed-in view of the box of hydrogen
     const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {
@@ -136,6 +159,7 @@ export default class SpectraScreenView extends ScreenView {
       listener: () => {
         this.interruptSubtreeInput();
         model.reset();
+        absorptionWavelengthsPanelVisibleProperty.reset();
         spectrometerAccordionBox.reset();
       },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
@@ -157,6 +181,7 @@ export default class SpectraScreenView extends ScreenView {
         modelVBox,
         spectrometerAccordionBox,
         resetAllButton,
+        absorptionWavelengthsPanel,
         popupsParent
       ]
     } );
@@ -167,6 +192,7 @@ export default class SpectraScreenView extends ScreenView {
       //TODO pdomPlayAreaNode.pdomOrder
       lightNode,
       lightControlPanel,
+      absorptionWavelengthsPanel,
       zoomedInBoxNode,
       modelVBox,
       timeControlNode,
@@ -181,6 +207,9 @@ export default class SpectraScreenView extends ScreenView {
 
     this.model = model;
     this.zoomedInBoxNode = zoomedInBoxNode;
+
+    //TODO yuck
+    absorptionWavelengthsPanel.setInitialPosition( new Vector2( modelVBox.left, modelVBox.top ) );
   }
 }
 

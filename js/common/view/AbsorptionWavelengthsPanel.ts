@@ -1,6 +1,5 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/31 Convert this to a Panel.
 //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/31 Support 'Absorption Wavelengths', 'Emission Wavelengths', and 'Absorption/Emission Wavelengths'
 /**
  * TODO
@@ -8,9 +7,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignGroup, Color, GridBox, HBox, HSeparator, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -22,6 +20,11 @@ import BohrModel from '../model/BohrModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PhotonNode from './PhotonNode.js';
 import MOTHAColors from '../MOTHAColors.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Property from '../../../../axon/js/Property.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -35,21 +38,33 @@ const TEXT_OPTIONS = {
   font: new PhetFont( 12 )
 };
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  position?: Vector2; // initial position, in view coordinates
+};
 
-type AbsorptionWavelengthsDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'>;
+type AbsorptionWavelengthsDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem' | 'visibleProperty'>;
 
-export default class AbsorptionWavelengthsDialog extends Dialog {
+export default class AbsorptionWavelengthsPanel extends Panel {
 
-  public constructor( monochromaticWavelengthProperty: NumberProperty, providedOptions: AbsorptionWavelengthsDialogOptions ) {
+  // Position of the panel's top-left corner.
+  private readonly positionProperty: Property<Vector2>;
 
-    const options = optionize<AbsorptionWavelengthsDialogOptions, SelfOptions, DialogOptions>()( {
+  public constructor( monochromaticWavelengthProperty: NumberProperty,
+                      layoutBounds: Bounds2,
+                      providedOptions: AbsorptionWavelengthsDialogOptions ) {
 
-      // DialogOptions
-      isDisposable: false
+    const options = optionize<AbsorptionWavelengthsDialogOptions, SelfOptions, PanelOptions>()( {
+
+      // SelfOptions
+      position: Vector2.ZERO,
+
+      // PanelOptions
+      isDisposable: false,
+      xMargin: 10,
+      yMargin: 10
     }, providedOptions );
 
-    const titleText = new Text( 'Absorption Wavelengths', {
+    const titleText = new Text( 'Absorption Wavelengths', { //TODO i18n
       font: new PhetFont( {
         size: 16,
         weight: 'bold'
@@ -144,7 +159,24 @@ export default class AbsorptionWavelengthsDialog extends Dialog {
     } );
 
     super( content, options );
+
+    this.positionProperty = new Vector2Property( options.position, {
+      tandem: options.tandem.createTandem( 'positionProperty' )
+    } );
+
+    this.positionProperty.link( position => {
+      this.translation = position;
+    } );
+  }
+
+  public reset(): void {
+    this.positionProperty.reset();
+  }
+
+  public setInitialPosition( position: Vector2 ): void {
+    this.positionProperty.value = position;
+    this.positionProperty.setInitialValue( position );
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionWavelengthsDialog', AbsorptionWavelengthsDialog );
+modelsOfTheHydrogenAtom.register( 'AbsorptionWavelengthsPanel', AbsorptionWavelengthsPanel );
