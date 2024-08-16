@@ -46,7 +46,8 @@ export default class LegendPanel extends Panel {
       yMargin: 0
     }, providedOptions );
 
-    const iconAlignGroup = new AlignGroup(); // to make all icons have the same effective dimensions
+    // To make all icons have the same effective size.
+    const iconAlignGroup = new AlignGroup();
 
     // A Node for each item described in the Key, organized under a parent tandem
     const keyNodes: KeyNode[] = [

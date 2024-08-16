@@ -180,7 +180,7 @@ class TitleNode extends ToggleNode<boolean> {
 
   public constructor( expandedProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
 
-    // to ensure that both titles have the same effective size, and are left aligned
+    // To ensure that both titles have the same effective size, and are left aligned.
     const alignBoxOptions: AlignBoxOptions = {
       group: new AlignGroup(),
       xAlign: 'left'
