@@ -1,12 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO Should we display the color for each wavelength?
-//TODO Should we display UV/Visible/IR labels?
-//TODO Should the UV and Visible wavelengths be selectable, and set the value of wavelengthProperty?
-//TODO Using a left-right arrow implies absorption (right) AND emission (left). Should this dialog be retitled? Or use a right arrow only?
-//TODO Should we title this Absorption and Emission Spectra? See https://webbtelescope.org/contents/articles/spectroscopy-101--how-absorption-and-emission-spectra-work
-//TODO Being a modal dialog, this is not very useful with Electron Energy Level accordion box.
-
+//TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/31 Convert this to a Panel.
+//TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/31 Support 'Absorption Wavelengths', 'Emission Wavelengths', and 'Absorption/Emission Wavelengths'
 /**
  * TODO
  *

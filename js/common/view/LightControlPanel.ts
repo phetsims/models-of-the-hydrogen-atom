@@ -56,6 +56,7 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'absorptionWavelengthsDialog' )
     } );
 
+    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/31 Replace with a Checkbox
     const absorptionWavelengthsButton = new AbsorptionWavelengthsButton( light.lightModeProperty, hydrogenAtomProperty,
       absorptionWavelengthsDialog, options.tandem.createTandem( 'absorptionWavelengthsButton' ) );
 
