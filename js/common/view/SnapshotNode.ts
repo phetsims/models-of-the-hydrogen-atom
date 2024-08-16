@@ -17,6 +17,9 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
+const INSIDE_X_MARGIN = 6;
+const INSIDE_Y_MARGIN = 6;
+
 type SelfOptions = EmptySelfOptions;
 
 type SnapshotNodeOptions = SelfOptions &
@@ -40,8 +43,8 @@ export default class SnapshotNode extends Node {
     const titleText = new Text( 'Snapshot', {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.invertibleTextFillProperty,
-      left: backgroundNode.left + 10,
-      top: backgroundNode.top + 10
+      left: backgroundNode.left + INSIDE_X_MARGIN,
+      top: backgroundNode.top + INSIDE_Y_MARGIN
     } );
 
     const trashButton = new TrashButton( {
@@ -52,8 +55,8 @@ export default class SnapshotNode extends Node {
       iconOptions: {
         scale: 0.04
       },
-      right: backgroundNode.right - 10,
-      bottom: backgroundNode.bottom - 10,
+      right: backgroundNode.right - INSIDE_X_MARGIN,
+      bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
       tandem: Tandem.OPT_OUT //TODO SnapshotNode is dynamically created
     } );
 
