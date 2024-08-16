@@ -25,6 +25,14 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
+import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
+import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -40,9 +48,10 @@ const TEXT_OPTIONS = {
 
 type SelfOptions = {
   position?: Vector2; // initial position, in view coordinates
+  visibleProperty: Property<boolean>; // our visibleProperty needs to be writable
 };
 
-type AbsorptionWavelengthsDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem' | 'visibleProperty'>;
+type AbsorptionWavelengthsDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class AbsorptionWavelengthsPanel extends Panel {
 
@@ -50,7 +59,7 @@ export default class AbsorptionWavelengthsPanel extends Panel {
   private readonly positionProperty: Property<Vector2>;
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
-                      layoutBounds: Bounds2,
+                      visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: AbsorptionWavelengthsDialogOptions ) {
 
     const options = optionize<AbsorptionWavelengthsDialogOptions, SelfOptions, PanelOptions>()( {
@@ -61,7 +70,11 @@ export default class AbsorptionWavelengthsPanel extends Panel {
       // PanelOptions
       isDisposable: false,
       xMargin: 10,
-      yMargin: 10
+      yMargin: 10,
+      cursor: 'pointer',
+      tagName: 'div', // for KeyboardDragListener
+      focusable: true, // for KeyboardDragListener
+      groupFocusHighlight: true
     }, providedOptions );
 
     const titleText = new Text( 'Absorption Wavelengths', { //TODO i18n
@@ -69,6 +82,26 @@ export default class AbsorptionWavelengthsPanel extends Panel {
         size: 16,
         weight: 'bold'
       } )
+    } );
+
+    const closeButton = new CloseButton( {
+
+      // styled like Dialog
+      baseColor: 'transparent',
+      buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
+      pathOptions: {
+        stroke: 'black'
+      },
+
+      listener: () => {
+        providedOptions.visibleProperty.value = false;
+      },
+      tandem: options.tandem.createTandem( 'closeButton' )
+    } );
+
+    const titleBarNode = new HBox( {
+      spacing: 5,
+      children: [ titleText, closeButton ]
     } );
 
     // Headings for the columns
@@ -153,7 +186,7 @@ export default class AbsorptionWavelengthsPanel extends Panel {
     const content = new VBox( {
       spacing: 10,
       children: [
-        titleText,
+        titleBarNode,
         gridBox
       ]
     } );
@@ -167,6 +200,43 @@ export default class AbsorptionWavelengthsPanel extends Panel {
     this.positionProperty.link( position => {
       this.translation = position;
     } );
+
+    // Keep the entire panel inside the visible bounds of the ScreenView.
+    const dragBoundsProperty = new DerivedProperty(
+      [ visibleBoundsProperty, this.boundsProperty ],
+      ( visibleBounds, bounds ) => new Bounds2(
+        visibleBounds.minX + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+        visibleBounds.minY + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
+        visibleBounds.maxX - MOTHAConstants.SCREEN_VIEW_X_MARGIN - bounds.width,
+        visibleBounds.maxY - MOTHAConstants.SCREEN_VIEW_Y_MARGIN - bounds.height ), {
+        valueComparisonStrategy: 'equalsFunction'
+      } );
+
+    // Keep the position inside of drag bounds.
+    dragBoundsProperty.lazyLink( dragBounds => {
+      if ( !isSettingPhetioStateProperty.value ) {
+        if ( !dragBounds.containsPoint( this.positionProperty.value ) ) {
+          this.positionProperty.value = dragBounds.closestBoundaryPointTo( this.positionProperty.value );
+        }
+      }
+    } );
+
+    const dragListener = new SoundDragListener( {
+      positionProperty: this.positionProperty,
+      dragBoundsProperty: dragBoundsProperty,
+      useParentOffset: true,
+      tandem: options.tandem.createTandem( 'dragListener' )
+    } );
+    this.addInputListener( dragListener );
+
+    const keyboardDragListener = new SoundKeyboardDragListener( {
+      positionProperty: this.positionProperty,
+      dragBoundsProperty: dragBoundsProperty,
+      dragSpeed: 600,
+      shiftDragSpeed: 150,
+      tandem: options.tandem.createTandem( 'keyboardDragListener' )
+    } );
+    this.addInputListener( keyboardDragListener );
   }
 
   public reset(): void {

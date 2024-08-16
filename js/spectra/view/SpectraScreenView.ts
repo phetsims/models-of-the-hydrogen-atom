@@ -61,7 +61,7 @@ export default class SpectraScreenView extends ScreenView {
 
     const absorptionWavelengthsPanelTandem = tandem.createTandem( 'absorptionWavelengthsPanel' );
     const absorptionWavelengthsPanel = new AbsorptionWavelengthsPanel(
-      model.light.monochromaticWavelengthProperty, this.layoutBounds, {
+      model.light.monochromaticWavelengthProperty, this.visibleBoundsProperty, {
         visibleProperty: absorptionWavelengthsPanelVisibleProperty,
         tandem: absorptionWavelengthsPanelTandem
       } );
@@ -153,6 +153,7 @@ export default class SpectraScreenView extends ScreenView {
         this.interruptSubtreeInput();
         model.reset();
         absorptionWavelengthsPanelVisibleProperty.reset();
+        absorptionWavelengthsPanel.reset();
         spectrometerAccordionBox.reset();
       },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
