@@ -83,9 +83,6 @@
   "screen.energyLevels": {
     "value": "Energy Levels"
   },
-  "absorptionWavelengths": {
-    "value": "Absorption Wavelengths"
-  },
   "slow": {
     "value": "slow motion"
   },
@@ -133,5 +130,8 @@
   },
   "questionMark": {
     "value": "?"
+  },
+  "absorptionEmission": {
+    "value": "Absorption/Emission"
   }
 }

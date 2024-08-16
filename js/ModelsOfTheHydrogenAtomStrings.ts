@@ -41,7 +41,6 @@ type StringsType = {
     'spectraStringProperty': LocalizedStringProperty;
     'energyLevelsStringProperty': LocalizedStringProperty;
   };
-  'absorptionWavelengthsStringProperty': LocalizedStringProperty;
   'slowStringProperty': LocalizedStringProperty;
   'spectrometerCollapsedStringProperty': LocalizedStringProperty;
   'spectrometerExpandedStringProperty': LocalizedStringProperty;
@@ -58,6 +57,7 @@ type StringsType = {
   'nTransitionStringProperty': LocalizedStringProperty;
   'wavelengthNanometersStringProperty': LocalizedStringProperty;
   'questionMarkStringProperty': LocalizedStringProperty;
+  'absorptionEmissionStringProperty': LocalizedStringProperty;
 };
 
 const ModelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;

@@ -19,7 +19,7 @@ export default class AbsorptionWavelengthsCheckbox extends Checkbox {
 
   public constructor( absorptionWavelengthsPanelVisibleProperty: Property<boolean>, tandem: Tandem ) {
 
-    const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionWavelengthsStringProperty, {
+    const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 200

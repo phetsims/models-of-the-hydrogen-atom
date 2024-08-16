@@ -34,15 +34,23 @@ import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboard
 import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 
+const TITLE_TEXT_OPTIONS = {
+  font: new PhetFont( {
+    size: 16,
+    weight: 'bold'
+  } ),
+  maxWidth: 200
+};
+
 const HEADING_TEXT_OPTIONS = {
   font: new PhetFont( {
     size: 12,
     weight: 'bold'
   } ),
-  maxWidth: 150
+  maxWidth: 100
 };
 
-const TEXT_OPTIONS = {
+const CONTENT_TEXT_OPTIONS = {
   font: new PhetFont( 12 )
 };
 
@@ -77,12 +85,7 @@ export default class AbsorptionWavelengthsPanel extends Panel {
       groupFocusHighlight: true
     }, providedOptions );
 
-    const titleText = new Text( 'Absorption Wavelengths', { //TODO i18n
-      font: new PhetFont( {
-        size: 16,
-        weight: 'bold'
-      } )
-    } );
+    const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, TITLE_TEXT_OPTIONS );
 
     const closeButton = new CloseButton( {
 
@@ -100,7 +103,7 @@ export default class AbsorptionWavelengthsPanel extends Panel {
     } );
 
     const titleBarNode = new HBox( {
-      spacing: 5,
+      spacing: 10,
       children: [ titleText, closeButton ]
     } );
 
@@ -137,7 +140,7 @@ export default class AbsorptionWavelengthsPanel extends Panel {
     let n1Previous = 1;
     for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
 
-      const wavelengthText = wavelengthTextAlignGroup.createBox( new Text( wavelength, TEXT_OPTIONS ) );
+      const wavelengthText = wavelengthTextAlignGroup.createBox( new Text( wavelength, CONTENT_TEXT_OPTIONS ) );
 
       // For wavelengths that can be set via monochromaticWavelengthProperty, use a push button. Otherwise, use Text.
       let waveLengthNode: Node;
@@ -173,7 +176,7 @@ export default class AbsorptionWavelengthsPanel extends Panel {
 
       rows.push( [
         photonAndWavelengthNode,
-        new Text( `${transition.n1} ${MOTHASymbols.rightArrow} ${transition.n2}`, TEXT_OPTIONS )
+        new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, CONTENT_TEXT_OPTIONS )
       ] );
     }
 
