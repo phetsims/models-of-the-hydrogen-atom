@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * AbsorptionTransitionDisplay displays the electron state transition (possibly undefined) associated with a wavelength.
+ * AbsorptionTransitionText displays the electron state transition (possibly undefined) associated with a wavelength.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,7 +16,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
-export default class AbsorptionTransitionDisplay extends RichText {
+export default class AbsorptionTransitionText extends RichText {
 
   public constructor( wavelengthProperty: TReadOnlyProperty<number>, tandem: Tandem ) {
 
@@ -35,9 +35,10 @@ export default class AbsorptionTransitionDisplay extends RichText {
       font: new PhetFont( 12 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 100,
-      tandem: tandem
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: true
     } );
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionTransitionDisplay', AbsorptionTransitionDisplay );
+modelsOfTheHydrogenAtom.register( 'AbsorptionTransitionText', AbsorptionTransitionText );

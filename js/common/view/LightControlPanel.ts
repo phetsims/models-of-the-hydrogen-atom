@@ -19,7 +19,7 @@ import AbsorptionWavelengthsDialog from './AbsorptionWavelengthsDialog.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import AbsorptionWavelengthsButton from './AbsorptionWavelengthsButton.js';
-import AbsorptionTransitionDisplay from './AbsorptionTransitionDisplay.js';
+import AbsorptionTransitionText from './AbsorptionTransitionText.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -44,8 +44,8 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
 
-    const absorptionTransitionDisplay = new AbsorptionTransitionDisplay( light.monochromaticWavelengthProperty,
-      options.tandem.createTandem( 'absorptionTransitionDisplay' ) );
+    const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty,
+      options.tandem.createTandem( 'absorptionTransitionText' ) );
 
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( light.lightModeProperty, {
       maxWidth: monochromaticWavelengthControl.width,
@@ -70,7 +70,7 @@ export class LightControlPanel extends Panel {
           excludeInvisibleChildrenFromBounds: false,
           spacing: 5,
           children: [
-            absorptionTransitionDisplay,
+            absorptionTransitionText,
             monochromaticWavelengthControl
           ]
         } ),
