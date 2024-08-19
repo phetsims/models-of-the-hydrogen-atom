@@ -166,12 +166,12 @@ export default class SchrodingerModel extends DeBroglieModel {
   }
 
   /**
-   * Probabilistically determines whether to absorb a photon.
-   * Typically, we defer to the superclass implementation. But if we're in state (2,0,0), the probability is 100%.
-   * This is not physically correct, but we want to make it easier to get out of state (2,0,0).
+   * Probabilistically determines whether to absorb a photon. Typically, we defer to the superclass implementation.
+   * But if we're in the metastable state (2,0,0), the probability is 100%. This is not physically correct, but we
+   * want to make it easier to get out of state (2,0,0).
    */
   protected override absorptionIsCertain(): boolean {
-    if ( this.electronStateProperty.value === 2 && this.secondaryElectronStateProperty.value === 0 ) {
+    if ( this.isMetastableStateProperty.value ) {
       return true;
     }
     return super.absorptionIsCertain();
