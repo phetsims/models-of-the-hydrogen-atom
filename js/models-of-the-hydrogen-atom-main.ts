@@ -38,7 +38,7 @@ simLauncher.launch( () => {
       team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
             'Noah Podolefsky, Carl Wieman',
       qualityAssurance: '',
-      graphicArts: 'Mariah Hermsmeyer'
+      graphicArts: 'Mayra López'
     }
   };
 
