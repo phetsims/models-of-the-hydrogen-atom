@@ -200,6 +200,7 @@ export default class MOTHAModel implements TModel {
    * @param dt - the time step, in seconds
    */
   private _step( dt: number ): void {
+    //TODO Should time be scaled when using the Step button?
     const dtScaled = dt * this.dtScaleProperty.value;
     this.light.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );
