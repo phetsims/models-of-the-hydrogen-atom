@@ -17,9 +17,9 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 
 type SelfOptions = {
-  wavelength: number; // the photon's immutable wavelength
+  wavelength: number; // the photon's integer wavelength, in nm
   wasEmitted?: boolean; // Was this photon emitted by the atom?
-  hasCollided?: boolean; // Has the photon collided with the atom?
+  hasCollided?: boolean; // Has this photon collided with the atom?
 };
 
 type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
@@ -66,6 +66,9 @@ export default class Photon extends Particle {
       radius: MOTHAConstants.PHOTON_RADIUS,
       speed: MOTHAConstants.PHOTON_INITIAL_SPEED
     }, providedOptions );
+
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
+    assert && assert( Number.isInteger( options.wavelength ), `wavelength must be an integer: ${options.wavelength}` );
 
     super( options );
 

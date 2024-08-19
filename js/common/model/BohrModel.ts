@@ -257,7 +257,9 @@ export default class BohrModel extends HydrogenAtom {
         wavelengths.push( wavelength );
       }
     }
+
     assert && assert( wavelengths.length > 0 );
+    assert && assert( _.every( wavelengths, wavelength => Number.isInteger( wavelength ) ) );
     return wavelengths;
   }
 
@@ -526,7 +528,11 @@ function getAbsorptionWavelength( n1: number, n2: number ): number {
   assert && assert( n2 <= MOTHAConstants.MAX_STATE, `bad n2=${n2}` );
 
   // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.
-  return 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );
+  const wavelength = 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );
+
+  // As a simplification to benefit PhET-iO, convert to an integer value.
+  // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53.
+  return Utils.toFixedNumber( wavelength, 0 );
 }
 
 /**

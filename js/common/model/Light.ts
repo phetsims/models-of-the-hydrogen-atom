@@ -105,7 +105,7 @@ export default class Light extends PhetioObject {
     assert && assert( this.monochromaticWavelengthRange.min < VisibleColor.MIN_WAVELENGTH );
 
     this.monochromaticWavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
-      //TODO numberType: 'Integer',
+      numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
       range: this.monochromaticWavelengthRange,
       tandem: options.tandem.createTandem( 'monochromaticWavelengthProperty' ),
       phetioFeatured: true
@@ -177,7 +177,6 @@ export default class Light extends PhetioObject {
     this.createPhotonAtPosition( wavelength, new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ) );
   }
 
-  //TODO Should wavelength be integer?
   /**
    * Creates a photon with the specified wavelength and position.
    */
@@ -223,12 +222,11 @@ export default class Light extends PhetioObject {
       else {
 
         // choose a random visible wavelength
-        //TODO Should wavelength be integer, by using nextIntBetween?
-        wavelength = dotRandom.nextDoubleBetween( this.monochromaticWavelengthRange.min, this.monochromaticWavelengthRange.max );
+        wavelength = dotRandom.nextIntBetween( this.monochromaticWavelengthRange.min, this.monochromaticWavelengthRange.max );
       }
     }
 
-    //TODO verify that wavelength is an integer?
+    assert && assert( Number.isInteger( wavelength ) );
     return wavelength;
   }
 
