@@ -34,6 +34,7 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
+import { LightMode } from '../model/LightMode.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -68,6 +69,7 @@ export default class AbsorptionEmissionDialog extends Panel {
   private readonly positionProperty: Property<Vector2>;
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
+                      lightModeProperty: Property<LightMode>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: AbsorptionEmissionDialogOptions ) {
 
@@ -154,6 +156,7 @@ export default class AbsorptionEmissionDialog extends Panel {
           content: wavelengthText,
           listener: () => {
             monochromaticWavelengthProperty.value = wavelength;
+            lightModeProperty.value = 'monochromatic';
           },
           tandem: Tandem.OPT_OUT
         } );
