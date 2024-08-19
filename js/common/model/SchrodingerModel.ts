@@ -259,7 +259,7 @@ export default class SchrodingerModel extends DeBroglieModel {
 
   private fireOneAbsorbablePhoton(): void {
     //TODO port MetastableHandler
-    //TODO randomly select one of the 4 visible wavelengths that transition from 2 -> n
+    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/55 randomly select one of the 4 visible wavelengths that transition from 2 -> n
   }
 
   //----------------------------------------------------------------------------
