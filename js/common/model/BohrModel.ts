@@ -63,9 +63,6 @@ const PHOTON_STIMULATED_EMISSION_PROBABILITY = PHOTON_ABSORPTION_PROBABILITY;
 // Probability that a photon will be emitted, [0,1]
 const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 
-// Wavelengths must be less than this close to be considered equal
-const WAVELENGTH_CLOSENESS_THRESHOLD = 0.5;
-
 // How close an emitted photon is placed to the photon that causes stimulated emission
 const STIMULATED_EMISSION_X_OFFSET = 10;
 
@@ -263,13 +260,6 @@ export default class BohrModel extends HydrogenAtom {
     return wavelengths;
   }
 
-  /**
-   * Determines if two wavelengths are "close enough" for the purposes of absorption and emission.
-   */
-  private closeEnough( wavelength1: number, wavelength2: number ): boolean {
-    return ( Math.abs( wavelength1 - wavelength2 ) < WAVELENGTH_CLOSENESS_THRESHOLD );
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   // Collision detection
   //--------------------------------------------------------------------------------------------------------------------
@@ -309,7 +299,7 @@ export default class BohrModel extends HydrogenAtom {
         let newState = 0;
         for ( let n = currentState + 1; n <= MOTHAConstants.MAX_STATE && !canAbsorb; n++ ) {
           const transitionWavelength = BohrModel.getAbsorptionWavelength( currentState, n );
-          if ( this.closeEnough( photon.wavelength, transitionWavelength ) ) {
+          if ( photon.wavelength === transitionWavelength ) {
             canAbsorb = true;
             newState = n;
           }
@@ -386,7 +376,7 @@ export default class BohrModel extends HydrogenAtom {
         let newElectronState = 0;
         for ( let electronState = MOTHAConstants.GROUND_STATE; electronState < currentElectronState && !canStimulateEmission; electronState++ ) {
           const transitionWavelength = BohrModel.getAbsorptionWavelength( electronState, currentElectronState );
-          if ( this.closeEnough( photon.wavelength, transitionWavelength ) ) {
+          if ( photon.wavelength === transitionWavelength ) {
             canStimulateEmission = true;
             newElectronState = electronState;
           }
@@ -413,6 +403,8 @@ export default class BohrModel extends HydrogenAtom {
             tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
           } );
           phet.log && phet.log( `Bohr: stimulated emission of ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+          assert && assert( BohrModel.wavelengthToStateTransitionMap.has( emittedPhoton.wavelength ),
+            `not an emission wavelength: ${emittedPhoton.wavelength}` );
           this.photonEmittedEmitter.emit( emittedPhoton );
 
           // move electron to new state
@@ -475,6 +467,8 @@ export default class BohrModel extends HydrogenAtom {
           tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
         } );
         phet.log && phet.log( `Bohr: spontaneous emission of ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+        assert && assert( BohrModel.wavelengthToStateTransitionMap.has( emittedPhoton.wavelength ),
+          `not an emission wavelength: ${emittedPhoton.wavelength}` );
         this.photonEmittedEmitter.emit( emittedPhoton );
 
         // move electron to new state
