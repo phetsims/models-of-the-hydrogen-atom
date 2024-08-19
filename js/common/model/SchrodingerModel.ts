@@ -203,7 +203,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * Chooses a new primary state (n) for the electron, -1 if there is no valid transition.
    */
   protected override chooseLowerElectronState(): number {
-    return getLowerPrimaryState( this.electronStateProperty.value, this.secondaryElectronStateProperty.value );
+    return chooseLowerPrimaryState( this.electronStateProperty.value, this.secondaryElectronStateProperty.value );
   }
 
   /**
@@ -216,8 +216,8 @@ export default class SchrodingerModel extends DeBroglieModel {
     const l = this.secondaryElectronStateProperty.value;
     const m = this.tertiaryElectronStateProperty.value;
 
-    const lNew = getNewSecondaryElectronState( nNew, l );
-    const mNew = getNewTertiaryElectronState( lNew, m );
+    const lNew = chooseSecondaryElectronState( nNew, l );
+    const mNew = chooseTertiaryElectronState( lNew, m );
 
     // Verify that no transition rules have been broken.
     const valid = isaValidTransition( n, l, m, nNew, lNew, mNew, MOTHAConstants.NUMBER_OF_STATES );
@@ -331,7 +331,7 @@ export default class SchrodingerModel extends DeBroglieModel {
  * @param l - the current secondary state
  * @returns the new primary state, -1 there is no valid transition
  */
-function getLowerPrimaryState( nOld: number, l: number ): number {
+function chooseLowerPrimaryState( nOld: number, l: number ): number {
 
   let nNew = -1;
 
@@ -398,7 +398,7 @@ function getLowerPrimaryState( nOld: number, l: number ): number {
  * @param nNew - the new primary state
  * @param lOld - the existing secondary state
  */
-function getNewSecondaryElectronState( nNew: number, lOld: number ): number {
+function chooseSecondaryElectronState( nNew: number, lOld: number ): number {
   assert && assert( Number.isInteger( nNew ) );
   assert && assert( Number.isInteger( lOld ) );
 
@@ -435,7 +435,7 @@ function getNewSecondaryElectronState( nNew: number, lOld: number ): number {
  * @param lNew - the new secondary state
  * @param mOld - the existing tertiary state
  */
-function getNewTertiaryElectronState( lNew: number, mOld: number ): number {
+function chooseTertiaryElectronState( lNew: number, mOld: number ): number {
   assert && assert( Number.isInteger( lNew ) );
   assert && assert( Number.isInteger( mOld ) );
 
