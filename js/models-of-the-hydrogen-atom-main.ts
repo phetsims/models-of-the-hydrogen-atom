@@ -37,7 +37,8 @@ simLauncher.launch( () => {
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
             'Noah Podolefsky, Carl Wieman',
-      qualityAssurance: ''
+      qualityAssurance: '',
+      graphicArts: 'Mariah Hermsmeyer'
     }
   };
 

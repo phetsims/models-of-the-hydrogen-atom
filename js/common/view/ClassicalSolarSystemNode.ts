@@ -15,11 +15,11 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ClassicalSolarSystemModel from '../model/ClassicalSolarSystemModel.js';
 import ElectronNode from './ElectronNode.js';
-import kaboom_png from '../../../images/kaboom_png.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Image, Node } from '../../../../scenery/js/imports.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import classicalSolarSystemExplosion_png from '../../../images/classicalSolarSystemExplosion_png.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -54,13 +54,14 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
       tandem: electronNodeTandem
     } );
 
-    const kaboomNode = new Image( kaboom_png, {
+    const explosionNode = new Image( classicalSolarSystemExplosion_png, {
       visibleProperty: hydrogenAtom.isDestroyedProperty,
+      scale: 0.15,
       center: protonNode.center,
-      tandem: options.tandem.createTandem( 'kaboomNode' )
+      tandem: options.tandem.createTandem( 'explosionNode' )
     } );
 
-    options.children = [ kaboomNode, protonNode, electronNode ];
+    options.children = [ explosionNode, protonNode, electronNode ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }
