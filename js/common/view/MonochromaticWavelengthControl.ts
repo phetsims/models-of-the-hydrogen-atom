@@ -27,6 +27,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
 
 const SLIDER_TRACK_SIZE = new Dimension2( 250, 15 );
 
@@ -79,6 +80,8 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
       } );
     };
 
+    const constrainValue = ( wavelength: number ) => Utils.toFixedNumber( wavelength, 0 );
+
     const options = optionize<MOTHAWavelengthControlOptions, SelfOptions, WavelengthNumberControlOptions>()( {
       isDisposable: false,
       range: wavelengthProperty.range,
@@ -87,7 +90,11 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
+      sliderOptions: {
+        constrainValue: constrainValue
+      },
       spectrumSliderTrackOptions: {
+        constrainValue: constrainValue,
         valueToColor: Light.wavelengthToColor,
         size: SLIDER_TRACK_SIZE
       },
