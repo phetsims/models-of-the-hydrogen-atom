@@ -280,7 +280,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * @param z coordinate on vertical axis
    */
   public getProbabilityDensity( n: number, l: number, m: number, x: number, y: number, z: number ): number {
-    //TODO validate state (n,l,m)
+    assert && assert( isValidState( n, l, m, MOTHAConstants.NUMBER_OF_STATES ), `invalid state: (${n},${l},${m})` );
     assert && assert( !( x === 0 && y === 0 && z === 0 ), 'undefined for (x,y,z)=(0,0,0)' );
 
     // convert to Polar coordinates
