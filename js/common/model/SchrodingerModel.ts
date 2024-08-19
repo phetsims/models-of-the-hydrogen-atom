@@ -252,8 +252,12 @@ export default class SchrodingerModel extends DeBroglieModel {
     return new Vector2( x, y );
   }
 
-  //TODO document
+  /**
+   * Excites the atom when it is in the metastable state (n,l,m) = (2,0,0) by firing an absorbable photon
+   * directly at the center of the atom. This moves the atom to a higher energy level.
+   */
   public excite(): void {
+    assert && assert( this.isMetastableStateProperty.value );
     this.fireOneAbsorbablePhoton();
   }
 
