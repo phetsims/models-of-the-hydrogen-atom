@@ -59,14 +59,12 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'xzAxesNode' )
     } );
 
-    //TODO Confirm that this new feature is desired. The design doc suggests otherwise. From 7/16/2016 meeting notes:
-    // Issue: Schrodinger model 2,0,0 metastable state
-    // Discussion: Are we okay with the electron getting stuck in 2,0,0 and then being excited by additional photons
-    //   to become “unstuck” or offering box for students to click to get electron to move again?
-    // Decision: Yes- Java behavior is okay.
-    const exciteAtomButton = new ExciteAtomButton( () => hydrogenAtom.excite(), {
-      tandem: options.tandem.createTandem( 'exciteAtomButton' )
-    } );
+    // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).
+    // Pressing this button fires a photon that transitions the atom to a higher energy level.
+    const exciteAtomButton = new ExciteAtomButton( hydrogenAtom.isMetastableStateProperty,
+      () => hydrogenAtom.excite(), {
+        tandem: options.tandem.createTandem( 'exciteAtomButton' )
+      } );
 
     const electronStateText = new FullElectronStateText( hydrogenAtom.electronStateProperty,
       hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {

@@ -14,6 +14,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -21,14 +22,15 @@ type ExciteAtomButtonOptions = SelfOptions & PickRequired<RectangularPushButtonO
 
 export default class ExciteAtomButton extends RectangularPushButton {
 
-  public constructor( excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
+  public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>, excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
 
     const options = optionize<ExciteAtomButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
 
       // RectangularPushButtonOptions
       isDisposable: false,
       listener: () => excite(),
-      baseColor: MOTHAColors.exciteButtonColorProperty,
+      baseColor: MOTHAColors.exciteAtomButtonColorProperty,
+      visibleProperty: isMetastableStateProperty,
       content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
         font: new PhetFont( 16 ),
         maxWidth: 100

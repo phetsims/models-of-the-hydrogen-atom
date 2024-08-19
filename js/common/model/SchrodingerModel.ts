@@ -54,6 +54,8 @@ import MOTHAUtils from '../MOTHAUtils.js';
 import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 /*
  * This table defines the transition strengths for the primary state component (n).
@@ -89,6 +91,9 @@ export default class SchrodingerModel extends DeBroglieModel {
   // tertiary electron state number (m)
   private readonly _tertiaryElectronStateProperty: NumberProperty;
   public readonly tertiaryElectronStateProperty: TReadOnlyProperty<number>;
+
+  // Is the atom in the metastable state (n,l,m) = (2,0,0)?
+  public readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: SchrodingerModelOptions ) {
 
@@ -132,6 +137,14 @@ export default class SchrodingerModel extends DeBroglieModel {
         this._tertiaryElectronStateProperty.rangeProperty.value = new Range( -l, l );
       }
     } );
+
+    this.isMetastableStateProperty = new DerivedProperty(
+      [ this.electronStateProperty, this.secondaryElectronStateProperty, this.tertiaryElectronStateProperty ],
+      ( n, l, m ) => n === 2 && l === 0 && m === 0, {
+        tandem: options.tandem.createTandem( 'isMetastableStateProperty' ),
+        phetioValueType: BooleanIO,
+        phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).'
+      } );
   }
 
   public override step( dt: number ): void {
