@@ -57,6 +57,7 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
+//TODO Revise TRANSITION_STRENGTH_TABLE table to remove 'nonsensical' entries.
 /*
  * This table defines the transition strengths for the primary state component (n).
  * Some entries in this table are nonsensical, but their strengths are zero, and it helps to have a symmetrical table.
@@ -64,9 +65,9 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
  *
  * Note that the table indexing is zero-based, while transitions are 1-based.
  * Here's an example that shows how the table is indexed:
- * TRANSITION_STRENGTH[5][0] is the transition strength from n=6 to n=1
+ * TRANSITION_STRENGTH_TABLE[5][0] is the transition strength from n=6 to n=1
  */
-const TRANSITION_STRENGTH = [
+const TRANSITION_STRENGTH_TABLE = [
   [ 0, 0, 0, 0, 0 ],
   [ 12.53, 0, 0, 0, 0 ],
   [ 3.34, 0.87, 0, 0, 0 ],
@@ -74,7 +75,7 @@ const TRANSITION_STRENGTH = [
   [ 0.69, 0.11, 0, 0.04, 0 ],
   [ 0.39, 0.06, 0.02, 0, 0 ]
 ];
-assert && assert( TRANSITION_STRENGTH.length === MOTHAConstants.NUMBER_OF_STATES );
+assert && assert( TRANSITION_STRENGTH_TABLE.length === MOTHAConstants.NUMBER_OF_STATES );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -368,7 +369,7 @@ function chooseLowerPrimaryState( nOld: number, l: number ): number {
     let strengthSum = 0;
     for ( let i = 0; i < numberOfEntries; i++ ) {
       const state = nMin + i;
-      const transitionStrength = TRANSITION_STRENGTH[ nOld - 1 ][ state - 1 ];
+      const transitionStrength = TRANSITION_STRENGTH_TABLE[ nOld - 1 ][ state - 1 ];
       entries.push( { value: state, weight: transitionStrength } );
       strengthSum += transitionStrength;
     }
