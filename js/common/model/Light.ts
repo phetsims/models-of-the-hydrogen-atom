@@ -105,6 +105,7 @@ export default class Light extends PhetioObject {
     assert && assert( this.monochromaticWavelengthRange.min < VisibleColor.MIN_WAVELENGTH );
 
     this.monochromaticWavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
+      //TODO numberType: 'Integer',
       range: this.monochromaticWavelengthRange,
       tandem: options.tandem.createTandem( 'monochromaticWavelengthProperty' ),
       phetioFeatured: true
