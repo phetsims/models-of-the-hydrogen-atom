@@ -56,7 +56,7 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
 
     const explosionNode = new Image( classicalSolarSystemExplosion_png, {
       visibleProperty: hydrogenAtom.isDestroyedProperty,
-      scale: 0.15,
+      scale: 0.5,
       center: protonNode.center,
       tandem: options.tandem.createTandem( 'explosionNode' )
     } );
