@@ -119,7 +119,7 @@ export default class MOTHAModel implements TModel {
 
     this.light.photonCreatedEmitter.addListener( photon => this.photons.add( photon ) );
 
-    this.spectrometer = new Spectrometer( {
+    this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, {
       tandem: tandem.createTandem( 'spectrometer' )
     } );
 
@@ -143,7 +143,6 @@ export default class MOTHAModel implements TModel {
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
       this.photons.clear();
-      this.spectrometer.clear();
 
       if ( oldHydrogenAtom ) {
         oldHydrogenAtom.reset();

@@ -128,9 +128,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       xMargin: 6,
       yMargin: 6,
       //TODO enabledProperty: spectrometer.hasDataProperty
-      listener: () => {
-        //TODO Erase what is currently show on the spectrometer.
-      },
+      listener: () => spectrometer.clear(),
       tandem: options.tandem.createTandem( 'eraseButton' )
     } );
 
