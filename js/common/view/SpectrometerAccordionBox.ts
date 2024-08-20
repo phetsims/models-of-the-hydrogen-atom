@@ -9,7 +9,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, Path, Text, VBox } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
@@ -65,14 +64,6 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       }
     } );
 
-    const recordStopButton = new RecordStopButton( recordingProperty, {
-      radius: 15,
-      xMargin: 8.25,
-      yMargin: 8.25,
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      tandem: options.tandem.createTandem( 'recordStopButton' )
-    } );
-
     const snapshotButton = new RectangularPushButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( cameraSolidShape, {
@@ -121,7 +112,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       stretch: true,
       spacing: 7,
       align: 'center',
-      children: [ recordStopButton, snapshotButton, viewSnapshotsButton, eraseButton ],
+      children: [ snapshotButton, viewSnapshotsButton, eraseButton ],
       maxHeight: spectrometerNode.height
     } );
 
