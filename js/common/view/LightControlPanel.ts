@@ -32,7 +32,7 @@ export class LightControlPanel extends Panel {
 
     const options = optionize4<LightControlPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
 
-      //TODO PanelOptions
+      // PanelOptions
       isDisposable: false,
       fill: MOTHAColors.panelFillColorProperty,
       stroke: MOTHAColors.panelStrokeColorProperty

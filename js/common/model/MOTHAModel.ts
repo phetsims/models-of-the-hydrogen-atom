@@ -108,10 +108,8 @@ export default class MOTHAModel implements TModel {
       [ this.modelModeProperty, this.predictiveModelProperty ],
       ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experiment : predictiveModel );
 
-    this.photons = createObservableArray<Photon>( {
-      //TODO tandem
-      //TODO phetioType
-    } );
+    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47 replace ObservableArray
+    this.photons = createObservableArray<Photon>();
 
     this.light = new Light( zoomedInBox, {
       tandem: tandem.createTandem( 'light' )

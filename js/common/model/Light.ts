@@ -28,7 +28,6 @@ import { LightMode, LightModeValues } from './LightMode.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import TEmitter from '../../../../axon/js/TEmitter.js';
 import MOTHAColors from '../MOTHAColors.js';
 
@@ -184,8 +183,7 @@ export default class Light extends PhetioObject {
     this.photonCreatedEmitter.emit( new Photon( {
       wavelength: wavelength,
       position: position,
-      direction: Math.PI / 2, // in the direction of +y
-      tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
+      direction: Math.PI / 2 // in the direction of +y
     } ) );
   }
 

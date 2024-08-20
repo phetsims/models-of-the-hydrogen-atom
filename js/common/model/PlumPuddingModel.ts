@@ -38,7 +38,6 @@ import Electron from './Electron.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -354,8 +353,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         wavelength: PHOTON_EMISSION_WAVELENGTH,
         position: this.electron.positionProperty.value, // at the electron's position
         direction: MOTHAUtils.nextAngle(), // in a random direction
-        wasEmitted: true,
-        tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
+        wasEmitted: true
       } );
       phet.log && phet.log( `Plum Pudding: emitted \u03BB=${photon.wavelength}` );
       this.photonEmittedEmitter.emit( photon );

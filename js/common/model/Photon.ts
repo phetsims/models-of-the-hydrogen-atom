@@ -15,6 +15,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = {
   wavelength: number; // the photon's integer wavelength, in nm
@@ -22,7 +23,7 @@ type SelfOptions = {
   hasCollided?: boolean; // Has this photon collided with the atom?
 };
 
-type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'>;
+type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius' | 'tandem'>;
 
 // This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
 export type PhotonStateObject = {
@@ -64,7 +65,8 @@ export default class Photon extends Particle {
 
       // ParticleOptions
       radius: MOTHAConstants.PHOTON_RADIUS,
-      speed: MOTHAConstants.PHOTON_INITIAL_SPEED
+      speed: MOTHAConstants.PHOTON_INITIAL_SPEED,
+      tandem: Tandem.OPT_OUT
     }, providedOptions );
 
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53

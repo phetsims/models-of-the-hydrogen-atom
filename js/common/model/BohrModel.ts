@@ -42,7 +42,6 @@ import Proton from './Proton.js';
 import Photon from './Photon.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -399,8 +398,7 @@ export default class BohrModel extends HydrogenAtom {
             wavelength: photon.wavelength,
             position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
             direction: photon.directionProperty.value,
-            wasEmitted: true,
-            tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
+            wasEmitted: true
           } );
           phet.log && phet.log( `Bohr: stimulated emission of ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
           assert && assert( BohrModel.wavelengthToStateTransitionMap.has( emittedPhoton.wavelength ),
@@ -463,8 +461,7 @@ export default class BohrModel extends HydrogenAtom {
           wavelength: BohrModel.getEmissionWavelength( currentState, newState ),
           position: this.getSpontaneousEmissionPosition(),
           direction: MOTHAUtils.nextAngle(), // in a random direction
-          wasEmitted: true,
-          tandem: Tandem.OPT_OUT //TODO create via PhetioGroup
+          wasEmitted: true
         } );
         phet.log && phet.log( `Bohr: spontaneous emission of ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
         assert && assert( BohrModel.wavelengthToStateTransitionMap.has( emittedPhoton.wavelength ),
