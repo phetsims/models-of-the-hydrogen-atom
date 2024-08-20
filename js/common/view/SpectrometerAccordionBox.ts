@@ -7,17 +7,14 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, Path, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Path, Text, VBox } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import ToggleNode from '../../../../sun/js/ToggleNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -27,10 +24,10 @@ import eyeSolidShape from '../../../../sherpa/js/fontawesome-5/eyeSolidShape.js'
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Spectrometer from '../model/Spectrometer.js';
-import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import SpectrometerNode from './SpectrometerNode.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -38,22 +35,19 @@ type SpectrometerAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOp
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 
-  private readonly resetSpectrometerAccordionBox: () => void;
-
   public constructor( spectrometer: Spectrometer, providedOptions: SpectrometerAccordionBoxOptions ) {
-
-    //TODO eliminate the need for this, used by TitleNode
-    const expandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
-      tandem: providedOptions.tandem.createTandem( 'expandedProperty' )
-    } );
 
     const options = optionize4<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
 
         // AccordionBoxOptions
         isDisposable: false,
-        titleNode: new TitleNode( expandedProperty, providedOptions.tandem.createTandem( 'titleNode' ) ),
-        expandedProperty: expandedProperty,
+        expandedDefaultValue: MOTHAQueryParameters.expandAll,
+        titleNode: new Text( ModelsOfTheHydrogenAtomStrings.spectrometerStringProperty, {
+          font: new PhetFont( { size: 16, weight: 'bold' } ),
+          fill: MOTHAColors.spectrometerTitleFillProperty,
+          maxWidth: 290
+        } ),
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty
       }, providedOptions );
@@ -142,52 +136,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     // Record only when the accordion box is expanded.
     this.expandedProperty.link( expanded => spectrometer.setRecordingEnabled( expanded ) );
 
-    this.resetSpectrometerAccordionBox = () => {
-      expandedProperty.reset();
-    };
-
     this.addLinkedElement( spectrometer );
-  }
-
-  public override reset(): void {
-    super.reset();
-    this.resetSpectrometerAccordionBox();
-  }
-}
-
-class TitleNode extends ToggleNode<boolean> {
-
-  public constructor( expandedProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
-
-    // To ensure that both titles have the same effective size, and are left aligned.
-    const alignBoxOptions: AlignBoxOptions = {
-      group: new AlignGroup(),
-      xAlign: 'left'
-    };
-
-    const titleExpandedText = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerExpandedStringProperty, {
-      font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.spectrometerTitleFillProperty,
-      maxWidth: 290
-    } ), alignBoxOptions );
-
-    const titleCollapsedText = new AlignBox( new Text( ModelsOfTheHydrogenAtomStrings.spectrometerCollapsedStringProperty, {
-      font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: MOTHAColors.spectrometerTitleFillProperty,
-      maxWidth: 290
-    } ), alignBoxOptions );
-
-    const items = [
-      { value: true, createNode: ( tandem: Tandem ) => titleExpandedText },
-      { value: false, createNode: ( tandem: Tandem ) => titleCollapsedText }
-    ];
-
-    super( expandedProperty, items, {
-
-      // ToggleNodeOptions
-      isDisposable: false,
-      tandem: tandem
-    } );
   }
 }
 

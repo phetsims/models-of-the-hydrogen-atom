@@ -42,8 +42,7 @@ type StringsType = {
     'energyLevelsStringProperty': LocalizedStringProperty;
   };
   'slowStringProperty': LocalizedStringProperty;
-  'spectrometerCollapsedStringProperty': LocalizedStringProperty;
-  'spectrometerExpandedStringProperty': LocalizedStringProperty;
+  'spectrometerStringProperty': LocalizedStringProperty;
   'nStringProperty': LocalizedStringProperty;
   'lStringProperty': LocalizedStringProperty;
   'mStringProperty': LocalizedStringProperty;
