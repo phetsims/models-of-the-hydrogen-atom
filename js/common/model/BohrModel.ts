@@ -47,6 +47,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import MOTHASymbols from '../MOTHASymbols.js';
+import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 
 // Radius of each electron orbit, ordered by increasing electron state number.
 // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
@@ -257,6 +258,13 @@ export default class BohrModel extends HydrogenAtom {
     assert && assert( wavelengths.length > 0 );
     assert && assert( _.every( wavelengths, wavelength => Number.isInteger( wavelength ) ) );
     return wavelengths;
+  }
+
+  /**
+   * Gets the absorption wavelengths that are in the visible spectrum.
+   */
+  public static getVisibleAbsorptionWavelengths(): number[] {
+    return Array.from( BohrModel.wavelengthToStateTransitionMap.keys() ).filter( wavelength => VisibleColor.isVisibleWavelength( wavelength ) );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

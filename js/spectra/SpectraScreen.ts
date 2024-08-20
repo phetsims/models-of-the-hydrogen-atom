@@ -18,6 +18,7 @@ import { Node, Path, TColor } from '../../../scenery/js/imports.js';
 import MOTHAColors from '../common/MOTHAColors.js';
 import { Shape } from '../../../kite/js/imports.js';
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
+import BohrModel from '../common/model/BohrModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -49,15 +50,13 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
 function createScreenIcon(): ScreenIcon {
 
   const photonRadius = 4;
+  const absorptionWavelengths = BohrModel.getVisibleAbsorptionWavelengths();
 
-  const absorptionWavelengths = [ 410, 434, 486, 656 ]; //TODO These are duplicated.
-  const photonColumns: Node[] = [];
-
-  absorptionWavelengths.forEach( wavelength => {
+  const photonColumns = absorptionWavelengths.map( wavelength => {
     const color = VisibleColor.wavelengthToColor( wavelength );
     const photonColumn = createPhotonColumn( photonRadius, color );
     photonColumn.centerX = ( wavelength - absorptionWavelengths[ 0 ] );
-    photonColumns.push( photonColumn );
+    return photonColumn;
   } );
 
   const iconNode = new Node( {
