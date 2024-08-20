@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * DeBroglieRepresentation is a union type for the different representations of the de Broglie model.
+ * DeBroglieRepresentation enumerates the different representations of the de Broglie model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
