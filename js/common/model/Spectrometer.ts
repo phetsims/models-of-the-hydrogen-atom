@@ -24,6 +24,8 @@ type SpectrometerOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tand
 
 export default class Spectrometer extends PhetioObject {
 
+  private recordingEnabled: boolean;
+
   public readonly dataPointsProperty: Property<SpectrometerDataPoint[]>;
 
   public readonly numberOfSnapshotsProperty: Property<number>;
@@ -39,6 +41,9 @@ export default class Spectrometer extends PhetioObject {
 
     super( options );
 
+    // Controlled by SpectrometerAccordionBox, so that we are not recording unless expanded.
+    this.recordingEnabled = true;
+
     this.dataPointsProperty = new Property<SpectrometerDataPoint[]>( [], {
       tandem: options.tandem.createTandem( 'dataPointsProperty' ),
       phetioValueType: ArrayIO( SpectrometerDataPoint.SpectrometerDataPointIO ),
@@ -50,7 +55,11 @@ export default class Spectrometer extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    const photonEmittedListener = ( photon: Photon ) => this.recordEmission( photon.wavelength );
+    const photonEmittedListener = ( photon: Photon ) => {
+      if ( this.recordingEnabled ) {
+        this.recordEmission( photon.wavelength );
+      }
+    };
 
     hydrogenAtomProperty.link( ( newHydrogenAtom, oldHydrogenAtom ) => {
 
@@ -69,6 +78,7 @@ export default class Spectrometer extends PhetioObject {
    * Records an emission of the specified wavelength.
    */
   private recordEmission( wavelength: number ): void {
+    assert && assert( this.recordingEnabled );
 
     const dataPoints = this.dataPointsProperty.value.slice();
 
@@ -89,11 +99,16 @@ export default class Spectrometer extends PhetioObject {
 
   public reset(): void {
     this.clear();
+    this.recordingEnabled = true;
     //TODO delete snapshots
   }
 
   public clear(): void {
     this.dataPointsProperty.value = [];
+  }
+
+  public setRecordingEnabled( recordingEnabled: boolean ): void {
+    this.recordingEnabled = recordingEnabled;
   }
 }
 

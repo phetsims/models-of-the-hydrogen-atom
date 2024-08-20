@@ -139,6 +139,9 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     super( contentNode, options );
 
+    // Record only when the accordion box is expanded.
+    this.expandedProperty.link( expanded => spectrometer.setRecordingEnabled( expanded ) );
+
     this.resetSpectrometerAccordionBox = () => {
       expandedProperty.reset();
     };
