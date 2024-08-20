@@ -537,9 +537,6 @@ type StateTransition = {
   n2: number; // n2 > n1
 };
 
-//TODO We are populating this map with (and displaying) integer absorption/emission wavelengths.
-//TODO But getAbsorptionWavelength uses the Rydberg formula, which produces non-integer values.
-//TODO Should we use integers, or should we use Rydberg values? This is relevant for PhET-iO.
 function createWavelengthToStateTransitionMap(): Map<number, StateTransition> {
   const map = new Map<number, StateTransition>();
   for ( let n1 = MOTHAConstants.GROUND_STATE; n1 < MOTHAConstants.MAX_STATE; n1++ ) {
@@ -550,6 +547,5 @@ function createWavelengthToStateTransitionMap(): Map<number, StateTransition> {
   }
   return map;
 }
-
 
 modelsOfTheHydrogenAtom.register( 'BohrModel', BohrModel );
