@@ -17,6 +17,8 @@ import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
 
 const GROUND_STATE = 1;
 const MAX_STATE = 6;
+const MIN_UV_WAVELENGTH = 92; //TODO Why 92? Isn't UV range [100,400] nm?
+const MAX_IR_WAVELENGTH = 7500; // slightly above 7460 nm for the 5 -> 6 state transition
 
 const CORNER_RADIUS = 5;
 
@@ -79,8 +81,8 @@ const MOTHAConstants = {
   // speeds, in distance per second
   PHOTON_INITIAL_SPEED: 300,
 
-  //TODO Why 92? Isn't UV range [100,400] nm?
-  MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
+  MONOCHROMATIC_WAVELENGTH_RANGE: new Range( MIN_UV_WAVELENGTH, VisibleColor.MAX_WAVELENGTH ),
+  SPECTROMETER_WAVELENGTH_RANGE: new Range( MIN_UV_WAVELENGTH, MAX_IR_WAVELENGTH ),
 
   MAX_SPECTROMETER_SNAPSHOTS: 4,
 

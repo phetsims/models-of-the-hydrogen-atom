@@ -8,12 +8,11 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import RecordStopButton from '../../../../scenery-phet/js/buttons/RecordStopButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, Path, Text, VBox } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -31,9 +30,7 @@ import Spectrometer from '../model/Spectrometer.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-
-// constants
-const DISPLAY_SIZE = new Dimension2( 575, 135 );
+import SpectrometerNode from './SpectrometerNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -55,19 +52,13 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
         // AccordionBoxOptions
         isDisposable: false,
+        titleNode: new TitleNode( expandedProperty, providedOptions.tandem.createTandem( 'titleNode' ) ),
         expandedProperty: expandedProperty,
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty
       }, providedOptions );
 
-    options.titleNode = new TitleNode( expandedProperty, options.tandem.createTandem( 'titleNode' ) );
-
-    //TODO placeholder
-    const displayNode = new Rectangle( 0, 0, DISPLAY_SIZE.width, DISPLAY_SIZE.height, {
-      cornerRadius: MOTHAConstants.CORNER_RADIUS,
-      fill: MOTHAColors.spectrometerFillProperty,
-      stroke: MOTHAColors.spectrometerStrokeProperty
-    } );
+    const spectrometerNode = new SpectrometerNode( spectrometer );
 
     //TODO relocate, handle reset
     //TODO does this belong here?
@@ -137,13 +128,13 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       spacing: 7,
       align: 'center',
       children: [ recordStopButton, snapshotButton, viewSnapshotsButton, eraseButton ],
-      maxHeight: displayNode.height
+      maxHeight: spectrometerNode.height
     } );
 
     const contentNode = new HBox( {
       spacing: 5,
       align: 'bottom',
-      children: [ displayNode, buttonGroup ]
+      children: [ spectrometerNode, buttonGroup ]
     } );
 
     super( contentNode, options );
