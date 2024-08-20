@@ -1,7 +1,7 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
 /**
- * LegendPanel displays a legend for the particle types that appear in the sim.
+ * LegendPanel displays a legend (sic) for the particle types that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -47,20 +47,19 @@ export default class LegendPanel extends Panel {
     // To make all icons have the same effective size.
     const iconAlignGroup = new AlignGroup();
 
-    // A Node for each item described in the Key, organized under a parent tandem
-    const keyNodes: KeyNode[] = [
-      new KeyNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
+    const legendNodes: LegendNode[] = [
+      new LegendNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.electronStringProperty, options.tandem.createTandem( 'electronNode' ) ),
-      new KeyNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
+      new LegendNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.protonStringProperty, options.tandem.createTandem( 'protonNode' ) ),
-      new KeyNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
+      new LegendNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.photonStringProperty, options.tandem.createTandem( 'photonNode' ) )
     ];
 
     const content = new VBox( {
       spacing: 4,
       align: 'left',
-      children: keyNodes
+      children: legendNodes
     } );
 
     super( content, options );
@@ -68,9 +67,9 @@ export default class LegendPanel extends Panel {
 }
 
 /**
- * The key for one symbol, described with text.
+ * Legend (sic) for one symbol, described with text.
  */
-class KeyNode extends HBox {
+class LegendNode extends HBox {
 
   public constructor( iconNode: Node, iconAlignGroup: AlignGroup, labelStringProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
     super( {
