@@ -21,7 +21,7 @@ import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Range from '../../../../dot/js/Range.js';
 
-const DISPLAY_SIZE = new Dimension2( 575, 135 );
+const DISPLAY_SIZE = new Dimension2( 620, 135 );
 const CHART_SIZE = new Dimension2( 0.97 * DISPLAY_SIZE.width, 0.9 * DISPLAY_SIZE.height );
 
 // We will be scaling the x-axis for wavelengths in the UV and IR range.

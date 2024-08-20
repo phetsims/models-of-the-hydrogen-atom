@@ -6,11 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Path, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Path, PressListener, Text } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -24,7 +23,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Spectrometer from '../model/Spectrometer.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import SpectrometerNode from './SpectrometerNode.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
@@ -41,27 +39,18 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
         // AccordionBoxOptions
         isDisposable: false,
+        titleBarExpandCollapse: false, // because we're putting buttons in the title bar
+        overrideTitleNodePickable: false,
         expandedDefaultValue: MOTHAQueryParameters.expandAll,
-        titleNode: new Text( ModelsOfTheHydrogenAtomStrings.spectrometerStringProperty, {
-          font: new PhetFont( { size: 16, weight: 'bold' } ),
-          fill: MOTHAColors.spectrometerTitleFillProperty,
-          maxWidth: 290
-        } ),
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty
       }, providedOptions );
 
-    const spectrometerNode = new SpectrometerNode( spectrometer );
-
-    //TODO relocate, handle reset
-    //TODO does this belong here?
-    const recordingProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'recordingProperty' )
-    } );
-    recordingProperty.link( recording => {
-      if ( !isSettingPhetioStateProperty.value ) {
-        //TODO Erase what is currently shown on the spectrometer and start recording.
-      }
+    const titleText = new Text( ModelsOfTheHydrogenAtomStrings.spectrometerStringProperty, {
+      cursor: 'pointer',
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      fill: MOTHAColors.spectrometerTitleFillProperty,
+      maxWidth: 290
     } );
 
     const snapshotButton = new RectangularPushButton( {
@@ -108,24 +97,36 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'eraseButton' )
     } );
 
-    const buttonGroup = new VBox( {
-      stretch: true,
-      spacing: 7,
-      align: 'center',
-      children: [ snapshotButton, viewSnapshotsButton, eraseButton ],
-      maxHeight: spectrometerNode.height
+    //TODO Make all buttons have the same dimensions.
+    const buttonGroup = new HBox( {
+      maxHeight: 25,
+      spacing: 10,
+      children: [ snapshotButton, viewSnapshotsButton, eraseButton ]
     } );
 
-    const contentNode = new HBox( {
-      spacing: 5,
-      align: 'bottom',
-      children: [ spectrometerNode, buttonGroup ]
+    options.titleNode = new HBox( {
+      children: [ titleText, buttonGroup ]
     } );
 
-    super( contentNode, options );
+    const spectrometerNode = new SpectrometerNode( spectrometer );
 
-    // Record only when the accordion box is expanded.
-    this.expandedProperty.link( expanded => spectrometer.setRecordingEnabled( expanded ) );
+    super( spectrometerNode, options );
+
+    this.expandedProperty.link( expanded => {
+
+      // Record only when the accordion box is expanded.
+      spectrometer.setRecordingEnabled( expanded );
+
+      // Show buttons when expanded.
+      buttonGroup.visible = expanded;
+    } );
+
+    titleText.addInputListener( new PressListener( {
+      press: () => {
+        this.expandedProperty.value = !this.expandedProperty.value;
+      },
+      tandem: options.tandem.createTandem( 'titleTextPressListener' )
+    } ) );
 
     this.addLinkedElement( spectrometer );
   }
