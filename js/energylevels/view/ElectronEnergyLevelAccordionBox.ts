@@ -18,7 +18,6 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 
-// constants
 const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
 type SelfOptions = EmptySelfOptions;

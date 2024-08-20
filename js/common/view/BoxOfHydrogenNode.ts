@@ -16,7 +16,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-// constants
 const BACK_DEPTH = 10;
 const BACK_OFFSET = 0.15;
 const BOX_SIZE = new Dimension2( 50, 40 );

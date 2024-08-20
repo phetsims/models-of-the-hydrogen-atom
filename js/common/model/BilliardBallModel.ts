@@ -30,7 +30,6 @@ import Utils from '../../../../dot/js/Utils.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
-// constants
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
 const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 

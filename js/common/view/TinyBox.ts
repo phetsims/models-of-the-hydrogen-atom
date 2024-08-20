@@ -13,7 +13,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
-// constants
 const TINY_BOX_SIZE = new Dimension2( 6, 6 );
 
 type SelfOptions = EmptySelfOptions;
