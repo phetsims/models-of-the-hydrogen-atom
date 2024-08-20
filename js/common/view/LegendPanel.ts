@@ -22,6 +22,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 
 const ITEM_FONT = new PhetFont( 16 );
+const PHOTO_WAVELENGTH = 480; // nm, for the photon icon
 
 type SelfOptions = {
   iconScale?: number;
@@ -52,7 +53,7 @@ export default class LegendPanel extends Panel {
         ModelsOfTheHydrogenAtomStrings.electronStringProperty, options.tandem.createTandem( 'electronNode' ) ),
       new LegendNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.protonStringProperty, options.tandem.createTandem( 'protonNode' ) ),
-      new LegendNode( PhotonNode.createIcon( 480, options.iconScale ), iconAlignGroup,
+      new LegendNode( PhotonNode.createIcon( PHOTO_WAVELENGTH, options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.photonStringProperty, options.tandem.createTandem( 'photonNode' ) )
     ];
 
