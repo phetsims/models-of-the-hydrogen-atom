@@ -47,7 +47,9 @@ export default class Spectrometer extends PhetioObject {
     this.dataPointsProperty = new Property<SpectrometerDataPoint[]>( [], {
       tandem: options.tandem.createTandem( 'dataPointsProperty' ),
       phetioValueType: ArrayIO( SpectrometerDataPoint.SpectrometerDataPointIO ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: true,
+      phetioDocumentation: 'Data points (number of photons emitted per wavelength) recorded by the spectrometer.'
     } );
 
     this.numberOfSnapshotsProperty = new NumberProperty( 0, {

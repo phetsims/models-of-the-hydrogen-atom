@@ -91,6 +91,7 @@ export default class Photon extends PhetioObject {
     } );
 
     this.directionProperty = new NumberProperty( options.direction, {
+      units: 'radians',
       tandem: options.tandem.createTandem( 'directionProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'Direction of motion, in radians.'

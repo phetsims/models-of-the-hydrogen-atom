@@ -60,7 +60,8 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     const absorptionEmissionDialogVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'absorptionEmissionDialogVisibleProperty' )
+      tandem: tandem.createTandem( 'absorptionEmissionDialogVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     const absorptionEmissionCheckbox = new AbsorptionEmissionCheckbox( absorptionEmissionDialogVisibleProperty, {

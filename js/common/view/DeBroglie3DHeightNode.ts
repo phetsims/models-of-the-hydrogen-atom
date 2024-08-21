@@ -90,8 +90,10 @@ export default class DeBroglie3DHeightNode extends Node {
 
     //TODO needs to be reset
     this.currentViewAngleProperty = new NumberProperty( 0, {
+      units: 'radians',
       tandem: options.tandem.createTandem( 'currentViewAngleProperty' ),
       phetioReadOnly: true
+      //TODO phetioDocumentation
     } );
 
     this.orbitVertices = [];

@@ -59,14 +59,14 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
   // offset of the electron relative to the atom's position
   private readonly electronOffsetProperty: TReadOnlyProperty<Vector2>;
 
-  // distance between electron and proton
-  private readonly electronDistanceProperty: Property<number>;
+  // distance between the electron and proton
+  private readonly electronToProtonDistanceProperty: Property<number>;
 
   // in radians
-  private readonly electronAngleProperty: Property<number>;
+  private readonly electronDirectionProperty: Property<number>;
 
-  // in radians
-  private readonly electronAngleDeltaProperty: Property<number>;
+  // in radians/s
+  private readonly electronAngularSpeedProperty: Property<number>;
 
   // Has the atom been destroyed?
   public readonly isDestroyedProperty: TReadOnlyProperty<boolean>;
@@ -91,62 +91,68 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
-    this.electronDistanceProperty = new NumberProperty( ELECTRON_DISTANCE, {
-      tandem: options.tandem.createTandem( 'electronDistanceProperty' )
+    this.electronToProtonDistanceProperty = new NumberProperty( ELECTRON_DISTANCE, {
+      tandem: options.tandem.createTandem( 'electronToProtonDistanceProperty' ),
+      phetioDocumentation: 'Distance between the electron and proton.'
     } );
 
-    //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
-    this.electronAngleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
-      tandem: options.tandem.createTandem( 'electronAngleProperty' )
+    //TODO We want this to start at a different angle each time we reset, but that conflicts with PhET-iO.
+    this.electronDirectionProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
+      units: 'radians',
+      tandem: options.tandem.createTandem( 'electronDirectionProperty' )
     } );
 
     //TODO make this go away, just set electron.positionProperty directly
     this.electronOffsetProperty = new DerivedProperty(
-      [ this.electronDistanceProperty, this.electronAngleProperty ],
+      [ this.electronToProtonDistanceProperty, this.electronDirectionProperty ],
       ( distance, angle ) => MOTHAUtils.polarToCartesian( distance, angle ), {
         tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
-        phetioValueType: Vector2.Vector2IO
+        phetioValueType: Vector2.Vector2IO,
+        phetioDocumentation: 'Offset of the electron from the center of the atom.'
       } );
 
     this.electronOffsetProperty.link( electronOffset => {
       this.electron.positionProperty.value = this.position.plus( electronOffset );
     } );
 
-    this.electronAngleDeltaProperty = new NumberProperty( ELECTRON_ANGLE_DELTA, {
-      tandem: options.tandem.createTandem( 'electronAngleDeltaProperty' )
+    this.electronAngularSpeedProperty = new NumberProperty( ELECTRON_ANGLE_DELTA, {
+      units: 'radians/s',
+      tandem: options.tandem.createTandem( 'electronAngularSpeedProperty' ),
+      phetioDocumentation: 'Angular speed of the electron.'
     } );
 
     // The atom is destroyed when the electron hits the proton.
-    this.isDestroyedProperty = new DerivedProperty( [ this.electronDistanceProperty ],
+    this.isDestroyedProperty = new DerivedProperty( [ this.electronToProtonDistanceProperty ],
       electronDistance => ( electronDistance === 0 ), {
         tandem: options.tandem.createTandem( 'isDestroyedProperty' ),
-        phetioValueType: BooleanIO
+        phetioValueType: BooleanIO,
+        phetioDocumentation: 'Whether the atom has been destroyed.'
       } );
   }
 
   public override reset(): void {
     this.electron.reset();
-    this.electronDistanceProperty.reset();
-    this.electronAngleProperty.reset();
-    this.electronAngleDeltaProperty.reset();
+    this.electronToProtonDistanceProperty.reset();
+    this.electronDirectionProperty.reset();
+    this.electronAngularSpeedProperty.reset();
     super.reset();
   }
 
   public override step( dt: number ): void {
     if ( !this.isDestroyedProperty.value ) {
 
-      // decrement the orbit angle, so the orbit is clockwise
-      this.electronAngleProperty.value -= ( this.electronAngleDeltaProperty.value * dt );
+      // Decrement the orbit angle, so the orbit is clockwise.
+      this.electronDirectionProperty.value -= ( this.electronAngularSpeedProperty.value * dt );
 
-      // increase the rate of change of the orbit angle
-      this.electronAngleDeltaProperty.value *= ELECTRON_ACCELERATION;
+      // Accelerate by increasing the angular speed.
+      this.electronAngularSpeedProperty.value *= ELECTRON_ACCELERATION;
 
-      // decrease the electron's distance from the proton
-      let newElectronDistance = this.electronDistanceProperty.value - ( ELECTRON_DISTANCE_DELTA * dt );
+      // Decrease the electron's distance from the proton.
+      let newElectronDistance = this.electronToProtonDistanceProperty.value - ( ELECTRON_DISTANCE_DELTA * dt );
       if ( newElectronDistance <= MIN_ELECTRON_DISTANCE ) {
         newElectronDistance = 0;
       }
-      this.electronDistanceProperty.value = newElectronDistance;
+      this.electronToProtonDistanceProperty.value = newElectronDistance;
     }
   }
 

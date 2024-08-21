@@ -107,7 +107,8 @@ export default class Light extends PhetioObject {
       numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
       range: this.monochromaticWavelengthRange,
       tandem: options.tandem.createTandem( 'monochromaticWavelengthProperty' ),
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioDocumentation: 'Wavelength used for the light when it is in monochromatic mode.'
     } );
 
     this.wavelengthProperty = new DerivedProperty( [ this.lightModeProperty, this.monochromaticWavelengthProperty ],
@@ -128,8 +129,10 @@ export default class Light extends PhetioObject {
     this.dtPerPhotonCreated = ( zoomedInBox.height / MOTHAConstants.PHOTON_SPEED ) / MAX_PHOTONS;
 
     this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
+      units: 's',
       tandem: options.tandem.createTandem( 'dtSincePhotonCreatedProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'Elapsed time since a photo was emitted by the light.'
     } );
 
     this.groundStateAbsorptionWavelengths = BohrModel.getAbsorptionWavelengths( MOTHAConstants.GROUND_STATE );

@@ -81,7 +81,7 @@ export default class BohrModel extends HydrogenAtom {
   private readonly _electronStateProperty: NumberProperty;
   public readonly electronStateProperty: TReadOnlyProperty<number>;
 
-  // time that the electron has been in its current state
+  // time that the electron has been in its current state, in seconds
   private readonly timeInStateProperty: Property<number>;
 
   // current angle of electron
@@ -121,7 +121,7 @@ export default class BohrModel extends HydrogenAtom {
 
     this._electronStateProperty = new NumberProperty( MOTHAConstants.GROUND_STATE, {
       numberType: 'Integer',
-      range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.GROUND_STATE + ORBIT_RADII.length ),
+      range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.MAX_STATE ),
       tandem: options.tandem.createTandem( 'electronStateProperty' ),
       phetioReadOnly: true,
       phetioFeatured: true,
@@ -130,8 +130,10 @@ export default class BohrModel extends HydrogenAtom {
     this.electronStateProperty = this._electronStateProperty;
 
     this.timeInStateProperty = new NumberProperty( 0, {
+      units: 's',
       tandem: options.tandem.createTandem( 'timeInStateProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'Time that the electron has been in its current state.'
     } );
 
     // When the electron changes state, reset timeInStateProperty.
@@ -143,6 +145,7 @@ export default class BohrModel extends HydrogenAtom {
 
     //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
     this.electronAngleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
+      units: 'radians',
       tandem: options.tandem.createTandem( 'electronAngleProperty' ),
       phetioReadOnly: true
     } );
@@ -155,7 +158,8 @@ export default class BohrModel extends HydrogenAtom {
         return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
-        phetioValueType: Vector2.Vector2IO
+        phetioValueType: Vector2.Vector2IO,
+        phetioDocumentation: 'Offset of the electron from the center of the atom.'
       } );
 
     this.electronOffsetProperty.link( electronOffset => {

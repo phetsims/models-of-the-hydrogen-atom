@@ -42,7 +42,10 @@ export default class LegendPanel extends Panel {
       // PanelOptions
       isDisposable: false,
       fill: null,
-      stroke: null
+      stroke: null,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     // To make all icons have the same effective size.

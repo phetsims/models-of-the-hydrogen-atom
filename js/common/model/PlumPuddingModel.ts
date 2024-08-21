@@ -98,7 +98,8 @@ export default class PlumPuddingModel extends HydrogenAtom {
     //TODO make this go away, just set electron.positionProperty directly
     this.electronOffsetProperty = new Vector2Property( Vector2.ZERO, {
       tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'Offset of the electron from the center of the atom.'
     } );
 
     this.electronOffsetProperty.link( electronOffset => {
@@ -113,6 +114,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
     //TODO Should be derived from this.electron.directionProperty, and directionProperty is not used.
     this.electronDirectionPositiveProperty = new BooleanProperty( true, {
+      units: 'radians',
       tandem: options.tandem.createTandem( 'electronDirectionPositiveProperty' ),
       phetioReadOnly: true
     } );
@@ -132,7 +134,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
       phetioDocumentation: 'The number of times the electron has crossed the atom\'s center since it started moving.'
     } );
 
-    //TODO should this affect this.electron.speedProperty?
     this.previousAmplitudeProperty = new NumberProperty( 0, {
       range: new Range( 0, 1 ),
       tandem: options.tandem.createTandem( 'previousAmplitudeProperty' ),
@@ -278,6 +279,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
     }
   }
 
+  //TODO Should we add electronAmplitudeProperty?
   /**
    * Gets the electron's amplitude. This is ratio of the number of photons actually absorbed to the number of photons
    * the electron is capable of absorbing.
