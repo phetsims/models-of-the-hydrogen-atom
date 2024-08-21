@@ -125,7 +125,7 @@ export default class Light extends PhetioObject {
       parameters: [ { valueType: Photon } ]
     } );
 
-    this.dtPerPhotonCreated = ( zoomedInBox.height / MOTHAConstants.PHOTON_INITIAL_SPEED ) / MAX_PHOTONS;
+    this.dtPerPhotonCreated = ( zoomedInBox.height / MOTHAConstants.PHOTON_SPEED ) / MAX_PHOTONS;
 
     this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
       tandem: options.tandem.createTandem( 'dtSincePhotonCreatedProperty' ),

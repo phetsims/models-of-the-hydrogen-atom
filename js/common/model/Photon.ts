@@ -1,29 +1,24 @@
 // Copyright 2016-2024, University of Colorado Boulder
 
 /**
- * Photon is the model of a photon. A photon has a wavelength, position, direction, and moves with constant speed.
+ * Photon is the model of a photon.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Particle, { ParticleOptions } from './Particle.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import Property from '../../../../axon/js/Property.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-
-type SelfOptions = {
-  wavelength: number; // the photon's integer wavelength, in nm
-  wasEmitted?: boolean; // Was this photon emitted by the atom?
-  hasCollided?: boolean; // Has this photon collided with the atom?
-};
-
-type PhotonOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius' | 'tandem'>;
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 // This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
 export type PhotonStateObject = {
@@ -31,7 +26,6 @@ export type PhotonStateObject = {
   // Serialize x and y coordinates separately, to reduce the number of Vector2 allocations.
   x: number;
   y: number;
-  speed: number;
   direction: number;
   wavelength: number;
   wasEmitted: boolean;
@@ -42,30 +36,47 @@ export type PhotonStateObject = {
 const PHOTON_STATE_SCHEMA = {
   x: NumberIO,
   y: NumberIO,
-  speed: NumberIO,
   direction: NumberIO,
   wavelength: NumberIO,
   wasEmitted: BooleanIO,
   hasCollided: BooleanIO
 };
 
-export default class Photon extends Particle {
+type SelfOptions = {
+  position?: Vector2; // initial position
+  direction?: number; // initial direction
+  wavelength: number; // the photon's integer wavelength, in nm
+  wasEmitted?: boolean; // Was this photon emitted by the atom?
+  hasCollided?: boolean; // Has this photon collided with the atom?
+};
 
-  public readonly wavelength: number;
+type PhotonOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'tandem'>;
+
+export default class Photon extends PhetioObject {
+
+  public readonly positionProperty: Property<Vector2>;
+  public readonly directionProperty: Property<number>; // radians
+  public readonly radius: number;
+  public readonly wavelength: number; // nm
+
+  // Whether the photon was emitted by the hydrogen atom.
   public readonly wasEmitted: boolean;
+
+  // Whether the photon has collided with the hydrogen atom.
   private _hasCollided: boolean;
 
   public constructor( providedOptions: PhotonOptions ) {
 
-    const options = optionize<PhotonOptions, SelfOptions, ParticleOptions>()( {
+    const options = optionize<PhotonOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
+      position: Vector2.ZERO,
+      direction: 0,
       wasEmitted: false,
       hasCollided: false,
 
-      // ParticleOptions
-      radius: MOTHAConstants.PHOTON_RADIUS,
-      speed: MOTHAConstants.PHOTON_INITIAL_SPEED,
+      // PhetioObjectOptions
+      phetioState: false,
       tandem: Tandem.OPT_OUT
     }, providedOptions );
 
@@ -74,9 +85,32 @@ export default class Photon extends Particle {
 
     super( options );
 
+    this.positionProperty = new Vector2Property( options.position, {
+      tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this.directionProperty = new NumberProperty( options.direction, {
+      tandem: options.tandem.createTandem( 'directionProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'Direction of motion, in radians.'
+    } );
+
+    this.radius = MOTHAConstants.PHOTON_RADIUS;
     this.wavelength = options.wavelength;
     this.wasEmitted = options.wasEmitted;
     this._hasCollided = options.hasCollided;
+  }
+
+  public reset(): void {
+    this.positionProperty.reset();
+    this.directionProperty.reset();
+  }
+
+  public override dispose(): void {
+    this.positionProperty.dispose();
+    this.directionProperty.dispose();
+    super.dispose();
   }
 
   public get hasCollided(): boolean {
@@ -89,10 +123,16 @@ export default class Photon extends Particle {
   }
 
   /**
-   * For debugging and logging only. Do not rely on the format of this string!
+   * Moves the photon based on elapsed time and constant speed.
+   * @param dt - elapsed time, in seconds
    */
-  public override toString(): string {
-    return super.toString() + ` wavelength=${this.wavelength}`;
+  public move( dt: number ): void {
+    const distance = dt * MOTHAConstants.PHOTON_SPEED;
+    const dx = Math.cos( this.directionProperty.value ) * distance;
+    const dy = Math.sin( this.directionProperty.value ) * distance;
+    const x = this.positionProperty.value.x + dx;
+    const y = this.positionProperty.value.y + dy;
+    this.positionProperty.value = new Vector2( x, y );
   }
 
   /**
@@ -102,7 +142,6 @@ export default class Photon extends Particle {
     return {
       x: this.positionProperty.value.x,
       y: this.positionProperty.value.y,
-      speed: this.speedProperty.value,
       direction: this.directionProperty.value,
       wavelength: this.wavelength,
       wasEmitted: this.wasEmitted,
@@ -116,7 +155,6 @@ export default class Photon extends Particle {
   private static fromStateObject( stateObject: PhotonStateObject ): Photon {
     return new Photon( {
       position: new Vector2( stateObject.x, stateObject.y ),
-      speed: stateObject.speed,
       direction: stateObject.direction,
       wavelength: stateObject.wavelength,
       wasEmitted: stateObject.wasEmitted,
@@ -139,7 +177,6 @@ export default class Photon extends Particle {
                    '<ul>' +
                    '<li>x: x coordinate of position' +
                    '<li>y: y coordinate of position' +
-                   '<li>speed: speed, in distance per second' +
                    '<li>direction: direction of motion, in radians' +
                    '<li>wavelength: wavelength of the photon, in nm' +
                    '<li>wasEmitted: whether the photon was emitted by the hydrogen atom' +

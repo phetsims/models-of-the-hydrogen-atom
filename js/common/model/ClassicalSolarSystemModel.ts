@@ -83,8 +83,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     super( zoomedInBox, options );
 
     this.proton = new Proton( {
-      position: this.position,
-      tandem: options.tandem.createTandem( 'proton' )
+      position: this.position
     } );
 
     this.electron = new Electron( {
@@ -126,7 +125,6 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
   }
 
   public override reset(): void {
-    this.proton.reset();
     this.electron.reset();
     this.electronDistanceProperty.reset();
     this.electronAngleProperty.reset();

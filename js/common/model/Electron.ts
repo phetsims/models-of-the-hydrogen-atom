@@ -6,29 +6,50 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Particle, { ParticleOptions } from './Particle.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import Property from '../../../../axon/js/Property.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  position?: Vector2;
+};
 
-type ElectronOptions = SelfOptions & StrictOmit<ParticleOptions, 'radius'> & PickRequired<ParticleOptions, 'tandem'>;
+type ElectronOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class Electron extends Particle {
+export default class Electron extends PhetioObject {
+
+  public readonly positionProperty: Property<Vector2>;
+  public readonly radius: number;
 
   public constructor( providedOptions: ElectronOptions ) {
 
-    const options = optionize<ElectronOptions, SelfOptions, ParticleOptions>()( {
+    const options = optionize<ElectronOptions, SelfOptions, PhetioObjectOptions>()( {
 
-      // ParticleOptions
+      // SelfOptions
+      position: Vector2.ZERO,
+
+      // PhetioObjectOptions
       isDisposable: false,
-      radius: MOTHAConstants.ELECTRON_RADIUS
+      phetioState: false
     }, providedOptions );
 
     super( options );
+
+    this.positionProperty = new Vector2Property( options.position, {
+      tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this.radius = MOTHAConstants.ELECTRON_RADIUS;
+  }
+
+  public reset(): void {
+    this.positionProperty.reset();
   }
 }
 

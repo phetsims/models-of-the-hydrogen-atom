@@ -70,7 +70,7 @@ const MOTHAConstants = {
   MAX_STATE: MAX_STATE,
   NUMBER_OF_STATES: MAX_STATE - GROUND_STATE + 1,
 
-  // radii, in model coordinates, unitless
+  // radii, in unitless model coordinates
   ELECTRON_RADIUS: 5,
   PROTON_RADIUS: 6,
   NEUTRON_RADIUS: 6,
@@ -78,8 +78,8 @@ const MOTHAConstants = {
   BILLIARD_BALL_RADIUS: 30,
   PLUM_PUDDING_RADIUS: 30,
 
-  // speeds, in distance per second
-  PHOTON_INITIAL_SPEED: 300,
+  // Photon speed is constant, in distance per second
+  PHOTON_SPEED: 300,
 
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( MIN_UV_WAVELENGTH, VisibleColor.MAX_WAVELENGTH ),
   SPECTROMETER_WAVELENGTH_RANGE: new Range( MIN_UV_WAVELENGTH, MAX_IR_WAVELENGTH ),

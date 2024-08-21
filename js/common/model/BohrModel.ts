@@ -111,8 +111,7 @@ export default class BohrModel extends HydrogenAtom {
     super( zoomedInBox, options );
 
     this.proton = new Proton( {
-      position: this.position,
-      tandem: options.tandem.createTandem( 'proton' )
+      position: this.position
     } );
 
     this.electron = new Electron( {
@@ -165,7 +164,6 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   public override reset(): void {
-    this.proton.reset();
     this.electron.reset();
     this._electronStateProperty.reset();
     this.timeInStateProperty.reset();
