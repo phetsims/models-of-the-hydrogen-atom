@@ -23,7 +23,6 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -40,12 +39,14 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Proton from './Proton.js';
 import Photon from './Photon.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
-const ELECTRON_DISTANCE = 150; // initial distance from electron to proton
+const ELECTRON_TO_PROTON_DISTANCE = 150; // initial distance from electron to proton
 const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the electron and proton is reduced per second
 const MIN_ELECTRON_DISTANCE = 5; // any distance between the electron and proton that is smaller than this is effectively zero
-const ELECTRON_ANGLE_DELTA = Utils.toRadians( 600 ); // initial change in the electron's rotation angle per second
-const ELECTRON_ACCELERATION = 1.008; // scaling of electronAngleDeltaProperty each time step is called
+const ELECTRON_ANGULAR_SPEED = Utils.toRadians( 600 ); // initial speed of the electron, in radians/s
+const ELECTRON_ANGULAR_SPEED_SCALE = 1.008; // scaling of electron speed each time step is called
 
 type SelfOptions = EmptySelfOptions;
 
@@ -54,19 +55,7 @@ type ClassicalSolarSystemModelOptions = SelfOptions & PickRequired<HydrogenAtomO
 export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
   public readonly proton: Proton;
-  public readonly electron: Electron;
-
-  // offset of the electron relative to the atom's position
-  private readonly electronOffsetProperty: TReadOnlyProperty<Vector2>;
-
-  // distance between the electron and proton
-  private readonly electronToProtonDistanceProperty: Property<number>;
-
-  // in radians
-  private readonly electronDirectionProperty: Property<number>;
-
-  // in radians/s
-  private readonly electronAngularSpeedProperty: Property<number>;
+  public readonly electron: ClassicalSolarSystemElectron;
 
   // Has the atom been destroyed?
   public readonly isDestroyedProperty: TReadOnlyProperty<boolean>;
@@ -86,44 +75,11 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       position: this.position
     } );
 
-    this.electron = new Electron( {
-      //TODO position is not properly initialized
-      tandem: options.tandem.createTandem( 'electron' )
-    } );
-
-    this.electronToProtonDistanceProperty = new NumberProperty( ELECTRON_DISTANCE, {
-      tandem: options.tandem.createTandem( 'electronToProtonDistanceProperty' ),
-      phetioDocumentation: 'Distance between the electron and proton.'
-    } );
-
-    //TODO We want this to start at a different angle each time we reset, but that conflicts with PhET-iO.
-    this.electronDirectionProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
-      units: 'radians',
-      tandem: options.tandem.createTandem( 'electronDirectionProperty' )
-    } );
-
-    //TODO make this go away, just set electron.positionProperty directly
-    this.electronOffsetProperty = new DerivedProperty(
-      [ this.electronToProtonDistanceProperty, this.electronDirectionProperty ],
-      ( distance, angle ) => MOTHAUtils.polarToCartesian( distance, angle ), {
-        tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
-        phetioValueType: Vector2.Vector2IO,
-        phetioDocumentation: 'Offset of the electron from the center of the atom.'
-      } );
-
-    this.electronOffsetProperty.link( electronOffset => {
-      this.electron.positionProperty.value = this.position.plus( electronOffset );
-    } );
-
-    this.electronAngularSpeedProperty = new NumberProperty( ELECTRON_ANGLE_DELTA, {
-      units: 'radians/s',
-      tandem: options.tandem.createTandem( 'electronAngularSpeedProperty' ),
-      phetioDocumentation: 'Angular speed of the electron.'
-    } );
+    this.electron = new ClassicalSolarSystemElectron( this.proton.position, options.tandem.createTandem( 'electron' ) );
 
     // The atom is destroyed when the electron hits the proton.
-    this.isDestroyedProperty = new DerivedProperty( [ this.electronToProtonDistanceProperty ],
-      electronDistance => ( electronDistance === 0 ), {
+    this.isDestroyedProperty = new DerivedProperty( [ this.electron.positionProperty ],
+      electronPosition => ( electronPosition.distance( this.proton.position ) === 0 ), {  //TODO epsilon?
         tandem: options.tandem.createTandem( 'isDestroyedProperty' ),
         phetioValueType: BooleanIO,
         phetioDocumentation: 'Whether the atom has been destroyed.'
@@ -132,32 +88,80 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
   public override reset(): void {
     this.electron.reset();
-    this.electronToProtonDistanceProperty.reset();
-    this.electronDirectionProperty.reset();
-    this.electronAngularSpeedProperty.reset();
     super.reset();
   }
 
   public override step( dt: number ): void {
     if ( !this.isDestroyedProperty.value ) {
-
-      // Decrement the orbit angle, so the orbit is clockwise.
-      this.electronDirectionProperty.value -= ( this.electronAngularSpeedProperty.value * dt );
-
-      // Accelerate by increasing the angular speed.
-      this.electronAngularSpeedProperty.value *= ELECTRON_ACCELERATION;
-
-      // Decrease the electron's distance from the proton.
-      let newElectronDistance = this.electronToProtonDistanceProperty.value - ( ELECTRON_DISTANCE_DELTA * dt );
-      if ( newElectronDistance <= MIN_ELECTRON_DISTANCE ) {
-        newElectronDistance = 0;
-      }
-      this.electronToProtonDistanceProperty.value = newElectronDistance;
+      this.electron.step( dt );
     }
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
     photon.move( dt );
+  }
+}
+
+/**
+ * ClassicalSolarSystemElectron is a specialization of Electron for the Classical Solar System model.
+ */
+class ClassicalSolarSystemElectron extends Electron {
+
+  private readonly directionProperty: Property<number>; // radians
+  private readonly angularSpeedProperty: Property<number>; // radians/s
+  private readonly protonPosition: Vector2;
+
+  public constructor( protonPosition: Vector2, tandem: Tandem ) {
+
+    const direction = MOTHAUtils.nextAngle();
+    const electronOffset = MOTHAUtils.polarToCartesian( ELECTRON_TO_PROTON_DISTANCE, direction );
+    const position = protonPosition.plus( electronOffset );
+
+    super( {
+      position: position,
+      tandem: tandem
+    } );
+
+    this.directionProperty = new NumberProperty( direction, {
+      units: 'radians',
+      tandem: tandem.createTandem( 'directionProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this.angularSpeedProperty = new NumberProperty( ELECTRON_ANGULAR_SPEED, {
+      units: 'radians/s',
+      tandem: tandem.createTandem( 'angularSpeedProperty' ),
+      phetioDocumentation: 'Angular speed of the electron.',
+      phetioReadOnly: true
+    } );
+
+    this.protonPosition = protonPosition;
+  }
+
+  public override reset(): void {
+    // TODO Does setting directionProperty to a different angle on reset conflict with PhET-iO?
+    this.directionProperty.value = MOTHAUtils.nextAngle();
+    this.angularSpeedProperty.reset();
+    super.reset();
+  }
+
+  public step( dt: number ): void {
+
+    // Move clockwise.
+    this.directionProperty.value -= ( this.angularSpeedProperty.value * dt );
+
+    // Move the electron closer to the proton.
+    const distance = this.positionProperty.value.distance( this.protonPosition ) - ( ELECTRON_DISTANCE_DELTA * dt );
+    if ( distance <= MIN_ELECTRON_DISTANCE ) {
+      this.positionProperty.value = this.protonPosition;
+    }
+    else {
+      const electronOffset = MOTHAUtils.polarToCartesian( distance, this.directionProperty.value );
+      this.positionProperty.value = this.protonPosition.plus( electronOffset );
+    }
+
+    // Accelerate.
+    this.angularSpeedProperty.value *= ELECTRON_ANGULAR_SPEED_SCALE;
   }
 }
 
