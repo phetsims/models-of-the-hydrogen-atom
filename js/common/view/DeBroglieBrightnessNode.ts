@@ -124,8 +124,8 @@ class RingNode extends Node {
         Color.interpolateRGBA( negativeAmplitudeColor, positiveAmplitudeColor, 0.5 )
     );
 
-    Multilink.multilink( [ this.hydrogenAtom.electronStateProperty, this.visibleProperty ],
-      ( electronState, visible ) => {
+    Multilink.multilink( [ this.hydrogenAtom.nProperty, this.visibleProperty ],
+      ( n, visible ) => {
         if ( visible ) {
           this.updateGeometry();
           this.updateColor();
@@ -146,8 +146,7 @@ class RingNode extends Node {
     assert && assert( this.visible, 'should only be called when visible' );
 
     // Compute the number of polygons needed to represent this electron state.
-    const electronState = this.hydrogenAtom.electronStateProperty.value;
-    const modelRadius = this.hydrogenAtom.getElectronOrbitRadius( electronState );
+    const modelRadius = this.hydrogenAtom.getElectronOrbitRadius( this.hydrogenAtom.nProperty.value );
     const viewRadius = this.modelViewTransform.modelToViewDeltaX( modelRadius );
     const numberOfPolygons = calculateNumberOfPolygons( viewRadius );
     assert && assert( numberOfPolygons <= this.polygonNodes.length );
@@ -171,7 +170,7 @@ class RingNode extends Node {
   private updateColor(): void {
     assert && assert( this.visible, 'should only be called when visible' );
 
-    const electronState = this.hydrogenAtom.electronStateProperty.value;
+    const n = this.hydrogenAtom.nProperty.value;
 
     // the number of relevant polygons, NOT this.polygonNodes.length
     assert && assert( _.every( this.children, child => child instanceof Path ) );
@@ -180,7 +179,7 @@ class RingNode extends Node {
     // Visit polygons in the same order as updateGeometry.
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
-      const amplitude = this.hydrogenAtom.getAmplitude( electronState, angle );
+      const amplitude = this.hydrogenAtom.getAmplitude( n, angle );
       this.polygonNodes[ i ].fill = this.amplitudeToColor( amplitude );
     }
   }

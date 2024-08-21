@@ -64,16 +64,15 @@ export default class SchrodingerNode extends HydrogenAtomNode {
         tandem: options.tandem.createTandem( 'exciteAtomButton' )
       } );
 
-    const wavefunctionText = new WavefunctionText( hydrogenAtom.electronStateProperty,
-      hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
-        tandem: options.tandem.createTandem( 'wavefunctionText' )
-      } );
+    const stateText = new WavefunctionText( hydrogenAtom.nlmProperty, {
+      tandem: options.tandem.createTandem( 'stateText' )
+    } );
 
     //TODO Should be in front of photons.
     const vBox = new VBox( {
       align: 'right',
       spacing: 15,
-      children: [ exciteAtomButton, wavefunctionText ]
+      children: [ exciteAtomButton, stateText ]
     } );
 
     //TODO Under Construction

@@ -77,9 +77,9 @@ export default class BohrModel extends HydrogenAtom {
   public readonly proton: Proton;
   public readonly electron: Electron;
 
-  // electron state number (n)
-  private readonly _electronStateProperty: NumberProperty;
-  public readonly electronStateProperty: TReadOnlyProperty<number>;
+  // n, the principal quantum number
+  private readonly _nProperty: NumberProperty;
+  public readonly nProperty: TReadOnlyProperty<number>;
 
   // time that the electron has been in its current state, in seconds
   private readonly timeInStateProperty: Property<number>;
@@ -119,15 +119,15 @@ export default class BohrModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
-    this._electronStateProperty = new NumberProperty( MOTHAConstants.GROUND_STATE, {
+    this._nProperty = new NumberProperty( MOTHAConstants.GROUND_STATE, {
       numberType: 'Integer',
       range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.MAX_STATE ),
-      tandem: options.tandem.createTandem( 'electronStateProperty' ),
+      tandem: options.tandem.createTandem( 'nProperty' ),
       phetioReadOnly: true,
       phetioFeatured: true,
-      phetioDocumentation: 'primary electron state (n)'
+      phetioDocumentation: 'n, the principal quantum number.'
     } );
-    this.electronStateProperty = this._electronStateProperty;
+    this.nProperty = this._nProperty;
 
     this.timeInStateProperty = new NumberProperty( 0, {
       units: 's',
@@ -137,7 +137,7 @@ export default class BohrModel extends HydrogenAtom {
     } );
 
     // When the electron changes state, reset timeInStateProperty.
-    this.electronStateProperty.link( electronState => {
+    this.nProperty.link( () => {
       if ( !isSettingPhetioStateProperty.value ) {
         this.timeInStateProperty.value = 0;
       }
@@ -152,9 +152,9 @@ export default class BohrModel extends HydrogenAtom {
 
     //TODO make this go away, just set electron.positionProperty directly
     this.electronOffsetProperty = new DerivedProperty(
-      [ this.electronStateProperty, this.electronAngleProperty ],
-      ( electronState, angle ) => {
-        const radius = this.getElectronOrbitRadius( electronState );
+      [ this.nProperty, this.electronAngleProperty ],
+      ( n, angle ) => {
+        const radius = this.getElectronOrbitRadius( n );
         return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
@@ -169,7 +169,7 @@ export default class BohrModel extends HydrogenAtom {
 
   public override reset(): void {
     this.electron.reset();
-    this._electronStateProperty.reset();
+    this._nProperty.reset();
     this.timeInStateProperty.reset();
     this.electronAngleProperty.reset();
     super.reset();
@@ -193,8 +193,8 @@ export default class BohrModel extends HydrogenAtom {
    * Subclasses may override this to produce different oscillation behavior.
    */
   protected calculateNewElectronAngle( dt: number ): number {
-    const electronState = this.electronStateProperty.value;
-    const deltaAngle = dt * ( BohrModel.ELECTRON_ANGLE_DELTA / ( electronState * electronState ) );
+    const n = this.nProperty.value;
+    const deltaAngle = dt * ( BohrModel.ELECTRON_ANGLE_DELTA / ( n * n ) );
     return this.electronAngleProperty.value - deltaAngle; //TODO clockwise
   }
 
@@ -204,14 +204,6 @@ export default class BohrModel extends HydrogenAtom {
       this.attemptStimulatedEmission( photon );
       photon.move( dt );
     }
-  }
-
-  /**
-   * Sets the electron's primary state (n). Use this method exclusively to n.
-   * Subclasses with more complicated electron state, like Schrodinger's (n,l,m), should override this method.
-   */
-  protected setElectronState( n: number ): void {
-    this._electronStateProperty.value = n;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -294,7 +286,7 @@ export default class BohrModel extends HydrogenAtom {
   private attemptAbsorption( photon: Photon ): boolean {
 
     let success = false;
-    const currentState = this.electronStateProperty.value;
+    const nCurrent = this.nProperty.value;
 
     // Has the electron been in this state long enough? And was this photon produced by the light?
     if ( this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE && !photon.wasEmitted ) {
@@ -305,17 +297,17 @@ export default class BohrModel extends HydrogenAtom {
 
         // Is the photon absorbable, does it have a transition wavelength?
         let canAbsorb = false;
-        let newState = 0;
-        for ( let n = currentState + 1; n <= MOTHAConstants.MAX_STATE && !canAbsorb; n++ ) {
-          const transitionWavelength = BohrModel.getAbsorptionWavelength( currentState, n );
+        let nNew = 0;
+        for ( let n = nCurrent + 1; n <= MOTHAConstants.MAX_STATE && !canAbsorb; n++ ) {
+          const transitionWavelength = BohrModel.getAbsorptionWavelength( nCurrent, n );
           if ( photon.wavelength === transitionWavelength ) {
             canAbsorb = true;
-            newState = n;
+            nNew = n;
           }
         }
 
         // Is the transition that would occur allowed?
-        if ( !this.absorptionIsAllowed( currentState, newState ) ) {
+        if ( !this.absorptionIsAllowed( nCurrent, nNew ) ) {
           return false;
         }
 
@@ -328,7 +320,7 @@ export default class BohrModel extends HydrogenAtom {
           this.photonAbsorbedEmitter.emit( photon );
 
           // move electron to new state
-          this.setElectronState( newState );
+          this._nProperty.value = nNew;
         }
       }
     }
@@ -346,7 +338,7 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Determines if a proposed state transition caused by absorption is legal. Always true for Bohr.
    */
-  private absorptionIsAllowed( oldState: number, newState: number ): boolean {
+  private absorptionIsAllowed( nOld: number, nNew: number ): boolean {
     return true;
   }
 
@@ -367,12 +359,12 @@ export default class BohrModel extends HydrogenAtom {
   private attemptStimulatedEmission( photon: Photon ): boolean {
 
     let success = false;
-    const currentElectronState = this.electronStateProperty.value;
+    const nCurrent = this.nProperty.value;
 
     // Are we in some state other than the ground state?
     // Has the electron been in this state long enough?
     // Was this photon produced by the light?
-    if ( currentElectronState > MOTHAConstants.GROUND_STATE &&
+    if ( nCurrent > MOTHAConstants.GROUND_STATE &&
          this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE &&
          !photon.wasEmitted ) {
 
@@ -382,17 +374,17 @@ export default class BohrModel extends HydrogenAtom {
 
         // Can this photon stimulate emission, does it have a transition wavelength?
         let canStimulateEmission = false;
-        let newElectronState = 0;
-        for ( let electronState = MOTHAConstants.GROUND_STATE; electronState < currentElectronState && !canStimulateEmission; electronState++ ) {
-          const transitionWavelength = BohrModel.getAbsorptionWavelength( electronState, currentElectronState );
+        let nNew = 0;
+        for ( let n = MOTHAConstants.GROUND_STATE; n < nCurrent && !canStimulateEmission; n++ ) {
+          const transitionWavelength = BohrModel.getAbsorptionWavelength( n, nCurrent );
           if ( photon.wavelength === transitionWavelength ) {
             canStimulateEmission = true;
-            newElectronState = electronState;
+            nNew = n;
           }
         }
 
         // Is the transition that would occur allowed?
-        if ( !this.stimulatedEmissionIsAllowed( currentElectronState, newElectronState ) ) {
+        if ( !this.stimulatedEmissionIsAllowed( nCurrent, nNew ) ) {
           return false;
         }
 
@@ -416,7 +408,7 @@ export default class BohrModel extends HydrogenAtom {
           this.photonEmittedEmitter.emit( emittedPhoton );
 
           // move electron to new state
-          this.setElectronState( newElectronState );
+          this._nProperty.value = nNew;
         }
       }
     }
@@ -435,8 +427,8 @@ export default class BohrModel extends HydrogenAtom {
    * Determines if a proposed state transition caused by stimulated emission is legal.
    * A Bohr transition is legal if the 2 states are different and newElectronState >= ground state.
    */
-  protected stimulatedEmissionIsAllowed( oldElectronState: number, newElectronState: number ): boolean {
-    return ( ( oldElectronState !== newElectronState ) && ( newElectronState >= MOTHAConstants.GROUND_STATE ) );
+  protected stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
+    return ( ( nOld !== nNew ) && ( nNew >= MOTHAConstants.GROUND_STATE ) );
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -449,18 +441,18 @@ export default class BohrModel extends HydrogenAtom {
   private attemptSpontaneousEmission(): boolean {
 
     let success = false;
-    const currentState = this.electronStateProperty.value;
+    const nCurrent = this.nProperty.value;
 
     // Are we in some state other than the ground state?
     // Has the electron been in this state long enough?
-    if ( currentState > MOTHAConstants.GROUND_STATE &&
+    if ( nCurrent > MOTHAConstants.GROUND_STATE &&
          this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE ) {
 
       //  Emit a photon with some probability...
       if ( this.spontaneousEmissionIsCertain() ) {
 
-        const newState = this.chooseLowerElectronState();
-        if ( newState === -1 ) {
+        const nNew = this.chooseLower_n();
+        if ( nNew === -1 ) {
           // For some subclasses, there may be no valid transition.
           return false;
         }
@@ -468,7 +460,7 @@ export default class BohrModel extends HydrogenAtom {
         // Create and emit a photon
         success = true;
         const emittedPhoton = new Photon( {
-          wavelength: BohrModel.getEmissionWavelength( currentState, newState ),
+          wavelength: BohrModel.getEmissionWavelength( nCurrent, nNew ),
           position: this.getSpontaneousEmissionPosition(),
           direction: MOTHAUtils.nextAngle(), // in a random direction
           wasEmitted: true
@@ -479,7 +471,7 @@ export default class BohrModel extends HydrogenAtom {
         this.photonEmittedEmitter.emit( emittedPhoton );
 
         // move electron to new state
-        this.setElectronState( newState );
+        this._nProperty.value = nNew;
       }
     }
 
@@ -494,17 +486,17 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   /**
-   * Chooses a new state for the electron. The state chosen is a lower state. This is used when moving to
-   * a lower state, during spontaneous emission. Each lower state has the same probability of being chosen.
-   * @returns positive state number, -1 if there is no lower state
+   * Chooses a lower value for n. This is used during spontaneous emission. Each lower state has the same probability
+   * of being chosen.
+   * @returns n, -1 if there is no lower state
    */
-  protected chooseLowerElectronState(): number {
-    const currentState = this.electronStateProperty.value;
-    if ( currentState === MOTHAConstants.GROUND_STATE ) {
+  protected chooseLower_n(): number {
+    const n = this.nProperty.value;
+    if ( n === MOTHAConstants.GROUND_STATE ) {
       return -1;
     }
     else {
-      return dotRandom.nextIntBetween( MOTHAConstants.GROUND_STATE, currentState - MOTHAConstants.GROUND_STATE );
+      return dotRandom.nextIntBetween( MOTHAConstants.GROUND_STATE, n - MOTHAConstants.GROUND_STATE );
     }
   }
 

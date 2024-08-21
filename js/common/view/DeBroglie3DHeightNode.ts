@@ -118,8 +118,8 @@ export default class DeBroglie3DHeightNode extends Node {
 
     // 3D orbits
     const orbitNodes: WireframeNode[] = [];
-    for ( let state = MOTHAConstants.GROUND_STATE; state < MOTHAConstants.MAX_STATE; state++ ) {
-      const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( state ) );
+    for ( let n = MOTHAConstants.GROUND_STATE; n < MOTHAConstants.MAX_STATE; n++ ) {
+      const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( n ) );
       const orbitNode = this.createOrbitNode( radius, this.viewMatrix, this.orbitVertices );
       orbitNodes.push( orbitNode );
     }
@@ -148,8 +148,8 @@ export default class DeBroglie3DHeightNode extends Node {
     } );
 
     //TODO are these dependencies correct?
-    Multilink.multilink( [ hydrogenAtom.electronStateProperty, hydrogenAtom.electronAngleProperty, this.visibleProperty ],
-      ( electronState, electronAngle, visible ) => {
+    Multilink.multilink( [ hydrogenAtom.nProperty, hydrogenAtom.electronAngleProperty, this.visibleProperty ],
+      ( n, electronAngle, visible ) => {
         visible && this.update();
       } );
   }
@@ -264,8 +264,8 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel,
                           modelViewTransform: ModelViewTransform2,
                           vertices: Vector3[] ): Vector3[] {
 
-  const electronState = hydrogenAtom.electronStateProperty.value;
-  const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( electronState ) );
+  const n = hydrogenAtom.nProperty.value;
+  const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( n ) );
 
   const numberOfVertices = vertices.length;
   const deltaAngle = ( 2 * Math.PI ) / numberOfVertices;
@@ -274,7 +274,7 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel,
     const angle = i * deltaAngle;
     const x = radius * Math.cos( angle );
     const y = radius * Math.sin( angle );
-    const z = MAX_WAVE_HEIGHT * hydrogenAtom.getAmplitude( electronState, angle );
+    const z = MAX_WAVE_HEIGHT * hydrogenAtom.getAmplitude( n, angle );
     vertices[ i ].setXYZ( x, y, z );
   }
   return vertices;

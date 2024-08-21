@@ -16,6 +16,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import SchrodingerBrightness from './SchrodingerBrightness.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -49,12 +50,11 @@ export default class SchrodingerFieldNode extends Node {
     this.upperLeftQuadrantNode = upperLeftQuadrantNode;
     this.brightnessCache = new SchrodingerBrightness( hydrogenAtom, zoomedInBoxBounds );
 
-    Multilink.multilink( [ hydrogenAtom.electronStateProperty, hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty ],
-      ( n, l, m ) => this.update( n, l, m ) );
+    hydrogenAtom.nlmProperty.link( nlm => this.update( nlm ) );
   }
 
-  private update( n: number, l: number, m: number ): void {
-    const brightness = this.brightnessCache.getBrightness( n, l, Math.abs( m ) );
+  private update( nlm: SchrodingerQuantumNumbers ): void {
+    const brightness = this.brightnessCache.getBrightness( nlm );
     this.upperLeftQuadrantNode.setBrightness( brightness );
   }
 }

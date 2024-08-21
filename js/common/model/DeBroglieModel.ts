@@ -84,8 +84,8 @@ export default class DeBroglieModel extends BohrModel {
   /**
    * Gets the amplitude [-1,1] of a standing wave at some angle, in some specified state of the electron.
    */
-  public getAmplitude( electronState: number, angle: number ): number {
-    const amplitude = Math.sin( electronState * angle ) * Math.sin( this.electronAngleProperty.value );
+  public getAmplitude( n: number, angle: number ): number {
+    const amplitude = Math.sin( n * angle ) * Math.sin( this.electronAngleProperty.value );
     assert && assert( amplitude >= -1 && amplitude <= 1 );
     return amplitude;
   }
@@ -128,7 +128,7 @@ export default class DeBroglieModel extends BohrModel {
     const angle = Math.atan( photonOffset.y / photonOffset.x );
 
     // position on orbit at corresponding angle
-    const orbitRadius = this.getElectronOrbitRadius( this.electronStateProperty.value );
+    const orbitRadius = this.getElectronOrbitRadius( this.nProperty.value );
     const orbitX = orbitRadius * Math.cos( angle );
     const orbitY = DeBroglieModel.ORBIT_3D_Y_SCALE * orbitRadius * Math.sin( angle );
 
@@ -154,7 +154,7 @@ export default class DeBroglieModel extends BohrModel {
 
     // distance of photon and electron from atom's center
     const photonRadius = Math.sqrt( ( photonOffset.x * photonOffset.x ) + ( photonOffset.y * photonOffset.y ) );
-    const orbitRadius = this.getElectronOrbitRadius( this.electronStateProperty.value );
+    const orbitRadius = this.getElectronOrbitRadius( this.nProperty.value );
 
     //TODO why is getClosenessForCollision used for 'radialDistance' when it's a function of BRIGHTNESS_RING_THICKNESS?
     return ( Math.abs( photonRadius - orbitRadius ) <= this.getClosenessForCollision( photon ) );

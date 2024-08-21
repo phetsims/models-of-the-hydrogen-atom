@@ -24,7 +24,7 @@ type PrimaryElectronStateTextOptions = SelfOptions & PickRequired<RichTextOption
 
 export default class ElectronStateText extends RichText {
 
-  public constructor( electronStateProperty: TReadOnlyProperty<number>, providedOptions: PrimaryElectronStateTextOptions ) {
+  public constructor( nProperty: TReadOnlyProperty<number>, providedOptions: PrimaryElectronStateTextOptions ) {
 
     const options = optionize<PrimaryElectronStateTextOptions, SelfOptions, RichTextOptions>()( {
 
@@ -41,7 +41,7 @@ export default class ElectronStateText extends RichText {
 
     const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
       nSymbol: MOTHASymbols.nStringProperty,
-      nValue: electronStateProperty
+      nValue: nProperty
     }, { tandem: Tandem.OPT_OUT } );
 
     super( stringProperty, options );

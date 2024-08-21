@@ -32,8 +32,8 @@ export default class OrbitsNode extends Node {
     }, providedOptions );
 
     const orbitNodes = [];
-    for ( let state = MOTHAConstants.GROUND_STATE; state <= MOTHAConstants.MAX_STATE; state++ ) {
-      const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( state ) );
+    for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
+      const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( n ) );
       const orbitNode = new OrbitNode( radius );
       orbitNodes.push( orbitNode );
     }

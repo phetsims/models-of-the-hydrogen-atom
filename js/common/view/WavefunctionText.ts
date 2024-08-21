@@ -1,5 +1,6 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
+//TODO rename to SchrodingerStateText
 /**
  * WavefunctionText displays the quantum numbers (n,l,m) that describe the wavefunction of the electron in
  * the Schrodinger model.
@@ -14,22 +15,22 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type FullElectronStateTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
+type WavefunctionTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
 
 export default class WavefunctionText extends RichText {
 
-  public constructor( primaryStateProperty: TReadOnlyProperty<number>,
-                      secondaryStateProperty: TReadOnlyProperty<number>,
-                      tertiaryStateProperty: TReadOnlyProperty<number>,
-                      providedOptions: FullElectronStateTextOptions ) {
+  public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
+                      providedOptions: WavefunctionTextOptions ) {
 
-    const options = optionize<FullElectronStateTextOptions, SelfOptions, RichTextOptions>()( {
+    const options = optionize<WavefunctionTextOptions, SelfOptions, RichTextOptions>()( {
 
       // RichTextOptions
       isDisposable: false,
@@ -42,14 +43,21 @@ export default class WavefunctionText extends RichText {
       }
     }, providedOptions );
 
-    const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty, {
-      nSymbol: MOTHASymbols.nStringProperty,
-      nValue: primaryStateProperty,
-      lSymbol: MOTHASymbols.lStringProperty,
-      lValue: secondaryStateProperty,
-      mSymbol: MOTHASymbols.mStringProperty,
-      mValue: tertiaryStateProperty
-    } );
+    const stringProperty = new DerivedStringProperty( [
+        ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty,
+        MOTHASymbols.nStringProperty,
+        MOTHASymbols.lStringProperty,
+        MOTHASymbols.mStringProperty,
+        nlmProperty
+      ],
+      ( pattern, nString, lString, mString, nlm ) => StringUtils.fillIn( pattern, {
+        nSymbol: nString,
+        lSymbol: lString,
+        mSymbol: mString,
+        nValue: nlm.n,
+        lValue: nlm.l,
+        mValue: nlm.m
+      } ) );
 
     super( stringProperty, options );
   }

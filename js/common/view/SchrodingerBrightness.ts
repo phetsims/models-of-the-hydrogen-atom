@@ -14,6 +14,7 @@ import SchrodingerModel from '../model/SchrodingerModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 
 const NUMBER_OF_HORIZONTAL_CELLS = 40;
 const NUMBER_OF_VERTICAL_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
@@ -76,7 +77,12 @@ export default class SchrodingerBrightness {
   /**
    * Gets the 2D brightness for a state. If it's not already cached, compute it.
    */
-  public getBrightness( n: number, l: number, m: number ): number[][] {
+  public getBrightness( quantumNumbers: SchrodingerQuantumNumbers ): number[][] {
+
+    const n = quantumNumbers.n;
+    const l = quantumNumbers.l;
+    const m = Math.abs( quantumNumbers.m );
+
     let brightness: number[][] | null = this.cache[ n - 1 ][ l ][ m ];
     assert && assert( brightness !== undefined );
     if ( brightness === null ) {
