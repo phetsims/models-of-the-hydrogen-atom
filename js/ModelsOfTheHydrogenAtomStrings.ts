@@ -12,35 +12,30 @@ type StringsType = {
   'models-of-the-hydrogen-atom': {
     'titleStringProperty': LocalizedStringProperty;
   };
+  'screen': {
+    'spectraStringProperty': LocalizedStringProperty;
+    'energyLevelsStringProperty': LocalizedStringProperty;
+  };
   '3DHeightStringProperty': LocalizedStringProperty;
   'billiardBallStringProperty': LocalizedStringProperty;
   'bohrStringProperty': LocalizedStringProperty;
   'brightnessStringProperty': LocalizedStringProperty;
   'classicalStringProperty': LocalizedStringProperty;
   'classicalSolarSystemStringProperty': LocalizedStringProperty;
-  'closeStringProperty': LocalizedStringProperty;
   'deBroglieStringProperty': LocalizedStringProperty;
   'electronStringProperty': LocalizedStringProperty;
   'electronEnergyLevelStringProperty': LocalizedStringProperty;
   'experimentStringProperty': LocalizedStringProperty;
   'modelStringProperty': LocalizedStringProperty;
-  'fastStringProperty': LocalizedStringProperty;
   'hydrogenSymbolStringProperty': LocalizedStringProperty;
-  'legendStringProperty': LocalizedStringProperty;
   'nEqualsStringProperty': LocalizedStringProperty;
   'nlmEqualsStringProperty': LocalizedStringProperty;
-  'normalStringProperty': LocalizedStringProperty;
   'photonStringProperty': LocalizedStringProperty;
   'plumPuddingStringProperty': LocalizedStringProperty;
   'protonStringProperty': LocalizedStringProperty;
   'quantumStringProperty': LocalizedStringProperty;
   'radialDistanceStringProperty': LocalizedStringProperty;
   'schrodingerStringProperty': LocalizedStringProperty;
-  'screen': {
-    'spectraStringProperty': LocalizedStringProperty;
-    'energyLevelsStringProperty': LocalizedStringProperty;
-  };
-  'slowStringProperty': LocalizedStringProperty;
   'spectrometerStringProperty': LocalizedStringProperty;
   'nStringProperty': LocalizedStringProperty;
   'lStringProperty': LocalizedStringProperty;
