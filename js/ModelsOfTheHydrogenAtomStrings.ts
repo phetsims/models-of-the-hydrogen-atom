@@ -29,7 +29,6 @@ type StringsType = {
   'legendStringProperty': LocalizedStringProperty;
   'nEqualsStringProperty': LocalizedStringProperty;
   'nlmEqualsStringProperty': LocalizedStringProperty;
-  'neutronStringProperty': LocalizedStringProperty;
   'normalStringProperty': LocalizedStringProperty;
   'photonStringProperty': LocalizedStringProperty;
   'plumPuddingStringProperty': LocalizedStringProperty;

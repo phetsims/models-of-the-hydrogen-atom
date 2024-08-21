@@ -70,14 +70,6 @@ const MOTHAColors = {
     default: 'rgb( 140, 140, 255 )'
   } ),
 
-  neutronBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'neutronBaseColor', {
-    default: 'rgb( 128, 128, 128 )'
-  } ),
-
-  neutronHighlightColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'neutronHighlightColor', {
-    default: 'rgb( 175, 175, 175 )'
-  } ),
-
   protonBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'protonBaseColor', {
     default: PhetColorScheme.RED_COLORBLIND
   } ),

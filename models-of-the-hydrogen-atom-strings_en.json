@@ -53,9 +53,6 @@
   "nlmEquals": {
     "value": "({{nSymbol}},{{lSymbol}},{{mSymbol}}) = ({{nValue}},{{lValue}},{{mValue}})"
   },
-  "neutron": {
-    "value": "neutron"
-  },
   "normal": {
     "value": "normal speed"
   },

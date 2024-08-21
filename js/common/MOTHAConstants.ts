@@ -73,7 +73,6 @@ const MOTHAConstants = {
   // radii, in unitless model coordinates
   ELECTRON_RADIUS: 5,
   PROTON_RADIUS: 6,
-  NEUTRON_RADIUS: 6,
   PHOTON_RADIUS: 15,
   BILLIARD_BALL_RADIUS: 30,
   PLUM_PUDDING_RADIUS: 30,
