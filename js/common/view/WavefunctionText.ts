@@ -1,7 +1,8 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * FullElectronStateText displays the full state (n,l,m) of the electron, used for the Schrodinger model.
+ * WavefunctionText displays the quantum numbers (n,l,m) that describe the wavefunction of the electron in
+ * the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,7 +22,7 @@ type SelfOptions = EmptySelfOptions;
 
 type FullElectronStateTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
 
-export default class FullElectronStateText extends RichText {
+export default class WavefunctionText extends RichText {
 
   public constructor( primaryStateProperty: TReadOnlyProperty<number>,
                       secondaryStateProperty: TReadOnlyProperty<number>,
@@ -54,4 +55,4 @@ export default class FullElectronStateText extends RichText {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'FullElectronStateText', FullElectronStateText );
+modelsOfTheHydrogenAtom.register( 'WavefunctionText', WavefunctionText );

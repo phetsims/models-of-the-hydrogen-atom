@@ -19,12 +19,12 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
-import FullElectronStateText from './FullElectronStateText.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import { Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import WavefunctionText from './WavefunctionText.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -64,16 +64,16 @@ export default class SchrodingerNode extends HydrogenAtomNode {
         tandem: options.tandem.createTandem( 'exciteAtomButton' )
       } );
 
-    const electronStateText = new FullElectronStateText( hydrogenAtom.electronStateProperty,
+    const wavefunctionText = new WavefunctionText( hydrogenAtom.electronStateProperty,
       hydrogenAtom.secondaryElectronStateProperty, hydrogenAtom.tertiaryElectronStateProperty, {
-        tandem: options.tandem.createTandem( 'electronStateText' )
+        tandem: options.tandem.createTandem( 'wavefunctionText' )
       } );
 
     //TODO Should be in front of photons.
     const vBox = new VBox( {
       align: 'right',
       spacing: 15,
-      children: [ exciteAtomButton, electronStateText ]
+      children: [ exciteAtomButton, wavefunctionText ]
     } );
 
     //TODO Under Construction
