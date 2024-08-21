@@ -35,7 +35,10 @@ export class LightControlPanel extends Panel {
       // PanelOptions
       isDisposable: false,
       fill: MOTHAColors.panelFillColorProperty,
-      stroke: MOTHAColors.panelStrokeColorProperty
+      stroke: MOTHAColors.panelStrokeColorProperty,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty, {

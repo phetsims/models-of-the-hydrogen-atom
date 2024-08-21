@@ -29,7 +29,14 @@ export default class XZAxesNode extends Node {
   public constructor( providedOptions: XZAxesNodeOptions ) {
 
     const options = optionize<XZAxesNodeOptions, SelfOptions, NodeOptions>()( {
-      color: 'black'
+
+      // SelfOptions
+      color: 'black',
+
+      // NodeOptions
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     const arrowNodeOptions = {

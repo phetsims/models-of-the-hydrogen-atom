@@ -42,13 +42,9 @@ export default class BohrNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'orbitsNode' )
     } );
 
-    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'protonNode' )
-    } );
+    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
 
-    const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'electronNode' )
-    } );
+    const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
 
     //TODO Should be in front of photons?
     const electronStateText = new PrimaryElectronStateText( hydrogenAtom.electronStateProperty, {

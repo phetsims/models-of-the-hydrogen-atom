@@ -1,5 +1,8 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
+//TODO Should we have 1 orbitsVisibleProperty used by all 3 representations?
+//TODO Should we have 1 electronVisibleProperty used by all 3 representations?
+
 /**
  * DeBroglieNode displays the de Broglie model of the hydrogen atom.
  *
@@ -43,24 +46,22 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
 
-    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'protonNode' )
-    } );
+    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
 
     // Organize the view Nodes under a common parent, to improve presentation in Studio.
     // These Nodes control their own visibility, based on the value of hydrogenAtom.deBroglieRepresentationProperty.
-    const viewNodesTandem = options.tandem.createTandem( 'viewNodes' );
+    const representationNodes = options.tandem.createTandem( 'representationNodes' );
 
     const deBroglieRadialDistanceNode = new DeBroglieRadialDistanceNode( hydrogenAtom, modelViewTransform, {
-      tandem: viewNodesTandem.createTandem( 'deBroglieRadialDistanceNode' )
+      tandem: representationNodes.createTandem( 'deBroglieRadialDistanceNode' )
     } );
 
     const deBroglie3DHeightNode = new DeBroglie3DHeightNode( hydrogenAtom, modelViewTransform, {
-      tandem: viewNodesTandem.createTandem( 'deBroglie3DHeightNode' )
+      tandem: representationNodes.createTandem( 'deBroglie3DHeightNode' )
     } );
 
     const deBroglieBrightnessNode = new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform, {
-      tandem: viewNodesTandem.createTandem( 'deBroglieBrightnessNode' )
+      tandem: representationNodes.createTandem( 'deBroglieBrightnessNode' )
     } );
 
     const viewNodes = new Node( {

@@ -17,7 +17,6 @@ import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-p
 import MOTHAColors from '../MOTHAColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -31,8 +30,7 @@ export default class BilliardBallNode extends HydrogenAtomNode {
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: BilliardBallNodeOptions ) {
 
-    const viewRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.radius );
-    const ballNode = new BallNode( 2 * viewRadius, providedOptions.tandem.createTandem( 'ballNode' ) );
+    const ballNode = new BallNode( 2 * modelViewTransform.modelToViewDeltaX( hydrogenAtom.radius ) );
 
     const options = optionize<BilliardBallNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
 
@@ -51,11 +49,10 @@ export default class BilliardBallNode extends HydrogenAtomNode {
 }
 
 class BallNode extends ShadedSphereNode {
-  public constructor( diameter: number, tandem = Tandem.OPT_OUT ) {
+  public constructor( diameter: number ) {
     super( diameter, combineOptions<ShadedSphereNodeOptions>( {}, MOTHAConstants.SHADED_SPHERE_NODE_OPTIONS, {
       mainColor: MOTHAColors.billiardBallColorProperty,
-      highlightColor: MOTHAColors.billiardBallHighlightColorProperty,
-      tandem: tandem
+      highlightColor: MOTHAColors.billiardBallHighlightColorProperty
     } ) );
   }
 }

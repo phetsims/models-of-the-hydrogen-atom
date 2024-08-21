@@ -43,9 +43,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
 
-    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'protonNode' )
-    } );
+    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
 
     const fieldNode = new SchrodingerFieldNode( hydrogenAtom, modelViewTransform, {
       tandem: options.tandem.createTandem( 'fieldNode' )

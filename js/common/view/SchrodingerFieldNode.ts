@@ -19,6 +19,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 
 type SelfOptions = EmptySelfOptions;
 
+//TODO Should SchrodingerFieldNode be instrumented?
 type SchrodingerFieldNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 //TODO this was SchrodingerNode.AtomNode is Java

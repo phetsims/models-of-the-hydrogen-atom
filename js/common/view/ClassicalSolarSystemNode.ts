@@ -18,7 +18,6 @@ import ElectronNode from './ElectronNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Image, Node } from '../../../../scenery/js/imports.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import classicalSolarSystemExplosion_png from '../../../images/classicalSolarSystemExplosion_png.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -36,29 +35,18 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
       //TODO default values for options
     }, providedOptions );
 
-    const protonNodeTandem = options.tandem.createTandem( 'protonNode' );
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
-      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty, {
-        tandem: protonNodeTandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
-      tandem: protonNodeTandem
+      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
     } );
 
-    const electronNodeTandem = options.tandem.createTandem( 'electronNode' );
     const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform, {
-      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty, {
-        tandem: electronNodeTandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
-      tandem: electronNodeTandem
+      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
     } );
 
     const explosionNode = new Image( classicalSolarSystemExplosion_png, {
       visibleProperty: hydrogenAtom.isDestroyedProperty,
       scale: 0.5,
-      center: protonNode.center,
-      tandem: options.tandem.createTandem( 'explosionNode' )
+      center: protonNode.center
     } );
 
     options.children = [ explosionNode, protonNode, electronNode ];
