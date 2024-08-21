@@ -16,7 +16,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ElectronNode from './ElectronNode.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BohrModel from '../model/BohrModel.js';
-import PrimaryElectronStateText from './PrimaryElectronStateText.js';
+import ElectronStateText from './ElectronStateText.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import OrbitsNode from './OrbitsNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -47,7 +47,7 @@ export default class BohrNode extends HydrogenAtomNode {
     const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
 
     //TODO Should be in front of photons?
-    const electronStateText = new PrimaryElectronStateText( hydrogenAtom.electronStateProperty, {
+    const electronStateText = new ElectronStateText( hydrogenAtom.electronStateProperty, {
       tandem: options.tandem.createTandem( 'electronStateText' )
     } );
 

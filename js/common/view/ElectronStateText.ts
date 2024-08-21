@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * PrimaryElectronStateText displays the primary state (n) of the electron, used for the Bohr and de Broglie models.
+ * ElectronStateText displays the electron state (n), used for the Bohr and de Broglie models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,7 +22,7 @@ type SelfOptions = EmptySelfOptions;
 
 type PrimaryElectronStateTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
 
-export default class PrimaryElectronStateText extends RichText {
+export default class ElectronStateText extends RichText {
 
   public constructor( electronStateProperty: TReadOnlyProperty<number>, providedOptions: PrimaryElectronStateTextOptions ) {
 
@@ -48,4 +48,4 @@ export default class PrimaryElectronStateText extends RichText {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'PrimaryElectronStateText', PrimaryElectronStateText );
+modelsOfTheHydrogenAtom.register( 'ElectronStateText', ElectronStateText );

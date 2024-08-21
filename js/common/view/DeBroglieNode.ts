@@ -18,7 +18,7 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
-import PrimaryElectronStateText from './PrimaryElectronStateText.js';
+import ElectronStateText from './ElectronStateText.js';
 import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
 import { Circle, Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -76,7 +76,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     } );
 
     //TODO Should be in front of photons?
-    const electronStateText = new PrimaryElectronStateText( hydrogenAtom.electronStateProperty, {
+    const electronStateText = new ElectronStateText( hydrogenAtom.electronStateProperty, {
       tandem: options.tandem.createTandem( 'electronStateText' )
     } );
 
