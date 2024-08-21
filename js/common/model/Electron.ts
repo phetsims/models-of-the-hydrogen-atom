@@ -19,7 +19,7 @@ type SelfOptions = {
   position?: Vector2;
 };
 
-type ElectronOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type ElectronOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Electron extends PhetioObject {
 
