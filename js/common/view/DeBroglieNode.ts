@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
-//TODO Should we have 1 orbitsVisibleProperty used by all 3 representations?
-//TODO Should we have 1 electronVisibleProperty used by all 3 representations?
+//TODO Should we have 1 orbitsVisibleProperty used by all 3 representations? Should orbits even be instrumented?
+//TODO Should we have 1 electronVisibleProperty used by all 3 representations? Should electron representation even be instrumented?
 
 /**
  * DeBroglieNode displays the de Broglie model of the hydrogen atom.
