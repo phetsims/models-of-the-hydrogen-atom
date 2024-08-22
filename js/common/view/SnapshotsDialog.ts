@@ -28,6 +28,7 @@ export default class SnapshotsDialog extends Dialog {
     const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>()( {
 
       // DialogOptions
+      isDisposable: false,
       fill: MOTHAColors.snapshotsDialogFillProperty,
       topMargin: 15,
       bottomMargin: 15,
@@ -55,13 +56,6 @@ export default class SnapshotsDialog extends Dialog {
     this.disposeSnapshotsDialog = () => {
       numberOfSnapshotsProperty.unlink( numberOfSnapshotsObserver );
     };
-  }
-
-  //TODO verify whether this gets called and whether it works correctly, because Dialog.dispose has been suspect
-  //TODO should we not dispose, and reuse this Dialog, for PhET-iO?
-  public override dispose(): void {
-    this.disposeSnapshotsDialog();
-    super.dispose();
   }
 }
 
