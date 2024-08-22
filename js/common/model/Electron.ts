@@ -42,8 +42,7 @@ export default class Electron extends PhetioObject {
 
     this.positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
-      phetioReadOnly: true,
-      phetioFeatured: true
+      phetioReadOnly: true
     } );
 
     this.radius = MOTHAConstants.ELECTRON_RADIUS;
