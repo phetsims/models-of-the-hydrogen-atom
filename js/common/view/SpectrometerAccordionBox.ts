@@ -9,7 +9,7 @@
 import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Path, PressListener, Text } from '../../../../scenery/js/imports.js';
+import { AlignGroup, HBox, HBoxOptions, Path, PressListener, Text } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -58,6 +58,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       maxWidth: 290
     } );
 
+    // Put all buttons under buttonGroup tandem.
     const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
 
     const snapshotButton = new RectangularPushButton( {
@@ -144,16 +145,19 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 }
 
 /**
- * HButtonGroup creates a row of buttons that all have the same size.
+ * HButtonGroup creates a row of buttons that all have the same size. While it's tempting to think that this is
+ * general enough to move to common code, it's not.
  */
 class HButtonGroup extends HBox {
-  public constructor( buttons: ButtonNode[], providedOptions: StrictOmit<HBoxOptions, 'children'> ) {
+  public constructor( buttons: ButtonNode[], providedOptions: StrictOmit<HBoxOptions, 'children'> & PickRequired<HBoxOptions, 'tandem'> ) {
 
     const alignGroup = new AlignGroup();
-    const alignBoxOptions: AlignBoxOptions = { align: 'stretch' };
 
     super( combineOptions<HBoxOptions>( {
-      children: buttons.map( button => alignGroup.createBox( button, alignBoxOptions ) )
+      children: buttons.map( button => alignGroup.createBox( button, {
+        align: 'stretch',
+        visibleProperty: button.visibleProperty // for PhET-iO
+      } ) )
     }, providedOptions ) );
   }
 }
