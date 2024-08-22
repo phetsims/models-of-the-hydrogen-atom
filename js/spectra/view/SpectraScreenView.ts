@@ -133,8 +133,8 @@ export default class SpectraScreenView extends ScreenView {
     lightControlPanel.top = zoomedInBoxNode.bottom + 15;
     boxOfHydrogenNode.centerX = lightNode.centerX;
     boxOfHydrogenNode.bottom = lightNode.top + 1;
-    tinyBoxNode.right = boxOfHydrogenNode.right - 10;
-    tinyBoxNode.top = boxOfHydrogenNode.top + 20;
+    tinyBoxNode.left = boxOfHydrogenNode.right - boxOfHydrogenNode.width / 3;
+    tinyBoxNode.centerY = boxOfHydrogenNode.centerY;
     modelVBox.left = zoomedInBoxNode.right + 30;
     modelVBox.top = zoomedInBoxNode.top;
     spectrometerAccordionBox.left = lightControlPanel.right + 12;

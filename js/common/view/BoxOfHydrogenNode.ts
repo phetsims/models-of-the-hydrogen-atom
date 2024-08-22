@@ -60,13 +60,15 @@ export default class BoxOfHydrogenNode extends Node {
       lineWidth: 1
     } );
 
-    // 'H' hydrogen symbol, in lower-left corner of front face
+    // 'H' hydrogen symbol, centered in the left 2/3 of the front face.
     const hydrogenText = new Text( ModelsOfTheHydrogenAtomStrings.hydrogenSymbolStringProperty, {
       fill: MOTHAColors.boxOfHydrogenSymbolColorProperty,
       font: new PhetFont( { weight: 'bold', size: 24 } ),
-      left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
-      bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),
-      maxWidth: 0.65 * BOX_SIZE.width
+      maxWidth: 0.5 * BOX_SIZE.width
+    } );
+    hydrogenText.localBoundsProperty.link( () => {
+      hydrogenText.centerX = frontNode.left + frontNode.width / 3;
+      hydrogenText.centerY = frontNode.centerY;
     } );
 
     options.children = [ frontNode, topNode, hydrogenText ];
