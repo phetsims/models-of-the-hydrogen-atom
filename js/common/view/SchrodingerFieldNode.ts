@@ -113,7 +113,6 @@ class QuadrantNode extends CanvasNode {
     this.invalidatePaint(); // results in a call to paintCanvas
   }
 
-  //TODO Should this be protected in CanvasNode?
   public paintCanvas( context: CanvasRenderingContext2D ): void {
 
     let x: number;
