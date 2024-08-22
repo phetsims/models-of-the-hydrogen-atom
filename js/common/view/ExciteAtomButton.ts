@@ -1,5 +1,6 @@
 // Copyright 2024, University of Colorado Boulder
 
+//TODO Make it possible for PhET-iO to permanently hide ExciteAtomButton.
 /**
  * ExciteAtomButton is the push button labeled 'Excite Atom'.
  *

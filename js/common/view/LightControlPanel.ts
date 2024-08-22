@@ -45,6 +45,7 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
 
+    //TODO Make it possible for PhET-iO to permanently hide absorptionTransitionText.
     const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty, {
       visibleProperty: new DerivedProperty( [ light.lightModeProperty, hydrogenAtomProperty ],
         ( lightMode, hydrogenAtom ) => ( lightMode === 'monochromatic' ) && ( hydrogenAtom instanceof BohrModel ) ),
