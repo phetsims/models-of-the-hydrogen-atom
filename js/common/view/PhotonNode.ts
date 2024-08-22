@@ -21,7 +21,7 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { Circle, Color, Node, NodeOptions, Path, RadialGradient, Rectangle, TColor } from '../../../../scenery/js/imports.js';
+import { Circle, Color, Node, NodeOptions, Path, RadialGradient, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from '../model/Photon.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
@@ -62,10 +62,10 @@ export default class PhotonNode extends Node {
 
     options.children = [ haloNode, orbNode, sparkleNode ];
 
-    // Draw a red rectangle around emitted photons.
+    // Draw a red circle around emitted photons, to make them easier to see.
     if ( MOTHAQueryParameters.debugEmission && photon.wasEmitted ) {
-      const size = 2 * haloRadius;
-      options.children.push( new Rectangle( -size / 2, -size / 2, size, size, {
+      options.children.push( new Circle( {
+        radius: 1.25 * haloRadius,
         stroke: 'red',
         lineWidth: 4
       } ) );
