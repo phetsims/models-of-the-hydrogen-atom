@@ -34,18 +34,18 @@ export type PhotonStateObject = {
 
 // This should match PhotonStateObject, but with IOTypes.
 const PHOTON_STATE_SCHEMA = {
+  wavelength: NumberIO,
   x: NumberIO,
   y: NumberIO,
   direction: NumberIO,
-  wavelength: NumberIO,
   wasEmitted: BooleanIO,
   hasCollided: BooleanIO
 };
 
 type SelfOptions = {
+  wavelength: number; // the photon's integer wavelength, in nm
   position?: Vector2; // initial position
   direction?: number; // initial direction
-  wavelength: number; // the photon's integer wavelength, in nm
   wasEmitted?: boolean; // Was this photon emitted by the atom?
   hasCollided?: boolean; // Has this photon collided with the atom?
 };
@@ -54,10 +54,10 @@ type PhotonOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'tandem'>;
 
 export default class Photon extends PhetioObject {
 
+  public readonly wavelength: number; // nm
   public readonly positionProperty: Property<Vector2>;
   public readonly directionProperty: Property<number>; // radians
-  public readonly radius: number;
-  public readonly wavelength: number; // nm
+  public readonly radius = MOTHAConstants.PHOTON_RADIUS;
 
   // Whether the photon was emitted by the hydrogen atom.
   public readonly wasEmitted: boolean;
@@ -97,7 +97,6 @@ export default class Photon extends PhetioObject {
       phetioDocumentation: 'Direction of motion, in radians.'
     } );
 
-    this.radius = MOTHAConstants.PHOTON_RADIUS;
     this.wavelength = options.wavelength;
     this.wasEmitted = options.wasEmitted;
     this._hasCollided = options.hasCollided;
@@ -141,10 +140,10 @@ export default class Photon extends PhetioObject {
    */
   private toStateObject(): PhotonStateObject {
     return {
+      wavelength: this.wavelength,
       x: this.positionProperty.value.x,
       y: this.positionProperty.value.y,
       direction: this.directionProperty.value,
-      wavelength: this.wavelength,
       wasEmitted: this.wasEmitted,
       hasCollided: this.hasCollided
     };
@@ -155,9 +154,9 @@ export default class Photon extends PhetioObject {
    */
   private static fromStateObject( stateObject: PhotonStateObject ): Photon {
     return new Photon( {
+      wavelength: stateObject.wavelength,
       position: new Vector2( stateObject.x, stateObject.y ),
       direction: stateObject.direction,
-      wavelength: stateObject.wavelength,
       wasEmitted: stateObject.wasEmitted,
       hasCollided: stateObject.hasCollided
     } );
@@ -176,10 +175,10 @@ export default class Photon extends PhetioObject {
                    '<br>' +
                    'Fields include:<br>' +
                    '<ul>' +
+                   '<li>wavelength: wavelength of the photon, in nm' +
                    '<li>x: x coordinate of position' +
                    '<li>y: y coordinate of position' +
                    '<li>direction: direction of motion, in radians' +
-                   '<li>wavelength: wavelength of the photon, in nm' +
                    '<li>wasEmitted: whether the photon was emitted by the hydrogen atom' +
                    '<li>hasCollided: whether the photon has collided with the hydrogen atom' +
                    '</ul>'
