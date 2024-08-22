@@ -1,5 +1,6 @@
 // Copyright 2024, University of Colorado Boulder
 
+//TODO NumberControl is creating and instrumenting monochromaticWavelengthControl.titleText with sceneryPhet.wavelengthStringProperty, even though we have no title.
 /**
  * MonochromaticWavelengthControl is a specialization of WavelengthNumberControl that lets the user select a UR or visible wavelength.
  *
@@ -59,8 +60,8 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
       // Center 'UV' in the UV section of the slider track.
       uvText.maxHeight = 0.75 * SLIDER_TRACK_SIZE.height;
       const uvTrackWidth = SLIDER_TRACK_SIZE.width * ( VisibleColor.MIN_WAVELENGTH - MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min ) / MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.getLength();
-      const uvTextCenterX = slider.x + uvTrackWidth / 2;
-      const uvTextCenterY = slider.top + SLIDER_TRACK_SIZE.height / 2;
+      const uvTextCenterX = slider.x + uvTrackWidth / 2 + 1; // + 1 to account for slider track lineWidth
+      const uvTextCenterY = slider.top + SLIDER_TRACK_SIZE.height / 2 + 1; // + 1 to account for slider track lineWidth
       uvText.localBoundsProperty.link( () => {
         uvText.centerX = uvTextCenterX;
         uvText.centerY = uvTextCenterY;
