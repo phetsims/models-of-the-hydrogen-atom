@@ -9,7 +9,7 @@
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Path, PressListener, Text } from '../../../../scenery/js/imports.js';
+import { AlignBoxOptions, AlignGroup, HBox, Path, PressListener, Text } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -45,6 +45,9 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty
       }, providedOptions );
+
+    // This implementation puts buttons in the title bar, and requires titleBarExpandCollapse: false.
+    assert && assert( options.titleBarExpandCollapse !== undefined && !options.titleBarExpandCollapse );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.spectrometerStringProperty, {
       cursor: 'pointer',
@@ -97,11 +100,14 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'eraseButton' )
     } );
 
-    //TODO Make all buttons have the same dimensions.
+    // Row of buttons, all with the same dimensions.
+    const buttons = [ snapshotButton, viewSnapshotsButton, eraseButton ];
+    const alignGroup = new AlignGroup();
+    const alignBoxOptions: AlignBoxOptions = { align: 'stretch' };
     const buttonGroup = new HBox( {
       maxHeight: 25,
       spacing: 10,
-      children: [ snapshotButton, viewSnapshotsButton, eraseButton ]
+      children: buttons.map( button => alignGroup.createBox( button, alignBoxOptions ) )
     } );
 
     options.titleNode = new HBox( {
@@ -121,6 +127,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       buttonGroup.visible = expanded;
     } );
 
+    // Since we are putting buttons in the title bar, we created this accordion box with titleBarExpandCollapse: false.
+    // So add the ability to press the title text to toggle expand/collapse.
     titleText.addInputListener( new PressListener( {
       press: () => {
         this.expandedProperty.value = !this.expandedProperty.value;
