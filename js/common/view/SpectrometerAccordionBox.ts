@@ -6,10 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBoxOptions, AlignGroup, HBox, Path, PressListener, Text } from '../../../../scenery/js/imports.js';
+import { AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Path, PressListener, Text } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -25,6 +25,8 @@ import Spectrometer from '../model/Spectrometer.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
 import SpectrometerNode from './SpectrometerNode.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -56,6 +58,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       maxWidth: 290
     } );
 
+    const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
+
     const snapshotButton = new RectangularPushButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( cameraSolidShape, {
@@ -68,14 +72,14 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       },
       enabledProperty: new DerivedProperty( [ spectrometer.numberOfSnapshotsProperty ],
         numberOfSnapshots => numberOfSnapshots < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS ),
-      tandem: options.tandem.createTandem( 'snapshotButton' )
+      tandem: buttonGroupTandem.createTandem( 'snapshotButton' )
     } );
 
     const snapshotsDialog = new SnapshotsDialog( spectrometer.numberOfSnapshotsProperty, {
       tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
 
-    const viewSnapshotsButtonTandem = options.tandem.createTandem( 'viewSnapshotsButton' );
+    const viewSnapshotsButtonTandem = buttonGroupTandem.createTandem( 'viewSnapshotsButton' );
     const viewSnapshotsButton = new RectangularPushButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( eyeSolidShape, {
@@ -97,17 +101,16 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       yMargin: 6,
       enabledProperty: spectrometer.hasDataPointsProperty,
       listener: () => spectrometer.clear(),
-      tandem: options.tandem.createTandem( 'eraseButton' )
+      tandem: buttonGroupTandem.createTandem( 'eraseButton' )
     } );
 
-    // Row of buttons, all with the same dimensions.
-    const buttons = [ snapshotButton, viewSnapshotsButton, eraseButton ];
-    const alignGroup = new AlignGroup();
-    const alignBoxOptions: AlignBoxOptions = { align: 'stretch' };
-    const buttonGroup = new HBox( {
+    const buttonGroup = new HButtonGroup( [ snapshotButton, viewSnapshotsButton, eraseButton ], {
       maxHeight: 25,
       spacing: 10,
-      children: buttons.map( button => alignGroup.createBox( button, alignBoxOptions ) )
+      tandem: buttonGroupTandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     options.titleNode = new HBox( {
@@ -137,6 +140,21 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } ) );
 
     this.addLinkedElement( spectrometer );
+  }
+}
+
+/**
+ * HButtonGroup creates a row of buttons that all have the same size.
+ */
+class HButtonGroup extends HBox {
+  public constructor( buttons: ButtonNode[], providedOptions: StrictOmit<HBoxOptions, 'children'> ) {
+
+    const alignGroup = new AlignGroup();
+    const alignBoxOptions: AlignBoxOptions = { align: 'stretch' };
+
+    super( combineOptions<HBoxOptions>( {
+      children: buttons.map( button => alignGroup.createBox( button, alignBoxOptions ) )
+    }, providedOptions ) );
   }
 }
 
