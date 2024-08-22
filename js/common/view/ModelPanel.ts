@@ -10,9 +10,9 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { HBox, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import { HBox, Node, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -23,7 +23,9 @@ import ContinuumBarNode from './ContinuumBarNode.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  hasContinuumBar?: boolean;
+};
 
 type ModelPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
@@ -35,6 +37,9 @@ export default class ModelPanel extends Panel {
                       providedOptions: ModelPanelOptions ) {
 
     const options = optionize4<ModelPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
+
+      // SelfOptions
+      hasContinuumBar: true,
 
       // PanelOptions
       isDisposable: false,
@@ -51,15 +56,23 @@ export default class ModelPanel extends Panel {
       tandem: options.tandem.createTandem( 'modelRadioButtonGroup' )
     } );
 
+    const children: Node[] = [];
+
     // continuum bar, 'Classical' to 'Quantum'
-    const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height, {
-      tandem: options.tandem.createTandem( 'continuumBarNode' )
-    } );
+    if ( options.hasContinuumBar ) {
+      //TODO Dynamically resize continuumBarNode to modelRadioButtonGroup.boundsProperty.value.height.
+      const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height, {
+        tandem: options.tandem.createTandem( 'continuumBarNode' )
+      } );
+      children.push( continuumBarNode );
+    }
+
+    children.push( modelRadioButtonGroup );
 
     // panel content
     const contentNode = new HBox( {
       spacing: 10,
-      children: [ continuumBarNode, modelRadioButtonGroup ]
+      children: children
     } );
 
     super( contentNode, options );

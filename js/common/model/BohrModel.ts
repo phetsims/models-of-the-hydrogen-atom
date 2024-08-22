@@ -135,6 +135,7 @@ export default class BohrModel extends HydrogenAtom {
     this.nProperty = this._nProperty;
 
     //TODO electronEnergyProperty should be a Property of BohrElectron
+    //TODO This was discussed at 8/22/24 PhET-iO design meeting. Do we need it?
     this.electronEnergyProperty = new DerivedProperty( [ this.nProperty ], n => MOTHAConstants.E1 / ( n * n ), {
       units: 'eV',
       phetioValueType: NumberIO,

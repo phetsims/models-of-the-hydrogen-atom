@@ -35,6 +35,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     // panel that contains radio buttons for selecting a predictive model
     const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels,
       model.modelModeProperty, {
+        hasContinuumBar: false,
         left: electronEnergyLevelAccordionBox.right + 20,
         top: electronEnergyLevelAccordionBox.top,
         tandem: tandem.createTandem( 'modelPanel' )
