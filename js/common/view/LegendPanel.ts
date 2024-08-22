@@ -91,7 +91,10 @@ class LegendNode extends HBox {
           maxWidth: 100 // determined empirically
         } )
       ],
-      tandem: tandem
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
   }
 }

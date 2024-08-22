@@ -31,7 +31,10 @@ export default class BoxOfHydrogenNode extends Node {
     const options = optionize<BoxOfHydrogenNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     // front face
@@ -63,9 +66,7 @@ export default class BoxOfHydrogenNode extends Node {
       font: new PhetFont( { weight: 'bold', size: 24 } ),
       left: frontNode.left + ( 0.15 * BOX_SIZE.width ),
       bottom: frontNode.bottom - ( 0.15 * BOX_SIZE.height ),
-      maxWidth: 0.65 * BOX_SIZE.width,
-      tandem: options.tandem.createTandem( 'hydrogenText' ),
-      phetioVisiblePropertyInstrumented: true
+      maxWidth: 0.65 * BOX_SIZE.width
     } );
 
     options.children = [ frontNode, topNode, hydrogenText ];
