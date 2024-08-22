@@ -89,14 +89,6 @@ export default class AbsorptionEmissionDialog extends Panel {
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, TITLE_TEXT_OPTIONS );
 
     const closeButton = new CloseButton( {
-
-      //TODO Use these options if we want the 'X' like in Dialog.
-      // baseColor: 'transparent',
-      // buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
-      // pathOptions: {
-      //   stroke: 'black'
-      // },
-
       iconLength: 10,
       listener: () => {
         providedOptions.visibleProperty.value = false;
