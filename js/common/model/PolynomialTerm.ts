@@ -1,6 +1,5 @@
-// Copyright 2022-2023, University of Colorado Boulder
+// Copyright 2022-2024, University of Colorado Boulder
 
-//TODO is this used?
 /**
  * PolynomialTerm is a minimal/incomplete implementation of a polynomial term, as needed for solving
  * associated Legendre polynomials. See solveAssociatedLegendrePolynomial.ts
