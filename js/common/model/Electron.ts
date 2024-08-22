@@ -24,7 +24,8 @@ export type ElectronOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 export default class Electron extends PhetioObject {
 
   public readonly positionProperty: Property<Vector2>;
-  public readonly radius: number;
+
+  public readonly radius = MOTHAConstants.ELECTRON_RADIUS;
 
   public constructor( providedOptions: ElectronOptions ) {
 
@@ -44,8 +45,6 @@ export default class Electron extends PhetioObject {
       tandem: options.tandem.createTandem( 'positionProperty' ),
       phetioReadOnly: true
     } );
-
-    this.radius = MOTHAConstants.ELECTRON_RADIUS;
   }
 
   public reset(): void {

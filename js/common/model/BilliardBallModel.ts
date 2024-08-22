@@ -39,7 +39,6 @@ type BilliardBallModelOptions = SelfOptions & PickRequired<HydrogenAtomOptions, 
 
 export default class BilliardBallModel extends HydrogenAtom {
 
-  //TODO do all HydrogenAtom subclasses have radius?
   public readonly radius = MOTHAConstants.BILLIARD_BALL_RADIUS;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {

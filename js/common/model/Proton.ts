@@ -21,7 +21,7 @@ type ProtonOptions = SelfOptions;
 export default class Proton extends PhetioObject {
 
   public readonly position: Vector2;
-  public readonly radius: number;
+  public readonly radius = MOTHAConstants.PROTON_RADIUS;
 
   public constructor( providedOptions?: ProtonOptions ) {
 
@@ -38,7 +38,6 @@ export default class Proton extends PhetioObject {
     super( options );
 
     this.position = options.position;
-    this.radius = MOTHAConstants.PROTON_RADIUS;
   }
 }
 
