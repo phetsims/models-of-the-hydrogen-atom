@@ -48,7 +48,9 @@ export default class BilliardBallModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.billiardBallStringProperty,
-      icon: BilliardBallNode.createIcon()
+      icon: BilliardBallNode.createIcon(),
+      photonEmittedEmitterInstrumented: false,
+      photonAbsorbedEmitterInstrumented: false
     }, providedOptions );
 
     super( zoomedInBox, options );

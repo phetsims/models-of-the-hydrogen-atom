@@ -20,13 +20,24 @@ import ZoomedInBox from './ZoomedInBox.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
 
 type SelfOptions = {
-  displayNameProperty: TReadOnlyProperty<string>; // name of the model shown in the UI
-  icon: Node; // icon used to represent the model in the UI
-  position?: Vector2; // position in the model coordinate frame
+
+  // Name of the model shown in the UI.
+  displayNameProperty: TReadOnlyProperty<string>;
+
+  // Icon used to represent the model in the UI.
+  icon: Node;
+
+  // Position of the atom's center in the model coordinate frame.
+  position?: Vector2;
+
+  // Set these to false for hydrogen atom models that do not emit and absorb light.
+  photonEmittedEmitterInstrumented?: boolean;
+  photonAbsorbedEmitterInstrumented?: boolean;
 };
 
 export type HydrogenAtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
@@ -54,6 +65,8 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
       // SelfOptions
       position: Vector2.ZERO,
+      photonEmittedEmitterInstrumented: true,
+      photonAbsorbedEmitterInstrumented: true,
 
       // PhetioObjectOptions
       isDisposable: false,
@@ -68,11 +81,15 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this.position = options.position;
 
     this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { valueType: Photon } ]
+      parameters: [ { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO } ],
+      tandem: options.photonEmittedEmitterInstrumented ? options.tandem.createTandem( 'photonEmittedEmitter' ) : Tandem.OPT_OUT,
+      phetioDocumentation: 'Register with this Emitter to be notified when a photon is emitted.'
     } );
 
     this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { valueType: Photon } ]
+      parameters: [ { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO } ],
+      tandem: options.photonAbsorbedEmitterInstrumented ? options.tandem.createTandem( 'photonAbsorbedEmitter' ) : Tandem.OPT_OUT,
+      phetioDocumentation: 'Register with this Emitter to be notified when a photon is absorbed.'
     } );
   }
 
