@@ -16,16 +16,28 @@ import MOTHAColors from '../MOTHAColors.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import { LightMode } from '../model/LightMode.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type AbsorptionTransitionTextOptions = SelfOptions & PickOptional<RichTextOptions, 'visibleProperty'> &
-  PickRequired<RichTextOptions, 'tandem'>;
+type AbsorptionTransitionTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
 
 export default class AbsorptionTransitionText extends RichText {
 
-  public constructor( wavelengthProperty: TReadOnlyProperty<number>, providedOptions: AbsorptionTransitionTextOptions ) {
+  public constructor( wavelengthProperty: TReadOnlyProperty<number>,
+                      lightModeProperty: TReadOnlyProperty<LightMode>,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      providedOptions: AbsorptionTransitionTextOptions ) {
+
+    const visibleProperty = new BooleanProperty( true, {
+      tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+      phetioDocumentation: 'Set this to false to permanently hide state transition display.' +
+                           'Otherwise, visibility depends on whether the light is set to an absorption wavelength.',
+      phetioFeatured: true
+    } );
 
     const options = optionize<AbsorptionTransitionTextOptions, SelfOptions, RichTextOptions>()( {
 
@@ -33,7 +45,8 @@ export default class AbsorptionTransitionText extends RichText {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 100,
-      phetioVisiblePropertyInstrumented: true
+      visibleProperty: new DerivedProperty( [ lightModeProperty, hydrogenAtomProperty, visibleProperty ],
+        ( lightMode, hydrogenAtom, visible ) => ( lightMode === 'monochromatic' ) && ( hydrogenAtom instanceof BohrModel ) && visible )
     }, providedOptions );
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],

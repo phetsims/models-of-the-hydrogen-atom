@@ -17,8 +17,6 @@ import Light from '../model/Light.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BohrModel from '../model/BohrModel.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
@@ -45,12 +43,10 @@ export class LightControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
     } );
 
-    //TODO Make it possible for PhET-iO to permanently hide absorptionTransitionText.
-    const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty, {
-      visibleProperty: new DerivedProperty( [ light.lightModeProperty, hydrogenAtomProperty ],
-        ( lightMode, hydrogenAtom ) => ( lightMode === 'monochromatic' ) && ( hydrogenAtom instanceof BohrModel ) ),
-      tandem: options.tandem.createTandem( 'absorptionTransitionText' )
-    } );
+    const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty,
+      light.lightModeProperty, hydrogenAtomProperty, {
+        tandem: options.tandem.createTandem( 'absorptionTransitionText' )
+      } );
 
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( light.lightModeProperty, {
       maxWidth: monochromaticWavelengthControl.width,
