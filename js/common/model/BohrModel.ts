@@ -119,6 +119,7 @@ export default class BohrModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
+    //TODO Should nProperty be a Property of BohrElectron?
     this._nProperty = new NumberProperty( MOTHAConstants.GROUND_STATE, {
       numberType: 'Integer',
       range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.MAX_STATE ),

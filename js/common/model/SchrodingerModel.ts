@@ -81,6 +81,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     super( zoomedInBox, options );
 
     // We would prefer that this be a DerivedProperty, but its derivation depends on its previous value.
+    //TODO Should nlmProperty be a Property of SchrodingerElectron?
     this._nlmProperty = new Property( new SchrodingerQuantumNumbers( this.nProperty.value, 0, 0 ), {
       phetioValueType: SchrodingerQuantumNumbers.SchrodingerQuantumNumbersIO,
       tandem: options.tandem.createTandem( 'nlmProperty' ),
