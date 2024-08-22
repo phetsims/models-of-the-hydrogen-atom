@@ -1,6 +1,5 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO Make it possible for PhET-iO to permanently hide ExciteAtomButton.
 /**
  * ExciteAtomButton is the push button labeled 'Excite Atom'.
  *
@@ -16,6 +15,8 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -25,13 +26,21 @@ export default class ExciteAtomButton extends RectangularPushButton {
 
   public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>, excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
 
+    const visibleProperty = new BooleanProperty( true, {
+      tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+      phetioDocumentation: 'Set this to false to permanently hide the "Excite Atom" button. ' +
+                           'Otherwise, visibility depends on whether the electron is in the metastable state (2,0,0).',
+      phetioFeatured: true
+    } );
+
     const options = optionize<ExciteAtomButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
 
       // RectangularPushButtonOptions
       isDisposable: false,
       listener: () => excite(),
       baseColor: MOTHAColors.exciteAtomButtonColorProperty,
-      visibleProperty: isMetastableStateProperty,
+      visibleProperty: new DerivedProperty( [ isMetastableStateProperty, visibleProperty ],
+        ( isMetastableState, visible ) => ( isMetastableState && visible ) ),
       content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
         font: new PhetFont( 16 ),
         maxWidth: 100
