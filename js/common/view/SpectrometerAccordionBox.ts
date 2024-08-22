@@ -61,6 +61,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     // Put all buttons under buttonGroup tandem.
     const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
 
+    //TODO Factor out SnapshotButton.ts
     const snapshotButton = new RectangularPushButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( cameraSolidShape, {
@@ -80,6 +81,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
 
+    //TODO Factor out ViewSnapshotsButton.ts
     const viewSnapshotsButtonTandem = buttonGroupTandem.createTandem( 'viewSnapshotsButton' );
     const viewSnapshotsButton = new RectangularPushButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
