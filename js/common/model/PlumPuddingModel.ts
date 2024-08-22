@@ -41,6 +41,8 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Utils from '../../../../dot/js/Utils.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -57,13 +59,14 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
   public readonly electron: PlumPuddingElectron;
 
-  // The line on which the electron oscillates, in coordinates relative to the atom's position.
-  private readonly electronLineProperty: Property<ElectronLine>;
+  // A point on the perimeter of the plum pudding atom, modeled as a circle.
+  // It defines the path of the electron through the center of the atom.
+  private readonly perimeterPointProperty: Property<Vector2>;
 
   // The number of times the electron has crossed the atom's center since it started moving.
   private readonly numberOfZeroCrossingsProperty: Property<number>;
 
-  // The amplitude of the electron just before emitting its last photon.
+  // The amplitude of the electron just before it emitted its last photon and stopped moving.
   private readonly previousAmplitudeProperty: Property<number>;
 
   // The number of photons the atom has absorbed and is "holding".
@@ -85,18 +88,17 @@ export default class PlumPuddingModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
-    this.electronLineProperty = new Property<ElectronLine>( nextElectronLine( this.radius ), {
-      //TODO tandem
-      //TODO phetioType: ElectronLineIO
-      //TODO phetioReadOnly: true
-      //TODO phetioDocumentation: 'The line on which the electron oscillates, in coordinates relative to the atom\'s position.'
+    this.perimeterPointProperty = new Vector2Property( nextPointOnCircle( this.radius ), {
+      isValidValue: point => point.x >= 0,
+      tandem: options.tandem.createTandem( 'perimeterPointProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'A point on the perimeter of the plum pudding atom. It defines the path of the electron through the center of the atom.'
     } );
 
     this.numberOfZeroCrossingsProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'numberOfZeroCrossingsProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: true,
       phetioDocumentation: 'The number of times the electron has crossed the atom\'s center since it started moving.'
     } );
 
@@ -104,8 +106,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       range: new Range( 0, 1 ),
       tandem: options.tandem.createTandem( 'previousAmplitudeProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: true,
-      phetioDocumentation: 'The amplitude of the electron just before emitting its last photon.'
+      phetioDocumentation: 'The amplitude of the electron just before it emitted its last photon and stopped moving.'
     } );
 
     this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
@@ -119,7 +120,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
   public override reset(): void {
     this.electron.reset();
-    this.electronLineProperty.reset();
+    this.perimeterPointProperty.reset();
     this.numberOfZeroCrossingsProperty.reset();
     this.previousAmplitudeProperty.reset();
     this.numberOfPhotonsAbsorbedProperty.reset();
@@ -166,7 +167,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         this.electron.isMovingProperty.value = false;
         this.numberOfZeroCrossingsProperty.value = 0;
         this.previousAmplitudeProperty.value = 0;
-        this.electronLineProperty.value = nextElectronLine( this.radius );
+        this.perimeterPointProperty.value = nextPointOnCircle( this.radius );
         this.electron.positionProperty.value = this.position;
         this.electron.directionProperty.value = dotRandom.nextBoolean() ? 'right' : 'left';
       }
@@ -178,12 +179,11 @@ export default class PlumPuddingModel extends HydrogenAtom {
    */
   private moveElectron( dt: number, amplitude: number ): void {
 
-    const electronLine = this.electronLineProperty.value;
-
-    // Assumptions about the electron's oscillation line
-    assert && assert( electronLine.x1 < electronLine.x2 );
-    assert && assert( Math.abs( electronLine.x1 ) === Math.abs( electronLine.x2 ) );
-    assert && assert( Math.abs( electronLine.y1 ) === Math.abs( electronLine.y2 ) );
+    const perimeterPoint = this.perimeterPointProperty.value;
+    const x1 = -perimeterPoint.x;
+    const x2 = perimeterPoint.x;
+    const y1 = -perimeterPoint.y;
+    const y2 = perimeterPoint.y;
 
     // Remember the old offset
     const electronOffset = this.electron.positionProperty.value.minus( this.position );
@@ -192,14 +192,14 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
     // Determine dx and dy
     const distanceDelta = dt * amplitude * ( 2 * this.radius );
-    let dx = Math.abs( electronLine.x1 ) * ( distanceDelta / this.radius );
-    let dy = Math.abs( electronLine.y1 ) * ( distanceDelta / this.radius );
+    let dx = Math.abs( x1 ) * ( distanceDelta / this.radius );
+    let dy = Math.abs( y1 ) * ( distanceDelta / this.radius );
 
     // Adjust signs for electron's horizontal direction
     const sign = ( this.electron.directionProperty.value === 'right' ? 1 : -1 );
     dx *= sign;
     dy *= sign; //TODO why are we adjusting dy?
-    if ( electronLine.y1 > electronLine.y2 ) {
+    if ( y1 > y2 ) {
       dy *= -1;
     }
 
@@ -208,14 +208,14 @@ export default class PlumPuddingModel extends HydrogenAtom {
     let y = y0 + dy;
 
     // If the new offset is past the end of the oscillation line, limit the electron position and change direction.
-    if ( Math.abs( x ) > Math.abs( electronLine.x1 ) || Math.abs( y ) > Math.abs( electronLine.y1 ) ) {
+    if ( Math.abs( x ) > Math.abs( x1 ) || Math.abs( y ) > Math.abs( y1 ) ) {
       if ( this.electron.directionProperty.value === 'right' ) {
-        x = electronLine.x2;
-        y = electronLine.y2;
+        x = x2;
+        y = y2;
       }
       else {
-        x = electronLine.x1;
-        y = electronLine.y1;
+        x = x1;
+        y = y1;
       }
 
       // Change direction
@@ -265,7 +265,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
    * Cannot absorb a photon if any of these are true:
    * - the photon was emitted by the atom
    * - we've already absorbed the max
-   * - we've emitted out last photon and haven't completed oscillation.
+   * - we've emitted our last photon and haven't completed oscillation.
    */
   private canAbsorb( photon: Photon ): boolean {
     return !( photon.wasEmitted ||
@@ -324,32 +324,14 @@ export default class PlumPuddingModel extends HydrogenAtom {
   }
 }
 
-// Defines the straight-line path that the electron follows.
-class ElectronLine {
-
-  public readonly x1: number;
-  public readonly y1: number;
-  public readonly x2: number;
-  public readonly y2: number;
-
-  public constructor( x1: number, y1: number, x2: number, y2: number ) {
-    assert && assert( x1 <= x2 );
-    this.x1 = x1;
-    this.y1 = y1;
-    this.x2 = x2;
-    this.y2 = y2;
-  }
-}
-
 /**
- * Gets the next random line that describes the electron's oscillation path.
- * The line is specified in coordinates relative to the atom (in the atom's local coordinate frame).
+ * Gets the next random point on a circle with the specified radius.
  */
-function nextElectronLine( radius: number ): ElectronLine {
+function nextPointOnCircle( radius: number ): Vector2 {
   const angle = MOTHAUtils.nextAngle();
   const x = Math.abs( radius * Math.sin( angle ) );
   const y = MOTHAUtils.nextSign() * radius * Math.cos( angle );
-  return new ElectronLine( -x, -y, x, y );
+  return new Vector2( x, y );
 }
 
 /**
