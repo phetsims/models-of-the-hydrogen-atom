@@ -19,7 +19,6 @@ import MOTHASymbols from '../MOTHASymbols.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import BohrModel from '../model/BohrModel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import PhotonNode from './PhotonNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
@@ -143,6 +142,9 @@ export default class AbsorptionEmissionDialog extends Panel {
     const wavelengthTextAlignGroup = new AlignGroup();
     const wavelengthNodeAlignGroup = new AlignGroup();
 
+    // Group all buttons.
+    const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
+
     let n1Previous = 1;
     for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
 
@@ -158,7 +160,8 @@ export default class AbsorptionEmissionDialog extends Panel {
             monochromaticWavelengthProperty.value = wavelength;
             lightModeProperty.value = 'monochromatic';
           },
-          tandem: Tandem.OPT_OUT
+          tandem: buttonGroupTandem.createTandem( `wavelength${wavelength}Button` ),
+          phetioVisiblePropertyInstrumented: false
         } );
       }
       else {
