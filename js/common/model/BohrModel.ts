@@ -48,6 +48,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 
 // Radius of each electron orbit, ordered by increasing electron state number.
 // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
@@ -80,6 +81,9 @@ export default class BohrModel extends HydrogenAtom {
   // n, the principal quantum number
   private readonly _nProperty: NumberProperty;
   public readonly nProperty: TReadOnlyProperty<number>;
+
+  // energy of the electron in its current state
+  public electronEnergyProperty: TReadOnlyProperty<number>;
 
   // time that the electron has been in its current state, in seconds
   private readonly timeInStateProperty: Property<number>;
@@ -119,7 +123,7 @@ export default class BohrModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
-    //TODO Should nProperty be a Property of BohrElectron?
+    //TODO nProperty should be a Property of BohrElectron
     this._nProperty = new NumberProperty( MOTHAConstants.GROUND_STATE, {
       numberType: 'Integer',
       range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.MAX_STATE ),
@@ -129,6 +133,13 @@ export default class BohrModel extends HydrogenAtom {
       phetioDocumentation: 'n, the principal quantum number.'
     } );
     this.nProperty = this._nProperty;
+
+    //TODO electronEnergyProperty should be a Property of BohrElectron
+    this.electronEnergyProperty = new DerivedProperty( [ this.nProperty ], n => MOTHAConstants.E1 / ( n * n ), {
+      units: 'eV',
+      phetioValueType: NumberIO,
+      tandem: options.tandem.createTandem( 'electronEnergyProperty' )
+    } );
 
     this.timeInStateProperty = new NumberProperty( 0, {
       units: 's',
@@ -145,6 +156,7 @@ export default class BohrModel extends HydrogenAtom {
     } );
 
     //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
+    //TODO electronAngleProperty should be a Property of BohrElectron
     this.electronAngleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
       units: 'radians',
       tandem: options.tandem.createTandem( 'electronAngleProperty' ),
@@ -152,6 +164,7 @@ export default class BohrModel extends HydrogenAtom {
     } );
 
     //TODO make this go away, just set electron.positionProperty directly
+    //TODO electronOffsetProperty should be a Property of BohrElectron
     this.electronOffsetProperty = new DerivedProperty(
       [ this.nProperty, this.electronAngleProperty ],
       ( n, angle ) => {

@@ -83,6 +83,9 @@ const MOTHAConstants = {
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( MIN_UV_WAVELENGTH, VisibleColor.MAX_WAVELENGTH ),
   SPECTROMETER_WAVELENGTH_RANGE: new Range( MIN_UV_WAVELENGTH, MAX_IR_WAVELENGTH ),
 
+  // Electron energy in the ground state, in eV
+  E1: -13.6,
+
   MAX_SPECTROMETER_SNAPSHOTS: 4,
 
   // margin between the state display and inside edge of zoomed-in box
