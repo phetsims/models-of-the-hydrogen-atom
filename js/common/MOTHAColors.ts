@@ -251,7 +251,7 @@ const MOTHAColors = {
   } ),
 
   pushButtonBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'pushButtonBaseColor', {
-    default: Color.grayColor( 245 )
+    default: Color.grayColor( 200 )
   } ),
 
   xzAxesColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'xzAxesColor', {

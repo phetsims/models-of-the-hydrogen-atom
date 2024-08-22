@@ -17,6 +17,8 @@ import HydrogenAtom from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import SpectrometerDataPoint from './SpectrometerDataPoint.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -27,6 +29,8 @@ export default class Spectrometer extends PhetioObject {
   private recordingEnabled: boolean;
 
   public readonly dataPointsProperty: Property<SpectrometerDataPoint[]>;
+
+  public readonly hasDataPointsProperty: TReadOnlyProperty<boolean>;
 
   public readonly numberOfSnapshotsProperty: Property<number>;
 
@@ -50,6 +54,11 @@ export default class Spectrometer extends PhetioObject {
       phetioReadOnly: true,
       phetioFeatured: true,
       phetioDocumentation: 'Data points (number of photons emitted per wavelength) recorded by the spectrometer.'
+    } );
+
+    this.hasDataPointsProperty = new DerivedProperty( [ this.dataPointsProperty ], dataPoints => dataPoints.length > 0, {
+      phetioValueType: BooleanIO,
+      tandem: options.tandem.createTandem( 'hasDataPointsProperty' )
     } );
 
     this.numberOfSnapshotsProperty = new NumberProperty( 0, {
