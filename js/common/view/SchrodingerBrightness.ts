@@ -42,7 +42,7 @@ export default class SchrodingerBrightness {
     const nMax = MOTHAConstants.MAX_STATE;
 
     // Initialize brightness entries to null
-    //TODO this is so ugly, ported from Java
+    //TODO This is huge, 89,600 entries, many of which are invalid states that will never be used.
     this.cache = Array( nMax );
     for ( let n = 1; n <= nMax; n++ ) {
       const lSize = n;
