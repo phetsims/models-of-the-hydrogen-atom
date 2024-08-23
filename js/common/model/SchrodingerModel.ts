@@ -89,6 +89,8 @@ export default class SchrodingerModel extends DeBroglieModel {
       phetioDocumentation: 'The quantum numbers (n,l,m) that specify a wavefunction for the electron.'
     } );
     this.nlmProperty = this._nlmProperty;
+    phet.log && this.nlmProperty.lazyLink( ( nlmNew, nlmOld ) =>
+      phet.log( `(n,l,m): (${nlmOld.n},${nlmOld.l},${nlmOld.m}) -> (${nlmNew.n},${nlmNew.l},${nlmNew.m})` ) );
 
     // When n changes, compute the next state.
     this.electron.nProperty.lazyLink( n => {
