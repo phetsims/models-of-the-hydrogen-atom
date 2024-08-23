@@ -15,7 +15,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import ProbabilisticChooser, { ProbabilisticChooserEntry } from './ProbabilisticChooser.js';
+import { chooseWeightedValue, WeightedValue } from './ProbabilisticChooser.js';
 
 //TODO Revise TRANSITION_STRENGTH_TABLE table to remove 'nonsensical' entries.
 /*
@@ -84,7 +84,7 @@ export default class SchrodingerQuantumNumbers {
    * The possible values of n are limited by the current value of l, since abs(l-l') must be 1.
    * The probability of each possible n transition is determined by its transition strength.
    *
-   * @returns n, -1 there is no valid transition
+   * @returns n, -1 if there is no valid transition
    */
   public chooseLower_n(): number {
 
@@ -122,12 +122,12 @@ export default class SchrodingerQuantumNumbers {
 
       // Get the strengths for each possible transition.
       const numberOfEntries = nMax - nMin + 1;
-      const entries: ProbabilisticChooserEntry<number>[] = [];
+      const weightedValues: WeightedValue[] = [];
       let strengthSum = 0;
       for ( let i = 0; i < numberOfEntries; i++ ) {
         const nValue = nMin + i;
         const transitionStrength = TRANSITION_STRENGTH_TABLE[ n - 1 ][ nValue - 1 ];
-        entries.push( { value: nValue, weight: transitionStrength } );
+        weightedValues.push( { value: nValue, weight: transitionStrength } );
         strengthSum += transitionStrength;
       }
 
@@ -137,8 +137,7 @@ export default class SchrodingerQuantumNumbers {
       }
 
       // choose a transition
-      const chooser = new ProbabilisticChooser( entries );
-      const value = chooser.getNext();
+      const value = chooseWeightedValue( weightedValues );
       if ( value === null ) {
         return -1;
       }

@@ -10,17 +10,17 @@
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-export type ProbabilisticChooserEntry<T> = {
-  value: T;
+export type WeightedValue = {
+  value: number;
   weight: number;
 };
 
-export default class ProbabilisticChooser<T> {
+export default class ProbabilisticChooser {
 
-  private readonly normalizedEntries: ProbabilisticChooserEntry<T>[];
+  private readonly normalizedEntries: WeightedValue[];
 
-  public constructor( entries: ProbabilisticChooserEntry<T>[] ) {
-    assert && assert( _.every( entries, entry => ( entry.weight >= 0 ) ) ); //TODO correct?
+  public constructor( entries: WeightedValue[] ) {
+    assert && assert( _.every( entries, entry => ( entry.weight >= 0 ) ) );
 
     // Compute the normalization factor for the weights.
     let totalWeight = 0;
@@ -44,9 +44,9 @@ export default class ProbabilisticChooser<T> {
   /**
    * Gets a value using a random probability of selection.
    */
-  public getNext(): T | null { //TODO should always return T, never null
+  public getNext(): number | null { //TODO should always return number , never null
     const weight = dotRandom.nextDouble();
-    let value: T | null = null;
+    let value: number | null = null;
     for ( let i = 0; i < this.normalizedEntries.length && value === null; i++ ) {
       const entry = this.normalizedEntries[ i ];
       if ( weight <= entry.weight ) {
@@ -56,6 +56,41 @@ export default class ProbabilisticChooser<T> {
     assert && assert( value !== null );
     return value;
   }
+}
+
+export function chooseWeightedValue( weightedValues: WeightedValue[] ): number | null {
+
+  assert && assert( _.every( weightedValues, weightedValue => ( weightedValue.weight >= 0 ) ) );
+
+  // Compute the normalization factor for the weights.
+  let totalWeight = 0;
+  weightedValues.forEach( weightedValue => {
+    totalWeight += weightedValue.weight;
+  } );
+  const normalizationFactor = 1 / totalWeight;
+
+  // Build the internal list that is used for choosing. Each entry is normalized, with an associated weight that is
+  // the sum of its own probability plus the cumulative normalized weights of all entries before it in the list.
+  // This makes the getNext() algorithm work properly.
+  const normalizedWeightedValues: WeightedValue[] = [];
+  let p = 0;
+  weightedValues.forEach( weightedValue => {
+    p += weightedValue.weight * normalizationFactor;
+    normalizedWeightedValues.push( { value: weightedValue.value, weight: p } );
+  } );
+  assert && assert( _.every( normalizedWeightedValues, value => ( value.weight >= 0 && value.weight <= 1 ) ) );
+
+  // Choose a value.
+  const weight = dotRandom.nextDouble();
+  let value: number | null = null;
+  for ( let i = 0; i < normalizedWeightedValues.length && value === null; i++ ) {
+    const normalizedWeightedValue = normalizedWeightedValues[ i ];
+    if ( weight <= normalizedWeightedValue.weight ) {
+      value = normalizedWeightedValue.value;
+    }
+  }
+  assert && assert( value !== null );
+  return value;
 }
 
 modelsOfTheHydrogenAtom.register( 'ProbabilisticChooser', ProbabilisticChooser );
