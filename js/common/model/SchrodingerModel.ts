@@ -97,6 +97,7 @@ export default class SchrodingerModel extends DeBroglieModel {
       this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
     } );
 
+    //TODO Should isMetastableStateProperty be a Property of SchrodingerElectron?
     this.isMetastableStateProperty = new DerivedProperty( [ this.nlmProperty ],
       f => ( f.n === 2 ) && ( f.l === 0 ) && ( f.m === 0 ), {
         tandem: options.tandem.createTandem( 'isMetastableStateProperty' ),
