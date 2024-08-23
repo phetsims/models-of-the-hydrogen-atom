@@ -17,7 +17,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import chooseWeightedValue, { WeightedValue } from './chooseWeightedValue.js';
 
-//TODO Revise TRANSITION_STRENGTH_TABLE table to remove 'nonsensical' entries.
+//TODO Revise TRANSITION_STRENGTH_TABLE table to remove 'nonsensical' entries. Better doc needed, hard to understand.
 /*
  * This table defines the transition strengths for the primary state component (n).
  * Some entries in this table are nonsensical, but their strengths are zero, and it helps to have a symmetrical table.
