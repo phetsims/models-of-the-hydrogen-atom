@@ -69,7 +69,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
           tandem: options.tandem.createTandem( 'bohrNode' )
         } ),
         deBroglieNode,
-        new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, modelViewTransform, {
+        new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, model.light, modelViewTransform, {
           tandem: options.tandem.createTandem( 'schrodingerNode' )
         } ),
         photonsLayer

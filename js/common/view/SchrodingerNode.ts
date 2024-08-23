@@ -25,6 +25,7 @@ import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import WavefunctionText from './WavefunctionText.js';
+import Light from '../model/Light.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -34,6 +35,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: SchrodingerModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      light: Light,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: SchrodingerNodeOptions ) {
 
@@ -59,7 +61,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).
     // Pressing this button fires a photon that transitions the atom to a higher energy level.
-    const exciteAtomButton = new ExciteAtomButton( hydrogenAtom.metastableHandler.isActiveProperty,
+    const exciteAtomButton = new ExciteAtomButton( hydrogenAtom.metastableHandler.isMetastableStateProperty, light,
       () => hydrogenAtom.excite(), {
         tandem: options.tandem.createTandem( 'exciteAtomButton' )
       } );

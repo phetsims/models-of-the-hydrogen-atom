@@ -27,7 +27,7 @@ import Property from '../../../../axon/js/Property.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
-const EXCITE_ATOM_INTERVAL = 0.1; // seconds
+const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java values was 100 (ms?)
 
 type SelfOptions = EmptySelfOptions;
 
@@ -42,8 +42,8 @@ export default class MetastableHandler extends PhetioObject {
   // Whether the atom in the metastable state (n,l,m) = (2,0,0)
   public readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
 
-  // Whether the MetastableHandler is active.
-  public readonly isActiveProperty: TReadOnlyProperty<boolean>;
+  // Whether the MetastableHandler is active, and will automatically attempt to excite the atom.
+  private readonly isActiveProperty: TReadOnlyProperty<boolean>;
 
   // Elapsed time since attempting to excite the atom to a higher state, in seconds.
   private readonly elapsedTimeProperty: Property<number>;
@@ -70,7 +70,7 @@ export default class MetastableHandler extends PhetioObject {
 
     this.isActiveProperty = new DerivedProperty(
       [ this.isMetastableStateProperty, this.light.isOnProperty, this.light.lightModeProperty ],
-      ( isMetastableState, lightIsOn, lightMode ) => isMetastableState && lightIsOn && lightMode === 'monochromatic', {
+      ( isMetastableState, lightIsOn, lightMode ) => isMetastableState && lightIsOn && lightMode === 'white', {
         tandem: options.tandem.createTandem( 'isActiveProperty' ),
         phetioValueType: BooleanIO,
         phetioDocumentation: 'For internal use only.'
@@ -104,10 +104,12 @@ export default class MetastableHandler extends PhetioObject {
     }
   }
 
-  // Causes the light to emit one absorbable photon at the atom's center.
-  // The absorption wavelength that will take the electron to a higher state (n) is chosen at random.
+  /**
+   * Attempts to excite the atom (take it to a higher state) by telling the light to emit one absorbable photon towards
+   * the atom's center. The absorption wavelength that will take the electron to a higher state (n) is chosen at random.
+   */
   public exciteAtom(): void {
-    assert && assert( this.isActiveProperty.value );
+    assert && assert( this.isMetastableStateProperty.value );
 
     // Randomly choose an absorption wavelength. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/55.
     const wavelengths = SchrodingerModel.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );

@@ -17,6 +17,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Light from '../model/Light.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -24,7 +25,9 @@ type ExciteAtomButtonOptions = SelfOptions & PickRequired<RectangularPushButtonO
 
 export default class ExciteAtomButton extends RectangularPushButton {
 
-  public constructor( metastableHandlerIsActiveProperty: TReadOnlyProperty<boolean>, excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
+  public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>,
+                      light: Light,
+                      excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
 
     const visibleProperty = new BooleanProperty( true, {
       tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
@@ -39,9 +42,13 @@ export default class ExciteAtomButton extends RectangularPushButton {
       isDisposable: false,
       listener: () => excite(),
       baseColor: MOTHAColors.exciteAtomButtonColorProperty,
+
+      // Visible when we're in state (2,0,0) with the light on, in 'monochromatic' mode.
+      // When the light is in 'white' mode, MetastableHandler automatically fires absorbable photons.
       visibleProperty: new DerivedProperty(
-        [ metastableHandlerIsActiveProperty, visibleProperty ],
-        ( metastableHandlerIsActive, visible ) => ( metastableHandlerIsActive && visible ) ),
+        [ visibleProperty, isMetastableStateProperty, light.isOnProperty, light.lightModeProperty ],
+        ( visible, isMetastableState, lightIsOn, lightMode ) =>
+          ( visible && isMetastableState && lightIsOn && lightMode === 'monochromatic' ) ),
       content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
         font: new PhetFont( 16 ),
         maxWidth: 100
