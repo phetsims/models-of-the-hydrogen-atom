@@ -31,16 +31,16 @@ export default class BohrElectron extends Electron {
   // n, the principal quantum number
   public readonly nProperty: NumberProperty;
 
-  // energy of the electron in its current state, in eV
+  // Energy of the electron in its current state, in eV.
   public readonly energyProperty: TReadOnlyProperty<number>;
 
-  // time that the electron has been in its current state, in seconds
+  // Time that the electron has been in its current state, in seconds.
   public readonly timeInStateProperty: Property<number>;
 
-  // current direction of the electron, in radians
+  // Direction of the electron, in radians.
   public readonly directionProperty: Property<number>;
 
-  // offset of the electron from the atom's center
+  // Offset of the electron from the atom's center.
   public readonly offsetProperty: TReadOnlyProperty<Vector2>;
 
   public constructor( providedOptions: BohrElectronOptions ) {
