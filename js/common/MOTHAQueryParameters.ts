@@ -51,6 +51,6 @@ modelsOfTheHydrogenAtom.register( 'MOTHAQueryParameters', MOTHAQueryParameters )
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );
 logGlobal( 'phet.preloads.phetio.queryParameters' );
-logGlobal( 'phet.geometricOptics.MOTHAQueryParameters' );
+logGlobal( 'phet.modelsOfTheHydrogenAtom.MOTHAQueryParameters' );
 
 export default MOTHAQueryParameters;
