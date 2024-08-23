@@ -24,7 +24,7 @@ type ExciteAtomButtonOptions = SelfOptions & PickRequired<RectangularPushButtonO
 
 export default class ExciteAtomButton extends RectangularPushButton {
 
-  public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>, excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
+  public constructor( metastableHandlerIsActiveProperty: TReadOnlyProperty<boolean>, excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
 
     const visibleProperty = new BooleanProperty( true, {
       tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
@@ -39,8 +39,9 @@ export default class ExciteAtomButton extends RectangularPushButton {
       isDisposable: false,
       listener: () => excite(),
       baseColor: MOTHAColors.exciteAtomButtonColorProperty,
-      visibleProperty: new DerivedProperty( [ isMetastableStateProperty, visibleProperty ],
-        ( isMetastableState, visible ) => ( isMetastableState && visible ) ),
+      visibleProperty: new DerivedProperty(
+        [ metastableHandlerIsActiveProperty, visibleProperty ],
+        ( metastableHandlerIsActive, visible ) => ( metastableHandlerIsActive && visible ) ),
       content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
         font: new PhetFont( 16 ),
         maxWidth: 100

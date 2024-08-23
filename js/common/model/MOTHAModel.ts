@@ -71,11 +71,13 @@ export default class MOTHAModel implements TModel {
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
+   * @param light
    * @param predictiveModels
    * @param initialPredictiveModel
    * @param tandem
    */
   protected constructor( zoomedInBox: ZoomedInBox,
+                         light: Light,
                          predictiveModels: HydrogenAtom[],
                          initialPredictiveModel: HydrogenAtom,
                          tandem: Tandem ) {
@@ -91,7 +93,7 @@ export default class MOTHAModel implements TModel {
       phetioFeatured: true
     } );
 
-    this.experiment = new Experiment( zoomedInBox, {
+    this.experiment = new Experiment( zoomedInBox, light, {
       tandem: tandem.createTandem( 'experiment' )
     } );
 
@@ -111,9 +113,7 @@ export default class MOTHAModel implements TModel {
     //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47 replace ObservableArray
     this.photons = createObservableArray<Photon>();
 
-    this.light = new Light( zoomedInBox, {
-      tandem: tandem.createTandem( 'light' )
-    } );
+    this.light = light;
 
     this.light.photonCreatedEmitter.addListener( photon => this.photons.add( photon ) );
 

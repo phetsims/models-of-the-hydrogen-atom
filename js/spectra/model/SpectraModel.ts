@@ -17,6 +17,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Light from '../../common/model/Light.js';
 
 export default class SpectraModel extends MOTHAModel {
 
@@ -31,6 +32,10 @@ export default class SpectraModel extends MOTHAModel {
   public constructor( tandem: Tandem ) {
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
+
+    const light = new Light( zoomedInBox, {
+      tandem: tandem.createTandem( 'light' )
+    } );
 
     // Group all predictive models under this tandem.
     const predictiveModelsTandem = tandem.createTandem( 'predictiveModels' );
@@ -55,7 +60,7 @@ export default class SpectraModel extends MOTHAModel {
       tandem: predictiveModelsTandem.createTandem( 'deBroglieModel' )
     } );
 
-    const schrodingerModel = new SchrodingerModel( zoomedInBox, {
+    const schrodingerModel = new SchrodingerModel( zoomedInBox, light, {
       tandem: predictiveModelsTandem.createTandem( 'schrodingerModel' )
     } );
 
@@ -69,7 +74,7 @@ export default class SpectraModel extends MOTHAModel {
       schrodingerModel
     ];
 
-    super( zoomedInBox, predictiveModels, billiardBallModel, tandem );
+    super( zoomedInBox, light, predictiveModels, billiardBallModel, tandem );
 
     this.billiardBallModel = billiardBallModel;
     this.plumPuddingModel = plumPuddingModel;

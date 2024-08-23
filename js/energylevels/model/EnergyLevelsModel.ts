@@ -14,6 +14,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Light from '../../common/model/Light.js';
 
 export default class EnergyLevelsModel extends MOTHAModel {
 
@@ -26,6 +27,10 @@ export default class EnergyLevelsModel extends MOTHAModel {
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
 
+    const light = new Light( zoomedInBox, {
+      tandem: tandem.createTandem( 'light' )
+    } );
+
     // Group all predictive models under this tandem.
     const predictiveModelsTandem = tandem.createTandem( 'predictiveModels' );
 
@@ -37,7 +42,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
       tandem: predictiveModelsTandem.createTandem( 'deBroglieModel' )
     } );
 
-    const schrodingerModel = new SchrodingerModel( zoomedInBox, {
+    const schrodingerModel = new SchrodingerModel( zoomedInBox, light, {
       tandem: predictiveModelsTandem.createTandem( 'schrodingerModel' )
     } );
 
@@ -50,7 +55,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
     assert && assert( _.every( predictiveModels, model => model instanceof BohrModel ),
       'all models in this screen must include the concept of state transition wavelengths' );
 
-    super( zoomedInBox, predictiveModels, bohrModel, tandem );
+    super( zoomedInBox, light, predictiveModels, bohrModel, tandem );
 
     this.bohrModel = bohrModel;
     this.deBroglieModel = deBroglieModel;

@@ -14,6 +14,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import Light from './Light.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -21,7 +22,7 @@ type ExperimentOptions = SelfOptions & PickRequired<SchrodingerModelOptions, 'ta
 
 export default class Experiment extends SchrodingerModel {
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: ExperimentOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, light: Light, providedOptions: ExperimentOptions ) {
 
     const options = optionize<ExperimentOptions, SelfOptions, SchrodingerModelOptions>()( {
 
@@ -29,7 +30,7 @@ export default class Experiment extends SchrodingerModel {
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.experimentStringProperty
     }, providedOptions );
 
-    super( zoomedInBox, options );
+    super( zoomedInBox, light, options );
   }
 }
 

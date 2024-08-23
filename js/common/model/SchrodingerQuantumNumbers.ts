@@ -79,6 +79,10 @@ export default class SchrodingerQuantumNumbers {
     this.m = m;
   }
 
+  public equals( quantumNumbers: SchrodingerQuantumNumbers ): boolean {
+    return ( quantumNumbers.n === this.n ) && ( quantumNumbers.l === this.l ) && ( quantumNumbers.m === this.m );
+  }
+
   /**
    * Chooses a lower value for n, based on the current values of n and l.
    * The possible values of n are limited by the current value of l, since abs(l-l') must be 1.

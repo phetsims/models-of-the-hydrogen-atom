@@ -56,6 +56,8 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import Property from '../../../../axon/js/Property.js';
 import BohrModel from './BohrModel.js';
+import MetastableHandler from './MetastableHandler.js';
+import Light from './Light.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -70,7 +72,9 @@ export default class SchrodingerModel extends DeBroglieModel {
   // Whether the atom in the metastable state (n,l,m) = (2,0,0)
   public readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: SchrodingerModelOptions ) {
+  public readonly metastableHandler: MetastableHandler;
+
+  public constructor( zoomedInBox: ZoomedInBox, light: Light, providedOptions: SchrodingerModelOptions ) {
 
     const options = optionize<SchrodingerModelOptions, SelfOptions, DeBroglieModelOptions>()( {
 
@@ -98,12 +102,22 @@ export default class SchrodingerModel extends DeBroglieModel {
     } );
 
     //TODO Should isMetastableStateProperty be a Property of SchrodingerElectron?
+    //TODO Move isMetastableStateProperty to MetastableHandler?
     this.isMetastableStateProperty = new DerivedProperty( [ this.nlmProperty ],
-      f => ( f.n === 2 ) && ( f.l === 0 ) && ( f.m === 0 ), {
+      state => state.equals( MetastableHandler.METASTABLE_STATE ), {
         tandem: options.tandem.createTandem( 'isMetastableStateProperty' ),
         phetioValueType: BooleanIO,
         phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).'
       } );
+
+    this.metastableHandler = new MetastableHandler( this.isMetastableStateProperty, light, {
+      tandem: options.tandem.createTandem( 'metastableHandler' )
+    } );
+  }
+
+  public override reset(): void {
+    this.metastableHandler.reset();
+    super.reset();
   }
 
   private get n(): number {
@@ -120,6 +134,7 @@ export default class SchrodingerModel extends DeBroglieModel {
 
   public override step( dt: number ): void {
     //TODO implement step
+    this.metastableHandler.step( dt );
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
@@ -188,13 +203,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * directly at the center of the atom. This moves the atom to a higher energy level.
    */
   public excite(): void {
-    assert && assert( this.isMetastableStateProperty.value );
-    this.fireOneAbsorbablePhoton();
-  }
-
-  private fireOneAbsorbablePhoton(): void {
-    //TODO port MetastableHandler
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/55 randomly select one of the 4 visible wavelengths that transition from 2 -> n
+    this.metastableHandler.exciteAtom();
   }
 
   //----------------------------------------------------------------------------
