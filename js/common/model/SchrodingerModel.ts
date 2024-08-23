@@ -195,9 +195,9 @@ export default class SchrodingerModel extends DeBroglieModel {
 
   /**
    * Probability Density. This algorithm is undefined for (x,y,z) = (0,0,0).
-   * @param n primary state
-   * @param l secondary state
-   * @param m tertiary state
+   * @param n
+   * @param l
+   * @param m
    * @param x coordinate on horizontal axis
    * @param y coordinate on axis the is perpendicular to the screen
    * @param z coordinate on vertical axis
