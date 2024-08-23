@@ -22,7 +22,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
@@ -32,7 +31,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
-import Electron, { ElectronOptions } from './Electron.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import MOTHAUtils from '../MOTHAUtils.js';
@@ -40,9 +38,9 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Utils from '../../../../dot/js/Utils.js';
 import MOTHASymbols from '../MOTHASymbols.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import PlumPuddingElectron from './PlumPuddingElectron.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -339,44 +337,6 @@ function nextPointOnCircle( radius: number ): Vector2 {
  */
 function signIsDifferent( n1: number, n2: number ): boolean {
   return ( ( n1 > 0 && n2 < 0 ) || ( n1 < 0 && n2 > 0 ) );
-}
-
-/**
- * PlumPuddingElectron is a specialization of Electron for the Plum Pudding model.
- */
-class PlumPuddingElectron extends Electron {
-
-  // Is the electron moving?
-  public readonly isMovingProperty: Property<boolean>;
-
-  // Whether the electron's horizontal motion is to the left or right.
-  public readonly directionProperty: StringUnionProperty<'left' | 'right'>;
-
-  public constructor( providedOptions: ElectronOptions ) {
-
-    const options = providedOptions;
-
-    super( options );
-
-    this.isMovingProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'isMovingProperty' ),
-      phetioReadOnly: true,
-      phetioFeatured: true
-    } );
-
-    this.directionProperty = new StringUnionProperty( 'left', {
-      validValues: [ 'left', 'right' ],
-      tandem: options.tandem.createTandem( 'directionProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'Whether the electron\'s horizontal motion is to the left or right.'
-    } );
-  }
-
-  public override reset(): void {
-    this.isMovingProperty.reset();
-    this.directionProperty.reset();
-    super.reset();
-  }
 }
 
 modelsOfTheHydrogenAtom.register( 'PlumPuddingModel', PlumPuddingModel );
