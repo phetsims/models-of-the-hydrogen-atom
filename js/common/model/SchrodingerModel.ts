@@ -51,8 +51,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import Property from '../../../../axon/js/Property.js';
 import BohrModel from './BohrModel.js';
@@ -68,9 +66,6 @@ export default class SchrodingerModel extends DeBroglieModel {
   // Quantum numbers (n,l,m) that specify the wavefunction for the electron.
   public readonly nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>;
   private readonly _nlmProperty: Property<SchrodingerQuantumNumbers>;
-
-  // Whether the atom in the metastable state (n,l,m) = (2,0,0)
-  public readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
 
   public readonly metastableHandler: MetastableHandler;
 
@@ -101,16 +96,7 @@ export default class SchrodingerModel extends DeBroglieModel {
       this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
     } );
 
-    //TODO Should isMetastableStateProperty be a Property of SchrodingerElectron?
-    //TODO Move isMetastableStateProperty to MetastableHandler?
-    this.isMetastableStateProperty = new DerivedProperty( [ this.nlmProperty ],
-      state => state.equals( MetastableHandler.METASTABLE_STATE ), {
-        tandem: options.tandem.createTandem( 'isMetastableStateProperty' ),
-        phetioValueType: BooleanIO,
-        phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).'
-      } );
-
-    this.metastableHandler = new MetastableHandler( this.isMetastableStateProperty, light, {
+    this.metastableHandler = new MetastableHandler( this.nlmProperty, light, {
       tandem: options.tandem.createTandem( 'metastableHandler' )
     } );
   }
@@ -148,7 +134,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * want to make it easier to get out of state (2,0,0).
    */
   protected override absorptionIsCertain(): boolean {
-    if ( this.isMetastableStateProperty.value ) {
+    if ( this.metastableHandler.isMetastableStateProperty.value ) {
       return true;
     }
     return super.absorptionIsCertain();

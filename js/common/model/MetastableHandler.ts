@@ -36,13 +36,16 @@ export default class MetastableHandler extends PhetioObject {
 
   private readonly light: Light;
 
+  // Whether the atom in the metastable state (n,l,m) = (2,0,0)
+  public readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
+
   // Whether the MetastableHandler is active.
   public readonly isActiveProperty: TReadOnlyProperty<boolean>;
 
   // Elapsed time since attempting to excite the atom to a higher state, in seconds.
   private readonly elapsedTimeProperty: Property<number>;
 
-  public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>, light: Light, providedOptions: MetastableHandlerOptions ) {
+  public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>, light: Light, providedOptions: MetastableHandlerOptions ) {
 
     const options = optionize<MetastableHandlerOptions, SelfOptions, PhetioObjectOptions>()( {
 
@@ -55,8 +58,15 @@ export default class MetastableHandler extends PhetioObject {
 
     this.light = light;
 
+    this.isMetastableStateProperty = new DerivedProperty( [ nlmProperty ],
+      nlm => nlm.equals( MetastableHandler.METASTABLE_STATE ), {
+        tandem: options.tandem.createTandem( 'isMetastableStateProperty' ),
+        phetioValueType: BooleanIO,
+        phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).'
+      } );
+
     this.isActiveProperty = new DerivedProperty(
-      [ isMetastableStateProperty, this.light.isOnProperty, this.light.lightModeProperty ],
+      [ this.isMetastableStateProperty, this.light.isOnProperty, this.light.lightModeProperty ],
       ( isMetastableState, lightIsOn, lightMode ) => isMetastableState && lightIsOn && lightMode === 'monochromatic', {
         tandem: options.tandem.createTandem( 'isActiveProperty' ),
         phetioValueType: BooleanIO,
