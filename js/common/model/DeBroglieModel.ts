@@ -33,16 +33,17 @@ export type DeBroglieModelOptions = SelfOptions & BohrModelOptions;
 
 export default class DeBroglieModel extends BohrModel {
 
-  // How much to scale the y dimension for 3D orbits
+  // Which representation to use.
+  public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
+
+  // How much to scale the y dimension for 3D orbits.
   public static readonly ORBIT_3D_Y_SCALE = 0.35;
 
-  // radial width of the ring for 'brightness' representation,
+  // Radial width of the ring for the 'brightness' representation.
   public static readonly BRIGHTNESS_RING_THICKNESS = 3;
 
-  // electron for the '3D Height' view
+  // Electron for the '3D Height' view.
   public readonly electron3D: Electron;
-
-  public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
@@ -92,8 +93,8 @@ export default class DeBroglieModel extends BohrModel {
 
   //TODO normalize the return value to [0,2*Math.PI]
   /**
-   * Calculates the new electron angle for some time step. For de Broglie, the change in angle (and thus
-   * the oscillation frequency) is the same for all states of the electron.
+   * Calculates the new electron angle for some time step. For de Broglie, the direction changes at the same rate for
+   * all electron states (n).
    */
   protected override calculateNewElectronDirection( dt: number ): number {
     const deltaAngle = dt * BohrModel.ELECTRON_ANGLE_DELTA;

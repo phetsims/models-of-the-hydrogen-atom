@@ -52,7 +52,7 @@ const PHOTON_STIMULATED_EMISSION_PROBABILITY = PHOTON_ABSORPTION_PROBABILITY;
 // Probability that a photon will be emitted, [0,1]
 const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 
-// How close an emitted photon is placed to the photon that causes stimulated emission
+// How close an emitted photon is placed to the photon that causes stimulated emission.
 const STIMULATED_EMISSION_X_OFFSET = 10;
 
 type SelfOptions = EmptySelfOptions;
@@ -70,13 +70,13 @@ export default class BohrModel extends HydrogenAtom {
   // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
   public static readonly ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 
-  // minimum time (in sec) that electron stays in a state before emission can occur
+  // Minimum time (in sec) that electron stays in a state before emission can occur.
   public static readonly MIN_TIME_IN_STATE = 1;
 
-  // Change in orbit angle per dt for ground state orbit
+  // Change in orbit angle per dt for ground state orbit.
   public static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
 
-  // A map from absorption/emission wavelengths to state transitions.
+  // A map from absorption/emission wavelengths to electron state (n) transitions.
   public static readonly wavelengthToStateTransitionMap = createWavelengthToStateTransitionMap();
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
@@ -114,17 +114,17 @@ export default class BohrModel extends HydrogenAtom {
     // Keep track of how long the electron has been in its current state.
     this.electron.timeInStateProperty.value += dt;
 
-    // Advance the electron along its orbit
+    // Advance the electron along its orbit.
     this.electron.directionProperty.value = this.calculateNewElectronDirection( dt );
 
-    // Attempt to emit a photon
+    // Attempt to emit a photon.
     this.attemptSpontaneousEmission();
   }
 
   //TODO normalize the return value to [0,2*Math.PI]
   /**
-   * Calculates the new electron direction for some time step.
-   * Subclasses may override this to produce different oscillation behavior.
+   * Calculates the new electron direction for some time step. For Bohr, the direction changes at a different rate for
+   * each electron state (n).
    */
   protected calculateNewElectronDirection( dt: number ): number {
     const n = this.electron.nProperty.value;
