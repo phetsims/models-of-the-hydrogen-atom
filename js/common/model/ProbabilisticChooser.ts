@@ -1,5 +1,6 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
+//TODO Convert ProbabilisticChooser to a utility function, so that we're not constantly instantiating a class.
 /**
  * ProbabilisticChooser randomly selects a value from a collection of weighted values.
  *
