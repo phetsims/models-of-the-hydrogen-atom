@@ -44,7 +44,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line no-view-imported-from-model
 import ZoomedInBox from './ZoomedInBox.js';
-import Photon from './Photon.js';
 import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -121,11 +120,6 @@ export default class SchrodingerModel extends DeBroglieModel {
   public override step( dt: number ): void {
     super.step( dt );
     this.metastableHandler.step( dt );
-  }
-
-  public override movePhoton( photon: Photon, dt: number ): void {
-    //TODO implement movePhoton
-    photon.move( dt );
   }
 
   /**

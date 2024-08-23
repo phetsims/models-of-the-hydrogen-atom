@@ -18,7 +18,7 @@ export default class PolynomialTerm {
 
   public constructor( coefficient: number, power: number ) {
     assert && assert( Number.isInteger( coefficient ) );
-    assert && assert( Number.isInteger( power ) && power >= 0 );
+    assert && assert( Number.isInteger( power ) );
 
     this.coefficient = coefficient;
     this.power = power;
