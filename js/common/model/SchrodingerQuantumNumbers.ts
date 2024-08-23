@@ -15,7 +15,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import { chooseWeightedValue, WeightedValue } from './ProbabilisticChooser.js';
+import chooseWeightedValue, { WeightedValue } from './chooseWeightedValue.js';
 
 //TODO Revise TRANSITION_STRENGTH_TABLE table to remove 'nonsensical' entries.
 /*
