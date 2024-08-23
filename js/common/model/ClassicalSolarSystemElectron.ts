@@ -1,7 +1,8 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * ClassicalSolarSystemElectron is the Electron specialized for the Classical Solar System model.
+ * ClassicalSolarSystemElectron is the Electron specialized for the Classical Solar System model.  It adds Properties
+ * needed by that model, but the model is still responsible for all aspects of the electron's behavior.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

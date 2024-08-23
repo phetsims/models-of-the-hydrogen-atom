@@ -1,7 +1,8 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * PlumPuddingElectron is the Electron specialized for the Plum Pudding model.
+ * PlumPuddingElectron is the Electron specialized for the Plum Pudding model. It adds Properties needed by that
+ * model, but the model is still responsible for all aspects of the electron's behavior.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
