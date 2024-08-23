@@ -119,7 +119,7 @@ export default class SchrodingerModel extends DeBroglieModel {
   }
 
   public override step( dt: number ): void {
-    //TODO implement step
+    super.step( dt );
     this.metastableHandler.step( dt );
   }
 
@@ -134,6 +134,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * want to make it easier to get out of state (2,0,0).
    */
   protected override absorptionIsCertain(): boolean {
+    //TODO Java version was if ( n === 2 && l === 0 ), ignoring m.
     if ( this.metastableHandler.isMetastableStateProperty.value ) {
       return true;
     }
@@ -221,19 +222,18 @@ export default class SchrodingerModel extends DeBroglieModel {
   }
 
   /**
-   * Wavefunction.
+   * Solves the electron's wavefunction.
    */
   private solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
-    const t1 = this.getGeneralizedLaguerrePolynomial( n, l, r );
+    const t1 = this.solveGeneralizedLaguerrePolynomial( n, l, r );
     const t2 = solveAssociatedLegendrePolynomial( l, Math.abs( m ), cosTheta );
     return ( t1 * t2 );
   }
 
   /**
-   * Generalized Laguerre Polynomial.
-   * Codified from design document.
+   * Solves the generalized Laguerre Polynomial, as specified in the Java design document.
    */
-  private getGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
+  private solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
     const a = BohrModel.getElectronOrbitRadius( n ) / ( n * n );
     const multiplier = Math.pow( r, l ) * Math.exp( -r / ( n * a ) );
     const b0 = 2.0 * Math.pow( ( n * a ), ( -1.5 ) ); // b0
