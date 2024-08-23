@@ -64,7 +64,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
   // The number of times the electron has crossed the atom's center since it started moving.
   private readonly numberOfZeroCrossingsProperty: Property<number>;
 
-  // The amplitude of the electron just before it emitted its last photon and stopped moving.
+  // The amplitude of the electron just before the atom emitted its last photon and the electron stopped moving.
   private readonly previousAmplitudeProperty: Property<number>;
 
   // The number of photons the atom has absorbed and is "holding".
