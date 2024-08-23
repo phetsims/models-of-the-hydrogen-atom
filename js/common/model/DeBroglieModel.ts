@@ -24,8 +24,9 @@ import Photon from './Photon.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import Electron from './Electron.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -42,8 +43,9 @@ export default class DeBroglieModel extends BohrModel {
   // Radial width of the ring for the 'brightness' representation.
   public static readonly BRIGHTNESS_RING_THICKNESS = 3;
 
-  // Electron for the '3D Height' view.
-  public readonly electron3D: Electron;
+  // Position of the electron adjusted for the '3D height' view.
+  //TODO Move this to DeBroglie3DHeightNode.
+  public readonly electron3DPositionProperty: TReadOnlyProperty<Vector2>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
 
@@ -56,9 +58,10 @@ export default class DeBroglieModel extends BohrModel {
 
     super( zoomedInBox, options );
 
-    this.electron3D = new Electron( {
-      //TODO position is not properly initialized
-      tandem: options.tandem.createTandem( 'electron3D' )
+    this.electron3DPositionProperty = new DerivedProperty( [ this.electron.positionProperty ], position => {
+      const x = position.x;
+      const yOffsetScaled = ( position.x - this.position.y ) * DeBroglieModel.ORBIT_3D_Y_SCALE;
+      return new Vector2( x, this.position.y + yOffsetScaled );
     } );
 
     this.deBroglieRepresentationProperty = new StringUnionProperty( 'radialDistance', {
@@ -66,16 +69,9 @@ export default class DeBroglieModel extends BohrModel {
       tandem: options.tandem.createTandem( 'deBroglieRepresentationProperty' ),
       phetioFeatured: true
     } );
-
-    this.electron.offsetProperty.link( offset => {
-      const xOffset = offset.x;
-      const yOffset = ( ( offset.y - this.position.y ) * DeBroglieModel.ORBIT_3D_Y_SCALE );
-      this.electron3D.positionProperty.value = this.position.plusXY( xOffset, yOffset );
-    } );
   }
 
   public override reset(): void {
-    this.electron3D.reset();
 
     //TODO Calling reset when switching between models probably should not reset this.
     this.deBroglieRepresentationProperty.reset();
