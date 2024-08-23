@@ -23,6 +23,7 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import BohrModel from '../model/BohrModel.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
 // tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of
@@ -109,7 +110,7 @@ class RingNode extends Node {
 
     // Pre-allocate the maximum number of polygon (Path) nodes. Based on the radius of the electron's current orbit,
     // some subset of these polygons will actually be added to the scene graph.
-    const maxRadius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( MOTHAConstants.MAX_STATE ) );
+    const maxRadius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( MOTHAConstants.MAX_STATE ) );
     const maxPolygons = calculateNumberOfPolygons( maxRadius );
     this.polygonNodes = [];
     for ( let i = 0; i < maxPolygons; i++ ) {
@@ -124,7 +125,7 @@ class RingNode extends Node {
         Color.interpolateRGBA( negativeAmplitudeColor, positiveAmplitudeColor, 0.5 )
     );
 
-    Multilink.multilink( [ this.hydrogenAtom.nProperty, this.visibleProperty ],
+    Multilink.multilink( [ this.hydrogenAtom.electron.nProperty, this.visibleProperty ],
       ( n, visible ) => {
         if ( visible ) {
           this.updateGeometry();
@@ -132,7 +133,7 @@ class RingNode extends Node {
         }
       } );
 
-    this.hydrogenAtom.electronAngleProperty.link( () => {
+    this.hydrogenAtom.electron.directionProperty.link( () => {
       this.visible && this.updateColor();
     } );
   }
@@ -146,7 +147,7 @@ class RingNode extends Node {
     assert && assert( this.visible, 'should only be called when visible' );
 
     // Compute the number of polygons needed to represent this electron state.
-    const modelRadius = this.hydrogenAtom.getElectronOrbitRadius( this.hydrogenAtom.nProperty.value );
+    const modelRadius = BohrModel.getElectronOrbitRadius( this.hydrogenAtom.electron.nProperty.value );
     const viewRadius = this.modelViewTransform.modelToViewDeltaX( modelRadius );
     const numberOfPolygons = calculateNumberOfPolygons( viewRadius );
     assert && assert( numberOfPolygons <= this.polygonNodes.length );
@@ -170,7 +171,7 @@ class RingNode extends Node {
   private updateColor(): void {
     assert && assert( this.visible, 'should only be called when visible' );
 
-    const n = this.hydrogenAtom.nProperty.value;
+    const n = this.hydrogenAtom.electron.nProperty.value;
 
     // the number of relevant polygons, NOT this.polygonNodes.length
     assert && assert( _.every( this.children, child => child instanceof Path ) );

@@ -22,6 +22,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import BohrModel from '../model/BohrModel.js';
 
 // multiply the ground state orbit radius by this number to determine the radial offset at max amplitude
 const RADIAL_OFFSET_FACTOR = 0.45;
@@ -107,9 +108,9 @@ class RingNode extends Path {
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( hydrogenAtom.position );
-    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE ) );
+    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE ) );
 
-    Multilink.multilink( [ hydrogenAtom.electronAngleProperty, this.visibleProperty ],
+    Multilink.multilink( [ hydrogenAtom.electron.directionProperty, this.visibleProperty ],
       ( electronAngle, visible ) => {
         visible && this.update();
       } );
@@ -122,8 +123,8 @@ class RingNode extends Path {
     assert && assert( this.visible );
 
     // Get the radius for the electron's current state.
-    const n = this.hydrogenAtom.nProperty.value;
-    const electronOrbitRadius = this.modelViewTransform.modelToViewDeltaX( this.hydrogenAtom.getElectronOrbitRadius( n ) );
+    const n = this.hydrogenAtom.electron.nProperty.value;
+    const electronOrbitRadius = this.modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
 
     const ringShape = new Shape();
     for ( let i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {

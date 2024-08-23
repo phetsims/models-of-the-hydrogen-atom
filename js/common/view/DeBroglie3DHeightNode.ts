@@ -26,6 +26,7 @@ import WireframeModel from './WireframeModel.js';
 import WireframeNode from './WireframeNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import BohrModel from '../model/BohrModel.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
 const NUMBER_OF_ORBIT_VERTICES = 200;
@@ -119,7 +120,7 @@ export default class DeBroglie3DHeightNode extends Node {
     // 3D orbits
     const orbitNodes: WireframeNode[] = [];
     for ( let n = MOTHAConstants.GROUND_STATE; n < MOTHAConstants.MAX_STATE; n++ ) {
-      const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( n ) );
+      const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
       const orbitNode = this.createOrbitNode( radius, this.viewMatrix, this.orbitVertices );
       orbitNodes.push( orbitNode );
     }
@@ -148,7 +149,7 @@ export default class DeBroglie3DHeightNode extends Node {
     } );
 
     //TODO are these dependencies correct?
-    Multilink.multilink( [ hydrogenAtom.nProperty, hydrogenAtom.electronAngleProperty, this.visibleProperty ],
+    Multilink.multilink( [ hydrogenAtom.electron.nProperty, hydrogenAtom.electron.directionProperty, this.visibleProperty ],
       ( n, electronAngle, visible ) => {
         visible && this.update();
       } );
@@ -264,8 +265,8 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel,
                           modelViewTransform: ModelViewTransform2,
                           vertices: Vector3[] ): Vector3[] {
 
-  const n = hydrogenAtom.nProperty.value;
-  const radius = modelViewTransform.modelToViewDeltaX( hydrogenAtom.getElectronOrbitRadius( n ) );
+  const n = hydrogenAtom.electron.nProperty.value;
+  const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
 
   const numberOfVertices = vertices.length;
   const deltaAngle = ( 2 * Math.PI ) / numberOfVertices;

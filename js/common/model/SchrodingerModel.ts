@@ -55,6 +55,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import Property from '../../../../axon/js/Property.js';
+import BohrModel from './BohrModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -82,7 +83,7 @@ export default class SchrodingerModel extends DeBroglieModel {
 
     // We would prefer that this be a DerivedProperty, but its derivation depends on its previous value.
     //TODO Should nlmProperty be a Property of SchrodingerElectron?
-    this._nlmProperty = new Property( new SchrodingerQuantumNumbers( this.nProperty.value, 0, 0 ), {
+    this._nlmProperty = new Property( new SchrodingerQuantumNumbers( this.electron.nProperty.value, 0, 0 ), {
       phetioValueType: SchrodingerQuantumNumbers.SchrodingerQuantumNumbersIO,
       tandem: options.tandem.createTandem( 'nlmProperty' ),
       phetioFeatured: true,
@@ -92,7 +93,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     this.nlmProperty = this._nlmProperty;
 
     // When n changes, compute the next state.
-    this.nProperty.lazyLink( n => {
+    this.electron.nProperty.lazyLink( n => {
       this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
     } );
 
@@ -175,7 +176,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     const angle = MOTHAUtils.nextAngle();
 
     // Convert to Cartesian coordinates, adjusted for the atom's position.
-    const radius = this.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE );
+    const radius = BohrModel.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE );
     const x = ( radius * Math.cos( angle ) ) + this.position.x;
     const y = ( radius * Math.sin( angle ) ) + this.position.y;
     return new Vector2( x, y );
@@ -237,7 +238,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * Codified from design document.
    */
   private getGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
-    const a = this.getElectronOrbitRadius( n ) / ( n * n );
+    const a = BohrModel.getElectronOrbitRadius( n ) / ( n * n );
     const multiplier = Math.pow( r, l ) * Math.exp( -r / ( n * a ) );
     const b0 = 2.0 * Math.pow( ( n * a ), ( -1.5 ) ); // b0
     const limit = n - l - 1;

@@ -31,29 +31,17 @@ import BohrNode from '../view/BohrNode.js'; // eslint-disable-line no-view-impor
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Utils from '../../../../dot/js/Utils.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Property from '../../../../axon/js/Property.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import Electron from './Electron.js';
 import Proton from './Proton.js';
 import Photon from './Photon.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-
-// Radius of each electron orbit, ordered by increasing electron state number.
-// These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
-const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
-assert && assert( ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES );
+import BohrElectron from './BohrElectron.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1.0;
@@ -76,23 +64,11 @@ export type BohrModelOptions = SelfOptions &
 export default class BohrModel extends HydrogenAtom {
 
   public readonly proton: Proton;
-  public readonly electron: Electron;
+  public readonly electron: BohrElectron;
 
-  // n, the principal quantum number
-  private readonly _nProperty: NumberProperty;
-  public readonly nProperty: TReadOnlyProperty<number>;
-
-  // energy of the electron in its current state
-  public electronEnergyProperty: TReadOnlyProperty<number>;
-
-  // time that the electron has been in its current state, in seconds
-  private readonly timeInStateProperty: Property<number>;
-
-  // current angle of electron
-  public readonly electronAngleProperty: Property<number>;
-
-  // offset of the electron from the atom's center
-  protected readonly electronOffsetProperty: TReadOnlyProperty<Vector2>;
+  // Radius of each electron orbit, ordered by increasing electron state number.
+  // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
+  public static readonly ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 
   // minimum time (in sec) that electron stays in a state before emission can occur
   public static readonly MIN_TIME_IN_STATE = 1;
@@ -118,85 +94,28 @@ export default class BohrModel extends HydrogenAtom {
       position: this.position
     } );
 
-    this.electron = new Electron( {
+    this.electron = new BohrElectron( {
       //TODO position is not properly initialized
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
-    //TODO nProperty should be a Property of BohrElectron
-    this._nProperty = new NumberProperty( MOTHAConstants.GROUND_STATE, {
-      numberType: 'Integer',
-      range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.MAX_STATE ),
-      tandem: options.tandem.createTandem( 'nProperty' ),
-      phetioReadOnly: true,
-      phetioFeatured: true,
-      phetioDocumentation: 'n, the principal quantum number.'
-    } );
-    this.nProperty = this._nProperty;
-
-    //TODO electronEnergyProperty should be a Property of BohrElectron
-    //TODO This was discussed at 8/22/24 PhET-iO design meeting. Do we need it?
-    this.electronEnergyProperty = new DerivedProperty( [ this.nProperty ], n => MOTHAConstants.E1 / ( n * n ), {
-      units: 'eV',
-      phetioValueType: NumberIO,
-      tandem: options.tandem.createTandem( 'electronEnergyProperty' )
-    } );
-
-    this.timeInStateProperty = new NumberProperty( 0, {
-      units: 's',
-      tandem: options.tandem.createTandem( 'timeInStateProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'Time that the electron has been in its current state.'
-    } );
-
-    // When the electron changes state, reset timeInStateProperty.
-    this.nProperty.link( () => {
-      if ( !isSettingPhetioStateProperty.value ) {
-        this.timeInStateProperty.value = 0;
-      }
-    } );
-
-    //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
-    //TODO electronAngleProperty should be a Property of BohrElectron
-    this.electronAngleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
-      units: 'radians',
-      tandem: options.tandem.createTandem( 'electronAngleProperty' ),
-      phetioReadOnly: true
-    } );
-
-    //TODO make this go away, just set electron.positionProperty directly
-    //TODO electronOffsetProperty should be a Property of BohrElectron
-    this.electronOffsetProperty = new DerivedProperty(
-      [ this.nProperty, this.electronAngleProperty ],
-      ( n, angle ) => {
-        const radius = this.getElectronOrbitRadius( n );
-        return MOTHAUtils.polarToCartesian( radius, angle );
-      }, {
-        tandem: options.tandem.createTandem( 'electronOffsetProperty' ),
-        phetioValueType: Vector2.Vector2IO,
-        phetioDocumentation: 'Offset of the electron from the center of the atom.'
-      } );
-
-    this.electronOffsetProperty.link( electronOffset => {
-      this.electron.positionProperty.value = this.position.plus( electronOffset );
+    this.electron.offsetProperty.link( offset => {
+      this.electron.positionProperty.value = this.position.plus( offset );
     } );
   }
 
   public override reset(): void {
     this.electron.reset();
-    this._nProperty.reset();
-    this.timeInStateProperty.reset();
-    this.electronAngleProperty.reset();
     super.reset();
   }
 
   public override step( dt: number ): void {
 
     // Keep track of how long the electron has been in its current state.
-    this.timeInStateProperty.value += dt;
+    this.electron.timeInStateProperty.value += dt;
 
     // Advance the electron along its orbit
-    this.electronAngleProperty.value = this.calculateNewElectronAngle( dt );
+    this.electron.directionProperty.value = this.calculateNewElectronDirection( dt );
 
     // Attempt to emit a photon
     this.attemptSpontaneousEmission();
@@ -204,13 +123,13 @@ export default class BohrModel extends HydrogenAtom {
 
   //TODO normalize the return value to [0,2*Math.PI]
   /**
-   * Calculates the new electron angle for some time step.
+   * Calculates the new electron direction for some time step.
    * Subclasses may override this to produce different oscillation behavior.
    */
-  protected calculateNewElectronAngle( dt: number ): number {
-    const n = this.nProperty.value;
+  protected calculateNewElectronDirection( dt: number ): number {
+    const n = this.electron.nProperty.value;
     const deltaAngle = dt * ( BohrModel.ELECTRON_ANGLE_DELTA / ( n * n ) );
-    return this.electronAngleProperty.value - deltaAngle; //TODO clockwise
+    return this.electron.directionProperty.value - deltaAngle; //TODO clockwise
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
@@ -228,8 +147,8 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Gets the radius of the electron's orbit when it's in a specified state.
    */
-  public getElectronOrbitRadius( n: number ): number {
-    return ORBIT_RADII[ n - MOTHAConstants.GROUND_STATE ];
+  public static getElectronOrbitRadius( n: number ): number {
+    return BohrModel.ORBIT_RADII[ n - MOTHAConstants.GROUND_STATE ];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -300,11 +219,13 @@ export default class BohrModel extends HydrogenAtom {
    */
   private attemptAbsorption( photon: Photon ): boolean {
 
+    const electron = this.electron;
+
     let success = false;
-    const nCurrent = this.nProperty.value;
+    const nCurrent = electron.nProperty.value;
 
     // Has the electron been in this state long enough? And was this photon produced by the light?
-    if ( this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE && !photon.wasEmitted ) {
+    if ( electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE && !photon.wasEmitted ) {
 
       // Do the photon and electron collide?
       const collide = this.collides( photon );
@@ -335,7 +256,7 @@ export default class BohrModel extends HydrogenAtom {
           this.photonAbsorbedEmitter.emit( photon );
 
           // move electron to new state
-          this._nProperty.value = nNew;
+          electron.nProperty.value = nNew;
         }
       }
     }
@@ -373,14 +294,16 @@ export default class BohrModel extends HydrogenAtom {
    */
   private attemptStimulatedEmission( photon: Photon ): boolean {
 
+    const electron = this.electron;
+
     let success = false;
-    const nCurrent = this.nProperty.value;
+    const nCurrent = electron.nProperty.value;
 
     // Are we in some state other than the ground state?
     // Has the electron been in this state long enough?
     // Was this photon produced by the light?
     if ( nCurrent > MOTHAConstants.GROUND_STATE &&
-         this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE &&
+         electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE &&
          !photon.wasEmitted ) {
 
       // Do the photon and electron collide?
@@ -423,7 +346,7 @@ export default class BohrModel extends HydrogenAtom {
           this.photonEmittedEmitter.emit( emittedPhoton );
 
           // move electron to new state
-          this._nProperty.value = nNew;
+          electron.nProperty.value = nNew;
         }
       }
     }
@@ -455,13 +378,14 @@ export default class BohrModel extends HydrogenAtom {
    */
   private attemptSpontaneousEmission(): boolean {
 
+    const electron = this.electron;
+
     let success = false;
-    const nCurrent = this.nProperty.value;
+    const nCurrent = electron.nProperty.value;
 
     // Are we in some state other than the ground state?
     // Has the electron been in this state long enough?
-    if ( nCurrent > MOTHAConstants.GROUND_STATE &&
-         this.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE ) {
+    if ( nCurrent > MOTHAConstants.GROUND_STATE && electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE ) {
 
       //  Emit a photon with some probability...
       if ( this.spontaneousEmissionIsCertain() ) {
@@ -486,7 +410,7 @@ export default class BohrModel extends HydrogenAtom {
         this.photonEmittedEmitter.emit( emittedPhoton );
 
         // move electron to new state
-        this._nProperty.value = nNew;
+        electron.nProperty.value = nNew;
       }
     }
 
@@ -506,7 +430,7 @@ export default class BohrModel extends HydrogenAtom {
    * @returns n, -1 if there is no lower state
    */
   protected chooseLower_n(): number {
-    const n = this.nProperty.value;
+    const n = this.electron.nProperty.value;
     if ( n === MOTHAConstants.GROUND_STATE ) {
       return -1;
     }
@@ -523,6 +447,7 @@ export default class BohrModel extends HydrogenAtom {
     return this.electron.positionProperty.value;
   }
 }
+assert && assert( BohrModel.ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES );
 
 /**
  * Gets the wavelength that must be absorbed for the electron to transition from state n1 to state n2,
