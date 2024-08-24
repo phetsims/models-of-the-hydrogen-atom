@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2024, University of Colorado Boulder
 
 /**
  * chooseWeightedValue randomly selects a value from a collection of weighted values.
