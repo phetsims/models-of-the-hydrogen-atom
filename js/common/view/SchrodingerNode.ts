@@ -63,9 +63,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
 
-    const fieldNode = new SchrodingerFieldNode( hydrogenAtom, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'fieldNode' )
-    } );
+    const fieldNode = new SchrodingerFieldNode( hydrogenAtom, modelViewTransform );
 
     //TODO Should be in front of photons?
     const xzAxesNode = new XZAxesNode( {

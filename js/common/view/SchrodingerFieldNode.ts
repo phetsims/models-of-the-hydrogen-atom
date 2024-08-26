@@ -13,133 +13,34 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { CanvasNode, Color, Node, NodeOptions } from '../../../../scenery/js/imports.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import MOTHAColors from '../MOTHAColors.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import SchrodingerBrightness from './SchrodingerBrightness.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
-import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
-
-type SelfOptions = EmptySelfOptions;
-
-//TODO Should SchrodingerFieldNode be instrumented?
-type SchrodingerFieldNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+import SchrodingerQuadrantNode from './SchrodingerQuadrantNode.js';
 
 export default class SchrodingerFieldNode extends Node {
 
-  private readonly upperLeftQuadrantNode: QuadrantNode;
   private readonly brightnessCache: SchrodingerBrightness;
 
-  public constructor( hydrogenAtom: SchrodingerModel, modelViewTransform: ModelViewTransform2,
-                      providedOptions: SchrodingerFieldNodeOptions ) {
-
-    const options = optionize<SchrodingerFieldNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      isDisposable: false
-    }, providedOptions );
+  public constructor( hydrogenAtom: SchrodingerModel, modelViewTransform: ModelViewTransform2 ) {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
 
-    const upperLeftQuadrantNode = new QuadrantNode( zoomedInBoxBounds.width / 2, zoomedInBoxBounds.height / 2 );
+    const upperLeftQuadrantNode = new SchrodingerQuadrantNode( zoomedInBoxBounds.width / 2, zoomedInBoxBounds.height / 2 );
     //TODO wrap upperLeftQuadrantNode in 4 other Nodes, transformed for each quadrant
 
-    options.children = [ upperLeftQuadrantNode ];
-
-    super( options );
-
-    this.upperLeftQuadrantNode = upperLeftQuadrantNode;
-    this.brightnessCache = new SchrodingerBrightness( hydrogenAtom, zoomedInBoxBounds );
-
-    hydrogenAtom.nlmProperty.link( nlm => this.update( nlm ) );
-  }
-
-  private update( nlm: SchrodingerQuantumNumbers ): void {
-    const brightness = this.brightnessCache.getBrightness( nlm );
-    this.upperLeftQuadrantNode.setBrightness( brightness );
-  }
-}
-
-//TODO this was SchrodingerNode.GridNode is Java, one quadrant of the field
-/**
- * QuadrantNode renders one quadrant of the 2D Schrodinger field.
- */
-class QuadrantNode extends CanvasNode {
-
-  private static readonly PERCENT_CELL_OVERLAP = 0.1; // 1.0 = 100%
-
-  private readonly quadrantWidth: number;
-  private readonly quadrantHeight: number;
-  private brightness: number[][]; // brightness values, [row][column]
-  private cellWidth: number;
-  private cellHeight: number;
-
-  public constructor( quadrantWidth: number, quadrantHeight: number ) {
-
     super( {
-      pickable: false
+      isDisposable: false,
+      children: [ upperLeftQuadrantNode ]
     } );
 
-    this.quadrantWidth = quadrantWidth;
-    this.quadrantHeight = quadrantHeight;
-    this.brightness = [];
-    this.cellWidth = 0;
-    this.cellHeight = 0;
+    this.brightnessCache = new SchrodingerBrightness( hydrogenAtom, zoomedInBoxBounds );
 
-    // If the colors that we use to render the Canvas change, trigger a call to paintCanvas.
-    Multilink.lazyMultilink( [ MOTHAColors.zoomedInBoxFillProperty, MOTHAColors.electronBaseColorProperty ],
-      () => this.invalidatePaint() );
-  }
-
-  /**
-   * Sets the brightness values that are applied to the cells in the grid.
-   * The dimensions of the brightness array determine the number of cells.
-   */
-  public setBrightness( brightness: number[][] ): void {
-    this.brightness = brightness;
-    this.cellWidth = this.quadrantWidth / brightness[ 0 ].length;
-    this.cellHeight = this.quadrantHeight / brightness.length;
-
-    // Compute the canvasBounds, the region to which we draw. This needs to be done before the animation frame happens.
-    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/43
-    const numberOfRows = this.brightness.length;
-    const numberOfColumns = Math.max( ...this.brightness.map( row => row.length ) );
-    this.canvasBounds = new Bounds2(
-      0,
-      0,
-      ( ( numberOfColumns - 1 ) * this.cellWidth ) + ( 1 + QuadrantNode.PERCENT_CELL_OVERLAP ) * this.cellWidth,
-      ( ( numberOfRows - 1 ) * this.cellHeight ) + ( 1 + QuadrantNode.PERCENT_CELL_OVERLAP ) * this.cellHeight
-    );
-
-    this.invalidatePaint(); // results in a call to paintCanvas
-  }
-
-  public paintCanvas( context: CanvasRenderingContext2D ): void {
-
-    let x: number;
-    let z: number;
-    const w = ( 1 + QuadrantNode.PERCENT_CELL_OVERLAP ) * this.cellWidth;
-    const h = ( 1 + QuadrantNode.PERCENT_CELL_OVERLAP ) * this.cellHeight;
-    const numberOfRows = this.brightness.length;
-
-    const minColor = MOTHAColors.zoomedInBoxFillProperty.value;
-    const maxColor = MOTHAColors.electronBaseColorProperty.value;
-
-    for ( let row = 0; row < numberOfRows; row++ ) {
-      const numberOfColumns = this.brightness[ row ].length;
-      for ( let column = 0; column < numberOfColumns; column++ ) {
-        const color = Color.interpolateRGBA( minColor, maxColor, this.brightness[ row ][ column ] );
-        context.fillStyle = color.toCSS();
-        x = ( column * this.cellWidth );
-        z = ( row * this.cellHeight );
-        context.rect( x, z, w, h );
-        context.fill();
-      }
-    }
+    hydrogenAtom.nlmProperty.link( nlm => {
+      const brightness = this.brightnessCache.getBrightness( nlm );
+      upperLeftQuadrantNode.setBrightness( brightness );
+    } );
   }
 }
 

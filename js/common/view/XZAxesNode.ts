@@ -3,6 +3,8 @@
 /**
  * XZAxesNode displays the x and z axes for the Schrodinger model.
  *
+ * In the Java implementation, this was class Axes2DNode in SchrodingerNode.java.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
