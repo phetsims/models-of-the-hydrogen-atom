@@ -17,25 +17,22 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import chooseWeightedValue, { WeightedValue } from './chooseWeightedValue.js';
 
-//TODO Revise TRANSITION_STRENGTH_TABLE table to remove 'nonsensical' entries. Better doc needed, hard to understand.
 /*
- * This table defines the transition strengths for the primary state component (n).
- * Some entries in this table are nonsensical, but their strengths are zero, and it helps to have a symmetrical table.
- * This table was taken from the Java simulation design document.
- *
- * Note that the table indexing is zero-based, while transitions are 1-based.
- * Here's an example that shows how the table is indexed:
- * TRANSITION_STRENGTH_TABLE[5][0] is the transition strength from n=6 to n=1
+ * This array defines the transition strengths for n (the primary quantum number) to lower values of n.
+ * Values were specified in the design document for the Java version; see page 20 of doc/java-version/hydrogen-atom.pdf.
+ * Note that the table indexing is zero-based, while n is 1-based.
+ * For example, TRANSITION_STRENGTHS[5][0] is the transition strength from n=6 to n=1.
  */
-const TRANSITION_STRENGTH_TABLE = [
-  [ 0, 0, 0, 0, 0 ],
-  [ 12.53, 0, 0, 0, 0 ],
-  [ 3.34, 0.87, 0, 0, 0 ],
-  [ 1.36, 0.24, 0.07, 0, 0 ],
-  [ 0.69, 0.11, 0, 0.04, 0 ],
-  [ 0.39, 0.06, 0.02, 0, 0 ]
+const TRANSITION_STRENGTHS = [
+  [], // There are no values lower than n = 1.
+  [ 12.53 ], // 2 -> 1
+  [ 3.34, 0.87 ], // 3 -> 1, 3 -> 2
+  [ 1.36, 0.24, 0.07 ], // 4 -> 1, 4 -> 2, 4 -> 3
+  [ 0.69, 0.11, 0, 0.04 ], // 5 -> 1, 5 -> 2, 5 -> 3, 5 -> 4
+  [ 0.39, 0.06, 0.02, 0, 0 ] // 6 -> 1, 6 -> 2, 6 -> 3, 6 -> 4, 6 -> 5
 ];
-assert && assert( TRANSITION_STRENGTH_TABLE.length === MOTHAConstants.NUMBER_OF_STATES );
+assert && assert( TRANSITION_STRENGTHS.length === MOTHAConstants.NUMBER_OF_STATES );
+assert && assert( _.every( TRANSITION_STRENGTHS, ( entry, index ) => entry.length === index ) );
 
 // This should match STATE_SCHEMA, but with JavaScript types.
 type SchrodingerQuantumNumbersStateObject = {
@@ -202,7 +199,7 @@ function chooseLower_n( n: number, l: number ): number {
     let strengthSum = 0;
     for ( let i = 0; i < numberOfEntries; i++ ) {
       const nValue = nMin + i;
-      const transitionStrength = TRANSITION_STRENGTH_TABLE[ n - 1 ][ nValue - 1 ];
+      const transitionStrength = TRANSITION_STRENGTHS[ n - 1 ][ nValue - 1 ];
       weightedValues.push( { value: nValue, weight: transitionStrength } );
       strengthSum += transitionStrength;
     }
