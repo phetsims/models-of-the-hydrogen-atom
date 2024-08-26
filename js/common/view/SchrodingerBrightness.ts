@@ -41,9 +41,10 @@ export default class SchrodingerBrightness {
 
     const nMax = MOTHAConstants.MAX_STATE;
 
-    // Initialize brightness entries to null
-    //TODO This is huge, 89,600 entries, many of which are invalid states that will never be used.
+    // Initialize brightness entries to null. This data structure is huge - 89,600 entries.
+    // Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
     this.cache = Array( nMax );
+    let numberOfEntries = 0;
     for ( let n = 1; n <= nMax; n++ ) {
       const lSize = n;
       this.cache[ n - 1 ] = Array( lSize );
@@ -56,17 +57,20 @@ export default class SchrodingerBrightness {
           for ( let z = 0; z < zSize; z++ ) {
             for ( let x = 0; x < NUMBER_OF_HORIZONTAL_CELLS; x++ ) {
               this.cache[ n - 1 ][ l ][ m ] = null;
+              numberOfEntries++;
             }
           }
         }
       }
     }
+    phet.log && phet.log( `SchrodingerBrightness.cache contains ${numberOfEntries} entries.` );
 
     // Initialize sums with zeros
     this.sums = new Array( NUMBER_OF_VERTICAL_CELLS );
     for ( let i = 0; i < NUMBER_OF_VERTICAL_CELLS; i++ ) {
       this.sums[ i ] = new Array( NUMBER_OF_HORIZONTAL_CELLS ).fill( 0 );
     }
+    phet.log && phet.log( `SchrodingerBrightness.sums contains ${this.sums.length} entries.` );
 
     // 3D cell size
     this.cellWidth = ( zoomedInBoxBounds.width / NUMBER_OF_HORIZONTAL_CELLS ) / 2;
@@ -75,7 +79,7 @@ export default class SchrodingerBrightness {
   }
 
   /**
-   * Gets the 2D brightness for a state. If it's not already cached, compute it.
+   * Gets the 2D brightness for a state. If it's not already cached, compute it and cache it.
    */
   public getBrightness( quantumNumbers: SchrodingerQuantumNumbers ): number[][] {
 
