@@ -56,16 +56,16 @@ export default class SchrodingerQuantumNumbers {
   // Principal quantum number:
   // * Indicates the energy of the electron and its average relative distance from the nucleus.
   // * As n increases, so does the average distance of the electron from the nucleus.
-  // * All wave functions that have the same value of n are said to constitute a principal shell.
-  // * The principal quantum number n corresponds to the n used by Bohr to describe electron orbits and by Rydberg to
-  //   describe atomic energy levels
+  // * All wavefunctions that have the same value of n are said to constitute a principal shell.
+  // * The principal quantum number n corresponds to the n used by Bohr to describe electron orbits
+  //   and by Rydberg to describe atomic energy levels
   public readonly n: number;
 
   // Azimuthal quantum number:
   // * Describes the shape of the region of space occupied by an electron.
-  // * All wave functions that have the same values of both n and l form a subshell.
-  // * The regions of space occupied by electrons in the same subshell usually have the same shape, but they are
-  //   oriented differently in space.
+  // * All wavefunctions that have the same values of both n and l form a subshell.
+  // * The regions of space occupied by electrons in the same subshell usually have the same shape,
+  //   but they are oriented differently in space.
   public readonly l: number;
 
   // Magnetic quantum number:
