@@ -53,7 +53,7 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
 
     // Compute the canvasBounds, the region to which we draw. This needs to be done before the animation frame happens.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/43
-    //TODO Can canvasBounds just be set to quadrantWidth x quadrantHeight in constructor?
+    //TODO Can constructor simply set canvasBounds: new Bounds2( 0, 0, quadrantWidth, quadrantHeight) ?
     const numberOfRows = this.brightness.length;
     const numberOfColumns = Math.max( ...this.brightness.map( row => row.length ) );
     this.canvasBounds = new Bounds2(
