@@ -4,7 +4,8 @@
  * PolynomialTerm is a minimal/incomplete implementation of a polynomial term, as needed for solving
  * associated Legendre polynomials. See solveAssociatedLegendrePolynomial.ts
  *
- * In the Java version, this was phet.colorado.edu.common.phetcommon.PolynomialTerm.
+ * In the Java version, this was phet.colorado.edu.common.phetcommon.PolynomialTerm. This is a partial
+ * port of the class, including only the methods needed by this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
