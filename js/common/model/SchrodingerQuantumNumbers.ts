@@ -91,64 +91,7 @@ export default class SchrodingerQuantumNumbers {
    * @returns n, -1 if there is no valid transition
    */
   public chooseLower_n(): number {
-
-    const n = this.n;
-    const l = this.l;
-
-    let nNew = -1;
-
-    if ( n < 2 ) {
-      // no state is lower than (1,0,0)
-      return -1;
-    }
-    else if ( n === 2 ) {
-      if ( l === 0 ) {
-
-        // transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
-        return -1;
-      }
-      else {
-
-        // the only transition from (2,1,?) is (1,0,0)
-        nNew = 1;
-      }
-    }
-    else if ( n > 2 ) {
-
-      // determine the possible range of n
-      const nMax = n - 1;
-      let nMin = Math.max( l, 1 );
-      if ( l === 0 ) {
-
-        // transition from (n,0,0) to (1,?,?) cannot satisfy the abs(l-l')=1 rule
-        nMin = 2;
-      }
-
-      // Get the strengths for each possible transition.
-      const numberOfEntries = nMax - nMin + 1;
-      const weightedValues: WeightedValue[] = [];
-      let strengthSum = 0;
-      for ( let i = 0; i < numberOfEntries; i++ ) {
-        const nValue = nMin + i;
-        const transitionStrength = TRANSITION_STRENGTH_TABLE[ n - 1 ][ nValue - 1 ];
-        weightedValues.push( { value: nValue, weight: transitionStrength } );
-        strengthSum += transitionStrength;
-      }
-
-      // all transitions had zero strength, none are possible
-      if ( strengthSum === 0 ) {
-        return -1;
-      }
-
-      // choose a transition
-      const value = chooseWeightedValue( weightedValues );
-      if ( value === null ) {
-        return -1;
-      }
-      nNew = value;
-    }
-
-    return nNew;
+    return chooseLower_n( this.n, this.l );
   }
 
   /**
@@ -164,11 +107,9 @@ export default class SchrodingerQuantumNumbers {
 
     // Verify that no transition rules have been broken.
     const valid = isaValidTransition( this, fNext );
+    assert && assert( valid, `Buggy transition rules resulted in (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},${mNext})` );
     if ( !valid ) {
-
-      // There's a bug in the implementation of the transition rules.
-      // Fall back to (n,l,m) = (1,0,0) if running without assertions.
-      fNext = new SchrodingerQuantumNumbers( 1, 0, 0 );
+      fNext = new SchrodingerQuantumNumbers( 1, 0, 0 ); // Fallback, if running without assertions.
     }
 
     return fNext;
@@ -215,6 +156,71 @@ export default class SchrodingerQuantumNumbers {
     fromStateObject: ( stateObject: SchrodingerQuantumNumbersStateObject ) => SchrodingerQuantumNumbers.fromStateObject( stateObject ),
     documentation: 'The quantum numbers (n,l,m) that describe a wavefunction for the electron.'
   } );
+}
+
+/**
+ * Chooses a lower value for n, based on the current values of n and l.
+ * The possible values of n are limited by the current value of l, since abs(l-l') must be 1.
+ * The probability of each possible n transition is determined by its transition strength.
+ *
+ * @returns n, -1 if there is no valid transition
+ */
+function chooseLower_n( n: number, l: number ): number {
+
+  let nNew = -1;
+
+  if ( n < 2 ) {
+    // no state is lower than (1,0,0)
+    return -1;
+  }
+  else if ( n === 2 ) {
+    if ( l === 0 ) {
+
+      // transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
+      return -1;
+    }
+    else {
+
+      // the only transition from (2,1,?) is (1,0,0)
+      nNew = 1;
+    }
+  }
+  else if ( n > 2 ) {
+
+    // determine the possible range of n
+    const nMax = n - 1;
+    let nMin = Math.max( l, 1 );
+    if ( l === 0 ) {
+
+      // transition from (n,0,0) to (1,?,?) cannot satisfy the abs(l-l')=1 rule
+      nMin = 2;
+    }
+
+    // Get the strengths for each possible transition.
+    const numberOfEntries = nMax - nMin + 1;
+    const weightedValues: WeightedValue[] = [];
+    let strengthSum = 0;
+    for ( let i = 0; i < numberOfEntries; i++ ) {
+      const nValue = nMin + i;
+      const transitionStrength = TRANSITION_STRENGTH_TABLE[ n - 1 ][ nValue - 1 ];
+      weightedValues.push( { value: nValue, weight: transitionStrength } );
+      strengthSum += transitionStrength;
+    }
+
+    // all transitions had zero strength, none are possible
+    if ( strengthSum === 0 ) {
+      return -1;
+    }
+
+    // choose a transition
+    const value = chooseWeightedValue( weightedValues );
+    if ( value === null ) {
+      return -1;
+    }
+    nNew = value;
+  }
+
+  return nNew;
 }
 
 /**
