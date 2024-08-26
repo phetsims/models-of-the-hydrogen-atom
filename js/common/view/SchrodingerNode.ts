@@ -16,8 +16,7 @@
  * cell's color.
  *
  * Computing the probability density for an NxNxN cube is fairly expensive, so the resulting NxN array of brightness
- * values is cache for reuse. The cache can optionally be fully populated when it is created (quite time consuming!)
- * or populated on demand.
+ * values is cache for reuse.
  *
  * In the Java implementation, this was SchrodingerNode.java.
  *
