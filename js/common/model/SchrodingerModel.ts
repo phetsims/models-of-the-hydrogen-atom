@@ -199,7 +199,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * @param l
    * @param m
    * @param x coordinate on horizontal axis
-   * @param y coordinate on axis the is perpendicular to the screen
+   * @param y coordinate on axis that is perpendicular to the screen
    * @param z coordinate on vertical axis
    */
   public getProbabilityDensity( n: number, l: number, m: number, x: number, y: number, z: number ): number {
