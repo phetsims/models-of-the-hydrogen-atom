@@ -204,12 +204,12 @@ function chooseLower_n( n: number, l: number ): number {
       strengthSum += transitionStrength;
     }
 
-    // all transitions had zero strength, none are possible
+    // All transitions had zero strength, so none are possible.
     if ( strengthSum === 0 ) {
       return -1;
     }
 
-    // choose a transition
+    // Choose a transition.
     const value = chooseWeightedValue( weightedValues );
     if ( value === null ) {
       return -1;
