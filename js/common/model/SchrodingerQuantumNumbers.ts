@@ -316,10 +316,7 @@ function choose_m( l: number, m: number ): number {
  * Checks state transition rules to see if a proposed transition is valid.
  */
 function isaValidTransition( fOld: SchrodingerQuantumNumbers, fNew: SchrodingerQuantumNumbers ): boolean {
-  return ( fOld.n !== fNew.n ) &&
-         ( fNew.l >= 0 && fNew.l <= fNew.n - 1 ) &&
-         ( Math.abs( fOld.l - fNew.l ) === 1 ) &&
-         ( Math.abs( fOld.m - fNew.m ) <= 1 );
+  return ( fOld.n !== fNew.n ) && ( Math.abs( fOld.l - fNew.l ) === 1 ) && ( Math.abs( fOld.m - fNew.m ) <= 1 );
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerQuantumNumbers', SchrodingerQuantumNumbers );
