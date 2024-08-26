@@ -4,6 +4,8 @@
  * PolynomialTerm is a minimal/incomplete implementation of a polynomial term, as needed for solving
  * associated Legendre polynomials. See solveAssociatedLegendrePolynomial.ts
  *
+ * In the Java version, this was phet.colorado.edu.common.phetcommon.PolynomialTerm.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
@@ -12,16 +14,16 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class PolynomialTerm {
 
-  public readonly coefficient: number;
   public readonly power: number;
+  public readonly coefficient: number;
   public static readonly ZERO = new PolynomialTerm( 0, 0 );
 
-  public constructor( coefficient: number, power: number ) {
-    assert && assert( Number.isInteger( coefficient ) );
+  public constructor( power: number, coefficient: number ) {
     assert && assert( Number.isInteger( power ) );
+    assert && assert( Number.isInteger( coefficient ) );
 
-    this.coefficient = coefficient;
     this.power = power;
+    this.coefficient = coefficient;
   }
 
   public dispose(): void {

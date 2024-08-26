@@ -4,6 +4,8 @@
  * Solves the associated Legendre polynomial.  This is needed to compute the wave function for the Schrodinger
  * model of the hydrogen atom.
  *
+ * In the java version, this was AssociatedLegendrePolynomials.java.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
@@ -21,9 +23,9 @@ import PolynomialTerm from './PolynomialTerm.js';
  * For details on why this doesn't work for l > 6, see Section 6.8 of "Numerical Recipes in C, Second Edition" (1992)
  * at http://www.nrbook.com/a/bookcpdf/c6-8.pdf
  *
- * @param l - electron's secondary state
- * @param m - electron's tertiary state
- * @param x - coordinate on horizontal (x) axis
+ * @param l - azimuthal quantum number
+ * @param m - magnetic quantum number
+ * @param x - x-axis coordinate
  */
 function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): number {
 
@@ -32,7 +34,7 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
   assert && assert( Number.isInteger( m ) && m >= 0 && m <= l, `invalid m: ${m}` );
   assert && assert( Math.abs( x ) <= 1, `invalid x: ${x}` );
 
-  let productTerms = [ new PolynomialTerm( 1, 0 ) ]; // 1x^0
+  let productTerms = [ new PolynomialTerm( 0, 1 ) ]; // 1x^0
 
   for ( let i = 0; i < l; i++ ) {
 
@@ -40,8 +42,8 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
     const terms: PolynomialTerm[] = [];
     for ( let k = 0; k < productTerms.length; k++ ) {
       const term = productTerms[ k ];
-      terms.push( new PolynomialTerm( term.coefficient, term.power + 2 ) );
-      terms.push( new PolynomialTerm( -1 * term.coefficient, term.power ) );
+      terms.push( new PolynomialTerm( term.power + 2, term.coefficient ) );
+      terms.push( new PolynomialTerm( term.power, -1 * term.coefficient ) );
     }
     productTerms = terms;
   }
@@ -51,8 +53,8 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
   }
 
   // Wolfram says there is a sign convention difference here. TODO clarify this?
-  return ( Math.pow( -1, m ) / ( Math.pow( 2, l ) * factorial( l ) ) )
-         * Math.pow( 1 - x * x, m / 2 ) * evaluate( productTerms, x );
+  return Math.pow( -1, m ) / ( Math.pow( 2, l ) * factorial( l ) ) *
+         Math.pow( 1 - x * x, m / 2 ) * evaluate( productTerms, x );
 }
 
 function evaluate( productTerms: PolynomialTerm[], x: number ): number {
