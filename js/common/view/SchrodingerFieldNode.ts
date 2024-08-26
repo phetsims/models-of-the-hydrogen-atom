@@ -1,7 +1,13 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
+//TODO Java implementation assumes a 1:1 transform between model and view coordinates.
+//   So we need to map from view to model coordinates before computing probability density.
+
 /**
- * TODO
+ * SchrodingerFieldNode displays the probability density field for the Schrodinger model of the hydrogen atom.
+ * See SchrodingerFieldNode for more documentation.
+ *
+ * In the Java implementation, this was class AtomNode is SchrodingerNode.java.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,7 +29,6 @@ type SelfOptions = EmptySelfOptions;
 //TODO Should SchrodingerFieldNode be instrumented?
 type SchrodingerFieldNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-//TODO this was SchrodingerNode.AtomNode is Java
 export default class SchrodingerFieldNode extends Node {
 
   private readonly upperLeftQuadrantNode: QuadrantNode;

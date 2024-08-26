@@ -1,9 +1,25 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
+//TODO port SchrodingerNode.java
+
 /**
  * SchrodingerNode displays the Schrodinger model of the hydrogen atom.
  *
- * TODO port SchrodingerNode.java
+ * The axes are orientated with x horizontal, z vertical, y depth.
+ *
+ * Probability density is computed in 3D. The atom's 3D space is treated as a cube containing NxNxN discrete cells.
+ * The probability density is computed at the center of each cell.
+ *
+ * The NxNxN 3D cube is projected onto an NxN 2D grid that covers the animation box. Depth information is mapped to
+ * color brightness. The sum of probability densities * for the depth dimension (y-axis) are normalized to a brightness
+ * value that has the range [0,1].  Each cell in the NxN grid has a brightness value that is used to generate the
+ * cell's color.
+ *
+ * Computing the probability density for an NxNxN cube is fairly expensive, so the resulting NxN array of brightness
+ * values is cache for reuse. The cache can optionally be fully populated when it is created (quite time consuming!)
+ * or populated on demand.
+ *
+ * In the Java implementation, this was SchrodingerNode.java.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
