@@ -44,7 +44,7 @@ import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import BohrElectron from './BohrElectron.js';
 
 // Probability that a photon will be absorbed, [0,1]
-const PHOTON_ABSORPTION_PROBABILITY = 1.0;
+const PHOTON_ABSORPTION_PROBABILITY = 1;
 
 // Probability that a photon will cause stimulated emission, [0,1]
 const PHOTON_STIMULATED_EMISSION_PROBABILITY = PHOTON_ABSORPTION_PROBABILITY;

@@ -232,7 +232,7 @@ export default class SchrodingerModel extends DeBroglieModel {
   private solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
     const a = BohrModel.getElectronOrbitRadius( n ) / ( n * n );
     const multiplier = Math.pow( r, l ) * Math.exp( -r / ( n * a ) );
-    const b0 = 2.0 * Math.pow( ( n * a ), ( -1.5 ) ); // b0
+    const b0 = 2 * Math.pow( ( n * a ), ( -1.5 ) ); // b0
     const limit = n - l - 1;
     let bj = b0;
     let sum = b0; // j==0
