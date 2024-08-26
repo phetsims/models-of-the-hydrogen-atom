@@ -27,19 +27,23 @@ export default class SchrodingerFieldNode extends Node {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
 
-    const upperLeftQuadrantNode = new SchrodingerQuadrantNode( zoomedInBoxBounds.width / 2, zoomedInBoxBounds.height / 2 );
-    //TODO wrap upperLeftQuadrantNode in 4 other Nodes, transformed for each quadrant
+    const quadrantWidth = zoomedInBoxBounds.width / 2;
+    const quadrantHeight = zoomedInBoxBounds.height / 2;
+
+    const bottomRightQuadrantNode = new SchrodingerQuadrantNode( quadrantWidth, quadrantHeight );
+    //TODO wrap bottomRightQuadrantNode in 3 other Nodes, reflected for each quadrant
 
     super( {
       isDisposable: false,
-      children: [ upperLeftQuadrantNode ]
+      children: [ bottomRightQuadrantNode ],
+      translation: modelViewTransform.modelToViewPosition( hydrogenAtom.position )
     } );
 
     this.brightnessCache = new SchrodingerBrightness( hydrogenAtom, zoomedInBoxBounds );
 
     hydrogenAtom.nlmProperty.link( nlm => {
       const brightness = this.brightnessCache.getBrightness( nlm );
-      upperLeftQuadrantNode.setBrightness( brightness );
+      bottomRightQuadrantNode.setBrightness( brightness );
     } );
   }
 }
