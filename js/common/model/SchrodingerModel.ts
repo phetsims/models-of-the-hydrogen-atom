@@ -237,7 +237,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     let bj = b0;
     let sum = b0; // j==0
     for ( let j = 1; j <= limit; j++ ) {
-      bj = ( 2.0 / ( n * a ) ) * ( ( j + l - n ) / ( j * ( j + ( 2.0 * l ) + 1.0 ) ) ) * bj;
+      bj = ( 2 / ( n * a ) ) * ( ( j + l - n ) / ( j * ( j + ( 2 * l ) + 1 ) ) ) * bj;
       sum += ( bj * Math.pow( r, j ) );
     }
     return ( multiplier * sum );
