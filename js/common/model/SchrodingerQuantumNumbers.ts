@@ -249,6 +249,7 @@ function choose_l( n: number, l: number ): number {
   }
 
   assert && assert( Number.isInteger( lNew ) );
+  assert && assert( lNew >= 0 && lNew <= n - 1 );
   assert && assert( Math.abs( lNew - l ) === 1 );
   return lNew;
 }
@@ -305,7 +306,7 @@ function choose_m( l: number, m: number ): number {
 
   assert && assert( Number.isInteger( mNew ), `mNew must be an integer: ${mNew}` );
   assert && assert( mNew >= -l && mNew <= l, `mNew must be [-l,l]: ${mNew}` );
-  assert && assert( mNew === -1 || mNew === 0 || mNew === 1 ); //TODO Wrong, the constraint is m-m' must be in [-1,0,1].
+  assert && assert( [ 0, 1 ].includes( Math.abs( mNew - m ) ), `mNew - m must be in [-1,0,1]: ${m} ${mNew}` );
   return mNew;
 }
 
