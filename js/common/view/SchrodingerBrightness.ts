@@ -44,17 +44,17 @@ export default class SchrodingerBrightness {
 
     // Initialize brightness entries to null. This data structure is huge - 89,600 entries.
     // Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
-    this.cache = Array( nMax );
+    this.cache = new Array( nMax );
     let numberOfEntries = 0;
     for ( let n = 1; n <= nMax; n++ ) {
       const lSize = n;
-      this.cache[ n - 1 ] = Array( lSize );
+      this.cache[ n - 1 ] = new Array( lSize );
       for ( let l = 0; l < lSize; l++ ) {
         const mSize = l + 1;
-        this.cache[ n - 1 ][ l ] = Array( mSize );
+        this.cache[ n - 1 ][ l ] = new Array( mSize );
         for ( let m = 0; m < l + 1; m++ ) {
           const zSize = NUMBER_OF_VERTICAL_CELLS;
-          this.cache[ n - 1 ][ l ][ m ] = Array( zSize );
+          this.cache[ n - 1 ][ l ][ m ] = new Array( zSize );
           for ( let z = 0; z < zSize; z++ ) {
             for ( let x = 0; x < NUMBER_OF_HORIZONTAL_CELLS; x++ ) {
               this.cache[ n - 1 ][ l ][ m ] = null;
