@@ -103,9 +103,9 @@ export default class SchrodingerBrightness {
   private computeBrightness( n: number, l: number, m: number ): number[][] {
 
     // 2D array filled with zeros
-    const brightness = Array( NUMBER_OF_VERTICAL_CELLS );
+    const brightness = new Array( NUMBER_OF_VERTICAL_CELLS );
     for ( let i = 0; i < NUMBER_OF_VERTICAL_CELLS; i++ ) {
-      brightness[ i ] = Array( NUMBER_OF_HORIZONTAL_CELLS ).fill( 0 );
+      brightness[ i ] = new Array( NUMBER_OF_HORIZONTAL_CELLS ).fill( 0 );
     }
 
     let maxSum = 0;
