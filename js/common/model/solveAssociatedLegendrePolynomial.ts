@@ -21,7 +21,7 @@ import PolynomialTerm from './PolynomialTerm.js';
  * as the input to the Integral Calculator at http://integrals.wolfram.com/index.jsp
  *
  * For details on why this doesn't work for l > 6, see Section 6.8 of "Numerical Recipes in C, Second Edition" (1992)
- * at http://www.nrbook.com/a/bookcpdf/c6-8.pdf
+ * at https://www.grad.hr/nastava/gs/prg/NumericalRecipesinC.pdf
  *
  * @param l - azimuthal quantum number
  * @param m - magnetic quantum number
