@@ -34,6 +34,19 @@ const MOTHAUtils = {
     const x = radius * Math.cos( angle );
     const y = radius * Math.sin( angle );
     return new Vector2( x, y );
+  },
+
+  /**
+   * Computes the factorial of an integer n without using recursion.
+   * n! = 1 * 2 * ... * ( n - 1 ) * n
+   */
+  factorial( n: number ): number {
+    assert && assert( Number.isInteger( n ) && n >= 0 );
+    let f = 1;
+    for ( let i = 2; i <= n; i++ ) {
+      f *= i;
+    }
+    return f;
   }
 };
 

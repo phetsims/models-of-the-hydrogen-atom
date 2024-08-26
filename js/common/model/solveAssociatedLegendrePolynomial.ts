@@ -10,6 +10,7 @@
  */
 
 import PolynomialTerm from './PolynomialTerm.js';
+import MOTHAUtils from '../MOTHAUtils.js';
 
 /**
  * This solution uses Wolfram's definition of the associated Legendre polynomial. See
@@ -53,7 +54,7 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
   }
 
   // Wolfram says there is a sign convention difference here. TODO clarify this?
-  return Math.pow( -1, m ) / ( Math.pow( 2, l ) * factorial( l ) ) *
+  return Math.pow( -1, m ) / ( Math.pow( 2, l ) * MOTHAUtils.factorial( l ) ) *
          Math.pow( 1 - x * x, m / 2 ) * evaluate( productTerms, x );
 }
 
@@ -63,21 +64,6 @@ function evaluate( productTerms: PolynomialTerm[], x: number ): number {
     sum += productTerms[ i ].evaluate( x );
   }
   return sum;
-}
-
-/**
- * Computes the factorial of an integer n without using recursion.
- * n! = 1 * 2 * ... * ( n - 1 ) * n
- */
-function factorial( n: number ): number {
-  assert && assert( Number.isInteger( n ) );
-  let f = 1;
-  let i = 2;
-  while ( i <= n ) {
-    f *= i;
-    i++;
-  }
-  return f;
 }
 
 export default solveAssociatedLegendrePolynomial;
