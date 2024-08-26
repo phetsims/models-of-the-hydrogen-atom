@@ -37,11 +37,11 @@ const MOTHAUtils = {
   },
 
   /**
-   * Computes the factorial of an integer n without using recursion.
+   * Computes the factorial of a non-negative integer n without using recursion.
    * n! = 1 * 2 * ... * ( n - 1 ) * n
    */
   factorial( n: number ): number {
-    assert && assert( Number.isInteger( n ) && n >= 0 );
+    assert && assert( Number.isInteger( n ) && n >= 0, `n must be a non-negative integer: ${n}` );
     let f = 1;
     for ( let i = 2; i <= n; i++ ) {
       f *= i;
