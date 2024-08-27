@@ -27,9 +27,9 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
   private cellWidth: number;
   private cellHeight: number;
 
-  // Caches the mapping of brightness [0,1] to color. The human eye can only differentiate between a small number of
-  // different brightnesses of color, so this array can be relatively small.
-  private readonly colorCache: Color[];
+  // Caches the mapping of brightness [0,1] to CSS color string. The human eye can only differentiate between
+  // a small number of different brightnesses of color, so this array can be relatively small.
+  private readonly colorCache: string[];
 
   public constructor( quadrantWidth: number, quadrantHeight: number ) {
 
@@ -51,7 +51,7 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
       ( minColor, maxColor ) => {
         this.colorCache.length = 0;
         for ( let i = 0; i <= NUMBER_OF_COLORS; i++ ) {
-          this.colorCache[ i ] = Color.interpolateRGBA( minColor, maxColor, i / NUMBER_OF_COLORS );
+          this.colorCache[ i ] = Color.interpolateRGBA( minColor, maxColor, i / NUMBER_OF_COLORS ).toCSS();
         }
         this.invalidatePaint();
       } );
@@ -102,8 +102,7 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
 
           // Fill the cell.
           const colorIndex = Utils.toFixedNumber( brightness * NUMBER_OF_COLORS, 0 );
-          const color = this.colorCache[ colorIndex ];
-          context.fillStyle = color.toCSS();
+          context.fillStyle = this.colorCache[ colorIndex ];
           context.fill();
         }
       }
