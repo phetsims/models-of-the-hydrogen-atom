@@ -41,6 +41,7 @@ import ExciteAtomButton from './ExciteAtomButton.js';
 import WavefunctionText from './WavefunctionText.js';
 import Light from '../model/Light.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -114,28 +115,29 @@ export default class SchrodingerNode extends HydrogenAtomNode {
   public static createIcon(): Node {
 
     const opacity = 0.4;
-    const d1 = 75;
-    const d2 = 50;
-    const d3 = 1.35 * d1;
 
-    // rect1 and rect2 have the same dimensions, 90 degrees different.
-    const rect1 = new Rectangle( 0, 0, d1, d2, {
+    const rect1Size = new Dimension2( 75, 50 );
+    const rect3Size = new Dimension2( 1.35 * rect1Size.width, rect1Size.width );
+    assert && assert( rect3Size.height === rect1Size.width );
+
+    // rect1 and rect2 have the same dimensions, 90 degrees different (swapped).
+    const rect1 = new Rectangle( 0, 0, rect1Size.width, rect1Size.height, {
       fill: MOTHAColors.electronBaseColorProperty,
       opacity: opacity
     } );
-    const rect2 = new Rectangle( 0, 0, d2, d1, {
+    const rect2 = new Rectangle( 0, 0, rect1Size.height, rect1Size.width, {
       fill: MOTHAColors.electronBaseColorProperty,
       opacity: opacity,
       center: rect1.center
     } );
 
-    // rect3 and rect4 have the same dimensions, 90 degrees different.
-    const rect3 = new Rectangle( 0, 0, d3, d1, {
+    // rect3 and rect4 have the same dimensions, 90 degrees different (swapped).
+    const rect3 = new Rectangle( 0, 0, rect3Size.width, rect3Size.height, {
       fill: MOTHAColors.electronBaseColorProperty,
       opacity: opacity,
       center: rect1.center
     } );
-    const rect4 = new Rectangle( 0, 0, d1, d3, {
+    const rect4 = new Rectangle( 0, 0, rect3Size.height, rect3Size.width, {
       fill: MOTHAColors.electronBaseColorProperty,
       opacity: opacity,
       center: rect1.center
