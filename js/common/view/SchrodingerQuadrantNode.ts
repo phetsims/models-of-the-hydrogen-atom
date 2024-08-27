@@ -14,10 +14,10 @@ import { CanvasNode, Color } from '../../../../scenery/js/imports.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Utils from '../../../../dot/js/Utils.js';
 
-const PERCENT_CELL_OVERLAP = 0.1; // 1.0 = 100%
-const MIN_COLOR_PROPERTY = MOTHAColors.zoomedInBoxFillProperty;
-const MAX_COLOR_PROPERTY = MOTHAColors.electronBaseColorProperty;
+const PERCENT_CELL_OVERLAP = 0.1; // percent overlap of cells in the grid, 1.0 = 100%
+const NUMBER_OF_COLORS = 100; // number of unique colors for the range of brightness values
 
 export default class SchrodingerQuadrantNode extends CanvasNode {
 
@@ -26,8 +26,10 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
   private brightness: number[][]; // brightness values, [row][column]
   private cellWidth: number;
   private cellHeight: number;
-  private minColor: Color;
-  private maxColor: Color;
+
+  // Caches the mapping of brightness [0,1] to color. The human eye can only differentiate between a small number of
+  // different brightnesses of color, so this array can be relatively small.
+  private readonly colorCache: Color[];
 
   public constructor( quadrantWidth: number, quadrantHeight: number ) {
 
@@ -41,15 +43,18 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
     this.brightness = [];
     this.cellWidth = 0;
     this.cellHeight = 0;
-    this.minColor = MIN_COLOR_PROPERTY.value;
-    this.maxColor = MAX_COLOR_PROPERTY.value;
+    this.colorCache = [];
 
-    // If the colors used to render the Canvas change, trigger a call to paintCanvas.
-    Multilink.lazyMultilink( [ MIN_COLOR_PROPERTY, MAX_COLOR_PROPERTY ], () => {
-      this.minColor = MIN_COLOR_PROPERTY.value;
-      this.maxColor = MAX_COLOR_PROPERTY.value;
-      this.invalidatePaint();
-    } );
+    // If the colors change, update the color cache and trigger a call to paintCanvas.
+    //TODO Why are we interpolating between 2 opaque colors? Why not just use brightness as the alpha component for electronBaseColorProperty?
+    Multilink.multilink( [ MOTHAColors.zoomedInBoxFillProperty, MOTHAColors.electronBaseColorProperty ],
+      ( minColor, maxColor ) => {
+        this.colorCache.length = 0;
+        for ( let i = 0; i <= NUMBER_OF_COLORS; i++ ) {
+          this.colorCache[ i ] = Color.interpolateRGBA( minColor, maxColor, i / NUMBER_OF_COLORS );
+        }
+        this.invalidatePaint();
+      } );
   }
 
   /**
@@ -96,7 +101,8 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
           context.rect( x, z, w, h );
 
           // Fill the cell.
-          const color = Color.interpolateRGBA( this.minColor, this.maxColor, brightness ); //TODO cache theses colors?
+          const colorIndex = Utils.toFixedNumber( brightness * NUMBER_OF_COLORS, 0 );
+          const color = this.colorCache[ colorIndex ];
           context.fillStyle = color.toCSS();
           context.fill();
         }
