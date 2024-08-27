@@ -95,7 +95,7 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
           context.rect( x, z, w, h );
 
           // Fill the cell.
-          const color = Color.interpolateRGBA( this.minColor, this.maxColor, brightness );
+          const color = Color.interpolateRGBA( this.minColor, this.maxColor, brightness ); //TODO cache theses colors?
           context.fillStyle = color.toCSS();
           context.fill();
         }
