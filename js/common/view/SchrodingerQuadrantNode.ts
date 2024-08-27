@@ -81,22 +81,31 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
     const maxColor = MAX_COLOR_PROPERTY.value;
 
     // For each cell in the 2D grid...
+    let numberOfCells = 0;
     for ( let row = 0; row < numberOfRows; row++ ) {
       const numberOfColumns = this.brightness[ row ].length;
       for ( let column = 0; column < numberOfColumns; column++ ) {
 
-        // Define the cell.
-        x = ( column * this.cellWidth );
-        z = ( row * this.cellHeight );
-        context.rect( x, z, w, h );
-
-        // Fill the cell.
         const brightness = this.brightness[ row ][ column ];
-        const color = Color.interpolateRGBA( minColor, maxColor, brightness );
-        context.fillStyle = color.toCSS();
-        context.fill();
+
+        // Skip cells that contain no information.
+        if ( brightness > 0 ) {
+
+          // Define the cell.
+          x = ( column * this.cellWidth );
+          z = ( row * this.cellHeight );
+          context.rect( x, z, w, h );
+
+          // Fill the cell.
+          const color = Color.interpolateRGBA( minColor, maxColor, brightness );
+          context.fillStyle = color.toCSS();
+          context.fill();
+
+          numberOfCells++;
+        }
       }
     }
+    phet.log && phet.log( `SchrodingerQuadrantNode paintCanvas: ${numberOfCells} cells` );
   }
 }
 
