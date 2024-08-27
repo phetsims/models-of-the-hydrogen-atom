@@ -1,4 +1,4 @@
-// Copyright 2022-2023, University of Colorado Boulder
+// Copyright 2022-2024, University of Colorado Boulder
 
 /**
  * Solves the associated Legendre polynomial.  This is needed to compute the wave function for the Schrodinger
