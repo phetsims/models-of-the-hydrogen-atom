@@ -29,7 +29,8 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
   public constructor( quadrantWidth: number, quadrantHeight: number ) {
 
     super( {
-      pickable: false
+      pickable: false,
+      canvasBounds: new Bounds2( 0, 0, quadrantWidth, quadrantHeight )
     } );
 
     this.quadrantWidth = quadrantWidth;
@@ -47,23 +48,14 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
    * The dimensions of the brightness array determine the number of cells.
    */
   public setBrightness( brightness: number[][] ): void {
+
+    // Set fields used by paintCanvas.
     this.brightness = brightness;
     this.cellWidth = this.quadrantWidth / brightness[ 0 ].length;
     this.cellHeight = this.quadrantHeight / brightness.length;
 
-    // Compute the canvasBounds, the region to which we draw. This needs to be done before the animation frame happens.
-    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/43
-    //TODO Can constructor simply set canvasBounds: new Bounds2( 0, 0, quadrantWidth, quadrantHeight) ?
-    const numberOfRows = this.brightness.length;
-    const numberOfColumns = Math.max( ...this.brightness.map( row => row.length ) );
-    this.canvasBounds = new Bounds2(
-      0,
-      0,
-      ( ( numberOfColumns - 1 ) * this.cellWidth ) + ( 1 + PERCENT_CELL_OVERLAP ) * this.cellWidth,
-      ( ( numberOfRows - 1 ) * this.cellHeight ) + ( 1 + PERCENT_CELL_OVERLAP ) * this.cellHeight
-    );
-
-    this.invalidatePaint(); // results in a call to paintCanvas
+    // This results in a call to paintCanvas.
+    this.invalidatePaint();
   }
 
   /**
@@ -71,17 +63,16 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
+    // Values used for drawing each cell.
     let x: number;
     let z: number;
     const w = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellWidth;
     const h = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellHeight;
-    const numberOfRows = this.brightness.length;
-
     const minColor = MIN_COLOR_PROPERTY.value;
     const maxColor = MAX_COLOR_PROPERTY.value;
 
     // For each cell in the 2D grid...
-    let numberOfCells = 0;
+    const numberOfRows = this.brightness.length;
     for ( let row = 0; row < numberOfRows; row++ ) {
       const numberOfColumns = this.brightness[ row ].length;
       for ( let column = 0; column < numberOfColumns; column++ ) {
@@ -100,12 +91,9 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
           const color = Color.interpolateRGBA( minColor, maxColor, brightness );
           context.fillStyle = color.toCSS();
           context.fill();
-
-          numberOfCells++;
         }
       }
     }
-    phet.log && phet.log( `SchrodingerQuadrantNode paintCanvas: ${numberOfCells} cells` );
   }
 }
 
