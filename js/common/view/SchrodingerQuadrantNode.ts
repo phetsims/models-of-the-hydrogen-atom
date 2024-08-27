@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SchrodingerQuadrantNode renders one quadrant of the 2D Schrodinger field.
+ * SchrodingerQuadrantNode renders one quadrant of the Schrodinger field.
  *
  * In the Java implementation, this was class GridNode in SchrodingerNode.java.
  *
