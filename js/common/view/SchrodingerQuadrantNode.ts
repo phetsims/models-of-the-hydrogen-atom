@@ -59,7 +59,7 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
   }
 
   /**
-   * According to the documentation is superclass CanvasNode, paintCanvas should have no outside effects other than
+   * According to the documentation in superclass CanvasNode, paintCanvas should have no outside effects other than
    * drawing to the context.
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
