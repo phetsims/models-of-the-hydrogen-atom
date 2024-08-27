@@ -1,7 +1,8 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SchrodingerQuadrantNode renders one quadrant of the Schrodinger field.
+ * SchrodingerQuadrantNode renders one quadrant of the Schrodinger field. The field is divided into a 2D grid of cells,
+ * and the cells are filled with colors of varying brightness to represent the state (n,l,m) of the electron.
  *
  * In the Java implementation, this was class GridNode in SchrodingerNode.java.
  *
