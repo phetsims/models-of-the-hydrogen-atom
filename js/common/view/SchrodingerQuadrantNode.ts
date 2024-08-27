@@ -25,6 +25,8 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
   private brightness: number[][]; // brightness values, [row][column]
   private cellWidth: number;
   private cellHeight: number;
+  private minColor: Color;
+  private maxColor: Color;
 
   public constructor( quadrantWidth: number, quadrantHeight: number ) {
 
@@ -38,9 +40,15 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
     this.brightness = [];
     this.cellWidth = 0;
     this.cellHeight = 0;
+    this.minColor = MIN_COLOR_PROPERTY.value;
+    this.maxColor = MAX_COLOR_PROPERTY.value;
 
-    // If the colors that we use to render the Canvas change, trigger a call to paintCanvas.
-    Multilink.lazyMultilink( [ MIN_COLOR_PROPERTY, MAX_COLOR_PROPERTY ], () => this.invalidatePaint() );
+    // If the colors used to render the Canvas change, trigger a call to paintCanvas.
+    Multilink.lazyMultilink( [ MIN_COLOR_PROPERTY, MAX_COLOR_PROPERTY ], () => {
+      this.minColor = MIN_COLOR_PROPERTY.value;
+      this.maxColor = MAX_COLOR_PROPERTY.value;
+      this.invalidatePaint();
+    } );
   }
 
   /**
@@ -69,8 +77,6 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
     let z: number;
     const w = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellWidth;
     const h = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellHeight;
-    const minColor = MIN_COLOR_PROPERTY.value;
-    const maxColor = MAX_COLOR_PROPERTY.value;
 
     // For each cell in the 2D grid...
     const numberOfRows = this.brightness.length;
@@ -89,7 +95,7 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
           context.rect( x, z, w, h );
 
           // Fill the cell.
-          const color = Color.interpolateRGBA( minColor, maxColor, brightness );
+          const color = Color.interpolateRGBA( this.minColor, this.maxColor, brightness );
           context.fillStyle = color.toCSS();
           context.fill();
         }
