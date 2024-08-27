@@ -89,7 +89,7 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
         // Skip cells that contain no information.
         if ( brightness > 0 ) {
 
-          // Define the cell.
+          // Add a rectangle for the cell.
           x = ( column * this.cellWidth );
           z = ( row * this.cellHeight );
           context.rect( x, z, w, h );
