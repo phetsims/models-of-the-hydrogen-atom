@@ -248,9 +248,9 @@ function choose_l( n: number, l: number ): number {
     }
   }
 
-  assert && assert( Number.isInteger( lNew ) );
-  assert && assert( lNew >= 0 && lNew <= n - 1 );
-  assert && assert( Math.abs( lNew - l ) === 1 );
+  assert && assert( Number.isInteger( lNew ), `lNew must be an integer: ${lNew}` );
+  assert && assert( lNew >= 0 && lNew <= n - 1, `lNew violated rules: n=${n} l=${l} lNew=${lNew}` );
+  assert && assert( Math.abs( lNew - l ) === 1, `lNew violates rules: l=${l} lNew=${lNew}` );
   return lNew;
 }
 
