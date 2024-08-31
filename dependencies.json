@@ -1,11 +1,11 @@
 {
-  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.8 Thu Aug 22 2024 13:28:38 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.9 Fri Aug 30 2024 20:12:42 GMT-0500 (Central Daylight Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "main"
   },
   "axon": {
-    "sha": "0263304feda8d78884908ad18f9fccef3ae940e0",
+    "sha": "35543cf35f92b7829ffdebe027c6968cebc54c5f",
     "branch": "main"
   },
   "brand": {
@@ -13,7 +13,7 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "718a259a3e6032e3e49dbe0f067a73538fcd0dcc",
+    "sha": "379a0b2db47012de0d3aa7396e492619798ddbd4",
     "branch": "main"
   },
   "dot": {
@@ -29,11 +29,11 @@
     "branch": "main"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "a219a19dcd7e1934d15e8f29d6709b7a5b4171e8",
+    "sha": "446e330579c1fd9cd0226c03e7181bdf7e24753c",
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "062fccfcc5d598509f0e7d426f1e2926849c639c",
+    "sha": "3f8ee6aa44eee20dc6e4f71416689209d5734edc",
     "branch": "main"
   },
   "phet-core": {
@@ -41,15 +41,15 @@
     "branch": "main"
   },
   "phet-io": {
-    "sha": "2a33d2f65d3b4328382aa33b5b2b3b4d56cbec4c",
+    "sha": "f4b858bc2bf74815220c95505b52cf3d1855e92a",
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "127cd310c9c2cd28c08ed68c6fb312ddf2add22e",
+    "sha": "d4b54c012b181c62cab9d44825d7177277d017ab",
     "branch": "main"
   },
   "phet-io-wrappers": {
-    "sha": "e55a56cac8a8d0c7c90925b63d8f3462d09f77aa",
+    "sha": "f6c07c76bb697b985c82f9b02b7fa66588b158fe",
     "branch": "main"
   },
   "phetcommon": {
@@ -69,7 +69,7 @@
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "0b0527fc6e01e949fa67392c1cea3c77aca67b39",
+    "sha": "2d1cb1daeb7c5a998fbc6f7e39542f67bffa1bf0",
     "branch": "main"
   },
   "sherpa": {
@@ -89,7 +89,7 @@
     "branch": "main"
   },
   "tandem": {
-    "sha": "05021a8bb062b2b926d5d95b9afcbfc23de120ba",
+    "sha": "3f589553d3662f79ecf02aa5755b5e92b2c4f01b",
     "branch": "main"
   },
   "twixt": {
