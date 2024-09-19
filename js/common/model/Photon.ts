@@ -6,19 +6,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import Property from '../../../../axon/js/Property.js';
-import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 // This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
 export type PhotonStateObject = {
@@ -170,7 +170,7 @@ export default class Photon extends PhetioObject {
     valueType: Photon,
     stateSchema: PHOTON_STATE_SCHEMA,
     toStateObject: photon => photon.toStateObject(),
-    fromStateObject: Photon.fromStateObject,
+    fromStateObject: x => Photon.fromStateObject( x ),
     documentation: 'PhET-iO Type for photons.<br>' +
                    '<br>' +
                    'Fields include:<br>' +
