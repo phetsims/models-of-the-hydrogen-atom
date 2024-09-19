@@ -22,7 +22,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 
 const ITEM_FONT = new PhetFont( 16 );
-const PHOTO_WAVELENGTH = 480; // nm, for the photon icon
+const PHOTO_WAVELENGTH = 530; // nm, for the photon icon
 
 type SelfOptions = {
   iconScale?: number;
