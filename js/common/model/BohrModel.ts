@@ -447,6 +447,7 @@ export default class BohrModel extends HydrogenAtom {
     return this.electron.positionProperty.value;
   }
 }
+
 assert && assert( BohrModel.ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES );
 
 /**
