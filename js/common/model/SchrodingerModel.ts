@@ -171,11 +171,11 @@ export default class SchrodingerModel extends DeBroglieModel {
    */
   protected override getSpontaneousEmissionPosition(): Vector2 {
 
-    // Choose a random point on the orbit, in polar coordinates.
+    // Choose a random point on the first orbit, in polar coordinates.
     const angle = MOTHAUtils.nextAngle();
+    const radius = BohrModel.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE );
 
     // Convert to Cartesian coordinates, adjusted for the atom's position.
-    const radius = BohrModel.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE );
     const x = ( radius * Math.cos( angle ) ) + this.position.x;
     const y = ( radius * Math.sin( angle ) ) + this.position.y;
     return new Vector2( x, y );
