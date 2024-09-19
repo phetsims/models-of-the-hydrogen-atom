@@ -74,9 +74,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Box of hydrogen
-    const boxOfHydrogenNode = new BoxOfHydrogenNode( {
-      tandem: tandem.createTandem( 'boxOfHydrogenNode' )
-    } );
+    const boxOfHydrogenNode = new BoxOfHydrogenNode();
 
     // Tiny box that indicates what will be zoomed
     const tinyBoxNode = new TinyBox( {

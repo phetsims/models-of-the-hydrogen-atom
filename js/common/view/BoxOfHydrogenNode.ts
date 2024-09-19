@@ -8,10 +8,8 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { LinearGradient, Node, NodeOptions, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { LinearGradient, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -20,22 +18,9 @@ const BACK_DEPTH = 10;
 const BACK_OFFSET = 0.15;
 const BOX_SIZE = new Dimension2( 50, 40 );
 
-type SelfOptions = EmptySelfOptions;
-
-type BoxOfHydrogenNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
-
 export default class BoxOfHydrogenNode extends Node {
 
-  public constructor( providedOptions: BoxOfHydrogenNodeOptions ) {
-
-    const options = optionize<BoxOfHydrogenNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      isDisposable: false,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
-    }, providedOptions );
+  public constructor() {
 
     // front face
     const frontNode = new Rectangle( 0, BACK_DEPTH, BOX_SIZE.width, BOX_SIZE.height, {
@@ -71,9 +56,11 @@ export default class BoxOfHydrogenNode extends Node {
       hydrogenText.centerY = frontNode.centerY;
     } );
 
-    options.children = [ frontNode, topNode, hydrogenText ];
-
-    super( options );
+    super( {
+      isDisposable: false,
+      children: [ frontNode, topNode, hydrogenText ]
+      // Nothing interesting for PhET-iO, and changing visibleProperty is undesirable, so do not instrument.
+    } );
   }
 }
 
