@@ -25,15 +25,15 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     type: 'flag'
   },
 
-  // Specifies how much to scale time (dt) for 'Normal' and 'Fast' time speeds, in that order.
+  // Specifies how much to scale time (dt) for 'Fast', 'Normal', and 'Slow' time speeds, in that order.
   timeScale: {
     type: 'array',
     elementSchema: {
       type: 'number',
       isValidValue: ( scale: number ) => ( scale > 0 )
     },
-    defaultValue: [ 1, 2 ],
-    isValidValue: ( array: number[] ) => ( array.length === 2 ) && ( array[ 0 ] < array[ 1 ] )
+    defaultValue: [ 2, 1, 0.5 ],
+    isValidValue: ( array: number[] ) => ( array.length === 3 ) && ( array[ 0 ] > array[ 1 ] ) && ( array[ 1 ] > array[ 2 ] )
   },
 
   // Expand all accordion boxes

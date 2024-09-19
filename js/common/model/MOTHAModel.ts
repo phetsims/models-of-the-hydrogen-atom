@@ -29,8 +29,12 @@ import Spectrometer from './Spectrometer.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
-const NORMAL_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 0 ];
-const FAST_SPEED_SCALE = MOTHAQueryParameters.timeScale[ 1 ];
+
+const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
+  [ TimeSpeed.FAST, MOTHAQueryParameters.timeScale[ 0 ] ],
+  [ TimeSpeed.NORMAL, MOTHAQueryParameters.timeScale[ 1 ] ],
+  [ TimeSpeed.SLOW, MOTHAQueryParameters.timeScale[ 2 ] ]
+] );
 
 export default class MOTHAModel implements TModel {
 
@@ -67,7 +71,7 @@ export default class MOTHAModel implements TModel {
   public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
 
   // scale factor applied to dt, based on timeSpeedProperty
-  private readonly dtScaleProperty: TReadOnlyProperty<number>;
+  private readonly timeScaleProperty: TReadOnlyProperty<number>;
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
@@ -132,8 +136,12 @@ export default class MOTHAModel implements TModel {
       phetioFeatured: true
     } );
 
-    this.dtScaleProperty = new DerivedProperty( [ this.timeSpeedProperty ],
-      timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? NORMAL_SPEED_SCALE : FAST_SPEED_SCALE
+    this.timeScaleProperty = new DerivedProperty( [ this.timeSpeedProperty ],
+      timeSpeed => {
+        const dtScale = TIME_SCALE_MAP.get( timeSpeed );
+        assert && assert( dtScale !== undefined );
+        return dtScale!;
+      }
     );
 
     const photonEmittedListener = ( photon: Photon ) => this.photons.add( photon );
@@ -198,7 +206,7 @@ export default class MOTHAModel implements TModel {
    */
   private _step( dt: number ): void {
     //TODO Should time be scaled when using the Step button?
-    const dtScaled = dt * this.dtScaleProperty.value;
+    const dtScaled = dt * this.timeScaleProperty.value;
     this.light.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );
     this.moveAndCullPhotons( dtScaled );

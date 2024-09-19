@@ -92,9 +92,8 @@ const MOTHAConstants = {
   STATE_DISPLAY_MARGINS: new Vector2( 10, 10 ),
 
   // The Java version had a wider range of speeds and a speed slider. For the HTML5 version, this was simplified to
-  // 2 speeds. If slower speed is needed for making sense of the de Broglie views, the recommended approach is to
-  // pause the sim and use the step button.
-  TIME_SPEEDS: [ TimeSpeed.FAST, TimeSpeed.NORMAL ],
+  // 3 speeds, using the standard PhET TimeControlNode.
+  TIME_SPEEDS: [ TimeSpeed.FAST, TimeSpeed.NORMAL, TimeSpeed.SLOW ],
 
   // Various shared options
   CORNER_RADIUS: CORNER_RADIUS,
