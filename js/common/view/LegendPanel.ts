@@ -52,10 +52,10 @@ export default class LegendPanel extends Panel {
     const iconAlignGroup = new AlignGroup();
 
     const legendNodes: LegendNode[] = [
-      new LegendNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.electronStringProperty, options.tandem.createTandem( 'electronNode' ) ),
       new LegendNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.protonStringProperty, options.tandem.createTandem( 'protonNode' ) ),
+      new LegendNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
+        ModelsOfTheHydrogenAtomStrings.electronStringProperty, options.tandem.createTandem( 'electronNode' ) ),
       new LegendNode( PhotonNode.createIcon( PHOTO_WAVELENGTH, options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.photonStringProperty, options.tandem.createTandem( 'photonNode' ) )
     ];
