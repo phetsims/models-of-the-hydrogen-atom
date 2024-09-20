@@ -56,7 +56,7 @@
         },
         "parserOptions": {
           "project": [
-            "../models-of-the-hydrogen-atom/tsconfig.json"
+            "../chipper/tsconfig/eslint-all/tsconfig.json"
           ]
         }
       }
