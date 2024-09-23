@@ -22,7 +22,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 
 const ITEM_FONT = new PhetFont( 16 );
-const PHOTO_WAVELENGTH = 530; // nm, for the photon icon
+const PHOTON_ICON_WAVELENGTH = 410; // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/61
 
 type SelfOptions = {
   iconScale?: number;
@@ -56,7 +56,7 @@ export default class LegendPanel extends Panel {
         ModelsOfTheHydrogenAtomStrings.protonStringProperty, options.tandem.createTandem( 'protonNode' ) ),
       new LegendNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.electronStringProperty, options.tandem.createTandem( 'electronNode' ) ),
-      new LegendNode( PhotonNode.createIcon( PHOTO_WAVELENGTH, options.iconScale ), iconAlignGroup,
+      new LegendNode( PhotonNode.createIcon( PHOTON_ICON_WAVELENGTH, options.iconScale ), iconAlignGroup,
         ModelsOfTheHydrogenAtomStrings.photonStringProperty, options.tandem.createTandem( 'photonNode' ) )
     ];
 
