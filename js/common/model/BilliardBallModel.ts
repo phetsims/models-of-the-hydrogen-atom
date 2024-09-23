@@ -47,8 +47,7 @@ export default class BilliardBallModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.billiardBallStringProperty,
-      icon: BilliardBallNode.createIcon(),
-      phetioDocumentation: 'The billiard ball model has no associated state. It is instrumented for completeness, because all other models are instrumented.'
+      icon: BilliardBallNode.createIcon()
     }, providedOptions );
 
     super( zoomedInBox, options );
