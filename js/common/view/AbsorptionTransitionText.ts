@@ -31,6 +31,7 @@ export default class AbsorptionTransitionText extends RichText {
                       electronStateIsRelevantProperty: TReadOnlyProperty<boolean>,
                       providedOptions: AbsorptionTransitionTextOptions ) {
 
+    //TODO Would GatedVisibleProperty be useful here?
     const visibleProperty = new BooleanProperty( true, {
       tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
       phetioDocumentation: 'Set this to false to permanently hide state transition display. ' +

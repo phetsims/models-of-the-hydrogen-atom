@@ -29,6 +29,7 @@ export default class ExciteAtomButton extends RectangularPushButton {
                       light: Light,
                       excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
 
+    //TODO Would GatedVisibleProperty be useful here?
     const visibleProperty = new BooleanProperty( true, {
       tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
       phetioDocumentation: 'Set this to false to permanently hide the "Excite Atom" button. ' +
