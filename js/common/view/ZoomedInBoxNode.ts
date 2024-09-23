@@ -59,9 +59,7 @@ export default class ZoomedInBoxNode extends Node {
       // NodeOptions
       isDisposable: false,
       children: [ backgroundNode, contentsNode, experimentNode, outlineNode ],
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
+      phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
     super( options );

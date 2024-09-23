@@ -26,7 +26,8 @@ export class LightNode extends Node {
     const options = optionize<LightNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
     const laserPointerNode = new LaserPointerNode( light.isOnProperty, {
