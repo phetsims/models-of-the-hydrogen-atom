@@ -63,11 +63,13 @@ const MOTHAColors = {
   //------------------------------------------------------------------------------------------------------------------
 
   electronBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronBaseColor', {
-    default: 'rgb( 108, 186, 223 )'
+    default: 'rgb( 108, 186, 223 )',
+    projector: 'rgb( 6, 144, 249 )'
   } ),
 
   electronHighlightColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronHighlightColor', {
-    default: 'rgb( 169, 214, 231 )'
+    default: 'rgb( 169, 214, 231 )',
+    projector: 'rgb( 172, 217, 251 )'
   } ),
 
   protonBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'protonBaseColor', {
