@@ -21,6 +21,7 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
 
@@ -40,7 +41,9 @@ type SelfOptions = {
   photonAbsorbedEmitterInstrumented?: boolean;
 };
 
-export type HydrogenAtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type HydrogenAtomOptions = SelfOptions &
+  PickOptional<PhetioObjectOptions, 'phetioDocumentation'> &
+  PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default abstract class HydrogenAtom extends PhetioObject {
 
