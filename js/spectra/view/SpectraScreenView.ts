@@ -55,7 +55,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Controls for the light
-    const lightControlPanel = new LightControlPanel( model.light, model.modelModeProperty, model.hydrogenAtomProperty, {
+    const lightControlPanel = new LightControlPanel( model.light, model.electronStateIsRelevantProperty, {
       tandem: tandem.createTandem( 'lightControlPanel' )
     } );
 
@@ -160,7 +160,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     const absorptionEmissionDialog = new AbsorptionEmissionDialog( model.light.monochromaticWavelengthProperty,
-      model.light.lightModeProperty, model.modelModeProperty, model.hydrogenAtomProperty, this.visibleBoundsProperty, {
+      model.light.lightModeProperty, model.electronStateIsRelevantProperty, this.visibleBoundsProperty, {
         position: modelVBox.leftTop,
         visibleProperty: absorptionEmissionDialogVisibleProperty,
         tandem: tandem.createTandem( 'absorptionEmissionDialog' )

@@ -18,9 +18,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import { LightMode } from '../model/LightMode.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { ModelMode } from '../model/ModelMode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -30,8 +28,7 @@ export default class AbsorptionTransitionText extends RichText {
 
   public constructor( wavelengthProperty: TReadOnlyProperty<number>,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
-                      modelModeProperty: TReadOnlyProperty<ModelMode>,
-                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      electronStateIsRelevantProperty: TReadOnlyProperty<boolean>,
                       providedOptions: AbsorptionTransitionTextOptions ) {
 
     const visibleProperty = new BooleanProperty( true, {
@@ -48,9 +45,9 @@ export default class AbsorptionTransitionText extends RichText {
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 100,
       visibleProperty: new DerivedProperty(
-        [ lightModeProperty, modelModeProperty, hydrogenAtomProperty, visibleProperty ],
-        ( lightMode, modelMode, hydrogenAtom, visible ) =>
-          ( lightMode === 'monochromatic' ) && ( modelMode !== 'experiment' ) && ( hydrogenAtom instanceof BohrModel ) && visible )
+        [ lightModeProperty, electronStateIsRelevantProperty, visibleProperty ],
+        ( lightMode, electronStateIsRelevant, visible ) =>
+          ( lightMode === 'monochromatic' ) && electronStateIsRelevant && visible )
     }, providedOptions );
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],

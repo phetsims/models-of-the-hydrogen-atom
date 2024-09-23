@@ -27,6 +27,7 @@ import TModel from '../../../../joist/js/TModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Spectrometer from './Spectrometer.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import BohrModel from './BohrModel.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 
@@ -52,6 +53,10 @@ export default class MOTHAModel implements TModel {
 
   // the hydrogen-atom model that is currently selected: either the Experiment model, or the selected predictive model.
   public readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
+
+  // Whether the concept of electron state is relevant for the selected value of hydrogenAtomProperty. This exists
+  // primarily to hide electron state in the view for situations where it is not relevant.
+  public readonly electronStateIsRelevantProperty: TReadOnlyProperty<boolean>;
 
   // the zoomed-in part of the box of hydrogen
   public readonly zoomedInBox: ZoomedInBox;
@@ -113,6 +118,10 @@ export default class MOTHAModel implements TModel {
     this.hydrogenAtomProperty = new DerivedProperty(
       [ this.modelModeProperty, this.predictiveModelProperty ],
       ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experiment : predictiveModel );
+
+    this.electronStateIsRelevantProperty = new DerivedProperty(
+      [ this.modelModeProperty, this.hydrogenAtomProperty ],
+      ( modelMode, hydrogenAtom ) => ( modelMode !== 'experiment' ) && ( hydrogenAtom instanceof BohrModel ) );
 
     //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47 replace ObservableArray
     this.photons = createObservableArray<Photon>();

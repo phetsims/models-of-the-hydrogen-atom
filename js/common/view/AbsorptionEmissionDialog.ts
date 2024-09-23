@@ -34,8 +34,6 @@ import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js'
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import { LightMode } from '../model/LightMode.js';
-import { ModelMode } from '../model/ModelMode.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -75,8 +73,7 @@ export default class AbsorptionEmissionDialog extends Panel {
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       lightModeProperty: Property<LightMode>,
-                      modelModeProperty: TReadOnlyProperty<ModelMode>,
-                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      electronStateIsRelevantProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: AbsorptionEmissionDialogOptions ) {
 
@@ -93,10 +90,6 @@ export default class AbsorptionEmissionDialog extends Panel {
       groupFocusHighlight: true,
       tandemNameSuffix: 'Dialog' // Yes it's a Panel, but we are OK with calling it a Dialog.
     }, providedOptions );
-
-    const transitionVisibleProperty = new DerivedProperty(
-      [ modelModeProperty, hydrogenAtomProperty ],
-      ( modelMode, hydrogenAtom ) => ( modelMode !== 'experiment' ) && ( hydrogenAtom instanceof BohrModel ) );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, TITLE_TEXT_OPTIONS );
 
@@ -120,7 +113,7 @@ export default class AbsorptionEmissionDialog extends Panel {
     const columnHeadings = [
       new Text( ModelsOfTheHydrogenAtomStrings.wavelengthNanometersStringProperty, HEADING_TEXT_OPTIONS ),
       new Text( ModelsOfTheHydrogenAtomStrings.nTransitionStringProperty, combineOptions<TextOptions>( {
-        visibleProperty: transitionVisibleProperty
+        visibleProperty: electronStateIsRelevantProperty
       }, HEADING_TEXT_OPTIONS ) )
     ];
 
@@ -128,7 +121,7 @@ export default class AbsorptionEmissionDialog extends Panel {
     const columnSeparators = [
       new HSeparator( SEPARATOR_OPTIONS ),
       new HSeparator( combineOptions<HSeparatorOptions>( {
-        visibleProperty: transitionVisibleProperty
+        visibleProperty: electronStateIsRelevantProperty
       }, SEPARATOR_OPTIONS ) )
     ];
 
@@ -192,7 +185,7 @@ export default class AbsorptionEmissionDialog extends Panel {
       rows.push( [
         photonAndWavelengthNode,
         new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, combineOptions<TextOptions>( {
-          visibleProperty: transitionVisibleProperty
+          visibleProperty: electronStateIsRelevantProperty
         }, CONTENT_TEXT_OPTIONS ) )
       ] );
     }
