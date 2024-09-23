@@ -75,7 +75,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).
     // Pressing this button fires a photon that transitions the atom to a higher energy level.
-    const exciteAtomButton = new ExciteAtomButton( hydrogenAtom.metastableHandler.isMetastableStateProperty, light,
+    const exciteAtomButton = new ExciteAtomButton( hydrogenAtom.isMetastableStateProperty, light,
       () => hydrogenAtom.excite(), {
         tandem: options.tandem.createTandem( 'exciteAtomButton' )
       } );

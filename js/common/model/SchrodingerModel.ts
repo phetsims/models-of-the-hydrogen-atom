@@ -55,6 +55,8 @@ import Property from '../../../../axon/js/Property.js';
 import BohrModel from './BohrModel.js';
 import MetastableHandler from './MetastableHandler.js';
 import Light from './Light.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -65,6 +67,9 @@ export default class SchrodingerModel extends DeBroglieModel {
   // Quantum numbers (n,l,m) that specify the wavefunction for the electron.
   public readonly nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>;
   private readonly _nlmProperty: Property<SchrodingerQuantumNumbers>;
+
+  // Whether the atom in the metastable state (n,l,m) = (2,0,0)
+  public readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
 
   public readonly metastableHandler: MetastableHandler;
 
@@ -83,7 +88,7 @@ export default class SchrodingerModel extends DeBroglieModel {
     //TODO Should nlmProperty be a Property of SchrodingerElectron?
     this._nlmProperty = new Property( new SchrodingerQuantumNumbers( this.electron.nProperty.value, 0, 0 ), {
       phetioValueType: SchrodingerQuantumNumbers.SchrodingerQuantumNumbersIO,
-      tandem: options.tandem.createTandem( 'nlmProperty' ),
+      tandem: this.electron.tandem.createTandem( 'nlmProperty' ), //TODO create SchrodingerElectron and add nlmProperty?
       phetioFeatured: true,
       phetioReadOnly: true,
       phetioDocumentation: 'The quantum numbers (n,l,m) that specify a wavefunction for the electron.'
@@ -97,7 +102,15 @@ export default class SchrodingerModel extends DeBroglieModel {
       this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
     } );
 
-    this.metastableHandler = new MetastableHandler( this.nlmProperty, light, {
+    this.isMetastableStateProperty = new DerivedProperty( [ this.nlmProperty ],
+      nlm => nlm.equals( MetastableHandler.METASTABLE_STATE ), {
+        tandem: this.electron.tandem.createTandem( 'isMetastableStateProperty' ), //TODO create SchrodingerElectron and add nlmProperty?
+        phetioValueType: BooleanIO,
+        phetioFeatured: true,
+        phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).'
+      } );
+
+    this.metastableHandler = new MetastableHandler( this.nlmProperty, this.isMetastableStateProperty, light, {
       tandem: options.tandem.createTandem( 'metastableHandler' )
     } );
   }
@@ -131,7 +144,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    */
   protected override absorptionIsCertain(): boolean {
     //TODO Java version was if ( n === 2 && l === 0 ), ignoring m.
-    if ( this.metastableHandler.isMetastableStateProperty.value ) {
+    if ( this.isMetastableStateProperty.value ) {
       return true;
     }
     return super.absorptionIsCertain();
