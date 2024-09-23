@@ -1,5 +1,6 @@
 // Copyright 2016-2024, University of Colorado Boulder
 
+//TODO addLinkedElement to spectrometer.snapshotsProperty
 /**
  * SnapshotsDialog is a dialog that displays spectrometer snapshots.
  *

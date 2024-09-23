@@ -1,6 +1,5 @@
 // Copyright 2016-2024, University of Colorado Boulder
 
-//TODO this is a placeholder
 /**
  * SnapshotNode is a snapshot from the spectrometer.
  *
@@ -58,7 +57,7 @@ export default class SnapshotNode extends Node {
       },
       right: backgroundNode.right - INSIDE_X_MARGIN,
       bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
-      tandem: Tandem.OPT_OUT //TODO SnapshotNode is dynamically created
+      tandem: Tandem.OPT_OUT //TODO instrument trashButton
     } );
 
     options.children = [ backgroundNode, titleText, trashButton ];
