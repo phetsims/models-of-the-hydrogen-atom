@@ -19,6 +19,7 @@ import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import { ModelMode } from '../model/ModelMode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -26,7 +27,10 @@ type LightControlPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem
 
 export class LightControlPanel extends Panel {
 
-  public constructor( light: Light, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: LightControlPanelOptions ) {
+  public constructor( light: Light,
+                      modelModeProperty: TReadOnlyProperty<ModelMode>,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      providedOptions: LightControlPanelOptions ) {
 
     const options = optionize4<LightControlPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
 
@@ -44,7 +48,7 @@ export class LightControlPanel extends Panel {
     } );
 
     const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty,
-      light.lightModeProperty, hydrogenAtomProperty, {
+      light.lightModeProperty, modelModeProperty, hydrogenAtomProperty, {
         tandem: options.tandem.createTandem( 'absorptionTransitionText' )
       } );
 

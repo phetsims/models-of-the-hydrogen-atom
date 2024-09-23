@@ -55,7 +55,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Controls for the light
-    const lightControlPanel = new LightControlPanel( model.light, model.hydrogenAtomProperty, {
+    const lightControlPanel = new LightControlPanel( model.light, model.modelModeProperty, model.hydrogenAtomProperty, {
       tandem: tandem.createTandem( 'lightControlPanel' )
     } );
 

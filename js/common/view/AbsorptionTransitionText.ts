@@ -20,6 +20,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import { LightMode } from '../model/LightMode.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import { ModelMode } from '../model/ModelMode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -29,6 +30,7 @@ export default class AbsorptionTransitionText extends RichText {
 
   public constructor( wavelengthProperty: TReadOnlyProperty<number>,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
+                      modelModeProperty: TReadOnlyProperty<ModelMode>,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       providedOptions: AbsorptionTransitionTextOptions ) {
 
@@ -45,8 +47,10 @@ export default class AbsorptionTransitionText extends RichText {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 100,
-      visibleProperty: new DerivedProperty( [ lightModeProperty, hydrogenAtomProperty, visibleProperty ],
-        ( lightMode, hydrogenAtom, visible ) => ( lightMode === 'monochromatic' ) && ( hydrogenAtom instanceof BohrModel ) && visible )
+      visibleProperty: new DerivedProperty(
+        [ lightModeProperty, modelModeProperty, hydrogenAtomProperty, visibleProperty ],
+        ( lightMode, modelMode, hydrogenAtom, visible ) =>
+          ( lightMode === 'monochromatic' ) && ( modelMode === 'model' ) && ( hydrogenAtom instanceof BohrModel ) && visible )
     }, providedOptions );
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],
