@@ -132,7 +132,7 @@ export default class Light extends PhetioObject {
       units: 's',
       tandem: options.tandem.createTandem( 'dtSincePhotonCreatedProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'Elapsed time since a photo was emitted by the light.'
+      phetioDocumentation: 'Elapsed time since a photon was emitted by the light source.'
     } );
 
     this.groundStateAbsorptionWavelengths = BohrModel.getAbsorptionWavelengths( MOTHAConstants.GROUND_STATE );
