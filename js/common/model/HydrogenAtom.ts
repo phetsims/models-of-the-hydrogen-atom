@@ -20,7 +20,6 @@ import ZoomedInBox from './ZoomedInBox.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
@@ -35,10 +34,6 @@ type SelfOptions = {
 
   // Position of the atom's center in the model coordinate frame.
   position?: Vector2;
-
-  // Set these to false for hydrogen atom models that do not emit and absorb light.
-  photonEmittedEmitterInstrumented?: boolean;
-  photonAbsorbedEmitterInstrumented?: boolean;
 };
 
 export type HydrogenAtomOptions = SelfOptions &
@@ -52,11 +47,12 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly icon: Node;
   public readonly position: Vector2;
 
-  // Notifies listeners by emitting when a photon is emitted (an unfortunate name)
-  public readonly photonEmittedEmitter: TEmitter<[ Photon ]>;
-
-  // Notifies listeners by emitting when a photon is absorbed
+  // Notifies listeners by emitting when a photon is absorbed or emitted. Not all models absorb or emit photons,
+  // and billiard ball does not even have an electron. But it simplifies programming for us and the PhET-iO client
+  // if all models have these emitters. For example, the Spectrometer can be hooked up to any of the models,
+  // regardless of whether they emit photons.
   public readonly photonAbsorbedEmitter: TEmitter<[ Photon ]>;
+  public readonly photonEmittedEmitter: TEmitter<[ Photon ]>;
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
@@ -68,8 +64,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
       // SelfOptions
       position: Vector2.ZERO,
-      photonEmittedEmitterInstrumented: true,
-      photonAbsorbedEmitterInstrumented: true,
 
       // PhetioObjectOptions
       isDisposable: false,
@@ -83,16 +77,20 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this.icon = options.icon;
     this.position = options.position;
 
-    this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO } ],
-      tandem: options.photonEmittedEmitterInstrumented ? options.tandem.createTandem( 'photonEmittedEmitter' ) : Tandem.OPT_OUT,
-      phetioDocumentation: 'Register with this Emitter to be notified when a photon is emitted.'
-    } );
-
     this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
       parameters: [ { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO } ],
-      tandem: options.photonAbsorbedEmitterInstrumented ? options.tandem.createTandem( 'photonAbsorbedEmitter' ) : Tandem.OPT_OUT,
-      phetioDocumentation: 'Register with this Emitter to be notified when a photon is absorbed.'
+      tandem: options.tandem.createTandem( 'photonAbsorbedEmitter' ),
+      phetioDocumentation: 'Register with this Emitter to be notified when a photon is absorbed.' +
+                           ' Included for all hydrogen atom models, regardless of whether they absorb photons, so that' +
+                           ' all models have the same API.'
+    } );
+
+    this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
+      parameters: [ { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO } ],
+      tandem: options.tandem.createTandem( 'photonEmittedEmitter' ),
+      phetioDocumentation: 'Register with this Emitter to be notified when a photon is emitted.' +
+                           ' Included for all hydrogen atom models, regardless of whether they emit photons, so that' +
+                           ' all models have the same API.'
     } );
   }
 
