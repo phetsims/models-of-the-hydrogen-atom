@@ -62,6 +62,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
 
     //TODO Factor out SnapshotButton.ts
+    const snapshotButtonTandem = buttonGroupTandem.createTandem( 'snapshotButton' );
     const snapshotButton = new RectangularPushButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( cameraSolidShape, {
@@ -73,8 +74,11 @@ export default class SpectrometerAccordionBox extends AccordionBox {
           Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, spectrometer.numberOfSnapshotsProperty.value + 1 );
       },
       enabledProperty: new DerivedProperty( [ spectrometer.numberOfSnapshotsProperty ],
-        numberOfSnapshots => numberOfSnapshots < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS ),
-      tandem: buttonGroupTandem.createTandem( 'snapshotButton' )
+        numberOfSnapshots => numberOfSnapshots < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, {
+          tandem: snapshotButtonTandem.createTandem( 'enabledProperty' ),
+          phetioValueType: BooleanIO
+        } ),
+      tandem: snapshotButtonTandem
     } );
 
     const snapshotsDialog = new SnapshotsDialog( spectrometer.numberOfSnapshotsProperty, {
