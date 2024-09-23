@@ -33,7 +33,7 @@ export default class AbsorptionTransitionText extends RichText {
 
     const visibleProperty = new BooleanProperty( true, {
       tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-      phetioDocumentation: 'Set this to false to permanently hide state transition display.' +
+      phetioDocumentation: 'Set this to false to permanently hide state transition display. ' +
                            'Otherwise, visibility depends on whether the light is set to an absorption wavelength.',
       phetioFeatured: true
     } );
