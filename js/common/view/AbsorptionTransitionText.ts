@@ -50,7 +50,7 @@ export default class AbsorptionTransitionText extends RichText {
       visibleProperty: new DerivedProperty(
         [ lightModeProperty, modelModeProperty, hydrogenAtomProperty, visibleProperty ],
         ( lightMode, modelMode, hydrogenAtom, visible ) =>
-          ( lightMode === 'monochromatic' ) && ( modelMode === 'model' ) && ( hydrogenAtom instanceof BohrModel ) && visible )
+          ( lightMode === 'monochromatic' ) && ( modelMode !== 'experiment' ) && ( hydrogenAtom instanceof BohrModel ) && visible )
     }, providedOptions );
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],

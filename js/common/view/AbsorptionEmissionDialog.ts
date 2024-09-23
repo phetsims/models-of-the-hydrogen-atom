@@ -10,9 +10,9 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, Color, GridBox, HBox, HSeparator, KeyboardListener, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Color, GridBox, HBox, HSeparator, HSeparatorOptions, KeyboardListener, Node, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
@@ -34,6 +34,8 @@ import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js'
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import { LightMode } from '../model/LightMode.js';
+import { ModelMode } from '../model/ModelMode.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -49,6 +51,10 @@ const HEADING_TEXT_OPTIONS = {
     weight: 'bold'
   } ),
   maxWidth: 100
+};
+
+const SEPARATOR_OPTIONS = {
+  stroke: Color.grayColor( 200 )
 };
 
 const CONTENT_TEXT_OPTIONS = {
@@ -69,6 +75,8 @@ export default class AbsorptionEmissionDialog extends Panel {
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       lightModeProperty: Property<LightMode>,
+                      modelModeProperty: TReadOnlyProperty<ModelMode>,
+                      hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: AbsorptionEmissionDialogOptions ) {
 
@@ -85,6 +93,10 @@ export default class AbsorptionEmissionDialog extends Panel {
       groupFocusHighlight: true,
       tandemNameSuffix: 'Dialog' // Yes it's a Panel, but we are OK with calling it a Dialog.
     }, providedOptions );
+
+    const transitionVisibleProperty = new DerivedProperty(
+      [ modelModeProperty, hydrogenAtomProperty ],
+      ( modelMode, hydrogenAtom ) => ( modelMode !== 'experiment' ) && ( hydrogenAtom instanceof BohrModel ) );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, TITLE_TEXT_OPTIONS );
 
@@ -107,16 +119,17 @@ export default class AbsorptionEmissionDialog extends Panel {
     // Headings for the columns
     const columnHeadings = [
       new Text( ModelsOfTheHydrogenAtomStrings.wavelengthNanometersStringProperty, HEADING_TEXT_OPTIONS ),
-      new Text( ModelsOfTheHydrogenAtomStrings.nTransitionStringProperty, HEADING_TEXT_OPTIONS )
+      new Text( ModelsOfTheHydrogenAtomStrings.nTransitionStringProperty, combineOptions<TextOptions>( {
+        visibleProperty: transitionVisibleProperty
+      }, HEADING_TEXT_OPTIONS ) )
     ];
 
     // Separators below the column headings
-    const hSeparatorOptions = {
-      stroke: Color.grayColor( 200 )
-    };
     const columnSeparators = [
-      new HSeparator( hSeparatorOptions ),
-      new HSeparator( hSeparatorOptions )
+      new HSeparator( SEPARATOR_OPTIONS ),
+      new HSeparator( combineOptions<HSeparatorOptions>( {
+        visibleProperty: transitionVisibleProperty
+      }, SEPARATOR_OPTIONS ) )
     ];
 
     const rows: Node[][] = [
@@ -178,7 +191,9 @@ export default class AbsorptionEmissionDialog extends Panel {
 
       rows.push( [
         photonAndWavelengthNode,
-        new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, CONTENT_TEXT_OPTIONS )
+        new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, combineOptions<TextOptions>( {
+          visibleProperty: transitionVisibleProperty
+        }, CONTENT_TEXT_OPTIONS ) )
       ] );
     }
 
@@ -190,6 +205,7 @@ export default class AbsorptionEmissionDialog extends Panel {
 
     const content = new VBox( {
       spacing: 10,
+      align: 'center',
       children: [
         titleBarNode,
         gridBox
