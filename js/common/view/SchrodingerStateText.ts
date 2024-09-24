@@ -2,7 +2,7 @@
 
 //TODO rename to SchrodingerStateText
 /**
- * WavefunctionText displays the quantum numbers (n,l,m) and orbital that describe the wavefunction of the electron in
+ * SchrodingerStateText displays the quantum numbers (n,l,m) and orbital that describe the wavefunction of the electron in
  * the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -35,7 +35,7 @@ const SUBSHELLS = [
   ModelsOfTheHydrogenAtomStrings.hStringProperty
 ];
 
-export default class WavefunctionText extends RichText {
+export default class SchrodingerStateText extends RichText {
 
   public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
                       providedOptions: WavefunctionTextOptions ) {
@@ -75,4 +75,4 @@ export default class WavefunctionText extends RichText {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'WavefunctionText', WavefunctionText );
+modelsOfTheHydrogenAtom.register( 'SchrodingerStateText', SchrodingerStateText );

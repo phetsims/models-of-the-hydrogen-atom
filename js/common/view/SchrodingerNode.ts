@@ -38,7 +38,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import { Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
-import WavefunctionText from './WavefunctionText.js';
+import SchrodingerStateText from './SchrodingerStateText.js';
 import Light from '../model/Light.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -80,7 +80,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
         tandem: options.tandem.createTandem( 'exciteAtomButton' )
       } );
 
-    const stateText = new WavefunctionText( hydrogenAtom.nlmProperty, {
+    const stateText = new SchrodingerStateText( hydrogenAtom.nlmProperty, {
       tandem: options.tandem.createTandem( 'stateText' )
     } );
 
