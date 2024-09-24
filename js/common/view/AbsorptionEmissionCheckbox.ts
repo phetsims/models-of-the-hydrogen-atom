@@ -15,6 +15,9 @@ import Property from '../../../../axon/js/Property.js';
 import MOTHAColors from '../MOTHAColors.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -22,12 +25,26 @@ type AbsorptionEmissionCheckboxOptions = SelfOptions & PickRequired<CheckboxOpti
 
 export default class AbsorptionEmissionCheckbox extends Checkbox {
 
-  public constructor( absorptionEmissionDialogVisibleProperty: Property<boolean>, providedOptions: AbsorptionEmissionCheckboxOptions ) {
+  public constructor( absorptionEmissionDialogVisibleProperty: Property<boolean>,
+                      electronStateIsRelevantProperty: TReadOnlyProperty<boolean>,
+                      providedOptions: AbsorptionEmissionCheckboxOptions ) {
+
+    //TODO Would GatedVisibleProperty be useful here?
+    const visibleProperty = new BooleanProperty( true, {
+      tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+      phetioDocumentation: 'Set this to false to permanently hide the "Absorption/Emission" checkbox. ' +
+                           'Otherwise, visibility depends on the selected hydrogen atom model.',
+      phetioFeatured: true
+    } );
 
     const options = optionize<AbsorptionEmissionCheckboxOptions, SelfOptions, CheckboxOptions>()( {
 
       // CheckboxOptions
-      isDisposable: false
+      isDisposable: false,
+
+      // Hide this checkbox for models where electron state is irrelevant.
+      // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
+      visibleProperty: DerivedProperty.and( [ electronStateIsRelevantProperty, visibleProperty ] )
     }, providedOptions );
 
     const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, {
