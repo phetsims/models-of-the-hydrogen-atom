@@ -34,7 +34,6 @@ import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js'
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import { LightMode } from '../model/LightMode.js';
-import { ModelMode } from '../model/ModelMode.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -74,7 +73,7 @@ export default class AbsorptionEmissionDialog extends Panel {
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       lightModeProperty: Property<LightMode>,
-                      modelModeProperty: TReadOnlyProperty<ModelMode>,
+                      isExperimentProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: AbsorptionEmissionDialogOptions ) {
 
@@ -92,8 +91,7 @@ export default class AbsorptionEmissionDialog extends Panel {
       tandemNameSuffix: 'Dialog' // Yes it's a Panel, but we are OK with calling it a Dialog.
     }, providedOptions );
 
-    const transitionColumnVisibleProperty = new DerivedProperty( [ modelModeProperty ],
-      modelMode => modelMode !== 'experiment' );
+    const transitionColumnVisibleProperty = DerivedProperty.not( isExperimentProperty );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, TITLE_TEXT_OPTIONS );
 

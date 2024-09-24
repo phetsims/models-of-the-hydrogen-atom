@@ -18,7 +18,6 @@ import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ExperimentNode from './ExperimentNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { ModelMode } from '../model/ModelMode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -31,7 +30,7 @@ export default class ZoomedInBoxNode extends Node {
 
   protected constructor( zoomedInBox: ZoomedInBox,
                          modelViewTransform: ModelViewTransform2,
-                         modelModeProperty: TReadOnlyProperty<ModelMode>,
+                         isExperimentProperty: TReadOnlyProperty<boolean>,
                          providedOptions: ZoomedInBoxNodeOptions ) {
 
     const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomedInBox ), {
@@ -43,7 +42,7 @@ export default class ZoomedInBoxNode extends Node {
       lineWidth: 3
     } );
 
-    const experimentNode = new ExperimentNode( modelModeProperty, {
+    const experimentNode = new ExperimentNode( isExperimentProperty, {
       center: backgroundNode.center,
       tandem: providedOptions.tandem.createTandem( 'experimentNode' )
     } );

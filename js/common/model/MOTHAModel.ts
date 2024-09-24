@@ -9,7 +9,6 @@
 import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -19,7 +18,6 @@ import ZoomedInBox from './ZoomedInBox.js';
 import Photon from './Photon.js';
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Experiment from './Experiment.js';
-import { ModelMode, ModelModeValues } from './ModelMode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
@@ -39,10 +37,10 @@ const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
 
 export default class MOTHAModel implements TModel {
 
-  // whether we're dealing with the experiment or a predictive hydrogen-atom model
-  public readonly modelModeProperty: Property<ModelMode>;
+  // whether we are viewing the experiment (true) or a predictive model (false) of the hydrogen atom.
+  public readonly isExperimentProperty: Property<boolean>;
 
-  // the experiment hydrogen-atom model
+  // the experiment hydrogen atom
   public readonly experiment: Experiment;
 
   // the supported set of predictive hydrogen-atom models
@@ -51,7 +49,7 @@ export default class MOTHAModel implements TModel {
   // the predictive hydrogen-atom model that is currently selected
   public readonly predictiveModelProperty: Property<HydrogenAtom>;
 
-  // the hydrogen-atom model that is currently selected: either the Experiment model, or the selected predictive model.
+  // the hydrogen-atom model that is active: either the experiment, or the selected predictive model.
   public readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
   // Whether the concept of electron state is relevant for the selected value of hydrogenAtomProperty. This exists
@@ -95,11 +93,10 @@ export default class MOTHAModel implements TModel {
 
     this.zoomedInBox = zoomedInBox;
 
-    //TODO default should be 'experiment'
-    this.modelModeProperty = new StringUnionProperty( 'model', {
-      validValues: ModelModeValues,
-      tandem: tandem.createTandem( 'modelModeProperty' ),
-      phetioFeatured: true
+    this.isExperimentProperty = new BooleanProperty( false, { //TODO initial value should be true
+      tandem: tandem.createTandem( 'isExperimentProperty' ),
+      phetioFeatured: true,
+      phetioDocumentation: 'Whether we are viewing the Experiment (true) or a Model (false) of the hydrogen atom.'
     } );
 
     this.experiment = new Experiment( zoomedInBox, light, {
@@ -116,12 +113,12 @@ export default class MOTHAModel implements TModel {
     } );
 
     this.hydrogenAtomProperty = new DerivedProperty(
-      [ this.modelModeProperty, this.predictiveModelProperty ],
-      ( modelMode, predictiveModel ) => ( modelMode === 'experiment' ) ? this.experiment : predictiveModel );
+      [ this.isExperimentProperty, this.predictiveModelProperty ],
+      ( isExperiment, predictiveModel ) => isExperiment ? this.experiment : predictiveModel );
 
     this.electronStateIsRelevantProperty = new DerivedProperty(
-      [ this.modelModeProperty, this.hydrogenAtomProperty ],
-      ( modelMode, hydrogenAtom ) => ( modelMode !== 'experiment' ) && ( hydrogenAtom instanceof BohrModel ) );
+      [ this.isExperimentProperty, this.hydrogenAtomProperty ],
+      ( isExperiment, hydrogenAtom ) => !isExperiment && ( hydrogenAtom instanceof BohrModel ) );
 
     //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47 replace ObservableArray
     this.photons = createObservableArray<Photon>();
@@ -178,7 +175,7 @@ export default class MOTHAModel implements TModel {
   }
 
   public reset(): void {
-    this.modelModeProperty.reset();
+    this.isExperimentProperty.reset();
     this.experiment.reset();
     this.predictiveModels.forEach( predictiveModel => predictiveModel.reset() );
     this.predictiveModelProperty.reset();

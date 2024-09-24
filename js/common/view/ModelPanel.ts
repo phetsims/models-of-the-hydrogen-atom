@@ -14,10 +14,8 @@ import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { HBox, Node, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import { ModelMode } from '../model/ModelMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
@@ -33,7 +31,7 @@ export default class ModelPanel extends Panel {
 
   public constructor( predictiveModelProperty: Property<HydrogenAtom>,
                       predictiveModels: HydrogenAtom[],
-                      modelModeProperty: TReadOnlyProperty<ModelMode>,
+                      isExperimentProperty: TReadOnlyProperty<boolean>,
                       providedOptions: ModelPanelOptions ) {
 
     const options = optionize4<ModelPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
@@ -43,10 +41,7 @@ export default class ModelPanel extends Panel {
 
       // PanelOptions
       isDisposable: false,
-      visibleProperty: new DerivedProperty( [ modelModeProperty ], modelMode => ( modelMode === 'model' ), {
-        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
+      visibleProperty: DerivedProperty.not( isExperimentProperty ),
       fill: MOTHAColors.modelsPanelFillProperty,
       stroke: MOTHAColors.modelsPanelStrokeProperty
     }, providedOptions );

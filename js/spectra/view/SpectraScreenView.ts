@@ -91,12 +91,12 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // switches the model mode between Experiment and Model
-    const experimentModelSwitch = new ExperimentModelSwitch( model.modelModeProperty, {
+    const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty, {
       tandem: tandem.createTandem( 'experimentModelSwitch' )
     } );
 
     // panel that contains radio buttons for selecting a predictive model
-    const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.modelModeProperty, {
+    const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty, {
       tandem: tandem.createTandem( 'modelPanel' )
     } );
 
@@ -169,7 +169,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     const absorptionEmissionDialog = new AbsorptionEmissionDialog( model.light.monochromaticWavelengthProperty,
-      model.light.lightModeProperty, model.modelModeProperty, this.visibleBoundsProperty, {
+      model.light.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
         position: modelVBox.leftTop,
         visibleProperty: absorptionEmissionDialogVisibleProperty,
         tandem: tandem.createTandem( 'absorptionEmissionDialog' )

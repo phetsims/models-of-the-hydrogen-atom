@@ -15,7 +15,6 @@ import ABSwitch, { ABSwitchOptions } from '../../../../sun/js/ABSwitch.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
-import { ModelMode } from '../model/ModelMode.js';
 import Property from '../../../../axon/js/Property.js';
 
 const TEXT_OPTIONS = {
@@ -28,9 +27,9 @@ type SelfOptions = EmptySelfOptions;
 
 type ExperimentModelSwitchOptions = SelfOptions & NodeTranslationOptions & PickRequired<ABSwitchOptions, 'tandem'>;
 
-export default class ExperimentModelSwitch extends ABSwitch<ModelMode> {
+export default class ExperimentModelSwitch extends ABSwitch<boolean> {
 
-  public constructor( modelModeProperty: Property<ModelMode>, providedOptions: ExperimentModelSwitchOptions ) {
+  public constructor( isExperimentProperty: Property<boolean>, providedOptions: ExperimentModelSwitchOptions ) {
 
     const options = optionize<ExperimentModelSwitchOptions, SelfOptions, ABSwitchOptions>()( {
 
@@ -44,7 +43,7 @@ export default class ExperimentModelSwitch extends ABSwitch<ModelMode> {
 
     const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, TEXT_OPTIONS );
 
-    super( modelModeProperty, 'experiment', experimentText, 'model', modelText, options );
+    super( isExperimentProperty, true, experimentText, false, modelText, options );
   }
 }
 

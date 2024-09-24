@@ -12,12 +12,9 @@ import { Node, NodeOptions, NodeTranslationOptions, Rectangle, Text } from '../.
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import MOTHAColors from '../MOTHAColors.js';
-import { ModelMode } from '../model/ModelMode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -26,7 +23,7 @@ type ExperimentNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired
 
 export default class ExperimentNode extends Node {
 
-  public constructor( modelModeProperty: TReadOnlyProperty<ModelMode>, providedOptions: ExperimentNodeOptions ) {
+  public constructor( isExperimentProperty: TReadOnlyProperty<boolean>, providedOptions: ExperimentNodeOptions ) {
 
     const questionMarkText = new Text( ModelsOfTheHydrogenAtomStrings.questionMarkStringProperty, {
       font: new PhetFont( 72 ),
@@ -49,10 +46,7 @@ export default class ExperimentNode extends Node {
 
       // NodeOptions
       children: [ square, questionMarkText ],
-      visibleProperty: new DerivedProperty( [ modelModeProperty ], modelMode => ( modelMode === 'experiment' ), {
-        phetioValueType: BooleanIO,
-        tandem: providedOptions.tandem.createTandem( 'visibleProperty' )
-      } )
+      visibleProperty: isExperimentProperty
     }, providedOptions );
 
     super( options );
