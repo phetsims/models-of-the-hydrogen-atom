@@ -78,32 +78,36 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
-    // Values used for drawing each cell.
-    let x: number;
-    let z: number;
-    const w = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellWidth;
-    const h = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellHeight;
+    const disabled = true; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/51 Not rendering correctly and causing a performance problem.
+    if ( !disabled ) {
 
-    // For each cell in the 2D grid...
-    const numberOfRows = this.brightness.length;
-    for ( let row = 0; row < numberOfRows; row++ ) {
-      const numberOfColumns = this.brightness[ row ].length;
-      for ( let column = 0; column < numberOfColumns; column++ ) {
+      // Values used for drawing each cell.
+      let x: number;
+      let z: number;
+      const w = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellWidth;
+      const h = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellHeight;
 
-        const brightness = this.brightness[ row ][ column ];
+      // For each cell in the 2D grid...
+      const numberOfRows = this.brightness.length;
+      for ( let row = 0; row < numberOfRows; row++ ) {
+        const numberOfColumns = this.brightness[ row ].length;
+        for ( let column = 0; column < numberOfColumns; column++ ) {
 
-        // Skip cells that contain no information.
-        if ( brightness > 0 ) {
+          const brightness = this.brightness[ row ][ column ];
 
-          // Add a rectangle for the cell.
-          x = ( column * this.cellWidth );
-          z = ( row * this.cellHeight );
-          context.rect( x, z, w, h );
+          // Skip cells that contain no information.
+          if ( brightness > 0 ) {
 
-          // Fill the cell.
-          const colorIndex = Utils.toFixedNumber( brightness * NUMBER_OF_COLORS, 0 );
-          context.fillStyle = this.colorCache[ colorIndex ];
-          context.fill();
+            // Add a rectangle for the cell.
+            x = ( column * this.cellWidth );
+            z = ( row * this.cellHeight );
+            context.rect( x, z, w, h );
+
+            // Fill the cell.
+            const colorIndex = Utils.toFixedNumber( brightness * NUMBER_OF_COLORS, 0 );
+            context.fillStyle = this.colorCache[ colorIndex ];
+            context.fill();
+          }
         }
       }
     }
