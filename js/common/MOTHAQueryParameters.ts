@@ -32,7 +32,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
       type: 'number',
       isValidValue: ( scale: number ) => ( scale > 0 )
     },
-    defaultValue: [ 2, 1, 0.5 ],
+    defaultValue: [ 3, 1, 0.25 ],
     isValidValue: ( array: number[] ) => ( array.length === 3 ) && ( array[ 0 ] > array[ 1 ] ) && ( array[ 1 ] > array[ 2 ] )
   },
 
