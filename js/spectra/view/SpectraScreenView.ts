@@ -29,6 +29,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AbsorptionEmissionDialog from '../../common/view/AbsorptionEmissionDialog.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import AbsorptionEmissionCheckbox from '../../common/view/AbsorptionEmissionCheckbox.js';
+import BohrModel from '../../common/model/BohrModel.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -61,7 +62,14 @@ export default class SpectraScreenView extends ScreenView {
 
     const absorptionEmissionDialogVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'absorptionEmissionDialogVisibleProperty' ),
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioReadOnly: true // because the sim controls this
+    } );
+
+    model.predictiveModelProperty.link( predictiveModel => {
+      if ( absorptionEmissionDialogVisibleProperty.value ) {
+        absorptionEmissionDialogVisibleProperty.value = ( predictiveModel instanceof BohrModel );
+      }
     } );
 
     const absorptionEmissionCheckbox = new AbsorptionEmissionCheckbox( absorptionEmissionDialogVisibleProperty,
