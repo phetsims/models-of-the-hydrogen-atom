@@ -52,9 +52,8 @@ export default class MOTHAModel implements TModel {
   // the hydrogen-atom model that is active: either the experiment, or the selected predictive model.
   public readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
-  // Whether the concept of electron state is relevant for the selected value of hydrogenAtomProperty. This exists
-  // primarily to hide electron state in the view for situations where it is not relevant.
-  public readonly electronStateIsRelevantProperty: TReadOnlyProperty<boolean>;
+  // whether hydrogenAtomProperty is a quantum model
+  public readonly isQuantumModelProperty: TReadOnlyProperty<boolean>;
 
   // the zoomed-in part of the box of hydrogen
   public readonly zoomedInBox: ZoomedInBox;
@@ -116,9 +115,8 @@ export default class MOTHAModel implements TModel {
       [ this.isExperimentProperty, this.predictiveModelProperty ],
       ( isExperiment, predictiveModel ) => isExperiment ? this.experiment : predictiveModel );
 
-    this.electronStateIsRelevantProperty = new DerivedProperty(
-      [ this.isExperimentProperty, this.hydrogenAtomProperty ],
-      ( isExperiment, hydrogenAtom ) => !isExperiment && ( hydrogenAtom instanceof BohrModel ) );
+    this.isQuantumModelProperty = new DerivedProperty( [ this.hydrogenAtomProperty ],
+      hydrogenAtom => ( hydrogenAtom instanceof BohrModel ) );
 
     //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47 replace ObservableArray
     this.photons = createObservableArray<Photon>();

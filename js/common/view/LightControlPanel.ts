@@ -26,7 +26,8 @@ type LightControlPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem
 export class LightControlPanel extends Panel {
 
   public constructor( light: Light,
-                      electronStateIsRelevantProperty: TReadOnlyProperty<boolean>,
+                      isQuantumModelProperty: TReadOnlyProperty<boolean>,
+                      isExperimentProperty: TReadOnlyProperty<boolean>,
                       providedOptions: LightControlPanelOptions ) {
 
     const options = optionize4<LightControlPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
@@ -45,7 +46,7 @@ export class LightControlPanel extends Panel {
     } );
 
     const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty,
-      light.lightModeProperty, electronStateIsRelevantProperty, {
+      light.lightModeProperty, isQuantumModelProperty, isExperimentProperty, {
         tandem: options.tandem.createTandem( 'absorptionTransitionText' )
       } );
 

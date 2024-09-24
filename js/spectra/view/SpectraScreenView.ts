@@ -56,7 +56,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Controls for the light
-    const lightControlPanel = new LightControlPanel( model.light, model.electronStateIsRelevantProperty, {
+    const lightControlPanel = new LightControlPanel( model.light, model.isQuantumModelProperty, model.isExperimentProperty, {
       tandem: tandem.createTandem( 'lightControlPanel' )
     } );
 
@@ -73,7 +73,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     const absorptionEmissionCheckbox = new AbsorptionEmissionCheckbox( absorptionEmissionDialogVisibleProperty,
-      model.electronStateIsRelevantProperty, {
+      model.isQuantumModelProperty, {
         tandem: tandem.createTandem( 'absorptionEmissionCheckbox' )
       } );
 

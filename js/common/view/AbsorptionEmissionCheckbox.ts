@@ -26,7 +26,7 @@ type AbsorptionEmissionCheckboxOptions = SelfOptions & PickRequired<CheckboxOpti
 export default class AbsorptionEmissionCheckbox extends Checkbox {
 
   public constructor( absorptionEmissionDialogVisibleProperty: Property<boolean>,
-                      electronStateIsRelevantProperty: TReadOnlyProperty<boolean>,
+                      isQuantumModelProperty: TReadOnlyProperty<boolean>,
                       providedOptions: AbsorptionEmissionCheckboxOptions ) {
 
     //TODO Would GatedVisibleProperty be useful here?
@@ -42,9 +42,9 @@ export default class AbsorptionEmissionCheckbox extends Checkbox {
       // CheckboxOptions
       isDisposable: false,
 
-      // Hide this checkbox for models where electron state is irrelevant.
-      // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
-      visibleProperty: DerivedProperty.and( [ electronStateIsRelevantProperty, visibleProperty ] )
+      // Show this checkbox only for quantum models, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
+      visibleProperty: new DerivedProperty( [ isQuantumModelProperty, visibleProperty ],
+        ( isQuantumModel, visible ) => isQuantumModel && visible )
     }, providedOptions );
 
     const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, {

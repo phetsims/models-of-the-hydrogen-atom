@@ -28,7 +28,8 @@ export default class AbsorptionTransitionText extends RichText {
 
   public constructor( wavelengthProperty: TReadOnlyProperty<number>,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
-                      electronStateIsRelevantProperty: TReadOnlyProperty<boolean>,
+                      isQuantumModelProperty: TReadOnlyProperty<boolean>,
+                      isExperimentProperty: TReadOnlyProperty<boolean>,
                       providedOptions: AbsorptionTransitionTextOptions ) {
 
     //TODO Would GatedVisibleProperty be useful here?
@@ -46,9 +47,9 @@ export default class AbsorptionTransitionText extends RichText {
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 100,
       visibleProperty: new DerivedProperty(
-        [ lightModeProperty, electronStateIsRelevantProperty, visibleProperty ],
-        ( lightMode, electronStateIsRelevant, visible ) =>
-          ( lightMode === 'monochromatic' ) && electronStateIsRelevant && visible )
+        [ lightModeProperty, isQuantumModelProperty, isExperimentProperty, visibleProperty ],
+        ( lightMode, isQuantumModel, isExperiment, visible ) =>
+          ( lightMode === 'monochromatic' ) && isQuantumModel && !isExperiment && visible )
     }, providedOptions );
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],
