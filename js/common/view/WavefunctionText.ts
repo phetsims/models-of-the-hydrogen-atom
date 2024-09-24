@@ -2,7 +2,7 @@
 
 //TODO rename to SchrodingerStateText
 /**
- * WavefunctionText displays the quantum numbers (n,l,m) that describe the wavefunction of the electron in
+ * WavefunctionText displays the quantum numbers (n,l,m) and orbital that describe the wavefunction of the electron in
  * the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -25,6 +25,16 @@ type SelfOptions = EmptySelfOptions;
 
 type WavefunctionTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
 
+// Orbital subshell names, indexed by the value of l from (n,l,m).
+const SUBSHELLS = [
+  ModelsOfTheHydrogenAtomStrings.sStringProperty,
+  ModelsOfTheHydrogenAtomStrings.pStringProperty,
+  ModelsOfTheHydrogenAtomStrings.dStringProperty,
+  ModelsOfTheHydrogenAtomStrings.gStringProperty,
+  ModelsOfTheHydrogenAtomStrings.fStringProperty,
+  ModelsOfTheHydrogenAtomStrings.hStringProperty
+];
+
 export default class WavefunctionText extends RichText {
 
   public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
@@ -43,20 +53,22 @@ export default class WavefunctionText extends RichText {
       }
     }, providedOptions );
 
-    const stringProperty = new DerivedStringProperty( [
+    const stringProperty = DerivedStringProperty.deriveAny( [
         ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty,
         MOTHASymbols.nStringProperty,
         MOTHASymbols.lStringProperty,
         MOTHASymbols.mStringProperty,
-        nlmProperty
+        nlmProperty,
+        ...SUBSHELLS
       ],
-      ( pattern, nString, lString, mString, nlm ) => StringUtils.fillIn( pattern, {
-        nSymbol: nString,
-        lSymbol: lString,
-        mSymbol: mString,
-        nValue: nlm.n,
-        lValue: nlm.l,
-        mValue: nlm.m
+      () => StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty.value, {
+        nSymbol: MOTHASymbols.nStringProperty.value,
+        lSymbol: MOTHASymbols.lStringProperty.value,
+        mSymbol: MOTHASymbols.mStringProperty.value,
+        nValue: nlmProperty.value.n,
+        lValue: nlmProperty.value.l,
+        mValue: nlmProperty.value.m,
+        subshell: SUBSHELLS[ nlmProperty.value.l ].value
       } ) );
 
     super( stringProperty, options );

@@ -4,6 +4,7 @@
  * Auto-generated from modulify, DO NOT manually modify.
  */
 /* eslint-disable */
+/* @formatter:off */
 import getStringModule from '../../chipper/js/getStringModule.js';
 import type LocalizedStringProperty from '../../chipper/js/LocalizedStringProperty.js';
 import modelsOfTheHydrogenAtom from './modelsOfTheHydrogenAtom.js';
@@ -51,6 +52,12 @@ type StringsType = {
   'wavelengthNanometersStringProperty': LocalizedStringProperty;
   'questionMarkStringProperty': LocalizedStringProperty;
   'absorptionEmissionStringProperty': LocalizedStringProperty;
+  'sStringProperty': LocalizedStringProperty;
+  'pStringProperty': LocalizedStringProperty;
+  'dStringProperty': LocalizedStringProperty;
+  'fStringProperty': LocalizedStringProperty;
+  'gStringProperty': LocalizedStringProperty;
+  'hStringProperty': LocalizedStringProperty;
 };
 
 const ModelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;
