@@ -161,7 +161,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     const absorptionEmissionDialog = new AbsorptionEmissionDialog( model.light.monochromaticWavelengthProperty,
-      model.light.lightModeProperty, model.electronStateIsRelevantProperty, this.visibleBoundsProperty, {
+      model.light.lightModeProperty, model.modelModeProperty, this.visibleBoundsProperty, {
         position: modelVBox.leftTop,
         visibleProperty: absorptionEmissionDialogVisibleProperty,
         tandem: tandem.createTandem( 'absorptionEmissionDialog' )
