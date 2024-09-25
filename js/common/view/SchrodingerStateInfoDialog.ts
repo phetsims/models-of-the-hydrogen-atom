@@ -17,7 +17,7 @@ import MOTHASymbols from '../MOTHASymbols.js';
 
 const CONTENT_TEXT_OPTIONS: RichTextOptions = {
   font: new PhetFont( 14 ),
-  lineWrap: 400
+  lineWrap: 575
 };
 
 export default class SchrodingerStateInfoDialog extends Dialog {
