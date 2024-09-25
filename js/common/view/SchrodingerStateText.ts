@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * SchrodingerStateText displays the quantum numbers (n,l,m) and orbital that describe the wavefunction of the electron
+ * SchrodingerStateText displays the quantum numbers (n,l,m) and subshell that describe the wavefunction of the electron
  * in the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -24,14 +24,14 @@ type SelfOptions = EmptySelfOptions;
 
 type WavefunctionTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
 
-// Orbital subshell names, indexed by the value of l from (n,l,m).
-const SUBSHELLS = [
-  ModelsOfTheHydrogenAtomStrings.sStringProperty,
-  ModelsOfTheHydrogenAtomStrings.pStringProperty,
-  ModelsOfTheHydrogenAtomStrings.dStringProperty,
-  ModelsOfTheHydrogenAtomStrings.gStringProperty,
-  ModelsOfTheHydrogenAtomStrings.fStringProperty,
-  ModelsOfTheHydrogenAtomStrings.hStringProperty
+// Orbital names, indexed by the value of l from (n,l,m).
+const ORBITALS = [
+  MOTHASymbols.sStringProperty,
+  MOTHASymbols.pStringProperty,
+  MOTHASymbols.dStringProperty,
+  MOTHASymbols.gStringProperty,
+  MOTHASymbols.fStringProperty,
+  MOTHASymbols.hStringProperty
 ];
 
 export default class SchrodingerStateText extends RichText {
@@ -58,7 +58,7 @@ export default class SchrodingerStateText extends RichText {
         MOTHASymbols.lStringProperty,
         MOTHASymbols.mStringProperty,
         nlmProperty,
-        ...SUBSHELLS
+        ...ORBITALS
       ],
       () => StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty.value, {
         nSymbol: MOTHASymbols.nStringProperty.value,
@@ -67,7 +67,7 @@ export default class SchrodingerStateText extends RichText {
         nValue: nlmProperty.value.n,
         lValue: nlmProperty.value.l,
         mValue: nlmProperty.value.m,
-        subshell: SUBSHELLS[ nlmProperty.value.l ].value
+        subshell: ORBITALS[ nlmProperty.value.l ].value
       } ) );
 
     super( stringProperty, options );
