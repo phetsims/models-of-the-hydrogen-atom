@@ -32,7 +32,6 @@ const MOTHASymbols = {
   // Arrows
   leftRightArrow: '\u2194', // <->, for photon absorption and emission, e.g. 1 <-> 2
   rightArrow: '\u2192', // for photon absorption, e.g. 1 -> 2
-  leftArrow: '\u2190', // for photon emission, e.g. 1 <- 2
 
   // Greek letters
   lambda: '\u03BB'
