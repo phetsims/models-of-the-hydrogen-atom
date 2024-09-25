@@ -29,7 +29,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AbsorptionEmissionDialog from '../../common/view/AbsorptionEmissionDialog.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import AbsorptionEmissionCheckbox from '../../common/view/AbsorptionEmissionCheckbox.js';
-import BohrModel from '../../common/model/BohrModel.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -66,9 +65,10 @@ export default class SpectraScreenView extends ScreenView {
       phetioReadOnly: true // because the sim controls this
     } );
 
-    model.predictiveModelProperty.link( predictiveModel => {
+    // Hide the dialog when a classical model is being viewed.
+    model.isQuantumModelProperty.link( isQuantumModel => {
       if ( absorptionEmissionDialogVisibleProperty.value ) {
-        absorptionEmissionDialogVisibleProperty.value = ( predictiveModel instanceof BohrModel );
+        absorptionEmissionDialogVisibleProperty.value = isQuantumModel;
       }
     } );
 
