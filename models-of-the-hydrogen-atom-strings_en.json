@@ -141,7 +141,7 @@
     "value": "{{n}}, the <b>Principal Quantum Number</b>, describes the energy and size of the orbital."
   },
   "lDescription": {
-    "value": "{{l}}, the <b>Angular Quantum Number</b>, describes the shape of the orbital. Orbital shapes are spherical ({{l}} = 0, or {{s}}), peanut-shaped ({{l}} = 1 or {{p}}), and become more complex as {{l}} increases."
+    "value": "{{l}}, the <b>Angular Quantum Number</b>, describes the shape of the orbital. Orbital shapes are spherical ({{l}} = 0 or {{s}}), peanut-shaped ({{l}} = 1 or {{p}}), and become more complex as {{l}} increases."
   },
   "mDescription": {
     "value": "{{m}}, the <b>Magnetic Quantum Number</b>, describes the orientation of the orbital in space."
