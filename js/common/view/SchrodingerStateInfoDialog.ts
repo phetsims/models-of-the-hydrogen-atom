@@ -32,6 +32,12 @@ export default class SchrodingerStateInfoDialog extends Dialog {
       maxWidth: 300
     } );
 
+    const nlmText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nlmDescriptionStringProperty, {
+      n: MOTHASymbols.nStringProperty,
+      l: MOTHASymbols.lStringProperty,
+      m: MOTHASymbols.mStringProperty
+    } ), CONTENT_TEXT_OPTIONS );
+
     const nText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nDescriptionStringProperty, {
       n: MOTHASymbols.nStringProperty
     } ), CONTENT_TEXT_OPTIONS );
@@ -52,7 +58,7 @@ export default class SchrodingerStateInfoDialog extends Dialog {
     const bodyBox = new VBox( {
       align: 'left',
       spacing: spacing,
-      children: [ nText, lText, mText ]
+      children: [ nlmText, nText, lText, mText ]
     } );
 
     const content = new VBox( {

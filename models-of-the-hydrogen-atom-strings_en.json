@@ -134,8 +134,11 @@
   "quantumNumbers": {
     "value": "Quantum Numbers"
   },
+  "nlmDescription": {
+    "value": "A solution to the Schrödinger equation, both the three-dimensional wavefunction and energy, includes a set of three quantum numbers ({{n}},{{l}},{{m}}). The wavefunction describes an atomic <b>orbital</b>, the region in space where the electron is located."
+  },
   "nDescription": {
-    "value": "{{n}} is the <b>Principal Quantum Number</b> and describes the energy of an orbital."
+    "value": "{{n}} is the <b>Principal Quantum Number</b> and describes the energy of the orbital."
   },
   "lDescription": {
     "value": "{{l}} is the <b>Angular Quantum Number</b> and describes the shape of the orbital. Orbitals have shapes that are best described as spherical ({{l}} = 0, or also called {{s}}), polar ({{l}} = 1 or also called {{p}}), or cloverleaf ({{l}} = 2 or also called {{d}}). They can even take on more complex shapes as the value of {{l}} becomes larger."
