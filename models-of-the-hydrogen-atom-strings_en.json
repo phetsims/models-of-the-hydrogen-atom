@@ -135,7 +135,7 @@
     "value": "Quantum Numbers"
   },
   "nlmDescription": {
-    "value": "Schrödinger used 3 quantum numbers (n, l, m) to describe the most probable location of an electron, also known as an <b>orbital</b>."
+    "value": "Schrödinger used 3 quantum numbers ({{n}},{{l}},{{m}}) to describe the most probable location of an electron, also known as an <b>orbital</b>."
   },
   "nDescription": {
     "value": "{{n}}, the <b>Principal Quantum Number</b>, describes the energy and size of the orbital."
