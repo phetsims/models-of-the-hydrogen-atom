@@ -42,7 +42,8 @@ import SchrodingerStateText from './SchrodingerStateText.js';
 import Light from '../model/Light.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
+import SchrodingerStateInfoDialog from './SchrodingerStateInfoDialog.js';
+import SchrodingerStateInfoButton from './SchrodingerStateInfoButton.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -85,14 +86,9 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'stateText' )
     } );
 
-    const stateInfoButton = new InfoButton( {
-      scale: 0.5,
-      iconFill: MOTHAColors.stateInfoButtonFillProperty,
-      listener: () => {
-        //TODO stateInfoDialog.show()
-      },
-      tandem: options.tandem.createTandem( 'stateInfoButton' )
-    } );
+    const stateInfoDialog = new SchrodingerStateInfoDialog( options.tandem.createTandem( 'stateInfoDialog' ) );
+
+    const stateInfoButton = new SchrodingerStateInfoButton( stateInfoDialog, options.tandem.createTandem( 'stateInfoButton' ) );
 
     const stateBox = new HBox( {
       children: [ stateText, stateInfoButton ],
