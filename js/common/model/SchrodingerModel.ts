@@ -48,7 +48,6 @@ import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import solveAssociatedLegendrePolynomial from './solveAssociatedLegendrePolynomial.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import Property from '../../../../axon/js/Property.js';
@@ -57,6 +56,7 @@ import MetastableHandler from './MetastableHandler.js';
 import Light from './Light.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import PolynomialTerm from './PolynomialTerm.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -224,37 +224,93 @@ export default class SchrodingerModel extends DeBroglieModel {
     const cosTheta = Math.abs( z ) / r;
 
     // Solve the wavefunction.
-    const w = this.solveWavefunction( n, l, m, r, cosTheta );
+    const w = solveWavefunction( n, l, m, r, cosTheta );
 
     // Square the result.
     return ( w * w );
   }
+}
 
-  /**
-   * Solves the electron's wavefunction.
-   */
-  private solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
-    const t1 = this.solveGeneralizedLaguerrePolynomial( n, l, r );
-    const t2 = solveAssociatedLegendrePolynomial( l, Math.abs( m ), cosTheta );
-    return ( t1 * t2 );
+/**
+ * Solves the electron's wavefunction.
+ */
+function solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
+  const t1 = solveGeneralizedLaguerrePolynomial( n, l, r );
+  const t2 = solveAssociatedLegendrePolynomial( l, Math.abs( m ), cosTheta );
+  return ( t1 * t2 );
+}
+
+/**
+ * Solves the generalized Laguerre Polynomial, as specified in the Java design document.
+ */
+function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
+  const a = BohrModel.getElectronOrbitRadius( n ) / ( n * n );
+  const multiplier = Math.pow( r, l ) * Math.exp( -r / ( n * a ) );
+  const b0 = 2 * Math.pow( n * a, -1.5 ); // b0
+  const limit = n - l - 1;
+  let bj = b0;
+  let sum = b0; // j==0
+  for ( let j = 1; j <= limit; j++ ) {
+    bj = ( 2 / ( n * a ) ) * ( ( j + l - n ) / ( j * ( j + ( 2 * l ) + 1 ) ) ) * bj;
+    sum += ( bj * Math.pow( r, j ) );
   }
+  return ( multiplier * sum );
+}
 
-  /**
-   * Solves the generalized Laguerre Polynomial, as specified in the Java design document.
-   */
-  private solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
-    const a = BohrModel.getElectronOrbitRadius( n ) / ( n * n );
-    const multiplier = Math.pow( r, l ) * Math.exp( -r / ( n * a ) );
-    const b0 = 2 * Math.pow( n * a, -1.5 ); // b0
-    const limit = n - l - 1;
-    let bj = b0;
-    let sum = b0; // j==0
-    for ( let j = 1; j <= limit; j++ ) {
-      bj = ( 2 / ( n * a ) ) * ( ( j + l - n ) / ( j * ( j + ( 2 * l ) + 1 ) ) ) * bj;
-      sum += ( bj * Math.pow( r, j ) );
+/**
+ * Solves the associated Legendre polynomial. In the java version, this was AssociatedLegendrePolynomials.java.
+ *
+ * This solution uses Wolfram's definition of the associated Legendre polynomial. See
+ * https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html
+ * http://mathworld.wolfram.com/LegendrePolynomial.html
+ *
+ * When l > 6, this implementation starts to differ from Wolfram and "Numerical Recipes in C".
+ * To compare with Mathematica online, use: x^2*(3)*( LegendreP[7,3,-0.99])
+ * as the input to the Integral Calculator at http://integrals.wolfram.com/index.jsp
+ *
+ * For details on why this doesn't work for l > 6, see Section 6.8 of "Numerical Recipes in C, Second Edition" (1992)
+ * at https://www.grad.hr/nastava/gs/prg/NumericalRecipesinC.pdf
+ *
+ * @param l - azimuthal quantum number
+ * @param m - magnetic quantum number
+ * @param x - x-axis coordinate
+ */
+function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): number {
+
+  // For large l, the brute-force solution below encounters instabilities.
+  assert && assert( Number.isInteger( l ) && l >= 0 && l <= 6, `invalid l: ${l}` );
+  assert && assert( Number.isInteger( m ) && m >= 0 && m <= l, `invalid m: ${m}` );
+  assert && assert( Math.abs( x ) <= 1, `invalid x: ${x}` );
+
+  let productTerms = [ new PolynomialTerm( 0, 1 ) ]; // 1x^0
+
+  for ( let i = 0; i < l; i++ ) {
+
+    // x^2-1 times each term on left side TODO what does this mean?
+    const terms: PolynomialTerm[] = [];
+    for ( let k = 0; k < productTerms.length; k++ ) {
+      const term = productTerms[ k ];
+      terms.push( new PolynomialTerm( term.power + 2, term.coefficient ) );
+      terms.push( new PolynomialTerm( term.power, -1 * term.coefficient ) );
     }
-    return ( multiplier * sum );
+    productTerms = terms;
   }
+
+  for ( let i = 0; i < productTerms.length; i++ ) {
+    productTerms[ i ] = productTerms[ i ].derive( l + m );
+  }
+
+  // Wolfram says there is a sign convention difference here. TODO clarify this?
+  return Math.pow( -1, m ) / ( Math.pow( 2, l ) * MOTHAUtils.factorial( l ) ) *
+         Math.pow( 1 - x * x, m / 2 ) * evaluate( productTerms, x );
+}
+
+function evaluate( productTerms: PolynomialTerm[], x: number ): number {
+  let sum = 0;
+  for ( let i = 0; i < productTerms.length; i++ ) {
+    sum += productTerms[ i ].evaluate( x );
+  }
+  return sum;
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerModel', SchrodingerModel );
