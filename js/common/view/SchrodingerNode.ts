@@ -35,13 +35,14 @@ import SchrodingerModel from '../model/SchrodingerModel.js';
 import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
 import SchrodingerStateText from './SchrodingerStateText.js';
 import Light from '../model/Light.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -84,11 +85,25 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       tandem: options.tandem.createTandem( 'stateText' )
     } );
 
+    const stateInfoButton = new InfoButton( {
+      scale: 0.5,
+      iconFill: MOTHAColors.stateInfoButtonFillProperty,
+      listener: () => {
+        //TODO stateInfoDialog.show()
+      },
+      tandem: options.tandem.createTandem( 'stateInfoButton' )
+    } );
+
+    const stateBox = new HBox( {
+      children: [ stateText, stateInfoButton ],
+      spacing: 8
+    } );
+
     //TODO Should be in front of photons.
     const vBox = new VBox( {
       align: 'right',
       spacing: 15,
-      children: [ exciteAtomButton, stateText ]
+      children: [ exciteAtomButton, stateBox ]
     } );
 
     //TODO Under Construction

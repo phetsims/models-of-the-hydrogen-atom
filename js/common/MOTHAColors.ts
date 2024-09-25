@@ -265,6 +265,10 @@ const MOTHAColors = {
     default: PhetColorScheme.BUTTON_YELLOW
   } ),
 
+  stateInfoButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'stateInfoButtonFill', {
+    default: 'rgb( 0, 111, 153 )'
+  } ),
+
   //------------------------------------------------------------------------------------------------------------------
   // Static colors
   //------------------------------------------------------------------------------------------------------------------
