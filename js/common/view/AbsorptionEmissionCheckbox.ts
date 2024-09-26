@@ -41,6 +41,8 @@ export default class AbsorptionEmissionCheckbox extends Checkbox {
 
       // CheckboxOptions
       isDisposable: false,
+      checkboxColor: MOTHAColors.checkboxColorProperty,
+      checkboxColorBackground: MOTHAColors.checkboxColorBackgroundProperty,
 
       // Show this checkbox only for quantum models, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
       visibleProperty: new DerivedProperty( [ isQuantumModelProperty, visibleProperty ],
