@@ -206,8 +206,8 @@ export default class BohrModel extends HydrogenAtom {
   protected collides( photon: Photon ): boolean {
     const electronPosition = this.electron.positionProperty.value;
     const photonPosition = photon.positionProperty.value;
-    const collisionCloseness = photon.radius + this.electron.radius;
-    return this.pointsCollide( electronPosition, photonPosition, collisionCloseness );
+    const maxDistance = photon.radius + this.electron.radius;
+    return this.pointsCollide( electronPosition, photonPosition, maxDistance );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

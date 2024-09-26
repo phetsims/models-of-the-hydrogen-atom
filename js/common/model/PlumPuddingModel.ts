@@ -282,9 +282,9 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       const electronPosition = this.electron.positionProperty.value;
       const photonPosition = photon.positionProperty.value;
-      const collisionCloseness = photon.radius + this.electron.radius;
+      const maxDistance = photon.radius + this.electron.radius;
 
-      if ( this.pointsCollide( electronPosition, photonPosition, collisionCloseness ) ) {
+      if ( this.pointsCollide( electronPosition, photonPosition, maxDistance ) ) {
         if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
           this.numberOfPhotonsAbsorbedProperty.value += 1;
           assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );
