@@ -59,10 +59,10 @@ type StringsType = {
   'gStringProperty': LocalizedStringProperty;
   'hStringProperty': LocalizedStringProperty;
   'quantumNumbersStringProperty': LocalizedStringProperty;
-  'nlmDescriptionStringProperty': LocalizedStringProperty;
-  'nDescriptionStringProperty': LocalizedStringProperty;
-  'lDescriptionStringProperty': LocalizedStringProperty;
-  'mDescriptionStringProperty': LocalizedStringProperty;
+  'nlmInfoStringProperty': LocalizedStringProperty;
+  'nInfoStringProperty': LocalizedStringProperty;
+  'lInfoStringProperty': LocalizedStringProperty;
+  'mInfoStringProperty': LocalizedStringProperty;
 };
 
 const ModelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;

@@ -32,24 +32,24 @@ export default class SchrodingerStateInfoDialog extends Dialog {
       maxWidth: 300
     } );
 
-    const nlmText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nlmDescriptionStringProperty, {
+    const nlmText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nlmInfoStringProperty, {
       n: MOTHASymbols.nStringProperty,
       l: MOTHASymbols.lStringProperty,
       m: MOTHASymbols.mStringProperty
     } ), CONTENT_TEXT_OPTIONS );
 
-    const nText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nDescriptionStringProperty, {
+    const nText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nInfoStringProperty, {
       n: MOTHASymbols.nStringProperty
     } ), CONTENT_TEXT_OPTIONS );
 
-    const lText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.lDescriptionStringProperty, {
+    const lText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.lInfoStringProperty, {
       l: MOTHASymbols.lStringProperty,
       s: MOTHASymbols.sStringProperty,
       p: MOTHASymbols.pStringProperty,
       d: MOTHASymbols.dStringProperty
     } ), CONTENT_TEXT_OPTIONS );
 
-    const mText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.mDescriptionStringProperty, {
+    const mText = new RichText( new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.mInfoStringProperty, {
       m: MOTHASymbols.mStringProperty
     } ), CONTENT_TEXT_OPTIONS );
 
