@@ -55,35 +55,6 @@
           "MODELS_OF_THE_HYDROGEN_ATOM/screen.spectra",
           "MODELS_OF_THE_HYDROGEN_ATOM/screen.energyLevels"
         ]
-      },
-      "eslintConfig": {
-        "extends": "../chipper/eslint/sim_eslintrc.js",
-        "rules": {
-          "todo-should-have-issue": "off"
-        },
-        "overrides": [
-          {
-            "files": [
-              "**/*.ts"
-            ],
-            "rules": {
-              "@typescript-eslint/ban-ts-comment": [
-                "error",
-                {
-                  "ts-expect-error": true,
-                  "ts-ignore": true,
-                  "ts-check": true,
-                  "ts-nocheck": true
-                }
-              ]
-            },
-            "parserOptions": {
-              "project": [
-                "../chipper/tsconfig/eslint-all/tsconfig.json"
-              ]
-            }
-          }
-        ]
       }
     };
   window.phet.chipper.stringRepos =
