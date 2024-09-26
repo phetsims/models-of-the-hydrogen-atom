@@ -269,12 +269,12 @@ const MOTHAColors = {
     default: 'rgb( 0, 111, 153 )'
   } ),
 
-  checkboxColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'checkboxColor', {
+  checkboxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'checkboxStroke', {
     default: 'white',
     projector: 'black'
   } ),
 
-  checkboxColorBackgroundProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'checkboxColorBackground', {
+  checkboxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'checkboxFill', {
     default: 'black',
     projector: 'white'
   } ),
