@@ -27,7 +27,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import BohrNode from '../view/BohrNode.js'; // eslint-disable-line no-view-imported-from-model
+import BohrNode from '../view/BohrNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import Utils from '../../../../dot/js/Utils.js';

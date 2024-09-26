@@ -29,7 +29,7 @@ import Range from '../../../../dot/js/Range.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line no-view-imported-from-model
+import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';

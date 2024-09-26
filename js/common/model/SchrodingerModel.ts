@@ -42,7 +42,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line no-view-imported-from-model
+import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import ZoomedInBox from './ZoomedInBox.js';
 import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
 import MOTHAConstants from '../MOTHAConstants.js';

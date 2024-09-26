@@ -25,7 +25,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line no-view-imported-from-model
+import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

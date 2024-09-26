@@ -21,7 +21,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import BilliardBallNode from '../view/BilliardBallNode.js'; // eslint-disable-line no-view-imported-from-model
+import BilliardBallNode from '../view/BilliardBallNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import Photon from './Photon.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import ZoomedInBox from './ZoomedInBox.js';
