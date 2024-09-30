@@ -288,7 +288,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       const photonPosition = photon.positionProperty.value;
       const maxDistance = photon.radius + this.electron.radius;
 
-      if ( this.pointsCollide( electronPosition, photonPosition, maxDistance ) ) {
+      if ( MOTHAUtils.pointsCollide( electronPosition, photonPosition, maxDistance ) ) {
         if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
           this.numberOfPhotonsAbsorbedProperty.value += 1;
           assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );

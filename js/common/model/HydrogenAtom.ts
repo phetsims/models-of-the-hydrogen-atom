@@ -111,13 +111,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public abstract movePhoton( photon: Photon, dt: number ): void;
 
   /**
-   * Determines if two points collide.
-   */
-  protected pointsCollide( position1: Vector2, position2: Vector2, maxDistance: number ): boolean {
-    return position1.distance( position2 ) <= maxDistance;
-  }
-
-  /**
    * HydrogenAtomIO handles PhET-iO serialization of HydrogenAtom. Since all HydrogenAtom instances are created at
    * startup, exist for the lifetime of the sim, and are phetioState: false, it implements 'Reference type serialization',
    * as described in the Serialization section of

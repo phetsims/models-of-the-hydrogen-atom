@@ -207,7 +207,7 @@ export default class BohrModel extends HydrogenAtom {
     const electronPosition = this.electron.positionProperty.value;
     const photonPosition = photon.positionProperty.value;
     const maxDistance = photon.radius + this.electron.radius;
-    return this.pointsCollide( electronPosition, photonPosition, maxDistance );
+    return MOTHAUtils.pointsCollide( electronPosition, photonPosition, maxDistance );
   }
 
   //--------------------------------------------------------------------------------------------------------------------
