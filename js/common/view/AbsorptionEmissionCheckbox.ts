@@ -37,10 +37,17 @@ export default class AbsorptionEmissionCheckbox extends Checkbox {
       phetioFeatured: true
     } );
 
+    const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, {
+      font: new PhetFont( 16 ),
+      fill: MOTHAColors.invertibleTextFillProperty,
+      maxWidth: 200
+    } );
+
     const options = optionize<AbsorptionEmissionCheckboxOptions, SelfOptions, CheckboxOptions>()( {
 
       // CheckboxOptions
       isDisposable: false,
+      boxWidth: text.height,
       checkboxColor: MOTHAColors.checkboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.checkboxFillProperty,
 
@@ -48,12 +55,6 @@ export default class AbsorptionEmissionCheckbox extends Checkbox {
       visibleProperty: new DerivedProperty( [ isQuantumModelProperty, visibleProperty ],
         ( isQuantumModel, visible ) => isQuantumModel && visible )
     }, providedOptions );
-
-    const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, {
-      font: new PhetFont( 16 ),
-      fill: MOTHAColors.invertibleTextFillProperty,
-      maxWidth: 200
-    } );
 
     super( absorptionEmissionDialogVisibleProperty, text, options );
   }
