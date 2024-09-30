@@ -27,10 +27,12 @@ const MOTHAUtils = {
   },
 
   /**
-   * Gets a random angle >= startAngle and < startAngle + sweepAngle, in radians.
+   * Gets a random angle (in radian) that is inside a pie-shaped portion of a circle. The pie shape is defined by a
+   * startAngle and arcLength, both in radians.
    */
-  nextAngleFrom( startAngle: number, sweepAngle: number ): number {
-    return startAngle + dotRandom.nextDoubleBetween( 0, sweepAngle );
+  nextAngleInPieShape( startAngle: number, arcLength: number ): number {
+    assert && assert( arcLength >= 0, `invalid arcLength: ${arcLength}` );
+    return startAngle + dotRandom.nextDoubleBetween( 0, arcLength );
   },
 
   /**
