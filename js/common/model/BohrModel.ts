@@ -473,14 +473,14 @@ function getAbsorptionWavelength( n1: number, n2: number ): number {
   return Utils.toFixedNumber( wavelength, 0 );
 }
 
-/**
- * Creates a map from absorption/emission wavelengths to electron state transitions, ordered by ascending wavelength.
- */
 type StateTransition = {
   n1: number;
   n2: number; // n2 > n1
 };
 
+/**
+ * Creates a map from absorption/emission wavelengths to electron state transitions, ordered by ascending wavelength.
+ */
 function createWavelengthToStateTransitionMap(): Map<number, StateTransition> {
   const map = new Map<number, StateTransition>();
   for ( let n1 = MOTHAConstants.GROUND_STATE; n1 < MOTHAConstants.MAX_STATE; n1++ ) {
