@@ -286,11 +286,9 @@ export default class BohrModel extends HydrogenAtom {
    * Attempts to stimulate emission with a specified photon.
    *
    * Definition of stimulated emission, for state m < n:
-   * If an electron in state n gets hit by a photon whose absorption
-   * would cause a transition from state m to n, then the electron
-   * should drop to state m and emit a photon.  The emitted photon
-   * should be the same wavelength and be traveling alongside the
-   * original photon.
+   * If an electron in state n is hit by a photon whose absorption would cause a transition from state m to n, then
+   * the electron should drop to state m and emit a photon. The emitted photon should be the same wavelength and be
+   * traveling alongside the original photon.
    */
   private attemptStimulatedEmission( photon: Photon ): boolean {
 
