@@ -160,6 +160,7 @@ export default class BohrModel extends HydrogenAtom {
    * Gets the wavelength that is absorbed when the electron transitions from n1 to n2, where n2 > n1.
    */
   public static getAbsorptionWavelength( n1: number, n2: number ): number {
+    //TODO Should this be a lookup in BohrModel.wavelengthToStateTransitionMap?
     return getAbsorptionWavelength( n1, n2 );
   }
 
@@ -167,6 +168,7 @@ export default class BohrModel extends HydrogenAtom {
    * Gets the wavelength that is emitted when the electron transitions from n2 to n1, where n1 < n2.
    */
   public static getEmissionWavelength( n2: number, n1: number ): number {
+    //TODO Should this be a lookup in BohrModel.wavelengthToStateTransitionMap?
     return getAbsorptionWavelength( n1, n2 );
   }
 
@@ -286,10 +288,10 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Attempts to stimulate emission with a specified photon.
    *
-   * Definition of stimulated emission, for states n1 > n2:
-   * If an electron in state n1 is hit by a photon whose absorption would cause a transition from state n1 to n2, then
-   * the electron should drop to state n2 and emit a photon. The emitted photon should be the same wavelength and be
-   * traveling alongside the original photon.
+   * Definition of stimulated emission, for states nOld > nNew:
+   * If an electron in state nOld is hit by a photon whose absorption would cause a transition from state nOld to nNew,
+   * then the electron should drop to state nNew and emit a photon. The emitted photon should be the same wavelength
+   * and be traveling alongside the original photon.
    */
   private attemptStimulatedEmission( photon: Photon ): boolean {
 
@@ -310,6 +312,7 @@ export default class BohrModel extends HydrogenAtom {
       if ( collide ) {
 
         // Can this photon stimulate emission, does it have a transition wavelength?
+        //TODO Should this be a lookup in BohrModel.wavelengthToStateTransitionMap?
         let canStimulateEmission = false;
         let nNew = 0;
         for ( let n = MOTHAConstants.GROUND_STATE; n < nCurrent && !canStimulateEmission; n++ ) {
@@ -364,6 +367,7 @@ export default class BohrModel extends HydrogenAtom {
    * Determines if a proposed state transition caused by stimulated emission is legal.
    * A Bohr transition is legal if the 2 states are different and newElectronState >= ground state.
    */
+  //TODO Doc for attemptStimulatedEmission says that nOld must be > nNew. Which is correct?
   protected stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
     return ( ( nOld !== nNew ) && ( nNew >= MOTHAConstants.GROUND_STATE ) );
   }
