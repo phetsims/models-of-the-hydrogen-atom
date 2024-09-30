@@ -27,10 +27,10 @@ const MOTHAUtils = {
   },
 
   /**
-   * Gets a random angle (in radian) that is inside a pie-shaped portion of a circle. The pie shape is defined by a
+   * Gets a random angle (in radian) that is inside a slice of a circular pie chart. The slice shape is defined by a
    * startAngle and arcLength, both in radians.
    */
-  nextAngleInPieShape( startAngle: number, arcLength: number ): number {
+  nextAngleInPieSlice( startAngle: number, arcLength: number ): number {
     assert && assert( arcLength >= 0, `invalid arcLength: ${arcLength}` );
     return startAngle + dotRandom.nextDoubleBetween( 0, arcLength );
   },
