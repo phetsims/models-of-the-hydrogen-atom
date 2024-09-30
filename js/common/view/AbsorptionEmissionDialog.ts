@@ -145,6 +145,7 @@ export default class AbsorptionEmissionDialog extends Panel {
     // Group all buttons.
     const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
 
+    //TODO Don't assume that wavelengthToStateTransitionMap is sorted by ascending wavelength.
     let n1Previous = 1;
     for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
 
