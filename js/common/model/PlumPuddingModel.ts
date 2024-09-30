@@ -292,7 +292,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
           this.numberOfPhotonsAbsorbedProperty.value += 1;
           assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );
-          phet.log && phet.log( `Plum Pudding: absorbed ${MOTHASymbols.lambda}=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
+          phet.log && phet.log( `PlumPuddingModel: absorbed ${MOTHASymbols.lambda}=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
           this.photonAbsorbedEmitter.emit( photon );
           absorbed = true;
         }
@@ -324,7 +324,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         direction: direction,
         wasEmitted: true
       } );
-      phet.log && phet.log( `Plum Pudding: emitted \u03BB=${photon.wavelength}` );
+      phet.log && phet.log( `PlumPuddingModel: emitted \u03BB=${photon.wavelength}` );
       this.photonEmittedEmitter.emit( photon );
     }
   }

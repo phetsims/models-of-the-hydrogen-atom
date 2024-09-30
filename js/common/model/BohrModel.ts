@@ -255,7 +255,7 @@ export default class BohrModel extends HydrogenAtom {
 
           // absorb photon
           success = true;
-          phet.log && phet.log( `Bohr: absorbed ${MOTHASymbols.lambda}=${photon.wavelength}` );
+          phet.log && phet.log( `BohrModel: absorbed ${MOTHASymbols.lambda}=${photon.wavelength}` );
           this.photonAbsorbedEmitter.emit( photon );
 
           // move electron to new state
@@ -342,7 +342,7 @@ export default class BohrModel extends HydrogenAtom {
             direction: photon.directionProperty.value,
             wasEmitted: true
           } );
-          phet.log && phet.log( `Bohr: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+          phet.log && phet.log( `BohrModel: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
           assert && assert( BohrModel.wavelengthToStateTransitionMap.has( emittedPhoton.wavelength ),
             `not an emission wavelength: ${emittedPhoton.wavelength}` );
           this.photonEmittedEmitter.emit( emittedPhoton );
@@ -407,7 +407,7 @@ export default class BohrModel extends HydrogenAtom {
           direction: MOTHAUtils.nextAngle(), // in a random direction
           wasEmitted: true
         } );
-        phet.log && phet.log( `Bohr: spontaneous emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+        phet.log && phet.log( `BohrModel: spontaneous emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
         assert && assert( BohrModel.wavelengthToStateTransitionMap.has( emittedPhoton.wavelength ),
           `not an emission wavelength: ${emittedPhoton.wavelength}` );
         this.photonEmittedEmitter.emit( emittedPhoton );

@@ -59,7 +59,7 @@ export default class BohrElectron extends Electron {
       phetioFeatured: true,
       phetioDocumentation: 'n, the principal quantum number.'
     } );
-    phet.log && this.nProperty.lazyLink( ( nNew, nOld ) => phet.log( `n: ${nOld} -> ${nNew}` ) );
+    phet.log && this.nProperty.lazyLink( ( nNew, nOld ) => phet.log( `BohrElectron: n ${nOld} -> ${nNew}` ) );
 
     //TODO This was discussed at 8/22/24 PhET-iO design meeting. Do we need it?
     this.energyProperty = new DerivedProperty( [ this.nProperty ], n => MOTHAConstants.E1 / ( n * n ), {
