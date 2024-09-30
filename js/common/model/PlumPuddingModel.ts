@@ -313,7 +313,8 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       this.numberOfPhotonsAbsorbedProperty.value -= 1;
 
-      // In a random direction that is noticeably different from the light source.
+      // The photon's direction must be noticeably different from the direction of the light source, so that emitted
+      // photons are easy to see, and not confused with photons from the light source.
       const direction = MOTHAUtils.nextAngleFrom( Light.DIRECTION + PHOTON_EMISSION_AVOID_ANGLE, 2 * Math.PI - 2 * PHOTON_EMISSION_AVOID_ANGLE );
 
       // Create and emit a photon
