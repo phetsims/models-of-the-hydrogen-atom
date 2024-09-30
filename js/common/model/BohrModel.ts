@@ -391,7 +391,7 @@ export default class BohrModel extends HydrogenAtom {
     // Has the electron been in this state long enough?
     if ( nCurrent > MOTHAConstants.GROUND_STATE && electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE ) {
 
-      //  Emit a photon with some probability...
+      // Emit a photon with some probability.
       if ( this.spontaneousEmissionIsCertain() ) {
 
         const nNew = this.chooseLower_n();
