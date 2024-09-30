@@ -155,7 +155,9 @@ export default class SchrodingerModel extends DeBroglieModel {
    */
   protected override stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
     let allowed = true;
-    if ( nNew === nOld ) {
+    if ( nNew >= nOld ) {
+
+      // Stimulated emission occurs when moving to a lower energy state.
       allowed = false;
     }
     else if ( nNew === 1 && this.l === 0 ) {
@@ -168,7 +170,6 @@ export default class SchrodingerModel extends DeBroglieModel {
       // the only way to get to (1,0,0) is from (n,1,?)
       allowed = false;
     }
-
     return allowed;
   }
 
