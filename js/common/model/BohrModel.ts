@@ -325,7 +325,7 @@ export default class BohrModel extends HydrogenAtom {
           return false;
         }
 
-        // Emit a photon with some probability...
+        // Emit a photon with some probability.
         if ( canStimulateEmission && this.stimulatedEmissionIsCertain() ) {
 
           // The photon should be moving in the direction that the light source is pointed.
