@@ -27,6 +27,13 @@ const MOTHAUtils = {
   },
 
   /**
+   * Gets a random angle >= startAngle and < startAngle + sweepAngle, in radians.
+   */
+  nextAngleFrom( startAngle: number, sweepAngle: number ): number {
+    return startAngle + dotRandom.nextDoubleBetween( 0, sweepAngle );
+  },
+
+  /**
    * Converts from polar to Cartesian coordinates.
    */
   polarToCartesian( radius: number, angle: number ): Vector2 {

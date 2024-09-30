@@ -44,6 +44,9 @@ type LightOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Light extends PhetioObject {
 
+  // The light source points up in the model coordinate frame.
+  public static readonly DIRECTION = Math.PI / 2;
+
   private readonly zoomedInBox: ZoomedInBox;
 
   // is the light on?
@@ -186,7 +189,7 @@ export default class Light extends PhetioObject {
     this.photonCreatedEmitter.emit( new Photon( {
       wavelength: wavelength,
       position: position,
-      direction: Math.PI / 2 // in the direction of +y
+      direction: Light.DIRECTION
     } ) );
   }
 

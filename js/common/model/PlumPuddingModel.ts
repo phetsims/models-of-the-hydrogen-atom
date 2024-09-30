@@ -41,11 +41,15 @@ import MOTHASymbols from '../MOTHASymbols.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import PlumPuddingElectron from './PlumPuddingElectron.js';
+import Light from './Light.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 const PHOTON_EMISSION_PROBABILITY = 0.1; // probability [0,1] that a photon will be emitted
 const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon will be absorbed
+
+// How close an emitted photon's direction can be to the light source direction.
+const PHOTON_EMISSION_AVOID_ANGLE = Math.PI / 8;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -309,11 +313,14 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       this.numberOfPhotonsAbsorbedProperty.value -= 1;
 
+      // In a random direction that is noticeably different from the light source.
+      const direction = MOTHAUtils.nextAngleFrom( Light.DIRECTION + PHOTON_EMISSION_AVOID_ANGLE, 2 * Math.PI - 2 * PHOTON_EMISSION_AVOID_ANGLE );
+
       // Create and emit a photon
       const photon = new Photon( {
         wavelength: PHOTON_EMISSION_WAVELENGTH,
         position: this.electron.positionProperty.value, // at the electron's position
-        direction: MOTHAUtils.nextAngle(), // in a random direction
+        direction: direction,
         wasEmitted: true
       } );
       phet.log && phet.log( `Plum Pudding: emitted \u03BB=${photon.wavelength}` );

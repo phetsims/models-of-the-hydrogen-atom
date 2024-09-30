@@ -34,7 +34,7 @@ export class LightNode extends Node {
       bodySize: new Dimension2( 88, 64 ),
       nozzleSize: new Dimension2( 18, 50 ),
       buttonRadius: 19,
-      rotation: -Math.PI / 2, // pointing up
+      rotation: -Light.DIRECTION, // +y is up in the model, down in the view
       tandem: options.tandem.createTandem( 'laserPointerNode' ),
       phetioVisiblePropertyInstrumented: false
     } );
