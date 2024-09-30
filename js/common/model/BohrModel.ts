@@ -42,6 +42,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import BohrElectron from './BohrElectron.js';
+import Light from './Light.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -327,8 +328,8 @@ export default class BohrModel extends HydrogenAtom {
         // Emit a photon with some probability...
         if ( canStimulateEmission && this.stimulatedEmissionIsCertain() ) {
 
-          // This algorithm assumes that photons are moving vertically from bottom to top.
-          assert && assert( photon.directionProperty.value === Math.PI / 2 );
+          // The photon should be moving in the direction that the light source is pointed.
+          assert && assert( photon.directionProperty.value === Light.DIRECTION );
 
           // Create and emit a photon
           success = true;
