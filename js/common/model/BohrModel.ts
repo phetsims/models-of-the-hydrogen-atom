@@ -365,7 +365,7 @@ export default class BohrModel extends HydrogenAtom {
 
   /**
    * Determines if a proposed state transition caused by stimulated emission is legal.
-   * A Bohr transition is legal if the 2 states are different and newElectronState >= ground state.
+   * A Bohr transition is legal if the 2 states are different and nNew is >= ground state.
    */
   //TODO Doc for attemptStimulatedEmission says that nOld must be > nNew. Which is correct?
   protected stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
