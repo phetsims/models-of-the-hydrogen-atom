@@ -1,5 +1,6 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
+//TODO Collision detection is done twice, calling this.collides in both absorbPhoton and attemptStimulatedEmission.
 /**
  * BohrModel is a predictive model of the hydrogen atom.
  *
