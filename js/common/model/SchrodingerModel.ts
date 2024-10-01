@@ -44,7 +44,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import ZoomedInBox from './ZoomedInBox.js';
-import DeBroglieModel, { DeBroglieModelOptions } from './DeBroglieModel.js';
+import { DeBroglieModelOptions } from './DeBroglieModel.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
@@ -57,12 +57,13 @@ import Light from './Light.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import PolynomialTerm from './PolynomialTerm.js';
+import DeBroglieBaseModel, { DeBroglieBaseModelOptions } from './DeBroglieBaseModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type SchrodingerModelOptions = SelfOptions & DeBroglieModelOptions;
+export type SchrodingerModelOptions = SelfOptions & DeBroglieBaseModelOptions;
 
-export default class SchrodingerModel extends DeBroglieModel {
+export default class SchrodingerModel extends DeBroglieBaseModel {
 
   // Quantum numbers (n,l,m) that specify the wavefunction for the electron.
   public readonly nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>;

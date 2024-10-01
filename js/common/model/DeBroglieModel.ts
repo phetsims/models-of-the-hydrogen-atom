@@ -27,24 +27,21 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import DeBroglieBaseModel from './DeBroglieBaseModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
 export type DeBroglieModelOptions = SelfOptions & BohrModelOptions;
 
-export default class DeBroglieModel extends BohrModel {
-
-  // Which representation to use.
-  public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
+export default class DeBroglieModel extends DeBroglieBaseModel {
 
   // How much to scale the y dimension for 3D orbits.
   public static readonly ORBIT_3D_Y_SCALE = 0.35;
 
-  // Radial width of the ring for the 'brightness' representation.
-  public static readonly BRIGHTNESS_RING_THICKNESS = 3;
+  // Which representation to use.
+  public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
 
   // Position of the electron adjusted for the '3D height' view.
-  //TODO Move this to DeBroglie3DHeightNode.
   public readonly electron3DPositionProperty: TReadOnlyProperty<Vector2>;
 
   public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
@@ -73,28 +70,9 @@ export default class DeBroglieModel extends BohrModel {
 
   public override reset(): void {
 
-    //TODO Calling reset when switching between models probably should not reset this.
+    //TODO Calling reset when switching between models should not reset this.
     this.deBroglieRepresentationProperty.reset();
     super.reset();
-  }
-
-  /**
-   * Gets the amplitude [-1,1] of a standing wave at some angle, in some specified state of the electron.
-   */
-  public getAmplitude( n: number, angle: number ): number {
-    const amplitude = Math.sin( n * angle ) * Math.sin( this.electron.directionProperty.value );
-    assert && assert( amplitude >= -1 && amplitude <= 1 );
-    return amplitude;
-  }
-
-  //TODO normalize the return value to [0,2*Math.PI]
-  /**
-   * Calculates the new electron angle for some time step. For de Broglie, the direction changes at the same rate for
-   * all electron states (n).
-   */
-  protected override calculateNewElectronDirection( dt: number ): number {
-    const deltaAngle = dt * BohrModel.ELECTRON_ANGLE_DELTA;
-    return this.electron.directionProperty.value - deltaAngle; //TODO clockwise
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -110,7 +88,7 @@ export default class DeBroglieModel extends BohrModel {
       return this.collides3D( photon );
     }
     else {
-      return this.collides2D( photon );
+      return super.collides( photon );
     }
   }
 
@@ -137,39 +115,6 @@ export default class DeBroglieModel extends BohrModel {
     const closeness = this.getClosenessForCollision( photon );
 
     return ( distance <= closeness );
-  }
-
-  /**
-   * Determines whether a photon collides with this atom in one of the 2D views. In all 2D views (including
-   * 'Radial Distance'), the photon collides with the atom if it hits the ring used to represent the standing wave
-   * in one of the brightness views.
-   */
-  private collides2D( photon: Photon ): boolean {
-
-    // position of photon relative to atom's center
-    const photonOffset = this.getPhotonOffset( photon );
-
-    // distance of photon and electron from atom's center
-    const photonRadius = Math.sqrt( ( photonOffset.x * photonOffset.x ) + ( photonOffset.y * photonOffset.y ) );
-    const orbitRadius = BohrModel.getElectronOrbitRadius( this.electron.nProperty.value );
-
-    //TODO why is getClosenessForCollision used for 'radialDistance' when it's a function of BRIGHTNESS_RING_THICKNESS?
-    return ( Math.abs( photonRadius - orbitRadius ) <= this.getClosenessForCollision( photon ) );
-  }
-
-  /**
-   * Gets the offset of a photon from the atom's position.
-   */
-  private getPhotonOffset( photon: Photon ): Vector2 {
-    return photon.positionProperty.value.minus( this.position );
-  }
-
-  //TODO Why isn't this adjusted for '3D Height' view?
-  /**
-   * How close the photon's center must be to a point on the electron's orbit in order for a collision to occur.
-   */
-  private getClosenessForCollision( photon: Photon ): number {
-    return ( photon.radius + this.electron.radius + DeBroglieModel.BRIGHTNESS_RING_THICKNESS );
   }
 }
 
