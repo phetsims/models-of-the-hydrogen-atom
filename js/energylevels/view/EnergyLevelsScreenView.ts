@@ -75,10 +75,6 @@ export default class EnergyLevelsScreenView extends ScreenView {
       //TODO pdomControlAreaNode.pdomOrder
     ];
   }
-
-  public override step( dt: number ): void {
-    //TODO implement step
-  }
 }
 
 modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenView', EnergyLevelsScreenView );
