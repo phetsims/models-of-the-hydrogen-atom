@@ -157,22 +157,6 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Gets the wavelength that is absorbed when the electron transitions from n1 to n2, where n2 > n1.
-   */
-  public static getAbsorptionWavelength( n1: number, n2: number ): number {
-    //TODO Should this be a lookup in BohrModel.wavelengthToStateTransitionMap?
-    return getAbsorptionWavelength( n1, n2 );
-  }
-
-  /**
-   * Gets the wavelength that is emitted when the electron transitions from n2 to n1, where n1 < n2.
-   */
-  public static getEmissionWavelength( n2: number, n1: number ): number {
-    //TODO Should this be a lookup in BohrModel.wavelengthToStateTransitionMap?
-    return getAbsorptionWavelength( n1, n2 );
-  }
-
-  /**
    * Gets the wavelengths that can be absorbed in state n.
    */
   public static getAbsorptionWavelengths( n: number ): number[] {
@@ -238,7 +222,7 @@ export default class BohrModel extends HydrogenAtom {
         let canAbsorb = false;
         let nNew = 0;
         for ( let n = nCurrent + 1; n <= MOTHAConstants.MAX_STATE && !canAbsorb; n++ ) {
-          const transitionWavelength = BohrModel.getAbsorptionWavelength( nCurrent, n );
+          const transitionWavelength = getAbsorptionWavelength( nCurrent, n );
           if ( photon.wavelength === transitionWavelength ) {
             canAbsorb = true;
             nNew = n;
@@ -315,7 +299,7 @@ export default class BohrModel extends HydrogenAtom {
         //TODO Should this be a lookup in BohrModel.wavelengthToStateTransitionMap?
         let nNew;
         for ( let n = MOTHAConstants.GROUND_STATE; n < nCurrent && nNew === undefined; n++ ) {
-          if ( photon.wavelength === BohrModel.getAbsorptionWavelength( n, nCurrent ) ) {
+          if ( photon.wavelength === getAbsorptionWavelength( n, nCurrent ) ) {
             nNew = n;
           }
         }
@@ -403,7 +387,7 @@ export default class BohrModel extends HydrogenAtom {
         // Create and emit a photon
         success = true;
         const emittedPhoton = new Photon( {
-          wavelength: BohrModel.getEmissionWavelength( nCurrent, nNew ),
+          wavelength: getEmissionWavelength( nCurrent, nNew ),
           position: this.getSpontaneousEmissionPosition(),
           direction: MOTHAUtils.nextAngle(), // in a random direction
           wasEmitted: true
@@ -455,15 +439,13 @@ export default class BohrModel extends HydrogenAtom {
 assert && assert( BohrModel.ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES );
 
 /**
- * Gets the wavelength that must be absorbed for the electron to transition from state n1 to state n2,
- * where n2 > n1. This algorithm assumes that the ground state is 1.
+ * Gets the wavelength that is absorbed when the electron to transition from state n1 to state n2, where n2 > n1.
  */
 function getAbsorptionWavelength( n1: number, n2: number ): number {
-  assert && assert( Number.isInteger( n1 ) && Number.isInteger( n2 ) );
   assert && assert( MOTHAConstants.GROUND_STATE === 1 );
-  assert && assert( n1 >= MOTHAConstants.GROUND_STATE, `bad n1=${n1}` );
+  assert && assert( Number.isInteger( n1 ) && n1 >= MOTHAConstants.GROUND_STATE, `bad n1=${n1}` );
+  assert && assert( Number.isInteger( n2 ) && n2 <= MOTHAConstants.MAX_STATE, `bad n2=${n2}` );
   assert && assert( n1 < n2, `bad n1=${n1} n2=${n2}` );
-  assert && assert( n2 <= MOTHAConstants.MAX_STATE, `bad n2=${n2}` );
 
   // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.
   const wavelength = 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );
@@ -471,6 +453,13 @@ function getAbsorptionWavelength( n1: number, n2: number ): number {
   // As a simplification to benefit PhET-iO, convert to an integer value.
   // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53.
   return Utils.toFixedNumber( wavelength, 0 );
+}
+
+/**
+ * Gets the wavelength that is emitted when the electron transitions from n1 to n2, where n2 < n1.
+ */
+function getEmissionWavelength( n1: number, n2: number ): number {
+  return getAbsorptionWavelength( n2, n1 );
 }
 
 type StateTransition = {
@@ -485,8 +474,9 @@ function createWavelengthToStateTransitionMap(): Map<number, StateTransition> {
   const map = new Map<number, StateTransition>();
   for ( let n1 = MOTHAConstants.GROUND_STATE; n1 < MOTHAConstants.MAX_STATE; n1++ ) {
     for ( let n2 = MOTHAConstants.MAX_STATE; n2 > n1; n2-- ) {
-      const wavelength = Utils.toFixedNumber( getAbsorptionWavelength( n1, n2 ), 0 );
-      map.set( wavelength, { n1: n1, n2: n2 } );
+      const wavelength = getAbsorptionWavelength( n1, n2 );
+      const transition = { n1: n1, n2: n2 };
+      map.set( wavelength, transition );
     }
   }
   return map;
