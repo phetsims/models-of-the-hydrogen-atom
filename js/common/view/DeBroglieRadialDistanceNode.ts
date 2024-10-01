@@ -12,7 +12,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions, Path, PathOptions } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -54,17 +54,12 @@ export default class DeBroglieRadialDistanceNode extends Node {
     }, providedOptions );
 
     // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom, modelViewTransform, {
+    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform, {
       tandem: options.tandem.createTandem( 'orbitsNode' )
     } );
 
     // Ring that represents the standing wave
-    const ringNode = new RingNode( hydrogenAtom, modelViewTransform, {
-
-      // Synchronize visibility with the parent Node, because RingNode is optimized to update only when visible.
-      visibleProperty: options.visibleProperty,
-      tandem: options.tandem.createTandem( 'ringNode' )
-    } );
+    const ringNode = new RingNode( hydrogenAtom, modelViewTransform );
 
     options.children = [ orbitsNode, ringNode ];
 
@@ -76,10 +71,6 @@ export default class DeBroglieRadialDistanceNode extends Node {
  * RingNode is the ring that represents the standing wave.
  * It's radial distance from the electron's orbit is a function of amplitude.
  */
-
-type RingNodeSelfOptions = EmptySelfOptions;
-type RingNodeOptions = RingNodeSelfOptions & PickRequired<PathOptions, 'visibleProperty' | 'tandem'>;
-
 class RingNode extends Path {
 
   private readonly hydrogenAtom: DeBroglieModel;
@@ -91,28 +82,26 @@ class RingNode extends Path {
   // radius of the ground state orbit, in view coordinates
   private readonly groundStateOrbitRadius: number;
 
-  public constructor( hydrogenAtom: DeBroglieModel,
-                      modelViewTransform: ModelViewTransform2,
-                      providedOptions: RingNodeOptions ) {
+  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
-    const options = optionize<RingNodeOptions, RingNodeSelfOptions, PathOptions>()( {
-
-      // PathOptions
+    super( null, {
       isDisposable: false,
       stroke: MOTHAColors.electronBaseColorProperty,
       lineWidth: 2
-    }, providedOptions );
-
-    super( null, options );
+    } );
 
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE ) );
 
-    Multilink.multilink( [ hydrogenAtom.electron.directionProperty, this.visibleProperty ],
-      ( electronAngle, visible ) => {
-        visible && this.update();
+    // Optimized to update only when the view representation is set to 'Radial Distance'.
+    const updateEnabledProperty = new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+      deBroglieRepresentation => deBroglieRepresentation === 'radialDistance' );
+
+    Multilink.multilink( [ hydrogenAtom.electron.directionProperty, updateEnabledProperty ],
+      ( electronDirection, updateEnabled ) => {
+        updateEnabled && this.update();
       } );
   }
 
@@ -120,7 +109,6 @@ class RingNode extends Path {
    * Updates the shape of the ring.
    */
   private update(): void {
-    assert && assert( this.visible );
 
     // Get the radius for the electron's current state.
     const n = this.hydrogenAtom.electron.nProperty.value;

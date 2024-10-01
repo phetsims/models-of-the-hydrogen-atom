@@ -54,26 +54,18 @@ export default class DeBroglieBrightnessNode extends Node {
     }, providedOptions );
 
     // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom, modelViewTransform, {
+    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform, {
       tandem: options.tandem.createTandem( 'orbitsNode' )
     } );
 
     // Ring whose brightness represents the standing wave
-    const ringNode = new RingNode( hydrogenAtom, modelViewTransform, {
-
-      // Synchronize visibility with the parent Node, because RingNode is optimized to update only when visible.
-      visibleProperty: options.visibleProperty,
-      tandem: options.tandem.createTandem( 'ringNode' )
-    } );
+    const ringNode = new RingNode( hydrogenAtom, modelViewTransform );
 
     options.children = [ orbitsNode, ringNode ];
 
     super( options );
   }
 }
-
-type RingNodeSelfOptions = EmptySelfOptions;
-type RingNodeOptions = RingNodeSelfOptions & PickRequired<NodeOptions, 'visibleProperty' | 'tandem'>;
 
 /**
  * RingNode is the brightness ring that represents the standing wave.
@@ -91,17 +83,11 @@ class RingNode extends Node {
   private readonly negativeAmplitudeColorProperty: TReadOnlyProperty<Color>;
   private readonly zeroAmplitudeColorProperty: TReadOnlyProperty<Color>;
 
-  public constructor( hydrogenAtom: DeBroglieModel,
-                      modelViewTransform: ModelViewTransform2,
-                      providedOptions: RingNodeOptions ) {
+  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
-    const options = optionize<RingNodeOptions, RingNodeSelfOptions, NodeOptions>()( {
-
-      // NodeOptions
+    super( {
       isDisposable: false
-    }, providedOptions );
-
-    super( options );
+    } );
 
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
@@ -125,16 +111,20 @@ class RingNode extends Node {
         Color.interpolateRGBA( negativeAmplitudeColor, positiveAmplitudeColor, 0.5 )
     );
 
-    Multilink.multilink( [ this.hydrogenAtom.electron.nProperty, this.visibleProperty ],
-      ( n, visible ) => {
-        if ( visible ) {
+    // Optimized to update only when the view representation is set to 'Brightness'.
+    const updateEnabledProperty = new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+      deBroglieRepresentation => deBroglieRepresentation === 'brightness' );
+
+    Multilink.multilink( [ this.hydrogenAtom.electron.nProperty, updateEnabledProperty ],
+      ( n, updateEnabled ) => {
+        if ( updateEnabled ) {
           this.updateGeometry();
           this.updateColor();
         }
       } );
 
     this.hydrogenAtom.electron.directionProperty.link( () => {
-      this.visible && this.updateColor();
+      updateEnabledProperty.value && this.updateColor();
     } );
   }
 
@@ -144,7 +134,6 @@ class RingNode extends Node {
    * to a different orbit, and therefore requiring the ring to be revised to match that orbit.
    */
   private updateGeometry(): void {
-    assert && assert( this.visible, 'should only be called when visible' );
 
     // Compute the number of polygons needed to represent this electron state.
     const modelRadius = BohrModel.getElectronOrbitRadius( this.hydrogenAtom.electron.nProperty.value );
@@ -169,7 +158,6 @@ class RingNode extends Node {
    * NOTE: This assumes that updateGeometry and updateColor use the same ordering for this.polygonNodes.
    */
   private updateColor(): void {
-    assert && assert( this.visible, 'should only be called when visible' );
 
     const n = this.hydrogenAtom.electron.nProperty.value;
 

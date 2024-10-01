@@ -148,10 +148,14 @@ export default class DeBroglie3DHeightNode extends Node {
       tandem: options.tandem.createTandem( 'waveNode' )
     } );
 
+    // Optimized to update only when the view representation is set to '3D Height'.
+    const updateEnabledProperty = new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+      deBroglieRepresentation => deBroglieRepresentation === '3DHeight' );
+
     //TODO are these dependencies correct?
-    Multilink.multilink( [ hydrogenAtom.electron.nProperty, hydrogenAtom.electron.directionProperty, this.visibleProperty ],
-      ( n, electronAngle, visible ) => {
-        visible && this.update();
+    Multilink.multilink( [ hydrogenAtom.electron.nProperty, hydrogenAtom.electron.directionProperty, updateEnabledProperty ],
+      ( n, electronDirection, updateEnabled ) => {
+        updateEnabled && this.update();
       } );
   }
 

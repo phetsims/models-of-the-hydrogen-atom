@@ -38,7 +38,7 @@ export default class BohrNode extends HydrogenAtomNode {
     }, providedOptions );
 
     // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom, modelViewTransform, {
+    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform, {
       tandem: options.tandem.createTandem( 'orbitsNode' )
     } );
 

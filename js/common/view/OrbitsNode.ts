@@ -14,6 +14,7 @@ import BohrModel from '../model/BohrModel.js';
 import OrbitNode from './OrbitNode.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -21,14 +22,13 @@ type OrbitsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class OrbitsNode extends Node {
 
-  //TODO BohrModel is not quite the right type here
-  public constructor( hydrogenAtom: BohrModel, modelViewTransform: ModelViewTransform2, providedOptions: OrbitsNodeOptions ) {
+  public constructor( hydrogenAtomPosition: Vector2, modelViewTransform: ModelViewTransform2, providedOptions: OrbitsNodeOptions ) {
 
     const options = optionize<OrbitsNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
       isDisposable: false,
-      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position )
+      center: modelViewTransform.modelToViewPosition( hydrogenAtomPosition )
     }, providedOptions );
 
     const orbitNodes = [];
