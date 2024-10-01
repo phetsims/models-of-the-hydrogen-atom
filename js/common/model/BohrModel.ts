@@ -202,7 +202,7 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Attempts to absorb a specified photon.
+   * Attempts to absorb a specified photon that would excite to a higher energy state.
    */
   private attemptAbsorption( photon: Photon ): boolean {
 
