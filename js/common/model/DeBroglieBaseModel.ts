@@ -58,7 +58,7 @@ export default class DeBroglieBaseModel extends BohrModel {
    */
   protected override calculateNewElectronDirection( dt: number ): number {
     const deltaAngle = dt * BohrModel.ELECTRON_ANGLE_DELTA;
-    return this.electron.directionProperty.value - deltaAngle; //TODO clockwise
+    return this.electron.directionProperty.value - deltaAngle; // clockwise
   }
 
   //--------------------------------------------------------------------------------------------------------------------
