@@ -296,7 +296,6 @@ export default class BohrModel extends HydrogenAtom {
       if ( collide ) {
 
         // Determine if the photon has a transition wavelength that would move the electron to a lower energy state.
-        //TODO Should this be a lookup in BohrModel.wavelengthToStateTransitionMap?
         let nNew;
         for ( let n = MOTHAConstants.GROUND_STATE; n < nCurrent && nNew === undefined; n++ ) {
           if ( photon.wavelength === getAbsorptionWavelength( n, nCurrent ) ) {
