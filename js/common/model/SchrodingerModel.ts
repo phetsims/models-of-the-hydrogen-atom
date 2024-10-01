@@ -200,6 +200,7 @@ export default class SchrodingerModel extends DeBroglieModel {
    * directly at the center of the atom. This moves the atom to a higher energy level.
    */
   public excite(): void {
+    assert && assert( this.isMetastableStateProperty.value );
     this.metastableHandler.exciteAtom();
   }
 
