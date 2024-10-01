@@ -157,15 +157,16 @@ export default class PlumPuddingModel extends HydrogenAtom {
     }
     else if ( this.electron.isMovingProperty.value && this.numberOfPhotonsAbsorbedProperty.value === 0 ) {
 
-      // Before moving the electron
-      const before = this.getNumberOfElectronOscillations();
+      // Oscillations before moving the electron
+      const oscillationsBefore = this.getNumberOfElectronOscillations();
 
-      // After moving the electron
       this.moveElectron( dt, this.previousAmplitudeProperty.value );
-      const after = this.getNumberOfElectronOscillations();
+
+      // Oscillations after moving the electron
+      const oscillationsAfter = this.getNumberOfElectronOscillations();
 
       // Stop the electron when it completes its current oscillation
-      if ( before !== after ) {
+      if ( oscillationsBefore !== oscillationsAfter ) {
         this.electron.isMovingProperty.value = false;
         this.numberOfZeroCrossingsProperty.value = 0;
         this.previousAmplitudeProperty.value = 0;
