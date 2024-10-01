@@ -203,42 +203,14 @@ export default class SchrodingerModel extends DeBroglieModel {
     this.metastableHandler.exciteAtom();
   }
 
-  //----------------------------------------------------------------------------
-  // Wave function
-  //----------------------------------------------------------------------------
-
   /**
-   * Probability Density. This algorithm is undefined for (x,y,z) = (0,0,0).
-   * @param n
-   * @param l
-   * @param m
-   * @param x coordinate on horizontal axis
-   * @param y coordinate on axis that is perpendicular to the screen
-   * @param z coordinate on vertical axis
+   * Solves the electron's wavefunction.
    */
-  public getProbabilityDensity( n: number, l: number, m: number, x: number, y: number, z: number ): number {
-    assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid state: (${n},${l},${m})` );
-    assert && assert( !( x === 0 && y === 0 && z === 0 ), 'undefined for (x,y,z)=(0,0,0)' );
-
-    // Convert to Polar coordinates.
-    const r = Math.sqrt( ( x * x ) + ( y * y ) + ( z * z ) );
-    const cosTheta = Math.abs( z ) / r;
-
-    // Solve the wavefunction.
-    const w = solveWavefunction( n, l, m, r, cosTheta );
-
-    // Square the result.
-    return ( w * w );
+  public static solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
+    const t1 = solveGeneralizedLaguerrePolynomial( n, l, r );
+    const t2 = solveAssociatedLegendrePolynomial( l, Math.abs( m ), cosTheta );
+    return ( t1 * t2 );
   }
-}
-
-/**
- * Solves the electron's wavefunction.
- */
-function solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
-  const t1 = solveGeneralizedLaguerrePolynomial( n, l, r );
-  const t2 = solveAssociatedLegendrePolynomial( l, Math.abs( m ), cosTheta );
-  return ( t1 * t2 );
 }
 
 /**

@@ -120,7 +120,7 @@ export default class SchrodingerBrightness {
         for ( let depth = 0; depth < NUMBER_OF_DEPTH_CELLS; depth++ ) {
           const y = ( depth * this.cellDepth ) + ( this.cellDepth / 2 );
           assert && assert( y > 0 );
-          const probabilityDensity = this.hydrogenAtom.getProbabilityDensity( n, l, m, x, y, z );
+          const probabilityDensity = solveProbabilityDensity( n, l, m, x, y, z );
           sum += probabilityDensity;
         }
         this.sums[ row ][ column ] = sum;
@@ -142,6 +142,32 @@ export default class SchrodingerBrightness {
 
     return brightness;
   }
+}
+
+/**
+ * Solves the Schrodinger probability density equation.
+ * This algorithm is undefined for (x,y,z) = (0,0,0).
+ *
+ * @param n
+ * @param l
+ * @param m
+ * @param x coordinate on horizontal axis
+ * @param y coordinate on axis that is perpendicular to the screen
+ * @param z coordinate on vertical axis
+ */
+function solveProbabilityDensity( n: number, l: number, m: number, x: number, y: number, z: number ): number {
+  assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid state: (${n},${l},${m})` );
+  assert && assert( !( x === 0 && y === 0 && z === 0 ), 'undefined for (x,y,z)=(0,0,0)' );
+
+  // Convert to Polar coordinates.
+  const r = Math.sqrt( ( x * x ) + ( y * y ) + ( z * z ) );
+  const cosTheta = Math.abs( z ) / r;
+
+  // Solve the wavefunction.
+  const w = SchrodingerModel.solveWavefunction( n, l, m, r, cosTheta );
+
+  // Square the result.
+  return ( w * w );
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerBrightness', SchrodingerBrightness );
