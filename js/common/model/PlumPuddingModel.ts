@@ -115,7 +115,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: true,
       phetioDocumentation: 'The number of photons the atom has absorbed and is "holding".'
     } );
   }
