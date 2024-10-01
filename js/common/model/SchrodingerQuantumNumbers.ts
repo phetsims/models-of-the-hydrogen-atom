@@ -85,9 +85,9 @@ export default class SchrodingerQuantumNumbers {
    * The possible values of n are limited by the current value of l, since abs(l-l') must be 1.
    * The probability of each possible n transition is determined by its transition strength.
    *
-   * @returns n, -1 if there is no valid transition
+   * @returns n, null if there is no valid transition
    */
-  public chooseLower_n(): number {
+  public chooseLower_n(): number | null {
     return chooseLower_n( this.n, this.l );
   }
 
@@ -160,21 +160,21 @@ export default class SchrodingerQuantumNumbers {
  * The possible values of n are limited by the current value of l, since abs(l-l') must be 1.
  * The probability of each possible n transition is determined by its transition strength.
  *
- * @returns n, -1 if there is no valid transition
+ * @returns n, null if there is no valid transition
  */
-function chooseLower_n( n: number, l: number ): number {
+function chooseLower_n( n: number, l: number ): number | null {
 
-  let nNew = -1;
+  let nNew: number | null = null;
 
   if ( n < 2 ) {
     // no state is lower than (1,0,0)
-    return -1;
+    return null;
   }
   else if ( n === 2 ) {
     if ( l === 0 ) {
 
       // transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
-      return -1;
+      return null;
     }
     else {
 
@@ -206,13 +206,13 @@ function chooseLower_n( n: number, l: number ): number {
 
     // All transitions had zero strength, so none are possible.
     if ( strengthSum === 0 ) {
-      return -1;
+      return null;
     }
 
     // Choose a transition.
     const value = chooseWeightedValue( weightedValues );
     if ( value === null ) {
-      return -1;
+      return null;
     }
     nNew = value;
   }

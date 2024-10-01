@@ -42,7 +42,6 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import BohrElectron from './BohrElectron.js';
-import Light from './Light.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -202,55 +201,40 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Attempts to absorb a specified photon that would excite to a higher energy state.
+   * Attempts to absorb a photon that would excite to a higher energy state.
    * @returns true if the photon was absorbed, false if it was not absorbed
    */
   private absorbPhoton( photon: Photon ): boolean {
 
-    let success = false;
+    const nCurrent = this.electron.nProperty.value;
 
-    const electron = this.electron;
-
-    // Has the electron been in this state long enough? And was this photon produced by the light?
-    if ( electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE && !photon.wasEmitted ) {
-
-      const nCurrent = electron.nProperty.value;
-
-      // Do the photon and electron collide?
-      const collide = this.collides( photon );
-      if ( collide ) {
-
-        // Is the photon absorbable, does it have a transition wavelength?
-        let canAbsorb = false;
-        let nNew = 0;
-        for ( let n = nCurrent + 1; n <= MOTHAConstants.MAX_STATE && !canAbsorb; n++ ) {
-          const transitionWavelength = getAbsorptionWavelength( nCurrent, n );
-          if ( photon.wavelength === transitionWavelength ) {
-            canAbsorb = true;
-            nNew = n;
-          }
-        }
-
-        // Is the transition that would occur allowed?
-        if ( !this.absorptionIsAllowed( nCurrent, nNew ) ) {
-          return false;
-        }
-
-        // Absorb the photon with some probability...
-        if ( canAbsorb && this.absorptionIsCertain() ) {
-
-          // absorb photon
-          success = true;
-          phet.log && phet.log( `BohrModel: absorbed ${MOTHASymbols.lambda}=${photon.wavelength}` );
-          this.photonAbsorbedEmitter.emit( photon );
-
-          // move electron to new state
-          electron.nProperty.value = nNew;
-        }
-      }
+    if ( photon.wasEmitted ||
+         nCurrent === MOTHAConstants.MAX_STATE ||
+         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE ||
+         !this.collides( photon ) ) {
+      return false;
     }
 
-    return success;
+    // Determine if the photon has a wavelength that would excite the electron to a higher energy state.
+    const nNew = getHigherStateForWavelength( nCurrent, photon.wavelength );
+    if ( nNew === null ) {
+      return false;
+    }
+    assert && assert( nNew > nCurrent, `nNew ${nNew} should be > nCurrent ${nCurrent}` );
+
+    // Absorb with some probability.
+    if ( !this.absorptionIsCertain() ) {
+      return false;
+    }
+
+    // Absorb the photon.
+    phet.log && phet.log( `BohrModel: absorbed ${MOTHASymbols.lambda}=${photon.wavelength}` );
+    this.photonAbsorbedEmitter.emit( photon );
+
+    // Move the electron to the new higher state.
+    this.electron.nProperty.value = nNew;
+
+    return true;
   }
 
   /**
@@ -258,14 +242,6 @@ export default class BohrModel extends HydrogenAtom {
    */
   protected absorptionIsCertain(): boolean {
     return dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY;
-  }
-
-  /**
-   * Determines if a proposed state transition caused by absorption is legal. Always true for Bohr.
-   */
-  private absorptionIsAllowed( nOld: number, nNew: number ): boolean {
-    assert && assert( nOld !== nNew );
-    return true;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -282,64 +258,41 @@ export default class BohrModel extends HydrogenAtom {
    */
   private attemptStimulatedEmission( photon: Photon ): boolean {
 
-    const electron = this.electron;
+    const nCurrent = this.electron.nProperty.value;
 
-    let success = false;
-    const nCurrent = electron.nProperty.value;
-
-    // Are we in some state other than the ground state?
-    // Has the electron been in this state long enough?
-    // Was this photon produced by the light?
-    if ( nCurrent > MOTHAConstants.GROUND_STATE &&
-         electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE &&
-         !photon.wasEmitted ) {
-
-      // Do the photon and electron collide?
-      const collide = this.collides( photon );
-      if ( collide ) {
-
-        // Determine if the photon has a transition wavelength that would move the electron to a lower energy state.
-        let nNew;
-        for ( let n = MOTHAConstants.GROUND_STATE; n < nCurrent && nNew === undefined; n++ ) {
-          if ( photon.wavelength === getAbsorptionWavelength( n, nCurrent ) ) {
-            nNew = n;
-          }
-        }
-        if ( nNew === undefined ) {
-          return false;
-        }
-
-        // Is the transition that would occur allowed?
-        if ( !this.stimulatedEmissionIsAllowed( nCurrent, nNew ) ) {
-          return false;
-        }
-
-        // Emit a photon with some probability.
-        if ( this.stimulatedEmissionIsCertain() ) {
-
-          // The photon should be moving in the direction that the light source is pointed.
-          assert && assert( photon.directionProperty.value === Light.DIRECTION );
-
-          // Create and emit a photon
-          success = true;
-          const emittedPhoton = new Photon( {
-            wavelength: photon.wavelength,
-            position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
-            direction: photon.directionProperty.value,
-            wasEmitted: true
-          } );
-          phet.log && phet.log( `BohrModel: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
-          assert && assert( BohrModel.wavelengthToStateTransitionMap.has( emittedPhoton.wavelength ),
-            `not an emission wavelength: ${emittedPhoton.wavelength}` );
-          this.photonEmittedEmitter.emit( emittedPhoton );
-
-          // move electron to new state
-          electron.nProperty.value = nNew;
-        }
-      }
+    if ( photon.wasEmitted ||
+         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE ||
+         nCurrent === MOTHAConstants.GROUND_STATE ||
+         !this.collides( photon ) ) {
+      return false;
     }
 
-    return success;
+    // Determine if the photon has a wavelength that would move the electron to a lower energy state.
+    const nNew = getLowerStateForWavelength( nCurrent, photon.wavelength );
+    if ( nNew === null || !this.stimulatedEmissionIsAllowed( nCurrent, nNew ) ) {
+      return false;
+    }
+    assert && assert( nNew < nCurrent, `nNew ${nNew} should be < nCurrent ${nCurrent}` );
+
+    // Emit with some probability.
+    if ( !this.stimulatedEmissionIsCertain() ) {
+      return false;
+    }
+
+    // Emit a photon.
+    const emittedPhoton = new Photon( {
+      wavelength: photon.wavelength,
+      position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
+      direction: photon.directionProperty.value,
+      wasEmitted: true
+    } );
+    this.photonEmittedEmitter.emit( emittedPhoton );
+    phet.log && phet.log( `BohrModel: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+
+    // Move the electron to the new lower state.
+    this.electron.nProperty.value = nNew;
+
+    return true;
   }
 
   /**
@@ -364,48 +317,44 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Spontaneous emission transitions from an excited energy state to a lower energy state, and emits a quantized
-   * amount of energy in the form of a photon. See https://en.wikipedia.org/wiki/Spontaneous_emission
+   * Spontaneous emission transitions from an excited energy state to a lower energy state, and emits a photon.
+   * See https://en.wikipedia.org/wiki/Spontaneous_emission
    */
   private attemptSpontaneousEmission(): boolean {
 
-    const electron = this.electron;
+    const nCurrent = this.electron.nProperty.value;
 
-    let success = false;
-    const nCurrent = electron.nProperty.value;
-
-    // Are we in some state other than the ground state?
-    // Has the electron been in this state long enough?
-    if ( nCurrent > MOTHAConstants.GROUND_STATE && electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE ) {
-
-      // Emit a photon with some probability.
-      if ( this.spontaneousEmissionIsCertain() ) {
-
-        const nNew = this.chooseLower_n();
-        if ( nNew === -1 ) {
-          // For some subclasses, there may be no valid transition.
-          return false;
-        }
-
-        // Create and emit a photon
-        success = true;
-        const emittedPhoton = new Photon( {
-          wavelength: getEmissionWavelength( nCurrent, nNew ),
-          position: this.getSpontaneousEmissionPosition(),
-          direction: MOTHAUtils.nextAngle(), // in a random direction
-          wasEmitted: true
-        } );
-        phet.log && phet.log( `BohrModel: spontaneous emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
-        assert && assert( BohrModel.wavelengthToStateTransitionMap.has( emittedPhoton.wavelength ),
-          `not an emission wavelength: ${emittedPhoton.wavelength}` );
-        this.photonEmittedEmitter.emit( emittedPhoton );
-
-        // move electron to new state
-        electron.nProperty.value = nNew;
-      }
+    if ( nCurrent === MOTHAConstants.GROUND_STATE ||
+         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE ) {
+      return false;
     }
 
-    return success;
+    // Choose a new lower state. For some subclasses of BohrModel, there may be no valid transition.
+    const nNew = this.chooseLower_n();
+    if ( nNew === null ) {
+      return false;
+    }
+    assert && assert( nNew < nCurrent, `nNew ${nNew} should be < nCurrent ${nCurrent}` );
+
+    // Emit with some probability.
+    if ( !this.spontaneousEmissionIsCertain() ) {
+      return false;
+    }
+
+    // Emit a photon
+    const emittedPhoton = new Photon( {
+      wavelength: getEmissionWavelength( nCurrent, nNew ),
+      position: this.getSpontaneousEmissionPosition(),
+      direction: MOTHAUtils.nextAngle(), // in a random direction
+      wasEmitted: true
+    } );
+    this.photonEmittedEmitter.emit( emittedPhoton );
+    phet.log && phet.log( `BohrModel: spontaneous emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+
+    // Move the electron to the new lower state.
+    this.electron.nProperty.value = nNew;
+
+    return true;
   }
 
   /**
@@ -418,12 +367,12 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Chooses a lower value for n. This is used during spontaneous emission. Each lower state has the same probability
    * of being chosen.
-   * @returns n, -1 if there is no lower state
+   * @returns n, null if there is no lower state
    */
-  protected chooseLower_n(): number {
+  protected chooseLower_n(): number | null {
     const n = this.electron.nProperty.value;
     if ( n === MOTHAConstants.GROUND_STATE ) {
-      return -1;
+      return null;
     }
     else {
       return dotRandom.nextIntBetween( MOTHAConstants.GROUND_STATE, n - MOTHAConstants.GROUND_STATE );
@@ -463,6 +412,35 @@ function getAbsorptionWavelength( n1: number, n2: number ): number {
  */
 function getEmissionWavelength( n1: number, n2: number ): number {
   return getAbsorptionWavelength( n2, n1 );
+}
+
+/**
+ * Gets the lower energy state for a current state and transition wavelength.
+ * Return null if there is no such state.
+ */
+function getLowerStateForWavelength( nCurrent: number, wavelength: number ): number | null {
+  let nNew: number | null = null;
+  for ( let n = MOTHAConstants.GROUND_STATE; n < nCurrent && nNew === null; n++ ) {
+    if ( wavelength === getAbsorptionWavelength( n, nCurrent ) ) {
+      nNew = n;
+    }
+  }
+  return nNew;
+}
+
+/**
+ * Gets the higher energy state for a current state and transition wavelength.
+ * Return null if there is no such state.
+ */
+function getHigherStateForWavelength( nCurrent: number, wavelength: number ): number | null {
+  let nNew: number | null = null;
+  for ( let n = nCurrent + 1; n <= MOTHAConstants.MAX_STATE && nNew === null; n++ ) {
+    const transitionWavelength = getAbsorptionWavelength( nCurrent, n );
+    if ( wavelength === transitionWavelength ) {
+      nNew = n;
+    }
+  }
+  return nNew;
 }
 
 type StateTransition = {

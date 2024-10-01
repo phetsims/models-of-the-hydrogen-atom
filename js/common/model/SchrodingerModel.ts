@@ -174,9 +174,9 @@ export default class SchrodingerModel extends DeBroglieModel {
   }
 
   /**
-   * Chooses a lower value for n. Returns -1 if there is no valid transition.
+   * Chooses a lower value for n. Returns null if there is no valid transition.
    */
-  protected override chooseLower_n(): number {
+  protected override chooseLower_n(): number | null {
     return this.nlmProperty.value.chooseLower_n();
   }
 
