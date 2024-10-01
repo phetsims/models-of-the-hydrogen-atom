@@ -36,6 +36,18 @@ const MOTHAUtils = {
   },
 
   /**
+   * Normalizes an angle to the range [0, 2 * PI].
+   */
+  normalizeAngle( angle: number ): number {
+    let normalizedAngle = angle % ( 2 * Math.PI );
+    if ( normalizedAngle < 0 ) {
+      normalizedAngle += ( 2 * Math.PI );
+    }
+    assert && assert( normalizedAngle >= 0 && normalizedAngle <= ( 2 * Math.PI ) );
+    return normalizedAngle;
+  },
+
+  /**
    * Converts from polar to Cartesian coordinates.
    */
   polarToCartesian( radius: number, angle: number ): Vector2 {

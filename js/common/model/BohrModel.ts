@@ -123,7 +123,6 @@ export default class BohrModel extends HydrogenAtom {
     this.attemptSpontaneousEmission();
   }
 
-  //TODO normalize the return value to [0,2*Math.PI]
   /**
    * Calculates the new electron direction for some time step. For Bohr, the direction changes at a different rate for
    * each electron state (n).
@@ -131,7 +130,7 @@ export default class BohrModel extends HydrogenAtom {
   protected calculateNewElectronDirection( dt: number ): number {
     const n = this.electron.nProperty.value;
     const deltaAngle = dt * ( BohrModel.ELECTRON_ANGLE_DELTA / ( n * n ) );
-    return this.electron.directionProperty.value - deltaAngle; // clockwise
+    return MOTHAUtils.normalizeAngle( this.electron.directionProperty.value - deltaAngle ); // clockwise
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {

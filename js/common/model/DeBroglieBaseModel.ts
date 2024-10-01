@@ -20,6 +20,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Photon from './Photon.js';
 import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line phet/no-view-imported-from-model
+import MOTHAUtils from '../MOTHAUtils.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -51,14 +52,13 @@ export default class DeBroglieBaseModel extends BohrModel {
     return amplitude;
   }
 
-  //TODO Normalize the return value to [0,2*Math.PI]
   /**
    * Calculates the new electron angle for some time step. For de Broglie, the direction changes at the same rate for
    * all electron states (n).
    */
   protected override calculateNewElectronDirection( dt: number ): number {
     const deltaAngle = dt * BohrModel.ELECTRON_ANGLE_DELTA;
-    return this.electron.directionProperty.value - deltaAngle; // clockwise
+    return MOTHAUtils.normalizeAngle( this.electron.directionProperty.value - deltaAngle ); // clockwise
   }
 
   //--------------------------------------------------------------------------------------------------------------------
