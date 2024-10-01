@@ -304,7 +304,7 @@ export default class BohrModel extends HydrogenAtom {
 
   /**
    * Determines if a proposed state transition caused by stimulated emission is legal.
-   * Stimulated emission involves a transition to a lower energy state, so a lower value on n.
+   * Stimulated emission involves a transition to a lower energy state, so a lower value of n.
    */
   protected stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
     assert && assert( nOld >= MOTHAConstants.GROUND_STATE && nOld <= MOTHAConstants.MAX_STATE, `invalid nOld: ${nOld}` );
