@@ -134,8 +134,8 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
-    const absorbed = this.attemptAbsorption( photon );
-    if ( !absorbed ) {
+    const photonWasAbsorbed = this.absorbPhoton( photon );
+    if ( !photonWasAbsorbed ) {
       this.attemptStimulatedEmission( photon );
       photon.move( dt );
     }
@@ -204,7 +204,7 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Attempts to absorb a specified photon that would excite to a higher energy state.
    */
-  private attemptAbsorption( photon: Photon ): boolean {
+  private absorbPhoton( photon: Photon ): boolean {
 
     let success = false;
 
