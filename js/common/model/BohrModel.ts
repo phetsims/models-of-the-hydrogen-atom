@@ -262,6 +262,7 @@ export default class BohrModel extends HydrogenAtom {
    * Determines if a proposed state transition caused by absorption is legal. Always true for Bohr.
    */
   private absorptionIsAllowed( nOld: number, nNew: number ): boolean {
+    assert && assert( nOld !== nNew );
     return true;
   }
 
