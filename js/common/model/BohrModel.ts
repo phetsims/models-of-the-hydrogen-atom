@@ -206,13 +206,14 @@ export default class BohrModel extends HydrogenAtom {
    */
   private attemptAbsorption( photon: Photon ): boolean {
 
-    const electron = this.electron;
-
     let success = false;
-    const nCurrent = electron.nProperty.value;
+
+    const electron = this.electron;
 
     // Has the electron been in this state long enough? And was this photon produced by the light?
     if ( electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE && !photon.wasEmitted ) {
+
+      const nCurrent = electron.nProperty.value;
 
       // Do the photon and electron collide?
       const collide = this.collides( photon );
