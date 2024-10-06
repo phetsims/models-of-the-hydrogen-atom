@@ -482,6 +482,7 @@ function getSpontaneousEmissionDirection( n: number, electronAngle: number ): nu
     // towards the nucleus, but not intersecting the nucleus.
     direction = MOTHAUtils.normalizeAngle( electronAngle + Math.PI + MOTHAUtils.nextSign() * 0.1 * Math.PI );
   }
+  assert && assert( direction >= 0 && direction <= 2 * Math.PI, `unexpected direction: ${direction}` );
 
   // Adjust the direction so that it is noticeably different from the direction of the light source. This ensures
   // that emitted photons are easy to see, and will not be confused with photons from the light source.
