@@ -264,15 +264,15 @@ export default class PlumPuddingModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Cannot absorb a photon if any of these are true:
-   * - the photon was emitted by the atom
-   * - we've already absorbed the max
-   * - we've emitted our last photon and haven't completed oscillation.
+   * The electron can absorb a photon if:
+   * - the photon was emitted by the light source, and
+   * - the electron has not already absorbed the max number of photons, and
+   * - the electron is not moving.
    */
   private canAbsorb( photon: Photon ): boolean {
-    return !( photon.wasEmitted ||
-              this.numberOfPhotonsAbsorbedProperty.value === MAX_PHOTONS_ABSORBED ||
-              ( this.numberOfPhotonsAbsorbedProperty.value === 0 && this.electron.isMovingProperty.value ) );
+    return !photon.wasEmitted &&
+           this.numberOfPhotonsAbsorbedProperty.value < MAX_PHOTONS_ABSORBED &&
+           !this.electron.isMovingProperty.value;
   }
 
   /**
