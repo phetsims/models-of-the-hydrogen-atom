@@ -277,7 +277,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
   /**
    * Attempts to absorb the specified photon.
-   * @param photon
    * @returns true if the photon was absorbed, false if it was not absorbed
    */
   private absorbPhoton( photon: Photon ): boolean {
