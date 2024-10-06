@@ -347,7 +347,7 @@ export default class BohrModel extends HydrogenAtom {
     const emittedPhoton = new Photon( {
       wavelength: getEmissionWavelength( nCurrent, nNew ),
       position: this.getSpontaneousEmissionPosition(),
-      direction: getSpontaneousEmissionDirection( nNew, this.electron.angleProperty.value ),
+      direction: getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value ),
       wasEmitted: true
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
@@ -480,7 +480,7 @@ function getSpontaneousEmissionDirection( n: number, electronAngle: number ): nu
 
     // For higher states, we do not want the photon to leave the view too quickly. So send it in a direction that is
     // towards the nucleus, but not intersecting the nucleus.
-    direction = electronAngle + ( 1.1 * Math.PI );
+    direction = MOTHAUtils.normalizeAngle( electronAngle + Math.PI + MOTHAUtils.nextSign() * 0.1 * Math.PI );
   }
 
   // Adjust the direction so that it is noticeably different from the direction of the light source. This ensures
