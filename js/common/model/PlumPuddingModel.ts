@@ -48,9 +48,6 @@ const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 const PHOTON_EMISSION_PROBABILITY = 0.1; // probability [0,1] that a photon will be emitted
 const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon will be absorbed
 
-// How close an emitted photon's direction can be to the light source direction.
-const PHOTON_EMISSION_AVOID_ANGLE = Math.PI / 8;
-
 type SelfOptions = EmptySelfOptions;
 
 type PlumPuddingModelOptions = SelfOptions & PickRequired<HydrogenAtomOptions, 'tandem'>;
@@ -263,6 +260,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
   // Photon Absorption
   //--------------------------------------------------------------------------------------------------------------------
 
+  //TODO I changes this by inverting the logic. Is it correct?
   /**
    * The electron can absorb a photon if:
    * - the photon was emitted by the light source, and
@@ -312,15 +310,11 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       this.numberOfPhotonsAbsorbedProperty.value -= 1;
 
-      // The photon's direction must be noticeably different from the direction of the light source, so that emitted
-      // photons are easy to see, and not confused with photons from the light source.
-      const direction = MOTHAUtils.nextAngleInPieSlice( Light.DIRECTION + PHOTON_EMISSION_AVOID_ANGLE, 2 * Math.PI - 2 * PHOTON_EMISSION_AVOID_ANGLE );
-
       // Create and emit a photon
       const photon = new Photon( {
         wavelength: PHOTON_EMISSION_WAVELENGTH,
         position: this.electron.positionProperty.value, // at the electron's position
-        direction: direction,
+        direction: getEmissionDirection(),
         wasEmitted: true
       } );
       phet.log && phet.log( `PlumPuddingModel: emitted \u03BB=${photon.wavelength}` );
@@ -344,6 +338,20 @@ function nextPointOnCircle( radius: number ): Vector2 {
  */
 function signIsDifferent( n1: number, n2: number ): boolean {
   return ( ( n1 > 0 && n2 < 0 ) || ( n1 < 0 && n2 > 0 ) );
+}
+
+/**
+ * Gets the direction (in radians) for a photon that is emitted. The direction is chosen at randem, then adjusted
+ * so that it is noticeably different from the direction of the light source. This ensures that emitted photons are
+ * easy to see, and will not be confused with photons from the light source.
+ */
+function getEmissionDirection(): number {
+  const threshold = Math.PI / 8; // How close we can be to the light's direction.
+  let direction = MOTHAUtils.nextAngle();
+  if ( Math.abs( direction - Light.DIRECTION ) < threshold ) {
+    direction = Light.DIRECTION + MOTHAUtils.nextSign() * threshold;
+  }
+  return direction;
 }
 
 modelsOfTheHydrogenAtom.register( 'PlumPuddingModel', PlumPuddingModel );

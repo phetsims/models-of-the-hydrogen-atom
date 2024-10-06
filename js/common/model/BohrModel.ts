@@ -44,6 +44,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import BohrElectron from './BohrElectron.js';
+import Light from './Light.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -346,7 +347,7 @@ export default class BohrModel extends HydrogenAtom {
     const emittedPhoton = new Photon( {
       wavelength: getEmissionWavelength( nCurrent, nNew ),
       position: this.getSpontaneousEmissionPosition(),
-      direction: MOTHAUtils.nextAngle(), // in a random direction
+      direction: getSpontaneousEmissionDirection( nNew, this.electron.directionProperty.value ),
       wasEmitted: true
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
@@ -462,6 +463,34 @@ function createWavelengthToStateTransitionMap(): Map<number, StateTransition> {
     }
   }
   return map;
+}
+
+/**
+ * Gets the direction (in radians) for a photon that is emitted via spontaneous emission.
+ */
+function getSpontaneousEmissionDirection( n: number, electronAngle: number ): number {
+
+  let direction;
+  if ( n < 5 ) {
+
+    // For lower states, choose a random angle.
+    direction = MOTHAUtils.nextAngle();
+  }
+  else {
+
+    // For higher states, we do not want the photon to leave the view too quickly. So send it in a direction that is
+    // towards the nucleus, but not intersecting the nucleus.
+    direction = electronAngle + ( 1.1 * Math.PI );
+  }
+
+  // Adjust the direction so that it is noticeably different from the direction of the light source. This ensures
+  // that emitted photons are easy to see, and will not be confused with photons from the light source.
+  const threshold = Math.PI / 8; // How close we can be to the light's direction.
+  if ( Math.abs( direction - Light.DIRECTION ) < threshold ) {
+    direction = Light.DIRECTION + MOTHAUtils.nextSign() * threshold;
+  }
+
+  return direction;
 }
 
 modelsOfTheHydrogenAtom.register( 'BohrModel', BohrModel );

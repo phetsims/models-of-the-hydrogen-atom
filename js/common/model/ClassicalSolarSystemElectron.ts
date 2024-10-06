@@ -25,6 +25,7 @@ type ClassicalSolarSystemElectronOptions = SelfOptions & ElectronOptions;
 
 export default class ClassicalSolarSystemElectron extends Electron {
 
+  //TODO This is not the direction of the electron, it is the angle around the orbit.
   public readonly directionProperty: Property<number>; // radians
   public readonly angularSpeedProperty: Property<number>; // radians/s
 

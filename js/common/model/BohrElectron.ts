@@ -38,6 +38,7 @@ export default class BohrElectron extends Electron {
   public readonly timeInStateProperty: Property<number>;
 
   // Direction of the electron, in radians.
+  //TODO This is not the direction of the electron, it is the angle around the orbit.
   public readonly directionProperty: Property<number>;
 
   // Offset of the electron from the atom's center.
