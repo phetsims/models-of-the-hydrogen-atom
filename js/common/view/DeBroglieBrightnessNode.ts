@@ -123,7 +123,7 @@ class RingNode extends Node {
         }
       } );
 
-    this.hydrogenAtom.electron.directionProperty.link( () => {
+    this.hydrogenAtom.electron.angleProperty.link( () => {
       updateEnabledProperty.value && this.updateColor();
     } );
   }

@@ -153,8 +153,8 @@ export default class DeBroglie3DHeightNode extends Node {
       deBroglieRepresentation => deBroglieRepresentation === '3DHeight' );
 
     //TODO are these dependencies correct?
-    Multilink.multilink( [ hydrogenAtom.electron.nProperty, hydrogenAtom.electron.directionProperty, updateEnabledProperty ],
-      ( n, electronDirection, updateEnabled ) => {
+    Multilink.multilink( [ hydrogenAtom.electron.nProperty, hydrogenAtom.electron.angleProperty, updateEnabledProperty ],
+      ( n, electronAngle, updateEnabled ) => {
         updateEnabled && this.update();
       } );
   }

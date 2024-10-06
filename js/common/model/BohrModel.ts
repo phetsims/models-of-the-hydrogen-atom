@@ -118,7 +118,7 @@ export default class BohrModel extends HydrogenAtom {
     this.electron.timeInStateProperty.value += dt;
 
     // Advance the electron along its orbit.
-    this.electron.directionProperty.value = this.calculateNewElectronDirection( dt );
+    this.electron.angleProperty.value = this.calculateNewElectronDirection( dt );
 
     // Attempt to emit a photon.
     this.attemptSpontaneousEmission();
@@ -131,7 +131,7 @@ export default class BohrModel extends HydrogenAtom {
   protected calculateNewElectronDirection( dt: number ): number {
     const n = this.electron.nProperty.value;
     const deltaAngle = dt * ( BohrModel.ELECTRON_ANGLE_DELTA / ( n * n ) );
-    return MOTHAUtils.normalizeAngle( this.electron.directionProperty.value - deltaAngle ); // clockwise
+    return MOTHAUtils.normalizeAngle( this.electron.angleProperty.value - deltaAngle ); // clockwise
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
@@ -347,7 +347,7 @@ export default class BohrModel extends HydrogenAtom {
     const emittedPhoton = new Photon( {
       wavelength: getEmissionWavelength( nCurrent, nNew ),
       position: this.getSpontaneousEmissionPosition(),
-      direction: getSpontaneousEmissionDirection( nNew, this.electron.directionProperty.value ),
+      direction: getSpontaneousEmissionDirection( nNew, this.electron.angleProperty.value ),
       wasEmitted: true
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );

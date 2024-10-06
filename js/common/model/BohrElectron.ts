@@ -37,9 +37,8 @@ export default class BohrElectron extends Electron {
   // Time that the electron has been in its current state, in seconds.
   public readonly timeInStateProperty: Property<number>;
 
-  // Direction of the electron, in radians.
-  //TODO This is not the direction of the electron, it is the angle around the orbit.
-  public readonly directionProperty: Property<number>;
+  // Angle of the electron along its orbit, in radians.
+  public readonly angleProperty: Property<number>;
 
   // Offset of the electron from the atom's center.
   public readonly offsetProperty: TReadOnlyProperty<Vector2>;
@@ -84,18 +83,18 @@ export default class BohrElectron extends Electron {
     } );
 
     //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
-    this.directionProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
+    this.angleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
       units: 'radians',
-      tandem: options.tandem.createTandem( 'directionProperty' ),
+      tandem: options.tandem.createTandem( 'angleProperty' ),
       phetioReadOnly: true
     } );
 
     //TODO make this go away, just set electron.positionProperty directly
     this.offsetProperty = new DerivedProperty(
-      [ this.nProperty, this.directionProperty ],
-      ( n, direction ) => {
+      [ this.nProperty, this.angleProperty ],
+      ( n, angle ) => {
         const radius = BohrModel.getElectronOrbitRadius( n );
-        return MOTHAUtils.polarToCartesian( radius, direction );
+        return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: options.tandem.createTandem( 'offsetProperty' ),
         phetioValueType: Vector2.Vector2IO,
@@ -106,7 +105,7 @@ export default class BohrElectron extends Electron {
   public override reset(): void {
     this.nProperty.reset();
     this.timeInStateProperty.reset();
-    this.directionProperty.reset();
+    this.angleProperty.reset();
     super.reset();
   }
 }

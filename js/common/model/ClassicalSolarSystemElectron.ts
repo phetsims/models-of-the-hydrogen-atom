@@ -18,15 +18,16 @@ import Utils from '../../../../dot/js/Utils.js';
 const ANGULAR_SPEED = Utils.toRadians( 600 ); // initial speed of the electron, in radians/s
 
 type SelfOptions = {
-  direction?: number;
+  angle?: number;
 };
 
 type ClassicalSolarSystemElectronOptions = SelfOptions & ElectronOptions;
 
 export default class ClassicalSolarSystemElectron extends Electron {
 
-  //TODO This is not the direction of the electron, it is the angle around the orbit.
-  public readonly directionProperty: Property<number>; // radians
+  // Angle of the electron along its orbit, in radians.
+  public readonly angleProperty: Property<number>; // radians
+
   public readonly angularSpeedProperty: Property<number>; // radians/s
 
   public constructor( providedOptions: ClassicalSolarSystemElectronOptions ) {
@@ -34,14 +35,14 @@ export default class ClassicalSolarSystemElectron extends Electron {
     const options = optionize<ClassicalSolarSystemElectronOptions, SelfOptions, ElectronOptions>()( {
 
       // SelfOptions
-      direction: 0
+      angle: 0
     }, providedOptions );
 
     super( options );
 
-    this.directionProperty = new NumberProperty( options.direction, {
+    this.angleProperty = new NumberProperty( options.angle, {
       units: 'radians',
-      tandem: options.tandem.createTandem( 'directionProperty' ),
+      tandem: options.tandem.createTandem( 'angleProperty' ),
       phetioReadOnly: true
     } );
 
@@ -54,8 +55,8 @@ export default class ClassicalSolarSystemElectron extends Electron {
   }
 
   public override reset(): void {
-    // TODO Does setting directionProperty to a different angle on reset conflict with PhET-iO?
-    this.directionProperty.value = MOTHAUtils.nextAngle();
+    // TODO Does setting angleProperty to a different angle on reset conflict with PhET-iO?
+    this.angleProperty.value = MOTHAUtils.nextAngle();
     this.angularSpeedProperty.reset();
     super.reset();
   }

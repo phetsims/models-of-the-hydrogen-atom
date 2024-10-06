@@ -99,8 +99,8 @@ class RingNode extends Path {
     const updateEnabledProperty = new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
       deBroglieRepresentation => deBroglieRepresentation === 'radialDistance' );
 
-    Multilink.multilink( [ hydrogenAtom.electron.directionProperty, updateEnabledProperty ],
-      ( electronDirection, updateEnabled ) => {
+    Multilink.multilink( [ hydrogenAtom.electron.angleProperty, updateEnabledProperty ],
+      ( electronAngle, updateEnabled ) => {
         updateEnabled && this.update();
       } );
   }

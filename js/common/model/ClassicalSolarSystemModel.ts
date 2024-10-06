@@ -69,11 +69,11 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       position: this.position
     } );
 
-    const direction = MOTHAUtils.nextAngle();
-    const electronOffset = MOTHAUtils.polarToCartesian( ELECTRON_TO_PROTON_DISTANCE, direction );
+    const angle = MOTHAUtils.nextAngle();
+    const electronOffset = MOTHAUtils.polarToCartesian( ELECTRON_TO_PROTON_DISTANCE, angle );
     this.electron = new ClassicalSolarSystemElectron( {
       position: this.proton.position.plus( electronOffset ),
-      direction: direction,
+      angle: angle,
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
@@ -97,7 +97,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       const protonPosition = this.proton.position;
 
       // Move the electron clockwise.
-      this.electron.directionProperty.value -= ( this.electron.angularSpeedProperty.value * dt );
+      this.electron.angleProperty.value -= ( this.electron.angularSpeedProperty.value * dt );
 
       // Move the electron closer to the proton.
       const distance = this.electron.positionProperty.value.distance( protonPosition ) - ( ELECTRON_DISTANCE_DELTA * dt );
@@ -105,7 +105,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
         this.electron.positionProperty.value = protonPosition;
       }
       else {
-        const electronOffset = MOTHAUtils.polarToCartesian( distance, this.electron.directionProperty.value );
+        const electronOffset = MOTHAUtils.polarToCartesian( distance, this.electron.angleProperty.value );
         this.electron.positionProperty.value = protonPosition.plus( electronOffset );
       }
 

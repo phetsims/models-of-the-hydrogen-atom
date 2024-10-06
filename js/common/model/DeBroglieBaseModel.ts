@@ -47,7 +47,7 @@ export default class DeBroglieBaseModel extends BohrModel {
    * Gets the amplitude [-1,1] of a standing wave at some angle, in some specified state of the electron.
    */
   public getAmplitude( n: number, angle: number ): number {
-    const amplitude = Math.sin( n * angle ) * Math.sin( this.electron.directionProperty.value );
+    const amplitude = Math.sin( n * angle ) * Math.sin( this.electron.angleProperty.value );
     assert && assert( amplitude >= -1 && amplitude <= 1 );
     return amplitude;
   }
@@ -58,7 +58,7 @@ export default class DeBroglieBaseModel extends BohrModel {
    */
   protected override calculateNewElectronDirection( dt: number ): number {
     const deltaAngle = dt * BohrModel.ELECTRON_ANGLE_DELTA;
-    return MOTHAUtils.normalizeAngle( this.electron.directionProperty.value - deltaAngle ); // clockwise
+    return MOTHAUtils.normalizeAngle( this.electron.angleProperty.value - deltaAngle ); // clockwise
   }
 
   //--------------------------------------------------------------------------------------------------------------------
