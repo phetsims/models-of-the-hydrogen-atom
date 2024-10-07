@@ -90,8 +90,7 @@ export default class DeBroglieBaseModel extends BohrModel {
     return photon.positionProperty.value.minus( this.position );
   }
 
-  //TODO Why isn't this adjusted for '3D Height' view?
-  //TODO Should '+ DeBroglieBaseModel.BRIGHTNESS_RING_THICKNESS' be removed here?
+  //TODO This is used for all de Broglie views. Should '+ DeBroglieBaseModel.BRIGHTNESS_RING_THICKNESS' be removed here?
   /**
    * How close the photon's center must be to a point on the electron's orbit in order for a collision to occur.
    */
