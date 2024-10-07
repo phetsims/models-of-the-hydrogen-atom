@@ -181,7 +181,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   }
 
   /**
-   * Our Schrodinger model emits photons from a random point on the first Bohr orbit.
+   * For spontaneous emission, our Schrodinger model emits photons from a random point on the first Bohr orbit.
    */
   protected override getSpontaneousEmissionPosition(): Vector2 {
 
