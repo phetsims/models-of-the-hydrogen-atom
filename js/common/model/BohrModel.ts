@@ -73,8 +73,10 @@ export default class BohrModel extends HydrogenAtom {
   // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
   public static readonly ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 
-  // Minimum time (in sec) that the electron must be in a state before a transition can occur.
-  public static readonly MIN_TIME_IN_STATE = 1;
+  // Minimum time (in sec) that the electron must be in a state before transitions can occur.
+  public static readonly MIN_TIME_IN_STATE_BEFORE_ABSORPTION = 0.75;
+  public static readonly MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION = 1;
+  public static readonly MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION = 1;
 
   // Change in orbit angle per dt for ground state orbit.
   public static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
@@ -213,7 +215,7 @@ export default class BohrModel extends HydrogenAtom {
 
     if ( photon.wasEmitted ||
          nCurrent === MOTHAConstants.MAX_STATE ||
-         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE ||
+         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_ABSORPTION ||
          !this.collides( photon ) ) {
       return false;
     }
@@ -264,7 +266,7 @@ export default class BohrModel extends HydrogenAtom {
     const nCurrent = this.electron.nProperty.value;
 
     if ( photon.wasEmitted ||
-         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE ||
+         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION ||
          nCurrent === MOTHAConstants.GROUND_STATE ||
          !this.collides( photon ) ) {
       return null;
@@ -331,7 +333,7 @@ export default class BohrModel extends HydrogenAtom {
     const nCurrent = this.electron.nProperty.value;
 
     if ( nCurrent === MOTHAConstants.GROUND_STATE ||
-         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE ) {
+         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION ) {
       return null;
     }
 
