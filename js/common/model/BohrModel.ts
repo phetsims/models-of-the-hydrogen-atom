@@ -288,7 +288,7 @@ export default class BohrModel extends HydrogenAtom {
       position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
       direction: photon.directionProperty.value,
       wasEmitted: true,
-      debugHaloColor: 'green'
+      debugHaloColor: 'rgb( 75, 255, 7 )' // bright green
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
     phet.log && phet.log( `BohrModel: stimulated emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );

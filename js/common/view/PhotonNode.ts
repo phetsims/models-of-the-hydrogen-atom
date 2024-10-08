@@ -67,7 +67,7 @@ export default class PhotonNode extends Node {
       options.children.push( new Circle( {
         radius: 1.25 * haloRadius,
         stroke: photon.debugHaloColor,
-        lineWidth: 4
+        lineWidth: 6
       } ) );
     }
 
