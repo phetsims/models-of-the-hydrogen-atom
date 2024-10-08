@@ -254,11 +254,11 @@ export default class BohrModel extends HydrogenAtom {
    * Attempts to stimulate emission with a specified photon. If an electron in state nOld is hit by a photon whose
    * absorption would cause a transition from state nOld to nNew, where nNew < nOld, then the electron should drop
    * to state nNew and emit a photon. The emitted photon should be the same wavelength and be traveling alongside
-   * the original photon.
+   * the original photon. See https://en.wikipedia.org/wiki/Stimulated_emission
    *
-   * See https://en.wikipedia.org/wiki/Stimulated_emission
+   * @returns the photon emitted, null if no photon was emitted.
    */
-  private attemptStimulatedEmission( photon: Photon ): boolean {
+  private attemptStimulatedEmission( photon: Photon ): Photon | null {
 
     const nCurrent = this.electron.nProperty.value;
 
@@ -266,19 +266,19 @@ export default class BohrModel extends HydrogenAtom {
          this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE ||
          nCurrent === MOTHAConstants.GROUND_STATE ||
          !this.collides( photon ) ) {
-      return false;
+      return null;
     }
 
     // Determine if the photon has a wavelength that would move the electron to a lower energy state.
     const nNew = getLowerStateForWavelength( nCurrent, photon.wavelength );
     if ( nNew === null || !this.stimulatedEmissionIsAllowed( nCurrent, nNew ) ) {
-      return false;
+      return null;
     }
     assert && assert( nNew < nCurrent, `nNew ${nNew} should be < nCurrent ${nCurrent}` );
 
     // Emit with some probability.
     if ( !this.stimulatedEmissionIsCertain() ) {
-      return false;
+      return null;
     }
 
     // Emit a photon.
@@ -290,12 +290,11 @@ export default class BohrModel extends HydrogenAtom {
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
     phet.log && phet.log( `BohrModel: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
-    console.log( `BohrModel: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
 
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;
 
-    return true;
+    return emittedPhoton;
   }
 
   /**
@@ -322,27 +321,28 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Spontaneous emission transitions from an excited energy state to a lower energy state, and emits a photon.
    * See https://en.wikipedia.org/wiki/Spontaneous_emission
+   *
+   * @returns the photon emitted, null if no photon was emitted.
    */
-  private attemptSpontaneousEmission(): boolean {
+  private attemptSpontaneousEmission(): Photon | null {
 
     const nCurrent = this.electron.nProperty.value;
 
     if ( nCurrent === MOTHAConstants.GROUND_STATE ||
          this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE ) {
-      return false;
+      return null;
     }
 
     // Choose a new lower state. For some subclasses of BohrModel, there may be no valid transition.
     const nNew = this.chooseLower_n();
     if ( nNew === null ) {
-      return false;
+      return null;
     }
     assert && assert( nNew < nCurrent, `nNew ${nNew} should be < nCurrent ${nCurrent}` );
 
     // Emit with some probability.
     if ( !this.spontaneousEmissionIsCertain() ) {
-      console.log( 'SPONTANEOUS EMISSION IS NOT PROBABLE.' );
-      return false;
+      return null;
     }
 
     // Emit a photon
@@ -358,7 +358,7 @@ export default class BohrModel extends HydrogenAtom {
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;
 
-    return true;
+    return emittedPhoton;
   }
 
   /**
