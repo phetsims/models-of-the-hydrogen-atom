@@ -134,7 +134,10 @@ export default class BohrModel extends HydrogenAtom {
     return MOTHAUtils.normalizeAngle( this.electron.angleProperty.value - deltaAngle ); // clockwise
   }
 
-  public override movePhoton( photon: Photon, dt: number ): void {
+  /**
+   * Advances the state of a photon by the specified time step.
+   */
+  public override stepPhoton( photon: Photon, dt: number ): void {
 
     // Attempt to absorb the photon.
     const photonWasAbsorbed = this.absorbPhoton( photon );
@@ -143,8 +146,8 @@ export default class BohrModel extends HydrogenAtom {
     if ( !photonWasAbsorbed ) {
       const emittedPhoton = this.attemptStimulatedEmission( photon );
 
-      // Move both the photon that caused the stimulated emission and the photon that was emitted, so that
-      // they will remain next to each other.
+      // Move both the photon that caused the stimulated emission and the photon that was emitted,
+      // so that they will remain next to each other.
       if ( emittedPhoton ) {
         emittedPhoton.move( dt );
       }

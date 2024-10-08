@@ -230,11 +230,10 @@ export default class PlumPuddingModel extends HydrogenAtom {
     this.electron.positionProperty.value = this.position.plusXY( x, y );
   }
 
-  //TODO Decouple interacting with photon from moving it.
   /**
    * Tries to absorb a photon. If it is not absorbed, the photon is moved.
    */
-  public override movePhoton( photon: Photon, dt: number ): void {
+  public override stepPhoton( photon: Photon, dt: number ): void {
     if ( !this.absorbPhoton( photon ) ) {
       photon.move( dt );
     }

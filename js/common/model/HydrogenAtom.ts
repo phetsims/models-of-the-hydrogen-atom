@@ -106,9 +106,9 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public abstract step( dt: number ): void;
 
   /**
-   * Moves a photon by the specified time step.
+   * Advances the state of a photon by the specified time step.
    */
-  public abstract movePhoton( photon: Photon, dt: number ): void;
+  public abstract stepPhoton( photon: Photon, dt: number ): void;
 
   /**
    * HydrogenAtomIO handles PhET-iO serialization of HydrogenAtom. Since all HydrogenAtom instances are created at

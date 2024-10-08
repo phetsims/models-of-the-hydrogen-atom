@@ -225,7 +225,7 @@ export default class MOTHAModel implements TModel {
 
     // Move and cull photons. May change this.photons, so operate on a copy of the array.
     this.photons.getArrayCopy().forEach( photon => {
-      hydrogenAtom.movePhoton( photon, dt );
+      hydrogenAtom.stepPhoton( photon, dt );
 
       // If the photon leaves the zoomed-in box, cull it.
       if ( !this.zoomedInBox.containsPhoton( photon ) ) {
