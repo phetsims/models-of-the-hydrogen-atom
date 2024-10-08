@@ -135,10 +135,21 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   public override movePhoton( photon: Photon, dt: number ): void {
+
+    // Attempt to absorb the photon.
     const photonWasAbsorbed = this.absorbPhoton( photon );
+
+    // If the photon was not absorbed, attempt stimulated emission and move photon(s).
     if ( !photonWasAbsorbed ) {
-      this.attemptStimulatedEmission( photon );
-      photon.move( dt ); //TODO photon will no longer be next to stimulated photon!
+      const emittedPhoton = this.attemptStimulatedEmission( photon );
+
+      // Move both the photon that caused the stimulated emission and the photon that was emitted, so that
+      // they will remain next to each other.
+      if ( emittedPhoton ) {
+        emittedPhoton.move( dt );
+      }
+
+      photon.move( dt );
     }
   }
 
