@@ -115,10 +115,10 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
   }
 
   /**
-   * Advances the state of a photon by the specified time step.
+   * This model does nothing with photons.
    */
-  public override stepPhoton( photon: Photon, dt: number ): void {
-    photon.move( dt );
+  public override processPhoton( photon: Photon ): void {
+    // Do nothing.
   }
 }
 

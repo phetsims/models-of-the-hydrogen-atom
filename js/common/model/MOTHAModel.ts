@@ -212,25 +212,30 @@ export default class MOTHAModel implements TModel {
     const dtScaled = dt * this.timeScaleProperty.value;
     this.light.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );
-    this.moveAndCullPhotons( dtScaled );
+    this.stepPhotons( dtScaled );
   }
 
   /**
-   * Moves photons. Photons that move outside the zoomed-in box are culled.
+   * Advances the state of the photons.
    * @param dt - the time step, in seconds
    */
-  private moveAndCullPhotons( dt: number ): void {
+  private stepPhotons( dt: number ): void {
 
-    const hydrogenAtom = this.hydrogenAtomProperty.value;
-
-    // Move and cull photons. May change this.photons, so operate on a copy of the array.
+    // This may change this.photons, so operate on a copy of the array.
     this.photons.getArrayCopy().forEach( photon => {
-      hydrogenAtom.stepPhoton( photon, dt );
 
-      // If the photon leaves the zoomed-in box, cull it.
+      // Move the photon before processing it, because this.hydrogenAtomProperty.value.step has been called.
+      // If we move the photon after processing it, then the photon will be processed when it is 1 time step
+      // behind the state of the atom.
+      photon.move( dt );
+
+      // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
       if ( !this.zoomedInBox.containsPhoton( photon ) ) {
-        photon.dispose();
         this.photons.remove( photon );
+        photon.dispose();
+      }
+      else {
+        this.hydrogenAtomProperty.value.processPhoton( photon );
       }
     } );
   }

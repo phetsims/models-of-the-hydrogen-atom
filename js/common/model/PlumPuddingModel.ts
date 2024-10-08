@@ -231,12 +231,10 @@ export default class PlumPuddingModel extends HydrogenAtom {
   }
 
   /**
-   * Tries to absorb a photon. If it is not absorbed, the photon is moved.
+   * Attempts to absorb the photon.
    */
-  public override stepPhoton( photon: Photon, dt: number ): void {
-    if ( !this.absorbPhoton( photon ) ) {
-      photon.move( dt );
-    }
+  public override processPhoton( photon: Photon ): void {
+    this.absorbPhoton( photon );
   }
 
   /**

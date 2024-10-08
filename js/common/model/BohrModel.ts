@@ -135,24 +135,11 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   /**
-   * Advances the state of a photon by the specified time step.
+   * Photon may be absorbed or stimulate emission.
    */
-  public override stepPhoton( photon: Photon, dt: number ): void {
-
-    // Attempt to absorb the photon.
-    const photonWasAbsorbed = this.absorbPhoton( photon );
-
-    // If the photon was not absorbed, attempt stimulated emission and move photon(s).
-    if ( !photonWasAbsorbed ) {
-      const emittedPhoton = this.attemptStimulatedEmission( photon );
-
-      // Move both the photon that caused the stimulated emission and the photon that was emitted,
-      // so that they will remain next to each other.
-      if ( emittedPhoton ) {
-        emittedPhoton.move( dt );
-      }
-
-      photon.move( dt );
+  public override processPhoton( photon: Photon ): void {
+    if ( !this.absorbPhoton( photon ) ) {
+      this.attemptStimulatedEmission( photon );
     }
   }
 

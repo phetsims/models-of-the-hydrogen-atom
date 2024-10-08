@@ -59,12 +59,9 @@ export default class BilliardBallModel extends HydrogenAtom {
 
   //TODO This does not look good in 'Fast' speed, because photos are inside the atom. Especially noticeable when stepping.
   /**
-   * Advances the state of a photon. If the photon collides with the atom, the photon bounces back at a
-   * 'steep but random' angle. Otherwise, it continues to move in its current direction.
+   * If the photon collides with the atom, the photon bounces back at a 'steep but random' angle.
    */
-  public override stepPhoton( photon: Photon, dt: number ): void {
-
-    // detect collision and adjust particle direction
+  public override processPhoton( photon: Photon ): void {
     if ( !photon.hasCollided ) {
       if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
         const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
@@ -73,9 +70,6 @@ export default class BilliardBallModel extends HydrogenAtom {
         photon.hasCollided = true;
       }
     }
-
-    // move photon
-    photon.move( dt );
   }
 }
 
