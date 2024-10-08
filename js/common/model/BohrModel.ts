@@ -73,7 +73,7 @@ export default class BohrModel extends HydrogenAtom {
   // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
   public static readonly ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 
-  // Minimum time (in sec) that electron stays in a state before emission can occur.
+  // Minimum time (in sec) that the electron must be in a state before a transition can occur.
   public static readonly MIN_TIME_IN_STATE = 1;
 
   // Change in orbit angle per dt for ground state orbit.
@@ -231,7 +231,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Absorb the photon.
-    phet.log && phet.log( `BohrModel: absorbed ${MOTHASymbols.lambda}=${photon.wavelength}` );
+    phet.log && phet.log( `BohrModel: absorbed ${MOTHASymbols.lambda}=${photon.wavelength}, ${nCurrent} -> ${nNew}` );
     this.photonAbsorbedEmitter.emit( photon );
 
     // Move the electron to the new higher state.
@@ -290,7 +290,7 @@ export default class BohrModel extends HydrogenAtom {
       wasEmitted: true
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
-    phet.log && phet.log( `BohrModel: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+    phet.log && phet.log( `BohrModel: stimulated emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;
@@ -354,7 +354,7 @@ export default class BohrModel extends HydrogenAtom {
       wasEmitted: true
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
-    phet.log && phet.log( `BohrModel: spontaneous emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+    phet.log && phet.log( `BohrModel: spontaneous emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;
