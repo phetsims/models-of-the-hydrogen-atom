@@ -138,7 +138,7 @@ export default class BohrModel extends HydrogenAtom {
     const photonWasAbsorbed = this.absorbPhoton( photon );
     if ( !photonWasAbsorbed ) {
       this.attemptStimulatedEmission( photon );
-      photon.move( dt );
+      photon.move( dt ); //TODO photon will no longer be next to stimulated photon!
     }
   }
 
@@ -290,6 +290,7 @@ export default class BohrModel extends HydrogenAtom {
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
     phet.log && phet.log( `BohrModel: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
+    console.log( `BohrModel: stimulated emission ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}` );
 
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;
@@ -340,6 +341,7 @@ export default class BohrModel extends HydrogenAtom {
 
     // Emit with some probability.
     if ( !this.spontaneousEmissionIsCertain() ) {
+      console.log( 'SPONTANEOUS EMISSION IS NOT PROBABLE.' );
       return false;
     }
 
