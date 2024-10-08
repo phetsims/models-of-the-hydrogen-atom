@@ -56,7 +56,7 @@ const PHOTON_STIMULATED_EMISSION_PROBABILITY = PHOTON_ABSORPTION_PROBABILITY;
 const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 
 // How close an emitted photon is placed to the photon that causes stimulated emission.
-const STIMULATED_EMISSION_X_OFFSET = 10;
+const STIMULATED_EMISSION_X_OFFSET = MOTHAConstants.PHOTON_RADIUS;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -287,7 +287,8 @@ export default class BohrModel extends HydrogenAtom {
       wavelength: photon.wavelength,
       position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
       direction: photon.directionProperty.value,
-      wasEmitted: true
+      wasEmitted: true,
+      debugHaloColor: 'green'
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
     phet.log && phet.log( `BohrModel: stimulated emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );
@@ -351,7 +352,8 @@ export default class BohrModel extends HydrogenAtom {
       wavelength: getEmissionWavelength( nCurrent, nNew ),
       position: this.getSpontaneousEmissionPosition(),
       direction: getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value ),
-      wasEmitted: true
+      wasEmitted: true,
+      debugHaloColor: 'red'
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
     phet.log && phet.log( `BohrModel: spontaneous emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );

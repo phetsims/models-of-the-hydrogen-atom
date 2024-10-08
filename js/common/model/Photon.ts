@@ -19,6 +19,7 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import { TColor } from '../../../../scenery/js/imports.js';
 
 // This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
 export type PhotonStateObject = {
@@ -48,6 +49,7 @@ type SelfOptions = {
   direction?: number; // initial direction
   wasEmitted?: boolean; // Was this photon emitted by the atom?
   hasCollided?: boolean; // Has this photon collided with the atom?
+  debugHaloColor?: TColor; // Color of halo around the photon, to make it easier to see for debugging.
 };
 
 type PhotonOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'tandem'>;
@@ -65,6 +67,9 @@ export default class Photon extends PhetioObject {
   // Whether the photon has collided with the hydrogen atom.
   private _hasCollided: boolean;
 
+  // Halo color around the photon, used for debugging to make it easier to see specific photons.
+  public readonly debugHaloColor: TColor;
+
   public constructor( providedOptions: PhotonOptions ) {
 
     const options = optionize<PhotonOptions, SelfOptions, PhetioObjectOptions>()( {
@@ -74,6 +79,7 @@ export default class Photon extends PhetioObject {
       direction: 0,
       wasEmitted: false,
       hasCollided: false,
+      debugHaloColor: null,
 
       // PhetioObjectOptions
       phetioState: false,
@@ -100,6 +106,7 @@ export default class Photon extends PhetioObject {
     this.wavelength = options.wavelength;
     this.wasEmitted = options.wasEmitted;
     this._hasCollided = options.hasCollided;
+    this.debugHaloColor = options.debugHaloColor;
   }
 
   public reset(): void {

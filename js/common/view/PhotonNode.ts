@@ -63,10 +63,10 @@ export default class PhotonNode extends Node {
     options.children = [ haloNode, orbNode, sparkleNode ];
 
     // Draw a red circle around emitted photons, to make them easier to see.
-    if ( MOTHAQueryParameters.debugEmission && photon.wasEmitted ) {
+    if ( MOTHAQueryParameters.debugEmission && photon.debugHaloColor ) {
       options.children.push( new Circle( {
         radius: 1.25 * haloRadius,
-        stroke: 'red',
+        stroke: photon.debugHaloColor,
         lineWidth: 4
       } ) );
     }
