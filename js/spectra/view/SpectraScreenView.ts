@@ -203,16 +203,17 @@ export default class SpectraScreenView extends ScreenView {
       lightControlPanel,
       absorptionEmissionCheckbox,
       absorptionEmissionDialog,
-      zoomedInBoxNode,
       modelVBox,
-      timeControlNode,
-      spectrometerAccordionBox,
-      resetAllButton
+      zoomedInBoxNode
     ];
 
     // Control Area focus order
     this.pdomControlAreaNode.pdomOrder = [
       //TODO pdomControlAreaNode.pdomOrder
+      spectrometerAccordionBox,
+      timeControlNode,
+      //TODO Info button is desired here, but is part of zoomedInBoxNode
+      resetAllButton
     ];
   }
 }
