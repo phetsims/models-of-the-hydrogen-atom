@@ -63,6 +63,12 @@ type StringsType = {
   'nInfoStringProperty': LocalizedStringProperty;
   'lInfoStringProperty': LocalizedStringProperty;
   'mInfoStringProperty': LocalizedStringProperty;
+  'a11y': {
+    'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
+    'takeSnapshotStringProperty': LocalizedStringProperty;
+    'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;
+    'viewSnapshotsStringProperty': LocalizedStringProperty;
+  }
 };
 
 const ModelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;

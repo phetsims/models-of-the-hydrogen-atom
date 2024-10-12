@@ -145,5 +145,25 @@
   },
   "mInfo": {
     "value": "{{m}}, the <b>Magnetic Quantum Number</b>, describes the orientation of the orbital in space."
+  },
+  "a11y": {
+    "absorptionEmission": {
+      "value": "Absorption/Emission"
+    },
+    "absorptionEmissionHelpText": {
+      "value": "Absorption/Emission"
+    },
+    "eraseSpectrometerData": {
+      "value": "Erase Spectrometer Data"
+    },
+    "takeSnapshot": {
+      "value": "Take Snapshot"
+    },
+    "takeSnapshotHelpText": {
+      "value": "Take up to four snapshots of the spectrometer data."
+    },
+    "viewSnapshots": {
+      "value": "View Snapshots"
+    }
   }
 }

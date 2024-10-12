@@ -78,6 +78,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
           tandem: snapshotButtonTandem.createTandem( 'enabledProperty' ),
           phetioValueType: BooleanIO
         } ),
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotHelpTextStringProperty,
       tandem: snapshotButtonTandem
     } );
 
@@ -99,6 +101,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         tandem: viewSnapshotsButtonTandem.createTandem( 'enabledProperty' ),
         phetioValueType: BooleanIO
       } ),
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.viewSnapshotsStringProperty,
       tandem: viewSnapshotsButtonTandem
     } );
 
@@ -108,6 +111,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       yMargin: 6,
       enabledProperty: spectrometer.hasDataPointsProperty,
       listener: () => spectrometer.clear(),
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.eraseSpectrometerDataStringProperty,
       tandem: buttonGroupTandem.createTandem( 'eraseButton' )
     } );
 
