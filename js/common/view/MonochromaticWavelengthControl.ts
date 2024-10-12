@@ -117,7 +117,11 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
           fill: MOTHAColors.wavelengthTextFillProperty,
           maxWidth: 50
         }
-      }
+      },
+
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 This is not working. Is NumberControl different?
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthHelpTextStringProperty
     }, providedOptions );
 
     super( wavelengthProperty, options );

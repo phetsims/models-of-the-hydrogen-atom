@@ -88,6 +88,8 @@ export default class AbsorptionEmissionDialog extends Panel {
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener
       groupFocusHighlight: true,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.absorptionEmissionDialogStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.absorptionEmissionDialogHelpTextStringProperty,
       tandemNameSuffix: 'Dialog' // Yes it's a Panel, but we are OK with calling it a Dialog.
     }, providedOptions );
 

@@ -64,10 +64,16 @@ type StringsType = {
   'lInfoStringProperty': LocalizedStringProperty;
   'mInfoStringProperty': LocalizedStringProperty;
   'a11y': {
+    'absorptionEmissionStringProperty': LocalizedStringProperty;
+    'absorptionEmissionHelpTextStringProperty': LocalizedStringProperty;
+    'absorptionEmissionDialogStringProperty': LocalizedStringProperty;
+    'absorptionEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
     'takeSnapshotStringProperty': LocalizedStringProperty;
     'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;
     'viewSnapshotsStringProperty': LocalizedStringProperty;
+    'wavelengthStringProperty': LocalizedStringProperty;
+    'wavelengthHelpTextStringProperty': LocalizedStringProperty;
   }
 };
 

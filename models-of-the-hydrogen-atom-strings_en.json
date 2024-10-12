@@ -151,7 +151,13 @@
       "value": "Absorption/Emission"
     },
     "absorptionEmissionHelpText": {
-      "value": "Absorption/Emission"
+      "value": "Show absorption/emission dialog for direct access to wavelengths."
+    },
+    "absorptionEmissionDialog": {
+      "value": "Absorption/Emission Dialog"
+    },
+    "absorptionEmissionDialogHelpText": {
+      "value": "Choose wavelength for light source."
     },
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"
@@ -164,6 +170,12 @@
     },
     "viewSnapshots": {
       "value": "View Snapshots"
+    },
+    "wavelength": {
+      "value": "Wavelength"
+    },
+    "wavelengthHelpText": {
+      "value": "Adjust wavelength for monochromatic light source."
     }
   }
 }
