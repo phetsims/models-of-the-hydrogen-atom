@@ -212,7 +212,7 @@ export default class SpectraScreenView extends ScreenView {
       //TODO pdomControlAreaNode.pdomOrder
       spectrometerAccordionBox,
       timeControlNode,
-      //TODO Info button is desired here, but is buried at zoomedInBoxNode.schrodingerNode.stateInfoButton
+      //TODO zoomedInBoxNode.schrodingerNode.stateInfoButton is desired here.
       resetAllButton
     ];
   }
