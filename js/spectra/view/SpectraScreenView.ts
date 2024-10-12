@@ -198,7 +198,6 @@ export default class SpectraScreenView extends ScreenView {
 
     // Play Area focus order
     this.pdomPlayAreaNode.pdomOrder = [
-      //TODO pdomPlayAreaNode.pdomOrder
       lightNode,
       lightControlPanel,
       absorptionEmissionCheckbox,
