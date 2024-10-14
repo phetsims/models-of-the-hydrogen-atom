@@ -42,10 +42,13 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
       spacing: 15,
 
       // pdom
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why is heading needed?
       labelTagName: 'h3',
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why can't we use accessibleName here?
       labelContent: ModelsOfTheHydrogenAtomStrings.a11y.lightModeStringProperty
     }, providedOptions );
 
+    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Use labelContent or options.accessibleName here?
     const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
       {
         value: 'white',
