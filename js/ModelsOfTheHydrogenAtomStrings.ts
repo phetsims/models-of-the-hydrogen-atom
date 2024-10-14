@@ -70,12 +70,15 @@ type StringsType = {
     'absorptionEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
     'deleteSnapshotStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
+    'lightModeStringProperty': LocalizedStringProperty;
+    'monochromaticStringProperty': LocalizedStringProperty;
     'spectrometerStringProperty': LocalizedStringProperty;
     'takeSnapshotStringProperty': LocalizedStringProperty;
     'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;
     'viewSnapshotsStringProperty': LocalizedStringProperty;
     'wavelengthStringProperty': LocalizedStringProperty;
     'wavelengthHelpTextStringProperty': LocalizedStringProperty;
+    'whiteStringProperty': LocalizedStringProperty;
   }
 };
 

@@ -165,6 +165,12 @@
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"
     },
+    "lightMode": {
+      "value": "Light Mode"
+    },
+    "monochromatic": {
+      "value": "Monochromatic"
+    },
     "spectrometer": {
       "value": "Spectrometer"
     },
@@ -182,6 +188,9 @@
     },
     "wavelengthHelpText": {
       "value": "Adjust wavelength for monochromatic light source."
+    },
+    "white": {
+      "value": "White"
     }
   }
 }

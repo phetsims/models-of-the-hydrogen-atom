@@ -39,18 +39,24 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
 
       // HorizontalAquaRadioButtonGroupOptions
       isDisposable: false,
-      spacing: 15
+      spacing: 15,
+
+      // pdom
+      labelTagName: 'h3',
+      labelContent: ModelsOfTheHydrogenAtomStrings.a11y.lightModeStringProperty
     }, providedOptions );
 
     const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
       {
         value: 'white',
         createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, TEXT_OPTIONS ),
+        labelContent: ModelsOfTheHydrogenAtomStrings.a11y.whiteStringProperty,
         tandemName: 'whiteRadioButton'
       },
       {
         value: 'monochromatic',
         createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, TEXT_OPTIONS ),
+        labelContent: ModelsOfTheHydrogenAtomStrings.a11y.monochromaticStringProperty,
         tandemName: 'monochromaticRadioButton'
       }
     ];
