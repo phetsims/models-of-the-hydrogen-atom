@@ -73,7 +73,11 @@ type StringsType = {
     'bohrStringProperty': LocalizedStringProperty;
     'classicalSolarSystemStringProperty': LocalizedStringProperty;
     'deBroglieStringProperty': LocalizedStringProperty;
+    'deBroglieRepresentationStringProperty': LocalizedStringProperty;
+    'deBroglieRepresentationHelpTextStringProperty': LocalizedStringProperty;
     'deleteSnapshotStringProperty': LocalizedStringProperty;
+    'electronEnergyLevelsStringProperty': LocalizedStringProperty;
+    'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
     'lightModeStringProperty': LocalizedStringProperty;
     'lightSourceStringProperty': LocalizedStringProperty;

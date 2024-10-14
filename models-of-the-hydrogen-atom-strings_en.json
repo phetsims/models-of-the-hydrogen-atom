@@ -174,8 +174,20 @@
     "deBroglie": {
       "value": "de Broglie"
     },
+    "deBroglieRepresentation": {
+      "value": "de Broglie Representation"
+    },
+    "deBroglieRepresentationHelpText": {
+      "value": "Choose the wave representation for de Broglie model."
+    },
     "deleteSnapshot": {
       "value": "Delete Snapshot"
+    },
+    "electronEnergyLevels": {
+      "value": "Electron Energy Levels"
+    },
+    "electronEnergyLevelsHelpText": {
+      "value": "Observe changes in the electron’s energy diagram."
     },
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"

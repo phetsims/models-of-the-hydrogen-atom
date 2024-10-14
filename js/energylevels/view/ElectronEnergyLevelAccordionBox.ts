@@ -31,12 +31,15 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     const options = optionize4<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
 
-      // AccordionBoxOptions
-      isDisposable: false,
-      expandedDefaultValue: MOTHAQueryParameters.expandAll,
-      fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
-      stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty
-    }, providedOptions );
+        // AccordionBoxOptions
+        isDisposable: false,
+        expandedDefaultValue: MOTHAQueryParameters.expandAll,
+        fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
+        stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
+        expandCollapseButtonOptions: {
+          accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelsStringProperty
+        }
+      }, providedOptions );
 
     options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
