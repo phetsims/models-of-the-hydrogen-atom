@@ -14,6 +14,7 @@ import Light from '../model/Light.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import BeamNode from './BeamNode.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -35,6 +36,7 @@ export class LightNode extends Node {
       nozzleSize: new Dimension2( 18, 50 ),
       buttonRadius: 19,
       rotation: -Light.DIRECTION, // +y is up in the model, down in the view
+      buttonAccessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceStringProperty,
       tandem: options.tandem.createTandem( 'laserPointerNode' ),
       phetioVisiblePropertyInstrumented: false
     } );

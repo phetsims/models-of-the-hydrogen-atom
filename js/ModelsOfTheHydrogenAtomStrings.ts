@@ -76,6 +76,7 @@ type StringsType = {
     'deleteSnapshotStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
     'lightModeStringProperty': LocalizedStringProperty;
+    'lightSourceStringProperty': LocalizedStringProperty;
     'monochromaticStringProperty': LocalizedStringProperty;
     'plumPuddingStringProperty': LocalizedStringProperty;
     'schrodingerStringProperty': LocalizedStringProperty;
