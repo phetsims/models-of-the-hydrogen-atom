@@ -159,8 +159,14 @@
     "absorptionEmissionDialogHelpText": {
       "value": "Choose wavelength for light source."
     },
+    "deleteSnapshot": {
+      "value": "Delete Snapshot"
+    },
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"
+    },
+    "spectrometer": {
+      "value": "Spectrometer"
     },
     "takeSnapshot": {
       "value": "Take Snapshot"

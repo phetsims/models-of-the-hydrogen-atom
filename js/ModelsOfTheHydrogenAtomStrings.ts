@@ -68,7 +68,9 @@ type StringsType = {
     'absorptionEmissionHelpTextStringProperty': LocalizedStringProperty;
     'absorptionEmissionDialogStringProperty': LocalizedStringProperty;
     'absorptionEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
+    'deleteSnapshotStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
+    'spectrometerStringProperty': LocalizedStringProperty;
     'takeSnapshotStringProperty': LocalizedStringProperty;
     'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;
     'viewSnapshotsStringProperty': LocalizedStringProperty;

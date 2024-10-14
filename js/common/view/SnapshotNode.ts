@@ -16,6 +16,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 const INSIDE_X_MARGIN = 6;
 const INSIDE_Y_MARGIN = 6;
@@ -57,6 +58,7 @@ export default class SnapshotNode extends Node {
       },
       right: backgroundNode.right - INSIDE_X_MARGIN,
       bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotStringProperty,
       tandem: Tandem.OPT_OUT //TODO instrument trashButton
     } );
 
