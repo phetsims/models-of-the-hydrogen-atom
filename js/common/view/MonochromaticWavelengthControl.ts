@@ -91,7 +91,11 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
         phetioValueType: BooleanIO
       } ),
       sliderOptions: {
-        constrainValue: constrainValue
+        constrainValue: constrainValue,
+
+        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Should be set on the NumberControl, but that does not work!
+        accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthStringProperty,
+        helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthHelpTextStringProperty
       },
       spectrumSliderTrackOptions: {
         constrainValue: constrainValue,
@@ -117,11 +121,7 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
           fill: MOTHAColors.wavelengthTextFillProperty,
           maxWidth: 50
         }
-      },
-
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 This is not working. Is NumberControl different?
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthHelpTextStringProperty
+      }
     }, providedOptions );
 
     super( wavelengthProperty, options );
