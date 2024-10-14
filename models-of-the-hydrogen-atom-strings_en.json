@@ -189,6 +189,9 @@
     "wavelengthHelpText": {
       "value": "Adjust wavelength for monochromatic light source."
     },
+    "wavelengthValueNanometers": {
+      "value": "Wavelength {{wavelength}} nanometers"
+    },
     "white": {
       "value": "White"
     }

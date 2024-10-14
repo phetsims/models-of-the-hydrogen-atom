@@ -34,6 +34,7 @@ import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js'
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import { LightMode } from '../model/LightMode.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -163,6 +164,9 @@ export default class AbsorptionEmissionDialog extends Panel {
             monochromaticWavelengthProperty.value = wavelength;
             lightModeProperty.value = 'monochromatic';
           },
+          accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.wavelengthValueNanometersStringProperty, {
+            wavelength: wavelength
+          } ),
           tandem: buttonGroupTandem.createTandem( `wavelength${wavelength}Button` ),
           phetioVisiblePropertyInstrumented: false
         } );
