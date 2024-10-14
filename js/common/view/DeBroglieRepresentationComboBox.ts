@@ -31,7 +31,11 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
       // ComboBoxOptions
       isDisposable: false,
       xMargin: 10,
-      yMargin: 6
+      yMargin: 6,
+
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Is this the correct pattern for ComboBox?
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.deBroglieRepresentationStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.deBroglieRepresentationHelpTextStringProperty
     }, providedOptions );
 
     const textOptions = {
@@ -46,9 +50,27 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
     const brightnessText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessStringProperty, textOptions );
 
     const items: ComboBoxItem<DeBroglieRepresentation>[] = [
-      { value: 'radialDistance', createNode: () => radialDistanceText, tandemName: 'radialDistanceItem' },
-      { value: '3DHeight', createNode: () => threeDHeightText, tandemName: '3DHeightItem' },
-      { value: 'brightness', createNode: () => brightnessText, tandemName: 'brightnessItem' }
+      {
+        value: 'radialDistance',
+        createNode: () => radialDistanceText,
+
+        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why is this not accessibleName?
+        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Do items need accessibleName?
+        a11yName: ModelsOfTheHydrogenAtomStrings.a11y.radialDistanceStringProperty,
+        tandemName: 'radialDistanceItem'
+      },
+      {
+        value: '3DHeight',
+        createNode: () => threeDHeightText,
+        a11yName: ModelsOfTheHydrogenAtomStrings.a11y[ '3DHeightStringProperty' ],
+        tandemName: '3DHeightItem'
+      },
+      {
+        value: 'brightness',
+        createNode: () => brightnessText,
+        a11yName: ModelsOfTheHydrogenAtomStrings.a11y.brightnessStringProperty,
+        tandemName: 'brightnessItem'
+      }
     ];
 
     super( deBroglieRepresentationProperty, items, listboxParent, options );

@@ -64,6 +64,7 @@ type StringsType = {
   'lInfoStringProperty': LocalizedStringProperty;
   'mInfoStringProperty': LocalizedStringProperty;
   'a11y': {
+    '3DHeightStringProperty': LocalizedStringProperty;
     'absorptionEmissionStringProperty': LocalizedStringProperty;
     'absorptionEmissionHelpTextStringProperty': LocalizedStringProperty;
     'absorptionEmissionDialogStringProperty': LocalizedStringProperty;
@@ -71,6 +72,7 @@ type StringsType = {
     'atomicModelStringProperty': LocalizedStringProperty;
     'billiardBallStringProperty': LocalizedStringProperty;
     'bohrStringProperty': LocalizedStringProperty;
+    'brightnessStringProperty': LocalizedStringProperty;
     'classicalSolarSystemStringProperty': LocalizedStringProperty;
     'deBroglieStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationStringProperty': LocalizedStringProperty;
@@ -79,10 +81,13 @@ type StringsType = {
     'electronEnergyLevelsStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
+    'experimentModelStringProperty': LocalizedStringProperty;
+    'experimentModelHelpTextStringProperty': LocalizedStringProperty;
     'lightModeStringProperty': LocalizedStringProperty;
     'lightSourceStringProperty': LocalizedStringProperty;
     'monochromaticStringProperty': LocalizedStringProperty;
     'plumPuddingStringProperty': LocalizedStringProperty;
+    'radialDistanceStringProperty': LocalizedStringProperty;
     'schrodingerStringProperty': LocalizedStringProperty;
     'spectrometerStringProperty': LocalizedStringProperty;
     'takeSnapshotStringProperty': LocalizedStringProperty;

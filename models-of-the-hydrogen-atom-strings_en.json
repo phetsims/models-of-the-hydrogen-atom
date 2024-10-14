@@ -147,6 +147,9 @@
     "value": "{{m}}, the <b>Magnetic Quantum Number</b>, describes the orientation of the orbital in space."
   },
   "a11y": {
+    "3DHeight": {
+      "value": "3D Height"
+    },
     "absorptionEmission": {
       "value": "Absorption/Emission"
     },
@@ -167,6 +170,9 @@
     },
     "bohr": {
       "value": "Bohr"
+    },
+    "brightness": {
+      "value": "Brightness"
     },
     "classicalSolarSystem": {
       "value": "Classical Solar System"
@@ -192,6 +198,12 @@
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"
     },
+    "experimentModel": {
+      "value": "Experiment Model"
+    },
+    "experimentModelHelpText": {
+      "value": "Change view between Experiment and Model options."
+    },
     "lightMode": {
       "value": "Light Mode"
     },
@@ -203,6 +215,9 @@
     },
     "plumPudding": {
       "value": "Plum Pudding"
+    },
+    "radialDistance": {
+      "value": "Radial Distance"
     },
     "schrodinger": {
       "value": "Schr\u00f6dinger"

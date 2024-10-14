@@ -36,7 +36,11 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
       // ABSwitchOptions
       isDisposable: false,
       centerOnSwitch: true,
-      toggleSwitchOptions: { size: new Dimension2( 50, 25 ) }
+      toggleSwitchOptions: { size: new Dimension2( 50, 25 ) },
+
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 This does not work.
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.experimentModelStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentModelHelpTextStringProperty
     }, providedOptions );
 
     const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, TEXT_OPTIONS );
