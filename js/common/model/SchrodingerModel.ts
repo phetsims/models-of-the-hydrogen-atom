@@ -79,7 +79,9 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.schrodingerStringProperty,
-      icon: SchrodingerNode.createIcon()
+      icon: SchrodingerNode.createIcon(),
+      tandemNamePrefix: 'schrodinger',
+      accessibleNameProperty: ModelsOfTheHydrogenAtomStrings.a11y.schrodingerStringProperty
     }, providedOptions );
 
     super( zoomedInBox, options );

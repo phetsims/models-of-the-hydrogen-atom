@@ -68,10 +68,17 @@ type StringsType = {
     'absorptionEmissionHelpTextStringProperty': LocalizedStringProperty;
     'absorptionEmissionDialogStringProperty': LocalizedStringProperty;
     'absorptionEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
+    'atomicModelStringProperty': LocalizedStringProperty;
+    'billiardBallStringProperty': LocalizedStringProperty;
+    'bohrStringProperty': LocalizedStringProperty;
+    'classicalSolarSystemStringProperty': LocalizedStringProperty;
+    'deBroglieStringProperty': LocalizedStringProperty;
     'deleteSnapshotStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
     'lightModeStringProperty': LocalizedStringProperty;
     'monochromaticStringProperty': LocalizedStringProperty;
+    'plumPuddingStringProperty': LocalizedStringProperty;
+    'schrodingerStringProperty': LocalizedStringProperty;
     'spectrometerStringProperty': LocalizedStringProperty;
     'takeSnapshotStringProperty': LocalizedStringProperty;
     'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;

@@ -61,7 +61,7 @@ const STIMULATED_EMISSION_X_OFFSET = MOTHAConstants.PHOTON_RADIUS;
 type SelfOptions = EmptySelfOptions;
 
 export type BohrModelOptions = SelfOptions &
-  PickOptional<HydrogenAtomOptions, 'displayNameProperty' | 'icon'> &
+  PickOptional<HydrogenAtomOptions, 'displayNameProperty' | 'icon' | 'tandemNamePrefix' | 'accessibleNameProperty'> &
   PickRequired<HydrogenAtomOptions, 'tandem'>;
 
 export default class BohrModel extends HydrogenAtom {
@@ -90,7 +90,9 @@ export default class BohrModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
-      icon: BohrNode.createIcon()
+      icon: BohrNode.createIcon(),
+      tandemNamePrefix: 'bohr',
+      accessibleNameProperty: ModelsOfTheHydrogenAtomStrings.a11y.bohrStringProperty
     }, providedOptions );
 
     super( zoomedInBox, options );

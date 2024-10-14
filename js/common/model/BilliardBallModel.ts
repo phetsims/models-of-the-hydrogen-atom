@@ -47,7 +47,9 @@ export default class BilliardBallModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.billiardBallStringProperty,
-      icon: BilliardBallNode.createIcon()
+      icon: BilliardBallNode.createIcon(),
+      tandemNamePrefix: 'bohr',
+      accessibleNameProperty: ModelsOfTheHydrogenAtomStrings.a11y.bohrStringProperty
     }, providedOptions );
 
     super( zoomedInBox, options );

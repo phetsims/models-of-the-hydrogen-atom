@@ -159,6 +159,21 @@
     "absorptionEmissionDialogHelpText": {
       "value": "Choose wavelength for light source."
     },
+    "atomicModel": {
+      "value": "Atomic Model"
+    },
+    "billiardBall": {
+      "value": "Billiard Ball"
+    },
+    "bohr": {
+      "value": "Bohr"
+    },
+    "classicalSolarSystem": {
+      "value": "Classical Solar System"
+    },
+    "deBroglie": {
+      "value": "de Broglie"
+    },
     "deleteSnapshot": {
       "value": "Delete Snapshot"
     },
@@ -170,6 +185,12 @@
     },
     "monochromatic": {
       "value": "Monochromatic"
+    },
+    "plumPudding": {
+      "value": "Plum Pudding"
+    },
+    "schrodinger": {
+      "value": "Schr\u00f6dinger"
     },
     "spectrometer": {
       "value": "Spectrometer"

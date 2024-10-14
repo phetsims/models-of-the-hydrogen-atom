@@ -15,6 +15,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -52,7 +53,13 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
           deselectedContentOpacity: 1,
           overContentOpacity: 1
         }
-      }
+      },
+
+      // pdom
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why is heading needed?
+      labelTagName: 'h3',
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why can't we use accessibleName here?
+      labelContent: ModelsOfTheHydrogenAtomStrings.a11y.atomicModelStringProperty
     }, providedOptions );
 
     // To make all icons have the same effective size.
@@ -83,7 +90,8 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
           maxWidth: 200 // determined empirically
         } ) ]
     } ),
-    tandemName: `${predictiveModel.tandem.name}RadioButton` //TODO too clever?
+    labelContent: predictiveModel.accessibleNameProperty,
+    tandemName: `${predictiveModel.tandemNamePrefix}RadioButton`
   };
 }
 
