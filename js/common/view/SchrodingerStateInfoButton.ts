@@ -12,6 +12,7 @@ import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SchrodingerStateInfoDialog from './SchrodingerStateInfoDialog.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 export default class SchrodingerStateInfoButton extends InfoButton {
 
@@ -20,6 +21,7 @@ export default class SchrodingerStateInfoButton extends InfoButton {
       scale: 0.5,
       iconFill: MOTHAColors.stateInfoButtonFillProperty,
       listener: () => dialog.show(),
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.infoHelpTextStringProperty,
       tandem: tandem
     } );
   }

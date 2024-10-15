@@ -162,6 +162,9 @@
     "atomicModel": {
       "value": "Atomic Model"
     },
+    "atomicModelHelpText": {
+      "value": "Choose atomic model to explore."
+    },
     "billiardBall": {
       "value": "Billiard Ball"
     },
@@ -201,6 +204,9 @@
     "experimentOrModelHelpText": {
       "value": "Collect experimental data or explore atomic models."
     },
+    "infoHelpText": {
+      "value": "Show definition of quantum numbers."
+    },
     "lightSource": {
       "value": "Light Source"
     },
@@ -229,7 +235,7 @@
       "value": "Take Snapshot"
     },
     "takeSnapshotHelpText": {
-      "value": "Take up to four snapshots of the spectrometer data."
+      "value": "Take up to four snapshots of spectrometer data."
     },
     "viewSnapshots": {
       "value": "View Snapshots"

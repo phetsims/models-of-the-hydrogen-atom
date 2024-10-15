@@ -69,6 +69,7 @@ type StringsType = {
     'absorptionAndEmissionHelpTextStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionDialogStringProperty': LocalizedStringProperty;
     'atomicModelStringProperty': LocalizedStringProperty;
+    'atomicModelHelpTextStringProperty': LocalizedStringProperty;
     'billiardBallStringProperty': LocalizedStringProperty;
     'bohrStringProperty': LocalizedStringProperty;
     'brightnessStringProperty': LocalizedStringProperty;
@@ -82,6 +83,7 @@ type StringsType = {
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
     'experimentOrModelStringProperty': LocalizedStringProperty;
     'experimentOrModelHelpTextStringProperty': LocalizedStringProperty;
+    'infoHelpTextStringProperty': LocalizedStringProperty;
     'lightSourceStringProperty': LocalizedStringProperty;
     'lightSourceModeStringProperty': LocalizedStringProperty;
     'lightSourceModeHelpTextStringProperty': LocalizedStringProperty;
