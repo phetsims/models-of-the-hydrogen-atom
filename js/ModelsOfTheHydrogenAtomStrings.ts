@@ -95,7 +95,7 @@ type StringsType = {
     'viewSnapshotsStringProperty': LocalizedStringProperty;
     'wavelengthStringProperty': LocalizedStringProperty;
     'wavelengthHelpTextStringProperty': LocalizedStringProperty;
-    'wavelengthValueNanometersStringProperty': LocalizedStringProperty;
+    'wavelengthNanometersStringProperty': LocalizedStringProperty;
     'whiteStringProperty': LocalizedStringProperty;
   }
 };

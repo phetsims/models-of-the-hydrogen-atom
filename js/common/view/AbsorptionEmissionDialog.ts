@@ -163,7 +163,7 @@ export default class AbsorptionEmissionDialog extends Panel {
             monochromaticWavelengthProperty.value = wavelength;
             lightModeProperty.value = 'monochromatic';
           },
-          accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.wavelengthValueNanometersStringProperty, {
+          accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNanometersStringProperty, {
             wavelength: wavelength
           } ),
           tandem: buttonGroupTandem.createTandem( `wavelength${wavelength}Button` ),
