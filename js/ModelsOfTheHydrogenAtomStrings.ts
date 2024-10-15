@@ -65,10 +65,9 @@ type StringsType = {
   'mInfoStringProperty': LocalizedStringProperty;
   'a11y': {
     '3DHeightStringProperty': LocalizedStringProperty;
-    'absorptionEmissionStringProperty': LocalizedStringProperty;
-    'absorptionEmissionHelpTextStringProperty': LocalizedStringProperty;
-    'absorptionEmissionDialogStringProperty': LocalizedStringProperty;
-    'absorptionEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
+    'absorptionAndEmissionStringProperty': LocalizedStringProperty;
+    'absorptionAndEmissionHelpTextStringProperty': LocalizedStringProperty;
+    'absorptionAndEmissionDialogStringProperty': LocalizedStringProperty;
     'atomicModelStringProperty': LocalizedStringProperty;
     'billiardBallStringProperty': LocalizedStringProperty;
     'bohrStringProperty': LocalizedStringProperty;
@@ -83,8 +82,9 @@ type StringsType = {
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
     'experimentModelStringProperty': LocalizedStringProperty;
     'experimentModelHelpTextStringProperty': LocalizedStringProperty;
-    'lightModeStringProperty': LocalizedStringProperty;
     'lightSourceStringProperty': LocalizedStringProperty;
+    'lightSourceModeStringProperty': LocalizedStringProperty;
+    'lightSourceModeHelpTextStringProperty': LocalizedStringProperty;
     'monochromaticStringProperty': LocalizedStringProperty;
     'plumPuddingStringProperty': LocalizedStringProperty;
     'radialDistanceStringProperty': LocalizedStringProperty;

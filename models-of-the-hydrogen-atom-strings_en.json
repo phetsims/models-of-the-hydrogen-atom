@@ -150,17 +150,14 @@
     "3DHeight": {
       "value": "3D Height"
     },
-    "absorptionEmission": {
-      "value": "Absorption/Emission"
+    "absorptionAndEmission": {
+      "value": "Absorption and Emission"
     },
-    "absorptionEmissionHelpText": {
-      "value": "Show absorption/emission dialog for direct access to wavelengths."
+    "absorptionAndEmissionHelpText": {
+      "value": "Show Absorption and Emission dialog for electron state transitions and their associated wavelengths."
     },
-    "absorptionEmissionDialog": {
-      "value": "Absorption/Emission Dialog"
-    },
-    "absorptionEmissionDialogHelpText": {
-      "value": "Choose wavelength for light source."
+    "absorptionAndEmissionDialog": {
+      "value": "Absorption and Emission Dialog"
     },
     "atomicModel": {
       "value": "Atomic Model"
@@ -204,11 +201,14 @@
     "experimentModelHelpText": {
       "value": "Change view between Experiment and Model options."
     },
-    "lightMode": {
-      "value": "Light Mode"
-    },
     "lightSource": {
       "value": "Light Source"
+    },
+    "lightSourceMode": {
+      "value": "Light Source Mode"
+    },
+    "lightSourceModeHelpText": {
+      "value": "Choose type of light emitted by light source."
     },
     "monochromatic": {
       "value": "Monochromatic"

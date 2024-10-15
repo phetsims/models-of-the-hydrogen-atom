@@ -45,7 +45,8 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
       //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why is heading needed?
       labelTagName: 'h3',
       //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why can't we use accessibleName here?
-      labelContent: ModelsOfTheHydrogenAtomStrings.a11y.lightModeStringProperty
+      labelContent: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeHelpTextStringProperty
     }, providedOptions );
 
     //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Use labelContent or options.accessibleName here?
