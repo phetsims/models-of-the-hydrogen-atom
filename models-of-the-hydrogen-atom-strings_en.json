@@ -193,7 +193,7 @@
       "value": "Electron Energy Levels"
     },
     "electronEnergyLevelsHelpText": {
-      "value": "Observe changes in the electron’s energy diagram."
+      "value": "Observe changes in the electron’s state as shown in an energy level diagram."
     },
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"

@@ -37,7 +37,8 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
         fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
         stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
         expandCollapseButtonOptions: {
-          accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelsStringProperty
+          accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelsStringProperty,
+          helpText: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelsHelpTextStringProperty
         }
       }, providedOptions );
 
