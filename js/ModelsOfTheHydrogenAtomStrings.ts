@@ -80,8 +80,8 @@ type StringsType = {
     'electronEnergyLevelsStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
-    'experimentModelStringProperty': LocalizedStringProperty;
-    'experimentModelHelpTextStringProperty': LocalizedStringProperty;
+    'experimentOrModelStringProperty': LocalizedStringProperty;
+    'experimentOrModelHelpTextStringProperty': LocalizedStringProperty;
     'lightSourceStringProperty': LocalizedStringProperty;
     'lightSourceModeStringProperty': LocalizedStringProperty;
     'lightSourceModeHelpTextStringProperty': LocalizedStringProperty;
