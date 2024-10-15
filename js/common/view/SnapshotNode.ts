@@ -17,6 +17,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 
 const INSIDE_X_MARGIN = 6;
 const INSIDE_Y_MARGIN = 6;
@@ -28,7 +29,7 @@ type SnapshotNodeOptions = SelfOptions &
 
 export default class SnapshotNode extends Node {
 
-  public constructor( numberOfSnapshotsProperty: TProperty<number>, providedOptions?: SnapshotNodeOptions ) {
+  public constructor( snapshotNumber: number, numberOfSnapshotsProperty: TProperty<number>, providedOptions?: SnapshotNodeOptions ) {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO default values for options
@@ -41,7 +42,7 @@ export default class SnapshotNode extends Node {
     } );
 
     //TODO i18n
-    const titleText = new Text( 'Snapshot', {
+    const titleText = new Text( `Snapshot ${snapshotNumber}`, {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       left: backgroundNode.left + INSIDE_X_MARGIN,
@@ -58,7 +59,9 @@ export default class SnapshotNode extends Node {
       },
       right: backgroundNode.right - INSIDE_X_MARGIN,
       bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotStringProperty,
+      accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotNameStringProperty, {
+        name: snapshotNumber //TODO get this from Snapshot model element, include model name
+      } ),
       tandem: Tandem.OPT_OUT //TODO instrument trashButton
     } );
 

@@ -77,7 +77,7 @@ type StringsType = {
     'deBroglieStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationHelpTextStringProperty': LocalizedStringProperty;
-    'deleteSnapshotStringProperty': LocalizedStringProperty;
+    'deleteSnapshotNameStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;

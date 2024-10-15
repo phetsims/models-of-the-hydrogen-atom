@@ -65,8 +65,8 @@ export default class SnapshotsDialog extends Dialog {
  */
 function createSnapshotNodes( numberOfSnapshotsProperty: TProperty<number> ): SnapshotNode[] {
   const snapshots = [];
-  for ( let i = 0; i < numberOfSnapshotsProperty.value; i++ ) {
-    snapshots.push( new SnapshotNode( numberOfSnapshotsProperty, {
+  for ( let snapshotNumber = 1; snapshotNumber <= numberOfSnapshotsProperty.value; snapshotNumber++ ) {
+    snapshots.push( new SnapshotNode( snapshotNumber, numberOfSnapshotsProperty, {
       scale: 0.8 //TODO Need to adjust this and MAX_SPECTROMETER_SNAPSHOTS to ensure the snapshots are readable.
     } ) );
   }

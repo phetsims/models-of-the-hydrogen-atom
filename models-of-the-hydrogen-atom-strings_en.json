@@ -186,8 +186,8 @@
     "deBroglieRepresentationHelpText": {
       "value": "Choose the wave representation for de Broglie model."
     },
-    "deleteSnapshot": {
-      "value": "Delete Snapshot"
+    "deleteSnapshotName": {
+      "value": "Delete Snapshot {{name}}"
     },
     "electronEnergyLevels": {
       "value": "Electron Energy Levels"
