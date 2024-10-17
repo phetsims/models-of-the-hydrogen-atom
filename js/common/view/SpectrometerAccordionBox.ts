@@ -9,24 +9,21 @@
 import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignGroup, HBox, HBoxOptions, Path, PressListener, Text } from '../../../../scenery/js/imports.js';
-import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
+import { AlignGroup, HBox, HBoxOptions, PressListener, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
-import eyeSolidShape from '../../../../sherpa/js/fontawesome-5/eyeSolidShape.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Spectrometer from '../model/Spectrometer.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
 import SpectrometerNode from './SpectrometerNode.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
+import SnapshotButton from './SnapshotButton.js';
+import ViewSnapshotsButton from './ViewSnapshotsButton.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -64,49 +61,14 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     // Put all buttons under buttonGroup tandem.
     const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
 
-    //TODO Factor out SnapshotButton.ts
-    const snapshotButtonTandem = buttonGroupTandem.createTandem( 'snapshotButton' );
-    const snapshotButton = new RectangularPushButton( {
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      content: new Path( cameraSolidShape, {
-        fill: 'black',
-        scale: 0.05
-      } ),
-      listener: () => {
-        spectrometer.numberOfSnapshotsProperty.value =
-          Math.min( MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, spectrometer.numberOfSnapshotsProperty.value + 1 );
-      },
-      enabledProperty: new DerivedProperty( [ spectrometer.numberOfSnapshotsProperty ],
-        numberOfSnapshots => numberOfSnapshots < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, {
-          tandem: snapshotButtonTandem.createTandem( 'enabledProperty' ),
-          phetioValueType: BooleanIO
-        } ),
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotHelpTextStringProperty,
-      tandem: snapshotButtonTandem
-    } );
+    const snapshotButton = new SnapshotButton( spectrometer, buttonGroupTandem.createTandem( 'snapshotButton' ) );
 
     const snapshotsDialog = new SnapshotsDialog( spectrometer.numberOfSnapshotsProperty, {
       tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
 
-    //TODO Factor out ViewSnapshotsButton.ts
-    const viewSnapshotsButtonTandem = buttonGroupTandem.createTandem( 'viewSnapshotsButton' );
-    const viewSnapshotsButton = new RectangularPushButton( {
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      content: new Path( eyeSolidShape, {
-        fill: 'black',
-        scale: 0.05
-      } ),
-      listener: () => snapshotsDialog.show(),
-      // Enabled when we have snapshots
-      enabledProperty: new DerivedProperty( [ spectrometer.numberOfSnapshotsProperty ], n => ( n > 0 ), {
-        tandem: viewSnapshotsButtonTandem.createTandem( 'enabledProperty' ),
-        phetioValueType: BooleanIO
-      } ),
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.viewSnapshotsStringProperty,
-      tandem: viewSnapshotsButtonTandem
-    } );
+    const viewSnapshotsButton = new ViewSnapshotsButton( snapshotsDialog, spectrometer,
+      buttonGroupTandem.createTandem( 'viewSnapshotsButton' ) );
 
     const eraseButton = new EraserButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,

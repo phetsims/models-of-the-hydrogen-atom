@@ -1,6 +1,6 @@
 // Copyright 2016-2024, University of Colorado Boulder
 
-//TODO addLinkedElement to spectrometer.snapshotsProperty
+//TODO addLinkedElement for spectrometer.snapshotsProperty
 /**
  * SnapshotsDialog is a dialog that displays spectrometer snapshots.
  *
@@ -21,8 +21,6 @@ type SelfOptions = EmptySelfOptions;
 type SnapshotsDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'>;
 
 export default class SnapshotsDialog extends Dialog {
-
-  private readonly disposeSnapshotsDialog: () => void;
 
   public constructor( numberOfSnapshotsProperty: TProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
 
@@ -53,10 +51,6 @@ export default class SnapshotsDialog extends Dialog {
       }
     };
     numberOfSnapshotsProperty.lazyLink( numberOfSnapshotsObserver );
-
-    this.disposeSnapshotsDialog = () => {
-      numberOfSnapshotsProperty.unlink( numberOfSnapshotsObserver );
-    };
   }
 }
 
