@@ -209,12 +209,7 @@ export default class AbsorptionEmissionDialog extends Panel {
       children: [
         titleBarNode,
         gridBox
-      ],
-
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Expected this to group wavelength buttons, but text ends up in odd places in A11y View.
-      tagName: 'h4',
-      labelContent: 'Transition Wavelengths',
-      helpText: 'Set the monochromatic light source to specific wavelength.'
+      ]
     } );
 
     super( content, options );
