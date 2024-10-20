@@ -68,6 +68,7 @@ export default class SchrodingerStateInfoDialog extends Dialog {
     } );
 
     super( content, {
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.quantumNumbersStringProperty,
       tandem: tandem
     } );
   }

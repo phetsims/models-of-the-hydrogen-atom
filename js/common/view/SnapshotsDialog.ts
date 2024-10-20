@@ -15,6 +15,7 @@ import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SnapshotNode from './SnapshotNode.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -31,7 +32,8 @@ export default class SnapshotsDialog extends Dialog {
       fill: MOTHAColors.snapshotsDialogFillProperty,
       topMargin: 15,
       bottomMargin: 15,
-      leftMargin: 15
+      leftMargin: 15,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.mySnapshotsStringProperty
     }, providedOptions );
 
     const content = new VBox( {

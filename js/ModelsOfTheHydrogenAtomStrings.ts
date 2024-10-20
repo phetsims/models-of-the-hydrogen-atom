@@ -88,7 +88,9 @@ type StringsType = {
     'lightSourceModeStringProperty': LocalizedStringProperty;
     'lightSourceModeHelpTextStringProperty': LocalizedStringProperty;
     'monochromaticStringProperty': LocalizedStringProperty;
+    'mySnapshotsStringProperty': LocalizedStringProperty;
     'plumPuddingStringProperty': LocalizedStringProperty;
+    'quantumNumbersStringProperty': LocalizedStringProperty;
     'radialDistanceStringProperty': LocalizedStringProperty;
     'schrodingerStringProperty': LocalizedStringProperty;
     'spectrometerStringProperty': LocalizedStringProperty;

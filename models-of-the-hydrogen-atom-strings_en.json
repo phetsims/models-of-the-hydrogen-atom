@@ -205,7 +205,7 @@
       "value": "Collect experimental data or explore atomic models."
     },
     "infoHelpText": {
-      "value": "Show definition of quantum numbers."
+      "value": "Show definitions of quantum numbers."
     },
     "lightSource": {
       "value": "Light Source"
@@ -219,8 +219,14 @@
     "monochromatic": {
       "value": "Monochromatic"
     },
+    "mySnapshots": {
+      "value": "My Snapshots"
+    },
     "plumPudding": {
       "value": "Plum Pudding"
+    },
+    "quantumNumbers": {
+      "value": "Quantum Numbers"
     },
     "radialDistance": {
       "value": "Radial Distance"
