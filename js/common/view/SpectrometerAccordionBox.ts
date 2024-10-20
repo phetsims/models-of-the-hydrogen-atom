@@ -43,9 +43,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         expandedDefaultValue: MOTHAQueryParameters.expandAll,
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
-        expandCollapseButtonOptions: {
-          accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.spectrometerStringProperty
-        }
+        accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.spectrometerStringProperty
       }, providedOptions );
 
     // This implementation puts buttons in the title bar, and requires titleBarExpandCollapse: false.
