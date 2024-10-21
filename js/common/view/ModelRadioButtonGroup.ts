@@ -91,7 +91,9 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
           maxWidth: 200 // determined empirically
         } ) ]
     } ),
-    labelContent: predictiveModel.accessibleNameProperty,
+    options: {
+      accessibleName: predictiveModel.accessibleNameProperty
+    },
     tandemName: `${predictiveModel.tandemNamePrefix}RadioButton`
   };
 }
