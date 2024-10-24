@@ -195,6 +195,9 @@
     "electronEnergyLevelsHelpText": {
       "value": "Observe changes in the electron’s state as shown in an energy level diagram."
     },
+    "energyLevelsScreenSummary": {
+      "value": "This is the summary for the Energy Levels screen."
+    },
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"
     },
@@ -233,6 +236,9 @@
     },
     "schrodinger": {
       "value": "Schr\u00f6dinger"
+    },
+    "spectraScreenSummary": {
+      "value": "This is the summary for the Spectra screen."
     },
     "spectrometer": {
       "value": "Spectrometer"

@@ -80,6 +80,7 @@ type StringsType = {
     'deleteSnapshotNameStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
+    'energyLevelsScreenSummaryStringProperty': LocalizedStringProperty;
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
     'experimentOrModelStringProperty': LocalizedStringProperty;
     'experimentOrModelHelpTextStringProperty': LocalizedStringProperty;
@@ -93,6 +94,7 @@ type StringsType = {
     'quantumNumbersStringProperty': LocalizedStringProperty;
     'radialDistanceStringProperty': LocalizedStringProperty;
     'schrodingerStringProperty': LocalizedStringProperty;
+    'spectraScreenSummaryStringProperty': LocalizedStringProperty;
     'spectrometerStringProperty': LocalizedStringProperty;
     'takeSnapshotStringProperty': LocalizedStringProperty;
     'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;

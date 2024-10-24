@@ -29,6 +29,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AbsorptionEmissionDialog from '../../common/view/AbsorptionEmissionDialog.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import AbsorptionEmissionCheckbox from '../../common/view/AbsorptionEmissionCheckbox.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -38,6 +39,12 @@ export default class SpectraScreenView extends ScreenView {
 
       // ScreenViewOptions
       isDisposable: false,
+
+      //TODO https://github.com/phetsims/joist/issues/987 change this to ScreenSummaryContent
+      screenSummaryContent: new Node( {
+        tagName: 'p',
+        innerContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenSummaryStringProperty
+      } ),
       tandem: tandem
     } );
 

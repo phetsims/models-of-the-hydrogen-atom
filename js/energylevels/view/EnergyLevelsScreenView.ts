@@ -15,6 +15,7 @@ import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 export default class EnergyLevelsScreenView extends ScreenView {
 
@@ -24,6 +25,12 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
       // ScreenViewOptions
       isDisposable: false,
+
+      //TODO https://github.com/phetsims/joist/issues/987 change this to ScreenSummaryContent
+      screenSummaryContent: new Node( {
+        tagName: 'p',
+        innerContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreenSummaryStringProperty
+      } ),
       tandem: tandem
     } );
 
