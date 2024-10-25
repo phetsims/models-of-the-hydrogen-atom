@@ -32,8 +32,6 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
       isDisposable: false,
       xMargin: 10,
       yMargin: 6,
-
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Is this the correct pattern for ComboBox?
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.deBroglieRepresentationStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.deBroglieRepresentationHelpTextStringProperty
     }, providedOptions );
