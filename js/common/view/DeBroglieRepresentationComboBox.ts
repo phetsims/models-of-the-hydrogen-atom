@@ -52,8 +52,7 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
         value: 'radialDistance',
         createNode: () => radialDistanceText,
 
-        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why is this not accessibleName?
-        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Do items need accessibleName?
+        //TODO description https://github.com/phetsims/sun/issues/906 Why is the API not ComboBoxItem.accessibleName?
         a11yName: ModelsOfTheHydrogenAtomStrings.a11y.radialDistanceStringProperty,
         tandemName: 'radialDistanceItem'
       },
