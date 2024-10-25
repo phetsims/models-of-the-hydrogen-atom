@@ -38,7 +38,7 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
       centerOnSwitch: true,
       toggleSwitchOptions: { size: new Dimension2( 50, 25 ) },
 
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 This does not work.
+      //TODO description: https://github.com/phetsims/scenery-phet/issues/880 ABSwitch does not support accessibleName and helpText.
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelHelpTextStringProperty
     }, providedOptions );
