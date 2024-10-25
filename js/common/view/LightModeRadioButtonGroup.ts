@@ -49,18 +49,21 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeHelpTextStringProperty
     }, providedOptions );
 
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Use labelContent or options.accessibleName here?
     const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
       {
         value: 'white',
         createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, TEXT_OPTIONS ),
-        labelContent: ModelsOfTheHydrogenAtomStrings.a11y.whiteStringProperty,
+        options: {
+          accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.whiteStringProperty
+        },
         tandemName: 'whiteRadioButton'
       },
       {
         value: 'monochromatic',
         createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, TEXT_OPTIONS ),
-        labelContent: ModelsOfTheHydrogenAtomStrings.a11y.monochromaticStringProperty,
+        options: {
+          accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.monochromaticStringProperty
+        },
         tandemName: 'monochromaticRadioButton'
       }
     ];
