@@ -1,5 +1,6 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
+//TODO description: https://github.com/phetsims/sun/issues/903 helpText appears after radio buttons in A11y View
 /**
  * ModelRadioButtonGroup is the radio button group for selecting a predictive model of the hydrogen atom.
  *
