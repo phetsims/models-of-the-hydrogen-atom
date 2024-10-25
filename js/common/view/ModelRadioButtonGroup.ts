@@ -56,7 +56,7 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
       },
 
       // pdom
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why is heading needed?
+      //TODO description: https://github.com/phetsims/sun/issues/900 Use a higher-level API for PDOM structure.
       labelTagName: 'h3',
       //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why can't we use accessibleName here?
       labelContent: ModelsOfTheHydrogenAtomStrings.a11y.atomicModelStringProperty,
