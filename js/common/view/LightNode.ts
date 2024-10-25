@@ -36,6 +36,8 @@ export class LightNode extends Node {
       nozzleSize: new Dimension2( 18, 50 ),
       buttonRadius: 19,
       rotation: -Light.DIRECTION, // +y is up in the model, down in the view
+
+      //TODO description: https://github.com/phetsims/scenery-phet/issues/877 buttonAccessibleName API should be changed
       buttonAccessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceStringProperty,
       tandem: options.tandem.createTandem( 'laserPointerNode' ),
       phetioVisiblePropertyInstrumented: false
