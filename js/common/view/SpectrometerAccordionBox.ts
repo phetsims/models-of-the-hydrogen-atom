@@ -1,5 +1,6 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
+//TODO description: https://github.com/phetsims/sun/issues/902 AccordionBox content is appearing above close button in A11y View.
 /**
  * SpectrometerAccordionBox is the accordion box that contains the spectrometer.
  *
