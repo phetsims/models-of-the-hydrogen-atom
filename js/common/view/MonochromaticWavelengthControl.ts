@@ -93,7 +93,7 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
       sliderOptions: {
         constrainValue: constrainValue,
 
-        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Should be set on the NumberControl, but that does not work!
+        //TODO description: https://github.com/phetsims/scenery-phet/issues/878 Should be setting these on the NumberControl, but they are unsupported.
         accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthStringProperty,
         helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthHelpTextStringProperty
       },
