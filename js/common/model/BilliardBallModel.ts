@@ -48,10 +48,8 @@ export default class BilliardBallModel extends HydrogenAtom {
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.billiardBallStringProperty,
       icon: BilliardBallNode.createIcon(),
-      tandemNamePrefix: 'billiardBall',
-
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 This is being ignore and tandem name is being used.
-      accessibleNameProperty: ModelsOfTheHydrogenAtomStrings.a11y.billiardBallStringProperty
+      accessibleNameProperty: ModelsOfTheHydrogenAtomStrings.a11y.billiardBallStringProperty,
+      tandemNamePrefix: 'billiardBall'
     }, providedOptions );
 
     super( zoomedInBox, options );
