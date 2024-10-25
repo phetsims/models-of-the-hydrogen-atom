@@ -58,7 +58,7 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
       // pdom
       //TODO description: https://github.com/phetsims/sun/issues/900 Use a higher-level API for PDOM structure.
       labelTagName: 'h3',
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 Why can't we use accessibleName here?
+      //TODO description: https://github.com/phetsims/sun/issues/899 Should be using accessibleName instead of labelContent.
       labelContent: ModelsOfTheHydrogenAtomStrings.a11y.atomicModelStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.atomicModelHelpTextStringProperty
     }, providedOptions );
