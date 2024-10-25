@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SchrodingerStateInfoButton is an info button that, when pressed, shows a dialog that explains the Schrodinger
+ * QuantumNumbersInfoButton is an info button that, when pressed, shows a dialog that explains the Schrodinger
  * state notation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -11,12 +11,12 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../MOTHAColors.js';
-import SchrodingerStateInfoDialog from './SchrodingerStateInfoDialog.js';
+import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
-export default class SchrodingerStateInfoButton extends InfoButton {
+export default class QuantumNumbersInfoButton extends InfoButton {
 
-  public constructor( dialog: SchrodingerStateInfoDialog, tandem: Tandem ) {
+  public constructor( dialog: QuantumNumbersInfoDialog, tandem: Tandem ) {
     super( {
       scale: 0.5,
       iconFill: MOTHAColors.stateInfoButtonFillProperty,
@@ -27,4 +27,4 @@ export default class SchrodingerStateInfoButton extends InfoButton {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'SchrodingerStateInfoButton', SchrodingerStateInfoButton );
+modelsOfTheHydrogenAtom.register( 'QuantumNumbersInfoButton', QuantumNumbersInfoButton );

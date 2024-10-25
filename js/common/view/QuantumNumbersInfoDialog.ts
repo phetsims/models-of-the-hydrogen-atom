@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SchrodingerStateInfoDialog explains the quantum numbers that describe the electron state for the Schrodinger model.
+ * QuantumNumbersInfoDialog explains the quantum numbers that describe the electron state for the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,7 +20,7 @@ const CONTENT_TEXT_OPTIONS: RichTextOptions = {
   lineWrap: 575
 };
 
-export default class SchrodingerStateInfoDialog extends Dialog {
+export default class QuantumNumbersInfoDialog extends Dialog {
 
   public constructor( tandem: Tandem ) {
 
@@ -74,4 +74,4 @@ export default class SchrodingerStateInfoDialog extends Dialog {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'SchrodingerStateInfoDialog', SchrodingerStateInfoDialog );
+modelsOfTheHydrogenAtom.register( 'QuantumNumbersInfoDialog', QuantumNumbersInfoDialog );
