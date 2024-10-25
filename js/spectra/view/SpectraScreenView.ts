@@ -40,7 +40,7 @@ export default class SpectraScreenView extends ScreenView {
       // ScreenViewOptions
       isDisposable: false,
 
-      //TODO https://github.com/phetsims/joist/issues/987 change this to ScreenSummaryContent
+      //TODO description: https://github.com/phetsims/joist/issues/987 change this to ScreenSummaryContent
       screenSummaryContent: new Node( {
         tagName: 'p',
         innerContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenSummaryStringProperty
@@ -215,10 +215,9 @@ export default class SpectraScreenView extends ScreenView {
 
     // Control Area focus order
     this.pdomControlAreaNode.pdomOrder = [
-      //TODO pdomControlAreaNode.pdomOrder
       spectrometerAccordionBox,
       timeControlNode,
-      //TODO zoomedInBoxNode.schrodingerNode.stateInfoButton is desired here.
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 zoomedInBoxNode.schrodingerNode.stateInfoButton is desired here.
       resetAllButton
     ];
   }

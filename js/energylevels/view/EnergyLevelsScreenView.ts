@@ -26,7 +26,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       // ScreenViewOptions
       isDisposable: false,
 
-      //TODO https://github.com/phetsims/joist/issues/987 change this to ScreenSummaryContent
+      //TODO description: https://github.com/phetsims/joist/issues/987 change this to ScreenSummaryContent
       screenSummaryContent: new Node( {
         tagName: 'p',
         innerContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreenSummaryStringProperty
@@ -71,7 +71,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
     // Play Area focus order
     this.pdomPlayAreaNode.pdomOrder = [
-      //TODO pdomPlayAreaNode.pdomOrder
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 flesh out pdomPlayAreaNode.pdomOrder
       electronEnergyLevelAccordionBox,
       modelPanel,
       resetAllButton
@@ -79,7 +79,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
     // Control Area focus order
     this.pdomControlAreaNode.pdomOrder = [
-      //TODO pdomControlAreaNode.pdomOrder
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67: flesh out pdomControlAreaNode.pdomOrder
     ];
   }
 }
