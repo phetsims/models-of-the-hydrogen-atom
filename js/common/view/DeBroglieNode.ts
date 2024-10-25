@@ -34,6 +34,9 @@ type DeBroglieNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'c
 
 export default class DeBroglieNode extends HydrogenAtomNode {
 
+  // For setting pdomOrder.
+  public readonly deBroglieRepresentationComboBox: Node;
+
   public constructor( hydrogenAtom: DeBroglieModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2,
@@ -88,6 +91,8 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     electronStateText.localBoundsProperty.link( () => {
       electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
+
+    this.deBroglieRepresentationComboBox = deBroglieRepresentationComboBox;
   }
 
   /**

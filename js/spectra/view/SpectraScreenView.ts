@@ -211,14 +211,14 @@ export default class SpectraScreenView extends ScreenView {
       absorptionEmissionCheckbox,
       absorptionEmissionDialog,
       modelVBox,
-      zoomedInBoxNode
+      zoomedInBoxNode.deBroglieRepresentationComboBox
     ];
 
     // Control Area focus order
     this.pdomControlAreaNode.pdomOrder = [
       spectrometerAccordionBox,
       timeControlNode,
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 zoomedInBoxNode.schrodingerNode.stateInfoButton is desired here.
+      zoomedInBoxNode.schrodingerQuantumNumbersInfoButton,
       resetAllButton
     ];
   }

@@ -51,6 +51,9 @@ type SchrodingerNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 
 
 export default class SchrodingerNode extends HydrogenAtomNode {
 
+  // For setting pdomOrder.
+  public readonly quantumNumbersInfoButton: Node;
+
   public constructor( hydrogenAtom: SchrodingerModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       light: Light,
@@ -88,10 +91,10 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const stateInfoDialog = new SchrodingerStateInfoDialog( options.tandem.createTandem( 'stateInfoDialog' ) );
 
-    const stateInfoButton = new SchrodingerStateInfoButton( stateInfoDialog, options.tandem.createTandem( 'stateInfoButton' ) );
+    const quantumNumbersInfoButton = new SchrodingerStateInfoButton( stateInfoDialog, options.tandem.createTandem( 'quantumNumbersInfoButton' ) );
 
     const stateBox = new HBox( {
-      children: [ stateText, stateInfoButton ],
+      children: [ stateText, quantumNumbersInfoButton ],
       spacing: 8
     } );
 
@@ -118,6 +121,8 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     vBox.localBoundsProperty.link( () => {
       vBox.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
+
+    this.quantumNumbersInfoButton = quantumNumbersInfoButton;
   }
 
   /**

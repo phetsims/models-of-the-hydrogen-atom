@@ -30,6 +30,10 @@ type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
+  // For setting pdomOrder.
+  public readonly deBroglieRepresentationComboBox: Node;
+  public readonly schrodingerQuantumNumbersInfoButton: Node;
+
   public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
     const options = optionize<SpectraZoomedInBoxNodeOptions, SelfOptions, ZoomedInBoxNodeOptions>()( {
@@ -48,30 +52,40 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
     super( model.zoomedInBox, modelViewTransform, model.isExperimentProperty, options );
 
+    const billiardBallNode = new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'billiardBallNode' )
+    } );
+
+    const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'plumPuddingNode' )
+    } );
+
+    const classicalSolarSystemNode = new ClassicalSolarSystemNode( model.classicalSolarSystemModel, model.hydrogenAtomProperty, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'classicalSolarSystemNode' )
+    } );
+
+    const bohrNode = new BohrNode( model.bohrModel, model.hydrogenAtomProperty, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'bohrNode' )
+    } );
+
     const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform, popupParent, {
       tandem: options.tandem.createTandem( 'deBroglieNode' )
+    } );
+
+    const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, model.light, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'schrodingerNode' )
     } );
 
     const photonsLayer = new Node();
 
     this.contentsNode.addChild( new Node( {
       children: [
-        new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'billiardBallNode' )
-        } ),
-        new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'plumPuddingNode' )
-        } ),
-        new ClassicalSolarSystemNode( model.classicalSolarSystemModel, model.hydrogenAtomProperty, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'classicalSolarSystemNode' )
-        } ),
-        new BohrNode( model.bohrModel, model.hydrogenAtomProperty, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'bohrNode' )
-        } ),
+        billiardBallNode,
+        plumPuddingNode,
+        classicalSolarSystemNode,
+        bohrNode,
         deBroglieNode,
-        new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, model.light, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'schrodingerNode' )
-        } ),
+        schrodingerNode,
         photonsLayer
       ]
     } ) );
@@ -93,6 +107,9 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       photonsLayer.removeChild( photonNode );
       photonNode.dispose();
     } );
+
+    this.deBroglieRepresentationComboBox = deBroglieNode.deBroglieRepresentationComboBox;
+    this.schrodingerQuantumNumbersInfoButton = schrodingerNode.quantumNumbersInfoButton;
   }
 }
 
