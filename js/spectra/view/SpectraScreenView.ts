@@ -41,6 +41,7 @@ export default class SpectraScreenView extends ScreenView {
       isDisposable: false,
 
       //TODO description: https://github.com/phetsims/joist/issues/987 change this to ScreenSummaryContent
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/72 Get the screen summary text from designers.
       screenSummaryContent: new Node( {
         tagName: 'p',
         innerContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenSummaryStringProperty
