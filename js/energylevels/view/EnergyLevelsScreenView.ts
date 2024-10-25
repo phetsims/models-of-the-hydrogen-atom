@@ -80,7 +80,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
     // Control Area focus order
     this.pdomControlAreaNode.pdomOrder = [
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67: flesh out pdomControlAreaNode.pdomOrder
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/67 flesh out pdomControlAreaNode.pdomOrder
     ];
   }
 }
