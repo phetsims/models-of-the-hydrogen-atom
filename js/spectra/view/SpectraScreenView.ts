@@ -30,6 +30,7 @@ import AbsorptionEmissionDialog from '../../common/view/AbsorptionEmissionDialog
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import AbsorptionEmissionCheckbox from '../../common/view/AbsorptionEmissionCheckbox.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -42,10 +43,10 @@ export default class SpectraScreenView extends ScreenView {
 
       //TODO description: https://github.com/phetsims/joist/issues/987 change this to ScreenSummaryContent
       //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/72 Get the screen summary text from designers.
-      screenSummaryContent: new Node( {
-        tagName: 'p',
-        innerContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenSummaryStringProperty
-      } ),
+      screenSummaryContent: new ScreenSummaryContent( [
+        ModelsOfTheHydrogenAtomStrings.a11y.spectraPlayAreaScreenSummaryStringProperty,
+        ModelsOfTheHydrogenAtomStrings.a11y.spectraControlAreaScreenSummaryStringProperty
+      ] ),
       tandem: tandem
     } );
 
