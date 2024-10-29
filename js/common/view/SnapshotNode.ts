@@ -60,7 +60,8 @@ export default class SnapshotNode extends Node {
       right: backgroundNode.right - INSIDE_X_MARGIN,
       bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
       accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotNameStringProperty, {
-        name: snapshotNumber //TODO get this from Snapshot model element, include model name
+        modelName: 'modelName', //TODO get this from Snapshot model element, include model name
+        snapshotNumber: snapshotNumber //TODO get this from Snapshot model element, include model name
       } ),
       tandem: Tandem.OPT_OUT //TODO instrument trashButton
     } );
