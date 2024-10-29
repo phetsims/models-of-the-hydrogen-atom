@@ -51,21 +51,19 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
       {
         value: 'radialDistance',
         createNode: () => radialDistanceText,
-
-        //TODO description: https://github.com/phetsims/sun/issues/906 a11yName should probably be renamed to accessibleName.
-        a11yName: ModelsOfTheHydrogenAtomStrings.a11y.radialDistanceStringProperty,
+        accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.radialDistanceStringProperty,
         tandemName: 'radialDistanceItem'
       },
       {
         value: '3DHeight',
         createNode: () => threeDHeightText,
-        a11yName: ModelsOfTheHydrogenAtomStrings.a11y[ '3DHeightStringProperty' ],
+        accessibleName: ModelsOfTheHydrogenAtomStrings.a11y[ '3DHeightStringProperty' ],
         tandemName: '3DHeightItem'
       },
       {
         value: 'brightness',
         createNode: () => brightnessText,
-        a11yName: ModelsOfTheHydrogenAtomStrings.a11y.brightnessStringProperty,
+        accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.brightnessStringProperty,
         tandemName: 'brightnessItem'
       }
     ];
