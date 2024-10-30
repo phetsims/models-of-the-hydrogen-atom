@@ -80,8 +80,11 @@ type StringsType = {
     'deleteSnapshotNameStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
-    'energyLevelsPlayAreaScreenSummaryStringProperty': LocalizedStringProperty;
-    'energyLevelsControlAreaScreenSummaryStringProperty': LocalizedStringProperty;
+    'energyLevelsScreenSummary': {
+      'playAreaStringProperty': LocalizedStringProperty;
+      'controlAreaStringProperty': LocalizedStringProperty;
+      'interactionHintStringProperty': LocalizedStringProperty;
+    };
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
     'experimentOrModelStringProperty': LocalizedStringProperty;
     'experimentOrModelHelpTextStringProperty': LocalizedStringProperty;
@@ -95,8 +98,11 @@ type StringsType = {
     'quantumNumbersStringProperty': LocalizedStringProperty;
     'radialDistanceStringProperty': LocalizedStringProperty;
     'schrodingerStringProperty': LocalizedStringProperty;
-    'spectraPlayAreaScreenSummaryStringProperty': LocalizedStringProperty;
-    'spectraControlAreaScreenSummaryStringProperty': LocalizedStringProperty;
+    'spectraScreenSummary': {
+      'playAreaStringProperty': LocalizedStringProperty;
+      'controlAreaStringProperty': LocalizedStringProperty;
+      'interactionHintStringProperty': LocalizedStringProperty;
+    };
     'spectrometerStringProperty': LocalizedStringProperty;
     'takeSnapshotStringProperty': LocalizedStringProperty;
     'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;

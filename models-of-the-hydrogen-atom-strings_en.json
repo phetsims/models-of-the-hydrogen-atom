@@ -195,11 +195,16 @@
     "electronEnergyLevelsHelpText": {
       "value": "Observe changes in the electron’s state as shown in an energy level diagram."
     },
-    "energyLevelsPlayAreaScreenSummary": {
-      "value": "In the Play Area, you find a container with a hydrogen atom. You can change the atom representation by choosing one of the 3 different models: Bohr, de Broglie, and Schrödinger. As the first screen, turn on the light source to interact with the atom, and experiment with white or monochromatic light. Open the Electron Energy Level to get more detailed information on the electron transition between levels and energy when it interacts with the light."
-    },
-    "energyLevelsControlAreaScreenSummary": {
-      "value": "In the Control Area is a Spectrometer that displays the photons emitted in a graph and offers options to save data. The play controls manipulate the reproduction velocity, and the reset button resets the simulation."
+    "energyLevelsScreenSummary": {
+      "playArea": {
+        "value": "In the Play Area, ..."
+      },
+      "controlArea": {
+        "value": "In the Control Area, ..."
+      },
+      "interactionHint": {
+        "value": "Turn on the light source to explore."
+      }
     },
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"
@@ -240,11 +245,16 @@
     "schrodinger": {
       "value": "Schr\u00f6dinger"
     },
-    "spectraPlayAreaScreenSummary": {
-      "value": "In the Play Area, you find a container with a hydrogen atom represented as an incognito box while the Experiment is selected. You can change the atom representation by changing from Experiment to Model and choosing one of the 6 different models. You can also turn on the light source to interact with the atom and experiment with white or monochromatic light."
-    },
-    "spectraControlAreaScreenSummary": {
-      "value": "In the Control Area is a Spectrometer that displays the photons emitted in a graph and offers options to save data. The play controls manipulate the reproduction velocity, and the reset button resets the simulation."
+    "spectraScreenSummary": {
+      "playArea": {
+        "value": "In the Play Area, ..."
+      },
+      "controlArea": {
+        "value": "In the Control Area, ..."
+      },
+      "interactionHint": {
+        "value": "Turn on the light source to explore."
+      }
     },
     "spectrometer": {
       "value": "Spectrometer"
