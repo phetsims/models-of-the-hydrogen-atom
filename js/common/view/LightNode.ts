@@ -6,15 +6,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
-import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Light from '../model/Light.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import BeamNode from './BeamNode.js';
+import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import Light from '../model/Light.js';
+import BeamNode from './BeamNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -34,7 +34,9 @@ export class LightNode extends Node {
     const laserPointerNode = new LaserPointerNode( light.isOnProperty, {
       bodySize: new Dimension2( 88, 64 ),
       nozzleSize: new Dimension2( 18, 50 ),
-      buttonRadius: 19,
+      buttonOptions: {
+        radius: 19
+      },
       rotation: -Light.DIRECTION, // +y is up in the model, down in the view
 
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceStringProperty,
