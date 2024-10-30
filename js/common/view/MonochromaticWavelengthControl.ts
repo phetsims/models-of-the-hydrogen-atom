@@ -7,27 +7,27 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import WavelengthNumberControl, { WavelengthNumberControlOptions } from '../../../../scenery-phet/js/WavelengthNumberControl.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Utils from '../../../../dot/js/Utils.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
-import Slider from '../../../../sun/js/Slider.js';
-import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
-import { HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import MOTHAColors from '../MOTHAColors.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import WavelengthNumberControl, { WavelengthNumberControlOptions } from '../../../../scenery-phet/js/WavelengthNumberControl.js';
+import { HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
+import Slider from '../../../../sun/js/Slider.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Light from '../model/Light.js';
 import { LightMode } from '../model/LightMode.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 const SLIDER_TRACK_SIZE = new Dimension2( 250, 15 );
 
@@ -90,12 +90,10 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthHelpTextStringProperty,
       sliderOptions: {
-        constrainValue: constrainValue,
-
-        //TODO description: https://github.com/phetsims/scenery-phet/issues/878 Should be setting these on the NumberControl, but they are unsupported.
-        accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthStringProperty,
-        helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthHelpTextStringProperty
+        constrainValue: constrainValue
       },
       spectrumSliderTrackOptions: {
         constrainValue: constrainValue,
