@@ -10,6 +10,8 @@
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
+/* global QueryStringMachineSchema */
+
 const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
 
   //----------------------------------------------------------------------------------------------------------------
