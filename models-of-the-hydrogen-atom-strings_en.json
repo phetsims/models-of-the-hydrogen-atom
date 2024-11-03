@@ -147,7 +147,7 @@
     "value": "{{m}}, the <b>Magnetic Quantum Number</b>, describes the orientation of the orbital in space."
   },
   "snapshotNumberName": {
-    "value": "Snapshot {{number}} {{name}}"
+    "value": "Snapshot {{number}}: {{name}}"
   },
   "a11y": {
     "3DHeight": {
@@ -190,7 +190,7 @@
       "value": "Choose the wave representation for de Broglie model."
     },
     "deleteSnapshotNumberName": {
-      "value": "Delete Snapshot {{number}} ({{name}})"
+      "value": "Delete Snapshot {{number}}: {{name}}"
     },
     "electronEnergyLevels": {
       "value": "Electron Energy Levels"
