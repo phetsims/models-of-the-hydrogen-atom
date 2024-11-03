@@ -107,14 +107,14 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     } );
 
     //TODO Under Construction
-    const underConstructionNode = new Text( 'Under Construction', {
-      font: new PhetFont( 24 ),
+    const underConstructionText = new Text( 'Under Construction', {
+      font: new PhetFont( 16 ),
       fill: 'red',
       centerX: zoomedInBoxBounds.centerX,
-      top: zoomedInBoxBounds.top + 10
+      top: zoomedInBoxBounds.top + 100
     } );
 
-    options.children = [ fieldNode, protonNode, xzAxesNode, vBox, underConstructionNode ];
+    options.children = [ fieldNode, protonNode, xzAxesNode, vBox, underConstructionText ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 

@@ -10,7 +10,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -52,7 +52,18 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       stroke: 'black'
     } );
 
-    super( diagramNode, options );
+    //TODO Under Construction
+    const underConstructionText = new Text( 'Under Construction', {
+      font: new PhetFont( 16 ),
+      fill: 'red',
+      center: diagramNode.center
+    } );
+
+    const content = new Node( {
+      children: [ diagramNode, underConstructionText ]
+    } );
+
+    super( content, options );
   }
 }
 

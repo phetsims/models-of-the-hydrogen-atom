@@ -70,7 +70,14 @@ export default class SnapshotNode extends Node {
       tandem: Tandem.OPT_OUT //TODO instrument trashButton
     } );
 
-    options.children = [ backgroundNode, titleText, trashButton ];
+    //TODO Under Construction
+    const underConstructionText = new Text( 'Under Construction', {
+      font: new PhetFont( 16 ),
+      fill: 'red',
+      center: backgroundNode.center
+    } );
+
+    options.children = [ backgroundNode, titleText, trashButton, underConstructionText ];
 
     super( options );
   }

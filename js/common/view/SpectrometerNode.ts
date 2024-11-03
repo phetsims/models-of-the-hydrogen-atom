@@ -44,6 +44,13 @@ export default class SpectrometerNode extends Node {
       stroke: MOTHAColors.spectrometerStrokeProperty
     } );
 
+    //TODO Under Construction
+    const underConstructionText = new Text( 'Under Construction', {
+      font: new PhetFont( 16 ),
+      fill: 'red',
+      center: backgroundNode.center
+    } );
+
     const spectrumNode = new SpectrumNode( {
       size: new Dimension2( CHART_SIZE.width, 4 ),
       minValue: scaleUV( MOTHAConstants.SPECTROMETER_WAVELENGTH_RANGE.min ),
@@ -69,13 +76,14 @@ export default class SpectrometerNode extends Node {
       maxWidth: 0.95 * backgroundNode.width
     } );
     text.localBoundsProperty.link( () => {
-      text.center = backgroundNode.center;
+      text.centerX = spectrumNode.centerX;
+      text.bottom = spectrumNode.top - 10;
     } );
 
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      children: [ backgroundNode, spectrumNode, text ]
+      children: [ backgroundNode, underConstructionText, spectrumNode, text ]
     }, providedOptions );
 
     super( options );
