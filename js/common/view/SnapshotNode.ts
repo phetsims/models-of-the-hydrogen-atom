@@ -41,12 +41,18 @@ export default class SnapshotNode extends Node {
       stroke: MOTHAColors.spectrometerStrokeProperty
     } );
 
-    //TODO i18n & dynamic locale
-    const titleText = new Text( `Snapshot ${snapshot.snapshotNumber} (${snapshot.modelNameProperty.value})`, {
+    const titleStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.snapshotNumberNameStringProperty, {
+      number: snapshot.snapshotNumber,
+      name: snapshot.modelNameProperty
+    } );
+    const titleText = new Text( titleStringProperty, {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.invertibleTextFillProperty,
-      left: backgroundNode.left + INSIDE_X_MARGIN,
-      top: backgroundNode.top + INSIDE_Y_MARGIN
+      maxWidth: 300
+    } );
+    titleText.localBoundsProperty.link( () => {
+      titleText.left = backgroundNode.left + INSIDE_X_MARGIN;
+      titleText.top = backgroundNode.top + INSIDE_Y_MARGIN;
     } );
 
     const trashButton = new TrashButton( {
@@ -57,9 +63,9 @@ export default class SnapshotNode extends Node {
       },
       right: backgroundNode.right - INSIDE_X_MARGIN,
       bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
-      accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotNameStringProperty, {
-        snapshotNumber: snapshot.snapshotNumber,
-        modelName: snapshot.modelNameProperty
+      accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotNumberNameStringProperty, {
+        number: snapshot.snapshotNumber,
+        name: snapshot.modelNameProperty
       } ),
       tandem: Tandem.OPT_OUT //TODO instrument trashButton
     } );

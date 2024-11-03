@@ -63,6 +63,7 @@ type StringsType = {
   'nInfoStringProperty': LocalizedStringProperty;
   'lInfoStringProperty': LocalizedStringProperty;
   'mInfoStringProperty': LocalizedStringProperty;
+  'snapshotNumberNameStringProperty': LocalizedStringProperty;
   'a11y': {
     '3DHeightStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionStringProperty': LocalizedStringProperty;
@@ -77,7 +78,7 @@ type StringsType = {
     'deBroglieStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationHelpTextStringProperty': LocalizedStringProperty;
-    'deleteSnapshotNameStringProperty': LocalizedStringProperty;
+    'deleteSnapshotNumberNameStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
     'energyLevelsScreenSummary': {
