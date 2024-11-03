@@ -68,21 +68,21 @@ export default class SpectrometerNode extends Node {
         return string;
       } );
 
-    //TODO simple temporary text display, for debugging
-    const text = new Text( stringProperty, {
+    //TODO simple display of the spectrometer data, for debugging
+    const dataText = new Text( stringProperty, {
       font: new PhetFont( 12 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 0.95 * backgroundNode.width
     } );
-    text.localBoundsProperty.link( () => {
-      text.centerX = spectrumNode.centerX;
-      text.bottom = spectrumNode.top - 10;
+    dataText.localBoundsProperty.link( () => {
+      dataText.centerX = spectrumNode.centerX;
+      dataText.bottom = spectrumNode.top - 10;
     } );
 
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      children: [ backgroundNode, underConstructionText, spectrumNode, text ]
+      children: [ backgroundNode, spectrumNode, dataText, underConstructionText ]
     }, providedOptions );
 
     super( options );
