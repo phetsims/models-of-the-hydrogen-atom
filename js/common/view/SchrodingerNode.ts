@@ -35,15 +35,15 @@ import SchrodingerModel from '../model/SchrodingerModel.js';
 import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { HBox, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, Rectangle, VBox } from '../../../../scenery/js/imports.js';
 import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
 import SchrodingerStateText from './SchrodingerStateText.js';
 import Light from '../model/Light.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
 import QuantumNumbersInfoButton from './QuantumNumbersInfoButton.js';
+import UnderConstructionText from './UnderConstructionText.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -107,9 +107,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     } );
 
     //TODO Under Construction
-    const underConstructionText = new Text( 'Under Construction', {
-      font: new PhetFont( 16 ),
-      fill: 'red',
+    const underConstructionText = new UnderConstructionText( {
       centerX: zoomedInBoxBounds.centerX,
       top: zoomedInBoxBounds.top + 100
     } );

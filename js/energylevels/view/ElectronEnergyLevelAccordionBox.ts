@@ -17,6 +17,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
+import UnderConstructionText from '../../common/view/UnderConstructionText.js';
 
 const DIAGRAM_SIZE = new Dimension2( 220, 420 );
 
@@ -53,9 +54,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     } );
 
     //TODO Under Construction
-    const underConstructionText = new Text( 'Under Construction', {
-      font: new PhetFont( 16 ),
-      fill: 'red',
+    const underConstructionText = new UnderConstructionText( {
       center: diagramNode.center
     } );
 

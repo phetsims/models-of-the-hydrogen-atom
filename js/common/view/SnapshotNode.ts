@@ -18,6 +18,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Snapshot from '../model/Snapshot.js';
+import UnderConstructionText from './UnderConstructionText.js';
 
 const INSIDE_X_MARGIN = 6;
 const INSIDE_Y_MARGIN = 6;
@@ -71,9 +72,7 @@ export default class SnapshotNode extends Node {
     } );
 
     //TODO Under Construction
-    const underConstructionText = new Text( 'Under Construction', {
-      font: new PhetFont( 16 ),
-      fill: 'red',
+    const underConstructionText = new UnderConstructionText( {
       center: backgroundNode.center
     } );
 

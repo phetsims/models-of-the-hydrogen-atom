@@ -20,6 +20,7 @@ import Light from '../model/Light.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Range from '../../../../dot/js/Range.js';
+import UnderConstructionText from './UnderConstructionText.js';
 
 const DISPLAY_SIZE = new Dimension2( 620, 135 );
 const CHART_SIZE = new Dimension2( 0.97 * DISPLAY_SIZE.width, 0.9 * DISPLAY_SIZE.height );
@@ -45,9 +46,7 @@ export default class SpectrometerNode extends Node {
     } );
 
     //TODO Under Construction
-    const underConstructionText = new Text( 'Under Construction', {
-      font: new PhetFont( 16 ),
-      fill: 'red',
+    const underConstructionText = new UnderConstructionText( {
       center: backgroundNode.center
     } );
 
