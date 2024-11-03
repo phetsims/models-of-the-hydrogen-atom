@@ -132,7 +132,7 @@ export default class DeBroglie3DHeightNode extends Node {
 
     //TODO Under Construction
     const underConstructionNode = new Text( 'Under Construction', {
-      font: new PhetFont( 24 ),
+      font: new PhetFont( 16 ),
       fill: 'red',
       center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ).minusXY( 0, 60 )
     } );
