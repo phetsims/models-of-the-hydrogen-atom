@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TProperty from '../../../../axon/js/TProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
@@ -16,6 +15,8 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SnapshotNode from './SnapshotNode.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import Snapshot from '../model/Snapshot.js';
+import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -23,7 +24,7 @@ type SnapshotsDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'
 
 export default class SnapshotsDialog extends Dialog {
 
-  public constructor( numberOfSnapshotsProperty: TProperty<number>, providedOptions?: SnapshotsDialogOptions ) {
+  public constructor( snapshots: ObservableArray<Snapshot>, providedOptions?: SnapshotsDialogOptions ) {
 
     const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>()( {
 
@@ -38,7 +39,7 @@ export default class SnapshotsDialog extends Dialog {
 
     const content = new VBox( {
       spacing: 10,
-      children: createSnapshotNodes( numberOfSnapshotsProperty )
+      children: createSnapshotNodes( snapshots )
     } );
 
     super( content, options );
@@ -49,24 +50,20 @@ export default class SnapshotsDialog extends Dialog {
         this.hide();
       }
       else {
-        content.children = createSnapshotNodes( numberOfSnapshotsProperty );
+        content.children = createSnapshotNodes( snapshots );
       }
     };
-    numberOfSnapshotsProperty.lazyLink( numberOfSnapshotsObserver );
+    snapshots.lengthProperty.lazyLink( numberOfSnapshotsObserver );
   }
 }
 
 /**
- * Creates the snapshots.
+ * Creates a Node for each snapshot.
  */
-function createSnapshotNodes( numberOfSnapshotsProperty: TProperty<number> ): SnapshotNode[] {
-  const snapshots = [];
-  for ( let snapshotNumber = 1; snapshotNumber <= numberOfSnapshotsProperty.value; snapshotNumber++ ) {
-    snapshots.push( new SnapshotNode( snapshotNumber, numberOfSnapshotsProperty, {
-      scale: 0.8 //TODO Need to adjust this and MAX_SPECTROMETER_SNAPSHOTS to ensure the snapshots are readable.
-    } ) );
-  }
-  return snapshots;
+function createSnapshotNodes( snapshots: ObservableArray<Snapshot> ): SnapshotNode[] {
+  return snapshots.map( snapshot => new SnapshotNode( snapshot, {
+    scale: 0.8 //TODO Need to adjust this and MAX_SPECTROMETER_SNAPSHOTS to ensure the snapshots are readable.
+  } ) );
 }
 
 modelsOfTheHydrogenAtom.register( 'SnapshotsDialog', SnapshotsDialog );

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TProperty from '../../../../axon/js/TProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -18,6 +17,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import Snapshot from '../model/Snapshot.js';
 
 const INSIDE_X_MARGIN = 6;
 const INSIDE_Y_MARGIN = 6;
@@ -29,7 +29,7 @@ type SnapshotNodeOptions = SelfOptions &
 
 export default class SnapshotNode extends Node {
 
-  public constructor( snapshotNumber: number, numberOfSnapshotsProperty: TProperty<number>, providedOptions?: SnapshotNodeOptions ) {
+  public constructor( snapshot: Snapshot, providedOptions?: SnapshotNodeOptions ) {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO default values for options
@@ -41,8 +41,8 @@ export default class SnapshotNode extends Node {
       stroke: MOTHAColors.spectrometerStrokeProperty
     } );
 
-    //TODO i18n
-    const titleText = new Text( `Snapshot ${snapshotNumber}`, {
+    //TODO i18n & dynamic locale
+    const titleText = new Text( `Snapshot ${snapshot.snapshotNumber} (${snapshot.modelNameProperty.value})`, {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       left: backgroundNode.left + INSIDE_X_MARGIN,
@@ -51,17 +51,15 @@ export default class SnapshotNode extends Node {
 
     const trashButton = new TrashButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      listener: () => {
-        numberOfSnapshotsProperty.value--;
-      },
+      listener: () => snapshot.dispose(),
       iconOptions: {
         scale: 0.04
       },
       right: backgroundNode.right - INSIDE_X_MARGIN,
       bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
       accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotNameStringProperty, {
-        modelName: 'modelName', //TODO get this from Snapshot model element, include model name
-        snapshotNumber: snapshotNumber //TODO get this from Snapshot model element, include model name
+        snapshotNumber: snapshot.snapshotNumber,
+        modelName: snapshot.modelNameProperty
       } ),
       tandem: Tandem.OPT_OUT //TODO instrument trashButton
     } );

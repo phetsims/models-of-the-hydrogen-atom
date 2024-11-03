@@ -9,7 +9,6 @@
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Property from '../../../../axon/js/Property.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -19,6 +18,8 @@ import SpectrometerDataPoint from './SpectrometerDataPoint.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
+import Snapshot from './Snapshot.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -26,13 +27,17 @@ type SpectrometerOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tand
 
 export default class Spectrometer extends PhetioObject {
 
+  private hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
+
   private recordingEnabled: boolean;
 
   public readonly dataPointsProperty: Property<SpectrometerDataPoint[]>;
 
   public readonly hasDataPointsProperty: TReadOnlyProperty<boolean>;
 
-  public readonly numberOfSnapshotsProperty: Property<number>;
+  public readonly snapshots: ObservableArray<Snapshot>;
+
+  private nextSnapshotNumber = 1;
 
   public constructor( hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: SpectrometerOptions ) {
 
@@ -44,6 +49,8 @@ export default class Spectrometer extends PhetioObject {
     }, providedOptions );
 
     super( options );
+
+    this.hydrogenAtomProperty = hydrogenAtomProperty;
 
     // Controlled by SpectrometerAccordionBox, so that we are not recording unless expanded.
     this.recordingEnabled = true;
@@ -61,10 +68,7 @@ export default class Spectrometer extends PhetioObject {
       tandem: options.tandem.createTandem( 'hasDataPointsProperty' )
     } );
 
-    this.numberOfSnapshotsProperty = new NumberProperty( 0, {
-      tandem: options.tandem.createTandem( 'numberOfSnapshotsProperty' ),
-      phetioReadOnly: true
-    } );
+    this.snapshots = createObservableArray<Snapshot>();
 
     const photonEmittedListener = ( photon: Photon ) => {
       if ( this.recordingEnabled ) {
@@ -83,6 +87,12 @@ export default class Spectrometer extends PhetioObject {
       }
       newHydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
     } );
+  }
+
+  public createSnapshot(): void {
+    const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value.displayNameProperty );
+    this.snapshots.push( snapshot );
+    snapshot.disposeEmitter.addListener( () => this.snapshots.remove( snapshot ) );
   }
 
   /**
@@ -111,7 +121,9 @@ export default class Spectrometer extends PhetioObject {
   public reset(): void {
     this.clear();
     this.recordingEnabled = true;
-    //TODO delete snapshots
+    this.snapshots.forEach( snapshot => snapshot.dispose() );
+    this.snapshots.length = 0;
+    this.nextSnapshotNumber = 1;
   }
 
   public clear(): void {

@@ -29,10 +29,11 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
       } ),
       listener: () => snapshotsDialog.show(),
       // Enabled when we have snapshots
-      enabledProperty: new DerivedProperty( [ spectrometer.numberOfSnapshotsProperty ], n => ( n > 0 ), {
-        tandem: tandem.createTandem( 'enabledProperty' ),
-        phetioValueType: BooleanIO
-      } ),
+      enabledProperty: new DerivedProperty( [ spectrometer.snapshots.lengthProperty ],
+        numberOfSnapshots => ( numberOfSnapshots > 0 ), {
+          tandem: tandem.createTandem( 'enabledProperty' ),
+          phetioValueType: BooleanIO
+        } ),
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.viewSnapshotsStringProperty,
       tandem: tandem
     } );

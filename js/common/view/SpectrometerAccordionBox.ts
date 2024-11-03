@@ -61,7 +61,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     const snapshotButton = new SnapshotButton( spectrometer, buttonGroupTandem.createTandem( 'snapshotButton' ) );
 
-    const snapshotsDialog = new SnapshotsDialog( spectrometer.numberOfSnapshotsProperty, {
+    const snapshotsDialog = new SnapshotsDialog( spectrometer.snapshots, {
       tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
 
