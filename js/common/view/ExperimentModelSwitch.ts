@@ -35,7 +35,7 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
 
       // ABSwitchOptions
       isDisposable: false,
-      centerOnSwitch: true,
+      centerOnSwitch: false,
       toggleSwitchOptions: { size: new Dimension2( 50, 25 ) },
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelHelpTextStringProperty

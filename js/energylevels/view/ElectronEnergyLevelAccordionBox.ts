@@ -10,7 +10,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -19,11 +19,12 @@ import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import UnderConstructionText from '../../common/view/UnderConstructionText.js';
 
-const DIAGRAM_SIZE = new Dimension2( 220, 420 );
+//TODO Height needs to stretch to same height as EnergyLevelsZoomedInBoxNode.
+const DIAGRAM_SIZE = new Dimension2( 220, 365 );
 
 type SelfOptions = EmptySelfOptions;
 
-type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
 
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
