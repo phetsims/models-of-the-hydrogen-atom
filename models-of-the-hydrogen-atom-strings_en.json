@@ -266,7 +266,7 @@
       "value": "Take Snapshot"
     },
     "takeSnapshotHelpText": {
-      "value": "Take up to four snapshots of spectrometer data."
+      "value": "Take up to {{max}} snapshots of spectrometer data."
     },
     "viewSnapshots": {
       "value": "View Snapshots"

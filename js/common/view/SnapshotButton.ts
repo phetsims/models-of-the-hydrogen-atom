@@ -17,6 +17,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Spectrometer from '../model/Spectrometer.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 
 export default class SnapshotButton extends RectangularPushButton {
 
@@ -36,7 +37,9 @@ export default class SnapshotButton extends RectangularPushButton {
           phetioValueType: BooleanIO
         } ),
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotHelpTextStringProperty,
+      helpText: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotHelpTextStringProperty, {
+        max: MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS
+      } ),
       tandem: tandem
     } );
   }
