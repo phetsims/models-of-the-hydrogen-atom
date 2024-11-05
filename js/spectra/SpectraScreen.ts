@@ -34,6 +34,8 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
       isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.spectraStringProperty,
       homeScreenIcon: createScreenIcon(),
+
+      //TODO https://github.com/phetsims/joist/issues/989 Improve the API for screen buttons helpText.
       descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenButtonsHelpTextStringProperty
     }, providedOptions );
 

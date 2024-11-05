@@ -34,6 +34,8 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
       isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.energyLevelsStringProperty,
       homeScreenIcon: createScreenIcon(),
+
+      //TODO https://github.com/phetsims/joist/issues/989 Improve the API for screen buttons helpText.
       descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreenButtonsHelpTextStringProperty
     }, providedOptions );
 
