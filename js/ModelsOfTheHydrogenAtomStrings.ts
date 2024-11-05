@@ -81,6 +81,7 @@ type StringsType = {
     'deleteSnapshotNumberNameStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsStringProperty': LocalizedStringProperty;
     'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
+    'energyLevelsScreenButtonsHelpTextStringProperty': LocalizedStringProperty;
     'energyLevelsScreenSummary': {
       'playAreaStringProperty': LocalizedStringProperty;
       'controlAreaStringProperty': LocalizedStringProperty;
@@ -99,6 +100,7 @@ type StringsType = {
     'quantumNumbersStringProperty': LocalizedStringProperty;
     'radialDistanceStringProperty': LocalizedStringProperty;
     'schrodingerStringProperty': LocalizedStringProperty;
+    'spectraScreenButtonsHelpTextStringProperty': LocalizedStringProperty;
     'spectraScreenSummary': {
       'playAreaStringProperty': LocalizedStringProperty;
       'controlAreaStringProperty': LocalizedStringProperty;

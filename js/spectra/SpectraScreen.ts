@@ -33,7 +33,8 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
       // MOTHAScreenOptions
       isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.spectraStringProperty,
-      homeScreenIcon: createScreenIcon()
+      homeScreenIcon: createScreenIcon(),
+      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenButtonsHelpTextStringProperty
     }, providedOptions );
 
     super(

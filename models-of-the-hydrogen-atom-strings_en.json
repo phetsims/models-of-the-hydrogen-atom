@@ -198,6 +198,9 @@
     "electronEnergyLevelsHelpText": {
       "value": "Observe changes in the electron’s state as shown in an energy level diagram."
     },
+    "energyLevelsScreenButtonsHelpText": {
+      "value": "Observe changes in the electron’s state and compare to quantum models of the hydrogen atom."
+    },
     "energyLevelsScreenSummary": {
       "playArea": {
         "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single hydrogen atom, which varies with the mode of exploration. In Experiment mode, the structure of the hydrogen atom is a mystery and is obscured. In Model mode, there are three quantum models of the hydrogen atom to explore. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample. Observe changes in the electron’s state in the Electron Energy Level diagram."
@@ -247,6 +250,9 @@
     },
     "schrodinger": {
       "value": "Schr\u00f6dinger"
+    },
+    "spectraScreenButtonsHelpText": {
+      "value": "Compare experimental spectroscopy data to historical models of the hydrogen atom."
     },
     "spectraScreenSummary": {
       "playArea": {
