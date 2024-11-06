@@ -215,9 +215,6 @@
     "eraseSpectrometerData": {
       "value": "Erase Spectrometer Data"
     },
-    "experimentOrModel": {
-      "value": "Experiment or Model"
-    },
     "experimentOrModelHelpText": {
       "value": "Collect experimental data or explore atomic models."
     },

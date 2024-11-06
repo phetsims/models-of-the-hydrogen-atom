@@ -88,7 +88,6 @@ type StringsType = {
       'interactionHintStringProperty': LocalizedStringProperty;
     };
     'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
-    'experimentOrModelStringProperty': LocalizedStringProperty;
     'experimentOrModelHelpTextStringProperty': LocalizedStringProperty;
     'infoHelpTextStringProperty': LocalizedStringProperty;
     'lightSourceStringProperty': LocalizedStringProperty;
