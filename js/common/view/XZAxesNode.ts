@@ -16,7 +16,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
-const ARROW_LENGTH = 100;
+const ARROW_LENGTH = 50;
 const LABEL_FONT = new MathSymbolFont( 18 );
 const LABEL_OFFSET = 4;
 
