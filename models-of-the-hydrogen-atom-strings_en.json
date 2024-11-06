@@ -192,10 +192,10 @@
     "deleteSnapshotNumberName": {
       "value": "Delete Snapshot {{number}}: {{name}}"
     },
-    "electronEnergyLevels": {
-      "value": "Electron Energy Levels"
+    "electronEnergyLevel": {
+      "value": "Electron Energy Level"
     },
-    "electronEnergyLevelsHelpText": {
+    "electronEnergyLevelHelpText": {
       "value": "Observe changes in the electron’s state as shown in an energy level diagram."
     },
     "energyLevelsScreenButtonsHelpText": {

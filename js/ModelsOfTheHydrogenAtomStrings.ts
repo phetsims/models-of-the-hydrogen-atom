@@ -79,8 +79,8 @@ type StringsType = {
     'deBroglieRepresentationStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationHelpTextStringProperty': LocalizedStringProperty;
     'deleteSnapshotNumberNameStringProperty': LocalizedStringProperty;
-    'electronEnergyLevelsStringProperty': LocalizedStringProperty;
-    'electronEnergyLevelsHelpTextStringProperty': LocalizedStringProperty;
+    'electronEnergyLevelStringProperty': LocalizedStringProperty;
+    'electronEnergyLevelHelpTextStringProperty': LocalizedStringProperty;
     'energyLevelsScreenButtonsHelpTextStringProperty': LocalizedStringProperty;
     'energyLevelsScreenSummary': {
       'playAreaStringProperty': LocalizedStringProperty;
