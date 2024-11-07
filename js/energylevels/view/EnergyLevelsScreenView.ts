@@ -70,8 +70,8 @@ export default class EnergyLevelsScreenView extends ScreenView {
       tandem: tandem.createTandem( 'lightControlPanel' )
     } );
 
-    const absorptionEmissionDialogVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'absorptionEmissionDialogVisibleProperty' ),
+    const absorptionAndEmissionDialogVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'absorptionAndEmissionDialogVisibleProperty' ),
       phetioFeatured: true,
       phetioReadOnly: true // because the sim controls this
     } );
@@ -79,12 +79,12 @@ export default class EnergyLevelsScreenView extends ScreenView {
     //TODO Not relevant in Energy Levels screen, but was copied here from SpectraScreenView as part of brute-force fleshing out.
     // Hide the dialog when a classical model is being viewed.
     model.isQuantumModelProperty.link( isQuantumModel => {
-      if ( absorptionEmissionDialogVisibleProperty.value ) {
-        absorptionEmissionDialogVisibleProperty.value = isQuantumModel;
+      if ( absorptionAndEmissionDialogVisibleProperty.value ) {
+        absorptionAndEmissionDialogVisibleProperty.value = isQuantumModel;
       }
     } );
 
-    const absorptionAndEmissionCheckbox = new AbsorptionAndEmissionCheckbox( absorptionEmissionDialogVisibleProperty,
+    const absorptionAndEmissionCheckbox = new AbsorptionAndEmissionCheckbox( absorptionAndEmissionDialogVisibleProperty,
       model.isQuantumModelProperty, {
         tandem: tandem.createTandem( 'absorptionAndEmissionCheckbox' )
       } );
@@ -190,7 +190,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     const absorptionEmissionDialog = new AbsorptionEmissionDialog( model.light.monochromaticWavelengthProperty,
       model.light.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
         position: modelVBox.leftTop,
-        visibleProperty: absorptionEmissionDialogVisibleProperty,
+        visibleProperty: absorptionAndEmissionDialogVisibleProperty,
         tandem: tandem.createTandem( 'absorptionEmissionDialog' )
       } );
 
