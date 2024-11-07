@@ -162,6 +162,9 @@
     "absorptionAndEmissionDialog": {
       "value": "Absorption and Emission Dialog"
     },
+    "absorptionAndEmissionDialogHelpText": {
+      "value": "Use the buttons to set the light source to a specific wavelength."
+    },
     "atomicModel": {
       "value": "Atomic Model"
     },

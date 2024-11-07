@@ -69,6 +69,7 @@ type StringsType = {
     'absorptionAndEmissionStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionHelpTextStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionDialogStringProperty': LocalizedStringProperty;
+    'absorptionAndEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
     'atomicModelStringProperty': LocalizedStringProperty;
     'atomicModelHelpTextStringProperty': LocalizedStringProperty;
     'billiardBallStringProperty': LocalizedStringProperty;
