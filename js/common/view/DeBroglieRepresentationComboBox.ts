@@ -51,18 +51,21 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
       {
         value: 'radialDistance',
         createNode: () => radialDistanceText,
+        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/82 Use default discoverable from radialDistanceText.
         accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.radialDistanceStringProperty,
         tandemName: 'radialDistanceItem'
       },
       {
         value: '3DHeight',
         createNode: () => threeDHeightText,
+        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/82 Use default discoverable from threeDHeightText.
         accessibleName: ModelsOfTheHydrogenAtomStrings.a11y[ '3DHeightStringProperty' ],
         tandemName: '3DHeightItem'
       },
       {
         value: 'brightness',
         createNode: () => brightnessText,
+        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/82 Use default discoverable from brightnessText.
         accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.brightnessStringProperty,
         tandemName: 'brightnessItem'
       }

@@ -43,6 +43,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         expandedDefaultValue: MOTHAQueryParameters.expandAll,
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
+
+        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/82 Use default, discoverable from options.titleNode.
         accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.spectrometerStringProperty
       }, providedOptions );
 

@@ -53,6 +53,7 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
         value: 'white',
         createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, TEXT_OPTIONS ),
         options: {
+          //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/82 Use default discoverable from Text.
           accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.whiteStringProperty
         },
         tandemName: 'whiteRadioButton'
@@ -61,6 +62,7 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
         value: 'monochromatic',
         createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, TEXT_OPTIONS ),
         options: {
+          //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/82 Use default discoverable from Text.
           accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.monochromaticStringProperty
         },
         tandemName: 'monochromaticRadioButton'
