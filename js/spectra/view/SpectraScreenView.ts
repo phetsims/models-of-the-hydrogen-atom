@@ -26,7 +26,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import { LightControlPanel } from '../../common/view/LightControlPanel.js';
 import { LightNode } from '../../common/view/LightNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import AbsorptionEmissionDialog from '../../common/view/AbsorptionEmissionDialog.js';
+import AbsorptionAndEmissionDialog from '../../common/view/AbsorptionAndEmissionDialog.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import AbsorptionAndEmissionCheckbox from '../../common/view/AbsorptionAndEmissionCheckbox.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -132,7 +132,7 @@ export default class SpectraScreenView extends ScreenView {
         this.interruptSubtreeInput();
         model.reset();
         absorptionAndEmissionDialogVisibleProperty.reset();
-        absorptionEmissionDialog.reset();
+        absorptionAndEmissionDialog.reset();
         spectrometerAccordionBox.reset();
       },
       tandem: tandem.createTandem( 'resetAllButton' )
@@ -177,11 +177,11 @@ export default class SpectraScreenView extends ScreenView {
       visibleProperty: DerivedProperty.and( [ zoomedInBoxNode.visibleProperty, boxOfHydrogenNode.visibleProperty ] )
     } );
 
-    const absorptionEmissionDialog = new AbsorptionEmissionDialog( model.light.monochromaticWavelengthProperty,
+    const absorptionAndEmissionDialog = new AbsorptionAndEmissionDialog( model.light.monochromaticWavelengthProperty,
       model.light.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
         position: modelVBox.leftTop,
         visibleProperty: absorptionAndEmissionDialogVisibleProperty,
-        tandem: tandem.createTandem( 'absorptionEmissionDialog' )
+        tandem: tandem.createTandem( 'absorptionAndEmissionDialog' )
       } );
 
     // rendering order
@@ -199,7 +199,7 @@ export default class SpectraScreenView extends ScreenView {
         modelVBox,
         spectrometerAccordionBox,
         resetAllButton,
-        absorptionEmissionDialog,
+        absorptionAndEmissionDialog,
         popupsParent
       ]
     } );
@@ -210,7 +210,7 @@ export default class SpectraScreenView extends ScreenView {
       lightNode,
       lightControlPanel,
       absorptionAndEmissionCheckbox,
-      absorptionEmissionDialog,
+      absorptionAndEmissionDialog,
       modelVBox,
       zoomedInBoxNode.deBroglieRepresentationComboBox
     ];

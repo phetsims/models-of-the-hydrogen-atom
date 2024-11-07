@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * AbsorptionEmissionDialog is a non-modal dialog that displays information about absorption/emission wavelengths
+ * AbsorptionAndEmissionDialog is a non-modal dialog that displays information about absorption/emission wavelengths
  * and state transitions, and contains controls for setting wavelengths for the Light.
  *
  * Since PhET does not have support for non-modal Dialogs, we fake a dialog using a Panel.
@@ -67,7 +67,7 @@ type SelfOptions = {
 
 type AbsorptionEmissionDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class AbsorptionEmissionDialog extends Panel {
+export default class AbsorptionAndEmissionDialog extends Panel {
 
   // Position of the panel's top-left corner.
   private readonly positionProperty: Property<Vector2>;
@@ -281,4 +281,4 @@ export default class AbsorptionEmissionDialog extends Panel {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionEmissionDialog', AbsorptionEmissionDialog );
+modelsOfTheHydrogenAtom.register( 'AbsorptionAndEmissionDialog', AbsorptionAndEmissionDialog );

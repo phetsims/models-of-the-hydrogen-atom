@@ -31,7 +31,7 @@ import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import AbsorptionEmissionDialog from '../../common/view/AbsorptionEmissionDialog.js';
+import AbsorptionAndEmissionDialog from '../../common/view/AbsorptionAndEmissionDialog.js';
 import EnergyLevelsZoomedInBoxNode from './EnergyLevelsZoomedInBoxNode.js';
 
 export default class EnergyLevelsScreenView extends ScreenView {
@@ -187,11 +187,11 @@ export default class EnergyLevelsScreenView extends ScreenView {
       visibleProperty: DerivedProperty.and( [ zoomedInBoxNode.visibleProperty, boxOfHydrogenNode.visibleProperty ] )
     } );
 
-    const absorptionEmissionDialog = new AbsorptionEmissionDialog( model.light.monochromaticWavelengthProperty,
+    const absorptionAndEmissionDialog = new AbsorptionAndEmissionDialog( model.light.monochromaticWavelengthProperty,
       model.light.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
         position: modelVBox.leftTop,
         visibleProperty: absorptionAndEmissionDialogVisibleProperty,
-        tandem: tandem.createTandem( 'absorptionEmissionDialog' )
+        tandem: tandem.createTandem( 'absorptionAndEmissionDialog' )
       } );
 
     // rendering order
@@ -210,7 +210,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
         spectrometerAccordionBox,
         electronEnergyLevelAccordionBox,
         resetAllButton,
-        absorptionEmissionDialog,
+        absorptionAndEmissionDialog,
         popupsParent
       ]
     } );
@@ -221,7 +221,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       lightNode,
       lightControlPanel,
       absorptionAndEmissionCheckbox,
-      absorptionEmissionDialog,
+      absorptionAndEmissionDialog,
       electronEnergyLevelAccordionBox,
       modelVBox,
       zoomedInBoxNode.deBroglieRepresentationComboBox
