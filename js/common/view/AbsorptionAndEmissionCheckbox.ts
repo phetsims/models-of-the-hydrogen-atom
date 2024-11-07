@@ -21,13 +21,13 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type AbsorptionEmissionCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type AbsorptionAndEmissionCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
 export default class AbsorptionAndEmissionCheckbox extends Checkbox {
 
-  public constructor( absorptionEmissionDialogVisibleProperty: Property<boolean>,
+  public constructor( absorptionAndEmissionDialogVisibleProperty: Property<boolean>,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
-                      providedOptions: AbsorptionEmissionCheckboxOptions ) {
+                      providedOptions: AbsorptionAndEmissionCheckboxOptions ) {
 
     //TODO Would GatedVisibleProperty be useful here?
     const visibleProperty = new BooleanProperty( true, {
@@ -43,7 +43,7 @@ export default class AbsorptionAndEmissionCheckbox extends Checkbox {
       maxWidth: 200
     } );
 
-    const options = optionize<AbsorptionEmissionCheckboxOptions, SelfOptions, CheckboxOptions>()( {
+    const options = optionize<AbsorptionAndEmissionCheckboxOptions, SelfOptions, CheckboxOptions>()( {
 
       // CheckboxOptions
       isDisposable: false,
@@ -58,7 +58,7 @@ export default class AbsorptionAndEmissionCheckbox extends Checkbox {
         ( isQuantumModel, visible ) => isQuantumModel && visible )
     }, providedOptions );
 
-    super( absorptionEmissionDialogVisibleProperty, text, options );
+    super( absorptionAndEmissionDialogVisibleProperty, text, options );
   }
 }
 

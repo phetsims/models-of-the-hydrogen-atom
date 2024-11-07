@@ -65,7 +65,7 @@ type SelfOptions = {
   visibleProperty: Property<boolean>; // our visibleProperty needs to be writable
 };
 
-type AbsorptionEmissionDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+type AbsorptionAndEmissionDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class AbsorptionAndEmissionDialog extends Panel {
 
@@ -76,9 +76,9 @@ export default class AbsorptionAndEmissionDialog extends Panel {
                       lightModeProperty: Property<LightMode>,
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
-                      providedOptions: AbsorptionEmissionDialogOptions ) {
+                      providedOptions: AbsorptionAndEmissionDialogOptions ) {
 
-    const options = optionize4<AbsorptionEmissionDialogOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
+    const options = optionize4<AbsorptionAndEmissionDialogOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
 
       // SelfOptions
       position: Vector2.ZERO,
