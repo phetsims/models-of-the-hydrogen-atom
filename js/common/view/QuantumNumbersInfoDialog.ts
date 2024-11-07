@@ -55,20 +55,14 @@ export default class QuantumNumbersInfoDialog extends Dialog {
 
     const spacing = new RichText( 'X', CONTENT_TEXT_OPTIONS ).height;
 
-    const bodyBox = new VBox( {
+    const content = new VBox( {
       align: 'left',
       spacing: spacing,
       children: [ nlmText, nText, lText, mText ]
     } );
 
-    const content = new VBox( {
-      align: 'center',
-      spacing: spacing,
-      children: [ titleText, bodyBox ]
-    } );
-
     super( content, {
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.quantumNumbersStringProperty,
+      title: titleText,
       tandem: tandem
     } );
   }
