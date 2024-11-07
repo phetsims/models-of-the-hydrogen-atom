@@ -37,7 +37,7 @@ export default class AbsorptionEmissionCheckbox extends Checkbox {
       phetioFeatured: true
     } );
 
-    const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, {
+    const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionAndEmissionStringProperty, {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 200

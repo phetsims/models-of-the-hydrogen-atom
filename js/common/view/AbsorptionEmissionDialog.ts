@@ -95,7 +95,7 @@ export default class AbsorptionEmissionDialog extends Panel {
 
     const transitionColumnVisibleProperty = DerivedProperty.not( isExperimentProperty );
 
-    const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionEmissionStringProperty, TITLE_TEXT_OPTIONS );
+    const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionAndEmissionStringProperty, TITLE_TEXT_OPTIONS );
 
     const closeButton = new CloseButton( {
       iconLength: 10,
