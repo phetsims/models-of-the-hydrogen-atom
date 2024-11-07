@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * AbsorptionEmissionCheckbox is the checkbox that shows the 'Absorption Wavelengths' panel.
+ * AbsorptionAndEmissionCheckbox is the checkbox that shows the 'Absorption and Emission' dialog.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,7 +23,7 @@ type SelfOptions = EmptySelfOptions;
 
 type AbsorptionEmissionCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
-export default class AbsorptionEmissionCheckbox extends Checkbox {
+export default class AbsorptionAndEmissionCheckbox extends Checkbox {
 
   public constructor( absorptionEmissionDialogVisibleProperty: Property<boolean>,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
@@ -62,4 +62,4 @@ export default class AbsorptionEmissionCheckbox extends Checkbox {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionEmissionCheckbox', AbsorptionEmissionCheckbox );
+modelsOfTheHydrogenAtom.register( 'AbsorptionAndEmissionCheckbox', AbsorptionAndEmissionCheckbox );

@@ -28,7 +28,7 @@ import { LightNode } from '../../common/view/LightNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AbsorptionEmissionDialog from '../../common/view/AbsorptionEmissionDialog.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import AbsorptionEmissionCheckbox from '../../common/view/AbsorptionEmissionCheckbox.js';
+import AbsorptionAndEmissionCheckbox from '../../common/view/AbsorptionAndEmissionCheckbox.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 
@@ -81,9 +81,9 @@ export default class SpectraScreenView extends ScreenView {
       }
     } );
 
-    const absorptionEmissionCheckbox = new AbsorptionEmissionCheckbox( absorptionEmissionDialogVisibleProperty,
+    const absorptionAndEmissionCheckbox = new AbsorptionAndEmissionCheckbox( absorptionEmissionDialogVisibleProperty,
       model.isQuantumModelProperty, {
-        tandem: tandem.createTandem( 'absorptionEmissionCheckbox' )
+        tandem: tandem.createTandem( 'absorptionAndEmissionCheckbox' )
       } );
 
     // The zoomed-in view of the box of hydrogen
@@ -157,9 +157,9 @@ export default class SpectraScreenView extends ScreenView {
     spectrometerAccordionBox.top = lightControlPanel.top;
     timeControlNode.left = modelVBox.left;
     timeControlNode.centerY = modelVBox.bottom + ( spectrometerAccordionBox.top - modelVBox.bottom ) / 2;
-    absorptionEmissionCheckbox.localBoundsProperty.link( () => {
-      absorptionEmissionCheckbox.centerX = lightControlPanel.centerX;
-      absorptionEmissionCheckbox.top = lightControlPanel.bottom + 5;
+    absorptionAndEmissionCheckbox.localBoundsProperty.link( () => {
+      absorptionAndEmissionCheckbox.centerX = lightControlPanel.centerX;
+      absorptionAndEmissionCheckbox.top = lightControlPanel.bottom + 5;
     } );
     resetAllButton.right = this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     resetAllButton.bottom = this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
@@ -191,7 +191,7 @@ export default class SpectraScreenView extends ScreenView {
         timeControlNode,
         lightNode,
         lightControlPanel,
-        absorptionEmissionCheckbox,
+        absorptionAndEmissionCheckbox,
         boxOfHydrogenNode,
         tinyBoxNode,
         dashedLines,
@@ -209,7 +209,7 @@ export default class SpectraScreenView extends ScreenView {
     this.pdomPlayAreaNode.pdomOrder = [
       lightNode,
       lightControlPanel,
-      absorptionEmissionCheckbox,
+      absorptionAndEmissionCheckbox,
       absorptionEmissionDialog,
       modelVBox,
       zoomedInBoxNode.deBroglieRepresentationComboBox
