@@ -66,7 +66,6 @@ type StringsType = {
   'snapshotNumberNameStringProperty': LocalizedStringProperty;
   'a11y': {
     '3DHeightStringProperty': LocalizedStringProperty;
-    'absorptionAndEmissionStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionHelpTextStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionDialogStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionDialogHelpTextStringProperty': LocalizedStringProperty;

@@ -50,7 +50,6 @@ export default class AbsorptionAndEmissionCheckbox extends Checkbox {
       boxWidth: text.height,
       checkboxColor: MOTHAColors.checkboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.checkboxFillProperty,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionHelpTextStringProperty,
 
       // Show this checkbox only for quantum models, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
