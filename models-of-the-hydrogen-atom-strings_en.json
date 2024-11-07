@@ -157,7 +157,7 @@
       "value": "Absorption and Emission"
     },
     "absorptionAndEmissionHelpText": {
-      "value": "Show Absorption and Emission dialog for electron state transitions and their associated wavelengths."
+      "value": "Show Absorption and Emission dialog for table of electron state transitions and their associated wavelengths."
     },
     "absorptionAndEmissionDialog": {
       "value": "Absorption and Emission Dialog"
