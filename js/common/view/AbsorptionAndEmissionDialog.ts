@@ -9,32 +9,32 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, Color, GridBox, HBox, HSeparator, HSeparatorOptions, KeyboardListener, Node, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHASymbols from '../MOTHASymbols.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import BohrModel from '../model/BohrModel.js';
-import PhotonNode from './PhotonNode.js';
-import MOTHAColors from '../MOTHAColors.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
-import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
+import { AlignGroup, Color, GridBox, HBox, HSeparator, HSeparatorOptions, KeyboardListener, Node, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import BohrModel from '../model/BohrModel.js';
 import { LightMode } from '../model/LightMode.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import MOTHASymbols from '../MOTHASymbols.js';
+import PhotonNode from './PhotonNode.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {

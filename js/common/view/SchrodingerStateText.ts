@@ -7,18 +7,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 

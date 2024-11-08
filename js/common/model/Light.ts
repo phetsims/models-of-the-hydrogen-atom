@@ -9,9 +9,10 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TEmitter from '../../../../axon/js/TEmitter.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -23,13 +24,12 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 import BohrModel from './BohrModel.js';
 import { LightMode, LightModeValues } from './LightMode.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import TEmitter from '../../../../axon/js/TEmitter.js';
-import MOTHAColors from '../MOTHAColors.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;

@@ -23,10 +23,10 @@ import { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSpher
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Circle, Color, Node, NodeOptions, Path, RadialGradient, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Photon from '../model/Photon.js';
-import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import Light from '../model/Light.js';
+import Photon from '../model/Photon.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 type SelfOptions = EmptySelfOptions;
 

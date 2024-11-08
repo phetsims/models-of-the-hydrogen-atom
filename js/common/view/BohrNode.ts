@@ -6,21 +6,21 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-import ProtonNode from './ProtonNode.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import ElectronNode from './ElectronNode.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import BohrModel from '../model/BohrModel.js';
-import ElectronStateText from './ElectronStateText.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import OrbitsNode from './OrbitsNode.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import BohrModel from '../model/BohrModel.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import ElectronNode from './ElectronNode.js';
+import ElectronStateText from './ElectronStateText.js';
+import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import OrbitNode from './OrbitNode.js';
+import OrbitsNode from './OrbitsNode.js';
+import ProtonNode from './ProtonNode.js';
 
 type SelfOptions = EmptySelfOptions;
 

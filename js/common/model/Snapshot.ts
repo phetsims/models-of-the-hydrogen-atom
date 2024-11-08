@@ -6,9 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class Snapshot extends PhetioObject {
 

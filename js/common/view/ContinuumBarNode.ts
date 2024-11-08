@@ -8,12 +8,12 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Font, Node, NodeOptions, Rectangle, Text, TPaint } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {

@@ -6,12 +6,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { NodeTranslationOptions, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from '../model/Light.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = {
   beamSize?: Dimension2;

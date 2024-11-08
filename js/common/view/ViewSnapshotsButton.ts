@@ -6,17 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColors from '../MOTHAColors.js';
-import { Path } from '../../../../scenery/js/imports.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Path } from '../../../../scenery/js/imports.js';
 import eyeSolidShape from '../../../../sherpa/js/fontawesome-5/eyeSolidShape.js';
+import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Dialog from '../../../../sun/js/Dialog.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Spectrometer from '../model/Spectrometer.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 export default class ViewSnapshotsButton extends RectangularPushButton {
 

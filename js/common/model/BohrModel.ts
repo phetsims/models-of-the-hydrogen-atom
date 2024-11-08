@@ -26,25 +26,25 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import BohrNode from '../view/BohrNode.js'; // eslint-disable-line phet/no-view-imported-from-model
-import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
-import ZoomedInBox from './ZoomedInBox.js';
-import Utils from '../../../../dot/js/Utils.js';
-import MOTHAUtils from '../MOTHAUtils.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import Proton from './Proton.js';
-import Photon from './Photon.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
+import Utils from '../../../../dot/js/Utils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
-import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import MOTHAUtils from '../MOTHAUtils.js';
+import BohrNode from '../view/BohrNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import BohrElectron from './BohrElectron.js';
+import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Light from './Light.js';
+import Photon from './Photon.js';
+import Proton from './Proton.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;

@@ -6,20 +6,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 import ElectronNode from './ElectronNode.js';
 import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 
 const ITEM_FONT = new PhetFont( 16 );
 const PHOTON_ICON_WAVELENGTH = 410; // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/61

@@ -6,6 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -13,8 +15,6 @@ import TimeControlNode, { TimeControlNodeOptions } from '../../../../scenery-phe
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;

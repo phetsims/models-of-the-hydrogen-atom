@@ -6,14 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {
   position?: Vector2;

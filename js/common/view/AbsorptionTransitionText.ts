@@ -6,19 +6,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
-import MOTHASymbols from '../MOTHASymbols.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import BohrModel from '../model/BohrModel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColors from '../MOTHAColors.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import BohrModel from '../model/BohrModel.js';
 import { LightMode } from '../model/LightMode.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHASymbols from '../MOTHASymbols.js';
 
 type SelfOptions = EmptySelfOptions;
 

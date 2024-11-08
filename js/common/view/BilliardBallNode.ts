@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import BilliardBallModel from '../model/BilliardBallModel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
-import MOTHAColors from '../MOTHAColors.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import BilliardBallModel from '../model/BilliardBallModel.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 
 type SelfOptions = EmptySelfOptions;
 

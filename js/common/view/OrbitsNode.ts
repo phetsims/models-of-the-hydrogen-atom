@@ -6,15 +6,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
-import OrbitNode from './OrbitNode.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
+import OrbitNode from './OrbitNode.js';
 
 type SelfOptions = EmptySelfOptions;
 

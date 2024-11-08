@@ -11,11 +11,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import SchrodingerModel from '../model/SchrodingerModel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import MOTHAConstants from '../MOTHAConstants.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 const NUMBER_OF_HORIZONTAL_CELLS = 40;
 const NUMBER_OF_VERTICAL_CELLS = NUMBER_OF_HORIZONTAL_CELLS;

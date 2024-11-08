@@ -8,22 +8,22 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Color, Node, NodeOptions, Path, TColor } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import DeBroglieModel from '../model/DeBroglieModel.js';
-import OrbitsNode from './OrbitsNode.js';
-import Utils from '../../../../dot/js/Utils.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import MOTHAColors from '../MOTHAColors.js';
-import Multilink from '../../../../axon/js/Multilink.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import BohrModel from '../model/BohrModel.js';
+import DeBroglieModel from '../model/DeBroglieModel.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import OrbitsNode from './OrbitsNode.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
 // tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of

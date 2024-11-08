@@ -7,15 +7,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 type SelfOptions = EmptySelfOptions;
 

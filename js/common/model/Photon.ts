@@ -12,6 +12,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import { TColor } from '../../../../scenery/js/imports.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -19,7 +20,6 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { TColor } from '../../../../scenery/js/imports.js';
 
 // This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
 export type PhotonStateObject = {

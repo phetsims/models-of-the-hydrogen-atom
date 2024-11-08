@@ -23,27 +23,27 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-import ProtonNode from './ProtonNode.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { HBox, Node, Rectangle, VBox } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import Light from '../model/Light.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
-import XZAxesNode from './XZAxesNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { HBox, Node, Rectangle, VBox } from '../../../../scenery/js/imports.js';
-import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
-import SchrodingerStateText from './SchrodingerStateText.js';
-import Light from '../model/Light.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
+import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
+import ProtonNode from './ProtonNode.js';
 import QuantumNumbersInfoButton from './QuantumNumbersInfoButton.js';
+import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
+import SchrodingerFieldNode from './SchrodingerFieldNode.js';
+import SchrodingerStateText from './SchrodingerStateText.js';
 import UnderConstructionText from './UnderConstructionText.js';
+import XZAxesNode from './XZAxesNode.js';
 
 type SelfOptions = EmptySelfOptions;
 

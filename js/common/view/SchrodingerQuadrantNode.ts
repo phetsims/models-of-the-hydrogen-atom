@@ -9,12 +9,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { CanvasNode, Color } from '../../../../scenery/js/imports.js';
-import MOTHAColors from '../MOTHAColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
+import { CanvasNode, Color } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 const PERCENT_CELL_OVERLAP = 0.1; // percent overlap of cells in the grid, 1.0 = 100%
 const NUMBER_OF_COLORS = 100; // number of unique colors for the range of brightness values

@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColors from '../MOTHAColors.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import { Path } from '../../../../scenery/js/imports.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Spectrometer from '../model/Spectrometer.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 export default class SnapshotButton extends RectangularPushButton {
 

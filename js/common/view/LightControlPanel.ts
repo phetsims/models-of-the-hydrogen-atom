@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import MOTHAColors from '../MOTHAColors.js';
-import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
+import { VBox } from '../../../../scenery/js/imports.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from '../model/Light.js';
-import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
-import AbsorptionTransitionText from './AbsorptionTransitionText.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import AbsorptionTransitionText from './AbsorptionTransitionText.js';
+import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
+import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
 
 type SelfOptions = EmptySelfOptions;
 

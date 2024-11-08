@@ -6,9 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TModel from '../../../../joist/js/TModel.js';
 import Screen, { ScreenOptions } from '../../../../joist/js/Screen.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import TModel from '../../../../joist/js/TModel.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';

@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import TrashButton from '../../../../scenery-phet/js/buttons/TrashButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
-import TrashButton from '../../../../scenery-phet/js/buttons/TrashButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import Snapshot from '../model/Snapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import Snapshot from '../model/Snapshot.js';
 import UnderConstructionText from './UnderConstructionText.js';
 
 const INSIDE_X_MARGIN = 6;

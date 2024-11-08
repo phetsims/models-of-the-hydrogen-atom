@@ -12,10 +12,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import SchrodingerModel from '../model/SchrodingerModel.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerBrightness from './SchrodingerBrightness.js';
 import SchrodingerQuadrantNode from './SchrodingerQuadrantNode.js';
 

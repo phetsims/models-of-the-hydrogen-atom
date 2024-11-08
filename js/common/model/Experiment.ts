@@ -8,13 +8,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ZoomedInBox from './ZoomedInBox.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Light from './Light.js';
+import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 

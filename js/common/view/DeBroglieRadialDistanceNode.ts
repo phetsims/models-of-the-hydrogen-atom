@@ -9,20 +9,20 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import DeBroglieModel from '../model/DeBroglieModel.js';
-import OrbitsNode from './OrbitsNode.js';
-import MOTHAColors from '../MOTHAColors.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import Multilink from '../../../../axon/js/Multilink.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import BohrModel from '../model/BohrModel.js';
+import DeBroglieModel from '../model/DeBroglieModel.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import OrbitsNode from './OrbitsNode.js';
 
 // multiply the ground state orbit radius by this number to determine the radial offset at max amplitude
 const RADIAL_OFFSET_FACTOR = 0.45;

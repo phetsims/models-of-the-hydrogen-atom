@@ -7,16 +7,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAColors from '../MOTHAColors.js';
-import SnapshotNode from './SnapshotNode.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Snapshot from '../model/Snapshot.js';
-import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
+import MOTHAColors from '../MOTHAColors.js';
+import SnapshotNode from './SnapshotNode.js';
 
 type SelfOptions = EmptySelfOptions;
 

@@ -8,12 +8,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { Node, NodeOptions, NodeTranslationOptions, RichText, TColor } from '../../../../scenery/js/imports.js';
-import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
+import { Node, NodeOptions, NodeTranslationOptions, RichText, TColor } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
 const ARROW_LENGTH = 50;

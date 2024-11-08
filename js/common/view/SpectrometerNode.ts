@@ -6,20 +6,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Spectrometer from '../model/Spectrometer.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import MOTHAColors from '../MOTHAColors.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
-import Light from '../model/Light.js';
-import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import Utils from '../../../../dot/js/Utils.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
+import Utils from '../../../../dot/js/Utils.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
+import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import { Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import Light from '../model/Light.js';
+import Spectrometer from '../model/Spectrometer.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 import UnderConstructionText from './UnderConstructionText.js';
 
 const DISPLAY_SIZE = new Dimension2( 620, 135 );

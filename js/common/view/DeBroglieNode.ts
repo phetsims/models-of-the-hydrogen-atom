@@ -9,24 +9,24 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-import ProtonNode from './ProtonNode.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import DeBroglieModel from '../model/DeBroglieModel.js';
-import ElectronStateText from './ElectronStateText.js';
-import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Circle, Node } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import DeBroglieModel from '../model/DeBroglieModel.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import DeBroglieRadialDistanceNode from './DeBroglieRadialDistanceNode.js';
 import DeBroglie3DHeightNode from './DeBroglie3DHeightNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
+import DeBroglieRadialDistanceNode from './DeBroglieRadialDistanceNode.js';
+import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
+import ElectronStateText from './ElectronStateText.js';
+import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import OrbitNode from './OrbitNode.js';
-import MOTHAColors from '../MOTHAColors.js';
+import ProtonNode from './ProtonNode.js';
 
 type SelfOptions = EmptySelfOptions;
 

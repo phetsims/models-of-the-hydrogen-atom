@@ -6,19 +6,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { Image, Node } from '../../../../scenery/js/imports.js';
+import classicalSolarSystemExplosion_png from '../../../images/classicalSolarSystemExplosion_png.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ClassicalSolarSystemModel from '../model/ClassicalSolarSystemModel.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import ElectronNode from './ElectronNode.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import ClassicalSolarSystemModel from '../model/ClassicalSolarSystemModel.js';
-import ElectronNode from './ElectronNode.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { Image, Node } from '../../../../scenery/js/imports.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import classicalSolarSystemExplosion_png from '../../../images/classicalSolarSystemExplosion_png.js';
 
 type SelfOptions = EmptySelfOptions;
 

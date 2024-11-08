@@ -8,21 +8,21 @@
 
 import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignGroup, HBox, HBoxOptions, PressListener, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
+import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
-import Spectrometer from '../model/Spectrometer.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import SnapshotButton from './SnapshotButton.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
 import SpectrometerNode from './SpectrometerNode.js';
-import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
-import SnapshotButton from './SnapshotButton.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
 
 type SelfOptions = EmptySelfOptions;

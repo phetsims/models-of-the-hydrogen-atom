@@ -6,26 +6,26 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Disposable from '../../../../axon/js/Disposable.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Light from './Light.js';
-import HydrogenAtom from './HydrogenAtom.js';
-import ZoomedInBox from './ZoomedInBox.js';
-import Photon from './Photon.js';
-import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
-import Experiment from './Experiment.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import TModel from '../../../../joist/js/TModel.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import Spectrometer from './Spectrometer.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import BohrModel from './BohrModel.js';
+import Experiment from './Experiment.js';
+import HydrogenAtom from './HydrogenAtom.js';
+import Light from './Light.js';
+import Photon from './Photon.js';
+import Spectrometer from './Spectrometer.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 

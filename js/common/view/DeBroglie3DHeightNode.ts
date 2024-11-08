@@ -7,10 +7,10 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -19,14 +19,14 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import { Color, Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import UnderConstructionText from './UnderConstructionText.js';
 import WireframeMatrix from './WireframeMatrix.js';
 import WireframeModel from './WireframeModel.js';
 import WireframeNode from './WireframeNode.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import BohrModel from '../model/BohrModel.js';
-import UnderConstructionText from './UnderConstructionText.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
 const NUMBER_OF_ORBIT_VERTICES = 200;

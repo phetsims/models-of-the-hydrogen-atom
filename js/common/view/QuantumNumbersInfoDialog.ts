@@ -6,13 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import Dialog from '../../../../sun/js/Dialog.js';
-import { RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import Dialog from '../../../../sun/js/Dialog.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
 const CONTENT_TEXT_OPTIONS: RichTextOptions = {

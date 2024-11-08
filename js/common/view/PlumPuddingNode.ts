@@ -6,17 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { Image, Node } from '../../../../scenery/js/imports.js';
-import PlumPuddingModel from '../model/PlumPuddingModel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import plumPudding_png from '../../../images/plumPudding_png.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { Image, Node } from '../../../../scenery/js/imports.js';
+import plumPudding_png from '../../../images/plumPudding_png.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import ElectronNode from './ElectronNode.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-import HydrogenAtom from '../model/HydrogenAtom.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = EmptySelfOptions;
 
