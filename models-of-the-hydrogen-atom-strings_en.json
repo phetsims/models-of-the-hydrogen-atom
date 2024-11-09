@@ -150,9 +150,6 @@
     "value": "Snapshot {{number}}: {{name}}"
   },
   "a11y": {
-    "3DHeight": {
-      "value": "3D Height"
-    },
     "absorptionAndEmissionHelpText": {
       "value": "Show Absorption and Emission dialog for table of electron state transitions and their associated wavelengths."
     },
@@ -167,9 +164,6 @@
     },
     "atomicModelHelpText": {
       "value": "Choose atomic model to explore."
-    },
-    "brightness": {
-      "value": "Brightness"
     },
     "deBroglieRepresentation": {
       "value": "de Broglie Representation"
@@ -217,9 +211,6 @@
     },
     "mySnapshots": {
       "value": "My Snapshots"
-    },
-    "radialDistance": {
-      "value": "Radial Distance"
     },
     "spectraScreenButtonsHelpText": {
       "value": "Compare experimental spectroscopy data to historical models of the hydrogen atom."

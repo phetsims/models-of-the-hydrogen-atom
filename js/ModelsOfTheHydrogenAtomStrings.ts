@@ -67,13 +67,11 @@ type StringsType = {
   'mInfoStringProperty': LocalizedStringProperty;
   'snapshotNumberNameStringProperty': LocalizedStringProperty;
   'a11y': {
-    '3DHeightStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionHelpTextStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionDialogStringProperty': LocalizedStringProperty;
     'absorptionAndEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
     'atomicModelStringProperty': LocalizedStringProperty;
     'atomicModelHelpTextStringProperty': LocalizedStringProperty;
-    'brightnessStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationHelpTextStringProperty': LocalizedStringProperty;
     'deleteSnapshotNumberNameStringProperty': LocalizedStringProperty;
@@ -91,7 +89,6 @@ type StringsType = {
     'lightSourceModeStringProperty': LocalizedStringProperty;
     'lightSourceModeHelpTextStringProperty': LocalizedStringProperty;
     'mySnapshotsStringProperty': LocalizedStringProperty;
-    'radialDistanceStringProperty': LocalizedStringProperty;
     'spectraScreenButtonsHelpTextStringProperty': LocalizedStringProperty;
     'spectraScreenSummary': {
       'playAreaStringProperty': LocalizedStringProperty;
