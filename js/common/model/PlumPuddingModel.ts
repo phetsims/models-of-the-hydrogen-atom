@@ -78,8 +78,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.plumPuddingStringProperty,
       icon: PlumPuddingNode.createIcon(),
-      tandemNamePrefix: 'plumPudding',
-      accessibleNameProperty: ModelsOfTheHydrogenAtomStrings.a11y.plumPuddingStringProperty
+      tandemNamePrefix: 'plumPudding'
     }, providedOptions );
 
     super( zoomedInBox, options );

@@ -21,7 +21,6 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import type LocalizedStringProperty from '../../../../chipper/js/LocalizedStringProperty.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
 
@@ -31,8 +30,6 @@ type SelfOptions = {
   displayNameProperty: TReadOnlyProperty<string>;
 
   tandemNamePrefix: string;
-
-  accessibleNameProperty: LocalizedStringProperty;
 
   // Icon used to represent the model in the UI.
   icon: Node;
@@ -60,7 +57,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly photonEmittedEmitter: TEmitter<[ Photon ]>;
 
   public readonly tandemNamePrefix: string;
-  public readonly accessibleNameProperty: LocalizedStringProperty;
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
@@ -85,7 +81,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this.icon = options.icon;
     this.position = options.position;
     this.tandemNamePrefix = options.tandemNamePrefix;
-    this.accessibleNameProperty = options.accessibleNameProperty;
 
     this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
       parameters: [ { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO } ],

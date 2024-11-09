@@ -38,8 +38,7 @@ export default class DeBroglieBaseModel extends BohrModel {
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.deBroglieStringProperty,
       icon: DeBroglieNode.createIcon(),
-      tandemNamePrefix: 'deBroglie',
-      accessibleNameProperty: ModelsOfTheHydrogenAtomStrings.a11y.deBroglieStringProperty
+      tandemNamePrefix: 'deBroglie'
     }, providedOptions );
 
     super( zoomedInBox, options );

@@ -168,20 +168,8 @@
     "atomicModelHelpText": {
       "value": "Choose atomic model to explore."
     },
-    "billiardBall": {
-      "value": "Billiard Ball"
-    },
-    "bohr": {
-      "value": "Bohr"
-    },
     "brightness": {
       "value": "Brightness"
-    },
-    "classicalSolarSystem": {
-      "value": "Classical Solar System"
-    },
-    "deBroglie": {
-      "value": "de Broglie"
     },
     "deBroglieRepresentation": {
       "value": "de Broglie Representation"
@@ -233,14 +221,8 @@
     "mySnapshots": {
       "value": "My Snapshots"
     },
-    "plumPudding": {
-      "value": "Plum Pudding"
-    },
     "radialDistance": {
       "value": "Radial Distance"
-    },
-    "schrodinger": {
-      "value": "Schr\u00f6dinger"
     },
     "spectraScreenButtonsHelpText": {
       "value": "Compare experimental spectroscopy data to historical models of the hydrogen atom."
