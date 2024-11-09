@@ -1,10 +1,12 @@
 // Copyright 2021-2024, University of Colorado Boulder
 
+/* eslint-disable */
+/* @formatter:off */
+
 /**
  * Auto-generated from modulify, DO NOT manually modify.
  */
-/* eslint-disable */
-/* @formatter:off */
+
 import getStringModule from '../../chipper/js/getStringModule.js';
 import type LocalizedStringProperty from '../../chipper/js/LocalizedStringProperty.js';
 import modelsOfTheHydrogenAtom from './modelsOfTheHydrogenAtom.js';
@@ -93,7 +95,6 @@ type StringsType = {
     'lightSourceStringProperty': LocalizedStringProperty;
     'lightSourceModeStringProperty': LocalizedStringProperty;
     'lightSourceModeHelpTextStringProperty': LocalizedStringProperty;
-    'monochromaticStringProperty': LocalizedStringProperty;
     'mySnapshotsStringProperty': LocalizedStringProperty;
     'plumPuddingStringProperty': LocalizedStringProperty;
     'radialDistanceStringProperty': LocalizedStringProperty;
@@ -111,7 +112,6 @@ type StringsType = {
     'wavelengthStringProperty': LocalizedStringProperty;
     'wavelengthHelpTextStringProperty': LocalizedStringProperty;
     'wavelengthNanometersStringProperty': LocalizedStringProperty;
-    'whiteStringProperty': LocalizedStringProperty;
   }
 };
 

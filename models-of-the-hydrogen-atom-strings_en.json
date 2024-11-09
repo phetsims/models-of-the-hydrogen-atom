@@ -230,9 +230,6 @@
     "lightSourceModeHelpText": {
       "value": "Choose type of light emitted by light source."
     },
-    "monochromatic": {
-      "value": "Monochromatic"
-    },
     "mySnapshots": {
       "value": "My Snapshots"
     },
@@ -279,9 +276,6 @@
     },
     "wavelengthNanometers": {
       "value": "{{wavelength}} nanometers"
-    },
-    "white": {
-      "value": "White"
     }
   }
 }
