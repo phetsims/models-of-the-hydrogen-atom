@@ -73,7 +73,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       yMargin: 6,
       enabledProperty: spectrometer.hasDataPointsProperty,
       listener: () => spectrometer.clear(),
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.eraseSpectrometerDataStringProperty,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.eraseSnapshotsButton.accessibleNameStringProperty,
       tandem: buttonGroupTandem.createTandem( 'eraseButton' )
     } );
 

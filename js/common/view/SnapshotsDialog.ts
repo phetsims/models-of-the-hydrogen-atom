@@ -34,7 +34,7 @@ export default class SnapshotsDialog extends Dialog {
       topMargin: 15,
       bottomMargin: 15,
       leftMargin: 15,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.mySnapshotsStringProperty
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.mySnapshotsDialog.accessibleNameStringProperty
     }, providedOptions );
 
     const content = new VBox( {

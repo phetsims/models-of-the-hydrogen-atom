@@ -90,8 +90,8 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthHelpTextStringProperty,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.accessibleNameStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.helpTextStringProperty,
       sliderOptions: {
         constrainValue: constrainValue
       },

@@ -64,7 +64,7 @@ export default class SnapshotNode extends Node {
       },
       right: backgroundNode.right - INSIDE_X_MARGIN,
       bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
-      accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotNumberNameStringProperty, {
+      accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
         number: snapshot.snapshotNumber,
         name: snapshot.modelNameProperty
       } ),

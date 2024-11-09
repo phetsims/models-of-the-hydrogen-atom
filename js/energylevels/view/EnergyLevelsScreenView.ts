@@ -42,12 +42,10 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
       // ScreenViewOptions
       isDisposable: false,
-
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/72 Get the screen summary text from designers.
       screenSummaryContent: new ScreenSummaryContent( [
-        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreenSummary.playAreaStringProperty,
-        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreenSummary.controlAreaStringProperty,
-        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreenSummary.interactionHintStringProperty
+        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
+        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
+        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
       ] ),
       tandem: tandem
     } );

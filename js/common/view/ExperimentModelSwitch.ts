@@ -37,7 +37,7 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
       isDisposable: false,
       centerOnSwitch: false,
       toggleSwitchOptions: { size: new Dimension2( 50, 25 ) },
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelHelpTextStringProperty
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelHelpTextSwitch.helpTextStringProperty
     }, providedOptions );
 
     const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, TEXT_OPTIONS );

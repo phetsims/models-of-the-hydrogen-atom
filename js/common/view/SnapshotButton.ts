@@ -36,8 +36,8 @@ export default class SnapshotButton extends RectangularPushButton {
           tandem: tandem.createTandem( 'enabledProperty' ),
           phetioValueType: BooleanIO
         } ),
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotStringProperty,
-      helpText: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.takeSnapshotHelpTextStringProperty, {
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.snapshotButton.accessibleNameStringProperty,
+      helpText: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.snapshotButton.helpTextStringProperty, {
         max: MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS
       } ),
       tandem: tandem

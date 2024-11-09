@@ -89,8 +89,8 @@ export default class AbsorptionAndEmissionDialog extends Panel {
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener
       groupFocusHighlight: true,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialogStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialogHelpTextStringProperty,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialog.accessibleNameStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialog.helpTextStringProperty,
       tandemNameSuffix: 'Dialog' // Yes it's a Panel, but we are OK with calling it a Dialog.
     }, providedOptions );
 
@@ -163,7 +163,7 @@ export default class AbsorptionAndEmissionDialog extends Panel {
             monochromaticWavelengthProperty.value = wavelength;
             lightModeProperty.value = 'monochromatic';
           },
-          accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNanometersStringProperty, {
+          accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.wavelengthButton.accessibleNameStringProperty, {
             wavelength: wavelength
           } ),
           tandem: buttonGroupTandem.createTandem( `wavelength${wavelength}Button` ),

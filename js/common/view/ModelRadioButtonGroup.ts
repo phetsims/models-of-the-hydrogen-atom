@@ -58,8 +58,8 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
       // pdom
       //TODO description: https://github.com/phetsims/sun/issues/900 Use a higher-level API for PDOM structure.
       labelTagName: 'h3',
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.atomicModelStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.atomicModelHelpTextStringProperty
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.modelRadioButtonGroup.accessibleNameStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.modelRadioButtonGroup.helpTextStringProperty
     }, providedOptions );
 
     // To make all icons have the same effective size.

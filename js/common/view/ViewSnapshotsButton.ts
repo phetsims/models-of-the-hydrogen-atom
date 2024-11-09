@@ -34,7 +34,7 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
           tandem: tandem.createTandem( 'enabledProperty' ),
           phetioValueType: BooleanIO
         } ),
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.viewSnapshotsStringProperty,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.viewSnapshotsButton.accessibleNameStringProperty,
       tandem: tandem
     } );
   }

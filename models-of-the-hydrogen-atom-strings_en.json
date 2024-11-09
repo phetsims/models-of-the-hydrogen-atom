@@ -150,99 +150,135 @@
     "value": "Snapshot {{number}}: {{name}}"
   },
   "a11y": {
-    "absorptionAndEmissionHelpText": {
-      "value": "Show Absorption and Emission dialog for table of electron state transitions and their associated wavelengths."
+    "absorptionAndEmissionCheckbox": {
+      "helpText": {
+        "value": "Show Absorption and Emission dialog for table of electron state transitions and their associated wavelengths."
+      }
     },
     "absorptionAndEmissionDialog": {
-      "value": "Absorption and Emission Dialog"
-    },
-    "absorptionAndEmissionDialogHelpText": {
-      "value": "Use the buttons to set the light source to a specific wavelength."
-    },
-    "atomicModel": {
-      "value": "Atomic Model"
-    },
-    "atomicModelHelpText": {
-      "value": "Choose atomic model to explore."
-    },
-    "deBroglieRepresentation": {
-      "value": "de Broglie Representation"
-    },
-    "deBroglieRepresentationHelpText": {
-      "value": "Choose the wave representation for de Broglie model."
-    },
-    "deleteSnapshotNumberName": {
-      "value": "Delete Snapshot {{number}}: {{name}}"
-    },
-    "electronEnergyLevelHelpText": {
-      "value": "Observe changes in the electron’s state as shown in an energy level diagram."
-    },
-    "energyLevelsScreenButtonsHelpText": {
-      "value": "Explore electron transitions and relate observations to quantum models of the hydrogen atom."
-    },
-    "energyLevelsScreenSummary": {
-      "playArea": {
-        "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single hydrogen atom, which varies with the mode of exploration. In Experiment mode, the structure of the hydrogen atom is a mystery and is obscured. In Model mode, there are three quantum models of the hydrogen atom to explore. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample. Observe changes in the electron’s state in the Electron Energy Level diagram."
+      "accessibleName": {
+        "value": "Absorption and Emission Dialog"
       },
-      "controlArea": {
-        "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer data and compare up to four snapshots at a time. Control how fast the action happens in the observation window, including buttons to pause or step forward, and reset the sim."
-      },
-      "interactionHint": {
-        "value": "Turn on the light source to start exploring."
+      "helpText": {
+        "value": "Use the buttons to set the light source to a specific wavelength."
       }
     },
-    "eraseSpectrometerData": {
-      "value": "Erase Spectrometer Data"
+    "deBroglieRepresentationComboBox": {
+      "accessibleName": {
+        "value": "de Broglie Representation"
+      },
+      "helpText": {
+        "value": "Choose the wave representation for de Broglie model."
+      }
     },
-    "experimentOrModelHelpText": {
-      "value": "Collect experimental data or explore atomic models."
+    "deleteSnapshotButton": {
+      "accessibleName": {
+        "value": "Delete Snapshot {{number}}: {{name}}"
+      }
     },
-    "infoHelpText": {
-      "value": "Show definitions of quantum numbers."
+    "electronEnergyLevelAccordionBox": {
+      "helpText": {
+        "value": "Observe changes in the electron’s state as shown in an energy level diagram."
+      }
+    },
+    "energyLevelsScreen": {
+      "screenButtonsHelpText": {
+        "value": "Explore electron transitions and relate observations to quantum models of the hydrogen atom."
+      },
+      "screenSummary": {
+        "playArea": {
+          "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single hydrogen atom, which varies with the mode of exploration. In Experiment mode, the structure of the hydrogen atom is a mystery and is obscured. In Model mode, there are three quantum models of the hydrogen atom to explore. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample. Observe changes in the electron’s state in the Electron Energy Level diagram."
+        },
+        "controlArea": {
+          "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer data and compare up to four snapshots at a time. Control how fast the action happens in the observation window, including buttons to pause or step forward, and reset the sim."
+        },
+        "interactionHint": {
+          "value": "Turn on the light source to start exploring."
+        }
+      }
+    },
+    "eraseSnapshotsButton": {
+      "accessibleName": {
+        "value": "Erase Spectrometer Data"
+      }
+    },
+    "experimentOrModelHelpTextSwitch": {
+      "helpText": {
+        "value": "Collect experimental data or explore atomic models."
+      }
+    },
+    "quantumNumbersInfoButton": {
+      "helpText": {
+        "value": "Show definitions of quantum numbers."
+      }
     },
     "lightSource": {
-      "value": "Light Source"
-    },
-    "lightSourceMode": {
-      "value": "Light Source Mode"
-    },
-    "lightSourceModeHelpText": {
-      "value": "Choose type of light emitted by light source."
-    },
-    "mySnapshots": {
-      "value": "My Snapshots"
-    },
-    "spectraScreenButtonsHelpText": {
-      "value": "Compare experimental spectroscopy data to historical models of the hydrogen atom."
-    },
-    "spectraScreenSummary": {
-      "playArea": {
-        "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single hydrogen atom, which varies with the mode of exploration. In Experiment mode, the structure of the hydrogen atom is a mystery and is obscured. In Model mode, there are six different models of the hydrogen atom to explore, ranging from classical to quantum. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample."
-      },
-      "controlArea": {
-        "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer data and compare up to four snapshots at a time. Control how fast the action happens in the observation window, including buttons to pause or step forward, and reset the sim."
-      },
-      "interactionHint": {
-        "value": "Turn on the light source to start exploring."
+      "accessibleName": {
+        "value": "Light Source"
       }
     },
-    "takeSnapshot": {
-      "value": "Take Snapshot"
+    "lightSourceModeRadioButtonGroup": {
+      "accessibleName": {
+        "value": "Light Source Mode"
+      },
+      "helpText": {
+        "value": "Choose type of light emitted by light source."
+      }
     },
-    "takeSnapshotHelpText": {
-      "value": "Take up to {{max}} snapshots of spectrometer data."
+    "modelRadioButtonGroup": {
+      "accessibleName": {
+        "value": "Atomic Model"
+      },
+      "helpText": {
+        "value": "Choose atomic model to explore."
+      }
     },
-    "viewSnapshots": {
-      "value": "View Snapshots"
+    "mySnapshotsDialog": {
+      "accessibleName": {
+        "value": "My Snapshots"
+      }
     },
-    "wavelength": {
-      "value": "Wavelength"
+    "spectraScreen": {
+      "screenButtonsHelpText": {
+        "value": "Compare experimental spectroscopy data to historical models of the hydrogen atom."
+      },
+      "screenSummary": {
+        "playArea": {
+          "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single hydrogen atom, which varies with the mode of exploration. In Experiment mode, the structure of the hydrogen atom is a mystery and is obscured. In Model mode, there are six different models of the hydrogen atom to explore, ranging from classical to quantum. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample."
+        },
+        "controlArea": {
+          "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer data and compare up to four snapshots at a time. Control how fast the action happens in the observation window, including buttons to pause or step forward, and reset the sim."
+        },
+        "interactionHint": {
+          "value": "Turn on the light source to start exploring."
+        }
+      }
     },
-    "wavelengthHelpText": {
-      "value": "Adjust wavelength for monochromatic light source."
+    "snapshotButton": {
+      "accessibleName": {
+        "value": "Take Snapshot"
+      },
+      "helpText": {
+        "value": "Take up to {{max}} snapshots of spectrometer data."
+      }
     },
-    "wavelengthNanometers": {
-      "value": "{{wavelength}} nanometers"
+    "viewSnapshotsButton": {
+      "accessibleName": {
+        "value": "View Snapshots"
+      }
+    },
+    "wavelengthButton": {
+      "accessibleName": {
+        "value": "{{wavelength}} nanometers"
+      }
+    },
+    "wavelengthNumberControl": {
+      "accessibleName": {
+        "value": "Wavelength"
+      },
+      "helpText": {
+        "value": "Adjust wavelength for monochromatic light source."
+      }
     }
   }
 }

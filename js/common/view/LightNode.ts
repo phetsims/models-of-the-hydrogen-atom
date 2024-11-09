@@ -39,7 +39,7 @@ export class LightNode extends Node {
       },
       rotation: -Light.DIRECTION, // +y is up in the model, down in the view
 
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceStringProperty,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSource.accessibleNameStringProperty,
       tandem: options.tandem.createTandem( 'laserPointerNode' ),
       phetioVisiblePropertyInstrumented: false
     } );

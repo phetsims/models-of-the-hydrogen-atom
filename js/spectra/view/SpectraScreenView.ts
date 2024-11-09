@@ -40,12 +40,10 @@ export default class SpectraScreenView extends ScreenView {
 
       // ScreenViewOptions
       isDisposable: false,
-
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/72 Get the screen summary text from designers.
       screenSummaryContent: new ScreenSummaryContent( [
-        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenSummary.playAreaStringProperty,
-        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenSummary.controlAreaStringProperty,
-        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreenSummary.interactionHintStringProperty
+        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,
+        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.controlAreaStringProperty,
+        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.interactionHintStringProperty
       ] ),
       tandem: tandem
     } );

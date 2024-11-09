@@ -44,8 +44,8 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
       // pdom
       //TODO description: https://github.com/phetsims/sun/issues/900 Use a higher-level API for PDOM structure.
       labelTagName: 'h3',
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeHelpTextStringProperty
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.accessibleNameStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.helpTextStringProperty
     }, providedOptions );
 
     const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [

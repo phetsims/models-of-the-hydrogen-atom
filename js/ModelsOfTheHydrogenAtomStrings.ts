@@ -67,40 +67,76 @@ type StringsType = {
   'mInfoStringProperty': LocalizedStringProperty;
   'snapshotNumberNameStringProperty': LocalizedStringProperty;
   'a11y': {
-    'absorptionAndEmissionHelpTextStringProperty': LocalizedStringProperty;
-    'absorptionAndEmissionDialogStringProperty': LocalizedStringProperty;
-    'absorptionAndEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
-    'atomicModelStringProperty': LocalizedStringProperty;
-    'atomicModelHelpTextStringProperty': LocalizedStringProperty;
-    'deBroglieRepresentationStringProperty': LocalizedStringProperty;
-    'deBroglieRepresentationHelpTextStringProperty': LocalizedStringProperty;
-    'deleteSnapshotNumberNameStringProperty': LocalizedStringProperty;
-    'electronEnergyLevelHelpTextStringProperty': LocalizedStringProperty;
-    'energyLevelsScreenButtonsHelpTextStringProperty': LocalizedStringProperty;
-    'energyLevelsScreenSummary': {
-      'playAreaStringProperty': LocalizedStringProperty;
-      'controlAreaStringProperty': LocalizedStringProperty;
-      'interactionHintStringProperty': LocalizedStringProperty;
+    'absorptionAndEmissionCheckbox': {
+      'helpTextStringProperty': LocalizedStringProperty;
     };
-    'eraseSpectrometerDataStringProperty': LocalizedStringProperty;
-    'experimentOrModelHelpTextStringProperty': LocalizedStringProperty;
-    'infoHelpTextStringProperty': LocalizedStringProperty;
-    'lightSourceStringProperty': LocalizedStringProperty;
-    'lightSourceModeStringProperty': LocalizedStringProperty;
-    'lightSourceModeHelpTextStringProperty': LocalizedStringProperty;
-    'mySnapshotsStringProperty': LocalizedStringProperty;
-    'spectraScreenButtonsHelpTextStringProperty': LocalizedStringProperty;
-    'spectraScreenSummary': {
-      'playAreaStringProperty': LocalizedStringProperty;
-      'controlAreaStringProperty': LocalizedStringProperty;
-      'interactionHintStringProperty': LocalizedStringProperty;
+    'absorptionAndEmissionDialog': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'helpTextStringProperty': LocalizedStringProperty;
     };
-    'takeSnapshotStringProperty': LocalizedStringProperty;
-    'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;
-    'viewSnapshotsStringProperty': LocalizedStringProperty;
-    'wavelengthStringProperty': LocalizedStringProperty;
-    'wavelengthHelpTextStringProperty': LocalizedStringProperty;
-    'wavelengthNanometersStringProperty': LocalizedStringProperty;
+    'deBroglieRepresentationComboBox': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'helpTextStringProperty': LocalizedStringProperty;
+    };
+    'deleteSnapshotButton': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+    };
+    'electronEnergyLevelAccordionBox': {
+      'helpTextStringProperty': LocalizedStringProperty;
+    };
+    'energyLevelsScreen': {
+      'screenButtonsHelpTextStringProperty': LocalizedStringProperty;
+      'screenSummary': {
+        'playAreaStringProperty': LocalizedStringProperty;
+        'controlAreaStringProperty': LocalizedStringProperty;
+        'interactionHintStringProperty': LocalizedStringProperty;
+      }
+    };
+    'eraseSnapshotsButton': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+    };
+    'experimentOrModelHelpTextSwitch': {
+      'helpTextStringProperty': LocalizedStringProperty;
+    };
+    'quantumNumbersInfoButton': {
+      'helpTextStringProperty': LocalizedStringProperty;
+    };
+    'lightSource': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+    };
+    'lightSourceModeRadioButtonGroup': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'helpTextStringProperty': LocalizedStringProperty;
+    };
+    'modelRadioButtonGroup': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'helpTextStringProperty': LocalizedStringProperty;
+    };
+    'mySnapshotsDialog': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+    };
+    'spectraScreen': {
+      'screenButtonsHelpTextStringProperty': LocalizedStringProperty;
+      'screenSummary': {
+        'playAreaStringProperty': LocalizedStringProperty;
+        'controlAreaStringProperty': LocalizedStringProperty;
+        'interactionHintStringProperty': LocalizedStringProperty;
+      }
+    };
+    'snapshotButton': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'helpTextStringProperty': LocalizedStringProperty;
+    };
+    'viewSnapshotsButton': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+    };
+    'wavelengthButton': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+    };
+    'wavelengthNumberControl': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'helpTextStringProperty': LocalizedStringProperty;
+    }
   }
 };
 
