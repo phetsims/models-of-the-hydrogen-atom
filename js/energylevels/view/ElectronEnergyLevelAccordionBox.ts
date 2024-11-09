@@ -38,8 +38,6 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
         expandedDefaultValue: MOTHAQueryParameters.expandAll,
         fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
         stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
-        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/82 Use default, discoverable from options.titleNode.
-        accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelStringProperty,
         helpText: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelHelpTextStringProperty
       }, providedOptions );
 

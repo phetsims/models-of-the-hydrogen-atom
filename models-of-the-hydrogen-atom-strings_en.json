@@ -180,9 +180,6 @@
     "deleteSnapshotNumberName": {
       "value": "Delete Snapshot {{number}}: {{name}}"
     },
-    "electronEnergyLevel": {
-      "value": "Electron Energy Level"
-    },
     "electronEnergyLevelHelpText": {
       "value": "Observe changes in the electron’s state as shown in an energy level diagram."
     },
@@ -237,9 +234,6 @@
       "interactionHint": {
         "value": "Turn on the light source to start exploring."
       }
-    },
-    "spectrometer": {
-      "value": "Spectrometer"
     },
     "takeSnapshot": {
       "value": "Take Snapshot"

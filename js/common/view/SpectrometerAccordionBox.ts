@@ -42,10 +42,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         overrideTitleNodePickable: false,
         expandedDefaultValue: MOTHAQueryParameters.expandAll,
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
-        stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
-
-        //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/82 Use default, discoverable from options.titleNode.
-        accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.spectrometerStringProperty
+        stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty
       }, providedOptions );
 
     // This implementation puts buttons in the title bar, and requires titleBarExpandCollapse: false.

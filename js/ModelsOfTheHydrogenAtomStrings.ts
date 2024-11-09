@@ -73,15 +73,10 @@ type StringsType = {
     'absorptionAndEmissionDialogHelpTextStringProperty': LocalizedStringProperty;
     'atomicModelStringProperty': LocalizedStringProperty;
     'atomicModelHelpTextStringProperty': LocalizedStringProperty;
-    'billiardBallStringProperty': LocalizedStringProperty;
-    'bohrStringProperty': LocalizedStringProperty;
     'brightnessStringProperty': LocalizedStringProperty;
-    'classicalSolarSystemStringProperty': LocalizedStringProperty;
-    'deBroglieStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationStringProperty': LocalizedStringProperty;
     'deBroglieRepresentationHelpTextStringProperty': LocalizedStringProperty;
     'deleteSnapshotNumberNameStringProperty': LocalizedStringProperty;
-    'electronEnergyLevelStringProperty': LocalizedStringProperty;
     'electronEnergyLevelHelpTextStringProperty': LocalizedStringProperty;
     'energyLevelsScreenButtonsHelpTextStringProperty': LocalizedStringProperty;
     'energyLevelsScreenSummary': {
@@ -96,16 +91,13 @@ type StringsType = {
     'lightSourceModeStringProperty': LocalizedStringProperty;
     'lightSourceModeHelpTextStringProperty': LocalizedStringProperty;
     'mySnapshotsStringProperty': LocalizedStringProperty;
-    'plumPuddingStringProperty': LocalizedStringProperty;
     'radialDistanceStringProperty': LocalizedStringProperty;
-    'schrodingerStringProperty': LocalizedStringProperty;
     'spectraScreenButtonsHelpTextStringProperty': LocalizedStringProperty;
     'spectraScreenSummary': {
       'playAreaStringProperty': LocalizedStringProperty;
       'controlAreaStringProperty': LocalizedStringProperty;
       'interactionHintStringProperty': LocalizedStringProperty;
     };
-    'spectrometerStringProperty': LocalizedStringProperty;
     'takeSnapshotStringProperty': LocalizedStringProperty;
     'takeSnapshotHelpTextStringProperty': LocalizedStringProperty;
     'viewSnapshotsStringProperty': LocalizedStringProperty;
