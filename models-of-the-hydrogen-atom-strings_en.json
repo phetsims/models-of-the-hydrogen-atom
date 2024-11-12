@@ -190,7 +190,7 @@
           "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single atom, which varies with the mode of exploration. In Experiment mode, the atom’s structure is a mystery and is obscured. In Model mode, there are various quantum models of the hydrogen atom to explore. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample. Observe changes in the electron’s state in the Electron Energy Level diagram."
         },
         "controlArea": {
-          "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer data and compare up to four snapshots at a time. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
+          "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer to compare data. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
         },
         "interactionHint": {
           "value": "Turn on the light source to start exploring."
@@ -247,7 +247,7 @@
           "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single atom which varies with the mode of exploration. In Experiment mode, the atom’s structure is a mystery and is obscured. In Model mode, there are various models of the hydrogen atom to explore, ranging from classical to quantum. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample."
         },
         "controlArea": {
-          "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer data and compare up to four snapshots at a time. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
+          "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer to compare data. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
         },
         "interactionHint": {
           "value": "Turn on the light source to start exploring."
