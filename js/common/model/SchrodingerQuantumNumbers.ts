@@ -51,6 +51,7 @@ const STATE_SCHEMA = {
 export default class SchrodingerQuantumNumbers {
 
   // Principal quantum number:
+  // * n = [1,6] integer
   // * Indicates the energy of the electron and its average relative distance from the nucleus.
   // * As n increases, so does the average distance of the electron from the nucleus.
   // * All wavefunctions that have the same value of n are said to constitute a principal shell.
@@ -59,6 +60,7 @@ export default class SchrodingerQuantumNumbers {
   public readonly n: number;
 
   // Azimuthal quantum number:
+  // * l = [0,n-1] integer
   // * Describes the shape of the region of space occupied by an electron.
   // * All wavefunctions that have the same values of both n and l form a subshell.
   // * The regions of space occupied by electrons in the same subshell usually have the same shape,
@@ -66,6 +68,7 @@ export default class SchrodingerQuantumNumbers {
   public readonly l: number;
 
   // Magnetic quantum number:
+  // * m = [-l,l] integer
   // * Describes the orientation of the region of space occupied by an electron with respect to an applied magnetic field.
   public readonly m: number;
 
