@@ -25,8 +25,12 @@ export default class SchrodingerBrightness {
 
   private readonly hydrogenAtom: SchrodingerModel;
 
-  private readonly cache: Array<Array<Array<null | Array<Array<number>>>>>; // [n][l][m][z][x]
-  private readonly sums: Array<Array<number>>; // reusable array for computing sums
+  // Cache of 2D brightness values [z][x], indexed by [n][l][abs(m)]. The entry for n=0 is undefined, because n = [1,6].
+  // This data structure is huge, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
+  private readonly cache: Array<Array<Array<null | Array<Array<number>>>>>;
+
+  // reusable array for computing sums
+  private readonly sums: Array<Array<number>>;
 
   private readonly cellWidth: number;
   private readonly cellHeight: number;
@@ -40,31 +44,17 @@ export default class SchrodingerBrightness {
 
     this.hydrogenAtom = hydrogenAtom;
 
-    const nMax = MOTHAConstants.MAX_STATE;
-
-    // Initialize brightness entries to null. This data structure is huge - 89,600 entries.
-    // Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
-    this.cache = new Array( nMax );
-    let numberOfEntries = 0;
-    for ( let n = 1; n <= nMax; n++ ) {
-      const lSize = n;
-      this.cache[ n - 1 ] = new Array( lSize );
-      for ( let l = 0; l < lSize; l++ ) {
-        const mSize = l + 1;
-        this.cache[ n - 1 ][ l ] = new Array( mSize );
-        for ( let m = 0; m < l + 1; m++ ) {
-          const zSize = NUMBER_OF_VERTICAL_CELLS;
-          this.cache[ n - 1 ][ l ][ m ] = new Array( zSize );
-          for ( let z = 0; z < zSize; z++ ) {
-            for ( let x = 0; x < NUMBER_OF_HORIZONTAL_CELLS; x++ ) {
-              this.cache[ n - 1 ][ l ][ m ] = null;
-              numberOfEntries++;
-            }
-          }
+    // Initialize brightness entries to null.
+    this.cache = [];
+    for ( let n = 1; n <= MOTHAConstants.MAX_STATE; n++ ) {
+      this.cache[ n ] = [];
+      for ( let l = 0; l <= n - 1; l++ ) {
+        this.cache[ n ][ l ] = [];
+        for ( let m = 0; m <= l; m++ ) {
+          this.cache[ n ][ l ][ m ] = null;
         }
       }
     }
-    phet.log && phet.log( `SchrodingerBrightness.cache contains ${numberOfEntries} entries.` );
 
     // Initialize sums with zeros
     this.sums = new Array( NUMBER_OF_VERTICAL_CELLS );
@@ -88,11 +78,11 @@ export default class SchrodingerBrightness {
     const l = quantumNumbers.l;
     const m = Math.abs( quantumNumbers.m );
 
-    let brightness: number[][] | null = this.cache[ n - 1 ][ l ][ m ];
+    let brightness: number[][] | null = this.cache[ n ][ l ][ m ];
     assert && assert( brightness !== undefined );
     if ( brightness === null ) {
       brightness = this.computeBrightness( n, l, m );
-      this.cache[ n - 1 ][ l ][ m ] = brightness;
+      this.cache[ n ][ l ][ m ] = brightness;
     }
     return brightness;
   }
