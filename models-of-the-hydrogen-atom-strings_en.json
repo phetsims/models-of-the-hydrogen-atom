@@ -157,7 +157,7 @@
     },
     "absorptionAndEmissionDialog": {
       "accessibleName": {
-        "value": "Absorption and Emission Dialog"
+        "value": "Absorption and Emission"
       },
       "helpText": {
         "value": "Use the buttons to set the light source to a specific wavelength."

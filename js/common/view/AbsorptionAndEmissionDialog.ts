@@ -5,6 +5,7 @@
  * and state transitions, and contains controls for setting wavelengths for the Light.
  *
  * Since PhET does not have support for non-modal Dialogs, we fake a dialog using a Panel.
+ * See https://github.com/phetsims/sun/issues/916.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,7 +24,7 @@ import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
-import { AlignGroup, Color, GridBox, HBox, HSeparator, HSeparatorOptions, KeyboardListener, Node, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Color, GridBox, HBox, HSeparator, HSeparatorOptions, KeyboardListener, Node, PDOMPeer, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
@@ -214,6 +215,17 @@ export default class AbsorptionAndEmissionDialog extends Panel {
     } );
 
     super( content, options );
+
+    // pdom - Set the aria-labelledby relation so that whenever focus enters the, dialog the accessible name is read.
+    this.addAriaLabelledbyAssociation( {
+      thisElementName: PDOMPeer.PRIMARY_SIBLING,
+      otherElementName: PDOMPeer.LABEL_SIBLING,
+      otherNode: this
+    } );
+
+    // pdom - Required for the aria-labelledby association to work in NVDA, see
+    // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
+    this.ariaRole = 'dialog';
 
     this.positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' )
