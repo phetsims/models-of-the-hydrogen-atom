@@ -232,7 +232,7 @@ export default class AbsorptionAndEmissionDialog extends Panel {
     this.addAriaLabelledbyAssociation( {
       thisElementName: PDOMPeer.PRIMARY_SIBLING,
       otherElementName: PDOMPeer.LABEL_SIBLING,
-      otherNode: this
+      otherNode: pdomNode
     } );
 
     // pdom - Required for the aria-labelledby association to work in NVDA, see
