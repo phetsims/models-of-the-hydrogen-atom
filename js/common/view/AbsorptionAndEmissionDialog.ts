@@ -90,8 +90,6 @@ export default class AbsorptionAndEmissionDialog extends Panel {
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener
       groupFocusHighlight: true,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialog.accessibleNameStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialog.helpTextStringProperty,
       tandemNameSuffix: 'Dialog' // Yes it's a Panel, but we are OK with calling it a Dialog.
     }, providedOptions );
 
@@ -109,9 +107,23 @@ export default class AbsorptionAndEmissionDialog extends Panel {
       tandem: options.tandem.createTandem( 'closeButton' )
     } );
 
+    // The accessible name and help text should be inside the dialog content. This content needs to come after the
+    // "Close" button in the order, and it needs to be a child of the content so that it can be found when the user
+    // reads down through the dialog.
+    const pdomNode = new Node( {
+      tagName: 'div',
+      labelTagName: 'h3',
+      descriptionTagName: 'p',
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialog.accessibleNameStringProperty,
+      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialog.helpTextStringProperty
+    } );
+
     const titleBarNode = new HBox( {
       spacing: 10,
-      children: [ titleText, closeButton ]
+      children: [ titleText, closeButton, pdomNode ],
+
+      // The pdomNode needs to come after the close button.
+      pdomOrder: [ titleText, closeButton, pdomNode ]
     } );
 
     // Headings for the columns
@@ -220,12 +232,6 @@ export default class AbsorptionAndEmissionDialog extends Panel {
     this.addAriaLabelledbyAssociation( {
       thisElementName: PDOMPeer.PRIMARY_SIBLING,
       otherElementName: PDOMPeer.LABEL_SIBLING,
-      otherNode: this
-    } );
-
-    this.addAriaDescribedbyAssociation( {
-      thisElementName: PDOMPeer.PRIMARY_SIBLING,
-      otherElementName: PDOMPeer.DESCRIPTION_SIBLING,
       otherNode: this
     } );
 
