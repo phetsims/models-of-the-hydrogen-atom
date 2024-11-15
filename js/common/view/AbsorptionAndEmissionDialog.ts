@@ -223,6 +223,12 @@ export default class AbsorptionAndEmissionDialog extends Panel {
       otherNode: this
     } );
 
+    this.addAriaDescribedbyAssociation( {
+      thisElementName: PDOMPeer.PRIMARY_SIBLING,
+      otherElementName: PDOMPeer.DESCRIPTION_SIBLING,
+      otherNode: this
+    } );
+
     // pdom - Required for the aria-labelledby association to work in NVDA, see
     // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
     this.ariaRole = 'dialog';
