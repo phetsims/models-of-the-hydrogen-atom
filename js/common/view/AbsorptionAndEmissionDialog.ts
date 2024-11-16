@@ -4,8 +4,8 @@
  * AbsorptionAndEmissionDialog is a non-modal dialog that displays information about absorption/emission wavelengths
  * and state transitions, and contains controls for setting wavelengths for the Light.
  *
- * Since PhET does not have support for non-modal Dialogs, we fake a dialog using a Panel.
- * See https://github.com/phetsims/sun/issues/916.
+ * Since PhET does not have support for non-modal Dialogs, we fake a non-modal Dialog using a Panel.
+ * See https://github.com/phetsims/sun/issues/916 and https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -107,6 +107,8 @@ export default class AbsorptionAndEmissionDialog extends Panel {
       tandem: options.tandem.createTandem( 'closeButton' )
     } );
 
+    // Since we're faking a non-modal Dialog using a Panel, we need to handle description that would be handled
+    // by common code for a non-modal Dialog, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
     // The accessible name and help text should be inside the dialog content. This content needs to come after the
     // "Close" button in the order, and it needs to be a child of the content so that it can be found when the user
     // reads down through the dialog.
@@ -228,7 +230,8 @@ export default class AbsorptionAndEmissionDialog extends Panel {
 
     super( content, options );
 
-    // pdom - Set the aria-labelledby relation so that whenever focus enters the, dialog the accessible name is read.
+    // pdom - Set the aria-labelledby relation so that whenever focus enters the dialog, the accessible name is read.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
     this.addAriaLabelledbyAssociation( {
       thisElementName: PDOMPeer.PRIMARY_SIBLING,
       otherElementName: PDOMPeer.LABEL_SIBLING,
