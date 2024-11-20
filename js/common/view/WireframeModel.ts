@@ -1,9 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * WireframeModel is a 3D wireframe model.
- * Ported from edu.colorado.phet.hydrogenatom.wireframe.Wireframe.java.
- * That code was distributed with JDK 1.4.2 in the Wireframe example applet.
+ * WireframeModel is a 3D wireframe model. This was Wireframe3D.java in the Java version.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

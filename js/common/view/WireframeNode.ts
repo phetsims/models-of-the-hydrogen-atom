@@ -1,9 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * WireframeNode displays a 3D wireframe model.
- * Ported from edu.colorado.phet.hydrogenatom.wireframe.WireframeNodeNode.java.
- * That code was distributed with JDK 1.4.2 in the Wireframe example applet.
+ * WireframeNode displays a 3D wireframe model. This was Wireframe3DNode.java in the Java version.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
