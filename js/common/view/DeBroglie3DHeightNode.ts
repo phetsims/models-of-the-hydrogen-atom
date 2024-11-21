@@ -25,7 +25,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import UnderConstructionText from './UnderConstructionText.js';
 import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
-import Wireframe3DModel from '../model/Wireframe3DModel.js';
+import Wireframe3DModel from './Wireframe3DModel.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates

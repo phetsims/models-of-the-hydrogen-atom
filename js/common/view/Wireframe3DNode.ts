@@ -10,7 +10,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Wireframe3DModel from '../model/Wireframe3DModel.js';
+import Wireframe3DModel from './Wireframe3DModel.js';
 
 type SelfOptions = EmptySelfOptions;
 

@@ -11,7 +11,7 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Color, RectangleOptions, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Wireframe3DMatrix from './Wireframe3DMatrix.js';
+import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
 
 type SelfOptions = {
   vertices?: Vector3[];
