@@ -24,9 +24,9 @@ import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import UnderConstructionText from './UnderConstructionText.js';
-import WireframeMatrix from './WireframeMatrix.js';
-import WireframeModel from './WireframeModel.js';
-import WireframeNode from './WireframeNode.js';
+import WireframeMatrix from '../model/WireframeMatrix.js';
+import WireframeModel from '../model/WireframeModel.js';
+import Wireframe3DNode from './Wireframe3DNode.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
 const NUMBER_OF_ORBIT_VERTICES = 200;
@@ -63,7 +63,7 @@ export default class DeBroglie3DHeightNode extends Node {
   private readonly waveBackColorProperty: TReadOnlyProperty<Color>;
 
   private readonly waveModel: WireframeModel; //TODO does this have PhET-iO state?
-  private readonly waveNode: WireframeNode; //TODO does this have PhET-iO state?
+  private readonly waveNode: Wireframe3DNode; //TODO does this have PhET-iO state?
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
@@ -118,7 +118,7 @@ export default class DeBroglie3DHeightNode extends Node {
     );
 
     // 3D orbits
-    const orbitNodes: WireframeNode[] = [];
+    const orbitNodes: Wireframe3DNode[] = [];
     for ( let n = MOTHAConstants.GROUND_STATE; n < MOTHAConstants.MAX_STATE; n++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
       const orbitNode = this.createOrbitNode( radius, this.viewMatrix, this.orbitVertices );
@@ -142,7 +142,7 @@ export default class DeBroglie3DHeightNode extends Node {
       lineWidth: 2
     } );
 
-    this.waveNode = new WireframeNode( this.waveModel, {
+    this.waveNode = new Wireframe3DNode( this.waveModel, {
       tandem: options.tandem.createTandem( 'waveNode' )
     } );
 
@@ -206,11 +206,11 @@ export default class DeBroglie3DHeightNode extends Node {
     }
   }
 
-  //TODO convert this to: class OrbitNode extends WireframeNode
+  //TODO convert this to: class OrbitNode extends Wireframe3DNode
   /**
    * Creates a Node for an electron orbit.
    */
-  private createOrbitNode( radius: number, viewMatrix: WireframeMatrix, vertices: Vector3[] ): WireframeNode {
+  private createOrbitNode( radius: number, viewMatrix: WireframeMatrix, vertices: Vector3[] ): Wireframe3DNode {
 
     // Update the vertices
     vertices = getOrbitVertices( radius, vertices );
@@ -238,7 +238,7 @@ export default class DeBroglie3DHeightNode extends Node {
     matrix.multiply( viewMatrix );
     wireframeModel.setMatrix( matrix );
 
-    return new WireframeNode( wireframeModel );
+    return new Wireframe3DNode( wireframeModel );
   }
 }
 

@@ -2,9 +2,7 @@
 
 //TODO replace with phet.dot.Matrix3
 /**
- * WireframeMatrix implements some features of a 3D matrix.
- * This is a partial port of edu.colorado.phet.hydrogenatom.wireframe.Matrix3D.java.
- * That code was distributed with JDK 1.4.2 in the Wireframe example applet.
+ * WireframeMatrix implements some features of a 3D matrix. This is a partial port of Matrix3D.java.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * WireframeNode displays a 3D wireframe model. This was Wireframe3DNode.java in the Java version.
+ * Wireframe3DNode displays a 3D wireframe model. This was Wireframe3DNode.java in the Java version.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,13 +10,13 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import WireframeModel from './WireframeModel.js';
+import WireframeModel from '../model/WireframeModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
 type WireframeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-export default class WireframeNode extends Node {
+export default class Wireframe3DNode extends Node {
 
   private readonly model: WireframeModel;
 
@@ -35,4 +35,4 @@ export default class WireframeNode extends Node {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'WireframeNode', WireframeNode );
+modelsOfTheHydrogenAtom.register( 'Wireframe3DNode', Wireframe3DNode );
