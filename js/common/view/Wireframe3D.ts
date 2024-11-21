@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * Wireframe3DModel is a 3D wireframe model. This was Wireframe3D.java in the Java version.
+ * Wireframe3D is a 3D wireframe model. This was Wireframe3D.java in the Java version.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,7 +22,7 @@ type SelfOptions = {
 
 type WireframeModelOptions = SelfOptions;
 
-export default class Wireframe3DModel {
+export default class Wireframe3D {
 
   private matrix: Wireframe3DMatrix;
   private vertices: Vector3[];
@@ -111,4 +111,4 @@ export default class Wireframe3DModel {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'Wireframe3DModel', Wireframe3DModel );
+modelsOfTheHydrogenAtom.register( 'Wireframe3D', Wireframe3D );

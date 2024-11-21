@@ -25,7 +25,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import UnderConstructionText from './UnderConstructionText.js';
 import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
-import Wireframe3DModel from './Wireframe3DModel.js';
+import Wireframe3D from './Wireframe3D.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
@@ -62,7 +62,7 @@ export default class DeBroglie3DHeightNode extends Node {
   private readonly waveFrontColorProperty: TReadOnlyProperty<Color>;
   private readonly waveBackColorProperty: TReadOnlyProperty<Color>;
 
-  private readonly waveModel: Wireframe3DModel; //TODO does this have PhET-iO state?
+  private readonly waveModel: Wireframe3D; //TODO does this have PhET-iO state?
   private readonly waveNode: Wireframe3DNode; //TODO does this have PhET-iO state?
 
   public constructor( hydrogenAtom: DeBroglieModel,
@@ -136,7 +136,7 @@ export default class DeBroglie3DHeightNode extends Node {
     } );
     this.addChild( underConstructionNode );
 
-    this.waveModel = new Wireframe3DModel( {
+    this.waveModel = new Wireframe3D( {
       frontColor: this.waveFrontColorProperty,
       backColor: this.waveBackColorProperty,
       lineWidth: 2
@@ -216,7 +216,7 @@ export default class DeBroglie3DHeightNode extends Node {
     vertices = getOrbitVertices( radius, vertices );
 
     // Create the wireframe model
-    const wireframeModel = new Wireframe3DModel( {
+    const wireframeModel = new Wireframe3D( {
       vertices: vertices,
       frontColor: this.orbitFrontColorProperty,
       backColor: this.orbitBackColorProperty,

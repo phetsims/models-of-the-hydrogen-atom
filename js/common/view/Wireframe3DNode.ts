@@ -10,7 +10,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Wireframe3DModel from './Wireframe3DModel.js';
+import Wireframe3D from './Wireframe3D.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -18,9 +18,9 @@ type WireframeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class Wireframe3DNode extends Node {
 
-  private readonly model: Wireframe3DModel;
+  private readonly model: Wireframe3D;
 
-  public constructor( model: Wireframe3DModel, providedOptions?: WireframeNodeOptions ) {
+  public constructor( model: Wireframe3D, providedOptions?: WireframeNodeOptions ) {
 
     const options = optionize<WireframeNodeOptions, SelfOptions, RectangleOptions>()( {
       //TODO
