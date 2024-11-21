@@ -1,7 +1,8 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
+//TODO Merge this class into Wireframe3DNode.
 /**
- * Wireframe3D is a 3D wireframe model. This was Wireframe3D.java in the Java version.
+ * Wireframe3D draws a 3D wireframe model. This was Wireframe3D.java in the Java version.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
