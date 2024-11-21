@@ -1,4 +1,4 @@
-// Copyright 2022-2023, University of Colorado Boulder
+// Copyright 2022-2024, University of Colorado Boulder
 
 /**
  * WireframeModel is a 3D wireframe model. This was Wireframe3D.java in the Java version.
