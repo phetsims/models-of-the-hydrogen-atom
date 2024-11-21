@@ -11,7 +11,7 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Color, RectangleOptions, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import WireframeMatrix from './WireframeMatrix.js';
+import Wireframe3DMatrix from './Wireframe3DMatrix.js';
 
 type SelfOptions = {
   vertices?: Vector3[];
@@ -24,7 +24,7 @@ type WireframeModelOptions = SelfOptions;
 
 export default class Wireframe3DModel {
 
-  private matrix: WireframeMatrix;
+  private matrix: Wireframe3DMatrix;
   private vertices: Vector3[];
   private frontColor: TColor;
   private backColor: TColor;
@@ -43,7 +43,7 @@ export default class Wireframe3DModel {
 
     assert && assert( isFinite( options.lineWidth ) && options.lineWidth > 0 );
 
-    this.matrix = new WireframeMatrix();
+    this.matrix = new Wireframe3DMatrix();
     this.vertices = options.vertices;
     this.frontColor = options.frontColor;
     this.backColor = options.backColor;
@@ -69,11 +69,11 @@ export default class Wireframe3DModel {
     //TODO
   }
 
-  public getMatrix(): WireframeMatrix {
+  public getMatrix(): Wireframe3DMatrix {
     return this.matrix;
   }
 
-  public setMatrix( matrix: WireframeMatrix ): void {
+  public setMatrix( matrix: Wireframe3DMatrix ): void {
     if ( this.matrix !== matrix ) {
       this.matrix = matrix;
       //TODO

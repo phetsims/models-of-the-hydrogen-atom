@@ -24,7 +24,7 @@ import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import UnderConstructionText from './UnderConstructionText.js';
-import WireframeMatrix from '../model/WireframeMatrix.js';
+import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
 import Wireframe3DModel from '../model/Wireframe3DModel.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
 
@@ -49,7 +49,7 @@ export default class DeBroglie3DHeightNode extends Node {
   private readonly modelViewTransform: ModelViewTransform2;
 
   //TODO viewMatrix needs to be a Property to save state, switch to Property<Matrix3>
-  private readonly viewMatrix: WireframeMatrix; // matrix used to set the view angle
+  private readonly viewMatrix: Wireframe3DMatrix; // matrix used to set the view angle
 
   //TODO can we get this from viewMatrix?
   private currentViewAngleProperty: Property<number>; // the current view angle
@@ -87,7 +87,7 @@ export default class DeBroglie3DHeightNode extends Node {
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
 
-    this.viewMatrix = new WireframeMatrix();
+    this.viewMatrix = new Wireframe3DMatrix();
 
     //TODO needs to be reset
     this.currentViewAngleProperty = new NumberProperty( 0, {
@@ -210,7 +210,7 @@ export default class DeBroglie3DHeightNode extends Node {
   /**
    * Creates a Node for an electron orbit.
    */
-  private createOrbitNode( radius: number, viewMatrix: WireframeMatrix, vertices: Vector3[] ): Wireframe3DNode {
+  private createOrbitNode( radius: number, viewMatrix: Wireframe3DMatrix, vertices: Vector3[] ): Wireframe3DNode {
 
     // Update the vertices
     vertices = getOrbitVertices( radius, vertices );

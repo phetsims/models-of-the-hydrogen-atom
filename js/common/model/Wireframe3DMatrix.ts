@@ -2,14 +2,14 @@
 
 //TODO replace with phet.dot.Matrix3
 /**
- * WireframeMatrix implements some features of a 3D matrix. This is a partial port of Matrix3D.java.
+ * Wireframe3DMatrix implements some features of a 3D matrix. This is a partial port of Matrix3D.java from the Java version.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
-export default class WireframeMatrix {
+export default class Wireframe3DMatrix {
 
   private xx = 1;
   private xy = 0;
@@ -54,7 +54,7 @@ export default class WireframeMatrix {
     this.zo += z;
   }
 
-  public multiply( matrix: WireframeMatrix ): void {
+  public multiply( matrix: Wireframe3DMatrix ): void {
 
     const lxx = this.xx * matrix.xx + this.yx * matrix.xy + this.zx * matrix.xz;
     const lxy = this.xy * matrix.xx + this.yy * matrix.xy + this.zy * matrix.xz;
@@ -118,4 +118,4 @@ export default class WireframeMatrix {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'WireframeMatrix', WireframeMatrix );
+modelsOfTheHydrogenAtom.register( 'Wireframe3DMatrix', Wireframe3DMatrix );
