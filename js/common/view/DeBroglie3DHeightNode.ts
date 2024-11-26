@@ -10,13 +10,12 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Color, Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
@@ -37,8 +36,19 @@ const NUMBER_OF_WAVE_VERTICES = 200;
 // If you change this value, you must also change DeBroglieModel.ORBIT_3D_Y_SCALE !! TODO why?
 const FINAL_VIEW_ANGLE = Utils.toRadians( 70 );
 
-// Change in angle during view animation.
+// Change in angle for each step of rotation animation.
+//TODO Should this be based on dt?
 const VIEW_ANGLE_DELTA = Utils.toRadians( 5 );
+
+const ORBIT_FRONT_COLOR_PROPERTY = MOTHAColors.orbitStrokeProperty;
+const ORBIT_BACK_COLOR_PROPERTY = new DerivedProperty( [ ORBIT_FRONT_COLOR_PROPERTY ],
+  orbitFrontColor => orbitFrontColor.darkerColor().darkerColor().darkerColor()
+);
+
+const WAVE_FRONT_COLOR_PROPERTY = MOTHAColors.electronBaseColorProperty;
+const WAVE_BACK_COLOR_PROPERTY = new DerivedProperty( [ WAVE_FRONT_COLOR_PROPERTY ],
+  waveFrontColor => waveFrontColor.darkerColor().darkerColor().darkerColor()
+);
 
 type SelfOptions = EmptySelfOptions;
 
@@ -55,17 +65,9 @@ export default class DeBroglie3DHeightNode extends Node {
   //TODO can we get this from viewMatrix?
   private currentViewAngleProperty: Property<number>; // the current view angle
 
-  private readonly orbitVertices: Vector3[]; // reusable vertices for orbits
   private waveVertices: Vector3[]; // reusable vertices for wave
 
-  private readonly orbitFrontColorProperty: TReadOnlyProperty<Color>;
-  private readonly orbitBackColorProperty: TReadOnlyProperty<Color>;
-  private readonly waveFrontColorProperty: TReadOnlyProperty<Color>;
-  private readonly waveBackColorProperty: TReadOnlyProperty<Color>;
-
   private readonly orbitNodes: Wireframe3DNode[];
-
-  private readonly waveModel: Wireframe3D; //TODO does this have PhET-iO state?
   private readonly waveNode: Wireframe3DNode; //TODO does this have PhET-iO state?
 
   public constructor( hydrogenAtom: DeBroglieModel,
@@ -100,33 +102,19 @@ export default class DeBroglie3DHeightNode extends Node {
       //TODO phetioDocumentation
     } );
 
-    this.orbitVertices = [];
-    for ( let i = 0; i < NUMBER_OF_ORBIT_VERTICES; i++ ) {
-      this.orbitVertices.push( new Vector3( 0, 0, 0 ) );
-    }
-
     this.waveVertices = [];
     for ( let i = 0; i < NUMBER_OF_WAVE_VERTICES; i++ ) {
       this.waveVertices.push( new Vector3( 0, 0, 0 ) );
     }
 
-    this.orbitFrontColorProperty = MOTHAColors.orbitStrokeProperty;
-    this.orbitBackColorProperty = new DerivedProperty( [ this.orbitFrontColorProperty ],
-      orbitFrontColor => orbitFrontColor.darkerColor().darkerColor().darkerColor()
-    );
-
-    this.waveFrontColorProperty = MOTHAColors.electronBaseColorProperty;
-    this.waveBackColorProperty = new DerivedProperty( [ this.waveFrontColorProperty ],
-      waveFrontColor => waveFrontColor.darkerColor().darkerColor().darkerColor()
-    );
-
     // 3D orbits
     this.orbitNodes = [];
     for ( let n = MOTHAConstants.GROUND_STATE; n < MOTHAConstants.MAX_STATE; n++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
-      const orbitNode = this.createOrbitNode( radius, this.viewMatrix, this.orbitVertices );
+      const orbitNode = createOrbitNode( radius, NUMBER_OF_ORBIT_VERTICES );
       this.orbitNodes.push( orbitNode );
     }
+    this.updateOrbitNodes();
     const orbitsNode = new Node( {
       children: this.orbitNodes,
       tandem: options.tandem.createTandem( 'orbitsNode' )
@@ -142,13 +130,13 @@ export default class DeBroglie3DHeightNode extends Node {
     } );
     this.addChild( underConstructionNode );
 
-    this.waveModel = new Wireframe3D( {
-      frontColorProperty: this.waveFrontColorProperty,
-      backColorProperty: this.waveBackColorProperty,
+    const waveModel = new Wireframe3D( {
+      frontColorProperty: WAVE_FRONT_COLOR_PROPERTY,
+      backColorProperty: WAVE_BACK_COLOR_PROPERTY,
       lineWidth: 2
     } );
 
-    this.waveNode = new Wireframe3DNode( this.waveModel, {
+    this.waveNode = new Wireframe3DNode( waveModel, {
       tandem: options.tandem.createTandem( 'waveNode' )
     } );
     this.addChild( this.waveNode );
@@ -158,10 +146,13 @@ export default class DeBroglie3DHeightNode extends Node {
       deBroglieRepresentation => deBroglieRepresentation === '3DHeight' );
 
     //TODO are these dependencies correct?
-    Multilink.multilink( [ hydrogenAtom.electron.nProperty, hydrogenAtom.electron.angleProperty, updateEnabledProperty ],
+    Multilink.lazyMultilink( [ hydrogenAtom.electron.nProperty, hydrogenAtom.electron.angleProperty, updateEnabledProperty ],
       ( n, electronAngle, updateEnabled ) => {
         updateEnabled && this.update();
       } );
+
+    this.updateOrbitNodes();
+    this.updateWaveNode();
   }
 
   private update(): void {
@@ -177,26 +168,28 @@ export default class DeBroglie3DHeightNode extends Node {
    */
   private updateWaveNode(): void {
 
+    const wireframeModel = this.waveNode.wireframeModel;
+
     // Update the vertices
     this.waveVertices = getWaveVertices( this.hydrogenAtom, this.modelViewTransform, this.waveVertices );
     assert && assert( this.waveVertices.length === NUMBER_OF_WAVE_VERTICES, `this.waveVertices.length=${this.waveVertices.length}` );
 
-    // Create the wireframe model
-    this.waveModel.setVertices( this.waveVertices );
+    // Update the wireframe model
+    wireframeModel.setVertices( this.waveVertices );
     for ( let i = 0; i < this.waveVertices.length - 1; i++ ) {
-      this.waveModel.addLine( i, i + 1 );
+      wireframeModel.addLine( this.waveVertices[ i ], this.waveVertices[ i + 1 ] );
     }
-    this.waveModel.addLine( this.waveVertices.length - 1, 0 ); // close the path
+    wireframeModel.addLine( this.waveVertices[ this.waveVertices.length - 1 ], this.waveVertices[ 0 ] ); // close the path
 
     // Transform the model
     //TODO This bit of code is duplicated in 3 places.
-    const xt = -( this.waveModel.minX + this.waveModel.maxX ) / 2;
-    const yt = -( this.waveModel.minY + this.waveModel.maxY ) / 2;
-    const zt = -( this.waveModel.minZ + this.waveModel.maxZ ) / 2;
-    this.waveModel.unit();
-    this.waveModel.translate( xt, yt, zt );
-    this.waveModel.multiply( this.viewMatrix );
-    this.waveModel.update();
+    const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
+    const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
+    const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
+    wireframeModel.unit();
+    wireframeModel.translate( xt, yt, zt );
+    wireframeModel.multiply( this.viewMatrix );
+    wireframeModel.update();
 
     //TODO how does this.waveNode get notified to update?
   }
@@ -204,13 +197,14 @@ export default class DeBroglie3DHeightNode extends Node {
   //TODO This is a departure from the Java version. Instead of creating new orbits as the atom rotates, rotate each orbit.
   private updateOrbitNodes(): void {
     this.orbitNodes.forEach( orbitNode => {
-      const xt = -( this.waveModel.minX + this.waveModel.maxX ) / 2;
-      const yt = -( this.waveModel.minY + this.waveModel.maxY ) / 2;
-      const zt = -( this.waveModel.minZ + this.waveModel.maxZ ) / 2;
-      orbitNode.model.unit();
-      orbitNode.model.translate( xt, yt, zt );
-      orbitNode.model.multiply( this.viewMatrix );
-      orbitNode.model.update();
+      const wireframeModel = orbitNode.wireframeModel;
+      const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
+      const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
+      const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
+      wireframeModel.unit();
+      wireframeModel.translate( xt, yt, zt );
+      wireframeModel.multiply( this.viewMatrix );
+      wireframeModel.update();
     } );
   }
 
@@ -224,56 +218,47 @@ export default class DeBroglie3DHeightNode extends Node {
       this.viewMatrix.rotateX( this.currentViewAngleProperty.value );
     }
   }
+}
 
-  //TODO convert this to: class OrbitNode extends Wireframe3DNode
-  /**
-   * Creates a Node for an electron orbit.
-   */
-  private createOrbitNode( radius: number, viewMatrix: Wireframe3DMatrix, vertices: Vector3[] ): Wireframe3DNode {
+//TODO convert this to: class Orbit3DNode extends Wireframe3DNode
+/**
+ * Creates a Node for an electron orbit.
+ */
+function createOrbitNode( radius: number, numberOfVerticies: number ): Wireframe3DNode {
 
-    // Update the vertices
-    vertices = getOrbitVertices( radius, vertices );
+  // Get the vertices that approximate the orbit.
+  const vertices = getOrbitVertices( radius, numberOfVerticies );
 
-    // Create the wireframe model
-    const wireframeModel = new Wireframe3D( {
-      frontColorProperty: this.orbitFrontColorProperty,
-      backColorProperty: this.orbitBackColorProperty,
-      lineWidth: 2
-    } );
-    wireframeModel.setVertices( vertices );
+  // Create the wireframe model
+  const wireframeModel = new Wireframe3D( {
+    frontColorProperty: ORBIT_FRONT_COLOR_PROPERTY,
+    backColorProperty: ORBIT_BACK_COLOR_PROPERTY,
+    lineWidth: 2
+  } );
+  wireframeModel.setVertices( vertices );
 
-    // Connect every-other pair of vertices to simulate a dashed line.
-    for ( let i = 0; i < vertices.length - 1; i += 2 ) {
-      wireframeModel.addLine( i, i + 1 );
-    }
-
-    // Transform the model
-    const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
-    const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
-    const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
-    wireframeModel.unit();
-    wireframeModel.translate( xt, yt, zt );
-    wireframeModel.multiply( viewMatrix );
-    wireframeModel.update();
-
-    return new Wireframe3DNode( wireframeModel );
+  // Connect every-other pair of vertices to simulate a dashed line.
+  for ( let i = 0; i < vertices.length - 1; i += 2 ) {
+    wireframeModel.addLine( vertices[ i ], vertices[ i + 1 ] );
   }
+
+  return new Wireframe3DNode( wireframeModel );
 }
 
 /**
  * Gets the vertices that approximate an electron orbit. All orbits are in the xy plane, at z=0.
  */
-function getOrbitVertices( orbitRadius: number, vertices: Vector3[] ): Vector3[] {
+function getOrbitVertices( orbitRadius: number, numberOfVertices: number ): Vector3[] {
 
-  const numberOfVertices = vertices.length;
   const deltaAngle = ( 2 * Math.PI ) / numberOfVertices;
 
+  const vertices: Vector3[] = [];
   for ( let i = 0; i < numberOfVertices; i++ ) {
     const angle = i * deltaAngle;
     const x = orbitRadius * Math.cos( angle );
     const y = orbitRadius * Math.sin( angle );
     const z = 0;
-    vertices[ i ].setXYZ( x, y, z );
+    vertices.push( new Vector3( x, y, z ) );
   }
   return vertices;
 }

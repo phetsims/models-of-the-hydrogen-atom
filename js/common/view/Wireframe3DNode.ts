@@ -18,9 +18,9 @@ type WireframeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class Wireframe3DNode extends Node {
 
-  public readonly model: Wireframe3D;
+  public readonly wireframeModel: Wireframe3D;
 
-  public constructor( model: Wireframe3D, providedOptions?: WireframeNodeOptions ) {
+  public constructor( wireframeModel: Wireframe3D, providedOptions?: WireframeNodeOptions ) {
 
     const options = optionize<WireframeNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO
@@ -31,7 +31,7 @@ export default class Wireframe3DNode extends Node {
 
     super( options );
 
-    this.model = model;
+    this.wireframeModel = wireframeModel;
   }
 }
 

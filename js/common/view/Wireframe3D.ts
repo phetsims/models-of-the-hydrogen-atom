@@ -17,10 +17,10 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
-// Indices into this.vertices that identify the ends of a 3D line segment.
+// Describes a line in 3D space.
 type WireframeLine = {
-  vertexIndex1: number;
-  vertexIndex2: number;
+  vertex1: Vector3;
+  vertex2: Vector3;
 };
 
 type SelfOptions = {
@@ -30,7 +30,7 @@ type SelfOptions = {
   numberOfColors?: number;
 };
 
-type WireframeModelOptions = SelfOptions;
+export type Wireframe3DOptions = SelfOptions;
 
 export default class Wireframe3D {
 
@@ -51,9 +51,9 @@ export default class Wireframe3D {
 
   public readonly boundsChangedEmitter: Emitter; //TODO Is this needed, perhaps to change Canvas bounds?
 
-  public constructor( providedOptions: WireframeModelOptions ) {
+  public constructor( providedOptions: Wireframe3DOptions ) {
 
-    const options = optionize<WireframeModelOptions, SelfOptions, RectangleOptions>()( {
+    const options = optionize<Wireframe3DOptions, SelfOptions, RectangleOptions>()( {
 
       // SelfOptions
       lineWidth: 1,
@@ -92,6 +92,9 @@ export default class Wireframe3D {
     this.matrix.multiply( matrix );
   }
 
+  /**
+   * If you change the matrix, vertices, or lines, then you are responsible for calling update.
+   */
   public update(): void {
     this.transformedVertices = this.matrix.transform( this.vertices );
     this.transformedBounds = computeBounds( this.transformedVertices );
@@ -135,13 +138,13 @@ export default class Wireframe3D {
   /**
    * Adds a line between 2 vertices.
    */
-  public addLine( vertexIndex1: number, vertexIndex2: number ): void {
-    assert && assert( vertexIndex1 !== vertexIndex2 );
-    assert && assert( vertexIndex1 >= 0 && vertexIndex1 < this.vertices.length );
-    assert && assert( vertexIndex2 >= 0 && vertexIndex2 < this.vertices.length );
+  public addLine( vertex1: Vector3, vertex2: Vector3 ): void {
+    assert && assert( vertex1 !== vertex2 );
+    assert && assert( this.vertices.includes( vertex1 ) );
+    assert && assert( this.vertices.includes( vertex2 ) );
     this.lines.push( {
-      vertexIndex1: vertexIndex1,
-      vertexIndex2: vertexIndex2
+      vertex1: vertex1,
+      vertex2: vertex2
     } );
   }
 
@@ -149,9 +152,8 @@ export default class Wireframe3D {
    * Gets the color for a line, based on its z coordinate.
    */
   private getColor( line: WireframeLine ): Color {
-    const vertex1 = this.vertices[ line.vertexIndex1 ];
-    const vertex2 = this.vertices[ line.vertexIndex2 ];
-    const zAverage = vertex1.z + ( vertex1.z - vertex2.z ) / 2;
+    assert && assert( this.lines.includes( line ) );
+    const zAverage = line.vertex1.z + ( line.vertex1.z - line.vertex2.z ) / 2;
     const colorIndex = Math.floor( ( this.colorPalette.length - 1 ) *
                                    ( ( zAverage - this.transformedBounds.minZ ) / ( this.transformedBounds.maxZ - this.transformedBounds.minZ ) ) );
     assert && assert( colorIndex >= 0 && colorIndex < this.colorPalette.length );
