@@ -63,10 +63,9 @@ export default class DeBroglie3DHeightNode extends Node {
   //TODO viewMatrix needs to be a Property to save state, switch to Property<Matrix3>
   private readonly viewMatrix: Wireframe3DMatrix; // matrix used to set the view angle
 
-  //TODO can we get this from viewMatrix?
-  private currentViewAngleProperty: Property<number>; // the current view angle
+  private readonly currentViewAngleProperty: Property<number>; // the current view angle
 
-  private waveVertices: Vector3[]; // reusable vertices for wave
+  private readonly waveVertices: Vector3[]; // reusable vertices for wave
 
   private readonly orbitNodes: Wireframe3DNode[];
   private readonly waveNode: Wireframe3DNode; //TODO does this have PhET-iO state?
@@ -176,7 +175,7 @@ export default class DeBroglie3DHeightNode extends Node {
     const wireframeModel = this.waveNode.wireframeModel;
 
     // Update the vertices
-    this.waveVertices = getWaveVertices( this.hydrogenAtom, this.modelViewTransform, this.waveVertices );
+    getWaveVertices( this.hydrogenAtom, this.modelViewTransform, this.waveVertices );
     assert && assert( this.waveVertices.length === NUMBER_OF_WAVE_VERTICES, `this.waveVertices.length=${this.waveVertices.length}` );
 
     // Update the wireframe model
