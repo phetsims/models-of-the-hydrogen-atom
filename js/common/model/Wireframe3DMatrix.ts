@@ -2,7 +2,8 @@
 
 //TODO replace with phet.dot.Matrix3
 /**
- * Wireframe3DMatrix implements some features of a 3D matrix. This is a partial port of Matrix3D.java from the Java version.
+ * Wireframe3DMatrix implements the features of a 3D matrix needed by this wireframe features in this simulation.
+ * This is a partial port of Matrix3D.java from the Java version.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,42 +18,44 @@ export default class Wireframe3DMatrix {
   private xz = 0;
   private xo = 0;
 
-  private yx = 1;
-  private yy = 0;
+  private yx = 0;
+  private yy = 1;
   private yz = 0;
   private yo = 0;
 
-  private zx = 1;
+  private zx = 0;
   private zy = 0;
-  private zz = 0;
+  private zz = 1;
   private zo = 0;
 
   public constructor() {
-    //TODO
+    // Defaults to the unit matrix.
   }
 
   /**
    * Sets this matrix to the unit matrix.
    */
   public unit(): void {
-    this.xo = 0;
     this.xx = 1;
     this.xy = 0;
     this.xz = 0;
-    this.yo = 0;
+    this.xo = 0;
+
     this.yx = 0;
     this.yy = 1;
     this.yz = 0;
-    this.zo = 0;
+    this.yo = 0;
+
     this.zx = 0;
     this.zy = 0;
     this.zz = 1;
+    this.zo = 0;
   }
 
-  public translate( x: number, y: number, z: number ): void {
-    this.xo += x;
-    this.yo += y;
-    this.zo += z;
+  public translate( dx: number, dy: number, dz: number ): void {
+    this.xo += dx;
+    this.yo += dy;
+    this.zo += dz;
   }
 
   public multiply( matrix: Wireframe3DMatrix ): void {
