@@ -8,14 +8,20 @@
  */
 
 import Disposable from '../../../../axon/js/Disposable.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
+import Bounds3 from '../../../../dot/js/Bounds3.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Color, RectangleOptions, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
+import Emitter from '../../../../axon/js/Emitter.js';
+
+type WireframeLine = {
+  vertexIndex1: number;
+  vertexIndex2: number;
+};
 
 type SelfOptions = {
-  vertices?: Vector3[];
   frontColor?: TColor;
   backColor?: TColor;
   lineWidth?: number;
@@ -25,18 +31,26 @@ type WireframeModelOptions = SelfOptions;
 
 export default class Wireframe3D {
 
-  private matrix: Wireframe3DMatrix;
+  // If you modify this matrix, you are responsible for calling update.
+  private readonly matrix: Wireframe3DMatrix;
+
   private vertices: Vector3[];
-  private frontColor: TColor;
-  private backColor: TColor;
-  private lineWidth: number;
+  private transformedVertices: Vector3[];
+  private readonly lines: WireframeLine[];
+  private untransformedBounds: Bounds3;
+  private transformedBounds: Bounds3;
+
+  private readonly frontColor: TColor;
+  private readonly backColor: TColor;
+  public readonly lineWidth: number;
+
+  public readonly boundsChangedEmitter: Emitter; //TODO Is this needed?
 
   public constructor( providedOptions: WireframeModelOptions ) {
 
     const options = optionize<WireframeModelOptions, SelfOptions, RectangleOptions>()( {
 
       // SelfOptions
-      vertices: [],
       frontColor: Color.BLACK,
       backColor: Color.BLACK,
       lineWidth: 1
@@ -44,71 +58,131 @@ export default class Wireframe3D {
 
     assert && assert( isFinite( options.lineWidth ) && options.lineWidth > 0 );
 
-    this.matrix = new Wireframe3DMatrix();
-    this.vertices = options.vertices;
     this.frontColor = options.frontColor;
     this.backColor = options.backColor;
     this.lineWidth = options.lineWidth;
+
+    this.matrix = new Wireframe3DMatrix();
+    this.vertices = [];
+    this.transformedVertices = [];
+    this.lines = [];
+    this.transformedBounds = Bounds3.NOTHING;
+    this.untransformedBounds = Bounds3.NOTHING;
+    this.boundsChangedEmitter = new Emitter();
   }
 
   public dispose(): void {
     Disposable.assertNotDisposable();
   }
 
-  public reset(): void {
-    //TODO
+  public unit(): void {
+    this.matrix.unit();
   }
 
-  public addVertices( vertices: Vector3[] ): void {
-    //TODO
+  public translate( x: number, y: number, z: number ): void {
+    this.matrix.translate( x, y, z );
+  }
+
+  public multiply( matrix: Wireframe3DMatrix ): void {
+    this.matrix.multiply( matrix );
+  }
+
+  public update(): void {
+    this.transformedVertices = this.matrix.transform( this.vertices );
+    this.transformedBounds = Wireframe3D.computeBounds( this.transformedVertices );
+    this.boundsChangedEmitter.emit();
+  }
+
+  public get minX(): number {
+    return this.untransformedBounds.minX;
+  }
+
+  public get maxX(): number {
+    return this.untransformedBounds.maxX;
+  }
+
+  public get minY(): number {
+    return this.untransformedBounds.minY;
+  }
+
+  public get maxY(): number {
+    return this.untransformedBounds.maxY;
+  }
+
+  public get minZ(): number {
+    return this.untransformedBounds.minZ;
+  }
+
+  public get maxZ(): number {
+    return this.untransformedBounds.maxZ;
+  }
+
+  /**
+   * Sets the vertices. Any lines that were previously added between vertices are deleted.
+   */
+  public setVertices( vertices: Vector3[] ): void {
+    this.lines.length = 0;
+    this.transformedVertices.length = 0;
+    this.vertices = vertices;
+    this.untransformedBounds = Wireframe3D.computeBounds( this.vertices );
   }
 
   /**
    * Adds a line between 2 vertices.
    */
-  public addLine( index1: number, index2: number ): void {
-    //TODO
+  public addLine( vertexIndex1: number, vertexIndex2: number ): void {
+    assert && assert( vertexIndex1 !== vertexIndex2 );
+    assert && assert( vertexIndex1 >= 0 && vertexIndex1 < this.vertices.length );
+    assert && assert( vertexIndex2 >= 0 && vertexIndex2 < this.vertices.length );
+    this.lines.push( {
+      vertexIndex1: vertexIndex1,
+      vertexIndex2: vertexIndex2
+    } );
   }
 
-  public getMatrix(): Wireframe3DMatrix {
-    return this.matrix;
-  }
-
-  public setMatrix( matrix: Wireframe3DMatrix ): void {
-    if ( this.matrix !== matrix ) {
-      this.matrix = matrix;
-      //TODO
+  /**
+   * Computes the 3D bounds for a set of 3D vertices.
+   */
+  private static computeBounds( vertices: Vector3[] ): Bounds3 {
+    if ( vertices.length === 0 ) {
+      return Bounds3.NOTHING;
     }
-  }
+    else {
 
-  public getXMin(): number {
-    //TODO
-    return 0;
-  }
+      const vertex = vertices[ 0 ];
+      let minX = vertex.x;
+      let maxX = vertex.x;
+      let minY = vertex.y;
+      let maxY = vertex.y;
+      let minZ = vertex.z;
+      let maxZ = vertex.z;
 
-  public getXMax(): number {
-    //TODO
-    return 0;
-  }
+      for ( let i = 1; i < vertices.length; i++ ) {
 
-  public getYMin(): number {
-    //TODO
-    return 0;
-  }
+        const vertex = vertices[ i ];
+        if ( vertex.x < minX ) {
+          minX = vertex.x;
+        }
+        else if ( vertex.x > maxX ) {
+          maxX = vertex.x;
+        }
 
-  public getYMax(): number {
-    //TODO
-    return 0;
-  }
+        if ( vertex.y < minY ) {
+          minY = vertex.y;
+        }
+        else if ( vertex.y > maxY ) {
+          maxY = vertex.y;
+        }
 
-  public getZMin(): number {
-    //TODO
-    return 0;
-  }
-
-  public getZMax(): number {
-    //TODO
-    return 0;
+        if ( vertex.z < minZ ) {
+          minZ = vertex.z;
+        }
+        else if ( vertex.z > maxZ ) {
+          maxZ = vertex.z;
+        }
+      }
+      return new Bounds3( minX, minY, maxX, maxY, minZ, maxZ );
+    }
   }
 }
 

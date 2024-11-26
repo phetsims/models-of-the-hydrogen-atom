@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Vector3 from '../../../../dot/js/Vector3.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class Wireframe3DMatrix {
@@ -115,6 +116,20 @@ export default class Wireframe3DMatrix {
     this.zx = nzx;
     this.zy = nzy;
     this.zz = nzz;
+  }
+
+  /**
+   * Transforms a set of vertices. The returned vertices are in the same order as the provided vertices.
+   */
+  public transform( vertices: Vector3[] ): Vector3[] {
+    const tv: Vector3[] = [];
+    vertices.forEach( vertex => {
+      const tx = ( vertex.x * this.xx + vertex.y * this.xy + vertex.z * this.xz + this.xo );
+      const ty = ( vertex.x * this.yx + vertex.y * this.yy + vertex.z * this.yz + this.yo );
+      const tz = ( vertex.x * this.zx + vertex.y * this.zy + vertex.z * this.zz + this.zo );
+      tv.push( new Vector3( tx, ty, tz ) );
+    } );
+    return tv;
   }
 }
 

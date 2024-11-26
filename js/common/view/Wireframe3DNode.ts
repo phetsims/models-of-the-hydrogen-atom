@@ -18,7 +18,7 @@ type WireframeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class Wireframe3DNode extends Node {
 
-  private readonly model: Wireframe3D;
+  public readonly model: Wireframe3D;
 
   public constructor( model: Wireframe3D, providedOptions?: WireframeNodeOptions ) {
 
