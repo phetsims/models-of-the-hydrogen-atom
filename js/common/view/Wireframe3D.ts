@@ -10,21 +10,24 @@
 import Disposable from '../../../../axon/js/Disposable.js';
 import Bounds3 from '../../../../dot/js/Bounds3.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import { Color, RectangleOptions, TColor } from '../../../../scenery/js/imports.js';
+import { Color, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
+// Indices into this.vertices that identify the ends of a 3D line segment.
 type WireframeLine = {
   vertexIndex1: number;
   vertexIndex2: number;
 };
 
 type SelfOptions = {
-  frontColor?: TColor;
-  backColor?: TColor;
   lineWidth?: number;
+  frontColorProperty: TReadOnlyProperty<Color>;
+  backColorProperty: TReadOnlyProperty<Color>;
+  numberOfColors?: number;
 };
 
 type WireframeModelOptions = SelfOptions;
@@ -36,31 +39,33 @@ export default class Wireframe3D {
 
   private vertices: Vector3[];
   private transformedVertices: Vector3[];
+
   private readonly lines: WireframeLine[];
+
   private untransformedBounds: Bounds3;
   private transformedBounds: Bounds3;
 
-  private readonly frontColor: TColor;
-  private readonly backColor: TColor;
   public readonly lineWidth: number;
 
-  public readonly boundsChangedEmitter: Emitter; //TODO Is this needed?
+  private readonly colorPalette: Color[];
+
+  public readonly boundsChangedEmitter: Emitter; //TODO Is this needed, perhaps to change Canvas bounds?
 
   public constructor( providedOptions: WireframeModelOptions ) {
 
     const options = optionize<WireframeModelOptions, SelfOptions, RectangleOptions>()( {
 
       // SelfOptions
-      frontColor: Color.BLACK,
-      backColor: Color.BLACK,
-      lineWidth: 1
+      lineWidth: 1,
+      numberOfColors: 16
     }, providedOptions );
 
     assert && assert( isFinite( options.lineWidth ) && options.lineWidth > 0 );
 
-    this.frontColor = options.frontColor;
-    this.backColor = options.backColor;
     this.lineWidth = options.lineWidth;
+
+    //TODO Update colorPalette and redraw when frontColorProperty or backColorProperty changes.
+    this.colorPalette = createColorPalette( options.frontColorProperty.value, options.backColorProperty.value, options.numberOfColors );
 
     this.matrix = new Wireframe3DMatrix();
     this.vertices = [];
@@ -89,7 +94,7 @@ export default class Wireframe3D {
 
   public update(): void {
     this.transformedVertices = this.matrix.transform( this.vertices );
-    this.transformedBounds = Wireframe3D.computeBounds( this.transformedVertices );
+    this.transformedBounds = computeBounds( this.transformedVertices );
     this.boundsChangedEmitter.emit();
   }
 
@@ -124,7 +129,7 @@ export default class Wireframe3D {
     this.lines.length = 0;
     this.transformedVertices.length = 0;
     this.vertices = vertices;
-    this.untransformedBounds = Wireframe3D.computeBounds( this.vertices );
+    this.untransformedBounds = computeBounds( this.vertices );
   }
 
   /**
@@ -141,49 +146,75 @@ export default class Wireframe3D {
   }
 
   /**
-   * Computes the 3D bounds for a set of 3D vertices.
+   * Gets the color for a line, based on its z coordinate.
    */
-  private static computeBounds( vertices: Vector3[] ): Bounds3 {
-    if ( vertices.length === 0 ) {
-      return Bounds3.NOTHING;
-    }
-    else {
-
-      const vertex = vertices[ 0 ];
-      let minX = vertex.x;
-      let maxX = vertex.x;
-      let minY = vertex.y;
-      let maxY = vertex.y;
-      let minZ = vertex.z;
-      let maxZ = vertex.z;
-
-      for ( let i = 1; i < vertices.length; i++ ) {
-
-        const vertex = vertices[ i ];
-        if ( vertex.x < minX ) {
-          minX = vertex.x;
-        }
-        else if ( vertex.x > maxX ) {
-          maxX = vertex.x;
-        }
-
-        if ( vertex.y < minY ) {
-          minY = vertex.y;
-        }
-        else if ( vertex.y > maxY ) {
-          maxY = vertex.y;
-        }
-
-        if ( vertex.z < minZ ) {
-          minZ = vertex.z;
-        }
-        else if ( vertex.z > maxZ ) {
-          maxZ = vertex.z;
-        }
-      }
-      return new Bounds3( minX, minY, maxX, maxY, minZ, maxZ );
-    }
+  private getColor( line: WireframeLine ): Color {
+    const vertex1 = this.vertices[ line.vertexIndex1 ];
+    const vertex2 = this.vertices[ line.vertexIndex2 ];
+    const zAverage = vertex1.z + ( vertex1.z - vertex2.z ) / 2;
+    const colorIndex = Math.floor( ( this.colorPalette.length - 1 ) *
+                                   ( ( zAverage - this.transformedBounds.minZ ) / ( this.transformedBounds.maxZ - this.transformedBounds.minZ ) ) );
+    assert && assert( colorIndex >= 0 && colorIndex < this.colorPalette.length );
+    return this.colorPalette[ colorIndex ];
   }
+}
+
+/**
+ * Computes the 3D bounds that fits a set of 3D vertices.
+ */
+function computeBounds( vertices: Vector3[] ): Bounds3 {
+  if ( vertices.length === 0 ) {
+    return Bounds3.NOTHING;
+  }
+  else {
+
+    const vertex = vertices[ 0 ];
+    let minX = vertex.x;
+    let maxX = vertex.x;
+    let minY = vertex.y;
+    let maxY = vertex.y;
+    let minZ = vertex.z;
+    let maxZ = vertex.z;
+
+    for ( let i = 1; i < vertices.length; i++ ) {
+
+      const vertex = vertices[ i ];
+      if ( vertex.x < minX ) {
+        minX = vertex.x;
+      }
+      else if ( vertex.x > maxX ) {
+        maxX = vertex.x;
+      }
+
+      if ( vertex.y < minY ) {
+        minY = vertex.y;
+      }
+      else if ( vertex.y > maxY ) {
+        maxY = vertex.y;
+      }
+
+      if ( vertex.z < minZ ) {
+        minZ = vertex.z;
+      }
+      else if ( vertex.z > maxZ ) {
+        maxZ = vertex.z;
+      }
+    }
+    return new Bounds3( minX, minY, maxX, maxY, minZ, maxZ );
+  }
+}
+
+/**
+ * Creates a color palette consisting of RGBA interpolations between a front and back color.
+ * This is used to give the impression of depth by coloring lines according to their z coordinate.
+ */
+function createColorPalette( frontColor: Color, backColor: Color, numberOfColors: number ): Color[] {
+  const colorPalette: Color[] = [];
+  for ( let i = 0; i < numberOfColors; i++ ) {
+    const distance = i / ( numberOfColors - 1 );
+    colorPalette.push( Color.interpolateRGBA( frontColor, backColor, distance ) );
+  }
+  return colorPalette;
 }
 
 modelsOfTheHydrogenAtom.register( 'Wireframe3D', Wireframe3D );

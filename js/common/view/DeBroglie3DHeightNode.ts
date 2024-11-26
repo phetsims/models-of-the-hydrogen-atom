@@ -143,8 +143,8 @@ export default class DeBroglie3DHeightNode extends Node {
     this.addChild( underConstructionNode );
 
     this.waveModel = new Wireframe3D( {
-      frontColor: this.waveFrontColorProperty,
-      backColor: this.waveBackColorProperty,
+      frontColorProperty: this.waveFrontColorProperty,
+      backColorProperty: this.waveBackColorProperty,
       lineWidth: 2
     } );
 
@@ -236,8 +236,8 @@ export default class DeBroglie3DHeightNode extends Node {
 
     // Create the wireframe model
     const wireframeModel = new Wireframe3D( {
-      frontColor: this.orbitFrontColorProperty,
-      backColor: this.orbitBackColorProperty,
+      frontColorProperty: this.orbitFrontColorProperty,
+      backColorProperty: this.orbitBackColorProperty,
       lineWidth: 2
     } );
     wireframeModel.setVertices( vertices );
