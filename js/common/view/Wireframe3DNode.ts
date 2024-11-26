@@ -8,7 +8,7 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Wireframe3D from './Wireframe3D.js';
 
@@ -22,10 +22,10 @@ export default class Wireframe3DNode extends Node {
 
   public constructor( model: Wireframe3D, providedOptions?: WireframeNodeOptions ) {
 
-    const options = optionize<WireframeNodeOptions, SelfOptions, RectangleOptions>()( {
+    const options = optionize<WireframeNodeOptions, SelfOptions, NodeOptions>()( {
       //TODO
 
-      // RectangleOptions
+      // NodeOptions
       isDisposable: false
     }, providedOptions );
 
