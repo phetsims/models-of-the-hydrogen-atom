@@ -19,8 +19,8 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // Describes a line in 3D space.
 type WireframeLine = {
-  vertex1: Vector3;
-  vertex2: Vector3;
+  vertex1Index: number;
+  vertex2Index: number;
 };
 
 type SelfOptions = {
@@ -37,16 +37,18 @@ export default class Wireframe3D {
   // If you modify this matrix, you are responsible for calling update.
   private readonly matrix: Wireframe3DMatrix;
 
-  private vertices: Vector3[];
-  private transformedVertices: Vector3[];
+  public vertices: Vector3[];
+  public transformedVertices: Vector3[];
 
-  private readonly lines: WireframeLine[];
+  public readonly lines: WireframeLine[];
 
   private untransformedBounds: Bounds3;
   private transformedBounds: Bounds3;
 
   public readonly lineWidth: number;
 
+  public readonly frontColorProperty: TReadOnlyProperty<Color>;
+  public readonly backColorProperty: TReadOnlyProperty<Color>;
   private readonly colorPalette: Color[];
 
   public readonly boundsChangedEmitter: Emitter; //TODO Is this needed, perhaps to change Canvas bounds?
@@ -64,6 +66,8 @@ export default class Wireframe3D {
 
     this.lineWidth = options.lineWidth;
 
+    this.frontColorProperty = options.frontColorProperty;
+    this.backColorProperty = options.backColorProperty;
     //TODO Update colorPalette and redraw when frontColorProperty or backColorProperty changes.
     this.colorPalette = createColorPalette( options.frontColorProperty.value, options.backColorProperty.value, options.numberOfColors );
 
@@ -97,6 +101,7 @@ export default class Wireframe3D {
    */
   public update(): void {
     this.transformedVertices = this.matrix.transform( this.vertices );
+    assert && assert( this.transformedVertices.length === this.vertices.length );
     this.transformedBounds = computeBounds( this.transformedVertices );
     this.boundsChangedEmitter.emit();
   }
@@ -138,13 +143,13 @@ export default class Wireframe3D {
   /**
    * Adds a line between 2 vertices.
    */
-  public addLine( vertex1: Vector3, vertex2: Vector3 ): void {
-    assert && assert( vertex1 !== vertex2 );
-    assert && assert( this.vertices.includes( vertex1 ) );
-    assert && assert( this.vertices.includes( vertex2 ) );
+  public addLine( vertex1Index: number, vertex2Index: number ): void {
+    assert && assert( vertex1Index !== vertex2Index );
+    assert && assert( vertex1Index >= 0 && vertex1Index < this.vertices.length );
+    assert && assert( vertex2Index >= 0 && vertex2Index < this.vertices.length );
     this.lines.push( {
-      vertex1: vertex1,
-      vertex2: vertex2
+      vertex1Index: vertex1Index,
+      vertex2Index: vertex2Index
     } );
   }
 
@@ -153,9 +158,15 @@ export default class Wireframe3D {
    */
   private getColor( line: WireframeLine ): Color {
     assert && assert( this.lines.includes( line ) );
-    const zAverage = line.vertex1.z + ( line.vertex1.z - line.vertex2.z ) / 2;
-    const colorIndex = Math.floor( ( this.colorPalette.length - 1 ) *
-                                   ( ( zAverage - this.transformedBounds.minZ ) / ( this.transformedBounds.maxZ - this.transformedBounds.minZ ) ) );
+
+    const vertex1 = this.transformedVertices[ line.vertex1Index ];
+    const vertex2 = this.transformedVertices[ line.vertex2Index ];
+
+    const minZ = this.transformedBounds.minZ;
+    const maxZ = this.transformedBounds.maxZ;
+    const zAverage = vertex1.z + ( vertex1.z - vertex2.z ) / 2;
+
+    const colorIndex = Math.floor( ( this.colorPalette.length - 1 ) * ( ( zAverage - minZ ) / ( maxZ - minZ ) ) );
     assert && assert( colorIndex >= 0 && colorIndex < this.colorPalette.length );
     return this.colorPalette[ colorIndex ];
   }

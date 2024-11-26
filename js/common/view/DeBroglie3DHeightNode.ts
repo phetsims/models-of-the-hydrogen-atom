@@ -7,7 +7,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -27,6 +26,8 @@ import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
 import Wireframe3D from './Wireframe3D.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
 import ProtonNode from './ProtonNode.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
 const NUMBER_OF_ORBIT_VERTICES = 200;
@@ -36,9 +37,8 @@ const NUMBER_OF_WAVE_VERTICES = 200;
 // If you change this value, you must also change DeBroglieModel.ORBIT_3D_Y_SCALE !! TODO why?
 const FINAL_VIEW_ANGLE = Utils.toRadians( 70 );
 
-// Change in angle for each step of rotation animation.
-//TODO Should this be based on dt?
-const VIEW_ANGLE_DELTA = Utils.toRadians( 5 );
+// Change in angle per second for rotation animation.
+const VIEW_ANGLE_DELTA = Utils.toRadians( 100 );
 
 const ORBIT_FRONT_COLOR_PROPERTY = MOTHAColors.orbitStrokeProperty;
 const ORBIT_BACK_COLOR_PROPERTY = new DerivedProperty( [ ORBIT_FRONT_COLOR_PROPERTY ],
@@ -57,6 +57,7 @@ type DeBroglie3DNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 export default class DeBroglie3DHeightNode extends Node {
 
   private readonly hydrogenAtom: DeBroglieModel;
+  private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
   private readonly modelViewTransform: ModelViewTransform2;
 
   //TODO viewMatrix needs to be a Property to save state, switch to Property<Matrix3>
@@ -90,11 +91,11 @@ export default class DeBroglie3DHeightNode extends Node {
     super( options );
 
     this.hydrogenAtom = hydrogenAtom;
+    this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
     this.modelViewTransform = modelViewTransform;
 
     this.viewMatrix = new Wireframe3DMatrix();
 
-    //TODO needs to be reset
     this.currentViewAngleProperty = new NumberProperty( 0, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'currentViewAngleProperty' ),
@@ -107,9 +108,9 @@ export default class DeBroglie3DHeightNode extends Node {
       this.waveVertices.push( new Vector3( 0, 0, 0 ) );
     }
 
-    // 3D orbits
+    // 3D orbits, with a shared parent Node
     this.orbitNodes = [];
-    for ( let n = MOTHAConstants.GROUND_STATE; n < MOTHAConstants.MAX_STATE; n++ ) {
+    for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
       const orbitNode = createOrbitNode( radius, NUMBER_OF_ORBIT_VERTICES );
       this.orbitNodes.push( orbitNode );
@@ -117,18 +118,14 @@ export default class DeBroglie3DHeightNode extends Node {
     this.updateOrbitNodes();
     const orbitsNode = new Node( {
       children: this.orbitNodes,
+      translation: modelViewTransform.modelToViewPosition( hydrogenAtom.position ),
       tandem: options.tandem.createTandem( 'orbitsNode' )
     } );
     this.addChild( orbitsNode );
+    orbitsNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position ); //TODO
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
     this.addChild( protonNode );
-
-    //TODO Under Construction
-    const underConstructionNode = new UnderConstructionText( {
-      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ).minusXY( 0, 60 )
-    } );
-    this.addChild( underConstructionNode );
 
     const waveModel = new Wireframe3D( {
       frontColorProperty: WAVE_FRONT_COLOR_PROPERTY,
@@ -137,29 +134,37 @@ export default class DeBroglie3DHeightNode extends Node {
     } );
 
     this.waveNode = new Wireframe3DNode( waveModel, {
+      translation: modelViewTransform.modelToViewPosition( hydrogenAtom.position ),
       tandem: options.tandem.createTandem( 'waveNode' )
     } );
     this.addChild( this.waveNode );
 
-    // Optimized to update only when the view representation is set to '3D Height'.
-    const updateEnabledProperty = new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
-      deBroglieRepresentation => deBroglieRepresentation === '3DHeight' );
+    //TODO Under Construction
+    const underConstructionNode = new UnderConstructionText( {
+      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ).minusXY( 0, 60 )
+    } );
+    this.addChild( underConstructionNode );
 
-    //TODO are these dependencies correct?
-    Multilink.lazyMultilink( [ hydrogenAtom.electron.nProperty, hydrogenAtom.electron.angleProperty, updateEnabledProperty ],
-      ( n, electronAngle, updateEnabled ) => {
-        updateEnabled && this.update();
-      } );
+    hydrogenAtom.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
+      if ( deBroglieRepresentation === '3DHeight' ) {
+        this.currentViewAngleProperty.reset();
+      }
+    } );
 
     this.updateOrbitNodes();
     this.updateWaveNode();
   }
 
-  private update(): void {
-    this.updateWaveNode();
-    if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
-      this.updateOrbitNodes();
-      this.stepViewMatrix();
+  /**
+   * Optimized to update only when the view representation is set to '3D Height'.
+   */
+  public step( dt: number ): void {
+    if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {
+      if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
+        this.stepViewMatrix( dt );
+        this.updateOrbitNodes();
+      }
+      this.updateWaveNode();
     }
   }
 
@@ -177,9 +182,9 @@ export default class DeBroglie3DHeightNode extends Node {
     // Update the wireframe model
     wireframeModel.setVertices( this.waveVertices );
     for ( let i = 0; i < this.waveVertices.length - 1; i++ ) {
-      wireframeModel.addLine( this.waveVertices[ i ], this.waveVertices[ i + 1 ] );
+      wireframeModel.addLine( i, i + 1 );
     }
-    wireframeModel.addLine( this.waveVertices[ this.waveVertices.length - 1 ], this.waveVertices[ 0 ] ); // close the path
+    wireframeModel.addLine( this.waveVertices.length - 1, 0 ); // close the path
 
     // Transform the model
     //TODO This bit of code is duplicated in 3 places.
@@ -191,7 +196,7 @@ export default class DeBroglie3DHeightNode extends Node {
     wireframeModel.multiply( this.viewMatrix );
     wireframeModel.update();
 
-    //TODO how does this.waveNode get notified to update?
+    this.waveNode.update();
   }
 
   //TODO This is a departure from the Java version. Instead of creating new orbits as the atom rotates, rotate each orbit.
@@ -205,15 +210,17 @@ export default class DeBroglie3DHeightNode extends Node {
       wireframeModel.translate( xt, yt, zt );
       wireframeModel.multiply( this.viewMatrix );
       wireframeModel.update();
+      orbitNode.update();
     } );
   }
 
   /*
    * Steps the view matrix until the view is rotated into place.
    */
-  private stepViewMatrix(): void {
+  private stepViewMatrix( dt: number ): void {
     if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
-      this.currentViewAngleProperty.value = Math.min( FINAL_VIEW_ANGLE, this.currentViewAngleProperty.value + VIEW_ANGLE_DELTA );
+      const deltaAngle = dt * VIEW_ANGLE_DELTA;
+      this.currentViewAngleProperty.value = Math.min( FINAL_VIEW_ANGLE, this.currentViewAngleProperty.value + deltaAngle );
       this.viewMatrix.unit();
       this.viewMatrix.rotateX( this.currentViewAngleProperty.value );
     }
@@ -239,7 +246,7 @@ function createOrbitNode( radius: number, numberOfVerticies: number ): Wireframe
 
   // Connect every-other pair of vertices to simulate a dashed line.
   for ( let i = 0; i < vertices.length - 1; i += 2 ) {
-    wireframeModel.addLine( vertices[ i ], vertices[ i + 1 ] );
+    wireframeModel.addLine( i, i + 1 );
   }
 
   return new Wireframe3DNode( wireframeModel );

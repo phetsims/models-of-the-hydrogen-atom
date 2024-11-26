@@ -27,12 +27,16 @@ import ElectronStateText from './ElectronStateText.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import OrbitNode from './OrbitNode.js';
 import ProtonNode from './ProtonNode.js';
+import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 
 type SelfOptions = EmptySelfOptions;
 
 type DeBroglieNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
 
 export default class DeBroglieNode extends HydrogenAtomNode {
+
+  private readonly deBroglie3DHeightNode: DeBroglie3DHeightNode;
+  private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
 
   // For setting pdomOrder.
   public readonly deBroglieRepresentationComboBox: Node;
@@ -92,7 +96,13 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );
 
+    this.deBroglie3DHeightNode = deBroglie3DHeightNode;
+    this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
     this.deBroglieRepresentationComboBox = deBroglieRepresentationComboBox;
+  }
+
+  public step( dt: number ): void {
+    this.deBroglie3DHeightNode.step( dt );
   }
 
   /**

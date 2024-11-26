@@ -36,6 +36,8 @@ import EnergyLevelsZoomedInBoxNode from './EnergyLevelsZoomedInBoxNode.js';
 
 export default class EnergyLevelsScreenView extends ScreenView {
 
+  private readonly zoomedInBoxNode: EnergyLevelsZoomedInBoxNode;
+
   public constructor( model: EnergyLevelsModel, tandem: Tandem ) {
 
     super( {
@@ -232,6 +234,12 @@ export default class EnergyLevelsScreenView extends ScreenView {
       zoomedInBoxNode.schrodingerQuantumNumbersInfoButton,
       resetAllButton
     ];
+
+    this.zoomedInBoxNode = zoomedInBoxNode;
+  }
+
+  public override step( dt: number ): void {
+    this.zoomedInBoxNode.step( dt );
   }
 }
 

@@ -34,6 +34,8 @@ import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 
 export default class SpectraScreenView extends ScreenView {
 
+  private readonly zoomedInBoxNode: SpectraZoomedInBoxNode;
+
   public constructor( model: SpectraModel, tandem: Tandem ) {
 
     super( {
@@ -220,6 +222,12 @@ export default class SpectraScreenView extends ScreenView {
       zoomedInBoxNode.schrodingerQuantumNumbersInfoButton,
       resetAllButton
     ];
+
+    this.zoomedInBoxNode = zoomedInBoxNode;
+  }
+
+  public override step( dt: number ): void {
+    this.zoomedInBoxNode.step( dt );
   }
 }
 
