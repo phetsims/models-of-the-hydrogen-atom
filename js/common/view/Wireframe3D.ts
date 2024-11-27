@@ -98,6 +98,10 @@ export default class Wireframe3D {
     this.matrix.multiply( matrix );
   }
 
+  public rotateX( theta: number ): void {
+    this.matrix.rotateX( theta );
+  }
+
   /**
    * If you change the matrix, vertices, or lines, then you are responsible for calling update.
    */

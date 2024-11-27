@@ -21,8 +21,6 @@ import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import UnderConstructionText from './UnderConstructionText.js';
-import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
 import Wireframe3D from './Wireframe3D.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
 import ProtonNode from './ProtonNode.js';
@@ -59,9 +57,6 @@ export default class DeBroglie3DHeightNode extends Node {
   private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
   private readonly modelViewTransform: ModelViewTransform2;
 
-  //TODO viewMatrix needs to be a Property to save state, switch to Property<Matrix3>
-  private readonly viewMatrix: Wireframe3DMatrix; // matrix used to set the view angle
-
   private readonly currentViewAngleProperty: Property<number>; // the current view angle
 
   private readonly waveVertices: Vector3[]; // reusable vertices for wave
@@ -92,8 +87,6 @@ export default class DeBroglie3DHeightNode extends Node {
     this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
     this.modelViewTransform = modelViewTransform;
 
-    this.viewMatrix = new Wireframe3DMatrix();
-
     //TODO Should this be initialized to FINAL_VIEW_ANGLE if deBroglieRepresentationProperty === '3DHeight'? Would break PhET-iO.
     this.currentViewAngleProperty = new NumberProperty( 0, {
       units: 'radians',
@@ -121,12 +114,6 @@ export default class DeBroglie3DHeightNode extends Node {
     this.waveNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position ); //TODO
     this.addChild( this.waveNode );
 
-    //TODO Under Construction
-    const underConstructionNode = new UnderConstructionText( {
-      center: modelViewTransform.modelToViewPosition( hydrogenAtom.position ).minusXY( 0, 60 )
-    } );
-    this.addChild( underConstructionNode );
-
     hydrogenAtom.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
       if ( deBroglieRepresentation === '3DHeight' ) {
         this.currentViewAngleProperty.reset();
@@ -143,7 +130,7 @@ export default class DeBroglie3DHeightNode extends Node {
   public step( dt: number ): void {
     if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {
       if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
-        this.stepViewMatrix( dt );
+        this.stepRotation( dt );
         this.updateOrbitsNode();
       }
       this.updateWaveNode();
@@ -167,23 +154,21 @@ export default class DeBroglie3DHeightNode extends Node {
     wireframeModel.addLine( this.waveVertices.length - 1, 0 ); // close the path
 
     // Transform the model
-    transformWireframe3DNode( this.waveNode, this.viewMatrix );
+    rotateNode( this.waveNode, this.currentViewAngleProperty.value );
   }
 
   //TODO Move to Orbits3DNode.
   private updateOrbitsNode(): void {
-    transformWireframe3DNode( this.orbitsNode, this.viewMatrix );
+    rotateNode( this.orbitsNode, this.currentViewAngleProperty.value );
   }
 
   /*
-   * Steps the view matrix until the view is rotated into place.
+   * Steps the rotation of the camera.
    */
-  private stepViewMatrix( dt: number ): void {
+  private stepRotation( dt: number ): void {
     if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
       const deltaAngle = dt * ANGULAR_SPEED;
       this.currentViewAngleProperty.value = Math.min( FINAL_VIEW_ANGLE, this.currentViewAngleProperty.value + deltaAngle );
-      this.viewMatrix.unit();
-      this.viewMatrix.rotateX( this.currentViewAngleProperty.value );
     }
   }
 }
@@ -281,14 +266,10 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel,
   return vertices;
 }
 
-function transformWireframe3DNode( node: Wireframe3DNode, viewMatrix: Wireframe3DMatrix ): void {
+function rotateNode( node: Wireframe3DNode, theta: number ): void {
   const wireframeModel = node.wireframeModel;
-  const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
-  const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
-  const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
   wireframeModel.unit();
-  wireframeModel.translate( xt, yt, zt );
-  wireframeModel.multiply( viewMatrix );
+  wireframeModel.rotateX( theta );
   wireframeModel.update();
   node.update();
 }
