@@ -11,6 +11,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import { Path, PathOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {
 
@@ -41,7 +42,7 @@ export default class OrbitNode extends Path {
       isDisposable: false,
       stroke: MOTHAColors.orbitStrokeProperty,
       lineWidth: 1,
-      lineDash: [ 3, 3 ]
+      lineDash: [ MOTHAConstants.ORBIT_LINE_LENGTH, MOTHAConstants.ORBIT_LINE_LENGTH ]
     }, providedOptions );
 
     assert && assert( options.yScale > 0 && options.yScale <= 1 );

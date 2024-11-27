@@ -95,6 +95,9 @@ const MOTHAConstants = {
   // 3 speeds, using the standard PhET TimeControlNode.
   TIME_SPEEDS: [ TimeSpeed.FAST, TimeSpeed.NORMAL, TimeSpeed.SLOW ],
 
+  // Length of the line segments used to draw orbits.
+  ORBIT_LINE_LENGTH: 3,
+
   // Various shared options
   CORNER_RADIUS: CORNER_RADIUS,
   ACCORDION_BOX_OPTIONS: ACCORDION_BOX_OPTIONS,
