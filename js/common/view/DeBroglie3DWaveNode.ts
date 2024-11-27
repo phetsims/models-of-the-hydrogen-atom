@@ -57,9 +57,8 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
     }
     this.addLine( this.waveVertices.length - 1, 0 ); // close the path
 
-    // Rotate to view angle.
-    this.unit();
-    this.rotateX( this.pitchProperty.value );
+    // Rotate to pitch.
+    this.setToRotationX( this.pitchProperty.value );
 
     super.update();
   }

@@ -12,7 +12,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Node, NodeOptions, Path, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
+import Matrix3 from '../../../../dot/js/Matrix3.js';
 
 // A line between 2 points, identified by their indices in this.vertices and this.transformedVertices.
 type WireframeLine = {
@@ -29,8 +29,8 @@ type WireframeNodeOptions = SelfOptions;
 
 export default class Wireframe3DNode extends Node {
 
-  // Matrix used to transform vertices.
-  private readonly wireframe3DMatrix: Wireframe3DMatrix;
+  // Matrix used to transform vertices. We cannot name this matrix because it would shadow Node's matrix.
+  private readonly vertexMatrix: Matrix3;
 
   // Untransformed vertices.
   private vertices: Vector3[];
@@ -50,7 +50,6 @@ export default class Wireframe3DNode extends Node {
   public constructor( providedOptions: WireframeNodeOptions ) {
 
     const options = optionize<WireframeNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO
 
       // NodeOptions
       isDisposable: false
@@ -58,7 +57,7 @@ export default class Wireframe3DNode extends Node {
 
     super( options );
 
-    this.wireframe3DMatrix = new Wireframe3DMatrix();
+    this.vertexMatrix = new Matrix3();
     this.vertices = [];
     this.transformedVertices = [];
     this.lines = [];
@@ -72,11 +71,10 @@ export default class Wireframe3DNode extends Node {
   }
 
   /**
-   * If you change this.wireframe3DMatrix or this.vertices, then you are responsible for calling this.update.
+   * If you change this.vertexMatrix or this.vertices, then you are responsible for calling this.update.
    */
   public update(): void {
-    this.wireframe3DMatrix.transform( this.vertices, this.transformedVertices );
-    this.isDirty = false;
+    this.transformVertices();
 
     const shape = new Shape();
     this.lines.forEach( line => {
@@ -89,19 +87,11 @@ export default class Wireframe3DNode extends Node {
   }
 
   /**
-   * Sets the matrix to the unit matrix. You are responsible for calling this.update.
-   */
-  public unit(): void {
-    this.wireframe3DMatrix.unit();
-    this.isDirty = true;
-  }
-
-  /**
-   * Rotates around the x-axis. You are responsible for calling this.update.
+   * Sets the transform matrix to rotation around the x-axis. You are responsible for calling this.update.
    * @param theta - in radians.
    */
-  public rotateX( theta: number ): void {
-    this.wireframe3DMatrix.rotateX( theta );
+  public setToRotationX( theta: number ): void {
+    this.vertexMatrix.setToRotationX( theta );
     this.isDirty = true;
   }
 
@@ -151,6 +141,18 @@ export default class Wireframe3DNode extends Node {
       vertex1Index: vertex1Index,
       vertex2Index: vertex2Index
     } );
+  }
+
+  /**
+   * Transforms a set of vertices. The transformed vertices are in the same order as the provided vertices.
+   */
+  private transformVertices(): void {
+    this.vertices.forEach( ( vertex, index ) => {
+      const transformedVertex = this.transformedVertices[ index ];
+      transformedVertex.set( vertex );
+      this.vertexMatrix.multiplyVector3( transformedVertex );
+    } );
+    this.isDirty = false;
   }
 }
 

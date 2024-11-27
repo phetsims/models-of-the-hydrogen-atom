@@ -51,11 +51,7 @@ export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
   }
 
   public override update(): void {
-
-    // Rotate to view angle.
-    this.unit();
-    this.rotateX( this.pitchProperty.value );
-
+    this.setToRotationX( this.pitchProperty.value );
     super.update();
   }
 
