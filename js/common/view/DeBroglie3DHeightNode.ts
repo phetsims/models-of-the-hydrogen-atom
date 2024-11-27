@@ -46,12 +46,14 @@ export default class DeBroglie3DHeightNode extends Node {
   private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
   private readonly modelViewTransform: ModelViewTransform2;
 
-  private readonly currentViewAngleProperty: Property<number>; // the current view angle
+  // the current view angle, rotated around the x-axis
+  private readonly currentViewAngleProperty: Property<number>;
 
-  private readonly waveVertices: Vector3[]; // reusable vertices for wave
+  // reusable vertices for wave
+  private readonly waveVertices: Vector3[];
 
   private readonly orbitsNode: Wireframe3DNode;
-  private readonly waveNode: Wireframe3DNode; //TODO does this have PhET-iO state?
+  private readonly waveNode: Wireframe3DNode;
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
@@ -76,7 +78,6 @@ export default class DeBroglie3DHeightNode extends Node {
     this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
     this.modelViewTransform = modelViewTransform;
 
-    //TODO Should this be initialized to FINAL_VIEW_ANGLE if deBroglieRepresentationProperty === '3DHeight'? Would break PhET-iO.
     this.currentViewAngleProperty = new NumberProperty( 0, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'currentViewAngleProperty' ),
