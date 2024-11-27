@@ -17,6 +17,7 @@ import Wireframe3DMatrix from '../model/Wireframe3DMatrix.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import MOTHAUtils from '../MOTHAUtils.js';
 
 // Describes a line in 3D space.
 type WireframeLine = {
@@ -110,7 +111,7 @@ export default class Wireframe3D {
     //TODO Reuse and mutate this.transformedVertices for performance.
     this.transformedVertices = this.matrix.transform( this.vertices );
     assert && assert( this.transformedVertices.length === this.vertices.length );
-    this.transformedBounds = computeBounds( this.transformedVertices );
+    this.transformedBounds = MOTHAUtils.computeBounds3( this.transformedVertices );
     this.boundsChangedEmitter.emit();
   }
 
@@ -145,7 +146,7 @@ export default class Wireframe3D {
     this.lines.length = 0;
     this.transformedVertices.length = 0;
     this.vertices = vertices;
-    this.untransformedBounds = computeBounds( this.vertices );
+    this.untransformedBounds = MOTHAUtils.computeBounds3( this.vertices );
   }
 
   /**
@@ -177,51 +178,6 @@ export default class Wireframe3D {
     const colorIndex = Math.floor( ( this.colorPalette.length - 1 ) * ( ( zAverage - minZ ) / ( maxZ - minZ ) ) );
     assert && assert( colorIndex >= 0 && colorIndex < this.colorPalette.length );
     return this.colorPalette[ colorIndex ];
-  }
-}
-
-/**
- * Computes the 3D bounds that fits a set of 3D vertices.
- */
-function computeBounds( vertices: Vector3[] ): Bounds3 {
-  if ( vertices.length === 0 ) {
-    return Bounds3.NOTHING;
-  }
-  else {
-
-    const vertex = vertices[ 0 ];
-    let minX = vertex.x;
-    let maxX = vertex.x;
-    let minY = vertex.y;
-    let maxY = vertex.y;
-    let minZ = vertex.z;
-    let maxZ = vertex.z;
-
-    for ( let i = 1; i < vertices.length; i++ ) {
-
-      const vertex = vertices[ i ];
-      if ( vertex.x < minX ) {
-        minX = vertex.x;
-      }
-      else if ( vertex.x > maxX ) {
-        maxX = vertex.x;
-      }
-
-      if ( vertex.y < minY ) {
-        minY = vertex.y;
-      }
-      else if ( vertex.y > maxY ) {
-        maxY = vertex.y;
-      }
-
-      if ( vertex.z < minZ ) {
-        minZ = vertex.z;
-      }
-      else if ( vertex.z > maxZ ) {
-        maxZ = vertex.z;
-      }
-    }
-    return new Bounds3( minX, minY, maxX, maxY, minZ, maxZ );
   }
 }
 

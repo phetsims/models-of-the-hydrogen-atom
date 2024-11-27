@@ -9,6 +9,8 @@
 import dotRandom from '../../../dot/js/dotRandom.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import Bounds3 from '../../../dot/js/Bounds3.js';
+import Vector3 from '../../../dot/js/Vector3.js';
 
 const MOTHAUtils = {
 
@@ -66,6 +68,52 @@ const MOTHAUtils = {
    */
   pointsCollide( position1: Vector2, position2: Vector2, maxDistance: number ): boolean {
     return position1.distance( position2 ) <= maxDistance;
+  },
+
+  //TODO Delete computeBounds3 if it is unused.
+  /**
+   * Computes the 3D bounds that fits a set of 3D vertices.
+   */
+  computeBounds3( vertices: Vector3[] ): Bounds3 {
+    if ( vertices.length === 0 ) {
+      return Bounds3.NOTHING;
+    }
+    else {
+
+      const vertex = vertices[ 0 ];
+      let minX = vertex.x;
+      let maxX = vertex.x;
+      let minY = vertex.y;
+      let maxY = vertex.y;
+      let minZ = vertex.z;
+      let maxZ = vertex.z;
+
+      for ( let i = 1; i < vertices.length; i++ ) {
+
+        const vertex = vertices[ i ];
+        if ( vertex.x < minX ) {
+          minX = vertex.x;
+        }
+        else if ( vertex.x > maxX ) {
+          maxX = vertex.x;
+        }
+
+        if ( vertex.y < minY ) {
+          minY = vertex.y;
+        }
+        else if ( vertex.y > maxY ) {
+          maxY = vertex.y;
+        }
+
+        if ( vertex.z < minZ ) {
+          minZ = vertex.z;
+        }
+        else if ( vertex.z > maxZ ) {
+          maxZ = vertex.z;
+        }
+      }
+      return new Bounds3( minX, minY, maxX, maxY, minZ, maxZ );
+    }
   }
 };
 
