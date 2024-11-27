@@ -119,7 +119,7 @@ export default class DeBroglie3DHeightNode extends Node {
 
     // wave
     this.waveNode = createWaveNode();
-    this.waveNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    this.waveNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position ); //TODO
     this.addChild( this.waveNode );
 
     //TODO Under Construction
