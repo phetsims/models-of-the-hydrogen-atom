@@ -42,6 +42,7 @@ export default class Wireframe3D {
 
   public readonly lines: WireframeLine[];
 
+  //TODO We do not need bounds for this sim, can set bounds to the entire zoom box.
   private untransformedBounds: Bounds3;
   private transformedBounds: Bounds3;
 

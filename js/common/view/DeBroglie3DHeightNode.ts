@@ -108,6 +108,7 @@ export default class DeBroglie3DHeightNode extends Node {
     }
 
     // 3D orbits, with a shared parent Node
+    //TODO Draw all orbits using one Wireframe3DNode.
     this.orbitNodes = [];
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
