@@ -21,7 +21,6 @@ import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import Wireframe3D from './Wireframe3D.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
 import ProtonNode from './ProtonNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -130,18 +129,16 @@ export default class DeBroglie3DHeightNode extends Node {
   //TODO Move to Wave3DNode.
   private updateWaveNode(): void {
 
-    const wireframeModel = this.waveNode.wireframeModel;
-
     // Update the vertices
     getWaveVertices( this.hydrogenAtom, this.modelViewTransform, this.waveVertices );
     assert && assert( this.waveVertices.length === NUMBER_OF_WAVE_VERTICES, `this.waveVertices.length=${this.waveVertices.length}` );
+    this.waveNode.setVertices( this.waveVertices );
 
-    // Update the wireframe model
-    wireframeModel.setVertices( this.waveVertices );
+    // Connect adjacent vertices.
     for ( let i = 0; i < this.waveVertices.length - 1; i++ ) {
-      wireframeModel.addLine( i, i + 1 );
+      this.waveNode.addLine( i, i + 1 );
     }
-    wireframeModel.addLine( this.waveVertices.length - 1, 0 ); // close the path
+    this.waveNode.addLine( this.waveVertices.length - 1, 0 ); // close the path
 
     // Transform the model
     rotateNode( this.waveNode, this.currentViewAngleProperty.value );
@@ -169,6 +166,11 @@ export default class DeBroglie3DHeightNode extends Node {
  */
 function createOrbitsNode( modelViewTransform: ModelViewTransform2 ): Wireframe3DNode {
 
+  const wireframeNode = new Wireframe3DNode( {
+    stroke: MOTHAColors.orbitStrokeProperty,
+    lineWidth: 1
+  } );
+
   const vertices: Vector3[] = [];
 
   for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
@@ -185,26 +187,19 @@ function createOrbitsNode( modelViewTransform: ModelViewTransform2 ): Wireframe3
     vertices.push( ...getOrbitVertices( orbitRadius, numberOfVertices ) );
   }
   assert && assert( vertices.length % 2 === 0, 'Even number of vertices is required.' );
-
-  // Create the wireframe model.
-  const wireframeModel = new Wireframe3D();
-  wireframeModel.setVertices( vertices );
+  wireframeNode.setVertices( vertices );
 
   // Connect every-other pair of vertices to simulate a dashed line.
   for ( let i = 0; i < vertices.length - 1; i += 2 ) {
-    wireframeModel.addLine( i, i + 1 );
+    wireframeNode.addLine( i, i + 1 );
   }
 
-  return new Wireframe3DNode( wireframeModel, {
-    stroke: MOTHAColors.orbitStrokeProperty,
-    lineWidth: 1
-  } );
+  return wireframeNode;
 }
 
 //TODO class Wave3DNode extends Wireframe3DNode
 function createWaveNode(): Wireframe3DNode {
-  const waveModel = new Wireframe3D();
-  return new Wireframe3DNode( waveModel, {
+  return new Wireframe3DNode( {
     stroke: MOTHAColors.electronBaseColorProperty,
     lineWidth: 2
   } );
@@ -253,10 +248,8 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel,
 }
 
 function rotateNode( node: Wireframe3DNode, theta: number ): void {
-  const wireframeModel = node.wireframeModel;
-  wireframeModel.unit();
-  wireframeModel.rotateX( theta );
-  wireframeModel.update();
+  node.unit();
+  node.rotateX( theta );
   node.update();
 }
 
