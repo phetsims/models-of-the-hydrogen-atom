@@ -95,6 +95,7 @@ export default class DeBroglie3DHeightNode extends Node {
 
     this.viewMatrix = new Wireframe3DMatrix();
 
+    //TODO Should this be initialized to FINAL_VIEW_ANGLE if deBroglieRepresentationProperty === '3DHeight'? Would break PhET-iO.
     this.currentViewAngleProperty = new NumberProperty( 0, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'currentViewAngleProperty' ),
@@ -150,9 +151,7 @@ export default class DeBroglie3DHeightNode extends Node {
     }
   }
 
-  /**
-   * Updates the wave.
-   */
+  //TODO Move to Wave3DNode.
   private updateWaveNode(): void {
 
     const wireframeModel = this.waveNode.wireframeModel;
@@ -181,6 +180,7 @@ export default class DeBroglie3DHeightNode extends Node {
     this.waveNode.update();
   }
 
+  //TODO Move to Orbits3DNode.
   private updateOrbitsNode(): void {
     const wireframeModel = this.orbitsNode.wireframeModel;
     const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
@@ -206,7 +206,7 @@ export default class DeBroglie3DHeightNode extends Node {
   }
 }
 
-//TODO convert this to: class Orbits3DNode extends Wireframe3DNode
+//TODO class Orbits3DNode extends Wireframe3DNode
 //TODO numberOfVertices should be a function of radius, so that all lines have the same dash length.
 /**
  * Creates a Node for the electron orbits.
@@ -236,7 +236,7 @@ function createOrbitsNode( modelViewTransform: ModelViewTransform2 ): Wireframe3
   return new Wireframe3DNode( wireframeModel );
 }
 
-//TODO factor out class WaveNode extends Wireframe3DNode.
+//TODO class Wave3DNode extends Wireframe3DNode
 function createWaveNode(): Wireframe3DNode {
 
   const waveModel = new Wireframe3D( {
@@ -248,6 +248,7 @@ function createWaveNode(): Wireframe3DNode {
   return new Wireframe3DNode( waveModel );
 }
 
+//TODO Move to Orbits3DNode.
 /**
  * Gets the vertices that approximate an electron orbit. All orbits are in the xy plane, at z=0.
  */
@@ -266,6 +267,7 @@ function getOrbitVertices( orbitRadius: number, numberOfVertices: number ): Vect
   return vertices;
 }
 
+//TODO Move to Wave3DNode.
 /**
  * Gets the vertices that approximate the standing wave.
  */
