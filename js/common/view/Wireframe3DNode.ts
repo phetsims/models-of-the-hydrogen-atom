@@ -2,7 +2,7 @@
 
 //TODO Use Canvas for better performance, and stroke based on z-coordinate.
 /**
- * Wireframe3DNode displays a 3D wireframe model. This was Wireframe3DNode.java in the Java version.
+ * Wireframe3DNode displays a 3D wireframe model. This was Wireframe3DNode.java and Wireframe3D.java in the Java version.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
