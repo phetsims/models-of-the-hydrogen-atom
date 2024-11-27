@@ -30,7 +30,6 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
-const NUMBER_OF_ORBIT_VERTICES = 200;
 const NUMBER_OF_WAVE_VERTICES = 200;
 
 // The final view angle (rotation about the x-axis), after the model has rotated into place.
@@ -207,7 +206,6 @@ export default class DeBroglie3DHeightNode extends Node {
 }
 
 //TODO class Orbits3DNode extends Wireframe3DNode
-//TODO numberOfVertices should be a function of orbitRadius, so that all lines have the same dash length.
 /**
  * Creates a Node for the electron orbits.
  */
@@ -217,10 +215,20 @@ function createOrbitsNode( modelViewTransform: ModelViewTransform2 ): Wireframe3
 
   for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
     const orbitRadius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
-    vertices.push( ...getOrbitVertices( orbitRadius, NUMBER_OF_ORBIT_VERTICES ) );
-  }
 
-  // Create the wireframe model
+    // Number of vertices varies by radius, so that all lines have the same length.
+    const orbitCircumference = 2 * Math.PI * orbitRadius;
+    let numberOfVertices = Math.floor( orbitCircumference / MOTHAConstants.ORBIT_LINE_LENGTH );
+
+    // Number of vertices must be even, so that we don't connect vertices from different orbits in the code below.
+    if ( numberOfVertices % 2 !== 0 ) {
+      numberOfVertices++;
+    }
+    vertices.push( ...getOrbitVertices( orbitRadius, numberOfVertices ) );
+  }
+  assert && assert( vertices.length % 2 === 0, 'Even number of vertices is required.' );
+
+  // Create the wireframe model.
   const wireframeModel = new Wireframe3D( {
     frontColorProperty: ORBIT_FRONT_COLOR_PROPERTY,
     backColorProperty: ORBIT_BACK_COLOR_PROPERTY,
