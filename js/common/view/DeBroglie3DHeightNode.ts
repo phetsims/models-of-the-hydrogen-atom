@@ -228,6 +228,7 @@ export default class DeBroglie3DHeightNode extends Node {
 }
 
 //TODO convert this to: class Orbit3DNode extends Wireframe3DNode
+//TODO numberOfVerticies should be a function of radius, so that all lines have the same dash length.
 /**
  * Creates a Node for an electron orbit.
  */
