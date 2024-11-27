@@ -24,9 +24,8 @@ import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import DeBroglie3DOrbitsNode from './DeBroglie3DOrbitsNode.js';
 import DeBroglie3DWaveNode from './DeBroglie3DWaveNode.js';
 
-// The final view angle (rotation about the x-axis), after the model has rotated into place.
-// If you change this value, you must also change DeBroglieModel.ORBIT_3D_Y_SCALE !! TODO why?
-const FINAL_VIEW_ANGLE = Utils.toRadians( 70 );
+// The final pitch (rotation about the x-axis), after the model has rotated into place.
+const FINAL_PITCH = Utils.toRadians( 70 );
 
 // Angular speed of the rotation animation, in radians/s.
 const ANGULAR_SPEED = Utils.toRadians( 100 );
@@ -39,8 +38,8 @@ export default class DeBroglie3DHeightNode extends Node {
 
   private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
 
-  // the view angle, rotated around the x-axis
-  private readonly viewAngleProperty: Property<number>;
+  // Pitch, rotation about the x-axis
+  private readonly pitchProperty: Property<number>;
 
   private readonly orbitsNode: Wireframe3DNode;
   private readonly waveNode: Wireframe3DNode;
@@ -66,15 +65,15 @@ export default class DeBroglie3DHeightNode extends Node {
 
     this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
 
-    this.viewAngleProperty = new NumberProperty( 0, {
+    this.pitchProperty = new NumberProperty( 0, {
       units: 'radians',
-      tandem: options.tandem.createTandem( 'viewAngleProperty' ),
+      tandem: options.tandem.createTandem( 'pitchProperty' ),
       phetioReadOnly: true
       //TODO phetioDocumentation
     } );
 
     // 3D orbits
-    this.orbitsNode = new DeBroglie3DOrbitsNode( modelViewTransform, this.viewAngleProperty );
+    this.orbitsNode = new DeBroglie3DOrbitsNode( modelViewTransform, this.pitchProperty );
     this.orbitsNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position ); //TODO
     this.addChild( this.orbitsNode );
 
@@ -83,13 +82,13 @@ export default class DeBroglie3DHeightNode extends Node {
     this.addChild( protonNode );
 
     // wave
-    this.waveNode = new DeBroglie3DWaveNode( hydrogenAtom, modelViewTransform, this.viewAngleProperty );
+    this.waveNode = new DeBroglie3DWaveNode( hydrogenAtom, modelViewTransform, this.pitchProperty );
     this.waveNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position ); //TODO
     this.addChild( this.waveNode );
 
     hydrogenAtom.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
       if ( deBroglieRepresentation === '3DHeight' ) {
-        this.viewAngleProperty.reset();
+        this.pitchProperty.reset();
       }
     } );
 
@@ -102,7 +101,7 @@ export default class DeBroglie3DHeightNode extends Node {
    */
   public step( dt: number ): void {
     if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {
-      if ( this.viewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
+      if ( this.pitchProperty.value !== FINAL_PITCH ) {
         this.stepRotation( dt );
         this.orbitsNode.update();
       }
@@ -114,9 +113,8 @@ export default class DeBroglie3DHeightNode extends Node {
    * Steps the rotation of the camera.
    */
   private stepRotation( dt: number ): void {
-    if ( this.viewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
-      const deltaAngle = dt * ANGULAR_SPEED;
-      this.viewAngleProperty.value = Math.min( FINAL_VIEW_ANGLE, this.viewAngleProperty.value + deltaAngle );
+    if ( this.pitchProperty.value !== FINAL_PITCH ) {
+      this.pitchProperty.value = Math.min( FINAL_PITCH, this.pitchProperty.value + dt * ANGULAR_SPEED );
     }
   }
 }

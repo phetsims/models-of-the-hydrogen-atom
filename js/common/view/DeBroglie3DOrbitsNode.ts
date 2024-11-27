@@ -17,15 +17,15 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
 
-  private readonly viewAngleProperty: TReadOnlyProperty<number>;
+  private readonly pitchProperty: TReadOnlyProperty<number>;
 
-  public constructor( modelViewTransform: ModelViewTransform2, viewAngleProperty: TReadOnlyProperty<number> ) {
+  public constructor( modelViewTransform: ModelViewTransform2, pitchProperty: TReadOnlyProperty<number> ) {
     super( {
       stroke: MOTHAColors.orbitStrokeProperty,
       lineWidth: 1
     } );
 
-    this.viewAngleProperty = viewAngleProperty;
+    this.pitchProperty = pitchProperty;
 
     const vertices: Vector3[] = [];
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
@@ -54,7 +54,7 @@ export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
 
     // Rotate to view angle.
     this.unit();
-    this.rotateX( this.viewAngleProperty.value );
+    this.rotateX( this.pitchProperty.value );
 
     super.update();
   }

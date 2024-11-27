@@ -22,12 +22,12 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
 
   private readonly hydrogenAtom: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
-  private readonly viewAngleProperty: TReadOnlyProperty<number>;
+  private readonly pitchProperty: TReadOnlyProperty<number>;
 
   // Reusable vertices.
   private readonly waveVertices: Vector3[];
 
-  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2, viewAngleProperty: TReadOnlyProperty<number> ) {
+  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2, pitchProperty: TReadOnlyProperty<number> ) {
 
     super( {
       stroke: MOTHAColors.electronBaseColorProperty,
@@ -36,7 +36,7 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
 
     this.hydrogenAtom = hydrogenAtom;
     this.modelViewTransform = modelViewTransform;
-    this.viewAngleProperty = viewAngleProperty;
+    this.pitchProperty = pitchProperty;
 
     this.waveVertices = [];
     for ( let i = 0; i < NUMBER_OF_WAVE_VERTICES; i++ ) {
@@ -59,7 +59,7 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
 
     // Rotate to view angle.
     this.unit();
-    this.rotateX( this.viewAngleProperty.value );
+    this.rotateX( this.pitchProperty.value );
 
     super.update();
   }
