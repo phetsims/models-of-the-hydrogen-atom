@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Tandem from '../../../../tandem/js/Tandem.js';
 import BilliardBallModel from '../../common/model/BilliardBallModel.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import ClassicalSolarSystemModel from '../../common/model/ClassicalSolarSystemModel.js';
 import DeBroglieModel from '../../common/model/DeBroglieModel.js';
+import Light from '../../common/model/Light.js';
 import MOTHAModel from '../../common/model/MOTHAModel.js';
 import PlumPuddingModel from '../../common/model/PlumPuddingModel.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import Light from '../../common/model/Light.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class SpectraModel extends MOTHAModel {
 

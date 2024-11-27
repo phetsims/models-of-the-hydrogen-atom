@@ -10,11 +10,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 import chooseWeightedValue, { WeightedValue } from './chooseWeightedValue.js';
 
 /*

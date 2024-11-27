@@ -7,13 +7,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Electron, { ElectronOptions } from './Electron.js';
-import Property from '../../../../axon/js/Property.js';
-import MOTHAUtils from '../MOTHAUtils.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAUtils from '../MOTHAUtils.js';
+import Electron, { ElectronOptions } from './Electron.js';
 
 const ANGULAR_SPEED = Utils.toRadians( 600 ); // initial speed of the electron, in radians/s
 

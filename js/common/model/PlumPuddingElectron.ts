@@ -7,11 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Electron, { ElectronOptions } from './Electron.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import Electron, { ElectronOptions } from './Electron.js';
 
 export default class PlumPuddingElectron extends Electron {
 

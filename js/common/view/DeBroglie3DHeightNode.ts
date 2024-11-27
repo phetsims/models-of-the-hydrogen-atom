@@ -9,6 +9,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -19,12 +20,11 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
+import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import Wireframe3DNode from './Wireframe3DNode.js';
 import ProtonNode from './ProtonNode.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
+import Wireframe3DNode from './Wireframe3DNode.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
 const NUMBER_OF_WAVE_VERTICES = 200;

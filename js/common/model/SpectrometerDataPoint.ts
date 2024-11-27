@@ -7,9 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 // This should match SPECTROMETER_DATA_POINT_STATE_SCHEMA, but with JavaScript types.
 type SpectrometerDataPointStateObject = {

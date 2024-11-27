@@ -6,31 +6,31 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { Node, Path, VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
+import AbsorptionAndEmissionCheckbox from '../../common/view/AbsorptionAndEmissionCheckbox.js';
+import AbsorptionAndEmissionDialog from '../../common/view/AbsorptionAndEmissionDialog.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
-import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
+import { LightControlPanel } from '../../common/view/LightControlPanel.js';
+import { LightNode } from '../../common/view/LightNode.js';
 import ModelPanel from '../../common/view/ModelPanel.js';
+import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import { LightControlPanel } from '../../common/view/LightControlPanel.js';
-import { LightNode } from '../../common/view/LightNode.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import AbsorptionAndEmissionDialog from '../../common/view/AbsorptionAndEmissionDialog.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import AbsorptionAndEmissionCheckbox from '../../common/view/AbsorptionAndEmissionCheckbox.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 
 export default class SpectraScreenView extends ScreenView {
 

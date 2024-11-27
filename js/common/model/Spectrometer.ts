@@ -6,20 +6,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import Photon from './Photon.js';
-import SpectrometerDataPoint from './SpectrometerDataPoint.js';
-import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Snapshot from './Snapshot.js';
+import SpectrometerDataPoint from './SpectrometerDataPoint.js';
 
 type SelfOptions = EmptySelfOptions;
 

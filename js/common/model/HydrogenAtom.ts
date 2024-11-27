@@ -12,15 +12,15 @@ import TEmitter from '../../../../axon/js/TEmitter.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
+import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
-import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
 

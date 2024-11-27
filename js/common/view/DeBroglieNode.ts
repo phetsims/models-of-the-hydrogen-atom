@@ -16,6 +16,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import { Circle, Node } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
+import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -27,7 +28,6 @@ import ElectronStateText from './ElectronStateText.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import OrbitNode from './OrbitNode.js';
 import ProtonNode from './ProtonNode.js';
-import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 
 type SelfOptions = EmptySelfOptions;
 

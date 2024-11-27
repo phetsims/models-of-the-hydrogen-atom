@@ -22,20 +22,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line phet/no-view-imported-from-model
-import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
-import ZoomedInBox from './ZoomedInBox.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import Proton from './Proton.js';
-import Photon from './Photon.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import ClassicalSolarSystemElectron from './ClassicalSolarSystemElectron.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAUtils from '../MOTHAUtils.js';
+import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line phet/no-view-imported-from-model
+import ClassicalSolarSystemElectron from './ClassicalSolarSystemElectron.js';
+import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
+import Photon from './Photon.js';
+import Proton from './Proton.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 const ELECTRON_TO_PROTON_DISTANCE = 150; // initial distance from electron to proton
 const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the electron and proton is reduced per second

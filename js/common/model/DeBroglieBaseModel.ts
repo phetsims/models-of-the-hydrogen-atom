@@ -11,16 +11,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { DeBroglieModelOptions } from './DeBroglieModel.js';
-import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import ZoomedInBox from './ZoomedInBox.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Photon from './Photon.js';
-import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import MOTHAUtils from '../MOTHAUtils.js';
+import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line phet/no-view-imported-from-model
+import BohrModel, { BohrModelOptions } from './BohrModel.js';
+import { DeBroglieModelOptions } from './DeBroglieModel.js';
+import Photon from './Photon.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 

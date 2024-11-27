@@ -12,20 +12,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
-import SchrodingerModel from './SchrodingerModel.js';
-import Light from './Light.js';
-import dotRandom from '../../../../dot/js/dotRandom.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Property from '../../../../axon/js/Property.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHASymbols from '../MOTHASymbols.js';
+import Light from './Light.js';
+import SchrodingerModel from './SchrodingerModel.js';
+import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 
 const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java values was 100 (ms?)
 

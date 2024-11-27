@@ -6,21 +6,21 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import SpectraModel from '../model/SpectraModel.js';
-import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/ZoomedInBoxNode.js';
-import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
-import BilliardBallNode from '../../common/view/BilliardBallNode.js';
-import PhotonNode from '../../common/view/PhotonNode.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import ClassicalSolarSystemNode from '../../common/view/ClassicalSolarSystemNode.js';
-import BohrNode from '../../common/view/BohrNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import SchrodingerNode from '../../common/view/SchrodingerNode.js';
+import BilliardBallNode from '../../common/view/BilliardBallNode.js';
+import BohrNode from '../../common/view/BohrNode.js';
+import ClassicalSolarSystemNode from '../../common/view/ClassicalSolarSystemNode.js';
 import DeBroglieNode from '../../common/view/DeBroglieNode.js';
+import PhotonNode from '../../common/view/PhotonNode.js';
+import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
+import SchrodingerNode from '../../common/view/SchrodingerNode.js';
+import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/ZoomedInBoxNode.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import SpectraModel from '../model/SpectraModel.js';
 
 const VIEW_SIZE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE;
 

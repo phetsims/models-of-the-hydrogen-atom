@@ -26,22 +26,22 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line phet/no-view-imported-from-model
-import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
-import Photon from './Photon.js';
-import ZoomedInBox from './ZoomedInBox.js';
-import MOTHAUtils from '../MOTHAUtils.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Utils from '../../../../dot/js/Utils.js';
-import MOTHASymbols from '../MOTHASymbols.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import PlumPuddingElectron from './PlumPuddingElectron.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import MOTHASymbols from '../MOTHASymbols.js';
+import MOTHAUtils from '../MOTHAUtils.js';
+import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line phet/no-view-imported-from-model
+import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Light from './Light.js';
+import Photon from './Photon.js';
+import PlumPuddingElectron from './PlumPuddingElectron.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons

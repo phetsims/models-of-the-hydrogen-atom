@@ -38,25 +38,25 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line phet/no-view-imported-from-model
-import ZoomedInBox from './ZoomedInBox.js';
-import { DeBroglieModelOptions } from './DeBroglieModel.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
-import Property from '../../../../axon/js/Property.js';
+import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import BohrModel from './BohrModel.js';
-import MetastableHandler from './MetastableHandler.js';
-import Light from './Light.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import PolynomialTerm from './PolynomialTerm.js';
 import DeBroglieBaseModel, { DeBroglieBaseModelOptions } from './DeBroglieBaseModel.js';
+import { DeBroglieModelOptions } from './DeBroglieModel.js';
+import Light from './Light.js';
+import MetastableHandler from './MetastableHandler.js';
+import PolynomialTerm from './PolynomialTerm.js';
+import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 

@@ -6,19 +6,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
+import { Node } from '../../../scenery/js/imports.js';
+import MOTHAColors from '../common/MOTHAColors.js';
+import ElectronNode from '../common/view/ElectronNode.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
+import OrbitNode from '../common/view/OrbitNode.js';
+import ProtonNode from '../common/view/ProtonNode.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
-import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { Node } from '../../../scenery/js/imports.js';
-import ProtonNode from '../common/view/ProtonNode.js';
-import ElectronNode from '../common/view/ElectronNode.js';
-import OrbitNode from '../common/view/OrbitNode.js';
-import MOTHAColors from '../common/MOTHAColors.js';
 
 type SelfOptions = EmptySelfOptions;
 

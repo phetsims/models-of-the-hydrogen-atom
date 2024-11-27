@@ -7,20 +7,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Electron, { ElectronOptions } from './Electron.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Property from '../../../../axon/js/Property.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import Range from '../../../../dot/js/Range.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Range from '../../../../dot/js/Range.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import BohrModel from './BohrModel.js';
+import Electron, { ElectronOptions } from './Electron.js';
 
 type SelfOptions = EmptySelfOptions;
 

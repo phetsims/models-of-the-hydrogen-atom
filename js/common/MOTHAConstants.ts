@@ -6,14 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
-import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import Range from '../../../dot/js/Range.js';
 import Vector2 from '../../../dot/js/Vector2.js';
-import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
 import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNode.js';
-import { PanelOptions } from '../../../sun/js/Panel.js';
+import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
+import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
+import { PanelOptions } from '../../../sun/js/Panel.js';
+import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const GROUND_STATE = 1;
 const MAX_STATE = 6;

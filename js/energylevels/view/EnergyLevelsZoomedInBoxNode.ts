@@ -7,17 +7,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/ZoomedInBoxNode.js';
-import PhotonNode from '../../common/view/PhotonNode.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import BohrNode from '../../common/view/BohrNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import SchrodingerNode from '../../common/view/SchrodingerNode.js';
+import BohrNode from '../../common/view/BohrNode.js';
 import DeBroglieNode from '../../common/view/DeBroglieNode.js';
+import PhotonNode from '../../common/view/PhotonNode.js';
+import SchrodingerNode from '../../common/view/SchrodingerNode.js';
+import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/ZoomedInBoxNode.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 
 const VIEW_SIZE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE;

@@ -15,19 +15,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line phet/no-view-imported-from-model
-import ZoomedInBox from './ZoomedInBox.js';
-import Photon from './Photon.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DeBroglieBaseModel from './DeBroglieBaseModel.js';
+import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
+import Photon from './Photon.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 

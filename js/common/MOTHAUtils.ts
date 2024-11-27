@@ -6,11 +6,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Bounds3 from '../../../dot/js/Bounds3.js';
 import dotRandom from '../../../dot/js/dotRandom.js';
 import Vector2 from '../../../dot/js/Vector2.js';
-import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
-import Bounds3 from '../../../dot/js/Bounds3.js';
 import Vector3 from '../../../dot/js/Vector3.js';
+import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const MOTHAUtils = {
 

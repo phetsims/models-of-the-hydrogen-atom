@@ -6,19 +6,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
+import { Shape } from '../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
+import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
+import { Node, Path, TColor } from '../../../scenery/js/imports.js';
+import BohrModel from '../common/model/BohrModel.js';
+import MOTHAColors from '../common/MOTHAColors.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
-import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { Node, Path, TColor } from '../../../scenery/js/imports.js';
-import MOTHAColors from '../common/MOTHAColors.js';
-import { Shape } from '../../../kite/js/imports.js';
-import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
-import BohrModel from '../common/model/BohrModel.js';
 
 type SelfOptions = EmptySelfOptions;
 

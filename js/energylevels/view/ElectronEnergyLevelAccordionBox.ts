@@ -13,11 +13,11 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
+import MOTHAConstants from '../../common/MOTHAConstants.js';
+import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
+import UnderConstructionText from '../../common/view/UnderConstructionText.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
-import MOTHAConstants from '../../common/MOTHAConstants.js';
-import UnderConstructionText from '../../common/view/UnderConstructionText.js';
 
 //TODO Height needs to stretch to same height as EnergyLevelsZoomedInBoxNode.
 const DIAGRAM_SIZE = new Dimension2( 220, 365 );

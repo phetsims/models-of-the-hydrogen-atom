@@ -7,9 +7,9 @@
  */
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
+import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
-import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 
 const MOTHAColors = {
 
