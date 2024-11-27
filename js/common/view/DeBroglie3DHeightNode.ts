@@ -207,7 +207,7 @@ export default class DeBroglie3DHeightNode extends Node {
 }
 
 //TODO class Orbits3DNode extends Wireframe3DNode
-//TODO numberOfVertices should be a function of radius, so that all lines have the same dash length.
+//TODO numberOfVertices should be a function of orbitRadius, so that all lines have the same dash length.
 /**
  * Creates a Node for the electron orbits.
  */
@@ -216,8 +216,8 @@ function createOrbitsNode( modelViewTransform: ModelViewTransform2 ): Wireframe3
   const vertices: Vector3[] = [];
 
   for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
-    const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
-    vertices.push( ...getOrbitVertices( radius, NUMBER_OF_ORBIT_VERTICES ) );
+    const orbitRadius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
+    vertices.push( ...getOrbitVertices( orbitRadius, NUMBER_OF_ORBIT_VERTICES ) );
   }
 
   // Create the wireframe model
