@@ -10,7 +10,7 @@
 import Vector3 from '../../../../dot/js/Vector3.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions, Path, TColor } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Path, PathOptions, TPaint } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 
@@ -21,8 +21,7 @@ type WireframeLine = {
 };
 
 type SelfOptions = {
-  stroke: TColor;
-  lineWidth: number;
+  pathOptions?: PathOptions;
 };
 
 type WireframeNodeOptions = SelfOptions;
@@ -47,9 +46,15 @@ export default class Wireframe3DNode extends Node {
 
   private readonly path: Path;
 
-  public constructor( providedOptions: WireframeNodeOptions ) {
+  public constructor( providedOptions?: WireframeNodeOptions ) {
 
     const options = optionize<WireframeNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // WireframeNodeOptions
+      pathOptions: {
+        stroke: 'black',
+        lineWidth: 1
+      },
 
       // NodeOptions
       isDisposable: false
@@ -63,11 +68,12 @@ export default class Wireframe3DNode extends Node {
     this.lines = [];
     this.isDirty = false;
 
-    this.path = new Path( null, {
-      stroke: options.stroke,
-      lineWidth: options.lineWidth
-    } );
+    this.path = new Path( null, options.pathOptions );
     this.addChild( this.path );
+  }
+
+  public setStroke( stroke: TPaint ): void {
+    this.path.stroke = stroke;
   }
 
   /**

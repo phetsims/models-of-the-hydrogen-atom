@@ -73,7 +73,7 @@ export default class DeBroglie3DHeightNode extends Node {
     } );
 
     // 3D orbits
-    this.orbitsNode = new DeBroglie3DOrbitsNode( modelViewTransform, this.pitchProperty );
+    this.orbitsNode = new DeBroglie3DOrbitsNode( modelViewTransform, this.pitchProperty, FINAL_PITCH );
     this.orbitsNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position ); //TODO
     this.addChild( this.orbitsNode );
 

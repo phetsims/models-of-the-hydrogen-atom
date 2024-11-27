@@ -14,18 +14,37 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import BohrModel from '../model/BohrModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import { LinearGradient } from '../../../../scenery/js/imports.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
 
   private readonly pitchProperty: TReadOnlyProperty<number>;
 
-  public constructor( modelViewTransform: ModelViewTransform2, pitchProperty: TReadOnlyProperty<number> ) {
-    super( {
-      stroke: MOTHAColors.orbitStrokeProperty,
-      lineWidth: 1
-    } );
+  public constructor( modelViewTransform: ModelViewTransform2, pitchProperty: TReadOnlyProperty<number>, finalPitch: number ) {
+
+    super();
 
     this.pitchProperty = pitchProperty;
+
+    // When rotation is completed, use a gradient to make the orbits appear to fade as they get further from the viewer.
+    // We do not bother to do this while the orbits are rotating, because the effect is too subtle, and the implementation
+    // is too complicated.
+    Multilink.multilink(
+      [ pitchProperty, MOTHAColors.orbitStrokeProperty, MOTHAColors.zoomedInBoxFillProperty ],
+      ( pitch, orbitStroke, zoomedInBoxFill ) => {
+        if ( pitch === finalPitch ) {
+          const yForeground = this.height / 2;
+          const yBackground = -this.height; // ...so that we don't fade totally to the background color.
+          const gradient = new LinearGradient( 0, yForeground, 0, yBackground )
+            .addColorStop( 0, orbitStroke )
+            .addColorStop( 1, zoomedInBoxFill );
+          this.setStroke( gradient );
+        }
+        else {
+          this.setStroke( orbitStroke );
+        }
+      } );
 
     const vertices: Vector3[] = [];
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
