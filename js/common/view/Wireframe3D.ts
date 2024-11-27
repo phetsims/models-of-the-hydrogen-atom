@@ -100,6 +100,8 @@ export default class Wireframe3D {
    * If you change the matrix, vertices, or lines, then you are responsible for calling update.
    */
   public update(): void {
+
+    //TODO Reuse and mutate this.transformedVertices for performance.
     this.transformedVertices = this.matrix.transform( this.vertices );
     assert && assert( this.transformedVertices.length === this.vertices.length );
     this.transformedBounds = computeBounds( this.transformedVertices );
