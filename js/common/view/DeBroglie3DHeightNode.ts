@@ -167,29 +167,12 @@ export default class DeBroglie3DHeightNode extends Node {
     wireframeModel.addLine( this.waveVertices.length - 1, 0 ); // close the path
 
     // Transform the model
-    //TODO This bit of code is duplicated in updateWaveNode and updateOrbitsNode.
-    const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
-    const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
-    const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
-    wireframeModel.unit();
-    wireframeModel.translate( xt, yt, zt );
-    wireframeModel.multiply( this.viewMatrix );
-    wireframeModel.update();
-
-    this.waveNode.update();
+    transformWireframe3DNode( this.waveNode, this.viewMatrix );
   }
 
   //TODO Move to Orbits3DNode.
   private updateOrbitsNode(): void {
-    const wireframeModel = this.orbitsNode.wireframeModel;
-    const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
-    const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
-    const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
-    wireframeModel.unit();
-    wireframeModel.translate( xt, yt, zt );
-    wireframeModel.multiply( this.viewMatrix );
-    wireframeModel.update();
-    this.orbitsNode.update();
+    transformWireframe3DNode( this.orbitsNode, this.viewMatrix );
   }
 
   /*
@@ -296,6 +279,18 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel,
     vertices[ i ].setXYZ( x, y, z );
   }
   return vertices;
+}
+
+function transformWireframe3DNode( node: Wireframe3DNode, viewMatrix: Wireframe3DMatrix ): void {
+  const wireframeModel = node.wireframeModel;
+  const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
+  const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
+  const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
+  wireframeModel.unit();
+  wireframeModel.translate( xt, yt, zt );
+  wireframeModel.multiply( viewMatrix );
+  wireframeModel.update();
+  node.update();
 }
 
 modelsOfTheHydrogenAtom.register( 'DeBroglie3DHeightNode', DeBroglie3DHeightNode );
