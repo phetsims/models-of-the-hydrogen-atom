@@ -37,8 +37,8 @@ const NUMBER_OF_WAVE_VERTICES = 200;
 // If you change this value, you must also change DeBroglieModel.ORBIT_3D_Y_SCALE !! TODO why?
 const FINAL_VIEW_ANGLE = Utils.toRadians( 70 );
 
-// Change in angle per second for rotation animation.
-const VIEW_ANGLE_DELTA = Utils.toRadians( 100 );
+// Angular speed of the rotation animation, in radians/s.
+const ANGULAR_SPEED = Utils.toRadians( 100 );
 
 const ORBIT_FRONT_COLOR_PROPERTY = MOTHAColors.orbitStrokeProperty;
 const ORBIT_BACK_COLOR_PROPERTY = new DerivedProperty( [ ORBIT_FRONT_COLOR_PROPERTY ],
@@ -218,7 +218,7 @@ export default class DeBroglie3DHeightNode extends Node {
    */
   private stepViewMatrix( dt: number ): void {
     if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
-      const deltaAngle = dt * VIEW_ANGLE_DELTA;
+      const deltaAngle = dt * ANGULAR_SPEED;
       this.currentViewAngleProperty.value = Math.min( FINAL_VIEW_ANGLE, this.currentViewAngleProperty.value + deltaAngle );
       this.viewMatrix.unit();
       this.viewMatrix.rotateX( this.currentViewAngleProperty.value );
