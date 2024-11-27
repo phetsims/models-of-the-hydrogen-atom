@@ -37,7 +37,8 @@ export default class Wireframe3DNode extends Node {
     this.wireframeModel = wireframeModel;
 
     this.path = new Path( null, {
-      stroke: this.wireframeModel.frontColorProperty //TODO use color palette based on z coordinate
+      stroke: this.wireframeModel.frontColorProperty, //TODO use color palette based on z coordinate
+      lineWidth: this.wireframeModel.lineWidth
     } );
     this.addChild( this.path );
     this.update();//TODO should be called by step

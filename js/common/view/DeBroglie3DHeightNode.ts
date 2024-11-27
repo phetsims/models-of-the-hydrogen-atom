@@ -239,7 +239,7 @@ function createOrbitNode( radius: number, numberOfVerticies: number ): Wireframe
   const wireframeModel = new Wireframe3D( {
     frontColorProperty: ORBIT_FRONT_COLOR_PROPERTY,
     backColorProperty: ORBIT_BACK_COLOR_PROPERTY,
-    lineWidth: 2
+    lineWidth: 1
   } );
   wireframeModel.setVertices( vertices );
 
