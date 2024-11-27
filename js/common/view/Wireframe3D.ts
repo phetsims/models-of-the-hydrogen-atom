@@ -1,6 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 //TODO Merge this class into Wireframe3DNode.
+//TODO Instead of colorPalette, change alpha as distance from camera increases.
 /**
  * Wireframe3D draws a 3D wireframe model. This is a partial port of Wireframe3D.java from the Java version.
  *
