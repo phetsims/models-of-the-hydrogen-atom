@@ -69,6 +69,9 @@ export default class Wireframe3D {
     this.vertices = vertices;
   }
 
+  /**
+   * Gets a transformed vertex, specified by its index in the array that was provided to setVertices.
+   */
   public getTransformedVertex( index: number ): Vector3 {
     assert && assert( Number.isInteger( index ) );
     assert && assert( index >= 0 && index < this.transformedVertices.length );
