@@ -97,14 +97,6 @@ export default class Wireframe3DNode extends Node {
   }
 
   /**
-   * Translates a distance in 3D space. You are responsible for calling this.update.
-   */
-  public translateDistance( dx: number, dy: number, dz: number ): void {
-    this.wireframe3DMatrix.translate( dx, dy, dz );
-    this.isDirty = true;
-  }
-
-  /**
    * Rotates around the x-axis. You are responsible for calling this.update.
    * @param theta - in radians.
    */

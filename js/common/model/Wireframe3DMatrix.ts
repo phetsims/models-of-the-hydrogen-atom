@@ -52,12 +52,6 @@ export default class Wireframe3DMatrix {
     this.zo = 0;
   }
 
-  public translate( dx: number, dy: number, dz: number ): void {
-    this.xo += dx;
-    this.yo += dy;
-    this.zo += dz;
-  }
-
   /**
    * Rotate about the x-axis.
    * @param theta - in radians
