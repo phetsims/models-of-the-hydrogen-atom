@@ -26,6 +26,7 @@ type SelfOptions = {
 
 type WireframeNodeOptions = SelfOptions;
 
+//TODO extends Path?
 export default class Wireframe3DNode extends Node {
 
   // Matrix used to transform vertices. We cannot name this matrix because it would shadow Node's matrix.
