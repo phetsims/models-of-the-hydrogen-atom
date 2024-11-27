@@ -1,5 +1,6 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
+//TODO Use Canvas for better performance.
 /**
  * Wireframe3DNode displays a 3D wireframe model. This was Wireframe3DNode.java in the Java version.
  *
