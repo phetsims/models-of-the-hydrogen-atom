@@ -67,7 +67,7 @@ export default class DeBroglie3DHeightNode extends Node {
 
   private readonly waveVertices: Vector3[]; // reusable vertices for wave
 
-  private readonly orbitNodes: Wireframe3DNode[];
+  private readonly orbitsNode: Wireframe3DNode;
   private readonly waveNode: Wireframe3DNode; //TODO does this have PhET-iO state?
 
   public constructor( hydrogenAtom: DeBroglieModel,
@@ -107,36 +107,18 @@ export default class DeBroglie3DHeightNode extends Node {
       this.waveVertices.push( new Vector3( 0, 0, 0 ) );
     }
 
-    // 3D orbits, with a shared parent Node
-    //TODO Draw all orbits using one Wireframe3DNode.
-    this.orbitNodes = [];
-    for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
-      const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
-      const orbitNode = createOrbitNode( radius, NUMBER_OF_ORBIT_VERTICES );
-      this.orbitNodes.push( orbitNode );
-    }
-    this.updateOrbitNodes();
-    const orbitsNode = new Node( {
-      children: this.orbitNodes,
-      translation: modelViewTransform.modelToViewPosition( hydrogenAtom.position ),
-      tandem: options.tandem.createTandem( 'orbitsNode' )
-    } );
-    this.addChild( orbitsNode );
-    orbitsNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position ); //TODO
+    // 3D orbits
+    this.orbitsNode = createOrbitsNode( modelViewTransform );
+    this.addChild( this.orbitsNode );
+    this.orbitsNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position ); //TODO
 
+    // proton
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
     this.addChild( protonNode );
 
-    const waveModel = new Wireframe3D( {
-      frontColorProperty: WAVE_FRONT_COLOR_PROPERTY,
-      backColorProperty: WAVE_BACK_COLOR_PROPERTY,
-      lineWidth: 2
-    } );
-
-    this.waveNode = new Wireframe3DNode( waveModel, {
-      translation: modelViewTransform.modelToViewPosition( hydrogenAtom.position ),
-      tandem: options.tandem.createTandem( 'waveNode' )
-    } );
+    // wave
+    this.waveNode = createWaveNode();
+    this.waveNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
     this.addChild( this.waveNode );
 
     //TODO Under Construction
@@ -151,7 +133,7 @@ export default class DeBroglie3DHeightNode extends Node {
       }
     } );
 
-    this.updateOrbitNodes();
+    this.updateOrbitsNode();
     this.updateWaveNode();
   }
 
@@ -162,7 +144,7 @@ export default class DeBroglie3DHeightNode extends Node {
     if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {
       if ( this.currentViewAngleProperty.value !== FINAL_VIEW_ANGLE ) {
         this.stepViewMatrix( dt );
-        this.updateOrbitNodes();
+        this.updateOrbitsNode();
       }
       this.updateWaveNode();
     }
@@ -187,7 +169,7 @@ export default class DeBroglie3DHeightNode extends Node {
     wireframeModel.addLine( this.waveVertices.length - 1, 0 ); // close the path
 
     // Transform the model
-    //TODO This bit of code is duplicated in 3 places.
+    //TODO This bit of code is duplicated in updateWaveNode and updateOrbitsNode.
     const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
     const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
     const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
@@ -199,19 +181,16 @@ export default class DeBroglie3DHeightNode extends Node {
     this.waveNode.update();
   }
 
-  //TODO This is a departure from the Java version. Instead of creating new orbits as the atom rotates, rotate each orbit.
-  private updateOrbitNodes(): void {
-    this.orbitNodes.forEach( orbitNode => {
-      const wireframeModel = orbitNode.wireframeModel;
-      const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
-      const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
-      const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
-      wireframeModel.unit();
-      wireframeModel.translate( xt, yt, zt );
-      wireframeModel.multiply( this.viewMatrix );
-      wireframeModel.update();
-      orbitNode.update();
-    } );
+  private updateOrbitsNode(): void {
+    const wireframeModel = this.orbitsNode.wireframeModel;
+    const xt = -( wireframeModel.minX + wireframeModel.maxX ) / 2;
+    const yt = -( wireframeModel.minY + wireframeModel.maxY ) / 2;
+    const zt = -( wireframeModel.minZ + wireframeModel.maxZ ) / 2;
+    wireframeModel.unit();
+    wireframeModel.translate( xt, yt, zt );
+    wireframeModel.multiply( this.viewMatrix );
+    wireframeModel.update();
+    this.orbitsNode.update();
   }
 
   /*
@@ -227,15 +206,19 @@ export default class DeBroglie3DHeightNode extends Node {
   }
 }
 
-//TODO convert this to: class Orbit3DNode extends Wireframe3DNode
-//TODO numberOfVerticies should be a function of radius, so that all lines have the same dash length.
+//TODO convert this to: class Orbits3DNode extends Wireframe3DNode
+//TODO numberOfVertices should be a function of radius, so that all lines have the same dash length.
 /**
- * Creates a Node for an electron orbit.
+ * Creates a Node for the electron orbits.
  */
-function createOrbitNode( radius: number, numberOfVerticies: number ): Wireframe3DNode {
+function createOrbitsNode( modelViewTransform: ModelViewTransform2 ): Wireframe3DNode {
 
-  // Get the vertices that approximate the orbit.
-  const vertices = getOrbitVertices( radius, numberOfVerticies );
+  const vertices: Vector3[] = [];
+
+  for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
+    const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
+    vertices.push( ...getOrbitVertices( radius, NUMBER_OF_ORBIT_VERTICES ) );
+  }
 
   // Create the wireframe model
   const wireframeModel = new Wireframe3D( {
@@ -251,6 +234,18 @@ function createOrbitNode( radius: number, numberOfVerticies: number ): Wireframe
   }
 
   return new Wireframe3DNode( wireframeModel );
+}
+
+//TODO factor out class WaveNode extends Wireframe3DNode.
+function createWaveNode(): Wireframe3DNode {
+
+  const waveModel = new Wireframe3D( {
+    frontColorProperty: WAVE_FRONT_COLOR_PROPERTY,
+    backColorProperty: WAVE_BACK_COLOR_PROPERTY,
+    lineWidth: 2
+  } );
+
+  return new Wireframe3DNode( waveModel );
 }
 
 /**
