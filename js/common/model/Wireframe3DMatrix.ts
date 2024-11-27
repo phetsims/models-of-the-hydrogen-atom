@@ -97,9 +97,6 @@ export default class Wireframe3DMatrix {
    */
   public rotateX( theta: number ): void {
 
-    //TODO Java version has this next line, which misbehaves.
-    //theta *= ( Math.PI / 180 );
-
     const cosTheta = Math.cos( theta );
     const sinTheta = Math.sin( theta );
 
