@@ -129,7 +129,6 @@ export default class SpectraScreenView extends ScreenView {
     // Reset All button
     const resetAllButton = new ResetAllButton( {
       listener: () => {
-        this.interruptSubtreeInput();
         model.reset();
         absorptionAndEmissionDialogVisibleProperty.reset();
         absorptionAndEmissionDialog.reset();

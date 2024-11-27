@@ -137,7 +137,6 @@ export default class EnergyLevelsScreenView extends ScreenView {
     // Reset All button
     const resetAllButton = new ResetAllButton( {
       listener: () => {
-        this.interruptSubtreeInput();
         model.reset();
         electronEnergyLevelAccordionBox.reset();
       },
