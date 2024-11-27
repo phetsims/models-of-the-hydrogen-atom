@@ -58,39 +58,6 @@ export default class Wireframe3DMatrix {
     this.zo += dz;
   }
 
-  public multiply( matrix: Wireframe3DMatrix ): void {
-
-    const xx = ( this.xx * matrix.xx ) + ( this.yx * matrix.xy ) + ( this.zx * matrix.xz );
-    const xy = ( this.xy * matrix.xx ) + ( this.yy * matrix.xy ) + ( this.zy * matrix.xz );
-    const xz = ( this.xz * matrix.xx ) + ( this.yz * matrix.xy ) + ( this.zz * matrix.xz );
-    const xo = ( this.xo * matrix.xx ) + ( this.yo * matrix.xy ) + ( this.zo * matrix.xz ) + matrix.xo;
-
-    const yx = ( this.xx * matrix.yx ) + ( this.yx * matrix.yy ) + ( this.zx * matrix.yz );
-    const yy = ( this.xy * matrix.yx ) + ( this.yy * matrix.yy ) + ( this.zy * matrix.yz );
-    const yz = ( this.xz * matrix.yx ) + ( this.yz * matrix.yy ) + ( this.zz * matrix.yz );
-    const yo = ( this.xo * matrix.yx ) + ( this.yo * matrix.yy ) + ( this.zo * matrix.yz ) + matrix.yo;
-
-    const zx = ( this.xx * matrix.zx ) + ( this.yx * matrix.zy ) + ( this.zx * matrix.zz );
-    const zy = ( this.xy * matrix.zx ) + ( this.yy * matrix.zy ) + ( this.zy * matrix.zz );
-    const zz = ( this.xz * matrix.zx ) + ( this.yz * matrix.zy ) + ( this.zz * matrix.zz );
-    const zo = ( this.xo * matrix.zx ) + ( this.yo * matrix.zy ) + ( this.zo * matrix.zz ) + matrix.zo;
-
-    this.xx = xx;
-    this.xy = xy;
-    this.xz = xz;
-    this.xo = xo;
-
-    this.yx = yx;
-    this.yy = yy;
-    this.yz = yz;
-    this.yo = yo;
-
-    this.zx = zx;
-    this.zy = zy;
-    this.zz = zz;
-    this.zo = zo;
-  }
-
   /**
    * Rotate about the x-axis.
    * @param theta - in radians

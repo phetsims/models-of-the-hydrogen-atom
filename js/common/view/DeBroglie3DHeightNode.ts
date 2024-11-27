@@ -37,16 +37,6 @@ const FINAL_VIEW_ANGLE = Utils.toRadians( 70 );
 // Angular speed of the rotation animation, in radians/s.
 const ANGULAR_SPEED = Utils.toRadians( 100 );
 
-const ORBIT_FRONT_COLOR_PROPERTY = MOTHAColors.orbitStrokeProperty;
-const ORBIT_BACK_COLOR_PROPERTY = new DerivedProperty( [ ORBIT_FRONT_COLOR_PROPERTY ],
-  orbitFrontColor => orbitFrontColor.darkerColor().darkerColor().darkerColor()
-);
-
-const WAVE_FRONT_COLOR_PROPERTY = MOTHAColors.electronBaseColorProperty;
-const WAVE_BACK_COLOR_PROPERTY = new DerivedProperty( [ WAVE_FRONT_COLOR_PROPERTY ],
-  waveFrontColor => waveFrontColor.darkerColor().darkerColor().darkerColor()
-);
-
 type SelfOptions = EmptySelfOptions;
 
 type DeBroglie3DNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
@@ -197,11 +187,7 @@ function createOrbitsNode( modelViewTransform: ModelViewTransform2 ): Wireframe3
   assert && assert( vertices.length % 2 === 0, 'Even number of vertices is required.' );
 
   // Create the wireframe model.
-  const wireframeModel = new Wireframe3D( {
-    frontColorProperty: ORBIT_FRONT_COLOR_PROPERTY,
-    backColorProperty: ORBIT_BACK_COLOR_PROPERTY,
-    lineWidth: 1
-  } );
+  const wireframeModel = new Wireframe3D();
   wireframeModel.setVertices( vertices );
 
   // Connect every-other pair of vertices to simulate a dashed line.
@@ -209,19 +195,19 @@ function createOrbitsNode( modelViewTransform: ModelViewTransform2 ): Wireframe3
     wireframeModel.addLine( i, i + 1 );
   }
 
-  return new Wireframe3DNode( wireframeModel );
+  return new Wireframe3DNode( wireframeModel, {
+    stroke: MOTHAColors.orbitStrokeProperty,
+    lineWidth: 1
+  } );
 }
 
 //TODO class Wave3DNode extends Wireframe3DNode
 function createWaveNode(): Wireframe3DNode {
-
-  const waveModel = new Wireframe3D( {
-    frontColorProperty: WAVE_FRONT_COLOR_PROPERTY,
-    backColorProperty: WAVE_BACK_COLOR_PROPERTY,
+  const waveModel = new Wireframe3D();
+  return new Wireframe3DNode( waveModel, {
+    stroke: MOTHAColors.electronBaseColorProperty,
     lineWidth: 2
   } );
-
-  return new Wireframe3DNode( waveModel );
 }
 
 //TODO Move to Orbits3DNode.
