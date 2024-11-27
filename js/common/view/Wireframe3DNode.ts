@@ -69,7 +69,6 @@ export default class Wireframe3DNode extends Node {
       lineWidth: options.lineWidth
     } );
     this.addChild( this.path );
-    this.update();
   }
 
   /**
