@@ -89,17 +89,16 @@ export default class Wireframe3DMatrix {
   }
 
   /**
-   * Transforms a set of vertices. The returned vertices are in the same order as the provided vertices.
+   * Transforms a set of vertices. The transformed vertices are in the same order as the provided vertices.
    */
-  public transform( vertices: Vector3[] ): Vector3[] {
-    const transformedVertices: Vector3[] = [];
-    vertices.forEach( vertex => {
+  public transform( vertices: Vector3[], transformedVertices: Vector3[] ): void {
+    assert && assert( vertices.length === transformedVertices.length );
+    vertices.forEach( ( vertex, index ) => {
       const x = ( vertex.x * this.xx ) + ( vertex.y * this.xy ) + ( vertex.z * this.xz ) + this.xo;
       const y = ( vertex.x * this.yx ) + ( vertex.y * this.yy ) + ( vertex.z * this.yz ) + this.yo;
       const z = ( vertex.x * this.zx ) + ( vertex.y * this.zy ) + ( vertex.z * this.zz ) + this.zo;
-      transformedVertices.push( new Vector3( x, y, z ) );
+      transformedVertices[ index ].setXYZ( x, y, z );
     } );
-    return transformedVertices;
   }
 }
 
