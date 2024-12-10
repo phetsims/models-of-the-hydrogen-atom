@@ -9,16 +9,16 @@
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
-import { Node } from '../../../scenery/js/imports.js';
+import { Circle, Node } from '../../../scenery/js/imports.js';
 import MOTHAColors from '../common/MOTHAColors.js';
 import ElectronNode from '../common/view/ElectronNode.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
-import OrbitNode from '../common/view/OrbitNode.js';
 import ProtonNode from '../common/view/ProtonNode.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
+import MOTHAConstants from '../common/MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -52,9 +52,15 @@ function createScreenIcon(): ScreenIcon {
 
   const protonNode = ProtonNode.createIcon();
   const electronNode = ElectronNode.createIcon();
+
+  const orbitOptions = {
+    stroke: MOTHAColors.orbitStrokeProperty,
+    lineWidth: 1,
+    lineDash: [ MOTHAConstants.ORBIT_LINE_LENGTH, MOTHAConstants.ORBIT_LINE_LENGTH ]
+  };
   const orbit1Radius = 1.5 * protonNode.height;
-  const orbit1Node = new OrbitNode( orbit1Radius );
-  const orbit2Node = new OrbitNode( 2 * orbit1Radius );
+  const orbit1Node = new Circle( orbit1Radius, orbitOptions );
+  const orbit2Node = new Circle( 2 * orbit1Radius, orbitOptions );
 
   orbit1Node.center = protonNode.center;
   orbit2Node.center = protonNode.center;

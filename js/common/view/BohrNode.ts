@@ -10,7 +10,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Circle, Node } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
@@ -18,9 +18,9 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import ElectronNode from './ElectronNode.js';
 import ElectronStateText from './ElectronStateText.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-import OrbitNode from './OrbitNode.js';
 import OrbitsNode from './OrbitsNode.js';
 import ProtonNode from './ProtonNode.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -66,7 +66,11 @@ export default class BohrNode extends HydrogenAtomNode {
     const protonIcon = ProtonNode.createIcon();
     protonIcon.setScaleMagnitude( 0.5 );
     const orbitRadius = 1.5 * protonIcon.height;
-    const orbitNode = new OrbitNode( orbitRadius );
+    const orbitNode = new Circle( orbitRadius, {
+      stroke: MOTHAColors.orbitStrokeProperty,
+      lineWidth: 1,
+      lineDash: [ MOTHAConstants.ORBIT_LINE_LENGTH, MOTHAConstants.ORBIT_LINE_LENGTH ]
+    } );
     const electronIcon = ElectronNode.createIcon();
     electronIcon.setScaleMagnitude( 0.5 );
     const electronAngle = 1.25 * Math.PI;

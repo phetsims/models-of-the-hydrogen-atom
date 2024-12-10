@@ -27,7 +27,6 @@ import DeBroglieRadialDistanceNode from './DeBroglieRadialDistanceNode.js';
 import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
 import ElectronStateText from './ElectronStateText.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-import OrbitNode from './OrbitNode.js';
 import ProtonNode from './ProtonNode.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -111,7 +110,11 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     const protonIcon = ProtonNode.createIcon();
     protonIcon.setScaleMagnitude( 0.5 );
     const orbitRadius = 1.5 * protonIcon.height;
-    const orbitNode = new OrbitNode( orbitRadius );
+    const orbitNode = new Circle( orbitRadius, {
+      stroke: MOTHAColors.orbitStrokeProperty,
+      lineWidth: 1,
+      lineDash: [ MOTHAConstants.ORBIT_LINE_LENGTH, MOTHAConstants.ORBIT_LINE_LENGTH ]
+    } );
     const electronIcon = new Circle( {
       radius: orbitRadius,
       stroke: MOTHAColors.electronBaseColorProperty,

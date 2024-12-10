@@ -10,36 +10,39 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import { Path, PathOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import OrbitNode from './OrbitNode.js';
+import MOTHAColors from '../MOTHAColors.js';
+import { Shape } from '../../../../kite/js/imports.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type OrbitsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type OrbitsNodeOptions = SelfOptions & PickRequired<PathOptions, 'tandem'>;
 
-export default class OrbitsNode extends Node {
+export default class OrbitsNode extends Path {
 
   public constructor( hydrogenAtomPosition: Vector2, modelViewTransform: ModelViewTransform2, providedOptions: OrbitsNodeOptions ) {
 
-    const options = optionize<OrbitsNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<OrbitsNodeOptions, SelfOptions, PathOptions>()( {
 
       // NodeOptions
       isDisposable: false,
+      stroke: MOTHAColors.orbitStrokeProperty,
+      lineWidth: 1,
+      lineDash: [ MOTHAConstants.ORBIT_LINE_LENGTH, MOTHAConstants.ORBIT_LINE_LENGTH ],
       center: modelViewTransform.modelToViewPosition( hydrogenAtomPosition )
     }, providedOptions );
 
-    const orbitNodes = [];
+    const shape = new Shape();
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
-      const orbitNode = new OrbitNode( radius );
-      orbitNodes.push( orbitNode );
+      shape.circle( Vector2.ZERO, radius );
+      shape.newSubpath();
     }
-    options.children = orbitNodes;
 
-    super( options );
+    super( shape, options );
   }
 }
 
