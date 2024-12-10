@@ -85,6 +85,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
         tandem: options.tandem.createTandem( 'exciteAtomButton' )
       } );
 
+    //TODO stateText visibly shifts around as the state changes. Can we get rid of xzAxesNode, and move quantumNumbersInfoButton and stateText to left corner?
     const stateText = new SchrodingerStateText( hydrogenAtom.nlmProperty, {
       tandem: options.tandem.createTandem( 'stateText' )
     } );
