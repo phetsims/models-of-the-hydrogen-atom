@@ -10,14 +10,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class PolynomialTerm {
 
   public readonly power: number;
   public readonly coefficient: number;
-  public static readonly ZERO = new PolynomialTerm( 0, 0 );
 
   public constructor( power: number, coefficient: number ) {
     assert && assert( Number.isInteger( power ) );
@@ -27,8 +25,8 @@ export default class PolynomialTerm {
     this.coefficient = coefficient;
   }
 
-  public dispose(): void {
-    Disposable.assertNotDisposable();
+  public equals( term: PolynomialTerm ): boolean {
+    return ( this.power === term.power ) && ( this.coefficient === term.coefficient );
   }
 
   public evaluate( x: number ): number {
@@ -38,21 +36,20 @@ export default class PolynomialTerm {
   public derive( iterations: number ): PolynomialTerm {
     assert && assert( Number.isInteger( iterations ) && iterations >= 0 );
 
-    // eslint-disable-next-line @typescript-eslint/no-this-alias,consistent-this
-    let term: PolynomialTerm = this;
+    let coefficient = this.coefficient;
+    let power = this.power;
     for ( let i = 0; i < iterations - 1; i++ ) {
-      term = term.deriveThis();
+      if ( power === 0 ) {
+        power = 0;
+        coefficient = 0;
+        break;
+      }
+      else {
+        coefficient = coefficient * power;
+        power = power - 1;
+      }
     }
-    return term;
-  }
-
-  private deriveThis(): PolynomialTerm {
-    if ( this.power === 0 ) {
-      return PolynomialTerm.ZERO;
-    }
-    else {
-      return new PolynomialTerm( this.power - 1, this.coefficient * this.power );
-    }
+    return new PolynomialTerm( power, coefficient );
   }
 }
 
