@@ -32,8 +32,7 @@ simLauncher.launch( () => {
     } ),
 
     credits: {
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/23 update credits
-      leadDesign: 'Amy Hanson, Sam McKagan',
+      leadDesign: 'Amy Hanson, Sam McKagan, Diana L\u00f3pez Tavares',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
             'Noah Podolefsky, Carl Wieman',
