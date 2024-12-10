@@ -36,9 +36,10 @@ export default class PolynomialTerm {
   }
 
   public derive( iterations: number ): PolynomialTerm {
-    assert && assert( Number.isInteger( iterations ) );
+    assert && assert( Number.isInteger( iterations ) && iterations >= 0 );
 
-    let term = this.deriveThis();
+    // eslint-disable-next-line @typescript-eslint/no-this-alias,consistent-this
+    let term: PolynomialTerm = this;
     for ( let i = 0; i < iterations - 1; i++ ) {
       term = term.deriveThis();
     }
