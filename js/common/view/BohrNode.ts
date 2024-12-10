@@ -63,14 +63,20 @@ export default class BohrNode extends HydrogenAtomNode {
   }
 
   public static createIcon(): Node {
+
+    // Proton
     const protonIcon = ProtonNode.createIcon();
     protonIcon.setScaleMagnitude( 0.5 );
+
+    // Electron orbit
     const orbitRadius = 1.5 * protonIcon.height;
     const orbitNode = new Circle( orbitRadius, {
       stroke: MOTHAColors.orbitStrokeProperty,
       lineWidth: 1,
       lineDash: [ MOTHAConstants.ORBIT_LINE_LENGTH, MOTHAConstants.ORBIT_LINE_LENGTH ]
     } );
+
+    // Electron particle
     const electronIcon = ElectronNode.createIcon();
     electronIcon.setScaleMagnitude( 0.5 );
     const electronAngle = 1.25 * Math.PI;
