@@ -2,6 +2,7 @@
 
 //TODO Should we have 1 orbitsVisibleProperty used by all 3 representations? Should orbits even be instrumented?
 //TODO Should we have 1 electronVisibleProperty used by all 3 representations? Should electron representation even be instrumented?
+//TODO Should deBroglieRepresentationComboBox and electronStateText be in front of photons?
 
 /**
  * DeBroglieNode displays the de Broglie model of the hydrogen atom.
@@ -76,13 +77,11 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       // No need to PhET-iO instrument this Node.
     } );
 
-    //TODO Should be in front of photons.
     const deBroglieRepresentationComboBox = new DeBroglieRepresentationComboBox( hydrogenAtom.deBroglieRepresentationProperty, listboxParent, {
       leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
       tandem: options.tandem.createTandem( 'deBroglieRepresentationComboBox' )
     } );
 
-    //TODO Should be in front of photons?
     const electronStateText = new ElectronStateText( hydrogenAtom.electron.nProperty, {
       tandem: options.tandem.createTandem( 'electronStateText' )
     } );

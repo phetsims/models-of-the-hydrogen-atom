@@ -1,6 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 //TODO port SchrodingerNode.java
+//TODO Should xzAxesNode, exciteAtomButton, stateText, and quantumNumbersInfoButton be in front of photons?
 
 /**
  * SchrodingerNode displays the Schrodinger model of the hydrogen atom.
@@ -70,7 +71,6 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const fieldNode = new SchrodingerFieldNode( hydrogenAtom, modelViewTransform );
 
-    //TODO Should be in front of photons?
     const xzAxesNode = new XZAxesNode( {
       color: MOTHAColors.xzAxesColorProperty,
       left: zoomedInBoxBounds.left + 15,
@@ -99,7 +99,6 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       spacing: 8
     } );
 
-    //TODO Should be in front of photons.
     const vBox = new VBox( {
       align: 'right',
       spacing: 15,
