@@ -25,7 +25,7 @@ import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
-import { AlignGroup, Color, GridBox, HBox, HSeparator, HSeparatorOptions, KeyboardListener, Node, PDOMPeer, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Color, GridBox, HBox, HSeparator, HSeparatorOptions, KeyboardListener, Node, PDOMPeer, Rectangle, Text, TextOptions, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
@@ -163,13 +163,14 @@ export default class AbsorptionAndEmissionDialog extends Panel {
     // Group all buttons.
     const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
 
-    //TODO Don't assume that wavelengthToStateTransitionMap is sorted by ascending wavelength.
+    // Create a row for each transition wavelength, ordered by increasing wavelength.
     let n1Previous = 1;
-    for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
+    const wavelengths = [ ...BohrModel.wavelengthToStateTransitionMap.keys() ].sort( ( a, b ) => a - b );
+    wavelengths.forEach( wavelength => {
 
-      const wavelengthText = wavelengthTextAlignGroup.createBox( new Text( wavelength, CONTENT_TEXT_OPTIONS ) );
-
+      // 'wavelength' column.
       // For wavelengths that can be set via monochromaticWavelengthProperty, use a push button. Otherwise, use Text.
+      const wavelengthText = wavelengthTextAlignGroup.createBox( new Text( wavelength, CONTENT_TEXT_OPTIONS ) );
       let waveLengthNode: Node;
       if ( monochromaticWavelengthProperty.range.contains( wavelength ) ) {
         waveLengthNode = new RectangularPushButton( {
@@ -198,21 +199,20 @@ export default class AbsorptionAndEmissionDialog extends Panel {
         ]
       } );
 
+      // 'n transition' column
+      const transition = BohrModel.wavelengthToStateTransitionMap.get( wavelength )!;
+      assert && assert( transition );
+      const transitionText = new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, combineOptions<TextOptions>( {
+        visibleProperty: transitionColumnVisibleProperty
+      }, CONTENT_TEXT_OPTIONS ) );
+
+      // Add a row, with an additional blank row when n changes.
       if ( transition.n1 !== n1Previous ) {
         n1Previous = transition.n1;
-        rows.push( [
-          new Rectangle( 0, 0, 1, ySpacing ),
-          new Rectangle( 0, 0, 1, ySpacing )
-        ] );
+        rows.push( [ new VStrut( ySpacing ), new VStrut( ySpacing ) ] );
       }
-
-      rows.push( [
-        photonAndWavelengthNode,
-        new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, combineOptions<TextOptions>( {
-          visibleProperty: transitionColumnVisibleProperty
-        }, CONTENT_TEXT_OPTIONS ) )
-      ] );
-    }
+      rows.push( [ photonAndWavelengthNode, transitionText ] );
+    } );
 
     const gridBox = new GridBox( {
       rows: rows,
@@ -231,7 +231,7 @@ export default class AbsorptionAndEmissionDialog extends Panel {
 
     super( content, options );
 
-    // pdom - Set the aria-labelledby relation so that whenever focus enters the dialog, the accessible name is read.
+    // pdom - Set the aria-labelledby relation so that whenever focus enters the dialog, the accessibleName is read.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
     this.addAriaLabelledbyAssociation( {
       thisElementName: PDOMPeer.PRIMARY_SIBLING,
