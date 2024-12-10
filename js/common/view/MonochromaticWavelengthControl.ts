@@ -1,6 +1,5 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO NumberControl is creating and instrumenting monochromaticWavelengthControl.titleText with sceneryPhet.wavelengthStringProperty, even though we have no title.
 /**
  * MonochromaticWavelengthControl is a specialization of WavelengthNumberControl that lets the user select a UR or visible wavelength.
  *
@@ -28,6 +27,7 @@ import Light from '../model/Light.js';
 import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const SLIDER_TRACK_SIZE = new Dimension2( 250, 15 );
 
@@ -92,6 +92,9 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
       } ),
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.accessibleNameStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.helpTextStringProperty,
+      titleNodeOptions: {
+        tandem: Tandem.OPT_OUT // because layoutFunction omits the title
+      },
       sliderOptions: {
         constrainValue: constrainValue
       },
