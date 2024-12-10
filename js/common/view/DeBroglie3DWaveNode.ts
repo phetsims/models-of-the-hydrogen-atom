@@ -30,14 +30,12 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
   public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2, pitchProperty: TReadOnlyProperty<number> ) {
 
     super( {
-      pathOptions: {
 
-        // The Java version colored line segments based on depth (z-coordinate). We are not doing that in the HTML5
-        // version because it's too subtle, and it complicates the implementation. It's sufficient that the orbits
-        // are rendered with depth cues.
-        stroke: MOTHAColors.electronBaseColorProperty,
-        lineWidth: 2
-      }
+      // The Java version colored line segments based on depth (z-coordinate). We are not doing that in the HTML5
+      // version because it's too subtle, and it complicates the implementation. It's sufficient that the orbits
+      // are rendered with depth cues.
+      stroke: MOTHAColors.electronBaseColorProperty,
+      lineWidth: 2
     } );
 
     this.hydrogenAtom = hydrogenAtom;

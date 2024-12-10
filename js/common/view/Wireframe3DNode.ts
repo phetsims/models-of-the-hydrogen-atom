@@ -1,16 +1,16 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
-//TODO Use Canvas for better performance, and stroke based on z-coordinate.
 /**
- * Wireframe3DNode displays a 3D wireframe model. This was Wireframe3DNode.java and Wireframe3D.java in the Java version.
+ * Wireframe3DNode displays a 3D wireframe model. This was Wireframe3DNode.java and Wireframe3D.java in the Java version,
+ * and has been simplified greatly.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Vector3 from '../../../../dot/js/Vector3.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions, Path, PathOptions, TPaint } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { Path, PathOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 
@@ -20,14 +20,11 @@ type WireframeLine = {
   vertex2Index: number;
 };
 
-type SelfOptions = {
-  pathOptions?: PathOptions;
-};
+type SelfOptions = EmptySelfOptions;
 
-type WireframeNodeOptions = SelfOptions;
+type WireframeNodeOptions = SelfOptions & PathOptions;
 
-//TODO extends Path?
-export default class Wireframe3DNode extends Node {
+export default class Wireframe3DNode extends Path {
 
   // Matrix used to transform vertices. We cannot name this matrix because it would shadow Node's matrix.
   private readonly vertexMatrix: Matrix3;
@@ -45,36 +42,21 @@ export default class Wireframe3DNode extends Node {
   // Indicates that transformedVertices are invalid. This saves your bacon if you forgot to call update.
   private isDirty: boolean;
 
-  private readonly path: Path;
-
   public constructor( providedOptions?: WireframeNodeOptions ) {
 
-    const options = optionize<WireframeNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<WireframeNodeOptions, SelfOptions, PathOptions>()( {
 
-      // WireframeNodeOptions
-      pathOptions: {
-        stroke: 'black',
-        lineWidth: 1
-      },
-
-      // NodeOptions
+      // PathOptions
       isDisposable: false
     }, providedOptions );
 
-    super( options );
+    super( null, options );
 
     this.vertexMatrix = new Matrix3();
     this.vertices = [];
     this.transformedVertices = [];
     this.lines = [];
     this.isDirty = false;
-
-    this.path = new Path( null, options.pathOptions );
-    this.addChild( this.path );
-  }
-
-  public setStroke( stroke: TPaint ): void {
-    this.path.stroke = stroke;
   }
 
   /**
@@ -90,7 +72,7 @@ export default class Wireframe3DNode extends Node {
       shape.moveTo( vertex1.x, vertex1.y );
       shape.lineTo( vertex2.x, vertex2.y );
     } );
-    this.path.setShape( shape );
+    this.setShape( shape );
   }
 
   /**
@@ -151,7 +133,7 @@ export default class Wireframe3DNode extends Node {
   }
 
   /**
-   * Transforms a set of vertices. The transformed vertices are in the same order as the provided vertices.
+   * Transforms this Node's vertices. The transformed vertices are in the same order as this.vertices.
    */
   private transformVertices(): void {
     this.vertices.forEach( ( vertex, index ) => {
