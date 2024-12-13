@@ -46,7 +46,10 @@ export default class EnergyLevelsModel extends MOTHAModel {
       tandem: predictiveModelsTandem.createTandem( 'schrodingerModel' )
     } );
 
-    // Predictive models supported by this screen, in the order that they will appear in the UI
+    // Predictive models supported by this screen, in the order that they will appear in the UI.
+    // NOTE: The Java version also included an Electron Energy Level diagram for the Classical Solar System model.
+    // We decided to omit that model in the HTML5 version, because the idea of quantized energy levels is quantum
+    // mechanical, and we see no value in displaying the diagram for any classical system.
     const predictiveModels = [
       bohrModel,
       deBroglieModel,
