@@ -75,7 +75,7 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
     const electronIcon = ElectronNode.createIcon();
     electronIcon.setScaleMagnitude( 0.5 );
 
-    // Electron above and left of proton
+    // Electron above and right of proton
     const electronAngle = 0.75 * Math.PI;
     const orbitRadius = 1.5 * protonIcon.height;
     electronIcon.centerX = orbitRadius * Math.sin( electronAngle );
