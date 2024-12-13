@@ -19,6 +19,8 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import ElectronNode from './ElectronNode.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
+import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -49,7 +51,16 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
       center: protonNode.center
     } );
 
-    options.children = [ explosionNode, protonNode, electronNode ];
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
+    const resetButton = new ResetButton( {
+      radius: 16,
+      rightBottom: zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS ),
+      listener: () => hydrogenAtom.reset(),
+      enabledProperty: hydrogenAtom.isDestroyedProperty,
+      tandem: options.tandem.createTandem( 'resetButton' )
+    } );
+
+    options.children = [ explosionNode, protonNode, electronNode, resetButton ];
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }
