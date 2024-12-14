@@ -10,7 +10,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Node, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
@@ -18,9 +18,10 @@ import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 import UnderConstructionText from '../../common/view/UnderConstructionText.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import ElectronEnergyLevelDiagramNode from './ElectronEnergyLevelDiagramNode.js';
 
-//TODO Height needs to stretch to same height as EnergyLevelsZoomedInBoxNode.
-const DIAGRAM_SIZE = new Dimension2( 220, 365 );
+// Height was empirically set so that heights of ElectronEnergyLevelAccordionBox and EnergyLevelsZoomedInBoxNode are roughly the same.
+const DIAGRAM_SIZE = new Dimension2( 220, 364 );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -47,10 +48,9 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       maxWidth: 150 // i18n, determined empirically
     } );
 
-    //TODO this is a placeholder
-    const diagramNode = new Rectangle( 0, 0, DIAGRAM_SIZE.width, DIAGRAM_SIZE.height, {
-      fill: 'white',
-      stroke: 'black'
+    const diagramNode = new ElectronEnergyLevelDiagramNode( {
+      size: DIAGRAM_SIZE,
+      tandem: options.tandem.createTandem( 'diagramNode' )
     } );
 
     //TODO Under Construction

@@ -66,6 +66,7 @@ type StringsType = {
   'lInfoStringProperty': LocalizedStringProperty;
   'mInfoStringProperty': LocalizedStringProperty;
   'snapshotNumberNameStringProperty': LocalizedStringProperty;
+  'energyStringProperty': LocalizedStringProperty;
   'a11y': {
     'absorptionAndEmissionCheckbox': {
       'helpTextStringProperty': LocalizedStringProperty;
