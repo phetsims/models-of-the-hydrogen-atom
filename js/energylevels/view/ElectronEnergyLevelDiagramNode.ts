@@ -18,6 +18,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import ElectronNode from '../../common/view/ElectronNode.js';
 import BohrElectron from '../../common/model/BohrElectron.js';
 
+// Margins inside the bounds of the diagram.
 const X_MARGIN = 4;
 const Y_MARGIN = 5;
 
