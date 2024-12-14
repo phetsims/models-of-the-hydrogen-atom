@@ -61,7 +61,7 @@ export default class BohrElectron extends Electron {
     } );
     phet.log && this.nProperty.lazyLink( ( nNew, nOld ) => phet.log( `BohrElectron: n ${nOld} -> ${nNew}` ) );
 
-    this.energyProperty = new DerivedProperty( [ this.nProperty ], n => MOTHAConstants.E1 / ( n * n ), {
+    this.energyProperty = new DerivedProperty( [ this.nProperty ], n => BohrElectron.getEnergy( n ), {
       units: 'eV',
       phetioValueType: NumberIO,
       tandem: options.tandem.createTandem( 'energyProperty' )
@@ -106,6 +106,14 @@ export default class BohrElectron extends Electron {
     this.timeInStateProperty.reset();
     this.angleProperty.reset();
     super.reset();
+  }
+
+  /**
+   * Gets the electron's energy in state n, in eV.
+   */
+  public static getEnergy( n: number ): number {
+    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE );
+    return MOTHAConstants.E1 / ( n * n );
   }
 }
 

@@ -16,17 +16,15 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ElectronNode from '../../common/view/ElectronNode.js';
-import MOTHAConstants from '../../common/MOTHAConstants.js';
+import BohrElectron from '../../common/model/BohrElectron.js';
 
 const X_MARGIN = 4;
 const Y_MARGIN = 5;
 
-// Energy of the ground state (n = 1), in eV.
-const E1 = -13.6;
-
-// How much to distort the spacing between energy level values. For no distortion, set this to zero.
+// How much to scale the energy values, so that spacing between the values increases.
 // This is needed so that energy levels do not visually overlap.
-const DISTORTION_FACTOR = 0.2; // 1.0 = 100% increase in spacing
+const ENERGY_SCALE = 1.2; // 1.0 = no scaling, 2.0 = 100% increase in spacing, etc.
+assert && assert( ENERGY_SCALE >= 1 );
 
 type SelfOptions = {
   size: Dimension2;
@@ -43,9 +41,6 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
 
   // Layer for the squiggle between the electron's previous and current state in the diagram.
   protected readonly squiggleLayer: Node;
-
-  // Energy at each electron state in eV, indexed by n. So note that energies[0] will be undefined.
-  private readonly energies: number[];
 
   //TODO protected
   public constructor( providedOptions: ElectronEnergyLevelDiagramNodeOptions ) {
@@ -93,31 +88,16 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
     this.electronNode = electronNode;
     this.stateLayer = stateLayer;
     this.squiggleLayer = squiggleLayer;
-    this.energies = calculateEnergies( MOTHAConstants.MAX_STATE );
   }
 
+  //TODO Consider replacing with this.hydrogenAtom.energyProperty.value * ENERGY_SCALE
   /**
    * Gets the electron's energy in state n, in eV.
+   * The value is scaled to increase the space between values, so that they don't visually overlap in the diagram.
    */
-  protected getEnergy( n: number ): number {
-    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE );
-    return this.energies[ n ];
+  protected getScaledEnergy( n: number ): number {
+    return ENERGY_SCALE * BohrElectron.getEnergy( n );
   }
-}
-
-/*
- * Calculates the energy values the possible electron state n = 1 to n = maxState.
- * Optional distortion is applied to increase the space between energy values so that they don't visually overlap.
- */
-function calculateEnergies( maxState: number ): number[] {
-  const energies: number[] = [];
-  for ( let n = 1; n <= maxState; n++ ) {
-    energies[ n ] = E1 / ( n * n );
-    if ( DISTORTION_FACTOR > 0 ) {
-      energies[ n ] *= ( 1 + DISTORTION_FACTOR );
-    }
-  }
-  return energies;
 }
 
 modelsOfTheHydrogenAtom.register( 'ElectronEnergyLevelDiagramNode', ElectronEnergyLevelDiagramNode );
