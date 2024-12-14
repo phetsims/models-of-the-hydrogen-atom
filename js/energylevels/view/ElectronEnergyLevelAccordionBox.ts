@@ -55,20 +55,17 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
     const bohrDiagramNode = new BohrElectronEnergyLevelDiagramNode( model.bohrModel, {
       size: DIAGRAM_SIZE,
-      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.bohrModel ),
-      tandem: options.tandem.createTandem( 'bohrDiagramNode' )
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.bohrModel )
     } );
 
     const deBroglieDiagramNode = new DeBroglieElectronEnergyLevelDiagramNode( model.deBroglieModel, {
       size: DIAGRAM_SIZE,
-      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.deBroglieModel ),
-      tandem: options.tandem.createTandem( 'deBroglieDiagramNode' )
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.deBroglieModel )
     } );
 
     const schrodingerDiagramNode = new SchrodingerElectronEnergyLevelDiagramNode( model.schrodingerModel, {
       size: DIAGRAM_SIZE,
-      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.schrodingerModel ),
-      tandem: options.tandem.createTandem( 'schrodingerDiagramNode' )
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.schrodingerModel )
     } );
 
     const experimentDiagramNode = new ExperimentElectronEnergyLevelDiagramNode( {

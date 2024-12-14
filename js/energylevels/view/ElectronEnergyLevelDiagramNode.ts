@@ -31,9 +31,11 @@ type SelfOptions = {
   size: Dimension2;
 };
 
-export type ElectronEnergyLevelDiagramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+export type ElectronEnergyLevelDiagramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
 
 export default class ElectronEnergyLevelDiagramNode extends Node {
+
+  protected readonly rectangle: Node;
 
   protected readonly electronNode: Node;
 
@@ -45,7 +47,11 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
 
   protected constructor( providedOptions: ElectronEnergyLevelDiagramNodeOptions ) {
 
-    const options = optionize<ElectronEnergyLevelDiagramNodeOptions, SelfOptions, NodeOptions>()( {}, providedOptions );
+    const options = optionize<ElectronEnergyLevelDiagramNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
+      isDisposable: false
+    }, providedOptions );
 
     const rectangle = new Rectangle( 0, 0, options.size.width, options.size.height, {
       fill: 'white',
@@ -61,9 +67,7 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
     const energyText = new Text( ModelsOfTheHydrogenAtomStrings.energyStringProperty, {
       font: new PhetFont( 12 ),
       rotation: -Math.PI / 2,
-      maxWidth: arrowLength / 2,
-      tandem: options.tandem.createTandem( 'energyText' ),
-      phetioVisiblePropertyInstrumented: true
+      maxWidth: arrowLength / 2
     } );
 
     const energyAxisHBox = new HBox( {
@@ -81,10 +85,11 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
     const electronNode = ElectronNode.createIcon();
     electronNode.center = rectangle.center; // a temporary location - anywhere right of the energy axis will do.
 
-    super( {
-      children: [ rectangle, energyAxisHBox, stateLayer, squiggleLayer, electronNode ]
-    } );
+    options.children = [ rectangle, energyAxisHBox, stateLayer, squiggleLayer, electronNode ];
 
+    super( options );
+
+    this.rectangle = rectangle;
     this.electronNode = electronNode;
     this.stateLayer = stateLayer;
     this.squiggleLayer = squiggleLayer;
