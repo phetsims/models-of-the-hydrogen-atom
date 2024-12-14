@@ -40,7 +40,7 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
   // Layer for all state (energy-level) information.
   protected readonly stateLayer: Node;
 
-  // Layer for the squiggle between the electron's previous and current state in the diagram.
+  // Layer for the squiggle drawn between the electron's previous and current state in the diagram.
   protected readonly squiggleLayer: Node;
 
   //TODO protected
