@@ -16,16 +16,14 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ElectronNode from '../../common/view/ElectronNode.js';
-import BohrElectron from '../../common/model/BohrElectron.js';
 
-// Margins inside the bounds of the diagram.
+// Margins inside the bounds of the diagram. If you change Y_MARGIN, you will likely need to adjust Y_OFFSETS.
 const X_MARGIN = 4;
 const Y_MARGIN = 5;
 
-// How much to scale the energy values, so that spacing between the values increases.
-// This is needed so that energy levels do not visually overlap.
-const ENERGY_SCALE = 1.2; // 1.0 = no scaling, 2.0 = 100% increase in spacing, etc.
-assert && assert( ENERGY_SCALE >= 1 );
+// Percent offset from the bottom of the Energy axis. These values were set empirically.
+// Using actual energy values results in visual overlap of the levels, since higher levels are closely spaced.
+const Y_OFFSETS = [ 0.025, 0.60, 0.73, 0.81, 0.86, 0.90 ];
 
 type SelfOptions = {
   size: Dimension2;
@@ -38,6 +36,10 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
   protected readonly rectangle: Node;
 
   protected readonly electronNode: Node;
+
+  protected readonly energyAxisHBox: Node;
+
+  protected readonly energyAxisLength: number;
 
   // Layer for all state (energy-level) information.
   protected readonly stateLayer: Node;
@@ -58,8 +60,8 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
       stroke: 'black'
     } );
 
-    const arrowLength = options.size.height - 2 * Y_MARGIN;
-    const energyAxis = new ArrowNode( 0, 0, 0, -arrowLength, {
+    const energyAxisLength = options.size.height - 2 * Y_MARGIN;
+    const energyAxis = new ArrowNode( 0, 0, 0, -energyAxisLength, {
       tailWidth: 2,
       stroke: null
     } );
@@ -67,7 +69,7 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
     const energyText = new Text( ModelsOfTheHydrogenAtomStrings.energyStringProperty, {
       font: new PhetFont( 12 ),
       rotation: -Math.PI / 2,
-      maxWidth: arrowLength / 2
+      maxWidth: energyAxisLength / 2
     } );
 
     const energyAxisHBox = new HBox( {
@@ -91,17 +93,17 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
 
     this.rectangle = rectangle;
     this.electronNode = electronNode;
+    this.energyAxisHBox = energyAxisHBox;
+    this.energyAxisLength = energyAxisLength;
     this.stateLayer = stateLayer;
     this.squiggleLayer = squiggleLayer;
   }
 
-  //TODO Consider replacing with this.hydrogenAtom.energyProperty.value * ENERGY_SCALE
   /**
-   * Gets the electron's energy in state n, in eV.
-   * The value is scaled to increase the space between values, so that they don't visually overlap in the diagram.
+   * Gets the y-offset for an electron state (n) relative to the top of this Node.
    */
-  protected getScaledEnergy( n: number ): number {
-    return ENERGY_SCALE * BohrElectron.getEnergy( n );
+  protected getYOffsetForState( n: number ): number {
+    return Y_MARGIN + this.energyAxisLength - ( Y_OFFSETS[ n - 1 ] * this.energyAxisLength );
   }
 }
 
