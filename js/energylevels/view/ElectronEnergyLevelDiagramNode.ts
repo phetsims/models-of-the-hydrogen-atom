@@ -15,6 +15,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import ElectronNode from '../../common/view/ElectronNode.js';
 
 const X_MARGIN = 4;
 const Y_MARGIN = 5;
@@ -26,6 +27,10 @@ type SelfOptions = {
 type ElectronEnergyLevelDiagramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class ElectronEnergyLevelDiagramNode extends Node {
+
+  protected readonly electronNode: Node;
+  protected readonly stateLayer: Node; // layer for all state (energy-level) information
+  protected readonly squiggleLayer: Node; // layer for the squiggle that shows the path from previous to current state
 
   //TODO protected
   public constructor( providedOptions: ElectronEnergyLevelDiagramNodeOptions ) {
@@ -62,9 +67,19 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
       centerY: rectangle.centerY
     } );
 
+    const stateLayer = new Node();
+    const squiggleLayer = new Node();
+
+    const electronNode = ElectronNode.createIcon();
+    electronNode.center = rectangle.center; // a temporary location - anywhere right of the energy axis will do.
+
     super( {
-      children: [ rectangle, energyAxisHBox ]
+      children: [ rectangle, energyAxisHBox, stateLayer, squiggleLayer, electronNode ]
     } );
+
+    this.electronNode = electronNode;
+    this.stateLayer = stateLayer;
+    this.squiggleLayer = squiggleLayer;
   }
 }
 
