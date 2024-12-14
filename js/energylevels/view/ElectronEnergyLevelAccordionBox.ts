@@ -17,9 +17,15 @@ import MOTHAConstants from '../../common/MOTHAConstants.js';
 import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import ElectronEnergyLevelDiagramNode from './ElectronEnergyLevelDiagramNode.js';
+import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
+import BohrElectronEnergyLevelDiagramNode from './BohrElectronEnergyLevelDiagramNode.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DeBroglieElectronEnergyLevelDiagramNode from './DeBroglieElectronEnergyLevelDiagramNode.js';
+import SchrodingerElectronEnergyLevelDiagramNode from './SchrodingerElectronEnergyLevelDiagramNode.js';
+import ExperimentElectronEnergyLevelDiagramNode from './ExperimentElectronEnergyLevelDiagramNode.js';
 
-// Height was empirically set so that heights of ElectronEnergyLevelAccordionBox and EnergyLevelsZoomedInBoxNode are roughly the same.
+// DIAGRAM_SIZE.height was empirically set so that heights of ElectronEnergyLevelAccordionBox and
+// EnergyLevelsZoomedInBoxNode are roughly the same.
 const DIAGRAM_SIZE = new Dimension2( 220, 364 );
 
 type SelfOptions = EmptySelfOptions;
@@ -28,7 +34,7 @@ type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & PickRequired<Accordi
 
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
-  public constructor( providedOptions: ElectronEnergyLevelAccordionBoxOptions ) {
+  public constructor( model: EnergyLevelsModel, providedOptions: ElectronEnergyLevelAccordionBoxOptions ) {
 
     const options = optionize4<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
@@ -47,13 +53,31 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       maxWidth: 150 // i18n, determined empirically
     } );
 
-    const diagramNode = new ElectronEnergyLevelDiagramNode( {
+    const bohrDiagramNode = new BohrElectronEnergyLevelDiagramNode( model.bohrModel, {
       size: DIAGRAM_SIZE,
-      tandem: options.tandem.createTandem( 'diagramNode' )
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.bohrModel ),
+      tandem: options.tandem.createTandem( 'bohrDiagramNode' )
+    } );
+
+    const deBroglieDiagramNode = new DeBroglieElectronEnergyLevelDiagramNode( model.deBroglieModel, {
+      size: DIAGRAM_SIZE,
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.deBroglieModel ),
+      tandem: options.tandem.createTandem( 'deBroglieDiagramNode' )
+    } );
+
+    const schrodingerDiagramNode = new SchrodingerElectronEnergyLevelDiagramNode( model.schrodingerModel, {
+      size: DIAGRAM_SIZE,
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.schrodingerModel ),
+      tandem: options.tandem.createTandem( 'schrodingerDiagramNode' )
+    } );
+
+    const experimentDiagramNode = new ExperimentElectronEnergyLevelDiagramNode( {
+      size: DIAGRAM_SIZE,
+      visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.experiment )
     } );
 
     const content = new Node( {
-      children: [ diagramNode ]
+      children: [ bohrDiagramNode, deBroglieDiagramNode, schrodingerDiagramNode, experimentDiagramNode ]
     } );
 
     super( content, options );

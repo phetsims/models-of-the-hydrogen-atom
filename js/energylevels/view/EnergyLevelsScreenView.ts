@@ -102,7 +102,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       visibleProperty: boxOfHydrogenNode.visibleProperty
     } );
 
-    const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( {
+    const electronEnergyLevelAccordionBox = new ElectronEnergyLevelAccordionBox( model, {
       tandem: tandem.createTandem( 'electronEnergyLevelAccordionBox' )
     } );
 

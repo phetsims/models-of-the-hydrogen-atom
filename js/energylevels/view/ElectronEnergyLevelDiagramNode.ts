@@ -31,7 +31,7 @@ type SelfOptions = {
   size: Dimension2;
 };
 
-type ElectronEnergyLevelDiagramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+export type ElectronEnergyLevelDiagramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class ElectronEnergyLevelDiagramNode extends Node {
 
@@ -43,8 +43,7 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
   // Layer for the squiggle drawn between the electron's previous and current state in the diagram.
   protected readonly squiggleLayer: Node;
 
-  //TODO protected
-  public constructor( providedOptions: ElectronEnergyLevelDiagramNodeOptions ) {
+  protected constructor( providedOptions: ElectronEnergyLevelDiagramNodeOptions ) {
 
     const options = optionize<ElectronEnergyLevelDiagramNodeOptions, SelfOptions, NodeOptions>()( {}, providedOptions );
 
