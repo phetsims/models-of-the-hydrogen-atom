@@ -15,7 +15,6 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
-import UnderConstructionText from '../../common/view/UnderConstructionText.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import ElectronEnergyLevelDiagramNode from './ElectronEnergyLevelDiagramNode.js';
@@ -53,13 +52,8 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'diagramNode' )
     } );
 
-    //TODO Under Construction
-    const underConstructionText = new UnderConstructionText( {
-      center: diagramNode.center
-    } );
-
     const content = new Node( {
-      children: [ diagramNode, underConstructionText ]
+      children: [ diagramNode ]
     } );
 
     super( content, options );
