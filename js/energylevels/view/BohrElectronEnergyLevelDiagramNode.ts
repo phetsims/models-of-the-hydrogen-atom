@@ -41,7 +41,7 @@ export default class BohrElectronEnergyLevelDiagramNode extends ElectronEnergyLe
     }
 
     // Position electron on level line.
-    this.electronNode.centerX = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET + LEVEL_LINE_LENGTH / 2;
+    this.electronNode.centerX = this.stateLayer.left + LEVEL_LINE_LENGTH / 2;
     hydrogenAtom.electron.nProperty.link( n => {
       this.electronNode.centerY = this.getYOffsetForState( n );
     } );
