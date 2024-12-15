@@ -17,11 +17,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-const TEXT_OPTIONS = {
-  font: new PhetFont( { size: 16, weight: 'bold' } ),
-  fill: MOTHAColors.switchTextFillProperty,
-  maxWidth: 100
-};
+const LABEL_FONT = new PhetFont( { size: 16, weight: 'bold' } );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -40,9 +36,19 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelHelpTextSwitch.helpTextStringProperty
     }, providedOptions );
 
-    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, TEXT_OPTIONS );
+    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, {
+      font: LABEL_FONT,
+      fill: MOTHAColors.switchTextFillProperty,
+      maxWidth: 90 // determined empirically in the Energy Levels screen
+    } );
 
-    const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, TEXT_OPTIONS );
+    const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, {
+      font: LABEL_FONT,
+      fill: MOTHAColors.switchTextFillProperty,
+      maxWidth: 50 // determined empirically in the Energy Levels screen
+    } );
+    console.log( experimentText.width );
+    console.log( modelText.width );
 
     super( isExperimentProperty, true, experimentText, false, modelText, options );
   }

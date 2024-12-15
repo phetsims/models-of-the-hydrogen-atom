@@ -87,7 +87,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
         new Text( predictiveModel.displayNameProperty, {
           fill: MOTHAColors.invertibleTextFillProperty,
           font: new PhetFont( 16 ),
-          maxWidth: 200 // determined empirically
+          maxWidth: 120 // determined empirically in the Energy Levels screen
         } ) ]
     } ),
     tandemName: `${predictiveModel.tandemNamePrefix}RadioButton`
