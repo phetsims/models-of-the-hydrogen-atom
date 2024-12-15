@@ -31,6 +31,7 @@ export default class BohrElectronEnergyLevelDiagramNode extends ElectronEnergyLe
 
     super( providedOptions );
 
+    // A horizontal line for each energy level, labeled with 'n = {value}'.
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const levelNode = createLevelNode( n );
       levelNode.localBoundsProperty.link( () => {
@@ -40,7 +41,7 @@ export default class BohrElectronEnergyLevelDiagramNode extends ElectronEnergyLe
       this.stateLayer.addChild( levelNode );
     }
 
-    // Position electron on level line.
+    // Position the electron on a level line, based on the value of n.
     this.electronNode.centerX = this.stateLayer.left + LEVEL_LINE_LENGTH / 2;
     hydrogenAtom.electron.nProperty.link( n => {
       this.electronNode.centerY = this.getYOffsetForState( n );

@@ -32,6 +32,7 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
 
     super( providedOptions );
 
+    // n horizontal lines for each energy level, labeled with 'n = {value}'.
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const levelNode = createLevelNode( n );
       levelNode.localBoundsProperty.link( () => {
@@ -41,13 +42,16 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
       this.stateLayer.addChild( levelNode );
     }
 
-    // Position electron on level line, based on n and l quantum numbers.
+    // Position the electron on the level line, based on the values of n and l.
     hydrogenAtom.nlmProperty.link( nlm => {
       this.electronNode.centerX = this.stateLayer.left + LEVEL_LINE_LENGTH / 2 + ( nlm.l * ( LEVEL_LINE_X_SPACING + LEVEL_LINE_LENGTH ) );
       this.electronNode.centerY = this.getYOffsetForState( nlm.n );
     } );
 
     //TODO Display squiggle between previous and current electron state.
+
+    //TODO Labels for l values.
+    //TODO m value
   }
 }
 
