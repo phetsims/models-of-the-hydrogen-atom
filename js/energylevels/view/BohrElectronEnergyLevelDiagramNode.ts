@@ -10,12 +10,15 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ElectronEnergyLevelDiagramNode, { ElectronEnergyLevelDiagramNodeOptions } from './ElectronEnergyLevelDiagramNode.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BohrModel from '../../common/model/BohrModel.js';
-import { HBox, Line, Node, Text } from '../../../../scenery/js/imports.js';
+import { HBox, Line, Node, RichText } from '../../../../scenery/js/imports.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
+import MOTHASymbols from '../../common/MOTHASymbols.js';
 
+const LEVEL_NODE_X_OFFSET = 15;
+const LEVEL_LINE_LENGTH = 15;
 const LEVEL_LABEL_FONT = new PhetFont( 12 );
 
 type SelfOptions = EmptySelfOptions;
@@ -31,13 +34,18 @@ export default class BohrElectronEnergyLevelDiagramNode extends ElectronEnergyLe
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const levelNode = createLevelNode( n );
       levelNode.localBoundsProperty.link( () => {
-        levelNode.left = this.energyAxisHBox.right + 15;
+        levelNode.left = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET;
         levelNode.centerY = this.getYOffsetForState( n );
       } );
       this.stateLayer.addChild( levelNode );
     }
 
-    //TODO Position electron on level line.
+    // Position electron on level line.
+    this.electronNode.centerX = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET + LEVEL_LINE_LENGTH / 2;
+    hydrogenAtom.electron.nProperty.link( n => {
+      this.electronNode.centerY = this.getYOffsetForState( n );
+    } );
+
     //TODO Display squiggle between previous and current electron state.
   }
 }
@@ -48,16 +56,16 @@ export default class BohrElectronEnergyLevelDiagramNode extends ElectronEnergyLe
  */
 function createLevelNode( n: number ): Node {
 
-  const line = new Line( 0, 0, 10, 0, {
-    lineWidth: 2,
+  const line = new Line( 0, 0, LEVEL_LINE_LENGTH, 0, {
+    lineWidth: 1,
     stroke: 'black'
   } );
 
   const labelStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
-    nSymbol: ModelsOfTheHydrogenAtomStrings.nStringProperty,
+    nSymbol: MOTHASymbols.nStringProperty,
     nValue: n
   } );
-  const label = new Text( labelStringProperty, {
+  const label = new RichText( labelStringProperty, {
     fill: 'black',
     font: LEVEL_LABEL_FONT,
     maxWidth: 50
