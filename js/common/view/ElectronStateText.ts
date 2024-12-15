@@ -39,9 +39,9 @@ export default class ElectronStateText extends RichText {
       }
     }, providedOptions );
 
-    const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
-      nSymbol: MOTHASymbols.nStringProperty,
-      nValue: nProperty
+    const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
+      symbol: MOTHASymbols.nStringProperty,
+      value: nProperty
     }, { tandem: Tandem.OPT_OUT } );
 
     super( stringProperty, options );

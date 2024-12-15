@@ -62,9 +62,9 @@ function createLevelNode( n: number ): Node {
     stroke: 'black'
   } );
 
-  const labelStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
-    nSymbol: MOTHASymbols.nStringProperty,
-    nValue: n
+  const labelStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
+    symbol: MOTHASymbols.nStringProperty,
+    value: n
   } );
   const label = new RichText( labelStringProperty, {
     fill: 'black',
