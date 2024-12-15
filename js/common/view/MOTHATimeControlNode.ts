@@ -34,11 +34,12 @@ export default class MOTHATimeControlNode extends TimeControlNode {
       isDisposable: false,
       timeSpeedProperty: timeSpeedProperty,
       timeSpeeds: MOTHAConstants.TIME_SPEEDS,
-      buttonGroupXSpacing: 25,
+      buttonGroupXSpacing: 20,
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: new PhetFont( 14 ),
-          fill: MOTHAColors.invertibleTextFillProperty
+          fill: MOTHAColors.invertibleTextFillProperty,
+          maxWidth: 65 // determined empirically in the Energy Levels screen
         }
       },
       playPauseStepButtonOptions: {
