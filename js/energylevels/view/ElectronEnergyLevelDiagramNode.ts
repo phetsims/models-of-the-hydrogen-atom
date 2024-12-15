@@ -47,6 +47,13 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
   // Layer for the squiggle drawn between the electron's previous and current state in the diagram.
   protected readonly squiggleLayer: Node;
 
+  // Constants used by subclasses.
+  public static readonly LEVEL_NODE_X_OFFSET = 15;
+  public static readonly LEVEL_LINE_LENGTH = 15;
+  public static readonly LEVEL_LINE_X_SPACING = 4;
+  public static readonly LABEL_FONT = new PhetFont( 12 );
+  public static readonly LABEL_MAX_WIDTH = 40;
+
   protected constructor( providedOptions: ElectronEnergyLevelDiagramNodeOptions ) {
 
     const options = optionize<ElectronEnergyLevelDiagramNodeOptions, SelfOptions, NodeOptions>()( {

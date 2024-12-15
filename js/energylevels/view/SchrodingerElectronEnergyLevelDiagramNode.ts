@@ -10,7 +10,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ElectronEnergyLevelDiagramNode, { ElectronEnergyLevelDiagramNodeOptions } from './ElectronEnergyLevelDiagramNode.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
@@ -18,10 +17,11 @@ import { HBox, Line, Node, RichText } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
-const LEVEL_NODE_X_OFFSET = 15;
-const LEVEL_LINE_LENGTH = 15;
+const LEVEL_NODE_X_OFFSET = ElectronEnergyLevelDiagramNode.LEVEL_NODE_X_OFFSET;
+const LEVEL_LINE_LENGTH = ElectronEnergyLevelDiagramNode.LEVEL_LINE_LENGTH;
 const LEVEL_LINE_X_SPACING = 4;
-const LABEL_FONT = new PhetFont( 12 );
+const LABEL_FONT = ElectronEnergyLevelDiagramNode.LABEL_FONT;
+const LABEL_MAX_WIDTH = ElectronEnergyLevelDiagramNode.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -52,7 +52,7 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
     } );
     const mText = new RichText( mEqualsValueStringProperty, {
       font: LABEL_FONT,
-      maxWidth: 50,
+      maxWidth: LABEL_MAX_WIDTH,
       top: this.energyAxisHBox.top
     } );
     mText.localBoundsProperty.link( () => {
@@ -101,7 +101,7 @@ function createLevelNode( n: number ): Node {
   const label = new RichText( labelStringProperty, {
     fill: 'black',
     font: LABEL_FONT,
-    maxWidth: 50
+    maxWidth: LABEL_MAX_WIDTH
   } );
 
   return new HBox( {

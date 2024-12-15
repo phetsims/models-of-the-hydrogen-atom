@@ -13,13 +13,13 @@ import BohrModel from '../../common/model/BohrModel.js';
 import { HBox, Line, Node, RichText } from '../../../../scenery/js/imports.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
 
-const LEVEL_NODE_X_OFFSET = 15;
-const LEVEL_LINE_LENGTH = 15;
-const LEVEL_LABEL_FONT = new PhetFont( 12 );
+const LEVEL_NODE_X_OFFSET = ElectronEnergyLevelDiagramNode.LEVEL_NODE_X_OFFSET;
+const LEVEL_LINE_LENGTH = ElectronEnergyLevelDiagramNode.LEVEL_LINE_LENGTH;
+const LABEL_FONT = ElectronEnergyLevelDiagramNode.LABEL_FONT;
+const LABEL_MAX_WIDTH = ElectronEnergyLevelDiagramNode.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -68,8 +68,8 @@ function createLevelNode( n: number ): Node {
   } );
   const label = new RichText( labelStringProperty, {
     fill: 'black',
-    font: LEVEL_LABEL_FONT,
-    maxWidth: 50
+    font: LABEL_FONT,
+    maxWidth: LABEL_MAX_WIDTH
   } );
 
   return new HBox( {
