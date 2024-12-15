@@ -67,8 +67,6 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
     } );
 
     //TODO Display squiggle between previous and current electron state.
-
-
   }
 }
 
