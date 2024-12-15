@@ -52,12 +52,23 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
  * This Node consists n-1 horizontal lines with label "n = {value}" to the right of the lines.
  */
 function createLevelNode( n: number ): Node {
+  assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE );
 
-  const linesLength = n * LEVEL_LINE_LENGTH + ( n - 1 ) * LEVEL_LINE_X_SPACING;
-  const lines = new Line( 0, 0, linesLength, 0, {
-    lineWidth: 1,
-    lineDash: [ LEVEL_LINE_LENGTH, LEVEL_LINE_X_SPACING ],
-    stroke: 'black'
+  // Create the same number of lines for all levels, so that the "n = {n}" labels will be horizontally aligned.
+  // Only the lines that are relevant will be visible.
+  const lines: Node[] = [];
+  for ( let l = 0; l < MOTHAConstants.MAX_STATE; l++ ) {
+    const line = new Line( 0, 0, LEVEL_LINE_LENGTH, 0, {
+      lineWidth: 1,
+      stroke: 'black',
+      visible: ( l < n )
+    } );
+    lines.push( line );
+  }
+  const linesHBox = new HBox( {
+    excludeInvisibleChildrenFromBounds: false,
+    children: lines,
+    spacing: LEVEL_LINE_X_SPACING
   } );
 
   const labelStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.nEqualsStringProperty, {
@@ -71,7 +82,7 @@ function createLevelNode( n: number ): Node {
   } );
 
   return new HBox( {
-    children: [ lines, label ],
+    children: [ linesHBox, label ],
     align: 'center',
     spacing: 5
   } );
