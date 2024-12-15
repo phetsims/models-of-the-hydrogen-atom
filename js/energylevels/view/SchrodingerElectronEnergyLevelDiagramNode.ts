@@ -44,25 +44,36 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
     }
 
     //TODO l = 0 1 2 3 4 5
+    const lEqualsStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsStringProperty, {
+      symbol: MOTHASymbols.lStringProperty
+    } );
+    const lEqualsText = new RichText( lEqualsStringProperty, {
+      font: LABEL_FONT,
+      maxWidth: LABEL_MAX_WIDTH,
+      left: this.energyAxisHBox.right + 5,
+      top: this.energyAxisHBox.top
+    } );
+    this.stateLayer.addChild( lEqualsText );
 
     // 'm = {value}' in the upper right corner of the diagram.
     const mEqualsValueStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
       symbol: MOTHASymbols.mStringProperty,
       value: new DerivedProperty( [ hydrogenAtom.nlmProperty ], nlm => nlm.m )
     } );
-    const mText = new RichText( mEqualsValueStringProperty, {
+    const mEqualsValueText = new RichText( mEqualsValueStringProperty, {
       font: LABEL_FONT,
       maxWidth: LABEL_MAX_WIDTH,
       top: this.energyAxisHBox.top
     } );
-    mText.localBoundsProperty.link( () => {
-      mText.right = this.rectangle.right - 10;
+    mEqualsValueText.localBoundsProperty.link( () => {
+      mEqualsValueText.right = this.rectangle.right - 10;
     } );
-    this.stateLayer.addChild( mText );
+    this.stateLayer.addChild( mEqualsValueText );
 
     // Position the electron on the level line, based on the values of n and l.
     hydrogenAtom.nlmProperty.link( nlm => {
-      this.electronNode.centerX = this.stateLayer.left + LEVEL_LINE_LENGTH / 2 + ( nlm.l * ( LEVEL_LINE_X_SPACING + LEVEL_LINE_LENGTH ) );
+      this.electronNode.centerX = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET + LEVEL_LINE_LENGTH / 2 +
+                                  ( nlm.l * ( LEVEL_LINE_X_SPACING + LEVEL_LINE_LENGTH ) );
       this.electronNode.centerY = this.getYOffsetForState( nlm.n );
     } );
 
@@ -94,18 +105,18 @@ function createLevelNode( n: number ): Node {
     spacing: LEVEL_LINE_X_SPACING
   } );
 
-  const labelStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
+  const nEqualsValueStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
     symbol: MOTHASymbols.nStringProperty,
     value: n
   } );
-  const label = new RichText( labelStringProperty, {
+  const nEqualsValueText = new RichText( nEqualsValueStringProperty, {
     fill: 'black',
     font: LABEL_FONT,
     maxWidth: LABEL_MAX_WIDTH
   } );
 
   return new HBox( {
-    children: [ linesHBox, label ],
+    children: [ linesHBox, nEqualsValueText ],
     align: 'center',
     spacing: 5
   } );

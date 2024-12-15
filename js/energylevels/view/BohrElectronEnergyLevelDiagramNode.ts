@@ -62,18 +62,18 @@ function createLevelNode( n: number ): Node {
     stroke: 'black'
   } );
 
-  const labelStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
+  const nEqualsValueStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
     symbol: MOTHASymbols.nStringProperty,
     value: n
   } );
-  const label = new RichText( labelStringProperty, {
+  const nEqualsValueText = new RichText( nEqualsValueStringProperty, {
     fill: 'black',
     font: LABEL_FONT,
     maxWidth: LABEL_MAX_WIDTH
   } );
 
   return new HBox( {
-    children: [ line, label ],
+    children: [ line, nEqualsValueText ],
     align: 'center',
     spacing: 5
   } );

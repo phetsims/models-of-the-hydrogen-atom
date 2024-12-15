@@ -31,6 +31,7 @@ type StringsType = {
   'experimentStringProperty': LocalizedStringProperty;
   'modelStringProperty': LocalizedStringProperty;
   'hydrogenSymbolStringProperty': LocalizedStringProperty;
+  'symbolEqualsStringProperty': LocalizedStringProperty;
   'symbolEqualsValueStringProperty': LocalizedStringProperty;
   'nlmEqualsStringProperty': LocalizedStringProperty;
   'photonStringProperty': LocalizedStringProperty;
