@@ -41,7 +41,11 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
       this.stateLayer.addChild( levelNode );
     }
 
-    //TODO Position electron on level line.
+    // Position electron on level line, based on n and l quantum numbers.
+    hydrogenAtom.nlmProperty.link( nlm => {
+      this.electronNode.centerX = this.stateLayer.left + LEVEL_LINE_LENGTH / 2 + ( nlm.l * ( LEVEL_LINE_X_SPACING + LEVEL_LINE_LENGTH ) );
+      this.electronNode.centerY = this.getYOffsetForState( nlm.n );
+    } );
 
     //TODO Display squiggle between previous and current electron state.
   }
