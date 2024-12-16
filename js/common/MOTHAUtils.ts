@@ -11,6 +11,7 @@ import dotRandom from '../../../dot/js/dotRandom.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import Vector3 from '../../../dot/js/Vector3.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 
 const MOTHAUtils = {
 
@@ -114,6 +115,29 @@ const MOTHAUtils = {
       }
       return new Bounds3( minX, minY, maxX, maxY, minZ, maxZ );
     }
+  },
+
+  /**
+   * Is the given wavelength in the UV spectrum?
+   */
+  isUV( wavelength: number ): boolean {
+    return wavelength < VisibleColor.MIN_WAVELENGTH;
+  },
+
+  /**
+   * Is the given wavelength in the IR spectrum?
+   */
+  isIR( wavelength: number ): boolean {
+    return wavelength > VisibleColor.MAX_WAVELENGTH;
+  },
+
+  /**
+   * Distance between 2 points, given by (x,y) coordinates.
+   */
+  distance( x1: number, y1: number, x2: number, y2: number ): number {
+    const dx = x1 - x2;
+    const dy = y1 - y2;
+    return Math.sqrt( dx * dx + dy * dy );
   }
 };
 
