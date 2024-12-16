@@ -12,7 +12,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import ElectronEnergyLevelDiagramNode, { ElectronEnergyLevelDiagramNodeOptions } from './ElectronEnergyLevelDiagramNode.js';
+import EnergylDiagram, { ElectronEnergyLevelDiagramNodeOptions } from './EnergylDiagram.js';
 
 type SelfOptions = {
   size: Dimension2;
@@ -20,7 +20,7 @@ type SelfOptions = {
 
 type ExperimentElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
-export default class ExperimentElectronEnergyLevelDiagramNode extends ElectronEnergyLevelDiagramNode {
+export default class ExperimentElectronEnergyLevelDiagramNode extends EnergylDiagram {
 
   public constructor( providedOptions: ExperimentElectronEnergyLevelDiagramNodeOptions ) {
 
