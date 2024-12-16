@@ -21,8 +21,8 @@ import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import BohrEnergyDiagram from './BohrEnergyDiagram.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DeBroglieEnergyDiagram from './DeBroglieEnergyDiagram.js';
-import SchrodingerElectronEnergyLevelDiagramNode from './SchrodingerElectronEnergyLevelDiagramNode.js';
-import ExperimentElectronEnergyLevelDiagramNode from './ExperimentElectronEnergyLevelDiagramNode.js';
+import SchrodingerEnergyDiagram from './SchrodingerEnergyDiagram.js';
+import ExperimentEnergyDiagram from './ExperimentEnergyDiagram.js';
 
 // DIAGRAM_SIZE.height was empirically set so that heights of ElectronEnergyLevelAccordionBox and
 // EnergyLevelsZoomedInBoxNode are roughly the same.
@@ -53,28 +53,28 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       maxWidth: 150 // i18n, determined empirically
     } );
 
-    const bohrDiagramNode = new BohrEnergyDiagram( model.bohrModel, {
+    const bohrEnergyDiagram = new BohrEnergyDiagram( model.bohrModel, {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.bohrModel )
     } );
 
-    const deBroglieDiagramNode = new DeBroglieEnergyDiagram( model.deBroglieModel, {
+    const deBroglieEnergyDiagram = new DeBroglieEnergyDiagram( model.deBroglieModel, {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.deBroglieModel )
     } );
 
-    const schrodingerDiagramNode = new SchrodingerElectronEnergyLevelDiagramNode( model.schrodingerModel, {
+    const schrodingerEnergyDiagram = new SchrodingerEnergyDiagram( model.schrodingerModel, {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.schrodingerModel )
     } );
 
-    const experimentDiagramNode = new ExperimentElectronEnergyLevelDiagramNode( {
+    const experimentEneryDiagram = new ExperimentEnergyDiagram( {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.experiment )
     } );
 
     const content = new Node( {
-      children: [ bohrDiagramNode, deBroglieDiagramNode, schrodingerDiagramNode, experimentDiagramNode ]
+      children: [ bohrEnergyDiagram, deBroglieEnergyDiagram, schrodingerEnergyDiagram, experimentEneryDiagram ]
     } );
 
     super( content, options );

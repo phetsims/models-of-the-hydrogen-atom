@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SchrodingerElectronEnergyLevelDiagramNode is the Electron Energy Level diagram for the Schrodinger model.
+ * SchrodingerEnergyDiagram is the Electron Energy Level diagram for the Schrodinger model.
  *
  * This was SchrodingerEnergyDiagram.java in the Java version.
  *
@@ -29,7 +29,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type SchrodingerElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
-export default class SchrodingerElectronEnergyLevelDiagramNode extends EnergyDiagram {
+export default class SchrodingerEnergyDiagram extends EnergyDiagram {
 
   private readonly levelNodes: Node;
 
@@ -147,4 +147,4 @@ function createLevelNode( n: number ): Node {
   } );
 }
 
-modelsOfTheHydrogenAtom.register( 'SchrodingerElectronEnergyLevelDiagramNode', SchrodingerElectronEnergyLevelDiagramNode );
+modelsOfTheHydrogenAtom.register( 'SchrodingerEnergyDiagram', SchrodingerEnergyDiagram );

@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * ExperimentElectronEnergyLevelDiagramNode is the Electron Energy Level diagram for the Experiment model.
+ * ExperimentEnergyDiagram is the Electron Energy Level diagram for the Experiment model.
  * Since the user is supposed to guess which model corresponds to the Experiment, a '?' is shown instead of a diagram.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -20,7 +20,7 @@ type SelfOptions = {
 
 type ExperimentElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
-export default class ExperimentElectronEnergyLevelDiagramNode extends EnergyDiagram {
+export default class ExperimentEnergyDiagram extends EnergyDiagram {
 
   public constructor( providedOptions: ExperimentElectronEnergyLevelDiagramNodeOptions ) {
 
@@ -39,4 +39,4 @@ export default class ExperimentElectronEnergyLevelDiagramNode extends EnergyDiag
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'ExperimentElectronEnergyLevelDiagramNode', ExperimentElectronEnergyLevelDiagramNode );
+modelsOfTheHydrogenAtom.register( 'ExperimentEnergyDiagram', ExperimentEnergyDiagram );
