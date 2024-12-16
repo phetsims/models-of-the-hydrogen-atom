@@ -94,6 +94,10 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
     //TODO Display squiggle between previous and current electron state.
   }
 
+  /**
+   * Gets the x-coordinate, relative to this Node, that corresponds to the quantum number l that describes
+   * the electron's state.
+   */
   private getXForState( l: number ): number {
     assert && assert( l >= 0 && l < MOTHAConstants.MAX_STATE );
     return this.levelNodes.left + LEVEL_LINE_LENGTH / 2 + ( l * ( LEVEL_LINE_LENGTH + LEVEL_LINE_X_SPACING ) );

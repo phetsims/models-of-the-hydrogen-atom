@@ -107,7 +107,8 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
   }
 
   /**
-   * Gets the y-coordinate for an electron state (n) relative to the top of this Node.
+   * Gets the y-coordinate, relative to this Node, that corresponds to the quantum number n that describes
+   * the electron's state.
    */
   protected getYForState( n: number ): number {
     return Y_MARGIN + this.energyAxisLength - ( Y_OFFSETS[ n - 1 ] * this.energyAxisLength );
