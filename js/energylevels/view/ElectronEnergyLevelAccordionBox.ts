@@ -20,7 +20,7 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import BohrEnergyDiagram from './BohrEnergyDiagram.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DeBroglieElectronEnergyLevelDiagramNode from './DeBroglieElectronEnergyLevelDiagramNode.js';
+import DeBroglieEnergyDiagram from './DeBroglieEnergyDiagram.js';
 import SchrodingerElectronEnergyLevelDiagramNode from './SchrodingerElectronEnergyLevelDiagramNode.js';
 import ExperimentElectronEnergyLevelDiagramNode from './ExperimentElectronEnergyLevelDiagramNode.js';
 
@@ -58,7 +58,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.bohrModel )
     } );
 
-    const deBroglieDiagramNode = new DeBroglieElectronEnergyLevelDiagramNode( model.deBroglieModel, {
+    const deBroglieDiagramNode = new DeBroglieEnergyDiagram( model.deBroglieModel, {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.deBroglieModel )
     } );

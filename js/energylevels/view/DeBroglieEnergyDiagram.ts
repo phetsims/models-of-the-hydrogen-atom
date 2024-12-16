@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * DeBroglieElectronEnergyLevelDiagramNode is the Electron Energy Level diagram for the de Broglie model.
+ * DeBroglieEnergyDiagram is the Electron Energy Level diagram for the de Broglie model.
  * This is identical to the diagram for Bohr model, and adds no new functionality. A class is provided for
  * completeness of the class hierarchy.
  *
@@ -19,11 +19,11 @@ type SelfOptions = EmptySelfOptions;
 
 type DeBroglieElectronEnergyLevelDiagramNodeOptions = SelfOptions & BohrElectronEnergyLevelDiagramNodeOptions;
 
-export default class DeBroglieElectronEnergyLevelDiagramNode extends BohrEnergyDiagram {
+export default class DeBroglieEnergyDiagram extends BohrEnergyDiagram {
 
   public constructor( hydrogenAtom: DeBroglieModel, providedOptions: DeBroglieElectronEnergyLevelDiagramNodeOptions ) {
     super( hydrogenAtom, providedOptions );
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'DeBroglieElectronEnergyLevelDiagramNode', DeBroglieElectronEnergyLevelDiagramNode );
+modelsOfTheHydrogenAtom.register( 'DeBroglieEnergyDiagram', DeBroglieEnergyDiagram );
