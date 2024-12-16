@@ -48,7 +48,7 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
   protected readonly squiggleLayer: Node;
 
   // Constants used by subclasses.
-  public static readonly LEVEL_NODE_X_OFFSET = 15;
+  public static readonly LEVEL_NODE_X_OFFSET = 22;
   public static readonly LEVEL_LINE_LENGTH = 15;
   public static readonly LEVEL_LINE_X_SPACING = 4;
   public static readonly LABEL_FONT = new PhetFont( 12 );

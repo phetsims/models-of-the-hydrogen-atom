@@ -13,7 +13,7 @@ import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
-import { HBox, Line, Node, RichText } from '../../../../scenery/js/imports.js';
+import { HBox, Line, Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
@@ -34,26 +34,39 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
     super( providedOptions );
 
     // n horizontal lines for each energy level, labeled with 'n = {value}'.
+    const levelNodes = new Node();
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const levelNode = createLevelNode( n );
       levelNode.localBoundsProperty.link( () => {
         levelNode.left = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET;
         levelNode.centerY = this.getYOffsetForState( n );
       } );
-      this.stateLayer.addChild( levelNode );
+      levelNodes.addChild( levelNode );
     }
+    this.stateLayer.addChild( levelNodes );
 
-    //TODO l = 0 1 2 3 4 5
+    // l =
     const lEqualsStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsStringProperty, {
       symbol: MOTHASymbols.lStringProperty
     } );
     const lEqualsText = new RichText( lEqualsStringProperty, {
       font: LABEL_FONT,
-      maxWidth: LABEL_MAX_WIDTH,
-      left: this.energyAxisHBox.right + 5,
-      top: this.energyAxisHBox.top
+      maxWidth: 14,
+      right: levelNodes.left - 3,
+      bottom: levelNodes.top - 1
     } );
     this.stateLayer.addChild( lEqualsText );
+
+    //TODO l values centered above each level line
+    for ( let l = 0; l < MOTHAConstants.MAX_STATE; l++ ) {
+      const lText = new Text( l, {
+        font: LABEL_FONT,
+        maxWidth: 8,
+        centerX: levelNodes.left + LEVEL_LINE_LENGTH / 2 + ( l * ( LEVEL_LINE_LENGTH + LEVEL_LINE_X_SPACING ) ),
+        bottom: lEqualsText.bottom
+      } );
+      this.stateLayer.addChild( lText );
+    }
 
     // 'm = {value}' in the upper right corner of the diagram.
     const mEqualsValueStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
