@@ -51,8 +51,6 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
       // But we are so tight on space in the Energy Levels screen that we don't have a choice.
       maxWidth: 50
     } );
-    console.log( experimentText.width );
-    console.log( modelText.width );
 
     super( isExperimentProperty, true, experimentText, false, modelText, options );
   }
