@@ -9,7 +9,7 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import EnergylDiagram, { ElectronEnergyLevelDiagramNodeOptions } from './EnergylDiagram.js';
+import EnergyDiagram, { ElectronEnergyLevelDiagramNodeOptions } from './EnergyDiagram.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import { HBox, Line, Node, RichText } from '../../../../scenery/js/imports.js';
@@ -18,16 +18,16 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
 
-const LEVEL_NODE_X_OFFSET = EnergylDiagram.LEVEL_NODE_X_OFFSET;
-const LEVEL_LINE_LENGTH = EnergylDiagram.LEVEL_LINE_LENGTH;
-const LABEL_FONT = EnergylDiagram.LABEL_FONT;
-const LABEL_MAX_WIDTH = EnergylDiagram.LABEL_MAX_WIDTH;
+const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
+const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
+const LABEL_FONT = EnergyDiagram.LABEL_FONT;
+const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
 export type BohrElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
-export default class BohrElectronEnergyLevelDiagramNode extends EnergylDiagram {
+export default class BohrElectronEnergyLevelDiagramNode extends EnergyDiagram {
 
   public constructor( hydrogenAtom: BohrModel, providedOptions: BohrElectronEnergyLevelDiagramNodeOptions ) {
 

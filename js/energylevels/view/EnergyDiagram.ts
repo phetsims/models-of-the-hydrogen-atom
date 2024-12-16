@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * EnergylDiagram is the base class for Electron Energy Level diagrams, responsible for the components
+ * EnergyDiagram is the base class for Electron Energy Level diagrams, responsible for the components
  * that are common to all such diagrams.
  *
  * This was AbstractEnergyDiagram.java in the Java version.
@@ -33,7 +33,7 @@ type SelfOptions = {
 
 export type ElectronEnergyLevelDiagramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
 
-export default class EnergylDiagram extends Node {
+export default class EnergyDiagram extends Node {
 
   protected readonly rectangle: Node;
 
@@ -117,4 +117,4 @@ export default class EnergylDiagram extends Node {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'EnergylDiagram', EnergylDiagram );
+modelsOfTheHydrogenAtom.register( 'EnergyDiagram', EnergyDiagram );

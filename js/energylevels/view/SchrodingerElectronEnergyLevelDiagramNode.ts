@@ -9,7 +9,7 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import EnergylDiagram, { ElectronEnergyLevelDiagramNodeOptions } from './EnergylDiagram.js';
+import EnergyDiagram, { ElectronEnergyLevelDiagramNodeOptions } from './EnergyDiagram.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
@@ -19,17 +19,17 @@ import { HBox, Line, Node, RichText, Text } from '../../../../scenery/js/imports
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
-const LEVEL_NODE_X_OFFSET = EnergylDiagram.LEVEL_NODE_X_OFFSET;
-const LEVEL_LINE_LENGTH = EnergylDiagram.LEVEL_LINE_LENGTH;
+const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
+const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
 const LEVEL_LINE_X_SPACING = 4;
-const LABEL_FONT = EnergylDiagram.LABEL_FONT;
-const LABEL_MAX_WIDTH = EnergylDiagram.LABEL_MAX_WIDTH;
+const LABEL_FONT = EnergyDiagram.LABEL_FONT;
+const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
 export type SchrodingerElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
-export default class SchrodingerElectronEnergyLevelDiagramNode extends EnergylDiagram {
+export default class SchrodingerElectronEnergyLevelDiagramNode extends EnergyDiagram {
 
   private readonly levelNodes: Node;
 
