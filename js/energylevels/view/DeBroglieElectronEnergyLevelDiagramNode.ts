@@ -13,13 +13,13 @@
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import DeBroglieModel from '../../common/model/DeBroglieModel.js';
-import BohrElectronEnergyLevelDiagramNode, { BohrElectronEnergyLevelDiagramNodeOptions } from './BohrElectronEnergyLevelDiagramNode.js';
+import BohrEnergyDiagram, { BohrElectronEnergyLevelDiagramNodeOptions } from './BohrEnergyDiagram.js';
 
 type SelfOptions = EmptySelfOptions;
 
 type DeBroglieElectronEnergyLevelDiagramNodeOptions = SelfOptions & BohrElectronEnergyLevelDiagramNodeOptions;
 
-export default class DeBroglieElectronEnergyLevelDiagramNode extends BohrElectronEnergyLevelDiagramNode {
+export default class DeBroglieElectronEnergyLevelDiagramNode extends BohrEnergyDiagram {
 
   public constructor( hydrogenAtom: DeBroglieModel, providedOptions: DeBroglieElectronEnergyLevelDiagramNodeOptions ) {
     super( hydrogenAtom, providedOptions );

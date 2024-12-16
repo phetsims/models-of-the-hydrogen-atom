@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * BohrElectronEnergyLevelDiagramNode is the Electron Energy Level diagram for the Bohr model.
+ * BohrEnergyDiagram is the Electron Energy Level diagram for the Bohr model.
  *
  * This was BohrEnergyDiagram.java in the Java version.
  *
@@ -27,7 +27,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type BohrElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
-export default class BohrElectronEnergyLevelDiagramNode extends EnergyDiagram {
+export default class BohrEnergyDiagram extends EnergyDiagram {
 
   public constructor( hydrogenAtom: BohrModel, providedOptions: BohrElectronEnergyLevelDiagramNodeOptions ) {
 
@@ -81,4 +81,4 @@ function createLevelNode( n: number ): Node {
   } );
 }
 
-modelsOfTheHydrogenAtom.register( 'BohrElectronEnergyLevelDiagramNode', BohrElectronEnergyLevelDiagramNode );
+modelsOfTheHydrogenAtom.register( 'BohrEnergyDiagram', BohrEnergyDiagram );

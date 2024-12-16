@@ -18,7 +18,7 @@ import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
-import BohrElectronEnergyLevelDiagramNode from './BohrElectronEnergyLevelDiagramNode.js';
+import BohrEnergyDiagram from './BohrEnergyDiagram.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DeBroglieElectronEnergyLevelDiagramNode from './DeBroglieElectronEnergyLevelDiagramNode.js';
 import SchrodingerElectronEnergyLevelDiagramNode from './SchrodingerElectronEnergyLevelDiagramNode.js';
@@ -53,7 +53,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       maxWidth: 150 // i18n, determined empirically
     } );
 
-    const bohrDiagramNode = new BohrElectronEnergyLevelDiagramNode( model.bohrModel, {
+    const bohrDiagramNode = new BohrEnergyDiagram( model.bohrModel, {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.bohrModel )
     } );
