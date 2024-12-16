@@ -3,6 +3,8 @@
 /**
  * SchrodingerElectronEnergyLevelDiagramNode is the Electron Energy Level diagram for the Schrodinger model.
  *
+ * This was SchrodingerEnergyDiagram.java in the Java version.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

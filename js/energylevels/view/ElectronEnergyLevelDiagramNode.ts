@@ -4,6 +4,8 @@
  * ElectronEnergyLevelDiagramNode is the base class for Electron Energy Level diagrams, responsible for the components
  * that are common to all such diagrams.
  *
+ * This was AbstractEnergyDiagram.java in the Java version.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

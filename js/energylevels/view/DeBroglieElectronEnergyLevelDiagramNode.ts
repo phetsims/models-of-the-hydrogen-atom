@@ -5,6 +5,8 @@
  * This is identical to the diagram for Bohr model, and adds no new functionality. A class is provided for
  * completeness of the class hierarchy.
  *
+ * This was DeBroglieEnergyDiagram.java in the Java version.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

@@ -3,6 +3,8 @@
 /**
  * BohrElectronEnergyLevelDiagramNode is the Electron Energy Level diagram for the Bohr model.
  *
+ * This was BohrEnergyDiagram.java in the Java version.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
