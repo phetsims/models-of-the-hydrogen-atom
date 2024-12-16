@@ -47,7 +47,7 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
       fill: MOTHAColors.switchTextFillProperty,
 
       // Determined empirically in the Energy Levels screen.
-      // Giving modelText a smaller maxWidth than experimentText feels wrong because its English-centric.
+      // Making modelText.maxWidth smaller than experimentText.maxWidth is wrong because it's English-centric.
       // But we are so tight on space in the Energy Levels screen that we don't have a choice.
       maxWidth: 90
     } );
