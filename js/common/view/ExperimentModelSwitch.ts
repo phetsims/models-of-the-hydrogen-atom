@@ -49,7 +49,7 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
       // Determined empirically in the Energy Levels screen.
       // Making modelText.maxWidth smaller than experimentText.maxWidth is wrong because it's English-centric.
       // But we are so tight on space in the Energy Levels screen that we don't have a choice.
-      maxWidth: 90
+      maxWidth: 50
     } );
     console.log( experimentText.width );
     console.log( modelText.width );
