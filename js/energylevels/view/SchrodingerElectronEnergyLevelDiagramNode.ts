@@ -57,7 +57,7 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
     } );
     this.stateLayer.addChild( lEqualsText );
 
-    //TODO l values centered above each level line
+    // l values, centered above each level line
     for ( let l = 0; l < MOTHAConstants.MAX_STATE; l++ ) {
       const lText = new Text( l, {
         font: LABEL_FONT,
