@@ -29,21 +29,23 @@ export type SchrodingerElectronEnergyLevelDiagramNodeOptions = SelfOptions & Ele
 
 export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronEnergyLevelDiagramNode {
 
+  private readonly levelNodes: Node;
+
   public constructor( hydrogenAtom: SchrodingerModel, providedOptions: SchrodingerElectronEnergyLevelDiagramNodeOptions ) {
 
     super( providedOptions );
 
     // n horizontal lines for each energy level, labeled with 'n = {value}'.
-    const levelNodes = new Node();
+    this.levelNodes = new Node();
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const levelNode = createLevelNode( n );
       levelNode.localBoundsProperty.link( () => {
         levelNode.left = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET;
-        levelNode.centerY = this.getYOffsetForState( n );
+        levelNode.centerY = this.getYForState( n );
       } );
-      levelNodes.addChild( levelNode );
+      this.levelNodes.addChild( levelNode );
     }
-    this.stateLayer.addChild( levelNodes );
+    this.stateLayer.addChild( this.levelNodes );
 
     // l =
     const lEqualsStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsStringProperty, {
@@ -52,8 +54,8 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
     const lEqualsText = new RichText( lEqualsStringProperty, {
       font: LABEL_FONT,
       maxWidth: 14,
-      right: levelNodes.left - 3,
-      bottom: levelNodes.top - 1
+      right: this.levelNodes.left - 3,
+      bottom: this.levelNodes.top - 1
     } );
     this.stateLayer.addChild( lEqualsText );
 
@@ -62,7 +64,7 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
       const lText = new Text( l, {
         font: LABEL_FONT,
         maxWidth: 8,
-        centerX: levelNodes.left + LEVEL_LINE_LENGTH / 2 + ( l * ( LEVEL_LINE_LENGTH + LEVEL_LINE_X_SPACING ) ),
+        centerX: this.getXForState( l ),
         bottom: lEqualsText.bottom
       } );
       this.stateLayer.addChild( lText );
@@ -85,12 +87,16 @@ export default class SchrodingerElectronEnergyLevelDiagramNode extends ElectronE
 
     // Position the electron on the level line, based on the values of n and l.
     hydrogenAtom.nlmProperty.link( nlm => {
-      this.electronNode.centerX = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET + LEVEL_LINE_LENGTH / 2 +
-                                  ( nlm.l * ( LEVEL_LINE_X_SPACING + LEVEL_LINE_LENGTH ) );
-      this.electronNode.centerY = this.getYOffsetForState( nlm.n );
+      this.electronNode.centerX = this.getXForState( nlm.l );
+      this.electronNode.centerY = this.getYForState( nlm.n );
     } );
 
     //TODO Display squiggle between previous and current electron state.
+  }
+
+  private getXForState( l: number ): number {
+    assert && assert( l >= 0 && l < MOTHAConstants.MAX_STATE );
+    return this.levelNodes.left + LEVEL_LINE_LENGTH / 2 + ( l * ( LEVEL_LINE_LENGTH + LEVEL_LINE_X_SPACING ) );
   }
 }
 

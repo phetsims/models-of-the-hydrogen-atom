@@ -107,9 +107,9 @@ export default class ElectronEnergyLevelDiagramNode extends Node {
   }
 
   /**
-   * Gets the y-offset for an electron state (n) relative to the top of this Node.
+   * Gets the y-coordinate for an electron state (n) relative to the top of this Node.
    */
-  protected getYOffsetForState( n: number ): number {
+  protected getYForState( n: number ): number {
     return Y_MARGIN + this.energyAxisLength - ( Y_OFFSETS[ n - 1 ] * this.energyAxisLength );
   }
 }

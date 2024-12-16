@@ -36,7 +36,7 @@ export default class BohrElectronEnergyLevelDiagramNode extends ElectronEnergyLe
       const levelNode = createLevelNode( n );
       levelNode.localBoundsProperty.link( () => {
         levelNode.left = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET;
-        levelNode.centerY = this.getYOffsetForState( n );
+        levelNode.centerY = this.getYForState( n );
       } );
       this.stateLayer.addChild( levelNode );
     }
@@ -44,7 +44,7 @@ export default class BohrElectronEnergyLevelDiagramNode extends ElectronEnergyLe
     // Position the electron on a level line, based on the value of n.
     this.electronNode.centerX = this.stateLayer.left + LEVEL_LINE_LENGTH / 2;
     hydrogenAtom.electron.nProperty.link( n => {
-      this.electronNode.centerY = this.getYOffsetForState( n );
+      this.electronNode.centerY = this.getYForState( n );
     } );
 
     //TODO Display squiggle between previous and current electron state.
