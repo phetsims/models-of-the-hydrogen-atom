@@ -18,11 +18,11 @@ type SelfOptions = {
   size: Dimension2;
 };
 
-type ExperimentElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
+type ExperimentEnergyDiagramOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
 export default class ExperimentEnergyDiagram extends EnergyDiagram {
 
-  public constructor( providedOptions: ExperimentElectronEnergyLevelDiagramNodeOptions ) {
+  public constructor( providedOptions: ExperimentEnergyDiagramOptions ) {
 
     super( providedOptions );
 

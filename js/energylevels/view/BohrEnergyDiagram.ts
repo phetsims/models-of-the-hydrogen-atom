@@ -25,11 +25,11 @@ const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
-export type BohrElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
+export type BohrEnergyDiagramOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
 export default class BohrEnergyDiagram extends EnergyDiagram {
 
-  public constructor( hydrogenAtom: BohrModel, providedOptions: BohrElectronEnergyLevelDiagramNodeOptions ) {
+  public constructor( hydrogenAtom: BohrModel, providedOptions: BohrEnergyDiagramOptions ) {
 
     super( providedOptions );
 

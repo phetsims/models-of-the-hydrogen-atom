@@ -27,13 +27,13 @@ const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
-export type SchrodingerElectronEnergyLevelDiagramNodeOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
+type SchrodingerEnergyDiagramOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
 
 export default class SchrodingerEnergyDiagram extends EnergyDiagram {
 
   private readonly levelNodes: Node;
 
-  public constructor( hydrogenAtom: SchrodingerModel, providedOptions: SchrodingerElectronEnergyLevelDiagramNodeOptions ) {
+  public constructor( hydrogenAtom: SchrodingerModel, providedOptions: SchrodingerEnergyDiagramOptions ) {
 
     super( providedOptions );
 
