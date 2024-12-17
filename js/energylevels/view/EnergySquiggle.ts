@@ -18,8 +18,10 @@ import MOTHAUtils from '../../common/MOTHAUtils.js';
 import { Shape } from '../../../../kite/js/imports.js';
 
 const MIN_SQUIGGLE_LENGTH = 5;
-const SQUIGGLE_AMPLITUDE = 6;
 const ARROW_HEAD_SIZE = new Dimension2( 20, 10 );
+
+// Amplitude of the squiggle sine wave, in pixels.
+const SQUIGGLE_AMPLITUDE = 6;
 
 // Length of 1 period of the squiggle, in pixels.
 const UV_SQUIGGLE_PERIOD = 8;
@@ -27,7 +29,8 @@ const MIN_VISIBLE_SQUIGGLE_PERIOD = 10;
 const MAX_VISIBLE_SQUIGGLE_PERIOD = 20;
 const IR_SQUIGGLE_PERIOD = 22;
 
-const SQUIGGLE_LIFETIME = 1.5; // seconds
+// Maximum time that the squiggle will be visible, in seconds.
+const SQUIGGLE_LIFETIME = 1.5;
 
 export default class EnergySquiggle extends Node {
 
