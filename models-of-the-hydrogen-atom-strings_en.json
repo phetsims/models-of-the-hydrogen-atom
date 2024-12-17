@@ -244,6 +244,11 @@
         "value": "My Snapshots"
       }
     },
+    "resetAtomButton": {
+      "accessibleName": {
+        "value": "Reset Atom"
+      }
+    },
     "spectraScreen": {
       "screenButtonsHelpText": {
         "value": "Compare experimental spectroscopy data to historical models of the hydrogen atom."

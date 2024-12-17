@@ -225,7 +225,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
       absorptionAndEmissionDialog,
       electronEnergyLevelAccordionBox,
       modelVBox,
-      zoomedInBoxNode.deBroglieRepresentationComboBox
+      zoomedInBoxNode
     ];
 
     // Control Area focus order

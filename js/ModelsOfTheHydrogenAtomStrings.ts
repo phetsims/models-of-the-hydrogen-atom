@@ -117,6 +117,9 @@ type StringsType = {
     'mySnapshotsDialog': {
       'accessibleNameStringProperty': LocalizedStringProperty;
     };
+    'resetAtomButton': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+    };
     'spectraScreen': {
       'screenButtonsHelpTextStringProperty': LocalizedStringProperty;
       'screenSummary': {

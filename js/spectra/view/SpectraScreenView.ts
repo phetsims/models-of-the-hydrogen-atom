@@ -212,7 +212,7 @@ export default class SpectraScreenView extends ScreenView {
       absorptionAndEmissionCheckbox,
       absorptionAndEmissionDialog,
       modelVBox,
-      zoomedInBoxNode.deBroglieRepresentationComboBox
+      zoomedInBoxNode
     ];
 
     // Control Area focus order
