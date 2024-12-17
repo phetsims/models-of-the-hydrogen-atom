@@ -13,11 +13,8 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Color, Node, NodeOptions, Path, TColor } from '../../../../scenery/js/imports.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import { Color, Node, Path, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -30,40 +27,25 @@ import OrbitsNode from './OrbitsNode.js';
 // more polygons (Path nodes), it's important to keep this value as small as possible.
 const POLYGON_SIZE = 3;
 
-type SelfOptions = EmptySelfOptions;
-
-type DeBroglieBrightnessNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
-
 export default class DeBroglieBrightnessNode extends Node {
 
-  public constructor( hydrogenAtom: DeBroglieModel,
-                      modelViewTransform: ModelViewTransform2,
-                      providedOptions: DeBroglieBrightnessNodeOptions ) {
-
-    const options = optionize<DeBroglieBrightnessNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      isDisposable: false,
-
-      // visible when the view choice is 'brightness'
-      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
-        deBroglieView => ( deBroglieView === 'brightness' ), {
-          tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-          phetioValueType: BooleanIO
-        } )
-    }, providedOptions );
+  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
     // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'orbitsNode' )
-    } );
+    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform );
 
     // Ring whose brightness represents the standing wave
     const ringNode = new RingNode( hydrogenAtom, modelViewTransform );
 
-    options.children = [ orbitsNode, ringNode ];
+    super( {
+      // NodeOptions
+      isDisposable: false,
+      children: [ orbitsNode, ringNode ],
 
-    super( options );
+      // visible when the view choice is 'brightness'
+      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+        deBroglieView => ( deBroglieView === 'brightness' ) )
+    } );
   }
 }
 

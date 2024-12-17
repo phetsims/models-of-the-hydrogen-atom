@@ -35,14 +35,8 @@ export default class BohrNode extends HydrogenAtomNode {
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: BohrNodeOptions ) {
 
-    const options = optionize<BohrNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      // No default values, but we modify options below.
-    }, providedOptions );
-
     // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'orbitsNode' )
-    } );
+    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform );
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
 
@@ -50,10 +44,14 @@ export default class BohrNode extends HydrogenAtomNode {
 
     //TODO Should electronStateText be in front of photons?
     const electronStateText = new ElectronStateText( hydrogenAtom.electron.nProperty, {
-      tandem: options.tandem.createTandem( 'electronStateText' )
+      tandem: providedOptions.tandem.createTandem( 'electronStateText' )
     } );
 
-    options.children = [ orbitsNode, protonNode, electronNode, electronStateText ];
+    const options = optionize<BohrNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
+
+      // HydrogenAtomNodeOptions
+      children: [ orbitsNode, protonNode, electronNode, electronStateText ]
+    }, providedOptions );
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 

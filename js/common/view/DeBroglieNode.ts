@@ -1,7 +1,5 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
-//TODO Should we have 1 orbitsVisibleProperty used by all 3 representations? Should orbits even be instrumented?
-//TODO Should we have 1 electronVisibleProperty used by all 3 representations? Should electron representation even be instrumented?
 //TODO Should deBroglieRepresentationComboBox and electronStateText be in front of photons?
 
 /**
@@ -49,29 +47,17 @@ export default class DeBroglieNode extends HydrogenAtomNode {
                       listboxParent: Node,
                       providedOptions: DeBroglieNodeOptions ) {
 
-    const options = optionize<DeBroglieNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      // No default values, but we modify options below.
-    }, providedOptions );
-
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
 
-    // Organize the view Nodes under a common parent, to improve presentation in Studio.
-    // These Nodes control their own visibility, based on the value of hydrogenAtom.deBroglieRepresentationProperty.
-    const representationNodes = options.tandem.createTandem( 'representationNodes' );
-
-    const deBroglieRadialDistanceNode = new DeBroglieRadialDistanceNode( hydrogenAtom, modelViewTransform, {
-      tandem: representationNodes.createTandem( 'deBroglieRadialDistanceNode' )
-    } );
+    const deBroglieRadialDistanceNode = new DeBroglieRadialDistanceNode( hydrogenAtom, modelViewTransform );
 
     const deBroglie3DHeightNode = new DeBroglie3DHeightNode( hydrogenAtom, modelViewTransform, {
-      tandem: representationNodes.createTandem( 'deBroglie3DHeightNode' )
+      tandem: providedOptions.tandem.createTandem( 'deBroglie3DHeightNode' )
     } );
 
-    const deBroglieBrightnessNode = new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform, {
-      tandem: representationNodes.createTandem( 'deBroglieBrightnessNode' )
-    } );
+    const deBroglieBrightnessNode = new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform );
 
     const viewNodes = new Node( {
       children: [ deBroglieRadialDistanceNode, deBroglie3DHeightNode, deBroglieBrightnessNode ]
@@ -80,14 +66,18 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
     const deBroglieRepresentationComboBox = new DeBroglieRepresentationComboBox( hydrogenAtom.deBroglieRepresentationProperty, listboxParent, {
       leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
-      tandem: options.tandem.createTandem( 'deBroglieRepresentationComboBox' )
+      tandem: providedOptions.tandem.createTandem( 'deBroglieRepresentationComboBox' )
     } );
 
     const electronStateText = new ElectronStateText( hydrogenAtom.electron.nProperty, {
-      tandem: options.tandem.createTandem( 'electronStateText' )
+      tandem: providedOptions.tandem.createTandem( 'electronStateText' )
     } );
 
-    options.children = [ protonNode, viewNodes, deBroglieRepresentationComboBox, electronStateText ];
+    const options = optionize<DeBroglieNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
+
+      // HydrogenAtomNodeOptions
+      children: [ protonNode, viewNodes, deBroglieRepresentationComboBox, electronStateText ]
+    }, providedOptions );
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
 

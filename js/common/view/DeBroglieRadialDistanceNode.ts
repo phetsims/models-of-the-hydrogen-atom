@@ -12,11 +12,8 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import { Node, Path } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
@@ -30,40 +27,26 @@ const RADIAL_OFFSET_FACTOR = 0.45;
 // number of line segments used to approximate the ring, empirically tunes to make the ring look smooth
 const NUMBER_OF_SEGMENTS = 200;
 
-type SelfOptions = EmptySelfOptions;
-
-type DeBroglieRadialNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
-
 export default class DeBroglieRadialDistanceNode extends Node {
 
-  public constructor( hydrogenAtom: DeBroglieModel,
-                      modelViewTransform: ModelViewTransform2,
-                      providedOptions: DeBroglieRadialNodeOptions ) {
+  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
-    const options = optionize<DeBroglieRadialNodeOptions, SelfOptions, NodeOptions>()( {
+    // Electron orbits
+    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform );
+
+    // Ring that represents the electron as a  standing wave
+    const ringNode = new RingNode( hydrogenAtom, modelViewTransform );
+
+    super( {
 
       // NodeOptions
       isDisposable: false,
+      children: [ orbitsNode, ringNode ],
 
       // visible when the view choice is 'Radial Distance'
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
-        deBroglieView => ( deBroglieView === 'radialDistance' ), {
-          tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-          phetioValueType: BooleanIO
-        } )
-    }, providedOptions );
-
-    // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'orbitsNode' )
+        deBroglieView => ( deBroglieView === 'radialDistance' ) )
     } );
-
-    // Ring that represents the standing wave
-    const ringNode = new RingNode( hydrogenAtom, modelViewTransform );
-
-    options.children = [ orbitsNode, ringNode ];
-
-    super( options );
   }
 }
 

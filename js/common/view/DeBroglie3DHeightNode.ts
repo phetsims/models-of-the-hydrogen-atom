@@ -14,7 +14,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
@@ -55,10 +54,7 @@ export default class DeBroglie3DHeightNode extends Node {
 
       // visible when the view choice is '3D Height'
       visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
-        deBroglieView => ( deBroglieView === '3DHeight' ), {
-          tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-          phetioValueType: BooleanIO
-        } )
+        deBroglieView => ( deBroglieView === '3DHeight' ) )
     }, providedOptions );
 
     super( options );
