@@ -219,7 +219,7 @@ export default class SpectraScreenView extends ScreenView {
     this.pdomControlAreaNode.pdomOrder = [
       spectrometerAccordionBox,
       timeControlNode,
-      zoomedInBoxNode.schrodingerQuantumNumbersInfoButton,
+      zoomedInBoxNode.schrodingerQuantumNumbersInfoButton, //TODO I'd like to move this to Play Area.
       resetAllButton
     ];
 

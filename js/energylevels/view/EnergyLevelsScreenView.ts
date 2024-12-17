@@ -232,7 +232,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     this.pdomControlAreaNode.pdomOrder = [
       spectrometerAccordionBox,
       timeControlNode,
-      zoomedInBoxNode.schrodingerQuantumNumbersInfoButton,
+      zoomedInBoxNode.schrodingerQuantumNumbersInfoButton, //TODO I'd like to move this to Play Area.
       resetAllButton
     ];
 
