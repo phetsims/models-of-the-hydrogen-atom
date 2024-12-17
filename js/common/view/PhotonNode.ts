@@ -39,10 +39,6 @@ export default class PhotonNode extends Node {
 
   public constructor( photon: Photon, modelViewTransform: ModelViewTransform2, providedOptions?: PhotonNodeOptions ) {
 
-    const options = optionize<PhotonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
-      //TODO default values for options
-    }, providedOptions );
-
     const wavelength = photon.wavelength;
 
     const photonRadius = modelViewTransform.modelToViewDeltaX( photon.radius );
@@ -60,18 +56,22 @@ export default class PhotonNode extends Node {
     const sparkleRadius = 0.575 * photonRadius;
     const sparkleNode = new SparkleNode( wavelength, sparkleRadius );
 
-    options.children = [ haloNode, orbNode, sparkleNode ];
+    const options = optionize<PhotonNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
+
+      // ShadedSphereNodeOptions
+      children: [ haloNode, orbNode, sparkleNode ]
+    }, providedOptions );
+
+    super( options );
 
     // Draw a red circle around emitted photons, to make them easier to see.
     if ( MOTHAQueryParameters.debugEmission && photon.debugHaloColor ) {
-      options.children.push( new Circle( {
+      this.addChild( new Circle( {
         radius: 1.25 * haloRadius,
         stroke: photon.debugHaloColor,
         lineWidth: 6
       } ) );
     }
-
-    super( options );
 
     const positionListener = ( position: Vector2 ) => {
       this.translation = modelViewTransform.modelToViewPosition( position );

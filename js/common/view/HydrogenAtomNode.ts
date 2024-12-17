@@ -1,6 +1,5 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
-//TODO should this Node be responsible for position?
 /**
  * HydrogenAtomNode is the base class for all hydrogen-atom views.
  *

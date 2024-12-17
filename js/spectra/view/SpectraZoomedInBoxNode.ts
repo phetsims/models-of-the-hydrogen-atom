@@ -7,7 +7,7 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
@@ -38,9 +38,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
   public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
-    const options = optionize<SpectraZoomedInBoxNodeOptions, SelfOptions, ZoomedInBoxNodeOptions>()( {
-      //TODO default values for options
-    }, providedOptions );
+    const options = providedOptions;
 
     // All model-view transform operations take place in the zoomed-in box.
     // Our model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.

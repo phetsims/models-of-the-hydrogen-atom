@@ -29,10 +29,6 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: PlumPuddingNodeOptions ) {
 
-    const options = optionize<PlumPuddingNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options
-    }, providedOptions );
-
     // Plum pudding image, centered at the atom's position
     const plumPuddingImage = new Image( plumPudding_png );
     const atomHeight = Math.abs( 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.radius ) );
@@ -42,7 +38,11 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
 
     const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
 
-    options.children = [ plumPuddingImage, electronNode ];
+    const options = optionize<PlumPuddingNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
+
+      // HydrogenAtomNodeOptions
+      children: [ plumPuddingImage, electronNode ]
+    }, providedOptions );
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }
