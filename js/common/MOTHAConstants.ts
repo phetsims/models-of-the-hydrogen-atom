@@ -17,7 +17,7 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const GROUND_STATE = 1;
 const MAX_STATE = 6;
-const MIN_UV_WAVELENGTH = 92; //TODO Why 92? Isn't UV range [100,400] nm?
+const MIN_UV_WAVELENGTH = 92; // slightly below 94 nm for the 1 -> state transition
 const MAX_IR_WAVELENGTH = 7500; // slightly above 7460 nm for the 5 -> 6 state transition
 
 const CORNER_RADIUS = 5;
