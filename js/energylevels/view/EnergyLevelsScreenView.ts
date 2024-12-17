@@ -114,6 +114,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
     // panel that contains radio buttons for selecting a predictive model
     const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty, {
+      radioButtonTextMaxWidth: 120,
       hasContinuumBar: false,
       tandem: tandem.createTandem( 'modelPanel' )
     } );

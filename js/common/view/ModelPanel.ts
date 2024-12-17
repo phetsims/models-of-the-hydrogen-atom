@@ -22,6 +22,7 @@ import ContinuumBarNode from './ContinuumBarNode.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
 
 type SelfOptions = {
+  radioButtonTextMaxWidth: number;
   hasContinuumBar?: boolean;
 };
 
@@ -48,6 +49,7 @@ export default class ModelPanel extends Panel {
 
     // radio buttons
     const modelRadioButtonGroup = new ModelRadioButtonGroup( predictiveModelProperty, predictiveModels, {
+      radioButtonTextMaxWidth: providedOptions.radioButtonTextMaxWidth,
       tandem: options.tandem.createTandem( 'modelRadioButtonGroup' )
     } );
 

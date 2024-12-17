@@ -106,6 +106,7 @@ export default class SpectraScreenView extends ScreenView {
 
     // panel that contains radio buttons for selecting a predictive model
     const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty, {
+      radioButtonTextMaxWidth: 200,
       tandem: tandem.createTandem( 'modelPanel' )
     } );
 

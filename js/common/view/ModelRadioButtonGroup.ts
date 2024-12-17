@@ -7,7 +7,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignGroup, HBox, Text } from '../../../../scenery/js/imports.js';
@@ -17,7 +17,9 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  radioButtonTextMaxWidth: number;
+};
 
 type ModelRadioButtonGroupOptions = SelfOptions & PickRequired<RectangularRadioButtonGroupOptions, 'tandem'>;
 
@@ -65,7 +67,8 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
     // To make all icons have the same effective size.
     const iconAlignGroup = new AlignGroup();
 
-    const items = predictiveModels.map( predictiveModel => createRadioButtonItem( predictiveModel, iconAlignGroup ) );
+    const items = predictiveModels.map( predictiveModel =>
+      createRadioButtonItem( predictiveModel, iconAlignGroup, providedOptions.radioButtonTextMaxWidth ) );
 
     super( predictiveModelProperty, items, options );
   }
@@ -74,7 +77,7 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
 /**
  * Creates the item for one radio button.
  */
-function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup ): RectangularRadioButtonGroupItem<HydrogenAtom> {
+function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup, textMaxWidth: number ): RectangularRadioButtonGroupItem<HydrogenAtom> {
 
   return {
     value: predictiveModel,
@@ -87,7 +90,7 @@ function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: A
         new Text( predictiveModel.displayNameProperty, {
           fill: MOTHAColors.invertibleTextFillProperty,
           font: new PhetFont( 16 ),
-          maxWidth: 120 // determined empirically in the Energy Levels screen
+          maxWidth: textMaxWidth
         } ) ]
     } ),
     tandemName: `${predictiveModel.tandemNamePrefix}RadioButton`
