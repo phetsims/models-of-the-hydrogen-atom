@@ -110,6 +110,10 @@ export default class EnergyDiagram extends Node {
     this.energySquiggle = energySquiggle;
   }
 
+  public step( dt: number ): void {
+    this.energySquiggle.step( dt );
+  }
+
   /**
    * Gets the y-coordinate, relative to this Node, that corresponds to the quantum number n that describes
    * the electron's state.

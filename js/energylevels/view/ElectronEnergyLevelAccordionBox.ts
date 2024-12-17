@@ -23,6 +23,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DeBroglieEnergyDiagram from './DeBroglieEnergyDiagram.js';
 import SchrodingerEnergyDiagram from './SchrodingerEnergyDiagram.js';
 import ExperimentEnergyDiagram from './ExperimentEnergyDiagram.js';
+import EnergyDiagram from './EnergyDiagram.js';
 
 // DIAGRAM_SIZE.height was empirically set so that heights of ElectronEnergyLevelAccordionBox and
 // EnergyLevelsZoomedInBoxNode are roughly the same.
@@ -33,6 +34,8 @@ type SelfOptions = EmptySelfOptions;
 type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
 
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
+
+  private readonly diagrams: EnergyDiagram[];
 
   public constructor( model: EnergyLevelsModel, providedOptions: ElectronEnergyLevelAccordionBoxOptions ) {
 
@@ -68,16 +71,24 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.schrodingerModel )
     } );
 
-    const experimentEneryDiagram = new ExperimentEnergyDiagram( {
+    const experimentEnergyDiagram = new ExperimentEnergyDiagram( {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.experiment )
     } );
 
+    const diagrams = [ bohrEnergyDiagram, deBroglieEnergyDiagram, schrodingerEnergyDiagram, experimentEnergyDiagram ];
+
     const content = new Node( {
-      children: [ bohrEnergyDiagram, deBroglieEnergyDiagram, schrodingerEnergyDiagram, experimentEneryDiagram ]
+      children: diagrams
     } );
 
     super( content, options );
+
+    this.diagrams = diagrams;
+  }
+
+  public step( dt: number ): void {
+    this.diagrams.forEach( diagram => diagram.step( dt ) );
   }
 }
 

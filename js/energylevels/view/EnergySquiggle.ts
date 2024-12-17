@@ -21,18 +21,32 @@ const MIN_SQUIGGLE_LENGTH = 5;
 const SQUIGGLE_AMPLITUDE = 6;
 const ARROW_HEAD_SIZE = new Dimension2( 20, 10 );
 
+// Length of 1 period of the squiggle, in pixels.
 const UV_SQUIGGLE_PERIOD = 8;
 const MIN_VISIBLE_SQUIGGLE_PERIOD = 10;
 const MAX_VISIBLE_SQUIGGLE_PERIOD = 20;
 const IR_SQUIGGLE_PERIOD = 22;
 
+const SQUIGGLE_LIFETIME = 1.5; // seconds
+
 export default class EnergySquiggle extends Node {
+
+  // Time since the update method was called, in seconds.
+  private timeSinceLastUpdate: number;
 
   public constructor() {
     super();
+    this.timeSinceLastUpdate = 0;
+    this.visible = false;
   }
 
+  /**
+   * Updates the squiggle to connect 2 points, with color corresponding to wavelength.
+   */
   public update( x1: number, y1: number, x2: number, y2: number, wavelength: number ): void {
+
+    this.timeSinceLastUpdate = 0;
+    this.visible = true;
 
     this.getChildren().forEach( child => child.dispose() );
     this.removeAllChildren();
@@ -94,6 +108,18 @@ export default class EnergySquiggle extends Node {
     const phi = Math.atan2( y2 - y1, x2 - x1 ); // conversion to Polar coordinates
     this.setTranslation( x1, y1 );
     this.setRotation( phi );
+  }
+
+  /**
+   * Hides the squiggle after it has been visible for SQUIGGLE_LIFETIME seconds.
+   */
+  public step( dt: number ): void {
+    if ( this.visible ) {
+      this.timeSinceLastUpdate += dt;
+      if ( this.timeSinceLastUpdate > SQUIGGLE_LIFETIME ) {
+        this.visible = false;
+      }
+    }
   }
 }
 
