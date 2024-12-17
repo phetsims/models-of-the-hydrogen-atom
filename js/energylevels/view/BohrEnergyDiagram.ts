@@ -46,7 +46,7 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
     // Position the electron on a level line, based on the value of n.
     this.electronNode.centerX = this.stateLayer.left + LEVEL_LINE_LENGTH / 2;
     hydrogenAtom.electron.nProperty.link( n => {
-      this.electronNode.centerY = this.getYForState( n );
+      this.electronNode.bottom = this.getYForState( n );
     } );
 
     //TODO Display squiggle between previous and current electron state.

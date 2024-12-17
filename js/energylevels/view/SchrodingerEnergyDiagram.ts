@@ -57,7 +57,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
       font: LABEL_FONT,
       maxWidth: 14,
       right: this.levelNodes.left - 3,
-      bottom: this.levelNodes.top - 1
+      bottom: this.levelNodes.top - 5
     } );
     this.stateLayer.addChild( lEqualsText );
 
@@ -90,7 +90,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     // Position the electron on the level line, based on the values of n and l.
     hydrogenAtom.nlmProperty.link( nlm => {
       this.electronNode.centerX = this.getXForState( nlm.l );
-      this.electronNode.centerY = this.getYForState( nlm.n );
+      this.electronNode.bottom = this.getYForState( nlm.n );
     } );
 
     //TODO Display squiggle between previous and current electron state.
