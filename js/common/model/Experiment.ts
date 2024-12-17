@@ -14,7 +14,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Light from './Light.js';
 import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -22,7 +21,7 @@ type ExperimentOptions = SelfOptions & PickRequired<SchrodingerModelOptions, 'ta
 
 export default class Experiment extends SchrodingerModel {
 
-  public constructor( zoomedInBox: ZoomedInBox, light: Light, providedOptions: ExperimentOptions ) {
+  public constructor( light: Light, providedOptions: ExperimentOptions ) {
 
     const options = optionize<ExperimentOptions, SelfOptions, SchrodingerModelOptions>()( {
 
@@ -30,7 +29,7 @@ export default class Experiment extends SchrodingerModel {
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.experimentStringProperty
     }, providedOptions );
 
-    super( zoomedInBox, light, options );
+    super( light, options );
   }
 }
 

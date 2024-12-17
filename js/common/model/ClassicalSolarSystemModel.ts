@@ -35,7 +35,6 @@ import ClassicalSolarSystemElectron from './ClassicalSolarSystemElectron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import Proton from './Proton.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 const ELECTRON_TO_PROTON_DISTANCE = 150; // initial distance from electron to proton
 const ELECTRON_DISTANCE_DELTA = 220; // amount the distance between the electron and proton is reduced per second
@@ -54,7 +53,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
   // Has the atom been destroyed?
   public readonly isDestroyedProperty: TReadOnlyProperty<boolean>;
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: ClassicalSolarSystemModelOptions ) {
+  public constructor( providedOptions: ClassicalSolarSystemModelOptions ) {
 
     const options = optionize<ClassicalSolarSystemModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
@@ -64,7 +63,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       tandemNamePrefix: 'classicalSolarSystem'
     }, providedOptions );
 
-    super( zoomedInBox, options );
+    super( options );
 
     this.proton = new Proton( {
       position: this.position

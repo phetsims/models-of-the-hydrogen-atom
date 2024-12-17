@@ -28,6 +28,7 @@ import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.j
 import ElectronStateText from './ElectronStateText.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -43,6 +44,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: DeBroglieModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2,
                       listboxParent: Node,
                       providedOptions: DeBroglieNodeOptions ) {
@@ -51,7 +53,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
       // No default values, but we modify options below.
     }, providedOptions );
 
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
 

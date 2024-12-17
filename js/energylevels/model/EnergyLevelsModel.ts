@@ -34,15 +34,15 @@ export default class EnergyLevelsModel extends MOTHAModel {
     // Group all predictive models under this tandem.
     const predictiveModelsTandem = tandem.createTandem( 'predictiveModels' );
 
-    const bohrModel = new BohrModel( zoomedInBox, {
+    const bohrModel = new BohrModel( {
       tandem: predictiveModelsTandem.createTandem( 'bohrModel' )
     } );
 
-    const deBroglieModel = new DeBroglieModel( zoomedInBox, {
+    const deBroglieModel = new DeBroglieModel( {
       tandem: predictiveModelsTandem.createTandem( 'deBroglieModel' )
     } );
 
-    const schrodingerModel = new SchrodingerModel( zoomedInBox, light, {
+    const schrodingerModel = new SchrodingerModel( light, {
       tandem: predictiveModelsTandem.createTandem( 'schrodingerModel' )
     } );
 

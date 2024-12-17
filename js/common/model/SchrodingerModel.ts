@@ -56,7 +56,6 @@ import Light from './Light.js';
 import MetastableHandler from './MetastableHandler.js';
 import PolynomialTerm from './PolynomialTerm.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -73,7 +72,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
   public readonly metastableHandler: MetastableHandler;
 
-  public constructor( zoomedInBox: ZoomedInBox, light: Light, providedOptions: SchrodingerModelOptions ) {
+  public constructor( light: Light, providedOptions: SchrodingerModelOptions ) {
 
     const options = optionize<SchrodingerModelOptions, SelfOptions, DeBroglieModelOptions>()( {
 
@@ -83,7 +82,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
       tandemNamePrefix: 'schrodinger'
     }, providedOptions );
 
-    super( zoomedInBox, options );
+    super( options );
 
     // We would prefer that this be a DerivedProperty, but its derivation depends on its previous value.
     //TODO Should nlmProperty be a Property of SchrodingerElectron?

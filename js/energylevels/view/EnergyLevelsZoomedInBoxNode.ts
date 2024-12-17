@@ -52,17 +52,19 @@ export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
 
     super( model.zoomedInBox, modelViewTransform, model.isExperimentProperty, options );
 
-    const bohrNode = new BohrNode( model.bohrModel, model.hydrogenAtomProperty, modelViewTransform, {
+    const bohrNode = new BohrNode( model.bohrModel, model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform, {
       tandem: options.tandem.createTandem( 'bohrNode' )
     } );
 
-    const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform, popupParent, {
-      tandem: options.tandem.createTandem( 'deBroglieNode' )
-    } );
+    const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, model.zoomedInBox,
+      modelViewTransform, popupParent, {
+        tandem: options.tandem.createTandem( 'deBroglieNode' )
+      } );
 
-    const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, model.light, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'schrodingerNode' )
-    } );
+    const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, model.zoomedInBox,
+      model.light, modelViewTransform, {
+        tandem: options.tandem.createTandem( 'schrodingerNode' )
+      } );
 
     const photonsLayer = new Node();
 

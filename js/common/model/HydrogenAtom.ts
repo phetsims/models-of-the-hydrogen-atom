@@ -20,7 +20,6 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
 
@@ -44,7 +43,6 @@ export type HydrogenAtomOptions = SelfOptions &
 
 export default abstract class HydrogenAtom extends PhetioObject {
 
-  public readonly zoomedInBox: ZoomedInBox; //TODO do all hydrogen-atom models need this?
   public readonly displayNameProperty: TReadOnlyProperty<string>;
   public readonly icon: Node;
   public readonly position: Vector2;
@@ -58,11 +56,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
   public readonly tandemNamePrefix: string;
 
-  /**
-   * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
-   * @param providedOptions
-   */
-  protected constructor( zoomedInBox: ZoomedInBox, providedOptions: HydrogenAtomOptions ) {
+  protected constructor( providedOptions: HydrogenAtomOptions ) {
 
     const options = optionize<HydrogenAtomOptions, SelfOptions, PhetioObjectOptions>()( {
 
@@ -76,7 +70,6 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
     super( options );
 
-    this.zoomedInBox = zoomedInBox;
     this.displayNameProperty = options.displayNameProperty;
     this.icon = options.icon;
     this.position = options.position;

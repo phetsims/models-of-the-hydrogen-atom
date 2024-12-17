@@ -20,7 +20,6 @@ import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line phe
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import { DeBroglieModelOptions } from './DeBroglieModel.js';
 import Photon from './Photon.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -31,7 +30,7 @@ export default class DeBroglieBaseModel extends BohrModel {
   // Radial width of the ring for the 'brightness' representation.
   public static readonly BRIGHTNESS_RING_THICKNESS = 3;
 
-  protected constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieBaseModelOptions ) {
+  protected constructor( providedOptions: DeBroglieBaseModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, BohrModelOptions>()( {
 
@@ -41,7 +40,7 @@ export default class DeBroglieBaseModel extends BohrModel {
       tandemNamePrefix: 'deBroglie'
     }, providedOptions );
 
-    super( zoomedInBox, options );
+    super( options );
   }
 
   /**

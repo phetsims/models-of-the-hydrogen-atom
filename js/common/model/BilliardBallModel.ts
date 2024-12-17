@@ -28,7 +28,6 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import BilliardBallNode from '../view/BilliardBallNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
 const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
@@ -41,7 +40,7 @@ export default class BilliardBallModel extends HydrogenAtom {
 
   public readonly radius = MOTHAConstants.BILLIARD_BALL_RADIUS;
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: BilliardBallModelOptions ) {
+  public constructor( providedOptions: BilliardBallModelOptions ) {
 
     const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
@@ -51,7 +50,7 @@ export default class BilliardBallModel extends HydrogenAtom {
       tandemNamePrefix: 'billiardBall'
     }, providedOptions );
 
-    super( zoomedInBox, options );
+    super( options );
   }
 
   public override step( dt: number ): void {

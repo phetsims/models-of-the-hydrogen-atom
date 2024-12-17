@@ -44,7 +44,6 @@ import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Light from './Light.js';
 import Photon from './Photon.js';
 import Proton from './Proton.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -84,7 +83,7 @@ export default class BohrModel extends HydrogenAtom {
   // A map from absorption/emission wavelengths to electron state (n) transitions.
   public static readonly wavelengthToStateTransitionMap = createWavelengthToStateTransitionMap();
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: BohrModelOptions ) {
+  public constructor( providedOptions: BohrModelOptions ) {
 
     const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
@@ -94,7 +93,7 @@ export default class BohrModel extends HydrogenAtom {
       tandemNamePrefix: 'bohr'
     }, providedOptions );
 
-    super( zoomedInBox, options );
+    super( options );
 
     this.proton = new Proton( {
       position: this.position

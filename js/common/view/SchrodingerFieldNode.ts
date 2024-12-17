@@ -18,14 +18,15 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerBrightness from './SchrodingerBrightness.js';
 import SchrodingerQuadrantNode from './SchrodingerQuadrantNode.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 
 export default class SchrodingerFieldNode extends Node {
 
   private readonly brightnessCache: SchrodingerBrightness;
 
-  public constructor( hydrogenAtom: SchrodingerModel, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( hydrogenAtom: SchrodingerModel, zoomedInBox: ZoomedInBox, modelViewTransform: ModelViewTransform2 ) {
 
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
     const quadrantWidth = zoomedInBoxBounds.width / 2;
     const quadrantHeight = zoomedInBoxBounds.height / 2;

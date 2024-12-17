@@ -98,7 +98,7 @@ export default class MOTHAModel implements TModel {
       phetioDocumentation: 'Whether we are viewing the Experiment (true) or a Model (false) of the hydrogen atom.'
     } );
 
-    this.experiment = new Experiment( zoomedInBox, light, {
+    this.experiment = new Experiment( light, {
       tandem: tandem.createTandem( 'experiment' )
     } );
 

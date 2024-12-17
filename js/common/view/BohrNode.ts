@@ -21,6 +21,7 @@ import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js
 import OrbitsNode from './OrbitsNode.js';
 import ProtonNode from './ProtonNode.js';
 import MOTHAColors from '../MOTHAColors.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -30,6 +31,7 @@ export default class BohrNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: BohrModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: BohrNodeOptions ) {
 
@@ -56,7 +58,7 @@ export default class BohrNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
     electronStateText.localBoundsProperty.link( () => {
       electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
     } );

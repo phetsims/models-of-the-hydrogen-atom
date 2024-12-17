@@ -45,6 +45,7 @@ import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import SchrodingerStateText from './SchrodingerStateText.js';
 import UnderConstructionText from './UnderConstructionText.js';
 import XZAxesNode from './XZAxesNode.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -57,6 +58,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: SchrodingerModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
+                      zoomedInBox: ZoomedInBox,
                       light: Light,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: SchrodingerNodeOptions ) {
@@ -65,11 +67,11 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       //TODO default values for options
     }, providedOptions );
 
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( hydrogenAtom.zoomedInBox );
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
 
-    const fieldNode = new SchrodingerFieldNode( hydrogenAtom, modelViewTransform );
+    const fieldNode = new SchrodingerFieldNode( hydrogenAtom, zoomedInBox, modelViewTransform );
 
     const xzAxesNode = new XZAxesNode( {
       color: MOTHAColors.xzAxesColorProperty,

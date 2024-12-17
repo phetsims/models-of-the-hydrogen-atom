@@ -40,27 +40,27 @@ export default class SpectraModel extends MOTHAModel {
     // Group all predictive models under this tandem.
     const predictiveModelsTandem = tandem.createTandem( 'predictiveModels' );
 
-    const billiardBallModel = new BilliardBallModel( zoomedInBox, {
+    const billiardBallModel = new BilliardBallModel( {
       tandem: predictiveModelsTandem.createTandem( 'billiardBallModel' )
     } );
 
-    const plumPuddingModel = new PlumPuddingModel( zoomedInBox, {
+    const plumPuddingModel = new PlumPuddingModel( {
       tandem: predictiveModelsTandem.createTandem( 'plumPuddingModel' )
     } );
 
-    const classicalSolarSystemModel = new ClassicalSolarSystemModel( zoomedInBox, {
+    const classicalSolarSystemModel = new ClassicalSolarSystemModel( {
       tandem: predictiveModelsTandem.createTandem( 'classicalSolarSystemModel' )
     } );
 
-    const bohrModel = new BohrModel( zoomedInBox, {
+    const bohrModel = new BohrModel( {
       tandem: predictiveModelsTandem.createTandem( 'bohrModel' )
     } );
 
-    const deBroglieModel = new DeBroglieModel( zoomedInBox, {
+    const deBroglieModel = new DeBroglieModel( {
       tandem: predictiveModelsTandem.createTandem( 'deBroglieModel' )
     } );
 
-    const schrodingerModel = new SchrodingerModel( zoomedInBox, light, {
+    const schrodingerModel = new SchrodingerModel( light, {
       tandem: predictiveModelsTandem.createTandem( 'schrodingerModel' )
     } );
 

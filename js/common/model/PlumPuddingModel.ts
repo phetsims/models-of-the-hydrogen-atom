@@ -41,7 +41,6 @@ import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Light from './Light.js';
 import Photon from './Photon.js';
 import PlumPuddingElectron from './PlumPuddingElectron.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
@@ -71,7 +70,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
   // The number of photons the atom has absorbed and is "holding".
   private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: PlumPuddingModelOptions ) {
+  public constructor( providedOptions: PlumPuddingModelOptions ) {
 
     const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
@@ -81,7 +80,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       tandemNamePrefix: 'plumPudding'
     }, providedOptions );
 
-    super( zoomedInBox, options );
+    super( options );
 
     this.electron = new PlumPuddingElectron( {
       position: this.position,

@@ -27,7 +27,6 @@ import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import DeBroglieBaseModel from './DeBroglieBaseModel.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
 import Photon from './Photon.js';
-import ZoomedInBox from './ZoomedInBox.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -44,7 +43,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
   // Position of the electron adjusted for the '3D height' view.
   public readonly electron3DPositionProperty: TReadOnlyProperty<Vector2>;
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: DeBroglieModelOptions ) {
+  public constructor( providedOptions: DeBroglieModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, BohrModelOptions>()( {
 
@@ -53,7 +52,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
       icon: DeBroglieNode.createIcon()
     }, providedOptions );
 
-    super( zoomedInBox, options );
+    super( options );
 
     this.electron3DPositionProperty = new DerivedProperty( [ this.electron.positionProperty ], position => {
       const x = position.x;
