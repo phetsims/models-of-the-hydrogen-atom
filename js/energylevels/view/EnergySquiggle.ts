@@ -17,7 +17,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAUtils from '../../common/MOTHAUtils.js';
 import { Shape } from '../../../../kite/js/imports.js';
 
-const MIN_SQUIGGLE_LENGTH = 500000;
+const MIN_SQUIGGLE_LENGTH = 5;
 const SQUIGGLE_AMPLITUDE = 6;
 const ARROW_HEAD_SIZE = new Dimension2( 20, 10 );
 
@@ -98,7 +98,7 @@ export default class EnergySquiggle extends Node {
       }
     }
     const squigglePath = new Path( squiggleShape, {
-      lineWidth: 2,
+      lineWidth: 1,
       stroke: color
     } );
     this.addChild( squigglePath );
