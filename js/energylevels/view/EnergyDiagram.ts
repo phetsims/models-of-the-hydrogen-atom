@@ -23,8 +23,9 @@ import ElectronNode from '../../common/view/ElectronNode.js';
 const X_MARGIN = 4;
 const Y_MARGIN = 5;
 
-// Percent offset from the bottom of the Energy axis. These values were set empirically.
-// Using actual energy values results in visual overlap of the levels, since higher levels are closely spaced.
+// Percent offset from the bottom of the Energy axis, where the horizontal level lines will appear, index by n-1.
+// These values were set empirically. Using actual energy values results in visual overlap of the levels, since
+// higher levels are closely spaced.
 const Y_OFFSETS = [ 0.025, 0.60, 0.73, 0.81, 0.86, 0.90 ];
 
 type SelfOptions = {
