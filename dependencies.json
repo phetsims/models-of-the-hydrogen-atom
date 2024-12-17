@@ -1,11 +1,11 @@
 {
-  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.14 Wed Nov 20 2024 09:26:49 GMT-0700 (Mountain Standard Time)",
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.15 Tue Dec 17 2024 12:54:26 GMT-0700 (Mountain Standard Time)",
   "assert": {
-    "sha": "386a2323ecc3b36fbe30babf13b660dc1cc522a8",
+    "sha": "f6d41b399ad32df2a00ab4b329981be0c574d77a",
     "branch": "main"
   },
   "axon": {
-    "sha": "7d28ac1450900b485756fd0c6a76f484fe0f05ae",
+    "sha": "1e4b7e8543cc0b83508fb21843122cf27372d94b",
     "branch": "main"
   },
   "brand": {
@@ -13,91 +13,91 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "8f9666b9e2b09f4434b69971fa1dd4e3fa9121f1",
+    "sha": "dd302e2dfbe14734bf900750868793eab4cb025d",
     "branch": "main"
   },
   "dot": {
-    "sha": "97e5775c972d83ab501371a7ff984b13e5d7d606",
+    "sha": "f73904858411cc2d67d7514a70542f98761f98f5",
     "branch": "main"
   },
   "joist": {
-    "sha": "13651285d77e80f7e9a8a7a73f1bab679d34279c",
+    "sha": "08e3eef7e405f23acb6ea3ec9838af749fc2c865",
     "branch": "main"
   },
   "kite": {
-    "sha": "0e133cdb5c4d2baf182178a0c7aeea7d8ec0bb81",
+    "sha": "2afbaa852ea9f42dd6d93019afd97eb735d6bbad",
     "branch": "main"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "62fb7858e253748bdc0e34ff55c0a8b2475bc3b7",
+    "sha": "34f9e8b63c0bd55f8368f09a725b7db8efb5325f",
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "120224473daf7a3ba151c9ebc80d142d9d7e0b4b",
+    "sha": "24b1e276899fdbcddec7a3d02c7409af2e0da24d",
     "branch": "main"
   },
   "phet-core": {
-    "sha": "81ba75b044852d46ba0596fd73ebd330bea6cf3a",
+    "sha": "c4d20331ba86007f58ece9c6ff8416f0c0ef76f3",
     "branch": "main"
   },
   "phet-io": {
-    "sha": "87258068d4cc5a5d7b2a69a1d1e791feeef4eac7",
+    "sha": "cb64ef3383cf667f0e3a50fc76391dfca840bc2d",
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "c50af574a351aeeff4cfdf398a9d821ca8fea453",
+    "sha": "7ebbbdf74b0e556fc0b2762d337997f84109659c",
     "branch": "main"
   },
   "phet-io-wrappers": {
-    "sha": "1ea253804b1f3b80df2aaa91f67ca4ad19019e6a",
+    "sha": "daf01feac9b19fa29f17028fc78c95d82a57b70f",
     "branch": "main"
   },
   "phetcommon": {
-    "sha": "168ed36b6c25a4313e10e46371c7fe4eb08c24da",
+    "sha": "647eeeed7f551c14feb79da3c15498e4bc91993d",
     "branch": "main"
   },
   "phetmarks": {
-    "sha": "441a195a7438520afd6b77265f858f5ec5d21ec6",
+    "sha": "9cfc1f0a9f147317b295bd6813bcf46d78c0d1a5",
     "branch": "main"
   },
   "query-string-machine": {
-    "sha": "34c361b2121b3415ae2c8aa1dd754e9d4d8e7950",
+    "sha": "3f4d94e426acfed81a7fe25fa730373f8fbd50de",
     "branch": "main"
   },
   "scenery": {
-    "sha": "792bacae80b0e7953422f1750fcfb6fbac982b9b",
+    "sha": "24e22cc5f1a7406f090aa41efc65649368d4c647",
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "257e714def14fa491fc45e2ff83c350371b1ff71",
+    "sha": "6fcb2f48aa573827b2dbdbea489b1542f4c80e13",
     "branch": "main"
   },
   "sherpa": {
-    "sha": "b8840dcdd00fc021a8cc85b74100ce5f9c2aff41",
+    "sha": "dd6a565a9c6ed38d4f8b53d2d81635c0b37a2af4",
     "branch": "main"
   },
   "studio": {
-    "sha": "26ac89621f246b1cd0f393bf21e3d20383ba82c7",
+    "sha": "0adeee7c51eebba3a08c14f0b510a318d87ffa39",
     "branch": "main"
   },
   "sun": {
-    "sha": "b5765ae10dfc93a6ae5678b57c5f92447d45c70a",
+    "sha": "54a6045317c3d557137b64b9d53b0a468860d4a9",
     "branch": "main"
   },
   "tambo": {
-    "sha": "46e24e04da54e3a7997682310bb1ec41600b7780",
+    "sha": "7f7b0423e189b9adfad26b0624775e5cc651bb4f",
     "branch": "main"
   },
   "tandem": {
-    "sha": "02f130f6a04d22a43cddc3551295258fa6459c76",
+    "sha": "dc6081d95de034dd3fbf594a16b354f436bc1423",
     "branch": "main"
   },
   "twixt": {
-    "sha": "e3b08807487c78bc8f59a4bb71e3946d0e182de2",
+    "sha": "f6cc96479cfb4bb6dbcb857e630b99816d98318c",
     "branch": "main"
   },
   "utterance-queue": {
-    "sha": "cd4792df77725a519e651d3f8a0159dd51d857a0",
+    "sha": "cd18aead8bd8edb86467e90f299f4818762715ef",
     "branch": "main"
   }
 }
