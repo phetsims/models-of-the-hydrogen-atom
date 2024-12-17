@@ -65,7 +65,7 @@ export default class EnergySquiggle extends Node {
 
     // The arrow head is drawn only if the distance between the points is large enough to fit both the arrow head and
     // a minimum amount of squiggle. If the distance isn't sufficient, then the squiggle will have no arrow head.
-    const hasArrow = false;//( distance > ARROW_HEAD_SIZE.height + MIN_SQUIGGLE_LENGTH );
+    const hasArrow = ( distance > ARROW_HEAD_SIZE.height + MIN_SQUIGGLE_LENGTH );
     if ( hasArrow ) {
       const arrowHeadShape = new Shape()
         .moveTo( distance, 0 )
