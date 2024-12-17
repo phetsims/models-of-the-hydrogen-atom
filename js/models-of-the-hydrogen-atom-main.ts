@@ -34,8 +34,8 @@ simLauncher.launch( () => {
     credits: {
       leadDesign: 'Amy Hanson, Sam McKagan, Diana L\u00f3pez Tavares',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-      team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
-            'Noah Podolefsky, Carl Wieman',
+      team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Mindy Gratny, Danielle Harlow, Emily B. Moore, ' +
+            'Ariel Paul, Kathy Perkins, Noah Podolefsky, Amy Rouinfar, Nancy Salpepi, Carl Wieman',
       qualityAssurance: '',
       graphicArts: 'Mayra López'
     }
