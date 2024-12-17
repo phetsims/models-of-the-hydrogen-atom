@@ -68,8 +68,8 @@ export default class DeBroglie3DHeightNode extends Node {
     this.pitchProperty = new NumberProperty( 0, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'pitchProperty' ),
-      phetioReadOnly: true
-      //TODO phetioDocumentation
+      phetioReadOnly: true,
+      phetioDocumentation: 'Pitch rotation angle of the "3D Height" view for the de Broglie model.'
     } );
 
     // 3D orbits
