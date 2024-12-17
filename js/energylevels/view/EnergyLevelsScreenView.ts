@@ -36,6 +36,7 @@ import EnergyLevelsZoomedInBoxNode from './EnergyLevelsZoomedInBoxNode.js';
 
 export default class EnergyLevelsScreenView extends ScreenView {
 
+  private readonly model: EnergyLevelsModel;
   private readonly zoomedInBoxNode: EnergyLevelsZoomedInBoxNode;
   private readonly electronEnergyLevelAccordionBox: ElectronEnergyLevelAccordionBox;
 
@@ -236,13 +237,16 @@ export default class EnergyLevelsScreenView extends ScreenView {
       resetAllButton
     ];
 
+    this.model = model;
     this.zoomedInBoxNode = zoomedInBoxNode;
     this.electronEnergyLevelAccordionBox = electronEnergyLevelAccordionBox;
   }
 
   public override step( dt: number ): void {
-    this.zoomedInBoxNode.step( dt );
-    this.electronEnergyLevelAccordionBox.step( dt );
+    if ( this.model.isPlayingProperty.value ) {
+      this.zoomedInBoxNode.step( dt );
+      this.electronEnergyLevelAccordionBox.step( dt );
+    }
   }
 }
 

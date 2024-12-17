@@ -34,6 +34,7 @@ import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 
 export default class SpectraScreenView extends ScreenView {
 
+  private readonly model: SpectraModel;
   private readonly zoomedInBoxNode: SpectraZoomedInBoxNode;
 
   public constructor( model: SpectraModel, tandem: Tandem ) {
@@ -223,11 +224,14 @@ export default class SpectraScreenView extends ScreenView {
       resetAllButton
     ];
 
+    this.model = model;
     this.zoomedInBoxNode = zoomedInBoxNode;
   }
 
   public override step( dt: number ): void {
-    this.zoomedInBoxNode.step( dt );
+    if ( this.model.isPlayingProperty.value ) {
+      this.zoomedInBoxNode.step( dt );
+    }
   }
 }
 
