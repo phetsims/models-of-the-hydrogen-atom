@@ -18,6 +18,7 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ElectronNode from '../../common/view/ElectronNode.js';
+import EnergySquiggle from './EnergySquiggle.js';
 
 // Margins inside the bounds of the diagram. If you change Y_MARGIN, you will likely need to adjust Y_OFFSETS.
 const X_MARGIN = 4;
@@ -47,8 +48,8 @@ export default class EnergyDiagram extends Node {
   // Layer for all state (energy-level) information.
   protected readonly stateLayer: Node;
 
-  // Layer for the squiggle drawn between the electron's previous and current state in the diagram.
-  protected readonly squiggleLayer: Node;
+  // Squiggle drawn between the electron's previous and current state in the diagram.
+  private readonly energySquiggle: EnergySquiggle;
 
   // Constants used by subclasses.
   public static readonly LEVEL_NODE_X_OFFSET = 22;
@@ -92,12 +93,12 @@ export default class EnergyDiagram extends Node {
     } );
 
     const stateLayer = new Node();
-    const squiggleLayer = new Node();
+    const energySquiggle = new EnergySquiggle();
 
     const electronNode = ElectronNode.createIcon();
     electronNode.center = rectangle.center; // a temporary location - anywhere right of the energy axis will do.
 
-    options.children = [ rectangle, energyAxisHBox, stateLayer, squiggleLayer, electronNode ];
+    options.children = [ rectangle, energyAxisHBox, stateLayer, energySquiggle, electronNode ];
 
     super( options );
 
@@ -106,7 +107,7 @@ export default class EnergyDiagram extends Node {
     this.energyAxisHBox = energyAxisHBox;
     this.energyAxisLength = energyAxisLength;
     this.stateLayer = stateLayer;
-    this.squiggleLayer = squiggleLayer;
+    this.energySquiggle = energySquiggle;
   }
 
   /**
@@ -115,6 +116,10 @@ export default class EnergyDiagram extends Node {
    */
   protected getYForState( n: number ): number {
     return Y_MARGIN + this.energyAxisLength - ( Y_OFFSETS[ n - 1 ] * this.energyAxisLength );
+  }
+
+  protected setEnergySquiggle( x1: number, y1: number, x2: number, y2: number, wavelength: number ): void {
+    this.energySquiggle.update( x1, y1, x2, y2, wavelength );
   }
 }
 

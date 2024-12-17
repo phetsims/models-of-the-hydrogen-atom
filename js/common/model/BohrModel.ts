@@ -396,6 +396,19 @@ export default class BohrModel extends HydrogenAtom {
   protected getSpontaneousEmissionPosition(): Vector2 {
     return this.electron.positionProperty.value;
   }
+
+  /**
+   * Gets the wavelength (in nm) that results in a transition between 2 values of n.
+   */
+  public static getTransitionWavelength( n1: number, n2: number ): number {
+    assert && assert( n1 !== n2 );
+    if ( n2 > n1 ) {
+      return getAbsorptionWavelength( n1, n2 );
+    }
+    else {
+      return getEmissionWavelength( n1, n2 );
+    }
+  }
 }
 
 assert && assert( BohrModel.ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES );

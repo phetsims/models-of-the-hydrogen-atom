@@ -18,6 +18,7 @@ import MOTHASymbols from '../../common/MOTHASymbols.js';
 import { HBox, Line, Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BohrModel from '../../common/model/BohrModel.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -88,12 +89,20 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     this.stateLayer.addChild( mEqualsValueText );
 
     // Position the electron on the level line, based on the values of n and l.
-    hydrogenAtom.nlmProperty.link( nlm => {
-      this.electronNode.centerX = this.getXForState( nlm.l );
-      this.electronNode.bottom = this.getYForState( nlm.n );
-    } );
+    hydrogenAtom.nlmProperty.link( ( nlmNew, nlmOld ) => {
+      const xPrevious = this.electronNode.centerX;
+      const yPrevious = this.electronNode.bottom;
 
-    //TODO Display squiggle between previous and current electron state.
+      // Move electron to new level line.
+      this.electronNode.centerX = this.getXForState( nlmNew.l );
+      this.electronNode.bottom = this.getYForState( nlmNew.n );
+
+      // Draw squiggle between previous and current electron state.
+      if ( nlmOld !== null ) {
+        this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
+          BohrModel.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
+      }
+    } );
   }
 
   /**
