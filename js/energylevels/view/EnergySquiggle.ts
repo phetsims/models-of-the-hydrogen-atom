@@ -1,4 +1,4 @@
-// Copyright 2015-2024, University of Colorado Boulder
+// Copyright 2024, University of Colorado Boulder
 
 /**
  * EnergySquiggle is the squiggle line shown in the energy diagrams. A squiggle can be drawn between any 2 points.
