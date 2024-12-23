@@ -14,8 +14,9 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import UnderConstructionText from './UnderConstructionText.js';
 import { IRAxisNode, UVAxisNode, VisibleAxisNode } from './WavelengthAxisNode.js';
+import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
+import SpectrometerBarNode from './SpectrometerBarNode.js';
 
 const DISPLAY_HEIGHT = 135;
 const X_MARGIN = 5;
@@ -47,10 +48,20 @@ export default class SpectrometerNode extends Node {
     xAxisNode.centerX = backgroundNode.centerX;
     xAxisNode.bottom = backgroundNode.bottom - 3;
 
-    //TODO Under Construction
-    const underConstructionText = new UnderConstructionText( {
-      centerX: backgroundNode.centerX,
-      top: backgroundNode.top + 10
+    const barNodes: Node[] = [];
+    photonAbsorptionModel.getWavelengths().forEach( wavelength => {
+      const barNode = new SpectrometerBarNode( wavelength );
+      barNode.setNumberOfPhotons( 15 ); //TODO This should be set based on spectrometer.dataPointsProperty
+      barNodes.push( barNode );
+    } );
+    const barsHBox = new HBox( {
+      excludeInvisibleChildrenFromBounds: false,
+      children: barNodes,
+      spacing: 1
+    } );
+    barsHBox.localBoundsProperty.link( () => {
+      barsHBox.centerX = backgroundNode.centerX;
+      barsHBox.bottom = xAxisNode.top - 1;
     } );
 
     const stringProperty = new DerivedStringProperty( [ spectrometer.dataPointsProperty ],
@@ -69,14 +80,14 @@ export default class SpectrometerNode extends Node {
       maxWidth: 0.95 * backgroundNode.width
     } );
     dataText.localBoundsProperty.link( () => {
-      dataText.centerX = underConstructionText.centerX;
-      dataText.top = underConstructionText.bottom + 5;
+      dataText.centerX = backgroundNode.centerX;
+      dataText.top = backgroundNode.top + 2;
     } );
 
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      children: [ backgroundNode, xAxisNode, dataText, underConstructionText ]
+      children: [ backgroundNode, xAxisNode, barsHBox, dataText ]
     }, providedOptions );
 
     super( options );

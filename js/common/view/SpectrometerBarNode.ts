@@ -1,0 +1,80 @@
+// Copyright 2024, University of Colorado Boulder
+
+/**
+ * SpectrometerBarNode is a 'bar' in the spectrometer.  It displays a stack of photons, color by wavelength.
+ * When the stack reaches its maximum height, an arrow is drawn at the top of the stack, to indicate that the
+ * value is larger than we can display.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
+
+import { Shape } from '../../../../kite/js/imports.js';
+import { Path } from '../../../../scenery/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import Light from '../model/Light.js';
+import ArrowShape from '../../../../scenery-phet/js/ArrowShape.js';
+
+const MAX_NUMBER_OF_PHOTONS = 14;
+const PHOTON_RADIUS = 3;
+const ARROW_HEAD_WIDTH = 10;
+const ARROW_HEAD_HEIGHT = 8;
+const ARROW_TAIL_WIDTH = 2;
+const ARROW_TAIL_LENGTH = 4;
+
+export default class SpectrometerBarNode extends Path {
+
+  public constructor( wavelength: number ) {
+    super( null, {
+      fill: Light.wavelengthToColor( wavelength )
+    } );
+  }
+
+  /**
+   * Sets the number of photons to display in the stack.
+   */
+  public setNumberOfPhotons( numberOfPhotons: number ): void {
+    assert && assert( Number.isInteger( numberOfPhotons ) && numberOfPhotons >= 0 );
+    if ( numberOfPhotons === 0 ) {
+      this.shape = null;
+    }
+    else {
+      const shape = new Shape();
+
+      const numberOfPhotonsToDraw = Math.min( numberOfPhotons, MAX_NUMBER_OF_PHOTONS );
+      for ( let i = 0; i < numberOfPhotonsToDraw; i++ ) {
+        const x = 0;
+        const y = -( PHOTON_RADIUS + ( i * 2 * PHOTON_RADIUS ) ); // draw stack of photons from bottom up
+        shape.circle( x, y, PHOTON_RADIUS );
+        shape.newSubpath();
+      }
+
+      // Draw an arrow at the top of the stack to indicate that the number of photons is more than we can display.
+      if ( numberOfPhotons > MAX_NUMBER_OF_PHOTONS ) {
+
+        const x = 0;
+        const yTail = -( MAX_NUMBER_OF_PHOTONS * 2 * PHOTON_RADIUS ) - 2;
+        const yTip = yTail - ARROW_TAIL_LENGTH - ARROW_HEAD_HEIGHT;
+
+        //TODO Get rid of this and just draw the arrow head here.
+        const points = ArrowShape.getArrowShapePoints( x, yTail, x, yTip, [], {
+          headWidth: ARROW_HEAD_WIDTH,
+          headHeight: ARROW_HEAD_HEIGHT,
+          tailWidth: ARROW_TAIL_WIDTH
+        } );
+
+        points.forEach( ( point, index ) => {
+          if ( index === 0 ) {
+            shape.moveTo( points[ 0 ].x, points[ 0 ].y );
+          }
+          else {
+            shape.lineTo( point.x, point.y );
+          }
+        } );
+        shape.close();
+      }
+      this.shape = shape;
+    }
+  }
+}
+
+modelsOfTheHydrogenAtom.register( 'SpectrometerBarNode', SpectrometerBarNode );
