@@ -83,33 +83,4 @@ export default class SpectrometerNode extends Node {
   }
 }
 
-//TODO Delete these functions if unused.
-
-// We will be scaling the x-axis for wavelengths in the UV and IR range.
-// const UV_SCALED_LENGTH = 150; // nm
-// const IR_SCALED_LENGTH = 150; // nm
-// const SCALED_WAVELENGTH_RANGE = new Range( VisibleColor.MIN_WAVELENGTH - UV_SCALED_LENGTH, VisibleColor.MAX_WAVELENGTH + IR_SCALED_LENGTH );
-
-// /**
-//  * Scales wavelengths in the UV portion of the spectrum, so that we can compress that part of the x-axis.
-//  */
-// function scaleUV( wavelength: number ): number {
-//   assert && assert( wavelength < VisibleColor.MIN_WAVELENGTH, `invalid UV wavelength: ${wavelength}` );
-//   return Utils.linear(
-//     MOTHAConstants.SPECTROMETER_WAVELENGTH_RANGE.min, VisibleColor.MIN_WAVELENGTH,
-//     SCALED_WAVELENGTH_RANGE.min, VisibleColor.MIN_WAVELENGTH,
-//     wavelength );
-// }
-//
-// /**
-//  * Scales wavelengths in the IR portion of the spectrum, so that we can compress that part of the x-axis.
-//  */
-// function scaleIR( wavelength: number ): number {
-//   assert && assert( wavelength > VisibleColor.MAX_WAVELENGTH, `invalid IR wavelength: ${wavelength}` );
-//   return Utils.linear(
-//     VisibleColor.MAX_WAVELENGTH, MOTHAConstants.SPECTROMETER_WAVELENGTH_RANGE.max,
-//     VisibleColor.MAX_WAVELENGTH, SCALED_WAVELENGTH_RANGE.max,
-//     wavelength );
-// }
-
 modelsOfTheHydrogenAtom.register( 'SpectrometerNode', SpectrometerNode );
