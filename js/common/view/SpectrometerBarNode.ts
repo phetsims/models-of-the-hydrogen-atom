@@ -22,10 +22,13 @@ const ARROW_TAIL_LENGTH = 4;
 
 export default class SpectrometerBarNode extends Path {
 
+  public readonly wavelength: number;
+
   public constructor( wavelength: number ) {
     super( null, {
       fill: Light.wavelengthToColor( wavelength )
     } );
+    this.wavelength = wavelength;
   }
 
   /**

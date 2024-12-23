@@ -28,6 +28,7 @@ export default class SpectrometerNode extends Node {
 
   public constructor( spectrometer: Spectrometer, providedOptions?: SpectrometerNodeOptions ) {
 
+    // Three segments for the x-axis, each with a different scale, so that values do not overlap.
     const uvWavelengths = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
     const visibleWavelengths = photonAbsorptionModel.getVisibleWavelengths();
     const irWavelengths = photonAbsorptionModel.getIRWavelengths();
@@ -51,22 +52,31 @@ export default class SpectrometerNode extends Node {
     xAxisNode.centerX = backgroundNode.centerX;
     xAxisNode.bottom = backgroundNode.bottom - 3;
 
-    const barNodes: Node[] = [];
+    // A bar for each photon emission wavelength.
+    const barNodes: SpectrometerBarNode[] = [];
     const wavelengths = [ ...uvWavelengths, ...visibleWavelengths, ...irWavelengths ];
     wavelengths.forEach( wavelength => {
       const barNode = new SpectrometerBarNode( wavelength );
-      barNode.setNumberOfPhotons( 15 ); //TODO This should be set based on spectrometer.dataPointsProperty
       barNodes.push( barNode );
     } );
     const barsHBox = new HBox( {
       excludeInvisibleChildrenFromBounds: false,
       children: barNodes,
-      spacing: 1
+      spacing: 1,
+      align: 'bottom'
     } );
     barsHBox.localBoundsProperty.link( () => {
       barsHBox.centerX = backgroundNode.centerX;
       barsHBox.bottom = xAxisNode.top - 1;
     } );
+
+    // Update bars as the spectrometer data changes.
+    spectrometer.dataPointsProperty.link( dataPoints => dataPoints.forEach( dataPoint => {
+      const wavelength = dataPoint.wavelength;
+      const barNode = _.find( barNodes, barNode => barNode.wavelength === wavelength )!;
+      assert && assert( barNode );
+      barNode.setNumberOfPhotons( dataPoint.numberOfPhotonsEmitted );
+    } ) );
 
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
