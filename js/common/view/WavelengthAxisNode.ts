@@ -18,7 +18,7 @@ import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Light from '../model/Light.js';
 
 const AXIS_HEIGHT = 4;
-const TICK_LINE_LENGTH = 5;
+const TICK_LINE_LENGTH = 3;
 const TICK_FONT = new PhetFont( 8 );
 
 type SelfOptions = {

@@ -50,7 +50,7 @@ export default class SpectrometerNode extends Node {
     } );
 
     xAxisNode.centerX = backgroundNode.centerX;
-    xAxisNode.bottom = backgroundNode.bottom - 3;
+    xAxisNode.bottom = backgroundNode.bottom - 5;
 
     // A bar for each photon emission wavelength.
     const barNodes: SpectrometerBarNode[] = [];
