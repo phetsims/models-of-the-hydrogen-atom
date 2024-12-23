@@ -16,8 +16,6 @@ import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Light from '../model/Light.js';
-import PlumPuddingModel from '../model/PlumPuddingModel.js';
-import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 
 const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 5;
@@ -81,18 +79,16 @@ export default class WavelengthAxisNode extends Node {
  */
 class UVAxisNode extends WavelengthAxisNode {
 
-  public constructor( axisLength: number ) {
-
-    const tickValues = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
+  public constructor( axisLength: number, wavelengths: number[] ) {
 
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
     } );
 
     super( {
-      minWavelength: _.min( tickValues )! - 1,
-      maxWavelength: _.max( tickValues )! + 1,
-      tickValues: tickValues,
+      minWavelength: _.min( wavelengths )! - 1,
+      maxWavelength: _.max( wavelengths )! + 1,
+      tickValues: wavelengths,
       axisNode: axisNode
     } );
   }
@@ -103,9 +99,7 @@ class UVAxisNode extends WavelengthAxisNode {
  */
 class IRAxisNode extends WavelengthAxisNode {
 
-  public constructor( axisLength: number ) {
-
-    const tickValues = photonAbsorptionModel.getIRWavelengths();
+  public constructor( axisLength: number, wavelengths: number[] ) {
 
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
@@ -114,7 +108,7 @@ class IRAxisNode extends WavelengthAxisNode {
     super( {
       minWavelength: 1000,
       maxWavelength: 7500,
-      tickValues: tickValues,
+      tickValues: wavelengths,
       axisNode: axisNode
     } );
   }
@@ -125,9 +119,7 @@ class IRAxisNode extends WavelengthAxisNode {
  */
 class VisibleAxisNode extends WavelengthAxisNode {
 
-  public constructor( axisLength: number ) {
-
-    const tickValues = photonAbsorptionModel.getVisibleWavelengths();
+  public constructor( axisLength: number, wavelengths: number[] ) {
 
     const axisNode = new SpectrumNode( {
       size: new Dimension2( axisLength, AXIS_HEIGHT ),
@@ -139,7 +131,7 @@ class VisibleAxisNode extends WavelengthAxisNode {
     super( {
       minWavelength: VisibleColor.MIN_WAVELENGTH,
       maxWavelength: VisibleColor.MAX_WAVELENGTH,
-      tickValues: tickValues,
+      tickValues: wavelengths,
       axisNode: axisNode
     } );
   }

@@ -17,6 +17,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import { IRAxisNode, UVAxisNode, VisibleAxisNode } from './WavelengthAxisNode.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import SpectrometerBarNode from './SpectrometerBarNode.js';
+import PlumPuddingModel from '../model/PlumPuddingModel.js';
 
 const DISPLAY_HEIGHT = 135;
 const X_MARGIN = 5;
@@ -29,9 +30,13 @@ export default class SpectrometerNode extends Node {
 
   public constructor( spectrometer: Spectrometer, providedOptions?: SpectrometerNodeOptions ) {
 
-    const uvAxisNode = new UVAxisNode( 400 );
-    const visibleAxisNode = new VisibleAxisNode( 145 );
-    const irAxisNode = new IRAxisNode( 275 );
+    const uvWavelengths = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
+    const visibleWavelengths = photonAbsorptionModel.getVisibleWavelengths();
+    const irWavelengths = photonAbsorptionModel.getIRWavelengths();
+
+    const uvAxisNode = new UVAxisNode( 400, uvWavelengths );
+    const visibleAxisNode = new VisibleAxisNode( 145, visibleWavelengths );
+    const irAxisNode = new IRAxisNode( 275, irWavelengths );
 
     const xAxisNode = new HBox( {
       children: [ uvAxisNode, visibleAxisNode, irAxisNode ],
@@ -49,7 +54,8 @@ export default class SpectrometerNode extends Node {
     xAxisNode.bottom = backgroundNode.bottom - 3;
 
     const barNodes: Node[] = [];
-    photonAbsorptionModel.getWavelengths().forEach( wavelength => {
+    const wavelengths = [ ...uvWavelengths, ...visibleWavelengths, ...irWavelengths ];
+    wavelengths.forEach( wavelength => {
       const barNode = new SpectrometerBarNode( wavelength );
       barNode.setNumberOfPhotons( 15 ); //TODO This should be set based on spectrometer.dataPointsProperty
       barNodes.push( barNode );
