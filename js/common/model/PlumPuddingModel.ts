@@ -43,7 +43,6 @@ import Photon from './Photon.js';
 import PlumPuddingElectron from './PlumPuddingElectron.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
-const PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 const PHOTON_EMISSION_PROBABILITY = 0.1; // probability [0,1] that a photon will be emitted
 const PHOTON_ABSORPTION_PROBABILITY = 0.5; // probability [0,1] that a photon will be absorbed
 
@@ -69,6 +68,8 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
   // The number of photons the atom has absorbed and is "holding".
   private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
+
+  public static readonly PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 
   public constructor( providedOptions: PlumPuddingModelOptions ) {
 
@@ -309,7 +310,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       // Create and emit a photon
       const photon = new Photon( {
-        wavelength: PHOTON_EMISSION_WAVELENGTH,
+        wavelength: PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH,
         position: this.electron.positionProperty.value, // at the electron's position
         direction: getEmissionDirection(),
         wasEmitted: true,

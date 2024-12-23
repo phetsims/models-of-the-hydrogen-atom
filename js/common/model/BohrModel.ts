@@ -186,6 +186,20 @@ export default class BohrModel extends HydrogenAtom {
     return Array.from( BohrModel.wavelengthToStateTransitionMap.keys() ).filter( wavelength => VisibleColor.isVisibleWavelength( wavelength ) );
   }
 
+  /**
+   * Gets the absorption wavelengths that are in the UV spectrum.
+   */
+  public static getUVAbsorptionWavelengths(): number[] {
+    return Array.from( BohrModel.wavelengthToStateTransitionMap.keys() ).filter( wavelength => wavelength < VisibleColor.MIN_WAVELENGTH );
+  }
+
+  /**
+   * Gets the absorption wavelengths that are in the IR spectrum.
+   */
+  public static getIRAbsorptionWavelengths(): number[] {
+    return Array.from( BohrModel.wavelengthToStateTransitionMap.keys() ).filter( wavelength => wavelength > VisibleColor.MAX_WAVELENGTH );
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   // Collision detection
   //--------------------------------------------------------------------------------------------------------------------

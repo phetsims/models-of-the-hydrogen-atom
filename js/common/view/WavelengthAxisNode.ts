@@ -16,6 +16,8 @@ import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Light from '../model/Light.js';
+import BohrModel from '../model/BohrModel.js';
+import PlumPuddingModel from '../model/PlumPuddingModel.js';
 
 const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 5;
@@ -78,14 +80,16 @@ class UVAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
 
+    const tickValues = [ ...BohrModel.getUVAbsorptionWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
+
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
     } );
 
     super( {
-      minWavelength: 93,
-      maxWavelength: 151,
-      tickValues: [ 94, 95, 97, 103, 122, 150 ], //TODO
+      minWavelength: _.min( tickValues )! - 1,
+      maxWavelength: _.max( tickValues )! + 1,
+      tickValues: tickValues,
       axisNode: axisNode
     } );
   }
@@ -95,6 +99,8 @@ class IRAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
 
+    const tickValues = BohrModel.getIRAbsorptionWavelengths();
+
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
     } );
@@ -102,7 +108,7 @@ class IRAxisNode extends WavelengthAxisNode {
     super( {
       minWavelength: 1000,
       maxWavelength: 7500,
-      tickValues: [ 1094, 1282, 1876, 2626, 4052, 7460 ], //TODO
+      tickValues: tickValues,
       axisNode: axisNode
     } );
   }
@@ -111,6 +117,8 @@ class IRAxisNode extends WavelengthAxisNode {
 class VisibleAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
+
+    const tickValues = BohrModel.getVisibleAbsorptionWavelengths();
 
     const axisNode = new SpectrumNode( {
       size: new Dimension2( axisLength, AXIS_HEIGHT ),
@@ -122,7 +130,7 @@ class VisibleAxisNode extends WavelengthAxisNode {
     super( {
       minWavelength: VisibleColor.MIN_WAVELENGTH,
       maxWavelength: VisibleColor.MAX_WAVELENGTH,
-      tickValues: [ 410, 434, 486, 656 ], //TODO
+      tickValues: tickValues,
       axisNode: axisNode
     } );
   }
