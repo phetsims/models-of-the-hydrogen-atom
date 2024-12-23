@@ -76,6 +76,9 @@ export default class WavelengthAxisNode extends Node {
   }
 }
 
+/**
+ * UVAxisNode is the segment of the x-axis for the UV spectrum.
+ */
 class UVAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
@@ -95,6 +98,9 @@ class UVAxisNode extends WavelengthAxisNode {
   }
 }
 
+/**
+ * IRAxisNode is the segment of the x-axis for the IR spectrum.
+ */
 class IRAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
@@ -114,6 +120,9 @@ class IRAxisNode extends WavelengthAxisNode {
   }
 }
 
+/**
+ * VisibleAxisNode is the segment of the x-axis for the visible spectrum.
+ */
 class VisibleAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
