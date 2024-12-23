@@ -31,7 +31,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
-import SpectrometerDebugText from '../../common/view/SpectrometerDebugText.js';
 
 export default class SpectraScreenView extends ScreenView {
 
@@ -227,16 +226,6 @@ export default class SpectraScreenView extends ScreenView {
 
     this.model = model;
     this.zoomedInBoxNode = zoomedInBoxNode;
-
-    // A simple text-only display of the spectrometer data, for debugging.
-    if ( phet.chipper.queryParameters.dev ) {
-      const dataText = new SpectrometerDebugText( model.spectrometer.dataPointsProperty );
-      dataText.localBoundsProperty.link( () => {
-        dataText.centerX = spectrometerAccordionBox.centerX;
-        dataText.top = spectrometerAccordionBox.top + 10;
-      } );
-      screenViewRootNode.addChild( dataText );
-    }
   }
 
   public override step( dt: number ): void {

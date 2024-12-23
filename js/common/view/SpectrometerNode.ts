@@ -16,6 +16,7 @@ import { IRAxisNode, UVAxisNode, VisibleAxisNode } from './WavelengthAxisNode.js
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import SpectrometerBarNode from './SpectrometerBarNode.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
+import SpectrometerDebugText from './SpectrometerDebugText.js';
 
 const DISPLAY_HEIGHT = 135;
 const X_MARGIN = 5;
@@ -85,6 +86,16 @@ export default class SpectrometerNode extends Node {
     }, providedOptions );
 
     super( options );
+
+    // A simple text-only display of the spectrometer data, for debugging.
+    if ( phet.chipper.queryParameters.dev ) {
+      const dataText = new SpectrometerDebugText( spectrometer.dataPointsProperty );
+      dataText.localBoundsProperty.link( () => {
+        dataText.right = backgroundNode.right - 5;
+        dataText.top = backgroundNode.top + 5;
+      } );
+      this.addChild( dataText );
+    }
   }
 }
 
