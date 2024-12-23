@@ -242,7 +242,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
     this.zoomedInBoxNode = zoomedInBoxNode;
     this.electronEnergyLevelAccordionBox = electronEnergyLevelAccordionBox;
 
-    // A simple display of the spectrometer data, for debugging.
+    // A simple text-only display of the spectrometer data, for debugging.
     if ( phet.chipper.queryParameters.dev ) {
       const dataText = new SpectrometerDebugText( model.spectrometer.dataPointsProperty );
       dataText.localBoundsProperty.link( () => {

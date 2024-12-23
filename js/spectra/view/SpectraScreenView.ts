@@ -228,7 +228,7 @@ export default class SpectraScreenView extends ScreenView {
     this.model = model;
     this.zoomedInBoxNode = zoomedInBoxNode;
 
-    // A simple display of the spectrometer data, for debugging.
+    // A simple text-only display of the spectrometer data, for debugging.
     if ( phet.chipper.queryParameters.dev ) {
       const dataText = new SpectrometerDebugText( model.spectrometer.dataPointsProperty );
       dataText.localBoundsProperty.link( () => {
