@@ -36,7 +36,7 @@ export default class SnapshotNode extends Node {
       //TODO default values for options
     }, providedOptions );
 
-    const backgroundNode = new Rectangle( 0, 0, 500, 150, {
+    const backgroundNode = new Rectangle( 0, 0, 500, 175, {
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
       fill: MOTHAColors.spectrometerFillProperty,
       stroke: MOTHAColors.spectrometerStrokeProperty
@@ -63,7 +63,7 @@ export default class SnapshotNode extends Node {
         scale: 0.04
       },
       right: backgroundNode.right - INSIDE_X_MARGIN,
-      bottom: backgroundNode.bottom - INSIDE_Y_MARGIN,
+      top: backgroundNode.top + INSIDE_Y_MARGIN,
       accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
         number: snapshot.snapshotNumber,
         name: snapshot.modelNameProperty
