@@ -31,12 +31,12 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import BohrModel from '../model/BohrModel.js';
 import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import PhotonNode from './PhotonNode.js';
+import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -165,7 +165,7 @@ export default class AbsorptionAndEmissionDialog extends Panel {
 
     // Create a row for each transition wavelength, ordered by increasing wavelength.
     let n1Previous = 1;
-    const wavelengths = [ ...BohrModel.wavelengthToStateTransitionMap.keys() ].sort( ( a, b ) => a - b );
+    const wavelengths = photonAbsorptionModel.getWavelengths().sort( ( a, b ) => a - b );
     wavelengths.forEach( wavelength => {
 
       // 'wavelength' column.
@@ -200,7 +200,7 @@ export default class AbsorptionAndEmissionDialog extends Panel {
       } );
 
       // 'n transition' column
-      const transition = BohrModel.wavelengthToStateTransitionMap.get( wavelength )!;
+      const transition = photonAbsorptionModel.getTransition( wavelength )!;
       assert && assert( transition );
       const transitionText = new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, combineOptions<TextOptions>( {
         visibleProperty: transitionColumnVisibleProperty

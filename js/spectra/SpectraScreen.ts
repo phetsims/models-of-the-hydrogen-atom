@@ -12,13 +12,13 @@ import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js'
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import { Node, Path, TColor } from '../../../scenery/js/imports.js';
-import BohrModel from '../common/model/BohrModel.js';
 import MOTHAColors from '../common/MOTHAColors.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
+import photonAbsorptionModel from '../common/model/PhotonAbsorptionModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -51,7 +51,7 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
 function createScreenIcon(): ScreenIcon {
 
   const photonRadius = 4;
-  const absorptionWavelengths = BohrModel.getVisibleAbsorptionWavelengths();
+  const absorptionWavelengths = photonAbsorptionModel.getVisibleWavelengths();
 
   const photonColumns = absorptionWavelengths.map( wavelength => {
     const color = VisibleColor.wavelengthToColor( wavelength );

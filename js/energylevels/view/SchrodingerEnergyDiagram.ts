@@ -18,7 +18,7 @@ import MOTHASymbols from '../../common/MOTHASymbols.js';
 import { HBox, Line, Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BohrModel from '../../common/model/BohrModel.js';
+import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -100,7 +100,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
       // Draw squiggle between previous and current electron state.
       if ( nlmOld !== null ) {
         this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
-          BohrModel.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
+          photonAbsorptionModel.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
       }
     } );
   }

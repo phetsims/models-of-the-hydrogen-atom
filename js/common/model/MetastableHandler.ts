@@ -24,8 +24,8 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import Light from './Light.js';
-import SchrodingerModel from './SchrodingerModel.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
+import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 
 const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java values was 100 (ms?)
 
@@ -109,7 +109,7 @@ export default class MetastableHandler extends PhetioObject {
     assert && assert( this.isMetastableStateProperty.value );
 
     // Randomly choose an absorption wavelength. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/55.
-    const wavelengths = SchrodingerModel.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );
+    const wavelengths = photonAbsorptionModel.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );
     const wavelength = wavelengths[ dotRandom.nextInt( wavelengths.length ) ];
 
     // Tell the light to emit a photon, and direct it towards the center of the atom.

@@ -26,10 +26,10 @@ import StringIO from '../../../../tandem/js/types/StringIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import BohrModel from './BohrModel.js';
 import { LightMode, LightModeValues } from './LightMode.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -138,7 +138,7 @@ export default class Light extends PhetioObject {
       phetioDocumentation: 'Elapsed time since a photon was emitted by the light source.'
     } );
 
-    this.groundStateAbsorptionWavelengths = BohrModel.getAbsorptionWavelengths( MOTHAConstants.GROUND_STATE );
+    this.groundStateAbsorptionWavelengths = photonAbsorptionModel.getAbsorptionWavelengths( MOTHAConstants.GROUND_STATE );
   }
 
   public reset(): void {

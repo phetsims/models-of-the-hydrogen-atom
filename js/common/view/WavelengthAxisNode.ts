@@ -16,8 +16,8 @@ import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Light from '../model/Light.js';
-import BohrModel from '../model/BohrModel.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
+import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 
 const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 5;
@@ -80,7 +80,7 @@ class UVAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
 
-    const tickValues = [ ...BohrModel.getUVAbsorptionWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
+    const tickValues = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
 
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
@@ -99,7 +99,7 @@ class IRAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
 
-    const tickValues = BohrModel.getIRAbsorptionWavelengths();
+    const tickValues = photonAbsorptionModel.getIRWavelengths();
 
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
@@ -118,7 +118,7 @@ class VisibleAxisNode extends WavelengthAxisNode {
 
   public constructor( axisLength: number ) {
 
-    const tickValues = BohrModel.getVisibleAbsorptionWavelengths();
+    const tickValues = photonAbsorptionModel.getVisibleWavelengths();
 
     const axisNode = new SpectrumNode( {
       size: new Dimension2( axisLength, AXIS_HEIGHT ),

@@ -17,6 +17,7 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
+import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -55,7 +56,7 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
       // Draw squiggle between previous and current electron state.
       if ( nOld !== null ) {
         this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
-          BohrModel.getTransitionWavelength( nOld, nNew ) );
+          photonAbsorptionModel.getTransitionWavelength( nOld, nNew ) );
       }
     } );
   }

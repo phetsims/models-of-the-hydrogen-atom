@@ -15,10 +15,10 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import BohrModel from '../model/BohrModel.js';
 import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
+import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -54,7 +54,7 @@ export default class AbsorptionTransitionText extends RichText {
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],
       ( n, wavelength ) => {
-        const transition = BohrModel.wavelengthToStateTransitionMap.get( wavelength );
+        const transition = photonAbsorptionModel.getTransition( wavelength );
         if ( transition ) {
           return `${n} = ${transition.n1} ${MOTHASymbols.rightArrow} ${transition.n2}`;
         }

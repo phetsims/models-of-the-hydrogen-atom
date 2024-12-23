@@ -69,8 +69,8 @@ export default class SpectrometerNode extends Node {
       maxWidth: 0.95 * backgroundNode.width
     } );
     dataText.localBoundsProperty.link( () => {
-      dataText.centerX = backgroundNode.centerX;
-      dataText.bottom = backgroundNode.bottom - 30;
+      dataText.centerX = underConstructionText.centerX;
+      dataText.top = underConstructionText.bottom + 5;
     } );
 
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {

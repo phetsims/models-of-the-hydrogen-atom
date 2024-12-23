@@ -32,7 +32,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -44,6 +43,7 @@ import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Light from './Light.js';
 import Photon from './Photon.js';
 import Proton from './Proton.js';
+import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -79,9 +79,6 @@ export default class BohrModel extends HydrogenAtom {
 
   // Change in orbit angle per dt for ground state orbit.
   public static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
-
-  // A map from absorption/emission wavelengths to electron state (n) transitions.
-  public static readonly wavelengthToStateTransitionMap = createWavelengthToStateTransitionMap();
 
   public constructor( providedOptions: BohrModelOptions ) {
 
@@ -157,50 +154,6 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Wavelength methods
-  //--------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Gets the wavelengths that can be absorbed in state n.
-   */
-  public static getAbsorptionWavelengths( n: number ): number[] {
-    assert && assert( Number.isInteger( n ) );
-    assert && assert( n >= MOTHAConstants.GROUND_STATE && n < MOTHAConstants.MAX_STATE, `bad n=${n}` );
-
-    const wavelengths: number[] = [];
-    for ( const [ wavelength, transition ] of BohrModel.wavelengthToStateTransitionMap ) {
-      if ( n === transition.n1 ) {
-        wavelengths.push( wavelength );
-      }
-    }
-
-    assert && assert( wavelengths.length > 0 );
-    assert && assert( _.every( wavelengths, wavelength => Number.isInteger( wavelength ) ) );
-    return wavelengths;
-  }
-
-  /**
-   * Gets the absorption wavelengths that are in the visible spectrum.
-   */
-  public static getVisibleAbsorptionWavelengths(): number[] {
-    return Array.from( BohrModel.wavelengthToStateTransitionMap.keys() ).filter( wavelength => VisibleColor.isVisibleWavelength( wavelength ) );
-  }
-
-  /**
-   * Gets the absorption wavelengths that are in the UV spectrum.
-   */
-  public static getUVAbsorptionWavelengths(): number[] {
-    return Array.from( BohrModel.wavelengthToStateTransitionMap.keys() ).filter( wavelength => wavelength < VisibleColor.MIN_WAVELENGTH );
-  }
-
-  /**
-   * Gets the absorption wavelengths that are in the IR spectrum.
-   */
-  public static getIRAbsorptionWavelengths(): number[] {
-    return Array.from( BohrModel.wavelengthToStateTransitionMap.keys() ).filter( wavelength => wavelength > VisibleColor.MAX_WAVELENGTH );
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
   // Collision detection
   //--------------------------------------------------------------------------------------------------------------------
 
@@ -235,7 +188,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Determine if the photon has a wavelength that would excite the electron to a higher energy state.
-    const nNew = getHigherStateForWavelength( nCurrent, photon.wavelength );
+    const nNew = photonAbsorptionModel.getHigherStateForWavelength( nCurrent, photon.wavelength );
     if ( nNew === null ) {
       return false;
     }
@@ -287,7 +240,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Determine if the photon has a wavelength that would move the electron to a lower energy state.
-    const nNew = getLowerStateForWavelength( nCurrent, photon.wavelength );
+    const nNew = photonAbsorptionModel.getLowerStateForWavelength( nCurrent, photon.wavelength );
     if ( nNew === null || !this.stimulatedEmissionIsAllowed( nCurrent, nNew ) ) {
       return null;
     }
@@ -365,7 +318,7 @@ export default class BohrModel extends HydrogenAtom {
 
     // Emit a photon
     const emittedPhoton = new Photon( {
-      wavelength: getEmissionWavelength( nCurrent, nNew ),
+      wavelength: photonAbsorptionModel.getEmissionWavelength( nCurrent, nNew ),
       position: this.getSpontaneousEmissionPosition(),
       direction: getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value ),
       wasEmitted: true,
@@ -409,95 +362,9 @@ export default class BohrModel extends HydrogenAtom {
   protected getSpontaneousEmissionPosition(): Vector2 {
     return this.electron.positionProperty.value;
   }
-
-  /**
-   * Gets the wavelength (in nm) that results in a transition between 2 values of n.
-   */
-  public static getTransitionWavelength( n1: number, n2: number ): number {
-    assert && assert( n1 !== n2 );
-    if ( n2 > n1 ) {
-      return getAbsorptionWavelength( n1, n2 );
-    }
-    else {
-      return getEmissionWavelength( n1, n2 );
-    }
-  }
 }
 
 assert && assert( BohrModel.ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES );
-
-/**
- * Gets the wavelength that is absorbed when the electron to transition from state n1 to state n2, where n2 > n1.
- */
-function getAbsorptionWavelength( n1: number, n2: number ): number {
-  assert && assert( MOTHAConstants.GROUND_STATE === 1 );
-  assert && assert( Number.isInteger( n1 ) && n1 >= MOTHAConstants.GROUND_STATE, `bad n1=${n1}` );
-  assert && assert( Number.isInteger( n2 ) && n2 <= MOTHAConstants.MAX_STATE, `bad n2=${n2}` );
-  assert && assert( n1 < n2, `bad n1=${n1} n2=${n2}` );
-
-  // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.
-  const wavelength = 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );
-
-  // As a simplification to benefit PhET-iO, convert to an integer value.
-  // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53.
-  return Utils.toFixedNumber( wavelength, 0 );
-}
-
-/**
- * Gets the wavelength that is emitted when the electron transitions from n1 to n2, where n2 < n1.
- */
-function getEmissionWavelength( n1: number, n2: number ): number {
-  return getAbsorptionWavelength( n2, n1 );
-}
-
-/**
- * Gets the lower energy state for a current state and transition wavelength.
- * Return null if there is no such state.
- */
-function getLowerStateForWavelength( nCurrent: number, wavelength: number ): number | null {
-  let nNew: number | null = null;
-  for ( let n = MOTHAConstants.GROUND_STATE; n < nCurrent && nNew === null; n++ ) {
-    if ( wavelength === getAbsorptionWavelength( n, nCurrent ) ) {
-      nNew = n;
-    }
-  }
-  return nNew;
-}
-
-/**
- * Gets the higher energy state for a current state and transition wavelength.
- * Return null if there is no such state.
- */
-function getHigherStateForWavelength( nCurrent: number, wavelength: number ): number | null {
-  let nNew: number | null = null;
-  for ( let n = nCurrent + 1; n <= MOTHAConstants.MAX_STATE && nNew === null; n++ ) {
-    const transitionWavelength = getAbsorptionWavelength( nCurrent, n );
-    if ( wavelength === transitionWavelength ) {
-      nNew = n;
-    }
-  }
-  return nNew;
-}
-
-type StateTransition = {
-  n1: number;
-  n2: number; // n2 > n1
-};
-
-/**
- * Creates a map from absorption/emission wavelengths to electron state transitions, ordered by ascending wavelength.
- */
-function createWavelengthToStateTransitionMap(): Map<number, StateTransition> {
-  const map = new Map<number, StateTransition>();
-  for ( let n1 = MOTHAConstants.GROUND_STATE; n1 < MOTHAConstants.MAX_STATE; n1++ ) {
-    for ( let n2 = MOTHAConstants.MAX_STATE; n2 > n1; n2-- ) {
-      const wavelength = getAbsorptionWavelength( n1, n2 );
-      const transition = { n1: n1, n2: n2 };
-      map.set( wavelength, transition );
-    }
-  }
-  return map;
-}
 
 /**
  * Gets the direction (in radians) for a photon that is emitted via spontaneous emission.
