@@ -118,8 +118,9 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     // Keep the 'Excite Atom' button and electron state positioned in the lower-right corner of the zoomed-in box.
+    const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
     vBox.localBoundsProperty.link( () => {
-      vBox.rightBottom = zoomedInBoxBounds.rightBottom.minusXY( 10, 10 );
+      vBox.rightBottom = electronStateTextRightBottom;
     } );
 
     this.quantumNumbersInfoButton = quantumNumbersInfoButton;

@@ -35,6 +35,8 @@ export default class BohrNode extends HydrogenAtomNode {
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: BohrNodeOptions ) {
 
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
+
     // Electron orbits
     const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform );
 
@@ -56,9 +58,9 @@ export default class BohrNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
+    const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
     electronStateText.localBoundsProperty.link( () => {
-      electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minusXY( 10, 10 );
+      electronStateText.rightBottom = electronStateTextRightBottom;
     } );
   }
 

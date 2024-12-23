@@ -82,8 +82,9 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
+    const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
     electronStateText.localBoundsProperty.link( () => {
-      electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minusXY( 10, 10 );
+      electronStateText.rightBottom = electronStateTextRightBottom;
     } );
 
     this.deBroglie3DHeightNode = deBroglie3DHeightNode;
