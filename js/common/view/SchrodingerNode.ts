@@ -74,9 +74,11 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const xzAxesNode = new XZAxesNode( {
       color: MOTHAColors.xzAxesColorProperty,
-      left: zoomedInBoxBounds.left + 15,
-      bottom: zoomedInBoxBounds.bottom - 10,
       tandem: options.tandem.createTandem( 'xzAxesNode' )
+    } );
+    xzAxesNode.localBoundsProperty.link( () => {
+      xzAxesNode.left = zoomedInBoxBounds.left + 15;
+      xzAxesNode.bottom = zoomedInBoxBounds.bottom - 10;
     } );
 
     // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).

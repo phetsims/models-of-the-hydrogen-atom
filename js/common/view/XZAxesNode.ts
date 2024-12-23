@@ -57,15 +57,21 @@ export default class XZAxesNode extends Node {
     const xText = new RichText( MOTHASymbols.xStringProperty, {
       font: LABEL_FONT,
       fill: options.color,
-      left: xAxisNode.right + LABEL_OFFSET,
-      centerY: xAxisNode.centerY
+      maxWidth: 20
+    } );
+    xText.localBoundsProperty.link( () => {
+      xText.left = xAxisNode.right + LABEL_OFFSET;
+      xText.centerY = xAxisNode.centerY;
     } );
 
     const zText = new RichText( MOTHASymbols.zStringProperty, {
       font: LABEL_FONT,
       fill: options.color,
-      centerX: zAxisNode.centerX,
-      bottom: zAxisNode.top - LABEL_OFFSET
+      maxWidth: 20
+    } );
+    zText.localBoundsProperty.link( () => {
+      zText.centerX = zAxisNode.centerX;
+      zText.bottom = zAxisNode.top - LABEL_OFFSET;
     } );
 
     options.children = [ xAxisNode, zAxisNode, xText, zText ];
