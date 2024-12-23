@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SpectrometerNode is the spectrometer that is displayed in SpectrometerAccordionBox.
+ * WavelengthAxisNode is a portion of the x-axis (wavelength) displayed by the spectrometer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
