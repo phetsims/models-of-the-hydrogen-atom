@@ -198,8 +198,8 @@ export default class SpectraScreenView extends ScreenView {
         dashedLines,
         zoomedInBoxNode,
         modelVBox,
-        spectrometerAccordionBox,
         resetAllButton,
+        spectrometerAccordionBox,
         absorptionAndEmissionDialog,
         popupsParent
       ]

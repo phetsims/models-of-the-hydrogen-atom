@@ -36,7 +36,7 @@ export default class SnapshotNode extends Node {
       //TODO default values for options
     }, providedOptions );
 
-    const backgroundNode = new Rectangle( 0, 0, 500, 175, {
+    const backgroundNode = new Rectangle( 0, 0, 800, 175, {
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
       fill: MOTHAColors.spectrometerFillProperty,
       stroke: MOTHAColors.spectrometerStrokeProperty
