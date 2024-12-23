@@ -12,7 +12,6 @@ import { Shape } from '../../../../kite/js/imports.js';
 import { Path } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from '../model/Light.js';
-import ArrowShape from '../../../../scenery-phet/js/ArrowShape.js';
 
 const MAX_NUMBER_OF_PHOTONS = 14;
 const PHOTON_RADIUS = 3;
@@ -55,21 +54,14 @@ export default class SpectrometerBarNode extends Path {
         const yTail = -( MAX_NUMBER_OF_PHOTONS * 2 * PHOTON_RADIUS ) - 2;
         const yTip = yTail - ARROW_TAIL_LENGTH - ARROW_HEAD_HEIGHT;
 
-        //TODO Get rid of this and just draw the arrow head here.
-        const points = ArrowShape.getArrowShapePoints( x, yTail, x, yTip, [], {
-          headWidth: ARROW_HEAD_WIDTH,
-          headHeight: ARROW_HEAD_HEIGHT,
-          tailWidth: ARROW_TAIL_WIDTH
-        } );
-
-        points.forEach( ( point, index ) => {
-          if ( index === 0 ) {
-            shape.moveTo( points[ 0 ].x, points[ 0 ].y );
-          }
-          else {
-            shape.lineTo( point.x, point.y );
-          }
-        } );
+        // Start at the tip and draw clockwise.
+        shape.moveTo( x, yTip );
+        shape.lineTo( x + ARROW_HEAD_WIDTH / 2, yTip + ARROW_HEAD_HEIGHT );
+        shape.lineTo( x + ARROW_TAIL_WIDTH / 2, yTip + ARROW_HEAD_HEIGHT );
+        shape.lineTo( x + ARROW_TAIL_WIDTH / 2, yTail );
+        shape.lineTo( x - ARROW_TAIL_WIDTH / 2, yTail );
+        shape.lineTo( x - ARROW_TAIL_WIDTH / 2, yTip + ARROW_HEAD_HEIGHT );
+        shape.lineTo( x - ARROW_HEAD_WIDTH / 2, yTip + ARROW_HEAD_HEIGHT );
         shape.close();
       }
       this.shape = shape;
