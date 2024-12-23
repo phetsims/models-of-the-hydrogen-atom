@@ -35,7 +35,6 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import Light from '../model/Light.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
 import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
@@ -120,7 +119,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     // Keep the 'Excite Atom' button and electron state positioned in the lower-right corner of the zoomed-in box.
     vBox.localBoundsProperty.link( () => {
-      vBox.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+      vBox.rightBottom = zoomedInBoxBounds.rightBottom.minusXY( 10, 10 );
     } );
 
     this.quantumNumbersInfoButton = quantumNumbersInfoButton;

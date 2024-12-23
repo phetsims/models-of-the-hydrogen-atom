@@ -58,7 +58,7 @@ export default class BohrNode extends HydrogenAtomNode {
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
     electronStateText.localBoundsProperty.link( () => {
-      electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minus( MOTHAConstants.STATE_DISPLAY_MARGINS );
+      electronStateText.rightBottom = zoomedInBoxBounds.rightBottom.minusXY( 10, 10 );
     } );
   }
 

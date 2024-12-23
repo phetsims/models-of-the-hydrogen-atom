@@ -7,7 +7,6 @@
  */
 
 import Range from '../../../dot/js/Range.js';
-import Vector2 from '../../../dot/js/Vector2.js';
 import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNode.js';
 import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
@@ -85,9 +84,6 @@ const MOTHAConstants = {
   E1: -13.6,
 
   MAX_SPECTROMETER_SNAPSHOTS: 4,
-
-  // margin between the state display and inside edge of zoomed-in box
-  STATE_DISPLAY_MARGINS: new Vector2( 10, 10 ),
 
   // The Java version had a wider range of speeds and a speed slider. For the HTML5 version, this was simplified to
   // 3 speeds, using the standard PhET TimeControlNode.
