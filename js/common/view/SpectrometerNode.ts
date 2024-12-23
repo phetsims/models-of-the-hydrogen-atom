@@ -28,9 +28,9 @@ export default class SpectrometerNode extends Node {
 
   public constructor( spectrometer: Spectrometer, providedOptions?: SpectrometerNodeOptions ) {
 
-    const uvAxisNode = new UVAxisNode( 325 );
+    const uvAxisNode = new UVAxisNode( 400 );
     const visibleAxisNode = new VisibleAxisNode( 145 );
-    const irAxisNode = new IRAxisNode( 250 );
+    const irAxisNode = new IRAxisNode( 275 );
 
     const xAxisNode = new HBox( {
       children: [ uvAxisNode, visibleAxisNode, irAxisNode ],
