@@ -33,6 +33,7 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import EnergyLevelsZoomedInBoxNode from './EnergyLevelsZoomedInBoxNode.js';
+import SpectrometerDebugText from '../../common/view/SpectrometerDebugText.js';
 
 export default class EnergyLevelsScreenView extends ScreenView {
 
@@ -240,6 +241,16 @@ export default class EnergyLevelsScreenView extends ScreenView {
     this.model = model;
     this.zoomedInBoxNode = zoomedInBoxNode;
     this.electronEnergyLevelAccordionBox = electronEnergyLevelAccordionBox;
+
+    // A simple display of the spectrometer data, for debugging.
+    if ( phet.chipper.queryParameters.dev ) {
+      const dataText = new SpectrometerDebugText( model.spectrometer.dataPointsProperty );
+      dataText.localBoundsProperty.link( () => {
+        dataText.centerX = spectrometerAccordionBox.centerX;
+        dataText.top = spectrometerAccordionBox.top + 10;
+      } );
+      screenViewRootNode.addChild( dataText );
+    }
   }
 
   public override step( dt: number ): void {

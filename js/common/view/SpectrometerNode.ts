@@ -6,10 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { HBox, Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -70,30 +68,10 @@ export default class SpectrometerNode extends Node {
       barsHBox.bottom = xAxisNode.top - 1;
     } );
 
-    const stringProperty = new DerivedStringProperty( [ spectrometer.dataPointsProperty ],
-      dataPoints => {
-        let string = '';
-        dataPoints.forEach( dataPoint => {
-          string += `${dataPoint.wavelength}:${dataPoint.numberOfPhotonsEmitted} `;
-        } );
-        return string;
-      } );
-
-    //TODO simple display of the spectrometer data, for debugging
-    const dataText = new Text( stringProperty, {
-      font: new PhetFont( 12 ),
-      fill: MOTHAColors.invertibleTextFillProperty,
-      maxWidth: 0.95 * backgroundNode.width
-    } );
-    dataText.localBoundsProperty.link( () => {
-      dataText.centerX = backgroundNode.centerX;
-      dataText.top = backgroundNode.top + 2;
-    } );
-
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      children: [ backgroundNode, xAxisNode, barsHBox, dataText ]
+      children: [ backgroundNode, xAxisNode, barsHBox ]
     }, providedOptions );
 
     super( options );
