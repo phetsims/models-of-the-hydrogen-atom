@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SpectrumChart the base class for the charts displayed by the Spectrometer.
+ * SpectrumChart is the base class for the charts displayed by the Spectrometer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
