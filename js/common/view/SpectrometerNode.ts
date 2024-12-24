@@ -60,6 +60,8 @@ export default class SpectrometerNode extends Node {
       const barNode = new SpectrometerBarNode( wavelength );
       barNodes.push( barNode );
     } );
+
+    //TODO Position each SpectrometerBarNode at the correct place on the x-axis.
     const barsHBox = new HBox( {
       excludeInvisibleChildrenFromBounds: false,
       children: barNodes,
