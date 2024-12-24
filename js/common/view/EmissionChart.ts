@@ -10,7 +10,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { Line, Node, NodeOptions, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Utils from '../../../../dot/js/Utils.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -23,26 +23,40 @@ import SpectrometerBarNode from './SpectrometerBarNode.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 3;
 const TICK_FONT = new PhetFont( 8 );
 
 type SelfOptions = {
+
+  // Whether to create tick marks at the values in providedOptions.wavelengths. Used to omit tick marks from snapshots.
+  hasTickMarks?: boolean;
+
+  // This chart will display data for these wavelengths. Data for other wavelengths will be ignored.
   wavelengths: number[];
+
+  // Range for this chart.
   minWavelength: number;
   maxWavelength: number;
+
+  // Node that serves as the x-axis.
   xAxis: Node;
 };
 
 type EmissionChartOptions = SelfOptions;
 
-export default class EmissionChart extends Node {
+class EmissionChart extends Node {
 
   protected constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
-                         provideOptions: EmissionChartOptions ) {
+                         providedOptions: EmissionChartOptions ) {
 
-    const options = optionize<EmissionChartOptions, SelfOptions, NodeOptions>()( {}, provideOptions );
+    const options = optionize<EmissionChartOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
+      hasTickMarks: true
+    }, providedOptions );
 
     const xAxis = options.xAxis;
     const xAxisLength = options.xAxis.width;
@@ -57,30 +71,32 @@ export default class EmissionChart extends Node {
 
       const x = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, wavelength );
 
-      const line = new Line( 0, 0, 0, TICK_LINE_LENGTH, {
-        stroke: MOTHAColors.spectrometerTickColorProperty,
-        lineWidth: 1
-      } );
+      if ( options.hasTickMarks ) {
+        const line = new Line( 0, 0, 0, TICK_LINE_LENGTH, {
+          stroke: MOTHAColors.spectrometerTickColorProperty,
+          lineWidth: 1
+        } );
 
-      const text = new Text( wavelength, {
-        fill: MOTHAColors.spectrometerTickColorProperty,
-        font: TICK_FONT,
-        rotation: -Math.PI / 2
-      } );
+        const text = new Text( wavelength, {
+          fill: MOTHAColors.spectrometerTickColorProperty,
+          font: TICK_FONT,
+          rotation: -Math.PI / 2
+        } );
 
-      const tickNode = new VBox( {
-        excludeInvisibleChildrenFromBounds: false,
-        children: [ line, text ],
-        spacing: 2,
-        centerX: xAxis.left + x,
-        top: xAxis.bottom,
+        const tickNode = new VBox( {
+          excludeInvisibleChildrenFromBounds: false,
+          children: [ line, text ],
+          spacing: 2,
+          centerX: xAxis.left + x,
+          top: xAxis.bottom,
 
-        // Make the tick visible only when its wavelength is included in the spectrometer data set.
-        visibleProperty: new DerivedProperty( [ dataPointsProperty ],
-          dataPoints => !!_.find( dataPoints, dataPoint => dataPoint.wavelength === wavelength ) ||
-                        MOTHAQueryParameters.showAllTicks )
-      } );
-      children.push( tickNode );
+          // Make the tick visible only when its wavelength is included in the spectrometer data set.
+          visibleProperty: new DerivedProperty( [ dataPointsProperty ],
+            dataPoints => !!_.find( dataPoints, dataPoint => dataPoint.wavelength === wavelength ) ||
+                          MOTHAQueryParameters.showAllTicks )
+        } );
+        children.push( tickNode );
+      }
 
       const barNode = new SpectrometerBarNode( wavelength );
       barNode.localBoundsProperty.link( () => {
@@ -112,7 +128,9 @@ export default class EmissionChart extends Node {
  */
 class UVEmissionChart extends EmissionChart {
 
-  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
+                      axisLength: number,
+                      providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
     const wavelengths = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
 
@@ -120,12 +138,12 @@ class UVEmissionChart extends EmissionChart {
       fill: MOTHAColors.UV_COLOR
     } );
 
-    super( dataPointsProperty, {
+    super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
       wavelengths: wavelengths,
       minWavelength: _.min( wavelengths )! - 1,
       maxWavelength: _.max( wavelengths )! + 1,
       xAxis: xAxis
-    } );
+    }, providedOptions ) );
   }
 }
 
@@ -134,7 +152,9 @@ class UVEmissionChart extends EmissionChart {
  */
 class IREmissionChart extends EmissionChart {
 
-  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
+                      axisLength: number,
+                      providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
     const wavelengths = photonAbsorptionModel.getIRWavelengths();
 
@@ -142,12 +162,12 @@ class IREmissionChart extends EmissionChart {
       fill: MOTHAColors.IR_COLOR
     } );
 
-    super( dataPointsProperty, {
+    super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
       wavelengths: wavelengths,
       minWavelength: 1000,
       maxWavelength: 7500,
       xAxis: xAxis
-    } );
+    }, providedOptions ) );
   }
 }
 
@@ -156,7 +176,9 @@ class IREmissionChart extends EmissionChart {
  */
 class VisibleEmissionChart extends EmissionChart {
 
-  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
+                      axisLength: number,
+                      providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
     const wavelengths = photonAbsorptionModel.getVisibleWavelengths();
 
@@ -167,12 +189,12 @@ class VisibleEmissionChart extends EmissionChart {
       valueToColor: Light.wavelengthToColor
     } );
 
-    super( dataPointsProperty, {
+    super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
       wavelengths: wavelengths,
       minWavelength: VisibleColor.MIN_WAVELENGTH,
       maxWavelength: VisibleColor.MAX_WAVELENGTH,
       xAxis: xAxis
-    } );
+    }, providedOptions ) );
   }
 }
 
