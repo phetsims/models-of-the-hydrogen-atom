@@ -8,7 +8,7 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { Line, Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Line, Node, NodeOptions, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Utils from '../../../../dot/js/Utils.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -51,21 +51,23 @@ export default class WavelengthAxisNode extends Node {
       const x = Utils.linear( options.minWavelength, options.maxWavelength, 0, axisLength, tickValue );
 
       const tickLine = new Line( 0, 0, 0, TICK_LINE_LENGTH, {
-        stroke: MOTHAColors.tickLineStrokeProperty,
-        lineWidth: 1,
+        stroke: MOTHAColors.spectrometerTickColorProperty,
+        lineWidth: 1
+      } );
+
+      const tickText = new Text( tickValue, {
+        fill: MOTHAColors.spectrometerTickColorProperty,
+        font: TICK_FONT,
+        rotation: -Math.PI / 2
+      } );
+
+      const tickVBox = new VBox( {
+        children: [ tickLine, tickText ],
+        spacing: 2,
         centerX: axisNode.left + x,
         top: axisNode.bottom
       } );
-      children.push( tickLine );
-
-      const tickText = new Text( tickValue, {
-        fill: MOTHAColors.tickTextFillProperty,
-        font: TICK_FONT,
-        rotation: -Math.PI / 2,
-        centerX: tickLine.centerX,
-        top: tickLine.bottom + 2
-      } );
-      children.push( tickText );
+      children.push( tickVBox );
     } );
 
     children.push( axisNode );

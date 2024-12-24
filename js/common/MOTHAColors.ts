@@ -189,12 +189,7 @@ const MOTHAColors = {
     projector: 'black'
   } ),
 
-  tickLineStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'tickLineStroke', {
-    default: 'white',
-    projector: 'black'
-  } ),
-
-  tickTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'tickTextFill', {
+  spectrometerTickColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerTickColor', {
     default: 'white',
     projector: 'black'
   } ),
