@@ -22,6 +22,7 @@ import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import SpectrometerBarNode from './SpectrometerBarNode.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 3;
@@ -76,7 +77,8 @@ export default class EmissionChart extends Node {
 
         // Make the tick visible only when its wavelength is included in the spectrometer data set.
         visibleProperty: new DerivedProperty( [ dataPointsProperty ],
-          dataPoints => !!_.find( dataPoints, dataPoint => dataPoint.wavelength === wavelength ) )
+          dataPoints => !!_.find( dataPoints, dataPoint => dataPoint.wavelength === wavelength ) ||
+                        MOTHAQueryParameters.showAllTicks )
       } );
       children.push( tickNode );
 

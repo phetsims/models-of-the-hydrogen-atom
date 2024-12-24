@@ -41,6 +41,12 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // Expand all accordion boxes
   expandAll: {
     type: 'flag'
+  },
+
+  // Shows ticks marks for all possible emission wavelengths on the Spectrometer. Tick marks are otherwise not
+  // shown unless a photon with the corresponding wavelength has been emitted.
+  showAllTicks: {
+    type: 'flag'
   }
 };
 
