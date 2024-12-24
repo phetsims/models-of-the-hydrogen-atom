@@ -20,6 +20,9 @@ import Light from '../model/Light.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
+import SpectrometerBarNode from './SpectrometerBarNode.js';
+import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
+import PlumPuddingModel from '../model/PlumPuddingModel.js';
 
 const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 3;
@@ -45,6 +48,7 @@ export default class WavelengthAxisNode extends Node {
     const axisLength = options.axisNode.width;
 
     const children: Node[] = [];
+    const barNodes: SpectrometerBarNode[] = [];
 
     options.tickValues.forEach( tickValue => {
 
@@ -76,11 +80,27 @@ export default class WavelengthAxisNode extends Node {
           dataPoints => !!_.find( dataPoints, dataPoint => dataPoint.wavelength === tickValue ) )
       } );
       children.push( tickNode );
+
+      const barNode = new SpectrometerBarNode( tickValue );
+      barNode.localBoundsProperty.link( () => {
+        barNode.centerX = Utils.linear( options.minWavelength, options.maxWavelength, 0, axisLength, tickValue );
+        barNode.bottom = axisNode.top - 1;
+      } );
+      children.push( barNode );
+      barNodes.push( barNode );
     } );
 
     children.push( axisNode );
 
     options.children = children;
+
+    // Update bars as the spectrometer data changes.
+    dataPointsProperty.link( dataPoints => barNodes.forEach( barNode => {
+      const wavelength = barNode.wavelength;
+      const dataPoint = _.find( dataPoints, dataPoint => dataPoint.wavelength === wavelength );
+      const numberOfPhotonsEmitted = !dataPoint ? 0 : dataPoint.numberOfPhotonsEmitted;
+      barNode.setNumberOfPhotons( numberOfPhotonsEmitted );
+    } ) );
 
     super( options );
   }
@@ -91,7 +111,9 @@ export default class WavelengthAxisNode extends Node {
  */
 class UVAxisNode extends WavelengthAxisNode {
 
-  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number, wavelengths: number[] ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
+
+    const wavelengths = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
 
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
@@ -111,7 +133,9 @@ class UVAxisNode extends WavelengthAxisNode {
  */
 class IRAxisNode extends WavelengthAxisNode {
 
-  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number, wavelengths: number[] ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
+
+    const wavelengths = photonAbsorptionModel.getIRWavelengths();
 
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
@@ -131,7 +155,9 @@ class IRAxisNode extends WavelengthAxisNode {
  */
 class VisibleAxisNode extends WavelengthAxisNode {
 
-  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number, wavelengths: number[] ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
+
+    const wavelengths = photonAbsorptionModel.getVisibleWavelengths();
 
     const axisNode = new SpectrumNode( {
       size: new Dimension2( axisLength, AXIS_HEIGHT ),

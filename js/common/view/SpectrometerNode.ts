@@ -7,15 +7,12 @@
  */
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { HBox, Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import { IRAxisNode, UVAxisNode, VisibleAxisNode } from './WavelengthAxisNode.js';
-import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
-import SpectrometerBarNode from './SpectrometerBarNode.js';
-import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import SpectrometerDebugText from './SpectrometerDebugText.js';
 
 const DISPLAY_HEIGHT = 135;
@@ -29,19 +26,16 @@ export default class SpectrometerNode extends Node {
 
   public constructor( spectrometer: Spectrometer, providedOptions?: SpectrometerNodeOptions ) {
 
-    // Three segments for the x-axis, each with a different scale, so that values do not overlap.
-    const uvWavelengths = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
-    const visibleWavelengths = photonAbsorptionModel.getVisibleWavelengths();
-    const irWavelengths = photonAbsorptionModel.getIRWavelengths();
+    // Three charts for three spectrums, each with a different scale, so that values do not overlap.
+    const uvChart = new UVAxisNode( spectrometer.dataPointsProperty, 400 );
+    const visibleChart = new VisibleAxisNode( spectrometer.dataPointsProperty, 145 );
+    const irChart = new IRAxisNode( spectrometer.dataPointsProperty, 275 );
 
-    const uvAxisNode = new UVAxisNode( spectrometer.dataPointsProperty, 400, uvWavelengths );
-    const visibleAxisNode = new VisibleAxisNode( spectrometer.dataPointsProperty, 145, visibleWavelengths );
-    const irAxisNode = new IRAxisNode( spectrometer.dataPointsProperty, 275, irWavelengths );
+    visibleChart.left = uvChart.right + 10;
+    irChart.left = visibleChart.right + 10;
 
-    const xAxisNode = new HBox( {
-      children: [ uvAxisNode, visibleAxisNode, irAxisNode ],
-      spacing: 10,
-      align: 'top'
+    const xAxisNode = new Node( {
+      children: [ uvChart, visibleChart, irChart ]
     } );
 
     const backgroundNode = new Rectangle( 0, 0, xAxisNode.width + 2 * X_MARGIN, DISPLAY_HEIGHT, {
@@ -53,38 +47,10 @@ export default class SpectrometerNode extends Node {
     xAxisNode.centerX = backgroundNode.centerX;
     xAxisNode.bottom = backgroundNode.bottom - 5;
 
-    // A bar for each photon emission wavelength.
-    const barNodes: SpectrometerBarNode[] = [];
-    const wavelengths = [ ...uvWavelengths, ...visibleWavelengths, ...irWavelengths ];
-    wavelengths.forEach( wavelength => {
-      const barNode = new SpectrometerBarNode( wavelength );
-      barNodes.push( barNode );
-    } );
-
-    //TODO Position each SpectrometerBarNode at the correct place on the x-axis.
-    const barsHBox = new HBox( {
-      excludeInvisibleChildrenFromBounds: false,
-      children: barNodes,
-      spacing: 1,
-      align: 'bottom'
-    } );
-    barsHBox.localBoundsProperty.link( () => {
-      barsHBox.centerX = backgroundNode.centerX;
-      barsHBox.bottom = xAxisNode.top - 1;
-    } );
-
-    // Update bars as the spectrometer data changes.
-    spectrometer.dataPointsProperty.link( dataPoints => barNodes.forEach( barNode => {
-      const wavelength = barNode.wavelength;
-      const dataPoint = _.find( dataPoints, dataPoint => dataPoint.wavelength === wavelength );
-      const numberOfPhotonsEmitted = !dataPoint ? 0 : dataPoint.numberOfPhotonsEmitted;
-      barNode.setNumberOfPhotons( numberOfPhotonsEmitted );
-    } ) );
-
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      children: [ backgroundNode, xAxisNode, barsHBox ]
+      children: [ backgroundNode, xAxisNode ]
     }, providedOptions );
 
     super( options );
