@@ -1,5 +1,6 @@
 // Copyright 2024, University of Colorado Boulder
 
+//TODO Better name for this class.
 /**
  * WavelengthAxisNode is a portion of the x-axis (wavelength) displayed by the spectrometer.
  *
@@ -41,6 +42,7 @@ export default class WavelengthAxisNode extends Node {
 
     const children: Node[] = [];
 
+    //TODO Make a tick visible (or non-transparent?) only when its wavelength is included in the spectrometer data set.
     options.tickValues.forEach( tickValue => {
 
       assert && assert( tickValue >= options.minWavelength && tickValue <= options.maxWavelength,
