@@ -12,7 +12,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { IRAxisNode, UVAxisNode, VisibleAxisNode } from './WavelengthAxisNode.js';
+import { IRSpectrumChart, UVSpectrumChart, VisibleSpectrumChart } from './SpectrumChart.js';
 import SpectrometerDebugText from './SpectrometerDebugText.js';
 
 const DISPLAY_HEIGHT = 135;
@@ -27,15 +27,15 @@ export default class SpectrometerNode extends Node {
   public constructor( spectrometer: Spectrometer, providedOptions?: SpectrometerNodeOptions ) {
 
     // Three charts for three spectrums, each with a different scale, so that values do not overlap.
-    const uvChart = new UVAxisNode( spectrometer.dataPointsProperty, 400 );
-    const visibleChart = new VisibleAxisNode( spectrometer.dataPointsProperty, 145 );
-    const irChart = new IRAxisNode( spectrometer.dataPointsProperty, 275 );
+    const uvSpectrumChart = new UVSpectrumChart( spectrometer.dataPointsProperty, 400 );
+    const visibleSpectrumChart = new VisibleSpectrumChart( spectrometer.dataPointsProperty, 145 );
+    const irSpectrumChart = new IRSpectrumChart( spectrometer.dataPointsProperty, 275 );
 
-    visibleChart.left = uvChart.right + 10;
-    irChart.left = visibleChart.right + 10;
+    visibleSpectrumChart.left = uvSpectrumChart.right + 10;
+    irSpectrumChart.left = visibleSpectrumChart.right + 10;
 
     const xAxisNode = new Node( {
-      children: [ uvChart, visibleChart, irChart ]
+      children: [ uvSpectrumChart, visibleSpectrumChart, irSpectrumChart ]
     } );
 
     const backgroundNode = new Rectangle( 0, 0, xAxisNode.width + 2 * X_MARGIN, DISPLAY_HEIGHT, {
