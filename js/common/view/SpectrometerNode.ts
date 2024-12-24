@@ -34,9 +34,9 @@ export default class SpectrometerNode extends Node {
     const visibleWavelengths = photonAbsorptionModel.getVisibleWavelengths();
     const irWavelengths = photonAbsorptionModel.getIRWavelengths();
 
-    const uvAxisNode = new UVAxisNode( 400, uvWavelengths );
-    const visibleAxisNode = new VisibleAxisNode( 145, visibleWavelengths );
-    const irAxisNode = new IRAxisNode( 275, irWavelengths );
+    const uvAxisNode = new UVAxisNode( spectrometer.dataPointsProperty, 400, uvWavelengths );
+    const visibleAxisNode = new VisibleAxisNode( spectrometer.dataPointsProperty, 145, visibleWavelengths );
+    const irAxisNode = new IRAxisNode( spectrometer.dataPointsProperty, 275, irWavelengths );
 
     const xAxisNode = new HBox( {
       children: [ uvAxisNode, visibleAxisNode, irAxisNode ],

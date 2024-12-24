@@ -1,6 +1,6 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO Better name for this class.
+//TODO Better name for class WavelengthAxisNode?
 /**
  * WavelengthAxisNode is a portion of the x-axis (wavelength) displayed by the spectrometer.
  *
@@ -17,6 +17,9 @@ import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Light from '../model/Light.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 
 const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 3;
@@ -33,7 +36,8 @@ type WavelengthAxisNodeOptions = SelfOptions;
 
 export default class WavelengthAxisNode extends Node {
 
-  protected constructor( provideOptions: WavelengthAxisNodeOptions ) {
+  protected constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
+                         provideOptions: WavelengthAxisNodeOptions ) {
 
     const options = optionize<WavelengthAxisNodeOptions, SelfOptions, NodeOptions>()( {}, provideOptions );
 
@@ -42,7 +46,6 @@ export default class WavelengthAxisNode extends Node {
 
     const children: Node[] = [];
 
-    //TODO Make a tick visible (or non-transparent?) only when its wavelength is included in the spectrometer data set.
     options.tickValues.forEach( tickValue => {
 
       assert && assert( tickValue >= options.minWavelength && tickValue <= options.maxWavelength,
@@ -50,24 +53,29 @@ export default class WavelengthAxisNode extends Node {
 
       const x = Utils.linear( options.minWavelength, options.maxWavelength, 0, axisLength, tickValue );
 
-      const tickLine = new Line( 0, 0, 0, TICK_LINE_LENGTH, {
+      const line = new Line( 0, 0, 0, TICK_LINE_LENGTH, {
         stroke: MOTHAColors.spectrometerTickColorProperty,
         lineWidth: 1
       } );
 
-      const tickText = new Text( tickValue, {
+      const text = new Text( tickValue, {
         fill: MOTHAColors.spectrometerTickColorProperty,
         font: TICK_FONT,
         rotation: -Math.PI / 2
       } );
 
-      const tickVBox = new VBox( {
-        children: [ tickLine, tickText ],
+      const tickNode = new VBox( {
+        excludeInvisibleChildrenFromBounds: false,
+        children: [ line, text ],
         spacing: 2,
         centerX: axisNode.left + x,
-        top: axisNode.bottom
+        top: axisNode.bottom,
+
+        // Make the tick visible only when its wavelength is included in the spectrometer data set.
+        visibleProperty: new DerivedProperty( [ dataPointsProperty ],
+          dataPoints => !!_.find( dataPoints, dataPoint => dataPoint.wavelength === tickValue ) )
       } );
-      children.push( tickVBox );
+      children.push( tickNode );
     } );
 
     children.push( axisNode );
@@ -83,13 +91,13 @@ export default class WavelengthAxisNode extends Node {
  */
 class UVAxisNode extends WavelengthAxisNode {
 
-  public constructor( axisLength: number, wavelengths: number[] ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number, wavelengths: number[] ) {
 
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
     } );
 
-    super( {
+    super( dataPointsProperty, {
       minWavelength: _.min( wavelengths )! - 1,
       maxWavelength: _.max( wavelengths )! + 1,
       tickValues: wavelengths,
@@ -103,13 +111,13 @@ class UVAxisNode extends WavelengthAxisNode {
  */
 class IRAxisNode extends WavelengthAxisNode {
 
-  public constructor( axisLength: number, wavelengths: number[] ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number, wavelengths: number[] ) {
 
     const axisNode = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
     } );
 
-    super( {
+    super( dataPointsProperty, {
       minWavelength: 1000,
       maxWavelength: 7500,
       tickValues: wavelengths,
@@ -123,7 +131,7 @@ class IRAxisNode extends WavelengthAxisNode {
  */
 class VisibleAxisNode extends WavelengthAxisNode {
 
-  public constructor( axisLength: number, wavelengths: number[] ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number, wavelengths: number[] ) {
 
     const axisNode = new SpectrumNode( {
       size: new Dimension2( axisLength, AXIS_HEIGHT ),
@@ -132,7 +140,7 @@ class VisibleAxisNode extends WavelengthAxisNode {
       valueToColor: Light.wavelengthToColor
     } );
 
-    super( {
+    super( dataPointsProperty, {
       minWavelength: VisibleColor.MIN_WAVELENGTH,
       maxWavelength: VisibleColor.MAX_WAVELENGTH,
       tickValues: wavelengths,
