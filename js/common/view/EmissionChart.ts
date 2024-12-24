@@ -106,9 +106,9 @@ export default class EmissionChart extends Node {
 }
 
 /**
- * UVSpectrumChart is the spectrometer chart for the UV (ultraviolet) spectrum.
+ * UVEmissionChart is the spectrometer chart that shows photons emitted in the UV (ultraviolet) spectrum.
  */
-class UVSpectrumChart extends EmissionChart {
+class UVEmissionChart extends EmissionChart {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
 
@@ -128,9 +128,9 @@ class UVSpectrumChart extends EmissionChart {
 }
 
 /**
- * IRSpectrumChart is the spectrometer chart for the IR (infrared) spectrum.
+ * IREmissionChart is the spectrometer chart that shows photons emitted in the IR (infrared) spectrum.
  */
-class IRSpectrumChart extends EmissionChart {
+class IREmissionChart extends EmissionChart {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
 
@@ -150,9 +150,9 @@ class IRSpectrumChart extends EmissionChart {
 }
 
 /**
- * IRSpectrumChart is the spectrometer chart for the visible spectrum.
+ * VisibleEmissionChart is the spectrometer chart that shows photons emitted in the visible spectrum.
  */
-class VisibleSpectrumChart extends EmissionChart {
+class VisibleEmissionChart extends EmissionChart {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
 
@@ -175,4 +175,4 @@ class VisibleSpectrumChart extends EmissionChart {
 }
 
 modelsOfTheHydrogenAtom.register( 'EmissionChart', EmissionChart );
-export { UVSpectrumChart, IRSpectrumChart, VisibleSpectrumChart };
+export { UVEmissionChart, IREmissionChart, VisibleEmissionChart };
