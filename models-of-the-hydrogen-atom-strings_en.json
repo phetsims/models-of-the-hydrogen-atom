@@ -71,8 +71,8 @@
   "schrodinger": {
     "value": "Schr\u00f6dinger"
   },
-  "spectrometerPhotonsEmittedPerNm": {
-    "value": "Spectrometer (photons emitted per nm)"
+  "spectrometer": {
+    "value": "Spectrometer"
   },
   "n": {
     "value": "n"
