@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * WavelengthAxisNode is a portion of the x-axis (wavelength) displayed by the spectrometer.
+ * SpectrumChart the base class for the charts displayed by the Spectrometer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
