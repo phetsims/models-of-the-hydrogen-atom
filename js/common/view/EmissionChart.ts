@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SpectrumChart is the base class for the charts displayed by the Spectrometer.
+ * EmissionChart is the base class for the charts displayed by the Spectrometer, showing emitted photons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -34,14 +34,14 @@ type SelfOptions = {
   xAxis: Node;
 };
 
-type SpectrumChartOptions = SelfOptions;
+type EmissionChartOptions = SelfOptions;
 
-export default class SpectrumChart extends Node {
+export default class EmissionChart extends Node {
 
   protected constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
-                         provideOptions: SpectrumChartOptions ) {
+                         provideOptions: EmissionChartOptions ) {
 
-    const options = optionize<SpectrumChartOptions, SelfOptions, NodeOptions>()( {}, provideOptions );
+    const options = optionize<EmissionChartOptions, SelfOptions, NodeOptions>()( {}, provideOptions );
 
     const xAxis = options.xAxis;
     const xAxisLength = options.xAxis.width;
@@ -108,7 +108,7 @@ export default class SpectrumChart extends Node {
 /**
  * UVSpectrumChart is the spectrometer chart for the UV (ultraviolet) spectrum.
  */
-class UVSpectrumChart extends SpectrumChart {
+class UVSpectrumChart extends EmissionChart {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
 
@@ -130,7 +130,7 @@ class UVSpectrumChart extends SpectrumChart {
 /**
  * IRSpectrumChart is the spectrometer chart for the IR (infrared) spectrum.
  */
-class IRSpectrumChart extends SpectrumChart {
+class IRSpectrumChart extends EmissionChart {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
 
@@ -152,7 +152,7 @@ class IRSpectrumChart extends SpectrumChart {
 /**
  * IRSpectrumChart is the spectrometer chart for the visible spectrum.
  */
-class VisibleSpectrumChart extends SpectrumChart {
+class VisibleSpectrumChart extends EmissionChart {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, axisLength: number ) {
 
@@ -174,5 +174,5 @@ class VisibleSpectrumChart extends SpectrumChart {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'SpectrumChart', SpectrumChart );
+modelsOfTheHydrogenAtom.register( 'EmissionChart', EmissionChart );
 export { UVSpectrumChart, IRSpectrumChart, VisibleSpectrumChart };

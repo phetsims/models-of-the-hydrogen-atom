@@ -12,7 +12,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { IRSpectrumChart, UVSpectrumChart, VisibleSpectrumChart } from './SpectrumChart.js';
+import { IRSpectrumChart, UVSpectrumChart, VisibleSpectrumChart } from './EmissionChart.js';
 import SpectrometerDebugText from './SpectrometerDebugText.js';
 
 const DISPLAY_HEIGHT = 135;
