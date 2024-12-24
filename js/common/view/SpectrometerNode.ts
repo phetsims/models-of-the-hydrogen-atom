@@ -72,11 +72,11 @@ export default class SpectrometerNode extends Node {
     } );
 
     // Update bars as the spectrometer data changes.
-    spectrometer.dataPointsProperty.link( dataPoints => dataPoints.forEach( dataPoint => {
-      const wavelength = dataPoint.wavelength;
-      const barNode = _.find( barNodes, barNode => barNode.wavelength === wavelength )!;
-      assert && assert( barNode );
-      barNode.setNumberOfPhotons( dataPoint.numberOfPhotonsEmitted );
+    spectrometer.dataPointsProperty.link( dataPoints => barNodes.forEach( barNode => {
+      const wavelength = barNode.wavelength;
+      const dataPoint = _.find( dataPoints, dataPoint => dataPoint.wavelength === wavelength );
+      const numberOfPhotonsEmitted = !dataPoint ? 0 : dataPoint.numberOfPhotonsEmitted;
+      barNode.setNumberOfPhotons( numberOfPhotonsEmitted );
     } ) );
 
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
