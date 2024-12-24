@@ -106,7 +106,7 @@ export default class SpectrumChart extends Node {
 }
 
 /**
- * UVSpectrumChart is the spectrometer chart for the UV spectrum.
+ * UVSpectrumChart is the spectrometer chart for the UV (ultraviolet) spectrum.
  */
 class UVSpectrumChart extends SpectrumChart {
 
@@ -128,7 +128,7 @@ class UVSpectrumChart extends SpectrumChart {
 }
 
 /**
- * IRSpectrumChart is the spectrometer chart for the UV spectrum.
+ * IRSpectrumChart is the spectrometer chart for the IR (infrared) spectrum.
  */
 class IRSpectrumChart extends SpectrumChart {
 
