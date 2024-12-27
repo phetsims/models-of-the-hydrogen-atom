@@ -81,8 +81,8 @@ export default class BohrElectron extends Electron {
       }
     } );
 
-    //TODO we want this to start at a different angle each time reset, but that conflicts with PhET-iO
-    this.angleProperty = new NumberProperty( MOTHAUtils.nextAngle(), {
+    // The Java version started at a different angle each time reset, but that conflicts with PhET-iO.
+    this.angleProperty = new NumberProperty( 0, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'angleProperty' ),
       phetioReadOnly: true

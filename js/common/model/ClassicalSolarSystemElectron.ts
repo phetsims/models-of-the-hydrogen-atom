@@ -12,7 +12,6 @@ import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAUtils from '../MOTHAUtils.js';
 import Electron, { ElectronOptions } from './Electron.js';
 
 const ANGULAR_SPEED = Utils.toRadians( 600 ); // initial speed of the electron, in radians/s
@@ -40,6 +39,7 @@ export default class ClassicalSolarSystemElectron extends Electron {
 
     super( options );
 
+    // The Java version started at a different angle each time reset, but that conflicts with PhET-iO.
     this.angleProperty = new NumberProperty( options.angle, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'angleProperty' ),
@@ -55,8 +55,7 @@ export default class ClassicalSolarSystemElectron extends Electron {
   }
 
   public override reset(): void {
-    // TODO Does setting angleProperty to a different angle on reset conflict with PhET-iO?
-    this.angleProperty.value = MOTHAUtils.nextAngle();
+    this.angleProperty.reset();
     this.angularSpeedProperty.reset();
     super.reset();
   }

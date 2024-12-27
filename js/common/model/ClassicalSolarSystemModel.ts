@@ -69,7 +69,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
       position: this.position
     } );
 
-    const angle = MOTHAUtils.nextAngle();
+    const angle = 0;
     const electronOffset = MOTHAUtils.polarToCartesian( ELECTRON_TO_PROTON_DISTANCE, angle );
     this.electron = new ClassicalSolarSystemElectron( {
       position: this.proton.position.plus( electronOffset ),
