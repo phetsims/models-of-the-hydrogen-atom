@@ -57,7 +57,6 @@ export default class BilliardBallModel extends HydrogenAtom {
     // do nothing for this model
   }
 
-  //TODO This does not look good in 'Fast' speed, because photos are inside the atom. Especially noticeable when stepping.
   /**
    * If the photon collides with the atom, the photon bounces back at a 'steep but random' angle.
    */
