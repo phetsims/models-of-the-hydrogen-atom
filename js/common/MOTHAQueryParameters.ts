@@ -49,13 +49,13 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     type: 'flag'
   },
 
-  // Displays spectrometer data in text-only format, in the upper-right corner of the spectrometer and snapshots.
-  debugSpectrometerData: {
+  // For debugging, displays maximum numbers of photons for all possible emission wavelengths.
+  debugSpectrometer: {
     type: 'flag'
   },
 
-  // Sets snapshots to maximum counts for all emission wavelengths.
-  debugSnapshots: {
+  // Displays spectrometer data in text-only format, in the upper-right corner of the spectrometer and snapshots.
+  debugSpectrometerData: {
     type: 'flag'
   }
 };

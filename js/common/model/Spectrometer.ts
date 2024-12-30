@@ -84,6 +84,11 @@ export default class Spectrometer extends PhetioObject {
       // When the hydrogen atom model is changed, clear the spectrometer.
       this.clear();
 
+      // For debugging, display maximum numbers of photons for all possible emission wavelengths.
+      if ( MOTHAQueryParameters.debugSpectrometer ) {
+        this.dataPointsProperty.value = getDebugDataPoints();
+      }
+
       // Wire up the listener to record photon emissions.
       if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
         oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
@@ -97,9 +102,7 @@ export default class Spectrometer extends PhetioObject {
    */
   public createSnapshot(): void {
 
-    const dataPoints = MOTHAQueryParameters.debugSnapshots ? getDebugDataPoints() : this.dataPointsProperty.value;
-
-    const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value.displayNameProperty, dataPoints );
+    const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value.displayNameProperty, this.dataPointsProperty.value );
     this.snapshots.push( snapshot );
 
     snapshot.disposeEmitter.addListener( () => this.snapshots.remove( snapshot ) );
