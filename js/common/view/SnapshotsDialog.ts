@@ -34,14 +34,16 @@ export default class SnapshotsDialog extends Dialog {
       // DialogOptions
       isDisposable: false,
       fill: MOTHAColors.snapshotsDialogFillProperty,
-      topMargin: 15,
-      bottomMargin: 15,
-      leftMargin: 15,
+      topMargin: 10,
+      bottomMargin: 10,
+      leftMargin: 10,
+      closeButtonRightMargin: 10,
+      xSpacing: 0,
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.mySnapshotsDialog.accessibleNameStringProperty
     }, providedOptions );
 
     const content = new VBox( {
-      spacing: 10,
+      spacing: 8,
       children: snapshots.map( snapshot => new SnapshotNode( snapshot, {
         scale: SNAPSHOT_SCALE
       } ) )
