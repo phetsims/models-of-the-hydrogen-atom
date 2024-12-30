@@ -107,9 +107,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     super( spectrometerChart, options );
 
     // Record only when the accordion box is expanded.
-    this.expandedProperty.link( expanded => {
-      spectrometer.setRecordingEnabled( expanded );
-    } );
+    this.expandedProperty.link( expanded => spectrometer.setRecordingEnabled( expanded ) );
 
     // Since we are putting buttons in the title bar, we created this accordion box with titleBarExpandCollapse: false.
     // So add the ability to press the title text to toggle expand/collapse.
