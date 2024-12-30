@@ -1,5 +1,6 @@
 // Copyright 2016-2024, University of Colorado Boulder
 
+//TODO Needs layout work. We're just getting lucky that the chart is the right height, and title fits above the data.
 /**
  * SnapshotNode is a snapshot from the spectrometer.
  *

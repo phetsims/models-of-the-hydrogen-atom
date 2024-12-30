@@ -1,5 +1,6 @@
 // Copyright 2024, University of Colorado Boulder
 
+//TODO Needs layout work. We're just getting lucky that the height of the bars works for the height of the chart.
 /**
  * SpectrometerChart plots the number of photons for each emission wavelength, across the UV, visible, and IR spectrums.
  * The x-axis is wavelength, while the y-axis is number of photons.  This chart is used in the 'Spectrum' accordion
