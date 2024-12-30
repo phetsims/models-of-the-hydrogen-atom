@@ -6,6 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
@@ -14,6 +16,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignGroup, HBox, HBoxOptions, PressListener, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Spectrometer from '../model/Spectrometer.js';
@@ -33,6 +36,11 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
   public constructor( spectrometer: Spectrometer, providedOptions: SpectrometerAccordionBoxOptions ) {
 
+    const expandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
+      tandem: providedOptions.tandem.createTandem( 'expandedProperty' ),
+      phetioFeatured: true
+    } );
+
     const options = optionize4<SpectrometerAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
 
@@ -40,7 +48,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
         isDisposable: false,
         titleBarExpandCollapse: false, // because we're putting buttons in the title bar
         overrideTitleNodePickable: false,
-        expandedDefaultValue: MOTHAQueryParameters.expandAll,
+        expandedProperty: expandedProperty,
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty
       }, providedOptions );
@@ -80,10 +88,14 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     const buttonGroup = new HButtonGroup( [ snapshotButton, viewSnapshotsButton, eraseButton ], {
       maxHeight: 25,
       spacing: 10,
-      tandem: buttonGroupTandem,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
+
+      // Buttons are visible when the accordion box is expanded.
+      visibleProperty: new DerivedProperty( [ expandedProperty ], expanded => expanded, {
+        tandem: buttonGroupTandem.createTandem( 'visibleProperty' ),
+        phetioFeatured: true,
+        phetioValueType: BooleanIO
+      } ),
+      tandem: buttonGroupTandem
     } );
 
     options.titleNode = new HBox( {
@@ -98,9 +110,6 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
       // Record only when the accordion box is expanded.
       spectrometer.setRecordingEnabled( expanded );
-
-      // Show buttons when expanded.
-      buttonGroup.visible = expanded;
     } );
 
     // Since we are putting buttons in the title bar, we created this accordion box with titleBarExpandCollapse: false.
