@@ -47,6 +47,11 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // shown unless a photon with the corresponding wavelength has been emitted.
   showAllTicks: {
     type: 'flag'
+  },
+
+  // Displays spectrometer data in text-only format, in the upper-right corner of the spectrometer and snapshots.
+  debugSpectrometerData: {
+    type: 'flag'
   }
 };
 

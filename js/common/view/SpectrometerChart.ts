@@ -17,6 +17,7 @@ import { IREmissionChart, UVEmissionChart, VisibleEmissionChart } from './Emissi
 import SpectrometerDebugText from './SpectrometerDebugText.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 const DISPLAY_HEIGHT = 135;
 const X_MARGIN = 5;
@@ -69,7 +70,7 @@ export default class SpectrometerChart extends Node {
     super( options );
 
     // A simple text-only display of the spectrometer data, for debugging.
-    if ( phet.chipper.queryParameters.dev ) {
+    if ( MOTHAQueryParameters.debugSpectrometerData ) {
       const dataText = new SpectrometerDebugText( dataPointsProperty );
       dataText.localBoundsProperty.link( () => {
         dataText.right = backgroundNode.right - 5;
