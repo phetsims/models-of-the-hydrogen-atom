@@ -90,7 +90,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       children: [ titleText, buttonGroup ]
     } );
 
-    const spectrometerNode = new SpectrometerNode( spectrometer );
+    const spectrometerNode = new SpectrometerNode( spectrometer.dataPointsProperty );
 
     super( spectrometerNode, options );
 
