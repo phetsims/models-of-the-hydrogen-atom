@@ -22,7 +22,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import SnapshotButton from './SnapshotButton.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
-import SpectrometerNode from './SpectrometerNode.js';
+import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -90,9 +90,9 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       children: [ titleText, buttonGroup ]
     } );
 
-    const spectrometerNode = new SpectrometerNode( spectrometer.dataPointsProperty );
+    const spectrometerChart = new SpectrometerChart( spectrometer.dataPointsProperty );
 
-    super( spectrometerNode, options );
+    super( spectrometerChart, options );
 
     this.expandedProperty.link( expanded => {
 

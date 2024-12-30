@@ -1,7 +1,9 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SpectrometerNode is the spectrometer that is displayed in SpectrometerAccordionBox.
+ * SpectrometerChart plots the number of photons for each emission wavelength, across the UV, visible, and IR spectrums.
+ * The x-axis is wavelength, while the y-axis is number of photons.  This chart is used in the 'Spectrum' accordion
+ * box, and in the snapshots dialog.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -26,7 +28,7 @@ type SelfOptions = {
 
 type SpectrometerNodeOptions = SelfOptions;
 
-export default class SpectrometerNode extends Node {
+export default class SpectrometerChart extends Node {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, providedOptions?: SpectrometerNodeOptions ) {
 
@@ -75,4 +77,4 @@ export default class SpectrometerNode extends Node {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'SpectrometerNode', SpectrometerNode );
+modelsOfTheHydrogenAtom.register( 'SpectrometerChart', SpectrometerChart );
