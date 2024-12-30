@@ -34,7 +34,8 @@ export default class SnapshotNode extends Node {
   public constructor( snapshot: Snapshot, providedOptions?: SnapshotNodeOptions ) {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
-      //TODO default values for options
+
+      //TODO Needs to be mutable and isDisposable:false for PhET-iO. Delete code related to dispose.
     }, providedOptions );
 
     const chart = new SpectrometerChart( new Property( snapshot.dataPoints ), {
@@ -68,7 +69,7 @@ export default class SnapshotNode extends Node {
       left: chart.right + 5,
       bottom: chart.bottom,
       accessibleName: trashButtonAccessibleNameProperty,
-      tandem: Tandem.OPT_OUT //TODO instrument trashButton, which means that SnapshotNode needs to be mutable and isDisposable:false
+      tandem: Tandem.OPT_OUT //TODO instrument trashButton
     } );
 
     options.children = [ chart, titleText, trashButton ];
