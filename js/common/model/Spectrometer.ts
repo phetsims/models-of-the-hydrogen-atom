@@ -20,6 +20,9 @@ import HydrogenAtom from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import Snapshot from './Snapshot.js';
 import SpectrometerDataPoint from './SpectrometerDataPoint.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import photonAbsorptionModel from './PhotonAbsorptionModel.js';
+import PlumPuddingModel from './PlumPuddingModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -89,10 +92,16 @@ export default class Spectrometer extends PhetioObject {
     } );
   }
 
+  /**
+   * Creates a snapshot of the current spectrometer data.
+   */
   public createSnapshot(): void {
-    const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value.displayNameProperty,
-      this.dataPointsProperty.value );
+
+    const dataPoints = MOTHAQueryParameters.debugSnapshots ? getDebugDataPoints() : this.dataPointsProperty.value;
+
+    const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value.displayNameProperty, dataPoints );
     this.snapshots.push( snapshot );
+
     snapshot.disposeEmitter.addListener( () => this.snapshots.remove( snapshot ) );
   }
 
@@ -134,6 +143,16 @@ export default class Spectrometer extends PhetioObject {
   public setRecordingEnabled( recordingEnabled: boolean ): void {
     this.recordingEnabled = recordingEnabled;
   }
+}
+
+/**
+ * Gets a set of data points that has a large value for all possible emission wavelengths.
+ * For debugging with the ?debugSnapshots query parameter.
+ */
+function getDebugDataPoints(): SpectrometerDataPoint[] {
+  const wavelengths = photonAbsorptionModel.getWavelengths();
+  wavelengths.push( PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH );
+  return wavelengths.map( wavelength => new SpectrometerDataPoint( wavelength, 100 ) );
 }
 
 modelsOfTheHydrogenAtom.register( 'Spectrometer', Spectrometer );
