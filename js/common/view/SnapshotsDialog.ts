@@ -10,7 +10,7 @@
 import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Rectangle, VBox } from '../../../../scenery/js/imports.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -21,6 +21,9 @@ import SnapshotNode from './SnapshotNode.js';
 type SelfOptions = EmptySelfOptions;
 
 type SnapshotsDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'>;
+
+//TODO Need to adjust this and MAX_SPECTROMETER_SNAPSHOTS to ensure the snapshots are readable.
+const SNAPSHOT_SCALE = 0.8;
 
 export default class SnapshotsDialog extends Dialog {
 
@@ -39,32 +42,28 @@ export default class SnapshotsDialog extends Dialog {
 
     const content = new VBox( {
       spacing: 10,
-      children: createSnapshotNodes( snapshots )
+      children: snapshots.map( snapshot => new SnapshotNode( snapshot, {
+        scale: SNAPSHOT_SCALE
+      } ) )
     } );
 
     super( content, options );
 
-    //TODO remove a specific snapshot, rather than rebuilding them all
-    const numberOfSnapshotsObserver = ( numberOfSnapshots: number ) => {
+    // Add new snapshots to the end.
+    snapshots.addItemAddedListener( snapshot => {
+      const snapshotNode = new SnapshotNode( snapshot, {
+        scale: SNAPSHOT_SCALE
+      } );
+      content.addChild( snapshotNode );
+    } );
+
+    // Hide this dialog when all snapshots have been deleted.
+    snapshots.lengthProperty.lazyLink( numberOfSnapshots => {
       if ( numberOfSnapshots === 0 ) {
-        content.children = [ new Rectangle( 0, 0, 100, 100 ) ];  // ... so that content has defined bounds.
         this.hide();
       }
-      else {
-        content.children = createSnapshotNodes( snapshots );
-      }
-    };
-    snapshots.lengthProperty.lazyLink( numberOfSnapshotsObserver );
+    } );
   }
-}
-
-/**
- * Creates a Node for each snapshot.
- */
-function createSnapshotNodes( snapshots: ObservableArray<Snapshot> ): SnapshotNode[] {
-  return snapshots.map( snapshot => new SnapshotNode( snapshot, {
-    scale: 0.8 //TODO Need to adjust this and MAX_SPECTROMETER_SNAPSHOTS to ensure the snapshots are readable.
-  } ) );
 }
 
 modelsOfTheHydrogenAtom.register( 'SnapshotsDialog', SnapshotsDialog );

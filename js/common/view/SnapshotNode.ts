@@ -11,17 +11,17 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import TrashButton from '../../../../scenery-phet/js/buttons/TrashButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Snapshot from '../model/Snapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import UnderConstructionText from './UnderConstructionText.js';
+import SpectrometerChart from './SpectrometerChart.js';
+import Property from '../../../../axon/js/Property.js';
 
 const INSIDE_X_MARGIN = 6;
-const INSIDE_Y_MARGIN = 6;
+const INSIDE_Y_MARGIN = 4;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -36,10 +36,8 @@ export default class SnapshotNode extends Node {
       //TODO default values for options
     }, providedOptions );
 
-    const backgroundNode = new Rectangle( 0, 0, 800, 175, {
-      cornerRadius: MOTHAConstants.CORNER_RADIUS,
-      fill: MOTHAColors.spectrometerFillProperty,
-      stroke: MOTHAColors.spectrometerStrokeProperty
+    const chart = new SpectrometerChart( new Property( snapshot.dataPoints ), {
+      hasTickMarks: false
     } );
 
     const titleStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.snapshotNumberNameStringProperty, {
@@ -52,36 +50,38 @@ export default class SnapshotNode extends Node {
       maxWidth: 300
     } );
     titleText.localBoundsProperty.link( () => {
-      titleText.left = backgroundNode.left + INSIDE_X_MARGIN;
-      titleText.top = backgroundNode.top + INSIDE_Y_MARGIN;
+      titleText.left = chart.left + INSIDE_X_MARGIN;
+      titleText.top = chart.top + INSIDE_Y_MARGIN;
     } );
 
+    const trashButtonAccessibleNameProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
+      number: snapshot.snapshotNumber,
+      name: snapshot.modelNameProperty
+    } );
     const trashButton = new TrashButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       listener: () => snapshot.dispose(),
       iconOptions: {
         scale: 0.04
       },
-      right: backgroundNode.right - INSIDE_X_MARGIN,
-      top: backgroundNode.top + INSIDE_Y_MARGIN,
-      accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
-        number: snapshot.snapshotNumber,
-        name: snapshot.modelNameProperty
-      } ),
-      tandem: Tandem.OPT_OUT //TODO instrument trashButton
+      left: chart.right + 5,
+      bottom: chart.bottom,
+      accessibleName: trashButtonAccessibleNameProperty,
+      tandem: Tandem.OPT_OUT //TODO instrument trashButton, which means that SnapshotNode needs to be mutable and isDisposable:false
     } );
 
-    //TODO Under Construction
-    const underConstructionText = new UnderConstructionText( {
-      center: backgroundNode.center
-    } );
-
-    options.children = [ backgroundNode, titleText, trashButton, underConstructionText ];
+    options.children = [ chart, titleText, trashButton ];
 
     super( options );
-  }
 
-  //TODO dispose
+    this.disposeEmitter.addListener( () => {
+      titleStringProperty.dispose();
+      trashButtonAccessibleNameProperty.dispose();
+      trashButton.dispose();
+    } );
+
+    snapshot.disposeEmitter.addListener( () => this.dispose() );
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'SnapshotNode', SnapshotNode );

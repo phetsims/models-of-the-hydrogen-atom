@@ -90,7 +90,8 @@ export default class Spectrometer extends PhetioObject {
   }
 
   public createSnapshot(): void {
-    const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value.displayNameProperty );
+    const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value.displayNameProperty,
+      this.dataPointsProperty.value );
     this.snapshots.push( snapshot );
     snapshot.disposeEmitter.addListener( () => this.snapshots.remove( snapshot ) );
   }

@@ -40,9 +40,12 @@ export default class SpectrometerChart extends Node {
 
 
     // Photon emission charts for three spectrums, each with a different scale, so that values do not overlap.
-    const uvEmissionChart = new UVEmissionChart( dataPointsProperty, 400 );
-    const visibleEmissionChart = new VisibleEmissionChart( dataPointsProperty, 145 );
-    const irEmissionChart = new IREmissionChart( dataPointsProperty, 275 );
+    const chartOptions = {
+      hasTickMarks: options.hasTickMarks
+    };
+    const uvEmissionChart = new UVEmissionChart( dataPointsProperty, 400, chartOptions );
+    const visibleEmissionChart = new VisibleEmissionChart( dataPointsProperty, 145, chartOptions );
+    const irEmissionChart = new IREmissionChart( dataPointsProperty, 275, chartOptions );
 
     visibleEmissionChart.left = uvEmissionChart.right + 10;
     irEmissionChart.left = visibleEmissionChart.right + 10;
