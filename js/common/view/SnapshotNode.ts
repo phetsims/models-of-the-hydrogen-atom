@@ -46,7 +46,7 @@ export default class SnapshotNode extends Node {
       name: snapshot.modelNameProperty
     } );
     const titleText = new Text( titleStringProperty, {
-      font: new PhetFont( 16 ),
+      font: new PhetFont( 14 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 300
     } );

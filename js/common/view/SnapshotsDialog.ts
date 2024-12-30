@@ -23,7 +23,7 @@ type SelfOptions = EmptySelfOptions;
 type SnapshotsDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'>;
 
 //TODO Need to adjust this and MAX_SPECTROMETER_SNAPSHOTS to ensure the snapshots are readable.
-const SNAPSHOT_SCALE = 0.8;
+const SNAPSHOT_SCALE = 0.9;
 
 export default class SnapshotsDialog extends Dialog {
 
