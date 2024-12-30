@@ -10,7 +10,7 @@
 import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { Rectangle, VBox } from '../../../../scenery/js/imports.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -47,6 +47,7 @@ export default class SnapshotsDialog extends Dialog {
     //TODO remove a specific snapshot, rather than rebuilding them all
     const numberOfSnapshotsObserver = ( numberOfSnapshots: number ) => {
       if ( numberOfSnapshots === 0 ) {
+        content.children = [ new Rectangle( 0, 0, 100, 100 ) ];  // ... so that content has defined bounds.
         this.hide();
       }
       else {
