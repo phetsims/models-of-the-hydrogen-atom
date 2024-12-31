@@ -43,6 +43,9 @@ export default class BilliardBallNode extends HydrogenAtomNode {
     this.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
   }
 
+  /**
+   * Creates the icon that represents this model in the user interface.
+   */
   public static createIcon(): Node {
     return new BallNode( 15 );
   }

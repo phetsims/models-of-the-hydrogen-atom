@@ -69,6 +69,9 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }
 
+  /**
+   * Creates the icon that represents this model in the user interface.
+   */
   public static createIcon(): Node {
 
     // Proton

@@ -47,6 +47,9 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }
 
+  /**
+   * Creates the icon that represents this model in the user interface.
+   */
   public static createIcon(): Node {
 
     // Plum pudding

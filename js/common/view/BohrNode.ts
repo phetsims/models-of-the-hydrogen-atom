@@ -64,6 +64,9 @@ export default class BohrNode extends HydrogenAtomNode {
     } );
   }
 
+  /**
+   * Creates the icon that represents this model in the user interface.
+   */
   public static createIcon(): Node {
 
     // Proton
