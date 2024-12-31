@@ -57,7 +57,6 @@ export default class ModelPanel extends Panel {
 
     // continuum bar, 'Classical' to 'Quantum'
     if ( options.hasContinuumBar ) {
-      //TODO Dynamically resize continuumBarNode to modelRadioButtonGroup.boundsProperty.value.height.
       const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height, {
         tandem: options.tandem.createTandem( 'continuumBarNode' )
       } );
