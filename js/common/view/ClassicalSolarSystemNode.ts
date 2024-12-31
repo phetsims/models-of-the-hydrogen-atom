@@ -35,10 +35,6 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: ClassicalSolarSystemNodeOptions ) {
 
-    const options = optionize<ClassicalSolarSystemNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options
-    }, providedOptions );
-
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
       visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
     } );
@@ -60,10 +56,15 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
       listener: () => hydrogenAtom.reset(),
       enabledProperty: hydrogenAtom.isDestroyedProperty,
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.resetAtomButton.accessibleNameStringProperty,
-      tandem: options.tandem.createTandem( 'resetButton' )
+      tandem: providedOptions.tandem.createTandem( 'resetButton' )
     } );
 
-    options.children = [ explosionNode, protonNode, electronNode, resetButton ];
+    const options = optionize<ClassicalSolarSystemNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
+
+      // HydrogenAtomNodeOptions
+      children: [ explosionNode, protonNode, electronNode, resetButton ]
+    }, providedOptions );
+
 
     super( hydrogenAtom, hydrogenAtomProperty, options );
   }

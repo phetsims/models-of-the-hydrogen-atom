@@ -13,7 +13,7 @@ import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -45,9 +45,7 @@ export default class BohrElectron extends Electron {
 
   public constructor( providedOptions: BohrElectronOptions ) {
 
-    const options = optionize<BohrElectronOptions, SelfOptions, ElectronOptions>()( {
-      //TODO options
-    }, providedOptions );
+    const options = providedOptions;
 
     super( options );
 
