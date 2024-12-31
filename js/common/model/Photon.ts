@@ -45,8 +45,8 @@ const PHOTON_STATE_SCHEMA = {
 
 type SelfOptions = {
   wavelength: number; // the photon's integer wavelength, in nm
-  position?: Vector2; // initial position
-  direction?: number; // initial direction
+  position: Vector2; // initial position
+  direction: number; // initial direction
   wasEmitted?: boolean; // Was this photon emitted by the atom?
   hasCollided?: boolean; // Has this photon collided with the atom?
   debugHaloColor?: TColor; // Color of halo around the photon, to make it easier to see for debugging.
@@ -75,8 +75,6 @@ export default class Photon extends PhetioObject {
     const options = optionize<PhotonOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
-      position: Vector2.ZERO,
-      direction: 0,
       wasEmitted: false,
       hasCollided: false,
       debugHaloColor: null,

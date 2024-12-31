@@ -83,7 +83,7 @@ export default class AbsorptionAndEmissionDialog extends Panel {
     const options = optionize4<AbsorptionAndEmissionDialogOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
 
       // SelfOptions
-      position: Vector2.ZERO,
+      position: new Vector2( 0, 0 ),
 
       // PanelOptions
       isDisposable: false,

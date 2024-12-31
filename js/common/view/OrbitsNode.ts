@@ -22,7 +22,7 @@ export default class OrbitsNode extends Path {
     const shape = new Shape();
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
-      shape.circle( Vector2.ZERO, radius );
+      shape.circle( 0, 0, radius );
       shape.newSubpath();
     }
 

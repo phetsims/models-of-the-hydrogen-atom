@@ -61,7 +61,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
     const options = optionize<HydrogenAtomOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
-      position: Vector2.ZERO,
+      position: new Vector2( 0, 0 ),
 
       // PhetioObjectOptions
       isDisposable: false,

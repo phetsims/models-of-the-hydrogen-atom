@@ -28,7 +28,7 @@ export default class Proton extends PhetioObject {
     const options = optionize<ProtonOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
-      position: Vector2.ZERO,
+      position: new Vector2( 0, 0 ),
 
       // PhetioObjectOptions
       isDisposable: false,

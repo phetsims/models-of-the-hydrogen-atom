@@ -97,7 +97,9 @@ export default class PhotonNode extends Node {
    */
   public static createIcon( wavelength: number, scale = 1 ): Node {
     const photon = new Photon( {
-      wavelength: wavelength
+      wavelength: wavelength,
+      position: new Vector2( 0, 0 ),
+      direction: 0
     } );
     const modelViewTransform = ModelViewTransform2.createIdentity();
     return new PhotonNode( photon, modelViewTransform, {

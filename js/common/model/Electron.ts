@@ -32,7 +32,7 @@ export default class Electron extends PhetioObject {
     const options = optionize<ElectronOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
-      position: Vector2.ZERO,
+      position: new Vector2( 0, 0 ),
 
       // PhetioObjectOptions
       isDisposable: false,
