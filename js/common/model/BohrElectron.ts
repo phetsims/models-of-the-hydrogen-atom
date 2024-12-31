@@ -88,7 +88,6 @@ export default class BohrElectron extends Electron {
       phetioReadOnly: true
     } );
 
-    //TODO make this go away, just set electron.positionProperty directly
     this.offsetProperty = new DerivedProperty(
       [ this.nProperty, this.angleProperty ],
       ( n, angle ) => {
