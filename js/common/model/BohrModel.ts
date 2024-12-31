@@ -96,13 +96,8 @@ export default class BohrModel extends HydrogenAtom {
       position: this.position
     } );
 
-    this.electron = new BohrElectron( {
-      //TODO position is not properly initialized
+    this.electron = new BohrElectron( this.position, {
       tandem: options.tandem.createTandem( 'electron' )
-    } );
-
-    this.electron.offsetProperty.link( offset => {
-      this.electron.positionProperty.value = this.position.plus( offset );
     } );
   }
 

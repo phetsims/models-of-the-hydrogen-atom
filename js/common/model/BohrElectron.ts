@@ -41,9 +41,9 @@ export default class BohrElectron extends Electron {
   public readonly angleProperty: Property<number>;
 
   // Offset of the electron from the atom's center.
-  public readonly offsetProperty: TReadOnlyProperty<Vector2>;
+  private readonly offsetProperty: TReadOnlyProperty<Vector2>;
 
-  public constructor( providedOptions: BohrElectronOptions ) {
+  public constructor( atomPosition: Vector2, providedOptions: BohrElectronOptions ) {
 
     const options = providedOptions;
 
@@ -96,6 +96,10 @@ export default class BohrElectron extends Electron {
         phetioValueType: Vector2.Vector2IO,
         phetioDocumentation: 'Offset of the electron from the center of the atom.'
       } );
+
+    this.offsetProperty.link( offset => {
+      this.positionProperty.value = atomPosition.plus( offset );
+    } );
   }
 
   public override reset(): void {
