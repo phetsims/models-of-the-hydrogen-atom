@@ -70,10 +70,9 @@ export default class ZoomedInBoxNode extends Node {
       tandem: providedOptions.tandem.createTandem( 'experimentNode' )
     } );
 
-    const contentsNode = new Node( {
-      children: [ ...hydrogenAtomNodes, photonsLayer ],
-
-      // Clip contents to the bounds of the box.
+    // Contents of the box, clipped to the bounds of the box.
+    const contentsLayer = new Node( {
+      children: [ ...hydrogenAtomNodes, photonsLayer, experimentNode ],
       clipArea: modelViewTransform.modelToViewShape( Shape.rectangle( zoomedInBox.minX, zoomedInBox.minY, zoomedInBox.width, zoomedInBox.height ) )
     } );
 
@@ -81,7 +80,7 @@ export default class ZoomedInBoxNode extends Node {
 
       // NodeOptions
       isDisposable: false,
-      children: [ backgroundNode, contentsNode, experimentNode, outlineNode ],
+      children: [ backgroundNode, contentsLayer, outlineNode ],
       phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
