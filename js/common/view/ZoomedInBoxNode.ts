@@ -42,10 +42,9 @@ export default class ZoomedInBoxNode extends Node {
                          isExperimentProperty: TReadOnlyProperty<boolean>,
                          providedOptions: ZoomedInBoxNodeOptions ) {
 
-    // All model-view transform operations take place in the zoomed-in box.
-    // Our model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.
-    // Our view uses a left-handed coordinate system: +x right, +y down, +angle clockwise.
-    // The origin is at the center of the zoomed-in box.
+    // All model-view transform operations take place in the zoomed-in box, whose origin is at its center.
+    // The model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.
+    // The view uses a left-handed coordinate system: +x right, +y down, +angle clockwise.
     const viewOffset = new Vector2( VIEW_SIZE / 2, VIEW_SIZE );
     const xScale = VIEW_SIZE / zoomedInBox.width;
     const yScale = VIEW_SIZE / zoomedInBox.height;
