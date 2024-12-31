@@ -220,9 +220,6 @@ export default class SpectraScreenView extends ScreenView {
     this.pdomControlAreaNode.pdomOrder = [
       spectrometerAccordionBox,
       timeControlNode,
-
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/93 Move schrodingerQuantumNumbersInfoButton to play area?
-      zoomedInBoxNode.schrodingerQuantumNumbersInfoButton,
       resetAllButton
     ];
 
