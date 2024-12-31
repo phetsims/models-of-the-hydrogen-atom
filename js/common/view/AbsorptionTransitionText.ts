@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -19,6 +18,7 @@ import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
+import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -32,13 +32,12 @@ export default class AbsorptionTransitionText extends RichText {
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       providedOptions: AbsorptionTransitionTextOptions ) {
 
-    //TODO Would GatedVisibleProperty be useful here?
-    const visibleProperty = new BooleanProperty( true, {
-      tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-      phetioDocumentation: 'Set this to false to permanently hide state transition display. ' +
-                           'Otherwise, visibility depends on whether the light is set to an absorption wavelength.',
-      phetioFeatured: true
-    } );
+    const visibleProperty = new DerivedProperty(
+      [ lightModeProperty, isQuantumModelProperty, isExperimentProperty ],
+      ( lightMode, isQuantumModel, isExperiment ) => ( lightMode === 'monochromatic' ) && isQuantumModel && !isExperiment );
+
+    // Provide PhET-iO clients with a way to permanently hide this text via 'selfVisibleProperty'
+    const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, providedOptions.tandem );
 
     const options = optionize<AbsorptionTransitionTextOptions, SelfOptions, RichTextOptions>()( {
 
@@ -46,10 +45,7 @@ export default class AbsorptionTransitionText extends RichText {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 100,
-      visibleProperty: new DerivedProperty(
-        [ lightModeProperty, isQuantumModelProperty, isExperimentProperty, visibleProperty ],
-        ( lightMode, isQuantumModel, isExperiment, visible ) =>
-          ( lightMode === 'monochromatic' ) && isQuantumModel && !isExperiment && visible )
+      visibleProperty: gatedVisibleProperty
     }, providedOptions );
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],

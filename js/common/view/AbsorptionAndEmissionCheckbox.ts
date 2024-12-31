@@ -6,8 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -29,13 +28,11 @@ export default class AbsorptionAndEmissionCheckbox extends Checkbox {
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
                       providedOptions: AbsorptionAndEmissionCheckboxOptions ) {
 
-    //TODO Would GatedVisibleProperty be useful here?
-    const visibleProperty = new BooleanProperty( true, {
-      tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-      phetioDocumentation: 'Set this to false to permanently hide the "Absorption/Emission" checkbox. ' +
-                           'Otherwise, visibility depends on the selected hydrogen atom model.',
-      phetioFeatured: true
-    } );
+    // Show this checkbox only for quantum models, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
+    const visibleProperty = isQuantumModelProperty;
+
+    // Provide PhET-iO clients with a way to permanently hide this checkbox via 'selfVisibleProperty'
+    const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, providedOptions.tandem );
 
     const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionAndEmissionStringProperty, {
       font: new PhetFont( 16 ),
@@ -51,10 +48,7 @@ export default class AbsorptionAndEmissionCheckbox extends Checkbox {
       checkboxColor: MOTHAColors.checkboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.checkboxFillProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionCheckbox.helpTextStringProperty,
-
-      // Show this checkbox only for quantum models, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
-      visibleProperty: new DerivedProperty( [ isQuantumModelProperty, visibleProperty ],
-        ( isQuantumModel, visible ) => isQuantumModel && visible )
+      visibleProperty: gatedVisibleProperty
     }, providedOptions );
 
     super( absorptionAndEmissionDialogVisibleProperty, text, options );

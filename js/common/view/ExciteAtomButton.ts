@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -18,6 +17,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Light from '../model/Light.js';
 import MOTHAColors from '../MOTHAColors.js';
+import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -29,13 +29,15 @@ export default class ExciteAtomButton extends RectangularPushButton {
                       light: Light,
                       excite: () => void, providedOptions: ExciteAtomButtonOptions ) {
 
-    //TODO Would GatedVisibleProperty be useful here?
-    const visibleProperty = new BooleanProperty( true, {
-      tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-      phetioDocumentation: 'Set this to false to permanently hide the "Excite Atom" button. ' +
-                           'Otherwise, visibility depends on whether the electron is in the metastable state (2,0,0).',
-      phetioFeatured: true
-    } );
+    // Visible when we're in state (2,0,0) with the light on, in 'monochromatic' mode.
+    // When the light is in 'white' mode, MetastableHandler automatically fires absorbable photons.
+    const visibleProperty = new DerivedProperty(
+      [ isMetastableStateProperty, light.isOnProperty, light.lightModeProperty ],
+      ( isMetastableState, lightIsOn, lightMode ) =>
+        ( isMetastableState && lightIsOn && lightMode === 'monochromatic' ) );
+
+    // Provide PhET-iO clients with a way to permanently hide this button via 'selfVisibleProperty'.
+    const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, providedOptions.tandem );
 
     const options = optionize<ExciteAtomButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
 
@@ -43,13 +45,7 @@ export default class ExciteAtomButton extends RectangularPushButton {
       isDisposable: false,
       listener: () => excite(),
       baseColor: MOTHAColors.exciteAtomButtonColorProperty,
-
-      // Visible when we're in state (2,0,0) with the light on, in 'monochromatic' mode.
-      // When the light is in 'white' mode, MetastableHandler automatically fires absorbable photons.
-      visibleProperty: new DerivedProperty(
-        [ visibleProperty, isMetastableStateProperty, light.isOnProperty, light.lightModeProperty ],
-        ( visible, isMetastableState, lightIsOn, lightMode ) =>
-          ( visible && isMetastableState && lightIsOn && lightMode === 'monochromatic' ) ),
+      visibleProperty: gatedVisibleProperty,
       content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
         font: new PhetFont( 16 ),
         maxWidth: 100
