@@ -92,7 +92,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     this.deBroglieRepresentationComboBox = deBroglieRepresentationComboBox;
   }
 
-  public step( dt: number ): void {
+  public override step( dt: number ): void {
     this.deBroglie3DHeightNode.step( dt );
   }
 

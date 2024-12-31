@@ -44,6 +44,10 @@ export default class HydrogenAtomNode extends Node {
 
     super( options );
   }
+
+  public step( dt: number ): void {
+    // Default is to do nothing.
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'HydrogenAtomNode', HydrogenAtomNode );

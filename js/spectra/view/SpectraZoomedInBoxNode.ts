@@ -21,6 +21,7 @@ import SchrodingerNode from '../../common/view/SchrodingerNode.js';
 import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/ZoomedInBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
+import HydrogenAtomNode from '../../common/view/HydrogenAtomNode.js';
 
 const VIEW_SIZE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE;
 
@@ -30,7 +31,7 @@ type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
-  private readonly deBroglieNode: DeBroglieNode;
+  private readonly hydrogenAtomNodes: HydrogenAtomNode[];
 
   // For setting pdomOrder.
   public readonly schrodingerQuantumNumbersInfoButton: Node;
@@ -78,18 +79,19 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
         tandem: options.tandem.createTandem( 'schrodingerNode' )
       } );
 
+    const hydrogenAtomNodes: HydrogenAtomNode[] = [
+      billiardBallNode,
+      plumPuddingNode,
+      classicalSolarSystemNode,
+      bohrNode,
+      deBroglieNode,
+      schrodingerNode
+    ];
+
     const photonsLayer = new Node();
 
     this.contentsNode.addChild( new Node( {
-      children: [
-        billiardBallNode,
-        plumPuddingNode,
-        classicalSolarSystemNode,
-        bohrNode,
-        deBroglieNode,
-        schrodingerNode,
-        photonsLayer
-      ]
+      children: [ ...hydrogenAtomNodes, photonsLayer ]
     } ) );
 
     const photonNodes: PhotonNode[] = [];
@@ -110,12 +112,12 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       photonNode.dispose();
     } );
 
-    this.deBroglieNode = deBroglieNode;
+    this.hydrogenAtomNodes = hydrogenAtomNodes;
     this.schrodingerQuantumNumbersInfoButton = schrodingerNode.quantumNumbersInfoButton;
   }
 
   public step( dt: number ): void {
-    this.deBroglieNode.step( dt );
+    this.hydrogenAtomNodes.forEach( hydrogenAtomNode => hydrogenAtomNode.step( dt ) );
   }
 }
 
