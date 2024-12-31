@@ -33,7 +33,6 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
   private readonly deBroglieNode: DeBroglieNode;
 
   // For setting pdomOrder.
-  public readonly deBroglieRepresentationComboBox: Node;
   public readonly schrodingerQuantumNumbersInfoButton: Node;
 
   public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
@@ -112,7 +111,6 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
     } );
 
     this.deBroglieNode = deBroglieNode;
-    this.deBroglieRepresentationComboBox = deBroglieNode.deBroglieRepresentationComboBox;
     this.schrodingerQuantumNumbersInfoButton = schrodingerNode.quantumNumbersInfoButton;
   }
 

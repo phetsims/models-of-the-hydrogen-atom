@@ -31,7 +31,6 @@ export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
   private readonly deBroglieNode: DeBroglieNode;
 
   // For setting pdomOrder.
-  public readonly deBroglieRepresentationComboBox: Node;
   public readonly schrodingerQuantumNumbersInfoButton: Node;
 
   public constructor( model: EnergyLevelsModel, popupParent: Node, providedOptions: EnergyLevelsZoomedInBoxNodeOptions ) {
@@ -94,7 +93,6 @@ export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
     } );
 
     this.deBroglieNode = deBroglieNode;
-    this.deBroglieRepresentationComboBox = deBroglieNode.deBroglieRepresentationComboBox;
     this.schrodingerQuantumNumbersInfoButton = schrodingerNode.quantumNumbersInfoButton;
   }
 
