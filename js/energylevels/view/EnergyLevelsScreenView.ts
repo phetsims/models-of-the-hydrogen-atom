@@ -233,7 +233,9 @@ export default class EnergyLevelsScreenView extends ScreenView {
     this.pdomControlAreaNode.pdomOrder = [
       spectrometerAccordionBox,
       timeControlNode,
-      zoomedInBoxNode.schrodingerQuantumNumbersInfoButton, //TODO I'd like to move this to Play Area.
+
+      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/93 Move schrodingerQuantumNumbersInfoButton to play area?
+      zoomedInBoxNode.schrodingerQuantumNumbersInfoButton,
       resetAllButton
     ];
 
