@@ -78,7 +78,6 @@ export default class EnergyLevelsScreenView extends ScreenView {
       phetioReadOnly: true // because the sim controls this
     } );
 
-    //TODO Not relevant in Energy Levels screen, but was copied here from SpectraScreenView as part of brute-force fleshing out.
     // Hide the dialog when a classical model is being viewed.
     model.isQuantumModelProperty.link( isQuantumModel => {
       if ( absorptionAndEmissionDialogVisibleProperty.value ) {
