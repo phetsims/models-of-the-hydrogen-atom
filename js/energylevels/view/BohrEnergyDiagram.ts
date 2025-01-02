@@ -47,17 +47,22 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
 
     // Position the electron on a level line, based on the value of n.
     hydrogenAtom.electron.nProperty.link( ( nNew, nOld ) => {
+
+      // Previous electron position.
       const xPrevious = this.electronNode.centerX;
       const yPrevious = this.electronNode.bottom;
 
+      // New electron position.
+      const x = this.stateLayer.left + LEVEL_LINE_LENGTH / 2;
+      const y = this.getYForState( nNew );
+
       // Move electron to new level line.
-      this.electronNode.centerX = this.stateLayer.left + LEVEL_LINE_LENGTH / 2;
-      this.electronNode.bottom = this.getYForState( nNew );
+      this.electronNode.centerX = x;
+      this.electronNode.bottom = y;
 
       // Draw squiggle between previous and current electron state.
       if ( nOld !== null ) {
-        this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
-          photonAbsorptionModel.getTransitionWavelength( nOld, nNew ) );
+        this.setEnergySquiggle( xPrevious, yPrevious, x, y, photonAbsorptionModel.getTransitionWavelength( nOld, nNew ) );
       }
     } );
   }
