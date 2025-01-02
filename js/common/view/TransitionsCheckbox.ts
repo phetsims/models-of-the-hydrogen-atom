@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * AbsorptionAndEmissionCheckbox is the checkbox that shows the 'Absorption and Emission' dialog.
+ * TransitionsCheckbox is the checkbox that shows the 'Transitions' dialog.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,13 +20,13 @@ import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type AbsorptionAndEmissionCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type TransitionsCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
-export default class AbsorptionAndEmissionCheckbox extends Checkbox {
+export default class TransitionsCheckbox extends Checkbox {
 
-  public constructor( absorptionAndEmissionDialogVisibleProperty: Property<boolean>,
+  public constructor( transitionsDialogVisibleProperty: Property<boolean>,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
-                      providedOptions: AbsorptionAndEmissionCheckboxOptions ) {
+                      providedOptions: TransitionsCheckboxOptions ) {
 
     // Show this checkbox only for quantum models, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
     const visibleProperty = isQuantumModelProperty;
@@ -34,25 +34,25 @@ export default class AbsorptionAndEmissionCheckbox extends Checkbox {
     // Provide PhET-iO clients with a way to permanently hide this checkbox via 'selfVisibleProperty'
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, providedOptions.tandem );
 
-    const text = new Text( ModelsOfTheHydrogenAtomStrings.absorptionAndEmissionStringProperty, {
+    const text = new Text( ModelsOfTheHydrogenAtomStrings.transitionsStringProperty, {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 200
     } );
 
-    const options = optionize<AbsorptionAndEmissionCheckboxOptions, SelfOptions, CheckboxOptions>()( {
+    const options = optionize<TransitionsCheckboxOptions, SelfOptions, CheckboxOptions>()( {
 
       // CheckboxOptions
       isDisposable: false,
       boxWidth: text.height,
       checkboxColor: MOTHAColors.checkboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.checkboxFillProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionCheckbox.helpTextStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.transitionsCheckbox.helpTextStringProperty,
       visibleProperty: gatedVisibleProperty
     }, providedOptions );
 
-    super( absorptionAndEmissionDialogVisibleProperty, text, options );
+    super( transitionsDialogVisibleProperty, text, options );
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionAndEmissionCheckbox', AbsorptionAndEmissionCheckbox );
+modelsOfTheHydrogenAtom.register( 'TransitionsCheckbox', TransitionsCheckbox );

@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * AbsorptionAndEmissionDialog is a non-modal dialog that displays information about absorption/emission wavelengths
+ * TransitionsDialog is a non-modal dialog that displays information about absorption/emission wavelengths
  * and state transitions, and contains controls for setting wavelengths for the Light.
  *
  * @deprecated - PhET needs a non-modal dialog.
@@ -43,7 +43,7 @@ const TITLE_TEXT_OPTIONS = {
     size: 16,
     weight: 'bold'
   } ),
-  maxWidth: 200
+  maxWidth: 150
 };
 
 const HEADING_TEXT_OPTIONS = {
@@ -51,7 +51,7 @@ const HEADING_TEXT_OPTIONS = {
     size: 12,
     weight: 'bold'
   } ),
-  maxWidth: 100
+  maxWidth: 85
 };
 
 const SEPARATOR_OPTIONS = {
@@ -69,7 +69,7 @@ type SelfOptions = {
 
 type AbsorptionAndEmissionDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class AbsorptionAndEmissionDialog extends Panel {
+export default class TransitionsDialog extends Panel {
 
   // Position of the panel's top-left corner.
   private readonly positionProperty: Property<Vector2>;
@@ -96,7 +96,7 @@ export default class AbsorptionAndEmissionDialog extends Panel {
 
     const transitionColumnVisibleProperty = DerivedProperty.not( isExperimentProperty );
 
-    const titleText = new Text( ModelsOfTheHydrogenAtomStrings.absorptionAndEmissionStringProperty, TITLE_TEXT_OPTIONS );
+    const titleText = new Text( ModelsOfTheHydrogenAtomStrings.transitionsStringProperty, TITLE_TEXT_OPTIONS );
 
     const closeButton = new CloseButton( {
       iconLength: 10,
@@ -117,11 +117,14 @@ export default class AbsorptionAndEmissionDialog extends Panel {
       tagName: 'div',
       labelTagName: 'h3',
       descriptionTagName: 'p',
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialog.accessibleNameStringProperty,
-      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.absorptionAndEmissionDialog.helpTextStringProperty
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleNameStringProperty,
+      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.helpTextStringProperty
     } );
 
     const titleBarNode = new HBox( {
+      layoutOptions: {
+        stretch: true
+      },
       spacing: 10,
       children: [ titleText, closeButton, pdomNode ],
 
@@ -310,4 +313,4 @@ export default class AbsorptionAndEmissionDialog extends Panel {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'AbsorptionAndEmissionDialog', AbsorptionAndEmissionDialog );
+modelsOfTheHydrogenAtom.register( 'TransitionsDialog', TransitionsDialog );

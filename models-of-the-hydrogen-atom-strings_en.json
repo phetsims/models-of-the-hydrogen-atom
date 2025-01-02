@@ -113,8 +113,8 @@
   "questionMark": {
     "value": "?"
   },
-  "absorptionAndEmission": {
-    "value": "Absorption and Emission"
+  "transitions": {
+    "value": "Transitions"
   },
   "s": {
     "value": "s"
@@ -156,14 +156,14 @@
     "value": "Energy"
   },
   "a11y": {
-    "absorptionAndEmissionCheckbox": {
+    "transitionsCheckbox": {
       "helpText": {
-        "value": "Show Absorption and Emission dialog for table of electron state transitions and their associated wavelengths."
+        "value": "Show Transitions dialog for table of electron state transitions and their associated wavelengths."
       }
     },
-    "absorptionAndEmissionDialog": {
+    "transitionsDialog": {
       "accessibleName": {
-        "value": "Absorption and Emission"
+        "value": "Transitions"
       },
       "helpText": {
         "value": "Use the buttons to set the light source to a specific wavelength."

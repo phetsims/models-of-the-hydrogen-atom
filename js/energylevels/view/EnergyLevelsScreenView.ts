@@ -17,8 +17,8 @@ import { Node, Path, VBox } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import AbsorptionAndEmissionCheckbox from '../../common/view/AbsorptionAndEmissionCheckbox.js';
-import AbsorptionAndEmissionDialog from '../../common/view/AbsorptionAndEmissionDialog.js';
+import TransitionsCheckbox from '../../common/view/TransitionsCheckbox.js';
+import TransitionsDialog from '../../common/view/TransitionsDialog.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
@@ -72,22 +72,22 @@ export default class EnergyLevelsScreenView extends ScreenView {
       tandem: tandem.createTandem( 'lightControlPanel' )
     } );
 
-    const absorptionAndEmissionDialogVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'absorptionAndEmissionDialogVisibleProperty' ),
+    const transitionsDialogVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'transitionsDialogVisibleProperty' ),
       phetioFeatured: true,
       phetioReadOnly: true // because the sim controls this
     } );
 
     // Hide the dialog when a classical model is being viewed.
     model.isQuantumModelProperty.link( isQuantumModel => {
-      if ( absorptionAndEmissionDialogVisibleProperty.value ) {
-        absorptionAndEmissionDialogVisibleProperty.value = isQuantumModel;
+      if ( transitionsDialogVisibleProperty.value ) {
+        transitionsDialogVisibleProperty.value = isQuantumModel;
       }
     } );
 
-    const absorptionAndEmissionCheckbox = new AbsorptionAndEmissionCheckbox( absorptionAndEmissionDialogVisibleProperty,
+    const transitionsCheckbox = new TransitionsCheckbox( transitionsDialogVisibleProperty,
       model.isQuantumModelProperty, {
-        tandem: tandem.createTandem( 'absorptionAndEmissionCheckbox' )
+        tandem: tandem.createTandem( 'transitionsCheckbox' )
       } );
 
     // The zoomed-in view of the box of hydrogen
@@ -140,6 +140,9 @@ export default class EnergyLevelsScreenView extends ScreenView {
     const resetAllButton = new ResetAllButton( {
       listener: () => {
         model.reset();
+        transitionsDialogVisibleProperty.reset();
+        transitionsDialog.reset();
+        spectrometerAccordionBox.reset();
         electronEnergyLevelAccordionBox.reset();
       },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
@@ -168,9 +171,9 @@ export default class EnergyLevelsScreenView extends ScreenView {
     spectrometerAccordionBox.top = lightControlPanel.top;
     timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
     timeControlNode.centerY = modelVBox.bottom + ( spectrometerAccordionBox.top - modelVBox.bottom ) / 2;
-    absorptionAndEmissionCheckbox.localBoundsProperty.link( () => {
-      absorptionAndEmissionCheckbox.centerX = lightControlPanel.centerX;
-      absorptionAndEmissionCheckbox.top = lightControlPanel.bottom + 5;
+    transitionsCheckbox.localBoundsProperty.link( () => {
+      transitionsCheckbox.centerX = lightControlPanel.centerX;
+      transitionsCheckbox.top = lightControlPanel.bottom + 5;
     } );
     resetAllButton.right = this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     resetAllButton.bottom = this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
@@ -188,11 +191,11 @@ export default class EnergyLevelsScreenView extends ScreenView {
       visibleProperty: DerivedProperty.and( [ zoomedInBoxNode.visibleProperty, boxOfHydrogenNode.visibleProperty ] )
     } );
 
-    const absorptionAndEmissionDialog = new AbsorptionAndEmissionDialog( model.light.monochromaticWavelengthProperty,
+    const transitionsDialog = new TransitionsDialog( model.light.monochromaticWavelengthProperty,
       model.light.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
         position: modelVBox.leftTop,
-        visibleProperty: absorptionAndEmissionDialogVisibleProperty,
-        tandem: tandem.createTandem( 'absorptionAndEmissionDialog' )
+        visibleProperty: transitionsDialogVisibleProperty,
+        tandem: tandem.createTandem( 'transitionsDialog' )
       } );
 
     // rendering order
@@ -202,7 +205,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
         timeControlNode,
         lightNode,
         lightControlPanel,
-        absorptionAndEmissionCheckbox,
+        transitionsCheckbox,
         boxOfHydrogenNode,
         tinyBoxNode,
         dashedLines,
@@ -211,7 +214,7 @@ export default class EnergyLevelsScreenView extends ScreenView {
         spectrometerAccordionBox,
         electronEnergyLevelAccordionBox,
         resetAllButton,
-        absorptionAndEmissionDialog,
+        transitionsDialog,
         popupsParent
       ]
     } );
@@ -221,8 +224,8 @@ export default class EnergyLevelsScreenView extends ScreenView {
     this.pdomPlayAreaNode.pdomOrder = [
       lightNode,
       lightControlPanel,
-      absorptionAndEmissionCheckbox,
-      absorptionAndEmissionDialog,
+      transitionsCheckbox,
+      transitionsDialog,
       electronEnergyLevelAccordionBox,
       modelVBox,
       zoomedInBoxNode

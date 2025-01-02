@@ -54,7 +54,7 @@ type StringsType = {
   'nTransitionStringProperty': LocalizedStringProperty;
   'wavelengthNanometersStringProperty': LocalizedStringProperty;
   'questionMarkStringProperty': LocalizedStringProperty;
-  'absorptionAndEmissionStringProperty': LocalizedStringProperty;
+  'transitionsStringProperty': LocalizedStringProperty;
   'sStringProperty': LocalizedStringProperty;
   'pStringProperty': LocalizedStringProperty;
   'dStringProperty': LocalizedStringProperty;
@@ -69,10 +69,10 @@ type StringsType = {
   'snapshotNumberNameStringProperty': LocalizedStringProperty;
   'energyStringProperty': LocalizedStringProperty;
   'a11y': {
-    'absorptionAndEmissionCheckbox': {
+    'transitionsCheckbox': {
       'helpTextStringProperty': LocalizedStringProperty;
     };
-    'absorptionAndEmissionDialog': {
+    'transitionsDialog': {
       'accessibleNameStringProperty': LocalizedStringProperty;
       'helpTextStringProperty': LocalizedStringProperty;
     };
