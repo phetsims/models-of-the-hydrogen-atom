@@ -181,18 +181,20 @@ class VisibleEmissionChart extends EmissionChart {
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
     const wavelengths = photonAbsorptionModel.getVisibleWavelengths();
+    const minWavelength = VisibleColor.MIN_WAVELENGTH;
+    const maxWavelength = Math.min( VisibleColor.MAX_WAVELENGTH, _.max( wavelengths )! + 30 );
 
     const xAxis = new SpectrumNode( {
       size: new Dimension2( axisLength, AXIS_HEIGHT ),
-      minValue: VisibleColor.MIN_WAVELENGTH,
-      maxValue: VisibleColor.MAX_WAVELENGTH,
+      minValue: minWavelength,
+      maxValue: maxWavelength,
       valueToColor: Light.wavelengthToColor
     } );
 
     super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
       wavelengths: wavelengths,
-      minWavelength: VisibleColor.MIN_WAVELENGTH,
-      maxWavelength: VisibleColor.MAX_WAVELENGTH,
+      minWavelength: minWavelength,
+      maxWavelength: maxWavelength,
       xAxis: xAxis
     }, providedOptions ) );
   }
