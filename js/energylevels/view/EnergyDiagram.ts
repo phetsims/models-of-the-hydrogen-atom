@@ -98,7 +98,7 @@ export default class EnergyDiagram extends Node {
     const electronNode = ElectronNode.createIcon();
     electronNode.center = rectangle.center; // a temporary location - anywhere right of the energy axis will do.
 
-    options.children = [ rectangle, energyAxisHBox, stateLayer, energySquiggle, electronNode ];
+    options.children = [ rectangle, energyAxisHBox, stateLayer, electronNode, energySquiggle ];
 
     super( options );
 
