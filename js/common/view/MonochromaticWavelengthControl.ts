@@ -29,7 +29,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-const SLIDER_TRACK_SIZE = new Dimension2( 250, 15 );
+const SLIDER_TRACK_SIZE = new Dimension2( 200, 15 );
 
 type SelfOptions = EmptySelfOptions;
 
