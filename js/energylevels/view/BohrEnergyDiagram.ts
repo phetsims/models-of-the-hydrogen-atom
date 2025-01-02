@@ -18,6 +18,7 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
 import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
+import MOTHAColors from '../../common/MOTHAColors.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -70,7 +71,7 @@ function createLevelNode( n: number ): Node {
 
   const line = new Line( 0, 0, LEVEL_LINE_LENGTH, 0, {
     lineWidth: 1,
-    stroke: 'black'
+    stroke: MOTHAColors.invertibleTextFillProperty
   } );
 
   const nEqualsValueStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
@@ -78,7 +79,7 @@ function createLevelNode( n: number ): Node {
     value: n
   } );
   const nEqualsValueText = new RichText( nEqualsValueStringProperty, {
-    fill: 'black',
+    fill: MOTHAColors.invertibleTextFillProperty,
     font: LABEL_FONT,
     maxWidth: LABEL_MAX_WIDTH
   } );

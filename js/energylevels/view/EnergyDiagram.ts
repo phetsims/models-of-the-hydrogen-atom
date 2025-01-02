@@ -19,6 +19,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ElectronNode from '../../common/view/ElectronNode.js';
 import EnergySquiggle from './EnergySquiggle.js';
+import MOTHAColors from '../../common/MOTHAColors.js';
 
 // Margins inside the bounds of the diagram. If you change Y_MARGIN, you will likely need to adjust Y_OFFSETS.
 const X_MARGIN = 4;
@@ -66,21 +67,20 @@ export default class EnergyDiagram extends Node {
       isDisposable: false
     }, providedOptions );
 
-    const rectangle = new Rectangle( 0, 0, options.size.width, options.size.height, {
-      fill: 'white',
-      stroke: 'black'
-    } );
+    const rectangle = new Rectangle( 0, 0, options.size.width, options.size.height );
 
     const energyAxisLength = options.size.height - 2 * Y_MARGIN;
     const energyAxis = new ArrowNode( 0, 0, 0, -energyAxisLength, {
       tailWidth: 2,
+      fill: MOTHAColors.invertibleTextFillProperty,
       stroke: null
     } );
 
     const energyText = new Text( ModelsOfTheHydrogenAtomStrings.energyStringProperty, {
       font: new PhetFont( 12 ),
       rotation: -Math.PI / 2,
-      maxWidth: energyAxisLength / 2
+      maxWidth: energyAxisLength / 2,
+      fill: MOTHAColors.invertibleTextFillProperty
     } );
 
     const energyAxisHBox = new HBox( {

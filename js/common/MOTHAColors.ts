@@ -212,8 +212,8 @@ const MOTHAColors = {
   } ),
 
   electronEnergyLevelAccordionBoxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelAccordionBoxFill', {
-    default: Color.grayColor( 80 ),
-    projector: Color.grayColor( 235 )
+    default: 'black',
+    projector: 'white'
   } ),
 
   electronEnergyLevelAccordionBoxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelAccordionBoxStroke', {

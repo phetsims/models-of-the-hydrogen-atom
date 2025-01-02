@@ -19,6 +19,7 @@ import { HBox, Line, Node, RichText, Text } from '../../../../scenery/js/imports
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
+import MOTHAColors from '../../common/MOTHAColors.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -56,6 +57,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     } );
     const lEqualsText = new RichText( lEqualsStringProperty, {
       font: LABEL_FONT,
+      fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 14,
       right: this.levelNodes.left - 3,
       bottom: this.levelNodes.top - 5
@@ -66,6 +68,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     for ( let l = 0; l < MOTHAConstants.MAX_STATE; l++ ) {
       const lText = new Text( l, {
         font: LABEL_FONT,
+        fill: MOTHAColors.invertibleTextFillProperty,
         maxWidth: 8,
         centerX: this.getXForState( l ),
         bottom: lEqualsText.bottom
@@ -80,6 +83,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     } );
     const mEqualsValueText = new RichText( mEqualsValueStringProperty, {
       font: LABEL_FONT,
+      fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: LABEL_MAX_WIDTH,
       top: this.energyAxisHBox.top
     } );
@@ -128,7 +132,7 @@ function createLevelNode( n: number ): Node {
   for ( let l = 0; l < MOTHAConstants.MAX_STATE; l++ ) {
     const line = new Line( 0, 0, LEVEL_LINE_LENGTH, 0, {
       lineWidth: 1,
-      stroke: 'black',
+      stroke: MOTHAColors.invertibleTextFillProperty,
       visible: ( l < n )
     } );
     lines.push( line );
@@ -144,7 +148,7 @@ function createLevelNode( n: number ): Node {
     value: n
   } );
   const nEqualsValueText = new RichText( nEqualsValueStringProperty, {
-    fill: 'black',
+    fill: MOTHAColors.invertibleTextFillProperty,
     font: LABEL_FONT,
     maxWidth: LABEL_MAX_WIDTH
   } );
