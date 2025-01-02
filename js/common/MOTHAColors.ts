@@ -24,7 +24,7 @@ const MOTHAColors = {
   } ),
 
   panelStrokeColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'panelStrokeColor', {
-    default: 'white',
+    default: Color.grayColor( 180 ),
     projector: 'black'
   } ),
 
