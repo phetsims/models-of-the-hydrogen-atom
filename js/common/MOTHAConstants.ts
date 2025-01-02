@@ -11,7 +11,6 @@ import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNo
 import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
-import { PanelOptions } from '../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const GROUND_STATE = 1;
@@ -34,12 +33,6 @@ const ACCORDION_BOX_OPTIONS: AccordionBoxOptions = {
     touchAreaXDilation: 10,
     touchAreaYDilation: 10
   }
-};
-
-const PANEL_OPTIONS: PanelOptions = {
-  xMargin: 10,
-  yMargin: 10,
-  cornerRadius: CORNER_RADIUS
 };
 
 const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
@@ -95,7 +88,6 @@ const MOTHAConstants = {
   // Various shared options
   CORNER_RADIUS: CORNER_RADIUS,
   ACCORDION_BOX_OPTIONS: ACCORDION_BOX_OPTIONS,
-  PANEL_OPTIONS: PANEL_OPTIONS,
   SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS
 };
 

@@ -19,7 +19,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -80,7 +80,7 @@ export default class TransitionsDialog extends Panel {
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: AbsorptionAndEmissionDialogOptions ) {
 
-    const options = optionize4<AbsorptionAndEmissionDialogOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
+    const options = optionize<AbsorptionAndEmissionDialogOptions, SelfOptions, PanelOptions>()( {
 
       // SelfOptions
       position: new Vector2( 0, 0 ),
@@ -88,6 +88,9 @@ export default class TransitionsDialog extends Panel {
       // PanelOptions
       isDisposable: false,
       cursor: 'pointer',
+      xMargin: 10,
+      yMargin: 10,
+      cornerRadius: MOTHAConstants.CORNER_RADIUS,
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener
       groupFocusHighlight: true,

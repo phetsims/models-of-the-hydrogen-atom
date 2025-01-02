@@ -7,7 +7,7 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
@@ -34,7 +34,7 @@ export default class LegendPanel extends Panel {
 
   public constructor( providedOptions: LegendPanelOptions ) {
 
-    const options = optionize4<LegendPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
+    const options = optionize<LegendPanelOptions, SelfOptions, PanelOptions>()( {
 
       // SelfOptions
       iconScale: MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE,
@@ -43,6 +43,8 @@ export default class LegendPanel extends Panel {
       isDisposable: false,
       fill: null,
       stroke: null,
+      xMargin: 0,
+      yMargin: 0,
       visiblePropertyOptions: {
         phetioFeatured: true
       }

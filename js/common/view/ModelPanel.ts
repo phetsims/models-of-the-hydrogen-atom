@@ -10,15 +10,14 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = {
   radioButtonTextMaxWidth: number;
@@ -34,7 +33,7 @@ export default class ModelPanel extends Panel {
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       providedOptions: ModelPanelOptions ) {
 
-    const options = optionize4<ModelPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
+    const options = optionize<ModelPanelOptions, SelfOptions, PanelOptions>()( {
 
       // SelfOptions
       hasContinuumBar: true,
@@ -43,7 +42,9 @@ export default class ModelPanel extends Panel {
       isDisposable: false,
       visibleProperty: DerivedProperty.not( isExperimentProperty ),
       fill: null,
-      stroke: null
+      stroke: null,
+      xMargin: 0,
+      yMargin: 0
     }, providedOptions );
 
     // radio buttons

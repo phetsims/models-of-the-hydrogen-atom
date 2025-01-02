@@ -7,7 +7,7 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
@@ -30,12 +30,15 @@ export class LightControlPanel extends Panel {
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       providedOptions: LightControlPanelOptions ) {
 
-    const options = optionize4<LightControlPanelOptions, SelfOptions, PanelOptions>()( {}, MOTHAConstants.PANEL_OPTIONS, {
+    const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
 
       // PanelOptions
       isDisposable: false,
       fill: MOTHAColors.panelFillColorProperty,
       stroke: MOTHAColors.panelStrokeColorProperty,
+      cornerRadius: MOTHAConstants.CORNER_RADIUS,
+      xMargin: 5,
+      yMargin: 10,
       visiblePropertyOptions: {
         phetioFeatured: true
       }
