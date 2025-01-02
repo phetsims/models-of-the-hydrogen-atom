@@ -18,7 +18,7 @@ import MOTHAUtils from '../../common/MOTHAUtils.js';
 import { Shape } from '../../../../kite/js/imports.js';
 
 const MIN_SQUIGGLE_LENGTH = 5;
-const ARROW_HEAD_SIZE = new Dimension2( 20, 10 );
+const ARROW_HEAD_SIZE = new Dimension2( 15, 12 );
 
 // Amplitude of the squiggle sine wave, in pixels.
 const SQUIGGLE_AMPLITUDE = 6;
