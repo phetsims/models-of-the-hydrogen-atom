@@ -118,16 +118,6 @@ const MOTHAColors = {
     projector: 'black'
   } ),
 
-  modelsPanelFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsPanelFill', {
-    default: 'black',
-    projector: 'white'
-  } ),
-
-  modelsPanelStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsPanelStroke', {
-    default: Color.grayColor( 180 ),
-    projector: 'black'
-  } ),
-
   modelsRadioButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonFill', {
     default: 'black',
     projector: 'white'
@@ -138,8 +128,8 @@ const MOTHAColors = {
   } ),
 
   modelsRadioButtonDeselectedStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonDeselectedStroke', {
-    default: Color.grayColor( 100 ),
-    projector: Color.grayColor( 230 )
+    default: Color.grayColor( 120 ),
+    projector: Color.grayColor( 180 )
   } ),
 
   modelsRadioButtonOverStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'modelsRadioButtonOverStroke', {

@@ -1,8 +1,8 @@
 // Copyright 2015-2024, University of Colorado Boulder
 
 /**
- * ModelPanel contains controls (radio buttons) for choosing one of the predictive models.
- * It is shown when the AB-switch is set to 'Model'.
+ * ModelPanel contains controls (radio buttons) for choosing one of the predictive models, and an optional
+ * 'Classical' to 'Continuum' bar. It is shown when the AB-switch is set to 'Model'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,7 +16,6 @@ import { HBox, Node } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
@@ -43,8 +42,8 @@ export default class ModelPanel extends Panel {
       // PanelOptions
       isDisposable: false,
       visibleProperty: DerivedProperty.not( isExperimentProperty ),
-      fill: MOTHAColors.modelsPanelFillProperty,
-      stroke: MOTHAColors.modelsPanelStrokeProperty
+      fill: null,
+      stroke: null
     }, providedOptions );
 
     // radio buttons
