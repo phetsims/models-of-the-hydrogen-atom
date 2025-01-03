@@ -64,20 +64,25 @@ class EmissionChart extends Node {
       wavelengthMap: null
     }, providedOptions );
 
-    // If wavelengthMap was not provided, create a default map that does not change wavelengths.
-    const wavelengthMap = options.wavelengthMap || new Map<number, number>( options.wavelengths.map( wavelength => [ wavelength, wavelength ] ) );
-
     // Verify that all wavelengths are present in the map, and that they are mapped to <= value.
-    assert && assert( wavelengthMap.size === options.wavelengths.length );
-    assert && assert( _.every( [ ...wavelengthMap.keys() ], key => options.wavelengths.includes( key ) ) );
-    assert && assert( _.every( [ ...wavelengthMap.keys() ], key => wavelengthMap.get( key )! <= key ) );
+    if ( assert && options.wavelengthMap ) {
+      const wavelengthMap = options.wavelengthMap;
+      assert && assert( wavelengthMap.size === options.wavelengths.length );
+      assert && assert( _.every( [ ...wavelengthMap.keys() ], key => options.wavelengths.includes( key ) ) );
+      assert && assert( _.every( [ ...wavelengthMap.keys() ], key => wavelengthMap.get( key )! <= key ) );
+    }
 
     // Handles the remapping of a wavelength.
     const remap = ( wavelength: number ) => {
-      assert && assert( options.wavelengths.includes( wavelength ), `${wavelength} is not a wavelength for this chart.` );
-      const newWavelength = wavelengthMap.get( wavelength )!;
-      assert && assert( newWavelength !== undefined );
-      return newWavelength;
+      if ( options.wavelengthMap ) {
+        assert && assert( options.wavelengths.includes( wavelength ), `${wavelength} is not a wavelength for this chart.` );
+        const newWavelength = options.wavelengthMap.get( wavelength )!;
+        assert && assert( newWavelength !== undefined );
+        return newWavelength;
+      }
+      else {
+        return wavelength;
+      }
     };
 
     const xAxis = options.xAxis;
