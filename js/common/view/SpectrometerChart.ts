@@ -24,11 +24,12 @@ const UV_AXIS_LENGTH = 270;
 const VISIBLE_AXIS_LENGTH = 145;
 const IR_AXIS_LENGTH = 225;
 
-const DISPLAY_HEIGHT = 135;
 const X_MARGIN = 5;
 const X_SPACING = 14;
 
 type SelfOptions = {
+  displayHeight?: number;
+
   // Whether to create tick marks at emission wavelengths. Used to omit tick marks from snapshots.
   hasTickMarks?: boolean;
 };
@@ -42,6 +43,7 @@ export default class SpectrometerChart extends Node {
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
+      displayHeight: 135,
       hasTickMarks: true
     }, providedOptions );
 
@@ -61,7 +63,7 @@ export default class SpectrometerChart extends Node {
       children: [ uvEmissionChart, visibleEmissionChart, irEmissionChart ]
     } );
 
-    const backgroundNode = new Rectangle( 0, 0, charts.width + 2 * X_MARGIN, DISPLAY_HEIGHT, {
+    const backgroundNode = new Rectangle( 0, 0, charts.width + 2 * X_MARGIN, options.displayHeight, {
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
       fill: MOTHAColors.spectrometerFillProperty,
       stroke: MOTHAColors.spectrometerStrokeProperty
