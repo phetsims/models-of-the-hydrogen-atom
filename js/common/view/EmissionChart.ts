@@ -44,8 +44,8 @@ type SelfOptions = {
   // Node that serves as the x-axis.
   xAxis: Node;
 
-  // Plots an x value at some other place on the x-axis. Used to compress the x-axis for the UV and IR spectrums.
-  plotAtX?: ( x: number ) => number;
+  // Plots a wavelength value at some other value on the x-axis. Used to compress the x-axis for the UV and IR spectrums.
+  plotAtX?: ( wavelength: number ) => number;
 };
 
 type EmissionChartOptions = SelfOptions;
