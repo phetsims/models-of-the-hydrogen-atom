@@ -158,7 +158,7 @@
   "a11y": {
     "transitionsCheckbox": {
       "helpText": {
-        "value": "Show Transitions dialog for table of electron state transitions and their associated wavelengths."
+        "value": "Show table of electron state transitions and their associated wavelengths."
       }
     },
     "transitionsDialog": {
