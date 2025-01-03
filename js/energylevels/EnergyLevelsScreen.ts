@@ -74,7 +74,7 @@ function createScreenIcon(): ScreenIcon {
   return new ScreenIcon( iconNode, {
     maxIconWidthProportion: 1,
     maxIconHeightProportion: 0.85,
-    fill: MOTHAColors.screenBackgroundColorProperty
+    fill: MOTHAColors.zoomedInBoxFillProperty
   } );
 }
 
