@@ -34,15 +34,15 @@ type SelfOptions = {
   // Whether to create tick marks at the values in providedOptions.wavelengths. Used to omit tick marks from snapshots.
   hasTickMarks?: boolean;
 
+  // Node that serves as the x-axis.
+  xAxis: Node;
+
   // This chart will display data for these wavelengths. Data for other wavelengths will be ignored.
   wavelengths: number[];
 
   // Range for this chart.
   minWavelength: number;
   maxWavelength: number;
-
-  // Node that serves as the x-axis.
-  xAxis: Node;
 
   // Maps a wavelength to some other value. Used to compress the x-axis for the UV and IR spectrums.
   // The key is the original wavelength, the value is the new wavelength, and value <= key.
@@ -159,12 +159,16 @@ class UVEmissionChart extends EmissionChart {
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
+    const xAxis = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
+      fill: MOTHAColors.UV_COLOR
+    } );
+
     const wavelengths = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
 
-    // Wavelengths are remapped to compress the IR spectrum. This is a brute-force, hardcoded approach because we
-    // need fine control of the position of each tick mark on the axis. All possible wavelength are included here,
-    // even when their values are not changed, because that made it easier to adjust this map iteratively, and easier
-    // to validate for possible programming errors.
+    // Wavelengths are remapped to compress the UV spectrum. This is a brute-force, hardcoded approach because we
+    // needed custom iterative control of the position of each tick mark on the x-axis. All possible wavelengths are
+    // included in this map, even when their values are not remapped. This made it easier to adjust the map iteratively,
+    // and easier to validate for possible programming errors.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/48#issuecomment-2568401842.
     const wavelengthMap = new Map<number, number>( [
       [ 94, 94 ],
@@ -175,15 +179,11 @@ class UVEmissionChart extends EmissionChart {
       [ 150, 112 ]
     ] );
 
-    const xAxis = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
-      fill: MOTHAColors.UV_COLOR
-    } );
-
     super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
+      xAxis: xAxis,
       wavelengths: wavelengths,
       minWavelength: wavelengthMap.get( _.min( wavelengths )! )! - 1,
       maxWavelength: wavelengthMap.get( _.max( wavelengths )! )! + 1,
-      xAxis: xAxis,
       wavelengthMap: wavelengthMap
     }, providedOptions ) );
   }
@@ -198,6 +198,10 @@ class IREmissionChart extends EmissionChart {
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
+    const xAxis = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
+      fill: MOTHAColors.IR_COLOR
+    } );
+
     const wavelengths = photonAbsorptionModel.getIRWavelengths();
 
     // The comment about wavelengthMap in UVEmissionChart applies here.
@@ -210,15 +214,11 @@ class IREmissionChart extends EmissionChart {
       [ 7460, 4000 ]
     ] );
 
-    const xAxis = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
-      fill: MOTHAColors.IR_COLOR
-    } );
-
     super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
+      xAxis: xAxis,
       wavelengths: wavelengths,
       minWavelength: 1000,
       maxWavelength: wavelengthMap.get( 7460 )! + 50,
-      xAxis: xAxis,
       wavelengthMap: wavelengthMap
     }, providedOptions ) );
   }
@@ -245,10 +245,10 @@ class VisibleEmissionChart extends EmissionChart {
     } );
 
     super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
+      xAxis: xAxis,
       wavelengths: wavelengths,
       minWavelength: minWavelength,
-      maxWavelength: maxWavelength,
-      xAxis: xAxis
+      maxWavelength: maxWavelength
     }, providedOptions ) );
   }
 }
