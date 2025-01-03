@@ -25,7 +25,6 @@ import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
-const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 3;
 const TICK_FONT = new PhetFont( 11 );
 
@@ -52,7 +51,9 @@ type SelfOptions = {
 
 type EmissionChartOptions = SelfOptions;
 
-class EmissionChart extends Node {
+export default class EmissionChart extends Node {
+
+  public static readonly AXIS_HEIGHT = 4;
 
   protected constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
                          providedOptions: EmissionChartOptions ) {
@@ -159,7 +160,7 @@ class UVEmissionChart extends EmissionChart {
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
-    const xAxis = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
+    const xAxis = new Rectangle( 0, 0, axisLength, EmissionChart.AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
     } );
 
@@ -198,7 +199,7 @@ class IREmissionChart extends EmissionChart {
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
-    const xAxis = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
+    const xAxis = new Rectangle( 0, 0, axisLength, EmissionChart.AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
     } );
 
@@ -238,7 +239,7 @@ class VisibleEmissionChart extends EmissionChart {
     const maxWavelength = _.max( wavelengths )! + 50;
 
     const xAxis = new SpectrumNode( {
-      size: new Dimension2( axisLength, AXIS_HEIGHT ),
+      size: new Dimension2( axisLength, EmissionChart.AXIS_HEIGHT ),
       minValue: minWavelength,
       maxValue: maxWavelength,
       valueToColor: Light.wavelengthToColor

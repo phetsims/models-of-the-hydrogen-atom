@@ -10,16 +10,15 @@
  */
 
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions, NodeTranslationOptions, Rectangle, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { Line, LineOptions, Node, NodeOptions, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import { IREmissionChart, UVEmissionChart, VisibleEmissionChart } from './EmissionChart.js';
+import EmissionChart, { IREmissionChart, UVEmissionChart, VisibleEmissionChart } from './EmissionChart.js';
 import SpectrometerDebugText from './SpectrometerDebugText.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 const UV_AXIS_LENGTH = 270;
 const VISIBLE_AXIS_LENGTH = 145;
@@ -61,7 +60,7 @@ export default class SpectrometerChart extends Node {
     irEmissionChart.left = visibleEmissionChart.right + X_SPACING;
 
     // Breaks between the segments of the x-axis.
-    const breakNodesCenterY = uvEmissionChart.y + 3; // set empirically, because '/' is not quite centered.
+    const breakNodesCenterY = uvEmissionChart.y + EmissionChart.AXIS_HEIGHT / 2;
     const uvRightBreakNode = new AxisBreakNode( {
       centerX: uvEmissionChart.right,
       centerY: breakNodesCenterY
@@ -112,11 +111,10 @@ export default class SpectrometerChart extends Node {
 /**
  * AxisBreakNode denotes a break in the x-axis.
  */
-class AxisBreakNode extends Text {
+class AxisBreakNode extends Line {
   public constructor( providedOptions?: NodeTranslationOptions ) {
-    super( '/', combineOptions<TextOptions>( {
-      font: new PhetFont( 18 ),
-      fill: MOTHAColors.invertibleTextFillProperty
+    super( 0, 0, -3, 16, combineOptions<LineOptions>( {
+      stroke: MOTHAColors.invertibleTextFillProperty
     }, providedOptions ) );
   }
 }
