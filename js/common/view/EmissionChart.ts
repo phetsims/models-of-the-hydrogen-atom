@@ -27,7 +27,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 const AXIS_HEIGHT = 4;
 const TICK_LINE_LENGTH = 3;
-const TICK_FONT = new PhetFont( 8 );
+const TICK_FONT = new PhetFont( 11 );
 
 type SelfOptions = {
 
@@ -43,6 +43,9 @@ type SelfOptions = {
 
   // Node that serves as the x-axis.
   xAxis: Node;
+
+  // Plots an x value at some other place on the x-axis. Used to compress the x-axis for the UV and IR spectrums.
+  plotAtX?: ( x: number ) => number;
 };
 
 type EmissionChartOptions = SelfOptions;
@@ -55,7 +58,11 @@ class EmissionChart extends Node {
     const options = optionize<EmissionChartOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
-      hasTickMarks: true
+      hasTickMarks: true,
+      plotAtX: wavelength => {
+        assert && assert( providedOptions.wavelengths.includes( wavelength ), `${wavelength} is not a wavelength for this chart.` );
+        return wavelength;
+      }
     }, providedOptions );
 
     const xAxis = options.xAxis;
@@ -66,10 +73,10 @@ class EmissionChart extends Node {
 
     options.wavelengths.forEach( wavelength => {
 
-      assert && assert( wavelength >= options.minWavelength && wavelength <= options.maxWavelength,
+      assert && assert( options.plotAtX( wavelength ) >= options.minWavelength && options.plotAtX( wavelength ) <= options.maxWavelength,
         `tickValue is out of range: ${wavelength}` );
 
-      const x = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, wavelength );
+      const x = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, options.plotAtX( wavelength ) );
 
       if ( options.hasTickMarks ) {
         const line = new Line( 0, 0, 0, TICK_LINE_LENGTH, {
@@ -100,7 +107,7 @@ class EmissionChart extends Node {
 
       const barNode = new SpectrometerBarNode( wavelength );
       barNode.localBoundsProperty.link( () => {
-        barNode.centerX = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, wavelength );
+        barNode.centerX = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, options.plotAtX( wavelength ) );
         barNode.bottom = xAxis.top - 1;
       } );
       children.push( barNode );
@@ -134,6 +141,24 @@ class UVEmissionChart extends EmissionChart {
 
     const wavelengths = [ ...photonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
 
+    // Wavelengths are brute-force remapped to compress the UV spectrum.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/48#issuecomment-2568401842.
+    const plotAtX = ( wavelength: number ) => {
+      assert && assert( wavelengths.includes( wavelength ), `${wavelength} is not a wavelength for this chart.` );
+      if ( wavelength === 103 ) {
+        return 100;
+      }
+      else if ( wavelength === 122 ) {
+        return 105;
+      }
+      else if ( wavelength === 150 ) {
+        return 112;
+      }
+      else {
+        return wavelength;
+      }
+    };
+
     const xAxis = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
     } );
@@ -141,8 +166,9 @@ class UVEmissionChart extends EmissionChart {
     super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
       wavelengths: wavelengths,
       minWavelength: _.min( wavelengths )! - 1,
-      maxWavelength: _.max( wavelengths )! + 1,
-      xAxis: xAxis
+      maxWavelength: plotAtX( _.max( wavelengths )! ) + 1,
+      xAxis: xAxis,
+      plotAtX: plotAtX
     }, providedOptions ) );
   }
 }
@@ -158,6 +184,27 @@ class IREmissionChart extends EmissionChart {
 
     const wavelengths = photonAbsorptionModel.getIRWavelengths();
 
+    // Wavelengths are brute-force remapped to compress the IR spectrum.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/48#issuecomment-2568401842.
+    const plotAtX = ( wavelength: number ) => {
+      assert && assert( wavelengths.includes( wavelength ), `${wavelength} is not a wavelength for this chart.` );
+      if ( wavelength === 1876 ) {
+        return 1650;
+      }
+      else if ( wavelength === 2626 ) {
+        return 2200;
+      }
+      else if ( wavelength === 4052 ) {
+        return 3000;
+      }
+      else if ( wavelength === 7460 ) {
+        return 4000;
+      }
+      else {
+        return wavelength;
+      }
+    };
+
     const xAxis = new Rectangle( 0, 0, axisLength, AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
     } );
@@ -165,8 +212,9 @@ class IREmissionChart extends EmissionChart {
     super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
       wavelengths: wavelengths,
       minWavelength: 1000,
-      maxWavelength: 7500,
-      xAxis: xAxis
+      maxWavelength: plotAtX( 7460 ) + 50,
+      xAxis: xAxis,
+      plotAtX: plotAtX
     }, providedOptions ) );
   }
 }

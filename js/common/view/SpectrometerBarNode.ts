@@ -13,7 +13,7 @@ import { Path } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from '../model/Light.js';
 
-const MAX_NUMBER_OF_PHOTONS = 14;
+const MAX_NUMBER_OF_PHOTONS = 12;
 const PHOTON_RADIUS = 3;
 const ARROW_HEAD_WIDTH = 10;
 const ARROW_HEAD_HEIGHT = 8;

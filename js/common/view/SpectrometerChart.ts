@@ -20,8 +20,13 @@ import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
+const UV_AXIS_LENGTH = 270;
+const VISIBLE_AXIS_LENGTH = 145;
+const IR_AXIS_LENGTH = 225;
+
 const DISPLAY_HEIGHT = 135;
 const X_MARGIN = 5;
+const X_SPACING = 14;
 
 type SelfOptions = {
   // Whether to create tick marks at emission wavelengths. Used to omit tick marks from snapshots.
@@ -45,12 +50,12 @@ export default class SpectrometerChart extends Node {
     const chartOptions = {
       hasTickMarks: options.hasTickMarks
     };
-    const uvEmissionChart = new UVEmissionChart( dataPointsProperty, 400, chartOptions );
-    const visibleEmissionChart = new VisibleEmissionChart( dataPointsProperty, 145, chartOptions );
-    const irEmissionChart = new IREmissionChart( dataPointsProperty, 275, chartOptions );
+    const uvEmissionChart = new UVEmissionChart( dataPointsProperty, UV_AXIS_LENGTH, chartOptions );
+    const visibleEmissionChart = new VisibleEmissionChart( dataPointsProperty, VISIBLE_AXIS_LENGTH, chartOptions );
+    const irEmissionChart = new IREmissionChart( dataPointsProperty, IR_AXIS_LENGTH, chartOptions );
 
-    visibleEmissionChart.left = uvEmissionChart.right + 10;
-    irEmissionChart.left = visibleEmissionChart.right + 10;
+    visibleEmissionChart.left = uvEmissionChart.right + X_SPACING;
+    irEmissionChart.left = visibleEmissionChart.right + X_SPACING;
 
     const charts = new Node( {
       children: [ uvEmissionChart, visibleEmissionChart, irEmissionChart ]
