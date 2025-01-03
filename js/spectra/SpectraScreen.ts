@@ -7,18 +7,17 @@
  */
 
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { Shape } from '../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
-import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
-import { Node, Path, TColor } from '../../../scenery/js/imports.js';
 import MOTHAColors from '../common/MOTHAColors.js';
 import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
-import photonAbsorptionModel from '../common/model/PhotonAbsorptionModel.js';
+import { VisibleEmissionChart } from '../common/view/EmissionChart.js';
+import Property from '../../../axon/js/Property.js';
+import SpectrometerDataPoint from '../common/model/SpectrometerDataPoint.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -50,35 +49,22 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
  */
 function createScreenIcon(): ScreenIcon {
 
-  const photonRadius = 4;
-  const absorptionWavelengths = photonAbsorptionModel.getVisibleWavelengths();
-
-  const photonColumns = absorptionWavelengths.map( wavelength => {
-    const color = VisibleColor.wavelengthToColor( wavelength );
-    const photonColumn = createPhotonColumn( photonRadius, color );
-    photonColumn.centerX = ( wavelength - absorptionWavelengths[ 0 ] );
-    return photonColumn;
+  const dataPoints = [
+    new SpectrometerDataPoint( 410, 8 ),
+    new SpectrometerDataPoint( 434, 10 ),
+    new SpectrometerDataPoint( 486, 15 ),
+    new SpectrometerDataPoint( 656, 12 )
+  ];
+  const dataPointsProperty = new Property( dataPoints );
+  const icon = new VisibleEmissionChart( dataPointsProperty, 150, {
+    hasTickMarks: false,
+    hasAxisLabel: false
   } );
 
-  const iconNode = new Node( {
-    children: photonColumns
-  } );
-
-  return new ScreenIcon( iconNode, {
+  return new ScreenIcon( icon, {
     maxIconWidthProportion: 0.85,
     maxIconHeightProportion: 0.85,
     fill: MOTHAColors.spectrometerFillProperty
-  } );
-}
-
-function createPhotonColumn( photonRadius: number, fill: TColor, numberOfPhotons = 20 ): Node {
-  const shape = new Shape();
-  for ( let i = 0; i < numberOfPhotons; i++ ) {
-    shape.circle( 0, i * 2 * photonRadius, photonRadius );
-  }
-  shape.close();
-  return new Path( shape, {
-    fill: fill
   } );
 }
 

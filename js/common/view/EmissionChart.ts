@@ -34,6 +34,9 @@ type SelfOptions = {
   // Whether to create tick marks at the values in providedOptions.wavelengths. Used to omit tick marks from snapshots.
   hasTickMarks?: boolean;
 
+  // Whether to create a label below the x-axis.
+  hasAxisLabel?: boolean;
+
   // Node that serves as the x-axis.
   xAxis: Node;
 
@@ -64,6 +67,7 @@ export default class EmissionChart extends Node {
 
       // SelfOptions
       hasTickMarks: true,
+      hasAxisLabel: true,
       wavelengthMap: null
     }, providedOptions );
 
@@ -140,14 +144,16 @@ export default class EmissionChart extends Node {
     children.push( xAxis );
 
     // x-axis label, visible only when there is no data, because tick marks would overlap.
-    const xAxisLabel = new Text( xAxisStringProperty, {
-      font: new PhetFont( 14 ), //TODO
-      fill: MOTHAColors.invertibleTextFillProperty,
-      centerX: xAxis.centerX,
-      top: xAxis.bottom + 3,
-      visibleProperty: new DerivedProperty( [ dataPointsProperty ], dataPoints => dataPoints.length === 0 )
-    } );
-    children.push( xAxisLabel );
+    if ( options.hasAxisLabel ) {
+      const xAxisLabel = new Text( xAxisStringProperty, {
+        font: new PhetFont( 14 ), //TODO
+        fill: MOTHAColors.invertibleTextFillProperty,
+        centerX: xAxis.centerX,
+        top: xAxis.bottom + 3,
+        visibleProperty: new DerivedProperty( [ dataPointsProperty ], dataPoints => dataPoints.length === 0 )
+      } );
+      children.push( xAxisLabel );
+    }
 
     options.children = children;
 
