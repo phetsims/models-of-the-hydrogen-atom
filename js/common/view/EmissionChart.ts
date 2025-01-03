@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * EmissionChart is the base class for the charts displayed by the Spectrometer, showing emitted photons.

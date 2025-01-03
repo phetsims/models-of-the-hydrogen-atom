@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 //TODO Needs layout work. We're just getting lucky that the height of the bars works for the height of the chart.
 /**

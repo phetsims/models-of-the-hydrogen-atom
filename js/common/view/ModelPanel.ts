@@ -1,4 +1,4 @@
-// Copyright 2015-2024, University of Colorado Boulder
+// Copyright 2015-2025, University of Colorado Boulder
 
 /**
  * ModelPanel contains controls (radio buttons) for choosing one of the predictive models, and an optional
