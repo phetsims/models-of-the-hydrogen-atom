@@ -27,7 +27,6 @@ import SnapshotButton from './SnapshotButton.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
 import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -57,14 +56,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     // This implementation puts buttons in the title bar, and requires titleBarExpandCollapse: false.
     assert && assert( options.titleBarExpandCollapse !== undefined && !options.titleBarExpandCollapse );
 
-    const titleStringProperty = new DerivedStringProperty( [
-        expandedProperty,
-        ModelsOfTheHydrogenAtomStrings.spectrometerPhotonsEmittedPerNanometerStringProperty,
-        ModelsOfTheHydrogenAtomStrings.spectrometerStringProperty
-      ], ( expanded, spectrometerPhotonsEmittedPerNanometerString, spectrometerString ) =>
-        expanded ? spectrometerPhotonsEmittedPerNanometerString : spectrometerString
-    );
-    const titleText = new Text( titleStringProperty, {
+    const titleText = new Text( ModelsOfTheHydrogenAtomStrings.spectrometerPhotonsEmittedPerNanometerStringProperty, {
       cursor: 'pointer',
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.spectrometerTitleFillProperty,

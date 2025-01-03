@@ -40,7 +40,6 @@ type StringsType = {
   'quantumStringProperty': LocalizedStringProperty;
   'radialDistanceStringProperty': LocalizedStringProperty;
   'schrodingerStringProperty': LocalizedStringProperty;
-  'spectrometerStringProperty': LocalizedStringProperty;
   'spectrometerPhotonsEmittedPerNanometerStringProperty': LocalizedStringProperty;
   'nStringProperty': LocalizedStringProperty;
   'lStringProperty': LocalizedStringProperty;
