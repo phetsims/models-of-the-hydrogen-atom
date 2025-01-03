@@ -39,7 +39,7 @@ export default class SnapshotNode extends Node {
     }, providedOptions );
 
     const chart = new SpectrometerChart( new Property( snapshot.dataPoints ), {
-      displayHeight: 150
+      chartHeight: 150 // set empirically with ?debugSpectrometer
     } );
 
     const titleStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.snapshotNumberNameStringProperty, {

@@ -102,7 +102,9 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       children: [ titleText, buttonGroup ]
     } );
 
-    const spectrometerChart = new SpectrometerChart( spectrometer.dataPointsProperty );
+    const spectrometerChart = new SpectrometerChart( spectrometer.dataPointsProperty, {
+      chartHeight: 135 // set empirically with ?debugSpectrometer
+    } );
 
     super( spectrometerChart, options );
 

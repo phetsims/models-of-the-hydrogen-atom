@@ -28,7 +28,9 @@ const X_MARGIN = 5;
 const X_SPACING = 8;
 
 type SelfOptions = {
-  displayHeight?: number;
+  
+  // Height of the chart.
+  chartHeight: number;
 
   // Whether to create tick marks at emission wavelengths. Used to omit tick marks from snapshots.
   hasTickMarks?: boolean;
@@ -38,12 +40,11 @@ type SpectrometerNodeOptions = SelfOptions;
 
 export default class SpectrometerChart extends Node {
 
-  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, providedOptions?: SpectrometerNodeOptions ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, providedOptions: SpectrometerNodeOptions ) {
 
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
-      displayHeight: 135,
       hasTickMarks: true
     }, providedOptions );
 
@@ -82,7 +83,7 @@ export default class SpectrometerChart extends Node {
       children: [ uvEmissionChart, visibleEmissionChart, irEmissionChart, uvRightBreakNode, visibleLeftBreakNode, visibleRightBreakNode, irLeftBreakNode ]
     } );
 
-    const backgroundNode = new Rectangle( 0, 0, charts.width + 2 * X_MARGIN, options.displayHeight, {
+    const backgroundNode = new Rectangle( 0, 0, charts.width + 2 * X_MARGIN, options.chartHeight, {
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
       fill: MOTHAColors.spectrometerFillProperty,
       stroke: MOTHAColors.spectrometerStrokeProperty
