@@ -14,8 +14,8 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 const MOTHAColors = {
 
   screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
-    default: 'black',
-    projector: 'white'
+    default: Color.grayColor( 25 ),
+    projector: Color.grayColor( 245 )
   } ),
 
   panelFillColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'panelFillColor', {
