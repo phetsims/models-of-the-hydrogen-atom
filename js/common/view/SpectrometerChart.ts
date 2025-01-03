@@ -109,11 +109,11 @@ export default class SpectrometerChart extends Node {
 }
 
 /**
- * AxisBreakNode denotes a break in the x-axis.
+ * AxisBreakNode denotes a break in the x-axis. It looks like '/'.
  */
 class AxisBreakNode extends Line {
   public constructor( providedOptions?: NodeTranslationOptions ) {
-    super( 0, 0, -3, 16, combineOptions<LineOptions>( {
+    super( 3, 0, 0, 16, combineOptions<LineOptions>( {
       stroke: MOTHAColors.invertibleTextFillProperty
     }, providedOptions ) );
   }
