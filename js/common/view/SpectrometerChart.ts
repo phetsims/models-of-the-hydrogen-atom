@@ -23,10 +23,10 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 const UV_AXIS_LENGTH = 270;
 const VISIBLE_AXIS_LENGTH = 145;
-const IR_AXIS_LENGTH = 225;
+const IR_AXIS_LENGTH = 235;
 
 const X_MARGIN = 5;
-const X_SPACING = 10;
+const X_SPACING = 8;
 
 type SelfOptions = {
   displayHeight?: number;
@@ -61,17 +61,26 @@ export default class SpectrometerChart extends Node {
     irEmissionChart.left = visibleEmissionChart.right + X_SPACING;
 
     // Breaks between the segments of the x-axis.
-    const uvVisibleBreakNode = new AxisBreakNode( {
-      centerX: uvEmissionChart.right + X_SPACING / 2,
-      centerY: uvEmissionChart.y + 3
+    const breakNodesCenterY = uvEmissionChart.y + 3; // set empirically, because '/' is not quite centered.
+    const uvRightBreakNode = new AxisBreakNode( {
+      centerX: uvEmissionChart.right,
+      centerY: breakNodesCenterY
     } );
-    const visibleIRBreakNode = new AxisBreakNode( {
-      centerX: visibleEmissionChart.right + X_SPACING / 2,
-      centerY: visibleEmissionChart.y + 3
+    const visibleLeftBreakNode = new AxisBreakNode( {
+      centerX: visibleEmissionChart.left,
+      centerY: breakNodesCenterY
+    } );
+    const visibleRightBreakNode = new AxisBreakNode( {
+      centerX: visibleEmissionChart.right,
+      centerY: breakNodesCenterY
+    } );
+    const irLeftBreakNode = new AxisBreakNode( {
+      centerX: irEmissionChart.left,
+      centerY: breakNodesCenterY
     } );
 
     const charts = new Node( {
-      children: [ uvEmissionChart, visibleEmissionChart, irEmissionChart, uvVisibleBreakNode, visibleIRBreakNode ]
+      children: [ uvEmissionChart, visibleEmissionChart, irEmissionChart, uvRightBreakNode, visibleLeftBreakNode, visibleRightBreakNode, irLeftBreakNode ]
     } );
 
     const backgroundNode = new Rectangle( 0, 0, charts.width + 2 * X_MARGIN, options.displayHeight, {
@@ -100,9 +109,12 @@ export default class SpectrometerChart extends Node {
   }
 }
 
+/**
+ * AxisBreakNode denotes a break in the x-axis.
+ */
 class AxisBreakNode extends Text {
   public constructor( providedOptions?: NodeTranslationOptions ) {
-    super( '/ /', combineOptions<TextOptions>( {
+    super( '/', combineOptions<TextOptions>( {
       font: new PhetFont( 18 ),
       fill: MOTHAColors.invertibleTextFillProperty
     }, providedOptions ) );

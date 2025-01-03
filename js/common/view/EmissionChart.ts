@@ -218,7 +218,7 @@ class IREmissionChart extends EmissionChart {
       xAxis: xAxis,
       wavelengths: wavelengths,
       minWavelength: 900,
-      maxWavelength: wavelengthMap.get( 7460 )! + 50,
+      maxWavelength: wavelengthMap.get( 7460 )! + 200,
       wavelengthMap: wavelengthMap
     }, providedOptions ) );
   }
@@ -235,7 +235,7 @@ class VisibleEmissionChart extends EmissionChart {
 
     const wavelengths = photonAbsorptionModel.getVisibleWavelengths();
     const minWavelength = VisibleColor.MIN_WAVELENGTH;
-    const maxWavelength = _.max( wavelengths )! + 30;
+    const maxWavelength = _.max( wavelengths )! + 50;
 
     const xAxis = new SpectrumNode( {
       size: new Dimension2( axisLength, AXIS_HEIGHT ),
