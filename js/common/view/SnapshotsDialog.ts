@@ -54,7 +54,9 @@ export default class SnapshotsDialog extends Dialog {
     // Add new snapshots to the end.
     snapshots.addItemAddedListener( snapshot => {
       const snapshotNode = new SnapshotNode( snapshot, {
-        scale: SNAPSHOT_SCALE
+        scale: SNAPSHOT_SCALE,
+        backgroundFill: MOTHAColors.snapshotFillProperty,
+        backgroundStroke: MOTHAColors.snapshotStrokeProperty
       } );
       content.addChild( snapshotNode );
     } );

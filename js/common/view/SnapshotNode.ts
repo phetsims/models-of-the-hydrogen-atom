@@ -8,11 +8,11 @@
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import TrashButton from '../../../../scenery-phet/js/buttons/TrashButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, TColor, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -24,10 +24,12 @@ import Property from '../../../../axon/js/Property.js';
 const INSIDE_X_MARGIN = 6;
 const INSIDE_Y_MARGIN = 4;
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  backgroundFill?: TColor;
+  backgroundStroke?: TColor;
+};
 
-type SnapshotNodeOptions = SelfOptions &
-  PickOptional<NodeOptions, 'scale'>;
+type SnapshotNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'>;
 
 export default class SnapshotNode extends Node {
 
@@ -35,11 +37,17 @@ export default class SnapshotNode extends Node {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
 
+      // SelfOptions
+      backgroundFill: MOTHAColors.spectrometerFillProperty,
+      backgroundStroke: MOTHAColors.spectrometerStrokeProperty
+
       //TODO Needs to be mutable and isDisposable:false for PhET-iO. Delete code related to dispose.
     }, providedOptions );
 
     const chart = new SpectrometerChart( new Property( snapshot.dataPoints ), {
-      chartHeight: 150 // set empirically with ?debugSpectrometer
+      chartHeight: 150, // set empirically with ?debugSpectrometer
+      backgroundFill: options.backgroundFill,
+      backgroundStroke: options.backgroundStroke
     } );
 
     const titleStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.snapshotNumberNameStringProperty, {

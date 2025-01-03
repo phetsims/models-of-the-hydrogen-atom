@@ -154,14 +154,9 @@ const MOTHAColors = {
     projector: 'black'
   } ),
 
-  spectrometerSubtitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerSubtitleFill', {
-    default: 'white',
-    projector: 'black'
-  } ),
-
   spectrometerAccordionBoxFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerAccordionBoxFill', {
-    default: Color.grayColor( 80 ),
-    projector: Color.grayColor( 235 )
+    default: 'black',
+    projector: 'white'
   } ),
 
   spectrometerAccordionBoxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerAccordionBoxStroke', {
@@ -175,8 +170,8 @@ const MOTHAColors = {
   } ),
 
   spectrometerStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerStroke', {
-    default: Color.grayColor( 117 ),
-    projector: 'black'
+    default: 'black',
+    projector: 'white'
   } ),
 
   spectrometerTickColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'spectrometerTickColor', {
@@ -185,11 +180,21 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Snapshots dialog
+  // Snapshots
   //------------------------------------------------------------------------------------------------------------------
 
   snapshotsDialogFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'snapshotsDialogFill', {
     default: 'white'
+  } ),
+
+  snapshotFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'snapshotFill', {
+    default: 'black',
+    projector: 'white'
+  } ),
+
+  snapshotStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'snapshotStroke', {
+    default: 'white',
+    projector: 'black'
   } ),
 
   //------------------------------------------------------------------------------------------------------------------

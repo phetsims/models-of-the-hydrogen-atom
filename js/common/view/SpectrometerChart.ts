@@ -10,7 +10,7 @@
  */
 
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { Line, LineOptions, Node, NodeOptions, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import { Line, LineOptions, Node, NodeOptions, NodeTranslationOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -34,6 +34,9 @@ type SelfOptions = {
 
   // Whether to create tick marks at emission wavelengths. Used to omit tick marks from snapshots.
   hasTickMarks?: boolean;
+
+  backgroundFill?: TColor;
+  backgroundStroke?: TColor;
 };
 
 type SpectrometerNodeOptions = SelfOptions;
@@ -45,7 +48,9 @@ export default class SpectrometerChart extends Node {
     const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
-      hasTickMarks: true
+      hasTickMarks: true,
+      backgroundFill: MOTHAColors.spectrometerFillProperty,
+      backgroundStroke: MOTHAColors.spectrometerStrokeProperty
     }, providedOptions );
 
 
@@ -85,8 +90,8 @@ export default class SpectrometerChart extends Node {
 
     const backgroundNode = new Rectangle( 0, 0, charts.width + 2 * X_MARGIN, options.chartHeight, {
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
-      fill: MOTHAColors.spectrometerFillProperty,
-      stroke: MOTHAColors.spectrometerStrokeProperty
+      fill: options.backgroundFill,
+      stroke: options.backgroundStroke
     } );
 
     charts.centerX = backgroundNode.centerX;
