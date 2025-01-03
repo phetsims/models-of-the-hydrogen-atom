@@ -9,8 +9,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { Node, NodeOptions, NodeTranslationOptions, Rectangle, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -19,13 +19,14 @@ import SpectrometerDebugText from './SpectrometerDebugText.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 const UV_AXIS_LENGTH = 270;
 const VISIBLE_AXIS_LENGTH = 145;
 const IR_AXIS_LENGTH = 225;
 
 const X_MARGIN = 5;
-const X_SPACING = 14;
+const X_SPACING = 10;
 
 type SelfOptions = {
   displayHeight?: number;
@@ -59,8 +60,18 @@ export default class SpectrometerChart extends Node {
     visibleEmissionChart.left = uvEmissionChart.right + X_SPACING;
     irEmissionChart.left = visibleEmissionChart.right + X_SPACING;
 
+    // Breaks between the segments of the x-axis.
+    const uvVisibleBreakNode = new AxisBreakNode( {
+      centerX: uvEmissionChart.right + X_SPACING / 2,
+      centerY: uvEmissionChart.y + 3
+    } );
+    const visibleIRBreakNode = new AxisBreakNode( {
+      centerX: visibleEmissionChart.right + X_SPACING / 2,
+      centerY: visibleEmissionChart.y + 3
+    } );
+
     const charts = new Node( {
-      children: [ uvEmissionChart, visibleEmissionChart, irEmissionChart ]
+      children: [ uvEmissionChart, visibleEmissionChart, irEmissionChart, uvVisibleBreakNode, visibleIRBreakNode ]
     } );
 
     const backgroundNode = new Rectangle( 0, 0, charts.width + 2 * X_MARGIN, options.displayHeight, {
@@ -86,6 +97,15 @@ export default class SpectrometerChart extends Node {
       } );
       this.addChild( dataText );
     }
+  }
+}
+
+class AxisBreakNode extends Text {
+  public constructor( providedOptions?: NodeTranslationOptions ) {
+    super( '/ /', combineOptions<TextOptions>( {
+      font: new PhetFont( 18 ),
+      fill: MOTHAColors.invertibleTextFillProperty
+    }, providedOptions ) );
   }
 }
 

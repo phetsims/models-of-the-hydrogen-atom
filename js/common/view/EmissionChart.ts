@@ -217,7 +217,7 @@ class IREmissionChart extends EmissionChart {
     super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
       xAxis: xAxis,
       wavelengths: wavelengths,
-      minWavelength: 1000,
+      minWavelength: 900,
       maxWavelength: wavelengthMap.get( 7460 )! + 50,
       wavelengthMap: wavelengthMap
     }, providedOptions ) );
