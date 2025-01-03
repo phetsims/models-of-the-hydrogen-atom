@@ -45,7 +45,7 @@ type SelfOptions = {
   xAxis: Node;
 
   // Maps a wavelength to some other value. Used to compress the x-axis for the UV and IR spectrums.
-  // The key is the original wavelength, the value is the new wavelength, where key >= value.
+  // The key is the original wavelength, the value is the new wavelength, and value <= key.
   // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/48#issuecomment-2568401842.
   wavelengthMap?: Map<number, number> | null;
 };
