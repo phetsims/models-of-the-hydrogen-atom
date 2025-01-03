@@ -24,6 +24,7 @@ import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 const TICK_LINE_LENGTH = 3;
 const TICK_FONT = new PhetFont( 11 );
@@ -56,6 +57,7 @@ export default class EmissionChart extends Node {
   public static readonly AXIS_HEIGHT = 4;
 
   protected constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
+                         xAxisStringProperty: TReadOnlyProperty<string>,
                          providedOptions: EmissionChartOptions ) {
 
     const options = optionize<EmissionChartOptions, SelfOptions, NodeOptions>()( {
@@ -137,6 +139,16 @@ export default class EmissionChart extends Node {
 
     children.push( xAxis );
 
+    // x-axis label, visible only when there is no data, because tick marks would overlap.
+    const xAxisLabel = new Text( xAxisStringProperty, {
+      font: new PhetFont( 14 ), //TODO
+      fill: MOTHAColors.invertibleTextFillProperty,
+      centerX: xAxis.centerX,
+      top: xAxis.bottom + 3,
+      visibleProperty: new DerivedProperty( [ dataPointsProperty ], dataPoints => dataPoints.length === 0 )
+    } );
+    children.push( xAxisLabel );
+
     options.children = children;
 
     // Update bars as the spectrometer data changes.
@@ -180,7 +192,7 @@ class UVEmissionChart extends EmissionChart {
       [ 150, 112 ]
     ] );
 
-    super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
+    super( dataPointsProperty, ModelsOfTheHydrogenAtomStrings.uvStringProperty, combineOptions<EmissionChartOptions>( {
       xAxis: xAxis,
       wavelengths: wavelengths,
       minWavelength: wavelengthMap.get( _.min( wavelengths )! )! - 1,
@@ -215,7 +227,7 @@ class IREmissionChart extends EmissionChart {
       [ 7460, 4000 ]
     ] );
 
-    super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
+    super( dataPointsProperty, ModelsOfTheHydrogenAtomStrings.irStringProperty, combineOptions<EmissionChartOptions>( {
       xAxis: xAxis,
       wavelengths: wavelengths,
       minWavelength: 900,
@@ -245,7 +257,7 @@ class VisibleEmissionChart extends EmissionChart {
       valueToColor: Light.wavelengthToColor
     } );
 
-    super( dataPointsProperty, combineOptions<EmissionChartOptions>( {
+    super( dataPointsProperty, ModelsOfTheHydrogenAtomStrings.visibleStringProperty, combineOptions<EmissionChartOptions>( {
       xAxis: xAxis,
       wavelengths: wavelengths,
       minWavelength: minWavelength,

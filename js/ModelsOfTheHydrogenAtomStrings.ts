@@ -1,4 +1,4 @@
-// Copyright 2021-2024, University of Colorado Boulder
+// Copyright 2021-2025, University of Colorado Boulder
 
 /* eslint-disable */
 /* @formatter:off */
@@ -51,6 +51,7 @@ type StringsType = {
   'monochromaticStringProperty': LocalizedStringProperty;
   'uvStringProperty': LocalizedStringProperty;
   'irStringProperty': LocalizedStringProperty;
+  'visibleStringProperty': LocalizedStringProperty;
   'nTransitionStringProperty': LocalizedStringProperty;
   'wavelengthNanometersStringProperty': LocalizedStringProperty;
   'questionMarkStringProperty': LocalizedStringProperty;
