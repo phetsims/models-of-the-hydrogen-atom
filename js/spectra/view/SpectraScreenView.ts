@@ -12,7 +12,7 @@ import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import { Node, Path, VBox } from '../../../../scenery/js/imports.js';
+import { Node, Path, Rectangle, VBox } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
@@ -139,6 +139,13 @@ export default class SpectraScreenView extends ScreenView {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
+    // Workaround for joist deficiency that requires exactly 'black' and 'white' screen background color in
+    // order to get the desired navigation bar color. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/96.
+    const screenBackgroundRectangle = new Rectangle( 0, 0, 1, 1, {
+      fill: MOTHAColors.screenBackgroundRectangleColorProperty
+    } );
+    this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
+
     // Layout is complicated, so do it all in one place, rather than via NodeTranslationOptions.
     legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
@@ -188,6 +195,7 @@ export default class SpectraScreenView extends ScreenView {
     // rendering order
     const screenViewRootNode = new Node( {
       children: [
+        screenBackgroundRectangle,
         legendPanel,
         timeControlNode,
         lightNode,

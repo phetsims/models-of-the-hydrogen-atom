@@ -13,9 +13,19 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const MOTHAColors = {
 
+  // Joist requires 'black' and 'white' to change the navigation bar color, so do not change these colors.
   screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
-    default: Color.grayColor( 25 ),
-    projector: Color.grayColor( 245 )
+    default: 'black',
+    projector: 'white'
+  } ),
+
+  // We do not want the screen background to be pure 'black' and 'white', so we have worked around the joist
+  // deficiency by adding a rectangle that covers the ScreenView's visible bounds.  This allows us to use
+  // shades of gray that are close to 'black' and 'white', while still getting the desired color for the
+  // navigation bar. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/96.
+  screenBackgroundRectangleColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundRectangleColor', {
+    default: Color.grayColor( 35 ),
+    projector: Color.grayColor( 235 )
   } ),
 
   panelFillColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'panelFillColor', {
