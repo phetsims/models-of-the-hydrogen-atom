@@ -138,7 +138,12 @@ const MOTHAColors = {
   } ),
 
   continuumBarFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'continuumBarFill', {
-    default: Color.grayColor( 220 )
+    default: Color.grayColor( 230 ),
+    projector: 'white'
+  } ),
+
+  continuumBarStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'continuumBarStroke', {
+    default: Color.grayColor( 180 )
   } ),
 
   continuumBarTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'continuumBarTextFill', {

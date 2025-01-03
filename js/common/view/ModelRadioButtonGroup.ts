@@ -36,15 +36,15 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
       spacing: 2,
       labelAlign: 'left',
       radioButtonOptions: {
-        baseColor: null,
+        baseColor: MOTHAColors.modelsRadioButtonFillProperty,
         xMargin: 12,
         yMargin: 8,
         xAlign: 'left',
         buttonAppearanceStrategyOptions: {
+          overFill: MOTHAColors.modelsRadioButtonFillProperty,
           selectedStroke: MOTHAColors.modelsRadioButtonSelectedStrokeProperty,
           deselectedStroke: MOTHAColors.modelsRadioButtonDeselectedStrokeProperty,
           overStroke: MOTHAColors.modelsRadioButtonOverStrokeProperty,
-          overFill: null,
           selectedLineWidth: 2.5,
           selectedButtonOpacity: 1,
           deselectedButtonOpacity: 1,

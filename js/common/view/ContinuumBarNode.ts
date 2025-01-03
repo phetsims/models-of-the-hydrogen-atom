@@ -21,6 +21,7 @@ type SelfOptions = {
   yMargin?: number;
   font?: Font;
   barFill?: TPaint;
+  barStroke?: TPaint;
   textFill?: TPaint;
 };
 
@@ -37,6 +38,7 @@ export default class ContinuumBarNode extends Node {
       yMargin: 6,
       font: new PhetFont( 14 ),
       barFill: MOTHAColors.continuumBarFillProperty,
+      barStroke: MOTHAColors.continuumBarStrokeProperty,
       textFill: MOTHAColors.continuumBarTextFillProperty,
 
       // NodeOptions
@@ -56,7 +58,8 @@ export default class ContinuumBarNode extends Node {
     const barWidth = Math.max( classicalText.width, quantumText.width ) + ( 2 * options.xMargin );
     const barNode = new Rectangle( 0, 0, barWidth, barHeight, {
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
-      fill: options.barFill
+      fill: options.barFill,
+      stroke: options.barStroke
     } );
 
     // 'Classical' at top
