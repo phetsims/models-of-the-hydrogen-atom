@@ -34,7 +34,7 @@ export default class MOTHATimeControlNode extends TimeControlNode {
       isDisposable: false,
       timeSpeedProperty: timeSpeedProperty,
       timeSpeeds: MOTHAConstants.TIME_SPEEDS,
-      buttonGroupXSpacing: 20,
+      flowBoxSpacing: 20,
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: new PhetFont( 14 ),
