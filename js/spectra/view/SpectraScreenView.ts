@@ -43,11 +43,13 @@ export default class SpectraScreenView extends ScreenView {
 
       // ScreenViewOptions
       isDisposable: false,
-      screenSummaryContent: new ScreenSummaryContent( [
-        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,
-        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.controlAreaStringProperty,
-        ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.interactionHintStringProperty
-      ] ),
+      screenSummaryContent: new ScreenSummaryContent( {
+        additionalContent: [
+          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.controlAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.interactionHintStringProperty
+        ]
+      } ),
       tandem: tandem
     } );
 

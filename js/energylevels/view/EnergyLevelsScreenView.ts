@@ -46,11 +46,13 @@ export default class EnergyLevelsScreenView extends ScreenView {
 
       // ScreenViewOptions
       isDisposable: false,
-      screenSummaryContent: new ScreenSummaryContent( [
-        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
-        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
-        ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
-      ] ),
+      screenSummaryContent: new ScreenSummaryContent( {
+        additionalContent: [
+          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
+        ]
+      } ),
       tandem: tandem
     } );
 
