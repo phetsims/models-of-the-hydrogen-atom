@@ -1,7 +1,7 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 //TODO port SchrodingerNode.java
-//TODO Should xzAxesNode, exciteAtomButton, stateText, and quantumNumbersInfoButton be in front of photons?
+//TODO Should xzAxesNode, exciteAtomButton, electronStateText, and quantumNumbersInfoButton be in front of photons?
 
 /**
  * SchrodingerNode displays the Schrodinger model of the hydrogen atom.
@@ -88,9 +88,8 @@ export default class SchrodingerNode extends HydrogenAtomNode {
         tandem: options.tandem.createTandem( 'exciteAtomButton' )
       } );
 
-    //TODO stateText visibly shifts around as the state changes. Can we get rid of xzAxesNode, and move quantumNumbersInfoButton and stateText to left corner?
-    const stateText = new SchrodingerStateText( hydrogenAtom.nlmProperty, {
-      tandem: options.tandem.createTandem( 'stateText' )
+    const electronStateText = new SchrodingerStateText( hydrogenAtom.nlmProperty, {
+      tandem: options.tandem.createTandem( 'electronStateText' )
     } );
 
     const quantumNumbersInfoDialog = new QuantumNumbersInfoDialog( options.tandem.createTandem( 'quantumNumbersInfoDialog' ) );
@@ -99,7 +98,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       options.tandem.createTandem( 'quantumNumbersInfoButton' ) );
 
     const stateBox = new HBox( {
-      children: [ stateText, quantumNumbersInfoButton ],
+      children: [ electronStateText, quantumNumbersInfoButton ],
       spacing: 8
     } );
 
