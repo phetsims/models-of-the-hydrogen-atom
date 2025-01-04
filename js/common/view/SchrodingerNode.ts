@@ -1,7 +1,6 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 //TODO port SchrodingerNode.java
-//TODO Should xzAxesNode, exciteAtomButton, electronStateText, and quantumNumbersInfoButton be in front of photons?
 
 /**
  * SchrodingerNode displays the Schrodinger model of the hydrogen atom.

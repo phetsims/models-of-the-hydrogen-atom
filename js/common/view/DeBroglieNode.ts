@@ -1,7 +1,5 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
-//TODO Should deBroglieRepresentationComboBox and electronStateText be in front of photons?
-
 /**
  * DeBroglieNode displays the de Broglie model of the hydrogen atom.
  *
