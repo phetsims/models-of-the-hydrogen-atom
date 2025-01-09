@@ -2,7 +2,7 @@
 
 //TODO Needs layout work. We're just getting lucky that the chart is the right height, and title fits above the data.
 /**
- * SnapshotNode is a snapshot from the spectrometer.
+ * SpectrometerSnapshotNode is a snapshot from the spectrometer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -31,7 +31,7 @@ type SelfOptions = {
 
 type SnapshotNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'>;
 
-export default class SnapshotNode extends Node {
+export default class SpectrometerSnapshotNode extends Node {
 
   public constructor( snapshot: SpectrometerSnapshot, providedOptions?: SnapshotNodeOptions ) {
 
@@ -94,4 +94,4 @@ export default class SnapshotNode extends Node {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'SnapshotNode', SnapshotNode );
+modelsOfTheHydrogenAtom.register( 'SpectrometerSnapshotNode', SpectrometerSnapshotNode );

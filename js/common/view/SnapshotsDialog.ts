@@ -16,7 +16,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SpectrometerSnapshot from '../model/SpectrometerSnapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
-import SnapshotNode from './SnapshotNode.js';
+import SpectrometerSnapshotNode from './SpectrometerSnapshotNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -44,7 +44,7 @@ export default class SnapshotsDialog extends Dialog {
 
     const content = new VBox( {
       spacing: 8,
-      children: snapshots.map( snapshot => new SnapshotNode( snapshot, {
+      children: snapshots.map( snapshot => new SpectrometerSnapshotNode( snapshot, {
         scale: SNAPSHOT_SCALE
       } ) )
     } );
@@ -53,7 +53,7 @@ export default class SnapshotsDialog extends Dialog {
 
     // Add new snapshots to the end.
     snapshots.addItemAddedListener( snapshot => {
-      const snapshotNode = new SnapshotNode( snapshot, {
+      const snapshotNode = new SpectrometerSnapshotNode( snapshot, {
         scale: SNAPSHOT_SCALE,
         backgroundFill: MOTHAColors.snapshotFillProperty,
         backgroundStroke: MOTHAColors.snapshotStrokeProperty
