@@ -20,7 +20,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import SnapshotButton from './SnapshotButton.js';
-import SnapshotsDialog from './SnapshotsDialog.js';
+import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
 import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -65,7 +65,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } );
 
     //TODO Should snapshotsDialog be here or at the ScreenView level?
-    const snapshotsDialog = new SnapshotsDialog( spectrometer.snapshots, {
+    const snapshotsDialog = new SpectrometerSnapshotsDialog( spectrometer.snapshots, {
       tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
 

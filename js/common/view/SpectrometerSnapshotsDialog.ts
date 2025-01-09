@@ -2,7 +2,7 @@
 
 //TODO addLinkedElement for spectrometer.snapshotsProperty
 /**
- * SnapshotsDialog is a dialog that displays spectrometer snapshots.
+ * SpectrometerSnapshotsDialog is a dialog that displays spectrometer snapshots.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -25,7 +25,7 @@ type SnapshotsDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'
 //TODO Need to adjust this and MAX_SPECTROMETER_SNAPSHOTS to ensure the snapshots are readable.
 const SNAPSHOT_SCALE = 0.9;
 
-export default class SnapshotsDialog extends Dialog {
+export default class SpectrometerSnapshotsDialog extends Dialog {
 
   public constructor( snapshots: ObservableArray<SpectrometerSnapshot>, providedOptions?: SnapshotsDialogOptions ) {
 
@@ -70,4 +70,4 @@ export default class SnapshotsDialog extends Dialog {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'SnapshotsDialog', SnapshotsDialog );
+modelsOfTheHydrogenAtom.register( 'SpectrometerSnapshotsDialog', SpectrometerSnapshotsDialog );
