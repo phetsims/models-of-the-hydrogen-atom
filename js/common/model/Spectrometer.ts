@@ -23,6 +23,8 @@ import SpectrometerDataPoint from './SpectrometerDataPoint.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import PlumPuddingModel from './PlumPuddingModel.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -32,7 +34,7 @@ export default class Spectrometer extends PhetioObject {
 
   private hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
-  private recordingEnabled: boolean;
+  public readonly recordingEnabledProperty: Property<boolean>;
 
   public readonly dataPointsProperty: Property<SpectrometerDataPoint[]>;
 
@@ -40,7 +42,7 @@ export default class Spectrometer extends PhetioObject {
 
   public readonly snapshots: ObservableArray<SpectrometerSnapshot>;
 
-  private nextSnapshotNumber = 1;
+  private readonly nextSnapshotNumberProperty: Property<number>;
 
   public constructor( hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: SpectrometerOptions ) {
 
@@ -56,7 +58,10 @@ export default class Spectrometer extends PhetioObject {
     this.hydrogenAtomProperty = hydrogenAtomProperty;
 
     // Controlled by SpectrometerAccordionBox, so that we are not recording unless expanded.
-    this.recordingEnabled = true;
+    this.recordingEnabledProperty = new BooleanProperty( false, {
+      phetioReadOnly: true,
+      tandem: options.tandem.createTandem( 'recordingEnabledProperty' )
+    } );
 
     this.dataPointsProperty = new Property<SpectrometerDataPoint[]>( [], {
       tandem: options.tandem.createTandem( 'dataPointsProperty' ),
@@ -71,10 +76,20 @@ export default class Spectrometer extends PhetioObject {
       tandem: options.tandem.createTandem( 'hasDataPointsProperty' )
     } );
 
-    this.snapshots = createObservableArray<SpectrometerSnapshot>();
+    this.nextSnapshotNumberProperty = new NumberProperty( 1, {
+      numberType: 'Integer',
+      phetioReadOnly: true,
+      tandem: options.tandem.createTandem( 'nextSnapshotNumberProperty' )
+    } );
+
+    this.snapshots = createObservableArray<SpectrometerSnapshot>( {
+      phetioReadOnly: true,
+      phetioType: createObservableArray.ObservableArrayIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),
+      tandem: options.tandem.createTandem( 'snapshots' )
+    } );
 
     const photonEmittedListener = ( photon: Photon ) => {
-      if ( this.recordingEnabled ) {
+      if ( this.recordingEnabledProperty.value ) {
         this.recordEmission( photon.wavelength );
       }
     };
@@ -102,8 +117,10 @@ export default class Spectrometer extends PhetioObject {
    */
   public takeSnapshot(): void {
 
-    const snapshot = new SpectrometerSnapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value, this.dataPointsProperty.value );
+    const snapshot = new SpectrometerSnapshot( this.nextSnapshotNumberProperty.value, this.hydrogenAtomProperty.value, this.dataPointsProperty.value );
     this.snapshots.push( snapshot );
+
+    this.nextSnapshotNumberProperty.value++;
 
     snapshot.disposeEmitter.addListener( () => this.snapshots.remove( snapshot ) );
   }
@@ -112,7 +129,7 @@ export default class Spectrometer extends PhetioObject {
    * Records an emission of the specified wavelength.
    */
   private recordEmission( wavelength: number ): void {
-    assert && assert( this.recordingEnabled );
+    assert && assert( this.recordingEnabledProperty.value );
 
     const dataPoints = this.dataPointsProperty.value.slice();
 
@@ -133,18 +150,14 @@ export default class Spectrometer extends PhetioObject {
 
   public reset(): void {
     this.clear();
-    this.recordingEnabled = true;
     this.snapshots.forEach( snapshot => snapshot.dispose() );
-    this.snapshots.length = 0;
-    this.nextSnapshotNumber = 1;
+    this.snapshots.clear();
+    this.nextSnapshotNumberProperty.reset();
+    // Do not reset recordingEnabledProperty. It is set by SpectrometerAccordionBox.
   }
 
   public clear(): void {
     this.dataPointsProperty.value = [];
-  }
-
-  public setRecordingEnabled( recordingEnabled: boolean ): void {
-    this.recordingEnabled = recordingEnabled;
   }
 }
 
