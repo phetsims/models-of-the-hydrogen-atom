@@ -18,7 +18,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import Photon from './Photon.js';
-import Snapshot from './Snapshot.js';
+import SpectrometerSnapshot from './SpectrometerSnapshot.js';
 import SpectrometerDataPoint from './SpectrometerDataPoint.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
@@ -38,7 +38,7 @@ export default class Spectrometer extends PhetioObject {
 
   public readonly hasDataPointsProperty: TReadOnlyProperty<boolean>;
 
-  public readonly snapshots: ObservableArray<Snapshot>;
+  public readonly snapshots: ObservableArray<SpectrometerSnapshot>;
 
   private nextSnapshotNumber = 1;
 
@@ -71,7 +71,7 @@ export default class Spectrometer extends PhetioObject {
       tandem: options.tandem.createTandem( 'hasDataPointsProperty' )
     } );
 
-    this.snapshots = createObservableArray<Snapshot>();
+    this.snapshots = createObservableArray<SpectrometerSnapshot>();
 
     const photonEmittedListener = ( photon: Photon ) => {
       if ( this.recordingEnabled ) {
@@ -102,7 +102,7 @@ export default class Spectrometer extends PhetioObject {
    */
   public takeSnapshot(): void {
 
-    const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value, this.dataPointsProperty.value );
+    const snapshot = new SpectrometerSnapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value, this.dataPointsProperty.value );
     this.snapshots.push( snapshot );
 
     snapshot.disposeEmitter.addListener( () => this.snapshots.remove( snapshot ) );

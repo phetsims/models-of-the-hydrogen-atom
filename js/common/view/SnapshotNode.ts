@@ -16,7 +16,7 @@ import { Node, NodeOptions, TColor, Text } from '../../../../scenery/js/imports.
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Snapshot from '../model/Snapshot.js';
+import SpectrometerSnapshot from '../model/SpectrometerSnapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SpectrometerChart from './SpectrometerChart.js';
 import Property from '../../../../axon/js/Property.js';
@@ -33,7 +33,7 @@ type SnapshotNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'>;
 
 export default class SnapshotNode extends Node {
 
-  public constructor( snapshot: Snapshot, providedOptions?: SnapshotNodeOptions ) {
+  public constructor( snapshot: SpectrometerSnapshot, providedOptions?: SnapshotNodeOptions ) {
 
     const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
 

@@ -14,7 +14,7 @@ import { VBox } from '../../../../scenery/js/imports.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Snapshot from '../model/Snapshot.js';
+import SpectrometerSnapshot from '../model/SpectrometerSnapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SnapshotNode from './SnapshotNode.js';
 
@@ -27,7 +27,7 @@ const SNAPSHOT_SCALE = 0.9;
 
 export default class SnapshotsDialog extends Dialog {
 
-  public constructor( snapshots: ObservableArray<Snapshot>, providedOptions?: SnapshotsDialogOptions ) {
+  public constructor( snapshots: ObservableArray<SpectrometerSnapshot>, providedOptions?: SnapshotsDialogOptions ) {
 
     const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>()( {
 
