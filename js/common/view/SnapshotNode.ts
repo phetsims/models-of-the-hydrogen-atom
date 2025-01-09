@@ -52,7 +52,7 @@ export default class SnapshotNode extends Node {
 
     const titleStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.snapshotNumberNameStringProperty, {
       number: snapshot.snapshotNumber,
-      name: snapshot.modelNameProperty
+      name: snapshot.hydrogenAtom.displayNameProperty
     } );
     const titleText = new Text( titleStringProperty, {
       font: new PhetFont( 14 ),
@@ -66,7 +66,7 @@ export default class SnapshotNode extends Node {
 
     const trashButtonAccessibleNameProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
       number: snapshot.snapshotNumber,
-      name: snapshot.modelNameProperty
+      name: snapshot.hydrogenAtom.displayNameProperty
     } );
     const trashButton = new TrashButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,

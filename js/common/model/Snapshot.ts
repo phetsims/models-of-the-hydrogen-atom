@@ -6,23 +6,28 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectrometerDataPoint from './SpectrometerDataPoint.js';
+import HydrogenAtom from './HydrogenAtom.js';
 
 export default class Snapshot extends PhetioObject {
 
+  // The snapshot number, as it appears in the snapshots dialog.
   public readonly snapshotNumber: number;
-  public readonly modelNameProperty: TReadOnlyProperty<string>;
+
+  // The hydrogen atom model that this snapshot is associated with.
+  public readonly hydrogenAtom: HydrogenAtom;
+
+  // The spectrometer data that was captured for this snapshot.
   public readonly dataPoints: SpectrometerDataPoint[];
 
-  public constructor( snapshotNumber: number, modelNameProperty: TReadOnlyProperty<string>, dataPoints: SpectrometerDataPoint[] ) {
+  public constructor( snapshotNumber: number, hydrogenAtom: HydrogenAtom, dataPoints: SpectrometerDataPoint[] ) {
     super( {
       phetioState: false
     } );
     this.snapshotNumber = snapshotNumber;
-    this.modelNameProperty = modelNameProperty;
+    this.hydrogenAtom = hydrogenAtom;
     this.dataPoints = dataPoints;
   }
 }
