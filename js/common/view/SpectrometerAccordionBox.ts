@@ -11,9 +11,8 @@ import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignGroup, HBox, Text } from '../../../../scenery/js/imports.js';
+import { HBox, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
-import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Spectrometer from '../model/Spectrometer.js';
@@ -24,7 +23,10 @@ import SnapshotButton from './SnapshotButton.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
 import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+
+// Uniform size of all push buttons that appear in the toolbar.
+const PUSH_BUTTON_SIZE = new Dimension2( 45, 32 );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -57,16 +59,23 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       maxWidth: 400
     } );
 
-    const snapshotButton = new SnapshotButton( spectrometer, options.tandem.createTandem( 'snapshotButton' ) );
+    const snapshotButton = new SnapshotButton( spectrometer, {
+      size: PUSH_BUTTON_SIZE,
+      tandem: options.tandem.createTandem( 'snapshotButton' )
+    } );
 
+    //TODO Should snapshotsDialog be here or at the ScreenView level?
     const snapshotsDialog = new SnapshotsDialog( spectrometer.snapshots, {
       tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
 
-    const viewSnapshotsButton = new ViewSnapshotsButton( snapshotsDialog, spectrometer,
-      options.tandem.createTandem( 'viewSnapshotsButton' ) );
+    const viewSnapshotsButton = new ViewSnapshotsButton( snapshotsDialog, spectrometer, {
+      size: PUSH_BUTTON_SIZE,
+      tandem: options.tandem.createTandem( 'viewSnapshotsButton' )
+    } );
 
     const eraseButton = new EraserButton( {
+      size: PUSH_BUTTON_SIZE,
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       xMargin: 6,
       yMargin: 6,
@@ -76,7 +85,12 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'eraseButton' )
     } );
 
-    const buttonGroup = new HButtonGroup( [ snapshotButton, viewSnapshotsButton, eraseButton ], expandedProperty );
+    const buttonGroup = new HBox( {
+      children: [ snapshotButton, viewSnapshotsButton, eraseButton ],
+      spacing: 10,
+      maxHeight: 25, // Set empirically, so the button group is not taller than the title bar area.
+      visibleProperty: expandedProperty // Buttons are visible when the accordion box is expanded.
+    } );
 
     options.titleNode = new HBox( {
       children: [ titleText, buttonGroup ]
@@ -92,31 +106,6 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     this.expandedProperty.link( expanded => spectrometer.setRecordingEnabled( expanded ) );
 
     this.addLinkedElement( spectrometer );
-  }
-}
-
-/**
- * HButtonGroup creates a row of buttons that all have the same size. While it's tempting to think that this is
- * general enough to move to common code, it's not.
- */
-class HButtonGroup extends HBox {
-  public constructor( buttons: ButtonNode[], expandedProperty: TReadOnlyProperty<boolean> ) {
-
-    // Make buttons have uniform size.
-    const alignGroup = new AlignGroup();
-    const uniformButtons = buttons.map( button => alignGroup.createBox( button, {
-      align: 'stretch',
-      visibleProperty: button.visibleProperty // for PhET-iO
-    } ) );
-
-    super( {
-      spacing: 10,
-      maxHeight: 25, // Set empirically, so the button group is not taller than the title bar area.
-      children: uniformButtons,
-
-      // Buttons are visible when the accordion box is expanded.
-      visibleProperty: expandedProperty
-    } );
   }
 }
 
