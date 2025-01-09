@@ -13,7 +13,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignGroup, HBox, HBoxOptions, PressListener, Text } from '../../../../scenery/js/imports.js';
+import { AlignGroup, HBox, HBoxOptions, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -46,15 +46,11 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
         // AccordionBoxOptions
         isDisposable: false,
-        titleBarExpandCollapse: false, // because we're putting buttons in the title bar
         overrideTitleNodePickable: false,
         expandedProperty: expandedProperty,
         fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
         stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty
       }, providedOptions );
-
-    // This implementation puts buttons in the title bar, and requires titleBarExpandCollapse: false.
-    assert && assert( options.titleBarExpandCollapse !== undefined && !options.titleBarExpandCollapse );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.spectrometerPhotonsEmittedPerNanometerStringProperty, {
       cursor: 'pointer',
@@ -110,15 +106,6 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     // Record only when the accordion box is expanded.
     this.expandedProperty.link( expanded => spectrometer.setRecordingEnabled( expanded ) );
-
-    // Since we are putting buttons in the title bar, we created this accordion box with titleBarExpandCollapse: false.
-    // So add the ability to press the title text to toggle expand/collapse.
-    titleText.addInputListener( new PressListener( {
-      press: () => {
-        this.expandedProperty.value = !this.expandedProperty.value;
-      },
-      tandem: options.tandem.createTandem( 'titleTextPressListener' )
-    } ) );
 
     this.addLinkedElement( spectrometer );
   }
