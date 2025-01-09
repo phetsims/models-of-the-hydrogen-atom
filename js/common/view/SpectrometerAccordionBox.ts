@@ -102,19 +102,17 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 class HButtonGroup extends HBox {
   public constructor( buttons: ButtonNode[], expandedProperty: TReadOnlyProperty<boolean> ) {
 
+    // Make buttons have uniform size.
     const alignGroup = new AlignGroup();
+    const uniformButtons = buttons.map( button => alignGroup.createBox( button, {
+      align: 'stretch',
+      visibleProperty: button.visibleProperty // for PhET-iO
+    } ) );
 
     super( {
       spacing: 10,
-
-      // Set empirically, so the button group is not taller than the title bar area.
-      maxHeight: 25,
-
-      // Make buttons have uniform size.
-      children: buttons.map( button => alignGroup.createBox( button, {
-        align: 'stretch',
-        visibleProperty: button.visibleProperty // for PhET-iO
-      } ) ),
+      maxHeight: 25, // Set empirically, so the button group is not taller than the title bar area.
+      children: uniformButtons,
 
       // Buttons are visible when the accordion box is expanded.
       visibleProperty: expandedProperty
