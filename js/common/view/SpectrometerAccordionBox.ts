@@ -25,8 +25,6 @@ import SnapshotsDialog from './SnapshotsDialog.js';
 import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -59,17 +57,14 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       maxWidth: 400
     } );
 
-    // Put all buttons under buttonGroup tandem.
-    const buttonGroupTandem = options.tandem.createTandem( 'buttonGroup' );
-
-    const snapshotButton = new SnapshotButton( spectrometer, buttonGroupTandem.createTandem( 'snapshotButton' ) );
+    const snapshotButton = new SnapshotButton( spectrometer, options.tandem.createTandem( 'snapshotButton' ) );
 
     const snapshotsDialog = new SnapshotsDialog( spectrometer.snapshots, {
       tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
 
     const viewSnapshotsButton = new ViewSnapshotsButton( snapshotsDialog, spectrometer,
-      buttonGroupTandem.createTandem( 'viewSnapshotsButton' ) );
+      options.tandem.createTandem( 'viewSnapshotsButton' ) );
 
     const eraseButton = new EraserButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
@@ -78,10 +73,10 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       enabledProperty: spectrometer.hasDataPointsProperty,
       listener: () => spectrometer.clear(),
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.eraseSnapshotsButton.accessibleNameStringProperty,
-      tandem: buttonGroupTandem.createTandem( 'eraseButton' )
+      tandem: options.tandem.createTandem( 'eraseButton' )
     } );
 
-    const buttonGroup = new HButtonGroup( [ snapshotButton, viewSnapshotsButton, eraseButton ], expandedProperty, buttonGroupTandem );
+    const buttonGroup = new HButtonGroup( [ snapshotButton, viewSnapshotsButton, eraseButton ], expandedProperty );
 
     options.titleNode = new HBox( {
       children: [ titleText, buttonGroup ]
@@ -105,7 +100,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
  * general enough to move to common code, it's not.
  */
 class HButtonGroup extends HBox {
-  public constructor( buttons: ButtonNode[], expandedProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
+  public constructor( buttons: ButtonNode[], expandedProperty: TReadOnlyProperty<boolean> ) {
 
     const alignGroup = new AlignGroup();
 
@@ -122,8 +117,7 @@ class HButtonGroup extends HBox {
       } ) ),
 
       // Buttons are visible when the accordion box is expanded.
-      visibleProperty: new GatedVisibleProperty( expandedProperty, tandem ),
-      tandem: tandem
+      visibleProperty: expandedProperty
     } );
   }
 }
