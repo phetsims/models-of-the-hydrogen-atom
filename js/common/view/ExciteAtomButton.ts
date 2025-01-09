@@ -42,8 +42,8 @@ export default class ExciteAtomButton extends RectangularPushButton {
     const options = optionize<ExciteAtomButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
 
       // RectangularPushButtonOptions
-      isDisposable: false,
       listener: () => excite(),
+      isDisposable: false,
       baseColor: MOTHAColors.exciteAtomButtonColorProperty,
       visibleProperty: gatedVisibleProperty,
       content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {

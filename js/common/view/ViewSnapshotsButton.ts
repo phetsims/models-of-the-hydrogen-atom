@@ -28,12 +28,12 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
   public constructor( snapshotsDialog: Dialog, spectrometer: Spectrometer, providedOptions: ViewSnapshotsButtonOptions ) {
 
     const options = optionize<ViewSnapshotsButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
+      listener: () => snapshotsDialog.show(),
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( eyeSolidShape, {
         fill: 'black',
         scale: 0.05
       } ),
-      listener: () => snapshotsDialog.show(),
       // Enabled when we have snapshots
       enabledProperty: new DerivedProperty( [ spectrometer.snapshots.lengthProperty ],
         numberOfSnapshots => ( numberOfSnapshots > 0 ), {

@@ -29,12 +29,12 @@ export default class SnapshotButton extends RectangularPushButton {
   public constructor( spectrometer: Spectrometer, providedOptions: SnapshotButtonOptions ) {
 
     const options = optionize<SnapshotButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
+      listener: () => spectrometer.takeSnapshot(),
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       content: new Path( cameraSolidShape, {
         fill: 'black',
         scale: 0.05
       } ),
-      listener: () => spectrometer.takeSnapshot(),
       enabledProperty: new DerivedProperty( [ spectrometer.snapshots.lengthProperty ],
         numberOfSnapshots => numberOfSnapshots < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, {
           tandem: providedOptions.tandem.createTandem( 'enabledProperty' ),

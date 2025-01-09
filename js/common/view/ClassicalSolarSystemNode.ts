@@ -51,9 +51,9 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
     const resetButton = new ResetButton( {
+      listener: () => hydrogenAtom.reset(),
       radius: 16,
       rightBottom: zoomedInBoxBounds.rightBottom.minusXY( 10, 10 ),
-      listener: () => hydrogenAtom.reset(),
       enabledProperty: hydrogenAtom.isDestroyedProperty,
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.resetAtomButton.accessibleNameStringProperty,
       tandem: providedOptions.tandem.createTandem( 'resetButton' )
