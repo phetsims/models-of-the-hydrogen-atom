@@ -98,9 +98,9 @@ export default class Spectrometer extends PhetioObject {
   }
 
   /**
-   * Creates a snapshot of the current spectrometer data.
+   * Takes a snapshot of the current spectrometer data.
    */
-  public createSnapshot(): void {
+  public takeSnapshot(): void {
 
     const snapshot = new Snapshot( this.nextSnapshotNumber++, this.hydrogenAtomProperty.value.displayNameProperty, this.dataPointsProperty.value );
     this.snapshots.push( snapshot );

@@ -34,9 +34,7 @@ export default class SnapshotButton extends RectangularPushButton {
         fill: 'black',
         scale: 0.05
       } ),
-      listener: () => {
-        spectrometer.createSnapshot();
-      },
+      listener: () => spectrometer.takeSnapshot(),
       enabledProperty: new DerivedProperty( [ spectrometer.snapshots.lengthProperty ],
         numberOfSnapshots => numberOfSnapshots < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS, {
           tandem: providedOptions.tandem.createTandem( 'enabledProperty' ),
