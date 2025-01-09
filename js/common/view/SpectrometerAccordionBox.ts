@@ -7,7 +7,6 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
@@ -15,7 +14,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignGroup, HBox, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Spectrometer from '../model/Spectrometer.js';
@@ -28,6 +26,7 @@ import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -123,11 +122,7 @@ class HButtonGroup extends HBox {
       } ) ),
 
       // Buttons are visible when the accordion box is expanded.
-      visibleProperty: new DerivedProperty( [ expandedProperty ], expanded => expanded, {
-        tandem: tandem.createTandem( 'visibleProperty' ),
-        phetioFeatured: true,
-        phetioValueType: BooleanIO
-      } ),
+      visibleProperty: new GatedVisibleProperty( expandedProperty, tandem ),
       tandem: tandem
     } );
   }
