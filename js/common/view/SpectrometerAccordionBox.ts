@@ -8,12 +8,11 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignGroup, HBox, HBoxOptions, Text } from '../../../../scenery/js/imports.js';
+import { AlignGroup, HBox, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -27,6 +26,8 @@ import SnapshotButton from './SnapshotButton.js';
 import SnapshotsDialog from './SnapshotsDialog.js';
 import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -81,18 +82,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: buttonGroupTandem.createTandem( 'eraseButton' )
     } );
 
-    const buttonGroup = new HButtonGroup( [ snapshotButton, viewSnapshotsButton, eraseButton ], {
-      maxHeight: 25,
-      spacing: 10,
-
-      // Buttons are visible when the accordion box is expanded.
-      visibleProperty: new DerivedProperty( [ expandedProperty ], expanded => expanded, {
-        tandem: buttonGroupTandem.createTandem( 'visibleProperty' ),
-        phetioFeatured: true,
-        phetioValueType: BooleanIO
-      } ),
-      tandem: buttonGroupTandem
-    } );
+    const buttonGroup = new HButtonGroup( [ snapshotButton, viewSnapshotsButton, eraseButton ], expandedProperty, buttonGroupTandem );
 
     options.titleNode = new HBox( {
       children: [ titleText, buttonGroup ]
@@ -116,16 +106,30 @@ export default class SpectrometerAccordionBox extends AccordionBox {
  * general enough to move to common code, it's not.
  */
 class HButtonGroup extends HBox {
-  public constructor( buttons: ButtonNode[], providedOptions: StrictOmit<HBoxOptions, 'children'> & PickRequired<HBoxOptions, 'tandem'> ) {
+  public constructor( buttons: ButtonNode[], expandedProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
 
     const alignGroup = new AlignGroup();
 
-    super( combineOptions<HBoxOptions>( {
+    super( {
+      spacing: 10,
+
+      // Set empirically, so the button group is not taller than the title bar area.
+      maxHeight: 25,
+
+      // Make buttons have uniform size.
       children: buttons.map( button => alignGroup.createBox( button, {
         align: 'stretch',
         visibleProperty: button.visibleProperty // for PhET-iO
-      } ) )
-    }, providedOptions ) );
+      } ) ),
+
+      // Buttons are visible when the accordion box is expanded.
+      visibleProperty: new DerivedProperty( [ expandedProperty ], expanded => expanded, {
+        tandem: tandem.createTandem( 'visibleProperty' ),
+        phetioFeatured: true,
+        phetioValueType: BooleanIO
+      } ),
+      tandem: tandem
+    } );
   }
 }
 
