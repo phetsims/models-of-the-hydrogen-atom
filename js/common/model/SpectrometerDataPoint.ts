@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * SpectrometerDataPoint is a data point on the spectrometer. It indicates the number of photons that have been

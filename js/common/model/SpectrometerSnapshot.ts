@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * SpectrometerSnapshot is a snapshot of spectrometer data for a specific model of the hydrogen atom.
