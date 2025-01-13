@@ -8,51 +8,72 @@
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import TrashButton from '../../../../scenery-phet/js/buttons/TrashButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, TColor, Text } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SpectrometerSnapshot from '../model/SpectrometerSnapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SpectrometerChart from './SpectrometerChart.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 
 const INSIDE_X_MARGIN = 6;
 const INSIDE_Y_MARGIN = 4;
 
-type SelfOptions = {
-  backgroundFill?: TColor;
-  backgroundStroke?: TColor;
-};
-
-type SnapshotNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'>;
-
 export default class SpectrometerSnapshotNode extends Node {
 
-  public constructor( snapshot: SpectrometerSnapshot, providedOptions?: SnapshotNodeOptions ) {
+  public readonly snapshotProperty: Property<SpectrometerSnapshot | null>;
 
-    const options = optionize<SnapshotNodeOptions, SelfOptions, NodeOptions>()( {
+  public constructor( tandem: Tandem ) {
 
-      // SelfOptions
-      backgroundFill: MOTHAColors.spectrometerFillProperty,
-      backgroundStroke: MOTHAColors.spectrometerStrokeProperty
+    const snapshotProperty = new Property<SpectrometerSnapshot | null>( null, {
+      phetioValueType: NullableIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),
+      phetioReadOnly: true,
+      phetioFeatured: true,
+      tandem: tandem.createTandem( 'snapshotProperty' ),
+      phetioDocumentation: 'The snapshot displayed by this Node, null if there is no snapshot.'
+    } );
 
-      //TODO Needs to be mutable and isDisposable:false for PhET-iO. Delete code related to dispose.
-    }, providedOptions );
+    const snapshotNumberProperty = new DerivedProperty( [ snapshotProperty ], snapshot => {
+      if ( snapshot ) {
+        return snapshot.snapshotNumber;
+      }
+      else {
+        return -1;
+      }
+    } );
 
-    const chart = new SpectrometerChart( new Property( snapshot.dataPoints ), {
+    const modelNameProperty = new DerivedProperty( [ snapshotProperty ], snapshot => {
+      if ( snapshot ) {
+        return snapshot.hydrogenAtom.displayNameProperty.value;
+      }
+      else {
+        return null;
+      }
+    } );
+
+    const dataPointsProperty = new DerivedProperty( [ snapshotProperty ], snapshot => {
+      if ( snapshot ) {
+        return snapshot.dataPoints;
+      }
+      else {
+        return [];
+      }
+    } );
+
+    const chart = new SpectrometerChart( dataPointsProperty, {
       chartHeight: 150, // set empirically with ?debugSpectrometer
-      backgroundFill: options.backgroundFill,
-      backgroundStroke: options.backgroundStroke
+      backgroundFill: MOTHAColors.snapshotFillProperty,
+      backgroundStroke: MOTHAColors.snapshotStrokeProperty
     } );
 
     const titleStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.snapshotNumberNameStringProperty, {
-      number: snapshot.snapshotNumber,
-      name: snapshot.hydrogenAtom.displayNameProperty
+      number: snapshotNumberProperty,
+      name: modelNameProperty
     } );
     const titleText = new Text( titleStringProperty, {
       font: new PhetFont( 14 ),
@@ -65,32 +86,36 @@ export default class SpectrometerSnapshotNode extends Node {
     } );
 
     const trashButtonAccessibleNameProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
-      number: snapshot.snapshotNumber,
-      name: snapshot.hydrogenAtom.displayNameProperty
+      number: snapshotNumberProperty,
+      name: modelNameProperty
     } );
     const trashButton = new TrashButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
-      listener: () => snapshot.dispose(),
+      listener: () => {
+        if ( snapshotProperty.value ) {
+          snapshotProperty.value.dispose();
+        }
+      },
       iconOptions: {
         scale: 0.04
       },
       left: chart.right + 5,
       bottom: chart.bottom,
       accessibleName: trashButtonAccessibleNameProperty,
-      tandem: Tandem.OPT_OUT //TODO instrument trashButton
+      tandem: tandem.createTandem( 'trashButton' )
     } );
 
-    options.children = [ chart, titleText, trashButton ];
-
-    super( options );
-
-    this.disposeEmitter.addListener( () => {
-      titleStringProperty.dispose();
-      trashButtonAccessibleNameProperty.dispose();
-      trashButton.dispose();
+    super( {
+      isDisposable: false,
+      children: [ chart, titleText, trashButton ],
+      scale: 0.9, //TODO can this be 1 ?
+      visibleProperty: new DerivedProperty( [ snapshotProperty ], snapshot => snapshot !== null ),
+      tandem: tandem,
+      phetioDocumentation: 'Displays a spectrometer snapshot. Do not confuse the tandem name of this element ' +
+                           'with the snapshot number that is displayed in the user interface.'
     } );
 
-    snapshot.disposeEmitter.addListener( () => this.dispose() );
+    this.snapshotProperty = snapshotProperty;
   }
 }
 
