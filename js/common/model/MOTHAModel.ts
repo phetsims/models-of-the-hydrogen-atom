@@ -7,7 +7,6 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Disposable from '../../../../axon/js/Disposable.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
@@ -26,6 +25,7 @@ import Light from './Light.js';
 import Photon from './Photon.js';
 import Spectrometer from './Spectrometer.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import PhotonSystem from './PhotonSystem.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 
@@ -63,8 +63,8 @@ export default class MOTHAModel implements TModel {
 
   public readonly spectrometer: Spectrometer;
 
-  // photons inside zoomedInBox
-  public readonly photons: ObservableArray<Photon>;
+  // the system of photons inside zoomedInBox
+  public readonly photonSystem: PhotonSystem;
 
   // is the simulation playing?
   public readonly isPlayingProperty: Property<boolean>;
@@ -118,12 +118,11 @@ export default class MOTHAModel implements TModel {
     this.isQuantumModelProperty = new DerivedProperty( [ this.hydrogenAtomProperty ],
       hydrogenAtom => ( hydrogenAtom instanceof BohrModel ) );
 
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47 replace ObservableArray
-    this.photons = createObservableArray<Photon>();
+    this.photonSystem = new PhotonSystem( zoomedInBox, this.hydrogenAtomProperty, tandem.createTandem( 'photonSystem' ) );
 
     this.light = light;
 
-    this.light.photonCreatedEmitter.addListener( photon => this.addPhoton( photon ) );
+    this.light.photonCreatedEmitter.addListener( photon => this.photonSystem.addPhoton( photon ) );
 
     this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, {
       tandem: tandem.createTandem( 'spectrometer' )
@@ -148,11 +147,11 @@ export default class MOTHAModel implements TModel {
       }
     );
 
-    const photonEmittedListener = ( photon: Photon ) => this.addPhoton( photon );
-    const photonAbsorbedEmitter = ( photon: Photon ) => this.removePhoton( photon );
+    const photonEmittedListener = ( photon: Photon ) => this.photonSystem.addPhoton( photon );
+    const photonAbsorbedEmitter = ( photon: Photon ) => this.photonSystem.removePhoton( photon );
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
-      this.removeAllPhotons();
+      this.photonSystem.removeAllPhotons();
 
       if ( oldHydrogenAtom ) {
         oldHydrogenAtom.reset();
@@ -179,7 +178,7 @@ export default class MOTHAModel implements TModel {
     this.predictiveModelProperty.reset();
     this.light.reset();
     this.spectrometer.reset();
-    this.removeAllPhotons();
+    this.photonSystem.reset();
     this.isPlayingProperty.reset();
     this.timeSpeedProperty.reset();
   }
@@ -210,46 +209,7 @@ export default class MOTHAModel implements TModel {
     const dtScaled = dt * this.timeScaleProperty.value;
     this.light.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );
-    this.stepPhotons( dtScaled );
-  }
-
-  /**
-   * Advances the state of the photons.
-   * @param dt - the time step, in seconds
-   */
-  private stepPhotons( dt: number ): void {
-
-    // This may change this.photons, so operate on a copy of the array.
-    this.photons.getArrayCopy().forEach( photon => {
-
-      // Move the photon before processing it, because this.hydrogenAtomProperty.value.step has been called.
-      // If we move the photon after processing it, then the photon will be processed when it is 1 time step
-      // behind the state of the atom.
-      photon.move( dt );
-
-      // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
-      if ( !this.zoomedInBox.containsPhoton( photon ) ) {
-        this.removePhoton( photon );
-        photon.dispose();
-      }
-      else {
-        this.hydrogenAtomProperty.value.processPhoton( photon );
-      }
-    } );
-  }
-
-  private addPhoton( photon: Photon ): void {
-    assert && assert( !this.photons.includes( photon ), 'Attempted to add photon more than once.' );
-    this.photons.add( photon );
-  }
-
-  private removePhoton( photon: Photon ): void {
-    assert && assert( this.photons.includes( photon ), 'Attempted to remove a photon that does not exist.' );
-    this.photons.remove( photon );
-  }
-
-  private removeAllPhotons(): void {
-    this.photons.clear();
+    this.photonSystem.step( dtScaled );
   }
 }
 

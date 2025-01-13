@@ -50,7 +50,7 @@ export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
       ];
     };
 
-    super( model.zoomedInBox, model.photons, createHydrogenAtomNodes, model.isExperimentProperty, options );
+    super( model.zoomedInBox, model.photonSystem, createHydrogenAtomNodes, model.isExperimentProperty, options );
   }
 }
 

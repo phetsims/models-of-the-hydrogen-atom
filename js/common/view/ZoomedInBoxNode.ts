@@ -23,8 +23,7 @@ import HydrogenAtomNode from './HydrogenAtomNode.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import PhotonNode from './PhotonNode.js';
-import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
-import Photon from '../model/Photon.js';
+import PhotonSystem from '../model/PhotonSystem.js';
 
 const VIEW_SIZE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE;
 
@@ -37,7 +36,7 @@ export default class ZoomedInBoxNode extends Node {
   private readonly hydrogenAtomNodes: HydrogenAtomNode[];
 
   protected constructor( zoomedInBox: ZoomedInBox,
-                         photons: ObservableArray<Photon>,
+                         photonSystem: PhotonSystem,
                          createHydrogenAtomNodes: ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => HydrogenAtomNode[],
                          isExperimentProperty: TReadOnlyProperty<boolean>,
                          providedOptions: ZoomedInBoxNodeOptions ) {
@@ -90,14 +89,14 @@ export default class ZoomedInBoxNode extends Node {
     const photonNodes: PhotonNode[] = [];
 
     // Add the PhotonNode for a Photon.
-    photons.addItemAddedListener( photon => {
+    photonSystem.addPhotonAddedListener( photon => {
       const photonNode = new PhotonNode( photon, modelViewTransform );
       photonNodes.push( photonNode );
       photonsLayer.addChild( photonNode );
     } );
 
     // Remove the PhotonNode for a Photon.
-    photons.addItemRemovedListener( photon => {
+    photonSystem.addPhotonRemovedListener( photon => {
       const photonNode = _.find( photonNodes, photonNode => ( photonNode.photon === photon ) )!;
       assert && assert( photonNode );
       photonNodes.splice( photonNodes.indexOf( photonNode ), 1 );
