@@ -32,16 +32,22 @@ type SpectrometerOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tand
 
 export default class Spectrometer extends PhetioObject {
 
+  // The hydrogen atom model that is currently selected.
   private hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
-  public readonly recordingEnabledProperty: Property<boolean>;
+  // Whether the spectrometer is recording data, false when the Spectrometer accordion box is collapsed.
+  public readonly enabledProperty: Property<boolean>;
 
+  // Data displayed by the spectrometer.
   public readonly dataPointsProperty: Property<SpectrometerDataPoint[]>;
 
+  // Whether the spectrometer has any data to display.
   public readonly hasDataPointsProperty: TReadOnlyProperty<boolean>;
 
+  // Snapshots of spectrometer data.
   public readonly snapshots: ObservableArray<SpectrometerSnapshot>;
 
+  // Snapshots are numbered using consecutive integers, starting from 1.
   private readonly nextSnapshotNumberProperty: Property<number>;
 
   public constructor( hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: SpectrometerOptions ) {
@@ -57,10 +63,10 @@ export default class Spectrometer extends PhetioObject {
 
     this.hydrogenAtomProperty = hydrogenAtomProperty;
 
-    // Controlled by SpectrometerAccordionBox, so that we are not recording unless expanded.
-    this.recordingEnabledProperty = new BooleanProperty( false, {
+    this.enabledProperty = new BooleanProperty( false, {
       phetioReadOnly: true,
-      tandem: options.tandem.createTandem( 'recordingEnabledProperty' )
+      tandem: options.tandem.createTandem( 'enabledProperty' ),
+      phetioDocumentation: 'Whether the spectrometer is recording data. Recording is enabled when the Spectrometer accordion box is expanded.'
     } );
 
     this.dataPointsProperty = new Property<SpectrometerDataPoint[]>( [], {
@@ -73,13 +79,16 @@ export default class Spectrometer extends PhetioObject {
 
     this.hasDataPointsProperty = new DerivedProperty( [ this.dataPointsProperty ], dataPoints => dataPoints.length > 0, {
       phetioValueType: BooleanIO,
-      tandem: options.tandem.createTandem( 'hasDataPointsProperty' )
+      tandem: options.tandem.createTandem( 'hasDataPointsProperty' ),
+      phetioDocumentation: 'Whether the spectrometer has data to display.'
     } );
 
     this.nextSnapshotNumberProperty = new NumberProperty( 1, {
       numberType: 'Integer',
       phetioReadOnly: true,
-      tandem: options.tandem.createTandem( 'nextSnapshotNumberProperty' )
+      tandem: options.tandem.createTandem( 'nextSnapshotNumberProperty' ),
+      phetioDocumentation: 'Snapshots are numbered using consecutive integers, starting from 1. ' +
+                           'This is the number that will be assigned to the next snapshot that is taken.'
     } );
 
     this.snapshots = createObservableArray<SpectrometerSnapshot>( {
@@ -88,8 +97,9 @@ export default class Spectrometer extends PhetioObject {
       tandem: options.tandem.createTandem( 'snapshots' )
     } );
 
+    // Add a data point when a photon is emitted.
     const photonEmittedListener = ( photon: Photon ) => {
-      if ( this.recordingEnabledProperty.value ) {
+      if ( this.enabledProperty.value ) {
         this.recordEmission( photon.wavelength );
       }
     };
@@ -112,6 +122,18 @@ export default class Spectrometer extends PhetioObject {
     } );
   }
 
+  public reset(): void {
+    this.clear();
+    this.snapshots.forEach( snapshot => snapshot.dispose() );
+    this.snapshots.clear();
+    this.nextSnapshotNumberProperty.reset();
+    // Do not reset enabledProperty. It is controlled by SpectrometerAccordionBox, so that we're recording data only when expanded.
+  }
+
+  public clear(): void {
+    this.dataPointsProperty.value = [];
+  }
+
   /**
    * Takes a snapshot of the current spectrometer data.
    */
@@ -129,7 +151,7 @@ export default class Spectrometer extends PhetioObject {
    * Records an emission of the specified wavelength.
    */
   private recordEmission( wavelength: number ): void {
-    assert && assert( this.recordingEnabledProperty.value );
+    assert && assert( this.enabledProperty.value );
 
     const dataPoints = this.dataPointsProperty.value.slice();
 
@@ -146,18 +168,6 @@ export default class Spectrometer extends PhetioObject {
     // Sort by ascending wavelength for nice presentation in Studio.
     // This also creates a new array, so that dataPointsProperty notifies listeners.
     this.dataPointsProperty.value = _.sortBy( dataPoints, dataPoint => dataPoint.wavelength );
-  }
-
-  public reset(): void {
-    this.clear();
-    this.snapshots.forEach( snapshot => snapshot.dispose() );
-    this.snapshots.clear();
-    this.nextSnapshotNumberProperty.reset();
-    // Do not reset recordingEnabledProperty. It is set by SpectrometerAccordionBox.
-  }
-
-  public clear(): void {
-    this.dataPointsProperty.value = [];
   }
 }
 
