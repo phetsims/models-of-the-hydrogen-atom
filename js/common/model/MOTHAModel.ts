@@ -123,7 +123,7 @@ export default class MOTHAModel implements TModel {
 
     this.light = light;
 
-    this.light.photonCreatedEmitter.addListener( photon => this.photons.add( photon ) );
+    this.light.photonCreatedEmitter.addListener( photon => this.addPhoton( photon ) );
 
     this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, {
       tandem: tandem.createTandem( 'spectrometer' )
@@ -148,11 +148,11 @@ export default class MOTHAModel implements TModel {
       }
     );
 
-    const photonEmittedListener = ( photon: Photon ) => this.photons.add( photon );
-    const photonAbsorbedEmitter = ( photon: Photon ) => this.photons.remove( photon );
+    const photonEmittedListener = ( photon: Photon ) => this.addPhoton( photon );
+    const photonAbsorbedEmitter = ( photon: Photon ) => this.removePhoton( photon );
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
-      this.photons.clear();
+      this.removeAllPhotons();
 
       if ( oldHydrogenAtom ) {
         oldHydrogenAtom.reset();
@@ -179,9 +179,7 @@ export default class MOTHAModel implements TModel {
     this.predictiveModelProperty.reset();
     this.light.reset();
     this.spectrometer.reset();
-    while ( this.photons.length > 0 ) {
-      this.photons.pop()!.dispose();
-    }
+    this.removeAllPhotons();
     this.isPlayingProperty.reset();
     this.timeSpeedProperty.reset();
   }
@@ -231,13 +229,27 @@ export default class MOTHAModel implements TModel {
 
       // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
       if ( !this.zoomedInBox.containsPhoton( photon ) ) {
-        this.photons.remove( photon );
+        this.removePhoton( photon );
         photon.dispose();
       }
       else {
         this.hydrogenAtomProperty.value.processPhoton( photon );
       }
     } );
+  }
+
+  private addPhoton( photon: Photon ): void {
+    assert && assert( !this.photons.includes( photon ), 'Attempted to add photon more than once.' );
+    this.photons.add( photon );
+  }
+
+  private removePhoton( photon: Photon ): void {
+    assert && assert( this.photons.includes( photon ), 'Attempted to remove a photon that does not exist.' );
+    this.photons.remove( photon );
+  }
+
+  private removeAllPhotons(): void {
+    this.photons.clear();
   }
 }
 
