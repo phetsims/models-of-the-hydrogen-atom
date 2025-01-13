@@ -65,6 +65,7 @@ export default class Spectrometer extends PhetioObject {
 
     this.enabledProperty = new BooleanProperty( false, {
       phetioReadOnly: true,
+      phetioFeatured: true,
       tandem: options.tandem.createTandem( 'enabledProperty' ),
       phetioDocumentation: 'Whether the spectrometer is recording data. Recording is enabled when the Spectrometer accordion box is expanded.'
     } );
