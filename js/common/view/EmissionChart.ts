@@ -28,6 +28,7 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 
 const TICK_LINE_LENGTH = 3;
 const TICK_FONT = new PhetFont( 11 );
+const X_AXIS_LABEL_FONT = new PhetFont( 14 );
 
 type SelfOptions = {
 
@@ -146,7 +147,7 @@ export default class EmissionChart extends Node {
     // x-axis label, visible only when there is no data, because tick marks would overlap.
     if ( options.hasAxisLabel ) {
       const xAxisLabel = new Text( xAxisStringProperty, {
-        font: new PhetFont( 14 ), //TODO
+        font: X_AXIS_LABEL_FONT,
         fill: MOTHAColors.invertibleTextFillProperty,
         centerX: xAxis.centerX,
         top: xAxis.bottom + 3,
