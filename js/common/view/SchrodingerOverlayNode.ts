@@ -34,10 +34,6 @@ export default class SchrodingerOverlayNode extends Node {
       color: MOTHAColors.xzAxesColorProperty,
       tandem: tandem.createTandem( 'xzAxesNode' )
     } );
-    xzAxesNode.localBoundsProperty.link( () => {
-      xzAxesNode.left = zoomedInBoxBounds.left + 15;
-      xzAxesNode.bottom = zoomedInBoxBounds.bottom - 10;
-    } );
 
     // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).
     // Pressing this button fires a photon that transitions the atom to a higher energy level.
@@ -75,7 +71,13 @@ export default class SchrodingerOverlayNode extends Node {
       phetioDocumentation: 'Overlay for user-interface elements in front of the Schrödinger atom'
     } );
 
-    // Keep the 'Excite Atom' button and electron state positioned in the lower-right corner of the zoomed-in box.
+    // xz-axes are in the left-bottom corner of the zoomed-in box.
+    const leftBottom = zoomedInBoxBounds.erodedXY( 15, 10 ).leftBottom;
+    xzAxesNode.localBoundsProperty.link( () => {
+      xzAxesNode.leftBottom = leftBottom;
+    } );
+
+    // Other elements are in the right-bottom corner of the zoomed-in box.
     const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
     vBox.localBoundsProperty.link( () => {
       vBox.rightBottom = electronStateTextRightBottom;
