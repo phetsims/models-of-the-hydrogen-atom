@@ -108,7 +108,6 @@ export default class SpectrometerSnapshotNode extends Node {
     super( {
       isDisposable: false,
       children: [ chart, titleText, trashButton ],
-      scale: 0.9, //TODO can this be 1 ?
       visibleProperty: new DerivedProperty( [ snapshotProperty ], snapshot => snapshot !== null ),
       tandem: tandem,
       phetioDocumentation: 'Displays a spectrometer snapshot. Do not confuse the tandem name of this element ' +
