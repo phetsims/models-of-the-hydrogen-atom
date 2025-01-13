@@ -31,14 +31,14 @@ export default class ClassicalSolarSystemOverlayNode extends Node {
       rightBottom: zoomedInBoxBounds.rightBottom.minusXY( 10, 10 ),
       enabledProperty: classicalSolarSystemModel.isDestroyedProperty,
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.resetAtomButton.accessibleNameStringProperty,
-      tandem: tandem.createTandem( 'resetButton' ),
-      phetioDocumentation: 'Overlay for user-interface elements in front of the Classical Solar System atom'
+      tandem: tandem.createTandem( 'resetButton' )
     } );
 
     super( {
       children: [ resetButton ],
       visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === classicalSolarSystemModel ),
-      tandem: tandem
+      tandem: tandem,
+      phetioDocumentation: 'Overlay for user-interface elements in front of the Classical Solar System atom'
     } );
   }
 }

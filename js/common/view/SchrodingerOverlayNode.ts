@@ -46,6 +46,7 @@ export default class SchrodingerOverlayNode extends Node {
         tandem: tandem.createTandem( 'exciteAtomButton' )
       } );
 
+    // (n,l,m) = ...
     const electronStateText = new SchrodingerStateText( schrodingerModel.nlmProperty, {
       tandem: tandem.createTandem( 'electronStateText' )
     } );
@@ -55,15 +56,16 @@ export default class SchrodingerOverlayNode extends Node {
     const quantumNumbersInfoButton = new QuantumNumbersInfoButton( quantumNumbersInfoDialog,
       tandem.createTandem( 'quantumNumbersInfoButton' ) );
 
-    const stateBox = new HBox( {
-      children: [ electronStateText, quantumNumbersInfoButton ],
-      spacing: 8
-    } );
-
     const vBox = new VBox( {
       align: 'right',
       spacing: 15,
-      children: [ exciteAtomButton, stateBox ]
+      children: [
+        exciteAtomButton,
+        new HBox( {
+          children: [ electronStateText, quantumNumbersInfoButton ],
+          spacing: 8
+        } )
+      ]
     } );
 
     super( {

@@ -25,7 +25,6 @@ export default class BohrNode extends HydrogenAtomNode {
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    // Electron orbits
     const orbitsNode = new OrbitsNode( bohrModel.position, modelViewTransform );
 
     const protonNode = new ProtonNode( bohrModel.proton, modelViewTransform );

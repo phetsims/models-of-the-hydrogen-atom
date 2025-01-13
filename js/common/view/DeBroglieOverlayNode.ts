@@ -30,6 +30,7 @@ export default class DeBroglieOverlayNode extends Node {
       tandem: tandem.createTandem( 'deBroglieRepresentationComboBox' )
     } );
 
+    // n = ...
     const electronStateText = new ElectronStateText( deBroglieModel.electron.nProperty, {
       tandem: tandem.createTandem( 'electronStateText' )
     } );
