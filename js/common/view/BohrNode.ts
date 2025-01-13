@@ -14,44 +14,26 @@ import BohrModel from '../model/BohrModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import ElectronNode from './ElectronNode.js';
-import ElectronStateText from './ElectronStateText.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import OrbitsNode from './OrbitsNode.js';
 import ProtonNode from './ProtonNode.js';
 import MOTHAColors from '../MOTHAColors.js';
-import ZoomedInBox from '../model/ZoomedInBox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class BohrNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: BohrModel,
+  public constructor( bohrModel: BohrModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                      zoomedInBox: ZoomedInBox,
-                      modelViewTransform: ModelViewTransform2,
-                      tandem: Tandem ) {
-
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
+                      modelViewTransform: ModelViewTransform2 ) {
 
     // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform );
+    const orbitsNode = new OrbitsNode( bohrModel.position, modelViewTransform );
 
-    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
+    const protonNode = new ProtonNode( bohrModel.proton, modelViewTransform );
 
-    const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
+    const electronNode = new ElectronNode( bohrModel.electron, modelViewTransform );
 
-    const electronStateText = new ElectronStateText( hydrogenAtom.electron.nProperty, {
-      tandem: tandem.createTandem( 'electronStateText' )
-    } );
-
-    super( hydrogenAtom, hydrogenAtomProperty, {
-      children: [ orbitsNode, protonNode, electronNode, electronStateText ],
-      tandem: tandem
-    } );
-
-    // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
-    const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
-    electronStateText.localBoundsProperty.link( () => {
-      electronStateText.rightBottom = electronStateTextRightBottom;
+    super( bohrModel, hydrogenAtomProperty, {
+      children: [ orbitsNode, protonNode, electronNode ]
     } );
   }
 

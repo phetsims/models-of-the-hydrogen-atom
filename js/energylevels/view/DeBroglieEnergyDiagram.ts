@@ -21,8 +21,8 @@ type DeBroglieEnergyDiagramOptions = SelfOptions & BohrEnergyDiagramOptions;
 
 export default class DeBroglieEnergyDiagram extends BohrEnergyDiagram {
 
-  public constructor( hydrogenAtom: DeBroglieModel, providedOptions: DeBroglieEnergyDiagramOptions ) {
-    super( hydrogenAtom, providedOptions );
+  public constructor( deBroglieModel: DeBroglieModel, providedOptions: DeBroglieEnergyDiagramOptions ) {
+    super( deBroglieModel, providedOptions );
   }
 }
 

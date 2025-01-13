@@ -24,7 +24,7 @@ export default class SchrodingerFieldNode extends Node {
 
   private readonly brightnessCache: SchrodingerBrightness;
 
-  public constructor( hydrogenAtom: SchrodingerModel, zoomedInBox: ZoomedInBox, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( schrodingerModel: SchrodingerModel, zoomedInBox: ZoomedInBox, modelViewTransform: ModelViewTransform2 ) {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
@@ -37,12 +37,12 @@ export default class SchrodingerFieldNode extends Node {
     super( {
       isDisposable: false,
       children: [ bottomRightQuadrantNode ],
-      translation: modelViewTransform.modelToViewPosition( hydrogenAtom.position )
+      translation: modelViewTransform.modelToViewPosition( schrodingerModel.position )
     } );
 
-    this.brightnessCache = new SchrodingerBrightness( hydrogenAtom, zoomedInBoxBounds );
+    this.brightnessCache = new SchrodingerBrightness( schrodingerModel, zoomedInBoxBounds );
 
-    hydrogenAtom.nlmProperty.link( nlm => {
+    schrodingerModel.nlmProperty.link( nlm => {
       const brightness = this.brightnessCache.getBrightness( nlm );
       bottomRightQuadrantNode.setBrightness( brightness );
     } );

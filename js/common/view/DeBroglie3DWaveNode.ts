@@ -27,7 +27,7 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
   // Reusable vertices.
   private readonly waveVertices: Vector3[];
 
-  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2, pitchProperty: TReadOnlyProperty<number> ) {
+  public constructor( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2, pitchProperty: TReadOnlyProperty<number> ) {
 
     super( {
 
@@ -38,7 +38,7 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
       lineWidth: 2
     } );
 
-    this.hydrogenAtom = hydrogenAtom;
+    this.hydrogenAtom = deBroglieModel;
     this.modelViewTransform = modelViewTransform;
     this.pitchProperty = pitchProperty;
 
@@ -71,8 +71,8 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
 /**
  * Gets the vertices that approximate the standing wave.
  */
-function getWaveVertices( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2, vertices: Vector3[] ): Vector3[] {
-  const n = hydrogenAtom.electron.nProperty.value;
+function getWaveVertices( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2, vertices: Vector3[] ): Vector3[] {
+  const n = deBroglieModel.electron.nProperty.value;
   const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
 
   const numberOfVertices = vertices.length;
@@ -82,7 +82,7 @@ function getWaveVertices( hydrogenAtom: DeBroglieModel, modelViewTransform: Mode
     const angle = i * deltaAngle;
     const x = radius * Math.cos( angle );
     const y = radius * Math.sin( angle );
-    const z = MAX_WAVE_HEIGHT * hydrogenAtom.getAmplitude( n, angle );
+    const z = MAX_WAVE_HEIGHT * deBroglieModel.getAmplitude( n, angle );
     vertices[ i ].setXYZ( x, y, z );
   }
   return vertices;

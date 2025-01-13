@@ -11,75 +11,41 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import { Circle, Node } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
-import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import DeBroglie3DHeightNode from './DeBroglie3DHeightNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import DeBroglieRadialDistanceNode from './DeBroglieRadialDistanceNode.js';
-import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
-import ElectronStateText from './ElectronStateText.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
-import ZoomedInBox from '../model/ZoomedInBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class DeBroglieNode extends HydrogenAtomNode {
 
   private readonly deBroglie3DHeightNode: DeBroglie3DHeightNode;
-  private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
 
-  // For setting pdomOrder.
-  public readonly deBroglieRepresentationComboBox: Node;
-
-  public constructor( hydrogenAtom: DeBroglieModel,
+  public constructor( deBroglieModel: DeBroglieModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                      zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2,
-                      listboxParent: Node,
                       tandem: Tandem ) {
 
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
+    const protonNode = new ProtonNode( deBroglieModel.proton, modelViewTransform );
 
-    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
+    const deBroglieRadialDistanceNode = new DeBroglieRadialDistanceNode( deBroglieModel, modelViewTransform );
 
-    const deBroglieRadialDistanceNode = new DeBroglieRadialDistanceNode( hydrogenAtom, modelViewTransform );
-
-    const deBroglie3DHeightNode = new DeBroglie3DHeightNode( hydrogenAtom, modelViewTransform, {
+    const deBroglie3DHeightNode = new DeBroglie3DHeightNode( deBroglieModel, modelViewTransform, {
       tandem: tandem.createTandem( 'deBroglie3DHeightNode' )
     } );
 
-    const deBroglieBrightnessNode = new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform );
+    const deBroglieBrightnessNode = new DeBroglieBrightnessNode( deBroglieModel, modelViewTransform );
 
-    const viewNodes = new Node( {
-      children: [ deBroglieRadialDistanceNode, deBroglie3DHeightNode, deBroglieBrightnessNode ]
-      // No need to PhET-iO instrument this Node.
-    } );
-
-    const deBroglieRepresentationComboBox = new DeBroglieRepresentationComboBox( hydrogenAtom.deBroglieRepresentationProperty, listboxParent, {
-      leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
-      tandem: tandem.createTandem( 'deBroglieRepresentationComboBox' )
-    } );
-
-    const electronStateText = new ElectronStateText( hydrogenAtom.electron.nProperty, {
-      tandem: tandem.createTandem( 'electronStateText' )
-    } );
-
-    super( hydrogenAtom, hydrogenAtomProperty, {
-      children: [ protonNode, viewNodes, deBroglieRepresentationComboBox, electronStateText ],
+    super( deBroglieModel, hydrogenAtomProperty, {
+      children: [ protonNode, deBroglieRadialDistanceNode, deBroglie3DHeightNode, deBroglieBrightnessNode ],
       tandem: tandem
     } );
 
-    // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
-    const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
-    electronStateText.localBoundsProperty.link( () => {
-      electronStateText.rightBottom = electronStateTextRightBottom;
-    } );
-
     this.deBroglie3DHeightNode = deBroglie3DHeightNode;
-    this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
-    this.deBroglieRepresentationComboBox = deBroglieRepresentationComboBox;
   }
 
   public override step( dt: number ): void {

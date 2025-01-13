@@ -18,20 +18,20 @@ import HydrogenAtomNode from './HydrogenAtomNode.js';
 
 export default class PlumPuddingNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: PlumPuddingModel,
+  public constructor( plumPuddingModel: PlumPuddingModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2 ) {
 
     // Plum pudding image, centered at the atom's position
     const plumPuddingImage = new Image( plumPudding_png );
-    const atomHeight = Math.abs( 2 * modelViewTransform.modelToViewDeltaY( hydrogenAtom.radius ) );
+    const atomHeight = Math.abs( 2 * modelViewTransform.modelToViewDeltaY( plumPuddingModel.radius ) );
     const imageScale = atomHeight / plumPuddingImage.height;
     plumPuddingImage.scale( imageScale );
-    plumPuddingImage.center = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    plumPuddingImage.center = modelViewTransform.modelToViewPosition( plumPuddingModel.position );
 
-    const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
+    const electronNode = new ElectronNode( plumPuddingModel.electron, modelViewTransform );
 
-    super( hydrogenAtom, hydrogenAtomProperty, {
+    super( plumPuddingModel, hydrogenAtomProperty, {
       children: [ plumPuddingImage, electronNode ]
     } );
   }

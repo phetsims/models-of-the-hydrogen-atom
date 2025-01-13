@@ -20,17 +20,17 @@ import HydrogenAtomNode from './HydrogenAtomNode.js';
 
 export default class BilliardBallNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: BilliardBallModel,
+  public constructor( billiardBallModel: BilliardBallModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    const ballNode = new BallNode( 2 * modelViewTransform.modelToViewDeltaX( hydrogenAtom.radius ) );
+    const ballNode = new BallNode( 2 * modelViewTransform.modelToViewDeltaX( billiardBallModel.radius ) );
 
-    super( hydrogenAtom, hydrogenAtomProperty, {
+    super( billiardBallModel, hydrogenAtomProperty, {
       children: [ ballNode ]
     } );
 
-    this.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    this.translation = modelViewTransform.modelToViewPosition( billiardBallModel.position );
   }
 
   /**

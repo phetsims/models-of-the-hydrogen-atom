@@ -29,13 +29,13 @@ const POLYGON_SIZE = 3;
 
 export default class DeBroglieBrightnessNode extends Node {
 
-  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
     // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform );
+    const orbitsNode = new OrbitsNode( deBroglieModel.position, modelViewTransform );
 
     // Ring whose brightness represents the standing wave
-    const ringNode = new RingNode( hydrogenAtom, modelViewTransform );
+    const ringNode = new RingNode( deBroglieModel, modelViewTransform );
 
     super( {
       // NodeOptions
@@ -43,7 +43,7 @@ export default class DeBroglieBrightnessNode extends Node {
       children: [ orbitsNode, ringNode ],
 
       // visible when the view choice is 'brightness'
-      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+      visibleProperty: new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === 'brightness' ) )
     } );
   }
@@ -54,7 +54,7 @@ export default class DeBroglieBrightnessNode extends Node {
  */
 class RingNode extends Node {
 
-  private readonly hydrogenAtom: DeBroglieModel;
+  private readonly deBroglieModel: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly hydrogenAtomPosition: Vector2; // in view coordinates
   private readonly ringThickness: number; // radial width of the ring, in view coordinates
@@ -65,15 +65,15 @@ class RingNode extends Node {
   private readonly negativeAmplitudeColorProperty: TReadOnlyProperty<Color>;
   private readonly zeroAmplitudeColorProperty: TReadOnlyProperty<Color>;
 
-  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
     super( {
       isDisposable: false
     } );
 
-    this.hydrogenAtom = hydrogenAtom;
+    this.deBroglieModel = deBroglieModel;
     this.modelViewTransform = modelViewTransform;
-    this.hydrogenAtomPosition = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    this.hydrogenAtomPosition = modelViewTransform.modelToViewPosition( deBroglieModel.position );
     this.ringThickness = modelViewTransform.modelToViewDeltaX( DeBroglieModel.BRIGHTNESS_RING_THICKNESS );
 
     // Pre-allocate the maximum number of polygon (Path) nodes. Based on the radius of the electron's current orbit,
@@ -94,10 +94,10 @@ class RingNode extends Node {
     );
 
     // Optimized to update only when the view representation is set to 'Brightness'.
-    const updateEnabledProperty = new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+    const updateEnabledProperty = new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
       deBroglieRepresentation => deBroglieRepresentation === 'brightness' );
 
-    Multilink.multilink( [ this.hydrogenAtom.electron.nProperty, updateEnabledProperty ],
+    Multilink.multilink( [ this.deBroglieModel.electron.nProperty, updateEnabledProperty ],
       ( n, updateEnabled ) => {
         if ( updateEnabled ) {
           this.updateGeometry();
@@ -105,7 +105,7 @@ class RingNode extends Node {
         }
       } );
 
-    this.hydrogenAtom.electron.angleProperty.link( () => {
+    this.deBroglieModel.electron.angleProperty.link( () => {
       updateEnabledProperty.value && this.updateColor();
     } );
   }
@@ -118,7 +118,7 @@ class RingNode extends Node {
   private updateGeometry(): void {
 
     // Compute the number of polygons needed to represent this electron state.
-    const modelRadius = BohrModel.getElectronOrbitRadius( this.hydrogenAtom.electron.nProperty.value );
+    const modelRadius = BohrModel.getElectronOrbitRadius( this.deBroglieModel.electron.nProperty.value );
     const viewRadius = this.modelViewTransform.modelToViewDeltaX( modelRadius );
     const numberOfPolygons = calculateNumberOfPolygons( viewRadius );
     assert && assert( numberOfPolygons <= this.polygonNodes.length );
@@ -141,7 +141,7 @@ class RingNode extends Node {
    */
   private updateColor(): void {
 
-    const n = this.hydrogenAtom.electron.nProperty.value;
+    const n = this.deBroglieModel.electron.nProperty.value;
 
     // the number of relevant polygons, NOT this.polygonNodes.length
     assert && assert( _.every( this.children, child => child instanceof Path ) );
@@ -150,7 +150,7 @@ class RingNode extends Node {
     // Visit polygons in the same order as updateGeometry.
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
-      const amplitude = this.hydrogenAtom.getAmplitude( n, angle );
+      const amplitude = this.deBroglieModel.getAmplitude( n, angle );
       this.polygonNodes[ i ].fill = this.amplitudeToColor( amplitude );
     }
   }

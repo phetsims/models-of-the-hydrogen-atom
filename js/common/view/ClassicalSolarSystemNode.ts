@@ -17,46 +17,29 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import ElectronNode from './ElectronNode.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
-import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
-import ZoomedInBox from '../model/ZoomedInBox.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
 
-  public constructor( hydrogenAtom: ClassicalSolarSystemModel,
+  public constructor( classicalSolarSystemModel: ClassicalSolarSystemModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                      zoomedInBox: ZoomedInBox,
-                      modelViewTransform: ModelViewTransform2,
-                      tandem: Tandem ) {
+                      modelViewTransform: ModelViewTransform2 ) {
 
-    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
-      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
+    const protonNode = new ProtonNode( classicalSolarSystemModel.proton, modelViewTransform, {
+      visibleProperty: DerivedProperty.not( classicalSolarSystemModel.isDestroyedProperty )
     } );
 
-    const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform, {
-      visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
+    const electronNode = new ElectronNode( classicalSolarSystemModel.electron, modelViewTransform, {
+      visibleProperty: DerivedProperty.not( classicalSolarSystemModel.isDestroyedProperty )
     } );
 
     const explosionNode = new Image( classicalSolarSystemExplosion_png, {
-      visibleProperty: hydrogenAtom.isDestroyedProperty,
+      visibleProperty: classicalSolarSystemModel.isDestroyedProperty,
       scale: 0.5,
       center: protonNode.center
     } );
 
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
-    const resetButton = new ResetButton( {
-      listener: () => hydrogenAtom.reset(),
-      radius: 16,
-      rightBottom: zoomedInBoxBounds.rightBottom.minusXY( 10, 10 ),
-      enabledProperty: hydrogenAtom.isDestroyedProperty,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.resetAtomButton.accessibleNameStringProperty,
-      tandem: tandem.createTandem( 'resetButton' )
-    } );
-
-    super( hydrogenAtom, hydrogenAtomProperty, {
-      children: [ explosionNode, protonNode, electronNode, resetButton ],
-      tandem: tandem
+    super( classicalSolarSystemModel, hydrogenAtomProperty, {
+      children: [ explosionNode, protonNode, electronNode ]
     } );
   }
 

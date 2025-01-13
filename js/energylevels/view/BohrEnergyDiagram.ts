@@ -31,7 +31,7 @@ export type BohrEnergyDiagramOptions = SelfOptions & ElectronEnergyLevelDiagramN
 
 export default class BohrEnergyDiagram extends EnergyDiagram {
 
-  public constructor( hydrogenAtom: BohrModel, providedOptions: BohrEnergyDiagramOptions ) {
+  public constructor( bohrModel: BohrModel, providedOptions: BohrEnergyDiagramOptions ) {
 
     super( providedOptions );
 
@@ -46,7 +46,7 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
     }
 
     // Position the electron on a level line, based on the value of n.
-    hydrogenAtom.electron.nProperty.link( ( nNew, nOld ) => {
+    bohrModel.electron.nProperty.link( ( nNew, nOld ) => {
 
       // Previous electron position.
       const xPrevious = this.electronNode.centerX;

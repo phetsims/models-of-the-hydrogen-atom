@@ -43,7 +43,7 @@ export default class DeBroglie3DHeightNode extends Node {
   private readonly orbitsNode: Wireframe3DNode;
   private readonly waveNode: Wireframe3DNode;
 
-  public constructor( hydrogenAtom: DeBroglieModel,
+  public constructor( deBroglieModel: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: DeBroglie3DNodeOptions ) {
 
@@ -53,13 +53,13 @@ export default class DeBroglie3DHeightNode extends Node {
       isDisposable: false,
 
       // visible when the view choice is '3D Height'
-      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+      visibleProperty: new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === '3DHeight' ) )
     }, providedOptions );
 
     super( options );
 
-    this.deBroglieRepresentationProperty = hydrogenAtom.deBroglieRepresentationProperty;
+    this.deBroglieRepresentationProperty = deBroglieModel.deBroglieRepresentationProperty;
 
     this.pitchProperty = new NumberProperty( 0, {
       units: 'radians',
@@ -70,19 +70,19 @@ export default class DeBroglie3DHeightNode extends Node {
 
     // 3D orbits
     this.orbitsNode = new DeBroglie3DOrbitsNode( modelViewTransform, this.pitchProperty, FINAL_PITCH );
-    this.orbitsNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    this.orbitsNode.translation = modelViewTransform.modelToViewPosition( deBroglieModel.position );
     this.addChild( this.orbitsNode );
 
     // proton
-    const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform );
+    const protonNode = new ProtonNode( deBroglieModel.proton, modelViewTransform );
     this.addChild( protonNode );
 
     // wave
-    this.waveNode = new DeBroglie3DWaveNode( hydrogenAtom, modelViewTransform, this.pitchProperty );
-    this.waveNode.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    this.waveNode = new DeBroglie3DWaveNode( deBroglieModel, modelViewTransform, this.pitchProperty );
+    this.waveNode.translation = modelViewTransform.modelToViewPosition( deBroglieModel.position );
     this.addChild( this.waveNode );
 
-    hydrogenAtom.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
+    deBroglieModel.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
       if ( deBroglieRepresentation === '3DHeight' ) {
         this.pitchProperty.reset();
       }

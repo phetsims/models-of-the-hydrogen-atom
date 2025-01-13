@@ -38,6 +38,7 @@ export default class ZoomedInBoxNode extends Node {
   protected constructor( zoomedInBox: ZoomedInBox,
                          photonSystem: PhotonSystem,
                          createHydrogenAtomNodes: ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => HydrogenAtomNode[],
+                         createOverlayNodes: ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => Node[],
                          isExperimentProperty: TReadOnlyProperty<boolean>,
                          providedOptions: ZoomedInBoxNodeOptions ) {
 
@@ -51,6 +52,8 @@ export default class ZoomedInBoxNode extends Node {
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( viewOffset, xScale, -yScale );
 
     const hydrogenAtomNodes = createHydrogenAtomNodes( modelViewTransform, providedOptions.tandem );
+
+    const overlayNodes = createOverlayNodes( modelViewTransform, providedOptions.tandem );
 
     const photonsLayer = new Node();
 
@@ -69,7 +72,7 @@ export default class ZoomedInBoxNode extends Node {
 
     // Contents of the box, clipped to the bounds of the box.
     const contentsLayer = new Node( {
-      children: [ ...hydrogenAtomNodes, photonsLayer, experimentNode ],
+      children: [ ...hydrogenAtomNodes, photonsLayer, ...overlayNodes, experimentNode ],
       clipArea: modelViewTransform.modelToViewShape( Shape.rectangle( zoomedInBox.minX, zoomedInBox.minY, zoomedInBox.width, zoomedInBox.height ) )
     } );
 

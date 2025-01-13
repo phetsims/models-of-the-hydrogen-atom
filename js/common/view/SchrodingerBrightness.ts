@@ -23,7 +23,7 @@ const NUMBER_OF_DEPTH_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
 
 export default class SchrodingerBrightness {
 
-  private readonly hydrogenAtom: SchrodingerModel;
+  private readonly schrodingerModel: SchrodingerModel;
 
   // Cache of 2D brightness values [z][x], indexed by [n][l][abs(m)]. The entry for n=0 is undefined, because n = [1,6].
   // This data structure is huge, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
@@ -37,12 +37,12 @@ export default class SchrodingerBrightness {
   private readonly cellDepth: number;
 
   /**
-   * @param hydrogenAtom
+   * @param schrodingerModel
    * @param zoomedInBoxBounds - in view coordinates
    */
-  public constructor( hydrogenAtom: SchrodingerModel, zoomedInBoxBounds: Bounds2 ) {
+  public constructor( schrodingerModel: SchrodingerModel, zoomedInBoxBounds: Bounds2 ) {
 
-    this.hydrogenAtom = hydrogenAtom;
+    this.schrodingerModel = schrodingerModel;
 
     // Initialize brightness entries to null.
     this.cache = [];

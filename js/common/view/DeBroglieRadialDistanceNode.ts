@@ -29,13 +29,13 @@ const NUMBER_OF_SEGMENTS = 200;
 
 export default class DeBroglieRadialDistanceNode extends Node {
 
-  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
     // Electron orbits
-    const orbitsNode = new OrbitsNode( hydrogenAtom.position, modelViewTransform );
+    const orbitsNode = new OrbitsNode( deBroglieModel.position, modelViewTransform );
 
     // Ring that represents the electron as a  standing wave
-    const ringNode = new RingNode( hydrogenAtom, modelViewTransform );
+    const ringNode = new RingNode( deBroglieModel, modelViewTransform );
 
     super( {
 
@@ -44,7 +44,7 @@ export default class DeBroglieRadialDistanceNode extends Node {
       children: [ orbitsNode, ringNode ],
 
       // visible when the view choice is 'Radial Distance'
-      visibleProperty: new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+      visibleProperty: new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === 'radialDistance' ) )
     } );
   }
@@ -56,7 +56,7 @@ export default class DeBroglieRadialDistanceNode extends Node {
  */
 class RingNode extends Path {
 
-  private readonly hydrogenAtom: DeBroglieModel;
+  private readonly deBroglieModel: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
 
   // position of the hydrogen atom, in view coordinates
@@ -65,7 +65,7 @@ class RingNode extends Path {
   // radius of the ground state orbit, in view coordinates
   private readonly groundStateOrbitRadius: number;
 
-  public constructor( hydrogenAtom: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
     super( null, {
       isDisposable: false,
@@ -73,16 +73,16 @@ class RingNode extends Path {
       lineWidth: 2
     } );
 
-    this.hydrogenAtom = hydrogenAtom;
+    this.deBroglieModel = deBroglieModel;
     this.modelViewTransform = modelViewTransform;
-    this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( hydrogenAtom.position );
+    this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( deBroglieModel.position );
     this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE ) );
 
     // Optimized to update only when the view representation is set to 'Radial Distance'.
-    const updateEnabledProperty = new DerivedProperty( [ hydrogenAtom.deBroglieRepresentationProperty ],
+    const updateEnabledProperty = new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
       deBroglieRepresentation => deBroglieRepresentation === 'radialDistance' );
 
-    Multilink.multilink( [ hydrogenAtom.electron.angleProperty, updateEnabledProperty ],
+    Multilink.multilink( [ deBroglieModel.electron.angleProperty, updateEnabledProperty ],
       ( electronAngle, updateEnabled ) => {
         updateEnabled && this.update();
       } );
@@ -94,14 +94,14 @@ class RingNode extends Path {
   private update(): void {
 
     // Get the radius for the electron's current state.
-    const n = this.hydrogenAtom.electron.nProperty.value;
+    const n = this.deBroglieModel.electron.nProperty.value;
     const electronOrbitRadius = this.modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
 
     const ringShape = new Shape();
     for ( let i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
 
       const angle = ( 2 * Math.PI ) * ( i / NUMBER_OF_SEGMENTS );
-      const amplitude = this.hydrogenAtom.getAmplitude( n, angle );
+      const amplitude = this.deBroglieModel.getAmplitude( n, angle );
 
       const maxRadialOffset = RADIAL_OFFSET_FACTOR * this.groundStateOrbitRadius;
       const radialOffset = maxRadialOffset * amplitude;

@@ -35,7 +35,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
 
   private readonly levelNodes: Node;
 
-  public constructor( hydrogenAtom: SchrodingerModel, providedOptions: SchrodingerEnergyDiagramOptions ) {
+  public constructor( schrodingerModel: SchrodingerModel, providedOptions: SchrodingerEnergyDiagramOptions ) {
 
     super( providedOptions );
 
@@ -79,7 +79,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     // 'm = {value}' in the upper right corner of the diagram.
     const mEqualsValueStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
       symbol: MOTHASymbols.mStringProperty,
-      value: new DerivedProperty( [ hydrogenAtom.nlmProperty ], nlm => nlm.m )
+      value: new DerivedProperty( [ schrodingerModel.nlmProperty ], nlm => nlm.m )
     } );
     const mEqualsValueText = new RichText( mEqualsValueStringProperty, {
       font: LABEL_FONT,
@@ -93,7 +93,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     this.stateLayer.addChild( mEqualsValueText );
 
     // Position the electron on the level line, based on the values of n and l.
-    hydrogenAtom.nlmProperty.link( ( nlmNew, nlmOld ) => {
+    schrodingerModel.nlmProperty.link( ( nlmNew, nlmOld ) => {
       const xPrevious = this.electronNode.centerX;
       const yPrevious = this.electronNode.bottom;
 

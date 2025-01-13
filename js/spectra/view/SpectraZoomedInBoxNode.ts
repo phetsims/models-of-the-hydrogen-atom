@@ -19,6 +19,10 @@ import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/Zoome
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BohrOverlayNode from '../../common/view/BohrOverlayNode.js';
+import ClassicalSolarSystemOverlayNode from '../../common/view/ClassicalSolarSystemOverlayNode.js';
+import DeBroglieOverlayNode from '../../common/view/DeBroglieOverlayNode.js';
+import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -26,7 +30,7 @@ type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
-  public constructor( model: SpectraModel, popupParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
+  public constructor( model: SpectraModel, listboxParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
 
     const options = providedOptions;
 
@@ -37,16 +41,15 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform );
 
       const classicalSolarSystemNode = new ClassicalSolarSystemNode( model.classicalSolarSystemModel,
-        model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform, parentTandem.createTandem( 'classicalSolarSystemNode' ) );
+        model.hydrogenAtomProperty, modelViewTransform );
 
-      const bohrNode = new BohrNode( model.bohrModel, model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform,
-        parentTandem.createTandem( 'bohrNode' ) );
+      const bohrNode = new BohrNode( model.bohrModel, model.hydrogenAtomProperty, modelViewTransform );
 
-      const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, model.zoomedInBox,
-        modelViewTransform, popupParent, parentTandem.createTandem( 'deBroglieNode' ) );
+      const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform,
+        parentTandem.createTandem( 'deBroglieNode' ) );
 
-      const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, model.zoomedInBox,
-        model.light, modelViewTransform, parentTandem.createTandem( 'schrodingerNode' ) );
+      const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty,
+        model.zoomedInBox, modelViewTransform );
 
       return [
         billiardBallNode,
@@ -58,7 +61,31 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       ];
     };
 
-    super( model.zoomedInBox, model.photonSystem, createHydrogenAtomNodes, model.isExperimentProperty, options );
+    const createOverlayNodes = ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => {
+
+      const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( model.zoomedInBox );
+
+      const classicalSolarSystemOverlayNode = new ClassicalSolarSystemOverlayNode( model.classicalSolarSystemModel,
+        model.hydrogenAtomProperty, zoomedInBoxBounds, parentTandem.createTandem( 'classicalSolarSystemOverlayNode' ) );
+
+      const bohrOverlayNode = new BohrOverlayNode( model.bohrModel, model.hydrogenAtomProperty, zoomedInBoxBounds,
+        parentTandem.createTandem( 'bohrOverlayNode' ) );
+
+      const deBroglieOverlayNode = new DeBroglieOverlayNode( model.deBroglieModel, model.hydrogenAtomProperty,
+        zoomedInBoxBounds, listboxParent, parentTandem.createTandem( 'deBroglieOverlayNode' ) );
+
+      const schrodingerOverlayNode = new SchrodingerOverlayNode( model.schrodingerModel, model.hydrogenAtomProperty,
+        zoomedInBoxBounds, model.light, parentTandem.createTandem( 'schrodingerOverlayNode' ) );
+
+      return [
+        classicalSolarSystemOverlayNode,
+        bohrOverlayNode,
+        deBroglieOverlayNode,
+        schrodingerOverlayNode
+      ];
+    };
+
+    super( model.zoomedInBox, model.photonSystem, createHydrogenAtomNodes, createOverlayNodes, model.isExperimentProperty, options );
   }
 }
 
