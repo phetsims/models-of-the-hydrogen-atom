@@ -7,8 +7,7 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -17,28 +16,19 @@ import BilliardBallModel from '../model/BilliardBallModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type BilliardBallNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
+import HydrogenAtomNode from './HydrogenAtomNode.js';
 
 export default class BilliardBallNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: BilliardBallModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                      modelViewTransform: ModelViewTransform2,
-                      providedOptions: BilliardBallNodeOptions ) {
+                      modelViewTransform: ModelViewTransform2 ) {
 
     const ballNode = new BallNode( 2 * modelViewTransform.modelToViewDeltaX( hydrogenAtom.radius ) );
 
-    const options = optionize<BilliardBallNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-
-      // HydrogenAtomNodeOptions
+    super( hydrogenAtom, hydrogenAtomProperty, {
       children: [ ballNode ]
-    }, providedOptions );
-
-    super( hydrogenAtom, hydrogenAtomProperty, options );
+    } );
 
     this.translation = modelViewTransform.modelToViewPosition( hydrogenAtom.position );
   }

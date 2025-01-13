@@ -7,8 +7,6 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Circle, Node } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -17,15 +15,12 @@ import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import ElectronNode from './ElectronNode.js';
 import ElectronStateText from './ElectronStateText.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
+import HydrogenAtomNode from './HydrogenAtomNode.js';
 import OrbitsNode from './OrbitsNode.js';
 import ProtonNode from './ProtonNode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type BohrNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class BohrNode extends HydrogenAtomNode {
 
@@ -33,7 +28,7 @@ export default class BohrNode extends HydrogenAtomNode {
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2,
-                      providedOptions: BohrNodeOptions ) {
+                      tandem: Tandem ) {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
@@ -45,16 +40,13 @@ export default class BohrNode extends HydrogenAtomNode {
     const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
 
     const electronStateText = new ElectronStateText( hydrogenAtom.electron.nProperty, {
-      tandem: providedOptions.tandem.createTandem( 'electronStateText' )
+      tandem: tandem.createTandem( 'electronStateText' )
     } );
 
-    const options = optionize<BohrNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-
-      // HydrogenAtomNodeOptions
-      children: [ orbitsNode, protonNode, electronNode, electronStateText ]
-    }, providedOptions );
-
-    super( hydrogenAtom, hydrogenAtomProperty, options );
+    super( hydrogenAtom, hydrogenAtomProperty, {
+      children: [ orbitsNode, protonNode, electronNode, electronStateText ],
+      tandem: tandem
+    } );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
     const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;

@@ -10,7 +10,6 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, NodeTranslationOptions, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -19,11 +18,11 @@ import MOTHAColors from '../MOTHAColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ExperimentNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+type ExperimentNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class ExperimentNode extends Node {
 
-  public constructor( isExperimentProperty: TReadOnlyProperty<boolean>, providedOptions: ExperimentNodeOptions ) {
+  public constructor( isExperimentProperty: TReadOnlyProperty<boolean>, providedOptions?: ExperimentNodeOptions ) {
 
     const questionMarkText = new Text( ModelsOfTheHydrogenAtomStrings.questionMarkStringProperty, {
       font: new PhetFont( 72 ),

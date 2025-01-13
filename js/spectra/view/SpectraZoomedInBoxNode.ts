@@ -32,32 +32,21 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
     const createHydrogenAtomNodes = ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => {
 
-      const billiardBallNode = new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform, {
-        tandem: parentTandem.createTandem( 'billiardBallNode' )
-      } );
+      const billiardBallNode = new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform );
 
-      const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform, {
-        tandem: parentTandem.createTandem( 'plumPuddingNode' )
-      } );
+      const plumPuddingNode = new PlumPuddingNode( model.plumPuddingModel, model.hydrogenAtomProperty, modelViewTransform );
 
       const classicalSolarSystemNode = new ClassicalSolarSystemNode( model.classicalSolarSystemModel,
-        model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform, {
-          tandem: parentTandem.createTandem( 'classicalSolarSystemNode' )
-        } );
+        model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform, parentTandem.createTandem( 'classicalSolarSystemNode' ) );
 
-      const bohrNode = new BohrNode( model.bohrModel, model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform, {
-        tandem: parentTandem.createTandem( 'bohrNode' )
-      } );
+      const bohrNode = new BohrNode( model.bohrModel, model.hydrogenAtomProperty, model.zoomedInBox, modelViewTransform,
+        parentTandem.createTandem( 'bohrNode' ) );
 
       const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, model.zoomedInBox,
-        modelViewTransform, popupParent, {
-          tandem: parentTandem.createTandem( 'deBroglieNode' )
-        } );
+        modelViewTransform, popupParent, parentTandem.createTandem( 'deBroglieNode' ) );
 
       const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, model.zoomedInBox,
-        model.light, modelViewTransform, {
-          tandem: parentTandem.createTandem( 'schrodingerNode' )
-        } );
+        model.light, modelViewTransform, parentTandem.createTandem( 'schrodingerNode' ) );
 
       return [
         billiardBallNode,

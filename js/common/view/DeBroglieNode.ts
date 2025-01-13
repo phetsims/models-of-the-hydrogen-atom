@@ -7,8 +7,6 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Circle, Node } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -22,13 +20,10 @@ import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import DeBroglieRadialDistanceNode from './DeBroglieRadialDistanceNode.js';
 import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
 import ElectronStateText from './ElectronStateText.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
+import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type DeBroglieNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class DeBroglieNode extends HydrogenAtomNode {
 
@@ -43,7 +38,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
                       zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2,
                       listboxParent: Node,
-                      providedOptions: DeBroglieNodeOptions ) {
+                      tandem: Tandem ) {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
@@ -52,7 +47,7 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     const deBroglieRadialDistanceNode = new DeBroglieRadialDistanceNode( hydrogenAtom, modelViewTransform );
 
     const deBroglie3DHeightNode = new DeBroglie3DHeightNode( hydrogenAtom, modelViewTransform, {
-      tandem: providedOptions.tandem.createTandem( 'deBroglie3DHeightNode' )
+      tandem: tandem.createTandem( 'deBroglie3DHeightNode' )
     } );
 
     const deBroglieBrightnessNode = new DeBroglieBrightnessNode( hydrogenAtom, modelViewTransform );
@@ -64,20 +59,17 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
     const deBroglieRepresentationComboBox = new DeBroglieRepresentationComboBox( hydrogenAtom.deBroglieRepresentationProperty, listboxParent, {
       leftTop: zoomedInBoxBounds.leftTop.plusXY( 5, 5 ),
-      tandem: providedOptions.tandem.createTandem( 'deBroglieRepresentationComboBox' )
+      tandem: tandem.createTandem( 'deBroglieRepresentationComboBox' )
     } );
 
     const electronStateText = new ElectronStateText( hydrogenAtom.electron.nProperty, {
-      tandem: providedOptions.tandem.createTandem( 'electronStateText' )
+      tandem: tandem.createTandem( 'electronStateText' )
     } );
 
-    const options = optionize<DeBroglieNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-
-      // HydrogenAtomNodeOptions
-      children: [ protonNode, viewNodes, deBroglieRepresentationComboBox, electronStateText ]
-    }, providedOptions );
-
-    super( hydrogenAtom, hydrogenAtomProperty, options );
+    super( hydrogenAtom, hydrogenAtomProperty, {
+      children: [ protonNode, viewNodes, deBroglieRepresentationComboBox, electronStateText ],
+      tandem: tandem
+    } );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.
     const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;

@@ -10,15 +10,13 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeOptions, RectangleOptions } from '../../../../scenery/js/imports.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type HydrogenAtomNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'> & PickOptional<NodeOptions, 'children'>;
+export type HydrogenAtomNodeOptions = SelfOptions & PickOptional<NodeOptions, 'children' | 'tandem'>;
 
 export default class HydrogenAtomNode extends Node {
 
@@ -29,17 +27,14 @@ export default class HydrogenAtomNode extends Node {
    */
   protected constructor( hydrogenAtom: HydrogenAtom,
                          hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                         providedOptions: HydrogenAtomNodeOptions ) {
+                         providedOptions?: HydrogenAtomNodeOptions ) {
 
     const options = optionize<HydrogenAtomNodeOptions, SelfOptions, RectangleOptions>()( {
 
       // NodeOptions
       isDisposable: false,
       visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ],
-        selectedHydrogenAtom => ( selectedHydrogenAtom === hydrogenAtom ), {
-          tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-          phetioValueType: BooleanIO
-        } )
+        selectedHydrogenAtom => ( selectedHydrogenAtom === hydrogenAtom ) )
     }, providedOptions );
 
     super( options );

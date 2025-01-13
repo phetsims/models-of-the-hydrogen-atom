@@ -25,8 +25,6 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { HBox, Node, Rectangle, VBox } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -35,7 +33,7 @@ import Light from '../model/Light.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
+import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
 import QuantumNumbersInfoButton from './QuantumNumbersInfoButton.js';
 import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
@@ -44,10 +42,7 @@ import SchrodingerStateText from './SchrodingerStateText.js';
 import UnderConstructionText from './UnderConstructionText.js';
 import XZAxesNode from './XZAxesNode.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type SchrodingerNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class SchrodingerNode extends HydrogenAtomNode {
 
@@ -59,11 +54,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
                       zoomedInBox: ZoomedInBox,
                       light: Light,
                       modelViewTransform: ModelViewTransform2,
-                      providedOptions: SchrodingerNodeOptions ) {
-
-    const options = optionize<SchrodingerNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-      //TODO default values for options
-    }, providedOptions );
+                      tandem: Tandem ) {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
@@ -73,7 +64,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const xzAxesNode = new XZAxesNode( {
       color: MOTHAColors.xzAxesColorProperty,
-      tandem: options.tandem.createTandem( 'xzAxesNode' )
+      tandem: tandem.createTandem( 'xzAxesNode' )
     } );
     xzAxesNode.localBoundsProperty.link( () => {
       xzAxesNode.left = zoomedInBoxBounds.left + 15;
@@ -84,17 +75,17 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     // Pressing this button fires a photon that transitions the atom to a higher energy level.
     const exciteAtomButton = new ExciteAtomButton( hydrogenAtom.isMetastableStateProperty, light,
       () => hydrogenAtom.excite(), {
-        tandem: options.tandem.createTandem( 'exciteAtomButton' )
+        tandem: tandem.createTandem( 'exciteAtomButton' )
       } );
 
     const electronStateText = new SchrodingerStateText( hydrogenAtom.nlmProperty, {
-      tandem: options.tandem.createTandem( 'electronStateText' )
+      tandem: tandem.createTandem( 'electronStateText' )
     } );
 
-    const quantumNumbersInfoDialog = new QuantumNumbersInfoDialog( options.tandem.createTandem( 'quantumNumbersInfoDialog' ) );
+    const quantumNumbersInfoDialog = new QuantumNumbersInfoDialog( tandem.createTandem( 'quantumNumbersInfoDialog' ) );
 
     const quantumNumbersInfoButton = new QuantumNumbersInfoButton( quantumNumbersInfoDialog,
-      options.tandem.createTandem( 'quantumNumbersInfoButton' ) );
+      tandem.createTandem( 'quantumNumbersInfoButton' ) );
 
     const stateBox = new HBox( {
       children: [ electronStateText, quantumNumbersInfoButton ],
@@ -113,9 +104,10 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       top: zoomedInBoxBounds.top + 100
     } );
 
-    options.children = [ fieldNode, protonNode, xzAxesNode, vBox, underConstructionText ];
-
-    super( hydrogenAtom, hydrogenAtomProperty, options );
+    super( hydrogenAtom, hydrogenAtomProperty, {
+      children: [ fieldNode, protonNode, xzAxesNode, vBox, underConstructionText ],
+      tandem: tandem
+    } );
 
     // Keep the 'Excite Atom' button and electron state positioned in the lower-right corner of the zoomed-in box.
     const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;

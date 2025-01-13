@@ -8,8 +8,6 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Image, Node } from '../../../../scenery/js/imports.js';
 import classicalSolarSystemExplosion_png from '../../../images/classicalSolarSystemExplosion_png.js';
@@ -17,15 +15,12 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ClassicalSolarSystemModel from '../model/ClassicalSolarSystemModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import ElectronNode from './ElectronNode.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
+import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type ClassicalSolarSystemNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
 
@@ -33,7 +28,7 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2,
-                      providedOptions: ClassicalSolarSystemNodeOptions ) {
+                      tandem: Tandem ) {
 
     const protonNode = new ProtonNode( hydrogenAtom.proton, modelViewTransform, {
       visibleProperty: DerivedProperty.not( hydrogenAtom.isDestroyedProperty )
@@ -56,17 +51,13 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
       rightBottom: zoomedInBoxBounds.rightBottom.minusXY( 10, 10 ),
       enabledProperty: hydrogenAtom.isDestroyedProperty,
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.resetAtomButton.accessibleNameStringProperty,
-      tandem: providedOptions.tandem.createTandem( 'resetButton' )
+      tandem: tandem.createTandem( 'resetButton' )
     } );
 
-    const options = optionize<ClassicalSolarSystemNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-
-      // HydrogenAtomNodeOptions
-      children: [ explosionNode, protonNode, electronNode, resetButton ]
-    }, providedOptions );
-
-
-    super( hydrogenAtom, hydrogenAtomProperty, options );
+    super( hydrogenAtom, hydrogenAtomProperty, {
+      children: [ explosionNode, protonNode, electronNode, resetButton ],
+      tandem: tandem
+    } );
   }
 
   /**

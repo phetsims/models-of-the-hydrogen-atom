@@ -64,8 +64,7 @@ export default class ZoomedInBoxNode extends Node {
     } );
 
     const experimentNode = new ExperimentNode( isExperimentProperty, {
-      center: backgroundNode.center,
-      tandem: providedOptions.tandem.createTandem( 'experimentNode' )
+      center: backgroundNode.center
     } );
 
     // Contents of the box, clipped to the bounds of the box.

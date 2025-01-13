@@ -7,8 +7,6 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Image, Node } from '../../../../scenery/js/imports.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
@@ -16,18 +14,13 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import ElectronNode from './ElectronNode.js';
-import HydrogenAtomNode, { HydrogenAtomNodeOptions } from './HydrogenAtomNode.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type PlumPuddingNodeOptions = SelfOptions & StrictOmit<HydrogenAtomNodeOptions, 'children'>;
+import HydrogenAtomNode from './HydrogenAtomNode.js';
 
 export default class PlumPuddingNode extends HydrogenAtomNode {
 
   public constructor( hydrogenAtom: PlumPuddingModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                      modelViewTransform: ModelViewTransform2,
-                      providedOptions: PlumPuddingNodeOptions ) {
+                      modelViewTransform: ModelViewTransform2 ) {
 
     // Plum pudding image, centered at the atom's position
     const plumPuddingImage = new Image( plumPudding_png );
@@ -38,13 +31,9 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
 
     const electronNode = new ElectronNode( hydrogenAtom.electron, modelViewTransform );
 
-    const options = optionize<PlumPuddingNodeOptions, SelfOptions, HydrogenAtomNodeOptions>()( {
-
-      // HydrogenAtomNodeOptions
+    super( hydrogenAtom, hydrogenAtomProperty, {
       children: [ plumPuddingImage, electronNode ]
-    }, providedOptions );
-
-    super( hydrogenAtom, hydrogenAtomProperty, options );
+    } );
   }
 
   /**
