@@ -53,10 +53,12 @@ export default class PhotonSystem extends PhetioObject {
   public removePhoton( photon: Photon ): void {
     assert && assert( this.photons.includes( photon ), 'Attempted to remove a photon that does not exist.' );
     this.photons.remove( photon );
+    //TODO Does photon need to be disposed?
   }
 
   public removeAllPhotons(): void {
     this.photons.clear();
+    //TODO Do photons need to be disposed?
   }
 
   public addPhotonAddedListener( listener: ( photon: Photon ) => void ): void {
@@ -84,7 +86,7 @@ export default class PhotonSystem extends PhetioObject {
       // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
       if ( !this.zoomedInBox.containsPhoton( photon ) ) {
         this.removePhoton( photon );
-        photon.dispose(); //TODO delete this?
+        photon.dispose(); //TODO Does photon need to be disposed?
       }
       else {
         this.hydrogenAtomProperty.value.processPhoton( photon );
