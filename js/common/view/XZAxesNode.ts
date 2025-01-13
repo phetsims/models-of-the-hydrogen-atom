@@ -1,6 +1,5 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
-//TODO What is XZAxesNode showing? Why is it important? Can we get rid of it?
 /**
  * XZAxesNode displays the x and z axes for the Schrodinger model.
  *
