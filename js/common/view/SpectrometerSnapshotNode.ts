@@ -106,6 +106,7 @@ export default class SpectrometerSnapshotNode extends Node {
 
     super( {
       isDisposable: false,
+      scale: 0.9, // Set empirically so that SpectrometerSnapshotsDialog is the same width regardless of how many snapshots we have.
       children: [ chart, titleText, trashButton ],
       visibleProperty: new DerivedProperty( [ snapshotProperty ], snapshot => snapshot !== null ),
       tandem: tandem,
