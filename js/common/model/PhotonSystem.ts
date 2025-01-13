@@ -78,9 +78,9 @@ export default class PhotonSystem extends PhetioObject {
     // This may change this.photons, so operate on a copy of the array.
     this.photons.getArrayCopy().forEach( photon => {
 
-      // Move the photon before processing it, because this.hydrogenAtomProperty.value.step has been called.
-      // If we move the photon after processing it, then the photon will be processed when it is 1 time step
-      // behind the state of the atom.
+      // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
+      // MOTHAModel.step. If we move the photon after processing it, then the photon will be processed when it
+      // is 1 time step behind the state of the atom.
       photon.move( dt );
 
       // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
