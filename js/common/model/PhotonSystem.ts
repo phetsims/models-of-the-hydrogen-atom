@@ -21,10 +21,10 @@ export default class PhotonSystem extends PhetioObject {
   private readonly zoomedInBox: ZoomedInBox;
 
   // the hydrogen-atom model that is selected: either the experiment or a predictive model.
-  public readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
+  private readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
   // the collection of photons that appear in the zoomed-in box
-  public readonly photons: ObservableArray<Photon>;
+  private readonly photons: ObservableArray<Photon>;
 
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
