@@ -46,6 +46,7 @@ export default class SpectrometerSnapshotNode extends Node {
       }
     } );
 
+    //TODO Does not change dynamically with ?stringTest=dynamic
     const modelNameProperty = new DerivedProperty( [ snapshotProperty ], snapshot => {
       if ( snapshot ) {
         return snapshot.hydrogenAtom.displayNameProperty.value;
