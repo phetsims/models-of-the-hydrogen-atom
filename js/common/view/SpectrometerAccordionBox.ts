@@ -64,7 +64,6 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'snapshotButton' )
     } );
 
-    //TODO Should snapshotsDialog be here or at the ScreenView level?
     const snapshotsDialog = new SpectrometerSnapshotsDialog( spectrometer.snapshots, {
       tandem: options.tandem.createTandem( 'snapshotsDialog' )
     } );
