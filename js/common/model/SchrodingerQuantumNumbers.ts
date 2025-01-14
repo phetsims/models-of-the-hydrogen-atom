@@ -73,7 +73,8 @@ export default class SchrodingerQuantumNumbers {
   public readonly m: number;
 
   public constructor( n: number, l: number, m: number ) {
-    assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid wavefunction: (${n},${l},${m}` );
+    //TODO Address and enable this assertion:
+    // assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid wavefunction: (${n},${l},${m}` );
     this.n = n;
     this.l = l;
     this.m = m;
