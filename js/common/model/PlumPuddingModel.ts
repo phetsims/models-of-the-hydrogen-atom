@@ -25,7 +25,6 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
@@ -63,9 +62,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
   // The number of times the electron has crossed the atom's center since it started moving.
   private readonly numberOfZeroCrossingsProperty: Property<number>;
 
-  // The amplitude of the electron just before the atom emitted its last photon and the electron stopped moving.
-  private readonly previousAmplitudeProperty: Property<number>;
-
   // The number of photons the atom has absorbed and is "holding".
   private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
 
@@ -102,13 +98,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
       phetioDocumentation: 'The number of times the electron has crossed the atom\'s center since it started moving.'
     } );
 
-    this.previousAmplitudeProperty = new NumberProperty( 0, {
-      range: new Range( 0, 1 ),
-      tandem: options.tandem.createTandem( 'previousAmplitudeProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'The amplitude of the electron just before it emitted its last photon and stopped moving.'
-    } );
-
     this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
@@ -121,7 +110,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
     this.electron.reset();
     this.perimeterPointProperty.reset();
     this.numberOfZeroCrossingsProperty.reset();
-    this.previousAmplitudeProperty.reset();
     this.numberOfPhotonsAbsorbedProperty.reset();
     super.reset();
   }
@@ -147,7 +135,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
           // If we have not more photons, remember amplitude, so we can complete oscillation.
           if ( this.numberOfPhotonsAbsorbedProperty.value === 0 ) {
-            this.previousAmplitudeProperty.value = amplitude;
+            this.electron.previousAmplitudeProperty.value = amplitude;
           }
         }
       }
@@ -157,7 +145,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       // Oscillations before moving the electron
       const oscillationsBefore = this.getNumberOfElectronOscillations();
 
-      this.moveElectron( dt, this.previousAmplitudeProperty.value );
+      this.moveElectron( dt, this.electron.previousAmplitudeProperty.value );
 
       // Oscillations after moving the electron
       const oscillationsAfter = this.getNumberOfElectronOscillations();
@@ -166,10 +154,10 @@ export default class PlumPuddingModel extends HydrogenAtom {
       if ( oscillationsBefore !== oscillationsAfter ) {
         this.electron.isMovingProperty.value = false;
         this.numberOfZeroCrossingsProperty.value = 0;
-        this.previousAmplitudeProperty.value = 0;
+        this.electron.previousAmplitudeProperty.value = 0;
         this.perimeterPointProperty.value = nextPointOnCircle( this.radius );
         this.electron.positionProperty.value = this.position;
-        this.electron.directionProperty.value = dotRandom.nextBoolean() ? 'right' : 'left';
+        this.electron.setRandomXDirection();
       }
     }
   }
@@ -196,7 +184,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
     let dy = Math.abs( y1 ) * ( distanceDelta / this.radius );
 
     // Adjust signs for electron's horizontal direction
-    const sign = ( this.electron.directionProperty.value === 'right' ? 1 : -1 );
+    const sign = ( this.electron.xDirection === 'right' ? 1 : -1 );
     dx *= sign;
     dy *= sign; //TODO why are we adjusting dy?
     if ( y1 > y2 ) {
@@ -209,7 +197,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
     // If the new offset is past the end of the oscillation line, limit the electron position and change direction.
     if ( Math.abs( x ) > Math.abs( x1 ) || Math.abs( y ) > Math.abs( y1 ) ) {
-      if ( this.electron.directionProperty.value === 'right' ) {
+      if ( this.electron.xDirection === 'right' ) {
         x = x2;
         y = y2;
       }
@@ -218,8 +206,8 @@ export default class PlumPuddingModel extends HydrogenAtom {
         y = y1;
       }
 
-      // Change direction
-      this.electron.directionProperty.value = ( this.electron.directionProperty.value === 'right' ) ? 'left' : 'right';
+      // Change x direction
+      this.electron.changeXDirection();
     }
 
     // Did we cross the origin?
