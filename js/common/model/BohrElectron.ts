@@ -62,6 +62,7 @@ export default class BohrElectron extends Electron {
     this.energyProperty = new DerivedProperty( [ this.nProperty ], n => BohrElectron.getEnergy( n ), {
       units: 'eV',
       phetioValueType: NumberIO,
+      phetioFeatured: true,
       tandem: options.tandem.createTandem( 'energyProperty' )
     } );
 

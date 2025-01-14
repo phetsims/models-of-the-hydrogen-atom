@@ -81,6 +81,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     this.isDestroyedProperty = new DerivedProperty( [ this.electron.positionProperty ],
       electronPosition => ( electronPosition.distance( this.proton.position ) === 0 ), {
         tandem: options.tandem.createTandem( 'isDestroyedProperty' ),
+        phetioFeatured: true,
         phetioValueType: BooleanIO,
         phetioDocumentation: 'Whether the atom has been destroyed.'
       } );
