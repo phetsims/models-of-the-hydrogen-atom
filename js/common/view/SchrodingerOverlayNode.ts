@@ -78,9 +78,9 @@ export default class SchrodingerOverlayNode extends Node {
     } );
 
     // Other elements are in the right-bottom corner of the zoomed-in box.
-    const electronStateTextRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
+    const rightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
     vBox.localBoundsProperty.link( () => {
-      vBox.rightBottom = electronStateTextRightBottom;
+      vBox.rightBottom = rightBottom;
     } );
   }
 }
