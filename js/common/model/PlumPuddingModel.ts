@@ -258,7 +258,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
   // Photon Absorption
   //--------------------------------------------------------------------------------------------------------------------
 
-  //TODO I changes this by inverting the logic. Is it correct?
+  //TODO I changed this by inverting the logic. Is it correct?
   /**
    * The electron can absorb a photon if:
    * - the photon was emitted by the light source, and
