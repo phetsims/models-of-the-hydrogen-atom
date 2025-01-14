@@ -1,7 +1,5 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
-//TODO Uninstrument aspects of superclass SchrodingerModel that do not need to be stateful and should not be exposed in PhET-iO.
-
 /**
  * Experiment is the model when we are in "Experiment" mode. It is identical to the Schrodinger model.
  *
