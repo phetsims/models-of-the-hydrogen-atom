@@ -1,14 +1,13 @@
 // Copyright 2022-2024, University of Colorado Boulder
 
 /**
- * Proton is the model of a proton.
+ * Proton is the model of a proton. It is not instrumented for PhET-iO because it has no state and no fields of interest.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
@@ -18,7 +17,7 @@ type SelfOptions = {
 
 type ProtonOptions = SelfOptions;
 
-export default class Proton extends PhetioObject {
+export default class Proton {
 
   // Position of the proton, fixed at the center of the atom.
   public readonly position: Vector2;
@@ -27,17 +26,11 @@ export default class Proton extends PhetioObject {
 
   public constructor( providedOptions?: ProtonOptions ) {
 
-    const options = optionize<ProtonOptions, SelfOptions, PhetioObjectOptions>()( {
+    const options = optionize<ProtonOptions, SelfOptions>()( {
 
       // SelfOptions
-      position: new Vector2( 0, 0 ),
-
-      // PhetioObjectOptions
-      isDisposable: false,
-      phetioState: false
+      position: new Vector2( 0, 0 )
     }, providedOptions );
-
-    super( options );
 
     this.position = options.position;
   }
