@@ -93,9 +93,13 @@ export default class Spectrometer extends PhetioObject {
     } );
 
     this.snapshots = createObservableArray<SpectrometerSnapshot>( {
+      tandem: options.tandem.createTandem( 'snapshots' ),
       phetioReadOnly: true,
+      phetioFeatured: true,
       phetioType: createObservableArray.ObservableArrayIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),
-      tandem: options.tandem.createTandem( 'snapshots' )
+      lengthPropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     // Add a data point when a photon is emitted.
