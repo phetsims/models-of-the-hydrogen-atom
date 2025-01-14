@@ -44,14 +44,12 @@ export class LightControlPanel extends Panel {
       }
     }, providedOptions );
 
-    const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty, {
-      tandem: options.tandem.createTandem( 'monochromaticWavelengthControl' )
-    } );
+    const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty,
+      options.tandem.createTandem( 'monochromaticWavelengthControl' ) );
 
     const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty,
-      light.lightModeProperty, isQuantumModelProperty, isExperimentProperty, {
-        tandem: options.tandem.createTandem( 'absorptionTransitionText' )
-      } );
+      light.lightModeProperty, isQuantumModelProperty, isExperimentProperty,
+      options.tandem.createTandem( 'absorptionTransitionText' ) );
 
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( light.lightModeProperty, {
       maxWidth: monochromaticWavelengthControl.width,

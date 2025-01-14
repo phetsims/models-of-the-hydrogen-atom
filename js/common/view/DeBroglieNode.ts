@@ -34,9 +34,8 @@ export default class DeBroglieNode extends HydrogenAtomNode {
 
     const deBroglieRadialDistanceNode = new DeBroglieRadialDistanceNode( deBroglieModel, modelViewTransform );
 
-    const deBroglie3DHeightNode = new DeBroglie3DHeightNode( deBroglieModel, modelViewTransform, {
-      tandem: tandem.createTandem( 'deBroglie3DHeightNode' )
-    } );
+    const deBroglie3DHeightNode = new DeBroglie3DHeightNode( deBroglieModel, modelViewTransform,
+      tandem.createTandem( 'deBroglie3DHeightNode' ) );
 
     const deBroglieBrightnessNode = new DeBroglieBrightnessNode( deBroglieModel, modelViewTransform );
 

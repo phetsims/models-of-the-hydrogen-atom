@@ -8,36 +8,29 @@
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
+import { RichText } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type PrimaryElectronStateTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
-
 export default class ElectronStateText extends RichText {
 
-  public constructor( nProperty: TReadOnlyProperty<number>, providedOptions: PrimaryElectronStateTextOptions ) {
+  public constructor( nProperty: TReadOnlyProperty<number>, tandem: Tandem ) {
 
-    const options = optionize<PrimaryElectronStateTextOptions, SelfOptions, RichTextOptions>()( {
-
-      // RichTextOptions
+    const options = {
       isDisposable: false,
       font: new PhetFont( 16 ),
       fill: MOTHAColors.stateDisplayFillProperty,
       maxWidth: 200,
+      tandem: tandem,
       phetioVisiblePropertyInstrumented: true,
       visiblePropertyOptions: {
         phetioFeatured: true
       }
-    }, providedOptions );
+    };
 
     const stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
       symbol: MOTHASymbols.nStringProperty,

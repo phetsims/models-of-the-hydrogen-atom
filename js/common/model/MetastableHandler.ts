@@ -17,21 +17,16 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import Light from './Light.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java values was 100 (ms?)
-
-type SelfOptions = EmptySelfOptions;
-
-type MetastableHandlerOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class MetastableHandler extends PhetioObject {
 
@@ -48,19 +43,13 @@ export default class MetastableHandler extends PhetioObject {
   // Whether the atom in the metastable state (n,l,m) = (2,0,0)
   private readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
 
-  public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
-                      isMetastableStateProperty: TReadOnlyProperty<boolean>,
-                      light: Light,
-                      providedOptions: MetastableHandlerOptions ) {
+  public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>, light: Light, tandem: Tandem ) {
 
-    const options = optionize<MetastableHandlerOptions, SelfOptions, PhetioObjectOptions>()( {
-
-      // PhetioObjectOptions
+    super( {
+      tandem: tandem,
       phetioState: false,
       phetioDocumentation: 'Supports transitioning the atom to a higher state when in the metastable state (n,l,m) = (2,0,0)'
-    }, providedOptions );
-
-    super( options );
+    } );
 
     this.isMetastableStateProperty = isMetastableStateProperty;
     this.light = light;
@@ -68,14 +57,14 @@ export default class MetastableHandler extends PhetioObject {
     this.isActiveProperty = new DerivedProperty(
       [ isMetastableStateProperty, light.isOnProperty, light.lightModeProperty ],
       ( isMetastableState, lightIsOn, lightMode ) => isMetastableState && lightIsOn && lightMode === 'white', {
-        tandem: options.tandem.createTandem( 'isActiveProperty' ),
+        tandem: tandem.createTandem( 'isActiveProperty' ),
         phetioDocumentation: 'For internal use only.',
         phetioValueType: BooleanIO
       } );
 
     this.elapsedTimeProperty = new NumberProperty( 0, {
       units: 's',
-      tandem: options.tandem.createTandem( 'elapsedTimeProperty' ),
+      tandem: tandem.createTandem( 'elapsedTimeProperty' ),
       phetioDocumentation: 'Elapsed time since attempting to excite the atom to a higher state.',
       phetioReadOnly: true
     } );

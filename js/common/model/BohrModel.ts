@@ -96,9 +96,7 @@ export default class BohrModel extends HydrogenAtom {
       position: this.position
     } );
 
-    this.electron = new BohrElectron( this.position, {
-      tandem: options.tandem.createTandem( 'electron' )
-    } );
+    this.electron = new BohrElectron( this.position, options.tandem.createTandem( 'electron' ) );
   }
 
   public override reset(): void {

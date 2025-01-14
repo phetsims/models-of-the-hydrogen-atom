@@ -10,9 +10,7 @@ import createObservableArray, { ObservableArray } from '../../../../axon/js/crea
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -25,10 +23,7 @@ import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import PlumPuddingModel from './PlumPuddingModel.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type SpectrometerOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class Spectrometer extends PhetioObject {
 
@@ -50,28 +45,25 @@ export default class Spectrometer extends PhetioObject {
   // Snapshots are numbered using consecutive integers, starting from 1.
   private readonly nextSnapshotNumberProperty: Property<number>;
 
-  public constructor( hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, providedOptions: SpectrometerOptions ) {
+  public constructor( hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
-    const options = optionize<SpectrometerOptions, SelfOptions, PhetioObjectOptions>()( {
-
-      // PhetioObjectOptions
+    super( {
+      tandem: tandem,
       isDisposable: false,
       phetioState: false
-    }, providedOptions );
-
-    super( options );
+    } );
 
     this.hydrogenAtomProperty = hydrogenAtomProperty;
 
     this.enabledProperty = new BooleanProperty( false, {
-      phetioReadOnly: true,
+      tandem: tandem.createTandem( 'enabledProperty' ),
+      phetioDocumentation: 'Whether the spectrometer is recording data. Recording is enabled when the Spectrometer accordion box is expanded.',
       phetioFeatured: true,
-      tandem: options.tandem.createTandem( 'enabledProperty' ),
-      phetioDocumentation: 'Whether the spectrometer is recording data. Recording is enabled when the Spectrometer accordion box is expanded.'
+      phetioReadOnly: true
     } );
 
     this.dataPointsProperty = new Property<SpectrometerDataPoint[]>( [], {
-      tandem: options.tandem.createTandem( 'dataPointsProperty' ),
+      tandem: tandem.createTandem( 'dataPointsProperty' ),
       phetioDocumentation: 'Data points (number of photons emitted per wavelength) recorded by the spectrometer.',
       phetioFeatured: true,
       phetioReadOnly: true,
@@ -79,21 +71,21 @@ export default class Spectrometer extends PhetioObject {
     } );
 
     this.hasDataPointsProperty = new DerivedProperty( [ this.dataPointsProperty ], dataPoints => dataPoints.length > 0, {
-      tandem: options.tandem.createTandem( 'hasDataPointsProperty' ),
+      tandem: tandem.createTandem( 'hasDataPointsProperty' ),
       phetioDocumentation: 'Whether the spectrometer has data to display.',
       phetioValueType: BooleanIO
     } );
 
     this.nextSnapshotNumberProperty = new NumberProperty( 1, {
       numberType: 'Integer',
-      tandem: options.tandem.createTandem( 'nextSnapshotNumberProperty' ),
+      tandem: tandem.createTandem( 'nextSnapshotNumberProperty' ),
       phetioDocumentation: 'Snapshots are numbered using consecutive integers, starting from 1. ' +
                            'This is the number that will be assigned to the next snapshot that is taken.',
       phetioReadOnly: true
     } );
 
     this.snapshots = createObservableArray<SpectrometerSnapshot>( {
-      tandem: options.tandem.createTandem( 'snapshots' ),
+      tandem: tandem.createTandem( 'snapshots' ),
       phetioFeatured: true,
       phetioReadOnly: true,
       phetioType: createObservableArray.ObservableArrayIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),

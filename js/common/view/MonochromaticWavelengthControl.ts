@@ -11,12 +11,10 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import WavelengthNumberControl, { WavelengthNumberControlOptions } from '../../../../scenery-phet/js/WavelengthNumberControl.js';
+import WavelengthNumberControl from '../../../../scenery-phet/js/WavelengthNumberControl.js';
 import { HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import Slider from '../../../../sun/js/Slider.js';
@@ -31,15 +29,11 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 
 const SLIDER_TRACK_SIZE = new Dimension2( 200, 15 );
 
-type SelfOptions = EmptySelfOptions;
-
-type MOTHAWavelengthControlOptions = SelfOptions & PickRequired<WavelengthNumberControlOptions, 'tandem'>;
-
 export class MonochromaticWavelengthControl extends WavelengthNumberControl {
 
   public constructor( wavelengthProperty: NumberProperty,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
-                      providedOptions: MOTHAWavelengthControlOptions ) {
+                      tandem: Tandem ) {
 
     // 'UV' text shown in the UV section of the slider track.
     const uvText = new Text( ModelsOfTheHydrogenAtomStrings.uvStringProperty, {
@@ -82,12 +76,12 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
 
     const constrainValue = ( wavelength: number ) => Utils.toFixedNumber( wavelength, 0 );
 
-    const options = optionize<MOTHAWavelengthControlOptions, SelfOptions, WavelengthNumberControlOptions>()( {
+    super( wavelengthProperty, {
       isDisposable: false,
       range: wavelengthProperty.range,
       layoutFunction: layoutFunction,
       visibleProperty: new DerivedProperty( [ lightModeProperty ], lightMode => ( lightMode === 'monochromatic' ), {
-        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+        tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.accessibleNameStringProperty,
@@ -122,10 +116,9 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
           fill: MOTHAColors.wavelengthTextFillProperty,
           maxWidth: 50
         }
-      }
-    }, providedOptions );
-
-    super( wavelengthProperty, options );
+      },
+      tandem: tandem
+    } );
   }
 }
 

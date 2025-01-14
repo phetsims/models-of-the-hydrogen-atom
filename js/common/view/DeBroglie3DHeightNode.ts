@@ -10,10 +10,8 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
@@ -22,16 +20,13 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import DeBroglie3DOrbitsNode from './DeBroglie3DOrbitsNode.js';
 import DeBroglie3DWaveNode from './DeBroglie3DWaveNode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // The final pitch (rotation about the x-axis), after the model has rotated into place.
 const FINAL_PITCH = Utils.toRadians( 70 );
 
 // Angular speed of the rotation animation, in radians/s.
 const ANGULAR_SPEED = Utils.toRadians( 100 );
-
-type SelfOptions = EmptySelfOptions;
-
-type DeBroglie3DNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class DeBroglie3DHeightNode extends Node {
 
@@ -45,25 +40,22 @@ export default class DeBroglie3DHeightNode extends Node {
 
   public constructor( deBroglieModel: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
-                      providedOptions: DeBroglie3DNodeOptions ) {
+                      tandem: Tandem ) {
 
-    const options = optionize<DeBroglie3DNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
+    super( {
       isDisposable: false,
+      tandem: tandem,
 
       // visible when the view choice is '3D Height'
       visibleProperty: new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === '3DHeight' ) )
-    }, providedOptions );
-
-    super( options );
+    } );
 
     this.deBroglieRepresentationProperty = deBroglieModel.deBroglieRepresentationProperty;
 
     this.pitchProperty = new NumberProperty( 0, {
       units: 'radians',
-      tandem: options.tandem.createTandem( 'pitchProperty' ),
+      tandem: tandem.createTandem( 'pitchProperty' ),
       phetioDocumentation: 'Pitch rotation angle of the "3D Height" view for the de Broglie model.',
       phetioReadOnly: true
     } );

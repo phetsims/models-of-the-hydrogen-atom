@@ -110,9 +110,8 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
         phetioValueType: BooleanIO
       } );
 
-    this.metastableHandler = new MetastableHandler( this.nlmProperty, this.isMetastableStateProperty, light, {
-      tandem: options.tandem.createTandem( 'metastableHandler' )
-    } );
+    this.metastableHandler = new MetastableHandler( this.isMetastableStateProperty, light,
+      options.tandem.createTandem( 'metastableHandler' ) );
   }
 
   public override reset(): void {
