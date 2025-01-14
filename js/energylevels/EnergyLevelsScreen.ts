@@ -7,35 +7,29 @@
  */
 
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import { Circle, Node } from '../../../scenery/js/imports.js';
 import MOTHAColors from '../common/MOTHAColors.js';
 import ElectronNode from '../common/view/ElectronNode.js';
-import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
+import MOTHAScreen from '../common/view/MOTHAScreen.js';
 import ProtonNode from '../common/view/ProtonNode.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
 import MOTHAConstants from '../common/MOTHAConstants.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type EnergyLevelsScreenOptions = SelfOptions & StrictOmit<MOTHAScreenOptions, 'name' | 'homeScreenIcon'>;
+import Tandem from '../../../tandem/js/Tandem.js';
 
 export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, EnergyLevelsScreenView> {
 
-  public constructor( providedOptions: EnergyLevelsScreenOptions ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = optionize<EnergyLevelsScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
-
-      // MOTHAScreenOptions
+    const options = {
       isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.energyLevelsStringProperty,
       homeScreenIcon: createScreenIcon(),
-      screenButtonsHelpText: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenButtonsHelpTextStringProperty
-    }, providedOptions );
+      screenButtonsHelpText: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenButtonsHelpTextStringProperty,
+      tandem: tandem
+    };
 
     super(
       () => new EnergyLevelsModel( options.tandem.createTandem( 'model' ) ),

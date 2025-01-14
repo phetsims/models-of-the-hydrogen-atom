@@ -7,10 +7,8 @@
  */
 
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../phet-core/js/types/StrictOmit.js';
 import MOTHAColors from '../common/MOTHAColors.js';
-import MOTHAScreen, { MOTHAScreenOptions } from '../common/view/MOTHAScreen.js';
+import MOTHAScreen from '../common/view/MOTHAScreen.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
@@ -18,23 +16,19 @@ import SpectraScreenView from './view/SpectraScreenView.js';
 import { VisibleEmissionChart } from '../common/view/EmissionChart.js';
 import Property from '../../../axon/js/Property.js';
 import SpectrometerDataPoint from '../common/model/SpectrometerDataPoint.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type SpectraScreenOptions = SelfOptions & StrictOmit<MOTHAScreenOptions, 'name' | 'homeScreenIcon'>;
+import Tandem from '../../../tandem/js/Tandem.js';
 
 export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScreenView> {
 
-  public constructor( providedOptions: SpectraScreenOptions ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = optionize<SpectraScreenOptions, SelfOptions, MOTHAScreenOptions>()( {
-
-      // MOTHAScreenOptions
+    const options = {
       isDisposable: false,
       name: ModelsOfTheHydrogenAtomStrings.screen.spectraStringProperty,
       homeScreenIcon: createScreenIcon(),
-      screenButtonsHelpText: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenButtonsHelpTextStringProperty
-    }, providedOptions );
+      screenButtonsHelpText: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenButtonsHelpTextStringProperty,
+      tandem: tandem
+    };
 
     super(
       () => new SpectraModel( options.tandem.createTandem( 'model' ) ),

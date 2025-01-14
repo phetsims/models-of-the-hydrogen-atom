@@ -19,8 +19,8 @@ simLauncher.launch( () => {
   const titleStringProperty = ModelsOfTheHydrogenAtomStrings[ 'models-of-the-hydrogen-atom' ].titleStringProperty;
 
   const screens = [
-    new SpectraScreen( { tandem: Tandem.ROOT.createTandem( 'spectraScreen' ) } ),
-    new EnergyLevelsScreen( { tandem: Tandem.ROOT.createTandem( 'energyLevelsScreen' ) } )
+    new SpectraScreen( Tandem.ROOT.createTandem( 'spectraScreen' ) ),
+    new EnergyLevelsScreen( Tandem.ROOT.createTandem( 'energyLevelsScreen' ) )
   ];
 
   const options: SimOptions = {
