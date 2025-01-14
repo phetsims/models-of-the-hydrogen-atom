@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * DeBroglie3DHeightNode displays the '3D Height' view for the de Broglie model.

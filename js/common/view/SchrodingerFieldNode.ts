@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 //TODO Java implementation assumes a 1:1 transform between model and view coordinates.
 //   So we need to map from view to model coordinates before computing probability density.

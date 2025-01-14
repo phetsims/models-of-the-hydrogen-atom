@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * DeBroglie3DWaveNode displays the electron as a wave in the '3D Height' view for the de Broglie model.
