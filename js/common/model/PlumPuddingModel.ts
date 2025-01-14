@@ -87,22 +87,22 @@ export default class PlumPuddingModel extends HydrogenAtom {
     this.perimeterPointProperty = new Vector2Property( nextPointOnCircle( this.radius ), {
       isValidValue: point => point.x >= 0,
       tandem: options.tandem.createTandem( 'perimeterPointProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'A point on the perimeter of the plum pudding atom. It defines the path of the electron through the center of the atom.'
+      phetioDocumentation: 'A point on the perimeter of the plum pudding atom. It defines the path of the electron through the center of the atom.',
+      phetioReadOnly: true
     } );
 
     this.numberOfZeroCrossingsProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'numberOfZeroCrossingsProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'The number of times the electron has crossed the atom\'s center since it started moving.'
+      phetioDocumentation: 'The number of times the electron has crossed the atom\'s center since it started moving.',
+      phetioReadOnly: true
     } );
 
     this.numberOfPhotonsAbsorbedProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'numberOfPhotonsAbsorbedProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'The number of photons the atom has absorbed and is "holding".'
+      phetioDocumentation: 'The number of photons the atom has absorbed and is "holding".',
+      phetioReadOnly: true
     } );
   }
 

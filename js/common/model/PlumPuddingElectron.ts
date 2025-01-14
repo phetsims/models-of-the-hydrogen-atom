@@ -35,22 +35,22 @@ export default class PlumPuddingElectron extends Electron {
 
     this.isMovingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isMovingProperty' ),
-      phetioReadOnly: true,
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioReadOnly: true
     } );
 
     this.xDirectionProperty = new StringUnionProperty( 'left', {
       validValues: [ 'left', 'right' ],
       tandem: options.tandem.createTandem( 'xDirectionProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'Whether the electron\'s horizontal motion is to the left or right.'
+      phetioDocumentation: 'Whether the electron\'s horizontal motion is to the left or right.',
+      phetioReadOnly: true
     } );
 
     this.previousAmplitudeProperty = new NumberProperty( 0, {
       range: new Range( 0, 1 ),
       tandem: options.tandem.createTandem( 'previousAmplitudeProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'The amplitude of the electron just before it emitted its last photon and stopped moving.'
+      phetioDocumentation: 'The amplitude of the electron just before it emitted its last photon and stopped moving.',
+      phetioReadOnly: true
     } );
   }
 

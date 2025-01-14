@@ -72,30 +72,30 @@ export default class Spectrometer extends PhetioObject {
 
     this.dataPointsProperty = new Property<SpectrometerDataPoint[]>( [], {
       tandem: options.tandem.createTandem( 'dataPointsProperty' ),
-      phetioValueType: ArrayIO( SpectrometerDataPoint.SpectrometerDataPointIO ),
-      phetioReadOnly: true,
+      phetioDocumentation: 'Data points (number of photons emitted per wavelength) recorded by the spectrometer.',
       phetioFeatured: true,
-      phetioDocumentation: 'Data points (number of photons emitted per wavelength) recorded by the spectrometer.'
+      phetioReadOnly: true,
+      phetioValueType: ArrayIO( SpectrometerDataPoint.SpectrometerDataPointIO )
     } );
 
     this.hasDataPointsProperty = new DerivedProperty( [ this.dataPointsProperty ], dataPoints => dataPoints.length > 0, {
-      phetioValueType: BooleanIO,
       tandem: options.tandem.createTandem( 'hasDataPointsProperty' ),
-      phetioDocumentation: 'Whether the spectrometer has data to display.'
+      phetioDocumentation: 'Whether the spectrometer has data to display.',
+      phetioValueType: BooleanIO
     } );
 
     this.nextSnapshotNumberProperty = new NumberProperty( 1, {
       numberType: 'Integer',
-      phetioReadOnly: true,
       tandem: options.tandem.createTandem( 'nextSnapshotNumberProperty' ),
       phetioDocumentation: 'Snapshots are numbered using consecutive integers, starting from 1. ' +
-                           'This is the number that will be assigned to the next snapshot that is taken.'
+                           'This is the number that will be assigned to the next snapshot that is taken.',
+      phetioReadOnly: true
     } );
 
     this.snapshots = createObservableArray<SpectrometerSnapshot>( {
       tandem: options.tandem.createTandem( 'snapshots' ),
-      phetioReadOnly: true,
       phetioFeatured: true,
+      phetioReadOnly: true,
       phetioType: createObservableArray.ObservableArrayIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),
       lengthPropertyOptions: {
         phetioFeatured: true

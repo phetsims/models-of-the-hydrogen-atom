@@ -98,8 +98,8 @@ export default class Light extends PhetioObject {
     this.lightModeProperty = new Property<LightMode>( 'white', {
       validValues: LightModeValues,
       tandem: options.tandem.createTandem( 'lightModeProperty' ),
-      phetioValueType: StringIO,
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioValueType: StringIO
     } );
 
     // Range goes from UV to max visible wavelength
@@ -110,8 +110,8 @@ export default class Light extends PhetioObject {
       numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
       range: this.monochromaticWavelengthRange,
       tandem: options.tandem.createTandem( 'monochromaticWavelengthProperty' ),
-      phetioFeatured: true,
-      phetioDocumentation: 'Wavelength used for the light when it is in monochromatic mode.'
+      phetioDocumentation: 'Wavelength used for the light when it is in monochromatic mode.',
+      phetioFeatured: true
     } );
 
     this.wavelengthProperty = new DerivedProperty( [ this.lightModeProperty, this.monochromaticWavelengthProperty ],
@@ -134,8 +134,8 @@ export default class Light extends PhetioObject {
     this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
       units: 's',
       tandem: options.tandem.createTandem( 'dtSincePhotonCreatedProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'Elapsed time since a photon was emitted by the light source.'
+      phetioDocumentation: 'Elapsed time since a photon was emitted by the light source.',
+      phetioReadOnly: true
     } );
 
     this.groundStateAbsorptionWavelengths = photonAbsorptionModel.getAbsorptionWavelengths( MOTHAConstants.GROUND_STATE );

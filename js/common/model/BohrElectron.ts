@@ -53,24 +53,24 @@ export default class BohrElectron extends Electron {
       numberType: 'Integer',
       range: new Range( MOTHAConstants.GROUND_STATE, MOTHAConstants.MAX_STATE ),
       tandem: options.tandem.createTandem( 'nProperty' ),
-      phetioReadOnly: true,
+      phetioDocumentation: 'n, the principal quantum number.',
       phetioFeatured: true,
-      phetioDocumentation: 'n, the principal quantum number.'
+      phetioReadOnly: true
     } );
     phet.log && this.nProperty.lazyLink( ( nNew, nOld ) => phet.log( `BohrElectron: n ${nOld} -> ${nNew}` ) );
 
     this.energyProperty = new DerivedProperty( [ this.nProperty ], n => BohrElectron.getEnergy( n ), {
       units: 'eV',
-      phetioValueType: NumberIO,
+      tandem: options.tandem.createTandem( 'energyProperty' ),
       phetioFeatured: true,
-      tandem: options.tandem.createTandem( 'energyProperty' )
+      phetioValueType: NumberIO
     } );
 
     this.timeInStateProperty = new NumberProperty( 0, {
       units: 's',
       tandem: options.tandem.createTandem( 'timeInStateProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'Time that the electron has been in its current state.'
+      phetioDocumentation: 'Time that the electron has been in its current state.',
+      phetioReadOnly: true
     } );
 
     // When the electron changes state, reset timeInStateProperty.
@@ -94,8 +94,8 @@ export default class BohrElectron extends Electron {
         return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: options.tandem.createTandem( 'offsetProperty' ),
-        phetioValueType: Vector2.Vector2IO,
-        phetioDocumentation: 'Offset of the electron from the center of the atom.'
+        phetioDocumentation: 'Offset of the electron from the center of the atom.',
+        phetioValueType: Vector2.Vector2IO
       } );
 
     this.offsetProperty.link( offset => {

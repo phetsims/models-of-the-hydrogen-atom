@@ -89,9 +89,9 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     this._nlmProperty = new Property( new SchrodingerQuantumNumbers( this.electron.nProperty.value, 0, 0 ), {
       phetioValueType: SchrodingerQuantumNumbers.SchrodingerQuantumNumbersIO,
       tandem: this.electron.tandem.createTandem( 'nlmProperty' ), //TODO create SchrodingerElectron and add nlmProperty?
+      phetioDocumentation: 'The quantum numbers (n,l,m) that specify a wavefunction for the electron.',
       phetioFeatured: true,
-      phetioReadOnly: true,
-      phetioDocumentation: 'The quantum numbers (n,l,m) that specify a wavefunction for the electron.'
+      phetioReadOnly: true
     } );
     this.nlmProperty = this._nlmProperty;
     phet.log && this.nlmProperty.lazyLink( ( nlmNew, nlmOld ) =>
@@ -105,9 +105,9 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     this.isMetastableStateProperty = new DerivedProperty( [ this.nlmProperty ],
       nlm => nlm.equals( MetastableHandler.METASTABLE_STATE ), {
         tandem: this.electron.tandem.createTandem( 'isMetastableStateProperty' ), //TODO create SchrodingerElectron and add nlmProperty?
-        phetioValueType: BooleanIO,
+        phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).',
         phetioFeatured: true,
-        phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).'
+        phetioValueType: BooleanIO
       } );
 
     this.metastableHandler = new MetastableHandler( this.nlmProperty, this.isMetastableStateProperty, light, {

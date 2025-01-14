@@ -94,8 +94,8 @@ export default class MOTHAModel implements TModel {
 
     this.isExperimentProperty = new BooleanProperty( false, { //TODO initial value should be true
       tandem: tandem.createTandem( 'isExperimentProperty' ),
-      phetioFeatured: true,
-      phetioDocumentation: 'Whether we are viewing the Experiment (true) or a Model (false) of the hydrogen atom.'
+      phetioDocumentation: 'Whether we are viewing the Experiment (true) or a Model (false) of the hydrogen atom.',
+      phetioFeatured: true
     } );
 
     this.experiment = new Experiment( light, {
@@ -107,8 +107,8 @@ export default class MOTHAModel implements TModel {
     this.predictiveModelProperty = new Property<HydrogenAtom>( initialPredictiveModel, {
       validValues: predictiveModels,
       tandem: tandem.createTandem( 'predictiveModelProperty' ),
-      phetioValueType: HydrogenAtom.HydrogenAtomIO,
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioValueType: HydrogenAtom.HydrogenAtomIO
     } );
 
     this.hydrogenAtomProperty = new DerivedProperty(

@@ -69,8 +69,8 @@ export default class MetastableHandler extends PhetioObject {
       [ isMetastableStateProperty, light.isOnProperty, light.lightModeProperty ],
       ( isMetastableState, lightIsOn, lightMode ) => isMetastableState && lightIsOn && lightMode === 'white', {
         tandem: options.tandem.createTandem( 'isActiveProperty' ),
-        phetioValueType: BooleanIO,
-        phetioDocumentation: 'For internal use only.'
+        phetioDocumentation: 'For internal use only.',
+        phetioValueType: BooleanIO
       } );
 
     this.elapsedTimeProperty = new NumberProperty( 0, {
