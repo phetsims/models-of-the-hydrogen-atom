@@ -20,7 +20,9 @@ type ProtonOptions = SelfOptions;
 
 export default class Proton extends PhetioObject {
 
+  // Position of the proton, fixed at the center of the atom.
   public readonly position: Vector2;
+
   public readonly radius = MOTHAConstants.PROTON_RADIUS;
 
   public constructor( providedOptions?: ProtonOptions ) {
