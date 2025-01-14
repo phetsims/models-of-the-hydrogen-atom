@@ -65,7 +65,7 @@ export default class BilliardBallModel extends HydrogenAtom {
       if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
         const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
         const deflectionAngle = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-        photon.directionProperty.value += ( Math.PI + deflectionAngle );
+        photon.direction += ( Math.PI + deflectionAngle );
         photon.hasCollided = true;
       }
     }

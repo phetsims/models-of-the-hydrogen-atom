@@ -1,4 +1,4 @@
-// Copyright 2016-2024, University of Colorado Boulder
+// Copyright 2016-2025, University of Colorado Boulder
 
 /**
  * Photon is the model of a photon.
@@ -6,29 +6,26 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import { TColor } from '../../../../scenery/js/imports.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
 export type PhotonStateObject = {
 
   // Serialize x and y coordinates separately, to reduce the number of Vector2 allocations.
+  wavelength: number;
   x: number;
   y: number;
   direction: number;
-  wavelength: number;
   wasEmitted: boolean;
   hasCollided: boolean;
 };
@@ -52,14 +49,19 @@ type SelfOptions = {
   debugHaloColor?: TColor; // Color of halo around the photon, to make it easier to see for debugging.
 };
 
-type PhotonOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'tandem'>;
+type PhotonOptions = SelfOptions;
 
-export default class Photon extends PhetioObject {
+export default class Photon {
 
+  // Wavelength of the photon, in nm.
   public readonly wavelength: number; // nm
-  public readonly positionProperty: Property<Vector2>;
-  public readonly directionProperty: Property<number>; // radians
-  public readonly radius = MOTHAConstants.PHOTON_RADIUS;
+
+  // Position of the photon, publicly readonly, privately mutable.
+  public readonly positionProperty: TReadOnlyProperty<Vector2>;
+  private readonly _positionProperty: Property<Vector2>;
+
+  // Direction that the photon is moving, in radians.
+  public direction: number; // radians
 
   // Whether the photon was emitted by the hydrogen atom.
   public readonly wasEmitted: boolean;
@@ -70,52 +72,33 @@ export default class Photon extends PhetioObject {
   // Halo color around the photon, used for debugging to make it easier to see specific photons.
   public readonly debugHaloColor: TColor;
 
+  public readonly radius = MOTHAConstants.PHOTON_RADIUS;
+
   public constructor( providedOptions: PhotonOptions ) {
 
-    const options = optionize<PhotonOptions, SelfOptions, PhetioObjectOptions>()( {
+    const options = optionize<PhotonOptions, SelfOptions>()( {
 
       // SelfOptions
       wasEmitted: false,
       hasCollided: false,
-      debugHaloColor: null,
-
-      // PhetioObjectOptions
-      phetioState: false,
-      tandem: Tandem.OPT_OUT
+      debugHaloColor: null
     }, providedOptions );
 
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
     assert && assert( Number.isInteger( options.wavelength ), `wavelength must be an integer: ${options.wavelength}` );
 
-    super( options );
-
-    this.positionProperty = new Vector2Property( options.position, {
-      tandem: options.tandem.createTandem( 'positionProperty' ),
-      phetioReadOnly: true
-    } );
-
-    this.directionProperty = new NumberProperty( options.direction, {
-      units: 'radians',
-      tandem: options.tandem.createTandem( 'directionProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'Direction of motion, in radians.'
-    } );
+    this._positionProperty = new Vector2Property( options.position );
+    this.positionProperty = this._positionProperty;
 
     this.wavelength = options.wavelength;
+    this.direction = options.direction;
     this.wasEmitted = options.wasEmitted;
     this._hasCollided = options.hasCollided;
     this.debugHaloColor = options.debugHaloColor;
   }
 
-  public reset(): void {
-    this.positionProperty.reset();
-    this.directionProperty.reset();
-  }
-
-  public override dispose(): void {
+  public dispose(): void {
     this.positionProperty.dispose();
-    this.directionProperty.dispose();
-    super.dispose();
   }
 
   public get hasCollided(): boolean {
@@ -133,11 +116,11 @@ export default class Photon extends PhetioObject {
    */
   public move( dt: number ): void {
     const distance = dt * MOTHAConstants.PHOTON_SPEED;
-    const dx = Math.cos( this.directionProperty.value ) * distance;
-    const dy = Math.sin( this.directionProperty.value ) * distance;
+    const dx = Math.cos( this.direction ) * distance;
+    const dy = Math.sin( this.direction ) * distance;
     const x = this.positionProperty.value.x + dx;
     const y = this.positionProperty.value.y + dy;
-    this.positionProperty.value = new Vector2( x, y );
+    this._positionProperty.value = new Vector2( x, y );
   }
 
   /**
@@ -148,7 +131,7 @@ export default class Photon extends PhetioObject {
       wavelength: this.wavelength,
       x: this.positionProperty.value.x,
       y: this.positionProperty.value.y,
-      direction: this.directionProperty.value,
+      direction: this.direction,
       wasEmitted: this.wasEmitted,
       hasCollided: this.hasCollided
     };

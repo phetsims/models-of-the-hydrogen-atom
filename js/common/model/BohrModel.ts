@@ -250,7 +250,7 @@ export default class BohrModel extends HydrogenAtom {
     const emittedPhoton = new Photon( {
       wavelength: photon.wavelength,
       position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
-      direction: photon.directionProperty.value,
+      direction: photon.direction,
       wasEmitted: true,
       debugHaloColor: 'rgb( 75, 255, 7 )' // bright green
     } );
