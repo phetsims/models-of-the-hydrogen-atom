@@ -18,8 +18,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import dotRandom from '../../../../dot/js/dotRandom.js';
-import Utils from '../../../../dot/js/Utils.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -28,9 +26,6 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import BilliardBallNode from '../view/BilliardBallNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
-
-const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
-const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -58,15 +53,12 @@ export default class BilliardBallModel extends HydrogenAtom {
   }
 
   /**
-   * If the photon collides with the atom, the photon bounces back at a 'steep but random' angle.
+   * Handle photon collision with the atom.
    */
   public override processPhoton( photon: Photon ): void {
     if ( !photon.hasCollided ) {
       if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
-        const sign = ( photon.positionProperty.value.x > this.position.x ) ? 1 : -1;
-        const deflectionAngle = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-        photon.direction += ( Math.PI + deflectionAngle );
-        photon.hasCollided = true;
+        photon.bounceBack( this.position );
       }
     }
   }

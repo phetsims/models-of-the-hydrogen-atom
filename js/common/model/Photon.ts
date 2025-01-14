@@ -17,6 +17,12 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
+import Utils from '../../../../dot/js/Utils.js';
+
+// Deflection angles when the photon collides with a rigid body, like the Billiard Ball atom.
+const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
+const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 
 // This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
 export type PhotonStateObject = {
@@ -61,7 +67,7 @@ export default class Photon {
   private readonly _positionProperty: Property<Vector2>;
 
   // Direction that the photon is moving, in radians.
-  public direction: number; // radians
+  private _direction: number;
 
   // Whether the photon was emitted by the hydrogen atom.
   public readonly wasEmitted: boolean;
@@ -91,7 +97,7 @@ export default class Photon {
     this.positionProperty = this._positionProperty;
 
     this.wavelength = options.wavelength;
-    this.direction = options.direction;
+    this._direction = options.direction;
     this.wasEmitted = options.wasEmitted;
     this._hasCollided = options.hasCollided;
     this.debugHaloColor = options.debugHaloColor;
@@ -101,13 +107,12 @@ export default class Photon {
     this.positionProperty.dispose();
   }
 
-  public get hasCollided(): boolean {
-    return this._hasCollided;
+  public get direction(): number {
+    return this._direction;
   }
 
-  public set hasCollided( value: boolean ) {
-    assert && assert( value, 'cannot un-collide a particle' );
-    this._hasCollided = value;
+  public get hasCollided(): boolean {
+    return this._hasCollided;
   }
 
   /**
@@ -121,6 +126,17 @@ export default class Photon {
     const x = this.positionProperty.value.x + dx;
     const y = this.positionProperty.value.y + dy;
     this._positionProperty.value = new Vector2( x, y );
+  }
+
+  /**
+   * If the photon collides with a rigid body (like the Billiard Ball atom), make the photon bounce back at a
+   * 'steep but random' angle.
+   */
+  public bounceBack( atomPosition: Vector2 ): void {
+    const sign = ( this.positionProperty.value.x > atomPosition.x ) ? 1 : -1;
+    const deflectionAngle = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
+    this._direction += ( Math.PI + deflectionAngle );
+    this._hasCollided = true;
   }
 
   /**
