@@ -76,6 +76,7 @@ export default class Photon {
   private _hasCollided: boolean;
 
   // Halo color around the photon, used for debugging to make it easier to see specific photons.
+  // For example, running with ?debugEmission puts a red halo around all photons that are emitted by the atom.
   public readonly debugHaloColor: TColor;
 
   public readonly radius = MOTHAConstants.PHOTON_RADIUS;
