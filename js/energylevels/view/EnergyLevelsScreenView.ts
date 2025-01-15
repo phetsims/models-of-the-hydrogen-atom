@@ -67,7 +67,6 @@ export default class EnergyLevelsScreenView extends ScreenView {
     const lightControlPanel = new LightControlPanel( model.light, model.isQuantumModelProperty, model.isExperimentProperty,
       tandem.createTandem( 'lightControlPanel' ) );
 
-    //TODO Is transitionsDialogVisibleProperty or could we use transitionsDialog.visibleProperty?
     const transitionsDialogVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'transitionsDialogVisibleProperty' ),
       phetioFeatured: true,
