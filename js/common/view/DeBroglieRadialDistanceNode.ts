@@ -38,8 +38,6 @@ export default class DeBroglieRadialDistanceNode extends Node {
     const ringNode = new RingNode( deBroglieModel, modelViewTransform );
 
     super( {
-
-      // NodeOptions
       isDisposable: false,
       children: [ orbitsNode, ringNode ],
 

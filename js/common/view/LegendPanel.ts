@@ -66,8 +66,6 @@ class LegendNode extends HBox {
 
   public constructor( iconNode: Node, iconAlignGroup: AlignGroup, labelStringProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
     super( {
-
-      // HBoxOptions
       isDisposable: false,
       spacing: 5,
       children: [

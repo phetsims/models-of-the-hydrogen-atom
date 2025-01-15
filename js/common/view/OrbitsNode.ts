@@ -27,8 +27,6 @@ export default class OrbitsNode extends Path {
     }
 
     super( shape, {
-
-      // NodeOptions
       isDisposable: false,
       stroke: MOTHAColors.orbitStrokeProperty,
       lineWidth: 1,

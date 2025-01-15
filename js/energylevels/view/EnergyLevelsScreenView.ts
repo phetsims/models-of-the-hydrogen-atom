@@ -43,8 +43,6 @@ export default class EnergyLevelsScreenView extends ScreenView {
   public constructor( model: EnergyLevelsModel, tandem: Tandem ) {
 
     super( {
-
-      // ScreenViewOptions
       isDisposable: false,
       screenSummaryContent: new ScreenSummaryContent( {
         additionalContent: [

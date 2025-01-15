@@ -59,7 +59,6 @@ export default class BoxOfHydrogenNode extends Node {
     super( {
       isDisposable: false,
       children: [ frontNode, topNode, hydrogenText ]
-      // Nothing interesting for PhET-iO, and changing visibleProperty is undesirable, so do not instrument.
     } );
   }
 }

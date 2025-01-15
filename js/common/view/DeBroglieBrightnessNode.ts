@@ -38,7 +38,6 @@ export default class DeBroglieBrightnessNode extends Node {
     const ringNode = new RingNode( deBroglieModel, modelViewTransform );
 
     super( {
-      // NodeOptions
       isDisposable: false,
       children: [ orbitsNode, ringNode ],
 
