@@ -42,6 +42,7 @@ export class LightNode extends Node {
       isDisposable: false,
       children: [ beamNode, laserPointerNode ],
       tandem: tandem,
+      phetioFeatured: true,
       phetioVisiblePropertyInstrumented: false
     } );
 

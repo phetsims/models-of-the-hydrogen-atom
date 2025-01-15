@@ -77,6 +77,7 @@ export default class Light extends PhetioObject {
     super( {
       isDisposable: false,
       tandem: tandem,
+      phetioFeatured: true,
       phetioState: false
     } );
 

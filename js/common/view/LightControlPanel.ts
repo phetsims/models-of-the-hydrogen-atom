@@ -56,6 +56,7 @@ export class LightControlPanel extends Panel {
       xMargin: 5,
       yMargin: 10,
       tandem: tandem,
+      phetioFeatured: true,
       visiblePropertyOptions: {
         phetioFeatured: true
       }
