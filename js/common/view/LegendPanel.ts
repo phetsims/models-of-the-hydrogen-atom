@@ -7,11 +7,9 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -23,43 +21,22 @@ import ProtonNode from './ProtonNode.js';
 
 const ITEM_FONT = new PhetFont( 16 );
 const PHOTON_ICON_WAVELENGTH = 410; // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/61
-
-type SelfOptions = {
-  iconScale?: number;
-};
-
-type LegendPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+const ICON_SCALE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE;
 
 export default class LegendPanel extends Panel {
 
-  public constructor( providedOptions: LegendPanelOptions ) {
-
-    const options = optionize<LegendPanelOptions, SelfOptions, PanelOptions>()( {
-
-      // SelfOptions
-      iconScale: MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE,
-
-      // PanelOptions
-      isDisposable: false,
-      fill: null,
-      stroke: null,
-      xMargin: 0,
-      yMargin: 0,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
-    }, providedOptions );
+  public constructor( tandem: Tandem ) {
 
     // To make all icons have the same effective size.
     const iconAlignGroup = new AlignGroup();
 
     const legendNodes: LegendNode[] = [
-      new LegendNode( ProtonNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.protonStringProperty, options.tandem.createTandem( 'protonNode' ) ),
-      new LegendNode( ElectronNode.createIcon( options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.electronStringProperty, options.tandem.createTandem( 'electronNode' ) ),
-      new LegendNode( PhotonNode.createIcon( PHOTON_ICON_WAVELENGTH, options.iconScale ), iconAlignGroup,
-        ModelsOfTheHydrogenAtomStrings.photonStringProperty, options.tandem.createTandem( 'photonNode' ) )
+      new LegendNode( ProtonNode.createIcon( ICON_SCALE ), iconAlignGroup,
+        ModelsOfTheHydrogenAtomStrings.protonStringProperty, tandem.createTandem( 'protonNode' ) ),
+      new LegendNode( ElectronNode.createIcon( ICON_SCALE ), iconAlignGroup,
+        ModelsOfTheHydrogenAtomStrings.electronStringProperty, tandem.createTandem( 'electronNode' ) ),
+      new LegendNode( PhotonNode.createIcon( PHOTON_ICON_WAVELENGTH, ICON_SCALE ), iconAlignGroup,
+        ModelsOfTheHydrogenAtomStrings.photonStringProperty, tandem.createTandem( 'photonNode' ) )
     ];
 
     const content = new VBox( {
@@ -68,7 +45,17 @@ export default class LegendPanel extends Panel {
       children: legendNodes
     } );
 
-    super( content, options );
+    super( content, {
+      isDisposable: false,
+      fill: null,
+      stroke: null,
+      xMargin: 0,
+      yMargin: 0,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      },
+      tandem: tandem
+    } );
   }
 }
 

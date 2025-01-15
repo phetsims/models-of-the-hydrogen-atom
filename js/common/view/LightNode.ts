@@ -7,29 +7,17 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Light from '../model/Light.js';
 import BeamNode from './BeamNode.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type LightNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
-
 export class LightNode extends Node {
 
-  public constructor( light: Light, providedOptions: LightNodeOptions ) {
-
-    const options = optionize<LightNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      isDisposable: false,
-      phetioVisiblePropertyInstrumented: false
-    }, providedOptions );
+  public constructor( light: Light, tandem: Tandem ) {
 
     const laserPointerNode = new LaserPointerNode( light.isOnProperty, {
       bodySize: new Dimension2( 88, 64 ),
@@ -40,7 +28,7 @@ export class LightNode extends Node {
       rotation: -Light.DIRECTION, // +y is up in the model, down in the view
 
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSource.accessibleNameStringProperty,
-      tandem: options.tandem.createTandem( 'laserPointerNode' ),
+      tandem: tandem.createTandem( 'laserPointerNode' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
@@ -50,9 +38,12 @@ export class LightNode extends Node {
       bottom: laserPointerNode.top + 1
     } );
 
-    options.children = [ beamNode, laserPointerNode ];
-
-    super( options );
+    super( {
+      isDisposable: false,
+      children: [ beamNode, laserPointerNode ],
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: false
+    } );
 
     this.addLinkedElement( light );
   }

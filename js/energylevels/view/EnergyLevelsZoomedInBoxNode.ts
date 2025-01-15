@@ -6,13 +6,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import BohrNode from '../../common/view/BohrNode.js';
 import DeBroglieNode from '../../common/view/DeBroglieNode.js';
 import SchrodingerNode from '../../common/view/SchrodingerNode.js';
-import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/ZoomedInBoxNode.js';
+import ZoomedInBoxNode from '../../common/view/ZoomedInBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -20,15 +19,9 @@ import BohrOverlayNode from '../../common/view/BohrOverlayNode.js';
 import DeBroglieOverlayNode from '../../common/view/DeBroglieOverlayNode.js';
 import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type EnergyLevelsZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
-
 export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
 
-  public constructor( model: EnergyLevelsModel, listboxParent: Node, providedOptions: EnergyLevelsZoomedInBoxNodeOptions ) {
-
-    const options = providedOptions;
+  public constructor( model: EnergyLevelsModel, listboxParent: Node, tandem: Tandem ) {
 
     const createHydrogenAtomNodes = ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => {
 
@@ -67,7 +60,7 @@ export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
       ];
     };
 
-    super( model.zoomedInBox, model.photonSystem, createHydrogenAtomNodes, createOverlayNodes, model.isExperimentProperty, options );
+    super( model.zoomedInBox, model.photonSystem, createHydrogenAtomNodes, createOverlayNodes, model.isExperimentProperty, tandem );
   }
 }
 

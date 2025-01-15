@@ -7,10 +7,8 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Panel from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Light from '../model/Light.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -18,42 +16,25 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type LightControlPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export class LightControlPanel extends Panel {
 
   public constructor( light: Light,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
                       isExperimentProperty: TReadOnlyProperty<boolean>,
-                      providedOptions: LightControlPanelOptions ) {
-
-    const options = optionize<LightControlPanelOptions, SelfOptions, PanelOptions>()( {
-
-      // PanelOptions
-      isDisposable: false,
-      fill: MOTHAColors.panelFillColorProperty,
-      stroke: MOTHAColors.panelStrokeColorProperty,
-      cornerRadius: MOTHAConstants.CORNER_RADIUS,
-      xMargin: 5,
-      yMargin: 10,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
-    }, providedOptions );
+                      tandem: Tandem ) {
 
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty,
-      options.tandem.createTandem( 'monochromaticWavelengthControl' ) );
+      tandem.createTandem( 'monochromaticWavelengthControl' ) );
 
     const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty,
       light.lightModeProperty, isQuantumModelProperty, isExperimentProperty,
-      options.tandem.createTandem( 'absorptionTransitionText' ) );
+      tandem.createTandem( 'absorptionTransitionText' ) );
 
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( light.lightModeProperty, {
       maxWidth: monochromaticWavelengthControl.width,
-      tandem: options.tandem.createTandem( 'lightModeRadioButtonGroup' )
+      tandem: tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
 
     const content = new VBox( {
@@ -67,7 +48,18 @@ export class LightControlPanel extends Panel {
       ]
     } );
 
-    super( content, options );
+    super( content, {
+      isDisposable: false,
+      fill: MOTHAColors.panelFillColorProperty,
+      stroke: MOTHAColors.panelStrokeColorProperty,
+      cornerRadius: MOTHAConstants.CORNER_RADIUS,
+      xMargin: 5,
+      yMargin: 10,
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
+    } );
 
     this.addLinkedElement( light );
   }

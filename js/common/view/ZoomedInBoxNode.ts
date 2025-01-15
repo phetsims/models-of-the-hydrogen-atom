@@ -10,10 +10,8 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import { Node, Rectangle } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
@@ -27,10 +25,6 @@ import PhotonSystem from '../model/PhotonSystem.js';
 
 const VIEW_SIZE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE;
 
-type SelfOptions = EmptySelfOptions;
-
-export type ZoomedInBoxNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
-
 export default class ZoomedInBoxNode extends Node {
 
   private readonly hydrogenAtomNodes: HydrogenAtomNode[];
@@ -40,7 +34,7 @@ export default class ZoomedInBoxNode extends Node {
                          createHydrogenAtomNodes: ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => HydrogenAtomNode[],
                          createOverlayNodes: ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => Node[],
                          isExperimentProperty: TReadOnlyProperty<boolean>,
-                         providedOptions: ZoomedInBoxNodeOptions ) {
+                         tandem: Tandem ) {
 
     // All model-view transform operations take place in the zoomed-in box, whose origin is at its center.
     // The model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.
@@ -51,9 +45,9 @@ export default class ZoomedInBoxNode extends Node {
     assert && assert( xScale === yScale, 'box is not scaled the same in both dimensions, is your box square?' );
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( viewOffset, xScale, -yScale );
 
-    const hydrogenAtomNodes = createHydrogenAtomNodes( modelViewTransform, providedOptions.tandem );
+    const hydrogenAtomNodes = createHydrogenAtomNodes( modelViewTransform, tandem );
 
-    const overlayNodes = createOverlayNodes( modelViewTransform, providedOptions.tandem );
+    const overlayNodes = createOverlayNodes( modelViewTransform, tandem );
 
     const photonsLayer = new Node();
 
@@ -76,15 +70,12 @@ export default class ZoomedInBoxNode extends Node {
       clipArea: modelViewTransform.modelToViewShape( Shape.rectangle( zoomedInBox.minX, zoomedInBox.minY, zoomedInBox.width, zoomedInBox.height ) )
     } );
 
-    const options = optionize<ZoomedInBoxNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
+    super( {
       isDisposable: false,
       children: [ backgroundNode, contentsLayer, outlineNode ],
+      tandem: tandem,
       phetioVisiblePropertyInstrumented: false
-    }, providedOptions );
-
-    super( options );
+    } );
 
     this.hydrogenAtomNodes = hydrogenAtomNodes;
 

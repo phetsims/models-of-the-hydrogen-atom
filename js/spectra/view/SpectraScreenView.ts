@@ -57,19 +57,14 @@ export default class SpectraScreenView extends ScreenView {
     const popupsParent = new Node();
 
     // Legend for particle types
-    const legendPanel = new LegendPanel( {
-      tandem: tandem.createTandem( 'legendPanel' )
-    } );
+    const legendPanel = new LegendPanel( tandem.createTandem( 'legendPanel' ) );
 
     // Light
-    const lightNode = new LightNode( model.light, {
-      tandem: tandem.createTandem( 'lightNode' )
-    } );
+    const lightNode = new LightNode( model.light, tandem.createTandem( 'lightNode' ) );
 
     // Controls for the light
-    const lightControlPanel = new LightControlPanel( model.light, model.isQuantumModelProperty, model.isExperimentProperty, {
-      tandem: tandem.createTandem( 'lightControlPanel' )
-    } );
+    const lightControlPanel = new LightControlPanel( model.light, model.isQuantumModelProperty, model.isExperimentProperty,
+      tandem.createTandem( 'lightControlPanel' ) );
 
     const transitionsDialogVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'transitionsDialogVisibleProperty' ),
@@ -85,14 +80,10 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     const transitionsCheckbox = new TransitionsCheckbox( transitionsDialogVisibleProperty,
-      model.isQuantumModelProperty, {
-        tandem: tandem.createTandem( 'transitionsCheckbox' )
-      } );
+      model.isQuantumModelProperty, tandem.createTandem( 'transitionsCheckbox' ) );
 
     // The zoomed-in view of the box of hydrogen
-    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, {
-      tandem: tandem.createTandem( 'zoomedInBoxNode' )
-    } );
+    const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, tandem.createTandem( 'zoomedInBoxNode' ) );
 
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode();

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import BilliardBallNode from '../../common/view/BilliardBallNode.js';
@@ -15,7 +14,7 @@ import ClassicalSolarSystemNode from '../../common/view/ClassicalSolarSystemNode
 import DeBroglieNode from '../../common/view/DeBroglieNode.js';
 import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
 import SchrodingerNode from '../../common/view/SchrodingerNode.js';
-import ZoomedInBoxNode, { ZoomedInBoxNodeOptions } from '../../common/view/ZoomedInBoxNode.js';
+import ZoomedInBoxNode from '../../common/view/ZoomedInBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -24,15 +23,9 @@ import ClassicalSolarSystemOverlayNode from '../../common/view/ClassicalSolarSys
 import DeBroglieOverlayNode from '../../common/view/DeBroglieOverlayNode.js';
 import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type SpectraZoomedInBoxNodeOptions = SelfOptions & ZoomedInBoxNodeOptions;
-
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
-  public constructor( model: SpectraModel, listboxParent: Node, providedOptions: SpectraZoomedInBoxNodeOptions ) {
-
-    const options = providedOptions;
+  public constructor( model: SpectraModel, listboxParent: Node, tandem: Tandem ) {
 
     const createHydrogenAtomNodes = ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => {
 
@@ -85,7 +78,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       ];
     };
 
-    super( model.zoomedInBox, model.photonSystem, createHydrogenAtomNodes, createOverlayNodes, model.isExperimentProperty, options );
+    super( model.zoomedInBox, model.photonSystem, createHydrogenAtomNodes, createOverlayNodes, model.isExperimentProperty, tandem );
   }
 }
 
