@@ -14,7 +14,8 @@ import Photon from './Photon.js';
 export default class ZoomedInBox extends Bounds2 {
 
   public constructor( size: number ) {
-    super( -size / 2, -size / 2, size / 2, size / 2 );
+    const apothem = size / 2;
+    super( -apothem, -apothem, apothem, apothem );
   }
 
   public containsPhoton( photon: Photon ): boolean {
