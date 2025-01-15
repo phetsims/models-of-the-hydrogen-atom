@@ -49,9 +49,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       tandem: tandem.createTandem( 'snapshotButton' )
     } );
 
-    const snapshotsDialog = new SpectrometerSnapshotsDialog( spectrometer.snapshots, {
-      tandem: tandem.createTandem( 'snapshotsDialog' )
-    } );
+    const snapshotsDialog = new SpectrometerSnapshotsDialog( spectrometer.snapshots, tandem.createTandem( 'snapshotsDialog' ) );
 
     const viewSnapshotsButton = new ViewSnapshotsButton( snapshotsDialog, spectrometer, {
       size: PUSH_BUTTON_SIZE,

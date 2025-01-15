@@ -7,42 +7,24 @@
  */
 
 import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
+import Dialog from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SpectrometerSnapshot from '../model/SpectrometerSnapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SpectrometerSnapshotNode from './SpectrometerSnapshotNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type SnapshotsDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class SpectrometerSnapshotsDialog extends Dialog {
 
-  public constructor( snapshots: ObservableArray<SpectrometerSnapshot>, providedOptions?: SnapshotsDialogOptions ) {
-
-    const options = optionize<SnapshotsDialogOptions, SelfOptions, DialogOptions>()( {
-
-      // DialogOptions
-      isDisposable: false,
-      fill: MOTHAColors.snapshotsDialogFillProperty,
-      topMargin: 10,
-      bottomMargin: 10,
-      leftMargin: 10,
-      closeButtonRightMargin: 10,
-      xSpacing: 0,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.mySnapshotsDialog.accessibleNameStringProperty
-    }, providedOptions );
+  public constructor( snapshots: ObservableArray<SpectrometerSnapshot>, tandem: Tandem ) {
 
     // Nodes that display snapshots. These Nodes are displayed from top to bottom in the Snapshots dialog.
     const snapshotNodes: SpectrometerSnapshotNode[] = [];
     for ( let i = 0; i < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS; i++ ) {
-      snapshotNodes.push( new SpectrometerSnapshotNode( options.tandem.createTandem( `snapshotNode${i}` ) ) );
+      snapshotNodes.push( new SpectrometerSnapshotNode( tandem.createTandem( `snapshotNode${i}` ) ) );
     }
 
     const content = new VBox( {
@@ -50,7 +32,17 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
       children: snapshotNodes
     } );
 
-    super( content, options );
+    super( content, {
+      isDisposable: false,
+      fill: MOTHAColors.snapshotsDialogFillProperty,
+      topMargin: 10,
+      bottomMargin: 10,
+      leftMargin: 10,
+      closeButtonRightMargin: 10,
+      xSpacing: 0,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.mySnapshotsDialog.accessibleNameStringProperty,
+      tandem: tandem
+    } );
 
     // When the snapshots change, mutate all snapshotNodes. While not the most performant implementation, it is much
     // simpler than shuffling the order of snapshotNodes as snapshots are added and deleted. And for PhET-iO, the
