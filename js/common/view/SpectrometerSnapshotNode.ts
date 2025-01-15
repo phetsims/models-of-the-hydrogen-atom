@@ -37,33 +37,9 @@ export default class SpectrometerSnapshotNode extends Node {
       phetioDocumentation: 'The snapshot displayed by this Node, null if there is no snapshot.'
     } );
 
-    const snapshotNumberProperty = new DerivedProperty( [ snapshotProperty ], snapshot => {
-      if ( snapshot ) {
-        return snapshot.snapshotNumber;
-      }
-      else {
-        return -1;
-      }
-    } );
-
-    //TODO Does not change dynamically with ?stringTest=dynamic
-    const modelNameProperty = new DerivedProperty( [ snapshotProperty ], snapshot => {
-      if ( snapshot ) {
-        return snapshot.hydrogenAtom.displayNameProperty.value;
-      }
-      else {
-        return null;
-      }
-    } );
-
-    const dataPointsProperty = new DerivedProperty( [ snapshotProperty ], snapshot => {
-      if ( snapshot ) {
-        return snapshot.dataPoints;
-      }
-      else {
-        return [];
-      }
-    } );
+    // Display the data for the associated snapshot.
+    const dataPointsProperty = new DerivedProperty( [ snapshotProperty ],
+      snapshot => snapshot ? snapshot.dataPoints : [] );
 
     const chart = new SpectrometerChart( dataPointsProperty, {
       chartHeight: 150, // set empirically with ?debugSpectrometer
@@ -71,24 +47,26 @@ export default class SpectrometerSnapshotNode extends Node {
       backgroundStroke: MOTHAColors.snapshotStrokeProperty
     } );
 
-    const titleStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.snapshotNumberNameStringProperty, {
-      number: snapshotNumberProperty,
-      name: modelNameProperty
-    } );
-    const titleText = new Text( titleStringProperty, {
+    // Display the number of the associated snapshot.
+    const snapshotNumberProperty = new DerivedProperty( [ snapshotProperty ],
+      snapshot => snapshot ? snapshot.snapshotNumber : -1 );
+
+    const titleText = new Text( '', {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.invertibleTextFillProperty,
-      maxWidth: 300
-    } );
-    titleText.localBoundsProperty.link( () => {
-      titleText.left = chart.left + INSIDE_X_MARGIN;
-      titleText.top = chart.top + INSIDE_Y_MARGIN;
+      maxWidth: 300,
+      left: chart.left + INSIDE_X_MARGIN,
+      top: chart.top + INSIDE_Y_MARGIN
     } );
 
-    const trashButtonAccessibleNameProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
-      number: snapshotNumberProperty,
-      name: modelNameProperty
+    // Dynamically update the title to reflect the model name in the current locale.
+    snapshotProperty.link( snapshot => {
+      titleText.stringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.snapshotNumberNameStringProperty, {
+        number: snapshotNumberProperty,
+        name: snapshot ? snapshot.hydrogenAtom.displayNameProperty : ''
+      } );
     } );
+
     const trashButton = new TrashButton( {
       baseColor: MOTHAColors.pushButtonBaseColorProperty,
       listener: () => {
@@ -101,8 +79,15 @@ export default class SpectrometerSnapshotNode extends Node {
       },
       left: chart.right + 5,
       bottom: chart.bottom,
-      accessibleName: trashButtonAccessibleNameProperty,
       tandem: tandem.createTandem( 'trashButton' )
+    } );
+
+    // Dynamically update the trashButton's accessibleName to reflect the model name in the current locale.
+    snapshotProperty.link( snapshot => {
+      trashButton.accessibleName = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
+        number: snapshotNumberProperty,
+        name: snapshot ? snapshot.hydrogenAtom.displayNameProperty : ''
+      } );
     } );
 
     super( {
