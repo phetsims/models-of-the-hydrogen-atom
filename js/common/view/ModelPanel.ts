@@ -57,9 +57,7 @@ export default class ModelPanel extends Panel {
 
     // continuum bar, 'Classical' to 'Quantum'
     if ( options.hasContinuumBar ) {
-      const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height, {
-        tandem: options.tandem.createTandem( 'continuumBarNode' )
-      } );
+      const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height, options.tandem.createTandem( 'continuumBarNode' ) );
       children.push( continuumBarNode );
     }
 

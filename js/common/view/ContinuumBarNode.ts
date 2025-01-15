@@ -7,76 +7,56 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Font, Node, NodeOptions, Rectangle, Text, TPaint } from '../../../../scenery/js/imports.js';
+import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
-type SelfOptions = {
-  xMargin?: number;
-  yMargin?: number;
-  font?: Font;
-  barFill?: TPaint;
-  barStroke?: TPaint;
-  textFill?: TPaint;
-};
-
-type ContinuumBarNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+const X_MARGIN = 5;
+const Y_MARGIN = 6;
+const FONT = new PhetFont( 14 );
 
 export default class ContinuumBarNode extends Node {
 
-  public constructor( barHeight: number, providedOptions: ContinuumBarNodeOptions ) {
-
-    const options = optionize<ContinuumBarNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // SelfOptions
-      xMargin: 5,
-      yMargin: 6,
-      font: new PhetFont( 14 ),
-      barFill: MOTHAColors.continuumBarFillProperty,
-      barStroke: MOTHAColors.continuumBarStrokeProperty,
-      textFill: MOTHAColors.continuumBarTextFillProperty,
-
-      // NodeOptions
-      isDisposable: false
-    }, providedOptions );
+  public constructor( barHeight: number, tandem: Tandem ) {
 
     // labels
     const textOptions = {
-      font: options.font,
-      fill: options.textFill,
+      font: FONT,
+      fill: MOTHAColors.continuumBarTextFillProperty,
       rotation: Math.PI / 2,
       maxWidth: 0.4 * barHeight
     };
     const classicalText = new Text( ModelsOfTheHydrogenAtomStrings.classicalStringProperty, textOptions );
     const quantumText = new Text( ModelsOfTheHydrogenAtomStrings.quantumStringProperty, textOptions );
 
-    const barWidth = Math.max( classicalText.width, quantumText.width ) + ( 2 * options.xMargin );
+    const barWidth = Math.max( classicalText.width, quantumText.width ) + ( 2 * X_MARGIN );
     const barNode = new Rectangle( 0, 0, barWidth, barHeight, {
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
-      fill: options.barFill,
-      stroke: options.barStroke
+      fill: MOTHAColors.continuumBarFillProperty,
+      stroke: MOTHAColors.continuumBarStrokeProperty
     } );
 
     // 'Classical' at top
     classicalText.localBoundsProperty.link( () => {
       classicalText.centerX = barNode.centerX;
-      classicalText.top = barNode.top + options.yMargin;
+      classicalText.top = barNode.top + Y_MARGIN;
     } );
 
     // 'Quantum' at bottom
     quantumText.localBoundsProperty.link( () => {
       quantumText.centerX = barNode.centerX;
-      quantumText.bottom = barNode.bottom - options.yMargin;
+      quantumText.bottom = barNode.bottom - Y_MARGIN;
     } );
 
-    options.children = [ barNode, classicalText, quantumText ];
-
-    super( options );
+    super( {
+      isDisposable: false,
+      children: [ barNode, classicalText, quantumText ],
+      tandem: tandem
+    } );
   }
 }
 
