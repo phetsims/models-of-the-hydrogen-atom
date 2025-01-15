@@ -94,9 +94,7 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // switches the model mode between Experiment and Model
-    const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty, {
-      tandem: tandem.createTandem( 'experimentModelSwitch' )
-    } );
+    const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty, tandem.createTandem( 'experimentModelSwitch' ) );
 
     // panel that contains radio buttons for selecting a predictive model
     const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty, {
@@ -112,14 +110,11 @@ export default class SpectraScreenView extends ScreenView {
     } );
 
     // Spectrometer
-    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, {
-      tandem: tandem.createTandem( 'spectrometerAccordionBox' )
-    } );
+    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, tandem.createTandem( 'spectrometerAccordionBox' ) );
 
     // Time controls
-    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty, model.stepOnce.bind( model ), {
-      tandem: tandem.createTandem( 'timeControlNode' )
-    } );
+    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty,
+      model.stepOnce.bind( model ), tandem.createTandem( 'timeControlNode' ) );
 
     // Reset All button
     const resetAllButton = new ResetAllButton( {

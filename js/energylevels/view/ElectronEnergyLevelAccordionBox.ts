@@ -7,8 +7,6 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
@@ -24,33 +22,20 @@ import DeBroglieEnergyDiagram from './DeBroglieEnergyDiagram.js';
 import SchrodingerEnergyDiagram from './SchrodingerEnergyDiagram.js';
 import ExperimentEnergyDiagram from './ExperimentEnergyDiagram.js';
 import EnergyDiagram from './EnergyDiagram.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 // DIAGRAM_SIZE.height was empirically set so that heights of ElectronEnergyLevelAccordionBox and
 // EnergyLevelsZoomedInBoxNode are roughly the same.
 const DIAGRAM_SIZE = new Dimension2( 220, 364 );
 
-type SelfOptions = EmptySelfOptions;
-
-type ElectronEnergyLevelAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
-
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
   private readonly diagrams: EnergyDiagram[];
 
-  public constructor( model: EnergyLevelsModel, providedOptions: ElectronEnergyLevelAccordionBoxOptions ) {
+  public constructor( model: EnergyLevelsModel, tandem: Tandem ) {
 
-    const options = optionize4<ElectronEnergyLevelAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
-      {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
-
-        // AccordionBoxOptions
-        isDisposable: false,
-        expandedDefaultValue: MOTHAQueryParameters.expandAll,
-        fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
-        stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
-        helpText: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelAccordionBox.helpTextStringProperty
-      }, providedOptions );
-
-    options.titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {
+    const titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.electronEnergyLevelTitleFillProperty,
       maxWidth: 150 // i18n, determined empirically
@@ -82,7 +67,15 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       children: diagrams
     } );
 
-    super( content, options );
+    super( content, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
+      isDisposable: false,
+      titleNode: titleNode,
+      expandedDefaultValue: MOTHAQueryParameters.expandAll,
+      fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
+      stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelAccordionBox.helpTextStringProperty,
+      tandem: tandem
+    } ) );
 
     this.diagrams = diagrams;
   }

@@ -12,7 +12,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import Light from '../model/Light.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
-import MOTHAColors from '../MOTHAColors.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
 import QuantumNumbersInfoButton from './QuantumNumbersInfoButton.js';
 import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
@@ -30,22 +29,15 @@ export default class SchrodingerOverlayNode extends Node {
                       light: Light,
                       tandem: Tandem ) {
 
-    const xzAxesNode = new XZAxesNode( {
-      color: MOTHAColors.xzAxesColorProperty,
-      tandem: tandem.createTandem( 'xzAxesNode' )
-    } );
+    const xzAxesNode = new XZAxesNode( tandem.createTandem( 'xzAxesNode' ) );
 
     // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).
     // Pressing this button fires a photon that transitions the atom to a higher energy level.
     const exciteAtomButton = new ExciteAtomButton( schrodingerModel.isMetastableStateProperty, light,
-      () => schrodingerModel.excite(), {
-        tandem: tandem.createTandem( 'exciteAtomButton' )
-      } );
+      () => schrodingerModel.excite(), tandem.createTandem( 'exciteAtomButton' ) );
 
     // (n,l,m) = ...
-    const electronStateText = new SchrodingerStateText( schrodingerModel.nlmProperty, {
-      tandem: tandem.createTandem( 'electronStateText' )
-    } );
+    const electronStateText = new SchrodingerStateText( schrodingerModel.nlmProperty, tandem.createTandem( 'electronStateText' ) );
 
     const quantumNumbersInfoDialog = new QuantumNumbersInfoDialog( tandem.createTandem( 'quantumNumbersInfoDialog' ) );
 

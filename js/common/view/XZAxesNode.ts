@@ -8,41 +8,25 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
-import { Node, NodeOptions, NodeTranslationOptions, RichText, TColor } from '../../../../scenery/js/imports.js';
+import { Node, RichText } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHASymbols from '../MOTHASymbols.js';
+import MOTHAColors from '../MOTHAColors.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const ARROW_LENGTH = 50;
 const LABEL_FONT = new MathSymbolFont( 18 );
 const LABEL_OFFSET = 4;
-
-type SelfOptions = {
-  color?: TColor; // color for the axes and labels
-};
-
-type XZAxesNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+const COLOR_PROPERTY = MOTHAColors.xzAxesColorProperty;
 
 export default class XZAxesNode extends Node {
 
-  public constructor( providedOptions: XZAxesNodeOptions ) {
-
-    const options = optionize<XZAxesNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // SelfOptions
-      color: 'black',
-
-      // NodeOptions
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
-    }, providedOptions );
+  public constructor( tandem: Tandem ) {
 
     const arrowNodeOptions = {
-      fill: options.color,
+      fill: COLOR_PROPERTY,
       stroke: null,
       headHeight: 6,
       headWidth: 6,
@@ -55,7 +39,7 @@ export default class XZAxesNode extends Node {
 
     const xText = new RichText( MOTHASymbols.xStringProperty, {
       font: LABEL_FONT,
-      fill: options.color,
+      fill: COLOR_PROPERTY,
       maxWidth: 20
     } );
     xText.localBoundsProperty.link( () => {
@@ -65,7 +49,7 @@ export default class XZAxesNode extends Node {
 
     const zText = new RichText( MOTHASymbols.zStringProperty, {
       font: LABEL_FONT,
-      fill: options.color,
+      fill: COLOR_PROPERTY,
       maxWidth: 20
     } );
     zText.localBoundsProperty.link( () => {
@@ -73,9 +57,14 @@ export default class XZAxesNode extends Node {
       zText.bottom = zAxisNode.top - LABEL_OFFSET;
     } );
 
-    options.children = [ xAxisNode, zAxisNode, xText, zText ];
-
-    super( options );
+    super( {
+      isDisposable: false,
+      children: [ xAxisNode, zAxisNode, xText, zText ],
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      },
+      tandem: tandem
+    } );
   }
 }
 

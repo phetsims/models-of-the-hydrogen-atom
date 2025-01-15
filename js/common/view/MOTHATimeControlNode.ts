@@ -8,29 +8,22 @@
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import TimeControlNode, { TimeControlNodeOptions } from '../../../../scenery-phet/js/TimeControlNode.js';
+import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type MOTHATimeControlNodeOptions = SelfOptions & PickRequired<TimeControlNodeOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class MOTHATimeControlNode extends TimeControlNode {
 
   public constructor( isPlayingProperty: Property<boolean>,
                       timeSpeedProperty: EnumerationProperty<TimeSpeed>,
                       stepOnce: () => void,
-                      providedOptions: MOTHATimeControlNodeOptions ) {
+                      tandem: Tandem ) {
 
-    const options = optionize<MOTHATimeControlNodeOptions, SelfOptions, TimeControlNodeOptions>()( {
-
-      // TimeControlNodeOptions
+    super( isPlayingProperty, {
       isDisposable: false,
       timeSpeedProperty: timeSpeedProperty,
       timeSpeeds: MOTHAConstants.TIME_SPEEDS,
@@ -50,10 +43,9 @@ export default class MOTHATimeControlNode extends TimeControlNode {
         stepForwardButtonOptions: {
           listener: () => stepOnce()
         }
-      }
-    }, providedOptions );
-
-    super( isPlayingProperty, options );
+      },
+      tandem: tandem
+    } );
   }
 }
 

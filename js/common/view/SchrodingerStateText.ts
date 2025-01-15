@@ -9,20 +9,15 @@
 
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
+import { RichText } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type WavefunctionTextOptions = SelfOptions & PickRequired<RichTextOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // Orbital names, indexed by the value of l from (n,l,m).
 const ORBITALS = [
@@ -36,21 +31,7 @@ const ORBITALS = [
 
 export default class SchrodingerStateText extends RichText {
 
-  public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
-                      providedOptions: WavefunctionTextOptions ) {
-
-    const options = optionize<WavefunctionTextOptions, SelfOptions, RichTextOptions>()( {
-
-      // RichTextOptions
-      isDisposable: false,
-      font: new PhetFont( 16 ),
-      fill: MOTHAColors.stateDisplayFillProperty,
-      maxWidth: 200,
-      phetioVisiblePropertyInstrumented: true,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
-    }, providedOptions );
+  public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>, tandem: Tandem ) {
 
     const stringProperty = DerivedStringProperty.deriveAny( [
         ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty,
@@ -70,7 +51,17 @@ export default class SchrodingerStateText extends RichText {
         subshell: ORBITALS[ nlmProperty.value.l ].value
       } ) );
 
-    super( stringProperty, options );
+    super( stringProperty, {
+      isDisposable: false,
+      font: new PhetFont( 16 ),
+      fill: MOTHAColors.stateDisplayFillProperty,
+      maxWidth: 200,
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: true,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
+    } );
   }
 }
 

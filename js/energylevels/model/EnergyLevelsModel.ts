@@ -27,9 +27,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
 
     const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
 
-    const light = new Light( zoomedInBox, {
-      tandem: tandem.createTandem( 'light' )
-    } );
+    const light = new Light( zoomedInBox, tandem.createTandem( 'light' ) );
 
     // Group all predictive models under this tandem.
     const predictiveModelsTandem = tandem.createTandem( 'predictiveModels' );

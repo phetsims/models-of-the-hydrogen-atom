@@ -16,11 +16,9 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Color } from '../../../../scenery/js/imports.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -30,6 +28,7 @@ import { LightMode, LightModeValues } from './LightMode.js';
 import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -37,10 +36,6 @@ assert && assert( TRANSITION_WAVELENGTHS_WEIGHT >= 0 && TRANSITION_WAVELENGTHS_W
 
 // Maximum number of photons in the zoomed-in box
 const MAX_PHOTONS = 20;
-
-type SelfOptions = EmptySelfOptions;
-
-type LightOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Light extends PhetioObject {
 
@@ -77,27 +72,24 @@ export default class Light extends PhetioObject {
   // Wavelengths (in nm) that can be absorbed when the electron is in the ground state (n = 1).
   private readonly groundStateAbsorptionWavelengths: number[];
 
-  public constructor( zoomedInBox: ZoomedInBox, providedOptions: LightOptions ) {
+  public constructor( zoomedInBox: ZoomedInBox, tandem: Tandem ) {
 
-    const options = optionize<LightOptions, SelfOptions, PhetioObjectOptions>()( {
-
-      // PhetioObjectOptions
+    super( {
       isDisposable: false,
+      tandem: tandem,
       phetioState: false
-    }, providedOptions );
-
-    super( options );
+    } );
 
     this.zoomedInBox = zoomedInBox;
 
     this.isOnProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'isOnProperty' ),
+      tandem: tandem.createTandem( 'isOnProperty' ),
       phetioFeatured: true
     } );
 
     this.lightModeProperty = new Property<LightMode>( 'white', {
       validValues: LightModeValues,
-      tandem: options.tandem.createTandem( 'lightModeProperty' ),
+      tandem: tandem.createTandem( 'lightModeProperty' ),
       phetioFeatured: true,
       phetioValueType: StringIO
     } );
@@ -109,7 +101,7 @@ export default class Light extends PhetioObject {
     this.monochromaticWavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
       numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
       range: this.monochromaticWavelengthRange,
-      tandem: options.tandem.createTandem( 'monochromaticWavelengthProperty' ),
+      tandem: tandem.createTandem( 'monochromaticWavelengthProperty' ),
       phetioDocumentation: 'Wavelength used for the light when it is in monochromatic mode.',
       phetioFeatured: true
     } );
@@ -133,7 +125,7 @@ export default class Light extends PhetioObject {
 
     this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
       units: 's',
-      tandem: options.tandem.createTandem( 'dtSincePhotonCreatedProperty' ),
+      tandem: tandem.createTandem( 'dtSincePhotonCreatedProperty' ),
       phetioDocumentation: 'Elapsed time since a photon was emitted by the light source.',
       phetioReadOnly: true
     } );
