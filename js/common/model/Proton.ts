@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * Proton is the model of a proton. It is not instrumented for PhET-iO because it has no state and no fields of interest.

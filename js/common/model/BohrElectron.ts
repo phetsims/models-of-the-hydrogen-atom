@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * BohrElectron is the Electron specialized for the Bohr model. It adds Properties needed by that model, but the model

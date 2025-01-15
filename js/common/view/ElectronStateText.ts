@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * ElectronStateText displays the electron state (n), used for the Bohr and de Broglie models.

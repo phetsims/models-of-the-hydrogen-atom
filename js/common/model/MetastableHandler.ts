@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 //TODO Is the Java version really using step, or just calling exciteAtom?
 /**
