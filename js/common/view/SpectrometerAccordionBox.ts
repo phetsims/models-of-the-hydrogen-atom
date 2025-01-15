@@ -89,7 +89,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       expandedProperty: expandedProperty,
       fill: MOTHAColors.spectrometerAccordionBoxFillProperty,
       stroke: MOTHAColors.spectrometerAccordionBoxStrokeProperty,
-      tandem: tandem
+      tandem: tandem,
+      phetioFeatured: true
     } ) );
 
     // Record data only when the accordion box is expanded.

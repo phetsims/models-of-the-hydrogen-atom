@@ -50,6 +50,7 @@ export default class Spectrometer extends PhetioObject {
     super( {
       tandem: tandem,
       isDisposable: false,
+      phetioFeatured: true,
       phetioState: false
     } );
 
