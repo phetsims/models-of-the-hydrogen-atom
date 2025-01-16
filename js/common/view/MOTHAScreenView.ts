@@ -217,40 +217,48 @@ export default class MOTHAScreenView extends ScreenView {
       } );
 
     // rendering order
+    const screenViewRootNodeChildren = [
+      screenBackgroundRectangle,
+      legendPanel,
+      timeControlNode,
+      lightNode,
+      lightControlPanel,
+      transitionsCheckbox,
+      boxOfHydrogenNode,
+      tinyBoxNode,
+      dashedLines,
+      this.zoomedInBoxNode,
+      modelVBox,
+      spectrometerAccordionBox,
+      resetAllButton,
+      transitionsDialog,
+      options.popupsParent
+    ];
+    if ( this.electronEnergyLevelAccordionBox ) {
+      // Add optional electronEnergyLevelAccordionBox before resetAllButton.
+      const index = screenViewRootNodeChildren.indexOf( resetAllButton );
+      screenViewRootNodeChildren.splice( index, 0, this.electronEnergyLevelAccordionBox );
+    }
     const screenViewRootNode = new Node( {
-      children: [
-        screenBackgroundRectangle,
-        legendPanel,
-        timeControlNode,
-        lightNode,
-        lightControlPanel,
-        transitionsCheckbox,
-        boxOfHydrogenNode,
-        tinyBoxNode,
-        dashedLines,
-        this.zoomedInBoxNode,
-        modelVBox,
-        spectrometerAccordionBox,
-        // Add electronEnergyLevelAccordionBox if it was provided:
-        ...( this.electronEnergyLevelAccordionBox ? [ this.electronEnergyLevelAccordionBox ] : [] ),
-        resetAllButton,
-        transitionsDialog,
-        options.popupsParent
-      ]
+      children: screenViewRootNodeChildren
     } );
     this.addChild( screenViewRootNode );
 
     // Play Area focus order
-    this.pdomPlayAreaNode.pdomOrder = [
+    const playAreaPDOMOrder = [
       lightNode,
       lightControlPanel,
       transitionsCheckbox,
       transitionsDialog,
-      // Add electronEnergyLevelAccordionBox if it was provided:
-      ...( this.electronEnergyLevelAccordionBox ? [ this.electronEnergyLevelAccordionBox ] : [] ),
       modelVBox,
       this.zoomedInBoxNode
     ];
+    if ( this.electronEnergyLevelAccordionBox ) {
+      // Add optional electronEnergyLevelAccordionBox before modelVBox.
+      const index = playAreaPDOMOrder.indexOf( modelVBox );
+      playAreaPDOMOrder.splice( index, 0, this.electronEnergyLevelAccordionBox );
+    }
+    this.pdomPlayAreaNode.pdomOrder = playAreaPDOMOrder;
 
     // Control Area focus order
     this.pdomControlAreaNode.pdomOrder = [
