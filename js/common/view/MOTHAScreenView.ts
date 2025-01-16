@@ -1,7 +1,7 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * MOTHAScreenView is the view for the 'Energy Levels' screen.
+ * MOTHAScreenView is the base class for the ScreenView in both screens.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -35,9 +35,18 @@ import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEne
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 
 type SelfOptions = {
-  zoomedInBoxNode: ZoomedInBoxNode;
+
+  // Parent Node for any popups.
   popupsParent: Node;
-  electronEnergyLevelAccordionBox?: ElectronEnergyLevelAccordionBox | null; // Optional, for layout
+
+  // The zoomed-in view of the box of hydrogen.
+  zoomedInBoxNode: ZoomedInBoxNode;
+
+  // Optional accordion box with Electron Energy Level diagrams, present in the Energy Levels screen.
+  electronEnergyLevelAccordionBox?: ElectronEnergyLevelAccordionBox | null;
+
+  // x-offset of lightNode from the left edge of layoutBounds.
+  lightNodeXOffset?: number;
 };
 
 type MOTHAScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
@@ -55,6 +64,7 @@ export default class MOTHAScreenView extends ScreenView {
 
       // SelfOptions
       electronEnergyLevelAccordionBox: null,
+      lightNodeXOffset: 35,
 
       // ScreenViewOptions
       isDisposable: false,
@@ -156,7 +166,7 @@ export default class MOTHAScreenView extends ScreenView {
     // Layout is complicated, so do it all in one place, rather than via NodeTranslationOptions.
     legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
-    lightNode.left = this.layoutBounds.left + 35;
+    lightNode.left = this.layoutBounds.left + options.lightNodeXOffset;
     lightControlPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     this.zoomedInBoxNode.left = lightNode.right + 50;
     this.zoomedInBoxNode.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
@@ -180,7 +190,7 @@ export default class MOTHAScreenView extends ScreenView {
       modelVBox.top = this.zoomedInBoxNode.top;
       timeControlNode.left = modelVBox.left;
     }
-    timeControlNode.centerY = modelVBox.bottom + ( spectrometerAccordionBox.top - modelVBox.bottom ) / 2;
+    timeControlNode.bottom = this.zoomedInBoxNode.bottom;
     transitionsCheckbox.localBoundsProperty.link( () => {
       transitionsCheckbox.centerX = lightControlPanel.centerX;
       transitionsCheckbox.top = lightControlPanel.bottom + 5;

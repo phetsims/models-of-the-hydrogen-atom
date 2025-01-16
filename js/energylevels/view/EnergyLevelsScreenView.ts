@@ -31,8 +31,8 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
       tandem.createTandem( 'electronEnergyLevelAccordionBox' ) );
 
     super( model, {
-      zoomedInBoxNode: zoomedInBoxNode,
       popupsParent: popupsParent,
+      zoomedInBoxNode: zoomedInBoxNode,
       electronEnergyLevelAccordionBox: electronEnergyLevelAccordionBox,
       tandem: tandem
     } );
