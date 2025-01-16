@@ -237,7 +237,8 @@ export default class MOTHAScreenView extends ScreenView {
         this.zoomedInBoxNode,
         modelVBox,
         spectrometerAccordionBox,
-        this.electronEnergyLevelAccordionBox ? this.electronEnergyLevelAccordionBox : new Rectangle( 0, 0, 1, 1 ), //TODO Eliminate this hack.
+        // Add electronEnergyLevelAccordionBox if it was provided:
+        ...( this.electronEnergyLevelAccordionBox ? [ this.electronEnergyLevelAccordionBox ] : [] ),
         resetAllButton,
         transitionsDialog,
         options.popupsParent
@@ -251,7 +252,8 @@ export default class MOTHAScreenView extends ScreenView {
       lightControlPanel,
       transitionsCheckbox,
       transitionsDialog,
-      null, //TODO electronEnergyLevelAccordionBox goes here if it was provided.
+      // Add electronEnergyLevelAccordionBox if it was provided:
+      ...( this.electronEnergyLevelAccordionBox ? [ this.electronEnergyLevelAccordionBox ] : [] ),
       modelVBox,
       this.zoomedInBoxNode
     ];
