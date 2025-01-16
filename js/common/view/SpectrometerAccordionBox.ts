@@ -30,6 +30,8 @@ const PUSH_BUTTON_SIZE = new Dimension2( 45, 32 );
 
 export default class SpectrometerAccordionBox extends AccordionBox {
 
+  private readonly resetSpectrometerAccordionBox: () => void;
+
   public constructor( spectrometer: Spectrometer, tandem: Tandem ) {
 
     const expandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
@@ -99,6 +101,15 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } );
 
     this.addLinkedElement( spectrometer );
+
+    this.resetSpectrometerAccordionBox = () => {
+      expandedProperty.reset();
+    };
+  }
+
+  public override reset(): void {
+    super.reset();
+    this.resetSpectrometerAccordionBox();
   }
 }
 
