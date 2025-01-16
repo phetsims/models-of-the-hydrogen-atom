@@ -37,6 +37,7 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
       zoomedInBoxNode: zoomedInBoxNode,
       electronEnergyLevelAccordionBox: electronEnergyLevelAccordionBox,
       lightNodeXOffset: 35,
+      modelRadioButtonTextMaxWidth: 120,
       screenSummaryContent: new ScreenSummaryContent( {
         additionalContent: [
           ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,

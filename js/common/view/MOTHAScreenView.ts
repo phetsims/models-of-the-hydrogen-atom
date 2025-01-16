@@ -47,6 +47,9 @@ type SelfOptions = {
   // x-offset of lightNode from the left edge of layoutBounds.
   lightNodeXOffset: number;
 
+  //
+  modelRadioButtonTextMaxWidth: number;
+
   // Description screen summary.
   screenSummaryContent: ScreenSummaryContent;
 };
@@ -117,7 +120,7 @@ export default class MOTHAScreenView extends ScreenView {
 
     // panel that contains radio buttons for selecting a predictive model
     const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty, {
-      radioButtonTextMaxWidth: 120,
+      radioButtonTextMaxWidth: options.modelRadioButtonTextMaxWidth,
       hasContinuumBar: false,
       tandem: options.tandem.createTandem( 'modelPanel' )
     } );
