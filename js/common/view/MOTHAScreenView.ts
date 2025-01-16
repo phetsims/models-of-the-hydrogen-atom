@@ -20,8 +20,8 @@ import TransitionsDialog from '../../common/view/TransitionsDialog.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
-import { LightControlPanel } from '../../common/view/LightControlPanel.js';
-import { LightNode } from '../../common/view/LightNode.js';
+import { LightControlPanel } from './LightControlPanel.js';
+import { LightNode } from './LightNode.js';
 import ModelPanel from '../../common/view/ModelPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
@@ -118,7 +118,8 @@ export default class MOTHAScreenView extends ScreenView {
     } );
 
     // switches the model mode between Experiment and Model
-    const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty, options.tandem.createTandem( 'experimentModelSwitch' ) );
+    const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty,
+      options.tandem.createTandem( 'experimentModelSwitch' ) );
 
     // panel that contains radio buttons for selecting a predictive model
     const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty, {
@@ -135,7 +136,8 @@ export default class MOTHAScreenView extends ScreenView {
     } );
 
     // Spectrometer
-    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, options.tandem.createTandem( 'spectrometerAccordionBox' ) );
+    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer,
+      options.tandem.createTandem( 'spectrometerAccordionBox' ) );
 
     // Time controls
     const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty,
