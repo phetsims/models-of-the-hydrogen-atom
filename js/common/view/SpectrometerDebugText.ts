@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * SpectrometerDebugText is a simple text-only display of the spectrometer data, for debugging.

@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2016-2025, University of Colorado Boulder
 
 /**
  * MOTHAScreenView is the base class for the ScreenView in both screens.

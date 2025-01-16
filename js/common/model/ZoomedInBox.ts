@@ -1,4 +1,4 @@
-// Copyright 2022-2023, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * ZoomedInBox is the part of the box of hydrogen that we're seeing in the zoomed-in view.
