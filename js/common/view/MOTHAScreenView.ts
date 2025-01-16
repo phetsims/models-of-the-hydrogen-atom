@@ -46,7 +46,7 @@ type SelfOptions = {
   electronEnergyLevelAccordionBox?: ElectronEnergyLevelAccordionBox | null;
 
   // x-offset of lightNode from the left edge of layoutBounds.
-  lightNodeXOffset?: number;
+  lightNodeXOffset: number;
 };
 
 type MOTHAScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
@@ -64,7 +64,6 @@ export default class MOTHAScreenView extends ScreenView {
 
       // SelfOptions
       electronEnergyLevelAccordionBox: null,
-      lightNodeXOffset: 35,
 
       // ScreenViewOptions
       isDisposable: false,

@@ -34,6 +34,7 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
       popupsParent: popupsParent,
       zoomedInBoxNode: zoomedInBoxNode,
       electronEnergyLevelAccordionBox: electronEnergyLevelAccordionBox,
+      lightNodeXOffset: 35,
       tandem: tandem
     } );
 
