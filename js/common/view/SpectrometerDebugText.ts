@@ -2,7 +2,7 @@
 
 /**
  * SpectrometerDebugText is a simple text-only display of the spectrometer data, for debugging.
- * Run with ?dev to show this in the Spectrometer accordion box.
+ * Run with ?debugSpectrometerData to show this in the Spectrometer accordion box and snapshots dialog.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
