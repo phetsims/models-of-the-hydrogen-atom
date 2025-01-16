@@ -35,6 +35,7 @@ type SelfOptions = {
   // Whether to create tick marks at emission wavelengths. Used to omit tick marks from snapshots.
   hasTickMarks?: boolean;
 
+  // Fill and stroke for the chart background.
   backgroundFill?: TColor;
   backgroundStroke?: TColor;
 };
