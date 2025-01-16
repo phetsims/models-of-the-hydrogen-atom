@@ -163,6 +163,8 @@ export default class MOTHAScreenView extends ScreenView {
     } );
     this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
 
+    //TODO Replace some of this layout code with HBox, VBox, etc.
+
     // Layout is complicated, so do it all in one place, rather than via NodeTranslationOptions.
     legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
