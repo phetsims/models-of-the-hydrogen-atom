@@ -13,6 +13,8 @@ import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import EnergyLevelsZoomedInBoxNode from './EnergyLevelsZoomedInBoxNode.js';
 import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
+import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 export default class EnergyLevelsScreenView extends MOTHAScreenView {
 
@@ -35,6 +37,13 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
       zoomedInBoxNode: zoomedInBoxNode,
       electronEnergyLevelAccordionBox: electronEnergyLevelAccordionBox,
       lightNodeXOffset: 35,
+      screenSummaryContent: new ScreenSummaryContent( {
+        additionalContent: [
+          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
+        ]
+      } ),
       tandem: tandem
     } );
 

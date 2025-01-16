@@ -27,7 +27,6 @@ import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import MOTHAModel from '../model/MOTHAModel.js';
@@ -47,6 +46,9 @@ type SelfOptions = {
 
   // x-offset of lightNode from the left edge of layoutBounds.
   lightNodeXOffset: number;
+
+  // Description screen summary.
+  screenSummaryContent: ScreenSummaryContent;
 };
 
 type MOTHAScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
@@ -66,14 +68,7 @@ export default class MOTHAScreenView extends ScreenView {
       electronEnergyLevelAccordionBox: null,
 
       // ScreenViewOptions
-      isDisposable: false,
-      screenSummaryContent: new ScreenSummaryContent( {
-        additionalContent: [
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
-        ]
-      } )
+      isDisposable: false
     }, providedOptions );
 
     super( options );

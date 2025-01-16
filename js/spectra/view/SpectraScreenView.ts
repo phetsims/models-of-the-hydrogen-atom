@@ -12,6 +12,8 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
+import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 export default class SpectraScreenView extends MOTHAScreenView {
 
@@ -27,6 +29,13 @@ export default class SpectraScreenView extends MOTHAScreenView {
       popupsParent: popupsParent,
       zoomedInBoxNode: zoomedInBoxNode,
       lightNodeXOffset: 125,
+      screenSummaryContent: new ScreenSummaryContent( {
+        additionalContent: [
+          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.controlAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.interactionHintStringProperty
+        ]
+      } ),
       tandem: tandem
     } );
   }
