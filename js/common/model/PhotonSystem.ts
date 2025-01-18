@@ -59,7 +59,6 @@ export default class PhotonSystem extends PhetioObject {
     super( {
       isDisposable: false,
       phetioState: false,
-      phetioDocumentation: 'The system of photons shown inside the zoomed-in box.',
       tandem: tandem
     } );
 

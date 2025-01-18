@@ -82,12 +82,14 @@ export default class MOTHAModel implements TModel {
    * @param light
    * @param predictiveModels
    * @param initialPredictiveModel
+   * @param hydrogenAtomsTandem
    * @param tandem
    */
   protected constructor( zoomedInBox: ZoomedInBox,
                          light: Light,
                          predictiveModels: HydrogenAtom[],
                          initialPredictiveModel: HydrogenAtom,
+                         hydrogenAtomsTandem: Tandem,
                          tandem: Tandem ) {
 
     assert && assert( predictiveModels.includes( initialPredictiveModel ) );
@@ -101,7 +103,7 @@ export default class MOTHAModel implements TModel {
     } );
 
     this.experiment = new Experiment( light, {
-      tandem: tandem.createTandem( 'experiment' )
+      tandem: hydrogenAtomsTandem.createTandem( 'experiment' )
     } );
 
     this.predictiveModels = predictiveModels;

@@ -30,18 +30,18 @@ export default class EnergyLevelsModel extends MOTHAModel {
     const light = new Light( zoomedInBox, tandem.createTandem( 'light' ) );
 
     // Group all predictive models under this tandem.
-    const predictiveModelsTandem = tandem.createTandem( 'predictiveModels' );
+    const hydrogenAtomsTandem = tandem.createTandem( 'hydrogenAtoms' );
 
     const bohrModel = new BohrModel( {
-      tandem: predictiveModelsTandem.createTandem( 'bohrModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'bohrModel' )
     } );
 
     const deBroglieModel = new DeBroglieModel( {
-      tandem: predictiveModelsTandem.createTandem( 'deBroglieModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'deBroglieModel' )
     } );
 
     const schrodingerModel = new SchrodingerModel( light, {
-      tandem: predictiveModelsTandem.createTandem( 'schrodingerModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'schrodingerModel' )
     } );
 
     // Predictive models supported by this screen, in the order that they will appear in the UI.
@@ -56,7 +56,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
     assert && assert( _.every( predictiveModels, model => model instanceof BohrModel ),
       'all models in this screen must include the concept of state transition wavelengths' );
 
-    super( zoomedInBox, light, predictiveModels, bohrModel, tandem );
+    super( zoomedInBox, light, predictiveModels, bohrModel, hydrogenAtomsTandem, tandem );
 
     this.bohrModel = bohrModel;
     this.deBroglieModel = deBroglieModel;

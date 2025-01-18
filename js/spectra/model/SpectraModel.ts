@@ -36,30 +36,30 @@ export default class SpectraModel extends MOTHAModel {
     const light = new Light( zoomedInBox, tandem.createTandem( 'light' ) );
 
     // Group all predictive models under this tandem.
-    const predictiveModelsTandem = tandem.createTandem( 'predictiveModels' );
+    const hydrogenAtomsTandem = tandem.createTandem( 'hydrogenAtoms' );
 
     const billiardBallModel = new BilliardBallModel( {
-      tandem: predictiveModelsTandem.createTandem( 'billiardBallModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'billiardBallModel' )
     } );
 
     const plumPuddingModel = new PlumPuddingModel( {
-      tandem: predictiveModelsTandem.createTandem( 'plumPuddingModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'plumPuddingModel' )
     } );
 
     const classicalSolarSystemModel = new ClassicalSolarSystemModel( {
-      tandem: predictiveModelsTandem.createTandem( 'classicalSolarSystemModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'classicalSolarSystemModel' )
     } );
 
     const bohrModel = new BohrModel( {
-      tandem: predictiveModelsTandem.createTandem( 'bohrModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'bohrModel' )
     } );
 
     const deBroglieModel = new DeBroglieModel( {
-      tandem: predictiveModelsTandem.createTandem( 'deBroglieModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'deBroglieModel' )
     } );
 
     const schrodingerModel = new SchrodingerModel( light, {
-      tandem: predictiveModelsTandem.createTandem( 'schrodingerModel' )
+      tandem: hydrogenAtomsTandem.createTandem( 'schrodingerModel' )
     } );
 
     // Predictive models supported by this screen, in the order that they will appear in the UI
@@ -72,7 +72,7 @@ export default class SpectraModel extends MOTHAModel {
       schrodingerModel
     ];
 
-    super( zoomedInBox, light, predictiveModels, billiardBallModel, tandem );
+    super( zoomedInBox, light, predictiveModels, billiardBallModel, hydrogenAtomsTandem, tandem );
 
     this.billiardBallModel = billiardBallModel;
     this.plumPuddingModel = plumPuddingModel;
