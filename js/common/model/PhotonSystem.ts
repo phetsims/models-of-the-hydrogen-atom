@@ -123,7 +123,7 @@ export default class PhotonSystem extends PhetioObject {
   }
 
   /**
-   * Adds a photon by mutating and inactive Photon instance,
+   * Adds a photon by mutating an inactive Photon instance,
    */
   private addPhoton( photonOptions: StrictOmit<Required<PhotonOptions>, 'tandem'> ): void {
     const photon = _.find( this.photons, photon => !photon.isActiveProperty.value )!;
