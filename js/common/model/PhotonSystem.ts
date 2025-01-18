@@ -36,7 +36,7 @@ export default class PhotonSystem extends PhetioObject {
   public readonly photonAddedEmitter: Emitter<[ Photon ]>;
   public readonly photonRemovedEmitter: Emitter<[ Photon ]>;
 
-  // A static set of Photons that will be reused, activated, and mutated as the sim runs.
+  // A static set of Photons that will be reused, mutated, and activated as the sim runs.
   private readonly photons: Photon[];
 
   // This is the number of static Photon instances that are created at startup, and the maximum number of Photons that
