@@ -3,13 +3,15 @@
 /**
  * PhotonSystem is the system of photons that are displayed in the zoomed-in box.
  *
+ * To encapsulate PhET-iO concerns, PhotonSystem owns and manages all Photon instances.
+ * See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
-import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -27,7 +29,7 @@ export default class PhotonSystem extends PhetioObject {
   private readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
   // the collection of photons that appear in the zoomed-in box
-  private readonly photons: ObservableArray<Photon>;
+  private readonly photons: Photon[];
 
   // notify when a photon is added or removed
   public readonly photonAddedEmitter: Emitter<[ Photon ]>;
@@ -44,8 +46,7 @@ export default class PhotonSystem extends PhetioObject {
     this.zoomedInBox = zoomedInBox;
     this.hydrogenAtomProperty = hydrogenAtomProperty;
 
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47 replace ObservableArray
-    this.photons = createObservableArray<Photon>();
+    this.photons = [];
 
     this.photonAddedEmitter = new Emitter<[ Photon ]>( {
       parameters: [ { name: 'photon', valueType: Photon } ]
@@ -84,13 +85,14 @@ export default class PhotonSystem extends PhetioObject {
   }
 
   private addPhoton( photon: Photon ): void {
-    this.photons.add( photon );
+    this.photons.push( photon );
     this.photonAddedEmitter.emit( photon );
   }
 
   public removePhoton( photon: Photon ): void {
     assert && assert( this.photons.includes( photon ), 'Attempted to remove a photon that does not exist.' );
-    this.photons.remove( photon );
+    const index = this.photons.indexOf( photon );
+    this.photons.splice( index, 1 );
     photon.dispose();
     this.photonRemovedEmitter.emit( photon );
   }
@@ -110,7 +112,7 @@ export default class PhotonSystem extends PhetioObject {
   public step( dt: number ): void {
 
     // This may change this.photons, so operate on a copy of the array.
-    this.photons.getArrayCopy().forEach( photon => {
+    Array.from( this.photons ).forEach( photon => {
 
       // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
       // MOTHAModel.step. If we move the photon after processing it, then the photon will be processed when it
