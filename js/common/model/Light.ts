@@ -60,8 +60,8 @@ export default class Light extends PhetioObject {
   // color displayed by the view
   public readonly colorProperty: TReadOnlyProperty<Color | string>;
 
-  // emits when a photon is created
-  public readonly photonCreatedEmitter: TEmitter<[ Photon ]>;
+  // notifies that a photon was emitted
+  public readonly photonEmittedEmitter: TEmitter<[ Photon ]>;
 
   // time between creation of photons
   private readonly dtPerPhotonCreated: number;
@@ -118,7 +118,7 @@ export default class Light extends PhetioObject {
         phetioValueType: Color.ColorIO
       } );
 
-    this.photonCreatedEmitter = new Emitter<[ Photon ]>( {
+    this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
       parameters: [ { valueType: Photon } ]
     } );
 
@@ -154,32 +154,32 @@ export default class Light extends PhetioObject {
         this.dtSincePhotonCreatedProperty.value = this.dtSincePhotonCreatedProperty.value % this.dtPerPhotonCreated;
 
         // Create a photon.
-        this.createPhoton();
+        this.emitPhoton();
       }
     }
   }
 
   /**
-   * Creates a photon at a random location along the bottom edge of the zoomed-in box.
+   * Emits a photon at a random location along the bottom edge of the zoomed-in box.
    */
-  private createPhoton(): void {
-    this.createPhotonAtPosition( this.getNextPhotonWavelength(), this.getNextPhotonPosition() );
+  private emitPhoton(): void {
+    this.emitPhotonAtPosition( this.getNextPhotonWavelength(), this.getNextPhotonPosition() );
   }
 
   //TODO Delete if not used.
   /**
-   * Creates a photon at the bottom-center of the zoomed-in box. This is used when we want to ensure that a
+   * Emits a photon at the bottom-center of the zoomed-in box. This is used when we want to ensure that a
    * photon hits the atom, which is centered in the zoomed-in box.
    */
-  public createPhotonAtCenter( wavelength: number ): void {
-    this.createPhotonAtPosition( wavelength, new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ) );
+  public emitPhotonAtBottomCenter( wavelength: number ): void {
+    this.emitPhotonAtPosition( wavelength, new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ) );
   }
 
   /**
-   * Creates a photon with the specified wavelength and position.
+   * Emits a photon with the specified wavelength and position.
    */
-  private createPhotonAtPosition( wavelength: number, position: Vector2 ): void {
-    this.photonCreatedEmitter.emit( new Photon( {
+  private emitPhotonAtPosition( wavelength: number, position: Vector2 ): void {
+    this.photonEmittedEmitter.emit( new Photon( {
       wavelength: wavelength,
       position: position,
       direction: Light.DIRECTION

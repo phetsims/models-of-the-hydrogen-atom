@@ -102,7 +102,7 @@ export default class MetastableHandler extends PhetioObject {
     const wavelength = wavelengths[ dotRandom.nextInt( wavelengths.length ) ];
 
     // Tell the light to emit a photon, and direct it towards the center of the atom.
-    this.light.createPhotonAtCenter( wavelength );
+    this.light.emitPhotonAtBottomCenter( wavelength );
 
     phet.log && phet.log( `MetastableHandler.exciteAtom ${MOTHASymbols.lambda}=${wavelength}` );
   }
