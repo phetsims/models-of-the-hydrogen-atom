@@ -1,7 +1,7 @@
 // Copyright 2015-2025, University of Colorado Boulder
 
 /**
- * Light is the model of a light that shines into the box of hydrogen.
+ * Light is the model of a light source that shines into the box of hydrogen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
