@@ -85,6 +85,7 @@ export default class PhotonSystem extends PhetioObject {
   }
 
   private addPhoton( photon: Photon ): void {
+    assert && assert( !this.photons.includes( photon ), 'Attempted to add a photon that already exists.' );
     this.photons.push( photon );
     this.photonAddedEmitter.emit( photon );
   }
