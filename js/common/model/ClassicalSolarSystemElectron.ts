@@ -43,13 +43,14 @@ export default class ClassicalSolarSystemElectron extends Electron {
     this.angleProperty = new NumberProperty( options.angle, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'angleProperty' ),
+      phetioDocumentation: 'Angle of the electron along its orbit. For internal use only.',
       phetioReadOnly: true
     } );
 
     this.angularSpeedProperty = new NumberProperty( ANGULAR_SPEED, {
       units: 'radians/s',
       tandem: options.tandem.createTandem( 'angularSpeedProperty' ),
-      phetioDocumentation: 'Angular speed of the electron.',
+      phetioDocumentation: 'Angular speed of the electron. For internal use only.',
       phetioReadOnly: true
     } );
   }

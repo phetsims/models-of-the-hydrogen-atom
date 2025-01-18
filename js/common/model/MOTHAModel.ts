@@ -111,6 +111,7 @@ export default class MOTHAModel implements TModel {
     this.predictiveModelProperty = new Property<HydrogenAtom>( initialPredictiveModel, {
       validValues: predictiveModels,
       tandem: tandem.createTandem( 'predictiveModelProperty' ),
+      phetioDocumentation: 'The predictive model that is currently selected in the user interface.',
       phetioFeatured: true,
       phetioValueType: HydrogenAtom.HydrogenAtomIO
     } );
@@ -133,12 +134,14 @@ export default class MOTHAModel implements TModel {
 
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isPlayingProperty' ),
+      phetioDocumentation: 'Whether the model is playing (true) or paused (false).',
       phetioFeatured: true
     } );
 
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       validValues: MOTHAConstants.TIME_SPEEDS,
       tandem: tandem.createTandem( 'timeSpeedProperty' ),
+      phetioDocumentation: 'Speed at which the model is playing.',
       phetioFeatured: true
     } );
 

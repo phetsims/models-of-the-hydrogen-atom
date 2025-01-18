@@ -63,6 +63,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
     this.deBroglieRepresentationProperty = new StringUnionProperty( 'radialDistance', {
       validValues: DeBroglieRepresentationValues,
       tandem: options.tandem.createTandem( 'deBroglieRepresentationProperty' ),
+      phetioDocumentation: 'The representation for the de Broglie model that is displayed in the view.',
       phetioFeatured: true
     } );
   }

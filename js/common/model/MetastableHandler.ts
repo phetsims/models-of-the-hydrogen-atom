@@ -65,7 +65,7 @@ export default class MetastableHandler extends PhetioObject {
     this.elapsedTimeProperty = new NumberProperty( 0, {
       units: 's',
       tandem: tandem.createTandem( 'elapsedTimeProperty' ),
-      phetioDocumentation: 'Elapsed time since attempting to excite the atom to a higher state.',
+      phetioDocumentation: 'Elapsed time since attempting to excite the atom to a higher state. For internal use only.',
       phetioReadOnly: true
     } );
 

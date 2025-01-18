@@ -43,6 +43,7 @@ export default class Electron extends PhetioObject {
 
     this.positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
   }

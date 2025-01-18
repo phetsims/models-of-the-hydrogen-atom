@@ -87,6 +87,7 @@ export default class Light extends PhetioObject {
     this.lightModeProperty = new Property<LightMode>( 'white', {
       validValues: LightModeValues,
       tandem: tandem.createTandem( 'lightModeProperty' ),
+      phetioDocumentation: 'Whether the light source is emitting white or monochromatic photons.',
       phetioFeatured: true,
       phetioValueType: StringIO
     } );
@@ -127,7 +128,7 @@ export default class Light extends PhetioObject {
     this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
       units: 's',
       tandem: tandem.createTandem( 'dtSincePhotonCreatedProperty' ),
-      phetioDocumentation: 'Elapsed time since a photon was emitted by the light source.',
+      phetioDocumentation: 'Elapsed time since a photon was emitted by the light source. For internal use only.',
       phetioReadOnly: true
     } );
 

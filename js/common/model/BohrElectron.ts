@@ -82,6 +82,7 @@ export default class BohrElectron extends Electron {
     this.angleProperty = new NumberProperty( 0, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'angleProperty' ),
+      phetioDocumentation: 'Angle of the electron along its orbit. For internal use only.',
       phetioReadOnly: true
     } );
 
@@ -92,7 +93,7 @@ export default class BohrElectron extends Electron {
         return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: options.tandem.createTandem( 'offsetProperty' ),
-        phetioDocumentation: 'Offset of the electron from the center of the atom.',
+        phetioDocumentation: 'Offset of the electron from the center of the atom. For internal use only.',
         phetioValueType: Vector2.Vector2IO
       } );
 
