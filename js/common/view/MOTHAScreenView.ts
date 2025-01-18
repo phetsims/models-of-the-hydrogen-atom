@@ -22,16 +22,18 @@ import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
 import { LightControlPanel } from './LightControlPanel.js';
 import { LightNode } from './LightNode.js';
-import ModelPanel from '../../common/view/ModelPanel.js';
+import ModelPanel, { ModelPanelOptions } from '../../common/view/ModelPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAModel from '../model/MOTHAModel.js';
 import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEnergyLevelAccordionBox.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = {
 
@@ -47,8 +49,8 @@ type SelfOptions = {
   // x-offset of lightNode from the left edge of layoutBounds.
   lightNodeXOffset: number;
 
-  //
-  modelRadioButtonTextMaxWidth: number;
+  // options propagated to ModelPanel.
+  modelPanelOptions?: PickOptional<ModelPanelOptions, 'radioButtonTextMaxWidth' | 'hasContinuumBar'>;
 
   // Description screen summary.
   screenSummaryContent: ScreenSummaryContent;
@@ -65,7 +67,7 @@ export default class MOTHAScreenView extends ScreenView {
 
   protected constructor( model: MOTHAModel, providedOptions: MOTHAScreenViewOptions ) {
 
-    const options = optionize<MOTHAScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
+    const options = optionize<MOTHAScreenViewOptions, StrictOmit<SelfOptions, 'modelPanelOptions'>, ScreenViewOptions>()( {
 
       // SelfOptions
       electronEnergyLevelAccordionBox: null,
@@ -119,11 +121,10 @@ export default class MOTHAScreenView extends ScreenView {
       options.tandem.createTandem( 'experimentModelSwitch' ) );
 
     // panel that contains radio buttons for selecting a predictive model
-    const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty, {
-      radioButtonTextMaxWidth: options.modelRadioButtonTextMaxWidth,
-      hasContinuumBar: false,
-      tandem: options.tandem.createTandem( 'modelPanel' )
-    } );
+    const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty,
+      combineOptions<ModelPanelOptions>( {
+        tandem: options.tandem.createTandem( 'modelPanel' )
+      }, options.modelPanelOptions ) );
 
     const modelVBox = new VBox( {
       children: [ experimentModelSwitch, modelPanel ],

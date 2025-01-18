@@ -24,7 +24,7 @@ type SelfOptions = {
   hasContinuumBar?: boolean;
 };
 
-type ModelPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+export type ModelPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class ModelPanel extends Panel {
 
