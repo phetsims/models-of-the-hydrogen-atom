@@ -10,29 +10,32 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import LightSource from '../model/LightSource.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
 import LightModeRadioButtonGroup from './LightModeRadioButtonGroup.js';
 import { MonochromaticWavelengthControl } from './MonochromaticWavelengthControl.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import { LightMode } from '../model/LightMode.js';
 
 export class LightControlPanel extends Panel {
 
-  public constructor( lightSource: LightSource,
+  public constructor( lightModeProperty: Property<LightMode>,
+                      monochromaticWavelengthProperty: NumberProperty,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
-    const monochromaticWavelengthControl = new MonochromaticWavelengthControl( lightSource.monochromaticWavelengthProperty, lightSource.lightModeProperty,
+    const monochromaticWavelengthControl = new MonochromaticWavelengthControl( monochromaticWavelengthProperty, lightModeProperty,
       tandem.createTandem( 'monochromaticWavelengthControl' ) );
 
-    const absorptionTransitionText = new AbsorptionTransitionText( lightSource.monochromaticWavelengthProperty,
-      lightSource.lightModeProperty, isQuantumModelProperty, isExperimentProperty,
+    const absorptionTransitionText = new AbsorptionTransitionText( monochromaticWavelengthProperty,
+      lightModeProperty, isQuantumModelProperty, isExperimentProperty,
       tandem.createTandem( 'absorptionTransitionText' ) );
 
-    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightSource.lightModeProperty, {
+    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightModeProperty, {
       maxWidth: monochromaticWavelengthControl.width,
       tandem: tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
@@ -56,13 +59,10 @@ export class LightControlPanel extends Panel {
       xMargin: 5,
       yMargin: 10,
       tandem: tandem,
-      phetioFeatured: true,
       visiblePropertyOptions: {
         phetioFeatured: true
       }
     } );
-
-    this.addLinkedElement( lightSource );
   }
 }
 

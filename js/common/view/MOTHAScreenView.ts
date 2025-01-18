@@ -88,8 +88,9 @@ export default class MOTHAScreenView extends ScreenView {
     // Light source
     const lightSourceNode = new LightSourceNode( model.lightSource, options.tandem.createTandem( 'lightSourceNode' ) );
 
-    // Controls for the light
-    const lightControlPanel = new LightControlPanel( model.lightSource, model.isQuantumModelProperty, model.isExperimentProperty,
+    // Controls for the type of light emitted by the light source
+    const lightControlPanel = new LightControlPanel( model.lightSource.lightModeProperty,
+      model.lightSource.monochromaticWavelengthProperty, model.isQuantumModelProperty, model.isExperimentProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
     const transitionsDialogVisibleProperty = new BooleanProperty( false, {
