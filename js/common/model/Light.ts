@@ -33,9 +33,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
 assert && assert( TRANSITION_WAVELENGTHS_WEIGHT >= 0 && TRANSITION_WAVELENGTHS_WEIGHT <= 1 );
 
-// Maximum number of photons in the zoomed-in box
-const MAX_PHOTONS = 20;
-
 export default class Light extends PhetioObject {
 
   // The light source points up in the model coordinate frame.
@@ -125,7 +122,7 @@ export default class Light extends PhetioObject {
       ]
     } );
 
-    this.dtPerPhotonCreated = ( zoomedInBox.height / MOTHAConstants.PHOTON_SPEED ) / MAX_PHOTONS;
+    this.dtPerPhotonCreated = ( zoomedInBox.height / MOTHAConstants.PHOTON_SPEED ) / MOTHAConstants.MAX_LIGHT_PHOTONS;
 
     this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
       units: 's',

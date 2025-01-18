@@ -70,6 +70,9 @@ const MOTHAConstants = {
   // Photon speed is constant, in distance per second
   PHOTON_SPEED: 300,
 
+  // Maximum number of photons emitted by the light source that appear in the zoomed-in box at once.
+  MAX_LIGHT_PHOTONS: 20,
+
   // Min is slightly below 94 nm for the 1 -> 6 state transition.
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
 

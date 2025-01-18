@@ -23,6 +23,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 export default class PhotonSystem extends PhetioObject {
 
@@ -39,12 +40,19 @@ export default class PhotonSystem extends PhetioObject {
   // A static set of Photons that will be reused, mutated, and activated as the sim runs.
   private readonly photons: Photon[];
 
+  // The maximum number of active photons that has occurred at runtime. This is used solely for debugging
+  // NUMBER_OF_PHOTON_INSTANCES. The value is valid and is printed to the console only when running with ?log.
+  private maxActivePhotons: number;
+
   // This is the number of static Photon instances that are created at startup, and the maximum number of Photons that
   // can therefore be visible in the zoomed-in box. If more Photons are needed at runtime, we cannot instantiate more
-  // dynamically because they are PhET-iO Elements. With assertions enabled, the sim will fail an assertion. With
-  // assertions disabled, a warning will be printed to the browser console, and we try to continue gracefully. If you
-  // see such a warning, increase this value. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
-  private static readonly NUMBER_OF_PHOTON_INSTANCES = 25;
+  // dynamically because they are PhET-iO Elements. With assertions enabled, the sim will fail an assertion if an
+  // inactive photon cannot be found. With assertions disabled, a warning will be printed to the browser console, and
+  // we attempt to continue gracefully by ignoring the request to add a photon. If you encounter this problem, increase
+  // this value by running with ?log to inspect maxActivePhotons. Note that this value is a bit more than MAX_LIGHT_PHOTONS
+  // (the maximum number of photons emitted by the light that appear in the zoomed-in box) to safely allow for photons
+  // emitted by the atom. See also Photon.ts and https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
+  private static readonly NUMBER_OF_PHOTON_INSTANCES = MOTHAConstants.MAX_LIGHT_PHOTONS + 5;
 
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
@@ -71,6 +79,7 @@ export default class PhotonSystem extends PhetioObject {
 
     // Create the static set of Photon elements.
     this.photons = [];
+    this.maxActivePhotons = 0;
     for ( let i = 0; i < PhotonSystem.NUMBER_OF_PHOTON_INSTANCES; i++ ) {
 
       const photon = new Photon( {
@@ -85,6 +94,17 @@ export default class PhotonSystem extends PhetioObject {
         }
         else {
           this.photonRemovedEmitter.emit( photon );
+        }
+
+        // See documentation of NUMBER_OF_PHOTON_INSTANCES for
+        if ( phet.log ) {
+          const numberOfActivePhotons = this.photons.filter( photon => photon.isActiveProperty.value ).length;
+          if ( numberOfActivePhotons > this.maxActivePhotons ) {
+            this.maxActivePhotons = numberOfActivePhotons;
+            phet.log && phet.log( `maxActivePhotons=${this.maxActivePhotons}`, {
+              color: 'red'
+            } );
+          }
         }
       } );
     }
@@ -127,13 +147,13 @@ export default class PhotonSystem extends PhetioObject {
    */
   private addPhoton( photonOptions: StrictOmit<Required<PhotonOptions>, 'tandem'> ): void {
     const photon = _.find( this.photons, photon => !photon.isActiveProperty.value )!;
-    assert && assert( photon, 'No inactive photons are available, increase PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
+    assert && assert( photon, 'No inactive photons are available! See documentation for PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
     if ( photon ) {
       photon.activate( photonOptions );
     }
     else {
       // The sim will not crash, but will print a console warning.
-      console.warn( 'No inactive photons are available, increase PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
+      console.warn( 'No inactive photons are available! See documentation for PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
     }
   }
 
