@@ -40,7 +40,8 @@ export default class PhotonSystem extends PhetioObject {
     super( {
       isDisposable: false,
       phetioState: false, //TODO
-      phetioDocumentation: 'The system of photons shown inside the zoomed-in box.'
+      phetioDocumentation: 'The system of photons shown inside the zoomed-in box.',
+      tandem: tandem
     } );
 
     this.zoomedInBox = zoomedInBox;
@@ -49,10 +50,14 @@ export default class PhotonSystem extends PhetioObject {
     this.photons = [];
 
     this.photonAddedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { name: 'photon', valueType: Photon } ]
+      parameters: [
+        { name: 'photon', valueType: Photon }
+      ]
     } );
     this.photonRemovedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { name: 'photon', valueType: Photon } ]
+      parameters: [
+        { name: 'photon', valueType: Photon }
+      ]
     } );
   }
 
