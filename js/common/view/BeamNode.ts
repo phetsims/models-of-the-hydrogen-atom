@@ -11,7 +11,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { NodeTranslationOptions, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Light from '../model/Light.js';
+import LightSource from '../model/LightSource.js';
 
 type SelfOptions = {
   beamSize?: Dimension2;
@@ -21,7 +21,7 @@ type BeamNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class BeamNode extends Rectangle {
 
-  public constructor( light: Light, providedOptions?: BeamNodeOptions ) {
+  public constructor( lightSource: LightSource, providedOptions?: BeamNodeOptions ) {
 
     const options = optionize<BeamNodeOptions, SelfOptions, RectangleOptions>()( {
 
@@ -30,11 +30,11 @@ export default class BeamNode extends Rectangle {
 
       // RectangleOptions
       isDisposable: false,
-      visibleProperty: light.isOnProperty,
-      fill: light.colorProperty,
+      visibleProperty: lightSource.isOnProperty,
+      fill: lightSource.colorProperty,
 
       // When displaying a white beam on a white background, a stroke is needed.
-      stroke: new DerivedProperty( [ light.lightModeProperty ], lightMode => lightMode === 'white' ? 'black' : null ),
+      stroke: new DerivedProperty( [ lightSource.lightModeProperty ], lightMode => lightMode === 'white' ? 'black' : null ),
       lineWidth: 0.5
     }, providedOptions );
 

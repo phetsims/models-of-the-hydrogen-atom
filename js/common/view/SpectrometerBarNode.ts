@@ -11,7 +11,7 @@
 import { Shape } from '../../../../kite/js/imports.js';
 import { Path } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Light from '../model/Light.js';
+import LightSource from '../model/LightSource.js';
 
 const MAX_NUMBER_OF_PHOTONS = 12;
 const PHOTON_RADIUS = 3;
@@ -26,7 +26,7 @@ export default class SpectrometerBarNode extends Path {
 
   public constructor( wavelength: number ) {
     super( null, {
-      fill: Light.wavelengthToColor( wavelength )
+      fill: LightSource.wavelengthToColor( wavelength )
     } );
     this.wavelength = wavelength;
   }

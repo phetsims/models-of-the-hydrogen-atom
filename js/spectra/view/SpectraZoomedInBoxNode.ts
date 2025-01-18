@@ -68,7 +68,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
         zoomedInBoxBounds, listboxParent, parentTandem.createTandem( 'deBroglieOverlayNode' ) );
 
       const schrodingerOverlayNode = new SchrodingerOverlayNode( model.schrodingerModel, model.hydrogenAtomProperty,
-        zoomedInBoxBounds, model.light, parentTandem.createTandem( 'schrodingerOverlayNode' ) );
+        zoomedInBoxBounds, model.lightSource, parentTandem.createTandem( 'schrodingerOverlayNode' ) );
 
       return [
         classicalSolarSystemOverlayNode,

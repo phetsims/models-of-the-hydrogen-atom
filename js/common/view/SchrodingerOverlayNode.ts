@@ -10,7 +10,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { HBox, Node, VBox } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import Light from '../model/Light.js';
+import LightSource from '../model/LightSource.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import ExciteAtomButton from './ExciteAtomButton.js';
 import QuantumNumbersInfoButton from './QuantumNumbersInfoButton.js';
@@ -26,14 +26,14 @@ export default class SchrodingerOverlayNode extends Node {
   public constructor( schrodingerModel: SchrodingerModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       zoomedInBoxBounds: Bounds2,
-                      light: Light,
+                      lightSource: LightSource,
                       tandem: Tandem ) {
 
     const xzAxesNode = new XZAxesNode( tandem.createTandem( 'xzAxesNode' ) );
 
     // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).
     // Pressing this button fires a photon that transitions the atom to a higher energy level.
-    const exciteAtomButton = new ExciteAtomButton( schrodingerModel.isMetastableStateProperty, light,
+    const exciteAtomButton = new ExciteAtomButton( schrodingerModel.isMetastableStateProperty, lightSource,
       () => schrodingerModel.excite(), tandem.createTandem( 'exciteAtomButton' ) );
 
     // (n,l,m) = ...

@@ -15,7 +15,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import Light from '../model/Light.js';
+import LightSource from '../model/LightSource.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
@@ -261,7 +261,7 @@ class VisibleEmissionChart extends EmissionChart {
       size: new Dimension2( axisLength, EmissionChart.AXIS_HEIGHT ),
       minValue: minWavelength,
       maxValue: maxWavelength,
-      valueToColor: Light.wavelengthToColor
+      valueToColor: LightSource.wavelengthToColor
     } );
 
     super( dataPointsProperty, ModelsOfTheHydrogenAtomStrings.visibleStringProperty, combineOptions<EmissionChartOptions>( {

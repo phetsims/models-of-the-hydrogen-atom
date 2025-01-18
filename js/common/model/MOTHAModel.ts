@@ -21,7 +21,7 @@ import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import BohrModel from './BohrModel.js';
 import Experiment from './Experiment.js';
 import HydrogenAtom from './HydrogenAtom.js';
-import Light from './Light.js';
+import LightSource from './LightSource.js';
 import Photon from './Photon.js';
 import Spectrometer from './Spectrometer.js';
 import ZoomedInBox from './ZoomedInBox.js';
@@ -60,8 +60,8 @@ export default class MOTHAModel implements TModel {
   // the zoomed-in part of the box of hydrogen
   public readonly zoomedInBox: ZoomedInBox;
 
-  // the light that is shining into the box of hydrogen
-  public readonly light: Light;
+  // the light source that is shining into the box of hydrogen
+  public readonly lightSource: LightSource;
 
   public readonly spectrometer: Spectrometer;
 
@@ -79,14 +79,14 @@ export default class MOTHAModel implements TModel {
 
   /**
    * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
-   * @param light
+   * @param lightSource
    * @param predictiveModels
    * @param initialPredictiveModel
    * @param hydrogenAtomsTandem
    * @param tandem
    */
   protected constructor( zoomedInBox: ZoomedInBox,
-                         light: Light,
+                         lightSource: LightSource,
                          predictiveModels: HydrogenAtom[],
                          initialPredictiveModel: HydrogenAtom,
                          hydrogenAtomsTandem: Tandem,
@@ -102,7 +102,7 @@ export default class MOTHAModel implements TModel {
       phetioFeatured: true
     } );
 
-    this.experiment = new Experiment( light, {
+    this.experiment = new Experiment( lightSource, {
       tandem: hydrogenAtomsTandem.createTandem( 'experiment' )
     } );
 
@@ -125,9 +125,9 @@ export default class MOTHAModel implements TModel {
 
     this.photonPool = new PhotonPool( zoomedInBox, this.hydrogenAtomProperty, tandem.createTandem( 'photonPool' ) );
 
-    this.light = light;
+    this.lightSource = lightSource;
 
-    this.light.photonEmittedEmitter.addListener( ( wavelength: number, position: Vector2, direction: number ) =>
+    this.lightSource.photonEmittedEmitter.addListener( ( wavelength: number, position: Vector2, direction: number ) =>
       this.photonPool.emitPhotonFromLight( wavelength, position, direction ) );
 
     this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, tandem.createTandem( 'spectrometer' ) );
@@ -183,7 +183,7 @@ export default class MOTHAModel implements TModel {
     this.experiment.reset();
     this.predictiveModels.forEach( predictiveModel => predictiveModel.reset() );
     this.predictiveModelProperty.reset();
-    this.light.reset();
+    this.lightSource.reset();
     this.spectrometer.reset();
     this.photonPool.reset();
     this.isPlayingProperty.reset();
@@ -214,7 +214,7 @@ export default class MOTHAModel implements TModel {
    */
   private _step( dt: number ): void {
     const dtScaled = dt * this.timeScaleProperty.value;
-    this.light.step( dtScaled );
+    this.lightSource.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );
     this.photonPool.step( dtScaled );
   }

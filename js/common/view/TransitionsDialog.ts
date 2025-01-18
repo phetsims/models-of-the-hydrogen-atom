@@ -2,7 +2,7 @@
 
 /**
  * TransitionsDialog is a non-modal dialog that displays information about absorption/emission wavelengths
- * and state transitions, and contains controls for setting wavelengths for the Light.
+ * and state transitions, and contains controls for setting wavelengths for the LightSource.
  *
  * @deprecated - PhET needs a non-modal dialog.
  * Since PhET does not have support for non-modal Dialogs, we fake a non-modal Dialog using a Panel.

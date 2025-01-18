@@ -10,7 +10,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Light from './Light.js';
+import LightSource from './LightSource.js';
 import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -19,7 +19,7 @@ type ExperimentOptions = SelfOptions & PickRequired<SchrodingerModelOptions, 'ta
 
 export default class Experiment extends SchrodingerModel {
 
-  public constructor( light: Light, providedOptions: ExperimentOptions ) {
+  public constructor( lightSource: LightSource, providedOptions: ExperimentOptions ) {
 
     const options = optionize<ExperimentOptions, SelfOptions, SchrodingerModelOptions>()( {
 
@@ -27,7 +27,7 @@ export default class Experiment extends SchrodingerModel {
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.experimentStringProperty
     }, providedOptions );
 
-    super( light, options );
+    super( lightSource, options );
   }
 }
 

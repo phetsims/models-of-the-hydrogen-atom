@@ -38,7 +38,7 @@ import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
-import Light from './Light.js';
+import LightSource from './LightSource.js';
 import Photon from './Photon.js';
 import PlumPuddingElectron from './PlumPuddingElectron.js';
 
@@ -333,10 +333,10 @@ function signIsDifferent( n1: number, n2: number ): boolean {
  * easy to see, and will not be confused with photons from the light source.
  */
 function getEmissionDirection(): number {
-  const threshold = Math.PI / 8; // How close we can be to the light's direction.
+  const threshold = Math.PI / 8; // How close we can be to the light direction.
   let direction = MOTHAUtils.nextAngle();
-  if ( Math.abs( direction - Light.DIRECTION ) < threshold ) {
-    direction = Light.DIRECTION + MOTHAUtils.nextSign() * threshold;
+  if ( Math.abs( direction - LightSource.DIRECTION ) < threshold ) {
+    direction = LightSource.DIRECTION + MOTHAUtils.nextSign() * threshold;
   }
   return direction;
 }

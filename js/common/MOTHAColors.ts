@@ -91,7 +91,7 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Light
+  // Light Source
   //------------------------------------------------------------------------------------------------------------------
 
   wavelengthSliderThumbStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'wavelengthSliderThumbStroke', {
@@ -120,7 +120,7 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Models panel
+  // Models Panel
   //------------------------------------------------------------------------------------------------------------------
 
   switchTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'switchTextFill', {

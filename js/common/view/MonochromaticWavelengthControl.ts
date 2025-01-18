@@ -21,7 +21,7 @@ import Slider from '../../../../sun/js/Slider.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Light from '../model/Light.js';
+import LightSource from '../model/LightSource.js';
 import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -94,11 +94,11 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
       },
       spectrumSliderTrackOptions: {
         constrainValue: constrainValue,
-        valueToColor: Light.wavelengthToColor,
+        valueToColor: LightSource.wavelengthToColor,
         size: SLIDER_TRACK_SIZE
       },
       spectrumSliderThumbOptions: {
-        valueToColor: Light.wavelengthToColor,
+        valueToColor: LightSource.wavelengthToColor,
         width: 20,
         height: 25,
         stroke: MOTHAColors.wavelengthSliderThumbStrokeProperty,

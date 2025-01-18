@@ -1,7 +1,7 @@
 // Copyright 2015-2025, University of Colorado Boulder
 
 /**
- * Light is the model of a light source that shines into the box of hydrogen.
+ * LightSource is the model of a light source that shines into the box of hydrogen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -33,24 +33,25 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
 assert && assert( TRANSITION_WAVELENGTHS_WEIGHT >= 0 && TRANSITION_WAVELENGTHS_WEIGHT <= 1 );
 
-export default class Light extends PhetioObject {
+export default class LightSource extends PhetioObject {
 
   // The light source points up in the model coordinate frame.
   public static readonly DIRECTION = Math.PI / 2;
 
+  // The zoomed-in part of the box of hydrogen
   private readonly zoomedInBox: ZoomedInBox;
 
   // is the light on?
   public readonly isOnProperty: BooleanProperty;
 
-  // whether the light is full spectrum (white) or monochromatic
+  // whether the light source is full spectrum (white) or monochromatic
   public readonly lightModeProperty: Property<LightMode>;
 
   // wavelength for monochromatic mode, in nm
   public readonly monochromaticWavelengthRange: Range;
   public readonly monochromaticWavelengthProperty: NumberProperty;
 
-  // wavelength of the light, where 0 is white light
+  // wavelength of the light, where VisibleColor.WHITE_WAVELENGTH is white light
   public readonly wavelengthProperty: TReadOnlyProperty<number>;
 
   // color displayed by the view
@@ -87,7 +88,7 @@ export default class Light extends PhetioObject {
     this.lightModeProperty = new Property<LightMode>( 'white', {
       validValues: LightModeValues,
       tandem: tandem.createTandem( 'lightModeProperty' ),
-      phetioDocumentation: 'Whether the light source is emitting white or monochromatic photons.',
+      phetioDocumentation: 'Whether the light source is emitting white light or monochromatic light.',
       phetioFeatured: true,
       phetioValueType: StringIO
     } );
@@ -111,7 +112,7 @@ export default class Light extends PhetioObject {
       } );
 
     this.colorProperty = new DerivedProperty( [ this.wavelengthProperty ],
-      wavelength => Light.wavelengthToColor( wavelength ), {
+      wavelength => LightSource.wavelengthToColor( wavelength ), {
         phetioValueType: Color.ColorIO
       } );
 
@@ -143,7 +144,7 @@ export default class Light extends PhetioObject {
   }
 
   /**
-   * Steps the light, and creates a photon when it's time to do so.
+   * Steps the light source, and creates a photon when it's time to do so.
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {
@@ -180,7 +181,7 @@ export default class Light extends PhetioObject {
    * Emits a photon with the specified wavelength and position.
    */
   private emitPhotonAtPosition( wavelength: number, position: Vector2 ): void {
-    this.photonEmittedEmitter.emit( wavelength, position, Light.DIRECTION );
+    this.photonEmittedEmitter.emit( wavelength, position, LightSource.DIRECTION );
   }
 
   /**
@@ -235,4 +236,4 @@ export default class Light extends PhetioObject {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'Light', Light );
+modelsOfTheHydrogenAtom.register( 'LightSource', LightSource );

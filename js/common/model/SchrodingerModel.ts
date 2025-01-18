@@ -52,7 +52,7 @@ import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line
 import BohrModel from './BohrModel.js';
 import DeBroglieBaseModel, { DeBroglieBaseModelOptions } from './DeBroglieBaseModel.js';
 import { DeBroglieModelOptions } from './DeBroglieModel.js';
-import Light from './Light.js';
+import LightSource from './LightSource.js';
 import MetastableHandler from './MetastableHandler.js';
 import PolynomialTerm from './PolynomialTerm.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
@@ -72,7 +72,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
   public readonly metastableHandler: MetastableHandler;
 
-  public constructor( light: Light, providedOptions: SchrodingerModelOptions ) {
+  public constructor( lightSource: LightSource, providedOptions: SchrodingerModelOptions ) {
 
     const options = optionize<SchrodingerModelOptions, SelfOptions, DeBroglieModelOptions>()( {
 
@@ -110,7 +110,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
         phetioValueType: BooleanIO
       } );
 
-    this.metastableHandler = new MetastableHandler( this.isMetastableStateProperty, light,
+    this.metastableHandler = new MetastableHandler( this.isMetastableStateProperty, lightSource,
       options.tandem.createTandem( 'metastableHandler' ) );
   }
 

@@ -10,7 +10,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Light from '../model/Light.js';
+import LightSource from '../model/LightSource.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
@@ -20,19 +20,19 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 
 export class LightControlPanel extends Panel {
 
-  public constructor( light: Light,
+  public constructor( lightSource: LightSource,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
-    const monochromaticWavelengthControl = new MonochromaticWavelengthControl( light.monochromaticWavelengthProperty, light.lightModeProperty,
+    const monochromaticWavelengthControl = new MonochromaticWavelengthControl( lightSource.monochromaticWavelengthProperty, lightSource.lightModeProperty,
       tandem.createTandem( 'monochromaticWavelengthControl' ) );
 
-    const absorptionTransitionText = new AbsorptionTransitionText( light.monochromaticWavelengthProperty,
-      light.lightModeProperty, isQuantumModelProperty, isExperimentProperty,
+    const absorptionTransitionText = new AbsorptionTransitionText( lightSource.monochromaticWavelengthProperty,
+      lightSource.lightModeProperty, isQuantumModelProperty, isExperimentProperty,
       tandem.createTandem( 'absorptionTransitionText' ) );
 
-    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( light.lightModeProperty, {
+    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightSource.lightModeProperty, {
       maxWidth: monochromaticWavelengthControl.width,
       tandem: tandem.createTandem( 'lightModeRadioButtonGroup' )
     } );
@@ -62,7 +62,7 @@ export class LightControlPanel extends Panel {
       }
     } );
 
-    this.addLinkedElement( light );
+    this.addLinkedElement( lightSource );
   }
 }
 

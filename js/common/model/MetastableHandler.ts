@@ -21,7 +21,7 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHASymbols from '../MOTHASymbols.js';
-import Light from './Light.js';
+import LightSource from './LightSource.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -32,7 +32,7 @@ export default class MetastableHandler extends PhetioObject {
 
   public static readonly METASTABLE_STATE = new SchrodingerQuantumNumbers( 2, 0, 0 );
 
-  private readonly light: Light;
+  private readonly lightSource: LightSource;
 
   // Whether the MetastableHandler is active, and will automatically attempt to excite the atom.
   private readonly isActiveProperty: TReadOnlyProperty<boolean>;
@@ -43,7 +43,7 @@ export default class MetastableHandler extends PhetioObject {
   // Whether the atom in the metastable state (n,l,m) = (2,0,0)
   private readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
 
-  public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>, light: Light, tandem: Tandem ) {
+  public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>, lightSource: LightSource, tandem: Tandem ) {
 
     super( {
       tandem: tandem,
@@ -52,10 +52,10 @@ export default class MetastableHandler extends PhetioObject {
     } );
 
     this.isMetastableStateProperty = isMetastableStateProperty;
-    this.light = light;
+    this.lightSource = lightSource;
 
     this.isActiveProperty = new DerivedProperty(
-      [ isMetastableStateProperty, light.isOnProperty, light.lightModeProperty ],
+      [ isMetastableStateProperty, lightSource.isOnProperty, lightSource.lightModeProperty ],
       ( isMetastableState, lightIsOn, lightMode ) => isMetastableState && lightIsOn && lightMode === 'white', {
         tandem: tandem.createTandem( 'isActiveProperty' ),
         phetioDocumentation: 'For internal use only.',
@@ -102,7 +102,7 @@ export default class MetastableHandler extends PhetioObject {
     const wavelength = wavelengths[ dotRandom.nextInt( wavelengths.length ) ];
 
     // Tell the light to emit a photon, and direct it towards the center of the atom.
-    this.light.emitPhotonAtBottomCenter( wavelength );
+    this.lightSource.emitPhotonAtBottomCenter( wavelength );
 
     phet.log && phet.log( `MetastableHandler.exciteAtom ${MOTHASymbols.lambda}=${wavelength}` );
   }

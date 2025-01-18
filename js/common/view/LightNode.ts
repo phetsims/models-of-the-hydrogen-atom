@@ -12,20 +12,20 @@ import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Light from '../model/Light.js';
+import LightSource from '../model/LightSource.js';
 import BeamNode from './BeamNode.js';
 
 export class LightNode extends Node {
 
-  public constructor( light: Light, tandem: Tandem ) {
+  public constructor( lightSource: LightSource, tandem: Tandem ) {
 
-    const lampNode = new LaserPointerNode( light.isOnProperty, {
+    const lampNode = new LaserPointerNode( lightSource.isOnProperty, {
       bodySize: new Dimension2( 88, 64 ),
       nozzleSize: new Dimension2( 18, 50 ),
       buttonOptions: {
         radius: 19
       },
-      rotation: -Light.DIRECTION, // +y is up in the model, down in the view
+      rotation: -LightSource.DIRECTION, // +y is up in the model, down in the view
 
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSource.accessibleNameStringProperty,
       tandem: tandem.createTandem( 'lampNode' ),
@@ -34,7 +34,7 @@ export class LightNode extends Node {
     } );
 
     // Beam of light
-    const beamNode = new BeamNode( light, {
+    const beamNode = new BeamNode( lightSource, {
       centerX: lampNode.centerX,
       bottom: lampNode.top + 1
     } );
@@ -47,7 +47,7 @@ export class LightNode extends Node {
       phetioVisiblePropertyInstrumented: false
     } );
 
-    this.addLinkedElement( light );
+    this.addLinkedElement( lightSource );
   }
 }
 

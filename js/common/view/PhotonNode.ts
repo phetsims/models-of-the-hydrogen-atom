@@ -23,7 +23,7 @@ import { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSpher
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Circle, Color, Node, NodeOptions, Path, RadialGradient, TColor } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Light from '../model/Light.js';
+import LightSource from '../model/LightSource.js';
 import Photon from '../model/Photon.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
@@ -150,7 +150,7 @@ class CrosshairsNode extends Node {
  */
 function createOrbColor( wavelength: number, radius: number ): RadialGradient {
   const innerColor = new Color( 255, 255, 255, 0.7 );
-  const outerColor = Light.wavelengthToColor( wavelength ).withAlpha( 0.5 );
+  const outerColor = LightSource.wavelengthToColor( wavelength ).withAlpha( 0.5 );
   return new RadialGradient( 0, 0, 0, 0, 0, radius )
     .addColorStop( 0.25, innerColor )
     .addColorStop( 1, outerColor );
@@ -160,7 +160,7 @@ function createOrbColor( wavelength: number, radius: number ): RadialGradient {
  * Creates the color for the halo that surrounds the orb.
  */
 function createHaloColor( wavelength: number, radius: number ): RadialGradient {
-  const innerColor = Light.wavelengthToColor( wavelength );
+  const innerColor = LightSource.wavelengthToColor( wavelength );
   const outerColor = innerColor.withAlpha( 0 );
   return new RadialGradient( 0, 0, 0, 0, 0, radius )
     .addColorStop( 0.4, innerColor )

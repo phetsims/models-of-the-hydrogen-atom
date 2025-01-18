@@ -85,11 +85,11 @@ export default class MOTHAScreenView extends ScreenView {
     // Legend for particle types
     const legendPanel = new LegendPanel( options.tandem.createTandem( 'legendPanel' ) );
 
-    // Light
-    const lightNode = new LightNode( model.light, options.tandem.createTandem( 'lightNode' ) );
+    // LightSource
+    const lightNode = new LightNode( model.lightSource, options.tandem.createTandem( 'lightNode' ) );
 
     // Controls for the light
-    const lightControlPanel = new LightControlPanel( model.light, model.isQuantumModelProperty, model.isExperimentProperty,
+    const lightControlPanel = new LightControlPanel( model.lightSource, model.isQuantumModelProperty, model.isExperimentProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
     const transitionsDialogVisibleProperty = new BooleanProperty( false, {
@@ -213,8 +213,8 @@ export default class MOTHAScreenView extends ScreenView {
       visibleProperty: DerivedProperty.and( [ this.zoomedInBoxNode.visibleProperty, boxOfHydrogenNode.visibleProperty ] )
     } );
 
-    const transitionsDialog = new TransitionsDialog( model.light.monochromaticWavelengthProperty,
-      model.light.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
+    const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
+      model.lightSource.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
         position: modelVBox.leftTop,
         visibleProperty: transitionsDialogVisibleProperty,
         tandem: options.tandem.createTandem( 'transitionsDialog' )
