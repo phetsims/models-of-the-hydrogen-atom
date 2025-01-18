@@ -3,8 +3,11 @@
 /**
  * PhotonSystem is the system of photons that are displayed in the zoomed-in box.
  *
- * To encapsulate PhET-iO concerns, PhotonSystem owns and manages all Photon instances.
- * See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
+ * To encapsulate PhET-iO concerns, PhotonSystem owns and manages a static pool of Photon instances.
+ * It provides a public API for adding and removing photons. But after instantiation of PhotonSystem at startup,
+ * no instances of Photon are created or disposed.  "Adding" a photon means mutating and activating an inactive
+ * Photon instance. "Removing" a photon means deactivating an active Photon instance, effectively returning it
+ * to the free pool. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
