@@ -7,61 +7,51 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
-import HorizontalAquaRadioButtonGroup, { HorizontalAquaRadioButtonGroupOptions } from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
+import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { LightMode } from '../model/LightMode.js';
 import MOTHAColors from '../MOTHAColors.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
-const TEXT_OPTIONS = {
-  font: new PhetFont( 16 ),
-  fill: MOTHAColors.invertibleTextFillProperty,
-  maxWidth: 110
-};
-
-type SelfOptions = EmptySelfOptions;
-
-type LightModeRadioButtonGroupOptions = SelfOptions &
-  PickOptional<HorizontalAquaRadioButtonGroupOptions, 'maxWidth'> &
-  PickRequired<HorizontalAquaRadioButtonGroupOptions, 'tandem'>;
+const FONT = new PhetFont( 16 );
 
 export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButtonGroup<LightMode> {
 
-  public constructor( lightModeProperty: Property<LightMode>, providedOptions: LightModeRadioButtonGroupOptions ) {
-
-    const options = optionize<LightModeRadioButtonGroupOptions, SelfOptions, HorizontalAquaRadioButtonGroupOptions>()( {
-
-      // HorizontalAquaRadioButtonGroupOptions
-      isDisposable: false,
-      spacing: 15,
-
-      // pdom
-      //TODO description: https://github.com/phetsims/sun/issues/900 Use a higher-level API for PDOM structure.
-      labelTagName: 'h3',
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.accessibleNameStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.helpTextStringProperty
-    }, providedOptions );
+  public constructor( lightModeProperty: Property<LightMode>, tandem: Tandem ) {
 
     const radioButtonGroupItems: AquaRadioButtonGroupItem<LightMode>[] = [
       {
         value: 'white',
-        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, TEXT_OPTIONS ),
+        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.whiteStringProperty, {
+          font: FONT,
+          fill: MOTHAColors.invertibleTextFillProperty,
+          maxWidth: 45
+        } ),
         tandemName: 'whiteRadioButton'
       },
       {
         value: 'monochromatic',
-        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, TEXT_OPTIONS ),
+        createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, {
+          font: FONT,
+          fill: MOTHAColors.invertibleTextFillProperty,
+          maxWidth: 115
+        } ),
         tandemName: 'monochromaticRadioButton'
       }
     ];
 
-    super( lightModeProperty, radioButtonGroupItems, options );
+    super( lightModeProperty, radioButtonGroupItems, {
+      isDisposable: false,
+      spacing: 15,
+      labelTagName: 'h3', //TODO https://github.com/phetsims/sun/issues/900 Use a higher-level API for PDOM structure.
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.accessibleNameStringProperty,
+      helpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.helpTextStringProperty,
+      tandem: tandem
+    } );
   }
 }
 

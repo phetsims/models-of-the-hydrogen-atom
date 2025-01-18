@@ -28,17 +28,14 @@ export class LightControlPanel extends Panel {
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
+    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightModeProperty,
+      tandem.createTandem( 'lightModeRadioButtonGroup' ) );
+
+    const absorptionTransitionText = new AbsorptionTransitionText( monochromaticWavelengthProperty, lightModeProperty,
+      isQuantumModelProperty, isExperimentProperty, tandem.createTandem( 'absorptionTransitionText' ) );
+
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( monochromaticWavelengthProperty, lightModeProperty,
       tandem.createTandem( 'monochromaticWavelengthControl' ) );
-
-    const absorptionTransitionText = new AbsorptionTransitionText( monochromaticWavelengthProperty,
-      lightModeProperty, isQuantumModelProperty, isExperimentProperty,
-      tandem.createTandem( 'absorptionTransitionText' ) );
-
-    const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightModeProperty, {
-      maxWidth: monochromaticWavelengthControl.width,
-      tandem: tandem.createTandem( 'lightModeRadioButtonGroup' )
-    } );
 
     const content = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
