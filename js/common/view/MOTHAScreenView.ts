@@ -21,7 +21,7 @@ import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
 import { LightControlPanel } from './LightControlPanel.js';
-import { LightNode } from './LightNode.js';
+import { LightSourceNode } from './LightSourceNode.js';
 import ModelPanel, { ModelPanelOptions } from '../../common/view/ModelPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
@@ -85,8 +85,8 @@ export default class MOTHAScreenView extends ScreenView {
     // Legend for particle types
     const legendPanel = new LegendPanel( options.tandem.createTandem( 'legendPanel' ) );
 
-    // LightSource
-    const lightNode = new LightNode( model.lightSource, options.tandem.createTandem( 'lightNode' ) );
+    // Light source
+    const lightSourceNode = new LightSourceNode( model.lightSource, options.tandem.createTandem( 'lightSourceNode' ) );
 
     // Controls for the light
     const lightControlPanel = new LightControlPanel( model.lightSource, model.isQuantumModelProperty, model.isExperimentProperty,
@@ -168,14 +168,14 @@ export default class MOTHAScreenView extends ScreenView {
     // Layout is complicated, so do it all in one place, rather than via NodeTranslationOptions.
     legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
-    lightNode.left = this.layoutBounds.left + options.lightNodeXOffset;
+    lightSourceNode.left = this.layoutBounds.left + options.lightNodeXOffset;
     lightControlPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
-    this.zoomedInBoxNode.left = lightNode.right + 50;
+    this.zoomedInBoxNode.left = lightSourceNode.right + 50;
     this.zoomedInBoxNode.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
-    lightNode.bottom = this.zoomedInBoxNode.bottom;
+    lightSourceNode.bottom = this.zoomedInBoxNode.bottom;
     lightControlPanel.top = this.zoomedInBoxNode.bottom + 15;
-    boxOfHydrogenNode.centerX = lightNode.centerX;
-    boxOfHydrogenNode.bottom = lightNode.top + 1;
+    boxOfHydrogenNode.centerX = lightSourceNode.centerX;
+    boxOfHydrogenNode.bottom = lightSourceNode.top + 1;
     tinyBoxNode.left = boxOfHydrogenNode.right - boxOfHydrogenNode.width / 3;
     tinyBoxNode.centerY = boxOfHydrogenNode.centerY;
     spectrometerAccordionBox.left = lightControlPanel.right + 12;
@@ -225,7 +225,7 @@ export default class MOTHAScreenView extends ScreenView {
       screenBackgroundRectangle,
       legendPanel,
       timeControlNode,
-      lightNode,
+      lightSourceNode,
       lightControlPanel,
       transitionsCheckbox,
       boxOfHydrogenNode,
@@ -250,7 +250,7 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Play Area focus order
     const playAreaPDOMOrder = [
-      lightNode,
+      lightSourceNode,
       lightControlPanel,
       transitionsCheckbox,
       transitionsDialog,

@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * LightNode displays the light.
+ * LightSourceNode displays the light source.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,10 +15,11 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import LightSource from '../model/LightSource.js';
 import BeamNode from './BeamNode.js';
 
-export class LightNode extends Node {
+export class LightSourceNode extends Node {
 
   public constructor( lightSource: LightSource, tandem: Tandem ) {
 
+    // Lamp that emits the light
     const lampNode = new LaserPointerNode( lightSource.isOnProperty, {
       bodySize: new Dimension2( 88, 64 ),
       nozzleSize: new Dimension2( 18, 50 ),
@@ -26,7 +27,6 @@ export class LightNode extends Node {
         radius: 19
       },
       rotation: -LightSource.DIRECTION, // +y is up in the model, down in the view
-
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSource.accessibleNameStringProperty,
       tandem: tandem.createTandem( 'lampNode' ),
       tandemNameSuffix: 'Node',
@@ -51,4 +51,4 @@ export class LightNode extends Node {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'LightNode', LightNode );
+modelsOfTheHydrogenAtom.register( 'LightSourceNode', LightSourceNode );
