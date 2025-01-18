@@ -48,7 +48,7 @@ export default class MetastableHandler extends PhetioObject {
     super( {
       tandem: tandem,
       phetioState: false,
-      phetioDocumentation: 'Supports transitioning the atom to a higher state when in the metastable state (n,l,m) = (2,0,0)'
+      phetioDocumentation: 'Supports transitioning the atom to a higher state when in the metastable state (n,l,m) = (2,0,0).'
     } );
 
     this.isMetastableStateProperty = isMetastableStateProperty;

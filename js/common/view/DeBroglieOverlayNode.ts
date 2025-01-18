@@ -38,7 +38,7 @@ export default class DeBroglieOverlayNode extends Node {
       children: [ deBroglieRepresentationComboBox, electronStateText ],
       visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === deBroglieModel ),
       tandem: tandem,
-      phetioDocumentation: 'Overlay for user-interface elements in front of the de Broglie atom'
+      phetioDocumentation: 'Overlay for user-interface elements in front of the de Broglie atom.'
     } );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.

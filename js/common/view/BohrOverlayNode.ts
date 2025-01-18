@@ -30,7 +30,7 @@ export default class BohrOverlayNode extends Node {
       children: [ electronStateText ],
       visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === bohrModel ),
       tandem: tandem,
-      phetioDocumentation: 'Overlay for user-interface elements in front of the Bohr atom'
+      phetioDocumentation: 'Overlay for user-interface elements in front of the Bohr atom.'
     } );
 
     // Keep the electron state positioned in the lower-right corner of the zoomed-in box.

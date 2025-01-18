@@ -38,7 +38,7 @@ export default class ClassicalSolarSystemOverlayNode extends Node {
       children: [ resetButton ],
       visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === classicalSolarSystemModel ),
       tandem: tandem,
-      phetioDocumentation: 'Overlay for user-interface elements in front of the Classical Solar System atom'
+      phetioDocumentation: 'Overlay for user-interface elements in front of the Classical Solar System atom.'
     } );
   }
 }

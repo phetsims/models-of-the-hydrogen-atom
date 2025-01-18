@@ -81,8 +81,8 @@ export default class Spectrometer extends PhetioObject {
     this.nextSnapshotNumberProperty = new NumberProperty( 1, {
       numberType: 'Integer',
       tandem: tandem.createTandem( 'nextSnapshotNumberProperty' ),
-      phetioDocumentation: 'Snapshots are numbered using consecutive integers, starting from 1. ' +
-                           'This is the number that will be assigned to the next snapshot that is taken.',
+      phetioDocumentation: 'This is the number that will be assigned to the next snapshot that is taken. ' +
+                           'Snapshots are numbered using consecutive integers, starting from 1. ',
       phetioReadOnly: true
     } );
 

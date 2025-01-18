@@ -81,9 +81,9 @@ export default abstract class HydrogenAtom extends PhetioObject {
         { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO }
       ],
       tandem: options.tandem.createTandem( 'photonAbsorbedEmitter' ),
-      phetioDocumentation: 'Register with this Emitter to be notified when a photon is absorbed.' +
-                           ' Included for all hydrogen atom models, regardless of whether they absorb photons,' +
-                           ' so that all models have the same API.'
+      phetioDocumentation: 'Register with this Emitter to be notified when a photon is absorbed. ' +
+                           'Included for all hydrogen atom models, regardless of whether they absorb photons, ' +
+                           'so that all models have the same API.'
     } );
 
     this.photonEmittedEmitter = new Emitter<[ number, Vector2, number, Color ]>( {
@@ -94,9 +94,9 @@ export default abstract class HydrogenAtom extends PhetioObject {
         { name: 'debugHalo', valueType: Color || null, phetioType: NullableIO( Color.ColorIO ) }
       ],
       tandem: options.tandem.createTandem( 'photonEmittedEmitter' ),
-      phetioDocumentation: 'Register with this Emitter to be notified when a photon is emitted.' +
-                           ' Included for all hydrogen atom models, regardless of whether they emit photons' +
-                           ' so that all models have the same API.'
+      phetioDocumentation: 'Register with this Emitter to be notified when a photon is emitted. ' +
+                           'Included for all hydrogen atom models, regardless of whether they emit photons ' +
+                           'so that all models have the same API.'
     } );
   }
 

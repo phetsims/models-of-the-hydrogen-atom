@@ -60,7 +60,7 @@ export default class SchrodingerOverlayNode extends Node {
       children: [ xzAxesNode, vBox ],
       visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === schrodingerModel ),
       tandem: tandem,
-      phetioDocumentation: 'Overlay for user-interface elements in front of the Schrödinger atom'
+      phetioDocumentation: 'Overlay for user-interface elements in front of the Schrödinger atom.'
     } );
 
     // xz-axes are in the left-bottom corner of the zoomed-in box.
