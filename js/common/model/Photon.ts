@@ -95,6 +95,7 @@ export default class Photon extends PhetioObject {
 
     this.wavelengthProperty = new NumberProperty( options.wavelength, {
       numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
+      units: 'nm',
       tandem: options.tandem.createTandem( 'wavelengthProperty' ),
       phetioReadOnly: true
     } );
@@ -106,6 +107,7 @@ export default class Photon extends PhetioObject {
     this.positionProperty = this._positionProperty;
 
     this.directionProperty = new NumberProperty( options.direction, {
+      units: 'radians',
       tandem: options.tandem.createTandem( 'directionProperty' ),
       phetioReadOnly: true
     } );
