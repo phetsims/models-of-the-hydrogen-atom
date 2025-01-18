@@ -75,7 +75,7 @@ export default class SpectrometerSnapshotNode extends Node {
         }
       },
       iconOptions: {
-        scale: 0.04
+        scale: 0.04 * 9
       },
       left: chart.right + 5,
       bottom: chart.bottom,
