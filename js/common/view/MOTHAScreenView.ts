@@ -11,7 +11,7 @@ import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import { Node, Path, Rectangle, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, Path, Rectangle, VBox } from '../../../../scenery/js/imports.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import TransitionsCheckbox from '../../common/view/TransitionsCheckbox.js';
@@ -21,19 +21,18 @@ import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
 import { LightControlPanel } from './LightControlPanel.js';
 import { LightSourceNode } from './LightSourceNode.js';
-import ModelPanel, { ModelPanelOptions } from '../../common/view/ModelPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import MOTHAModel from '../model/MOTHAModel.js';
 import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEnergyLevelAccordionBox.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
+import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
+import ContinuumBarNode from './ContinuumBarNode.js';
 
 type SelfOptions = {
 
@@ -49,8 +48,11 @@ type SelfOptions = {
   // x-offset of lightNode from the left edge of layoutBounds.
   lightNodeXOffset: number;
 
-  // options propagated to ModelPanel.
-  modelPanelOptions?: PickOptional<ModelPanelOptions, 'radioButtonTextMaxWidth' | 'hasContinuumBar'>;
+  // propagated to ModelPanel.
+  modelRadioButtonTextMaxWidth: number;
+
+  // whether to add a 'Classical...Quantum' continuum bar
+  hasContinuumBar?: boolean;
 
   // Description screen summary.
   screenSummaryContent: ScreenSummaryContent;
@@ -67,10 +69,11 @@ export default class MOTHAScreenView extends ScreenView {
 
   protected constructor( model: MOTHAModel, providedOptions: MOTHAScreenViewOptions ) {
 
-    const options = optionize<MOTHAScreenViewOptions, StrictOmit<SelfOptions, 'modelPanelOptions'>, ScreenViewOptions>()( {
+    const options = optionize<MOTHAScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
 
       // SelfOptions
       electronEnergyLevelAccordionBox: null,
+      hasContinuumBar: true,
 
       // ScreenViewOptions
       isDisposable: false
@@ -120,18 +123,30 @@ export default class MOTHAScreenView extends ScreenView {
     const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty,
       options.tandem.createTandem( 'experimentModelSwitch' ) );
 
-    // panel that contains radio buttons for selecting a predictive model
-    const modelPanel = new ModelPanel( model.predictiveModelProperty, model.predictiveModels, model.isExperimentProperty,
-      combineOptions<ModelPanelOptions>( {
-        tandem: options.tandem.createTandem( 'modelPanel' )
-      }, options.modelPanelOptions ) );
+    const modelRadioButtonGroup = new ModelRadioButtonGroup( model.predictiveModelProperty, model.predictiveModels, {
+      radioButtonTextMaxWidth: providedOptions.modelRadioButtonTextMaxWidth,
+      tandem: options.tandem.createTandem( 'modelRadioButtonGroup' )
+    } );
 
     const modelVBox = new VBox( {
-      children: [ experimentModelSwitch, modelPanel ],
+      children: [ experimentModelSwitch, modelRadioButtonGroup ],
       align: 'center',
       spacing: 10,
       excludeInvisibleChildrenFromBounds: false
     } );
+
+    let modelBox: Node;
+    if ( options.hasContinuumBar ) {
+      const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height, options.tandem.createTandem( 'continuumBarNode' ) );
+      modelBox = new HBox( {
+        align: 'bottom',
+        spacing: 10,
+        children: [ continuumBarNode, modelVBox ]
+      } );
+    }
+    else {
+      modelBox = modelVBox;
+    }
 
     // Spectrometer snapshots dialog
     const spectrometerSnapshotsDialog = new SpectrometerSnapshotsDialog( model.spectrometer.snapshots,
@@ -187,21 +202,21 @@ export default class MOTHAScreenView extends ScreenView {
     if ( this.electronEnergyLevelAccordionBox ) {
       this.electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
       this.electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
-      modelVBox.left = this.electronEnergyLevelAccordionBox.right + 10;
-      modelVBox.top = this.electronEnergyLevelAccordionBox.top;
+      modelBox.left = this.electronEnergyLevelAccordionBox.right + 10;
+      modelBox.top = this.electronEnergyLevelAccordionBox.top;
       timeControlNode.left = this.electronEnergyLevelAccordionBox.right + 15;
     }
     else {
-      modelVBox.left = this.zoomedInBoxNode.right + 30;
-      modelVBox.top = this.zoomedInBoxNode.top;
-      timeControlNode.left = modelVBox.left;
+      modelBox.left = this.zoomedInBoxNode.right + 30;
+      modelBox.top = this.zoomedInBoxNode.top;
+      timeControlNode.left = modelBox.left;
     }
     timeControlNode.bottom = this.zoomedInBoxNode.bottom;
     transitionsCheckbox.localBoundsProperty.link( () => {
       transitionsCheckbox.centerX = lightControlPanel.centerX;
       transitionsCheckbox.top = lightControlPanel.bottom + 5;
     } );
-    transitionsDialog.setInitialPosition( modelVBox.leftTop );
+    transitionsDialog.setInitialPosition( modelBox.leftTop );
     resetAllButton.right = this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     resetAllButton.bottom = this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
 
@@ -228,7 +243,7 @@ export default class MOTHAScreenView extends ScreenView {
       tinyBoxNode,
       dashedLines,
       this.zoomedInBoxNode,
-      modelVBox,
+      modelBox,
       spectrometerAccordionBox,
       resetAllButton,
       transitionsDialog,
@@ -250,12 +265,12 @@ export default class MOTHAScreenView extends ScreenView {
       lightControlPanel,
       transitionsCheckbox,
       transitionsDialog,
-      modelVBox,
+      modelBox,
       this.zoomedInBoxNode
     ];
     if ( this.electronEnergyLevelAccordionBox ) {
-      // Add optional electronEnergyLevelAccordionBox before modelVBox.
-      const index = playAreaPDOMOrder.indexOf( modelVBox );
+      // Add optional electronEnergyLevelAccordionBox before modelBox.
+      const index = playAreaPDOMOrder.indexOf( modelBox );
       playAreaPDOMOrder.splice( index, 0, this.electronEnergyLevelAccordionBox );
     }
     this.pdomPlayAreaNode.pdomOrder = playAreaPDOMOrder;
