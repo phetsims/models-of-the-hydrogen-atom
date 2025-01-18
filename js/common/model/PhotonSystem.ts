@@ -14,6 +14,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from './HydrogenAtom.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Color } from '../../../../scenery/js/imports.js';
 
 export default class PhotonSystem extends PhetioObject {
 
@@ -45,9 +47,28 @@ export default class PhotonSystem extends PhetioObject {
     this.removeAllPhotons();
   }
 
-  public addPhoton( photon: Photon ): void {
-    assert && assert( !this.photons.includes( photon ), 'Attempted to add photon more than once.' );
-    this.photons.add( photon );
+  /**
+   * Emits a photon from the light source.
+   */
+  public emitPhotonFromLight( wavelength: number, position: Vector2, direction: number ): void {
+    this.photons.add( new Photon( {
+      wavelength: wavelength,
+      position: position,
+      direction: direction
+    } ) );
+  }
+
+  /**
+   * Emits a photon from the hydrogen atom.
+   */
+  public emitPhotonFromAtom( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ): void {
+    this.photons.add( new Photon( {
+      wavelength: wavelength,
+      position: position,
+      direction: direction,
+      wasEmittedByAtom: true,
+      debugHaloColor: debugHaloColor
+    } ) );
   }
 
   public removePhoton( photon: Photon ): void {

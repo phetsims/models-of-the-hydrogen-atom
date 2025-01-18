@@ -14,7 +14,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Color, Node } from '../../../../scenery/js/imports.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
@@ -52,7 +52,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
   // if all models have these emitters. For example, the Spectrometer can be hooked up to any of the models,
   // regardless of whether they emit photons.
   public readonly photonAbsorbedEmitter: TEmitter<[ Photon ]>;
-  public readonly photonEmittedEmitter: TEmitter<[ Photon ]>;
+  public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color ]>;
 
   public readonly tandemNamePrefix: string;
 
@@ -83,8 +83,13 @@ export default abstract class HydrogenAtom extends PhetioObject {
                            ' all models have the same API.'
     } );
 
-    this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO } ],
+    this.photonEmittedEmitter = new Emitter<[ number, Vector2, number, Color ]>( {
+      parameters: [
+        { name: 'wavelength', valueType: 'number' },
+        { name: 'position', valueType: Vector2 },
+        { name: 'direction', valueType: 'number' },
+        { name: 'debugHalo', valueType: Color }
+      ],
       tandem: options.tandem.createTandem( 'photonEmittedEmitter' ),
       phetioDocumentation: 'Register with this Emitter to be notified when a photon is emitted.' +
                            ' Included for all hydrogen atom models, regardless of whether they emit photons, so that' +

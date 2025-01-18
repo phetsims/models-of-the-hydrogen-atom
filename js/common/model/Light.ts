@@ -25,7 +25,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import { LightMode, LightModeValues } from './LightMode.js';
-import Photon from './Photon.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -61,7 +60,7 @@ export default class Light extends PhetioObject {
   public readonly colorProperty: TReadOnlyProperty<Color | string>;
 
   // notifies that a photon was emitted
-  public readonly photonEmittedEmitter: TEmitter<[ Photon ]>;
+  public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number ]>;
 
   // time between creation of photons
   private readonly dtPerPhotonCreated: number;
@@ -118,8 +117,12 @@ export default class Light extends PhetioObject {
         phetioValueType: Color.ColorIO
       } );
 
-    this.photonEmittedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { valueType: Photon } ]
+    this.photonEmittedEmitter = new Emitter<[ number, Vector2, number ]>( {
+      parameters: [
+        { name: 'wavelength', valueType: 'number' },
+        { name: 'position', valueType: Vector2 },
+        { name: 'direction', valueType: 'number' }
+      ]
     } );
 
     this.dtPerPhotonCreated = ( zoomedInBox.height / MOTHAConstants.PHOTON_SPEED ) / MAX_PHOTONS;
@@ -179,11 +182,7 @@ export default class Light extends PhetioObject {
    * Emits a photon with the specified wavelength and position.
    */
   private emitPhotonAtPosition( wavelength: number, position: Vector2 ): void {
-    this.photonEmittedEmitter.emit( new Photon( {
-      wavelength: wavelength,
-      position: position,
-      direction: Light.DIRECTION
-    } ) );
+    this.photonEmittedEmitter.emit( wavelength, position, Light.DIRECTION );
   }
 
   /**

@@ -44,6 +44,7 @@ import Light from './Light.js';
 import Photon from './Photon.js';
 import Proton from './Proton.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
+import { Color } from '../../../../scenery/js/imports.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -56,6 +57,9 @@ const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 
 // How close an emitted photon is placed to the photon that causes stimulated emission.
 const STIMULATED_EMISSION_X_OFFSET = MOTHAConstants.PHOTON_RADIUS;
+
+const STIMULATED_EMISSION_HALO_COLOR = new Color( 75, 255, 7 );
+const SPONTANEOUS_EMISSION_HALO_COLOR = Color.RED;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -221,7 +225,7 @@ export default class BohrModel extends HydrogenAtom {
    *
    * @returns the photon emitted, null if no photon was emitted.
    */
-  private attemptStimulatedEmission( photon: Photon ): Photon | null {
+  private attemptStimulatedEmission( photon: Photon ): void {
 
     const nCurrent = this.electron.nProperty.value;
 
@@ -229,36 +233,32 @@ export default class BohrModel extends HydrogenAtom {
          this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION ||
          nCurrent === MOTHAConstants.GROUND_STATE ||
          !this.collides( photon ) ) {
-      return null;
+      return;
     }
 
     // Determine if the photon has a wavelength that would move the electron to a lower energy state.
     const nNew = photonAbsorptionModel.getLowerStateForWavelength( nCurrent, photon.wavelength );
     if ( nNew === null || !this.stimulatedEmissionIsAllowed( nCurrent, nNew ) ) {
-      return null;
+      return;
     }
     assert && assert( nNew < nCurrent, `nNew ${nNew} should be < nCurrent ${nCurrent}` );
 
     // Emit with some probability.
     if ( !this.stimulatedEmissionIsCertain() ) {
-      return null;
+      return;
     }
 
     // Emit a photon.
-    const emittedPhoton = new Photon( {
-      wavelength: photon.wavelength,
-      position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
-      direction: photon.direction,
-      wasEmittedByAtom: true,
-      debugHaloColor: 'rgb( 75, 255, 7 )' // bright green for stimulated emission
-    } );
-    this.photonEmittedEmitter.emit( emittedPhoton );
-    phet.log && phet.log( `BohrModel: stimulated emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );
+    this.photonEmittedEmitter.emit(
+      photon.wavelength,
+      photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
+      photon.direction,
+      STIMULATED_EMISSION_HALO_COLOR
+    );
+    phet.log && phet.log( `BohrModel: stimulated emission, ${MOTHASymbols.lambda}=${photon.wavelength}, ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;
-
-    return emittedPhoton;
   }
 
   /**
@@ -288,42 +288,36 @@ export default class BohrModel extends HydrogenAtom {
    *
    * @returns the photon emitted, null if no photon was emitted.
    */
-  private attemptSpontaneousEmission(): Photon | null {
+  private attemptSpontaneousEmission(): void {
 
     const nCurrent = this.electron.nProperty.value;
 
     if ( nCurrent === MOTHAConstants.GROUND_STATE ||
          this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION ) {
-      return null;
+      return;
     }
 
     // Choose a new lower state. For some subclasses of BohrModel, there may be no valid transition.
     const nNew = this.chooseLower_n();
     if ( nNew === null ) {
-      return null;
+      return;
     }
     assert && assert( nNew < nCurrent, `nNew ${nNew} should be < nCurrent ${nCurrent}` );
 
     // Emit with some probability.
     if ( !this.spontaneousEmissionIsCertain() ) {
-      return null;
+      return;
     }
 
     // Emit a photon
-    const emittedPhoton = new Photon( {
-      wavelength: photonAbsorptionModel.getEmissionWavelength( nCurrent, nNew ),
-      position: this.getSpontaneousEmissionPosition(),
-      direction: getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value ),
-      wasEmittedByAtom: true,
-      debugHaloColor: 'red' // red for spontaneous emission
-    } );
-    this.photonEmittedEmitter.emit( emittedPhoton );
-    phet.log && phet.log( `BohrModel: spontaneous emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );
+    const wavelength = photonAbsorptionModel.getEmissionWavelength( nCurrent, nNew );
+    const position = this.getSpontaneousEmissionPosition();
+    const direction = getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value );
+    this.photonEmittedEmitter.emit( wavelength, position, direction, SPONTANEOUS_EMISSION_HALO_COLOR );
+    phet.log && phet.log( `BohrModel: spontaneous emission, ${MOTHASymbols.lambda}=${wavelength}, ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;
-
-    return emittedPhoton;
   }
 
   /**

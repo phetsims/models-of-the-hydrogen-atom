@@ -30,6 +30,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Color } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -296,15 +297,12 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       this.numberOfPhotonsAbsorbedProperty.value -= 1;
 
-      const photon = new Photon( {
-        wavelength: PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH,
-        position: this.electron.positionProperty.value, // at the electron's position
-        direction: getEmissionDirection(),
-        wasEmittedByAtom: true,
-        debugHaloColor: 'red' // red for emission
-      } );
-      phet.log && phet.log( `PlumPuddingModel: emitted \u03BB=${photon.wavelength}` );
-      this.photonEmittedEmitter.emit( photon );
+      this.photonEmittedEmitter.emit(
+        PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH,
+        this.electron.positionProperty.value,
+        getEmissionDirection(),
+        Color.RED
+      );
     }
   }
 }

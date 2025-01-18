@@ -26,6 +26,8 @@ import Photon from './Photon.js';
 import Spectrometer from './Spectrometer.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import PhotonSystem from './PhotonSystem.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Color } from '../../../../scenery/js/imports.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 
@@ -122,7 +124,8 @@ export default class MOTHAModel implements TModel {
 
     this.light = light;
 
-    this.light.photonEmittedEmitter.addListener( photon => this.photonSystem.addPhoton( photon ) );
+    this.light.photonEmittedEmitter.addListener( ( wavelength: number, position: Vector2, direction: number ) =>
+      this.photonSystem.emitPhotonFromLight( wavelength, position, direction ) );
 
     this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, tandem.createTandem( 'spectrometer' ) );
 
@@ -145,7 +148,8 @@ export default class MOTHAModel implements TModel {
       }
     );
 
-    const photonEmittedListener = ( photon: Photon ) => this.photonSystem.addPhoton( photon );
+    const photonEmittedListener = ( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ) =>
+      this.photonSystem.emitPhotonFromAtom( wavelength, position, direction, debugHaloColor );
     const photonAbsorbedEmitter = ( photon: Photon ) => this.photonSystem.removePhoton( photon );
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {

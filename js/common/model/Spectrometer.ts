@@ -15,7 +15,6 @@ import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from './HydrogenAtom.js';
-import Photon from './Photon.js';
 import SpectrometerSnapshot from './SpectrometerSnapshot.js';
 import SpectrometerDataPoint from './SpectrometerDataPoint.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
@@ -24,6 +23,8 @@ import PlumPuddingModel from './PlumPuddingModel.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import { Color } from '../../../../scenery/js/imports.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 export default class Spectrometer extends PhetioObject {
 
@@ -96,9 +97,9 @@ export default class Spectrometer extends PhetioObject {
     } );
 
     // Add a data point when a photon is emitted.
-    const photonEmittedListener = ( photon: Photon ) => {
+    const photonEmittedListener = ( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ) => {
       if ( this.enabledProperty.value ) {
-        this.recordEmission( photon.wavelength );
+        this.recordEmission( wavelength );
       }
     };
 

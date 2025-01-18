@@ -10,7 +10,7 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import { TColor } from '../../../../scenery/js/imports.js';
+import { Color } from '../../../../scenery/js/imports.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -52,7 +52,7 @@ type SelfOptions = {
   direction?: number; // initial direction
   wasEmittedByAtom?: boolean; // Was this photon emitted by the atom?
   hasCollided?: boolean; // Has this photon collided with the atom?
-  debugHaloColor?: TColor; // Color of halo around the photon, to make it easier to see for debugging.
+  debugHaloColor?: Color | null; // Color of halo around the photon, to make it easier to see for debugging.
 };
 
 type PhotonOptions = SelfOptions;
@@ -77,7 +77,7 @@ export default class Photon {
 
   // Halo color around the photon, used for debugging to make it easier to see specific photons.
   // For example, running with ?debugEmission puts a red halo around all photons that are emitted by the atom.
-  public readonly debugHaloColor: TColor;
+  public readonly debugHaloColor: Color | null;
 
   public readonly radius = MOTHAConstants.PHOTON_RADIUS;
 
