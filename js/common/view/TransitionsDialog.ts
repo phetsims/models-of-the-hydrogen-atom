@@ -95,7 +95,6 @@ export default class TransitionsDialog extends Panel {
 
       // PanelOptions
       isDisposable: false,
-      visibleProperty: isShowingProperty,
       cursor: 'pointer',
       xMargin: 10,
       yMargin: 10,
@@ -103,7 +102,8 @@ export default class TransitionsDialog extends Panel {
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener
       groupFocusHighlight: true,
-      tandemNameSuffix: 'Dialog' // Yes it's a Panel, but we are OK with calling it a Dialog.
+      tandemNameSuffix: 'Dialog', // Yes it's a Panel, but we are OK with calling it a Dialog.
+      phetioVisiblePropertyInstrumented: false // like Dialog
     }, providedOptions );
 
     const transitionColumnVisibleProperty = DerivedProperty.not( isExperimentProperty );
@@ -115,7 +115,9 @@ export default class TransitionsDialog extends Panel {
       listener: () => this.hide(),
       touchAreaXDilation: 5,
       touchAreaYDilation: 5,
-      tandem: options.tandem.createTandem( 'closeButton' )
+      tandem: options.tandem.createTandem( 'closeButton' ),
+      phetioVisiblePropertyInstrumented: false, // like Dialog
+      phetioEnabledPropertyInstrumented: false // like Dialog
     } );
 
     // Since we're faking a non-modal Dialog using a Panel, we need to handle description that would be handled
@@ -245,6 +247,9 @@ export default class TransitionsDialog extends Panel {
     super( content, options );
 
     this.isShowingProperty = isShowingProperty;
+    this.isShowingProperty.link( isShowing => {
+      this.visible = isShowing;
+    } );
 
     // pdom - Set the aria-labelledby relation so that whenever focus enters the dialog, the accessibleName is read.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
