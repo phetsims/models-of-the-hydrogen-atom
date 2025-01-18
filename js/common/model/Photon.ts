@@ -3,6 +3,10 @@
 /**
  * Photon is the model of a photon.
  *
+ * A static set of Photon instances is allocated at startup, and reused/mutated as the sim runs. This avoids the
+ * complexities of PhetioGroup and dynamic elements. See also PhotonSystem.
+ * See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
@@ -11,110 +15,169 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Color } from '../../../../scenery/js/imports.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
+import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 // Deflection angles when the photon collides with a rigid body, like the Billiard Ball atom.
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
 const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 
-// This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
-export type PhotonStateObject = {
-
-  // Serialize x and y coordinates separately, to reduce the number of Vector2 allocations.
-  wavelength: number;
-  x: number;
-  y: number;
-  direction: number;
-  wasEmittedByAtom: boolean;
-  hasCollided: boolean;
-};
-
-// This should match PhotonStateObject, but with IOTypes.
-const PHOTON_STATE_SCHEMA = {
-  wavelength: NumberIO,
-  x: NumberIO,
-  y: NumberIO,
-  direction: NumberIO,
-  wasEmittedByAtom: BooleanIO,
-  hasCollided: BooleanIO
-};
-
 type SelfOptions = {
-  wavelength: number; // the photon's integer wavelength, in nm
-  position: Vector2; // initial position
+  wavelength?: number; // the photon's integer wavelength, in nm
+  position?: Vector2; // initial position
   direction?: number; // initial direction
   wasEmittedByAtom?: boolean; // Was this photon emitted by the atom?
-  hasCollided?: boolean; // Has this photon collided with the atom?
+  hasCollidedWithAtom?: boolean; // Has this photon collided with the atom?
   debugHaloColor?: Color | null; // Color of halo around the photon, to make it easier to see for debugging.
 };
 
-type PhotonOptions = SelfOptions;
+export type PhotonOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class Photon {
+export default class Photon extends PhetioObject {
 
   // Wavelength of the photon, in nm.
-  public readonly wavelength: number; // nm
+  private readonly wavelengthProperty: Property<number>;
 
   // Position of the photon, publicly readonly, privately mutable.
   public readonly positionProperty: TReadOnlyProperty<Vector2>;
   private readonly _positionProperty: Property<Vector2>;
 
   // Direction that the photon is moving, in radians.
-  private _direction: number;
+  private readonly directionProperty: Property<number>;
 
   // Whether the photon was emitted by the hydrogen atom.
-  public readonly wasEmittedByAtom: boolean;
+  public readonly wasEmittedByAtomProperty: Property<boolean>;
 
   // Whether the photon has collided with the hydrogen atom.
-  private _hasCollided: boolean;
+  private readonly hasCollidedWithAtomProperty: Property<boolean>;
+
+  public readonly isActiveProperty: Property<boolean>;
 
   // Halo color around the photon, used for debugging to make it easier to see specific photons.
   // For example, running with ?debugEmission puts a red halo around all photons that are emitted by the atom.
-  public readonly debugHaloColor: Color | null;
+  private _debugHaloColor: Color | null;
 
   public readonly radius = MOTHAConstants.PHOTON_RADIUS;
 
   public constructor( providedOptions: PhotonOptions ) {
 
-    const options = optionize<PhotonOptions, SelfOptions>()( {
+    const options = optionize<PhotonOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
+      wavelength: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min,
+      position: new Vector2( 0, 0 ),
       direction: 0,
       wasEmittedByAtom: false,
-      hasCollided: false,
-      debugHaloColor: null
+      hasCollidedWithAtom: false,
+      debugHaloColor: null,
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioState: false,
+      phetioType: Photon.PhotonIO
     }, providedOptions );
 
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
     assert && assert( Number.isInteger( options.wavelength ), `wavelength must be an integer: ${options.wavelength}` );
 
-    this._positionProperty = new Vector2Property( options.position );
+    super( options );
+
+    this.wavelengthProperty = new NumberProperty( options.wavelength, {
+      numberType: 'Integer',
+      tandem: options.tandem.createTandem( 'wavelengthProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this._positionProperty = new Vector2Property( options.position, {
+      tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioReadOnly: true
+    } );
     this.positionProperty = this._positionProperty;
 
-    this.wavelength = options.wavelength;
-    this._direction = options.direction;
-    this.wasEmittedByAtom = options.wasEmittedByAtom;
-    this._hasCollided = options.hasCollided;
-    this.debugHaloColor = options.debugHaloColor;
+    this.directionProperty = new NumberProperty( options.direction, {
+      tandem: options.tandem.createTandem( 'directionProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this.wasEmittedByAtomProperty = new BooleanProperty( options.wasEmittedByAtom, {
+      tandem: options.tandem.createTandem( 'wasEmittedByAtomProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this.hasCollidedWithAtomProperty = new BooleanProperty( options.hasCollidedWithAtom, {
+      tandem: options.tandem.createTandem( 'hasCollidedWithAtomProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this.isActiveProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'isActiveProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this._debugHaloColor = options.debugHaloColor;
   }
 
-  public dispose(): void {
-    this.positionProperty.dispose();
+  /**
+   * Activates a Photon with new property values.
+   */
+  public activate( photonOptions: StrictOmit<PhotonOptions, 'tandem'> ): void {
+   assert && assert( !this.isActiveProperty.value, 'Attempted to activate a photon that is already active.' );
+
+    if ( photonOptions.wavelength !== undefined ) {
+      this.wavelengthProperty.value = photonOptions.wavelength;
+    }
+
+    if ( photonOptions.position !== undefined ) {
+      this._positionProperty.value = photonOptions.position;
+    }
+
+    if ( photonOptions.direction !== undefined ) {
+      this.directionProperty.value = photonOptions.direction;
+    }
+
+    if ( photonOptions.wasEmittedByAtom !== undefined ) {
+      this.wasEmittedByAtomProperty.value = photonOptions.wasEmittedByAtom;
+    }
+
+    if ( photonOptions.hasCollidedWithAtom !== undefined ) {
+      this.hasCollidedWithAtomProperty.value = photonOptions.hasCollidedWithAtom;
+    }
+
+    if ( photonOptions.debugHaloColor !== undefined ) {
+      this._debugHaloColor = photonOptions.debugHaloColor;
+    }
+
+    this.isActiveProperty.value = true;
+  }
+
+  public get wavelength(): number {
+    return this.wavelengthProperty.value;
   }
 
   public get direction(): number {
-    return this._direction;
+    return this.directionProperty.value;
   }
 
-  public get hasCollided(): boolean {
-    return this._hasCollided;
+  public get wasEmittedByAtom(): boolean {
+    return this.wasEmittedByAtomProperty.value;
+  }
+
+  public get hasCollidedWithAtom(): boolean {
+    return this.hasCollidedWithAtomProperty.value;
+  }
+
+  public get debugHaloColor(): Color | null {
+    return this._debugHaloColor;
   }
 
   /**
@@ -122,6 +185,7 @@ export default class Photon {
    * @param dt - elapsed time, in seconds
    */
   public move( dt: number ): void {
+    assert && assert( this.isActiveProperty.value, 'Attempted to move an inactive Photon.' );
     const distance = dt * MOTHAConstants.PHOTON_SPEED;
     const dx = Math.cos( this.direction ) * distance;
     const dy = Math.sin( this.direction ) * distance;
@@ -135,59 +199,22 @@ export default class Photon {
    * 'steep but random' angle.
    */
   public bounceBack( atomPosition: Vector2 ): void {
+    assert && assert( this.isActiveProperty.value, 'Attempted to bounceBack an inactive Photon.' );
     const sign = ( this.positionProperty.value.x > atomPosition.x ) ? 1 : -1;
     const deflectionAngle = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
-    this._direction += ( Math.PI + deflectionAngle );
-    this._hasCollided = true;
+    this.directionProperty.value += ( Math.PI + deflectionAngle );
+    this.hasCollidedWithAtomProperty.value = true;
   }
 
   /**
-   * Serializes this Photon.
+   * PhotonIO handles PhET-iO serialization of Photon. Since all Photon instances are created at startup, exist for
+   * the lifetime of the sim, and are phetioState: false, it implements 'Reference type serialization', as described
+   * in the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  private toStateObject(): PhotonStateObject {
-    return {
-      wavelength: this.wavelength,
-      x: this.positionProperty.value.x,
-      y: this.positionProperty.value.y,
-      direction: this.direction,
-      wasEmittedByAtom: this.wasEmittedByAtom,
-      hasCollided: this.hasCollided
-    };
-  }
-
-  /**
-   * Deserializes an instance of Photon.
-   */
-  private static fromStateObject( stateObject: PhotonStateObject ): Photon {
-    return new Photon( {
-      wavelength: stateObject.wavelength,
-      position: new Vector2( stateObject.x, stateObject.y ),
-      direction: stateObject.direction,
-      wasEmittedByAtom: stateObject.wasEmittedByAtom,
-      hasCollided: stateObject.hasCollided
-    } );
-  }
-
-  /**
-   * PhotonIO handles serialization of a Photon. It implements 'Data Type Serialization' as described in
-   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
-   */
-  public static readonly PhotonIO = new IOType<Photon, PhotonStateObject>( 'PhotonIO', {
+  public static readonly PhotonIO = new IOType<Photon, ReferenceIOState>( 'PhotonIO', {
     valueType: Photon,
-    stateSchema: PHOTON_STATE_SCHEMA,
-    toStateObject: photon => photon.toStateObject(),
-    fromStateObject: x => Photon.fromStateObject( x ),
-    documentation: 'PhET-iO Type for photons.<br>' +
-                   '<br>' +
-                   'Fields include:<br>' +
-                   '<ul>' +
-                   '<li>wavelength: wavelength of the photon, in nm' +
-                   '<li>x: x coordinate of position' +
-                   '<li>y: y coordinate of position' +
-                   '<li>direction: direction of motion, in radians' +
-                   '<li>wasEmittedByAtom: whether the photon was emitted by the hydrogen atom' +
-                   '<li>hasCollided: whether the photon has collided with the hydrogen atom' +
-                   '</ul>'
+    supertype: ReferenceIO( IOType.ObjectIO )
   } );
 }
 

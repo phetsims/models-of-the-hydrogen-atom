@@ -27,6 +27,7 @@ import Light from '../model/Light.js';
 import Photon from '../model/Photon.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -98,7 +99,8 @@ export default class PhotonNode extends Node {
   public static createIcon( wavelength: number, scale = 1 ): Node {
     const photon = new Photon( {
       wavelength: wavelength,
-      position: new Vector2( 0, 0 )
+      position: new Vector2( 0, 0 ),
+      tandem: Tandem.OPT_OUT
     } );
     const modelViewTransform = ModelViewTransform2.createIdentity();
     return new PhotonNode( photon, modelViewTransform, {

@@ -23,8 +23,6 @@ import Photon from './Photon.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 
-export type HydrogenAtomStateObject = ReferenceIOState;
-
 type SelfOptions = {
 
   // Name of the model shown in the UI.
@@ -67,7 +65,8 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioState: false
+      phetioState: false,
+      phetioType: HydrogenAtom.HydrogenAtomIO
     }, providedOptions );
 
     super( options );
@@ -123,7 +122,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
    * as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static readonly HydrogenAtomIO = new IOType<HydrogenAtom, HydrogenAtomStateObject>( 'HydrogenAtomIO', {
+  public static readonly HydrogenAtomIO = new IOType<HydrogenAtom, ReferenceIOState>( 'HydrogenAtomIO', {
     valueType: HydrogenAtom,
     supertype: ReferenceIO( IOType.ObjectIO ),
     documentation: 'A model of the hydrogen atom'

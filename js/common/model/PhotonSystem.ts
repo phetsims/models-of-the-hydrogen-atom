@@ -11,7 +11,7 @@
 
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Photon from './Photon.js';
+import Photon, { PhotonOptions } from './Photon.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -19,6 +19,7 @@ import HydrogenAtom from './HydrogenAtom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 export default class PhotonSystem extends PhetioObject {
 
@@ -35,11 +36,18 @@ export default class PhotonSystem extends PhetioObject {
   public readonly photonAddedEmitter: Emitter<[ Photon ]>;
   public readonly photonRemovedEmitter: Emitter<[ Photon ]>;
 
+  // This is the number of static Photon instances that are created at startup, and the maximum number of Photons that
+  // can therefore be visible in the zoomed-in box. If more Photons are needed at runtime, we cannot instantiate more
+  // dynamically because they are PhET-iO Elements. With assertions enabled, the sim will fail an assertion. With
+  // assertions disabled, a warning will be printed to the browser console, and we try to continue gracefully. If you
+  // see such a warning, increase this value. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
+  private static readonly NUMBER_OF_PHOTON_INSTANCES = 25;
+
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
     super( {
       isDisposable: false,
-      phetioState: false, //TODO
+      phetioState: false,
       phetioDocumentation: 'The system of photons shown inside the zoomed-in box.',
       tandem: tandem
     } );
@@ -48,6 +56,11 @@ export default class PhotonSystem extends PhetioObject {
     this.hydrogenAtomProperty = hydrogenAtomProperty;
 
     this.photons = [];
+    for ( let i = 0; i < PhotonSystem.NUMBER_OF_PHOTON_INSTANCES; i++ ) {
+      this.photons.push( new Photon( {
+        tandem: tandem.createTandem( `photon${i}` )
+      } ) );
+    }
 
     this.photonAddedEmitter = new Emitter<[ Photon ]>( {
       parameters: [
@@ -69,64 +82,79 @@ export default class PhotonSystem extends PhetioObject {
    * Emits a photon from the light source.
    */
   public emitPhotonFromLight( wavelength: number, position: Vector2, direction: number ): void {
-    this.addPhoton( new Photon( {
+    this.addPhoton( {
       wavelength: wavelength,
       position: position,
-      direction: direction
-    } ) );
+      direction: direction,
+      wasEmittedByAtom: false,
+      hasCollidedWithAtom: false,
+      debugHaloColor: null
+    } );
   }
 
   /**
    * Emits a photon from the hydrogen atom.
    */
   public emitPhotonFromAtom( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ): void {
-    this.addPhoton( new Photon( {
+    this.addPhoton( {
       wavelength: wavelength,
       position: position,
       direction: direction,
       wasEmittedByAtom: true,
+      hasCollidedWithAtom: false,
       debugHaloColor: debugHaloColor
-    } ) );
+    } );
   }
 
-  private addPhoton( photon: Photon ): void {
-    assert && assert( !this.photons.includes( photon ), 'Attempted to add a photon that already exists.' );
-    this.photons.push( photon );
-    this.photonAddedEmitter.emit( photon );
+  private addPhoton( photonOptions: StrictOmit<Required<PhotonOptions>, 'tandem'> ): void {
+    const photon = _.find( this.photons, photon => !photon.isActiveProperty.value )!;
+    assert && assert( photon, 'No inactive photons are available, increase PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
+    if ( photon ) {
+      photon.activate( photonOptions );
+      this.photonAddedEmitter.emit( photon );
+    }
+    else {
+      // The sim will not crash, but will print a console warning.
+      console.warn( 'No inactive photons are available, increase PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
+    }
   }
 
   public removePhoton( photon: Photon ): void {
-    assert && assert( this.photons.includes( photon ), 'Attempted to remove a photon that does not exist.' );
-    const index = this.photons.indexOf( photon );
-    this.photons.splice( index, 1 );
-    photon.dispose();
+    assert && assert( photon.isActiveProperty.value, 'Attempted to remove a photon that is inactive.' );
+    photon.isActiveProperty.value = false;
     this.photonRemovedEmitter.emit( photon );
   }
 
   public removeAllPhotons(): void {
-    Array.from( this.photons ).forEach( photon => this.removePhoton( photon ) );
+    Array.from( this.photons ).forEach( photon => {
+      if ( photon.isActiveProperty.value ) {
+        this.removePhoton( photon );
+      }
+    } );
   }
 
   /**
-   * Advances the state of the photons.
+   * Advances the state of all active photons.
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {
 
     // This may change this.photons, so operate on a shallow copy of the array.
     Array.from( this.photons ).forEach( photon => {
+      if ( photon.isActiveProperty.value ) {
 
-      // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
-      // MOTHAModel.step. If we move the photon after processing it, then the photon will be processed when it
-      // is 1 time step behind the state of the atom.
-      photon.move( dt );
+        // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
+        // MOTHAModel.step. If we move the photon after processing it, then the photon will be processed when it
+        // is 1 time step behind the state of the atom.
+        photon.move( dt );
 
-      // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
-      if ( !this.zoomedInBox.containsPhoton( photon ) ) {
-        this.removePhoton( photon );
-      }
-      else {
-        this.hydrogenAtomProperty.value.processPhoton( photon );
+        // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
+        if ( !this.zoomedInBox.containsPhoton( photon ) ) {
+          this.removePhoton( photon );
+        }
+        else {
+          this.hydrogenAtomProperty.value.processPhoton( photon );
+        }
       }
     } );
   }
