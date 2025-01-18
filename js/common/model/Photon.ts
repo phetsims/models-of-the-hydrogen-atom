@@ -91,13 +91,10 @@ export default class Photon extends PhetioObject {
       phetioType: Photon.PhotonIO
     }, providedOptions );
 
-    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
-    assert && assert( Number.isInteger( options.wavelength ), `wavelength must be an integer: ${options.wavelength}` );
-
     super( options );
 
     this.wavelengthProperty = new NumberProperty( options.wavelength, {
-      numberType: 'Integer',
+      numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
       tandem: options.tandem.createTandem( 'wavelengthProperty' ),
       phetioReadOnly: true
     } );
