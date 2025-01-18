@@ -4,7 +4,7 @@
  * Photon is the model of a photon.
  *
  * A static set of Photon instances is allocated at startup, and reused/mutated as the sim runs. This avoids the
- * complexities of PhetioGroup and dynamic elements. See also PhotonSystem.ts and
+ * complexities of PhetioGroup and dynamic elements. See also PhotonPool.ts and
  * https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47
  *
  * @author Chris Malley (PixelZoom, Inc.)

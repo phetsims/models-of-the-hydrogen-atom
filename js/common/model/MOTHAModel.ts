@@ -25,7 +25,7 @@ import Light from './Light.js';
 import Photon from './Photon.js';
 import Spectrometer from './Spectrometer.js';
 import ZoomedInBox from './ZoomedInBox.js';
-import PhotonSystem from './PhotonSystem.js';
+import PhotonPool from './PhotonPool.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
 
@@ -65,8 +65,8 @@ export default class MOTHAModel implements TModel {
 
   public readonly spectrometer: Spectrometer;
 
-  // the system of photons inside zoomedInBox
-  public readonly photonSystem: PhotonSystem;
+  // the pool of Photon instances that are available for use by the sim
+  public readonly photonPool: PhotonPool;
 
   // is the simulation playing?
   public readonly isPlayingProperty: Property<boolean>;
@@ -122,12 +122,12 @@ export default class MOTHAModel implements TModel {
     this.isQuantumModelProperty = new DerivedProperty( [ this.hydrogenAtomProperty ],
       hydrogenAtom => ( hydrogenAtom instanceof BohrModel ) );
 
-    this.photonSystem = new PhotonSystem( zoomedInBox, this.hydrogenAtomProperty, tandem.createTandem( 'photonSystem' ) );
+    this.photonPool = new PhotonPool( zoomedInBox, this.hydrogenAtomProperty, tandem.createTandem( 'photonPool' ) );
 
     this.light = light;
 
     this.light.photonEmittedEmitter.addListener( ( wavelength: number, position: Vector2, direction: number ) =>
-      this.photonSystem.emitPhotonFromLight( wavelength, position, direction ) );
+      this.photonPool.emitPhotonFromLight( wavelength, position, direction ) );
 
     this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, tandem.createTandem( 'spectrometer' ) );
 
@@ -151,11 +151,11 @@ export default class MOTHAModel implements TModel {
     );
 
     const photonEmittedListener = ( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ) =>
-      this.photonSystem.emitPhotonFromAtom( wavelength, position, direction, debugHaloColor );
-    const photonAbsorbedEmitter = ( photon: Photon ) => this.photonSystem.removePhoton( photon );
+      this.photonPool.emitPhotonFromAtom( wavelength, position, direction, debugHaloColor );
+    const photonAbsorbedEmitter = ( photon: Photon ) => this.photonPool.removePhoton( photon );
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
-      this.photonSystem.removeAllPhotons();
+      this.photonPool.removeAllPhotons();
 
       if ( oldHydrogenAtom ) {
         oldHydrogenAtom.reset();
@@ -182,7 +182,7 @@ export default class MOTHAModel implements TModel {
     this.predictiveModelProperty.reset();
     this.light.reset();
     this.spectrometer.reset();
-    this.photonSystem.reset();
+    this.photonPool.reset();
     this.isPlayingProperty.reset();
     this.timeSpeedProperty.reset();
   }
@@ -213,7 +213,7 @@ export default class MOTHAModel implements TModel {
     const dtScaled = dt * this.timeScaleProperty.value;
     this.light.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );
-    this.photonSystem.step( dtScaled );
+    this.photonPool.step( dtScaled );
   }
 }
 

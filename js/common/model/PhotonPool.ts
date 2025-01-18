@@ -1,10 +1,10 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * PhotonSystem is the system of photons that are displayed in the zoomed-in box.
+ * PhotonPool is the collection of Photon instances that are available for use by the sim.
  *
- * To encapsulate PhET-iO concerns, PhotonSystem owns and manages a static pool of Photon instances.
- * It provides a public API for adding and removing photons. But after instantiation of PhotonSystem at startup,
+ * To encapsulate PhET-iO concerns, PhotonPool owns and manages a static pool of Photon instances.
+ * It provides a public API for adding and removing photons. But after instantiation of PhotonPool at startup,
  * no instances of Photon are created or disposed.  "Adding" a photon means mutating and activating an inactive
  * Photon instance. "Removing" a photon means deactivating an active Photon instance, effectively returning it
  * to the free pool. See also Photon.ts and https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
@@ -25,7 +25,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
-export default class PhotonSystem extends PhetioObject {
+export default class PhotonPool extends PhetioObject {
 
   // the zoomed-in part of the box of hydrogen
   private readonly zoomedInBox: ZoomedInBox;
@@ -58,6 +58,8 @@ export default class PhotonSystem extends PhetioObject {
 
     super( {
       isDisposable: false,
+      phetioDocumentation: 'The pool of Photon instances that are available for use by the sim, created when the sim starts. ' +
+                           'Photons are not created and destroyed dynamically, but are instead reused and mutated as needed.',
       phetioState: false,
       tandem: tandem
     } );
@@ -79,7 +81,7 @@ export default class PhotonSystem extends PhetioObject {
     // Create the static set of Photon elements.
     this.photons = [];
     this.maxActivePhotons = 0;
-    for ( let i = 0; i < PhotonSystem.NUMBER_OF_PHOTON_INSTANCES; i++ ) {
+    for ( let i = 0; i < PhotonPool.NUMBER_OF_PHOTON_INSTANCES; i++ ) {
       const photon = new Photon( {
         tandem: tandem.createTandem( `photon${i}` )
       } );
@@ -125,13 +127,13 @@ export default class PhotonSystem extends PhetioObject {
    */
   private addPhoton( photonOptions: StrictOmit<Required<PhotonOptions>, 'tandem'> ): void {
     const photon = _.find( this.photons, photon => !photon.isActiveProperty.value )!;
-    assert && assert( photon, 'No inactive photons are available! See documentation for PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
+    assert && assert( photon, 'No inactive photons are available! See documentation for PhotonPool.NUMBER_OF_PHOTON_INSTANCES.' );
     if ( photon ) {
       photon.activate( photonOptions );
     }
     else {
       // The sim will not crash, but will print a console warning.
-      console.warn( 'No inactive photons are available! See documentation for PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
+      console.warn( 'No inactive photons are available! See documentation for PhotonPool.NUMBER_OF_PHOTON_INSTANCES.' );
     }
   }
 
@@ -203,7 +205,7 @@ export default class PhotonSystem extends PhetioObject {
       const numberOfActivePhotons = this.photons.filter( photon => photon.isActiveProperty.value ).length;
       if ( numberOfActivePhotons > this.maxActivePhotons ) {
         this.maxActivePhotons = numberOfActivePhotons;
-        phet.log && phet.log( `NUMBER_OF_PHOTON_INSTANCES=${PhotonSystem.NUMBER_OF_PHOTON_INSTANCES}, maxActivePhotons=${this.maxActivePhotons}`, {
+        phet.log && phet.log( `NUMBER_OF_PHOTON_INSTANCES=${PhotonPool.NUMBER_OF_PHOTON_INSTANCES}, maxActivePhotons=${this.maxActivePhotons}`, {
           color: 'red'
         } );
       }
@@ -211,4 +213,4 @@ export default class PhotonSystem extends PhetioObject {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'PhotonSystem', PhotonSystem );
+modelsOfTheHydrogenAtom.register( 'PhotonPool', PhotonPool );
