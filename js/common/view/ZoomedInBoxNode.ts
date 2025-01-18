@@ -82,14 +82,14 @@ export default class ZoomedInBoxNode extends Node {
     const photonNodes: PhotonNode[] = [];
 
     // Add the PhotonNode for a Photon.
-    photonSystem.addPhotonAddedListener( photon => {
+    photonSystem.photonAddedEmitter.addListener( photon => {
       const photonNode = new PhotonNode( photon, modelViewTransform );
       photonNodes.push( photonNode );
       photonsLayer.addChild( photonNode );
     } );
 
     // Remove the PhotonNode for a Photon.
-    photonSystem.addPhotonRemovedListener( photon => {
+    photonSystem.photonRemovedEmitter.addListener( photon => {
       const photonNode = _.find( photonNodes, photonNode => ( photonNode.photon === photon ) )!;
       assert && assert( photonNode );
       photonNodes.splice( photonNodes.indexOf( photonNode ), 1 );

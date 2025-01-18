@@ -16,6 +16,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
+import Emitter from '../../../../axon/js/Emitter.js';
 
 export default class PhotonSystem extends PhetioObject {
 
@@ -27,6 +28,10 @@ export default class PhotonSystem extends PhetioObject {
 
   // the collection of photons that appear in the zoomed-in box
   private readonly photons: ObservableArray<Photon>;
+
+  // notify when a photon is added or removed
+  public readonly photonAddedEmitter: Emitter<[ Photon ]>;
+  public readonly photonRemovedEmitter: Emitter<[ Photon ]>;
 
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
@@ -41,6 +46,13 @@ export default class PhotonSystem extends PhetioObject {
 
     //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47 replace ObservableArray
     this.photons = createObservableArray<Photon>();
+
+    this.photonAddedEmitter = new Emitter<[ Photon ]>( {
+      parameters: [ { name: 'photon', valueType: Photon } ]
+    } );
+    this.photonRemovedEmitter = new Emitter<[ Photon ]>( {
+      parameters: [ { name: 'photon', valueType: Photon } ]
+    } );
   }
 
   public reset(): void {
@@ -51,7 +63,7 @@ export default class PhotonSystem extends PhetioObject {
    * Emits a photon from the light source.
    */
   public emitPhotonFromLight( wavelength: number, position: Vector2, direction: number ): void {
-    this.photons.add( new Photon( {
+    this.addPhoton( new Photon( {
       wavelength: wavelength,
       position: position,
       direction: direction
@@ -62,7 +74,7 @@ export default class PhotonSystem extends PhetioObject {
    * Emits a photon from the hydrogen atom.
    */
   public emitPhotonFromAtom( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ): void {
-    this.photons.add( new Photon( {
+    this.addPhoton( new Photon( {
       wavelength: wavelength,
       position: position,
       direction: direction,
@@ -71,24 +83,24 @@ export default class PhotonSystem extends PhetioObject {
     } ) );
   }
 
+  private addPhoton( photon: Photon ): void {
+    this.photons.add( photon );
+    this.photonAddedEmitter.emit( photon );
+  }
+
   public removePhoton( photon: Photon ): void {
     assert && assert( this.photons.includes( photon ), 'Attempted to remove a photon that does not exist.' );
     this.photons.remove( photon );
     photon.dispose();
+    this.photonRemovedEmitter.emit( photon );
   }
 
   public removeAllPhotons(): void {
     while ( this.photons.length > 0 ) {
-      this.photons.pop()!.dispose();
+      const photon = this.photons.pop()!;
+      photon.dispose();
+      this.photonRemovedEmitter.emit( photon );
     }
-  }
-
-  public addPhotonAddedListener( listener: ( photon: Photon ) => void ): void {
-    this.photons.addItemAddedListener( listener );
-  }
-
-  public addPhotonRemovedListener( listener: ( photon: Photon ) => void ): void {
-    this.photons.addItemRemovedListener( listener );
   }
 
   /**
