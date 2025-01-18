@@ -100,6 +100,12 @@ export default class MOTHAScreenView extends ScreenView {
       phetioReadOnly: true // because the sim controls this
     } );
 
+    const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
+      model.lightSource.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
+        visibleProperty: transitionsDialogVisibleProperty,
+        tandem: options.tandem.createTandem( 'transitionsDialog' )
+      } );
+
     // Hide the dialog when a classical model is being viewed.
     model.isQuantumModelProperty.link( isQuantumModel => {
       if ( transitionsDialogVisibleProperty.value ) {
@@ -204,12 +210,11 @@ export default class MOTHAScreenView extends ScreenView {
       transitionsCheckbox.centerX = lightControlPanel.centerX;
       transitionsCheckbox.top = lightControlPanel.bottom + 5;
     } );
+    transitionsDialog.setInitialPosition( modelVBox.leftTop );
     resetAllButton.right = this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     resetAllButton.bottom = this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
 
-    // Now continue with things that depend on the above layout.
-
-    // Dashed lines that connect the tiny box and zoom box. Do this after layout!
+    // Now that layout is done, we can add the dashed lines that connect the tiny box and zoomed-in box.
     const dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )
       .lineTo( this.zoomedInBoxNode.left, this.zoomedInBoxNode.top )
@@ -219,13 +224,6 @@ export default class MOTHAScreenView extends ScreenView {
       lineDash: [ 5, 5 ],
       visibleProperty: DerivedProperty.and( [ this.zoomedInBoxNode.visibleProperty, boxOfHydrogenNode.visibleProperty ] )
     } );
-
-    const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
-      model.lightSource.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
-        position: modelVBox.leftTop,
-        visibleProperty: transitionsDialogVisibleProperty,
-        tandem: options.tandem.createTandem( 'transitionsDialog' )
-      } );
 
     // rendering order
     const screenViewRootNodeChildren = [
