@@ -197,7 +197,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Absorb the photon.
-    phet.log && phet.log( `BohrModel: absorbed ${MOTHASymbols.lambda}=${photon.wavelength}, ${nCurrent} -> ${nNew}` );
+    phet.log && phet.log( `Absorb: ${MOTHASymbols.lambda}=${photon.wavelength}, n = ${nCurrent} -> ${nNew}` );
     this.photonAbsorbedEmitter.emit( photon );
 
     // Move the electron to the new higher state.
@@ -255,7 +255,7 @@ export default class BohrModel extends HydrogenAtom {
       photon.direction,
       STIMULATED_EMISSION_HALO_COLOR
     );
-    phet.log && phet.log( `BohrModel: stimulated emission, ${MOTHASymbols.lambda}=${photon.wavelength}, ${nCurrent} -> ${nNew}` );
+    phet.log && phet.log( `Emit (Stimulated): ${MOTHASymbols.lambda}=${photon.wavelength}, n = ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;
@@ -314,7 +314,7 @@ export default class BohrModel extends HydrogenAtom {
     const position = this.getSpontaneousEmissionPosition();
     const direction = getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value );
     this.photonEmittedEmitter.emit( wavelength, position, direction, SPONTANEOUS_EMISSION_HALO_COLOR );
-    phet.log && phet.log( `BohrModel: spontaneous emission, ${MOTHASymbols.lambda}=${wavelength}, ${nCurrent} -> ${nNew}` );
+    phet.log && phet.log( `Emit (Spontaneous): ${MOTHASymbols.lambda}=${wavelength}, n = ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.
     this.electron.nProperty.value = nNew;

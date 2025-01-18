@@ -95,7 +95,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     } );
     this.nlmProperty = this._nlmProperty;
     phet.log && this.nlmProperty.lazyLink( ( nlmNew, nlmOld ) =>
-      phet.log( `SchrodingerModel: (n,l,m) (${nlmOld.n},${nlmOld.l},${nlmOld.m}) -> (${nlmNew.n},${nlmNew.l},${nlmNew.m})` ) );
+      phet.log( `SchrodingerModel: (n,l,m) = (${nlmOld.n},${nlmOld.l},${nlmOld.m}) -> (${nlmNew.n},${nlmNew.l},${nlmNew.m})` ) );
 
     // When n changes, compute the next state.
     this.electron.nProperty.lazyLink( n => {

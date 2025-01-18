@@ -56,7 +56,6 @@ export default class BohrElectron extends Electron {
       phetioFeatured: true,
       phetioReadOnly: true
     } );
-    phet.log && this.nProperty.lazyLink( ( nNew, nOld ) => phet.log( `BohrElectron: n ${nOld} -> ${nNew}` ) );
 
     this.energyProperty = new DerivedProperty( [ this.nProperty ], n => BohrElectron.getEnergy( n ), {
       units: 'eV',
