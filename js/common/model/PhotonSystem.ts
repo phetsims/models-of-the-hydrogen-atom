@@ -99,11 +99,7 @@ export default class PhotonSystem extends PhetioObject {
   }
 
   public removeAllPhotons(): void {
-    while ( this.photons.length > 0 ) {
-      const photon = this.photons.pop()!;
-      photon.dispose();
-      this.photonRemovedEmitter.emit( photon );
-    }
+    Array.from( this.photons ).forEach( photon => this.removePhoton( photon ) );
   }
 
   /**
