@@ -296,13 +296,12 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       this.numberOfPhotonsAbsorbedProperty.value -= 1;
 
-      // Create and emit a photon
       const photon = new Photon( {
         wavelength: PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH,
         position: this.electron.positionProperty.value, // at the electron's position
         direction: getEmissionDirection(),
         wasEmittedByAtom: true,
-        debugHaloColor: 'red'
+        debugHaloColor: 'red' // red for emission
       } );
       phet.log && phet.log( `PlumPuddingModel: emitted \u03BB=${photon.wavelength}` );
       this.photonEmittedEmitter.emit( photon );

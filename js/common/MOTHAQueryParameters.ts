@@ -23,7 +23,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // Internal query parameters
   //----------------------------------------------------------------------------------------------------------------
 
-  // Draws a red rectangle around emitted photons.
+  // Draws a halo around photons that emitted by the hydrogen atom, to make them easier to see.
   debugEmission: {
     type: 'flag'
   },

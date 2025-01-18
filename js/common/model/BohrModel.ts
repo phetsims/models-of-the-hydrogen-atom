@@ -250,7 +250,7 @@ export default class BohrModel extends HydrogenAtom {
       position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
       direction: photon.direction,
       wasEmittedByAtom: true,
-      debugHaloColor: 'rgb( 75, 255, 7 )' // bright green
+      debugHaloColor: 'rgb( 75, 255, 7 )' // bright green for stimulated emission
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
     phet.log && phet.log( `BohrModel: stimulated emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );
@@ -315,7 +315,7 @@ export default class BohrModel extends HydrogenAtom {
       position: this.getSpontaneousEmissionPosition(),
       direction: getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value ),
       wasEmittedByAtom: true,
-      debugHaloColor: 'red'
+      debugHaloColor: 'red' // red for spontaneous emission
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
     phet.log && phet.log( `BohrModel: spontaneous emission, ${MOTHASymbols.lambda}=${emittedPhoton.wavelength}, ${nCurrent} -> ${nNew}` );

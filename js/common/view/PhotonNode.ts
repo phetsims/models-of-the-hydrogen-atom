@@ -64,7 +64,7 @@ export default class PhotonNode extends Node {
 
     super( options );
 
-    // Draw a red circle around emitted photons, to make them easier to see.
+    // Draw a halo around specific photons, to make them easier to see.
     if ( MOTHAQueryParameters.debugEmission && photon.debugHaloColor ) {
       this.addChild( new Circle( {
         radius: 1.25 * haloRadius,
@@ -98,8 +98,7 @@ export default class PhotonNode extends Node {
   public static createIcon( wavelength: number, scale = 1 ): Node {
     const photon = new Photon( {
       wavelength: wavelength,
-      position: new Vector2( 0, 0 ),
-      direction: 0
+      position: new Vector2( 0, 0 )
     } );
     const modelViewTransform = ModelViewTransform2.createIdentity();
     return new PhotonNode( photon, modelViewTransform, {
