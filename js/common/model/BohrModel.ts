@@ -173,7 +173,7 @@ export default class BohrModel extends HydrogenAtom {
 
     const nCurrent = this.electron.nProperty.value;
 
-    if ( photon.wasEmitted ||
+    if ( photon.wasEmittedByAtom ||
          nCurrent === MOTHAConstants.MAX_STATE ||
          this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_ABSORPTION ||
          !this.collides( photon ) ) {
@@ -225,7 +225,7 @@ export default class BohrModel extends HydrogenAtom {
 
     const nCurrent = this.electron.nProperty.value;
 
-    if ( photon.wasEmitted ||
+    if ( photon.wasEmittedByAtom ||
          this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION ||
          nCurrent === MOTHAConstants.GROUND_STATE ||
          !this.collides( photon ) ) {
@@ -249,7 +249,7 @@ export default class BohrModel extends HydrogenAtom {
       wavelength: photon.wavelength,
       position: photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
       direction: photon.direction,
-      wasEmitted: true,
+      wasEmittedByAtom: true,
       debugHaloColor: 'rgb( 75, 255, 7 )' // bright green
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );
@@ -314,7 +314,7 @@ export default class BohrModel extends HydrogenAtom {
       wavelength: photonAbsorptionModel.getEmissionWavelength( nCurrent, nNew ),
       position: this.getSpontaneousEmissionPosition(),
       direction: getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value ),
-      wasEmitted: true,
+      wasEmittedByAtom: true,
       debugHaloColor: 'red'
     } );
     this.photonEmittedEmitter.emit( emittedPhoton );

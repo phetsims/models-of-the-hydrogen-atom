@@ -254,7 +254,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
    * - the electron is not moving.
    */
   private canAbsorb( photon: Photon ): boolean {
-    return !photon.wasEmitted &&
+    return !photon.wasEmittedByAtom &&
            this.numberOfPhotonsAbsorbedProperty.value < MAX_PHOTONS_ABSORBED &&
            !this.electron.isMovingProperty.value;
   }
@@ -301,7 +301,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         wavelength: PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH,
         position: this.electron.positionProperty.value, // at the electron's position
         direction: getEmissionDirection(),
-        wasEmitted: true,
+        wasEmittedByAtom: true,
         debugHaloColor: 'red'
       } );
       phet.log && phet.log( `PlumPuddingModel: emitted \u03BB=${photon.wavelength}` );

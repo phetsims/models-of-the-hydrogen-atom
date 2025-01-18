@@ -32,7 +32,7 @@ export type PhotonStateObject = {
   x: number;
   y: number;
   direction: number;
-  wasEmitted: boolean;
+  wasEmittedByAtom: boolean;
   hasCollided: boolean;
 };
 
@@ -42,7 +42,7 @@ const PHOTON_STATE_SCHEMA = {
   x: NumberIO,
   y: NumberIO,
   direction: NumberIO,
-  wasEmitted: BooleanIO,
+  wasEmittedByAtom: BooleanIO,
   hasCollided: BooleanIO
 };
 
@@ -50,7 +50,7 @@ type SelfOptions = {
   wavelength: number; // the photon's integer wavelength, in nm
   position: Vector2; // initial position
   direction: number; // initial direction
-  wasEmitted?: boolean; // Was this photon emitted by the atom?
+  wasEmittedByAtom?: boolean; // Was this photon emitted by the atom?
   hasCollided?: boolean; // Has this photon collided with the atom?
   debugHaloColor?: TColor; // Color of halo around the photon, to make it easier to see for debugging.
 };
@@ -70,7 +70,7 @@ export default class Photon {
   private _direction: number;
 
   // Whether the photon was emitted by the hydrogen atom.
-  public readonly wasEmitted: boolean;
+  public readonly wasEmittedByAtom: boolean;
 
   // Whether the photon has collided with the hydrogen atom.
   private _hasCollided: boolean;
@@ -86,7 +86,7 @@ export default class Photon {
     const options = optionize<PhotonOptions, SelfOptions>()( {
 
       // SelfOptions
-      wasEmitted: false,
+      wasEmittedByAtom: false,
       hasCollided: false,
       debugHaloColor: null
     }, providedOptions );
@@ -99,7 +99,7 @@ export default class Photon {
 
     this.wavelength = options.wavelength;
     this._direction = options.direction;
-    this.wasEmitted = options.wasEmitted;
+    this.wasEmittedByAtom = options.wasEmittedByAtom;
     this._hasCollided = options.hasCollided;
     this.debugHaloColor = options.debugHaloColor;
   }
@@ -149,7 +149,7 @@ export default class Photon {
       x: this.positionProperty.value.x,
       y: this.positionProperty.value.y,
       direction: this.direction,
-      wasEmitted: this.wasEmitted,
+      wasEmittedByAtom: this.wasEmittedByAtom,
       hasCollided: this.hasCollided
     };
   }
@@ -162,7 +162,7 @@ export default class Photon {
       wavelength: stateObject.wavelength,
       position: new Vector2( stateObject.x, stateObject.y ),
       direction: stateObject.direction,
-      wasEmitted: stateObject.wasEmitted,
+      wasEmittedByAtom: stateObject.wasEmittedByAtom,
       hasCollided: stateObject.hasCollided
     } );
   }
@@ -184,7 +184,7 @@ export default class Photon {
                    '<li>x: x coordinate of position' +
                    '<li>y: y coordinate of position' +
                    '<li>direction: direction of motion, in radians' +
-                   '<li>wasEmitted: whether the photon was emitted by the hydrogen atom' +
+                   '<li>wasEmittedByAtom: whether the photon was emitted by the hydrogen atom' +
                    '<li>hasCollided: whether the photon has collided with the hydrogen atom' +
                    '</ul>'
   } );
