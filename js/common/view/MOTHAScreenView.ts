@@ -152,6 +152,7 @@ export default class MOTHAScreenView extends ScreenView {
       transitionsDialogVisibleProperty.reset();
       transitionsDialog.reset();
       spectrometerAccordionBox.reset();
+      spectrometerSnapshotsDialog.hide();
     };
 
     // Reset All button
