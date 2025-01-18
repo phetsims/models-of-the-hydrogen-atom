@@ -123,7 +123,7 @@ export default class PhotonSystem extends PhetioObject {
   }
 
   /**
-   * Adds a photon by mutating an inactive Photon instance,
+   * Adds a photon by mutating and activating an inactive Photon instance,
    */
   private addPhoton( photonOptions: StrictOmit<Required<PhotonOptions>, 'tandem'> ): void {
     const photon = _.find( this.photons, photon => !photon.isActiveProperty.value )!;
@@ -138,7 +138,7 @@ export default class PhotonSystem extends PhetioObject {
   }
 
   /**
-   * Removes a photon by deactivating a Photon instance.
+   * Removes a photon by deactivating an active Photon instance.
    */
   public removePhoton( photon: Photon ): void {
     assert && assert( photon.isActiveProperty.value, 'Attempted to remove a photon that is inactive.' );
@@ -149,7 +149,9 @@ export default class PhotonSystem extends PhetioObject {
    * Removes (deactivates) all Photon instances.
    */
   public removeAllPhotons(): void {
-    Array.from( this.photons ).forEach( photon => {
+
+    // this.photons does not change, so it is safe to operate directly on this array.
+    this.photons.forEach( photon => {
       if ( photon.isActiveProperty.value ) {
         this.removePhoton( photon );
       }
@@ -162,8 +164,8 @@ export default class PhotonSystem extends PhetioObject {
    */
   public step( dt: number ): void {
 
-    // This may change this.photons, so operate on a shallow copy of the array.
-    Array.from( this.photons ).forEach( photon => {
+    // this.photons does not change, so it is safe to operate directly on this array.
+    this.photons.forEach( photon => {
       if ( photon.isActiveProperty.value ) {
 
         // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
