@@ -61,10 +61,7 @@ export default class Photon extends PhetioObject {
   // Whether the photon has collided with the hydrogen atom.
   private readonly hasCollidedWithAtomProperty: Property<boolean>;
 
-  // Whether the photon is active. A true value means that the Photon is currently participating in the model,
-  // is visible in the zoomed-in box, and will therefore have an associated PhotonNode in the view. A false value
-  // means that the Photon is not participating in the model, and is effectively in the free pool, ready to be
-  // mutated and reused.
+  // See phetioDocumentation.
   public readonly isActiveProperty: Property<boolean>;
 
   // Halo color around the photon, used for debugging to make it easier to see specific photons.
@@ -102,6 +99,7 @@ export default class Photon extends PhetioObject {
 
     this._positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
     this.positionProperty = this._positionProperty;
@@ -109,21 +107,28 @@ export default class Photon extends PhetioObject {
     this.directionProperty = new NumberProperty( options.direction, {
       units: 'radians',
       tandem: options.tandem.createTandem( 'directionProperty' ),
+      phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
 
     this.wasEmittedByAtomProperty = new BooleanProperty( options.wasEmittedByAtom, {
       tandem: options.tandem.createTandem( 'wasEmittedByAtomProperty' ),
+      phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
 
     this.hasCollidedWithAtomProperty = new BooleanProperty( options.hasCollidedWithAtom, {
       tandem: options.tandem.createTandem( 'hasCollidedWithAtomProperty' ),
+      phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
 
     this.isActiveProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isActiveProperty' ),
+      phetioDocumentation: 'Whether the photon is active. A true value means that the Photon is in use by the simulation, ' +
+                           'is visible in the zoomed-in box, and therefore has an associated PhotonNode in the view. ' +
+                           'A false value means that the Photon is not participating in the model, and is available to ' +
+                           'be mutated and reused.',
       phetioReadOnly: true
     } );
 
@@ -134,7 +139,7 @@ export default class Photon extends PhetioObject {
    * Activates a Photon with new property values.
    */
   public activate( photonOptions: StrictOmit<PhotonOptions, 'tandem'> ): void {
-   assert && assert( !this.isActiveProperty.value, 'Attempted to activate a photon that is already active.' );
+    assert && assert( !this.isActiveProperty.value, 'Attempted to activate a photon that is already active.' );
 
     if ( photonOptions.wavelength !== undefined ) {
       this.wavelengthProperty.value = photonOptions.wavelength;
