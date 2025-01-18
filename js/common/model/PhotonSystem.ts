@@ -7,7 +7,7 @@
  * It provides a public API for adding and removing photons. But after instantiation of PhotonSystem at startup,
  * no instances of Photon are created or disposed.  "Adding" a photon means mutating and activating an inactive
  * Photon instance. "Removing" a photon means deactivating an active Photon instance, effectively returning it
- * to the free pool. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
+ * to the free pool. See also Photon.ts and https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
