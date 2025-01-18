@@ -19,11 +19,11 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import SnapshotButton from './SnapshotButton.js';
-import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
 import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Dialog from '../../../../sun/js/Dialog.js';
 
 // Uniform size of all push buttons that appear in the toolbar.
 const PUSH_BUTTON_SIZE = new Dimension2( 45, 32 );
@@ -32,7 +32,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
   private readonly resetSpectrometerAccordionBox: () => void;
 
-  public constructor( spectrometer: Spectrometer, tandem: Tandem ) {
+  public constructor( spectrometer: Spectrometer, snapshotsDialog: Dialog, tandem: Tandem ) {
 
     const expandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
       tandem: tandem.createTandem( 'expandedProperty' ),
@@ -50,8 +50,6 @@ export default class SpectrometerAccordionBox extends AccordionBox {
       size: PUSH_BUTTON_SIZE,
       tandem: tandem.createTandem( 'snapshotButton' )
     } );
-
-    const snapshotsDialog = new SpectrometerSnapshotsDialog( spectrometer.snapshots, tandem.createTandem( 'snapshotsDialog' ) );
 
     const viewSnapshotsButton = new ViewSnapshotsButton( snapshotsDialog, spectrometer, {
       size: PUSH_BUTTON_SIZE,

@@ -34,6 +34,7 @@ import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEne
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
 
 type SelfOptions = {
 
@@ -134,8 +135,12 @@ export default class MOTHAScreenView extends ScreenView {
       excludeInvisibleChildrenFromBounds: false
     } );
 
+    // Spectrometer snapshots dialog
+    const spectrometerSnapshotsDialog = new SpectrometerSnapshotsDialog( model.spectrometer.snapshots,
+      options.tandem.createTandem( 'spectrometerSnapshotsDialog' ) );
+
     // Spectrometer
-    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer,
+    const spectrometerAccordionBox = new SpectrometerAccordionBox( model.spectrometer, spectrometerSnapshotsDialog,
       options.tandem.createTandem( 'spectrometerAccordionBox' ) );
 
     // Time controls
