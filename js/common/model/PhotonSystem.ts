@@ -108,7 +108,7 @@ export default class PhotonSystem extends PhetioObject {
    */
   public step( dt: number ): void {
 
-    // This may change this.photons, so operate on a copy of the array.
+    // This may change this.photons, so operate on a shallow copy of the array.
     Array.from( this.photons ).forEach( photon => {
 
       // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
