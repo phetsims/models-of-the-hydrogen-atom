@@ -81,32 +81,11 @@ export default class PhotonSystem extends PhetioObject {
     this.photons = [];
     this.maxActivePhotons = 0;
     for ( let i = 0; i < PhotonSystem.NUMBER_OF_PHOTON_INSTANCES; i++ ) {
-
       const photon = new Photon( {
         tandem: tandem.createTandem( `photon${i}` )
       } );
       this.photons.push( photon );
-
-      // Toggling isActiveProperty causes PhotonNode to be created and disposed in the view.
-      photon.isActiveProperty.lazyLink( isActive => {
-        if ( isActive ) {
-          this.photonAddedEmitter.emit( photon );
-        }
-        else {
-          this.photonRemovedEmitter.emit( photon );
-        }
-
-        // See documentation of NUMBER_OF_PHOTON_INSTANCES for
-        if ( phet.log ) {
-          const numberOfActivePhotons = this.photons.filter( photon => photon.isActiveProperty.value ).length;
-          if ( numberOfActivePhotons > this.maxActivePhotons ) {
-            this.maxActivePhotons = numberOfActivePhotons;
-            phet.log && phet.log( `maxActivePhotons=${this.maxActivePhotons}`, {
-              color: 'red'
-            } );
-          }
-        }
-      } );
+      photon.isActiveProperty.lazyLink( () => this.activationHandler( photon ) );
     }
   }
 
@@ -202,6 +181,34 @@ export default class PhotonSystem extends PhetioObject {
         }
       }
     } );
+  }
+
+  /**
+   * This method is called when a Photon's isActiveProperty value changes. It notifies listeners that the photon
+   * was added (activated) or removed (deactivated).  In the view, this results in an associated PhotonNode being
+   * created or disposed.
+   *
+   * This method also contains support for debugging problems with NUMBER_OF_PHOTON_INSTANCES. For details, see
+   * the documentation for NUMBER_OF_PHOTON_INSTANCES.
+   */
+  private activationHandler( photon: Photon ): void {
+    if ( photon.isActiveProperty.value ) {
+      this.photonAddedEmitter.emit( photon );
+    }
+    else {
+      this.photonRemovedEmitter.emit( photon );
+    }
+
+    // For debugging NUMBER_OF_PHOTON_INSTANCES.
+    if ( phet.log ) {
+      const numberOfActivePhotons = this.photons.filter( photon => photon.isActiveProperty.value ).length;
+      if ( numberOfActivePhotons > this.maxActivePhotons ) {
+        this.maxActivePhotons = numberOfActivePhotons;
+        phet.log && phet.log( `NUMBER_OF_PHOTON_INSTANCES=${PhotonSystem.NUMBER_OF_PHOTON_INSTANCES}, maxActivePhotons=${this.maxActivePhotons}`, {
+          color: 'red'
+        } );
+      }
+    }
   }
 }
 
