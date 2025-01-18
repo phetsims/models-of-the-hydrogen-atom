@@ -29,12 +29,12 @@ export default class PhotonSystem extends PhetioObject {
   // the hydrogen-atom model that is selected: either the experiment or a predictive model.
   private readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
-  // the collection of photons that appear in the zoomed-in box
-  private readonly photons: Photon[];
-
   // notify when a photon is added or removed
   public readonly photonAddedEmitter: Emitter<[ Photon ]>;
   public readonly photonRemovedEmitter: Emitter<[ Photon ]>;
+
+  // A static set of Photons that will be reused, activated, and mutated as the sim runs.
+  private readonly photons: Photon[];
 
   // This is the number of static Photon instances that are created at startup, and the maximum number of Photons that
   // can therefore be visible in the zoomed-in box. If more Photons are needed at runtime, we cannot instantiate more
@@ -55,13 +55,6 @@ export default class PhotonSystem extends PhetioObject {
     this.zoomedInBox = zoomedInBox;
     this.hydrogenAtomProperty = hydrogenAtomProperty;
 
-    this.photons = [];
-    for ( let i = 0; i < PhotonSystem.NUMBER_OF_PHOTON_INSTANCES; i++ ) {
-      this.photons.push( new Photon( {
-        tandem: tandem.createTandem( `photon${i}` )
-      } ) );
-    }
-
     this.photonAddedEmitter = new Emitter<[ Photon ]>( {
       parameters: [
         { name: 'photon', valueType: Photon }
@@ -72,6 +65,26 @@ export default class PhotonSystem extends PhetioObject {
         { name: 'photon', valueType: Photon }
       ]
     } );
+
+    // Create the static set of Photon elements.
+    this.photons = [];
+    for ( let i = 0; i < PhotonSystem.NUMBER_OF_PHOTON_INSTANCES; i++ ) {
+
+      const photon = new Photon( {
+        tandem: tandem.createTandem( `photon${i}` )
+      } );
+      this.photons.push( photon );
+
+      // Toggling isActiveProperty causes PhotonNode to be created and disposed in the view.
+      photon.isActiveProperty.lazyLink( isActive => {
+        if ( isActive ) {
+          this.photonAddedEmitter.emit( photon );
+        }
+        else {
+          this.photonRemovedEmitter.emit( photon );
+        }
+      } );
+    }
   }
 
   public reset(): void {
@@ -106,12 +119,14 @@ export default class PhotonSystem extends PhetioObject {
     } );
   }
 
+  /**
+   * Adds a photon by mutating and inactive Photon instance,
+   */
   private addPhoton( photonOptions: StrictOmit<Required<PhotonOptions>, 'tandem'> ): void {
     const photon = _.find( this.photons, photon => !photon.isActiveProperty.value )!;
     assert && assert( photon, 'No inactive photons are available, increase PhotonSystem.NUMBER_OF_PHOTON_INSTANCES.' );
     if ( photon ) {
       photon.activate( photonOptions );
-      this.photonAddedEmitter.emit( photon );
     }
     else {
       // The sim will not crash, but will print a console warning.
@@ -119,12 +134,17 @@ export default class PhotonSystem extends PhetioObject {
     }
   }
 
+  /**
+   * Removes a photon by deactivating a Photon instance.
+   */
   public removePhoton( photon: Photon ): void {
     assert && assert( photon.isActiveProperty.value, 'Attempted to remove a photon that is inactive.' );
     photon.isActiveProperty.value = false;
-    this.photonRemovedEmitter.emit( photon );
   }
 
+  /**
+   * Removes (deactivates) all Photon instances.
+   */
   public removeAllPhotons(): void {
     Array.from( this.photons ).forEach( photon => {
       if ( photon.isActiveProperty.value ) {

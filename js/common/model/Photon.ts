@@ -61,6 +61,10 @@ export default class Photon extends PhetioObject {
   // Whether the photon has collided with the hydrogen atom.
   private readonly hasCollidedWithAtomProperty: Property<boolean>;
 
+  // Whether the photon is active. A true value means that the Photon is currently participating in the model,
+  // is visible in the zoomed-in box, and will therefore have an associated PhotonNode in the view. A false value
+  // means that the Photon is not participating in the model, and is effectively in the free pool, ready to be
+  // mutated and reused.
   public readonly isActiveProperty: Property<boolean>;
 
   // Halo color around the photon, used for debugging to make it easier to see specific photons.
