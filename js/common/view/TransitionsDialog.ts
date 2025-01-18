@@ -37,6 +37,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import PhotonNode from './PhotonNode.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -64,7 +65,6 @@ const CONTENT_TEXT_OPTIONS = {
 
 type SelfOptions = {
   position?: Vector2; // initial position, in view coordinates
-  visibleProperty: Property<boolean>; // our visibleProperty needs to be writable
 };
 
 type AbsorptionAndEmissionDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
@@ -74,11 +74,19 @@ export default class TransitionsDialog extends Panel {
   // Position of the panel's top-left corner.
   private readonly positionProperty: Property<Vector2>;
 
+  public readonly isShowingProperty: Property<boolean>;
+
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       lightModeProperty: Property<LightMode>,
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: AbsorptionAndEmissionDialogOptions ) {
+
+    const isShowingProperty = new BooleanProperty( false, {
+      tandem: providedOptions.tandem.createTandem( 'isShowingProperty' ),
+      phetioFeatured: true,
+      phetioReadOnly: true // because the sim controls this
+    } );
 
     const options = optionize<AbsorptionAndEmissionDialogOptions, SelfOptions, PanelOptions>()( {
 
@@ -87,6 +95,7 @@ export default class TransitionsDialog extends Panel {
 
       // PanelOptions
       isDisposable: false,
+      visibleProperty: isShowingProperty,
       cursor: 'pointer',
       xMargin: 10,
       yMargin: 10,
@@ -103,9 +112,7 @@ export default class TransitionsDialog extends Panel {
 
     const closeButton = new CloseButton( {
       iconLength: 10,
-      listener: () => {
-        providedOptions.visibleProperty.value = false;
-      },
+      listener: () => this.hide(),
       touchAreaXDilation: 5,
       touchAreaYDilation: 5,
       tandem: options.tandem.createTandem( 'closeButton' )
@@ -237,6 +244,8 @@ export default class TransitionsDialog extends Panel {
 
     super( content, options );
 
+    this.isShowingProperty = isShowingProperty;
+
     // pdom - Set the aria-labelledby relation so that whenever focus enters the dialog, the accessibleName is read.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
     this.addAriaLabelledbyAssociation( {
@@ -299,7 +308,7 @@ export default class TransitionsDialog extends Panel {
       keys: [ 'escape', 'tab', 'shift+tab' ],
       fire: ( event, keysPressed ) => {
         if ( keysPressed === 'escape' ) {
-          providedOptions.visibleProperty.value = false;
+          this.hide();
         }
       }
     } );
@@ -308,11 +317,16 @@ export default class TransitionsDialog extends Panel {
 
   public reset(): void {
     this.positionProperty.reset();
+    this.isShowingProperty.reset();
   }
 
   public setInitialPosition( position: Vector2 ): void {
     this.positionProperty.value = position;
     this.positionProperty.setInitialValue( position );
+  }
+
+  private hide(): void {
+    this.isShowingProperty.value = false;
   }
 }
 

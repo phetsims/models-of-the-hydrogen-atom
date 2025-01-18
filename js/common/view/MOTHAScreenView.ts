@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
@@ -94,26 +93,19 @@ export default class MOTHAScreenView extends ScreenView {
       model.lightSource.monochromaticWavelengthProperty, model.isQuantumModelProperty, model.isExperimentProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
-    const transitionsDialogVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'transitionsDialogVisibleProperty' ),
-      phetioFeatured: true,
-      phetioReadOnly: true // because the sim controls this
-    } );
-
     const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
       model.lightSource.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
-        visibleProperty: transitionsDialogVisibleProperty,
         tandem: options.tandem.createTandem( 'transitionsDialog' )
       } );
 
     // Hide the dialog when a classical model is being viewed.
     model.isQuantumModelProperty.link( isQuantumModel => {
-      if ( transitionsDialogVisibleProperty.value ) {
-        transitionsDialogVisibleProperty.value = isQuantumModel;
+      if ( transitionsDialog.isShowingProperty.value ) {
+        transitionsDialog.isShowingProperty.value = isQuantumModel;
       }
     } );
 
-    const transitionsCheckbox = new TransitionsCheckbox( transitionsDialogVisibleProperty,
+    const transitionsCheckbox = new TransitionsCheckbox( transitionsDialog.isShowingProperty,
       model.isQuantumModelProperty, options.tandem.createTandem( 'transitionsCheckbox' ) );
 
     // Box of hydrogen
@@ -155,7 +147,6 @@ export default class MOTHAScreenView extends ScreenView {
 
     this.resetAllMOTHAScreenView = () => {
       model.reset();
-      transitionsDialogVisibleProperty.reset();
       transitionsDialog.reset();
       spectrometerAccordionBox.reset();
       spectrometerSnapshotsDialog.hide();
