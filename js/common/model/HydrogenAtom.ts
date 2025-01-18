@@ -20,6 +20,8 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 
 export type HydrogenAtomStateObject = ReferenceIOState;
 
@@ -76,24 +78,26 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this.tandemNamePrefix = options.tandemNamePrefix;
 
     this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [ { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO } ],
+      parameters: [
+        { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO }
+      ],
       tandem: options.tandem.createTandem( 'photonAbsorbedEmitter' ),
       phetioDocumentation: 'Register with this Emitter to be notified when a photon is absorbed.' +
-                           ' Included for all hydrogen atom models, regardless of whether they absorb photons, so that' +
-                           ' all models have the same API.'
+                           ' Included for all hydrogen atom models, regardless of whether they absorb photons,' +
+                           ' so that all models have the same API.'
     } );
 
     this.photonEmittedEmitter = new Emitter<[ number, Vector2, number, Color ]>( {
       parameters: [
-        { name: 'wavelength', valueType: 'number' },
-        { name: 'position', valueType: Vector2 },
-        { name: 'direction', valueType: 'number' },
-        { name: 'debugHalo', valueType: Color }
+        { name: 'wavelength', valueType: 'number', phetioType: NumberIO },
+        { name: 'position', valueType: Vector2, phetioType: Vector2.Vector2IO },
+        { name: 'direction', valueType: 'number', phetioType: NumberIO },
+        { name: 'debugHalo', valueType: Color || null, phetioType: NullableIO( Color.ColorIO ) }
       ],
       tandem: options.tandem.createTandem( 'photonEmittedEmitter' ),
       phetioDocumentation: 'Register with this Emitter to be notified when a photon is emitted.' +
-                           ' Included for all hydrogen atom models, regardless of whether they emit photons, so that' +
-                           ' all models have the same API.'
+                           ' Included for all hydrogen atom models, regardless of whether they emit photons' +
+                           ' so that all models have the same API.'
     } );
   }
 
