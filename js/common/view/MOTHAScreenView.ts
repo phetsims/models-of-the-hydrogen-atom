@@ -194,6 +194,9 @@ export default class MOTHAScreenView extends ScreenView {
     tinyBoxNode.left = boxOfHydrogenNode.right - boxOfHydrogenNode.width / 3;
     tinyBoxNode.centerY = boxOfHydrogenNode.centerY;
     if ( this.electronEnergyLevelAccordionBox ) {
+
+      // If we have electronEnergyLevelAccordionBox, it goes between zoomedInBox and modelBox.
+      //TODO Adjust layout when electronEnergyLevelAccordionBox is made invisible via PhET-iO.
       this.electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
       this.electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
       modelBox.left = this.electronEnergyLevelAccordionBox.right + 10;
@@ -201,6 +204,8 @@ export default class MOTHAScreenView extends ScreenView {
       timeControlNode.left = this.electronEnergyLevelAccordionBox.right + 15;
     }
     else {
+
+      // If we do not have electronEnergyLevelAccordionBox, zoomedInBox and modelBox are next to each other.
       modelBox.left = this.zoomedInBoxNode.right + 30;
       modelBox.top = this.zoomedInBoxNode.top;
       timeControlNode.left = modelBox.left;
