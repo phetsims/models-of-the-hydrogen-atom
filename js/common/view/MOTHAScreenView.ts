@@ -175,30 +175,24 @@ export default class MOTHAScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
-    // Workaround for joist deficiency that requires exactly 'black' and 'white' screen background color in
-    // order to get the desired navigation bar color. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/96.
+    // Workaround for joist deficiency that requires exactly 'black' and 'white' screen background color in order
+    // to get the desired navigation bar color. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/96.
     const screenBackgroundRectangle = new Rectangle( 0, 0, 1, 1, {
       fill: MOTHAColors.screenBackgroundRectangleColorProperty
     } );
     this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
 
-    //TODO Replace some of this layout code with HBox, VBox, etc.
-
-    // Layout is complicated, so do it all in one place, rather than via NodeTranslationOptions.
-    legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
-    legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
+    // The more complicated part of layout involves everything above the Spectrometer. Trying to do this with
+    // VBox/HBox was even more complicated, and made it more difficult to tweak the layout (which we did often).
+    // So this brute-force approach eventually became the preferred choice.
     lightSourceNode.left = this.layoutBounds.left + options.lightNodeXOffset;
-    lightControlPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     this.zoomedInBoxNode.left = lightSourceNode.right + 50;
     this.zoomedInBoxNode.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
     lightSourceNode.bottom = this.zoomedInBoxNode.bottom;
-    lightControlPanel.top = this.zoomedInBoxNode.bottom + 15;
     boxOfHydrogenNode.centerX = lightSourceNode.centerX;
     boxOfHydrogenNode.bottom = lightSourceNode.top + 1;
     tinyBoxNode.left = boxOfHydrogenNode.right - boxOfHydrogenNode.width / 3;
     tinyBoxNode.centerY = boxOfHydrogenNode.centerY;
-    spectrometerAccordionBox.left = lightControlPanel.right + 12;
-    spectrometerAccordionBox.top = lightControlPanel.top;
     if ( this.electronEnergyLevelAccordionBox ) {
       this.electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
       this.electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
@@ -212,11 +206,27 @@ export default class MOTHAScreenView extends ScreenView {
       timeControlNode.left = modelBox.left;
     }
     timeControlNode.bottom = this.zoomedInBoxNode.bottom;
-    transitionsCheckbox.localBoundsProperty.link( () => {
-      transitionsCheckbox.centerX = lightControlPanel.centerX;
-      transitionsCheckbox.top = lightControlPanel.bottom + 5;
+
+    // Layout of elements below zoomedInBoxNode is well-suited to using VBox and HBox.
+    const bottomHBox = new HBox( {
+      align: 'top',
+      spacing: 12,
+      children: [
+        new VBox( {
+          align: 'center',
+          spacing: 5,
+          children: [ lightControlPanel, transitionsCheckbox ]
+        } ),
+        spectrometerAccordionBox
+      ],
+      left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+      top: this.zoomedInBoxNode.bottom + 15
     } );
+
+    // Layout of misc. elements
     transitionsDialog.setInitialPosition( modelBox.leftTop );
+    legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
+    legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
     resetAllButton.right = this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     resetAllButton.bottom = this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
 
@@ -237,14 +247,12 @@ export default class MOTHAScreenView extends ScreenView {
       legendPanel,
       timeControlNode,
       lightSourceNode,
-      lightControlPanel,
-      transitionsCheckbox,
       boxOfHydrogenNode,
       tinyBoxNode,
       dashedLines,
       this.zoomedInBoxNode,
       modelBox,
-      spectrometerAccordionBox,
+      bottomHBox,
       resetAllButton,
       transitionsDialog,
       options.popupsParent
