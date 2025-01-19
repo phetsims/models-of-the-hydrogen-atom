@@ -182,8 +182,10 @@ export default class MOTHAScreenView extends ScreenView {
     } );
     this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
 
+    //TODO Make another attempt at using HBox/VBox here.
+
     // The more complicated part of layout involves everything above the Spectrometer. Trying to do this with
-    // VBox/HBox was even more complicated, and made it more difficult to tweak the layout (which we did often).
+    // HBox/VBox was even more complicated, and made it more difficult to tweak the layout (which we did often).
     // So this brute-force approach eventually became the preferred choice.
     lightSourceNode.left = this.layoutBounds.left + options.lightNodeXOffset;
     this.zoomedInBoxNode.left = lightSourceNode.right + 50;
@@ -196,12 +198,22 @@ export default class MOTHAScreenView extends ScreenView {
     if ( this.electronEnergyLevelAccordionBox ) {
 
       // If we have electronEnergyLevelAccordionBox, it goes between zoomedInBox and modelBox.
-      //TODO Adjust layout when electronEnergyLevelAccordionBox is made invisible via PhET-iO.
-      this.electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
-      this.electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
-      modelBox.left = this.electronEnergyLevelAccordionBox.right + 10;
-      modelBox.top = this.electronEnergyLevelAccordionBox.top;
-      timeControlNode.left = this.electronEnergyLevelAccordionBox.right + 15;
+      const electronEnergyLevelAccordionBox = this.electronEnergyLevelAccordionBox;
+      electronEnergyLevelAccordionBox.visibleProperty.link( visible => {
+        if ( visible ) {
+          electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
+          electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
+          modelBox.left = electronEnergyLevelAccordionBox.right + 10;
+          modelBox.top = electronEnergyLevelAccordionBox.top;
+          timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
+        }
+        else {
+          //TODO This is a duplicate of code below.
+          modelBox.left = this.zoomedInBoxNode.right + 30;
+          modelBox.top = this.zoomedInBoxNode.top;
+          timeControlNode.left = modelBox.left;
+        }
+      } );
     }
     else {
 
@@ -212,7 +224,7 @@ export default class MOTHAScreenView extends ScreenView {
     }
     timeControlNode.bottom = this.zoomedInBoxNode.bottom;
 
-    // Layout of elements below zoomedInBoxNode is well-suited to using VBox and HBox.
+    // Layout of elements below zoomedInBoxNode is well-suited to using HBox/VBox.
     const bottomHBox = new HBox( {
       align: 'top',
       spacing: 12,
