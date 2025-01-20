@@ -16,6 +16,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import SpectrometerSnapshotNode from './SpectrometerSnapshotNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 export default class SpectrometerSnapshotsDialog extends Dialog {
 
@@ -51,14 +52,17 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
       assert && assert( numberOfSnapshots >= 0 && numberOfSnapshots <= MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS,
         `unexpected numberOfSnapshots: ${numberOfSnapshots}` );
 
-      // Populate all snapshotNodes in order, from top to bottom.
-      for ( let i = 0; i < snapshotNodes.length; i++ ) {
-        snapshotNodes[ i ].snapshotProperty.value = snapshots[ i ] || null;
-      }
+      if ( !isSettingPhetioStateProperty.value ) {
 
-      // Close this dialog if all snapshots have been deleted.
-      if ( numberOfSnapshots === 0 && this.isShowingProperty.value ) {
-        this.hide();
+        // Populate all snapshotNodes in order, from top to bottom.
+        for ( let i = 0; i < snapshotNodes.length; i++ ) {
+          snapshotNodes[ i ].snapshotProperty.value = snapshots[ i ] || null;
+        }
+
+        // Close this dialog if all snapshots have been deleted.
+        if ( numberOfSnapshots === 0 && this.isShowingProperty.value ) {
+          this.hide();
+        }
       }
     } );
   }

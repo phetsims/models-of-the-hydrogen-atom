@@ -98,7 +98,9 @@ export default class BohrElectron extends Electron {
       } );
 
     this.offsetProperty.link( offset => {
-      this.positionProperty.value = atomPosition.plus( offset );
+      if ( !isSettingPhetioStateProperty.value ) {
+        this.positionProperty.value = atomPosition.plus( offset );
+      }
     } );
   }
 

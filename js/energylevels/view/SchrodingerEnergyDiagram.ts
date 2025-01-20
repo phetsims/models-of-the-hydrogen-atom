@@ -20,6 +20,7 @@ import MOTHAConstants from '../../common/MOTHAConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -101,8 +102,9 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
       this.electronNode.centerX = this.getXForState( nlmNew.l );
       this.electronNode.bottom = this.getYForState( nlmNew.n );
 
+      //TODO This looks odd in the State Wrapper, investigate.
       // Draw squiggle between previous and current electron state.
-      if ( nlmOld !== null ) {
+      if ( !isSettingPhetioStateProperty.value && nlmOld !== null ) {
         this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
           photonAbsorptionModel.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
       }

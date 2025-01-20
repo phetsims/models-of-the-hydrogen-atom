@@ -20,6 +20,8 @@ import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import OrbitsNode from './OrbitsNode.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 // multiply the ground state orbit radius by this number to determine the radial offset at max amplitude
 const RADIAL_OFFSET_FACTOR = 0.45;
@@ -80,10 +82,15 @@ class RingNode extends Path {
     const updateEnabledProperty = new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
       deBroglieRepresentation => deBroglieRepresentation === 'radialDistance' );
 
-    Multilink.multilink( [ deBroglieModel.electron.angleProperty, updateEnabledProperty ],
-      ( electronAngle, updateEnabled ) => {
-        updateEnabled && this.update();
+    Multilink.multilink( [ updateEnabledProperty, deBroglieModel.electron.nProperty, deBroglieModel.electron.angleProperty ],
+      updateEnabled => {
+        if ( !isSettingPhetioStateProperty.value && updateEnabled ) {
+          this.update();
+        }
       } );
+
+    // Because the above Multilink is short-circuited when setting state, we need to call update after state has been set.
+    phetioStateSetEmitter.addListener( () => this.update() );
   }
 
   /**
@@ -99,7 +106,7 @@ class RingNode extends Path {
     for ( let i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
 
       const angle = ( 2 * Math.PI ) * ( i / NUMBER_OF_SEGMENTS );
-      const amplitude = this.deBroglieModel.getAmplitude( n, angle );
+      const amplitude = this.deBroglieModel.getAmplitude( n, angle ); // getAmplitude uses this.deBroglieModel.electron.angleProperty
 
       const maxRadialOffset = RADIAL_OFFSET_FACTOR * this.groundStateOrbitRadius;
       const radialOffset = maxRadialOffset * amplitude;

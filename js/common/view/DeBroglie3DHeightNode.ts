@@ -21,6 +21,7 @@ import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import DeBroglie3DOrbitsNode from './DeBroglie3DOrbitsNode.js';
 import DeBroglie3DWaveNode from './DeBroglie3DWaveNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // The final pitch (rotation about the x-axis), after the model has rotated into place.
 const FINAL_PITCH = Utils.toRadians( 70 );
@@ -75,7 +76,7 @@ export default class DeBroglie3DHeightNode extends Node {
     this.addChild( this.waveNode );
 
     deBroglieModel.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
-      if ( deBroglieRepresentation === '3DHeight' ) {
+      if ( !isSettingPhetioStateProperty.value && deBroglieRepresentation === '3DHeight' ) {
         this.pitchProperty.reset();
       }
     } );

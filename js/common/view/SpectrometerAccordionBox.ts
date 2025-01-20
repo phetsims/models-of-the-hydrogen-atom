@@ -24,6 +24,7 @@ import ViewSnapshotsButton from './ViewSnapshotsButton.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Dialog from '../../../../sun/js/Dialog.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Uniform size of all push buttons that appear in the toolbar.
 const PUSH_BUTTON_SIZE = new Dimension2( 45, 32 );
@@ -95,7 +96,9 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     // Record data only when the accordion box is expanded.
     this.expandedProperty.link( expanded => {
-      spectrometer.enabledProperty.value = expanded;
+      if ( !isSettingPhetioStateProperty.value ) {
+        spectrometer.enabledProperty.value = expanded;
+      }
     } );
 
     this.addLinkedElement( spectrometer );

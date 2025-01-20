@@ -15,12 +15,14 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Color, Node, Path, TColor } from '../../../../scenery/js/imports.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import OrbitsNode from './OrbitsNode.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
 // tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of
@@ -96,17 +98,27 @@ class RingNode extends Node {
     const updateEnabledProperty = new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
       deBroglieRepresentation => deBroglieRepresentation === 'brightness' );
 
-    Multilink.multilink( [ this.deBroglieModel.electron.nProperty, updateEnabledProperty ],
-      ( n, updateEnabled ) => {
-        if ( updateEnabled ) {
-          this.updateGeometry();
-          this.updateColor();
+    Multilink.multilink( [
+        updateEnabledProperty,
+        this.deBroglieModel.electron.nProperty,
+        this.deBroglieModel.electron.angleProperty,
+        this.zeroAmplitudeColorProperty,
+        this.positiveAmplitudeColorProperty,
+        this.negativeAmplitudeColorProperty
+      ],
+      updateEnabled => {
+        if ( !isSettingPhetioStateProperty.value && updateEnabled ) {
+          this.update();
         }
       } );
 
-    this.deBroglieModel.electron.angleProperty.link( () => {
-      updateEnabledProperty.value && this.updateColor();
-    } );
+    // Because the above Multilink is short-circuited when setting state, we need to call update after state has been set.
+    phetioStateSetEmitter.addListener( () => this.update() );
+  }
+
+  private update(): void {
+    this.updateGeometry();
+    this.updateColor();
   }
 
   /**
@@ -149,7 +161,7 @@ class RingNode extends Node {
     // Visit polygons in the same order as updateGeometry.
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       const angle = ( 2 * Math.PI ) * ( i / numberOfPolygons );
-      const amplitude = this.deBroglieModel.getAmplitude( n, angle );
+      const amplitude = this.deBroglieModel.getAmplitude( n, angle ); // getAmplitude uses this.deBroglieModel.electron.angleProperty
       this.polygonNodes[ i ].fill = this.amplitudeToColor( amplitude );
     }
   }

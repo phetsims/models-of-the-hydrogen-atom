@@ -25,6 +25,7 @@ import LightSource from './LightSource.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java values was 100 (ms?)
 
@@ -70,7 +71,7 @@ export default class MetastableHandler extends PhetioObject {
     } );
 
     this.isActiveProperty.lazyLink( isActive => {
-      if ( !isActive ) {
+      if ( !isSettingPhetioStateProperty.value && !isActive ) {
         this.elapsedTimeProperty.value = 0;
       }
     } );

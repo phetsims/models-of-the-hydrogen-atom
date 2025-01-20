@@ -56,6 +56,7 @@ import LightSource from './LightSource.js';
 import MetastableHandler from './MetastableHandler.js';
 import PolynomialTerm from './PolynomialTerm.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -99,7 +100,9 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
     // When n changes, compute the next state.
     this.electron.nProperty.lazyLink( n => {
-      this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
+      if ( !isSettingPhetioStateProperty.value ) {
+        this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
+      }
     } );
 
     this.isMetastableStateProperty = new DerivedProperty( [ this.nlmProperty ],

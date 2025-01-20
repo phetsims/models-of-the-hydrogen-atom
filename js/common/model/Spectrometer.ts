@@ -25,6 +25,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 export default class Spectrometer extends PhetioObject {
 
@@ -104,20 +105,22 @@ export default class Spectrometer extends PhetioObject {
     };
 
     hydrogenAtomProperty.link( ( newHydrogenAtom, oldHydrogenAtom ) => {
+      if ( !isSettingPhetioStateProperty.value ) {
 
-      // When the hydrogen atom model is changed, clear the spectrometer.
-      this.clear();
+        // When the hydrogen atom model is changed, clear the spectrometer.
+        this.clear();
 
-      // For debugging, display maximum numbers of photons for all possible emission wavelengths.
-      if ( MOTHAQueryParameters.debugSpectrometer ) {
-        this.dataPointsProperty.value = getDebugDataPoints();
+        // For debugging, display maximum numbers of photons for all possible emission wavelengths.
+        if ( MOTHAQueryParameters.debugSpectrometer ) {
+          this.dataPointsProperty.value = getDebugDataPoints();
+        }
+
+        // Wire up the listener to record photon emissions.
+        if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
+          oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
+        }
+        newHydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
       }
-
-      // Wire up the listener to record photon emissions.
-      if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
-        oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
-      }
-      newHydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
     } );
   }
 

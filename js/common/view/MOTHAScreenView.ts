@@ -33,6 +33,7 @@ import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = {
 
@@ -103,7 +104,7 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Hide the dialog when a classical model is being viewed.
     model.isQuantumModelProperty.link( isQuantumModel => {
-      if ( transitionsDialog.isShowingProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value && transitionsDialog.isShowingProperty.value ) {
         transitionsDialog.isShowingProperty.value = isQuantumModel;
       }
     } );

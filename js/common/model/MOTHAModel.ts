@@ -28,6 +28,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import PhotonPool from './PhotonPool.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 
@@ -158,19 +159,21 @@ export default class MOTHAModel implements TModel {
     const photonAbsorbedEmitter = ( photon: Photon ) => this.photonPool.removePhoton( photon );
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
-      this.photonPool.removeAllPhotons();
+      if ( !isSettingPhetioStateProperty.value ) {
+        this.photonPool.removeAllPhotons();
 
-      if ( oldHydrogenAtom ) {
-        oldHydrogenAtom.reset();
-        if ( oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
-          oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
+        if ( oldHydrogenAtom ) {
+          oldHydrogenAtom.reset();
+          if ( oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
+            oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
+          }
+          if ( oldHydrogenAtom.photonAbsorbedEmitter.hasListener( photonAbsorbedEmitter ) ) {
+            oldHydrogenAtom.photonAbsorbedEmitter.removeListener( photonAbsorbedEmitter );
+          }
         }
-        if ( oldHydrogenAtom.photonAbsorbedEmitter.hasListener( photonAbsorbedEmitter ) ) {
-          oldHydrogenAtom.photonAbsorbedEmitter.removeListener( photonAbsorbedEmitter );
-        }
+        hydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
+        hydrogenAtom.photonAbsorbedEmitter.addListener( photonAbsorbedEmitter );
       }
-      hydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
-      hydrogenAtom.photonAbsorbedEmitter.addListener( photonAbsorbedEmitter );
     } );
   }
 
