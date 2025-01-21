@@ -116,7 +116,7 @@ export default class Spectrometer extends PhetioObject {
         }
       }
 
-      // Wire up photonEmittedEmitter to record photon emissions.
+      // Listen for photons emitted.
       if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
         oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
       }

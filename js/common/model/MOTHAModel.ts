@@ -158,13 +158,13 @@ export default class MOTHAModel implements TModel {
         oldHydrogenAtom && oldHydrogenAtom.reset();
       }
 
-      // Wire up photonEmittedEmitter.
+      // Listen for photons emitted.
       if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
         oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
       }
       hydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
 
-      // Wire up photonAbsorbedEmitter.
+      // Listener for photons absorbed.
       if ( oldHydrogenAtom && oldHydrogenAtom.photonAbsorbedEmitter.hasListener( photonAbsorbedEmitter ) ) {
         oldHydrogenAtom.photonAbsorbedEmitter.removeListener( photonAbsorbedEmitter );
       }
