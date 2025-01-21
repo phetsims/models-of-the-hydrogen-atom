@@ -1,7 +1,7 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
 /**
- * ContinuumBarNode appears next to the radio buttons for choosing predicitive models, and shows whether
+ * ContinuumBarNode appears next to the radio buttons for choosing a hydrogen atom model, and indicates where
  * those models fall on the 'Classical' to 'Quantum' continuum.
  *
  * @author Chris Malley (PixelZoom, Inc.)
