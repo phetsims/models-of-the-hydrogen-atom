@@ -57,6 +57,13 @@ export default class Photon extends PhetioObject {
   // Wavelength of the photon, in nm.
   public readonly wavelength: number;
 
+  // Whether the photon was emitted by the hydrogen atom.
+  public readonly wasEmittedByAtom: boolean;
+
+  // Halo color around the photon, used for debugging to make it easier to see specific photons.
+  // For example, running with ?debugEmission puts a red halo around all photons that are emitted by the atom.
+  public readonly debugHaloColor: Color | null;
+
   // Position of the photon, publicly readonly, privately mutable.
   public readonly positionProperty: TReadOnlyProperty<Vector2>;
   private readonly _positionProperty: Property<Vector2>;
@@ -64,15 +71,8 @@ export default class Photon extends PhetioObject {
   // Direction that the photon is moving, in radians.
   private readonly directionProperty: Property<number>;
 
-  // Whether the photon was emitted by the hydrogen atom.
-  public readonly wasEmittedByAtom: boolean;
-
   // Whether the photon has collided with the hydrogen atom.
   private readonly hasCollidedWithAtomProperty: Property<boolean>;
-
-  // Halo color around the photon, used for debugging to make it easier to see specific photons.
-  // For example, running with ?debugEmission puts a red halo around all photons that are emitted by the atom.
-  public readonly debugHaloColor: Color | null;
 
   public readonly radius = MOTHAConstants.PHOTON_RADIUS;
 
