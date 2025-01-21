@@ -1,13 +1,11 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * PhotonPool is the collection Photon instances. It encapsulates a PhetioGroup that is used to dynamically
- * create the Photon PhET-iO Elements.
+ * PhotonGroup is a PhetioGroup that manages Photon instances as dynamic PhET-iO Elements.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon, { PhotonOptions } from './Photon.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -27,7 +25,7 @@ type PhotonGroupCreateElementOptions = StrictOmit<PhotonOptions, 'tandem'>;
 // Arguments to createElement, other than tandem.
 type PhotonGroupCreateElementArguments = [ PhotonGroupCreateElementOptions ];
 
-export default class PhotonPool extends PhetioObject {
+export default class PhotonGroup extends PhetioGroup<Photon, PhotonGroupCreateElementArguments> {
 
   // the zoomed-in part of the box of hydrogen
   private readonly zoomedInBox: ZoomedInBox;
@@ -35,21 +33,7 @@ export default class PhotonPool extends PhetioObject {
   // the hydrogen-atom model that is selected: either the experiment or a predictive model.
   private readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
-  // For managing dynamic Photon elements
-  private readonly photonGroup: PhetioGroup<Photon, PhotonGroupCreateElementArguments>;
-
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
-
-    super( {
-      isDisposable: false,
-      phetioDocumentation: 'The pool of Photon instances that are available for use by the sim, created when the sim starts. ' +
-                           'Photons are not created and destroyed dynamically, but are instead reused and mutated as needed.',
-      phetioState: false,
-      tandem: tandem
-    } );
-
-    this.zoomedInBox = zoomedInBox;
-    this.hydrogenAtomProperty = hydrogenAtomProperty;
 
     const createPhoton = ( tandem: Tandem, photonOptions: PhotonGroupCreateElementOptions ) =>
       new Photon( combineOptions<PhotonOptions>( {
@@ -61,28 +45,18 @@ export default class PhotonPool extends PhetioObject {
       wavelength: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min //TODO Can we get rid of this? Or what should the default be?
     } ];
 
-    this.photonGroup = new PhetioGroup<Photon, PhotonGroupCreateElementArguments>( createPhoton, defaultArguments, {
+    super( createPhoton, defaultArguments, {
+      isDisposable: false,
       phetioType: PhetioGroup.PhetioGroupIO( Photon.PhotonIO ),
-      tandem: tandem.createTandem( 'photonGroup' )
+      tandem: tandem
     } );
+
+    this.zoomedInBox = zoomedInBox;
+    this.hydrogenAtomProperty = hydrogenAtomProperty;
   }
 
   public reset(): void {
     this.removeAllPhotons();
-  }
-
-  /**
-   * Adds a listener that will be notified when a photon is added.
-   */
-  public addPhotonAddedListener( listener: ( photon: Photon ) => void ): void {
-    this.photonGroup.elementCreatedEmitter.addListener( listener );
-  }
-
-  /**
-   * Adds a listener that will be notified when a photon is removed.
-   */
-  public addPhotonRemovedListener( listener: ( photon: Photon ) => void ): void {
-    this.photonGroup.elementDisposedEmitter.addListener( listener );
   }
 
   /**
@@ -117,22 +91,22 @@ export default class PhotonPool extends PhetioObject {
    * Adds a photon and notifies listeners.
    */
   private addPhoton( photonOptions: PhotonGroupCreateElementOptions ): Photon {
-    return this.photonGroup.createNextElement( photonOptions );
+    return this.createNextElement( photonOptions );
   }
 
   /**
    * Removes a photon and notifies listeners.
    */
   public removePhoton( photon: Photon ): void {
-    assert && assert( this.photonGroup.includes( photon ), 'Photon is not a member of photonGroup.' );
-    this.photonGroup.disposeElement( photon );
+    assert && assert( this.includes( photon ), 'Photon is not a member of photonGroup.' );
+    this.disposeElement( photon );
   }
 
   /**
    * Removes all photons and notifies listeners.
    */
   public removeAllPhotons(): void {
-    this.photonGroup.clear();
+    this.clear();
   }
 
   /**
@@ -142,7 +116,7 @@ export default class PhotonPool extends PhetioObject {
   public step( dt: number ): void {
 
     // this.photonGroup may be changed, so iterate on a shallow copy.
-    this.photonGroup.getArrayCopy().forEach( photon => {
+    this.getArrayCopy().forEach( photon => {
 
       // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
       // MOTHAModel.step. If we move the photon after processing it, then the photon will be processed when it
@@ -160,4 +134,4 @@ export default class PhotonPool extends PhetioObject {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'PhotonPool', PhotonPool );
+modelsOfTheHydrogenAtom.register( 'PhotonGroup', PhotonGroup );
