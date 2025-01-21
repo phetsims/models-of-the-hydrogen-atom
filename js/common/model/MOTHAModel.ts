@@ -152,20 +152,23 @@ export default class MOTHAModel implements TModel {
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
       if ( !isSettingPhetioStateProperty.value ) {
-        this.photonGroup.clear();
 
-        if ( oldHydrogenAtom ) {
-          oldHydrogenAtom.reset();
-          if ( oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
-            oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
-          }
-          if ( oldHydrogenAtom.photonAbsorbedEmitter.hasListener( photonAbsorbedEmitter ) ) {
-            oldHydrogenAtom.photonAbsorbedEmitter.removeListener( photonAbsorbedEmitter );
-          }
-        }
-        hydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
-        hydrogenAtom.photonAbsorbedEmitter.addListener( photonAbsorbedEmitter );
+        // Clear photons and reset the previous atomic model.
+        this.photonGroup.clear();
+        oldHydrogenAtom && oldHydrogenAtom.reset();
       }
+
+      // Wire up photonEmittedEmitter.
+      if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
+        oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
+      }
+      hydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
+
+      // Wire up photonAbsorbedEmitter.
+      if ( oldHydrogenAtom && oldHydrogenAtom.photonAbsorbedEmitter.hasListener( photonAbsorbedEmitter ) ) {
+        oldHydrogenAtom.photonAbsorbedEmitter.removeListener( photonAbsorbedEmitter );
+      }
+      hydrogenAtom.photonAbsorbedEmitter.addListener( photonAbsorbedEmitter );
     } );
   }
 

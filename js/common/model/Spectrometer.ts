@@ -107,21 +107,20 @@ export default class Spectrometer extends PhetioObject {
     hydrogenAtomProperty.link( ( newHydrogenAtom, oldHydrogenAtom ) => {
       if ( !isSettingPhetioStateProperty.value ) {
 
-        // When the hydrogen atom model is changed, clear the spectrometer.
+        // Clear the spectrometer.
         this.clear();
 
         // For debugging, display maximum numbers of photons for all possible emission wavelengths.
         if ( MOTHAQueryParameters.debugSpectrometer ) {
           this.dataPointsProperty.value = getDebugDataPoints();
         }
-
-        // Wire up the listener to record photon emissions.
-        if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
-          oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
-        }
-        //TODO State Wrapper fails here with 'Cannot add the same listener twice'.
-        newHydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
       }
+
+      // Wire up photonEmittedEmitter to record photon emissions.
+      if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
+        oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
+      }
+      newHydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
     } );
   }
 
