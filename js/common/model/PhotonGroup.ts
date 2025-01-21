@@ -19,13 +19,13 @@ import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
-// tandem is omitted because photonGroup provides the tandem.
-type PhotonGroupCreateElementOptions = StrictOmit<PhotonOptions, 'tandem'>;
+// Options to createPhoton function. tandem is omitted because photonGroup provides the tandem.
+type CreatePhotonOptions = StrictOmit<PhotonOptions, 'tandem'>;
 
-// Arguments to createElement, other than tandem.
-type PhotonGroupCreateElementArguments = [ PhotonGroupCreateElementOptions ];
+// Arguments to createPhoton function, other than tandem.
+type CreatePhotonArguments = [ CreatePhotonOptions ];
 
-export default class PhotonGroup extends PhetioGroup<Photon, PhotonGroupCreateElementArguments> {
+export default class PhotonGroup extends PhetioGroup<Photon, CreatePhotonArguments> {
 
   // the zoomed-in part of the box of hydrogen
   private readonly zoomedInBox: ZoomedInBox;
@@ -35,13 +35,13 @@ export default class PhotonGroup extends PhetioGroup<Photon, PhotonGroupCreateEl
 
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
-    const createPhoton = ( tandem: Tandem, photonOptions: PhotonGroupCreateElementOptions ) =>
+    const createPhoton = ( tandem: Tandem, providedOptions: CreatePhotonOptions ) =>
       new Photon( combineOptions<PhotonOptions>( {
         tandem: tandem
-      }, photonOptions ) );
+      }, providedOptions ) );
 
     // defaultArguments, passed to createElement during API harvest
-    const defaultArguments: PhotonGroupCreateElementArguments = [ {
+    const defaultArguments: CreatePhotonArguments = [ {
       wavelength: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min //TODO Can we get rid of this? Or what should the default be?
     } ];
 
@@ -55,15 +55,11 @@ export default class PhotonGroup extends PhetioGroup<Photon, PhotonGroupCreateEl
     this.hydrogenAtomProperty = hydrogenAtomProperty;
   }
 
-  public reset(): void {
-    this.removeAllPhotons();
-  }
-
   /**
    * Emits a photon from the light source.
    */
   public emitPhotonFromLight( wavelength: number, position: Vector2, direction: number ): void {
-    this.addPhoton( {
+    this.createNextElement( {
       wavelength: wavelength,
       position: position,
       direction: direction,
@@ -77,7 +73,7 @@ export default class PhotonGroup extends PhetioGroup<Photon, PhotonGroupCreateEl
    * Emits a photon from the hydrogen atom.
    */
   public emitPhotonFromAtom( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ): void {
-    this.addPhoton( {
+    this.createNextElement( {
       wavelength: wavelength,
       position: position,
       direction: direction,
@@ -85,28 +81,6 @@ export default class PhotonGroup extends PhetioGroup<Photon, PhotonGroupCreateEl
       hasCollidedWithAtom: false,
       debugHaloColor: debugHaloColor
     } );
-  }
-
-  /**
-   * Adds a photon and notifies listeners.
-   */
-  private addPhoton( photonOptions: PhotonGroupCreateElementOptions ): Photon {
-    return this.createNextElement( photonOptions );
-  }
-
-  /**
-   * Removes a photon and notifies listeners.
-   */
-  public removePhoton( photon: Photon ): void {
-    assert && assert( this.includes( photon ), 'Photon is not a member of photonGroup.' );
-    this.disposeElement( photon );
-  }
-
-  /**
-   * Removes all photons and notifies listeners.
-   */
-  public removeAllPhotons(): void {
-    this.clear();
   }
 
   /**
@@ -125,7 +99,7 @@ export default class PhotonGroup extends PhetioGroup<Photon, PhotonGroupCreateEl
 
       // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
       if ( !this.zoomedInBox.containsPhoton( photon ) ) {
-        this.removePhoton( photon );
+        this.disposeElement( photon );
       }
       else {
         this.hydrogenAtomProperty.value.processPhoton( photon );

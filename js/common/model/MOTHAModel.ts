@@ -156,11 +156,11 @@ export default class MOTHAModel implements TModel {
 
     const photonEmittedListener = ( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ) =>
       this.photonGroup.emitPhotonFromAtom( wavelength, position, direction, debugHaloColor );
-    const photonAbsorbedEmitter = ( photon: Photon ) => this.photonGroup.removePhoton( photon );
+    const photonAbsorbedEmitter = ( photon: Photon ) => this.photonGroup.disposeElement( photon );
 
     this.hydrogenAtomProperty.link( ( hydrogenAtom, oldHydrogenAtom ) => {
       if ( !isSettingPhetioStateProperty.value ) {
-        this.photonGroup.removeAllPhotons();
+        this.photonGroup.clear();
 
         if ( oldHydrogenAtom ) {
           oldHydrogenAtom.reset();
@@ -188,7 +188,7 @@ export default class MOTHAModel implements TModel {
     this.predictiveModelProperty.reset();
     this.lightSource.reset();
     this.spectrometer.reset();
-    this.photonGroup.reset();
+    this.photonGroup.clear();
     this.isPlayingProperty.reset();
     this.timeSpeedProperty.reset();
   }
