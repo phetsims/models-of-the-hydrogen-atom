@@ -31,7 +31,7 @@ import MOTHAModel from '../model/MOTHAModel.js';
 import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEnergyLevelAccordionBox.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
-import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
+import AtomicModelRadioButtonGroup from './AtomicModelRadioButtonGroup.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
@@ -124,7 +124,7 @@ export default class MOTHAScreenView extends ScreenView {
     const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty,
       options.tandem.createTandem( 'experimentModelSwitch' ) );
 
-    const atomicModelRadioButtonGroup = new ModelRadioButtonGroup( model.atomicModelProperty, model.atomicModels, {
+    const atomicModelRadioButtonGroup = new AtomicModelRadioButtonGroup( model.atomicModelProperty, model.atomicModels, {
       radioButtonTextMaxWidth: providedOptions.modelRadioButtonTextMaxWidth,
       tandem: options.tandem.createTandem( 'atomicModelRadioButtonGroup' )
     } );

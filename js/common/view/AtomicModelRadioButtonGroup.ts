@@ -1,7 +1,7 @@
 // Copyright 2015-2025, University of Colorado Boulder
 
 /**
- * ModelRadioButtonGroup is the radio button group for selecting one of the predictive atomic models.
+ * AtomicModelRadioButtonGroup is the radio button group for selecting one of the predictive atomic models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,15 +21,15 @@ type SelfOptions = {
   radioButtonTextMaxWidth: number;
 };
 
-type ModelRadioButtonGroupOptions = SelfOptions & PickRequired<RectangularRadioButtonGroupOptions, 'tandem'>;
+type AtomicModelRadioButtonGroupOptions = SelfOptions & PickRequired<RectangularRadioButtonGroupOptions, 'tandem'>;
 
-export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<HydrogenAtom> {
+export default class AtomicModelRadioButtonGroup extends RectangularRadioButtonGroup<HydrogenAtom> {
 
   public constructor( atomicModelProperty: Property<HydrogenAtom>,
                       atomicModels: HydrogenAtom[],
-                      providedOptions: ModelRadioButtonGroupOptions ) {
+                      providedOptions: AtomicModelRadioButtonGroupOptions ) {
 
-    const options = optionize<ModelRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
+    const options = optionize<AtomicModelRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 
       // RectangularRadioButtonGroupOptions
       isDisposable: false,
@@ -94,4 +94,4 @@ function createRadioButtonItem( atomicModel: HydrogenAtom, iconAlignGroup: Align
   };
 }
 
-modelsOfTheHydrogenAtom.register( 'ModelRadioButtonGroup', ModelRadioButtonGroup );
+modelsOfTheHydrogenAtom.register( 'AtomicModelRadioButtonGroup', AtomicModelRadioButtonGroup );
