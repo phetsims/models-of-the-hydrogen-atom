@@ -20,7 +20,7 @@ const NUMBER_OF_WAVE_VERTICES = 100; // enough for a smooth looking wave for n=6
 
 export default class DeBroglie3DWaveNode extends Wireframe3DNode {
 
-  private readonly hydrogenAtom: DeBroglieModel;
+  private readonly deGroglieModel: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly pitchProperty: TReadOnlyProperty<number>;
 
@@ -38,7 +38,7 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
       lineWidth: 2
     } );
 
-    this.hydrogenAtom = deBroglieModel;
+    this.deGroglieModel = deBroglieModel;
     this.modelViewTransform = modelViewTransform;
     this.pitchProperty = pitchProperty;
 
@@ -51,7 +51,7 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
   public override update(): void {
 
     // Update the vertices
-    getWaveVertices( this.hydrogenAtom, this.modelViewTransform, this.waveVertices );
+    getWaveVertices( this.deGroglieModel, this.modelViewTransform, this.waveVertices );
     assert && assert( this.waveVertices.length === NUMBER_OF_WAVE_VERTICES, `this.waveVertices.length=${this.waveVertices.length}` );
     this.setVertices( this.waveVertices );
 
