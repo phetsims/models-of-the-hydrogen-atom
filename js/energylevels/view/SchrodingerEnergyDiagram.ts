@@ -103,9 +103,9 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
       this.electronNode.bottom = this.getYForState( nlmNew.n );
 
       // Draw squiggle between previous and current electron state.
-      //TODO This looks odd in the State Wrapper, investigate.
+      //TODO State Wrapper: I see squiggles in Downstream that do not appear in Upstream.
       //TODO Is this problematic for resetAll? It may be the case that nlmOld.n === nlmNew.n, which is an illegal transition and causes getTransitionWavelength to fail.
-      if ( !isSettingPhetioStateProperty.value && nlmOld !== null ) {
+      if ( nlmOld !== null && !( isSettingPhetioStateProperty.value && nlmOld.n === nlmNew.n ) ) {
         this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
           photonAbsorptionModel.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
       }

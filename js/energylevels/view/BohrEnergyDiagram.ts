@@ -19,7 +19,6 @@ import MOTHAConstants from '../../common/MOTHAConstants.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
 import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -62,9 +61,8 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
       this.electronNode.bottom = y;
 
       // Draw squiggle between previous and current electron state.
-      //TODO This looks odd in the State Wrapper, investigate.
-      //TODO Is this problematic for resetAll? It may be the case that nlmOld.n === nlmNew.n, which is an illegal transition and causes getTransitionWavelength to fail.
-      if ( !isSettingPhetioStateProperty.value && nOld !== null ) {
+      //TODO State Wrapper: I see squiggles in Downstream that do not appear in Upstream because n transitions are randomly selected.
+      if ( nOld !== null ) {
         this.setEnergySquiggle( xPrevious, yPrevious, x, y, photonAbsorptionModel.getTransitionWavelength( nOld, nNew ) );
       }
     } );
