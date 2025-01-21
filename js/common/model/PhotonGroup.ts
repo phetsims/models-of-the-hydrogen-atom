@@ -48,8 +48,8 @@ export default class PhotonGroup extends PhetioGroup<Photon, CreateElementArgume
 
     super( createElement, defaultArguments, {
       isDisposable: false,
-      phetioType: PhetioGroup.PhetioGroupIO( Photon.PhotonIO ),
-      tandem: tandem
+      tandem: tandem,
+      phetioType: PhetioGroup.PhetioGroupIO( Photon.PhotonIO )
     } );
 
     this.zoomedInBox = zoomedInBox;
