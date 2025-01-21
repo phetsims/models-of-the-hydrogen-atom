@@ -91,7 +91,6 @@ export default class Photon extends PhetioObject {
 
       // PhetioObjectOptions
       phetioDynamicElement: true,
-      phetioState: false,
       phetioType: Photon.PhotonIO
     }, providedOptions );
 
