@@ -1,13 +1,8 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * PhotonPool is the collection of Photon instances that are available for use by the sim.
- *
- * To encapsulate PhET-iO concerns, PhotonPool owns and manages a static pool of Photon instances.
- * It provides a public API for adding and removing photons. But after instantiation of PhotonPool at startup,
- * no instances of Photon are created or disposed.  "Adding" a photon means mutating and activating an inactive
- * Photon instance. "Removing" a photon means deactivating an active Photon instance, effectively returning it
- * to the free pool. See also Photon.ts and https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
+ * PhotonPool is the collection Photon instances. It encapsulates a PhetioGroup that is used to dynamically
+ * create the Photon PhET-iO Elements.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,9 +16,16 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
-import Emitter from '../../../../axon/js/Emitter.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+
+// tandem is omitted because photonGroup provides the tandem.
+type PhotonGroupCreateElementOptions = StrictOmit<PhotonOptions, 'tandem'>;
+
+// Arguments to createElement, other than tandem.
+type PhotonGroupCreateElementArguments = [ PhotonGroupCreateElementOptions ];
 
 export default class PhotonPool extends PhetioObject {
 
@@ -33,26 +35,8 @@ export default class PhotonPool extends PhetioObject {
   // the hydrogen-atom model that is selected: either the experiment or a predictive model.
   private readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
-  // notify when a photon is added or removed
-  public readonly photonAddedEmitter: Emitter<[ Photon ]>;
-  public readonly photonRemovedEmitter: Emitter<[ Photon ]>;
-
-  // A static set of Photons that will be reused, mutated, and activated as the sim runs.
-  private readonly photons: Photon[];
-
-  // The maximum number of active photons that has occurred at runtime. This is used solely for debugging
-  // NUMBER_OF_PHOTON_INSTANCES. The value is valid and is printed to the console only when running with ?log.
-  private maxActivePhotons: number;
-
-  // This is the number of static Photon instances that are created at startup, and the maximum number of Photons that
-  // can therefore be visible in the zoomed-in box. If more Photons are needed at runtime, we cannot instantiate more
-  // dynamically because they are PhET-iO Elements. With assertions enabled, the sim will fail an assertion if an
-  // inactive photon cannot be found. With assertions disabled, a warning will be printed to the browser console, and
-  // we attempt to continue gracefully by ignoring the request to add a photon. If you encounter this problem, increase
-  // this value by running with ?log to inspect maxActivePhotons. Note that this value is a bit more than MAX_LIGHT_PHOTONS
-  // (the maximum number of photons emitted by the light that appear in the zoomed-in box) to safely allow for photons
-  // emitted by the atom. See also Photon.ts and https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47.
-  private static readonly NUMBER_OF_PHOTON_INSTANCES = MOTHAConstants.MAX_LIGHT_PHOTONS + 5;
+  // For managing dynamic Photon elements
+  private readonly photonGroup: PhetioGroup<Photon, PhotonGroupCreateElementArguments>;
 
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
@@ -67,31 +51,38 @@ export default class PhotonPool extends PhetioObject {
     this.zoomedInBox = zoomedInBox;
     this.hydrogenAtomProperty = hydrogenAtomProperty;
 
-    this.photonAddedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [
-        { name: 'photon', valueType: Photon }
-      ]
-    } );
-    this.photonRemovedEmitter = new Emitter<[ Photon ]>( {
-      parameters: [
-        { name: 'photon', valueType: Photon }
-      ]
-    } );
+    const createPhoton = ( tandem: Tandem, photonOptions: PhotonGroupCreateElementOptions ) =>
+      new Photon( combineOptions<PhotonOptions>( {
+        tandem: tandem
+      }, photonOptions ) );
 
-    // Create the static set of Photon elements.
-    this.photons = [];
-    this.maxActivePhotons = 0;
-    for ( let i = 0; i < PhotonPool.NUMBER_OF_PHOTON_INSTANCES; i++ ) {
-      const photon = new Photon( {
-        tandem: tandem.createTandem( `photon${i}` )
-      } );
-      this.photons.push( photon );
-      photon.isActiveProperty.lazyLink( () => this.activationHandler( photon ) );
-    }
+    // defaultArguments, passed to createElement during API harvest
+    const defaultArguments: PhotonGroupCreateElementArguments = [ {
+      wavelength: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min //TODO Can we get rid of this? Or what should the default be?
+    } ];
+
+    this.photonGroup = new PhetioGroup<Photon, PhotonGroupCreateElementArguments>( createPhoton, defaultArguments, {
+      phetioType: PhetioGroup.PhetioGroupIO( Photon.PhotonIO ),
+      tandem: tandem.createTandem( 'photonGroup' )
+    } );
   }
 
   public reset(): void {
     this.removeAllPhotons();
+  }
+
+  /**
+   * Adds a listener that will be notified when a photon is added.
+   */
+  public addPhotonAddedListener( listener: ( photon: Photon ) => void ): void {
+    this.photonGroup.elementCreatedEmitter.addListener( listener );
+  }
+
+  /**
+   * Adds a listener that will be notified when a photon is removed.
+   */
+  public addPhotonRemovedListener( listener: ( photon: Photon ) => void ): void {
+    this.photonGroup.elementDisposedEmitter.addListener( listener );
   }
 
   /**
@@ -123,93 +114,49 @@ export default class PhotonPool extends PhetioObject {
   }
 
   /**
-   * Adds a photon by mutating and activating an inactive Photon instance,
+   * Adds a photon and notifies listeners.
    */
-  private addPhoton( photonOptions: StrictOmit<Required<PhotonOptions>, 'tandem'> ): void {
-    const photon = _.find( this.photons, photon => !photon.isActiveProperty.value )!;
-    assert && assert( photon, 'No inactive photons are available! See documentation for PhotonPool.NUMBER_OF_PHOTON_INSTANCES.' );
-    if ( photon ) {
-      photon.activate( photonOptions );
-    }
-    else {
-      // The sim will not crash, but will print a console warning.
-      console.warn( 'No inactive photons are available! See documentation for PhotonPool.NUMBER_OF_PHOTON_INSTANCES.' );
-    }
+  private addPhoton( photonOptions: PhotonGroupCreateElementOptions ): Photon {
+    return this.photonGroup.createNextElement( photonOptions );
   }
 
   /**
-   * Removes a photon by deactivating an active Photon instance.
+   * Removes a photon and notifies listeners.
    */
   public removePhoton( photon: Photon ): void {
-    assert && assert( photon.isActiveProperty.value, 'Attempted to remove a photon that is inactive.' );
-    photon.isActiveProperty.value = false;
+    assert && assert( this.photonGroup.includes( photon ), 'Photon is not a member of photonGroup.' );
+    this.photonGroup.disposeElement( photon );
   }
 
   /**
-   * Removes (deactivates) all Photon instances.
+   * Removes all photons and notifies listeners.
    */
   public removeAllPhotons(): void {
-
-    // this.photons does not change, so it is safe to operate directly on this array.
-    this.photons.forEach( photon => {
-      if ( photon.isActiveProperty.value ) {
-        this.removePhoton( photon );
-      }
-    } );
+    this.photonGroup.clear();
   }
 
   /**
-   * Advances the state of all active photons.
+   * Advances the state of all photons.
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {
 
-    // this.photons does not change, so it is safe to operate directly on this array.
-    this.photons.forEach( photon => {
-      if ( photon.isActiveProperty.value ) {
+    // this.photonGroup may be changed, so iterate on a shallow copy.
+    this.photonGroup.getArrayCopy().forEach( photon => {
 
-        // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
-        // MOTHAModel.step. If we move the photon after processing it, then the photon will be processed when it
-        // is 1 time step behind the state of the atom.
-        photon.move( dt );
+      // Move the photon before processing it, because this.hydrogenAtomProperty.value.step is called first by
+      // MOTHAModel.step. If we move the photon after processing it, then the photon will be processed when it
+      // is 1 time step behind the state of the atom.
+      photon.move( dt );
 
-        // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
-        if ( !this.zoomedInBox.containsPhoton( photon ) ) {
-          this.removePhoton( photon );
-        }
-        else {
-          this.hydrogenAtomProperty.value.processPhoton( photon );
-        }
+      // If the photon leaves the zoomed-in box, remove it. Otherwise, allow the atom to process it.
+      if ( !this.zoomedInBox.containsPhoton( photon ) ) {
+        this.removePhoton( photon );
+      }
+      else {
+        this.hydrogenAtomProperty.value.processPhoton( photon );
       }
     } );
-  }
-
-  /**
-   * This method is called when a Photon's isActiveProperty value changes. It notifies listeners that the photon
-   * was added (activated) or removed (deactivated).  In the view, this results in an associated PhotonNode being
-   * created or disposed.
-   *
-   * This method also contains support for debugging problems with NUMBER_OF_PHOTON_INSTANCES. For details, see
-   * the documentation for NUMBER_OF_PHOTON_INSTANCES.
-   */
-  private activationHandler( photon: Photon ): void {
-    if ( photon.isActiveProperty.value ) {
-      this.photonAddedEmitter.emit( photon );
-    }
-    else {
-      this.photonRemovedEmitter.emit( photon );
-    }
-
-    // For debugging NUMBER_OF_PHOTON_INSTANCES.
-    if ( phet.log ) {
-      const numberOfActivePhotons = this.photons.filter( photon => photon.isActiveProperty.value ).length;
-      if ( numberOfActivePhotons > this.maxActivePhotons ) {
-        this.maxActivePhotons = numberOfActivePhotons;
-        phet.log && phet.log( `NUMBER_OF_PHOTON_INSTANCES=${PhotonPool.NUMBER_OF_PHOTON_INSTANCES}, maxActivePhotons=${this.maxActivePhotons}`, {
-          color: 'red'
-        } );
-      }
-    }
   }
 }
 

@@ -1,11 +1,7 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
 /**
- * Photon is the model of a photon.
- *
- * A static set of Photon instances is allocated at startup, and reused/mutated as the sim runs. This avoids the
- * complexities of PhetioGroup and dynamic elements. See also PhotonPool.ts and
- * https://github.com/phetsims/models-of-the-hydrogen-atom/issues/47
+ * Photon is the model of a photon. Instances are dynamic PhET-iO Elements, created via PhotonGroup.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,18 +18,33 @@ import Utils from '../../../../dot/js/Utils.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // Deflection angles when the photon collides with a rigid body, like the Billiard Ball atom.
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
 const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 
+// This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
+// Other Photon fields are instrumented Properties, and handle their own serialization.
+export type PhotonStateObject = {
+  wavelength: number;
+  wasEmittedByAtom: boolean;
+  hasCollidedWithAtom: boolean;
+};
+
+// This should match PhotonStateObject, but with IOTypes.
+const PHOTON_STATE_SCHEMA = {
+  wavelength: NumberIO,
+  wasEmittedByAtom: BooleanIO,
+  hasCollidedWithAtom: BooleanIO
+};
+
 type SelfOptions = {
-  wavelength?: number; // the photon's integer wavelength, in nm
+  wavelength: number; // the photon's integer wavelength, in nm
   position?: Vector2; // initial position
   direction?: number; // initial direction
   wasEmittedByAtom?: boolean; // Was this photon emitted by the atom?
@@ -46,7 +57,7 @@ export type PhotonOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tan
 export default class Photon extends PhetioObject {
 
   // Wavelength of the photon, in nm.
-  private readonly wavelengthProperty: Property<number>;
+  public readonly wavelength: number;
 
   // Position of the photon, publicly readonly, privately mutable.
   public readonly positionProperty: TReadOnlyProperty<Vector2>;
@@ -56,17 +67,14 @@ export default class Photon extends PhetioObject {
   private readonly directionProperty: Property<number>;
 
   // Whether the photon was emitted by the hydrogen atom.
-  public readonly wasEmittedByAtomProperty: Property<boolean>;
+  public readonly wasEmittedByAtom: boolean;
 
   // Whether the photon has collided with the hydrogen atom.
   private readonly hasCollidedWithAtomProperty: Property<boolean>;
 
-  // See phetioDocumentation.
-  public readonly isActiveProperty: Property<boolean>;
-
   // Halo color around the photon, used for debugging to make it easier to see specific photons.
   // For example, running with ?debugEmission puts a red halo around all photons that are emitted by the atom.
-  private _debugHaloColor: Color | null;
+  public readonly debugHaloColor: Color | null;
 
   public readonly radius = MOTHAConstants.PHOTON_RADIUS;
 
@@ -75,7 +83,6 @@ export default class Photon extends PhetioObject {
     const options = optionize<PhotonOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
-      wavelength: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min,
       position: new Vector2( 0, 0 ),
       direction: 0,
       wasEmittedByAtom: false,
@@ -83,19 +90,16 @@ export default class Photon extends PhetioObject {
       debugHaloColor: null,
 
       // PhetioObjectOptions
-      isDisposable: false,
+      phetioDynamicElement: true,
       phetioState: false,
       phetioType: Photon.PhotonIO
     }, providedOptions );
 
     super( options );
 
-    this.wavelengthProperty = new NumberProperty( options.wavelength, {
-      numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
-      units: 'nm',
-      tandem: options.tandem.createTandem( 'wavelengthProperty' ),
-      phetioReadOnly: true
-    } );
+    this.wavelength = options.wavelength;
+    this.wasEmittedByAtom = options.wasEmittedByAtom;
+    this.debugHaloColor = options.debugHaloColor;
 
     this._positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
@@ -111,81 +115,32 @@ export default class Photon extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    this.wasEmittedByAtomProperty = new BooleanProperty( options.wasEmittedByAtom, {
-      tandem: options.tandem.createTandem( 'wasEmittedByAtomProperty' ),
-      phetioDocumentation: 'For internal use only.',
-      phetioReadOnly: true
-    } );
-
     this.hasCollidedWithAtomProperty = new BooleanProperty( options.hasCollidedWithAtom, {
       tandem: options.tandem.createTandem( 'hasCollidedWithAtomProperty' ),
       phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
-
-    this.isActiveProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'isActiveProperty' ),
-      phetioDocumentation: 'Whether the photon is active. A true value means that the Photon is in use by the simulation, ' +
-                           'is visible in the zoomed-in box, and therefore has an associated PhotonNode in the view. ' +
-                           'A false value means that the Photon is not participating in the model, and is available to ' +
-                           'be mutated and reused.',
-      phetioReadOnly: true
-    } );
-
-    this._debugHaloColor = options.debugHaloColor;
-  }
-
-  /**
-   * Activates a Photon with new property values.
-   */
-  public activate( photonOptions: StrictOmit<PhotonOptions, 'tandem'> ): void {
-    assert && assert( !this.isActiveProperty.value, 'Attempted to activate a photon that is already active.' );
-
-    if ( photonOptions.wavelength !== undefined ) {
-      this.wavelengthProperty.value = photonOptions.wavelength;
-    }
-
-    if ( photonOptions.position !== undefined ) {
-      this._positionProperty.value = photonOptions.position;
-    }
-
-    if ( photonOptions.direction !== undefined ) {
-      this.directionProperty.value = photonOptions.direction;
-    }
-
-    if ( photonOptions.wasEmittedByAtom !== undefined ) {
-      this.wasEmittedByAtomProperty.value = photonOptions.wasEmittedByAtom;
-    }
-
-    if ( photonOptions.hasCollidedWithAtom !== undefined ) {
-      this.hasCollidedWithAtomProperty.value = photonOptions.hasCollidedWithAtom;
-    }
-
-    if ( photonOptions.debugHaloColor !== undefined ) {
-      this._debugHaloColor = photonOptions.debugHaloColor;
-    }
-
-    this.isActiveProperty.value = true;
-  }
-
-  public get wavelength(): number {
-    return this.wavelengthProperty.value;
   }
 
   public get direction(): number {
     return this.directionProperty.value;
   }
 
-  public get wasEmittedByAtom(): boolean {
-    return this.wasEmittedByAtomProperty.value;
-  }
-
   public get hasCollidedWithAtom(): boolean {
     return this.hasCollidedWithAtomProperty.value;
   }
 
-  public get debugHaloColor(): Color | null {
-    return this._debugHaloColor;
+  public override dispose(): void {
+
+    // _positionProperty is the only public Property, so unlink any listeners.
+    this._positionProperty.unlinkAll();
+
+    // Instrumented Properties must be disposed, to remove from the tandem registry.
+    this._positionProperty.dispose();
+    this.directionProperty.dispose();
+    this.hasCollidedWithAtomProperty.dispose();
+
+    super.dispose();
   }
 
   /**
@@ -193,7 +148,6 @@ export default class Photon extends PhetioObject {
    * @param dt - elapsed time, in seconds
    */
   public move( dt: number ): void {
-    assert && assert( this.isActiveProperty.value, 'Attempted to move an inactive Photon.' );
     const distance = dt * MOTHAConstants.PHOTON_SPEED;
     const dx = Math.cos( this.direction ) * distance;
     const dy = Math.sin( this.direction ) * distance;
@@ -207,7 +161,6 @@ export default class Photon extends PhetioObject {
    * 'steep but random' angle.
    */
   public bounceBack( atomPosition: Vector2 ): void {
-    assert && assert( this.isActiveProperty.value, 'Attempted to bounceBack an inactive Photon.' );
     const sign = ( this.positionProperty.value.x > atomPosition.x ) ? 1 : -1;
     const deflectionAngle = sign * dotRandom.nextDoubleBetween( MIN_DEFLECTION_ANGLE, MAX_DEFLECTION_ANGLE );
     this.directionProperty.value += ( Math.PI + deflectionAngle );
@@ -215,14 +168,18 @@ export default class Photon extends PhetioObject {
   }
 
   /**
-   * PhotonIO handles PhET-iO serialization of Photon. Since all Photon instances are created at startup, exist for
-   * the lifetime of the sim, and are phetioState: false, it implements 'Reference type serialization', as described
-   * in the Serialization section of
+   * PhotonIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * Dynamic element serialization is appropriate because Photon instances are created dynamically.
    */
-  public static readonly PhotonIO = new IOType<Photon, ReferenceIOState>( 'PhotonIO', {
+  public static readonly PhotonIO = new IOType<Photon, PhotonStateObject>( 'PhotonIO', {
     valueType: Photon,
-    supertype: ReferenceIO( IOType.ObjectIO )
+    stateSchema: PHOTON_STATE_SCHEMA,
+    stateObjectToCreateElementArguments: stateObject => [ {
+      wavelength: stateObject.wavelength,
+      wasEmittedByAtom: stateObject.wasEmittedByAtom,
+      hasCollidedWithAtom: stateObject.hasCollidedWithAtom
+    } ]
   } );
 }
 
