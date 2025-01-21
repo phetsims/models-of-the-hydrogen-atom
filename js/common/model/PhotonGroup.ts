@@ -41,9 +41,9 @@ export default class PhotonGroup extends PhetioGroup<Photon, CreateElementArgume
         tandem: tandem
       }, providedOptions ) );
 
-    // defaultArguments, passed to createElement during API harvest.
+    // defaultArguments, passed to createElement during API harvest. Any valid argument values will do here.
     const defaultArguments: CreateElementArguments = [ {
-      wavelength: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min //TODO Can we get rid of this? Or what should the default be?
+      wavelength: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min
     } ];
 
     super( createElement, defaultArguments, {
