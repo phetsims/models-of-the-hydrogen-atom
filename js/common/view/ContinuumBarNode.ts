@@ -56,7 +56,7 @@ export default class ContinuumBarNode extends Node {
       isDisposable: false,
       children: [ barNode, classicalText, quantumText ],
       tandem: tandem,
-      phetioDocumentation: 'The vertical bar that indicates the continuum from Classical to Quantum atomic model.',
+      phetioDocumentation: 'The vertical bar that indicates where atomic models fall on the Classical to Quantum continuum.',
       visiblePropertyOptions: {
         phetioFeatured: true
       }
