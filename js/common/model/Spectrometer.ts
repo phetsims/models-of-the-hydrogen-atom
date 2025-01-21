@@ -97,7 +97,7 @@ export default class Spectrometer extends PhetioObject {
       }
     } );
 
-    // Add a data point when a photon is emitted.
+    // When a photon is emitted, record its wavelength.
     const photonEmittedListener = ( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ) => {
       if ( this.enabledProperty.value ) {
         this.recordEmission( wavelength );
@@ -119,6 +119,7 @@ export default class Spectrometer extends PhetioObject {
         if ( oldHydrogenAtom && oldHydrogenAtom.photonEmittedEmitter.hasListener( photonEmittedListener ) ) {
           oldHydrogenAtom.photonEmittedEmitter.removeListener( photonEmittedListener );
         }
+        //TODO State Wrapper fails here with 'Cannot add the same listener twice'.
         newHydrogenAtom.photonEmittedEmitter.addListener( photonEmittedListener );
       }
     } );
