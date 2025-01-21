@@ -183,11 +183,7 @@ export default class MOTHAScreenView extends ScreenView {
     } );
     this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
 
-    //TODO Make another attempt at using HBox/VBox here.
-
-    // The more complicated part of layout involves everything above the Spectrometer. Trying to do this with
-    // HBox/VBox was even more complicated, and made it more difficult to tweak the layout (which we did often).
-    // So this brute-force approach eventually became the preferred choice.
+    // Layout: zoomedInBoxNode and the elements to the left of it.
     lightSourceNode.left = this.layoutBounds.left + options.lightNodeXOffset;
     this.zoomedInBoxNode.left = lightSourceNode.right + 50;
     this.zoomedInBoxNode.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
@@ -196,6 +192,9 @@ export default class MOTHAScreenView extends ScreenView {
     boxOfHydrogenNode.bottom = lightSourceNode.top + 1;
     tinyBoxNode.left = boxOfHydrogenNode.right - boxOfHydrogenNode.width / 3;
     tinyBoxNode.centerY = boxOfHydrogenNode.centerY;
+
+    // Layout: elements to the right of zoomedInBoxNode.
+    //TODO Make another attempt at using HBox/VBox here.
     if ( this.electronEnergyLevelAccordionBox ) {
 
       // If we have electronEnergyLevelAccordionBox, it goes between zoomedInBox and modelBox.
@@ -225,7 +224,7 @@ export default class MOTHAScreenView extends ScreenView {
     }
     timeControlNode.bottom = this.zoomedInBoxNode.bottom;
 
-    // Layout of elements below zoomedInBoxNode is well-suited to using HBox/VBox.
+    // Layout: elements below zoomedInBoxNode.
     const bottomHBox = new HBox( {
       align: 'top',
       spacing: 12,
@@ -242,7 +241,7 @@ export default class MOTHAScreenView extends ScreenView {
       top: this.zoomedInBoxNode.bottom + 15
     } );
 
-    // Layout of misc. elements
+    // Layout: miscellaneous elements
     transitionsDialog.setInitialPosition( modelBox.leftTop );
     legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
