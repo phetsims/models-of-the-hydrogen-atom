@@ -33,14 +33,12 @@ const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
 export type PhotonStateObject = {
   wavelength: number;
   wasEmittedByAtom: boolean;
-  hasCollidedWithAtom: boolean;
 };
 
 // This should match PhotonStateObject, but with IOTypes.
 const PHOTON_STATE_SCHEMA = {
   wavelength: NumberIO,
-  wasEmittedByAtom: BooleanIO,
-  hasCollidedWithAtom: BooleanIO
+  wasEmittedByAtom: BooleanIO
 };
 
 type SelfOptions = {
@@ -172,8 +170,7 @@ export default class Photon extends PhetioObject {
     stateSchema: PHOTON_STATE_SCHEMA,
     stateObjectToCreateElementArguments: stateObject => [ {
       wavelength: stateObject.wavelength,
-      wasEmittedByAtom: stateObject.wasEmittedByAtom,
-      hasCollidedWithAtom: stateObject.hasCollidedWithAtom
+      wasEmittedByAtom: stateObject.wasEmittedByAtom
     } ]
   } );
 }
