@@ -19,13 +19,13 @@ import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
-// Options to createPhoton function. tandem is omitted because photonGroup provides the tandem.
-type CreatePhotonOptions = StrictOmit<PhotonOptions, 'tandem'>;
+// Options to createElement function. tandem is omitted because photonGroup provides the tandem.
+type CreateElementOptions = StrictOmit<PhotonOptions, 'tandem'>;
 
-// Arguments to createPhoton function, other than tandem.
-type CreatePhotonArguments = [ CreatePhotonOptions ];
+// Arguments to createElement function, other than tandem.
+type CreateElementArguments = [ CreateElementOptions ];
 
-export default class PhotonGroup extends PhetioGroup<Photon, CreatePhotonArguments> {
+export default class PhotonGroup extends PhetioGroup<Photon, CreateElementArguments> {
 
   // the zoomed-in part of the box of hydrogen
   private readonly zoomedInBox: ZoomedInBox;
@@ -35,17 +35,18 @@ export default class PhotonGroup extends PhetioGroup<Photon, CreatePhotonArgumen
 
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
-    const createPhoton = ( tandem: Tandem, providedOptions: CreatePhotonOptions ) =>
+    // Function that this group uses to create dynamic Photon elements.
+    const createElement = ( tandem: Tandem, providedOptions: CreateElementOptions ) =>
       new Photon( combineOptions<PhotonOptions>( {
         tandem: tandem
       }, providedOptions ) );
 
-    // defaultArguments, passed to createElement during API harvest
-    const defaultArguments: CreatePhotonArguments = [ {
+    // defaultArguments, passed to createElement during API harvest.
+    const defaultArguments: CreateElementArguments = [ {
       wavelength: MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE.min //TODO Can we get rid of this? Or what should the default be?
     } ];
 
-    super( createPhoton, defaultArguments, {
+    super( createElement, defaultArguments, {
       isDisposable: false,
       phetioType: PhetioGroup.PhetioGroupIO( Photon.PhotonIO ),
       tandem: tandem
