@@ -131,10 +131,7 @@ export default class Photon extends PhetioObject {
 
   public override dispose(): void {
 
-    // _positionProperty is the only public Property, so unlink any listeners.
-    this._positionProperty.unlinkAll();
-
-    // Instrumented Properties must be disposed, to remove from the tandem registry.
+    // Instrumented Properties must be disposed, to remove them from the tandem registry.
     this._positionProperty.dispose();
     this.directionProperty.dispose();
     this.hasCollidedWithAtomProperty.dispose();
