@@ -1,7 +1,8 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * LightSourceNode displays the light source.
+ * LightSourceNode displays the light source. It consists of a lamp, with a beam of light coming out of the lamp
+ * when the light source is on.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
