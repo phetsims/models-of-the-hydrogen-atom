@@ -50,7 +50,7 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
     // order of snapshotNodes is always that same in the dialog.
     snapshots.lengthProperty.lazyLink( numberOfSnapshots => {
       assert && assert( numberOfSnapshots >= 0 && numberOfSnapshots <= MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS,
-        `unexpected numberOfSnapshots: ${numberOfSnapshots}` );
+        `invalid numberOfSnapshots: ${numberOfSnapshots}` );
 
       if ( !isSettingPhetioStateProperty.value ) {
 

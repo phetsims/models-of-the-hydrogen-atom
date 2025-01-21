@@ -93,7 +93,8 @@ export default class MOTHAModel implements TModel {
                          hydrogenAtomsTandem: Tandem,
                          tandem: Tandem ) {
 
-    assert && assert( predictiveModels.includes( initialPredictiveModel ) );
+    assert && assert( predictiveModels.includes( initialPredictiveModel ),
+      'initialPredictiveModel is not one of the supported predictiveModels' );
 
     this.zoomedInBox = zoomedInBox;
 
@@ -207,7 +208,7 @@ export default class MOTHAModel implements TModel {
    * Steps the model by one time step. Used by the Step button in the time controls.
    */
   public stepOnce(): void {
-    assert && assert( !this.isPlayingProperty.value );
+    assert && assert( !this.isPlayingProperty.value, 'stepOnce should only be called when the sim is paused.' );
     this._step( STEP_ONCE_NORMAL_DT );
   }
 

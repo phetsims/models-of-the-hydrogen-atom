@@ -18,8 +18,8 @@ export default class PolynomialTerm {
   public readonly coefficient: number;
 
   public constructor( power: number, coefficient: number ) {
-    assert && assert( Number.isInteger( power ) );
-    assert && assert( Number.isInteger( coefficient ) );
+    assert && assert( Number.isInteger( power ), `invalid power: ${power}` );
+    assert && assert( Number.isInteger( coefficient ), `invalid coefficient: ${coefficient}` );
 
     this.power = power;
     this.coefficient = coefficient;
@@ -34,7 +34,7 @@ export default class PolynomialTerm {
   }
 
   public derive( iterations: number ): PolynomialTerm {
-    assert && assert( Number.isInteger( iterations ) && iterations >= 0 );
+    assert && assert( Number.isInteger( iterations ) && iterations >= 0, `invalid iterations: ${iterations}` );
 
     let coefficient = this.coefficient;
     let power = this.power;

@@ -67,8 +67,8 @@ class PhotonAbsorptionModel {
    * Gets the wavelengths that can be absorbed in state n.
    */
   public getAbsorptionWavelengths( n: number ): number[] {
-    assert && assert( Number.isInteger( n ) );
-    assert && assert( n >= MOTHAConstants.GROUND_STATE && n < MOTHAConstants.MAX_STATE, `bad n=${n}` );
+    assert && assert( Number.isInteger( n ), `n should be an integer: ${n}` );
+    assert && assert( n >= MOTHAConstants.GROUND_STATE && n < MOTHAConstants.MAX_STATE, `invalid n=${n}` );
 
     const wavelengths: number[] = [];
     for ( const [ wavelength, transition ] of this.map ) {
@@ -77,8 +77,8 @@ class PhotonAbsorptionModel {
       }
     }
 
-    assert && assert( wavelengths.length > 0 );
-    assert && assert( _.every( wavelengths, wavelength => Number.isInteger( wavelength ) ) );
+    assert && assert( wavelengths.length > 0, 'Expected to have one or more absorption wavelengths.' );
+    assert && assert( _.every( wavelengths, wavelength => Number.isInteger( wavelength ) ), 'All wavelengths must be integer values.' );
     return wavelengths;
   }
 
@@ -86,7 +86,7 @@ class PhotonAbsorptionModel {
    * Gets the wavelength (in nm) that results in a transition between 2 values of n.
    */
   public getTransitionWavelength( n1: number, n2: number ): number {
-    assert && assert( n1 !== n2 );
+    assert && assert( n1 !== n2, `Transition cannot occur between the same value of n: ${n1}` );
     if ( n2 > n1 ) {
       return this.getAbsorptionWavelength( n1, n2 );
     }
@@ -156,7 +156,7 @@ function computeAbsorptionWavelength( n1: number, n2: number ): number {
   assert && assert( MOTHAConstants.GROUND_STATE === 1 );
   assert && assert( Number.isInteger( n1 ) && n1 >= MOTHAConstants.GROUND_STATE, `bad n1=${n1}` );
   assert && assert( Number.isInteger( n2 ) && n2 <= MOTHAConstants.MAX_STATE, `bad n2=${n2}` );
-  assert && assert( n1 < n2, `bad n1=${n1} n2=${n2}` );
+  assert && assert( n1 < n2, `n1=${n1} must be < n2=${n2}` );
 
   // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.
   const wavelength = 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );

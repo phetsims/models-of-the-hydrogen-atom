@@ -35,17 +35,18 @@ export default function chooseWeightedValue( weightedValues: WeightedValue[] ): 
     p += weightedValue.weight * normalizationFactor;
     normalizedWeightedValues.push( { value: weightedValue.value, weight: p } );
   } );
-  assert && assert( _.every( normalizedWeightedValues, value => ( value.weight >= 0 && value.weight <= 1 ) ) );
+  assert && assert( _.every( normalizedWeightedValues, value => ( value.weight >= 0 && value.weight <= 1 ) ),
+    'invalid normalizedWeightedValues' );
 
-  // Choose a value.
+  // Choose a weighted value.
   const weight = dotRandom.nextDouble();
-  let value: number | null = null;
-  for ( let i = 0; i < normalizedWeightedValues.length && value === null; i++ ) {
+  let weightedValue: number | null = null;
+  for ( let i = 0; i < normalizedWeightedValues.length && weightedValue === null; i++ ) {
     const normalizedWeightedValue = normalizedWeightedValues[ i ];
     if ( weight <= normalizedWeightedValue.weight ) {
-      value = normalizedWeightedValue.value;
+      weightedValue = normalizedWeightedValue.value;
     }
   }
-  assert && assert( value !== null );
-  return value;
+  assert && assert( weightedValue !== null, 'Expected to have a weightedValue by this point.' );
+  return weightedValue;
 }

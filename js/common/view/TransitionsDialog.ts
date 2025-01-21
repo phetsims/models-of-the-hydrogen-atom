@@ -216,7 +216,7 @@ export default class TransitionsDialog extends Panel {
 
       // 'n transition' column
       const transition = photonAbsorptionModel.getTransition( wavelength )!;
-      assert && assert( transition );
+      assert && assert( transition, `no transition found for wavelength ${wavelength}` );
       const transitionText = new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, combineOptions<TextOptions>( {
         visibleProperty: transitionColumnVisibleProperty
       }, CONTENT_TEXT_OPTIONS ) );

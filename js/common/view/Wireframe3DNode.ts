@@ -112,8 +112,7 @@ export default class Wireframe3DNode extends Path {
    */
   private getTransformedVertex( index: number ): Vector3 {
     assert && assert( !this.isDirty, 'Did you forget to call update?' );
-    assert && assert( Number.isInteger( index ) );
-    assert && assert( index >= 0 && index < this.transformedVertices.length );
+    assert && assert( Number.isInteger( index ) && index >= 0 && index < this.transformedVertices.length, `invalid index: ${index}` );
     return this.transformedVertices[ index ];
   }
 
@@ -121,11 +120,9 @@ export default class Wireframe3DNode extends Path {
    * Adds a line between 2 vertices, identified by their indices in the array that was provided to setVertices.
    */
   public addLine( vertex1Index: number, vertex2Index: number ): void {
-    assert && assert( Number.isInteger( vertex1Index ) );
-    assert && assert( Number.isInteger( vertex2Index ) );
-    assert && assert( vertex1Index !== vertex2Index );
-    assert && assert( vertex1Index >= 0 && vertex1Index < this.vertices.length );
-    assert && assert( vertex2Index >= 0 && vertex2Index < this.vertices.length );
+    assert && assert( Number.isInteger( vertex1Index ) && vertex1Index >= 0 && vertex1Index < this.vertices.length, `invalid vertex1Index: ${vertex1Index}` );
+    assert && assert( Number.isInteger( vertex2Index ) && vertex2Index >= 0 && vertex2Index < this.vertices.length, `invalid vertex2Index: ${vertex2Index}` );
+    assert && assert( vertex1Index !== vertex2Index, `vertex1Index and vertex2Index are the same: ${vertex1Index}` );
     this.lines.push( {
       vertex1Index: vertex1Index,
       vertex2Index: vertex2Index

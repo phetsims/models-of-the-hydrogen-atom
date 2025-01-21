@@ -83,9 +83,8 @@ export default class EmissionChart extends Node {
     // Handles the remapping of a wavelength.
     const remap = ( wavelength: number ) => {
       if ( options.wavelengthMap ) {
-        assert && assert( options.wavelengths.includes( wavelength ), `${wavelength} is not a wavelength for this chart.` );
         const newWavelength = options.wavelengthMap.get( wavelength )!;
-        assert && assert( newWavelength !== undefined );
+        assert && assert( newWavelength !== undefined, `No entry found for wavelength ${wavelength}` );
         return newWavelength;
       }
       else {
@@ -102,7 +101,7 @@ export default class EmissionChart extends Node {
     options.wavelengths.forEach( wavelength => {
 
       assert && assert( remap( wavelength ) >= options.minWavelength && remap( wavelength ) <= options.maxWavelength,
-        `tickValue is out of range: ${wavelength}` );
+        `wavelength is out of range: ${wavelength}` );
 
       const x = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, remap( wavelength ) );
 

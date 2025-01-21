@@ -153,7 +153,7 @@ export default class Spectrometer extends PhetioObject {
    * Records an emission of the specified wavelength.
    */
   private recordEmission( wavelength: number ): void {
-    assert && assert( this.enabledProperty.value );
+    assert && assert( this.enabledProperty.value, 'recordEmission should only be called when the spectrometer is enabled.' );
 
     const dataPoints = this.dataPointsProperty.value.slice();
 

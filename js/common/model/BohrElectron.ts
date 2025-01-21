@@ -115,7 +115,7 @@ export default class BohrElectron extends Electron {
    * Gets the electron's energy in state n, in eV.
    */
   public static getEnergy( n: number ): number {
-    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE );
+    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE, `invalid n: ${n}` );
     return MOTHAConstants.E1 / ( n * n );
   }
 }

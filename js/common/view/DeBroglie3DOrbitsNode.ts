@@ -60,7 +60,7 @@ export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
       }
       vertices.push( ...DeBroglie3DOrbitsNode.getOrbitVertices( orbitRadius, numberOfVertices ) );
     }
-    assert && assert( vertices.length % 2 === 0, 'Even number of vertices is required.' );
+    assert && assert( vertices.length % 2 === 0, `An even number of vertices is required: ${vertices.length}` );
     this.setVertices( vertices );
 
     // Connect every-other pair of vertices to simulate a dashed line.

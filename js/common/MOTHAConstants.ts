@@ -94,7 +94,8 @@ const MOTHAConstants = {
   SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS
 };
 
-assert && assert( MOTHAConstants.GROUND_STATE === 1, 'This is a fundamental assumption of this implementation.' );
+assert && assert( MOTHAConstants.GROUND_STATE === 1,
+  'A fundamental assumption of this implementation is that n=1 is the ground state.' );
 
 modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );
 

@@ -52,7 +52,7 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
 
     // Update the vertices
     getWaveVertices( this.deBroglieModel, this.modelViewTransform, this.waveVertices );
-    assert && assert( this.waveVertices.length === NUMBER_OF_WAVE_VERTICES, `this.waveVertices.length=${this.waveVertices.length}` );
+    assert && assert( this.waveVertices.length === NUMBER_OF_WAVE_VERTICES, `Invalid number of waveVertices: ${this.waveVertices.length}` );
     this.setVertices( this.waveVertices );
 
     // Connect adjacent vertices.

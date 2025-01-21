@@ -117,7 +117,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
    * the electron's state.
    */
   private getXForState( l: number ): number {
-    assert && assert( l >= 0 && l < MOTHAConstants.MAX_STATE );
+    assert && assert( l >= 0 && l < MOTHAConstants.MAX_STATE, `invalid l: ${l}` );
     return this.levelNodes.left + LEVEL_LINE_LENGTH / 2 + ( l * ( LEVEL_LINE_LENGTH + LEVEL_LINE_X_SPACING ) );
   }
 }
@@ -127,7 +127,8 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
  * This Node consists n-1 horizontal lines with label "n = {value}" to the right of the lines.
  */
 function createLevelNode( n: number ): Node {
-  assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE );
+  assert && assert( Number.isInteger( n ), `n must be an integer: ${n}` );
+  assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE, `invalid n: ${n}` );
 
   // Create the same number of lines for all levels, so that the "n = {n}" labels will be horizontally aligned.
   // Only the lines that are relevant will be visible.

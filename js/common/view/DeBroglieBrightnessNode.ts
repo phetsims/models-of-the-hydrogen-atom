@@ -132,7 +132,7 @@ class RingNode extends Node {
     const modelRadius = BohrModel.getElectronOrbitRadius( this.deBroglieModel.electron.nProperty.value );
     const viewRadius = this.modelViewTransform.modelToViewDeltaX( modelRadius );
     const numberOfPolygons = calculateNumberOfPolygons( viewRadius );
-    assert && assert( numberOfPolygons <= this.polygonNodes.length );
+    assert && assert( numberOfPolygons <= this.polygonNodes.length, `invalid number of polygons: ${numberOfPolygons}` );
 
     // Select polygons in order from the pool, and create their Shapes.
     const children = [];
@@ -155,7 +155,7 @@ class RingNode extends Node {
     const n = this.deBroglieModel.electron.nProperty.value;
 
     // the number of relevant polygons, NOT this.polygonNodes.length
-    assert && assert( _.every( this.children, child => child instanceof Path ) );
+    assert && assert( _.every( this.children, child => child instanceof Path ), 'Every child should be an instance of Path.' );
     const numberOfPolygons = this.getChildrenCount();
 
     // Visit polygons in the same order as updateGeometry.
@@ -170,7 +170,7 @@ class RingNode extends Node {
    * Maps the specified amplitude to a color.
    */
   private amplitudeToColor( amplitude: number ): TColor {
-    assert && assert( amplitude >= -1 && amplitude <= 1, `amplitude=${amplitude}` );
+    assert && assert( amplitude >= -1 && amplitude <= 1, `invalid amplitude=${amplitude}` );
     if ( amplitude === 0 ) {
       return this.zeroAmplitudeColorProperty.value;
     }

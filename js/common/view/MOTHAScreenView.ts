@@ -231,6 +231,7 @@ export default class MOTHAScreenView extends ScreenView {
       spacing: 12,
       children: [
         new VBox( {
+          excludeInvisibleChildrenFromBounds: false,
           align: 'center',
           spacing: 5,
           children: [ lightControlPanel, transitionsCheckbox ]

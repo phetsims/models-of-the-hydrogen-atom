@@ -277,7 +277,8 @@ export default class PlumPuddingModel extends HydrogenAtom {
       if ( MOTHAUtils.pointsCollide( electronPosition, photonPosition, maxDistance ) ) {
         if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
           this.numberOfPhotonsAbsorbedProperty.value += 1;
-          assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED );
+          assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED,
+            `Too many photons have been absorbed: ${this.numberOfPhotonsAbsorbedProperty.value}` );
           phet.log && phet.log( `Absorb: ${MOTHASymbols.lambda}=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
           this.photonAbsorbedEmitter.emit( photon );
           absorbed = true;

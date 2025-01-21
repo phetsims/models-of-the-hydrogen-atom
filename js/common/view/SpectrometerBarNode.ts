@@ -35,7 +35,7 @@ export default class SpectrometerBarNode extends Path {
    * Sets the number of photons to display in the stack.
    */
   public setNumberOfPhotons( numberOfPhotons: number ): void {
-    assert && assert( Number.isInteger( numberOfPhotons ) && numberOfPhotons >= 0 );
+    assert && assert( Number.isInteger( numberOfPhotons ) && numberOfPhotons >= 0, `invalid numberOfPhotons: ${numberOfPhotons}` );
     if ( numberOfPhotons === 0 ) {
       this.shape = null;
     }

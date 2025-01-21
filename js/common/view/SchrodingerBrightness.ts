@@ -102,14 +102,14 @@ export default class SchrodingerBrightness {
 
     for ( let row = 0; row < NUMBER_OF_VERTICAL_CELLS; row++ ) {
       const z = ( row * this.cellHeight ) + ( this.cellHeight / 2 );
-      assert && assert( z > 0 );
+      assert && assert( z > 0, `invalid z: ${z}` );
       for ( let column = 0; column < NUMBER_OF_HORIZONTAL_CELLS; column++ ) {
         const x = ( column * this.cellWidth ) + ( this.cellWidth / 2 );
-        assert && assert( x > 0 );
+        assert && assert( x > 0, `invalid x: ${x}` );
         let sum = 0;
         for ( let depth = 0; depth < NUMBER_OF_DEPTH_CELLS; depth++ ) {
           const y = ( depth * this.cellDepth ) + ( this.cellDepth / 2 );
-          assert && assert( y > 0 );
+          assert && assert( y > 0, `invalid y: ${y}` );
           const probabilityDensity = solveProbabilityDensity( n, l, m, x, y, z );
           sum += probabilityDensity;
         }

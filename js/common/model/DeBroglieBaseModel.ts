@@ -48,7 +48,7 @@ export default class DeBroglieBaseModel extends BohrModel {
    */
   public getAmplitude( n: number, angle: number ): number {
     const amplitude = Math.sin( n * angle ) * Math.sin( this.electron.angleProperty.value );
-    assert && assert( amplitude >= -1 && amplitude <= 1 );
+    assert && assert( amplitude >= -1 && amplitude <= 1, `invalid amplitude: ${amplitude}` );
     return amplitude;
   }
 

@@ -229,8 +229,8 @@ function chooseLower_n( n: number, l: number ): number | null {
  * The new value l' must be in [0,...n-1], and l-l' must be in [-1,1].
  */
 function choose_l( n: number, l: number ): number {
-  assert && assert( Number.isInteger( n ) );
-  assert && assert( Number.isInteger( l ) );
+  assert && assert( Number.isInteger( n ), `invalid n: ${n}` );
+  assert && assert( Number.isInteger( l ), `invalid l: ${l}` );
 
   let lNew;
 
@@ -254,8 +254,8 @@ function choose_l( n: number, l: number ): number {
 
   assert && assert( Number.isInteger( lNew ), `lNew must be an integer: ${lNew}` );
   //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59 Enable and address this assert:
-  // assert && assert( lNew >= 0 && lNew <= n - 1, `lNew violates rules: n=${n} l=${l} lNew=${lNew}` );
-  assert && assert( Math.abs( lNew - l ) === 1, `lNew violates rules: l=${l} lNew=${lNew}` );
+  // assert && assert( lNew >= 0 && lNew <= n - 1, `lNew violates transition rules: n=${n} l=${l} lNew=${lNew}` );
+  assert && assert( Math.abs( lNew - l ) === 1, `lNew violates transition rules: l=${l} lNew=${lNew}` );
   return lNew;
 }
 
@@ -264,8 +264,8 @@ function choose_l( n: number, l: number ): number {
  * The new value m' must be in [-l,...,+l], and m-m' must be in [-1,0,1].
  */
 function choose_m( l: number, m: number ): number {
-  assert && assert( Number.isInteger( l ) );
-  assert && assert( Number.isInteger( m ) );
+  assert && assert( Number.isInteger( l ), `invalid l: ${l}` );
+  assert && assert( Number.isInteger( m ), `invalid m: ${m}` );
 
   let mNew;
 
@@ -310,8 +310,8 @@ function choose_m( l: number, m: number ): number {
   }
 
   assert && assert( Number.isInteger( mNew ), `mNew must be an integer: ${mNew}` );
-  assert && assert( mNew >= -l && mNew <= l, `mNew must be [-l,l]: ${mNew}` );
-  assert && assert( [ 0, 1 ].includes( Math.abs( mNew - m ) ), `mNew - m must be in [-1,0,1]: ${m} ${mNew}` );
+  assert && assert( mNew >= -l && mNew <= l, `mNew must be in the range [-l,l]: ${mNew}` );
+  assert && assert( [ -1, 0, 1 ].includes( mNew - m ), `mNew - m must be in the set [-1,0,1]: ${m} ${mNew}` );
   return mNew;
 }
 

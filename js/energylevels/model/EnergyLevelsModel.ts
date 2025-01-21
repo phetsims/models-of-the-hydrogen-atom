@@ -54,7 +54,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
       schrodingerModel
     ];
     assert && assert( _.every( predictiveModels, model => model instanceof BohrModel ),
-      'all models in this screen must include the concept of state transition wavelengths' );
+      'All models in this screen must include the concept of electron energy level.' );
 
     super( zoomedInBox, lightSource, predictiveModels, bohrModel, hydrogenAtomsTandem, tandem );
 

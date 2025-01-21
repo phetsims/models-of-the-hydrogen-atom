@@ -351,7 +351,8 @@ export default class BohrModel extends HydrogenAtom {
   }
 }
 
-assert && assert( BohrModel.ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES );
+assert && assert( BohrModel.ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES,
+  'An orbit must exists for each electron state.' );
 
 /**
  * Gets the direction (in radians) for a photon that is emitted via spontaneous emission.
@@ -370,7 +371,7 @@ function getSpontaneousEmissionDirection( n: number, electronAngle: number ): nu
     // towards the nucleus, but not intersecting the nucleus.
     direction = MOTHAUtils.normalizeAngle( electronAngle + Math.PI + MOTHAUtils.nextSign() * 0.1 * Math.PI );
   }
-  assert && assert( direction >= 0 && direction <= 2 * Math.PI, `unexpected direction: ${direction}` );
+  assert && assert( direction >= 0 && direction <= 2 * Math.PI, `invalid direction: ${direction}` );
 
   // Adjust the direction so that it is noticeably different from the direction of the light source. This ensures
   // that emitted photons are easy to see, and will not be confused with photons from the light source.

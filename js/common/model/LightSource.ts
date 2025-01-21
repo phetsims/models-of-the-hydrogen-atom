@@ -31,7 +31,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
-assert && assert( TRANSITION_WAVELENGTHS_WEIGHT >= 0 && TRANSITION_WAVELENGTHS_WEIGHT <= 1 );
+assert && assert( TRANSITION_WAVELENGTHS_WEIGHT >= 0 && TRANSITION_WAVELENGTHS_WEIGHT <= 1,
+  `invalid TRANSITION_WAVELENGTHS_WEIGHT: ${TRANSITION_WAVELENGTHS_WEIGHT}` );
 
 export default class LightSource extends PhetioObject {
 
@@ -95,7 +96,8 @@ export default class LightSource extends PhetioObject {
 
     // Range goes from UV to max visible wavelength
     this.monochromaticWavelengthRange = MOTHAConstants.MONOCHROMATIC_WAVELENGTH_RANGE;
-    assert && assert( this.monochromaticWavelengthRange.min < VisibleColor.MIN_WAVELENGTH );
+    assert && assert( this.monochromaticWavelengthRange.min < VisibleColor.MIN_WAVELENGTH,
+      `invalid monochromaticWavelengthRange.min: ${this.monochromaticWavelengthRange.min}` );
 
     this.monochromaticWavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
       numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
@@ -221,7 +223,7 @@ export default class LightSource extends PhetioObject {
       }
     }
 
-    assert && assert( Number.isInteger( wavelength ) );
+    assert && assert( Number.isInteger( wavelength ), `wavelength must be an integer: ${wavelength}` );
     return wavelength;
   }
 

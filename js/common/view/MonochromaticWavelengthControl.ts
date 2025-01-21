@@ -44,8 +44,8 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
 
     // Layout for this NumberControl, with 'UV' centered in the UV section of the slider track.
     const layoutFunction = ( titleNode: Node, numberDisplay: NumberDisplay, slider: Slider, decrementButton: ArrowButton | null, incrementButton: ArrowButton | null ): Node => {
-      assert && assert( decrementButton, 'There is no decrementButton!' );
-      assert && assert( incrementButton, 'There is no incrementButton!' );
+      assert && assert( decrementButton, 'A decrementButton is required.' );
+      assert && assert( incrementButton, 'An incrementButton is required.' );
 
       const sliderWrapper = new Node( {
         children: [ slider, uvText ]

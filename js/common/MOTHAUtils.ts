@@ -35,7 +35,7 @@ const MOTHAUtils = {
     if ( normalizedAngle < 0 ) {
       normalizedAngle += ( 2 * Math.PI );
     }
-    assert && assert( normalizedAngle >= 0 && normalizedAngle <= ( 2 * Math.PI ) );
+    assert && assert( normalizedAngle >= 0 && normalizedAngle <= ( 2 * Math.PI ), `Invalid normalizedAngle: ${normalizedAngle}` );
     return normalizedAngle;
   },
 
@@ -43,7 +43,7 @@ const MOTHAUtils = {
    * Converts from polar to Cartesian coordinates.
    */
   polarToCartesian( radius: number, angle: number ): Vector2 {
-    assert && assert( isFinite( radius ) && radius >= 0 );
+    assert && assert( isFinite( radius ) && radius >= 0, `invalid radius: ${radius}` );
     const x = radius * Math.cos( angle );
     const y = radius * Math.sin( angle );
     return new Vector2( x, y );
