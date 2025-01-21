@@ -1,7 +1,7 @@
 // Copyright 2015-2025, University of Colorado Boulder
 
 /**
- * ModelRadioButtonGroup is the radio button group for selecting a predictive model of the hydrogen atom.
+ * ModelRadioButtonGroup is the radio button group for selecting one of the predictive atomic models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

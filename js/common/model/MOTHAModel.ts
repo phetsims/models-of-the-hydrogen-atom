@@ -46,10 +46,10 @@ export default class MOTHAModel implements TModel {
   // the experiment hydrogen atom
   public readonly experiment: Experiment;
 
-  // the supported set of predictive hydrogen-atom models
+  // the supported set of predictive atomic models
   public readonly atomicModels: HydrogenAtom[];
 
-  // the predictive hydrogen-atom model that is currently selected
+  // the predictive atomic model that is currently selected
   public readonly atomicModelProperty: Property<HydrogenAtom>;
 
   // the hydrogen-atom model that is active: either the experiment, or the selected predictive model.

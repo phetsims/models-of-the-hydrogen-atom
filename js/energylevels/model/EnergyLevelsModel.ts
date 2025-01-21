@@ -18,7 +18,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class EnergyLevelsModel extends MOTHAModel {
 
-  // predictive models supported by this screen
+  // predictive atomic models supported by this screen
   public readonly bohrModel: BohrModel;
   public readonly deBroglieModel: DeBroglieModel;
   public readonly schrodingerModel: SchrodingerModel;

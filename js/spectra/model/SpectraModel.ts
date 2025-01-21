@@ -21,7 +21,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class SpectraModel extends MOTHAModel {
 
-  // predictive models supported by this screen
+  // predictive atomic models supported by this screen
   public readonly billiardBallModel: BilliardBallModel;
   public readonly plumPuddingModel: PlumPuddingModel;
   public readonly classicalSolarSystemModel: ClassicalSolarSystemModel;
