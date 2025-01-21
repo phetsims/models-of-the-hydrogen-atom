@@ -22,7 +22,7 @@ type WireframeLine = {
 
 type SelfOptions = EmptySelfOptions;
 
-type WireframeNodeOptions = SelfOptions & PathOptions;
+type Wireframe3DNodeOptions = SelfOptions & PathOptions;
 
 export default class Wireframe3DNode extends Path {
 
@@ -42,9 +42,9 @@ export default class Wireframe3DNode extends Path {
   // Indicates that transformedVertices are invalid. This saves your bacon if you forgot to call update.
   private isDirty: boolean;
 
-  public constructor( providedOptions?: WireframeNodeOptions ) {
+  public constructor( providedOptions?: Wireframe3DNodeOptions ) {
 
-    const options = optionize<WireframeNodeOptions, SelfOptions, PathOptions>()( {
+    const options = optionize<Wireframe3DNodeOptions, SelfOptions, PathOptions>()( {
 
       // PathOptions
       isDisposable: false

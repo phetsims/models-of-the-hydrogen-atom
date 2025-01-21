@@ -40,13 +40,13 @@ type SelfOptions = {
   backgroundStroke?: TColor;
 };
 
-type SpectrometerNodeOptions = SelfOptions;
+type SpectrometerChartOptions = SelfOptions;
 
 export default class SpectrometerChart extends Node {
 
-  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, providedOptions: SpectrometerNodeOptions ) {
+  public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>, providedOptions: SpectrometerChartOptions ) {
 
-    const options = optionize<SpectrometerNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<SpectrometerChartOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
       hasTickMarks: true,

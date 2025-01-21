@@ -12,13 +12,13 @@ import { Text } from '../../../../scenery/js/imports.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import EnergyDiagram, { ElectronEnergyLevelDiagramNodeOptions } from './EnergyDiagram.js';
+import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 
 type SelfOptions = {
   size: Dimension2;
 };
 
-type ExperimentEnergyDiagramOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
+type ExperimentEnergyDiagramOptions = SelfOptions & EnergyDiagramOptions;
 
 export default class ExperimentEnergyDiagram extends EnergyDiagram {
 

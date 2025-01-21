@@ -67,7 +67,7 @@ type SelfOptions = {
   position?: Vector2; // initial position, in view coordinates
 };
 
-type AbsorptionAndEmissionDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+type TransitionsDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class TransitionsDialog extends Panel {
 
@@ -80,7 +80,7 @@ export default class TransitionsDialog extends Panel {
                       lightModeProperty: Property<LightMode>,
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
-                      providedOptions: AbsorptionAndEmissionDialogOptions ) {
+                      providedOptions: TransitionsDialogOptions ) {
 
     const isShowingProperty = new BooleanProperty( false, {
       tandem: providedOptions.tandem.createTandem( 'isShowingProperty' ),
@@ -88,7 +88,7 @@ export default class TransitionsDialog extends Panel {
       phetioReadOnly: true // because the sim controls this
     } );
 
-    const options = optionize<AbsorptionAndEmissionDialogOptions, SelfOptions, PanelOptions>()( {
+    const options = optionize<TransitionsDialogOptions, SelfOptions, PanelOptions>()( {
 
       // SelfOptions
       position: new Vector2( 0, 0 ),

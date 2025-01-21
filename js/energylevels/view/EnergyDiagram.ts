@@ -34,7 +34,7 @@ type SelfOptions = {
   size: Dimension2;
 };
 
-export type ElectronEnergyLevelDiagramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
+export type EnergyDiagramOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
 
 export default class EnergyDiagram extends Node {
 
@@ -59,9 +59,9 @@ export default class EnergyDiagram extends Node {
   public static readonly LABEL_FONT = new PhetFont( 12 );
   public static readonly LABEL_MAX_WIDTH = 40;
 
-  protected constructor( providedOptions: ElectronEnergyLevelDiagramNodeOptions ) {
+  protected constructor( providedOptions: EnergyDiagramOptions ) {
 
-    const options = optionize<ElectronEnergyLevelDiagramNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<EnergyDiagramOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
       isDisposable: false

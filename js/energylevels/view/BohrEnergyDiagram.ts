@@ -9,7 +9,7 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import EnergyDiagram, { ElectronEnergyLevelDiagramNodeOptions } from './EnergyDiagram.js';
+import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import { HBox, Line, Node, RichText } from '../../../../scenery/js/imports.js';
@@ -28,7 +28,7 @@ const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
-export type BohrEnergyDiagramOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
+export type BohrEnergyDiagramOptions = SelfOptions & EnergyDiagramOptions;
 
 export default class BohrEnergyDiagram extends EnergyDiagram {
 

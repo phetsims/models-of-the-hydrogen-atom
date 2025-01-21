@@ -9,7 +9,7 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import EnergyDiagram, { ElectronEnergyLevelDiagramNodeOptions } from './EnergyDiagram.js';
+import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
@@ -30,7 +30,7 @@ const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
-type SchrodingerEnergyDiagramOptions = SelfOptions & ElectronEnergyLevelDiagramNodeOptions;
+type SchrodingerEnergyDiagramOptions = SelfOptions & EnergyDiagramOptions;
 
 export default class SchrodingerEnergyDiagram extends EnergyDiagram {
 
