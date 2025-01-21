@@ -55,7 +55,10 @@ export default class ContinuumBarNode extends Node {
     super( {
       isDisposable: false,
       children: [ barNode, classicalText, quantumText ],
-      tandem: tandem
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
   }
 }
