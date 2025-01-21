@@ -50,7 +50,8 @@ export default class AbsorptionTransitionText extends RichText {
       fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 100,
       visibleProperty: gatedVisibleProperty,
-      tandem: tandem
+      tandem: tandem,
+      phetioDocumentation: 'When the selected wavelength is an absorption wavelength, this element displays the electron state transition.'
     } );
   }
 }
