@@ -36,34 +36,34 @@ export default class SpectraModel extends MOTHAModel {
     const lightSource = new LightSource( zoomedInBox, tandem.createTandem( 'lightSource' ) );
 
     // Group all predictive models under this tandem.
-    const hydrogenAtomsTandem = tandem.createTandem( 'hydrogenAtoms' );
+    const atomicModelsTandem = tandem.createTandem( 'atomicModels' );
 
     const billiardBallModel = new BilliardBallModel( {
-      tandem: hydrogenAtomsTandem.createTandem( 'billiardBallModel' )
+      tandem: atomicModelsTandem.createTandem( 'billiardBallModel' )
     } );
 
     const plumPuddingModel = new PlumPuddingModel( {
-      tandem: hydrogenAtomsTandem.createTandem( 'plumPuddingModel' )
+      tandem: atomicModelsTandem.createTandem( 'plumPuddingModel' )
     } );
 
     const classicalSolarSystemModel = new ClassicalSolarSystemModel( {
-      tandem: hydrogenAtomsTandem.createTandem( 'classicalSolarSystemModel' )
+      tandem: atomicModelsTandem.createTandem( 'classicalSolarSystemModel' )
     } );
 
     const bohrModel = new BohrModel( {
-      tandem: hydrogenAtomsTandem.createTandem( 'bohrModel' )
+      tandem: atomicModelsTandem.createTandem( 'bohrModel' )
     } );
 
     const deBroglieModel = new DeBroglieModel( {
-      tandem: hydrogenAtomsTandem.createTandem( 'deBroglieModel' )
+      tandem: atomicModelsTandem.createTandem( 'deBroglieModel' )
     } );
 
     const schrodingerModel = new SchrodingerModel( lightSource, {
-      tandem: hydrogenAtomsTandem.createTandem( 'schrodingerModel' )
+      tandem: atomicModelsTandem.createTandem( 'schrodingerModel' )
     } );
 
-    // Predictive models supported by this screen, in the order that they will appear in the UI
-    const predictiveModels = [
+    // Atomic models supported by this screen, in the order that they will appear in the UI
+    const atomicModels = [
       billiardBallModel,
       plumPuddingModel,
       classicalSolarSystemModel,
@@ -72,7 +72,7 @@ export default class SpectraModel extends MOTHAModel {
       schrodingerModel
     ];
 
-    super( zoomedInBox, lightSource, predictiveModels, billiardBallModel, hydrogenAtomsTandem, tandem );
+    super( zoomedInBox, lightSource, atomicModels, billiardBallModel, tandem );
 
     this.billiardBallModel = billiardBallModel;
     this.plumPuddingModel = plumPuddingModel;

@@ -47,10 +47,10 @@ export default class MOTHAModel implements TModel {
   public readonly experiment: Experiment;
 
   // the supported set of predictive hydrogen-atom models
-  public readonly predictiveModels: HydrogenAtom[];
+  public readonly atomicModels: HydrogenAtom[];
 
   // the predictive hydrogen-atom model that is currently selected
-  public readonly predictiveModelProperty: Property<HydrogenAtom>;
+  public readonly atomicModelProperty: Property<HydrogenAtom>;
 
   // the hydrogen-atom model that is active: either the experiment, or the selected predictive model.
   public readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
@@ -78,23 +78,14 @@ export default class MOTHAModel implements TModel {
   // scale factor applied to dt, based on timeSpeedProperty
   private readonly timeScaleProperty: TReadOnlyProperty<number>;
 
-  /**
-   * @param zoomedInBox - the zoomed-in part of the box of hydrogen, where animation takes place
-   * @param lightSource
-   * @param predictiveModels
-   * @param initialPredictiveModel
-   * @param hydrogenAtomsTandem
-   * @param tandem
-   */
   protected constructor( zoomedInBox: ZoomedInBox,
                          lightSource: LightSource,
-                         predictiveModels: HydrogenAtom[],
-                         initialPredictiveModel: HydrogenAtom,
-                         hydrogenAtomsTandem: Tandem,
+                         atomicModels: HydrogenAtom[],
+                         initialAtomicModel: HydrogenAtom,
                          tandem: Tandem ) {
 
-    assert && assert( predictiveModels.includes( initialPredictiveModel ),
-      'initialPredictiveModel is not one of the supported predictiveModels' );
+    assert && assert( atomicModels.includes( initialAtomicModel ),
+      'initialAtomicModel is not one of the supported atomicModels' );
 
     this.zoomedInBox = zoomedInBox;
 
@@ -105,22 +96,22 @@ export default class MOTHAModel implements TModel {
     } );
 
     this.experiment = new Experiment( lightSource, {
-      tandem: hydrogenAtomsTandem.createTandem( 'experiment' )
+      tandem: tandem.createTandem( 'experiment' )
     } );
 
-    this.predictiveModels = predictiveModels;
+    this.atomicModels = atomicModels;
 
-    this.predictiveModelProperty = new Property<HydrogenAtom>( initialPredictiveModel, {
-      validValues: predictiveModels,
-      tandem: tandem.createTandem( 'predictiveModelProperty' ),
-      phetioDocumentation: 'The predictive model that is currently selected in the user interface.',
+    this.atomicModelProperty = new Property<HydrogenAtom>( initialAtomicModel, {
+      validValues: atomicModels,
+      tandem: tandem.createTandem( 'atomicModelProperty' ),
+      phetioDocumentation: 'The hydrogen-atom model that is currently selected in the user interface.',
       phetioFeatured: true,
       phetioValueType: HydrogenAtom.HydrogenAtomIO
     } );
 
     this.hydrogenAtomProperty = new DerivedProperty(
-      [ this.isExperimentProperty, this.predictiveModelProperty ],
-      ( isExperiment, predictiveModel ) => isExperiment ? this.experiment : predictiveModel );
+      [ this.isExperimentProperty, this.atomicModelProperty ],
+      ( isExperiment, atomicModel ) => isExperiment ? this.experiment : atomicModel );
 
     this.isQuantumModelProperty = new DerivedProperty( [ this.hydrogenAtomProperty ],
       hydrogenAtom => ( hydrogenAtom instanceof BohrModel ) );
@@ -185,8 +176,8 @@ export default class MOTHAModel implements TModel {
   public reset(): void {
     this.isExperimentProperty.reset();
     this.experiment.reset();
-    this.predictiveModels.forEach( predictiveModel => predictiveModel.reset() );
-    this.predictiveModelProperty.reset();
+    this.atomicModels.forEach( atomicModel => atomicModel.reset() );
+    this.atomicModelProperty.reset();
     this.lightSource.reset();
     this.spectrometer.reset();
     this.photonGroup.clear();

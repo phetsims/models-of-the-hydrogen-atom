@@ -30,33 +30,33 @@ export default class EnergyLevelsModel extends MOTHAModel {
     const lightSource = new LightSource( zoomedInBox, tandem.createTandem( 'lightSource' ) );
 
     // Group all predictive models under this tandem.
-    const hydrogenAtomsTandem = tandem.createTandem( 'hydrogenAtoms' );
+    const atomicModelsTandem = tandem.createTandem( 'atomicModels' );
 
     const bohrModel = new BohrModel( {
-      tandem: hydrogenAtomsTandem.createTandem( 'bohrModel' )
+      tandem: atomicModelsTandem.createTandem( 'bohrModel' )
     } );
 
     const deBroglieModel = new DeBroglieModel( {
-      tandem: hydrogenAtomsTandem.createTandem( 'deBroglieModel' )
+      tandem: atomicModelsTandem.createTandem( 'deBroglieModel' )
     } );
 
     const schrodingerModel = new SchrodingerModel( lightSource, {
-      tandem: hydrogenAtomsTandem.createTandem( 'schrodingerModel' )
+      tandem: atomicModelsTandem.createTandem( 'schrodingerModel' )
     } );
 
-    // Predictive models supported by this screen, in the order that they will appear in the UI.
+    // Atomic models supported by this screen, in the order that they will appear in the UI.
     // NOTE: The Java version also included an Electron Energy Level diagram for the Classical Solar System model.
     // We decided to omit that model in the HTML5 version, because the idea of quantized energy levels is quantum
     // mechanical, and we see no value in displaying the diagram for any classical system.
-    const predictiveModels = [
+    const atomicModels = [
       bohrModel,
       deBroglieModel,
       schrodingerModel
     ];
-    assert && assert( _.every( predictiveModels, model => model instanceof BohrModel ),
-      'All models in this screen must include the concept of electron energy level.' );
+    assert && assert( _.every( atomicModels, atomicModel => atomicModel instanceof BohrModel ),
+      'All atomic models in this screen must include the concept of electron energy level.' );
 
-    super( zoomedInBox, lightSource, predictiveModels, bohrModel, hydrogenAtomsTandem, tandem );
+    super( zoomedInBox, lightSource, atomicModels, bohrModel, tandem );
 
     this.bohrModel = bohrModel;
     this.deBroglieModel = deBroglieModel;

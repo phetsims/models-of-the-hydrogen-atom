@@ -124,13 +124,13 @@ export default class MOTHAScreenView extends ScreenView {
     const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty,
       options.tandem.createTandem( 'experimentModelSwitch' ) );
 
-    const modelRadioButtonGroup = new ModelRadioButtonGroup( model.predictiveModelProperty, model.predictiveModels, {
+    const atomicModelRadioButtonGroup = new ModelRadioButtonGroup( model.atomicModelProperty, model.atomicModels, {
       radioButtonTextMaxWidth: providedOptions.modelRadioButtonTextMaxWidth,
-      tandem: options.tandem.createTandem( 'modelRadioButtonGroup' )
+      tandem: options.tandem.createTandem( 'atomicModelRadioButtonGroup' )
     } );
 
     const modelVBox = new VBox( {
-      children: [ experimentModelSwitch, modelRadioButtonGroup ],
+      children: [ experimentModelSwitch, atomicModelRadioButtonGroup ],
       align: 'center',
       spacing: 10,
       excludeInvisibleChildrenFromBounds: false
@@ -138,7 +138,7 @@ export default class MOTHAScreenView extends ScreenView {
 
     let modelBox: Node;
     if ( options.hasContinuumBar ) {
-      const continuumBarNode = new ContinuumBarNode( modelRadioButtonGroup.height, options.tandem.createTandem( 'continuumBarNode' ) );
+      const continuumBarNode = new ContinuumBarNode( atomicModelRadioButtonGroup.height, options.tandem.createTandem( 'continuumBarNode' ) );
       modelBox = new HBox( {
         align: 'bottom',
         spacing: 10,

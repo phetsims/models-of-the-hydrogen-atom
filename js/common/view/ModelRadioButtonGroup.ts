@@ -25,8 +25,8 @@ type ModelRadioButtonGroupOptions = SelfOptions & PickRequired<RectangularRadioB
 
 export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<HydrogenAtom> {
 
-  public constructor( predictiveModelProperty: Property<HydrogenAtom>,
-                      predictiveModels: HydrogenAtom[],
+  public constructor( atomicModelProperty: Property<HydrogenAtom>,
+                      atomicModels: HydrogenAtom[],
                       providedOptions: ModelRadioButtonGroupOptions ) {
 
     const options = optionize<ModelRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
@@ -64,33 +64,33 @@ export default class ModelRadioButtonGroup extends RectangularRadioButtonGroup<H
     // To make all icons have the same effective size.
     const iconAlignGroup = new AlignGroup();
 
-    const items = predictiveModels.map( predictiveModel =>
-      createRadioButtonItem( predictiveModel, iconAlignGroup, providedOptions.radioButtonTextMaxWidth ) );
+    const items = atomicModels.map( atomicModel =>
+      createRadioButtonItem( atomicModel, iconAlignGroup, providedOptions.radioButtonTextMaxWidth ) );
 
-    super( predictiveModelProperty, items, options );
+    super( atomicModelProperty, items, options );
   }
 }
 
 /**
  * Creates the item for one radio button.
  */
-function createRadioButtonItem( predictiveModel: HydrogenAtom, iconAlignGroup: AlignGroup, textMaxWidth: number ): RectangularRadioButtonGroupItem<HydrogenAtom> {
+function createRadioButtonItem( atomicModel: HydrogenAtom, iconAlignGroup: AlignGroup, textMaxWidth: number ): RectangularRadioButtonGroupItem<HydrogenAtom> {
 
   return {
-    value: predictiveModel,
+    value: atomicModel,
     createNode: tandem => new HBox( {
       spacing: 10,
       justify: 'left',
       sizable: false,
       children: [
-        iconAlignGroup.createBox( predictiveModel.icon ),
-        new Text( predictiveModel.displayNameProperty, {
+        iconAlignGroup.createBox( atomicModel.icon ),
+        new Text( atomicModel.displayNameProperty, {
           fill: MOTHAColors.invertibleTextFillProperty,
           font: new PhetFont( 16 ),
           maxWidth: textMaxWidth
         } ) ]
     } ),
-    tandemName: `${predictiveModel.tandemNamePrefix}RadioButton`
+    tandemName: `${atomicModel.tandemNamePrefix}RadioButton`
   };
 }
 
