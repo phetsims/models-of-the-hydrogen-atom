@@ -49,6 +49,7 @@ class LampNode extends LaserPointerNode {
 
   public constructor( isOnProperty: Property<boolean>, tandem: Tandem ) {
     super( isOnProperty, {
+      isDisposable: false,
       bodySize: new Dimension2( 88, 64 ),
       nozzleSize: new Dimension2( 18, 50 ),
       buttonOptions: {
