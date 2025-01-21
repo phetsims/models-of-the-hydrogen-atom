@@ -156,8 +156,7 @@ export default class Photon extends PhetioObject {
   }
 
   /**
-   * If the photon collides with a rigid body (like the Billiard Ball atom), make the photon bounce back at a
-   * 'steep but random' angle.
+   * If the photon collides with the atom and is not absorbed, make the photon bounce back at a 'steep but random' angle.
    */
   public bounceBack( atomPosition: Vector2 ): void {
     const sign = ( this.positionProperty.value.x > atomPosition.x ) ? 1 : -1;
