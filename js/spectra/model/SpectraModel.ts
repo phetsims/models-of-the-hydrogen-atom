@@ -21,7 +21,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class SpectraModel extends MOTHAModel {
 
-  // predictive atomic models supported by this screen
+  // Atomic models supported by this screen
   public readonly billiardBallModel: BilliardBallModel;
   public readonly plumPuddingModel: PlumPuddingModel;
   public readonly classicalSolarSystemModel: ClassicalSolarSystemModel;
@@ -35,7 +35,7 @@ export default class SpectraModel extends MOTHAModel {
 
     const lightSource = new LightSource( zoomedInBox, tandem.createTandem( 'lightSource' ) );
 
-    // Group all predictive models under this tandem.
+    // Group all atomic models under this tandem.
     const atomicModelsTandem = tandem.createTandem( 'atomicModels' );
 
     const billiardBallModel = new BilliardBallModel( {
