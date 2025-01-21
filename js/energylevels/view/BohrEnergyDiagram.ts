@@ -61,7 +61,6 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
       this.electronNode.bottom = y;
 
       // Draw squiggle between previous and current electron state.
-      //TODO State Wrapper: I see squiggles in Downstream that do not appear in Upstream because n transitions are randomly selected.
       if ( nOld !== null ) {
         this.setEnergySquiggle( xPrevious, yPrevious, x, y, photonAbsorptionModel.getTransitionWavelength( nOld, nNew ) );
       }

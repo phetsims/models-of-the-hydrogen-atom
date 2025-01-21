@@ -125,6 +125,10 @@ export default class EnergyDiagram extends Node {
   protected setEnergySquiggle( x1: number, y1: number, x2: number, y2: number, wavelength: number ): void {
     this.energySquiggle.update( x1, y1, x2, y2, wavelength );
   }
+
+  protected hideEnergySquiggle(): void {
+    this.energySquiggle.visible = false;
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'EnergyDiagram', EnergyDiagram );
