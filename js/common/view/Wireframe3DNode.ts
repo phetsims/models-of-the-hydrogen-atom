@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * Wireframe3DNode displays a 3D wireframe model. This was Wireframe3DNode.java and Wireframe3D.java in the Java version,

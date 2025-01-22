@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * PolynomialTerm is a minimal/incomplete implementation of a polynomial term, as needed for solving

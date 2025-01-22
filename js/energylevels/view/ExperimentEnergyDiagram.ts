@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * ExperimentEnergyDiagram is the Electron Energy Level diagram for the Experiment model.

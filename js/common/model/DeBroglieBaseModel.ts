@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * DeBroglieBaseModel is the base class for the de Broglie model of the hydrogen atom, a modification of BohrModel.
