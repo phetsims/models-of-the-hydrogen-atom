@@ -1,11 +1,15 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
-//TODO Is the Java version really using step, or just calling exciteAtom?
 /**
  *  MetastableHandler handles a case where the Schrodinger model can get stuck in state (n,l,m) = (2,0,0). This state
  *  is known as a metastable state. The only way to get out of this state is to absorb a photon that 'excites' the
- *  atom (takes the electron to a higher state, a higher value of n). While the light is emitting white light and the
- *  atom is in state (2,0,0), we fire an absorbable photon at the atom's center every MAX_STUCK_TIME milliseconds.
+ *  atom (takes the electron to a higher state, a higher value of n).
+ *
+ *  Automatic excitation occurs when the light is emitting white light and the atom is in state (2,0,0). In this case,
+ *  the step method fires an absorbable photon at the atom's center every MAX_STUCK_TIME ms.
+ *
+ *  Manual excitation occurs when the light is emitting monochromatic light. In this case, the user must manually
+ *  fire an absorbable photon at the atom's center by pressing the 'Excite Atom' button.
  *
  *  Ported from MetastableHandler.java, with many changes.
  *
@@ -41,10 +45,10 @@ export default class MetastableHandler extends PhetioObject {
   // Elapsed time since attempting to excite the atom to a higher state, in seconds.
   private readonly elapsedTimeProperty: Property<number>;
 
-  // Whether the atom in the metastable state (n,l,m) = (2,0,0)
-  private readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
+  // Whether the atom is in the metastable state (n,l,m) = (2,0,0)
+  public readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
 
-  public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>, lightSource: LightSource, tandem: Tandem ) {
+  public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>, lightSource: LightSource, tandem: Tandem ) {
 
     super( {
       tandem: tandem,
@@ -52,11 +56,19 @@ export default class MetastableHandler extends PhetioObject {
       phetioDocumentation: 'Supports transitioning the atom to a higher state when in the metastable state (n,l,m) = (2,0,0).'
     } );
 
-    this.isMetastableStateProperty = isMetastableStateProperty;
+    this.isMetastableStateProperty = new DerivedProperty( [ nlmProperty ],
+      nlm => nlm.equals( MetastableHandler.METASTABLE_STATE ), {
+        tandem: tandem.createTandem( 'isMetastableStateProperty' ),
+        phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).',
+        phetioFeatured: true,
+        phetioValueType: BooleanIO
+      } );
+
     this.lightSource = lightSource;
 
+    // Active when the electron is in the metastable state, and the light source is on and emitting white light.
     this.isActiveProperty = new DerivedProperty(
-      [ isMetastableStateProperty, lightSource.isOnProperty, lightSource.lightModeProperty ],
+      [ this.isMetastableStateProperty, lightSource.isOnProperty, lightSource.lightModeProperty ],
       ( isMetastableState, lightIsOn, lightMode ) => isMetastableState && lightIsOn && lightMode === 'white', {
         tandem: tandem.createTandem( 'isActiveProperty' ),
         phetioDocumentation: 'For internal use only.',
@@ -94,6 +106,7 @@ export default class MetastableHandler extends PhetioObject {
   /**
    * Attempts to excite the atom (take it to a higher state) by telling the light to emit one absorbable photon towards
    * the atom's center. The absorption wavelength that will take the electron to a higher state (n) is chosen at random.
+   * This method is called from step() and from the 'Excite Atom' button listener.
    */
   public exciteAtom(): void {
     assert && assert( this.isMetastableStateProperty.value,

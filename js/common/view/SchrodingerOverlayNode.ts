@@ -33,7 +33,7 @@ export default class SchrodingerOverlayNode extends Node {
 
     // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).
     // Pressing this button fires a photon that transitions the atom to a higher energy level.
-    const exciteAtomButton = new ExciteAtomButton( schrodingerModel.isMetastableStateProperty, lightSource,
+    const exciteAtomButton = new ExciteAtomButton( schrodingerModel.metastableHandler.isMetastableStateProperty, lightSource,
       () => schrodingerModel.excite(), tandem.createTandem( 'exciteAtomButton' ) );
 
     // (n,l,m) = ...

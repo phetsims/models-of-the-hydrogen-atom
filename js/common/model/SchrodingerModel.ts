@@ -38,12 +38,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -68,9 +66,6 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   public readonly nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>;
   private readonly _nlmProperty: Property<SchrodingerQuantumNumbers>;
 
-  // Whether the atom in the metastable state (n,l,m) = (2,0,0)
-  public readonly isMetastableStateProperty: TReadOnlyProperty<boolean>;
-
   public readonly metastableHandler: MetastableHandler;
 
   public constructor( lightSource: LightSource, providedOptions: SchrodingerModelOptions ) {
@@ -89,7 +84,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     //TODO Should nlmProperty be a Property of SchrodingerElectron?
     this._nlmProperty = new Property( new SchrodingerQuantumNumbers( this.electron.nProperty.value, 0, 0 ), {
       phetioValueType: SchrodingerQuantumNumbers.SchrodingerQuantumNumbersIO,
-      tandem: this.electron.tandem.createTandem( 'nlmProperty' ), //TODO create SchrodingerElectron and add nlmProperty?
+      tandem: this.electron.tandem.createTandem( 'nlmProperty' ),
       phetioDocumentation: 'The quantum numbers (n,l,m) that specify a wavefunction for the electron.',
       phetioFeatured: true,
       phetioReadOnly: true
@@ -99,21 +94,14 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
       phet.log( `SchrodingerModel: (n,l,m) = (${nlmOld.n},${nlmOld.l},${nlmOld.m}) -> (${nlmNew.n},${nlmNew.l},${nlmNew.m})` ) );
 
     // When n changes, compute the next state.
+    //TODO It would be preferable to derive nProperty from nlmProperty.
     this.electron.nProperty.lazyLink( n => {
       if ( !isSettingPhetioStateProperty.value ) {
         this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
       }
     } );
 
-    this.isMetastableStateProperty = new DerivedProperty( [ this.nlmProperty ],
-      nlm => nlm.equals( MetastableHandler.METASTABLE_STATE ), {
-        tandem: this.electron.tandem.createTandem( 'isMetastableStateProperty' ), //TODO create SchrodingerElectron and add isMetastableStateProperty?
-        phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).',
-        phetioFeatured: true,
-        phetioValueType: BooleanIO
-      } );
-
-    this.metastableHandler = new MetastableHandler( this.isMetastableStateProperty, lightSource,
+    this.metastableHandler = new MetastableHandler( this.nlmProperty, lightSource,
       options.tandem.createTandem( 'metastableHandler' ) );
   }
 
@@ -146,7 +134,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
    */
   protected override absorptionIsCertain(): boolean {
     //TODO Java version was if ( n === 2 && l === 0 ), ignoring m.
-    if ( this.isMetastableStateProperty.value ) {
+    if ( this.metastableHandler.isMetastableStateProperty.value ) {
       return true;
     }
     return super.absorptionIsCertain();
@@ -202,7 +190,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
    * directly at the center of the atom. This moves the atom to a higher energy level.
    */
   public excite(): void {
-    assert && assert( this.isMetastableStateProperty.value, 'excite should only be called when atom is in the metastable state.' );
+    assert && assert( this.metastableHandler.isMetastableStateProperty.value, 'excite should only be called when atom is in the metastable state.' );
     this.metastableHandler.exciteAtom();
   }
 
