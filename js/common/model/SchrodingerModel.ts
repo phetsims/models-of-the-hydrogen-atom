@@ -107,7 +107,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
     this.isMetastableStateProperty = new DerivedProperty( [ this.nlmProperty ],
       nlm => nlm.equals( MetastableHandler.METASTABLE_STATE ), {
-        tandem: this.electron.tandem.createTandem( 'isMetastableStateProperty' ), //TODO create SchrodingerElectron and add nlmProperty?
+        tandem: this.electron.tandem.createTandem( 'isMetastableStateProperty' ), //TODO create SchrodingerElectron and add isMetastableStateProperty?
         phetioDocumentation: 'True when the atom is in the metastable state (n,l,m) = (2,0,0).',
         phetioFeatured: true,
         phetioValueType: BooleanIO
