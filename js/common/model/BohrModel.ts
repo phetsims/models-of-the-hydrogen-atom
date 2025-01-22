@@ -1,6 +1,5 @@
 // Copyright 2019-2025, University of Colorado Boulder
 
-//TODO Collision detection is done twice, calling this.collides in both absorbPhoton and attemptStimulatedEmission.
 /**
  * BohrModel is a predictive model of the hydrogen atom.
  *
@@ -116,7 +115,9 @@ export default class BohrModel extends HydrogenAtom {
     this.electron.angleProperty.value = this.calculateNewElectronDirection( dt );
 
     // Attempt to emit a photon.
-    this.attemptSpontaneousEmission();
+    if ( this.electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE_BEFORE_ABSORPTION ) {
+      this.attemptSpontaneousEmission();
+    }
   }
 
   /**
@@ -133,8 +134,10 @@ export default class BohrModel extends HydrogenAtom {
    * Photon may be absorbed or stimulate emission.
    */
   public override processPhoton( photon: Photon ): void {
-    if ( !this.absorbPhoton( photon ) ) {
-      this.attemptStimulatedEmission( photon );
+    if ( this.collides( photon ) ) {
+      if ( !this.absorbPhoton( photon ) ) {
+        this.attemptStimulatedEmission( photon );
+      }
     }
   }
 
@@ -178,8 +181,7 @@ export default class BohrModel extends HydrogenAtom {
 
     if ( photon.wasEmittedByAtom ||
          nCurrent === MOTHAConstants.MAX_STATE ||
-         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_ABSORPTION ||
-         !this.collides( photon ) ) {
+         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_ABSORPTION ) {
       return false;
     }
 
@@ -230,8 +232,7 @@ export default class BohrModel extends HydrogenAtom {
 
     if ( photon.wasEmittedByAtom ||
          this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION ||
-         nCurrent === MOTHAConstants.GROUND_STATE ||
-         !this.collides( photon ) ) {
+         nCurrent === MOTHAConstants.GROUND_STATE ) {
       return;
     }
 
