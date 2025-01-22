@@ -1,5 +1,6 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
+//TODO Add a query parameter that makes it easy to get into the metastable state.
 /**
  *  MetastableHandler handles a case where the Schrodinger model can get stuck in state (n,l,m) = (2,0,0). This state
  *  is known as a metastable state. The only way to get out of this state is to absorb a photon that 'excites' the
@@ -117,6 +118,7 @@ export default class MetastableHandler extends PhetioObject {
     const wavelength = wavelengths[ dotRandom.nextInt( wavelengths.length ) ];
 
     // Tell the light to emit a photon, and direct it towards the center of the atom.
+    //TODO Add a unique debugHaloColor for this photon, so that it's easy to see.
     this.lightSource.emitPhotonAtBottomCenter( wavelength );
 
     phet.log && phet.log( `MetastableHandler.exciteAtom ${MOTHASymbols.lambda}=${wavelength}` );
