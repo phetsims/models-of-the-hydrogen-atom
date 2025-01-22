@@ -1,6 +1,6 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
-//TODO What happens when the Experiment gets into the metastable state? There is no 'Excite Atom' button here.
+//TODO What happens when the Experiment gets into the metastable state? Maybe this is OK? There is no 'Excite Atom' button here.
 /**
  * ExperimentNode is shown when the AB switch is set to 'Experiment'.  It displays a '?' that covers the space
  * where the hydrogen atom would be shown.
