@@ -24,7 +24,7 @@ import chooseWeightedValue, { WeightedValue } from './chooseWeightedValue.js';
  * For example, TRANSITION_STRENGTHS[5][0] is the transition strength from n=6 to n=1.
  */
 const TRANSITION_STRENGTHS = [
-  [], // There are no values lower than n = 1.
+  [], // There are no states lower than n = 1.
   [ 12.53 ], // 2 -> 1
   [ 3.34, 0.87 ], // 3 -> 1, 3 -> 2
   [ 1.36, 0.24, 0.07 ], // 4 -> 1, 4 -> 2, 4 -> 3
@@ -51,16 +51,17 @@ const STATE_SCHEMA = {
 export default class SchrodingerQuantumNumbers {
 
   // Principal quantum number:
-  // * n = [1,6] integer
+  // * n is an integer in the range [1,6].
   // * Indicates the energy of the electron and its average relative distance from the nucleus.
   // * As n increases, so does the average distance of the electron from the nucleus.
   // * All wavefunctions that have the same value of n are said to constitute a principal shell.
   // * The principal quantum number n corresponds to the n used by Bohr to describe electron orbits
-  //   and by Rydberg to describe atomic energy levels
+  //   and by Rydberg to describe atomic energy levels.
   public readonly n: number;
 
   // Azimuthal quantum number:
-  // * l = [0,n-1] integer
+  // * l is an integer in the range [0,n-1].
+  // * When a state transition occurs, abs(l-l') must be 1.
   // * Describes the shape of the region of space occupied by an electron.
   // * All wavefunctions that have the same values of both n and l form a subshell.
   // * The regions of space occupied by electrons in the same subshell usually have the same shape,
@@ -68,13 +69,13 @@ export default class SchrodingerQuantumNumbers {
   public readonly l: number;
 
   // Magnetic quantum number:
-  // * m = [-l,l] integer
+  // * m is an integer in the range [-l,l].
+  // * When a state transition occurs, m-m' must be -1, 0, or 1.
   // * Describes the orientation of the region of space occupied by an electron with respect to an applied magnetic field.
   public readonly m: number;
 
   public constructor( n: number, l: number, m: number ) {
-    //TODO Address and enable this assertion:
-    // assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid wavefunction: (${n},${l},${m}` );
+    assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid wavefunction: (${n},${l},${m}` );
     this.n = n;
     this.l = l;
     this.m = m;
@@ -100,6 +101,7 @@ export default class SchrodingerQuantumNumbers {
    * Randomly chooses the values for l and m, according to state transition rules.
    */
   public getNextState( nNext: number ): SchrodingerQuantumNumbers {
+    assert && assert( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext <= MOTHAConstants.MAX_STATE, `invalid nNext=${nNext}` );
 
     // Compute the next wavefunction.
     const lNext = choose_l( nNext, this.l );
@@ -167,14 +169,17 @@ export default class SchrodingerQuantumNumbers {
  * @returns n, null if there is no valid transition
  */
 function chooseLower_n( n: number, l: number ): number | null {
+  assert && assert( Number.isInteger( n ) && n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE, `invalid n=${n}` );
+  assert && assert( Number.isInteger( l ) && l >= 0 && l <= n - 1, `invalid l=${l}, n=${n}` );
 
-  let nNew: number | null = null;
+  let nNext: number | null = null;
 
-  if ( n < 2 ) {
-    // no state is lower than (1,0,0)
+  if ( n === 1 ) {
+    // There is no state that is lower than (1,0,0)
     return null;
   }
   else if ( n === 2 ) {
+    //TODO Why does n=2 need to be a special case?
     if ( l === 0 ) {
 
       // transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
@@ -183,7 +188,7 @@ function chooseLower_n( n: number, l: number ): number | null {
     else {
 
       // the only transition from (2,1,?) is (1,0,0)
-      nNew = 1;
+      nNext = 1;
     }
   }
   else if ( n > 2 ) {
@@ -218,101 +223,101 @@ function chooseLower_n( n: number, l: number ): number | null {
     if ( value === null ) {
       return null;
     }
-    nNew = value;
+    nNext = value;
   }
 
-  return nNew;
+  assert && assert( nNext === null || ( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext < n ), `invalid nNext=${nNext}` );
+  return nNext;
 }
 
 /**
- * Chooses a value for l, based on the current values of n and l.
- * The new value l' must be in [0,...n-1], and l-l' must be in [-1,1].
+ * Chooses a new value for l, based on the next value of n and current value of l.
+ * The new value l' must be in the range [0,n-1], and abs(l-l') must be 1.
  */
-function choose_l( n: number, l: number ): number {
-  assert && assert( Number.isInteger( n ), `invalid n: ${n}` );
-  assert && assert( Number.isInteger( l ), `invalid l: ${l}` );
+function choose_l( nNext: number, l: number ): number {
+  assert && assert( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext <= MOTHAConstants.MAX_STATE, `invalid nNext=${nNext}` );
+  assert && assert( Number.isInteger( l ), `invalid l=${l}` );
 
-  let lNew;
+  let lNext;
 
   if ( l === 0 ) {
-    lNew = 1;
+    lNext = 1;
   }
-  else if ( l === n ) {
-    lNew = l - 1;
+  else if ( l === nNext ) {
+    lNext = l - 1;
   }
-  else if ( l === n - 1 ) {
-    lNew = l - 1;
+  else if ( l === nNext - 1 ) {
+    lNext = l - 1;
   }
   else {
     if ( dotRandom.nextBoolean() ) {
-      lNew = l + 1;
+      lNext = l + 1;
     }
     else {
-      lNew = l - 1;
+      lNext = l - 1;
     }
   }
 
-  assert && assert( Number.isInteger( lNew ), `lNew must be an integer: ${lNew}` );
-  //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59 Enable and address this assert:
-  // assert && assert( lNew >= 0 && lNew <= n - 1, `lNew violates transition rules: n=${n} l=${l} lNew=${lNew}` );
-  assert && assert( Math.abs( lNew - l ) === 1, `lNew violates transition rules: l=${l} lNew=${lNew}` );
-  return lNew;
+  assert && assert( Number.isInteger( lNext ), `lNext must be an integer: lNext=${lNext}` );
+  assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext violates transition rules: nNext=${nNext} l=${l} lNext=${lNext}` );
+  assert && assert( Math.abs( lNext - l ) === 1, `lNext violates transition rules: l=${l} lNext=${lNext}` );
+  return lNext;
 }
 
 /**
- * Chooses a value for m, based on the current values of l and m.
- * The new value m' must be in [-l,...,+l], and m-m' must be in [-1,0,1].
+ * Chooses a value for m, based on the next value of l and the current value of m.
+ * The new value m' must be in the range [-l,l], and m-m' must be in the set [-1,0,1].
  */
-function choose_m( l: number, m: number ): number {
-  assert && assert( Number.isInteger( l ), `invalid l: ${l}` );
-  assert && assert( Number.isInteger( m ), `invalid m: ${m}` );
+function choose_m( lNext: number, m: number ): number {
+  assert && assert( Number.isInteger( lNext ) && lNext >= 0 && lNext <= MOTHAConstants.MAX_STATE - 1, `invalid lNext=${lNext}` );
+  assert && assert( Number.isInteger( m ), `invalid m=${m}` );
 
-  let mNew;
+  let mNext;
 
-  if ( l === 0 ) {
-    mNew = 0;
+  if ( lNext === 0 ) {
+    mNext = 0;
   }
-  else if ( m > l ) {
-    mNew = l;
+  else if ( m > lNext ) {
+    mNext = lNext;
   }
-  else if ( m < -l ) {
-    mNew = -l;
+  else if ( m < -lNext ) {
+    mNext = -lNext;
   }
-  else if ( m === l ) {
+  else if ( m === lNext ) {
     const a = dotRandom.nextInt( 2 );
     if ( a === 0 ) {
-      mNew = m;
+      mNext = m;
     }
     else {
-      mNew = m - 1;
+      mNext = m - 1;
     }
   }
-  else if ( m === -l ) {
+  else if ( m === -lNext ) {
     const a = dotRandom.nextInt( 2 );
     if ( a === 0 ) {
-      mNew = m;
+      mNext = m;
     }
     else {
-      mNew = m + 1;
+      mNext = m + 1;
     }
   }
   else {
     const a = dotRandom.nextInt( 3 );
     if ( a === 0 ) {
-      mNew = m + 1;
+      mNext = m + 1;
     }
     else if ( a === 1 ) {
-      mNew = m - 1;
+      mNext = m - 1;
     }
     else {
-      mNew = m;
+      mNext = m;
     }
   }
 
-  assert && assert( Number.isInteger( mNew ), `mNew must be an integer: ${mNew}` );
-  assert && assert( mNew >= -l && mNew <= l, `mNew must be in the range [-l,l]: ${mNew}` );
-  assert && assert( [ -1, 0, 1 ].includes( mNew - m ), `mNew - m must be in the set [-1,0,1]: ${m} ${mNew}` );
-  return mNew;
+  assert && assert( Number.isInteger( mNext ), `mNext must be an integer: mNew=${mNext}` );
+  assert && assert( mNext >= -lNext && mNext <= lNext, `mNext must be in the range [-l,l]: mNext=${mNext}, lNext=${lNext}` );
+  assert && assert( [ -1, 0, 1 ].includes( mNext - m ), `mNext - m must be in the set [-1,0,1]: m=${m} mNext=${mNext}` );
+  return mNext;
 }
 
 /**
