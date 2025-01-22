@@ -117,15 +117,14 @@ export default class MetastableHandler extends PhetioObject {
     // Randomly choose an absorption wavelength. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/55.
     const wavelengths = photonAbsorptionModel.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );
     const wavelength = wavelengths[ dotRandom.nextInt( wavelengths.length ) ];
-    phet.log && phet.log( `Exciting atom with photon wavelength=${wavelength}`, {
-      color: 'blue'
-    } );
 
     // Tell the light to emit a photon, and direct it towards the center of the atom.
     // Running with ?showHalos, this photon will have a halo that makes it easier to see.
     this.lightSource.emitPhotonAtBottomCenter( wavelength, MOTHAColors.EXCITE_METASTABLE_HALO_COLOR );
 
-    phet.log && phet.log( `MetastableHandler.exciteAtom ${MOTHASymbols.lambda}=${wavelength}` );
+    phet.log && phet.log( `MetastableHandler: exciteAtom ${MOTHASymbols.lambda}=${wavelength}`, {
+      color: 'blue'
+    } );
   }
 }
 
