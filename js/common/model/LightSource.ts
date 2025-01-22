@@ -170,7 +170,6 @@ export default class LightSource extends PhetioObject {
     this.emitPhotonAtPosition( this.getNextPhotonWavelength(), this.getNextPhotonPosition() );
   }
 
-  //TODO Delete if not used.
   /**
    * Emits a photon at the bottom-center of the zoomed-in box. This is used when we want to ensure that a
    * photon hits the atom, which is centered in the zoomed-in box.
