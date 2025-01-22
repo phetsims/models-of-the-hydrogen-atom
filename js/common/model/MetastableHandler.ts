@@ -31,6 +31,7 @@ import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java value was 100 ms, why did we change it?
 
@@ -118,8 +119,8 @@ export default class MetastableHandler extends PhetioObject {
     const wavelength = wavelengths[ dotRandom.nextInt( wavelengths.length ) ];
 
     // Tell the light to emit a photon, and direct it towards the center of the atom.
-    //TODO Add a unique debugHaloColor for this photon, so that it's easy to see.
-    this.lightSource.emitPhotonAtBottomCenter( wavelength );
+    // Running with ?showHalos, this photon will have a halo that makes it easier to see.
+    this.lightSource.emitPhotonAtBottomCenter( wavelength, MOTHAColors.EXCITE_METASTABLE_HALO_COLOR );
 
     phet.log && phet.log( `MetastableHandler.exciteAtom ${MOTHASymbols.lambda}=${wavelength}` );
   }

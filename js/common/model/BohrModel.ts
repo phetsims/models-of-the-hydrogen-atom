@@ -42,7 +42,7 @@ import LightSource from './LightSource.js';
 import Photon from './Photon.js';
 import Proton from './Proton.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
-import { Color } from '../../../../scenery/js/imports.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -55,9 +55,6 @@ const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 
 // How close an emitted photon is placed to the photon that causes stimulated emission.
 const STIMULATED_EMISSION_X_OFFSET = MOTHAConstants.PHOTON_RADIUS;
-
-const STIMULATED_EMISSION_HALO_COLOR = new Color( 75, 255, 7 );
-const SPONTANEOUS_EMISSION_HALO_COLOR = Color.RED;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -253,7 +250,7 @@ export default class BohrModel extends HydrogenAtom {
       photon.wavelength,
       photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
       photon.direction,
-      STIMULATED_EMISSION_HALO_COLOR
+      MOTHAColors.STIMULATED_EMISSION_HALO_COLOR
     );
     phet.log && phet.log( `Emit (Stimulated): ${MOTHASymbols.lambda}=${photon.wavelength}, n = ${nCurrent} -> ${nNew}` );
 
@@ -313,7 +310,7 @@ export default class BohrModel extends HydrogenAtom {
     const wavelength = photonAbsorptionModel.getEmissionWavelength( nCurrent, nNew );
     const position = this.getSpontaneousEmissionPosition();
     const direction = getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value );
-    this.photonEmittedEmitter.emit( wavelength, position, direction, SPONTANEOUS_EMISSION_HALO_COLOR );
+    this.photonEmittedEmitter.emit( wavelength, position, direction, MOTHAColors.SPONTANEOUS_EMISSION_HALO_COLOR );
     phet.log && phet.log( `Emit (Spontaneous): ${MOTHASymbols.lambda}=${wavelength}, n = ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.

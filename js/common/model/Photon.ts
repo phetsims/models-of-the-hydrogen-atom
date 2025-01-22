@@ -61,7 +61,7 @@ export default class Photon extends PhetioObject {
   public readonly wasEmittedByAtom: boolean;
 
   // Halo color around the photon, used for debugging to make it easier to see specific photons.
-  // For example, running with ?debugEmission puts a red halo around all photons that are emitted by the atom.
+  // Halos are visible when running with ?showHalos.
   public readonly debugHaloColor: Color | null;
 
   // Position of the photon, publicly readonly, privately mutable.

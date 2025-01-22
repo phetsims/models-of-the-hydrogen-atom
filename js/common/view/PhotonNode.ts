@@ -66,7 +66,7 @@ export default class PhotonNode extends Node {
     super( options );
 
     // Draw a halo around specific photons, to make them easier to see.
-    if ( MOTHAQueryParameters.debugEmission && photon.debugHaloColor ) {
+    if ( MOTHAQueryParameters.showHalos && photon.debugHaloColor ) {
       this.addChild( new Circle( {
         radius: 1.25 * haloRadius,
         stroke: photon.debugHaloColor,

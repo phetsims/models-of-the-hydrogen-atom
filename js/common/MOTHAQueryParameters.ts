@@ -23,8 +23,9 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // Internal query parameters
   //----------------------------------------------------------------------------------------------------------------
 
-  // Draws a halo around photons that emitted by the hydrogen atom, to make them easier to see.
-  debugEmission: {
+  // Draws a halo around special photons, to make them easier to see. This includes photons that are emitted by
+  // the atom, and photons that are used to excite the Schrodinger atom out of the metastable state (2,0,0).
+  showHalos: {
     type: 'flag'
   },
 

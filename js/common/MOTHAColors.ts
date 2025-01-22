@@ -304,7 +304,12 @@ const MOTHAColors = {
   // Sparkle in the center of photons
   VISIBLE_SPARKLE_COLOR: 'rgba( 255, 255, 255, 0.4 )',
   UV_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 400 ),
-  IR_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 )
+  IR_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 ),
+
+  // Holo colors for photons, for debugging with ?showHalos
+  SPONTANEOUS_EMISSION_HALO_COLOR: Color.RED,
+  STIMULATED_EMISSION_HALO_COLOR: Color.GREEN,
+  EXCITE_METASTABLE_HALO_COLOR: Color.BLUE
 };
 
 modelsOfTheHydrogenAtom.register( 'MOTHAColors', MOTHAColors );

@@ -59,7 +59,7 @@ export default class LightSource extends PhetioObject {
   public readonly colorProperty: TReadOnlyProperty<Color | string>;
 
   // notifies that a photon was emitted
-  public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number ]>;
+  public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color | null ]>;
 
   // time between creation of photons
   private readonly dtPerPhotonCreated: number;
@@ -118,11 +118,12 @@ export default class LightSource extends PhetioObject {
         phetioValueType: Color.ColorIO
       } );
 
-    this.photonEmittedEmitter = new Emitter<[ number, Vector2, number ]>( {
+    this.photonEmittedEmitter = new Emitter<[ number, Vector2, number, Color | null ]>( {
       parameters: [
         { name: 'wavelength', valueType: 'number' },
         { name: 'position', valueType: Vector2 },
-        { name: 'direction', valueType: 'number' }
+        { name: 'direction', valueType: 'number' },
+        { name: 'debugHaloColor', valueType: [ Color, null ] }
       ]
     } );
 
@@ -167,22 +168,22 @@ export default class LightSource extends PhetioObject {
    * Emits a photon at a random location along the bottom edge of the zoomed-in box.
    */
   private emitPhoton(): void {
-    this.emitPhotonAtPosition( this.getNextPhotonWavelength(), this.getNextPhotonPosition() );
+    this.emitPhotonAtPosition( this.getNextPhotonWavelength(), this.getNextPhotonPosition(), null );
   }
 
   /**
    * Emits a photon at the bottom-center of the zoomed-in box. This is used when we want to ensure that a
    * photon hits the atom, which is centered in the zoomed-in box.
    */
-  public emitPhotonAtBottomCenter( wavelength: number ): void {
-    this.emitPhotonAtPosition( wavelength, new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ) );
+  public emitPhotonAtBottomCenter( wavelength: number, debugHaloColor: Color ): void {
+    this.emitPhotonAtPosition( wavelength, new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ), debugHaloColor );
   }
 
   /**
    * Emits a photon with the specified wavelength and position.
    */
-  private emitPhotonAtPosition( wavelength: number, position: Vector2 ): void {
-    this.photonEmittedEmitter.emit( wavelength, position, LightSource.DIRECTION );
+  private emitPhotonAtPosition( wavelength: number, position: Vector2, debugHaloColor: Color | null ): void {
+    this.photonEmittedEmitter.emit( wavelength, position, LightSource.DIRECTION, debugHaloColor );
   }
 
   /**

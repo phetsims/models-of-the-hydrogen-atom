@@ -120,8 +120,8 @@ export default class MOTHAModel implements TModel {
 
     this.lightSource = lightSource;
 
-    this.lightSource.photonEmittedEmitter.addListener( ( wavelength: number, position: Vector2, direction: number ) =>
-      this.photonGroup.emitPhotonFromLight( wavelength, position, direction ) );
+    this.lightSource.photonEmittedEmitter.addListener( ( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color | null ) =>
+      this.photonGroup.emitPhotonFromLight( wavelength, position, direction, debugHaloColor ) );
 
     this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, tandem.createTandem( 'spectrometer' ) );
 

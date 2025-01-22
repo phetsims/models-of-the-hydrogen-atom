@@ -59,14 +59,14 @@ export default class PhotonGroup extends PhetioGroup<Photon, CreateElementArgume
   /**
    * Emits a photon from the light source.
    */
-  public emitPhotonFromLight( wavelength: number, position: Vector2, direction: number ): void {
+  public emitPhotonFromLight( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color | null ): void {
     this.createNextElement( {
       wavelength: wavelength,
       position: position,
       direction: direction,
       wasEmittedByAtom: false,
       hasCollidedWithAtom: false,
-      debugHaloColor: null
+      debugHaloColor: debugHaloColor
     } );
   }
 
