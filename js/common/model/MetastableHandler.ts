@@ -27,7 +27,7 @@ import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
-const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java values was 100 (ms?)
+const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java value was 100 ms, why did we change it?
 
 export default class MetastableHandler extends PhetioObject {
 
