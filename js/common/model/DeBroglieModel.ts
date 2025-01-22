@@ -111,7 +111,6 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
     const distance = photonOffset.distanceXY( orbitX, orbitY );
 
     // how close the photon's center must be to a point on the electron's orbit
-    //TODO Why is getClosenessForCollision used for '3D Height' when it's a function of BRIGHTNESS_RING_THICKNESS?
     const closeness = this.getClosenessForCollision( photon );
 
     return ( distance <= closeness );

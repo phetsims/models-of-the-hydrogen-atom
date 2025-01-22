@@ -21,6 +21,9 @@ import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import { DeBroglieModelOptions } from './DeBroglieModel.js';
 import Photon from './Photon.js';
 
+// See getClosenessForCollision
+const COLLISION_THRESHOLD = 8;
+
 type SelfOptions = EmptySelfOptions;
 
 export type DeBroglieBaseModelOptions = SelfOptions & BohrModelOptions;
@@ -79,7 +82,6 @@ export default class DeBroglieBaseModel extends BohrModel {
     const photonRadius = Math.sqrt( ( photonOffset.x * photonOffset.x ) + ( photonOffset.y * photonOffset.y ) );
     const orbitRadius = BohrModel.getElectronOrbitRadius( this.electron.nProperty.value );
 
-    //TODO Why is getClosenessForCollision used for 'radialDistance' when it's a function of BRIGHTNESS_RING_THICKNESS?
     return ( Math.abs( photonRadius - orbitRadius ) <= this.getClosenessForCollision( photon ) );
   }
 
@@ -90,12 +92,13 @@ export default class DeBroglieBaseModel extends BohrModel {
     return photon.positionProperty.value.minus( this.position );
   }
 
-  //TODO This is used for all de Broglie views. Should '+ DeBroglieBaseModel.BRIGHTNESS_RING_THICKNESS' be removed here?
   /**
    * How close the photon's center must be to a point on the electron's orbit in order for a collision to occur.
+   * Because the electron is represented as a wave, we add a threshold here so that there is a collision when the
+   * photon is "sufficiently close" to the wave.
    */
   protected getClosenessForCollision( photon: Photon ): number {
-    return ( photon.radius + this.electron.radius + DeBroglieBaseModel.BRIGHTNESS_RING_THICKNESS );
+    return ( photon.radius + COLLISION_THRESHOLD );
   }
 }
 
