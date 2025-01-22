@@ -1,6 +1,6 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
-//TODO Since this inherits from Schrodinger, it gets a MetastableHandler, and will automatically excite the atom when the light source is white light. Is that OK? Is that what Java did?
+//TODO As in the Java version, since Experiment extends SchrodingerModel, it gets a MetastableHandler, and will automatically excite the atom when the light source is white light. Is that OK?
 /**
  * Experiment is the model when we are in "Experiment" mode. It is identical to the Schrodinger model.
  *
