@@ -338,7 +338,7 @@ export default class BohrModel extends HydrogenAtom {
       return null;
     }
     else {
-      return dotRandom.nextIntBetween( MOTHAConstants.GROUND_STATE, n - MOTHAConstants.GROUND_STATE );
+      return dotRandom.nextIntBetween( MOTHAConstants.GROUND_STATE, n - 1 );
     }
   }
 
