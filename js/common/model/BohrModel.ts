@@ -1,7 +1,6 @@
 // Copyright 2019-2025, University of Colorado Boulder
 
 //TODO Collision detection is done twice, calling this.collides in both absorbPhoton and attemptStimulatedEmission.
-//TODO this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE is checked 3x: absorbPhoton, attemptStimulatedEmission, and attemptSpontaneousEmission.
 /**
  * BohrModel is a predictive model of the hydrogen atom.
  *
