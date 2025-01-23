@@ -86,6 +86,27 @@ export default class SchrodingerQuantumNumbers {
   }
 
   /**
+   * Gets the next state for a new value of n.
+   * Randomly chooses the values for l and m, according to state transition rules.
+   */
+  public getNextState( nNext: number ): SchrodingerQuantumNumbers {
+    assert && assert( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext <= MOTHAConstants.MAX_STATE, `invalid nNext=${nNext}` );
+
+    const lNext = this.choose_l( nNext );
+    const mNext = this.choose_m( nNext, lNext );
+    let nlmNext = new SchrodingerQuantumNumbers( nNext, lNext, mNext );
+
+    // Verify that no transition rules have been broken.
+    const valid = isaValidTransition( this, nlmNext );
+    assert && assert( valid, `Buggy transition rules resulted in (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},${mNext})` );
+    if ( !valid ) {
+      nlmNext = new SchrodingerQuantumNumbers( 1, 0, 0 ); // Fallback, if running without assertions.
+    }
+
+    return nlmNext;
+  }
+
+  /**
    * Chooses a lower value for n, based on the current values of n and l.
    * The possible values of n are limited by the current value of l, since abs(l-l') must be 1.
    * The probability of each possible n transition is determined by its transition strength.
@@ -93,29 +114,149 @@ export default class SchrodingerQuantumNumbers {
    * @returns n, null if there is no valid transition
    */
   public chooseLower_n(): number | null {
-    return chooseLower_n( this.n, this.l );
+
+    const n = this.n;
+    const l = this.l;
+    let nNext: number | null = null;
+
+    if ( n === 1 ) {
+      return null; // There is no state that is lower than (1,0,0)
+    }
+    else if ( n === 2 ) {
+      if ( l === 0 ) {
+        return null; // Transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule.
+      }
+      else {
+        assert && assert( l === 1, `unexpected value l=${l}` );
+        nNext = 1; // The only transition from (2,1,?) is (1,0,0)
+      }
+    }
+    else if ( n > 2 ) {
+
+      // Determine the possible range of n.
+      const nMax = n - 1;
+      let nMin = Math.max( l, 1 );
+      if ( l === 0 ) {
+        nMin = 2; // Transition from (n,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
+      }
+
+      // Get the strengths for each possible transition.
+      const numberOfEntries = nMax - nMin + 1;
+      const weightedValues: WeightedValue[] = [];
+      let strengthSum = 0;
+      for ( let i = 0; i < numberOfEntries; i++ ) {
+        const nValue = nMin + i;
+        const transitionStrength = TRANSITION_STRENGTHS[ n - 1 ][ nValue - 1 ];
+        weightedValues.push( { value: nValue, weight: transitionStrength } );
+        strengthSum += transitionStrength;
+      }
+
+      // All transitions had zero strength, so none are possible.
+      if ( strengthSum === 0 ) {
+        return null;
+      }
+
+      // Choose a transition.
+      const value = chooseWeightedValue( weightedValues );
+      if ( value === null ) {
+        return null;
+      }
+      nNext = value;
+    }
+
+    assert && assert( nNext === null || ( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext < n ),
+      `invalid nNext: (${this.n},${this.l},${this.m}) -> (${nNext},?,?)` );
+    return nNext;
   }
 
   /**
-   * Gets the next state for a new value of n.
-   * Randomly chooses the values for l and m, according to state transition rules.
+   * Chooses a new value for l, based on the next value of n and current value of l.
+   * The new value l' must be in the range [0,n-1], and abs(l-l') must be 1.
    */
-  public getNextState( nNext: number ): SchrodingerQuantumNumbers {
+  private choose_l( nNext: number ): number {
     assert && assert( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext <= MOTHAConstants.MAX_STATE, `invalid nNext=${nNext}` );
 
-    // Compute the next wavefunction.
-    const lNext = choose_l( nNext, this.l );
-    const mNext = choose_m( lNext, this.m );
-    let fNext = new SchrodingerQuantumNumbers( nNext, lNext, mNext );
+    const l = this.l;
+    let lNext;
 
-    // Verify that no transition rules have been broken.
-    const valid = isaValidTransition( this, fNext );
-    assert && assert( valid, `Buggy transition rules resulted in (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},${mNext})` );
-    if ( !valid ) {
-      fNext = new SchrodingerQuantumNumbers( 1, 0, 0 ); // Fallback, if running without assertions.
+    if ( l === 0 ) {
+      lNext = 1;
+    }
+    else if ( l === nNext ) {
+      lNext = l - 1;
+    }
+    else if ( l === nNext - 1 ) {
+      lNext = l - 1;
+    }
+    else {
+      if ( dotRandom.nextBoolean() ) {
+        lNext = l + 1;
+      }
+      else {
+        lNext = l - 1;
+      }
     }
 
-    return fNext;
+    assert && assert( Number.isInteger( lNext ), `lNext must be an integer: lNext=${lNext}` );
+    assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext must be in the range [0,nNext-1]: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},?)` );
+    assert && assert( Math.abs( l - lNext ) === 1, `(l - lNext) must be 1 or -1: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},?)` );
+    return lNext;
+  }
+
+  /**
+   * Chooses a value for m, based on the next value of l and the current value of m.
+   * The new value m' must be in the range [-l,l], and m-m' must be in the set [-1,0,1].
+   */
+  private choose_m( nNext: number, lNext: number ): number {
+    assert && assert( Number.isInteger( lNext ) && lNext >= 0 && lNext <= MOTHAConstants.MAX_STATE - 1, `invalid lNext=${lNext}` );
+
+    const m = this.m;
+    let mNext;
+
+    if ( lNext === 0 ) {
+      mNext = 0;
+    }
+    else if ( m > lNext ) {
+      mNext = lNext;
+    }
+    else if ( m < -lNext ) {
+      mNext = -lNext;
+    }
+    else if ( m === lNext ) {
+      const a = dotRandom.nextInt( 2 );
+      if ( a === 0 ) {
+        mNext = m;
+      }
+      else {
+        mNext = m - 1;
+      }
+    }
+    else if ( m === -lNext ) {
+      const a = dotRandom.nextInt( 2 );
+      if ( a === 0 ) {
+        mNext = m;
+      }
+      else {
+        mNext = m + 1;
+      }
+    }
+    else {
+      const a = dotRandom.nextInt( 3 );
+      if ( a === 0 ) {
+        mNext = m + 1;
+      }
+      else if ( a === 1 ) {
+        mNext = m - 1;
+      }
+      else {
+        mNext = m;
+      }
+    }
+
+    assert && assert( Number.isInteger( mNext ), `mNext must be an integer: mNew=${mNext}` );
+    assert && assert( mNext >= -lNext && mNext <= lNext, `mNext must be in the range [-l,l]: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},${mNext}` );
+    assert && assert( [ -1, 0, 1 ].includes( m - mNext ), `(m - mNext) must be -1, 0, or 1: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},${mNext}` );
+    return mNext;
   }
 
   /**
@@ -162,162 +303,10 @@ export default class SchrodingerQuantumNumbers {
 }
 
 /**
- * Chooses a lower value for n, based on the current values of n and l.
- * The possible values of n are limited by the current value of l, since abs(l-l') must be 1.
- * The probability of each possible n transition is determined by its transition strength.
- *
- * @returns n, null if there is no valid transition
- */
-function chooseLower_n( n: number, l: number ): number | null {
-  assert && assert( Number.isInteger( n ) && n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE, `invalid n=${n}` );
-  assert && assert( Number.isInteger( l ) && l >= 0 && l <= n - 1, `invalid l=${l}, n=${n}` );
-
-  let nNext: number | null = null;
-
-  if ( n === 1 ) {
-    return null; // There is no state that is lower than (1,0,0)
-  }
-  else if ( n === 2 ) {
-    if ( l === 0 ) {
-      return null; // Transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule.
-    }
-    else {
-      assert && assert( l === 1, `unexpected value l=${l}` );
-      nNext = 1; // The only transition from (2,1,?) is (1,0,0)
-    }
-  }
-  else if ( n > 2 ) {
-
-    // Determine the possible range of n.
-    const nMax = n - 1;
-    let nMin = Math.max( l, 1 );
-    if ( l === 0 ) {
-      nMin = 2; // Transition from (n,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
-    }
-
-    // Get the strengths for each possible transition.
-    const numberOfEntries = nMax - nMin + 1;
-    const weightedValues: WeightedValue[] = [];
-    let strengthSum = 0;
-    for ( let i = 0; i < numberOfEntries; i++ ) {
-      const nValue = nMin + i;
-      const transitionStrength = TRANSITION_STRENGTHS[ n - 1 ][ nValue - 1 ];
-      weightedValues.push( { value: nValue, weight: transitionStrength } );
-      strengthSum += transitionStrength;
-    }
-
-    // All transitions had zero strength, so none are possible.
-    if ( strengthSum === 0 ) {
-      return null;
-    }
-
-    // Choose a transition.
-    const value = chooseWeightedValue( weightedValues );
-    if ( value === null ) {
-      return null;
-    }
-    nNext = value;
-  }
-
-  assert && assert( nNext === null || ( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext < n ), `invalid nNext=${nNext}` );
-  return nNext;
-}
-
-/**
- * Chooses a new value for l, based on the next value of n and current value of l.
- * The new value l' must be in the range [0,n-1], and abs(l-l') must be 1.
- */
-function choose_l( nNext: number, l: number ): number {
-  assert && assert( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext <= MOTHAConstants.MAX_STATE, `invalid nNext=${nNext}` );
-  assert && assert( Number.isInteger( l ), `invalid l=${l}` );
-
-  let lNext;
-
-  if ( l === 0 ) {
-    lNext = 1;
-  }
-  else if ( l === nNext ) {
-    lNext = l - 1;
-  }
-  else if ( l === nNext - 1 ) {
-    lNext = l - 1;
-  }
-  else {
-    if ( dotRandom.nextBoolean() ) {
-      lNext = l + 1;
-    }
-    else {
-      lNext = l - 1;
-    }
-  }
-
-  assert && assert( Number.isInteger( lNext ), `lNext must be an integer: lNext=${lNext}` );
-  assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext must be in the range [0,nNext-1]: nNext=${nNext} l=${l} lNext=${lNext}` );
-  assert && assert( Math.abs( lNext - l ) === 1, `(lNext - l) must be 1 or -1: l=${l} lNext=${lNext}` );
-  return lNext;
-}
-
-/**
- * Chooses a value for m, based on the next value of l and the current value of m.
- * The new value m' must be in the range [-l,l], and m-m' must be in the set [-1,0,1].
- */
-function choose_m( lNext: number, m: number ): number {
-  assert && assert( Number.isInteger( lNext ) && lNext >= 0 && lNext <= MOTHAConstants.MAX_STATE - 1, `invalid lNext=${lNext}` );
-  assert && assert( Number.isInteger( m ), `invalid m=${m}` );
-
-  let mNext;
-
-  if ( lNext === 0 ) {
-    mNext = 0;
-  }
-  else if ( m > lNext ) {
-    mNext = lNext;
-  }
-  else if ( m < -lNext ) {
-    mNext = -lNext;
-  }
-  else if ( m === lNext ) {
-    const a = dotRandom.nextInt( 2 );
-    if ( a === 0 ) {
-      mNext = m;
-    }
-    else {
-      mNext = m - 1;
-    }
-  }
-  else if ( m === -lNext ) {
-    const a = dotRandom.nextInt( 2 );
-    if ( a === 0 ) {
-      mNext = m;
-    }
-    else {
-      mNext = m + 1;
-    }
-  }
-  else {
-    const a = dotRandom.nextInt( 3 );
-    if ( a === 0 ) {
-      mNext = m + 1;
-    }
-    else if ( a === 1 ) {
-      mNext = m - 1;
-    }
-    else {
-      mNext = m;
-    }
-  }
-
-  assert && assert( Number.isInteger( mNext ), `mNext must be an integer: mNew=${mNext}` );
-  assert && assert( mNext >= -lNext && mNext <= lNext, `mNext must be in the range [-l,l]: mNext=${mNext}, lNext=${lNext}` );
-  assert && assert( [ -1, 0, 1 ].includes( mNext - m ), `(mNext - m) must be -1, 0, or 1: m=${m} mNext=${mNext}` );
-  return mNext;
-}
-
-/**
  * Checks state transition rules to see if a proposed transition is valid.
  */
-function isaValidTransition( fOld: SchrodingerQuantumNumbers, fNew: SchrodingerQuantumNumbers ): boolean {
-  return ( fOld.n !== fNew.n ) && ( Math.abs( fOld.l - fNew.l ) === 1 ) && ( Math.abs( fOld.m - fNew.m ) <= 1 );
+function isaValidTransition( nlmOld: SchrodingerQuantumNumbers, nlmNew: SchrodingerQuantumNumbers ): boolean {
+  return ( nlmOld.n !== nlmNew.n ) && ( Math.abs( nlmOld.l - nlmNew.l ) === 1 ) && ( Math.abs( nlmOld.m - nlmNew.m ) <= 1 );
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerQuantumNumbers', SchrodingerQuantumNumbers );
