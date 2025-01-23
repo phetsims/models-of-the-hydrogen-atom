@@ -16,6 +16,8 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = {
   radioButtonTextMaxWidth: number;
@@ -27,12 +29,14 @@ export default class AtomicModelRadioButtonGroup extends RectangularRadioButtonG
 
   public constructor( atomicModelProperty: Property<HydrogenAtom>,
                       atomicModels: HydrogenAtom[],
+                      isExperimentProperty: TReadOnlyProperty<boolean>,
                       providedOptions: AtomicModelRadioButtonGroupOptions ) {
 
     const options = optionize<AtomicModelRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 
       // RectangularRadioButtonGroupOptions
       isDisposable: false,
+      visibleProperty: DerivedProperty.not( isExperimentProperty ),
       spacing: 2,
       labelAlign: 'left',
       radioButtonOptions: {

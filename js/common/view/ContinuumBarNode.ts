@@ -14,6 +14,9 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const X_MARGIN = 5;
 const Y_MARGIN = 6;
@@ -21,7 +24,9 @@ const FONT = new PhetFont( 14 );
 
 export default class ContinuumBarNode extends Node {
 
-  public constructor( barHeight: number, tandem: Tandem ) {
+  public constructor( barHeight: number, isExperimentProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
+
+    const gatedVisibleProperty = new GatedVisibleProperty( DerivedProperty.not( isExperimentProperty ), tandem );
 
     // labels
     const textOptions = {
@@ -54,6 +59,7 @@ export default class ContinuumBarNode extends Node {
 
     super( {
       isDisposable: false,
+      visibleProperty: gatedVisibleProperty,
       children: [ barNode, classicalText, quantumText ],
       tandem: tandem,
       phetioDocumentation: 'The vertical bar that indicates where atomic models fall on the Classical to Quantum continuum.',
