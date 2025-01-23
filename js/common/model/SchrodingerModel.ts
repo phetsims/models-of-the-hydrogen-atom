@@ -133,7 +133,6 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
    * want to make it easier to get out of state (2,0,0).
    */
   protected override absorptionIsCertain(): boolean {
-    //TODO Java version was if ( n === 2 && l === 0 ), ignoring m.
     if ( this.metastableHandler.isMetastableStateProperty.value ) {
       return true;
     }
