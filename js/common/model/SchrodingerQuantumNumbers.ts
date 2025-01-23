@@ -259,8 +259,8 @@ function choose_l( nNext: number, l: number ): number {
   }
 
   assert && assert( Number.isInteger( lNext ), `lNext must be an integer: lNext=${lNext}` );
-  assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext violates transition rules: nNext=${nNext} l=${l} lNext=${lNext}` );
-  assert && assert( Math.abs( lNext - l ) === 1, `lNext violates transition rules: l=${l} lNext=${lNext}` );
+  assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext must be in the range [0,nNext-1]: nNext=${nNext} l=${l} lNext=${lNext}` );
+  assert && assert( Math.abs( lNext - l ) === 1, `(lNext - l) must be 1 or -1: l=${l} lNext=${lNext}` );
   return lNext;
 }
 
@@ -316,7 +316,7 @@ function choose_m( lNext: number, m: number ): number {
 
   assert && assert( Number.isInteger( mNext ), `mNext must be an integer: mNew=${mNext}` );
   assert && assert( mNext >= -lNext && mNext <= lNext, `mNext must be in the range [-l,l]: mNext=${mNext}, lNext=${lNext}` );
-  assert && assert( [ -1, 0, 1 ].includes( mNext - m ), `mNext - m must be in the set [-1,0,1]: m=${m} mNext=${mNext}` );
+  assert && assert( [ -1, 0, 1 ].includes( mNext - m ), `(mNext - m) must be -1, 0, or 1: m=${m} mNext=${mNext}` );
   return mNext;
 }
 
