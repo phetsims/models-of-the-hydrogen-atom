@@ -175,31 +175,24 @@ function chooseLower_n( n: number, l: number ): number | null {
   let nNext: number | null = null;
 
   if ( n === 1 ) {
-    // There is no state that is lower than (1,0,0)
-    return null;
+    return null; // There is no state that is lower than (1,0,0)
   }
   else if ( n === 2 ) {
-    //TODO Why does n=2 need to be a special case?
     if ( l === 0 ) {
-
-      // transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
-      return null;
+      return null; // Transition from (2,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule.
     }
     else {
-
-      // the only transition from (2,1,?) is (1,0,0)
-      nNext = 1;
+      assert && assert( l === 1, `unexpected value l=${l}` );
+      nNext = 1; // The only transition from (2,1,?) is (1,0,0)
     }
   }
   else if ( n > 2 ) {
 
-    // determine the possible range of n
+    // Determine the possible range of n.
     const nMax = n - 1;
     let nMin = Math.max( l, 1 );
     if ( l === 0 ) {
-
-      // transition from (n,0,0) to (1,?,?) cannot satisfy the abs(l-l')=1 rule
-      nMin = 2;
+      nMin = 2; // Transition from (n,0,?) to (1,0,?) cannot satisfy the abs(l-l')=1 rule
     }
 
     // Get the strengths for each possible transition.
