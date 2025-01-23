@@ -30,6 +30,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   },
 
   // Specifies how much to scale time (dt) for 'Fast', 'Normal', and 'Slow' time speeds, in that order.
+  // Careful! If 'Fast' is too large, dt may be so big that photons jump over the atom.
   timeScale: {
     type: 'array',
     elementSchema: {
