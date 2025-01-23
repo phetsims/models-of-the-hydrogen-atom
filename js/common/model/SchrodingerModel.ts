@@ -263,7 +263,9 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
     productTerms[ i ] = productTerms[ i ].derive( l + m );
   }
 
-  // Wolfram says there is a sign convention difference here. TODO clarify this?
+  // According to https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html, there are 2 two sign conventions
+  // for associated Legendre polynomials. Some authors omit the Condon-Shortley phase (-1)^m, while others include it.
+  // We are including it here, as the first term.
   return Math.pow( -1, m ) / ( Math.pow( 2, l ) * MOTHAUtils.factorial( l ) ) *
          Math.pow( 1 - x * x, m / 2 ) * evaluate( productTerms, x );
 }
