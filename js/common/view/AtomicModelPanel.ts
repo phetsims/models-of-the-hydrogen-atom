@@ -34,7 +34,8 @@ export default class AtomicModelPanel extends Panel {
                       isExperimentProperty: TReadOnlyProperty<boolean>,
                       providedOptions: AtomicModelPanelOptions ) {
 
-    const visibleProperty = new GatedVisibleProperty( DerivedProperty.not( isExperimentProperty ), providedOptions.tandem );
+    // Provide PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
+    const gatedVisibleProperty = new GatedVisibleProperty( DerivedProperty.not( isExperimentProperty ), providedOptions.tandem );
 
     const options = optionize<AtomicModelPanelOptions, SelfOptions, PanelOptions>()( {
 
@@ -43,7 +44,7 @@ export default class AtomicModelPanel extends Panel {
 
       // PanelOptions
       isDisposable: false,
-      visibleProperty: visibleProperty,
+      visibleProperty: gatedVisibleProperty,
       fill: null,
       stroke: null,
       xMargin: 0,

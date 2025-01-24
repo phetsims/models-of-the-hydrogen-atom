@@ -31,7 +31,7 @@ export default class AbsorptionTransitionText extends RichText {
       [ lightModeProperty, isQuantumModelProperty, isExperimentProperty ],
       ( lightMode, isQuantumModel, isExperiment ) => ( lightMode === 'monochromatic' ) && isQuantumModel && !isExperiment );
 
-    // Provide PhET-iO clients with a way to permanently hide this text via 'selfVisibleProperty'
+    // Provide PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],

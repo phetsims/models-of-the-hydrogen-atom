@@ -68,11 +68,12 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       children: diagrams
     } );
 
-    const visibleProperty = new GatedVisibleProperty( DerivedProperty.not( model.isExperimentProperty ), tandem );
+    // Provide PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
+    const gatedVisibleProperty = new GatedVisibleProperty( DerivedProperty.not( model.isExperimentProperty ), tandem );
 
     super( content, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
-      visibleProperty: visibleProperty,
+      visibleProperty: gatedVisibleProperty,
       titleNode: titleNode,
       expandedDefaultValue: MOTHAQueryParameters.expandAll,
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,

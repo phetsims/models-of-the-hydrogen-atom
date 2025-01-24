@@ -32,7 +32,7 @@ export default class ExciteAtomButton extends RectangularPushButton {
       ( isMetastableState, lightIsOn, lightMode ) =>
         ( isMetastableState && lightIsOn && lightMode === 'monochromatic' ) );
 
-    // Provide PhET-iO clients with a way to permanently hide this button via 'selfVisibleProperty'.
+    // Provide PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'.
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem, {
       phetioDocumentation: 'This button is visible when the atom is stuck in the metastable state (n,l,m) = (2,0,0).'
     } );
