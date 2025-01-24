@@ -133,8 +133,14 @@ export default class MOTHAScreenView extends ScreenView {
     const modelVBox = new VBox( {
       children: [ experimentModelSwitch, atomicModelPanel ],
       align: 'center',
-      spacing: 10,
-      excludeInvisibleChildrenFromBounds: false
+      spacing: 10
+    } );
+
+    // If experimentModelSwitch is invisible, then we want atomicModelPanel to move up. Otherwise, we expect the
+    // visibility of atomicModelPanel to change based on the experimentModelSwitch setting, and we do not want
+    // the switch to be shifting left/right.
+    experimentModelSwitch.visibleProperty.link( visible => {
+      modelVBox.excludeInvisibleChildrenFromBounds = !visible;
     } );
 
     // Spectrometer snapshots dialog
