@@ -41,7 +41,11 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
     super( isExperimentProperty, true, experimentText, false, modelText, {
       isDisposable: false,
       centerOnSwitch: false,
-      toggleSwitchOptions: { size: new Dimension2( 50, 25 ) },
+      toggleSwitchOptions: {
+        size: new Dimension2( 50, 25 ),
+        phetioVisiblePropertyInstrumented: false,
+        phetioEnabledPropertyInstrumented: false
+      },
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelHelpTextSwitch.helpTextStringProperty,
       tandem: tandem
     } );
