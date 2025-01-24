@@ -93,6 +93,7 @@ export default class Spectrometer extends PhetioObject {
       phetioReadOnly: true,
       phetioType: createObservableArray.ObservableArrayIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),
       lengthPropertyOptions: {
+        phetioDocumentation: 'The number of snapshots in the snapshots dialog.',
         phetioFeatured: true
       }
     } );
