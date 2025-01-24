@@ -141,7 +141,13 @@ export default class Spectrometer extends PhetioObject {
    */
   public takeSnapshot(): void {
 
-    const snapshot = new SpectrometerSnapshot( this.nextSnapshotNumberProperty.value, this.hydrogenAtomProperty.value, this.dataPointsProperty.value );
+    // Since each data point is a SpectrometerDataPoint instance, it is insufficient to make a shallow copy of
+    // dataPointsProperty.value. We need to make a deep copy of the data points. Otherwise, the snapshots and
+    // the spectrometer will be referencing the same SpectrometerDataPoint instances, and those instances will
+    // continue to be updated as the spectrometer accumulates data.
+    const dataPoints = this.dataPointsProperty.value.map( dataPoint => dataPoint.clone() );
+
+    const snapshot = new SpectrometerSnapshot( this.nextSnapshotNumberProperty.value, this.hydrogenAtomProperty.value, dataPoints );
     this.snapshots.push( snapshot );
 
     this.nextSnapshotNumberProperty.value++;

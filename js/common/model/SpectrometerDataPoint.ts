@@ -34,6 +34,13 @@ export default class SpectrometerDataPoint {
   }
 
   /**
+   * Clones this data point. Used when taking snapshots of spectrometer data.
+   */
+  public clone(): SpectrometerDataPoint {
+    return new SpectrometerDataPoint( this.wavelength, this.numberOfPhotonsEmitted );
+  }
+
+  /**
    * Serializes this SpectrometerDataPoint.
    */
   private toStateObject(): SpectrometerDataPointStateObject {
