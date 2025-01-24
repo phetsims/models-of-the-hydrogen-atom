@@ -133,7 +133,8 @@ export default class MOTHAScreenView extends ScreenView {
     const modelVBox = new VBox( {
       children: [ experimentModelSwitch, atomicModelPanel ],
       align: 'center',
-      spacing: 10
+      spacing: 10,
+      excludeInvisibleChildrenFromBounds: false
     } );
 
     // Spectrometer snapshots dialog
