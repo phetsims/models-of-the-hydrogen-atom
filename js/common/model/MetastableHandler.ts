@@ -33,7 +33,10 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-const EXCITE_ATOM_INTERVAL = 2; // seconds TODO Java value was 100 ms, why did we change it?
+// This is how often (in seconds) we automatically attempt to excite the atom when in the metastable state.
+// This value was 100 ms in the Java version. But we decided that we want the electron to sit in the metastable state
+// for enough time that the user can see it in the (n,l,m) readout and the Electron Energy Level diagram.
+const EXCITE_ATOM_INTERVAL = 2;
 
 export default class MetastableHandler extends PhetioObject {
 
