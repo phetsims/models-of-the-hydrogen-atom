@@ -24,6 +24,7 @@ import ExperimentEnergyDiagram from './ExperimentEnergyDiagram.js';
 import EnergyDiagram from './EnergyDiagram.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 
 // DIAGRAM_SIZE.height was empirically set so that heights of ElectronEnergyLevelAccordionBox and
 // EnergyLevelsZoomedInBoxNode are roughly the same.
@@ -67,8 +68,11 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       children: diagrams
     } );
 
+    const visibleProperty = new GatedVisibleProperty( DerivedProperty.not( model.isExperimentProperty ), tandem );
+
     super( content, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
+      visibleProperty: visibleProperty,
       titleNode: titleNode,
       expandedDefaultValue: MOTHAQueryParameters.expandAll,
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,

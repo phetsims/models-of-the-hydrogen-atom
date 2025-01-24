@@ -187,21 +187,11 @@ export default class MOTHAScreenView extends ScreenView {
 
       // If we have electronEnergyLevelAccordionBox, it goes between zoomedInBox and modelBox.
       const electronEnergyLevelAccordionBox = this.electronEnergyLevelAccordionBox;
-      electronEnergyLevelAccordionBox.visibleProperty.link( visible => {
-        if ( visible ) {
-          electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
-          electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
-          modelVBox.left = electronEnergyLevelAccordionBox.right + 10;
-          modelVBox.top = electronEnergyLevelAccordionBox.top;
-          timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
-        }
-        else {
-          //TODO This is a duplicate of code below.
-          modelVBox.left = this.zoomedInBoxNode.right + 30;
-          modelVBox.top = this.zoomedInBoxNode.top;
-          timeControlNode.left = modelVBox.left;
-        }
-      } );
+      electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
+      electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
+      modelVBox.left = electronEnergyLevelAccordionBox.right + 10;
+      modelVBox.top = electronEnergyLevelAccordionBox.top;
+      timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
     }
     else {
 
