@@ -31,9 +31,8 @@ import MOTHAModel from '../model/MOTHAModel.js';
 import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEnergyLevelAccordionBox.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
-import AtomicModelRadioButtonGroup from './AtomicModelRadioButtonGroup.js';
-import ContinuumBarNode from './ContinuumBarNode.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import AtomicModelPanel from './AtomicModelPanel.js';
 
 type SelfOptions = {
 
@@ -47,13 +46,13 @@ type SelfOptions = {
   electronEnergyLevelAccordionBox?: ElectronEnergyLevelAccordionBox | null;
 
   // x-offset of lightNode from the left edge of layoutBounds.
-  lightNodeXOffset: number;
+  lightSourceNodeXOffset: number;
 
   // propagated to ModelPanel.
-  modelRadioButtonTextMaxWidth: number;
+  atomicModelRadioButtonTextMaxWidth: number;
 
   // whether to add a 'Classical...Quantum' continuum bar
-  hasContinuumBar?: boolean;
+  hasContinuumBarNode?: boolean;
 
   // Description screen summary.
   screenSummaryContent: ScreenSummaryContent;
@@ -74,7 +73,7 @@ export default class MOTHAScreenView extends ScreenView {
 
       // SelfOptions
       electronEnergyLevelAccordionBox: null,
-      hasContinuumBar: true,
+      hasContinuumBarNode: true,
 
       // ScreenViewOptions
       isDisposable: false
@@ -124,33 +123,18 @@ export default class MOTHAScreenView extends ScreenView {
     const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty,
       options.tandem.createTandem( 'experimentModelSwitch' ) );
 
-    const atomicModelRadioButtonGroup = new AtomicModelRadioButtonGroup( model.atomicModelProperty, model.atomicModels,
+    const atomicModelPanel = new AtomicModelPanel( model.atomicModelProperty, model.atomicModels,
       model.isExperimentProperty, {
-        radioButtonTextMaxWidth: providedOptions.modelRadioButtonTextMaxWidth,
-        tandem: options.tandem.createTandem( 'atomicModelRadioButtonGroup' )
+        radioButtonTextMaxWidth: providedOptions.atomicModelRadioButtonTextMaxWidth,
+        hasContinuumBarNode: providedOptions.hasContinuumBarNode,
+        tandem: options.tandem.createTandem( 'atomicModelPanel' )
       } );
 
     const modelVBox = new VBox( {
-      children: [ experimentModelSwitch, atomicModelRadioButtonGroup ],
+      children: [ experimentModelSwitch, atomicModelPanel ],
       align: 'center',
-      spacing: 10,
-      excludeInvisibleChildrenFromBounds: false
+      spacing: 10
     } );
-
-    let modelBox: Node;
-    if ( options.hasContinuumBar ) {
-      const continuumBarNode = new ContinuumBarNode( atomicModelRadioButtonGroup.height, model.isExperimentProperty,
-        options.tandem.createTandem( 'continuumBarNode' ) );
-      modelBox = new HBox( {
-        excludeInvisibleChildrenFromBounds: false,
-        align: 'bottom',
-        spacing: 10,
-        children: [ continuumBarNode, modelVBox ]
-      } );
-    }
-    else {
-      modelBox = modelVBox;
-    }
 
     // Spectrometer snapshots dialog
     const spectrometerSnapshotsDialog = new SpectrometerSnapshotsDialog( model.spectrometer.snapshots,
@@ -187,7 +171,7 @@ export default class MOTHAScreenView extends ScreenView {
     this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
 
     // Layout: zoomedInBoxNode and the elements to the left of it.
-    lightSourceNode.left = this.layoutBounds.left + options.lightNodeXOffset;
+    lightSourceNode.left = this.layoutBounds.left + options.lightSourceNodeXOffset;
     this.zoomedInBoxNode.left = lightSourceNode.right + 50;
     this.zoomedInBoxNode.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
     lightSourceNode.bottom = this.zoomedInBoxNode.bottom;
@@ -206,24 +190,24 @@ export default class MOTHAScreenView extends ScreenView {
         if ( visible ) {
           electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
           electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
-          modelBox.left = electronEnergyLevelAccordionBox.right + 10;
-          modelBox.top = electronEnergyLevelAccordionBox.top;
+          modelVBox.left = electronEnergyLevelAccordionBox.right + 10;
+          modelVBox.top = electronEnergyLevelAccordionBox.top;
           timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
         }
         else {
           //TODO This is a duplicate of code below.
-          modelBox.left = this.zoomedInBoxNode.right + 30;
-          modelBox.top = this.zoomedInBoxNode.top;
-          timeControlNode.left = modelBox.left;
+          modelVBox.left = this.zoomedInBoxNode.right + 30;
+          modelVBox.top = this.zoomedInBoxNode.top;
+          timeControlNode.left = modelVBox.left;
         }
       } );
     }
     else {
 
       // If we do not have electronEnergyLevelAccordionBox, zoomedInBox and modelBox are next to each other.
-      modelBox.left = this.zoomedInBoxNode.right + 30;
-      modelBox.top = this.zoomedInBoxNode.top;
-      timeControlNode.left = modelBox.left;
+      modelVBox.left = this.zoomedInBoxNode.right + 30;
+      modelVBox.top = this.zoomedInBoxNode.top;
+      timeControlNode.left = modelVBox.left;
     }
     timeControlNode.bottom = this.zoomedInBoxNode.bottom;
 
@@ -245,7 +229,7 @@ export default class MOTHAScreenView extends ScreenView {
     } );
 
     // Layout: miscellaneous elements
-    transitionsDialog.setInitialPosition( modelBox.leftTop );
+    transitionsDialog.setInitialPosition( modelVBox.leftTop );
     legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
     legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
     resetAllButton.right = this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN;
@@ -272,7 +256,7 @@ export default class MOTHAScreenView extends ScreenView {
       tinyBoxNode,
       dashedLines,
       this.zoomedInBoxNode,
-      modelBox,
+      modelVBox,
       bottomHBox,
       resetAllButton,
       transitionsDialog,
@@ -294,12 +278,12 @@ export default class MOTHAScreenView extends ScreenView {
       lightControlPanel,
       transitionsCheckbox,
       transitionsDialog,
-      modelBox,
+      modelVBox,
       this.zoomedInBoxNode
     ];
     if ( this.electronEnergyLevelAccordionBox ) {
       // Add optional electronEnergyLevelAccordionBox before modelBox.
-      const index = playAreaPDOMOrder.indexOf( modelBox );
+      const index = playAreaPDOMOrder.indexOf( modelVBox );
       playAreaPDOMOrder.splice( index, 0, this.electronEnergyLevelAccordionBox );
     }
     this.pdomPlayAreaNode.pdomOrder = playAreaPDOMOrder;

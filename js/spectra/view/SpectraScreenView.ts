@@ -28,8 +28,8 @@ export default class SpectraScreenView extends MOTHAScreenView {
     super( model, {
       popupsParent: popupsParent,
       zoomedInBoxNode: zoomedInBoxNode,
-      lightNodeXOffset: 125,
-      modelRadioButtonTextMaxWidth: 200,
+      lightSourceNodeXOffset: 125,
+      atomicModelRadioButtonTextMaxWidth: 200,
       screenSummaryContent: new ScreenSummaryContent( {
         additionalContent: [
           ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,

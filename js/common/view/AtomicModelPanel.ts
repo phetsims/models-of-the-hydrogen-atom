@@ -1,0 +1,79 @@
+// Copyright 2015-2025, University of Colorado Boulder
+
+/**
+ * AtomicModelPanel contains controls (radio buttons) for choosing one of the atomic models, and an optional
+ * 'Classical' to 'Continuum' bar. It is shown when the AB-switch is set to 'Model'.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
+
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { HBox, Node } from '../../../../scenery/js/imports.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import HydrogenAtom from '../model/HydrogenAtom.js';
+import ContinuumBarNode from './ContinuumBarNode.js';
+import AtomicModelRadioButtonGroup from './AtomicModelRadioButtonGroup.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
+
+type SelfOptions = {
+  radioButtonTextMaxWidth: number;
+  hasContinuumBarNode?: boolean;
+};
+
+export type AtomicModelPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+
+export default class AtomicModelPanel extends Panel {
+
+  public constructor( atomicModelProperty: Property<HydrogenAtom>,
+                      atomicModels: HydrogenAtom[],
+                      isExperimentProperty: TReadOnlyProperty<boolean>,
+                      providedOptions: AtomicModelPanelOptions ) {
+
+    const visibleProperty = new GatedVisibleProperty( DerivedProperty.not( isExperimentProperty ), providedOptions.tandem );
+
+    const options = optionize<AtomicModelPanelOptions, SelfOptions, PanelOptions>()( {
+
+      // SelfOptions
+      hasContinuumBarNode: true,
+
+      // PanelOptions
+      isDisposable: false,
+      visibleProperty: visibleProperty,
+      fill: null,
+      stroke: null,
+      xMargin: 0,
+      yMargin: 0
+    }, providedOptions );
+
+    // radio buttons
+    const atomicModelRadioButtonGroup = new AtomicModelRadioButtonGroup( atomicModelProperty, atomicModels, {
+      radioButtonTextMaxWidth: providedOptions.radioButtonTextMaxWidth,
+      tandem: options.tandem.createTandem( 'atomicModelRadioButtonGroup' )
+    } );
+
+    const children: Node[] = [];
+
+    // Optional continuum bar, 'Classical' to 'Quantum'
+    if ( options.hasContinuumBarNode ) {
+      const continuumBarNode = new ContinuumBarNode( atomicModelRadioButtonGroup.height, options.tandem.createTandem( 'continuumBarNode' ) );
+      children.push( continuumBarNode );
+    }
+
+    children.push( atomicModelRadioButtonGroup );
+
+    // panel content
+    const contentNode = new HBox( {
+      spacing: 10,
+      children: children
+    } );
+
+    super( contentNode, options );
+  }
+}
+
+modelsOfTheHydrogenAtom.register( 'AtomicModelPanel', AtomicModelPanel );
