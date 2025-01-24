@@ -190,18 +190,33 @@ export default class MOTHAScreenView extends ScreenView {
     // Layout: elements to the right of zoomedInBoxNode.
     //TODO Make another attempt at using HBox/VBox here.
     if ( this.electronEnergyLevelAccordionBox ) {
-
-      // If we have electronEnergyLevelAccordionBox, it goes between zoomedInBox and modelBox.
       const electronEnergyLevelAccordionBox = this.electronEnergyLevelAccordionBox;
-      electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
-      electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
-      modelVBox.left = electronEnergyLevelAccordionBox.right + 10;
-      modelVBox.top = electronEnergyLevelAccordionBox.top;
-      timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
+
+      electronEnergyLevelAccordionBox.gatedVisibleProperty.selfBooleanProperty.link( gatedVisible => {
+        if ( gatedVisible ) {
+
+          // If electronEnergyLevelAccordionBox has not been made permanently invisible via PhET-iO,
+          // it goes between zoomedInBox and modelBox.
+          electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
+          electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
+          modelVBox.left = electronEnergyLevelAccordionBox.right + 10;
+          modelVBox.top = electronEnergyLevelAccordionBox.top;
+          timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
+        }
+        else {
+
+          // If electronEnergyLevelAccordionBox has been made permanently invisible via PhET-iO,
+          // zoomedInBox and modelBox are next to each other.
+          modelVBox.left = this.zoomedInBoxNode.right + 30;
+          modelVBox.top = this.zoomedInBoxNode.top;
+          timeControlNode.left = modelVBox.left;
+        }
+      } );
     }
     else {
 
       // If we do not have electronEnergyLevelAccordionBox, zoomedInBox and modelBox are next to each other.
+      //TODO Duplicated lines from above.
       modelVBox.left = this.zoomedInBoxNode.right + 30;
       modelVBox.top = this.zoomedInBoxNode.top;
       timeControlNode.left = modelVBox.left;

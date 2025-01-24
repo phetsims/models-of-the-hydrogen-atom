@@ -33,6 +33,7 @@ const DIAGRAM_SIZE = new Dimension2( 220, 364 );
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
   private readonly diagrams: EnergyDiagram[];
+  public readonly gatedVisibleProperty: GatedVisibleProperty;
 
   public constructor( model: EnergyLevelsModel, tandem: Tandem ) {
 
@@ -83,6 +84,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     } ) );
 
     this.diagrams = diagrams;
+    this.gatedVisibleProperty = gatedVisibleProperty;
   }
 
   public step( dt: number ): void {
