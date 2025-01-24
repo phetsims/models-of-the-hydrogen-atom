@@ -57,7 +57,7 @@ class LampNode extends LaserPointerNode {
       },
       rotation: -LightSource.DIRECTION, // +y is up in the model, down in the view
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSource.accessibleNameStringProperty,
-      tandem: tandem.createTandem( 'lampNode' ),
+      tandem: tandem,
       tandemNameSuffix: 'Node',
       phetioVisiblePropertyInstrumented: false
     } );
