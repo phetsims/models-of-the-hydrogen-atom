@@ -29,6 +29,7 @@ import PhotonGroup from './PhotonGroup.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 const STEP_ONCE_NORMAL_DT = 0.1;
 
@@ -113,8 +114,10 @@ export default class MOTHAModel implements TModel {
       [ this.isExperimentProperty, this.atomicModelProperty ],
       ( isExperiment, atomicModel ) => isExperiment ? this.experiment : atomicModel );
 
-    this.isQuantumModelProperty = new DerivedProperty( [ this.hydrogenAtomProperty ],
-      hydrogenAtom => ( hydrogenAtom instanceof BohrModel ) );
+    this.isQuantumModelProperty = new DerivedProperty( [ this.hydrogenAtomProperty ], hydrogenAtom => ( hydrogenAtom instanceof BohrModel ), {
+        tandem: tandem.createTandem( 'isQuantumModelProperty' ),
+        phetioValueType: BooleanIO
+      } );
 
     this.photonGroup = new PhotonGroup( zoomedInBox, this.hydrogenAtomProperty, tandem.createTandem( 'photonGroup' ) );
 

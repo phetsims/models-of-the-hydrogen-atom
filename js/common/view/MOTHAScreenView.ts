@@ -31,8 +31,9 @@ import MOTHAModel from '../model/MOTHAModel.js';
 import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEnergyLevelAccordionBox.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import AtomicModelPanel from './AtomicModelPanel.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = {
 
@@ -96,20 +97,28 @@ export default class MOTHAScreenView extends ScreenView {
       model.lightSource.monochromaticWavelengthProperty, model.isQuantumModelProperty, model.isExperimentProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
-    const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
-      model.lightSource.lightModeProperty, model.isExperimentProperty, this.visibleBoundsProperty, {
-        tandem: options.tandem.createTandem( 'transitionsDialog' )
-      } );
+    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106 I don't like that this is phetioReadOnly:false and is set by the sim.
+    const transitionsIsCheckedProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'transitionsIsCheckedProperty' ),
+      phetioDocumentation: 'Whether the Transitions checkbox is checked. Setting this to true shows transitionsDialog only for quantum atomic models.',
+      phetioFeatured: true
+    } );
 
-    // Hide the dialog when a classical model is being viewed.
+    const transitionsCheckbox = new TransitionsCheckbox( transitionsIsCheckedProperty,
+      model.isQuantumModelProperty, options.tandem.createTandem( 'transitionsCheckbox' ) );
+
+    // Uncheck the Transitions checkbox when we switch to a classical model.
     model.isQuantumModelProperty.link( isQuantumModel => {
-      if ( !isSettingPhetioStateProperty.value && transitionsDialog.isShowingProperty.value ) {
-        transitionsDialog.isShowingProperty.value = isQuantumModel;
+      if ( !isSettingPhetioStateProperty.value && !isQuantumModel && transitionsIsCheckedProperty.value ) {
+        transitionsIsCheckedProperty.value = false;
       }
     } );
 
-    const transitionsCheckbox = new TransitionsCheckbox( transitionsDialog.isShowingProperty,
-      model.isQuantumModelProperty, options.tandem.createTandem( 'transitionsCheckbox' ) );
+    const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
+      model.lightSource.lightModeProperty, model.isExperimentProperty, transitionsIsCheckedProperty,
+      model.isQuantumModelProperty, this.visibleBoundsProperty, {
+        tandem: options.tandem.createTandem( 'transitionsDialog' )
+      } );
 
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode();
