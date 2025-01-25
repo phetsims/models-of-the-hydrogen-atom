@@ -214,7 +214,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
     }
 
     // Did we cross the origin?
-    //TODO why is ( x === 0 && y === 0 ) considered a zero crossing?
     if ( ( x === 0 && y === 0 ) || signIsDifferent( x, x0 ) || signIsDifferent( y, y0 ) ) {
       this.numberOfZeroCrossingsProperty.value += 1;
     }
