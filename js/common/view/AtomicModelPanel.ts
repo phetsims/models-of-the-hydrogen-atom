@@ -1,4 +1,4 @@
-// Copyright 2015-2025, University of Colorado Boulder
+// Copyright 2025, University of Colorado Boulder
 
 /**
  * AtomicModelPanel contains controls (radio buttons) for choosing one of the atomic models, and an optional
