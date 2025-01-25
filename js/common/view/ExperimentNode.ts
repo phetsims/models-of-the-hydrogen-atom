@@ -1,6 +1,5 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
-//TODO As in the Java version, Experiment has no 'Excite Atom' button. The only way to get out of the metastable state is to change the light source to white. Is that OK?
 /**
  * ExperimentNode is shown when the AB switch is set to 'Experiment'.  It displays a '?' that covers the space
  * where the hydrogen atom would be shown.
