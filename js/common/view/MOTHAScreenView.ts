@@ -188,14 +188,22 @@ export default class MOTHAScreenView extends ScreenView {
     } );
     this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
 
-    // Dialog that opens when the Experiment's electron is stuck in the metastable state. Closing the dialog switches
-    // the light source to 'white', which cause an absorbable photon to be automatically fired at the atom. When that
-    // photon is absorbed, the electron will move to a higher state. See documentation in ExperimentOopsDialog for
-    // details on how to test this feature.
+    // Dialog that opens when the Experiment's electron is stuck in the metastable state. Closing this dialog fires
+    // an absorbable photon at the atom (similar to the 'Excite Atom' button for Schrodinger), which will cause the
+    // electron to move to a higher state.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/105 for feature history.
+    // To test:
+    // * Run with ?dev&showHalos. dev will show the (n,l,m) state display, and showHalos will draw a halo around
+    //   the absorbable photon, making it easier to see.
+    // * Set time speed to 'Fast', so that you'll get to the metastable state faster.
+    // * Set the A/B switch to 'Experiment'.
+    // * Set the light source to set to 'Monochromatic' 94 nm.
+    // * Turn on the light source.
+    // * Then wait for the electron to get stuck in the metastable state, and verify that this dialog opens.
+    // * Close this dialog, observe that an absorbable photon is fired at the atom, and the electron moves to
+    //   a higher state.
     const experimentOopsDialog = new ExperimentOopsDialog( {
-      hideCallback: () => {
-        model.lightSource.lightModeProperty.value = 'white';
-      },
+      hideCallback: () => model.experiment.excite(),
       tandem: options.tandem.createTandem( 'experimentOopsDialog' )
     } );
     Multilink.multilink(
