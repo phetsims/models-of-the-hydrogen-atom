@@ -99,11 +99,12 @@ export default class MOTHAScreenView extends ScreenView {
       model.lightSource.monochromaticWavelengthProperty, model.isQuantumModelProperty, model.isExperimentProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106 I don't like that this is phetioReadOnly:false and is set by the sim.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106 for the design of transitionsIsCheckedProperty.
     const transitionsIsCheckedProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'transitionsIsCheckedProperty' ),
       phetioDocumentation: 'Whether the Transitions checkbox is checked. Setting this to true shows transitionsDialog only for quantum atomic models.',
-      phetioFeatured: true
+      phetioFeatured: true, // see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106#issuecomment-2617048461
+      phetioReadOnly: true // see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106#issuecomment-2616678607
     } );
 
     const transitionsCheckbox = new TransitionsCheckbox( transitionsIsCheckedProperty,
