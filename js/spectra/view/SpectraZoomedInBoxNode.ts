@@ -78,7 +78,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       ];
     };
 
-    super( model.zoomedInBox, model.photonGroup, createHydrogenAtomNodes, createOverlayNodes, model.isExperimentProperty, tandem );
+    super( model, createHydrogenAtomNodes, createOverlayNodes, tandem );
   }
 }
 

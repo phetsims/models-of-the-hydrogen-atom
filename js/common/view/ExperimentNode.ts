@@ -14,6 +14,9 @@ import { Node, NodeOptions, NodeTranslationOptions, Rectangle, Text } from '../.
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
+import SchrodingerStateText from './SchrodingerStateText.js';
+import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -21,7 +24,9 @@ type ExperimentNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class ExperimentNode extends Node {
 
-  public constructor( isExperimentProperty: TReadOnlyProperty<boolean>, providedOptions?: ExperimentNodeOptions ) {
+  public constructor( isExperimentProperty: TReadOnlyProperty<boolean>,
+                      nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
+                      providedOptions?: ExperimentNodeOptions ) {
 
     const questionMarkText = new Text( ModelsOfTheHydrogenAtomStrings.questionMarkStringProperty, {
       font: new PhetFont( 72 ),
@@ -48,6 +53,18 @@ export default class ExperimentNode extends Node {
     }, providedOptions );
 
     super( options );
+
+    // (n,l,m) = ..., for debugging ExperimentOopsDialog.
+    if ( phet.chipper.queryParameters.dev ) {
+
+      const electronStateText = new SchrodingerStateText( nlmProperty, Tandem.OPT_OUT );
+      electronStateText.fill = 'red';
+      electronStateText.localBoundsProperty.link( () => {
+        electronStateText.centerX = square.centerX;
+        electronStateText.top = square.bottom + 100;
+      } );
+      this.addChild( electronStateText );
+    }
   }
 }
 

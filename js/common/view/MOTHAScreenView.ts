@@ -34,6 +34,8 @@ import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
 import AtomicModelPanel from './AtomicModelPanel.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import ExperimentOopsDialog from './ExperimentOopsDialog.js';
 
 type SelfOptions = {
 
@@ -185,6 +187,23 @@ export default class MOTHAScreenView extends ScreenView {
       fill: MOTHAColors.screenBackgroundRectangleColorProperty
     } );
     this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
+
+    // Dialog that opens when the Experiment's electron is stuck in the metastable state. Closing the dialog switches
+    // the light source to 'white', which cause an absorbable photon to be automatically fired at the atom. When that
+    // photon is absorbed, the electron will move to a higher state.
+    const experimentOopsDialog = new ExperimentOopsDialog( {
+      hideCallback: () => {
+        model.lightSource.lightModeProperty.value = 'white';
+      },
+      tandem: options.tandem.createTandem( 'experimentOopsDialog' )
+    } );
+    Multilink.multilink(
+      [ model.isExperimentProperty, model.experiment.metastableHandler.isMetastableStateProperty, model.lightSource.lightModeProperty ],
+      ( isExperiment, isMetastableState, lightMode ) => {
+        if ( isExperiment && isMetastableState && lightMode === 'monochromatic' ) {
+          experimentOopsDialog.show();
+        }
+      } );
 
     // Layout: zoomedInBoxNode and the elements to the left of it.
     lightSourceNode.left = this.layoutBounds.left + options.lightSourceNodeXOffset;

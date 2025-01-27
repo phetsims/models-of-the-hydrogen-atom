@@ -8,20 +8,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node, Rectangle } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ExperimentNode from './ExperimentNode.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import PhotonNode from './PhotonNode.js';
-import PhotonGroup from '../model/PhotonGroup.js';
+import MOTHAModel from '../model/MOTHAModel.js';
 
 const VIEW_SIZE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE;
 
@@ -29,12 +27,12 @@ export default class ZoomedInBoxNode extends Node {
 
   private readonly hydrogenAtomNodes: HydrogenAtomNode[];
 
-  protected constructor( zoomedInBox: ZoomedInBox,
-                         photonGroup: PhotonGroup,
+  protected constructor( model: MOTHAModel,
                          createHydrogenAtomNodes: ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => HydrogenAtomNode[],
                          createOverlayNodes: ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => Node[],
-                         isExperimentProperty: TReadOnlyProperty<boolean>,
                          tandem: Tandem ) {
+
+    const zoomedInBox = model.zoomedInBox;
 
     // All model-view transform operations take place in the zoomed-in box, whose origin is at its center.
     // The model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.
@@ -60,7 +58,7 @@ export default class ZoomedInBoxNode extends Node {
       lineWidth: 3
     } );
 
-    const experimentNode = new ExperimentNode( isExperimentProperty, {
+    const experimentNode = new ExperimentNode( model.isExperimentProperty, model.experiment.nlmProperty, {
       center: backgroundNode.center
     } );
 
@@ -82,14 +80,14 @@ export default class ZoomedInBoxNode extends Node {
     const photonNodes: PhotonNode[] = [];
 
     // Add the PhotonNode associated with a Photon.
-    photonGroup.elementCreatedEmitter.addListener( photon => {
+    model.photonGroup.elementCreatedEmitter.addListener( photon => {
       const photonNode = new PhotonNode( photon, modelViewTransform );
       photonNodes.push( photonNode );
       photonsLayer.addChild( photonNode );
     } );
 
     // Remove the PhotonNode associated with a Photon.
-    photonGroup.elementDisposedEmitter.addListener( photon => {
+    model.photonGroup.elementDisposedEmitter.addListener( photon => {
       const photonNode = _.find( photonNodes, photonNode => ( photonNode.photon === photon ) )!;
       assert && assert( photonNode );
       photonNodes.splice( photonNodes.indexOf( photonNode ), 1 );
