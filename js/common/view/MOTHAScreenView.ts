@@ -190,7 +190,8 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Dialog that opens when the Experiment's electron is stuck in the metastable state. Closing the dialog switches
     // the light source to 'white', which cause an absorbable photon to be automatically fired at the atom. When that
-    // photon is absorbed, the electron will move to a higher state.
+    // photon is absorbed, the electron will move to a higher state. See documentation in ExperimentOopsDialog for
+    // details on how to test this feature.
     const experimentOopsDialog = new ExperimentOopsDialog( {
       hideCallback: () => {
         model.lightSource.lightModeProperty.value = 'white';

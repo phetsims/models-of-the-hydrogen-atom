@@ -12,6 +12,8 @@
  * light source gets set to 'white', an absorbable photon is fired at the atom, and the electron moves to
  * a higher state.
  *
+ * See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/105 for feature history.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
