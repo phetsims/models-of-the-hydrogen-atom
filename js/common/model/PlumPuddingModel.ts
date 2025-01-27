@@ -189,7 +189,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
     // Adjust signs for electron's horizontal direction
     const sign = ( this.electron.xDirection === 'right' ? 1 : -1 );
     dx *= sign;
-    dy *= sign; //TODO why are we adjusting dy?
+    dy *= sign;
     if ( y1 > y2 ) {
       dy *= -1;
     }
