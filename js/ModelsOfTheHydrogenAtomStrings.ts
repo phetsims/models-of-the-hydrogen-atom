@@ -69,7 +69,8 @@ type StringsType = {
   'mInfoStringProperty': LocalizedStringProperty;
   'snapshotNumberNameStringProperty': LocalizedStringProperty;
   'energyStringProperty': LocalizedStringProperty;
-  'oopsTheElectronIsStuckStringProperty': LocalizedStringProperty;
+  'experimentOopsDialogTitleStringProperty': LocalizedStringProperty;
+  'experimentOopsDialogMessageStringProperty': LocalizedStringProperty;
   'a11y': {
     'transitionsCheckbox': {
       'helpTextStringProperty': LocalizedStringProperty;

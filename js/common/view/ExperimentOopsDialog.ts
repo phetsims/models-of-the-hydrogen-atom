@@ -23,6 +23,13 @@ import ElectronNode from './ElectronNode.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { RichText } from '../../../../scenery/js/imports.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+
+const TITLE_FONT = new PhetFont( {
+  size: 24,
+  weight: 'bold'
+} );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -35,19 +42,20 @@ export default class ExperimentOopsDialog extends OopsDialog {
     const options = optionize<ExperimentOopsDialogOptions, SelfOptions, OopsDialogOptions>()( {
 
       // OopsDialogOptions
+      title: new RichText( ModelsOfTheHydrogenAtomStrings.experimentOopsDialogTitleStringProperty, {
+        font: TITLE_FONT
+      } ),
       isDisposable: false,
       iconNode: ElectronNode.createIcon( 5 ),
       iconPosition: 'left',
       richTextOptions: {
-        lineWrap: 300
+        lineWrap: 400
       },
       leftMargin: 25,
       xSpacing: 24
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/105 accessibleName:
-      //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/105 helpText:
     }, providedOptions );
 
-    super( ModelsOfTheHydrogenAtomStrings.oopsTheElectronIsStuckStringProperty, options );
+    super( ModelsOfTheHydrogenAtomStrings.experimentOopsDialogMessageStringProperty, options );
   }
 }
 
