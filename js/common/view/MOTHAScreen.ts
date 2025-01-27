@@ -12,10 +12,12 @@ import TModel from '../../../../joist/js/TModel.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
+import MOTHAKeyboardHelpContent from './MOTHAKeyboardHelpContent.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type MOTHAScreenOptions = SelfOptions & ScreenOptions;
+export type MOTHAScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'name' | 'homeScreenIcon' | 'screenButtonsHelpText' | 'tandem'>;
 
 export default class MOTHAScreen<M extends TModel, V extends ScreenView> extends Screen<M, V> {
 
@@ -27,7 +29,8 @@ export default class MOTHAScreen<M extends TModel, V extends ScreenView> extends
       isDisposable: false,
       backgroundColorProperty: MOTHAColors.screenBackgroundColorProperty,
       showUnselectedHomeScreenIconFrame: true,
-      showScreenIconFrameForNavigationBarFill: 'black'
+      showScreenIconFrameForNavigationBarFill: 'black',
+      createKeyboardHelpNode: () => new MOTHAKeyboardHelpContent()
     }, providedOptions );
 
     super( createModel, createView, options );

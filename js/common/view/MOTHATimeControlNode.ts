@@ -36,10 +36,6 @@ export default class MOTHATimeControlNode extends TimeControlNode {
         }
       },
       playPauseStepButtonOptions: {
-        playPauseButtonOptions: {
-          //TODO https://github.com/phetsims/scenery-phet/issues/682 workaround, we do not want partial hotkey support for TimeControlNode
-          includeGlobalHotkey: false
-        },
         stepForwardButtonOptions: {
           listener: () => stepOnce()
         }
