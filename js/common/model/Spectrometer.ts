@@ -163,7 +163,7 @@ export default class Spectrometer extends PhetioObject {
     assert && assert( this.enabledProperty.value, 'recordEmission should only be called when the spectrometer is enabled.' );
 
     // To verify that legacy issue https://github.com/phetsims/models-of-the-hydrogen-atom/issues/14 is no longer a problem.
-    assert && assert( photonAbsorptionModel.getTransition( wavelength ), `invalid emission wavelength: ${wavelength}` );
+    assert && assert( photonAbsorptionModel.getTransition( wavelength ), `invalid transition wavelength: ${wavelength}` );
 
     const dataPoints = this.dataPointsProperty.value.slice();
 
