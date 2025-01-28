@@ -1,6 +1,5 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
-//TODO Needs layout work. We're just getting lucky that the height of the bars works for the height of the chart.
 /**
  * SpectrometerChart plots the number of photons for each emission wavelength, across the UV, visible, and IR spectrums.
  * The x-axis is wavelength, while the y-axis is number of photons.  This chart is used in the 'Spectrum' accordion
@@ -30,7 +29,7 @@ const X_SPACING = 8;
 
 type SelfOptions = {
   
-  // Height of the chart.
+  // Height of the chart. Must be set empirically using ?debugSpectrometer, so that the data fits in backgroundNode.
   chartHeight: number;
 
   // Whether to create tick marks at emission wavelengths. Used to omit tick marks from snapshots.
