@@ -20,6 +20,7 @@ import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
+// Lengths of the 3 x-axis (nm) segments
 const UV_AXIS_LENGTH = 270;
 const VISIBLE_AXIS_LENGTH = 145;
 const IR_AXIS_LENGTH = 235;
