@@ -239,9 +239,10 @@ export default class MOTHAScreenView extends ScreenView {
         timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
       }
       else {
-        modelVBox.left = this.zoomedInBoxNode.right + 30;
+        const left = this.zoomedInBoxNode.right + 30;
+        modelVBox.left = left;
         modelVBox.top = this.zoomedInBoxNode.top;
-        timeControlNode.left = modelVBox.left;
+        timeControlNode.left = left;
       }
     };
 
