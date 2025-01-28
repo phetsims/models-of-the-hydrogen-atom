@@ -249,8 +249,8 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
 
   for ( let i = 0; i < l; i++ ) {
 
-    //TODO This comment was ported from AssociatedLegendrePolynomials.java. What does it mean?
     // x^2-1 times each term on left side
+    // (This comment was ported from AssociatedLegendrePolynomials.java, and we're not sure what it means.)
     const terms: PolynomialTerm[] = [];
     for ( let k = 0; k < productTerms.length; k++ ) {
       const term = productTerms[ k ];
