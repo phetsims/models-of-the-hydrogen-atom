@@ -27,6 +27,7 @@ import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import DeBroglieBaseModel from './DeBroglieBaseModel.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
 import Photon from './Photon.js';
+import isResettingAllProperty from '../../../../scenery-phet/js/isResettingAllProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -70,8 +71,10 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
 
   public override reset(): void {
 
-    //TODO Calling reset when switching between models should not reset this.
-    this.deBroglieRepresentationProperty.reset();
+    // Representation should only be reset when doing a 'Reset All', not when switching atomic models.
+    if ( isResettingAllProperty.value ) {
+      this.deBroglieRepresentationProperty.reset();
+    }
     super.reset();
   }
 
