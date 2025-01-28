@@ -227,6 +227,7 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Layout: elements to the right of zoomedInBoxNode.
     //TODO Make another attempt at using HBox/VBox here.
+    timeControlNode.bottom = this.zoomedInBoxNode.bottom;
     if ( this.electronEnergyLevelAccordionBox ) {
       const electronEnergyLevelAccordionBox = this.electronEnergyLevelAccordionBox;
 
@@ -259,7 +260,6 @@ export default class MOTHAScreenView extends ScreenView {
       modelVBox.top = this.zoomedInBoxNode.top;
       timeControlNode.left = modelVBox.left;
     }
-    timeControlNode.bottom = this.zoomedInBoxNode.bottom;
 
     // Layout: elements below zoomedInBoxNode.
     const bottomHBox = new HBox( {
