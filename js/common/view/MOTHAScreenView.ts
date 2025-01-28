@@ -229,38 +229,31 @@ export default class MOTHAScreenView extends ScreenView {
       modelVBox.excludeInvisibleChildrenFromBounds = !visible;
     } );
 
-    //TODO Make another attempt at using HBox/VBox here.
+    // Layout involving electronEnergyLevelAccordionBox or lack thereof.
+    const layoutEnergyLevelAccordionBox = ( electronEnergyLevelAccordionBox?: Node ) => {
+      if ( electronEnergyLevelAccordionBox ) {
+        electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
+        electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
+        modelVBox.left = electronEnergyLevelAccordionBox.right + 10;
+        modelVBox.top = electronEnergyLevelAccordionBox.top;
+        timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
+      }
+      else {
+        modelVBox.left = this.zoomedInBoxNode.right + 30;
+        modelVBox.top = this.zoomedInBoxNode.top;
+        timeControlNode.left = modelVBox.left;
+      }
+    };
+
     if ( this.electronEnergyLevelAccordionBox ) {
-      const electronEnergyLevelAccordionBox = this.electronEnergyLevelAccordionBox;
 
-      electronEnergyLevelAccordionBox.gatedVisibleProperty.selfBooleanProperty.link( gatedVisible => {
-        if ( gatedVisible ) {
-
-          // If electronEnergyLevelAccordionBox has not been made permanently invisible via PhET-iO,
-          // it goes between zoomedInBox and modelBox.
-          electronEnergyLevelAccordionBox.left = this.zoomedInBoxNode.right + 10;
-          electronEnergyLevelAccordionBox.top = this.zoomedInBoxNode.top;
-          modelVBox.left = electronEnergyLevelAccordionBox.right + 10;
-          modelVBox.top = electronEnergyLevelAccordionBox.top;
-          timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
-        }
-        else {
-
-          // If electronEnergyLevelAccordionBox has been made permanently invisible via PhET-iO,
-          // zoomedInBox and modelBox are next to each other.
-          modelVBox.left = this.zoomedInBoxNode.right + 30;
-          modelVBox.top = this.zoomedInBoxNode.top;
-          timeControlNode.left = modelVBox.left;
-        }
-      } );
+      // If provided with electronEnergyLevelAccordionBox, it's possible that it may be permanently hidden via PhET-iO,
+      // and that requires a layout as if electronEnergyLevelAccordionBox did not exist.
+      this.electronEnergyLevelAccordionBox.gatedVisibleProperty.selfBooleanProperty.link( gatedVisible =>
+        gatedVisible ? layoutEnergyLevelAccordionBox( this.electronEnergyLevelAccordionBox! ) : layoutEnergyLevelAccordionBox() );
     }
     else {
-
-      // If we do not have electronEnergyLevelAccordionBox, zoomedInBox and modelBox are next to each other.
-      //TODO Duplicated lines from above.
-      modelVBox.left = this.zoomedInBoxNode.right + 30;
-      modelVBox.top = this.zoomedInBoxNode.top;
-      timeControlNode.left = modelVBox.left;
+      layoutEnergyLevelAccordionBox();
     }
 
     // Layout: elements below zoomedInBoxNode.
