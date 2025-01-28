@@ -1,6 +1,5 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
-//TODO Add a query parameter that makes it easy to get into the metastable state.
 /**
  *  MetastableHandler handles a case where the Schrodinger model can get stuck in state (n,l,m) = (2,0,0). This state
  *  is known as a metastable state. The only way to get out of this state is to absorb a photon that 'excites' the
@@ -11,6 +10,13 @@
  *
  *  Manual excitation occurs when the light is emitting monochromatic light. In this case, the user must manually
  *  fire an absorbable photon at the atom's center by pressing the 'Excite Atom' button.
+ *
+ *  To get into the metastable state:
+ *  1. Select the Schrodinger atomic model.
+ *  2. Select 'Fast' time speed, so you don't have to wait as long.
+ *  3. Set the light source to 'Monochromatic' and 94 nm.
+ *  4. Turn on the light source.
+ *  5. Wait for the electron to get into the metastable state.
  *
  *  Ported from MetastableHandler.java, with many changes.
  *
