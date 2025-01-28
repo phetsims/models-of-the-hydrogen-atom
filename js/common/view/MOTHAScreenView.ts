@@ -142,19 +142,6 @@ export default class MOTHAScreenView extends ScreenView {
         tandem: options.tandem.createTandem( 'atomicModelPanel' )
       } );
 
-    const modelVBox = new VBox( {
-      children: [ experimentModelSwitch, atomicModelPanel ],
-      align: 'center',
-      spacing: 10
-    } );
-
-    // If experimentModelSwitch is invisible, then we want atomicModelPanel to move up. Otherwise, we expect the
-    // visibility of atomicModelPanel to change based on the experimentModelSwitch setting, and we do not want
-    // the switch to be shifting left/right.
-    experimentModelSwitch.visibleProperty.link( visible => {
-      modelVBox.excludeInvisibleChildrenFromBounds = !visible;
-    } );
-
     // Spectrometer snapshots dialog
     const spectrometerSnapshotsDialog = new SpectrometerSnapshotsDialog( model.spectrometer.snapshots,
       options.tandem.createTandem( 'spectrometerSnapshotsDialog' ) );
@@ -183,7 +170,8 @@ export default class MOTHAScreenView extends ScreenView {
     } );
 
     // Workaround for joist deficiency that requires exactly 'black' and 'white' screen background color in order
-    // to get the desired navigation bar color. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/96.
+    // to get the desired navigation bar color. This rectangle expands to fill the visible bounds of the ScreenView.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/96.
     const screenBackgroundRectangle = new Rectangle( 0, 0, 1, 1, {
       fill: MOTHAColors.screenBackgroundRectangleColorProperty
     } );
@@ -226,8 +214,22 @@ export default class MOTHAScreenView extends ScreenView {
     tinyBoxNode.centerY = boxOfHydrogenNode.centerY;
 
     // Layout: elements to the right of zoomedInBoxNode.
-    //TODO Make another attempt at using HBox/VBox here.
     timeControlNode.bottom = this.zoomedInBoxNode.bottom;
+
+    const modelVBox = new VBox( {
+      children: [ experimentModelSwitch, atomicModelPanel ],
+      align: 'center',
+      spacing: 10
+    } );
+
+    // If experimentModelSwitch is invisible, then we want atomicModelPanel to move up. Otherwise, we expect the
+    // visibility of atomicModelPanel to change based on the experimentModelSwitch setting, and we do not want
+    // the switch to be shifting left/right.
+    experimentModelSwitch.visibleProperty.link( visible => {
+      modelVBox.excludeInvisibleChildrenFromBounds = !visible;
+    } );
+
+    //TODO Make another attempt at using HBox/VBox here.
     if ( this.electronEnergyLevelAccordionBox ) {
       const electronEnergyLevelAccordionBox = this.electronEnergyLevelAccordionBox;
 
