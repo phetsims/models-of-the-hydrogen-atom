@@ -214,8 +214,6 @@ export default class MOTHAScreenView extends ScreenView {
     tinyBoxNode.centerY = boxOfHydrogenNode.centerY;
 
     // Layout: elements to the right of zoomedInBoxNode.
-    timeControlNode.bottom = this.zoomedInBoxNode.bottom;
-
     const modelVBox = new VBox( {
       children: [ experimentModelSwitch, atomicModelPanel ],
       align: 'center',
@@ -237,12 +235,14 @@ export default class MOTHAScreenView extends ScreenView {
         modelVBox.left = electronEnergyLevelAccordionBox.right + 10;
         modelVBox.top = electronEnergyLevelAccordionBox.top;
         timeControlNode.left = electronEnergyLevelAccordionBox.right + 15;
+        timeControlNode.bottom = this.zoomedInBoxNode.bottom;
       }
       else {
         const left = this.zoomedInBoxNode.right + 30;
         modelVBox.left = left;
         modelVBox.top = this.zoomedInBoxNode.top;
         timeControlNode.left = left;
+        timeControlNode.bottom = this.zoomedInBoxNode.bottom;
       }
     };
 
