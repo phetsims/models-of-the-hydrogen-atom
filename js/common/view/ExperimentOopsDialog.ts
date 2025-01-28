@@ -14,7 +14,7 @@ import ElectronNode from './ElectronNode.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { RichText } from '../../../../scenery/js/imports.js';
+import { Text } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 const TITLE_FONT = new PhetFont( {
@@ -33,14 +33,16 @@ export default class ExperimentOopsDialog extends OopsDialog {
     const options = optionize<ExperimentOopsDialogOptions, SelfOptions, OopsDialogOptions>()( {
 
       // OopsDialogOptions
-      title: new RichText( ModelsOfTheHydrogenAtomStrings.experimentOopsDialogTitleStringProperty, {
-        font: TITLE_FONT
+      title: new Text( ModelsOfTheHydrogenAtomStrings.experimentOopsDialogTitleStringProperty, {
+        font: TITLE_FONT,
+        maxWidth: 300
       } ),
       isDisposable: false,
       iconNode: ElectronNode.createIcon( 5 ),
       iconPosition: 'left',
       richTextOptions: {
-        lineWrap: 400
+        lineWrap: 400,
+        maxHeight: 200 // lineWrap takes care of maxWidth
       },
       leftMargin: 25,
       xSpacing: 24
