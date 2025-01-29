@@ -143,6 +143,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
    * Determines if a proposed state transition caused by stimulated emission is allowed.
    */
   protected override stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
+    assert && assert( nOld === this.n, `nOld=${nOld}, expected ${this.n}` );
     let allowed = true;
     if ( nNew >= nOld ) {
 
@@ -151,12 +152,14 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     }
     else if ( nNew === 1 && this.l === 0 ) {
 
-      // transition from (n,0,0) to (1,?,?) cannot satisfy the abs(l-l')=1 rule
+      // Transition from (?,0,?) to (1,?,?) cannot satisfy the l=[0,n-1] constraint and abs(l-l')=1 rule.
+      // lNew would need to be 1, and would result in (1,1,?).
       allowed = false;
     }
     else if ( nNew === 1 && this.l !== 1 ) {
 
-      // the only way to get to (1,0,0) is from (n,1,?)
+      // If nNew is 1, then the only valid of lNew would be 0, to satisfy the l=[0,n-1] constraint.
+      // And the only way to get to lNew of 0 is if it is currently 1, to satisfy the abs(l-l')=1 rule.
       allowed = false;
     }
     return allowed;
