@@ -7,6 +7,7 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { LinearGradient, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
@@ -51,9 +52,9 @@ export default class BoxOfHydrogenNode extends Node {
       font: new PhetFont( { weight: 'bold', size: 24 } ),
       maxWidth: 0.5 * BOX_SIZE.width
     } );
+    const hydrogenTextCenter = new Vector2( frontNode.left + frontNode.width / 3, frontNode.centerY );
     hydrogenText.localBoundsProperty.link( () => {
-      hydrogenText.centerX = frontNode.left + frontNode.width / 3;
-      hydrogenText.centerY = frontNode.centerY;
+      hydrogenText.center = hydrogenTextCenter;
     } );
 
     super( {

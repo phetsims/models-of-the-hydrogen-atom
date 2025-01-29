@@ -28,7 +28,7 @@ const X_MARGIN = 5;
 const X_SPACING = 8;
 
 type SelfOptions = {
-  
+
   // Height of the chart. Must be set empirically using ?debugSpectrometer, so that the data fits in backgroundNode.
   chartHeight: number;
 
@@ -106,9 +106,9 @@ export default class SpectrometerChart extends Node {
     // A simple text-only display of the spectrometer data, for debugging.
     if ( MOTHAQueryParameters.debugSpectrometerData ) {
       const dataText = new SpectrometerDebugText( dataPointsProperty );
+      const dataTextRightTop = backgroundNode.rightTop.plusXY( -5, 5 );
       dataText.localBoundsProperty.link( () => {
-        dataText.right = backgroundNode.right - 5;
-        dataText.top = backgroundNode.top + 5;
+        dataText.rightTop = dataTextRightTop;
       } );
       this.addChild( dataText );
     }

@@ -42,9 +42,9 @@ export default class XZAxesNode extends Node {
       fill: COLOR_PROPERTY,
       maxWidth: 20
     } );
+    const xTextLeftCenter = xAxisNode.rightCenter.plusXY( LABEL_OFFSET, 0 );
     xText.localBoundsProperty.link( () => {
-      xText.left = xAxisNode.right + LABEL_OFFSET;
-      xText.centerY = xAxisNode.centerY;
+      xText.leftCenter = xTextLeftCenter;
     } );
 
     const zText = new RichText( MOTHASymbols.zStringProperty, {
@@ -52,9 +52,9 @@ export default class XZAxesNode extends Node {
       fill: COLOR_PROPERTY,
       maxWidth: 20
     } );
+    const zTextCenterBottom = zAxisNode.centerTop.plusXY( 0, -LABEL_OFFSET );
     zText.localBoundsProperty.link( () => {
-      zText.centerX = zAxisNode.centerX;
-      zText.bottom = zAxisNode.top - LABEL_OFFSET;
+      zText.centerBottom = zTextCenterBottom;
     } );
 
     super( {

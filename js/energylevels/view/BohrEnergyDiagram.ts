@@ -19,6 +19,7 @@ import MOTHAConstants from '../../common/MOTHAConstants.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
 import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -38,9 +39,9 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
     // A horizontal line for each energy level, labeled with 'n = {value}'.
     for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
       const levelNode = createLevelNode( n );
+      const levelNodeLeftCenter = new Vector2( this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET, this.getYForState( n ) );
       levelNode.localBoundsProperty.link( () => {
-        levelNode.left = this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET;
-        levelNode.centerY = this.getYForState( n );
+        levelNode.leftCenter = levelNodeLeftCenter;
       } );
       this.stateLayer.addChild( levelNode );
     }

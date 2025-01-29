@@ -64,15 +64,15 @@ export default class SchrodingerOverlayNode extends Node {
     } );
 
     // xz-axes are in the left-bottom corner of the zoomed-in box.
-    const leftBottom = zoomedInBoxBounds.erodedXY( 15, 10 ).leftBottom;
+    const xzAxesNodeLeftBottom = zoomedInBoxBounds.erodedXY( 15, 10 ).leftBottom;
     xzAxesNode.localBoundsProperty.link( () => {
-      xzAxesNode.leftBottom = leftBottom;
+      xzAxesNode.leftBottom = xzAxesNodeLeftBottom;
     } );
 
     // Other elements are in the right-bottom corner of the zoomed-in box.
-    const rightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
+    const vBoxRightBottom = zoomedInBoxBounds.erodedXY( 10, 10 ).rightBottom;
     vBox.localBoundsProperty.link( () => {
-      vBox.rightBottom = rightBottom;
+      vBox.rightBottom = vBoxRightBottom;
     } );
   }
 }

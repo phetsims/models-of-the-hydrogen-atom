@@ -59,9 +59,9 @@ export default class ExperimentNode extends Node {
 
       const electronStateText = new SchrodingerStateText( nlmProperty, Tandem.OPT_OUT );
       electronStateText.fill = 'red';
+      const electronStateTextCenterTop = square.centerBottom.plusXY( 0, 100 );
       electronStateText.localBoundsProperty.link( () => {
-        electronStateText.centerX = square.centerX;
-        electronStateText.top = square.bottom + 100;
+        electronStateText.centerTop = electronStateTextCenterTop;
       } );
       this.addChild( electronStateText );
     }
