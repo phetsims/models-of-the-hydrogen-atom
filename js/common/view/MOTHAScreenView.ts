@@ -222,7 +222,9 @@ export default class MOTHAScreenView extends ScreenView {
 
     // If experimentModelSwitch is invisible, then we want atomicModelPanel to move up. Otherwise, we expect the
     // visibility of atomicModelPanel to change based on the experimentModelSwitch setting, and we do not want
-    // the switch to be shifting left/right.
+    // the switch to be shifting left/right. Note that for a period of time, this was failing assertion in an Node
+    // validateBounds which was addressed by removing the assertion, see
+    // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/108#issuecomment-2622765138
     experimentModelSwitch.visibleProperty.link( visible => {
       modelVBox.excludeInvisibleChildrenFromBounds = !visible;
     } );
