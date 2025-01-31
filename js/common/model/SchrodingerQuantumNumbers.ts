@@ -81,6 +81,14 @@ export default class SchrodingerQuantumNumbers {
     this.m = m;
   }
 
+  /**
+   * For debugging and logging only. Do not rely on the format of this string.
+   * @typescript-eslint/no-base-to-string
+   */
+  public toString(): string {
+    return `(n,l,m)=(${this.n},${this.l},${this.m})`;
+  }
+
   public equals( quantumNumbers: SchrodingerQuantumNumbers ): boolean {
     return ( quantumNumbers.n === this.n ) && ( quantumNumbers.l === this.l ) && ( quantumNumbers.m === this.m );
   }
