@@ -67,6 +67,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   private readonly _nlmProperty: Property<SchrodingerQuantumNumbers>;
 
   public readonly metastableHandler: MetastableHandler;
+  private isResetting = false; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59 temporary workaround for invalid nlm transition on reset
 
   public constructor( lightSource: LightSource, providedOptions: SchrodingerModelOptions ) {
 
@@ -95,9 +96,9 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
     // When n changes, compute the next state.
     //TODO It would be preferable to derive nProperty from nlmProperty.
-    this.electron.nProperty.lazyLink( n => {
-      if ( !isSettingPhetioStateProperty.value ) {
-        this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
+    this.electron.nProperty.lazyLink( ( nNew, nOld ) => {
+      if ( !isSettingPhetioStateProperty.value && !this.isResetting ) {
+        this._nlmProperty.value = this.nlmProperty.value.getNextState( nNew );
       }
     } );
 
@@ -106,8 +107,11 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   }
 
   public override reset(): void {
+    this.isResetting = true;
+    this._nlmProperty.reset();
     this.metastableHandler.reset();
     super.reset();
+    this.isResetting = false;
   }
 
   private get n(): number {
