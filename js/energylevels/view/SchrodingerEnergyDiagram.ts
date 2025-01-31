@@ -105,9 +105,10 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
 
       // Draw squiggle between previous and current electron state.
       if ( nlmOld !== null ) {
-        if ( isSettingPhetioStateProperty.value && nlmOld.n === nlmNew.n ) {
+        if ( isSettingPhetioStateProperty.value || schrodingerModel.isResetting() ) {
 
-          // If we're setting PhET-iO state and the transition is invalid, hide the squiggle.
+          // If we're setting PhET-iO state or resetting the model, the transition is likely to be invalid,
+          // so hide the squiggle.
           this.hideEnergySquiggle();
         }
         else {
