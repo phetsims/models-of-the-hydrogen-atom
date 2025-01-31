@@ -40,7 +40,7 @@ export default class SchrodingerFieldNode extends Node {
       translation: modelViewTransform.modelToViewPosition( schrodingerModel.position )
     } );
 
-    this.brightnessCache = new SchrodingerBrightness( schrodingerModel, zoomedInBoxBounds );
+    this.brightnessCache = new SchrodingerBrightness( zoomedInBoxBounds );
 
     schrodingerModel.nlmProperty.link( nlm => {
       const brightness = this.brightnessCache.getBrightness( nlm );
