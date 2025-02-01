@@ -37,7 +37,7 @@ export default class ElectronNode extends ShadedSphereNode {
         highlightColor: MOTHAColors.electronHighlightColorProperty
       }, providedOptions );
 
-    super( 2 * modelViewTransform.modelToViewDeltaX( electron.radius ), options );
+    super( 2 * modelViewTransform.modelToViewDeltaX( Electron.RADIUS ), options );
 
     electron.positionProperty.link( position => {
       this.translation = modelViewTransform.modelToViewPosition( position );

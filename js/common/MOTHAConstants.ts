@@ -60,13 +60,6 @@ const MOTHAConstants = {
   MAX_STATE: MAX_STATE,
   NUMBER_OF_STATES: MAX_STATE - GROUND_STATE + 1,
 
-  // radii, in unitless model coordinates
-  ELECTRON_RADIUS: 5,
-  PROTON_RADIUS: 6,
-  PHOTON_RADIUS: 15,
-  BILLIARD_BALL_RADIUS: 30,
-  PLUM_PUDDING_RADIUS: 30,
-
   // Photon speed is constant, in distance per second
   PHOTON_SPEED: 300,
 
@@ -79,6 +72,7 @@ const MOTHAConstants = {
   // Electron energy in the ground state, in eV
   E1: -13.6,
 
+  // Maximum number of spectrometer snapshots that can exist at a time.
   MAX_SPECTROMETER_SNAPSHOTS: 4,
 
   // The Java version had a wider range of speeds and a speed slider. For the HTML5 version, this was simplified to

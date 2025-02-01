@@ -33,10 +33,10 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line phet/no-view-imported-from-model
+import Electron from './Electron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import LightSource from './LightSource.js';
 import Photon from './Photon.js';
@@ -52,8 +52,6 @@ type PlumPuddingModelOptions = SelfOptions & PickRequired<HydrogenAtomOptions, '
 
 export default class PlumPuddingModel extends HydrogenAtom {
 
-  public readonly radius = MOTHAConstants.PLUM_PUDDING_RADIUS;
-
   public readonly electron: PlumPuddingElectron;
 
   // A point on the perimeter of the plum pudding atom, modeled as a circle.
@@ -65,6 +63,9 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
   // The number of photons the atom has absorbed and is "holding".
   private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
+
+  // Radius of the plum pudding, in unitless model coordinates.
+  public static readonly RADIUS = 30;
 
   public static readonly PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 
@@ -85,7 +86,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
-    this.perimeterPointProperty = new Vector2Property( nextPointOnCircle( this.radius ), {
+    this.perimeterPointProperty = new Vector2Property( nextPointOnCircle( PlumPuddingModel.RADIUS ), {
       isValidValue: point => point.x >= 0,
       tandem: options.tandem.createTandem( 'perimeterPointProperty' ),
       phetioDocumentation: 'A point on the perimeter of the plum pudding atom. It defines the path of the electron ' +
@@ -158,7 +159,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
         this.electron.isMovingProperty.value = false;
         this.numberOfZeroCrossingsProperty.value = 0;
         this.electron.previousAmplitudeProperty.value = 0;
-        this.perimeterPointProperty.value = nextPointOnCircle( this.radius );
+        this.perimeterPointProperty.value = nextPointOnCircle( PlumPuddingModel.RADIUS );
         this.electron.positionProperty.value = this.position;
         this.electron.setRandomXDirection();
       }
@@ -182,9 +183,9 @@ export default class PlumPuddingModel extends HydrogenAtom {
     const y0 = electronOffset.y;
 
     // Determine dx and dy
-    const distanceDelta = dt * amplitude * ( 2 * this.radius );
-    let dx = Math.abs( x1 ) * ( distanceDelta / this.radius );
-    let dy = Math.abs( y1 ) * ( distanceDelta / this.radius );
+    const distanceDelta = dt * amplitude * ( 2 * PlumPuddingModel.RADIUS );
+    let dx = Math.abs( x1 ) * ( distanceDelta / PlumPuddingModel.RADIUS );
+    let dy = Math.abs( y1 ) * ( distanceDelta / PlumPuddingModel.RADIUS );
 
     // Adjust signs for electron's horizontal direction
     const sign = ( this.electron.xDirection === 'right' ? 1 : -1 );
@@ -270,7 +271,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
       const electronPosition = this.electron.positionProperty.value;
       const photonPosition = photon.positionProperty.value;
-      const maxDistance = photon.radius + this.electron.radius;
+      const maxDistance = Photon.RADIUS + Electron.RADIUS;
 
       if ( MOTHAUtils.pointsCollide( electronPosition, photonPosition, maxDistance ) ) {
         if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {

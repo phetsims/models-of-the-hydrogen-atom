@@ -13,7 +13,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {
   position?: Vector2;
@@ -23,9 +22,11 @@ export type ElectronOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 
 export default class Electron extends PhetioObject {
 
+  // Position, in unitless model coordinates.
   public readonly positionProperty: Property<Vector2>;
 
-  public readonly radius = MOTHAConstants.ELECTRON_RADIUS;
+  // Radius, in unitless model coordinates.
+  public static readonly RADIUS = 5;
 
   public constructor( providedOptions: ElectronOptions ) {
 

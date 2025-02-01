@@ -24,7 +24,7 @@ export default class BilliardBallNode extends HydrogenAtomNode {
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    const ballNode = new BallNode( 2 * modelViewTransform.modelToViewDeltaX( billiardBallModel.radius ) );
+    const ballNode = new BallNode( 2 * modelViewTransform.modelToViewDeltaX( BilliardBallModel.RADIUS ) );
 
     super( billiardBallModel, hydrogenAtomProperty, {
       children: [ ballNode ]

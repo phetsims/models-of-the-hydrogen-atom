@@ -43,6 +43,7 @@ import Photon from './Photon.js';
 import Proton from './Proton.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
+import Electron from './Electron.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -54,7 +55,7 @@ const PHOTON_STIMULATED_EMISSION_PROBABILITY = PHOTON_ABSORPTION_PROBABILITY;
 const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 
 // How close an emitted photon is placed to the photon that causes stimulated emission.
-const STIMULATED_EMISSION_X_OFFSET = MOTHAConstants.PHOTON_RADIUS;
+const STIMULATED_EMISSION_X_OFFSET = Photon.RADIUS;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -160,7 +161,7 @@ export default class BohrModel extends HydrogenAtom {
   protected collides( photon: Photon ): boolean {
     const electronPosition = this.electron.positionProperty.value;
     const photonPosition = photon.positionProperty.value;
-    const maxDistance = photon.radius + this.electron.radius;
+    const maxDistance = Photon.RADIUS + Electron.RADIUS;
     return MOTHAUtils.pointsCollide( electronPosition, photonPosition, maxDistance );
   }
 

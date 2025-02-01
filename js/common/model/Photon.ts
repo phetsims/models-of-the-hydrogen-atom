@@ -74,7 +74,8 @@ export default class Photon extends PhetioObject {
   // Whether the photon has collided with the hydrogen atom.
   private readonly hasCollidedWithAtomProperty: Property<boolean>;
 
-  public readonly radius = MOTHAConstants.PHOTON_RADIUS;
+  // Radius, in unitless model coordinates.
+  public static readonly RADIUS = 15;
 
   public constructor( providedOptions: PhotonOptions ) {
 

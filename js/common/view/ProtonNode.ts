@@ -34,7 +34,7 @@ export default class ProtonNode extends ShadedSphereNode {
         translation: modelViewTransform.modelToViewPosition( proton.position )
       }, providedOptions );
 
-    super( 2 * modelViewTransform.modelToViewDeltaX( proton.radius ), options );
+    super( 2 * modelViewTransform.modelToViewDeltaX( Proton.RADIUS ), options );
   }
 
   /**

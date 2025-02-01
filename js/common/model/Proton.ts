@@ -9,7 +9,6 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 
 type SelfOptions = {
   position?: Vector2;
@@ -22,7 +21,8 @@ export default class Proton {
   // Position of the proton, fixed at the center of the atom.
   public readonly position: Vector2;
 
-  public readonly radius = MOTHAConstants.PROTON_RADIUS;
+  // Radius, in unitless model coordinates.
+  public static readonly RADIUS = 6;
 
   public constructor( providedOptions?: ProtonOptions ) {
 

@@ -42,7 +42,7 @@ export default class PhotonNode extends Node {
 
     const wavelength = photon.wavelength;
 
-    const photonRadius = modelViewTransform.modelToViewDeltaX( photon.radius );
+    const photonRadius = modelViewTransform.modelToViewDeltaX( Photon.RADIUS );
 
     const haloRadius = photonRadius;
     const haloNode = new Circle( haloRadius, {

@@ -22,7 +22,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import BilliardBallNode from '../view/BilliardBallNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
@@ -33,7 +32,8 @@ type BilliardBallModelOptions = SelfOptions & PickRequired<HydrogenAtomOptions, 
 
 export default class BilliardBallModel extends HydrogenAtom {
 
-  public readonly radius = MOTHAConstants.BILLIARD_BALL_RADIUS;
+  // Radius of the billiard ball, in unitless model coordinates.
+  public static readonly RADIUS = 30;
 
   public constructor( providedOptions: BilliardBallModelOptions ) {
 
@@ -57,7 +57,7 @@ export default class BilliardBallModel extends HydrogenAtom {
    */
   public override processPhoton( photon: Photon ): void {
     if ( !photon.hasCollidedWithAtom ) {
-      if ( photon.positionProperty.value.distance( this.position ) <= this.radius ) {
+      if ( photon.positionProperty.value.distance( this.position ) <= BilliardBallModel.RADIUS ) {
         photon.bounceBack( this.position );
       }
     }

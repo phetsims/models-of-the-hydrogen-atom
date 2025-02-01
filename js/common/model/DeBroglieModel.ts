@@ -113,10 +113,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
     // distance from electron to the closest point on orbit
     const distance = photonOffset.distanceXY( orbitX, orbitY );
 
-    // how close the photon's center must be to a point on the electron's orbit
-    const closeness = this.getClosenessForCollision( photon );
-
-    return ( distance <= closeness );
+    return ( distance <= DeBroglieBaseModel.CLOSENESS_FOR_COLLISION );
   }
 }
 
