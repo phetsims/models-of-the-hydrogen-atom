@@ -31,8 +31,10 @@ import { Color } from '../../../../scenery/js/imports.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
+// Time step, in seconds, when pressing the time control's step button with speed set to TimeSpeed.NORMAL.
 const STEP_ONCE_NORMAL_DT = 0.1;
 
+// Maps TimeSpeed values to scale factors specified via the timeScale query parameter.
 const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
   [ TimeSpeed.FAST, MOTHAQueryParameters.timeScale[ 0 ] ],
   [ TimeSpeed.NORMAL, MOTHAQueryParameters.timeScale[ 1 ] ],
