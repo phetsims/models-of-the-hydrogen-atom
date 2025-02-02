@@ -57,6 +57,16 @@ const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 // How close an emitted photon is placed to the photon that causes stimulated emission.
 const STIMULATED_EMISSION_X_OFFSET = Photon.RADIUS;
 
+// Minimum time (in sec) that the electron must be in a state before transitions can occur.
+const MIN_TIME_IN_STATE_BEFORE_ABSORPTION = 0.75;
+const MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION = 1;
+const MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION = 1;
+
+// Radius of each electron orbit, ordered by increasing electron state number.
+// These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
+const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
+assert && assert( ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES, 'An orbit must exists for each electron state.' );
+
 type SelfOptions = EmptySelfOptions;
 
 export type BohrModelOptions = SelfOptions &
@@ -68,17 +78,8 @@ export default class BohrModel extends HydrogenAtom {
   public readonly proton: Proton;
   public readonly electron: BohrElectron;
 
-  // Radius of each electron orbit, ordered by increasing electron state number.
-  // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
-  public static readonly ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
-
-  // Minimum time (in sec) that the electron must be in a state before transitions can occur.
-  public static readonly MIN_TIME_IN_STATE_BEFORE_ABSORPTION = 0.75;
-  public static readonly MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION = 1;
-  public static readonly MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION = 1;
-
   // Change in orbit angle per dt for ground state orbit.
-  public static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
+  protected static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
 
   public constructor( providedOptions: BohrModelOptions ) {
 
@@ -113,7 +114,7 @@ export default class BohrModel extends HydrogenAtom {
     this.electron.angleProperty.value = this.calculateNewElectronDirection( dt );
 
     // Attempt to emit a photon.
-    if ( this.electron.timeInStateProperty.value >= BohrModel.MIN_TIME_IN_STATE_BEFORE_ABSORPTION ) {
+    if ( this.electron.timeInStateProperty.value >= MIN_TIME_IN_STATE_BEFORE_ABSORPTION ) {
       this.attemptSpontaneousEmission();
     }
   }
@@ -147,7 +148,7 @@ export default class BohrModel extends HydrogenAtom {
    * Gets the radius of the electron's orbit when it's in a specified state.
    */
   public static getElectronOrbitRadius( n: number ): number {
-    return BohrModel.ORBIT_RADII[ n - MOTHAConstants.GROUND_STATE ];
+    return ORBIT_RADII[ n - MOTHAConstants.GROUND_STATE ];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -179,7 +180,7 @@ export default class BohrModel extends HydrogenAtom {
 
     if ( photon.wasEmittedByAtom ||
          nCurrent === MOTHAConstants.MAX_STATE ||
-         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_ABSORPTION ) {
+         this.electron.timeInStateProperty.value < MIN_TIME_IN_STATE_BEFORE_ABSORPTION ) {
       return false;
     }
 
@@ -229,7 +230,7 @@ export default class BohrModel extends HydrogenAtom {
     const nCurrent = this.electron.nProperty.value;
 
     if ( photon.wasEmittedByAtom ||
-         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION ||
+         this.electron.timeInStateProperty.value < MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION ||
          nCurrent === MOTHAConstants.GROUND_STATE ) {
       return;
     }
@@ -291,7 +292,7 @@ export default class BohrModel extends HydrogenAtom {
     const nCurrent = this.electron.nProperty.value;
 
     if ( nCurrent === MOTHAConstants.GROUND_STATE ||
-         this.electron.timeInStateProperty.value < BohrModel.MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION ) {
+         this.electron.timeInStateProperty.value < MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION ) {
       return;
     }
 
@@ -348,9 +349,6 @@ export default class BohrModel extends HydrogenAtom {
     return this.electron.positionProperty.value;
   }
 }
-
-assert && assert( BohrModel.ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES,
-  'An orbit must exists for each electron state.' );
 
 /**
  * Gets the direction (in radians) for a photon that is emitted via spontaneous emission.
