@@ -14,8 +14,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron, { ElectronOptions } from './Electron.js';
 
-const ANGULAR_SPEED = Utils.toRadians( 600 ); // initial speed of the electron, in radians/s
-
 type SelfOptions = {
   angle?: number;
 };
@@ -47,7 +45,7 @@ export default class ClassicalSolarSystemElectron extends Electron {
       phetioReadOnly: true
     } );
 
-    this.angularSpeedProperty = new NumberProperty( ANGULAR_SPEED, {
+    this.angularSpeedProperty = new NumberProperty( Utils.toRadians( 600 ), {
       units: 'radians/s',
       tandem: options.tandem.createTandem( 'angularSpeedProperty' ),
       phetioDocumentation: 'Angular speed of the electron. For internal use only.',
