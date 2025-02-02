@@ -196,15 +196,6 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   }
 
   /**
-   * Excites the atom when it is in the metastable state (n,l,m) = (2,0,0) by firing an absorbable photon
-   * directly at the center of the atom. This moves the atom to a higher energy level.
-   */
-  public excite(): void {
-    assert && assert( this.metastableHandler.isMetastableStateProperty.value, 'excite should only be called when atom is in the metastable state.' );
-    this.metastableHandler.exciteAtom();
-  }
-
-  /**
    * Solves the electron's wavefunction.
    */
   public static solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {

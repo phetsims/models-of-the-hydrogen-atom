@@ -108,20 +108,20 @@ export default class MetastableHandler extends PhetioObject {
     if ( this.isActiveProperty.value ) {
       this.elapsedTimeProperty.value += dt;
       if ( this.elapsedTimeProperty.value >= EXCITE_ATOM_INTERVAL ) {
-        this.exciteAtom();
+        this.exciteElectron();
         this.elapsedTimeProperty.value = 0;
       }
     }
   }
 
   /**
-   * Attempts to excite the atom (take it to a higher state) by telling the light to emit one absorbable photon towards
+   * Attempts to excite the electron (take it to a higher state) by telling the light to emit one absorbable photon towards
    * the atom's center. The absorption wavelength that will take the electron to a higher state (n) is chosen at random.
    * This method is called from step() and from the 'Excite Atom' button listener.
    */
-  public exciteAtom(): void {
+  public exciteElectron(): void {
     assert && assert( this.isMetastableStateProperty.value,
-      'exciteAtom should only be called when the atom is in the metastable state.' );
+      'exciteElectron should only be called when the atom is in the metastable state.' );
 
     // Randomly choose an absorption wavelength. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/55.
     const wavelengths = photonAbsorptionModel.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );

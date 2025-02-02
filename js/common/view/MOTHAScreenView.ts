@@ -191,20 +191,21 @@ export default class MOTHAScreenView extends ScreenView {
     // * Then wait for the electron to get stuck in the metastable state, and verify that this dialog opens.
     // * Close this dialog, observe that an absorbable photon is fired at the atom, and the electron moves to
     //   a higher state.
+    const experiment = model.experiment;
     const experimentOopsDialog = new ExperimentOopsDialog( {
       hideCallback: () => {
 
         // While ExperimentOopsDialog is model, it's possible that PhET-iO may be used to change the sim state
         // while the dialog is open. So we need to check that the electron is still in the metastable state before
         // exciting it. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/109.
-        if ( model.experiment.metastableHandler.isMetastableStateProperty.value ) {
-          model.experiment.excite();
+        if ( experiment.metastableHandler.isMetastableStateProperty.value ) {
+          experiment.metastableHandler.exciteElectron();
         }
       },
       tandem: options.tandem.createTandem( 'experimentOopsDialog' )
     } );
     Multilink.multilink(
-      [ model.isExperimentProperty, model.experiment.metastableHandler.isMetastableStateProperty, model.lightSource.lightModeProperty ],
+      [ model.isExperimentProperty, experiment.metastableHandler.isMetastableStateProperty, model.lightSource.lightModeProperty ],
       ( isExperiment, isMetastableState, lightMode ) => {
         if ( isExperiment && isMetastableState && lightMode === 'monochromatic' ) {
           experimentOopsDialog.show();
