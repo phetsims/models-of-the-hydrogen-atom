@@ -15,10 +15,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
@@ -41,9 +38,6 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
   // Which representation to use.
   public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
 
-  // Position of the electron adjusted for the '3D height' view.
-  public readonly electron3DPositionProperty: TReadOnlyProperty<Vector2>;
-
   public constructor( providedOptions: DeBroglieModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, BohrModelOptions>()( {
@@ -54,12 +48,6 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
     }, providedOptions );
 
     super( options );
-
-    this.electron3DPositionProperty = new DerivedProperty( [ this.electron.positionProperty ], position => {
-      const x = position.x;
-      const yOffsetScaled = ( position.x - this.position.y ) * DeBroglieModel.ORBIT_3D_Y_SCALE;
-      return new Vector2( x, this.position.y + yOffsetScaled );
-    } );
 
     this.deBroglieRepresentationProperty = new StringUnionProperty( 'radialDistance', {
       validValues: DeBroglieRepresentationValues,
