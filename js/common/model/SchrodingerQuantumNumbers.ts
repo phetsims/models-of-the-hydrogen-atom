@@ -86,7 +86,7 @@ export default class SchrodingerQuantumNumbers {
    * @typescript-eslint/no-base-to-string
    */
   public toString(): string {
-    return `(n,l,m)=(${this.n},${this.l},${this.m})`;
+    return `(${this.n},${this.l},${this.m})`;
   }
 
   public equals( quantumNumbers: SchrodingerQuantumNumbers ): boolean {
