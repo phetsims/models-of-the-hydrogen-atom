@@ -45,6 +45,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
 
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.deBroglieStringProperty,
+      debugName: 'de Broglie',
       icon: DeBroglieNode.createIcon()
     }, providedOptions );
 

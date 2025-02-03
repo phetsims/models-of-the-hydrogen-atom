@@ -28,6 +28,9 @@ type SelfOptions = {
   // Name of the model shown in the UI.
   displayNameProperty: TReadOnlyProperty<string>;
 
+  // Name use in log and assertion messages, not in the UI.
+  debugName: string;
+
   tandemNamePrefix: string;
 
   // Icon used to represent the model in the UI.
@@ -42,6 +45,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
   public readonly position: Vector2;
   public readonly displayNameProperty: TReadOnlyProperty<string>;
+  public readonly debugName: string;
   public readonly icon: Node;
 
   // Notifies listeners by emitting when a photon is absorbed or emitted. Not all models absorb or emit photons,
@@ -67,6 +71,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
     this.position = position;
     this.displayNameProperty = options.displayNameProperty;
+    this.debugName = options.debugName;
     this.icon = options.icon;
     this.tandemNamePrefix = options.tandemNamePrefix;
 

@@ -74,7 +74,7 @@ type SelfOptions = {
 };
 
 export type BohrModelOptions = SelfOptions &
-  PickOptional<HydrogenAtomOptions, 'displayNameProperty' | 'icon' | 'tandemNamePrefix'> &
+  PickOptional<HydrogenAtomOptions, 'displayNameProperty' | 'debugName' | 'icon' | 'tandemNamePrefix'> &
   PickRequired<HydrogenAtomOptions, 'tandem'>;
 
 export default class BohrModel extends HydrogenAtom {
@@ -91,6 +91,7 @@ export default class BohrModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
+      debugName: 'Bohr',
       icon: BohrNode.createIcon(),
       tandemNamePrefix: 'bohr'
     }, providedOptions );
@@ -201,7 +202,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Absorb the photon.
-    phet.log && phet.log( `Absorbing ${MOTHASymbols.lambda}=${photon.wavelength}, n = ${nCurrent} -> ${nNew}` );
+    phet.log && phet.log( `${this.debugName}: absorbing ${MOTHASymbols.lambda}=${photon.wavelength}, n = ${nCurrent} -> ${nNew}` );
     this.photonAbsorbedEmitter.emit( photon );
 
     // Move the electron to the new higher state.
@@ -252,7 +253,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Emit a photon.
-    phet.log && phet.log( `Stimulated emission of ${MOTHASymbols.lambda}=${photon.wavelength}, n = ${nCurrent} -> ${nNew}` );
+    phet.log && phet.log( `${this.debugName}: stimulated emission of ${MOTHASymbols.lambda}=${photon.wavelength}, n = ${nCurrent} -> ${nNew}` );
     this.photonEmittedEmitter.emit(
       photon.wavelength,
       photon.positionProperty.value.plusXY( STIMULATED_EMISSION_X_OFFSET, 0 ),
@@ -316,7 +317,7 @@ export default class BohrModel extends HydrogenAtom {
     const wavelength = photonAbsorptionModel.getEmissionWavelength( nCurrent, nNew );
     const position = this.getSpontaneousEmissionPosition();
     const direction = getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value );
-    phet.log && phet.log( `Spontaneous emission of ${MOTHASymbols.lambda}=${wavelength}, n = ${nCurrent} -> ${nNew}` );
+    phet.log && phet.log( `${this.debugName}: spontaneous emission of ${MOTHASymbols.lambda}=${wavelength}, n = ${nCurrent} -> ${nNew}` );
     this.photonEmittedEmitter.emit( wavelength, position, direction, MOTHAColors.SPONTANEOUS_EMISSION_HALO_COLOR );
 
     // Move the electron to the new lower state.

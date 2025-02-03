@@ -60,6 +60,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.classicalSolarSystemStringProperty,
+      debugName: 'Classical Solar System',
       icon: ClassicalSolarSystemNode.createIcon(),
       tandemNamePrefix: 'classicalSolarSystem'
     }, providedOptions );
