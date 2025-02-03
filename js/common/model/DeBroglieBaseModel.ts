@@ -20,10 +20,11 @@ import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line phe
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import { DeBroglieModelOptions } from './DeBroglieModel.js';
 import Photon from './Photon.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type DeBroglieBaseModelOptions = SelfOptions & BohrModelOptions;
+export type DeBroglieBaseModelOptions = SelfOptions & StrictOmit<BohrModelOptions, 'createElectron'>;
 
 export default class DeBroglieBaseModel extends BohrModel {
 

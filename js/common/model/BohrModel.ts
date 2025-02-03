@@ -27,7 +27,7 @@
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -44,6 +44,8 @@ import Proton from './Proton.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Electron from './Electron.js';
+import QuantumElectron from './QuantumElectron.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -67,7 +69,9 @@ const MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION = 1;
 const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 assert && assert( ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES, 'An orbit must exists for each electron state.' );
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  createElectron?: ( atomPosition: Vector2, tandem: Tandem ) => QuantumElectron;
+};
 
 export type BohrModelOptions = SelfOptions &
   PickOptional<HydrogenAtomOptions, 'displayNameProperty' | 'icon' | 'tandemNamePrefix'> &
@@ -76,7 +80,7 @@ export type BohrModelOptions = SelfOptions &
 export default class BohrModel extends HydrogenAtom {
 
   public readonly proton: Proton;
-  public readonly electron: BohrElectron;
+  public readonly electron: QuantumElectron;
 
   // Change in orbit angle per dt for ground state orbit.
   protected static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
@@ -86,6 +90,8 @@ export default class BohrModel extends HydrogenAtom {
     const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
+      createElectron: ( atomPosition: Vector2, tandem: Tandem ) => new BohrElectron( atomPosition, tandem ),
+      position: new Vector2( 0, 0 ),
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
       icon: BohrNode.createIcon(),
       tandemNamePrefix: 'bohr'
@@ -97,7 +103,7 @@ export default class BohrModel extends HydrogenAtom {
       position: this.position
     } );
 
-    this.electron = new BohrElectron( this.position, options.tandem.createTandem( 'electron' ) );
+    this.electron = options.createElectron( this.position, options.tandem.createTandem( 'electron' ) );
   }
 
   public override reset(): void {
@@ -201,7 +207,7 @@ export default class BohrModel extends HydrogenAtom {
     this.photonAbsorbedEmitter.emit( photon );
 
     // Move the electron to the new higher state.
-    this.electron.nProperty.value = nNew;
+    this.electron.set_n( nNew );
 
     return true;
   }
@@ -257,7 +263,7 @@ export default class BohrModel extends HydrogenAtom {
     phet.log && phet.log( `Emit (Stimulated): ${MOTHASymbols.lambda}=${photon.wavelength}, n = ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.
-    this.electron.nProperty.value = nNew;
+    this.electron.set_n( nNew );
   }
 
   /**
@@ -316,7 +322,7 @@ export default class BohrModel extends HydrogenAtom {
     phet.log && phet.log( `Emit (Spontaneous): ${MOTHASymbols.lambda}=${wavelength}, n = ${nCurrent} -> ${nNew}` );
 
     // Move the electron to the new lower state.
-    this.electron.nProperty.value = nNew;
+    this.electron.set_n( nNew );
   }
 
   /**

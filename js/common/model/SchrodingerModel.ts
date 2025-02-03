@@ -38,7 +38,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -54,7 +53,8 @@ import LightSource from './LightSource.js';
 import MetastableHandler from './MetastableHandler.js';
 import PolynomialTerm from './PolynomialTerm.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import SchrodingerElectron from './SchrodingerElectron.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -64,9 +64,9 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
   // Quantum numbers (n,l,m) that specify the wavefunction for the electron.
   public readonly nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>;
-  private readonly _nlmProperty: Property<SchrodingerQuantumNumbers>;
 
   public readonly metastableHandler: MetastableHandler;
+
   private _isResetting = false; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59 temporary workaround for invalid nlm transition on reset
 
   public constructor( lightSource: LightSource, providedOptions: SchrodingerModelOptions ) {
@@ -74,6 +74,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     const options = optionize<SchrodingerModelOptions, SelfOptions, DeBroglieModelOptions>()( {
 
       // DeBroglieModelOptions
+      createElectron: ( atomPosition: Vector2, tandem: Tandem ) => new SchrodingerElectron( atomPosition, tandem ),
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.schrodingerStringProperty,
       icon: SchrodingerNode.createIcon(),
       tandemNamePrefix: 'schrodinger'
@@ -81,26 +82,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
     super( options );
 
-    // We would prefer that this be a DerivedProperty, but its derivation depends on its previous value.
-    //TODO Should nlmProperty be a Property of SchrodingerElectron?
-    this._nlmProperty = new Property( new SchrodingerQuantumNumbers( this.electron.nProperty.value, 0, 0 ), {
-      phetioValueType: SchrodingerQuantumNumbers.SchrodingerQuantumNumbersIO,
-      tandem: this.electron.tandem.createTandem( 'nlmProperty' ),
-      phetioDocumentation: 'The quantum numbers (n,l,m) that specify a wavefunction for the electron.',
-      phetioFeatured: true,
-      phetioReadOnly: true
-    } );
-    this.nlmProperty = this._nlmProperty;
-    phet.log && this.nlmProperty.lazyLink( ( nlmNew, nlmOld ) =>
-      phet.log( `SchrodingerModel: (n,l,m) = ${nlmOld.toString()} -> ${nlmNew.toString()}` ) );
-
-    // When n changes, compute the next state.
-    //TODO It would be preferable to derive nProperty from nlmProperty.
-    this.electron.nProperty.lazyLink( ( nNew, nOld ) => {
-      if ( !isSettingPhetioStateProperty.value && !this._isResetting ) {
-        this._nlmProperty.value = this.nlmProperty.value.getNextState( nNew );
-      }
-    } );
+    this.nlmProperty = ( this.electron as SchrodingerElectron ).nlmProperty; //TODO Get rid of cast.
 
     this.metastableHandler = new MetastableHandler( this.nlmProperty, lightSource,
       options.tandem.createTandem( 'metastableHandler' ) );
@@ -108,7 +90,6 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
   public override reset(): void {
     this._isResetting = true;
-    this._nlmProperty.reset();
     this.metastableHandler.reset();
     super.reset();
     this._isResetting = false;
