@@ -54,7 +54,6 @@ import MetastableHandler from './MetastableHandler.js';
 import PolynomialTerm from './PolynomialTerm.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import SchrodingerElectron from './SchrodingerElectron.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -65,24 +64,30 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   // Quantum numbers (n,l,m) that specify the wavefunction for the electron.
   public readonly nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>;
 
+  // Responsible for the case where the electron gets stuck in the metastable state (n,l,m) = (2,0,0).
   public readonly metastableHandler: MetastableHandler;
 
-  private _isResetting = false; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59 temporary workaround for invalid nlm transition on reset
+  // When reset is called, the value of nlmProperty may change in a way that violates state transition rules.
+  // This flag allows us to know when we are resetting, and ignore those violations.
+  // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59.
+  private _isResetting = false;
 
-  public constructor( lightSource: LightSource, providedOptions: SchrodingerModelOptions ) {
+  public constructor( position: Vector2, lightSource: LightSource, providedOptions: SchrodingerModelOptions ) {
+
+    const schrodingerElectron = new SchrodingerElectron( position, providedOptions.tandem.createTandem( 'electron' ) );
 
     const options = optionize<SchrodingerModelOptions, SelfOptions, DeBroglieModelOptions>()( {
 
       // DeBroglieModelOptions
-      createElectron: ( atomPosition: Vector2, tandem: Tandem ) => new SchrodingerElectron( atomPosition, tandem ),
+      electron: schrodingerElectron,
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.schrodingerStringProperty,
       icon: SchrodingerNode.createIcon(),
       tandemNamePrefix: 'schrodinger'
     }, providedOptions );
 
-    super( options );
+    super( position, options );
 
-    this.nlmProperty = ( this.electron as SchrodingerElectron ).nlmProperty; //TODO Get rid of cast.
+    this.nlmProperty = schrodingerElectron.nlmProperty;
 
     this.metastableHandler = new MetastableHandler( this.nlmProperty, lightSource,
       options.tandem.createTandem( 'metastableHandler' ) );
@@ -99,14 +104,23 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     return this._isResetting;
   }
 
+  /**
+   * Convenience method for getting n, the principal quantum number. See SchrodingerQuantumNumbers for details.
+   */
   private get n(): number {
     return this.nlmProperty.value.n;
   }
 
+  /**
+   * Convenience method for getting l, the azimuthal quantum number. See SchrodingerQuantumNumbers for details.
+   */
   private get l(): number {
     return this.nlmProperty.value.l;
   }
 
+  /**
+   * Convenience method for getting m, the magnetic quantum number. See SchrodingerQuantumNumbers for details.
+   */
   private get m(): number {
     return this.nlmProperty.value.m;
   }

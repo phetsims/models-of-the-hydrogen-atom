@@ -69,7 +69,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
   public static readonly PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 
-  public constructor( providedOptions: PlumPuddingModelOptions ) {
+  public constructor( position: Vector2, providedOptions: PlumPuddingModelOptions ) {
 
     const options = optionize<PlumPuddingModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
@@ -79,7 +79,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       tandemNamePrefix: 'plumPudding'
     }, providedOptions );
 
-    super( options );
+    super( position, options );
 
     this.electron = new PlumPuddingElectron( {
       position: this.position,

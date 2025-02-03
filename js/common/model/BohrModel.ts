@@ -45,7 +45,7 @@ import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Electron from './Electron.js';
 import QuantumElectron from './QuantumElectron.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -70,7 +70,7 @@ const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 assert && assert( ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES, 'An orbit must exists for each electron state.' );
 
 type SelfOptions = {
-  createElectron?: ( atomPosition: Vector2, tandem: Tandem ) => QuantumElectron;
+  electron?: QuantumElectron;
 };
 
 export type BohrModelOptions = SelfOptions &
@@ -85,25 +85,23 @@ export default class BohrModel extends HydrogenAtom {
   // Change in orbit angle per dt for ground state orbit.
   protected static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
 
-  public constructor( providedOptions: BohrModelOptions ) {
+  public constructor( position: Vector2, providedOptions: BohrModelOptions ) {
 
-    const options = optionize<BohrModelOptions, SelfOptions, HydrogenAtomOptions>()( {
+    const options = optionize<BohrModelOptions, StrictOmit<SelfOptions, 'electron'>, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
-      createElectron: ( atomPosition: Vector2, tandem: Tandem ) => new BohrElectron( atomPosition, tandem ),
-      position: new Vector2( 0, 0 ),
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
       icon: BohrNode.createIcon(),
       tandemNamePrefix: 'bohr'
     }, providedOptions );
 
-    super( options );
+    super( position, options );
 
     this.proton = new Proton( {
       position: this.position
     } );
 
-    this.electron = options.createElectron( this.position, options.tandem.createTandem( 'electron' ) );
+    this.electron = options.electron || new BohrElectron( position, options.tandem.createTandem( 'electron' ) );
   }
 
   public override reset(): void {

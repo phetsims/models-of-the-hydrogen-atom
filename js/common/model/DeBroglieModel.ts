@@ -25,6 +25,7 @@ import DeBroglieBaseModel from './DeBroglieBaseModel.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
 import Photon from './Photon.js';
 import isResettingAllProperty from '../../../../scenery-phet/js/isResettingAllProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -38,7 +39,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
   // Which representation to use.
   public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
 
-  public constructor( providedOptions: DeBroglieModelOptions ) {
+  public constructor( position: Vector2, providedOptions: DeBroglieModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, BohrModelOptions>()( {
 
@@ -47,7 +48,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
       icon: DeBroglieNode.createIcon()
     }, providedOptions );
 
-    super( options );
+    super( position, options );
 
     this.deBroglieRepresentationProperty = new StringUnionProperty( 'radialDistance', {
       validValues: DeBroglieRepresentationValues,

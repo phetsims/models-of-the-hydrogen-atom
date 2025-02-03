@@ -32,9 +32,6 @@ type SelfOptions = {
 
   // Icon used to represent the model in the UI.
   icon: Node;
-
-  // Position of the atom's center in the model coordinate frame.
-  position?: Vector2;
 };
 
 export type HydrogenAtomOptions = SelfOptions &
@@ -43,9 +40,9 @@ export type HydrogenAtomOptions = SelfOptions &
 
 export default abstract class HydrogenAtom extends PhetioObject {
 
+  public readonly position: Vector2;
   public readonly displayNameProperty: TReadOnlyProperty<string>;
   public readonly icon: Node;
-  public readonly position: Vector2;
 
   // Notifies listeners by emitting when a photon is absorbed or emitted. Not all models absorb or emit photons,
   // and billiard ball does not even have an electron. But it simplifies programming for us and the PhET-iO client
@@ -56,12 +53,9 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
   public readonly tandemNamePrefix: string;
 
-  protected constructor( providedOptions: HydrogenAtomOptions ) {
+  protected constructor( position: Vector2, providedOptions: HydrogenAtomOptions ) {
 
     const options = optionize<HydrogenAtomOptions, SelfOptions, PhetioObjectOptions>()( {
-
-      // SelfOptions
-      position: new Vector2( 0, 0 ),
 
       // PhetioObjectOptions
       isDisposable: false,
@@ -71,9 +65,9 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
     super( options );
 
+    this.position = position;
     this.displayNameProperty = options.displayNameProperty;
     this.icon = options.icon;
-    this.position = options.position;
     this.tandemNamePrefix = options.tandemNamePrefix;
 
     this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {

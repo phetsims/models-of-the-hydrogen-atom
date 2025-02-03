@@ -7,6 +7,7 @@
  */
 
 import Range from '../../../dot/js/Range.js';
+import Vector2 from '../../../dot/js/Vector2.js';
 import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNode.js';
 import TimeSpeed from '../../../scenery-phet/js/TimeSpeed.js';
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
@@ -47,6 +48,9 @@ const MOTHAConstants = {
   // margins for all ScreenView instances
   SCREEN_VIEW_X_MARGIN: 15,
   SCREEN_VIEW_Y_MARGIN: 15,
+
+  // Position of the atom's center in the model coordinate frame.
+  ATOM_POSITION: new Vector2( 0, 0 ),
 
   // This value is the same as the Java version, to preserve the same relative sizes of things in the model.
   // This constant was ANIMATION_BOX_SIZE in HAConstants.java.

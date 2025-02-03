@@ -24,7 +24,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type DeBroglieBaseModelOptions = SelfOptions & StrictOmit<BohrModelOptions, 'createElectron'>;
+export type DeBroglieBaseModelOptions = SelfOptions & StrictOmit<BohrModelOptions, 'electron'>;
 
 export default class DeBroglieBaseModel extends BohrModel {
 
@@ -36,7 +36,7 @@ export default class DeBroglieBaseModel extends BohrModel {
   // photon is "sufficiently close" to the wave.
   protected static readonly CLOSENESS_FOR_COLLISION = Photon.RADIUS + 8;
 
-  protected constructor( providedOptions: DeBroglieBaseModelOptions ) {
+  protected constructor( position: Vector2, providedOptions: DeBroglieBaseModelOptions ) {
 
     const options = optionize<DeBroglieModelOptions, SelfOptions, BohrModelOptions>()( {
 
@@ -46,7 +46,7 @@ export default class DeBroglieBaseModel extends BohrModel {
       tandemNamePrefix: 'deBroglie'
     }, providedOptions );
 
-    super( options );
+    super( position, options );
   }
 
   /**

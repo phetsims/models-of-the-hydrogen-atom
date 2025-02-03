@@ -25,6 +25,7 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import BilliardBallNode from '../view/BilliardBallNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -35,7 +36,7 @@ export default class BilliardBallModel extends HydrogenAtom {
   // Radius of the billiard ball, in unitless model coordinates.
   public static readonly RADIUS = 30;
 
-  public constructor( providedOptions: BilliardBallModelOptions ) {
+  public constructor( position: Vector2, providedOptions: BilliardBallModelOptions ) {
 
     const options = optionize<BilliardBallModelOptions, SelfOptions, HydrogenAtomOptions>()( {
 
@@ -45,7 +46,7 @@ export default class BilliardBallModel extends HydrogenAtom {
       tandemNamePrefix: 'billiardBall'
     }, providedOptions );
 
-    super( options );
+    super( position, options );
   }
 
   public override step( dt: number ): void {

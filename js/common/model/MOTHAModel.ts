@@ -98,7 +98,7 @@ export default class MOTHAModel implements TModel {
       phetioFeatured: true
     } );
 
-    this.experiment = new Experiment( lightSource, {
+    this.experiment = new Experiment( MOTHAConstants.ATOM_POSITION, lightSource, {
       tandem: tandem.createTandem( 'experiment' )
     } );
 

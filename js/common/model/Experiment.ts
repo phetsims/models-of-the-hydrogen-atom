@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -19,7 +20,7 @@ type ExperimentOptions = SelfOptions & PickRequired<SchrodingerModelOptions, 'ta
 
 export default class Experiment extends SchrodingerModel {
 
-  public constructor( lightSource: LightSource, providedOptions: ExperimentOptions ) {
+  public constructor( position: Vector2, lightSource: LightSource, providedOptions: ExperimentOptions ) {
 
     const options = optionize<ExperimentOptions, SelfOptions, SchrodingerModelOptions>()( {
 
@@ -27,7 +28,7 @@ export default class Experiment extends SchrodingerModel {
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.experimentStringProperty
     }, providedOptions );
 
-    super( lightSource, options );
+    super( position, lightSource, options );
   }
 }
 

@@ -38,27 +38,27 @@ export default class SpectraModel extends MOTHAModel {
     // Group all atomic models under this tandem.
     const atomicModelsTandem = tandem.createTandem( 'atomicModels' );
 
-    const billiardBallModel = new BilliardBallModel( {
+    const billiardBallModel = new BilliardBallModel( MOTHAConstants.ATOM_POSITION, {
       tandem: atomicModelsTandem.createTandem( 'billiardBallModel' )
     } );
 
-    const plumPuddingModel = new PlumPuddingModel( {
+    const plumPuddingModel = new PlumPuddingModel( MOTHAConstants.ATOM_POSITION, {
       tandem: atomicModelsTandem.createTandem( 'plumPuddingModel' )
     } );
 
-    const classicalSolarSystemModel = new ClassicalSolarSystemModel( {
+    const classicalSolarSystemModel = new ClassicalSolarSystemModel( MOTHAConstants.ATOM_POSITION, {
       tandem: atomicModelsTandem.createTandem( 'classicalSolarSystemModel' )
     } );
 
-    const bohrModel = new BohrModel( {
+    const bohrModel = new BohrModel( MOTHAConstants.ATOM_POSITION, {
       tandem: atomicModelsTandem.createTandem( 'bohrModel' )
     } );
 
-    const deBroglieModel = new DeBroglieModel( {
+    const deBroglieModel = new DeBroglieModel( MOTHAConstants.ATOM_POSITION, {
       tandem: atomicModelsTandem.createTandem( 'deBroglieModel' )
     } );
 
-    const schrodingerModel = new SchrodingerModel( lightSource, {
+    const schrodingerModel = new SchrodingerModel( MOTHAConstants.ATOM_POSITION, lightSource, {
       tandem: atomicModelsTandem.createTandem( 'schrodingerModel' )
     } );
 
