@@ -21,7 +21,7 @@ const MOTHASymbols = {
   lStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.lStringProperty ),
   mStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.mStringProperty ),
 
-  // Schrodinger electron orbitals, with markup for RichText
+  // Schrodinger electron orbital shapes, with markup for RichText
   sStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.sStringProperty ),
   pStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.pStringProperty ),
   dStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.dStringProperty ),
