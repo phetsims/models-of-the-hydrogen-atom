@@ -25,7 +25,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
 
   public constructor( tandem: Tandem ) {
 
-    const zoomedInBox = new ZoomedInBox( MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE );
+    const zoomedInBox = new ZoomedInBox();
 
     const lightSource = new LightSource( zoomedInBox, tandem.createTandem( 'lightSource' ) );
 

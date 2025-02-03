@@ -48,13 +48,6 @@ const MOTHAConstants = {
   // Position of all hydrogen atoms, in the model coordinate frame.
   ATOM_POSITION: new Vector2( 0, 0 ),
 
-  // This value is the same as the Java version, to preserve the same relative sizes of things in the model.
-  // This constant was ANIMATION_BOX_SIZE in HAConstants.java.
-  ZOOMED_IN_BOX_MODEL_SIZE: 475,
-
-  // This value is specific to the HTML5 version.
-  ZOOMED_IN_BOX_VIEW_SIZE: 400,
-
   // Range for the monochromatic light slider.
   // Min is slightly below 94 nm for the 1 -> 6 state transition.
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),

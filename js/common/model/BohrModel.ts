@@ -64,7 +64,7 @@ const MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION = 1;
 const MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION = 1;
 
 // Radius of each electron orbit, ordered by increasing electron state number.
-// These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
+// These values are distorted to fit in zoomedInBox, and are specific to ZoomedInBox.SIZE.
 const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 assert && assert( ORBIT_RADII.length === QuantumElectron.NUMBER_OF_STATES, 'An orbit must exists for each electron state.' );
 

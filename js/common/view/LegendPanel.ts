@@ -14,13 +14,14 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import ElectronNode from './ElectronNode.js';
 import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
+import ZoomedInBoxNode from './ZoomedInBoxNode.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 
 // Make the icons appear to be the same size as particles in the zoomed-in box.
-const ICON_SCALE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE;
+const ICON_SCALE = ZoomedInBoxNode.SIZE / ZoomedInBox.SIZE;
 
 const PHOTON_ICON_WAVELENGTH = 410; // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/61
 
