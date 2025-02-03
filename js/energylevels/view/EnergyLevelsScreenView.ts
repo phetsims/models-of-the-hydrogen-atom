@@ -18,8 +18,6 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 
 export default class EnergyLevelsScreenView extends MOTHAScreenView {
 
-  private readonly resetAllEnergyLevelsScreenView: () => void;
-
   public constructor( model: EnergyLevelsModel, tandem: Tandem ) {
 
     // Parent for any popups.
@@ -48,15 +46,6 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
       } ),
       tandem: tandem
     } );
-
-    this.resetAllEnergyLevelsScreenView = () => {
-      electronEnergyLevelAccordionBox.reset();
-    };
-  }
-
-  protected override resetAll(): void {
-    super.resetAll();
-    this.resetAllEnergyLevelsScreenView();
   }
 }
 

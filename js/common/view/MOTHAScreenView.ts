@@ -46,6 +46,7 @@ type SelfOptions = {
   zoomedInBoxNode: ZoomedInBoxNode;
 
   // Optional accordion box with Electron Energy Level diagrams, present in the Energy Levels screen.
+  // If provided, MOTHAScreenView will take responsibility for resetting.
   electronEnergyLevelAccordionBox?: ElectronEnergyLevelAccordionBox | null;
 
   // x-offset of lightNode from the left edge of layoutBounds.
@@ -66,9 +67,12 @@ type MOTHAScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tan
 export default class MOTHAScreenView extends ScreenView {
 
   private readonly model: MOTHAModel;
+
+  // Box that show the zoom-in view of the hydrogen atom.
   private readonly zoomedInBoxNode: ZoomedInBoxNode;
+
+  // Optional accordion box that displays Electron Energy Level diagrams.
   private readonly electronEnergyLevelAccordionBox: ElectronEnergyLevelAccordionBox | null;
-  private readonly resetAllMOTHAScreenView: () => void;
 
   protected constructor( model: MOTHAModel, providedOptions: MOTHAScreenViewOptions ) {
 
@@ -131,7 +135,7 @@ export default class MOTHAScreenView extends ScreenView {
       visibleProperty: boxOfHydrogenNode.visibleProperty
     } );
 
-    // switches the model mode between Experiment and Model
+    // Switches between Experiment and Model.
     const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty,
       options.tandem.createTandem( 'experimentModelSwitch' ) );
 
@@ -154,16 +158,14 @@ export default class MOTHAScreenView extends ScreenView {
     const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty,
       model.stepOnce.bind( model ), options.tandem.createTandem( 'timeControlNode' ) );
 
-    this.resetAllMOTHAScreenView = () => {
-      model.reset();
-      transitionsDialog.reset();
-      spectrometerAccordionBox.reset();
-      spectrometerSnapshotsDialog.hide();
-    };
-
-    // Reset All button
     const resetAllButton = new ResetAllButton( {
-      listener: () => this.resetAll(),
+      listener: () => {
+        model.reset();
+        transitionsDialog.reset();
+        spectrometerAccordionBox.reset();
+        spectrometerSnapshotsDialog.hide();
+        this.electronEnergyLevelAccordionBox && this.electronEnergyLevelAccordionBox.reset();
+      },
       right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'resetAllButton' )
@@ -319,11 +321,13 @@ export default class MOTHAScreenView extends ScreenView {
       transitionsDialog,
       options.popupsParent
     ];
+
+    // Add optional electronEnergyLevelAccordionBox before resetAllButton.
     if ( this.electronEnergyLevelAccordionBox ) {
-      // Add optional electronEnergyLevelAccordionBox before resetAllButton.
       const index = screenViewRootNodeChildren.indexOf( resetAllButton );
       screenViewRootNodeChildren.splice( index, 0, this.electronEnergyLevelAccordionBox );
     }
+
     const screenViewRootNode = new Node( {
       children: screenViewRootNodeChildren
     } );
@@ -338,11 +342,13 @@ export default class MOTHAScreenView extends ScreenView {
       modelVBox,
       this.zoomedInBoxNode
     ];
+
+    // Add optional electronEnergyLevelAccordionBox before modelBox.
     if ( this.electronEnergyLevelAccordionBox ) {
-      // Add optional electronEnergyLevelAccordionBox before modelBox.
       const index = playAreaPDOMOrder.indexOf( modelVBox );
       playAreaPDOMOrder.splice( index, 0, this.electronEnergyLevelAccordionBox );
     }
+
     this.pdomPlayAreaNode.pdomOrder = playAreaPDOMOrder;
 
     // Control Area focus order
@@ -351,10 +357,6 @@ export default class MOTHAScreenView extends ScreenView {
       timeControlNode,
       resetAllButton
     ];
-  }
-
-  protected resetAll(): void {
-    this.resetAllMOTHAScreenView();
   }
 
   /**
