@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
 import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
 import { Node, RichText } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -21,21 +21,21 @@ const LABEL_FONT = new MathSymbolFont( 18 );
 const LABEL_OFFSET = 4;
 const COLOR_PROPERTY = MOTHAColors.xzAxesColorProperty;
 
+const ARROW_NODE_OPTIONS: ArrowNodeOptions = {
+  fill: COLOR_PROPERTY,
+  stroke: null,
+  headHeight: 6,
+  headWidth: 6,
+  tailWidth: 1
+};
+
 export default class XZAxesNode extends Node {
 
   public constructor( tandem: Tandem ) {
 
-    const arrowNodeOptions = {
-      fill: COLOR_PROPERTY,
-      stroke: null,
-      headHeight: 6,
-      headWidth: 6,
-      tailWidth: 1
-    };
-
     // Axes, with their tails at (0,0)
-    const xAxisNode = new ArrowNode( 0, 0, ARROW_LENGTH, 0, arrowNodeOptions );
-    const zAxisNode = new ArrowNode( 0, 0, 0, -ARROW_LENGTH, arrowNodeOptions );
+    const xAxisNode = new ArrowNode( 0, 0, ARROW_LENGTH, 0, ARROW_NODE_OPTIONS );
+    const zAxisNode = new ArrowNode( 0, 0, 0, -ARROW_LENGTH, ARROW_NODE_OPTIONS );
 
     const xText = new RichText( MOTHASymbols.xStringProperty, {
       font: LABEL_FONT,
