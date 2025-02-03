@@ -50,8 +50,8 @@ export default class Spectrometer extends PhetioObject {
   public constructor( hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {
 
     super( {
-      tandem: tandem,
       isDisposable: false,
+      tandem: tandem,
       phetioFeatured: true,
       phetioState: false
     } );
@@ -82,7 +82,7 @@ export default class Spectrometer extends PhetioObject {
     this.nextSnapshotNumberProperty = new NumberProperty( 1, {
       numberType: 'Integer',
       tandem: tandem.createTandem( 'nextSnapshotNumberProperty' ),
-      phetioDocumentation: 'This is the number that will be assigned to the next snapshot that is taken. ' +
+      phetioDocumentation: 'The number that will be assigned to the next snapshot that is taken. ' +
                            'Snapshots are numbered using consecutive integers, starting from 1. ',
       phetioReadOnly: true
     } );
@@ -133,6 +133,9 @@ export default class Spectrometer extends PhetioObject {
     // Do not reset enabledProperty. It is controlled by SpectrometerAccordionBox, so that we're recording data only when expanded.
   }
 
+  /**
+   * Clears the spectrometer by removing all data points.
+   */
   public clear(): void {
     this.dataPointsProperty.value = [];
   }

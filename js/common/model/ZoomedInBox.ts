@@ -18,6 +18,9 @@ export default class ZoomedInBox extends Bounds2 {
     super( -apothem, -apothem, apothem, apothem );
   }
 
+  /**
+   * Whether the box contains the specified photon.
+   */
   public containsPhoton( photon: Photon ): boolean {
     return this.containsPoint( photon.positionProperty.value );
   }
