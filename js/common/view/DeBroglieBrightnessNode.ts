@@ -20,9 +20,9 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import OrbitsNode from './OrbitsNode.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import QuantumElectron from '../model/QuantumElectron.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
 // tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of
@@ -79,7 +79,7 @@ class RingNode extends Node {
 
     // Pre-allocate the maximum number of polygon (Path) nodes. Based on the radius of the electron's current orbit,
     // some subset of these polygons will actually be added to the scene graph.
-    const maxRadius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( MOTHAConstants.MAX_STATE ) );
+    const maxRadius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( QuantumElectron.MAX_STATE ) );
     const maxPolygons = calculateNumberOfPolygons( maxRadius );
     this.polygonNodes = [];
     for ( let i = 0; i < maxPolygons; i++ ) {

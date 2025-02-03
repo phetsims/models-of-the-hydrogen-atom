@@ -32,7 +32,6 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import BohrNode from '../view/BohrNode.js'; // eslint-disable-line phet/no-view-imported-from-model
@@ -67,7 +66,7 @@ const MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION = 1;
 // Radius of each electron orbit, ordered by increasing electron state number.
 // These values are distorted to fit in zoomedInBox, and are specific to MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE.
 const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
-assert && assert( ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES, 'An orbit must exists for each electron state.' );
+assert && assert( ORBIT_RADII.length === QuantumElectron.NUMBER_OF_STATES, 'An orbit must exists for each electron state.' );
 
 type SelfOptions = {
 
@@ -164,7 +163,7 @@ export default class BohrModel extends HydrogenAtom {
    * @param n - the principal quantum number that describes the electron's state
    */
   public static getElectronOrbitRadius( n: number ): number {
-    return ORBIT_RADII[ n - MOTHAConstants.GROUND_STATE ];
+    return ORBIT_RADII[ n - QuantumElectron.GROUND_STATE ];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -195,7 +194,7 @@ export default class BohrModel extends HydrogenAtom {
     const nCurrent = this.electron.nProperty.value;
 
     if ( photon.wasEmittedByAtom ||
-         nCurrent === MOTHAConstants.MAX_STATE ||
+         nCurrent === QuantumElectron.MAX_STATE ||
          this.electron.timeInStateProperty.value < MIN_TIME_IN_STATE_BEFORE_ABSORPTION ) {
       return false;
     }
@@ -247,7 +246,7 @@ export default class BohrModel extends HydrogenAtom {
 
     if ( photon.wasEmittedByAtom ||
          this.electron.timeInStateProperty.value < MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION ||
-         nCurrent === MOTHAConstants.GROUND_STATE ) {
+         nCurrent === QuantumElectron.GROUND_STATE ) {
       return;
     }
 
@@ -288,8 +287,8 @@ export default class BohrModel extends HydrogenAtom {
    * Stimulated emission involves a transition to a lower energy state, so a lower value of n.
    */
   protected stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
-    assert && assert( nOld >= MOTHAConstants.GROUND_STATE && nOld <= MOTHAConstants.MAX_STATE, `invalid nOld: ${nOld}` );
-    assert && assert( nNew >= MOTHAConstants.GROUND_STATE && nNew <= MOTHAConstants.MAX_STATE, `invalid nNew: ${nNew}` );
+    assert && assert( nOld >= QuantumElectron.GROUND_STATE && nOld <= QuantumElectron.MAX_STATE, `invalid nOld: ${nOld}` );
+    assert && assert( nNew >= QuantumElectron.GROUND_STATE && nNew <= QuantumElectron.MAX_STATE, `invalid nNew: ${nNew}` );
     return nOld > nNew;
   }
 
@@ -306,7 +305,7 @@ export default class BohrModel extends HydrogenAtom {
 
     const nCurrent = this.electron.nProperty.value;
 
-    if ( nCurrent === MOTHAConstants.GROUND_STATE ||
+    if ( nCurrent === QuantumElectron.GROUND_STATE ||
          this.electron.timeInStateProperty.value < MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION ) {
       return;
     }
@@ -348,7 +347,7 @@ export default class BohrModel extends HydrogenAtom {
    */
   protected chooseLower_n(): number | null {
     const n = this.electron.nProperty.value;
-    return ( n === MOTHAConstants.GROUND_STATE ) ? null : dotRandom.nextIntBetween( MOTHAConstants.GROUND_STATE, n - 1 );
+    return ( n === QuantumElectron.GROUND_STATE ) ? null : dotRandom.nextIntBetween( QuantumElectron.GROUND_STATE, n - 1 );
   }
 
   /**

@@ -25,6 +25,11 @@ const E1 = -13.6;
 
 export default abstract class QuantumElectron extends Electron {
 
+  // Values for n, which is often referred to as the 'electron state'.
+  public static readonly GROUND_STATE = 1;
+  public static readonly MAX_STATE = 6;
+  public static readonly NUMBER_OF_STATES = QuantumElectron.MAX_STATE - QuantumElectron.GROUND_STATE + 1;
+
   // n, the principal quantum number.
   public readonly nProperty: TReadOnlyProperty<number>;
 
@@ -108,5 +113,7 @@ export default abstract class QuantumElectron extends Electron {
    */
   public abstract set_n( n: number ): void;
 }
+
+assert && assert( QuantumElectron.GROUND_STATE === 1, 'A fundamental assumption of this sim is that n=1 is the ground state.' );
 
 modelsOfTheHydrogenAtom.register( 'QuantumElectron', QuantumElectron );

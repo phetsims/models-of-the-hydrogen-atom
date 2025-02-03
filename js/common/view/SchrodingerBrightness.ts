@@ -15,7 +15,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
-import MOTHAConstants from '../MOTHAConstants.js';
+import QuantumElectron from '../model/QuantumElectron.js';
 
 const NUMBER_OF_HORIZONTAL_CELLS = 40;
 const NUMBER_OF_VERTICAL_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
@@ -41,7 +41,7 @@ export default class SchrodingerBrightness {
 
     // Initialize brightness entries to null.
     this.cache = [];
-    for ( let n = 1; n <= MOTHAConstants.MAX_STATE; n++ ) {
+    for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
       this.cache[ n ] = [];
       for ( let l = 0; l <= n - 1; l++ ) {
         this.cache[ n ][ l ] = [];

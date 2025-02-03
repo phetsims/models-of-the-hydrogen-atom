@@ -14,13 +14,14 @@ import BohrModel from '../model/BohrModel.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAColors from '../MOTHAColors.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import QuantumElectron from '../model/QuantumElectron.js';
 
 export default class OrbitsNode extends Path {
 
   public constructor( hydrogenAtomPosition: Vector2, modelViewTransform: ModelViewTransform2 ) {
 
     const shape = new Shape();
-    for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
+    for ( let n = QuantumElectron.GROUND_STATE; n <= QuantumElectron.MAX_STATE; n++ ) {
       const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
       shape.circle( 0, 0, radius );
       shape.newSubpath();

@@ -9,9 +9,9 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import Utils from '../../../../dot/js/Utils.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import QuantumElectron from './QuantumElectron.js';
 
 // Transition for n, the principal quantum number that represents the electron's state.
 type StateTransition = {
@@ -27,8 +27,8 @@ class PhotonAbsorptionModel {
 
     // Instantiate and populate the map.
     this.map = new Map<number, StateTransition>();
-    for ( let n1 = MOTHAConstants.GROUND_STATE; n1 < MOTHAConstants.MAX_STATE; n1++ ) {
-      for ( let n2 = MOTHAConstants.MAX_STATE; n2 > n1; n2-- ) {
+    for ( let n1 = QuantumElectron.GROUND_STATE; n1 < QuantumElectron.MAX_STATE; n1++ ) {
+      for ( let n2 = QuantumElectron.MAX_STATE; n2 > n1; n2-- ) {
         const wavelength = computeAbsorptionWavelength( n1, n2 );
         const transition = { n1: n1, n2: n2 };
         this.map.set( wavelength, transition );
@@ -69,7 +69,7 @@ class PhotonAbsorptionModel {
    */
   public getAbsorptionWavelengths( n: number ): number[] {
     assert && assert( Number.isInteger( n ), `n should be an integer: ${n}` );
-    assert && assert( n >= MOTHAConstants.GROUND_STATE && n < MOTHAConstants.MAX_STATE, `invalid n=${n}` );
+    assert && assert( n >= QuantumElectron.GROUND_STATE && n < QuantumElectron.MAX_STATE, `invalid n=${n}` );
 
     const wavelengths: number[] = [];
     for ( const [ wavelength, transition ] of this.map ) {
@@ -126,7 +126,7 @@ class PhotonAbsorptionModel {
    */
   public getLowerStateForWavelength( nCurrent: number, wavelength: number ): number | null {
     let nNew: number | null = null;
-    for ( let n = MOTHAConstants.GROUND_STATE; n < nCurrent && nNew === null; n++ ) {
+    for ( let n = QuantumElectron.GROUND_STATE; n < nCurrent && nNew === null; n++ ) {
       if ( wavelength === this.getAbsorptionWavelength( n, nCurrent ) ) {
         nNew = n;
       }
@@ -140,7 +140,7 @@ class PhotonAbsorptionModel {
    */
   public getHigherStateForWavelength( nCurrent: number, wavelength: number ): number | null {
     let nNew: number | null = null;
-    for ( let n = nCurrent + 1; n <= MOTHAConstants.MAX_STATE && nNew === null; n++ ) {
+    for ( let n = nCurrent + 1; n <= QuantumElectron.MAX_STATE && nNew === null; n++ ) {
       const transitionWavelength = this.getAbsorptionWavelength( nCurrent, n );
       if ( wavelength === transitionWavelength ) {
         nNew = n;
@@ -154,9 +154,9 @@ class PhotonAbsorptionModel {
  * Computes the wavelength that is absorbed when the electron transitions from state n1 to state n2, where n2 > n1.
  */
 function computeAbsorptionWavelength( n1: number, n2: number ): number {
-  assert && assert( MOTHAConstants.GROUND_STATE === 1 );
-  assert && assert( Number.isInteger( n1 ) && n1 >= MOTHAConstants.GROUND_STATE, `bad n1=${n1}` );
-  assert && assert( Number.isInteger( n2 ) && n2 <= MOTHAConstants.MAX_STATE, `bad n2=${n2}` );
+  assert && assert( QuantumElectron.GROUND_STATE === 1 );
+  assert && assert( Number.isInteger( n1 ) && n1 >= QuantumElectron.GROUND_STATE, `bad n1=${n1}` );
+  assert && assert( Number.isInteger( n2 ) && n2 <= QuantumElectron.MAX_STATE, `bad n2=${n2}` );
   assert && assert( n1 < n2, `n1=${n1} must be < n2=${n2}` );
 
   // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.

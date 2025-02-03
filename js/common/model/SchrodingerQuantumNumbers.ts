@@ -14,8 +14,8 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import chooseWeightedValue, { WeightedValue } from './chooseWeightedValue.js';
+import QuantumElectron from './QuantumElectron.js';
 
 /*
  * This array defines the transition strengths for n (the primary quantum number) to lower values of n.
@@ -31,7 +31,7 @@ const TRANSITION_STRENGTHS = [
   [ 0.69, 0.11, 0, 0.04 ], // 5 -> 1, 5 -> 2, 5 -> 3, 5 -> 4
   [ 0.39, 0.06, 0.02, 0, 0 ] // 6 -> 1, 6 -> 2, 6 -> 3, 6 -> 4, 6 -> 5
 ];
-assert && assert( TRANSITION_STRENGTHS.length === MOTHAConstants.NUMBER_OF_STATES );
+assert && assert( TRANSITION_STRENGTHS.length === QuantumElectron.NUMBER_OF_STATES );
 assert && assert( _.every( TRANSITION_STRENGTHS, ( entry, index ) => entry.length === index ) );
 
 // This should match STATE_SCHEMA, but with JavaScript types.
@@ -97,7 +97,7 @@ export default class SchrodingerQuantumNumbers {
    * Gets the next (n,l,m) state for a new value of n. Values for l and m are chosen according to state transition rules.
    */
   public getNextState( nNext: number ): SchrodingerQuantumNumbers {
-    assert && assert( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext <= MOTHAConstants.MAX_STATE, `invalid nNext=${nNext}` );
+    assert && assert( Number.isInteger( nNext ) && nNext >= QuantumElectron.GROUND_STATE && nNext <= QuantumElectron.MAX_STATE, `invalid nNext=${nNext}` );
 
     // Compute values for l and m.
     const lNext = this.choose_l( nNext );
@@ -172,7 +172,7 @@ export default class SchrodingerQuantumNumbers {
       nNext = value;
     }
 
-    assert && assert( nNext === null || ( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext < n ),
+    assert && assert( nNext === null || ( Number.isInteger( nNext ) && nNext >= QuantumElectron.GROUND_STATE && nNext < n ),
       `invalid nNext: (${this.n},${this.l},${this.m}) -> (${nNext},?,?)` );
     return nNext;
   }
@@ -182,7 +182,7 @@ export default class SchrodingerQuantumNumbers {
    * The new value l' must be in the range [0,n-1], and abs(l-l') must be 1.
    */
   private choose_l( nNext: number ): number {
-    assert && assert( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext <= MOTHAConstants.MAX_STATE, `invalid nNext=${nNext}` );
+    assert && assert( Number.isInteger( nNext ) && nNext >= QuantumElectron.GROUND_STATE && nNext <= QuantumElectron.MAX_STATE, `invalid nNext=${nNext}` );
 
     const l = this.l;
     let lNext;
@@ -216,7 +216,7 @@ export default class SchrodingerQuantumNumbers {
    * The new value m' must be in the range [-l,l], and m-m' must be in the set [-1,0,1].
    */
   private choose_m( nNext: number, lNext: number ): number {
-    assert && assert( Number.isInteger( lNext ) && lNext >= 0 && lNext <= MOTHAConstants.MAX_STATE - 1, `invalid lNext=${lNext}` );
+    assert && assert( Number.isInteger( lNext ) && lNext >= 0 && lNext <= QuantumElectron.MAX_STATE - 1, `invalid lNext=${lNext}` );
 
     const m = this.m;
     let mNext;
@@ -274,7 +274,7 @@ export default class SchrodingerQuantumNumbers {
     return Number.isInteger( n ) &&
            Number.isInteger( l ) &&
            Number.isInteger( m ) &&
-           ( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE ) &&
+           ( n >= QuantumElectron.GROUND_STATE && n <= QuantumElectron.MAX_STATE ) &&
            ( l >= 0 && l <= n - 1 ) &&
            ( m >= -l && m <= l );
   }

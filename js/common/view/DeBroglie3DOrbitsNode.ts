@@ -16,6 +16,7 @@ import BohrModel from '../model/BohrModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LinearGradient } from '../../../../scenery/js/imports.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import QuantumElectron from '../model/QuantumElectron.js';
 
 export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
 
@@ -49,7 +50,7 @@ export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
       } );
 
     const vertices: Vector3[] = [];
-    for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
+    for ( let n = QuantumElectron.GROUND_STATE; n <= QuantumElectron.MAX_STATE; n++ ) {
       const orbitRadius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
 
       // Number of vertices varies by radius, so that all lines have the same length.

@@ -40,7 +40,7 @@ export default class ZoomedInBoxNode extends Node {
     const viewOffset = new Vector2( VIEW_SIZE / 2, VIEW_SIZE );
     const xScale = VIEW_SIZE / zoomedInBox.width;
     const yScale = VIEW_SIZE / zoomedInBox.height;
-    assert && assert( xScale === yScale, 'box is not scaled the same in both dimensions, is your box square?' );
+    assert && assert( xScale === yScale, 'ZoomedInBoxNode is not scaled the same in both dimensions. Is your box square?' );
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( viewOffset, xScale, -yScale );
 
     const hydrogenAtomNodes = createHydrogenAtomNodes( modelViewTransform, tandem );

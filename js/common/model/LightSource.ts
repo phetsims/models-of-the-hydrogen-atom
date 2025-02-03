@@ -28,6 +28,10 @@ import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Photon from './Photon.js';
+import QuantumElectron from './QuantumElectron.js';
+
+// Maximum number of photons emitted by the light source that appear in the zoomed-in box at once.
+const MAX_LIGHT_PHOTONS = 20;
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -127,7 +131,7 @@ export default class LightSource extends PhetioObject {
       ]
     } );
 
-    this.dtPerPhotonCreated = ( zoomedInBox.height / Photon.SPEED ) / MOTHAConstants.MAX_LIGHT_PHOTONS;
+    this.dtPerPhotonCreated = ( zoomedInBox.height / Photon.SPEED ) / MAX_LIGHT_PHOTONS;
 
     this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
       units: 's',
@@ -136,7 +140,7 @@ export default class LightSource extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    this.groundStateAbsorptionWavelengths = photonAbsorptionModel.getAbsorptionWavelengths( MOTHAConstants.GROUND_STATE );
+    this.groundStateAbsorptionWavelengths = photonAbsorptionModel.getAbsorptionWavelengths( QuantumElectron.GROUND_STATE );
   }
 
   public reset(): void {

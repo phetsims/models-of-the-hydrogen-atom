@@ -18,10 +18,10 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import OrbitsNode from './OrbitsNode.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
+import QuantumElectron from '../model/QuantumElectron.js';
 
 // multiply the ground state orbit radius by this number to determine the radial offset at max amplitude
 const RADIAL_OFFSET_FACTOR = 0.45;
@@ -76,7 +76,7 @@ class RingNode extends Path {
     this.deBroglieModel = deBroglieModel;
     this.modelViewTransform = modelViewTransform;
     this.hydrogenAtomPosition = this.modelViewTransform.modelToViewPosition( deBroglieModel.position );
-    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE ) );
+    this.groundStateOrbitRadius = this.modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( QuantumElectron.GROUND_STATE ) );
 
     // Optimized to update only when the view representation is set to 'Radial Distance'.
     const updateEnabledProperty = new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],

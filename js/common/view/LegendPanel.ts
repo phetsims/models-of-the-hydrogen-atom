@@ -19,9 +19,10 @@ import ElectronNode from './ElectronNode.js';
 import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
 
-const ITEM_FONT = new PhetFont( 16 );
-const PHOTON_ICON_WAVELENGTH = 410; // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/61
+// Make the icons appear to be the same size as particles in the zoomed-in box.
 const ICON_SCALE = MOTHAConstants.ZOOMED_IN_BOX_VIEW_SIZE / MOTHAConstants.ZOOMED_IN_BOX_MODEL_SIZE;
+
+const PHOTON_ICON_WAVELENGTH = 410; // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/61
 
 export default class LegendPanel extends Panel {
 
@@ -64,6 +65,8 @@ export default class LegendPanel extends Panel {
  */
 class LegendNode extends HBox {
 
+  private static readonly ITEM_FONT = new PhetFont( 16 );
+
   public constructor( iconNode: Node, iconAlignGroup: AlignGroup, labelStringProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
     super( {
       isDisposable: false,
@@ -73,7 +76,7 @@ class LegendNode extends HBox {
           group: iconAlignGroup
         } ),
         new Text( labelStringProperty, {
-          font: ITEM_FONT,
+          font: LegendNode.ITEM_FONT,
           fill: MOTHAColors.invertibleTextFillProperty,
           maxWidth: 80 // determined empirically in the Energy Levels screen
         } )

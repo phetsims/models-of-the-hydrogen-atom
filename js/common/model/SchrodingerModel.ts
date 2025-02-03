@@ -43,7 +43,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import BohrModel from './BohrModel.js';
@@ -54,6 +53,7 @@ import MetastableHandler from './MetastableHandler.js';
 import PolynomialTerm from './PolynomialTerm.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import SchrodingerElectron from './SchrodingerElectron.js';
+import QuantumElectron from './QuantumElectron.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -191,7 +191,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
     // Choose a random point on the first orbit, in polar coordinates.
     const angle = MOTHAUtils.nextAngle();
-    const radius = BohrModel.getElectronOrbitRadius( MOTHAConstants.GROUND_STATE );
+    const radius = BohrModel.getElectronOrbitRadius( QuantumElectron.GROUND_STATE );
 
     // Convert to Cartesian coordinates, adjusted for the atom's position.
     const x = ( radius * Math.cos( angle ) ) + this.position.x;

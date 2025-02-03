@@ -13,9 +13,6 @@ import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
-const GROUND_STATE = 1;
-const MAX_STATE = 6;
-
 const CORNER_RADIUS = 5;
 
 const ACCORDION_BOX_OPTIONS: AccordionBoxOptions = {
@@ -48,7 +45,7 @@ const MOTHAConstants = {
   SCREEN_VIEW_X_MARGIN: 15,
   SCREEN_VIEW_Y_MARGIN: 15,
 
-  // Position of the atom in the model coordinate frame.
+  // Position of all hydrogen atoms, in the model coordinate frame.
   ATOM_POSITION: new Vector2( 0, 0 ),
 
   // This value is the same as the Java version, to preserve the same relative sizes of things in the model.
@@ -58,14 +55,7 @@ const MOTHAConstants = {
   // This value is specific to the HTML5 version.
   ZOOMED_IN_BOX_VIEW_SIZE: 400,
 
-  // The notion of "ground state" does not apply to all hydrogen atom models, but it is convenient to have it here.
-  GROUND_STATE: GROUND_STATE,
-  MAX_STATE: MAX_STATE,
-  NUMBER_OF_STATES: MAX_STATE - GROUND_STATE + 1,
-
-  // Maximum number of photons emitted by the light source that appear in the zoomed-in box at once.
-  MAX_LIGHT_PHOTONS: 20,
-
+  // Range for the monochromatic light slider.
   // Min is slightly below 94 nm for the 1 -> 6 state transition.
   MONOCHROMATIC_WAVELENGTH_RANGE: new Range( 92, VisibleColor.MAX_WAVELENGTH ),
 
@@ -80,9 +70,6 @@ const MOTHAConstants = {
   ACCORDION_BOX_OPTIONS: ACCORDION_BOX_OPTIONS,
   SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS
 };
-
-assert && assert( MOTHAConstants.GROUND_STATE === 1,
-  'A fundamental assumption of this implementation is that n=1 is the ground state.' );
 
 modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );
 

@@ -16,12 +16,12 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
 import { HBox, Line, Node, RichText, Text } from '../../../../scenery/js/imports.js';
-import MOTHAConstants from '../../common/MOTHAConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import QuantumElectron from '../../common/model/QuantumElectron.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -43,7 +43,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
 
     // n horizontal lines for each energy level, labeled with 'n = {value}'.
     this.levelNodes = new Node();
-    for ( let n = MOTHAConstants.GROUND_STATE; n <= MOTHAConstants.MAX_STATE; n++ ) {
+    for ( let n = QuantumElectron.GROUND_STATE; n <= QuantumElectron.MAX_STATE; n++ ) {
       const levelNode = createLevelNode( n );
       const levelNodeLeftCenter = new Vector2( this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET, this.getYForState( n ) );
       levelNode.localBoundsProperty.link( () => {
@@ -67,7 +67,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     this.stateLayer.addChild( lEqualsText );
 
     // l values, centered above each level line
-    for ( let l = 0; l < MOTHAConstants.MAX_STATE; l++ ) {
+    for ( let l = 0; l < QuantumElectron.MAX_STATE; l++ ) {
       const lText = new Text( l, {
         font: LABEL_FONT,
         fill: MOTHAColors.invertibleTextFillProperty,
@@ -124,7 +124,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
    * the electron's state.
    */
   private getXForState( l: number ): number {
-    assert && assert( l >= 0 && l < MOTHAConstants.MAX_STATE, `invalid l: ${l}` );
+    assert && assert( l >= 0 && l < QuantumElectron.MAX_STATE, `invalid l: ${l}` );
     return this.levelNodes.left + LEVEL_LINE_LENGTH / 2 + ( l * ( LEVEL_LINE_LENGTH + LEVEL_LINE_X_SPACING ) );
   }
 }
@@ -135,12 +135,12 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
  */
 function createLevelNode( n: number ): Node {
   assert && assert( Number.isInteger( n ), `n must be an integer: ${n}` );
-  assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE, `invalid n: ${n}` );
+  assert && assert( n >= QuantumElectron.GROUND_STATE && n <= QuantumElectron.MAX_STATE, `invalid n: ${n}` );
 
   // Create the same number of lines for all levels, so that the "n = {n}" labels will be horizontally aligned.
   // Only the lines that are relevant will be visible.
   const lines: Node[] = [];
-  for ( let l = 0; l < MOTHAConstants.MAX_STATE; l++ ) {
+  for ( let l = 0; l < QuantumElectron.MAX_STATE; l++ ) {
     const line = new Line( 0, 0, LEVEL_LINE_LENGTH, 0, {
       lineWidth: 1,
       stroke: MOTHAColors.invertibleTextFillProperty,
