@@ -101,6 +101,10 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     this._isResetting = false;
   }
 
+  /**
+   * Whether this atomic model is currently resetting. This is useful because the (n,l,m) )transition that occurs
+   * when resetting is very likely to be invalid, and other code needs to know when to ignore validation.
+   */
   public isResetting(): boolean {
     return this._isResetting;
   }
@@ -197,6 +201,11 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
   /**
    * Solves the electron's wavefunction.
+   * @param n - principal quantum number
+   * @param l - azimuthal quantum number
+   * @param m - magnetic quantum number
+   * @param r - radius
+   * @param cosTheta - cosine of the angle
    */
   public static solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
     const t1 = solveGeneralizedLaguerrePolynomial( n, l, r );
@@ -207,6 +216,9 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 
 /**
  * Solves the generalized Laguerre Polynomial, as specified in the Java design document.
+ * @param n - principal quantum number
+ * @param l - azimuthal quantum number
+ * @param r - radius
  */
 function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
   const a = BohrModel.getElectronOrbitRadius( n ) / ( n * n );

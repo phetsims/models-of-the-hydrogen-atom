@@ -94,19 +94,19 @@ export default class SchrodingerQuantumNumbers {
   }
 
   /**
-   * Gets the next state for a new value of n.
-   * Randomly chooses the values for l and m, according to state transition rules.
+   * Gets the next (n,l,m) state for a new value of n. Values for l and m are chosen according to state transition rules.
    */
   public getNextState( nNext: number ): SchrodingerQuantumNumbers {
     assert && assert( Number.isInteger( nNext ) && nNext >= MOTHAConstants.GROUND_STATE && nNext <= MOTHAConstants.MAX_STATE, `invalid nNext=${nNext}` );
 
+    // Compute values for l and m.
     const lNext = this.choose_l( nNext );
     const mNext = this.choose_m( nNext, lNext );
     let nlmNext = new SchrodingerQuantumNumbers( nNext, lNext, mNext );
 
-    // Verify that no transition rules have been broken.
+    // Verify that the transition is valid.
     const valid = isaValidTransition( this, nlmNext );
-    assert && assert( valid, `Buggy transition rules resulted in (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},${mNext})` );
+    assert && assert( valid, `Invalid transition: (n,l,m) = ${this.toString()} -> ${nNext.toString()}` );
     if ( !valid ) {
       nlmNext = new SchrodingerQuantumNumbers( 1, 0, 0 ); // Fallback, if running without assertions.
     }
@@ -212,7 +212,7 @@ export default class SchrodingerQuantumNumbers {
   }
 
   /**
-   * Chooses a value for m, based on the next value of l and the current value of m.
+   * Chooses a new value for m, based on the next value of l and the current value of m.
    * The new value m' must be in the range [-l,l], and m-m' must be in the set [-1,0,1].
    */
   private choose_m( nNext: number, lNext: number ): number {
@@ -280,7 +280,7 @@ export default class SchrodingerQuantumNumbers {
   }
 
   /**
-   * Serializes this SchrodingerQuantumNumbers.
+   * Serializes this instance of SchrodingerQuantumNumbers.
    */
   private toStateObject(): SchrodingerQuantumNumbersStateObject {
     return {
@@ -314,7 +314,11 @@ export default class SchrodingerQuantumNumbers {
  * Checks state transition rules to see if a proposed transition is valid.
  */
 function isaValidTransition( nlmOld: SchrodingerQuantumNumbers, nlmNew: SchrodingerQuantumNumbers ): boolean {
-  return ( nlmOld.n !== nlmNew.n ) && ( Math.abs( nlmOld.l - nlmNew.l ) === 1 ) && ( Math.abs( nlmOld.m - nlmNew.m ) <= 1 );
+  return SchrodingerQuantumNumbers.isValidState( nlmOld.n, nlmOld.l, nlmOld.m ) &&
+         SchrodingerQuantumNumbers.isValidState( nlmNew.n, nlmNew.l, nlmNew.m ) &&
+         ( nlmOld.n !== nlmNew.n ) &&
+         ( Math.abs( nlmOld.l - nlmNew.l ) === 1 ) &&
+         ( Math.abs( nlmOld.m - nlmNew.m ) <= 1 );
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerQuantumNumbers', SchrodingerQuantumNumbers );
