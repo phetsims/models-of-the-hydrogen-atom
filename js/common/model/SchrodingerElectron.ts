@@ -47,6 +47,10 @@ export default class SchrodingerElectron extends QuantumElectron {
     super.reset();
   }
 
+  /**
+   * Sets the value of n, the principal quantum number. For the Schrodinger model, this involves computing a
+   * complete (n,l,m) state based on transition rules. See SchrodingerQuantumNumbers.
+   */
   public override set_n( n: number ): void {
     this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
   }
