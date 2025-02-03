@@ -2,7 +2,7 @@
 
 /**
  * SpectrometerChart plots the number of photons for each emission wavelength, across the UV, visible, and IR spectrums.
- * The x-axis is wavelength, while the y-axis is number of photons.  This chart is used in the 'Spectrum' accordion
+ * The x-axis is wavelength, while the y-axis is number of photons.  This chart is used in the Spectrometer accordion
  * box, and in the snapshots dialog.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -98,7 +98,6 @@ export default class SpectrometerChart extends Node {
     charts.centerX = backgroundNode.centerX;
     charts.bottom = backgroundNode.bottom - 5;
 
-    // NodeOptions
     options.children = [ backgroundNode, charts ];
 
     super( options );
@@ -116,7 +115,7 @@ export default class SpectrometerChart extends Node {
 }
 
 /**
- * AxisBreakNode denotes a break in the x-axis. It looks like '/'.
+ * AxisBreakNode denotes a break at the end of an x-axis segment. It looks like '/'.
  */
 class AxisBreakNode extends Line {
   public constructor( providedOptions?: NodeTranslationOptions ) {

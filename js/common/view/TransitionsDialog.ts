@@ -40,7 +40,7 @@ import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import MOTHAScreenView from './MOTHAScreenView.js';
 
-const TITLE_TEXT_OPTIONS = {
+const TITLE_TEXT_OPTIONS: TextOptions = {
   font: new PhetFont( {
     size: 16,
     weight: 'bold'
@@ -48,7 +48,7 @@ const TITLE_TEXT_OPTIONS = {
   maxWidth: 150
 };
 
-const HEADING_TEXT_OPTIONS = {
+const HEADING_TEXT_OPTIONS: TextOptions = {
   font: new PhetFont( {
     size: 12,
     weight: 'bold'
@@ -56,16 +56,16 @@ const HEADING_TEXT_OPTIONS = {
   maxWidth: 85
 };
 
-const SEPARATOR_OPTIONS = {
+const SEPARATOR_OPTIONS: HSeparatorOptions = {
   stroke: Color.grayColor( 200 )
 };
 
-const CONTENT_TEXT_OPTIONS = {
+const CONTENT_TEXT_OPTIONS: TextOptions = {
   font: new PhetFont( 12 )
 };
 
 type SelfOptions = {
-  position?: Vector2; // initial position, in view coordinates
+  position?: Vector2; // the dialog's initial position, in view coordinates
 };
 
 type TransitionsDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
@@ -320,6 +320,10 @@ export default class TransitionsDialog extends Panel {
     this.positionProperty.reset();
   }
 
+  /**
+   * Sets the initial position of this dialog. This is used after the ScreenView layout has been finalized,
+   * and we can therefore position the dialog.
+   */
   public setInitialPosition( position: Vector2 ): void {
     this.positionProperty.value = position;
     this.positionProperty.setInitialValue( position );

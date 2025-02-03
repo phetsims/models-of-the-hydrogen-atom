@@ -1,7 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
 /**
- * SpectrometerSnapshotsDialog is a dialog that displays spectrometer snapshots.
+ * SpectrometerSnapshotsDialog is a dialog that displays spectrometer snapshots. To appease PhET-iO, it creates a
+ * fixed number of SpectrometerSnapshotNode instances, then reuses them.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

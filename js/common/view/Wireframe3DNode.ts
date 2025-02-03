@@ -2,7 +2,7 @@
 
 /**
  * Wireframe3DNode displays a 3D wireframe model. This was Wireframe3DNode.java and Wireframe3D.java in the Java version,
- * and has been simplified greatly.
+ * and has been simplified greatly to provide only what is needed for the de Brogile '3D Height' view.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

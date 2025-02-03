@@ -1,7 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
 /**
- * SpectrometerSnapshotNode is a snapshot from the spectrometer.
+ * SpectrometerSnapshotNode is a snapshot from the spectrometer, shown in the snapshots dialog.
+ * To appease PhET-iO, a fixed number of instances are created at startup and reused.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

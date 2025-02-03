@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * SpectrometerBarNode is a 'bar' in the spectrometer.  It displays a stack of photons, color by wavelength.
+ * SpectrometerBarNode is a 'bar' in the spectrometer.  It displays a stack of photons, colored by wavelength.
  * When the stack reaches its maximum height, an arrow is drawn at the top of the stack, to indicate that the
  * value is larger than we can display.
  *
