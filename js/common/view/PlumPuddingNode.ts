@@ -37,7 +37,7 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
   }
 
   /**
-   * Creates the icon that represents this model in the user interface.
+   * Creates the icon that represents this atomic model in the user interface.
    */
   public static createIcon(): Node {
 

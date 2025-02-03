@@ -45,7 +45,7 @@ export default class ElectronNode extends ShadedSphereNode {
   }
 
   /**
-   * Creates an electron icon, used in the legend.
+   * Creates an electron icon.
    */
   public static createIcon( scale = 1 ): Node {
     const electron = new Electron( {

@@ -38,7 +38,7 @@ export default class ProtonNode extends ShadedSphereNode {
   }
 
   /**
-   * Creates a proton icon, used in the legend.
+   * Creates a proton icon.
    */
   public static createIcon( scale = 1 ): Node {
     const proton = new Proton();

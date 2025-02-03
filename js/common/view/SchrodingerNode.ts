@@ -53,7 +53,8 @@ export default class SchrodingerNode extends HydrogenAtomNode {
   }
 
   /**
-   * Creates the icon that represents this model in the user interface. The icon consists of 4 overlapping rectangles.
+   * Creates the icon that represents this atomic model in the user interface.
+   * The icon consists of 4 overlapping rectangles.
    */
   public static createIcon(): Node {
 

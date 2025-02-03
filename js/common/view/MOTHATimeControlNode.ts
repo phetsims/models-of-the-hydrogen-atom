@@ -1,7 +1,7 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
 /**
- * TimeControls provides the controls for simulation time.
+ * MOTHATimeControlNode provides the controls for simulation time.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

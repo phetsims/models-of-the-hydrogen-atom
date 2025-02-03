@@ -1,7 +1,7 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * OrbitsNode is the set of 2D orbits for a hydrogen atom's electron. It is used in the Bohr and de Broglie models.
+ * OrbitsNode is the set of 2D orbits that are followed by the electron. It is used in the Bohr and de Broglie models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

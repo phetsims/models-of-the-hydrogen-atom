@@ -36,7 +36,6 @@ type PhotonNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale' | 'tand
 export default class PhotonNode extends Node {
 
   public readonly photon: Photon;
-  private readonly disposePhotonNode: () => void;
 
   public constructor( photon: Photon, modelViewTransform: ModelViewTransform2, providedOptions?: PhotonNodeOptions ) {
 
@@ -81,20 +80,16 @@ export default class PhotonNode extends Node {
 
     this.photon = photon;
 
-    this.disposePhotonNode = () => {
+    // When this Node is disposed, remove the listener if it's still registered.
+    this.disposeEmitter.addListener( () => {
       if ( photon.positionProperty.hasListener( positionListener ) ) {
         photon.positionProperty.unlink( positionListener );
       }
-    };
-  }
-
-  public override dispose(): void {
-    this.disposePhotonNode();
-    super.dispose();
+    } );
   }
 
   /**
-   * Creates a photon icon, used in the legend.
+   * Creates a photon icon.
    */
   public static createIcon( wavelength: number, scale = 1 ): Node {
     const photon = new Photon( {

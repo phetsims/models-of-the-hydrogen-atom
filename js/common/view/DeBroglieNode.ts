@@ -57,7 +57,8 @@ export default class DeBroglieNode extends HydrogenAtomNode {
   }
 
   /**
-   * Creates the icon that represents this model in the user interface. This icon corresponds to the 'Radial' view.
+   * Creates the icon that represents this atomic model in the user interface.
+   * This icon corresponds to the 'Radial' view.
    */
   public static createIcon(): Node {
 
