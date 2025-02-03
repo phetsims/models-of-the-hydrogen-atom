@@ -23,11 +23,12 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default abstract class QuantumElectron extends Electron {
 
-  // the principal quantum number
+  // n, the principal quantum number.
   public readonly nProperty: TReadOnlyProperty<number>;
 
   // Energy of the electron in its current state, in eV.
-  public readonly energyProperty: TReadOnlyProperty<number>;
+  // This Property is private because it exists only as a PhET-iO convenience.
+  private readonly energyProperty: TReadOnlyProperty<number>;
 
   // Time that the electron has been in its current state, in seconds.
   public readonly timeInStateProperty: Property<number>;
@@ -35,7 +36,7 @@ export default abstract class QuantumElectron extends Electron {
   // Angle of the electron along its orbit, in radians.
   public readonly angleProperty: Property<number>;
 
-  // Offset of the electron from the atom's center.
+  // Offset of the electron from the atom's center, unitless.
   private readonly offsetProperty: TReadOnlyProperty<Vector2>;
 
   protected constructor( nProperty: TReadOnlyProperty<number>, atomPosition: Vector2, tandem: Tandem ) {
@@ -47,7 +48,7 @@ export default abstract class QuantumElectron extends Electron {
 
     this.nProperty = nProperty;
 
-    this.energyProperty = new DerivedProperty( [ nProperty ], n => QuantumElectron.getEnergy( n ), {
+    this.energyProperty = new DerivedProperty( [ nProperty ], n => MOTHAConstants.E1 / ( n * n ), {
       units: 'eV',
       tandem: tandem.createTandem( 'energyProperty' ),
       phetioFeatured: true,
@@ -57,7 +58,7 @@ export default abstract class QuantumElectron extends Electron {
     this.timeInStateProperty = new NumberProperty( 0, {
       units: 's',
       tandem: tandem.createTandem( 'timeInStateProperty' ),
-      phetioDocumentation: 'Time that the electron has been in its current state.',
+      phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
 
@@ -72,7 +73,7 @@ export default abstract class QuantumElectron extends Electron {
     this.angleProperty = new NumberProperty( 0, {
       units: 'radians',
       tandem: tandem.createTandem( 'angleProperty' ),
-      phetioDocumentation: 'Angle of the electron along its orbit. For internal use only.',
+      phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
 
@@ -83,7 +84,7 @@ export default abstract class QuantumElectron extends Electron {
         return MOTHAUtils.polarToCartesian( radius, angle );
       }, {
         tandem: tandem.createTandem( 'offsetProperty' ),
-        phetioDocumentation: 'Offset of the electron from the center of the atom. For internal use only.',
+        phetioDocumentation: 'For internal use only.',
         phetioValueType: Vector2.Vector2IO
       } );
 
@@ -100,15 +101,10 @@ export default abstract class QuantumElectron extends Electron {
     super.reset();
   }
 
-  public abstract set_n( n: number ): void;
-
   /**
-   * Gets the electron's energy in state n, in eV.
+   * Sets the value of n, the principal quantum number.
    */
-  public static getEnergy( n: number ): number {
-    assert && assert( n >= MOTHAConstants.GROUND_STATE && n <= MOTHAConstants.MAX_STATE, `invalid n: ${n}` );
-    return MOTHAConstants.E1 / ( n * n );
-  }
+  public abstract set_n( n: number ): void;
 }
 
 modelsOfTheHydrogenAtom.register( 'QuantumElectron', QuantumElectron );
