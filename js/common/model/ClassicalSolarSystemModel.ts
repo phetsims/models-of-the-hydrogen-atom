@@ -94,6 +94,10 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     super.reset();
   }
 
+  /**
+   * Steps the atomic model.
+   * @param dt - time step, in seconds
+   */
   public override step( dt: number ): void {
     if ( !this.isDestroyedProperty.value ) {
 

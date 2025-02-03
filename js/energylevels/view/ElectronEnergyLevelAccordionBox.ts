@@ -87,6 +87,10 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     this.gatedVisibleProperty = gatedVisibleProperty;
   }
 
+  /**
+   * Steps each diagram.
+   * @param dt - time step, in seconds
+   */
   public step( dt: number ): void {
     this.diagrams.forEach( diagram => diagram.step( dt ) );
   }

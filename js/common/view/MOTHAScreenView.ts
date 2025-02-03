@@ -357,6 +357,10 @@ export default class MOTHAScreenView extends ScreenView {
     this.resetAllMOTHAScreenView();
   }
 
+  /**
+   * Steps the view when the sim is playing.
+   * @param dt - time step, in seconds
+   */
   public override step( dt: number ): void {
     if ( this.model.isPlayingProperty.value ) {
       this.zoomedInBoxNode.step( dt );

@@ -104,6 +104,10 @@ export default class MetastableHandler extends PhetioObject {
     this.elapsedTimeProperty.reset();
   }
 
+  /**
+   * Steps the MetastableHandler.
+   * @param dt - time step, in seconds
+   */
   public step( dt: number ): void {
     if ( this.isActiveProperty.value ) {
       this.elapsedTimeProperty.value += dt;

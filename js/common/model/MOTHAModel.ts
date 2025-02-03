@@ -194,7 +194,7 @@ export default class MOTHAModel implements TModel {
   }
 
   /**
-   * Steps the model if it's playing.
+   * Steps the model, if it's playing.
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {

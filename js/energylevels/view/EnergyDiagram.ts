@@ -110,6 +110,10 @@ export default class EnergyDiagram extends Node {
     this.energySquiggle = energySquiggle;
   }
 
+  /**
+   * Steps the energy squiggle.
+   * @param dt - time step, in seconds
+   */
   public step( dt: number ): void {
     this.energySquiggle.step( dt );
   }

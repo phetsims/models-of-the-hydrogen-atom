@@ -50,6 +50,10 @@ export default class BilliardBallModel extends HydrogenAtom {
     super( position, options );
   }
 
+  /**
+   * Steps the atomic model.
+   * @param dt - time step, in seconds
+   */
   public override step( dt: number ): void {
     // do nothing for this model
   }

@@ -40,6 +40,10 @@ export default class HydrogenAtomNode extends Node {
     super( options );
   }
 
+  /**
+   * Steps the view.
+   * @param dt - time step, in seconds
+   */
   public step( dt: number ): void {
     // Default is to do nothing.
   }

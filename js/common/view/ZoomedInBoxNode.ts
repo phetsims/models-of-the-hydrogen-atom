@@ -96,6 +96,10 @@ export default class ZoomedInBoxNode extends Node {
     } );
   }
 
+  /**
+   * Steps the view.
+   * @param dt - time step, in seconds
+   */
   public step( dt: number ): void {
     this.hydrogenAtomNodes.forEach( hydrogenAtomNode => hydrogenAtomNode.step( dt ) );
   }

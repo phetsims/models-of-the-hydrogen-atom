@@ -120,8 +120,9 @@ export default class PlumPuddingModel extends HydrogenAtom {
   }
 
   /**
-   * Oscillates the electron inside the atom. Emits a photon at a random time.
+   * Steps the atomic model. This oscillates the electron inside the atom, and emits a photon at a random time.
    * After emitting its last photon, the electron completes its oscillation and returns to (0,0).
+   * @param dt - time step, in seconds
    */
   public override step( dt: number ): void {
 

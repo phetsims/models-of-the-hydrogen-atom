@@ -110,6 +110,10 @@ export default class BohrModel extends HydrogenAtom {
     super.reset();
   }
 
+  /**
+   * Steps the atomic model.
+   * @param dt - time step, in seconds
+   */
   public override step( dt: number ): void {
 
     // Keep track of how long the electron has been in its current state.

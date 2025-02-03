@@ -86,7 +86,8 @@ export default class DeBroglie3DHeightNode extends Node {
   }
 
   /**
-   * Optimized to update only when the view representation is set to '3D Height'.
+   * Advances the rotation of the 3D Height view, optimized to update only when the view representation is set to '3D Height'
+   * @param dt - time step, in seconds
    */
   public step( dt: number ): void {
     if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {

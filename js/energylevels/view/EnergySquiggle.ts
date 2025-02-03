@@ -115,6 +115,7 @@ export default class EnergySquiggle extends Node {
 
   /**
    * Hides the squiggle after it has been visible for SQUIGGLE_LIFETIME seconds.
+   * @param dt - time step, in seconds
    */
   public step( dt: number ): void {
     if ( this.visible ) {

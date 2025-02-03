@@ -47,6 +47,10 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     this.deBroglie3DHeightNode = deBroglie3DHeightNode;
   }
 
+  /**
+   * Steps the view.
+   * @param dt - time step, in seconds
+   */
   public override step( dt: number ): void {
     this.deBroglie3DHeightNode.step( dt );
   }

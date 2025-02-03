@@ -147,7 +147,7 @@ export default class LightSource extends PhetioObject {
   }
 
   /**
-   * Steps the light source, and creates a photon when it's time to do so.
+   * Steps the light source, and emits a photon when it's time to do so.
    * @param dt - the time step, in seconds
    */
   public step( dt: number ): void {

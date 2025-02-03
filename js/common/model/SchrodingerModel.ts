@@ -126,6 +126,10 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
     return this.nlmProperty.value.m;
   }
 
+  /**
+   * Steps the atomic model.
+   * @param dt - time step, in seconds
+   */
   public override step( dt: number ): void {
     super.step( dt );
     this.metastableHandler.step( dt );

@@ -86,7 +86,7 @@ export default class PhotonGroup extends PhetioGroup<Photon, CreateElementArgume
 
   /**
    * Advances the state of all photons.
-   * @param dt - the time step, in seconds
+   * @param dt - time step, in seconds
    */
   public step( dt: number ): void {
 
