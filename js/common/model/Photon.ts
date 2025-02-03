@@ -12,7 +12,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
@@ -59,6 +58,9 @@ export default class Photon extends PhetioObject {
 
   // Radius, in unitless model coordinates.
   public static readonly RADIUS = 15;
+
+  // Photon speed is constant, in distance per second.
+  public static readonly SPEED = 300;
 
   // Wavelength of the photon, in nm.
   public readonly wavelength: number;
@@ -149,7 +151,7 @@ export default class Photon extends PhetioObject {
    * @param dt - elapsed time, in seconds
    */
   public move( dt: number ): void {
-    const distance = dt * MOTHAConstants.PHOTON_SPEED;
+    const distance = dt * Photon.SPEED;
     const dx = Math.cos( this.direction ) * distance;
     const dy = Math.sin( this.direction ) * distance;
     const x = this.positionProperty.value.x + dx;

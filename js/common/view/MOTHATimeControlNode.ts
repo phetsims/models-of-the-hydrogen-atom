@@ -13,7 +13,6 @@ import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class MOTHATimeControlNode extends TimeControlNode {
@@ -23,10 +22,13 @@ export default class MOTHATimeControlNode extends TimeControlNode {
                       stepOnce: () => void,
                       tandem: Tandem ) {
 
+    const timeSpeeds = timeSpeedProperty.validValues!;
+    assert && assert( timeSpeeds, 'timeSpeedProperty must have validValues.' );
+
     super( isPlayingProperty, {
       isDisposable: false,
       timeSpeedProperty: timeSpeedProperty,
-      timeSpeeds: MOTHAConstants.TIME_SPEEDS,
+      timeSpeeds: [ ...timeSpeeds ],
       flowBoxSpacing: 20,
       speedRadioButtonGroupOptions: {
         labelOptions: {

@@ -27,6 +27,7 @@ import ZoomedInBox from './ZoomedInBox.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import Photon from './Photon.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -126,7 +127,7 @@ export default class LightSource extends PhetioObject {
       ]
     } );
 
-    this.dtPerPhotonCreated = ( zoomedInBox.height / MOTHAConstants.PHOTON_SPEED ) / MOTHAConstants.MAX_LIGHT_PHOTONS;
+    this.dtPerPhotonCreated = ( zoomedInBox.height / Photon.SPEED ) / MOTHAConstants.MAX_LIGHT_PHOTONS;
 
     this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
       units: 's',

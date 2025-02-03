@@ -3,7 +3,7 @@
 /**
  * QuantumElectron is a base class that specializes Electron for quantum models of the hydrogen atom
  * (Bohr, de Broglie, Schrodinger).
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
@@ -15,11 +15,13 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import BohrModel from './BohrModel.js';
 import Electron from './Electron.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+
+// Electron energy in the ground state, in eV
+const E1 = -13.6;
 
 export default abstract class QuantumElectron extends Electron {
 
@@ -48,7 +50,7 @@ export default abstract class QuantumElectron extends Electron {
 
     this.nProperty = nProperty;
 
-    this.energyProperty = new DerivedProperty( [ nProperty ], n => MOTHAConstants.E1 / ( n * n ), {
+    this.energyProperty = new DerivedProperty( [ nProperty ], n => E1 / ( n * n ), {
       units: 'eV',
       tandem: tandem.createTandem( 'energyProperty' ),
       phetioFeatured: true,

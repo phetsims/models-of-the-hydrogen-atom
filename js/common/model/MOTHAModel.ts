@@ -137,8 +137,10 @@ export default class MOTHAModel implements TModel {
       phetioFeatured: true
     } );
 
+    // The Java version had a wider range of speeds and a speed slider. For the HTML5 version, this was simplified to
+    // 3 speeds, using the standard PhET TimeControlNode.
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
-      validValues: MOTHAConstants.TIME_SPEEDS,
+      validValues: [ TimeSpeed.FAST, TimeSpeed.NORMAL, TimeSpeed.SLOW ],
       tandem: tandem.createTandem( 'timeSpeedProperty' ),
       phetioDocumentation: 'Speed at which the model is playing.',
       phetioFeatured: true
