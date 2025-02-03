@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * ExperimentNode is shown when the AB switch is set to 'Experiment'.  It displays a '?' that covers the space
+ * ExperimentNode is shown when the A/B switch is set to 'Experiment'.  It displays a '?' that covers the space
  * where the hydrogen atom would be shown.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -54,9 +54,8 @@ export default class ExperimentNode extends Node {
 
     super( options );
 
-    // (n,l,m) = ..., for debugging ExperimentOopsDialog.
+    // (n,l,m) = ... in the bottom third of the zoomed-in box, for debugging ExperimentOopsDialog.
     if ( phet.chipper.queryParameters.dev ) {
-
       const electronStateText = new SchrodingerStateText( nlmProperty, Tandem.OPT_OUT );
       electronStateText.fill = 'red';
       const electronStateTextCenterTop = square.centerBottom.plusXY( 0, 100 );

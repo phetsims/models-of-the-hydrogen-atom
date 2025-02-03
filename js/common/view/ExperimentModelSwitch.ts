@@ -1,7 +1,7 @@
 // Copyright 2015-2025, University of Colorado Boulder
 
 /**
- * ExperimentModelSwitch is an AB switch that determines whether we are viewing an experiment or a predictive model.
+ * ExperimentModelSwitch is an A/B switch that determines whether we are viewing an experiment or a predictive model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,7 +16,10 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import MOTHAColors from '../MOTHAColors.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-const LABEL_FONT = new PhetFont( { size: 16, weight: 'bold' } );
+const LABEL_FONT = new PhetFont( {
+  size: 16,
+  weight: 'bold'
+} );
 
 export default class ExperimentModelSwitch extends ABSwitch<boolean> {
 

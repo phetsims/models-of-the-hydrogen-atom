@@ -1,7 +1,8 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * MonochromaticWavelengthControl is a specialization of WavelengthNumberControl that lets the user select a UR or visible wavelength.
+ * MonochromaticWavelengthControl is a specialization of WavelengthNumberControl that lets the user select
+ * an ultraviolet (UV) or visible wavelength.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
