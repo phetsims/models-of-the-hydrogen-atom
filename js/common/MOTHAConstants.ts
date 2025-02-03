@@ -34,7 +34,7 @@ const ACCORDION_BOX_OPTIONS: AccordionBoxOptions = {
 
 const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
 
-  // Lit from bottom center, which is where the light shines.
+  // Lit from bottom center, to match the direction of the light source.
   highlightXOffset: 0,
   highlightYOffset: 0.4
 };
