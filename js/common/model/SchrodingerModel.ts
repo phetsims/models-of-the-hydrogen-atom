@@ -270,15 +270,7 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
   // for associated Legendre polynomials. Some authors omit the Condon-Shortley phase (-1)^m, while others include it.
   // We are including it here, as the first term.
   return Math.pow( -1, m ) / ( Math.pow( 2, l ) * MOTHAUtils.factorial( l ) ) *
-         Math.pow( 1 - x * x, m / 2 ) * evaluate( productTerms, x );
-}
-
-function evaluate( productTerms: PolynomialTerm[], x: number ): number {
-  let sum = 0;
-  for ( let i = 0; i < productTerms.length; i++ ) {
-    sum += productTerms[ i ].evaluate( x );
-  }
-  return sum;
+         Math.pow( 1 - x * x, m / 2 ) * PolynomialTerm.evaluatePolynomial( productTerms, x );
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerModel', SchrodingerModel );

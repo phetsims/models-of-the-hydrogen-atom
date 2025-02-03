@@ -60,6 +60,17 @@ export default class PolynomialTerm {
     }
     return new PolynomialTerm( exponent, coefficient );
   }
+
+  /**
+   * Evaluates a polynomial (a set of PolynomialTerms) for a specified value of the variable.
+   */
+  public static evaluatePolynomial( terms: PolynomialTerm[], x: number ): number {
+    let sum = 0;
+    for ( let i = 0; i < terms.length; i++ ) {
+      sum += terms[ i ].evaluate( x );
+    }
+    return sum;
+  }
 }
 
 modelsOfTheHydrogenAtom.register( 'PolynomialTerm', PolynomialTerm );
