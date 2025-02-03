@@ -256,8 +256,8 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
     const terms: PolynomialTerm[] = [];
     for ( let k = 0; k < productTerms.length; k++ ) {
       const term = productTerms[ k ];
-      terms.push( new PolynomialTerm( term.power + 2, term.coefficient ) );
-      terms.push( new PolynomialTerm( term.power, -1 * term.coefficient ) );
+      terms.push( new PolynomialTerm( term.exponent + 2, term.coefficient ) );
+      terms.push( new PolynomialTerm( term.exponent, -1 * term.coefficient ) );
     }
     productTerms = terms;
   }
