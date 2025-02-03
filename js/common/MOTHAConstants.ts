@@ -49,7 +49,7 @@ const MOTHAConstants = {
   SCREEN_VIEW_X_MARGIN: 15,
   SCREEN_VIEW_Y_MARGIN: 15,
 
-  // Position of the atom's center in the model coordinate frame.
+  // Position of the atom in the model coordinate frame.
   ATOM_POSITION: new Vector2( 0, 0 ),
 
   // This value is the same as the Java version, to preserve the same relative sizes of things in the model.

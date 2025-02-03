@@ -25,16 +25,17 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 
 type SelfOptions = {
 
-  // Name of the model shown in the UI.
+  // Atom's name as it appears in the user interface.
   displayNameProperty: TReadOnlyProperty<string>;
 
-  // Name use in log and assertion messages, not in the UI.
+  // Atom's name used in log and assertion messages, not in the user interface.
   debugName: string;
 
-  tandemNamePrefix: string;
-
-  // Icon used to represent the model in the UI.
+  // Icon used to represent the atom in the user interface.
   icon: Node;
+
+  // Prefix used for tandem names for PhET-iO Elements that are related to the atom.
+  tandemNamePrefix: string;
 };
 
 export type HydrogenAtomOptions = SelfOptions &
@@ -43,19 +44,21 @@ export type HydrogenAtomOptions = SelfOptions &
 
 export default abstract class HydrogenAtom extends PhetioObject {
 
+  // Atom's position in unitless model coordinates.
   public readonly position: Vector2;
+
+  // See SelfOptions for documentation of these fields.
   public readonly displayNameProperty: TReadOnlyProperty<string>;
   public readonly debugName: string;
   public readonly icon: Node;
+  public readonly tandemNamePrefix: string;
 
   // Notifies listeners by emitting when a photon is absorbed or emitted. Not all models absorb or emit photons,
   // and billiard ball does not even have an electron. But it simplifies programming for us and the PhET-iO client
-  // if all models have these emitters. For example, the Spectrometer can be hooked up to any of the models,
-  // regardless of whether they emit photons.
+  // if all atomic models have these Emitters. For example, the Spectrometer can be hooked up to any of the atomic
+  // models, regardless of whether they emit photons.
   public readonly photonAbsorbedEmitter: TEmitter<[ Photon ]>;
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color ]>;
-
-  public readonly tandemNamePrefix: string;
 
   protected constructor( position: Vector2, providedOptions: HydrogenAtomOptions ) {
 
@@ -70,6 +73,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
     super( options );
 
     this.position = position;
+
     this.displayNameProperty = options.displayNameProperty;
     this.debugName = options.debugName;
     this.icon = options.icon;
@@ -107,13 +111,13 @@ export default abstract class HydrogenAtom extends PhetioObject {
   }
 
   /**
-   * Called when time has advanced by some delta.
+   * Steps the atomic model.
    * @param dt - time step, in seconds
    */
   public abstract step( dt: number ): void;
 
   /**
-   * Process a photon based on the current state of the atom.
+   * Processes a photon based on the current state of the atom.
    */
   public abstract processPhoton( photon: Photon ): void;
 
