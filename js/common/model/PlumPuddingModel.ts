@@ -52,6 +52,13 @@ type PlumPuddingModelOptions = SelfOptions & PickRequired<HydrogenAtomOptions, '
 
 export default class PlumPuddingModel extends HydrogenAtom {
 
+  // Radius of the plum pudding, in unitless model coordinates.
+  public static readonly RADIUS = 30;
+
+  // Wavelength (in nm) of emitted photons.
+  public static readonly PHOTON_EMISSION_WAVELENGTH = 150;
+
+  // The atom's electron.
   public readonly electron: PlumPuddingElectron;
 
   // A point on the perimeter of the plum pudding atom, modeled as a circle.
@@ -63,11 +70,6 @@ export default class PlumPuddingModel extends HydrogenAtom {
 
   // The number of photons the atom has absorbed and is "holding".
   private readonly numberOfPhotonsAbsorbedProperty: Property<number>;
-
-  // Radius of the plum pudding, in unitless model coordinates.
-  public static readonly RADIUS = 30;
-
-  public static readonly PHOTON_EMISSION_WAVELENGTH = 150; // wavelength (in nm) of emitted photons
 
   public constructor( position: Vector2, providedOptions: PlumPuddingModelOptions ) {
 
@@ -232,7 +234,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
   }
 
   /**
-   * Gets the electron's amplitude. This is ratio of the number of photons actually absorbed to the number of photons
+   * Gets the electron's amplitude. This is a ratio of the number of photons actually absorbed to the number of photons
    * the electron is capable of absorbing.
    */
   private getElectronAmplitude(): number {
@@ -252,7 +254,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Can absorb a photon if none of these are true:
+   * The atom can absorb a photon if none of these are true:
    * - the photon was emitted by the atom
    * - we've already absorbed the max
    * - we've emitted out last photon and haven't completed oscillation.
@@ -330,7 +332,7 @@ function signIsDifferent( n1: number, n2: number ): boolean {
 }
 
 /**
- * Gets the direction (in radians) for a photon that is emitted. The direction is chosen at randem, then adjusted
+ * Gets the direction (in radians) for a photon that is emitted. The direction is chosen at random, then adjusted
  * so that it is noticeably different from the direction of the light source. This ensures that emitted photons are
  * easy to see, and will not be confused with photons from the light source.
  */
