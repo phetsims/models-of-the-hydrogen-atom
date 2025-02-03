@@ -19,8 +19,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import StringIO from '../../../../tandem/js/types/StringIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -28,6 +26,7 @@ import { LightMode, LightModeValues } from './LightMode.js';
 import ZoomedInBox from './ZoomedInBox.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 
 // probability that a "white light" photon's wavelength will be one that causes a state transition. 1.0 = 100%
 const TRANSITION_WAVELENGTHS_WEIGHT = 0.40;
@@ -42,29 +41,29 @@ export default class LightSource extends PhetioObject {
   // The zoomed-in part of the box of hydrogen
   private readonly zoomedInBox: ZoomedInBox;
 
-  // is the light on?
+  // Is the light on?
   public readonly isOnProperty: BooleanProperty;
 
-  // whether the light source is full spectrum (white) or monochromatic
+  // Whether the light source is full spectrum (white) or monochromatic.
   public readonly lightModeProperty: Property<LightMode>;
 
-  // wavelength for monochromatic mode, in nm
+  // Wavelength for monochromatic mode, in nm.
   public readonly monochromaticWavelengthRange: Range;
   public readonly monochromaticWavelengthProperty: NumberProperty;
 
-  // wavelength of the light, where VisibleColor.WHITE_WAVELENGTH is white light
+  // Wavelength of the light, where VisibleColor.WHITE_WAVELENGTH is white light.
   public readonly wavelengthProperty: TReadOnlyProperty<number>;
 
-  // color displayed by the view
+  // Color displayed by the view.
   public readonly colorProperty: TReadOnlyProperty<Color | string>;
 
-  // notifies that a photon was emitted
+  // Notifies that a photon was emitted.
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color | null ]>;
 
-  // time between creation of photons
+  // Time between creation of photons, in seconds.
   private readonly dtPerPhotonCreated: number;
 
-  // elapsed time since a photon was created
+  // Elapsed time since a photon was created, in seconds.
   private readonly dtSincePhotonCreatedProperty: Property<number>;
 
   // Wavelengths (in nm) that can be absorbed when the electron is in the ground state (n = 1).
@@ -86,12 +85,11 @@ export default class LightSource extends PhetioObject {
       phetioFeatured: true
     } );
 
-    this.lightModeProperty = new Property<LightMode>( 'white', {
+    this.lightModeProperty = new StringUnionProperty<LightMode>( 'white', {
       validValues: LightModeValues,
       tandem: tandem.createTandem( 'lightModeProperty' ),
       phetioDocumentation: 'Whether the light source is emitting white light or monochromatic light.',
-      phetioFeatured: true,
-      phetioValueType: StringIO
+      phetioFeatured: true
     } );
 
     // Range goes from UV to max visible wavelength
@@ -101,6 +99,7 @@ export default class LightSource extends PhetioObject {
 
     this.monochromaticWavelengthProperty = new NumberProperty( VisibleColor.MIN_WAVELENGTH, {
       numberType: 'Integer', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53
+      units: 'nm',
       range: this.monochromaticWavelengthRange,
       tandem: tandem.createTandem( 'monochromaticWavelengthProperty' ),
       phetioDocumentation: 'Wavelength used for the light when it is in monochromatic mode.',
@@ -110,7 +109,7 @@ export default class LightSource extends PhetioObject {
     this.wavelengthProperty = new DerivedProperty( [ this.lightModeProperty, this.monochromaticWavelengthProperty ],
       ( lightMode, monochromaticWavelength ) =>
         ( lightMode === 'white' ) ? VisibleColor.WHITE_WAVELENGTH : monochromaticWavelength, {
-        phetioValueType: NumberIO
+        units: 'nm'
       } );
 
     this.colorProperty = new DerivedProperty( [ this.wavelengthProperty ],
