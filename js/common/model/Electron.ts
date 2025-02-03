@@ -1,7 +1,7 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * Electron is the model of an electron.
+ * Electron is the base class for models of an electron.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,11 +22,11 @@ export type ElectronOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 
 export default class Electron extends PhetioObject {
 
-  // Position, in unitless model coordinates.
-  public readonly positionProperty: Property<Vector2>;
-
   // Radius, in unitless model coordinates.
   public static readonly RADIUS = 5;
+
+  // Position, in unitless model coordinates.
+  public readonly positionProperty: Property<Vector2>;
 
   public constructor( providedOptions: ElectronOptions ) {
 

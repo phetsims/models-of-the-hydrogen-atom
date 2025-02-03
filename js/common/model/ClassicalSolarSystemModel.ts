@@ -48,7 +48,10 @@ type ClassicalSolarSystemModelOptions = SelfOptions & PickRequired<HydrogenAtomO
 
 export default class ClassicalSolarSystemModel extends HydrogenAtom {
 
+  // The atom's proton.
   public readonly proton: Proton;
+
+  // The atom's electron.
   public readonly electron: ClassicalSolarSystemElectron;
 
   // Has the atom been destroyed?

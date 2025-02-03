@@ -18,11 +18,11 @@ type ProtonOptions = SelfOptions;
 
 export default class Proton {
 
-  // Position of the proton, fixed at the center of the atom.
-  public readonly position: Vector2;
-
   // Radius, in unitless model coordinates.
   public static readonly RADIUS = 6;
+
+  // Position of the proton, fixed at the center of the atom.
+  public readonly position: Vector2;
 
   public constructor( providedOptions?: ProtonOptions ) {
 

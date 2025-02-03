@@ -54,6 +54,9 @@ export type PhotonOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tan
 
 export default class Photon extends PhetioObject {
 
+  // Radius, in unitless model coordinates.
+  public static readonly RADIUS = 15;
+
   // Wavelength of the photon, in nm.
   public readonly wavelength: number;
 
@@ -73,9 +76,6 @@ export default class Photon extends PhetioObject {
 
   // Whether the photon has collided with the hydrogen atom.
   private readonly hasCollidedWithAtomProperty: Property<boolean>;
-
-  // Radius, in unitless model coordinates.
-  public static readonly RADIUS = 15;
 
   public constructor( providedOptions: PhotonOptions ) {
 

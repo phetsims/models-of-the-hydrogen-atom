@@ -36,7 +36,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
   // How much to scale the y dimension for 3D orbits.
   public static readonly ORBIT_3D_Y_SCALE = 0.35;
 
-  // Which representation to use.
+  // Which view representation to use.
   public readonly deBroglieRepresentationProperty: StringUnionProperty<DeBroglieRepresentation>;
 
   public constructor( position: Vector2, providedOptions: DeBroglieModelOptions ) {
@@ -51,7 +51,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
 
     super( position, options );
 
-    this.deBroglieRepresentationProperty = new StringUnionProperty( 'radialDistance', {
+    this.deBroglieRepresentationProperty = new StringUnionProperty<DeBroglieRepresentation>( 'radialDistance', {
       validValues: DeBroglieRepresentationValues,
       tandem: options.tandem.createTandem( 'deBroglieRepresentationProperty' ),
       phetioDocumentation: 'The representation for the de Broglie model that is displayed in the view.',
@@ -73,8 +73,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Determines whether a photon collides with this atom.
-   * Uses different algorithms depending on whether the view is 2D or 3D.
+   * Determines whether a photon collides with this atom. A different algorithm is used for 2D vs 3D.
    */
   protected override collides( photon: Photon ): boolean {
     if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {
@@ -86,8 +85,8 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
   }
 
   /**
-   * Determines whether a photon collides with this atom in the 3D view. In this case, the photon collides with
-   * the atom if it hits the ellipse that is the 2D projection of the electron's 3D orbit.
+   * Determines whether a photon collides with this atom in the '3D Height' view. The photon collides
+   * with the atom if it hits the ellipse that is the 2D projection of the electron's 3D orbit.
    */
   private collides3D( photon: Photon ): boolean {
 
