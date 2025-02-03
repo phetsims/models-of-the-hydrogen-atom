@@ -90,7 +90,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
       top: this.energyAxisHBox.top
     } );
     mEqualsValueText.localBoundsProperty.link( () => {
-      mEqualsValueText.right = this.rectangle.right - 10;
+      mEqualsValueText.right = this.backgroundRectangle.right - 10;
     } );
     this.stateLayer.addChild( mEqualsValueText );
 

@@ -1,9 +1,8 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * DeBroglieEnergyDiagram is the Electron Energy Level diagram for the de Broglie model.
- * This is identical to the diagram for Bohr model, and adds no new functionality. A class is provided for
- * completeness of the class hierarchy.
+ * DeBroglieEnergyDiagram is the Electron Energy Level diagram for the de Broglie model. This is identical to the
+ * diagram for Bohr model, and adds no new functionality. A class is provided for completeness of the class hierarchy.
  *
  * This was DeBroglieEnergyDiagram.java in the Java version.
  *

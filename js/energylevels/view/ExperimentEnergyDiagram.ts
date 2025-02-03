@@ -33,7 +33,7 @@ export default class ExperimentEnergyDiagram extends EnergyDiagram {
       font: new PhetFont( 72 ),
       fill: 'black',
       maxWidth: 60,
-      center: this.rectangle.center
+      center: this.backgroundRectangle.center
     } );
     this.addChild( questionMarkText );
   }

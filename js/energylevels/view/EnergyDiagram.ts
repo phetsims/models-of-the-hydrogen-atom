@@ -38,12 +38,16 @@ export type EnergyDiagramOptions = SelfOptions & PickRequired<NodeOptions, 'visi
 
 export default class EnergyDiagram extends Node {
 
-  protected readonly rectangle: Node;
+  // Background rectangle for the diagram.
+  protected readonly backgroundRectangle: Node;
 
+  // Electron that moves around in the diagram according to its energy level.
   protected readonly electronNode: Node;
 
+  // HBox that includes the energy (y) axis and its label.
   protected readonly energyAxisHBox: Node;
 
+  // Length of the energy (y) axis.
   protected readonly energyAxisLength: number;
 
   // Layer for all state (energy-level) information.
@@ -67,7 +71,7 @@ export default class EnergyDiagram extends Node {
       isDisposable: false
     }, providedOptions );
 
-    const rectangle = new Rectangle( 0, 0, options.size.width, options.size.height );
+    const backgroundRectangle = new Rectangle( 0, 0, options.size.width, options.size.height );
 
     const energyAxisLength = options.size.height - 2 * Y_MARGIN;
     const energyAxis = new ArrowNode( 0, 0, 0, -energyAxisLength, {
@@ -88,21 +92,21 @@ export default class EnergyDiagram extends Node {
       children: [ energyText, energyAxis ],
       spacing: 1,
       align: 'center',
-      left: rectangle.left + X_MARGIN,
-      centerY: rectangle.centerY
+      left: backgroundRectangle.left + X_MARGIN,
+      centerY: backgroundRectangle.centerY
     } );
 
     const stateLayer = new Node();
     const energySquiggle = new EnergySquiggle();
 
     const electronNode = ElectronNode.createIcon();
-    electronNode.center = rectangle.center; // a temporary location - anywhere right of the energy axis will do.
+    electronNode.center = backgroundRectangle.center; // a temporary location - anywhere right of the energy axis will do.
 
-    options.children = [ rectangle, energyAxisHBox, stateLayer, electronNode, energySquiggle ];
+    options.children = [ backgroundRectangle, energyAxisHBox, stateLayer, electronNode, energySquiggle ];
 
     super( options );
 
-    this.rectangle = rectangle;
+    this.backgroundRectangle = backgroundRectangle;
     this.electronNode = electronNode;
     this.energyAxisHBox = energyAxisHBox;
     this.energyAxisLength = energyAxisLength;
