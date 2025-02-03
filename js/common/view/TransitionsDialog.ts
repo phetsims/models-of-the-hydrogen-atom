@@ -190,7 +190,7 @@ export default class TransitionsDialog extends Panel {
       let waveLengthNode: Node;
       if ( monochromaticWavelengthProperty.range.contains( wavelength ) ) {
         waveLengthNode = new RectangularPushButton( {
-          baseColor: MOTHAColors.pushButtonBaseColorProperty,
+          baseColor: MOTHAColors.pushButtonColorProperty,
           content: wavelengthText,
           listener: () => {
             monochromaticWavelengthProperty.value = wavelength;

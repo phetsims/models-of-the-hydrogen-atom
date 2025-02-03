@@ -69,7 +69,7 @@ export default class SpectrometerSnapshotNode extends Node {
     } );
 
     const trashButton = new TrashButton( {
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
+      baseColor: MOTHAColors.pushButtonColorProperty,
       listener: () => {
         if ( snapshotProperty.value ) {
           snapshotProperty.value.dispose();

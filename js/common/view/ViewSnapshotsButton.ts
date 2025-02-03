@@ -29,7 +29,7 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
 
     const options = optionize<ViewSnapshotsButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
       listener: () => snapshotsDialog.show(),
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
+      baseColor: MOTHAColors.pushButtonColorProperty,
       content: new Path( eyeSolidShape, {
         fill: 'black',
         scale: 0.05

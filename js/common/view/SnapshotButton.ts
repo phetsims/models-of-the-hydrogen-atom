@@ -30,7 +30,7 @@ export default class SnapshotButton extends RectangularPushButton {
 
     const options = optionize<SnapshotButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
       listener: () => spectrometer.takeSnapshot(),
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
+      baseColor: MOTHAColors.pushButtonColorProperty,
       content: new Path( cameraSolidShape, {
         fill: 'black',
         scale: 0.05

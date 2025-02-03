@@ -59,7 +59,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
     const eraseButton = new EraserButton( {
       size: PUSH_BUTTON_SIZE,
-      baseColor: MOTHAColors.pushButtonBaseColorProperty,
+      baseColor: MOTHAColors.pushButtonColorProperty,
       xMargin: 6,
       yMargin: 6,
       enabledProperty: spectrometer.hasDataPointsProperty,

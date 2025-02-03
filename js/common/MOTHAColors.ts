@@ -14,6 +14,7 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 const MOTHAColors = {
 
   // Joist requires 'black' and 'white' to change the navigation bar color, so do not change these colors.
+  // Instead, see screenBackgroundRectangleColorProperty.
   screenBackgroundColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'screenBackgroundColor', {
     default: 'black',
     projector: 'white'
@@ -120,7 +121,7 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Models Panel
+  // Atomic Models panel
   //------------------------------------------------------------------------------------------------------------------
 
   switchTextFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'switchTextFill', {
@@ -195,7 +196,7 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Snapshots
+  // Spectrometer Snapshots
   //------------------------------------------------------------------------------------------------------------------
 
   snapshotsDialogFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'snapshotsDialogFill', {
@@ -213,7 +214,7 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
-  // Electron Energy Level
+  // Electron Energy Level diagrams
   //------------------------------------------------------------------------------------------------------------------
 
   electronEnergyLevelTitleFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'electronEnergyLevelTitleFill', {
@@ -258,6 +259,23 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
+  // Buttons
+  //------------------------------------------------------------------------------------------------------------------
+
+  // Base color for most push buttons.
+  pushButtonColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'pushButtonColor', {
+    default: Color.grayColor( 200 )
+  } ),
+
+  exciteElectronButtonColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'exciteElectronButtonColor', {
+    default: PhetColorScheme.BUTTON_YELLOW
+  } ),
+
+  stateInfoButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'stateInfoButtonFill', {
+    default: 'rgb( 0, 111, 153 )'
+  } ),
+
+  //------------------------------------------------------------------------------------------------------------------
   // Miscellaneous
   //------------------------------------------------------------------------------------------------------------------
 
@@ -267,21 +285,9 @@ const MOTHAColors = {
     projector: 'black'
   } ),
 
-  pushButtonBaseColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'pushButtonBaseColor', {
-    default: Color.grayColor( 200 )
-  } ),
-
   xzAxesColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'xzAxesColor', {
     default: 'white',
     projector: 'black'
-  } ),
-
-  exciteElectronButtonColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'exciteElectronButtonColor', {
-    default: PhetColorScheme.BUTTON_YELLOW
-  } ),
-
-  stateInfoButtonFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'stateInfoButtonFill', {
-    default: 'rgb( 0, 111, 153 )'
   } ),
 
   checkboxStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'checkboxStroke', {
@@ -301,12 +307,12 @@ const MOTHAColors = {
   UV_COLOR: 'rgb( 160, 160, 160 )',
   IR_COLOR: 'rgb( 160, 160, 160 )',
 
-  // Sparkle in the center of photons
+  // Sparkle in the center of photons.
   VISIBLE_SPARKLE_COLOR: 'rgba( 255, 255, 255, 0.4 )',
   UV_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 400 ),
   IR_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 ),
 
-  // Holo colors for photons, for debugging with ?showHalos
+  // Holo colors for specific photons, for debugging with ?showHalos
   SPONTANEOUS_EMISSION_HALO_COLOR: Color.RED,
   STIMULATED_EMISSION_HALO_COLOR: Color.GREEN,
   EXCITE_METASTABLE_HALO_COLOR: Color.BLUE
