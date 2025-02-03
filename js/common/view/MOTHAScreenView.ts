@@ -13,7 +13,6 @@ import { Shape } from '../../../../kite/js/imports.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node, Path, Rectangle, VBox } from '../../../../scenery/js/imports.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
-import MOTHAConstants from '../../common/MOTHAConstants.js';
 import TransitionsCheckbox from '../../common/view/TransitionsCheckbox.js';
 import TransitionsDialog from '../../common/view/TransitionsDialog.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
@@ -65,6 +64,9 @@ type SelfOptions = {
 type MOTHAScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
 
 export default class MOTHAScreenView extends ScreenView {
+
+  public static readonly X_MARGIN = 15;
+  public static readonly Y_MARGIN = 15;
 
   private readonly model: MOTHAModel;
 
@@ -166,8 +168,8 @@ export default class MOTHAScreenView extends ScreenView {
         spectrometerSnapshotsDialog.hide();
         this.electronEnergyLevelAccordionBox && this.electronEnergyLevelAccordionBox.reset();
       },
-      right: this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN,
-      bottom: this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
+      right: this.layoutBounds.right - MOTHAScreenView.X_MARGIN,
+      bottom: this.layoutBounds.bottom - MOTHAScreenView.Y_MARGIN,
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
@@ -217,7 +219,7 @@ export default class MOTHAScreenView extends ScreenView {
     // Layout: zoomedInBoxNode and the elements to the left of it.
     lightSourceNode.left = this.layoutBounds.left + options.lightSourceNodeXOffset;
     this.zoomedInBoxNode.left = lightSourceNode.right + 50;
-    this.zoomedInBoxNode.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
+    this.zoomedInBoxNode.top = this.layoutBounds.top + MOTHAScreenView.Y_MARGIN;
     lightSourceNode.bottom = this.zoomedInBoxNode.bottom;
     boxOfHydrogenNode.centerX = lightSourceNode.centerX;
     boxOfHydrogenNode.bottom = lightSourceNode.top + 1;
@@ -283,16 +285,16 @@ export default class MOTHAScreenView extends ScreenView {
         } ),
         spectrometerAccordionBox
       ],
-      left: this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
+      left: this.layoutBounds.left + MOTHAScreenView.X_MARGIN,
       top: this.zoomedInBoxNode.bottom + 15
     } );
 
     // Layout: miscellaneous elements
     transitionsDialog.setInitialPosition( modelVBox.leftTop );
-    legendPanel.left = this.layoutBounds.left + MOTHAConstants.SCREEN_VIEW_X_MARGIN;
-    legendPanel.top = this.layoutBounds.top + MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
-    resetAllButton.right = this.layoutBounds.right - MOTHAConstants.SCREEN_VIEW_X_MARGIN;
-    resetAllButton.bottom = this.layoutBounds.bottom - MOTHAConstants.SCREEN_VIEW_Y_MARGIN;
+    legendPanel.left = this.layoutBounds.left + MOTHAScreenView.X_MARGIN;
+    legendPanel.top = this.layoutBounds.top + MOTHAScreenView.Y_MARGIN;
+    resetAllButton.right = this.layoutBounds.right - MOTHAScreenView.X_MARGIN;
+    resetAllButton.bottom = this.layoutBounds.bottom - MOTHAScreenView.Y_MARGIN;
 
     // Now that layout is done, we can add the dashed lines that connect the tiny box and zoomed-in box.
     const dashedLines = new Path( new Shape()

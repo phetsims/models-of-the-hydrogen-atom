@@ -38,6 +38,7 @@ import MOTHASymbols from '../MOTHASymbols.js';
 import PhotonNode from './PhotonNode.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import MOTHAScreenView from './MOTHAScreenView.js';
 
 const TITLE_TEXT_OPTIONS = {
   font: new PhetFont( {
@@ -270,10 +271,10 @@ export default class TransitionsDialog extends Panel {
     const dragBoundsProperty = new DerivedProperty(
       [ visibleBoundsProperty, this.boundsProperty ],
       ( visibleBounds, bounds ) => new Bounds2(
-        visibleBounds.minX + MOTHAConstants.SCREEN_VIEW_X_MARGIN,
-        visibleBounds.minY + MOTHAConstants.SCREEN_VIEW_Y_MARGIN,
-        visibleBounds.maxX - MOTHAConstants.SCREEN_VIEW_X_MARGIN - bounds.width,
-        visibleBounds.maxY - MOTHAConstants.SCREEN_VIEW_Y_MARGIN - bounds.height ), {
+        visibleBounds.minX + MOTHAScreenView.X_MARGIN,
+        visibleBounds.minY + MOTHAScreenView.Y_MARGIN,
+        visibleBounds.maxX - MOTHAScreenView.X_MARGIN - bounds.width,
+        visibleBounds.maxY - MOTHAScreenView.Y_MARGIN - bounds.height ), {
         valueComparisonStrategy: 'equalsFunction'
       } );
 

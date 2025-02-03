@@ -41,10 +41,6 @@ const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
 
 const MOTHAConstants = {
 
-  // margins for all ScreenView instances
-  SCREEN_VIEW_X_MARGIN: 15,
-  SCREEN_VIEW_Y_MARGIN: 15,
-
   // Position of all hydrogen atoms, in the model coordinate frame.
   ATOM_POSITION: new Vector2( 0, 0 ),
 
