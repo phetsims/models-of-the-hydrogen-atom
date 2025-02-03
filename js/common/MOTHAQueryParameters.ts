@@ -1,7 +1,7 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * Query parameters supported by the geometric-optics simulation.
+ * Query parameters supported by this simulation.
  * Running with ?log will print these query parameters and their values to the console at startup.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -23,8 +23,8 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // Internal query parameters
   //----------------------------------------------------------------------------------------------------------------
 
-  // Draws a halo around special photons, to make them easier to see. This includes photons that are emitted by
-  // the atom, and photons that are used to excite the Schrodinger atom out of the metastable state (2,0,0).
+  // Draws a halo around special photons, to make them easier to see. This includes photons that are emitted by the
+  // atom, and photons that are used to excite the Schrodinger electron out of the metastable state (n,l,m) = (2,0,0).
   showHalos: {
     type: 'flag'
   },
@@ -41,7 +41,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     isValidValue: ( array: number[] ) => ( array.length === 3 ) && ( array[ 0 ] > array[ 1 ] ) && ( array[ 1 ] > array[ 2 ] )
   },
 
-  // Expand all accordion boxes
+  // Expand all accordion boxes on startup.
   expandAll: {
     type: 'flag'
   },
@@ -57,7 +57,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     type: 'flag'
   },
 
-  // Displays spectrometer data in text-only format, in the upper-right corner of the spectrometer and snapshots.
+  // Displays spectrometer data in text-only format, in the right-top corner of the spectrometer and snapshots.
   debugSpectrometerData: {
     type: 'flag'
   }
