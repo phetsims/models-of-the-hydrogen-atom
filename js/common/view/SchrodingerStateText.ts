@@ -1,7 +1,7 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * SchrodingerStateText displays the quantum numbers (n,l,m) and subshell that describe the wavefunction of the electron
+ * SchrodingerStateText displays the quantum numbers (n,l,m) and orbital that describe the wavefunction of the electron
  * in the Schrodinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
