@@ -43,42 +43,43 @@ const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
 
 export default class MOTHAModel implements TModel {
 
-  // whether we are viewing the experiment (true) or a predictive model (false) of the hydrogen atom.
+  // Whether we are viewing the Experiment (true) or a Model (false) of the hydrogen atom.
   public readonly isExperimentProperty: Property<boolean>;
 
-  // the experiment hydrogen atom
+  // Atomic model for what is presented as the 'Experiment' in the user interface.
   public readonly experiment: Experiment;
 
-  // the supported set of predictive atomic models
+  // The supported set of predictive atomic models.
   public readonly atomicModels: HydrogenAtom[];
 
-  // the predictive atomic model that is currently selected
+  // The predictive atomic model that is currently selected.
   public readonly atomicModelProperty: Property<HydrogenAtom>;
 
-  // the hydrogen-atom model that is active: either the experiment, or the selected predictive model.
+  // The atomic model that is active: either the Experiment, or the selected predictive Model.
   public readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
-  // whether hydrogenAtomProperty is a quantum model
+  // Whether the value of hydrogenAtomProperty is a quantum model.
   public readonly isQuantumModelProperty: TReadOnlyProperty<boolean>;
 
-  // the zoomed-in part of the box of hydrogen
+  // The zoomed-in part of the box of hydrogen.
   public readonly zoomedInBox: ZoomedInBox;
 
-  // the light source that is shining into the box of hydrogen
+  // The light source that is shining into the box of hydrogen.
   public readonly lightSource: LightSource;
 
+  // The spectrometer that is used to measure photon emission.
   public readonly spectrometer: Spectrometer;
 
-  // Manages dynamic Photon elements for PhET-iO
+  // Manages dynamic Photon elements for PhET-iO.
   public readonly photonGroup: PhotonGroup;
 
-  // is the simulation playing?
+  // Whether the simulation is playing (true) or paused (false).
   public readonly isPlayingProperty: Property<boolean>;
 
-  // speed that the simulation is running at
+  // Speed that the simulation is running at.
   public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
 
-  // scale factor applied to dt, based on timeSpeedProperty
+  // Scale factor applied to dt, based on timeSpeedProperty.
   private readonly timeScaleProperty: TReadOnlyProperty<number>;
 
   protected constructor( zoomedInBox: ZoomedInBox,
@@ -151,6 +152,7 @@ export default class MOTHAModel implements TModel {
       }
     );
 
+    // Listeners for photon emission and absorption.
     const photonEmittedListener = ( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color ) =>
       this.photonGroup.emitPhotonFromAtom( wavelength, position, direction, debugHaloColor );
     const photonAbsorbedEmitter = ( photon: Photon ) => this.photonGroup.disposeElement( photon );

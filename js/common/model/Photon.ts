@@ -47,7 +47,10 @@ type SelfOptions = {
   direction?: number; // initial direction
   wasEmittedByAtom?: boolean; // Was this photon emitted by the atom?
   hasCollidedWithAtom?: boolean; // Has this photon collided with the atom?
-  debugHaloColor?: Color | null; // Color of halo around the photon, to make it easier to see for debugging.
+
+  // Color of the halo around the photon, to make it easier to see for debugging.
+  // Halos are visible when running with ?showHalos.
+  debugHaloColor?: Color | null;
 };
 
 export type PhotonOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
@@ -120,6 +123,9 @@ export default class Photon extends PhetioObject {
     } );
   }
 
+  /**
+   * Gets the photon's direction, in radians.
+   */
   public get direction(): number {
     return this.directionProperty.value;
   }

@@ -212,8 +212,8 @@ export default class PlumPuddingModel extends HydrogenAtom {
         y = y1;
       }
 
-      // Change x direction
-      this.electron.changeXDirection();
+      // Reverses the x direction
+      this.electron.reverseXDirection();
     }
 
     // Did we cross the origin?

@@ -13,6 +13,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import Utils from '../../../../dot/js/Utils.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 
+// Transition for n, the principal quantum number that represents the electron's state.
 type StateTransition = {
   n1: number;
   n2: number; // n2 > n1
