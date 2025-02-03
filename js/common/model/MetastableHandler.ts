@@ -9,7 +9,7 @@
  *  the step method fires an absorbable photon at the atom's center every MAX_STUCK_TIME ms.
  *
  *  Manual excitation occurs when the light is emitting monochromatic light. In this case, the user must manually
- *  fire an absorbable photon at the atom's center by pressing the 'Excite Atom' button.
+ *  fire an absorbable photon at the atom's center by pressing the 'Excite Electron' button.
  *
  *  To get into the metastable state:
  *  1. Select the Schrodinger atomic model.

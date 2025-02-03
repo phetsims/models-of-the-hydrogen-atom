@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * ExciteElectronButton is the push button labeled 'Excite Atom'.
+ * ExciteElectronButton is the push button labeled 'Excite Electron'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
