@@ -22,6 +22,9 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
 
   private readonly deBroglieModel: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
+
+  // Pitch, rotation about the x-axis.
+  // In case you're not familiar with 3D rotation, it is typically specified as pitch, roll, and yaw angles.
   private readonly pitchProperty: TReadOnlyProperty<number>;
 
   // Reusable vertices.

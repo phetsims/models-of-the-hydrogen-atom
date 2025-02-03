@@ -31,11 +31,14 @@ const ANGULAR_SPEED = Utils.toRadians( 100 );
 
 export default class DeBroglie3DHeightNode extends Node {
 
+  // Selected view representation of the de Broglie model.
   private readonly deBroglieRepresentationProperty: TReadOnlyProperty<DeBroglieRepresentation>;
 
-  // Pitch, rotation about the x-axis
+  // Pitch, rotation about the x-axis.
+  // In case you're not familiar with 3D rotation, it is typically specified as pitch, roll, and yaw angles.
   private readonly pitchProperty: Property<number>;
 
+  // Wireframe renderings of the orbits and wave.
   private readonly orbitsNode: Wireframe3DNode;
   private readonly waveNode: Wireframe3DNode;
 
@@ -47,7 +50,7 @@ export default class DeBroglie3DHeightNode extends Node {
       isDisposable: false,
       tandem: tandem,
 
-      // visible when the view choice is '3D Height'
+      // Visible when the view choice is '3D Height'.
       visibleProperty: new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === '3DHeight' ) )
     } );

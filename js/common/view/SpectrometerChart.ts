@@ -67,7 +67,7 @@ export default class SpectrometerChart extends Node {
     irEmissionChart.left = visibleEmissionChart.right + X_SPACING;
 
     // Breaks between the segments of the x-axis.
-    const breakNodesCenterY = uvEmissionChart.y + EmissionChart.AXIS_HEIGHT / 2;
+    const breakNodesCenterY = uvEmissionChart.y + EmissionChart.X_AXIS_HEIGHT / 2;
     const uvRightBreakNode = new AxisBreakNode( {
       centerX: uvEmissionChart.right,
       centerY: breakNodesCenterY

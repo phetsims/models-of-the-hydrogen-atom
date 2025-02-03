@@ -23,6 +23,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class DeBroglieNode extends HydrogenAtomNode {
 
+  // View for the '3D Height' representation. We need a reference to this so that it can be animated via the step method.
   private readonly deBroglie3DHeightNode: DeBroglie3DHeightNode;
 
   public constructor( deBroglieModel: DeBroglieModel,

@@ -19,6 +19,8 @@ import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
 
+  // Pitch, rotation about the x-axis.
+  // In case you're not familiar with 3D rotation, it is typically specified as pitch, roll, and yaw angles.
   private readonly pitchProperty: TReadOnlyProperty<number>;
 
   public constructor( modelViewTransform: ModelViewTransform2, pitchProperty: TReadOnlyProperty<number>, finalPitch: number ) {

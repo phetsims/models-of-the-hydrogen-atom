@@ -33,17 +33,17 @@ export default class DeBroglieRadialDistanceNode extends Node {
 
   public constructor( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
-    // Electron orbits
+    // Electron orbits.
     const orbitsNode = new OrbitsNode( deBroglieModel.position, modelViewTransform );
 
-    // Ring that represents the electron as a  standing wave
+    // Ring that represents the electron as a  standing wave.
     const ringNode = new RingNode( deBroglieModel, modelViewTransform );
 
     super( {
       isDisposable: false,
       children: [ orbitsNode, ringNode ],
 
-      // visible when the view choice is 'Radial Distance'
+      // Visible when the view choice is 'Radial Distance'.
       visibleProperty: new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
         deBroglieView => ( deBroglieView === 'radialDistance' ) )
     } );

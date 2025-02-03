@@ -31,18 +31,13 @@ export default class AbsorptionTransitionText extends RichText {
       [ lightModeProperty, isQuantumModelProperty, isExperimentProperty ],
       ( lightMode, isQuantumModel, isExperiment ) => ( lightMode === 'monochromatic' ) && isQuantumModel && !isExperiment );
 
-    // Provide PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
+    // Provide PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'.
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
 
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],
       ( n, wavelength ) => {
         const transition = photonAbsorptionModel.getTransition( wavelength );
-        if ( transition ) {
-          return `${n} = ${transition.n1} ${MOTHASymbols.rightArrow} ${transition.n2}`;
-        }
-        else {
-          return '';
-        }
+        return transition ? `${n} = ${transition.n1} ${MOTHASymbols.rightArrow} ${transition.n2}` : '';
       } );
 
     super( stringProperty, {

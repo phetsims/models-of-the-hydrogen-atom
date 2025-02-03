@@ -2,7 +2,7 @@
 
 /**
  * AtomicModelPanel contains controls (radio buttons) for choosing one of the atomic models, and an optional
- * 'Classical' to 'Continuum' bar. It is shown when the AB-switch is set to 'Model'.
+ * 'Classical' to 'Quantum' continuum bar. It is shown when the A/B switch is set to 'Model'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -51,7 +51,7 @@ export default class AtomicModelPanel extends Panel {
       yMargin: 0
     }, providedOptions );
 
-    // radio buttons
+    // Radio buttons
     const atomicModelRadioButtonGroup = new AtomicModelRadioButtonGroup( atomicModelProperty, atomicModels, {
       radioButtonTextMaxWidth: providedOptions.radioButtonTextMaxWidth,
       tandem: options.tandem.createTandem( 'atomicModelRadioButtonGroup' )
@@ -67,7 +67,6 @@ export default class AtomicModelPanel extends Panel {
 
     children.push( atomicModelRadioButtonGroup );
 
-    // panel content
     const contentNode = new HBox( {
       spacing: 10,
       children: children

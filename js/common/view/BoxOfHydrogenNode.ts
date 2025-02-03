@@ -1,7 +1,7 @@
 // Copyright 2015-2025, University of Colorado Boulder
 
 /**
- * BoxOfHydrogenNode is the box of hydrogen into which the light emits photons.
+ * BoxOfHydrogenNode is the (small) box of hydrogen into which the light emits photons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

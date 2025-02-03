@@ -58,7 +58,8 @@ type EmissionChartOptions = SelfOptions;
 
 export default class EmissionChart extends Node {
 
-  public static readonly AXIS_HEIGHT = 4;
+  // Height (or thickness) of the x-axis.
+  public static readonly X_AXIS_HEIGHT = 4;
 
   protected constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
                          xAxisStringProperty: TReadOnlyProperty<string>,
@@ -178,7 +179,7 @@ class UVEmissionChart extends EmissionChart {
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
-    const xAxis = new Rectangle( 0, 0, axisLength, EmissionChart.AXIS_HEIGHT, {
+    const xAxis = new Rectangle( 0, 0, axisLength, EmissionChart.X_AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
     } );
 
@@ -217,7 +218,7 @@ class IREmissionChart extends EmissionChart {
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
-    const xAxis = new Rectangle( 0, 0, axisLength, EmissionChart.AXIS_HEIGHT, {
+    const xAxis = new Rectangle( 0, 0, axisLength, EmissionChart.X_AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
     } );
 
@@ -257,7 +258,7 @@ class VisibleEmissionChart extends EmissionChart {
     const maxWavelength = _.max( wavelengths )! + 50;
 
     const xAxis = new SpectrumNode( {
-      size: new Dimension2( axisLength, EmissionChart.AXIS_HEIGHT ),
+      size: new Dimension2( axisLength, EmissionChart.X_AXIS_HEIGHT ),
       minValue: minWavelength,
       maxValue: maxWavelength,
       valueToColor: LightSource.wavelengthToColor
