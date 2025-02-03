@@ -12,7 +12,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import LightSource from '../model/LightSource.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
-import ExciteAtomButton from './ExciteAtomButton.js';
+import ExciteElectronButton from './ExciteElectronButton.js';
 import QuantumNumbersInfoButton from './QuantumNumbersInfoButton.js';
 import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
 import SchrodingerStateText from './SchrodingerStateText.js';
@@ -31,10 +31,10 @@ export default class SchrodingerOverlayNode extends Node {
 
     const xzAxesNode = new XZAxesNode( tandem.createTandem( 'xzAxesNode' ) );
 
-    // 'Excite Atom' button that appears when the atom is in the metastable state (n,l,m) = (2,0,0).
-    // Pressing this button fires a photon that transitions the atom to a higher energy level.
-    const exciteAtomButton = new ExciteAtomButton( schrodingerModel.metastableHandler.isMetastableStateProperty, lightSource,
-      () => schrodingerModel.metastableHandler.exciteElectron(), tandem.createTandem( 'exciteAtomButton' ) );
+    // 'Excite Electron' button that appears when the electron is in the metastable state (n,l,m) = (2,0,0).
+    // Pressing this button fires a photon that transitions the electron to a higher energy level.
+    const exciteElectronButton = new ExciteElectronButton( schrodingerModel.metastableHandler.isMetastableStateProperty, lightSource,
+      () => schrodingerModel.metastableHandler.exciteElectron(), tandem.createTandem( 'exciteElectronButton' ) );
 
     // (n,l,m) = ...
     const electronStateText = new SchrodingerStateText( schrodingerModel.nlmProperty, tandem.createTandem( 'electronStateText' ) );
@@ -48,7 +48,7 @@ export default class SchrodingerOverlayNode extends Node {
       align: 'right',
       spacing: 15,
       children: [
-        exciteAtomButton,
+        exciteElectronButton,
         new HBox( {
           children: [ electronStateText, quantumNumbersInfoButton ],
           spacing: 8

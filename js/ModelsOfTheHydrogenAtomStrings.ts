@@ -46,7 +46,7 @@ type StringsType = {
   'mStringProperty': LocalizedStringProperty;
   'xStringProperty': LocalizedStringProperty;
   'zStringProperty': LocalizedStringProperty;
-  'exciteAtomStringProperty': LocalizedStringProperty;
+  'exciteElectronStringProperty': LocalizedStringProperty;
   'whiteStringProperty': LocalizedStringProperty;
   'monochromaticStringProperty': LocalizedStringProperty;
   'uvStringProperty': LocalizedStringProperty;

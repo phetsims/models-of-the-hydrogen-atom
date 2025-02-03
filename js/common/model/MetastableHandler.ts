@@ -131,7 +131,7 @@ export default class MetastableHandler extends PhetioObject {
     // Running with ?showHalos, this photon will have a halo that makes it easier to see.
     this.lightSource.emitPhotonAtBottomCenter( wavelength, MOTHAColors.EXCITE_METASTABLE_HALO_COLOR );
 
-    phet.log && phet.log( `MetastableHandler: exciteAtom ${MOTHASymbols.lambda}=${wavelength}`, {
+    phet.log && phet.log( `MetastableHandler: exciteElectron ${MOTHASymbols.lambda}=${wavelength}`, {
       color: 'blue'
     } );
   }

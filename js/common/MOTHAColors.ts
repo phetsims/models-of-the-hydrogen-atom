@@ -276,7 +276,7 @@ const MOTHAColors = {
     projector: 'black'
   } ),
 
-  exciteAtomButtonColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'exciteAtomButtonColor', {
+  exciteElectronButtonColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'exciteElectronButtonColor', {
     default: PhetColorScheme.BUTTON_YELLOW
   } ),
 

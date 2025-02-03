@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * ExciteAtomButton is the push button labeled 'Excite Atom'.
+ * ExciteElectronButton is the push button labeled 'Excite Atom'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,7 +18,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-export default class ExciteAtomButton extends RectangularPushButton {
+export default class ExciteElectronButton extends RectangularPushButton {
 
   public constructor( isMetastableStateProperty: TReadOnlyProperty<boolean>,
                       lightSource: LightSource,
@@ -40,9 +40,9 @@ export default class ExciteAtomButton extends RectangularPushButton {
     super( {
       listener: () => excite(),
       isDisposable: false,
-      baseColor: MOTHAColors.exciteAtomButtonColorProperty,
+      baseColor: MOTHAColors.exciteElectronButtonColorProperty,
       visibleProperty: gatedVisibleProperty,
-      content: new Text( ModelsOfTheHydrogenAtomStrings.exciteAtomStringProperty, {
+      content: new Text( ModelsOfTheHydrogenAtomStrings.exciteElectronStringProperty, {
         font: new PhetFont( 16 ),
         maxWidth: 100
       } ),
@@ -51,4 +51,4 @@ export default class ExciteAtomButton extends RectangularPushButton {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'ExciteAtomButton', ExciteAtomButton );
+modelsOfTheHydrogenAtom.register( 'ExciteElectronButton', ExciteElectronButton );
