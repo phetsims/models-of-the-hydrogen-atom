@@ -19,8 +19,13 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-// Orbital names, indexed by the value of l from (n,l,m).
-const ORBITALS = [
+// Letters that represent the orbital shape, indexed by the value of l from (n,l,m).
+// s = spherical
+// p = dumbbell
+// d = clover leaf
+// ...
+//TODO Are these correct? I don't find g or h in Google search, and the order of f is suspect.
+const ORBITAL_SHAPE_PROPERTIES = [
   MOTHASymbols.sStringProperty,
   MOTHASymbols.pStringProperty,
   MOTHASymbols.dStringProperty,
@@ -39,7 +44,7 @@ export default class SchrodingerStateText extends RichText {
         MOTHASymbols.lStringProperty,
         MOTHASymbols.mStringProperty,
         nlmProperty,
-        ...ORBITALS
+        ...ORBITAL_SHAPE_PROPERTIES
       ],
       () => StringUtils.fillIn( ModelsOfTheHydrogenAtomStrings.nlmEqualsStringProperty.value, {
         nSymbol: MOTHASymbols.nStringProperty.value,
@@ -48,7 +53,7 @@ export default class SchrodingerStateText extends RichText {
         nValue: nlmProperty.value.n,
         lValue: nlmProperty.value.l,
         mValue: nlmProperty.value.m,
-        subshell: ORBITALS[ nlmProperty.value.l ].value
+        orbitalShape: ORBITAL_SHAPE_PROPERTIES[ nlmProperty.value.l ].value
       } ) );
 
     super( stringProperty, {
