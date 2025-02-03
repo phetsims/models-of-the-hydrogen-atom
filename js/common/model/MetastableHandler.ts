@@ -119,9 +119,9 @@ export default class MetastableHandler extends PhetioObject {
   }
 
   /**
-   * Attempts to excite the electron (take it to a higher state) by telling the light to emit one absorbable photon towards
-   * the atom's center. The absorption wavelength that will take the electron to a higher state (n) is chosen at random.
-   * This method is called from step() and from the 'Excite Atom' button listener.
+   * Attempts to excite the electron (take it to a higher state) by telling the light to emit one absorbable photon
+   * towards the atom's center. The absorption wavelength that will take the electron to a higher state (n) is chosen
+   * at random.
    */
   public exciteElectron(): void {
     assert && assert( this.isMetastableStateProperty.value,
