@@ -41,6 +41,9 @@ export default class BohrElectron extends QuantumElectron {
     super.reset();
   }
 
+  /**
+   * Sets the value of n, the principal quantum number.
+   */
   public override set_n( n: number ): void {
     this._nProperty.value = n;
   }

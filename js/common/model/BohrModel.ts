@@ -70,6 +70,9 @@ const ORBIT_RADII = [ 15, 44, 81, 124, 174, 233 ];
 assert && assert( ORBIT_RADII.length === MOTHAConstants.NUMBER_OF_STATES, 'An orbit must exists for each electron state.' );
 
 type SelfOptions = {
+
+  // The atom's electron. For BohrModel, this is BohrElectron. But since BohrModel serves as a base class for other
+  // quantum models, those other models may provide their own subclass of QuantumElectron.
   electron?: QuantumElectron;
 };
 
@@ -79,7 +82,10 @@ export type BohrModelOptions = SelfOptions &
 
 export default class BohrModel extends HydrogenAtom {
 
+  // The atom's proton.
   public readonly proton: Proton;
+
+  // The atom's electron.
   public readonly electron: QuantumElectron;
 
   // Change in orbit angle per dt for ground state orbit.
@@ -139,7 +145,7 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   /**
-   * Photon may be absorbed or stimulate emission.
+   * Processes a photon.
    */
   public override processPhoton( photon: Photon ): void {
     if ( this.collides( photon ) ) {
@@ -154,7 +160,8 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Gets the radius of the electron's orbit when it's in a specified state.
+   * Gets the radius of the electron's orbit.
+   * @param n - the principal quantum number that describes the electron's state
    */
   public static getElectronOrbitRadius( n: number ): number {
     return ORBIT_RADII[ n - MOTHAConstants.GROUND_STATE ];
@@ -229,7 +236,7 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Attempts to stimulate emission with a specified photon. If an electron in state nOld is hit by a photon whose
    * absorption would cause a transition from state nOld to nNew, where nNew < nOld, then the electron should drop
-   * to state nNew and emit a photon. The emitted photon should be the same wavelength and be traveling alongside
+   * to state nNew and emit a photon. The emitted photon will have the same wavelength and be traveling alongside
    * the original photon. See https://en.wikipedia.org/wiki/Stimulated_emission
    *
    * @returns the photon emitted, null if no photon was emitted.
@@ -293,7 +300,6 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Spontaneous emission transitions from an excited energy state to a lower energy state, and emits a photon.
    * See https://en.wikipedia.org/wiki/Spontaneous_emission
-   *
    * @returns the photon emitted, null if no photon was emitted.
    */
   private attemptSpontaneousEmission(): void {
@@ -336,18 +342,13 @@ export default class BohrModel extends HydrogenAtom {
   }
 
   /**
-   * Chooses a lower value for n. This is used during spontaneous emission. Each lower state has the same probability
-   * of being chosen.
+   * Chooses a lower value for n, a lower energy state for the electron. This is used during spontaneous emission.
+   * Each lower state has the same probability of being chosen.
    * @returns n, null if there is no lower state
    */
   protected chooseLower_n(): number | null {
     const n = this.electron.nProperty.value;
-    if ( n === MOTHAConstants.GROUND_STATE ) {
-      return null;
-    }
-    else {
-      return dotRandom.nextIntBetween( MOTHAConstants.GROUND_STATE, n - 1 );
-    }
+    return ( n === MOTHAConstants.GROUND_STATE ) ? null : dotRandom.nextIntBetween( MOTHAConstants.GROUND_STATE, n - 1 );
   }
 
   /**

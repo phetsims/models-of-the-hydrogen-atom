@@ -59,7 +59,7 @@ export default class BilliardBallModel extends HydrogenAtom {
   }
 
   /**
-   * Handle photon collision with the atom.
+   * Handles collisions between photons and the atom.
    */
   public override processPhoton( photon: Photon ): void {
     if ( !photon.hasCollidedWithAtom ) {
