@@ -1,11 +1,11 @@
 {
-  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.18 Tue Jan 21 2025 15:38:07 GMT-0700 (Mountain Standard Time)",
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.19 Mon Feb 03 2025 17:17:03 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "f6d41b399ad32df2a00ab4b329981be0c574d77a",
     "branch": "main"
   },
   "axon": {
-    "sha": "6401a916cbc6b206d63a5b637b59abbadea45d00",
+    "sha": "d1a79102ccd08cfd0e2f27483afa2d82db6f8ffc",
     "branch": "main"
   },
   "brand": {
@@ -13,27 +13,27 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "293e23b01255c35dfbeca0fcd5bdf3a721266f32",
+    "sha": "33ec2c8589db340ea95842fdcb3c2db0ead9c45b",
     "branch": "main"
   },
   "dot": {
-    "sha": "5a811e63cd3d2a657363ec8aa67564ba90bbff4f",
+    "sha": "0b80a8fbe0b44ffbda0afb2af438abcee5f28db6",
     "branch": "main"
   },
   "joist": {
-    "sha": "e26d67221c4765d20d5938f20cde82dcdcea99c7",
+    "sha": "db9422b64e191f5e551b6113c820dd88aad37a38",
     "branch": "main"
   },
   "kite": {
-    "sha": "6d11da9ca8d51de88333391613b0a7acd6d87ecb",
+    "sha": "a3fd3b7909de5f9517263ea9f116c7768e0916de",
     "branch": "main"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "a284946c663c74879aeda00fa675c49f77a2e487",
+    "sha": "1bc2bbcc11d36d4e58be1db8d2a4f5e90f2df9e4",
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "0ca3034fab5ef051a9e3464faddaf9416342bf0c",
+    "sha": "c72bbb52d223e7edcc775b72f2e85b5675315b85",
     "branch": "main"
   },
   "phet-core": {
@@ -41,11 +41,11 @@
     "branch": "main"
   },
   "phet-io": {
-    "sha": "a995a81d268b08cd8523412f2af59ef3653aa60c",
+    "sha": "01a20ccb26b09681b7f958c47b06b28f4e035067",
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "73262736a1ceb1f7ab63ed554c01cb581368316f",
+    "sha": "63afb644a97f52a1e8da7043e5865ae0ef414924",
     "branch": "main"
   },
   "phet-io-wrappers": {
@@ -65,35 +65,35 @@
     "branch": "main"
   },
   "scenery": {
-    "sha": "0b35da9b7adaf1ea3b0a4ec6a4d6fa2214458849",
+    "sha": "397ce01aacc188b2f1326b90b3fe267e9979822f",
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "dcbb634b7689e07897d2f760c7bf61bdac05a7c4",
+    "sha": "49ca44cb319c1ef7d77b22d6ebf81d410257b860",
     "branch": "main"
   },
   "sherpa": {
-    "sha": "02feaf7b7eb8939fd3060b70eb5167905a41d3c9",
+    "sha": "1d0673857dcaafb0d2243b093e658caf1b8cc222",
     "branch": "main"
   },
   "studio": {
-    "sha": "7221d5936b11eeef6d23077447f9315b97b2fab0",
+    "sha": "01c6e2192a36127bd26709dd0c0c293902f460ac",
     "branch": "main"
   },
   "sun": {
-    "sha": "508c4611552a1edba4609920593598c4329dce71",
+    "sha": "de9baa0752300a46b9b00dafd75ad67ef742312e",
     "branch": "main"
   },
   "tambo": {
-    "sha": "cd53c43196e863e39128d0419fee3e5316907958",
+    "sha": "b6991562f23bfb10075621c855c88d8e76b7e98a",
     "branch": "main"
   },
   "tandem": {
-    "sha": "6063be2dc8c71b640fa196b9c1b6bd8938b08431",
+    "sha": "65a4084c531b0d7c9baa638e8a2563de9072aedb",
     "branch": "main"
   },
   "twixt": {
-    "sha": "f6cc96479cfb4bb6dbcb857e630b99816d98318c",
+    "sha": "f982da1af4c10e0963a03320dba94aa1f020fcba",
     "branch": "main"
   },
   "utterance-queue": {
