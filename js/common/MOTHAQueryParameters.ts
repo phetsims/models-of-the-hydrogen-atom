@@ -42,7 +42,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     isValidValue: ( array: number[] ) => ( array.length === 3 ) && ( array[ 0 ] > array[ 1 ] ) && ( array[ 1 ] > array[ 2 ] )
   },
 
-  // For debugging, displays maximum numbers of photons for all possible emission wavelengths.
+  // Displays maximum numbers of photons at all possible emission wavelengths on the spectrometer.
   debugSpectrometer: {
     type: 'flag'
   }
