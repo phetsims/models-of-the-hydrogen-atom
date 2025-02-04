@@ -71,13 +71,13 @@ export default class SchrodingerBrightness {
 
     const n = quantumNumbers.n;
     const l = quantumNumbers.l;
-    const m = Math.abs( quantumNumbers.m );
+    const mAbs = Math.abs( quantumNumbers.m );
 
-    let brightness: number[][] | null = this.cache[ n ][ l ][ m ];
+    let brightness: number[][] | null = this.cache[ n ][ l ][ mAbs ];
     assert && assert( brightness !== undefined );
     if ( brightness === null ) {
-      brightness = this.computeBrightness( n, l, m );
-      this.cache[ n ][ l ][ m ] = brightness;
+      brightness = this.computeBrightness( n, l, mAbs );
+      this.cache[ n ][ l ][ mAbs ] = brightness;
     }
     return brightness;
   }
