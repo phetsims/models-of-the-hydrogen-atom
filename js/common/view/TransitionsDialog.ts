@@ -80,7 +80,7 @@ export default class TransitionsDialog extends Panel {
                       lightModeProperty: Property<LightMode>,
                       experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
                       transitionsIsCheckedProperty: Property<boolean>,
-                      isQuantumModelProperty: TReadOnlyProperty<boolean>,
+                      isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: TransitionsDialogOptions ) {
 
@@ -91,7 +91,7 @@ export default class TransitionsDialog extends Panel {
 
       // PanelOptions
       isDisposable: false,
-      visibleProperty: DerivedProperty.and( [ transitionsIsCheckedProperty, isQuantumModelProperty ], {
+      visibleProperty: DerivedProperty.and( [ transitionsIsCheckedProperty, isQuantumAtomProperty ], {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),

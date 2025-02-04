@@ -25,6 +25,9 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 
 type SelfOptions = {
 
+  // Whether the atom is a quantum atom.
+  isQuantum?: boolean;
+
   // Atom's name as it appears in the user interface.
   displayNameProperty: TReadOnlyProperty<string>;
 
@@ -48,6 +51,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly position: Vector2;
 
   // See SelfOptions for documentation of these fields.
+  public readonly isQuantum: boolean;
   public readonly displayNameProperty: TReadOnlyProperty<string>;
   public readonly debugName: string;
   public readonly icon: Node;
@@ -64,6 +68,9 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
     const options = optionize<HydrogenAtomOptions, SelfOptions, PhetioObjectOptions>()( {
 
+      // SelfOptions
+      isQuantum: false,
+
       // PhetioObjectOptions
       isDisposable: false,
       phetioState: false,
@@ -74,6 +81,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
 
     this.position = position;
 
+    this.isQuantum = options.isQuantum;
     this.displayNameProperty = options.displayNameProperty;
     this.debugName = options.debugName;
     this.icon = options.icon;

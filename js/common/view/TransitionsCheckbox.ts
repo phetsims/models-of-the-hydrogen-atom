@@ -20,11 +20,11 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 export default class TransitionsCheckbox extends Checkbox {
 
   public constructor( transitionsDialogVisibleProperty: Property<boolean>,
-                      isQuantumModelProperty: TReadOnlyProperty<boolean>,
+                      isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
-    // Show this checkbox only for quantum models, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
-    const visibleProperty = isQuantumModelProperty;
+    // Show this checkbox only for quantum atoms, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
+    const visibleProperty = isQuantumAtomProperty;
 
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );

@@ -17,7 +17,6 @@ import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
-import BohrModel from './BohrModel.js';
 import Experiment from './Experiment.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import LightSource from './LightSource.js';
@@ -71,8 +70,8 @@ export default class MOTHAModel implements TModel {
   // The atomic model that is active: either the Experiment, or the selected predictive Model.
   public readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
-  // Whether the value of hydrogenAtomProperty is a quantum model.
-  public readonly isQuantumModelProperty: TReadOnlyProperty<boolean>;
+  // Whether the value of hydrogenAtomProperty is a quantum atom.
+  public readonly isQuantumAtomProperty: TReadOnlyProperty<boolean>;
 
   // The zoomed-in part of the box of hydrogen.
   public readonly zoomedInBox: ZoomedInBox;
@@ -135,10 +134,11 @@ export default class MOTHAModel implements TModel {
 
     this.hydrogenAtomProperty = new DerivedProperty(
       [ this.experimentOrModelProperty, this.atomicModelProperty ],
-      ( isExperiment, atomicModel ) => isExperiment ? this.experiment : atomicModel );
+      ( experimentOrModel, atomicModel ) => experimentOrModel === 'experiment' ? this.experiment : atomicModel );
 
-    this.isQuantumModelProperty = new DerivedProperty( [ this.hydrogenAtomProperty ], hydrogenAtom => ( hydrogenAtom instanceof BohrModel ), {
-      tandem: options.tandem.createTandem( 'isQuantumModelProperty' ),
+    this.isQuantumAtomProperty = new DerivedProperty( [ this.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom.isQuantum, {
+      tandem: options.tandem.createTandem( 'isQuantumAtomProperty' ),
+      phetioDocumentation: 'True if a quantum atom is selected.',
       phetioValueType: BooleanIO
     } );
 

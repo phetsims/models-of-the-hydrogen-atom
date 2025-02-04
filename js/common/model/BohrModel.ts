@@ -95,6 +95,7 @@ export default class BohrModel extends HydrogenAtom {
     const options = optionize<BohrModelOptions, StrictOmit<SelfOptions, 'electron'>, HydrogenAtomOptions>()( {
 
       // HydrogenAtomOptions
+      isQuantum: true,
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
       debugName: 'Bohr',
       icon: BohrNode.createIcon(),

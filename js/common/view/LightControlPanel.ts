@@ -25,7 +25,7 @@ export class LightControlPanel extends Panel {
 
   public constructor( lightModeProperty: Property<LightMode>,
                       monochromaticWavelengthProperty: NumberProperty,
-                      isQuantumModelProperty: TReadOnlyProperty<boolean>,
+                      isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
                       tandem: Tandem ) {
 
@@ -33,7 +33,7 @@ export class LightControlPanel extends Panel {
       tandem.createTandem( 'lightModeRadioButtonGroup' ) );
 
     const absorptionTransitionText = new AbsorptionTransitionText( monochromaticWavelengthProperty,
-      experimentOrModelProperty, isQuantumModelProperty, lightModeProperty, tandem.createTandem( 'absorptionTransitionText' ) );
+      experimentOrModelProperty, isQuantumAtomProperty, lightModeProperty, tandem.createTandem( 'absorptionTransitionText' ) );
 
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( monochromaticWavelengthProperty, lightModeProperty,
       tandem.createTandem( 'monochromaticWavelengthControl' ) );

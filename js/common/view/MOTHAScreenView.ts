@@ -102,7 +102,7 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Controls for the type of light emitted by the light source
     const lightControlPanel = new LightControlPanel( model.lightSource.lightModeProperty,
-      model.lightSource.monochromaticWavelengthProperty, model.isQuantumModelProperty, model.experimentOrModelProperty,
+      model.lightSource.monochromaticWavelengthProperty, model.isQuantumAtomProperty, model.experimentOrModelProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106 for the design of transitionsIsCheckedProperty.
@@ -114,18 +114,18 @@ export default class MOTHAScreenView extends ScreenView {
     } );
 
     const transitionsCheckbox = new TransitionsCheckbox( transitionsIsCheckedProperty,
-      model.isQuantumModelProperty, options.tandem.createTandem( 'transitionsCheckbox' ) );
+      model.isQuantumAtomProperty, options.tandem.createTandem( 'transitionsCheckbox' ) );
 
     // Uncheck the Transitions checkbox when we switch to a classical model.
-    model.isQuantumModelProperty.link( isQuantumModel => {
-      if ( !isSettingPhetioStateProperty.value && !isQuantumModel && transitionsIsCheckedProperty.value ) {
+    model.isQuantumAtomProperty.link( isQuantumAtom => {
+      if ( !isSettingPhetioStateProperty.value && !isQuantumAtom && transitionsIsCheckedProperty.value ) {
         transitionsIsCheckedProperty.value = false;
       }
     } );
 
     const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
       model.lightSource.lightModeProperty, model.experimentOrModelProperty, transitionsIsCheckedProperty,
-      model.isQuantumModelProperty, this.visibleBoundsProperty, {
+      model.isQuantumAtomProperty, this.visibleBoundsProperty, {
         tandem: options.tandem.createTandem( 'transitionsDialog' )
       } );
 

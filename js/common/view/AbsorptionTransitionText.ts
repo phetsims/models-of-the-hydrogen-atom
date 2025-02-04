@@ -25,14 +25,14 @@ export default class AbsorptionTransitionText extends RichText {
 
   public constructor( wavelengthProperty: TReadOnlyProperty<number>,
                       experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
-                      isQuantumModelProperty: TReadOnlyProperty<boolean>,
+                      isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
                       tandem: Tandem ) {
 
     const visibleProperty = new DerivedProperty(
-      [ experimentOrModelProperty, isQuantumModelProperty, lightModeProperty ],
-      ( experimentOrModel, isQuantumModel, lightMode ) =>
-        ( experimentOrModel === 'model' && isQuantumModel && lightMode === 'monochromatic' ) );
+      [ experimentOrModelProperty, isQuantumAtomProperty, lightModeProperty ],
+      ( experimentOrModel, isQuantumAtom, lightMode ) =>
+        ( experimentOrModel === 'model' && isQuantumAtom && lightMode === 'monochromatic' ) );
 
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'.
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
