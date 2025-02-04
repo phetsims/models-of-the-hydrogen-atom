@@ -130,6 +130,10 @@ export default class EnergyDiagram extends Node {
     return Y_MARGIN + this.energyAxisLength - ( Y_OFFSETS[ n - 1 ] * this.energyAxisLength );
   }
 
+  /**
+   * Mutates the energy squiggle to correspond to connect the electron's previous and current level lines,
+   * with color and period matched to the wavelength that was responsible for the transition.
+   */
   protected setEnergySquiggle( x1: number, y1: number, x2: number, y2: number, wavelength: number ): void {
     this.energySquiggle.update( x1, y1, x2, y2, wavelength );
   }

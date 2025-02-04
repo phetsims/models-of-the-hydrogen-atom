@@ -32,7 +32,10 @@ const DIAGRAM_SIZE = new Dimension2( 220, 364 );
 
 export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
+  // A diagram for each atomic model.
   private readonly diagrams: EnergyDiagram[];
+
+  // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
   public readonly gatedVisibleProperty: GatedVisibleProperty;
 
   public constructor( model: EnergyLevelsModel, tandem: Tandem ) {
@@ -69,7 +72,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       children: diagrams
     } );
 
-    // Provide PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
+    // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
     const gatedVisibleProperty = new GatedVisibleProperty( DerivedProperty.not( model.isExperimentProperty ), tandem );
 
     super( content, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
@@ -92,6 +95,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
    * @param dt - time step, in seconds
    */
   public step( dt: number ): void {
+    //TODO Should we step only the diagram that is visible?
     this.diagrams.forEach( diagram => diagram.step( dt ) );
   }
 }

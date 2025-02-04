@@ -1,8 +1,9 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * EnergySquiggle is the squiggle line shown in the energy diagrams. A squiggle can be drawn between any 2 points.
- * The color and period of the squiggle is determined by the specified wavelength.
+ * EnergySquiggle is the squiggle line shown in the energy diagrams, connecting the electrons previous and current
+ * energy levels. A squiggle can be drawn between any 2 points. The color and period of the squiggle is determined
+ * by the specified wavelength.
  *
  * This was EnergySquiggle.java in the Java version.
  *

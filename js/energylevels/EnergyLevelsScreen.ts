@@ -39,7 +39,8 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
 }
 
 /**
- * Creates the ScreenIcon for this Screen, a proton and electron with 2 orbits to represent 2 energy levels.
+ * Creates the ScreenIcon for this Screen.
+ * It looks like an abbreviated version of the Bohr model - a proton, an electron, and 2 orbits.
  */
 function createScreenIcon(): ScreenIcon {
 

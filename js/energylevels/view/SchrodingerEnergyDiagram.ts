@@ -35,6 +35,7 @@ type SchrodingerEnergyDiagramOptions = SelfOptions & EnergyDiagramOptions;
 
 export default class SchrodingerEnergyDiagram extends EnergyDiagram {
 
+  // Nodes for each energy level.
   private readonly levelNodes: Node;
 
   public constructor( schrodingerModel: SchrodingerModel, providedOptions: SchrodingerEnergyDiagramOptions ) {

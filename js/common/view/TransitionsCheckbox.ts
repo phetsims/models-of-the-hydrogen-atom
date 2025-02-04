@@ -26,7 +26,7 @@ export default class TransitionsCheckbox extends Checkbox {
     // Show this checkbox only for quantum models, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
     const visibleProperty = isQuantumModelProperty;
 
-    // Provide PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
+    // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
 
     const text = new Text( ModelsOfTheHydrogenAtomStrings.transitionsStringProperty, {

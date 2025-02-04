@@ -27,6 +27,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 
   public constructor( model: SpectraModel, listboxParent: Node, tandem: Tandem ) {
 
+    // Creates the view for this screen's atomic models.
     const createHydrogenAtomNodes = ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => {
 
       const billiardBallNode = new BilliardBallNode( model.billiardBallModel, model.hydrogenAtomProperty, modelViewTransform );
@@ -54,6 +55,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       ];
     };
 
+    // Creates the overlays that have controls and displays for this screen's atomic models.
     const createOverlayNodes = ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => {
 
       const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( model.zoomedInBox );

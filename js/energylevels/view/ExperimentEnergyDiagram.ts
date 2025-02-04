@@ -1,5 +1,6 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
+//TODO This is not used. Should it be?
 /**
  * ExperimentEnergyDiagram is the Electron Energy Level diagram for the Experiment model.
  * Since the user is supposed to guess which model corresponds to the Experiment, a '?' is shown instead of a diagram.

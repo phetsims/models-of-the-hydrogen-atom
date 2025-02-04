@@ -38,7 +38,7 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
 }
 
 /**
- * Creates the ScreenIcon for this Screen.
+ * Creates the ScreenIcon for this Screen. It looks like an abbreviated view of the Spectrometer.
  */
 function createScreenIcon(): ScreenIcon {
 

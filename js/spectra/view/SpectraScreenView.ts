@@ -22,7 +22,7 @@ export default class SpectraScreenView extends MOTHAScreenView {
     // Parent for any popups.
     const popupsParent = new Node();
 
-    // The zoomed-in view of the box of hydrogen
+    // The zoomed-in view of the box of hydrogen.
     const zoomedInBoxNode = new SpectraZoomedInBoxNode( model, popupsParent, tandem.createTandem( 'zoomedInBoxNode' ) );
 
     super( model, {
