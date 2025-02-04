@@ -41,7 +41,8 @@ export default class Spectrometer extends PhetioObject {
   // Whether the spectrometer has any data to display.
   public readonly hasDataPointsProperty: TReadOnlyProperty<boolean>;
 
-  // Snapshots of spectrometer data.
+  // Snapshots of spectrometer data. We are using a Property instead of ObservableArray so that the data can be
+  // inspected in Studio, which (as of this writing) is not supported for ObservableArray.
   public readonly snapshotsProperty: Property<SpectrometerSnapshot[]>;
 
   // Number of snapshots
