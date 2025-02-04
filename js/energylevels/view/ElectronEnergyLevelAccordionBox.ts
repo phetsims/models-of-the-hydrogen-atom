@@ -24,7 +24,6 @@ import ExperimentEnergyDiagram from './ExperimentEnergyDiagram.js';
 import EnergyDiagram from './EnergyDiagram.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 
 // DIAGRAM_SIZE.height was empirically set so that heights of ElectronEnergyLevelAccordionBox and
 // EnergyLevelsZoomedInBoxNode are roughly the same.
@@ -34,9 +33,6 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
 
   // A diagram for each atomic model.
   private readonly diagrams: EnergyDiagram[];
-
-  // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
-  public readonly gatedVisibleProperty: GatedVisibleProperty;
 
   public constructor( model: EnergyLevelsModel, tandem: Tandem ) {
 
@@ -61,7 +57,6 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.schrodingerModel )
     } );
 
-    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/104 This is never visible. Should it be?
     const experimentEnergyDiagram = new ExperimentEnergyDiagram( {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.experiment )
@@ -73,12 +68,8 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       children: diagrams
     } );
 
-    // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
-    const gatedVisibleProperty = new GatedVisibleProperty( DerivedProperty.not( model.isExperimentProperty ), tandem );
-
     super( content, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
-      visibleProperty: gatedVisibleProperty,
       titleNode: titleNode,
       expandedDefaultValue: MOTHAQueryParameters.expandAll,
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
@@ -88,7 +79,6 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     } ) );
 
     this.diagrams = diagrams;
-    this.gatedVisibleProperty = gatedVisibleProperty;
   }
 
   /**

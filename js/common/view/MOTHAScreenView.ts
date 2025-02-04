@@ -230,16 +230,8 @@ export default class MOTHAScreenView extends ScreenView {
     const modelVBox = new VBox( {
       children: [ experimentModelSwitch, atomicModelPanel ],
       align: 'center',
-      spacing: 10
-    } );
-
-    // If experimentModelSwitch is invisible, then we want atomicModelPanel to move up. Otherwise, we expect the
-    // visibility of atomicModelPanel to change based on the experimentModelSwitch setting, and we do not want
-    // the switch to be shifting left/right. Note that for a period of time, this was failing assertion in an Node
-    // validateBounds which was addressed by removing the assertion, see
-    // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/108#issuecomment-2622765138
-    experimentModelSwitch.visibleProperty.link( visible => {
-      modelVBox.excludeInvisibleChildrenFromBounds = !visible;
+      spacing: 10,
+      excludeInvisibleChildrenFromBounds: true
     } );
 
     // Layout involving electronEnergyLevelAccordionBox or lack thereof.
@@ -263,10 +255,10 @@ export default class MOTHAScreenView extends ScreenView {
 
     if ( this.electronEnergyLevelAccordionBox ) {
 
-      // If provided with electronEnergyLevelAccordionBox, it's possible that it may be permanently hidden via PhET-iO,
+      // If provided with electronEnergyLevelAccordionBox, it's possible that it may be hidden via PhET-iO,
       // and that requires a layout as if electronEnergyLevelAccordionBox did not exist.
-      this.electronEnergyLevelAccordionBox.gatedVisibleProperty.selfBooleanProperty.link( gatedVisible =>
-        gatedVisible ? layoutEnergyLevelAccordionBox( this.electronEnergyLevelAccordionBox! ) : layoutEnergyLevelAccordionBox() );
+      this.electronEnergyLevelAccordionBox.visibleProperty.link( visible =>
+        visible ? layoutEnergyLevelAccordionBox( this.electronEnergyLevelAccordionBox! ) : layoutEnergyLevelAccordionBox() );
     }
     else {
       layoutEnergyLevelAccordionBox();
