@@ -45,6 +45,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import Electron from './Electron.js';
 import QuantumElectron from './QuantumElectron.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -288,8 +289,8 @@ export default class BohrModel extends HydrogenAtom {
    * Stimulated emission involves a transition to a lower energy state, so a lower value of n.
    */
   protected stimulatedEmissionIsAllowed( nOld: number, nNew: number ): boolean {
-    assert && assert( nOld >= QuantumElectron.GROUND_STATE && nOld <= QuantumElectron.MAX_STATE, `invalid nOld: ${nOld}` );
-    assert && assert( nNew >= QuantumElectron.GROUND_STATE && nNew <= QuantumElectron.MAX_STATE, `invalid nNew: ${nNew}` );
+    assert && assert( SchrodingerQuantumNumbers.isValid_n( nOld ), `invalid nOld: ${nOld}` );
+    assert && assert( SchrodingerQuantumNumbers.isValid_n( nNew ), `invalid nNew: ${nNew}` );
     return nOld > nNew;
   }
 

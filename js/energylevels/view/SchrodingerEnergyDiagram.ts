@@ -22,6 +22,7 @@ import MOTHAColors from '../../common/MOTHAColors.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import QuantumElectron from '../../common/model/QuantumElectron.js';
+import SchrodingerQuantumNumbers from '../../common/model/SchrodingerQuantumNumbers.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -135,8 +136,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
  * This Node consists n-1 horizontal lines with label "n = {value}" to the right of the lines.
  */
 function createLevelNode( n: number ): Node {
-  assert && assert( Number.isInteger( n ), `n must be an integer: ${n}` );
-  assert && assert( n >= QuantumElectron.GROUND_STATE && n <= QuantumElectron.MAX_STATE, `invalid n: ${n}` );
+  assert && assert( SchrodingerQuantumNumbers.isValid_n( n ), `invalid n: ${n}` );
 
   // Create the same number of lines for all levels, so that the "n = {n}" labels will be horizontally aligned.
   // Only the lines that are relevant will be visible.

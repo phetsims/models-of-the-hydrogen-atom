@@ -75,7 +75,7 @@ export default class SchrodingerQuantumNumbers {
   public readonly m: number;
 
   public constructor( n: number, l: number, m: number ) {
-    assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid wavefunction: (${n},${l},${m}` );
+    assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid state: (${n},${l},${m})` );
     this.n = n;
     this.l = l;
     this.m = m;
@@ -97,7 +97,7 @@ export default class SchrodingerQuantumNumbers {
    * Gets the next (n,l,m) state for a new value of n. Values for l and m are chosen according to state transition rules.
    */
   public getNextState( nNext: number ): SchrodingerQuantumNumbers {
-    assert && assert( Number.isInteger( nNext ) && nNext >= QuantumElectron.GROUND_STATE && nNext <= QuantumElectron.MAX_STATE, `invalid nNext=${nNext}` );
+    assert && assert( SchrodingerQuantumNumbers.isValid_n( nNext ), `invalid nNext=${nNext}` );
 
     // Compute values for l and m.
     const lNext = this.choose_l( nNext );
@@ -172,7 +172,7 @@ export default class SchrodingerQuantumNumbers {
       nNext = value;
     }
 
-    assert && assert( nNext === null || ( Number.isInteger( nNext ) && nNext >= QuantumElectron.GROUND_STATE && nNext < n ),
+    assert && assert( nNext === null || ( SchrodingerQuantumNumbers.isValid_n( nNext ) && nNext < n ),
       `invalid nNext: (${this.n},${this.l},${this.m}) -> (${nNext},?,?)` );
     return nNext;
   }
@@ -182,7 +182,7 @@ export default class SchrodingerQuantumNumbers {
    * The new value l' must be in the range [0,n-1], and abs(l-l') must be 1.
    */
   private choose_l( nNext: number ): number {
-    assert && assert( Number.isInteger( nNext ) && nNext >= QuantumElectron.GROUND_STATE && nNext <= QuantumElectron.MAX_STATE, `invalid nNext=${nNext}` );
+    assert && assert( SchrodingerQuantumNumbers.isValid_n( nNext ), `invalid nNext=${nNext}` );
 
     const l = this.l;
     let lNext;
@@ -206,8 +206,8 @@ export default class SchrodingerQuantumNumbers {
     }
 
     assert && assert( Number.isInteger( lNext ), `lNext must be an integer: lNext=${lNext}` );
-    assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext must be in the range [0,nNext-1]: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},?)` );
-    assert && assert( Math.abs( l - lNext ) === 1, `(l - lNext) must be 1 or -1: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},?)` );
+    assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext must be in the range [0,nNext-1]: ${this.toString()}) -> (${nNext},${lNext},?)` );
+    assert && assert( Math.abs( l - lNext ) === 1, `(l - lNext) must be 1 or -1: ${this.toString()} -> (${nNext},${lNext},?)` );
     assert && assert( lNext < 3, `lNext is theoretically possible, but unexpected in practice: ${this.toString()} -> (${nNext},${lNext},?)` );
     return lNext;
   }
@@ -263,8 +263,8 @@ export default class SchrodingerQuantumNumbers {
     }
 
     assert && assert( Number.isInteger( mNext ), `mNext must be an integer: mNew=${mNext}` );
-    assert && assert( mNext >= -lNext && mNext <= lNext, `mNext must be in the range [-l,l]: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},${mNext}` );
-    assert && assert( [ -1, 0, 1 ].includes( m - mNext ), `(m - mNext) must be -1, 0, or 1: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},${mNext}` );
+    assert && assert( mNext >= -lNext && mNext <= lNext, `mNext must be in the range [-l,l]: ${this.toString()} -> (${nNext},${lNext},${mNext}` );
+    assert && assert( [ -1, 0, 1 ].includes( m - mNext ), `(m - mNext) must be -1, 0, or 1: ${this.toString()} -> (${nNext},${lNext},${mNext}` );
     return mNext;
   }
 
@@ -272,12 +272,16 @@ export default class SchrodingerQuantumNumbers {
    * Determines whether (n,l,m) describes a valid state.
    */
   public static isValidState( n: number, l: number, m: number ): boolean {
-    return Number.isInteger( n ) &&
-           Number.isInteger( l ) &&
-           Number.isInteger( m ) &&
-           ( n >= QuantumElectron.GROUND_STATE && n <= QuantumElectron.MAX_STATE ) &&
-           ( l >= 0 && l <= n - 1 ) &&
-           ( m >= -l && m <= l );
+    return SchrodingerQuantumNumbers.isValid_n( n ) &&
+           Number.isInteger( l ) && ( l >= 0 && l <= n - 1 ) &&
+           Number.isInteger( m ) && ( m >= -l && m <= l );
+  }
+
+  /**
+   * Validates n, the principal quantum number.
+   */
+  public static isValid_n( n: number ): boolean {
+    return Number.isInteger( n ) && n >= QuantumElectron.GROUND_STATE && n <= QuantumElectron.MAX_STATE;
   }
 
   /**

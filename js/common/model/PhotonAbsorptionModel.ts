@@ -12,6 +12,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import QuantumElectron from './QuantumElectron.js';
+import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 
 // Transition for n, the principal quantum number that represents the electron's state.
 type StateTransition = {
@@ -68,8 +69,7 @@ class PhotonAbsorptionModel {
    * Gets the wavelengths that can be absorbed in state n.
    */
   public getAbsorptionWavelengths( n: number ): number[] {
-    assert && assert( Number.isInteger( n ), `n should be an integer: ${n}` );
-    assert && assert( n >= QuantumElectron.GROUND_STATE && n < QuantumElectron.MAX_STATE, `invalid n=${n}` );
+    assert && assert( SchrodingerQuantumNumbers.isValid_n( n ), `invalid n=${n}` );
 
     const wavelengths: number[] = [];
     for ( const [ wavelength, transition ] of this.map ) {
@@ -155,9 +155,9 @@ class PhotonAbsorptionModel {
  */
 function computeAbsorptionWavelength( n1: number, n2: number ): number {
   assert && assert( QuantumElectron.GROUND_STATE === 1 );
-  assert && assert( Number.isInteger( n1 ) && n1 >= QuantumElectron.GROUND_STATE, `bad n1=${n1}` );
-  assert && assert( Number.isInteger( n2 ) && n2 <= QuantumElectron.MAX_STATE, `bad n2=${n2}` );
-  assert && assert( n1 < n2, `n1=${n1} must be < n2=${n2}` );
+  assert && assert( SchrodingerQuantumNumbers.isValid_n( n1 ), `invalid n1=${n1}` );
+  assert && assert( SchrodingerQuantumNumbers.isValid_n( n2 ), `invalid n2=${n2}` );
+  assert && assert( n1 < n2, `For absorption, n1=${n1} must be < n2=${n2}` );
 
   // Rydberg formula, see doc/java-version/hydrogen-atom.pdf page 20.
   const wavelength = 1240 / ( 13.6 * ( ( 1 / ( n1 * n1 ) ) - ( 1 / ( n2 * n2 ) ) ) );
