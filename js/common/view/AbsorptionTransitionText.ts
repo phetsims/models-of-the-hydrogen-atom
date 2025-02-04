@@ -2,6 +2,7 @@
 
 /**
  * AbsorptionTransitionText displays the electron state transition (possibly undefined) associated with a wavelength.
+ * This appears above the monochromatic wavelength control in the control panel for the light source.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
