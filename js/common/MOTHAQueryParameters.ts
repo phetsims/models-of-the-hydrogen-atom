@@ -25,6 +25,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
 
   // Draws a halo around special photons, to make them easier to see. This includes photons that are emitted by the
   // atom, and photons that are used to excite the Schrodinger electron out of the metastable state (n,l,m) = (2,0,0).
+  // See MOTHAColors.*_HALO_COLOR for the halo colors.
   showHalos: {
     type: 'flag'
   },
@@ -39,12 +40,6 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     },
     defaultValue: [ 3, 1, 0.25 ],
     isValidValue: ( array: number[] ) => ( array.length === 3 ) && ( array[ 0 ] > array[ 1 ] ) && ( array[ 1 ] > array[ 2 ] )
-  },
-
-  // Shows ticks marks for all possible emission wavelengths on the Spectrometer. Tick marks are otherwise not
-  // shown unless a photon with the corresponding wavelength has been emitted.
-  showAllTicks: {
-    type: 'flag'
   },
 
   // For debugging, displays maximum numbers of photons for all possible emission wavelengths.
