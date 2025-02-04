@@ -208,8 +208,10 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
    * @param cosTheta - cosine of the angle
    */
   public static solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
+    assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid state: (n,l,m) = (${n},${l},${m})` );
+
     const t1 = solveGeneralizedLaguerrePolynomial( n, l, r );
-    const t2 = solveAssociatedLegendrePolynomial( l, Math.abs( m ), cosTheta );
+    const t2 = solveAssociatedLegendrePolynomial( l, m, cosTheta );
     return ( t1 * t2 );
   }
 }
@@ -254,13 +256,9 @@ function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): 
  */
 function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): number {
 
-  // For large l, the brute-force solution below encounters instabilities.
-  assert && assert( Number.isInteger( l ) && l >= 0 && l <= 6, `invalid l: ${l}` );
-  assert && assert( Number.isInteger( m ) && m >= 0 && m <= l, `invalid m: ${m}` );
-  assert && assert( Math.abs( x ) <= 1, `invalid x: ${x}` );
+  const mAbs = Math.abs( m );
 
   let productTerms = [ new PolynomialTerm( 0, 1 ) ]; // 1x^0
-
   for ( let i = 0; i < l; i++ ) {
 
     // x^2-1 times each term on left side
@@ -275,14 +273,14 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
   }
 
   for ( let i = 0; i < productTerms.length; i++ ) {
-    productTerms[ i ] = productTerms[ i ].derive( l + m );
+    productTerms[ i ] = productTerms[ i ].derive( l + mAbs );
   }
 
   // According to https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html, there are 2 two sign conventions
   // for associated Legendre polynomials. Some authors omit the Condon-Shortley phase (-1)^m, while others include it.
   // We are including it here, as the first term.
-  return Math.pow( -1, m ) / ( Math.pow( 2, l ) * MOTHAUtils.factorial( l ) ) *
-         Math.pow( 1 - x * x, m / 2 ) * PolynomialTerm.evaluatePolynomial( productTerms, x );
+  return Math.pow( -1, mAbs ) / ( Math.pow( 2, l ) * MOTHAUtils.factorial( l ) ) *
+         Math.pow( 1 - x * x, mAbs / 2 ) * PolynomialTerm.evaluatePolynomial( productTerms, x );
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerModel', SchrodingerModel );
