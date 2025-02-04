@@ -116,7 +116,8 @@ export default class MOTHAScreenView extends ScreenView {
     const transitionsCheckbox = new TransitionsCheckbox( transitionsIsCheckedProperty,
       model.isQuantumAtomProperty, options.tandem.createTandem( 'transitionsCheckbox' ) );
 
-    // Uncheck the Transitions checkbox when we switch to a classical model.
+    // Uncheck the Transitions checkbox when we switch to a classical model, because the concept of electron state
+    // transition is relevant only for quantum models.
     model.isQuantumAtomProperty.link( isQuantumAtom => {
       if ( !isSettingPhetioStateProperty.value && !isQuantumAtom && transitionsIsCheckedProperty.value ) {
         transitionsIsCheckedProperty.value = false;
