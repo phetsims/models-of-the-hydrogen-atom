@@ -68,8 +68,8 @@ export default class LightSource extends PhetioObject {
   // Time between creation of photons, in seconds.
   private readonly dtPerPhotonCreated: number;
 
-  // Elapsed time since a photon was created, in seconds.
-  private readonly dtSincePhotonCreatedProperty: Property<number>;
+  // Elapsed time since a photon was emitted by the light source, in seconds.
+  private readonly dtSincePhotonEmittedProperty: Property<number>;
 
   // Wavelengths (in nm) that can be absorbed when the electron is in the ground state (n = 1).
   private readonly groundStateAbsorptionWavelengths: number[];
@@ -107,7 +107,7 @@ export default class LightSource extends PhetioObject {
       units: 'nm',
       range: this.monochromaticWavelengthRange,
       tandem: tandem.createTandem( 'monochromaticWavelengthProperty' ),
-      phetioDocumentation: 'Wavelength used for the light when it is in monochromatic mode.',
+      phetioDocumentation: 'Wavelength of the light when the light source is in monochromatic mode.',
       phetioFeatured: true
     } );
 
@@ -133,10 +133,10 @@ export default class LightSource extends PhetioObject {
 
     this.dtPerPhotonCreated = ( zoomedInBox.height / Photon.SPEED ) / MAX_LIGHT_PHOTONS;
 
-    this.dtSincePhotonCreatedProperty = new NumberProperty( 0, {
+    this.dtSincePhotonEmittedProperty = new NumberProperty( 0, {
       units: 's',
-      tandem: tandem.createTandem( 'dtSincePhotonCreatedProperty' ),
-      phetioDocumentation: 'Elapsed time since a photon was emitted by the light source. For internal use only.',
+      tandem: tandem.createTandem( 'dtSincePhotonEmittedProperty' ),
+      phetioDocumentation: 'For internal use only.',
       phetioReadOnly: true
     } );
 
@@ -147,7 +147,7 @@ export default class LightSource extends PhetioObject {
     this.isOnProperty.reset();
     this.lightModeProperty.reset();
     this.monochromaticWavelengthProperty.reset();
-    this.dtSincePhotonCreatedProperty.reset();
+    this.dtSincePhotonEmittedProperty.reset();
   }
 
   /**
@@ -156,11 +156,11 @@ export default class LightSource extends PhetioObject {
    */
   public step( dt: number ): void {
     if ( this.isOnProperty.value ) {
-      this.dtSincePhotonCreatedProperty.value += dt;
-      if ( this.dtSincePhotonCreatedProperty.value >= this.dtPerPhotonCreated ) {
+      this.dtSincePhotonEmittedProperty.value += dt;
+      if ( this.dtSincePhotonEmittedProperty.value >= this.dtPerPhotonCreated ) {
 
         // Save the remainder.
-        this.dtSincePhotonCreatedProperty.value = this.dtSincePhotonCreatedProperty.value % this.dtPerPhotonCreated;
+        this.dtSincePhotonEmittedProperty.value = this.dtSincePhotonEmittedProperty.value % this.dtPerPhotonCreated;
 
         // Create a photon.
         this.emitPhoton();
