@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * QuantumElectron is a base class that specializes Electron for quantum models of the hydrogen atom
