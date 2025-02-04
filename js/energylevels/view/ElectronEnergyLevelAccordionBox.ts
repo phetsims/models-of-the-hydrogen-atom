@@ -85,8 +85,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
    * @param dt - time step, in seconds
    */
   public step( dt: number ): void {
-    //TODO Should we step only the diagram that is visible?
-    this.diagrams.forEach( diagram => diagram.step( dt ) );
+    this.diagrams.forEach( diagram => diagram.step( dt ) ); // Very low cost to step all diagrams.
   }
 }
 
