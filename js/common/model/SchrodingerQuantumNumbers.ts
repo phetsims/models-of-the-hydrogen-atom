@@ -94,10 +94,12 @@ export default class SchrodingerQuantumNumbers {
   }
 
   /**
-   * Gets the next (n,l,m) state for a new value of n. Values for l and m are chosen according to state transition rules.
+   * Gets the next (n,l,m) state for a new value of n, based on the current state. Values for l and m are chosen
+   * according to state transition rules.
    */
   public getNextState( nNext: number ): SchrodingerQuantumNumbers {
     assert && assert( SchrodingerQuantumNumbers.isValid_n( nNext ), `invalid nNext=${nNext}` );
+    assert && assert( nNext !== this.n, `Next n must be different from the current n: ${nNext}` );
 
     // Compute values for l and m.
     const lNext = this.choose_l( nNext );
