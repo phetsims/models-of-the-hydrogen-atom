@@ -208,6 +208,7 @@ export default class SchrodingerQuantumNumbers {
     assert && assert( Number.isInteger( lNext ), `lNext must be an integer: lNext=${lNext}` );
     assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext must be in the range [0,nNext-1]: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},?)` );
     assert && assert( Math.abs( l - lNext ) === 1, `(l - lNext) must be 1 or -1: (${this.n},${this.l},${this.m}) -> (${nNext},${lNext},?)` );
+    assert && assert( lNext < 3, `lNext is theoretically possible, but unexpected in practice: ${this.toString()} -> (${nNext},${lNext},?)` );
     return lNext;
   }
 
