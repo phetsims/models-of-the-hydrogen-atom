@@ -3,7 +3,7 @@
 /**
  * SchrodingerBrightness is responsible for representing Schrodinger states (and their associated wavefunctions)
  * as brightness. Brightness is computed on demand, then cached. The cache is configured for a fixed number of states,
- * and a fixed size 2D grid. See SchrodingerFieldNode for more documentation.
+ * and a fixed size 2D grid. See SchrodingerNode for more documentation.
  *
  * In the Java implementation, this was class BrightnessCache in SchrodingerNode.java. The Java version provided
  * an option to pre-populate the cache. This proved to be quite time-consuming and the option was never used.
