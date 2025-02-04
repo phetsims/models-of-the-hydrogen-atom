@@ -99,6 +99,7 @@ export default class Spectrometer extends PhetioObject {
 
     this.numberOfSnapshotsProperty = new DerivedProperty( [ this.snapshotsProperty ], snapshots => snapshots.length, {
       tandem: tandem.createTandem( 'numberOfSnapshotsProperty' ),
+      phetioFeatured: true,
       phetioValueType: NumberIO
     } );
 
