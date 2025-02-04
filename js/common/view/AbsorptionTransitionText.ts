@@ -19,18 +19,20 @@ import MOTHASymbols from '../MOTHASymbols.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import { ExperimentOrModel } from '../model/MOTHAModel.js';
 
 export default class AbsorptionTransitionText extends RichText {
 
   public constructor( wavelengthProperty: TReadOnlyProperty<number>,
-                      lightModeProperty: TReadOnlyProperty<LightMode>,
+                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
-                      isExperimentProperty: TReadOnlyProperty<boolean>,
+                      lightModeProperty: TReadOnlyProperty<LightMode>,
                       tandem: Tandem ) {
 
     const visibleProperty = new DerivedProperty(
-      [ lightModeProperty, isQuantumModelProperty, isExperimentProperty ],
-      ( lightMode, isQuantumModel, isExperiment ) => ( lightMode === 'monochromatic' ) && isQuantumModel && !isExperiment );
+      [ experimentOrModelProperty, isQuantumModelProperty, lightModeProperty ],
+      ( experimentOrModel, isQuantumModel, lightMode ) =>
+        ( experimentOrModel === 'model' && isQuantumModel && lightMode === 'monochromatic' ) );
 
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'.
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );

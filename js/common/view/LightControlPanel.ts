@@ -19,20 +19,21 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { LightMode } from '../model/LightMode.js';
+import { ExperimentOrModel } from '../model/MOTHAModel.js';
 
 export class LightControlPanel extends Panel {
 
   public constructor( lightModeProperty: Property<LightMode>,
                       monochromaticWavelengthProperty: NumberProperty,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
-                      isExperimentProperty: TReadOnlyProperty<boolean>,
+                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
                       tandem: Tandem ) {
 
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightModeProperty,
       tandem.createTandem( 'lightModeRadioButtonGroup' ) );
 
-    const absorptionTransitionText = new AbsorptionTransitionText( monochromaticWavelengthProperty, lightModeProperty,
-      isQuantumModelProperty, isExperimentProperty, tandem.createTandem( 'absorptionTransitionText' ) );
+    const absorptionTransitionText = new AbsorptionTransitionText( monochromaticWavelengthProperty,
+      experimentOrModelProperty, isQuantumModelProperty, lightModeProperty, tandem.createTandem( 'absorptionTransitionText' ) );
 
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( monochromaticWavelengthProperty, lightModeProperty,
       tandem.createTandem( 'monochromaticWavelengthControl' ) );

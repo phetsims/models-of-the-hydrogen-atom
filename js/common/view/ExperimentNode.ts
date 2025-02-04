@@ -17,6 +17,8 @@ import MOTHAColors from '../MOTHAColors.js';
 import SchrodingerStateText from './SchrodingerStateText.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -24,7 +26,7 @@ type ExperimentNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class ExperimentNode extends Node {
 
-  public constructor( isExperimentProperty: TReadOnlyProperty<boolean>,
+  public constructor( experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
                       nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
                       providedOptions?: ExperimentNodeOptions ) {
 
@@ -49,7 +51,7 @@ export default class ExperimentNode extends Node {
 
       // NodeOptions
       children: [ square, questionMarkText ],
-      visibleProperty: isExperimentProperty
+      visibleProperty: new DerivedProperty( [ experimentOrModelProperty ], experimentOrModel => experimentOrModel === 'experiment' )
     }, providedOptions );
 
     super( options );

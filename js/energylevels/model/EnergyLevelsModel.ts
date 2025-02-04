@@ -57,7 +57,7 @@ export default class EnergyLevelsModel extends MOTHAModel {
       'All atomic models in this screen must include the concept of electron energy level.' );
 
     super( zoomedInBox, lightSource, atomicModels, bohrModel, {
-      isExperiment: false,
+      experimentOrModel: 'model',
       tandem: tandem
     } );
 

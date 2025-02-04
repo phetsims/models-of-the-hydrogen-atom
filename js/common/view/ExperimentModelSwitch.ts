@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
@@ -15,15 +14,17 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import { ExperimentOrModel } from '../model/MOTHAModel.js';
 
 const LABEL_FONT = new PhetFont( {
   size: 16,
   weight: 'bold'
 } );
 
-export default class ExperimentModelSwitch extends ABSwitch<boolean> {
+export default class ExperimentModelSwitch extends ABSwitch<ExperimentOrModel> {
 
-  public constructor( isExperimentProperty: Property<boolean>, tandem: Tandem ) {
+  public constructor( experimentOrModelProperty: StringUnionProperty<ExperimentOrModel>, tandem: Tandem ) {
 
     const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, {
       font: LABEL_FONT,
@@ -41,7 +42,7 @@ export default class ExperimentModelSwitch extends ABSwitch<boolean> {
       maxWidth: 50
     } );
 
-    super( isExperimentProperty, true, experimentText, false, modelText, {
+    super( experimentOrModelProperty, 'experiment', experimentText, 'model', modelText, {
       isDisposable: false,
       centerOnSwitch: false,
       toggleSwitchOptions: {

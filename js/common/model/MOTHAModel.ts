@@ -32,6 +32,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 
 // Time step, in seconds, when pressing the time control's step button with speed set to TimeSpeed.NORMAL.
 const STEP_ONCE_NORMAL_DT = 0.1;
@@ -43,16 +44,20 @@ const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
   [ TimeSpeed.SLOW, MOTHAQueryParameters.timeScale[ 2 ] ]
 ] );
 
+const ExperimentOrModelValues = [ 'experiment', 'model' ] as const;
+export type ExperimentOrModel = ( typeof ExperimentOrModelValues )[number];
+
 type SelfOptions = {
-  isExperiment?: boolean; // initial value of isExperimentProperty
+  experimentOrModel?: ExperimentOrModel; // initial value of experimentOrModelProperty
 };
 
 type MOTHAModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class MOTHAModel implements TModel {
 
-  // Whether we are viewing the Experiment (true) or a Model (false) of the hydrogen atom.
-  public readonly isExperimentProperty: Property<boolean>;
+  // Whether we are viewing the Experiment or a Model of the hydrogen atom.
+  // This could have been implemented as a boolean Property, but presents better in Studio as an enumeration.
+  public readonly experimentOrModelProperty: StringUnionProperty<ExperimentOrModel>;
 
   // Atomic model for what is presented as the 'Experiment' in the user interface.
   public readonly experiment: Experiment;
@@ -102,14 +107,15 @@ export default class MOTHAModel implements TModel {
     const options = optionize<MOTHAModelOptions, SelfOptions>()( {
 
       // SelfOptions
-      isExperiment: true
+      experimentOrModel: 'experiment'
     }, providedOptions );
 
     this.zoomedInBox = zoomedInBox;
 
-    this.isExperimentProperty = new BooleanProperty( options.isExperiment, {
-      tandem: options.tandem.createTandem( 'isExperimentProperty' ),
-      phetioDocumentation: 'Whether we are viewing the Experiment (true) or a Model (false) of the hydrogen atom.',
+    this.experimentOrModelProperty = new StringUnionProperty<ExperimentOrModel>( options.experimentOrModel, {
+      validValues: ExperimentOrModelValues,
+      tandem: options.tandem.createTandem( 'experimentOrModelProperty' ),
+      phetioDocumentation: 'Whether we are viewing the Experiment or a Model of the hydrogen atom.',
       phetioFeatured: true
     } );
 
@@ -128,7 +134,7 @@ export default class MOTHAModel implements TModel {
     } );
 
     this.hydrogenAtomProperty = new DerivedProperty(
-      [ this.isExperimentProperty, this.atomicModelProperty ],
+      [ this.experimentOrModelProperty, this.atomicModelProperty ],
       ( isExperiment, atomicModel ) => isExperiment ? this.experiment : atomicModel );
 
     this.isQuantumModelProperty = new DerivedProperty( [ this.hydrogenAtomProperty ], hydrogenAtom => ( hydrogenAtom instanceof BohrModel ), {
@@ -200,7 +206,7 @@ export default class MOTHAModel implements TModel {
   }
 
   public reset(): void {
-    this.isExperimentProperty.reset();
+    this.experimentOrModelProperty.reset();
     this.experiment.reset();
     this.atomicModels.forEach( atomicModel => atomicModel.reset() );
     this.atomicModelProperty.reset();

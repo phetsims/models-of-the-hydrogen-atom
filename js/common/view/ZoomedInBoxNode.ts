@@ -58,7 +58,7 @@ export default class ZoomedInBoxNode extends Node {
       lineWidth: 3
     } );
 
-    const experimentNode = new ExperimentNode( model.isExperimentProperty, model.experiment.nlmProperty, {
+    const experimentNode = new ExperimentNode( model.experimentOrModelProperty, model.experiment.nlmProperty, {
       center: backgroundNode.center
     } );
 

@@ -102,7 +102,7 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Controls for the type of light emitted by the light source
     const lightControlPanel = new LightControlPanel( model.lightSource.lightModeProperty,
-      model.lightSource.monochromaticWavelengthProperty, model.isQuantumModelProperty, model.isExperimentProperty,
+      model.lightSource.monochromaticWavelengthProperty, model.isQuantumModelProperty, model.experimentOrModelProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106 for the design of transitionsIsCheckedProperty.
@@ -124,7 +124,7 @@ export default class MOTHAScreenView extends ScreenView {
     } );
 
     const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
-      model.lightSource.lightModeProperty, model.isExperimentProperty, transitionsIsCheckedProperty,
+      model.lightSource.lightModeProperty, model.experimentOrModelProperty, transitionsIsCheckedProperty,
       model.isQuantumModelProperty, this.visibleBoundsProperty, {
         tandem: options.tandem.createTandem( 'transitionsDialog' )
       } );
@@ -138,11 +138,11 @@ export default class MOTHAScreenView extends ScreenView {
     } );
 
     // Switches between Experiment and Model.
-    const experimentModelSwitch = new ExperimentModelSwitch( model.isExperimentProperty,
+    const experimentModelSwitch = new ExperimentModelSwitch( model.experimentOrModelProperty,
       options.tandem.createTandem( 'experimentModelSwitch' ) );
 
     const atomicModelPanel = new AtomicModelPanel( model.atomicModelProperty, model.atomicModels,
-      model.isExperimentProperty, {
+      model.experimentOrModelProperty, {
         radioButtonTextMaxWidth: providedOptions.atomicModelRadioButtonTextMaxWidth,
         hasContinuumBarNode: providedOptions.hasContinuumBarNode,
         tandem: options.tandem.createTandem( 'atomicModelPanel' )
@@ -209,9 +209,9 @@ export default class MOTHAScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'experimentOopsDialog' )
     } );
     Multilink.multilink(
-      [ model.isExperimentProperty, experiment.metastableHandler.isMetastableStateProperty, model.lightSource.lightModeProperty ],
-      ( isExperiment, isMetastableState, lightMode ) => {
-        if ( isExperiment && isMetastableState && lightMode === 'monochromatic' ) {
+      [ model.experimentOrModelProperty, experiment.metastableHandler.isMetastableStateProperty, model.lightSource.lightModeProperty ],
+      ( experimentOrModel, isMetastableState, lightMode ) => {
+        if ( experimentOrModel === 'experiment' && isMetastableState && lightMode === 'monochromatic' ) {
           experimentOopsDialog.show();
         }
       } );

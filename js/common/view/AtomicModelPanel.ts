@@ -19,6 +19,7 @@ import ContinuumBarNode from './ContinuumBarNode.js';
 import AtomicModelRadioButtonGroup from './AtomicModelRadioButtonGroup.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
+import { ExperimentOrModel } from '../model/MOTHAModel.js';
 
 type SelfOptions = {
   radioButtonTextMaxWidth: number;
@@ -31,11 +32,13 @@ export default class AtomicModelPanel extends Panel {
 
   public constructor( atomicModelProperty: Property<HydrogenAtom>,
                       atomicModels: HydrogenAtom[],
-                      isExperimentProperty: TReadOnlyProperty<boolean>,
+                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
                       providedOptions: AtomicModelPanelOptions ) {
 
+    const visibleProperty = new DerivedProperty( [ experimentOrModelProperty ], experimentOrModel => experimentOrModel === 'model' );
+
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
-    const gatedVisibleProperty = new GatedVisibleProperty( DerivedProperty.not( isExperimentProperty ), providedOptions.tandem );
+    const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, providedOptions.tandem );
 
     const options = optionize<AtomicModelPanelOptions, SelfOptions, PanelOptions>()( {
 

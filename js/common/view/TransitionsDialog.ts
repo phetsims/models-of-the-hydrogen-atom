@@ -39,6 +39,7 @@ import PhotonNode from './PhotonNode.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import MOTHAScreenView from './MOTHAScreenView.js';
+import { ExperimentOrModel } from '../model/MOTHAModel.js';
 
 const TITLE_TEXT_OPTIONS: TextOptions = {
   font: new PhetFont( {
@@ -77,7 +78,7 @@ export default class TransitionsDialog extends Panel {
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       lightModeProperty: Property<LightMode>,
-                      isExperimentProperty: TReadOnlyProperty<boolean>,
+                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
                       transitionsIsCheckedProperty: Property<boolean>,
                       isQuantumModelProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
@@ -105,7 +106,8 @@ export default class TransitionsDialog extends Panel {
       phetioVisiblePropertyInstrumented: false // like Dialog
     }, providedOptions );
 
-    const transitionColumnVisibleProperty = DerivedProperty.not( isExperimentProperty );
+    const transitionColumnVisibleProperty = new DerivedProperty( [ experimentOrModelProperty ],
+      experimentOrModel => experimentOrModel === 'model' );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.transitionsStringProperty, TITLE_TEXT_OPTIONS );
 
