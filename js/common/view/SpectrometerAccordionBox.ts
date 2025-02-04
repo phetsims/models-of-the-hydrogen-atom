@@ -17,7 +17,6 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import SnapshotButton from './SnapshotButton.js';
 import SpectrometerChart from './SpectrometerChart.js';
 import ViewSnapshotsButton from './ViewSnapshotsButton.js';
@@ -35,7 +34,8 @@ export default class SpectrometerAccordionBox extends AccordionBox {
 
   public constructor( spectrometer: Spectrometer, snapshotsDialog: Dialog, tandem: Tandem ) {
 
-    const expandedProperty = new BooleanProperty( MOTHAQueryParameters.expandAll, {
+    // Initially collapsed, so that students can explore the models before collecting data.
+    const expandedProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'expandedProperty' ),
       phetioFeatured: true
     } );

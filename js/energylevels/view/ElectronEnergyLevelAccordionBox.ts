@@ -70,7 +70,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     super( content, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
       titleNode: titleNode,
-      expandedDefaultValue: true, // expanded by default because this is the feature that is new to the Energy Levels screen.
+      expandedDefaultValue: true, // Initially expanded because this is the feature that is new to the Energy Levels screen.
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelAccordionBox.helpTextStringProperty,

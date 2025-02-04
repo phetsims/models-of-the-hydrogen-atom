@@ -41,11 +41,6 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     isValidValue: ( array: number[] ) => ( array.length === 3 ) && ( array[ 0 ] > array[ 1 ] ) && ( array[ 1 ] > array[ 2 ] )
   },
 
-  // Expand all accordion boxes on startup.
-  expandAll: {
-    type: 'flag'
-  },
-
   // Shows ticks marks for all possible emission wavelengths on the Spectrometer. Tick marks are otherwise not
   // shown unless a photon with the corresponding wavelength has been emitted.
   showAllTicks: {

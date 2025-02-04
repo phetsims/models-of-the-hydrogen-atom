@@ -10,13 +10,13 @@
  * Probability density is computed in 3D. The atom's 3D space is treated as a cube containing NxNxN discrete cells.
  * The probability density is computed at the center of each cell.
  *
- * The NxNxN 3D cube is projected onto an NxN 2D grid that covers the animation box. Depth information is mapped to
- * color brightness. The sum of probability densities * for the depth dimension (y-axis) are normalized to a brightness
+ * The NxNxN 3D cube is projected onto an NxN 2D grid that covers the zoomed-in box. Depth information is mapped to
+ * color brightness. The sum of probability densities for the depth dimension (y-axis) are normalized to a brightness
  * value that has the range [0,1].  Each cell in the NxN grid has a brightness value that is used to generate the
  * cell's color.
  *
  * Computing the probability density for an NxNxN cube is fairly expensive, so the resulting NxN array of brightness
- * values is cache for reuse.
+ * values is cached for reuse.
  *
  * In the Java implementation, this was SchrodingerNode.java.
  *
