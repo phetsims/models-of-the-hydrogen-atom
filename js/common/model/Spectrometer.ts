@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -26,6 +25,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 
 export default class Spectrometer extends PhetioObject {
 
@@ -42,7 +42,10 @@ export default class Spectrometer extends PhetioObject {
   public readonly hasDataPointsProperty: TReadOnlyProperty<boolean>;
 
   // Snapshots of spectrometer data.
-  public readonly snapshots: ObservableArray<SpectrometerSnapshot>;
+  public readonly snapshotsProperty: Property<SpectrometerSnapshot[]>;
+
+  // Number of snapshots
+  public readonly numberOfSnapshotsProperty: TReadOnlyProperty<number>;
 
   // Snapshots are numbered using consecutive integers, starting from 1.
   private readonly nextSnapshotNumberProperty: Property<number>;
@@ -87,15 +90,16 @@ export default class Spectrometer extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    this.snapshots = createObservableArray<SpectrometerSnapshot>( {
-      tandem: tandem.createTandem( 'snapshots' ),
+    this.snapshotsProperty = new Property<SpectrometerSnapshot[]>( [], {
+      tandem: tandem.createTandem( 'snapshotsProperty' ),
       phetioFeatured: true,
       phetioReadOnly: true,
-      phetioType: createObservableArray.ObservableArrayIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),
-      lengthPropertyOptions: {
-        phetioDocumentation: 'The number of snapshots in the snapshots dialog.',
-        phetioFeatured: true
-      }
+      phetioValueType: ArrayIO( SpectrometerSnapshot.SpectrometerSnapshotIO )
+    } );
+
+    this.numberOfSnapshotsProperty = new DerivedProperty( [ this.snapshotsProperty ], snapshots => snapshots.length, {
+      tandem: tandem.createTandem( 'numberOfSnapshotsProperty' ),
+      phetioValueType: NumberIO
     } );
 
     // When a photon is emitted, record its wavelength.
@@ -127,8 +131,8 @@ export default class Spectrometer extends PhetioObject {
 
   public reset(): void {
     this.clear();
-    this.snapshots.forEach( snapshot => snapshot.dispose() );
-    this.snapshots.clear();
+    this.snapshotsProperty.value.forEach( snapshot => snapshot.dispose() );
+    this.snapshotsProperty.value = [];
     this.nextSnapshotNumberProperty.reset();
     // Do not reset enabledProperty. It is controlled by SpectrometerAccordionBox, so that we're recording data only when expanded.
   }
@@ -152,11 +156,13 @@ export default class Spectrometer extends PhetioObject {
     const dataPoints = this.dataPointsProperty.value.map( dataPoint => dataPoint.clone() );
 
     const snapshot = new SpectrometerSnapshot( this.nextSnapshotNumberProperty.value, this.hydrogenAtomProperty.value, dataPoints );
-    this.snapshots.push( snapshot );
+    this.snapshotsProperty.value = [ ...this.snapshotsProperty.value, snapshot ];
 
     this.nextSnapshotNumberProperty.value++;
 
-    snapshot.disposeEmitter.addListener( () => this.snapshots.remove( snapshot ) );
+    snapshot.disposeEmitter.addListener( () => {
+      this.snapshotsProperty.value = this.snapshotsProperty.value.filter( element => element !== snapshot );
+    } );
   }
 
   /**

@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -18,10 +17,11 @@ import SpectrometerSnapshotNode from './SpectrometerSnapshotNode.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class SpectrometerSnapshotsDialog extends Dialog {
 
-  public constructor( snapshots: ObservableArray<SpectrometerSnapshot>, tandem: Tandem ) {
+  public constructor( snapshotsProperty: TReadOnlyProperty<SpectrometerSnapshot[]>, tandem: Tandem ) {
 
     // Nodes that display snapshots. These Nodes are displayed from top to bottom in the Snapshots dialog.
     const snapshotNodes: SpectrometerSnapshotNode[] = [];
@@ -49,9 +49,8 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
     // When the snapshots change, mutate all snapshotNodes. While not the most performant implementation, it is much
     // simpler than shuffling the order of snapshotNodes as snapshots are added and deleted. And for PhET-iO, the
     // order of snapshotNodes is always that same in the dialog.
-    snapshots.lengthProperty.lazyLink( numberOfSnapshots => {
-      assert && assert( numberOfSnapshots >= 0 && numberOfSnapshots <= MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS,
-        `invalid numberOfSnapshots: ${numberOfSnapshots}` );
+    snapshotsProperty.link( snapshots => {
+      assert && assert( snapshots.length <= snapshotNodes.length, `invalid number of snapshots: ${snapshots.length}` );
 
       if ( !isSettingPhetioStateProperty.value ) {
 
@@ -61,7 +60,7 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
         }
 
         // Close this dialog if all snapshots have been deleted.
-        if ( numberOfSnapshots === 0 && this.isShowingProperty.value ) {
+        if ( snapshots.length === 0 && this.isShowingProperty.value ) {
           this.hide();
         }
       }

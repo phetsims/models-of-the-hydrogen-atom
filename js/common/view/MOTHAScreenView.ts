@@ -149,7 +149,7 @@ export default class MOTHAScreenView extends ScreenView {
       } );
 
     // Spectrometer snapshots dialog
-    const spectrometerSnapshotsDialog = new SpectrometerSnapshotsDialog( model.spectrometer.snapshots,
+    const spectrometerSnapshotsDialog = new SpectrometerSnapshotsDialog( model.spectrometer.snapshotsProperty,
       options.tandem.createTandem( 'spectrometerSnapshotsDialog' ) );
 
     // Spectrometer

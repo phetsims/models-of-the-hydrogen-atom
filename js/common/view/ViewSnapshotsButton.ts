@@ -14,10 +14,10 @@ import Dialog from '../../../../sun/js/Dialog.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -25,7 +25,7 @@ type ViewSnapshotsButtonOptions = SelfOptions & PickRequired<RectangularPushButt
 
 export default class ViewSnapshotsButton extends RectangularPushButton {
 
-  public constructor( snapshotsDialog: Dialog, spectrometer: Spectrometer, providedOptions: ViewSnapshotsButtonOptions ) {
+  public constructor( snapshotsDialog: Dialog, numberOfSnapshotsProperty: TReadOnlyProperty<number>, providedOptions: ViewSnapshotsButtonOptions ) {
 
     const options = optionize<ViewSnapshotsButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
       listener: () => snapshotsDialog.show(),
@@ -35,11 +35,10 @@ export default class ViewSnapshotsButton extends RectangularPushButton {
         scale: 0.05
       } ),
       // Enabled when we have snapshots
-      enabledProperty: new DerivedProperty( [ spectrometer.snapshots.lengthProperty ],
-        numberOfSnapshots => ( numberOfSnapshots > 0 ), {
-          tandem: providedOptions.tandem.createTandem( 'enabledProperty' ),
-          phetioValueType: BooleanIO
-        } ),
+      enabledProperty: new DerivedProperty( [ numberOfSnapshotsProperty ], numberOfSnapshots => ( numberOfSnapshots > 0 ), {
+        tandem: providedOptions.tandem.createTandem( 'enabledProperty' ),
+        phetioValueType: BooleanIO
+      } ),
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.viewSnapshotsButton.accessibleNameStringProperty
     }, providedOptions );
 
