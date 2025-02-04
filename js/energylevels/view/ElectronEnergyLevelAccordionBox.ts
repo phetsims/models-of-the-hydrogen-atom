@@ -61,6 +61,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.schrodingerModel )
     } );
 
+    //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/104 This is never visible. Should it be?
     const experimentEnergyDiagram = new ExperimentEnergyDiagram( {
       size: DIAGRAM_SIZE,
       visibleProperty: new DerivedProperty( [ model.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom === model.experiment )
