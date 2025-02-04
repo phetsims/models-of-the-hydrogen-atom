@@ -56,7 +56,10 @@ export default class EnergyLevelsModel extends MOTHAModel {
     assert && assert( _.every( atomicModels, atomicModel => atomicModel instanceof BohrModel ),
       'All atomic models in this screen must include the concept of electron energy level.' );
 
-    super( zoomedInBox, lightSource, atomicModels, bohrModel, tandem );
+    super( zoomedInBox, lightSource, atomicModels, bohrModel, {
+      isExperiment: false,
+      tandem: tandem
+    } );
 
     this.bohrModel = bohrModel;
     this.deBroglieModel = deBroglieModel;
