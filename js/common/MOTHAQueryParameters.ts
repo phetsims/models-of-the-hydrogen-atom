@@ -43,6 +43,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   },
 
   // Displays maximum numbers of photons at all possible emission wavelengths on the spectrometer.
+  // This is useful for debugging how the spectrometer looks when it is displaying a lot of data.
   debugSpectrometer: {
     type: 'flag'
   }
