@@ -56,7 +56,6 @@ export default class AtomicModelRadioButtonGroup extends RectangularRadioButtonG
           overContentOpacity: 1
         }
       },
-      labelTagName: 'h3', //TODO https://github.com/phetsims/sun/issues/900 Use a higher-level API for PDOM structure.
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.modelRadioButtonGroup.accessibleNameStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.modelRadioButtonGroup.helpTextStringProperty,
       phetioVisiblePropertyInstrumented: false

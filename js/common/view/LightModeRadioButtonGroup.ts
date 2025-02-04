@@ -47,7 +47,6 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
     super( lightModeProperty, radioButtonGroupItems, {
       isDisposable: false,
       spacing: 15,
-      labelTagName: 'h3', //TODO https://github.com/phetsims/sun/issues/900 Use a higher-level API for PDOM structure.
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.accessibleNameStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.helpTextStringProperty,
       tandem: tandem
