@@ -27,7 +27,6 @@ import PhotonGroup from './PhotonGroup.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -136,11 +135,7 @@ export default class MOTHAModel implements TModel {
       [ this.experimentOrModelProperty, this.atomicModelProperty ],
       ( experimentOrModel, atomicModel ) => experimentOrModel === 'experiment' ? this.experiment : atomicModel );
 
-    this.isQuantumAtomProperty = new DerivedProperty( [ this.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom.isQuantum, {
-      tandem: options.tandem.createTandem( 'isQuantumAtomProperty' ),
-      phetioDocumentation: 'True if a quantum atom is selected.',
-      phetioValueType: BooleanIO
-    } );
+    this.isQuantumAtomProperty = new DerivedProperty( [ this.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom.isQuantum );
 
     this.photonGroup = new PhotonGroup( zoomedInBox, this.hydrogenAtomProperty, options.tandem.createTandem( 'photonGroup' ) );
 
