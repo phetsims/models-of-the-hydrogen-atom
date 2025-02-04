@@ -19,18 +19,16 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-// Letters that represent the orbital shape, indexed by the value of l from (n,l,m).
-// s = spherical
-// p = dumbbell
-// d = clover leaf
-// ...
-//TODO Are these correct? I don't find g or h in Google search, and the order of f is suspect.
+// In quantum mechanics, an atomic orbital is a function describing the location and wave-like behavior of an electron
+// in an atom. These letters represent the orbital shape, and are indexed by the value of l from (n,l,m).
+// l > 2 (f, g, h) are theoretically possible, but should not be encountered in practice.
+// See https://en.wikipedia.org/wiki/Atomic_orbital#Orbitals_table
 const ORBITAL_SHAPE_PROPERTIES = [
   MOTHASymbols.sStringProperty,
   MOTHASymbols.pStringProperty,
   MOTHASymbols.dStringProperty,
-  MOTHASymbols.gStringProperty,
   MOTHASymbols.fStringProperty,
+  MOTHASymbols.gStringProperty,
   MOTHASymbols.hStringProperty
 ];
 
