@@ -14,10 +14,8 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import EmissionChart, { IREmissionChart, UVEmissionChart, VisibleEmissionChart } from './EmissionChart.js';
-import SpectrometerDebugText from './SpectrometerDebugText.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 // Lengths of the 3 x-axis (nm) segments
 const UV_AXIS_LENGTH = 270;
@@ -101,16 +99,6 @@ export default class SpectrometerChart extends Node {
     options.children = [ backgroundNode, charts ];
 
     super( options );
-
-    // A simple text-only display of the spectrometer data, for debugging.
-    if ( MOTHAQueryParameters.debugSpectrometerData ) {
-      const dataText = new SpectrometerDebugText( dataPointsProperty );
-      const dataTextRightTop = backgroundNode.rightTop.plusXY( -5, 5 );
-      dataText.localBoundsProperty.link( () => {
-        dataText.rightTop = dataTextRightTop;
-      } );
-      this.addChild( dataText );
-    }
   }
 }
 
