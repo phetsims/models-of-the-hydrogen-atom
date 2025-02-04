@@ -175,7 +175,7 @@ export default class SchrodingerQuantumNumbers {
     }
 
     assert && assert( nNext === null || ( SchrodingerQuantumNumbers.isValid_n( nNext ) && nNext < n ),
-      `invalid nNext: (${this.n},${this.l},${this.m}) -> (${nNext},?,?)` );
+      `invalid nNext: ${this.toString()} -> (${nNext},?,?)` );
     return nNext;
   }
 
