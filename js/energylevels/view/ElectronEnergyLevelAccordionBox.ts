@@ -12,7 +12,6 @@ import { Node, Text } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import MOTHAQueryParameters from '../../common/MOTHAQueryParameters.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
@@ -71,7 +70,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     super( content, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
       titleNode: titleNode,
-      expandedDefaultValue: MOTHAQueryParameters.expandAll,
+      expandedDefaultValue: true, // expanded by default because this is the feature that is new to the Energy Levels screen.
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelAccordionBox.helpTextStringProperty,
