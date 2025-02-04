@@ -16,7 +16,7 @@ import MOTHAColors from '../../common/MOTHAColors.js';
 import TransitionsCheckbox from '../../common/view/TransitionsCheckbox.js';
 import TransitionsDialog from '../../common/view/TransitionsDialog.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
-import ExperimentModelSwitch from '../../common/view/ExperimentModelSwitch.js';
+import ExperimentOrModelSwitch from './ExperimentOrModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
 import { LightControlPanel } from './LightControlPanel.js';
 import { LightSourceNode } from './LightSourceNode.js';
@@ -138,8 +138,8 @@ export default class MOTHAScreenView extends ScreenView {
     } );
 
     // Switches between Experiment and Model.
-    const experimentModelSwitch = new ExperimentModelSwitch( model.experimentOrModelProperty,
-      options.tandem.createTandem( 'experimentModelSwitch' ) );
+    const experimentOrModelSwitch = new ExperimentOrModelSwitch( model.experimentOrModelProperty,
+      options.tandem.createTandem( 'experimentOrModelSwitch' ) );
 
     const atomicModelPanel = new AtomicModelPanel( model.atomicModelProperty, model.atomicModels,
       model.experimentOrModelProperty, {
@@ -228,7 +228,7 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Layout: elements to the right of zoomedInBoxNode.
     const modelVBox = new VBox( {
-      children: [ experimentModelSwitch, atomicModelPanel ],
+      children: [ experimentOrModelSwitch, atomicModelPanel ],
       align: 'center',
       spacing: 10,
       excludeInvisibleChildrenFromBounds: true
