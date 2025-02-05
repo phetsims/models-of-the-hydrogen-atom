@@ -1,7 +1,5 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
-//TODO port SchrodingerNode.java
-
 /**
  * SchrodingerNode displays the Schrodinger model of the hydrogen atom.
  *
@@ -33,8 +31,8 @@ import SchrodingerModel from '../model/SchrodingerModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
-import SchrodingerFieldNode from './SchrodingerFieldNode.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
+import SchrodingerQuadrantNode from './SchrodingerQuadrantNode.js';
 
 export default class SchrodingerNode extends HydrogenAtomNode {
 
@@ -43,12 +41,15 @@ export default class SchrodingerNode extends HydrogenAtomNode {
                       zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2 ) {
 
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
+
     const protonNode = new ProtonNode( schrodingerModel.proton, modelViewTransform );
 
-    const fieldNode = new SchrodingerFieldNode( schrodingerModel, zoomedInBox, modelViewTransform );
+    const electronNode = new SchrodingerQuadrantNode( schrodingerModel.nlmProperty, schrodingerModel.position,
+      modelViewTransform, zoomedInBoxBounds );
 
     super( schrodingerModel, hydrogenAtomProperty, {
-      children: [ fieldNode, protonNode ]
+      children: [ electronNode, protonNode ]
     } );
   }
 
