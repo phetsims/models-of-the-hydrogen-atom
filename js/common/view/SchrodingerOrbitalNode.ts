@@ -21,8 +21,6 @@ import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 
-const PERCENT_CELL_OVERLAP = 0.1; // percent overlap of cells in the grid, 1.0 = 100%
-
 export default class SchrodingerOrbitalNode extends CanvasNode {
 
   private readonly quadrantWidth: number;
@@ -84,7 +82,7 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
-    const enabled = false; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/51 Not rendering correctly and causing a performance problem.
+    const enabled = true; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/51 Not rendering correctly and causing a performance problem.
     if ( enabled ) {
 
       // globalAlpha will be used to set the alpha component.
@@ -93,8 +91,8 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
       // Values used for drawing each cell.
       let x: number;
       let z: number;
-      const w = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellWidth;
-      const h = ( 1 + PERCENT_CELL_OVERLAP ) * this.cellHeight;
+      const w = this.cellWidth;
+      const h = this.cellHeight;
 
       // For each cell in the 2D grid...
       const numberOfRows = this.brightnessValues.length;
