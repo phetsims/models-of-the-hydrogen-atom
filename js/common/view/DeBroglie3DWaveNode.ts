@@ -76,15 +76,15 @@ export default class DeBroglie3DWaveNode extends Wireframe3DNode {
  */
 function getWaveVertices( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2, vertices: Vector3[] ): Vector3[] {
   const n = deBroglieModel.electron.nProperty.value;
-  const radius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
+  const orbitRadius = modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
 
   const numberOfVertices = vertices.length;
   const deltaAngle = ( 2 * Math.PI ) / numberOfVertices;
 
   for ( let i = 0; i < numberOfVertices; i++ ) {
     const angle = i * deltaAngle;
-    const x = radius * Math.cos( angle );
-    const y = radius * Math.sin( angle );
+    const x = orbitRadius * Math.cos( angle );
+    const y = orbitRadius * Math.sin( angle );
     const z = MAX_WAVE_HEIGHT * deBroglieModel.getAmplitude( n, angle );
     vertices[ i ].setXYZ( x, y, z );
   }
