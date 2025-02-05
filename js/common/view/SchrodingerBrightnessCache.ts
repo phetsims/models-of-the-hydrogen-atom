@@ -24,7 +24,7 @@ import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 
-//TODO Improve resolution by increasing number of cells? But this hurts performance...
+//TODO Improve resolution by increasing number of cells? But that hurts performance...
 const NUMBER_OF_HORIZONTAL_CELLS = 40;
 const NUMBER_OF_VERTICAL_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
 const NUMBER_OF_DEPTH_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
