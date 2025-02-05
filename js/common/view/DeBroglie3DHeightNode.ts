@@ -64,9 +64,11 @@ export default class DeBroglie3DHeightNode extends Node {
       phetioReadOnly: true
     } );
 
+    const atomPosition = modelViewTransform.modelToViewPosition( deBroglieModel.position );
+
     // 3D orbits
     this.orbitsNode = new DeBroglie3DOrbitsNode( modelViewTransform, this.pitchProperty, FINAL_PITCH );
-    this.orbitsNode.translation = modelViewTransform.modelToViewPosition( deBroglieModel.position );
+    this.orbitsNode.translation = atomPosition;
     this.addChild( this.orbitsNode );
 
     // proton
@@ -75,7 +77,7 @@ export default class DeBroglie3DHeightNode extends Node {
 
     // wave
     this.waveNode = new DeBroglie3DWaveNode( deBroglieModel, modelViewTransform, this.pitchProperty );
-    this.waveNode.translation = modelViewTransform.modelToViewPosition( deBroglieModel.position );
+    this.waveNode.translation = atomPosition;
     this.addChild( this.waveNode );
 
     deBroglieModel.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
