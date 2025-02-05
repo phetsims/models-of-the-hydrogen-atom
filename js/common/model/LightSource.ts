@@ -131,7 +131,7 @@ export default class LightSource extends PhetioObject {
       ]
     } );
 
-    this.dtPerPhotonCreated = ( zoomedInBox.height / Photon.SPEED ) / MAX_LIGHT_PHOTONS;
+    this.dtPerPhotonCreated = ( zoomedInBox.bounds.height / Photon.SPEED ) / MAX_LIGHT_PHOTONS;
 
     this.dtSincePhotonEmittedProperty = new NumberProperty( 0, {
       units: 's',
@@ -180,7 +180,7 @@ export default class LightSource extends PhetioObject {
    * photon hits the atom, which is centered in the zoomed-in box.
    */
   public emitPhotonAtBottomCenter( wavelength: number, debugHaloColor: Color ): void {
-    this.emitPhotonAtPosition( wavelength, new Vector2( this.zoomedInBox.centerX, this.zoomedInBox.minY ), debugHaloColor );
+    this.emitPhotonAtPosition( wavelength, new Vector2( this.zoomedInBox.bounds.centerX, this.zoomedInBox.bounds.minY ), debugHaloColor );
   }
 
   /**
@@ -194,8 +194,8 @@ export default class LightSource extends PhetioObject {
    * Gets the next random position for a photon, along the bottom edge of the zoomed-in box.
    */
   private getNextPhotonPosition(): Vector2 {
-    const x = dotRandom.nextDoubleBetween( this.zoomedInBox.minX, this.zoomedInBox.maxX );
-    const y = this.zoomedInBox.minY;
+    const x = dotRandom.nextDoubleBetween( this.zoomedInBox.bounds.minX, this.zoomedInBox.bounds.maxX );
+    const y = this.zoomedInBox.bounds.minY;
     return new Vector2( x, y );
   }
 

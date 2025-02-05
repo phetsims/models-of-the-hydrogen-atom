@@ -41,7 +41,7 @@ export default class SchrodingerNode extends HydrogenAtomNode {
                       zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox.bounds );
 
     const orbitalNode = new SchrodingerOrbitalNode( schrodingerModel.nlmProperty, schrodingerModel.position,
       modelViewTransform, zoomedInBoxBounds );

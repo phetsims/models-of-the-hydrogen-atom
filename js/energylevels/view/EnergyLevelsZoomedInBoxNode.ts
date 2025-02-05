@@ -44,7 +44,7 @@ export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
     // Creates the overlays that have controls and displays for this screen's atomic models.
     const createOverlayNodes = ( modelViewTransform: ModelViewTransform2, parentTandem: Tandem ) => {
 
-      const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( model.zoomedInBox );
+      const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( model.zoomedInBox.bounds );
 
       const bohrOverlayNode = new BohrOverlayNode( model.bohrModel, model.hydrogenAtomProperty, zoomedInBoxBounds,
         parentTandem.createTandem( 'bohrOverlayNode' ) );

@@ -19,6 +19,7 @@ import HydrogenAtomNode from './HydrogenAtomNode.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhotonNode from './PhotonNode.js';
 import MOTHAModel from '../model/MOTHAModel.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 
 export default class ZoomedInBoxNode extends Node {
 
@@ -40,10 +41,8 @@ export default class ZoomedInBoxNode extends Node {
     // The model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.
     // The view uses a left-handed coordinate system: +x right, +y down, +angle clockwise.
     const viewOffset = new Vector2( ZoomedInBoxNode.SIDE_LENGTH / 2, ZoomedInBoxNode.SIDE_LENGTH );
-    const xScale = ZoomedInBoxNode.SIDE_LENGTH / zoomedInBox.width;
-    const yScale = ZoomedInBoxNode.SIDE_LENGTH / zoomedInBox.height;
-    assert && assert( xScale === yScale, 'ZoomedInBoxNode is not scaled the same in both dimensions. Is your box square?' );
-    const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( viewOffset, xScale, -yScale );
+    const modelViewTransformScale = ZoomedInBoxNode.SIDE_LENGTH / ZoomedInBox.SIDE_LENGTH;
+    const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( viewOffset, modelViewTransformScale, -modelViewTransformScale );
 
     const hydrogenAtomNodes = createHydrogenAtomNodes( modelViewTransform, tandem );
 
@@ -51,11 +50,13 @@ export default class ZoomedInBoxNode extends Node {
 
     const photonsLayer = new Node();
 
-    const backgroundNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomedInBox ), {
+    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox.bounds );
+
+    const backgroundNode = new Rectangle( zoomedInBoxBounds, {
       fill: MOTHAColors.zoomedInBoxFillProperty
     } );
 
-    const outlineNode = new Rectangle( modelViewTransform.modelToViewBounds( zoomedInBox ), {
+    const outlineNode = new Rectangle( zoomedInBoxBounds, {
       stroke: MOTHAColors.zoomedInBoxStrokeProperty,
       lineWidth: 3
     } );
@@ -67,7 +68,7 @@ export default class ZoomedInBoxNode extends Node {
     // Contents of the box, clipped to the bounds of the box.
     const contentsLayer = new Node( {
       children: [ ...hydrogenAtomNodes, photonsLayer, ...overlayNodes, experimentNode ],
-      clipArea: modelViewTransform.modelToViewShape( Shape.rectangle( zoomedInBox.minX, zoomedInBox.minY, zoomedInBox.width, zoomedInBox.height ) )
+      clipArea: Shape.bounds( zoomedInBoxBounds )
     } );
 
     super( {
