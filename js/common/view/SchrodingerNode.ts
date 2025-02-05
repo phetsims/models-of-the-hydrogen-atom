@@ -32,7 +32,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
-import SchrodingerQuadrantNode from './SchrodingerQuadrantNode.js';
+import SchrodingerOrbitalNode from './SchrodingerOrbitalNode.js';
 
 export default class SchrodingerNode extends HydrogenAtomNode {
 
@@ -43,13 +43,13 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
     const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox );
 
-    const protonNode = new ProtonNode( schrodingerModel.proton, modelViewTransform );
-
-    const electronNode = new SchrodingerQuadrantNode( schrodingerModel.nlmProperty, schrodingerModel.position,
+    const orbitalNode = new SchrodingerOrbitalNode( schrodingerModel.nlmProperty, schrodingerModel.position,
       modelViewTransform, zoomedInBoxBounds );
 
+    const protonNode = new ProtonNode( schrodingerModel.proton, modelViewTransform );
+
     super( schrodingerModel, hydrogenAtomProperty, {
-      children: [ electronNode, protonNode ]
+      children: [ orbitalNode, protonNode ]
     } );
   }
 

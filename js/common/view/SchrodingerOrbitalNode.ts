@@ -1,8 +1,9 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * SchrodingerQuadrantNode renders one quadrant of the Schrodinger field. The quadrant is divided into a 2D grid
- * of cells, and the cells are filled with colors of varying brightness to represent the state (n,l,m) of the electron.
+ * SchrodingerOrbitalNode renders the atomic orbital, a function describing the location and wave-like behavior of the
+ * electron. The orbital is characterized by the quantum numbers (n,l,m) that describe the electron's state - see
+ * SchrodingerQuantumNumbers.
  *
  * In the Java implementation, this was inner classes AtomNode and GridNode in SchrodingerNode.java.
  *
@@ -24,7 +25,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 const PERCENT_CELL_OVERLAP = 0.1; // percent overlap of cells in the grid, 1.0 = 100%
 const NUMBER_OF_COLORS = 100; // number of unique colors for the range of brightness values
 
-export default class SchrodingerQuadrantNode extends CanvasNode {
+export default class SchrodingerOrbitalNode extends CanvasNode {
 
   private readonly canvasWidth: number;
   private readonly canvasHeight: number;
@@ -136,4 +137,4 @@ export default class SchrodingerQuadrantNode extends CanvasNode {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'SchrodingerQuadrantNode', SchrodingerQuadrantNode );
+modelsOfTheHydrogenAtom.register( 'SchrodingerOrbitalNode', SchrodingerOrbitalNode );
