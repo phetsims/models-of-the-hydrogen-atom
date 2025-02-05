@@ -1,5 +1,6 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
+//TODO Make this a singleton, to reuse the same cache for both screens.
 /**
  * SchrodingerBrightness is responsible for representing Schrodinger states (and their associated wavefunctions)
  * as brightness. Brightness is computed on demand, then cached. The cache is configured for a fixed number of states,
