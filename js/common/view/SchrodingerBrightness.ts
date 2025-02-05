@@ -58,7 +58,7 @@ export default class SchrodingerBrightness {
     }
     phet.log && phet.log( `SchrodingerBrightness.sums contains ${this.sums.length} entries.` );
 
-    // 3D cell size
+    // 3D cell size. Dividing by 2 because we only need to compute 1/8 of the 3D space, one quadrant of the 2D space.
     this.cellWidth = ( zoomedInBoxBounds.width / NUMBER_OF_HORIZONTAL_CELLS ) / 2;
     this.cellHeight = ( zoomedInBoxBounds.height / NUMBER_OF_VERTICAL_CELLS ) / 2;
     this.cellDepth = ( zoomedInBoxBounds.height / NUMBER_OF_DEPTH_CELLS ) / 2;
