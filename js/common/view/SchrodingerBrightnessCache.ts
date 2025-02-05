@@ -10,11 +10,6 @@
  * In the Java implementation, this was class BrightnessCache in SchrodingerNode.java. The Java version provided
  * an option to pre-populate the cache. This proved to be quite time-consuming and the option was never used.
  *
- * Some useful references for orbital shapes:
- * https://upload.wikimedia.org/wikipedia/commons/e/e7/Hydrogen_Density_Plots.png
- * https://en.wikipedia.org/wiki/Atomic_orbital#Orbitals_table
- * https://www.falstad.com/qmatom/
- *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
