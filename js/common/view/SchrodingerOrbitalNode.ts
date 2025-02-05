@@ -3,17 +3,16 @@
 /**
  * SchrodingerOrbitalNode renders the atomic orbital, a function describing the location and wave-like behavior of the
  * electron. The orbital is characterized by the quantum numbers (n,l,m) that describe the electron's state - see
- * SchrodingerQuantumNumbers.
+ * SchrodingerQuantumNumbers. In this implementation, the orbital is rendered as a 2D NxN grid, where each cell in
+ * the grid is filled with the electron color with varying alpha (transparency).
  *
  * In the Java implementation, this was inner classes AtomNode and GridNode in SchrodingerNode.java.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Multilink from '../../../../axon/js/Multilink.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Utils from '../../../../dot/js/Utils.js';
-import { CanvasNode, Color } from '../../../../scenery/js/imports.js';
+import { CanvasNode } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SchrodingerBrightnessCache from './SchrodingerBrightnessCache.js';
@@ -23,70 +22,57 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Vector2 from '../../../../dot/js/Vector2.js';
 
 const PERCENT_CELL_OVERLAP = 0.1; // percent overlap of cells in the grid, 1.0 = 100%
-const NUMBER_OF_COLORS = 100; // number of unique colors for the range of brightness values
 
 export default class SchrodingerOrbitalNode extends CanvasNode {
 
-  private readonly canvasWidth: number;
-  private readonly canvasHeight: number;
-
-  private brightnessValues: number[][]; // brightness values for 2D grid, [row][column]
-  private cellWidth: number;
-  private cellHeight: number;
-
+  private readonly quadrantWidth: number;
+  private readonly quadrantHeight: number;
   private readonly brightnessCache: SchrodingerBrightnessCache;
 
-  // Caches the mapping of brightness [0,1] to CSS color string. The human eye can only differentiate between
-  // a small number of different brightnesses of color, so this array can be relatively small.
-  private readonly colorCache: string[];
+  private brightnessValues: number[][]; // 2D grid of brightness values, in [row][column] order.
+  private cellWidth: number;
+  private cellHeight: number;
 
   public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
                       atomPosition: Vector2,
                       modelViewTransform: ModelViewTransform2,
                       zoomedInBoxBounds: Bounds2 ) {
 
-    const canvasWidth = zoomedInBoxBounds.width;
-    const canvasHeight = zoomedInBoxBounds.height;
+    const quadrantWidth = zoomedInBoxBounds.width / 2;
+    const quadrantHeight = zoomedInBoxBounds.height / 2;
 
     super( {
       pickable: false,
-      canvasBounds: new Bounds2( -canvasWidth / 2, -canvasHeight / 2, canvasWidth / 2, canvasHeight / 2 ),
+      canvasBounds: new Bounds2( -quadrantWidth, -quadrantHeight, quadrantWidth, quadrantHeight ),
       translation: modelViewTransform.modelToViewPosition( atomPosition )
     } );
 
-    this.canvasWidth = canvasWidth;
-    this.canvasHeight = canvasHeight;
+    this.quadrantWidth = quadrantWidth;
+    this.quadrantHeight = quadrantHeight;
+    this.brightnessCache = new SchrodingerBrightnessCache( zoomedInBoxBounds );
+
+    // These values will be populated by update().
     this.brightnessValues = [];
     this.cellWidth = 0;
     this.cellHeight = 0;
-    this.colorCache = [];
 
-    this.brightnessCache = new SchrodingerBrightnessCache( zoomedInBoxBounds );
+    nlmProperty.link( nlm => this.update( nlm ) );
 
-    nlmProperty.link( nlm => this.updateBrightness( nlm ) );
-
-    // If the colors change, update the color cache and trigger a call to paintCanvas.
-    //TODO Why are we interpolating between 2 opaque colors? Why not just use brightness as the alpha component for electronBaseColorProperty?
-    Multilink.multilink( [ MOTHAColors.zoomedInBoxFillProperty, MOTHAColors.electronBaseColorProperty ],
-      ( minColor, maxColor ) => {
-        this.colorCache.length = 0;
-        for ( let i = 0; i <= NUMBER_OF_COLORS; i++ ) {
-          this.colorCache[ i ] = Color.interpolateRGBA( minColor, maxColor, i / NUMBER_OF_COLORS ).toCSS();
-        }
-        this.invalidatePaint();
-      } );
+    // If the electron color changes, trigger a call to paintCanvas.
+    MOTHAColors.electronBaseColorProperty.link( () => this.invalidatePaint() );
   }
 
   /**
-   * Sets the brightness values that are applied to the cells in the grid.
-   * The dimensions of the brightness array determine the number of cells.
+   * Updates the fields that are used to render the orbital, then triggers a call to paintCanvas.
    */
-  private updateBrightness( nlm: SchrodingerQuantumNumbers ): void {
+  private update( nlm: SchrodingerQuantumNumbers ): void {
 
-    // Set fields used by paintCanvas.
+    // Get the brightness values that describe the orbital for the electron's state.
     this.brightnessValues = this.brightnessCache.getBrightness( nlm );
-    this.cellWidth = 0.5 * this.canvasWidth / this.brightnessValues[ 0 ].length;
-    this.cellHeight = 0.5 * this.canvasHeight / this.brightnessValues.length;
+
+    // brightnessValues is for 1 quadrant, so use quadrant size to compute cell size.
+    this.cellWidth = this.quadrantWidth / this.brightnessValues[ 0 ].length;
+    this.cellHeight = this.quadrantHeight / this.brightnessValues.length;
 
     // This results in a call to paintCanvas.
     this.invalidatePaint();
@@ -100,6 +86,9 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
 
     const enabled = false; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/51 Not rendering correctly and causing a performance problem.
     if ( enabled ) {
+
+      // globalAlpha will be used to set the alpha component.
+      context.fillStyle = MOTHAColors.electronBaseColorProperty.value.toCSS();
 
       // Values used for drawing each cell.
       let x: number;
@@ -118,18 +107,16 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
           // Skip cells that contain no information.
           if ( brightness > 0 ) {
 
-            // Add a rectangle for the cell to each quadrant.
             x = ( column * this.cellWidth );
             z = ( row * this.cellHeight );
-            context.rect( x, z, w, h );
-            context.rect( -x, z, w, h );
-            context.rect( x, -z, w, h );
-            context.rect( -x, -z, w, h );
 
-            // Fill the cell.
-            const colorIndex = Utils.toFixedNumber( brightness * NUMBER_OF_COLORS, 0 );
-            context.fillStyle = this.colorCache[ colorIndex ];
-            context.fill();
+            // Fill a rectangle in each quadrant.
+            // Use globalAlpha and fillRect because we're filling rectangles with different alpha values.
+            context.globalAlpha = brightness;
+            context.fillRect( x, z, w, h );
+            context.fillRect( -x, z, w, h );
+            context.fillRect( x, -z, w, h );
+            context.fillRect( -x, -z, w, h );
           }
         }
       }
