@@ -29,7 +29,8 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
 
   private readonly canvasWidth: number;
   private readonly canvasHeight: number;
-  private brightnessValues: number[][]; // brightness values, [row][column]
+
+  private brightnessValues: number[][]; // brightness values for 2D grid, [row][column]
   private cellWidth: number;
   private cellHeight: number;
 
