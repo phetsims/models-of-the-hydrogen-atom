@@ -21,7 +21,7 @@ import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 
 // Make the icons appear to be the same size as particles in the zoomed-in box.
-const ICON_SCALE = ZoomedInBoxNode.SIZE / ZoomedInBox.SIZE;
+const ICON_SCALE = ZoomedInBoxNode.SIDE_LENGTH / ZoomedInBox.SIDE_LENGTH;
 
 const PHOTON_ICON_WAVELENGTH = 410; // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/61
 

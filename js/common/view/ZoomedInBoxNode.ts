@@ -22,8 +22,8 @@ import MOTHAModel from '../model/MOTHAModel.js';
 
 export default class ZoomedInBoxNode extends Node {
 
-  // Length of one edge of the box, which is square, in view coordinates.
-  public static readonly SIZE = 400;
+  // Length of one side of the box, which is square, in view coordinates.
+  public static readonly SIDE_LENGTH = 400;
 
   private readonly hydrogenAtomNodes: HydrogenAtomNode[];
 
@@ -37,9 +37,9 @@ export default class ZoomedInBoxNode extends Node {
     // All model-view transform operations take place in the zoomed-in box, whose origin is at its center.
     // The model uses a right-handed coordinate system: +x right, +y up, +angle counterclockwise.
     // The view uses a left-handed coordinate system: +x right, +y down, +angle clockwise.
-    const viewOffset = new Vector2( ZoomedInBoxNode.SIZE / 2, ZoomedInBoxNode.SIZE );
-    const xScale = ZoomedInBoxNode.SIZE / zoomedInBox.width;
-    const yScale = ZoomedInBoxNode.SIZE / zoomedInBox.height;
+    const viewOffset = new Vector2( ZoomedInBoxNode.SIDE_LENGTH / 2, ZoomedInBoxNode.SIDE_LENGTH );
+    const xScale = ZoomedInBoxNode.SIDE_LENGTH / zoomedInBox.width;
+    const yScale = ZoomedInBoxNode.SIDE_LENGTH / zoomedInBox.height;
     assert && assert( xScale === yScale, 'ZoomedInBoxNode is not scaled the same in both dimensions. Is your box square?' );
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( viewOffset, xScale, -yScale );
 

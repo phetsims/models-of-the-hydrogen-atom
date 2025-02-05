@@ -13,12 +13,13 @@ import Photon from './Photon.js';
 
 export default class ZoomedInBox extends Bounds2 {
 
+  // Length of one side of the box, which is square, in model coordinates.
   // This value is the same as the Java version, to preserve the same relative sizes of things in the model.
   // This constant was ANIMATION_BOX_SIZE in HAConstants.java.
-  public static readonly SIZE = 475;
+  public static readonly SIDE_LENGTH = 475;
 
   public constructor() {
-    const apothem = ZoomedInBox.SIZE / 2;
+    const apothem = ZoomedInBox.SIDE_LENGTH / 2;
     super( -apothem, -apothem, apothem, apothem );
   }
 
