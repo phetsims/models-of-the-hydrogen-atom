@@ -22,7 +22,9 @@ import MOTHAModel from '../model/MOTHAModel.js';
 
 export default class ZoomedInBoxNode extends Node {
 
-  // Length of one side of the box, which is square, in view coordinates.
+  // Length of one side of the box, which is square, in view coordinates. This value is smaller than in the Java
+  // version, because we are cramming more into the user interface. This value also differs from ZoomedInBox.SIDE_LENGTH,
+  // so a model-view transform will be needed for things that are displayed in the zoomed-in box.
   public static readonly SIDE_LENGTH = 400;
 
   private readonly hydrogenAtomNodes: HydrogenAtomNode[];
