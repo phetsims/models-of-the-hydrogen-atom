@@ -82,40 +82,36 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
    */
   public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
-    const enabled = true; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/51 Not rendering correctly and causing a performance problem.
-    if ( enabled ) {
+    // globalAlpha will be used to set the alpha component.
+    context.fillStyle = MOTHAColors.electronBaseColorProperty.value.toCSS();
 
-      // globalAlpha will be used to set the alpha component.
-      context.fillStyle = MOTHAColors.electronBaseColorProperty.value.toCSS();
+    // Values used for drawing each cell.
+    let x: number;
+    let z: number;
+    const w = this.cellWidth;
+    const h = this.cellHeight;
 
-      // Values used for drawing each cell.
-      let x: number;
-      let z: number;
-      const w = this.cellWidth;
-      const h = this.cellHeight;
+    // For each cell in the 2D grid...
+    const numberOfRows = this.brightnessValues.length;
+    for ( let row = 0; row < numberOfRows; row++ ) {
+      const numberOfColumns = this.brightnessValues[ row ].length;
+      for ( let column = 0; column < numberOfColumns; column++ ) {
 
-      // For each cell in the 2D grid...
-      const numberOfRows = this.brightnessValues.length;
-      for ( let row = 0; row < numberOfRows; row++ ) {
-        const numberOfColumns = this.brightnessValues[ row ].length;
-        for ( let column = 0; column < numberOfColumns; column++ ) {
+        const brightness = this.brightnessValues[ row ][ column ];
 
-          const brightness = this.brightnessValues[ row ][ column ];
+        // Skip cells that contain no information.
+        if ( brightness > 0 ) {
 
-          // Skip cells that contain no information.
-          if ( brightness > 0 ) {
+          x = ( column * this.cellWidth );
+          z = ( row * this.cellHeight );
 
-            x = ( column * this.cellWidth );
-            z = ( row * this.cellHeight );
-
-            // Fill a rectangle in each quadrant.
-            // Use globalAlpha and fillRect because we're filling rectangles with different alpha values.
-            context.globalAlpha = brightness;
-            context.fillRect( x, z, w, h );
-            context.fillRect( -x, z, w, h );
-            context.fillRect( x, -z, w, h );
-            context.fillRect( -x, -z, w, h );
-          }
+          // Fill a rectangle in each quadrant.
+          // Use globalAlpha and fillRect because we're filling rectangles with different alpha values.
+          context.globalAlpha = brightness;
+          context.fillRect( x, z, w, h );
+          context.fillRect( -x, z, w, h );
+          context.fillRect( x, -z, w, h );
+          context.fillRect( -x, -z, w, h );
         }
       }
     }
