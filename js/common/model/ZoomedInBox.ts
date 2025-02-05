@@ -11,6 +11,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
 
+//TODO Using inheritance here has confused me more than once. Change to composition.
 export default class ZoomedInBox extends Bounds2 {
 
   // Length of one side of the box, which is square, in model coordinates.
