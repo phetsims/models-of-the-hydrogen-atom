@@ -102,16 +102,17 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
         // Skip cells that contain no information.
         if ( brightness > 0 ) {
 
+          // Coordinates in the right-bottom quadrant.
           x = ( column * this.cellWidth );
           z = ( row * this.cellHeight );
 
           // Fill a rectangle in each quadrant.
           // Use globalAlpha and fillRect because we're filling rectangles with different alpha values.
           context.globalAlpha = brightness;
-          context.fillRect( x, z, w, h );
-          context.fillRect( -x, z, w, h );
-          context.fillRect( x, -z, w, h );
-          context.fillRect( -x, -z, w, h );
+          context.fillRect( x, z, w, h ); // right-bottom quadrant
+          context.fillRect( -( x + this.cellWidth ), z, w, h ); // left-bottom quadrant
+          context.fillRect( x, -( z + this.cellHeight ), w, h ); // right-top quadrant
+          context.fillRect( -( x + this.cellWidth ), -( z + this.cellHeight ), w, h ); // left-top quadrant
         }
       }
     }
