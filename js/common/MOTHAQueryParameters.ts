@@ -35,8 +35,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   timeScale: {
     type: 'array',
     elementSchema: {
-      type: 'number',
-      isValidValue: ( scale: number ) => ( scale > 0 )
+      type: 'number'
     },
     defaultValue: [ 3, 1, 0.25 ],
     isValidValue: ( array: number[] ) => ( array.length === 3 ) && ( array[ 0 ] > array[ 1 ] ) && ( array[ 1 ] > array[ 2 ] )
@@ -46,6 +45,25 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // This is useful for debugging how the spectrometer looks when it is displaying a lot of data.
   debugSpectrometer: {
     type: 'flag'
+  },
+
+  // The initial state (n,l,m) for the Schrodinger model. This is useful for checking an orbital shape, without
+  // having to wait for the sim to get to a specific state.
+  nlm: {
+    type: 'array',
+    elementSchema: {
+      type: 'number'
+    },
+    defaultValue: [ 1, 0, 0 ],
+    isValidValue: ( array: number[] ) => {
+      const n = array[ 0 ];
+      const l = array[ 1 ];
+      const m = array[ 2 ];
+      return ( array.length === 3 ) &&
+             ( n >= 0 && n <= 6 ) &&
+             ( l >= 0 && l <= n - 1 ) &&
+             ( m >= -l && m <= l );
+    }
   }
 };
 

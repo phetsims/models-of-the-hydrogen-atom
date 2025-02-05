@@ -15,6 +15,7 @@ import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import Property from '../../../../axon/js/Property.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 export default class SchrodingerElectron extends QuantumElectron {
 
@@ -24,7 +25,10 @@ export default class SchrodingerElectron extends QuantumElectron {
 
   public constructor( atomPosition: Vector2, tandem: Tandem ) {
 
-    const nlmProperty = new Property( new SchrodingerQuantumNumbers( 1, 0, 0 ), {
+    const n = MOTHAQueryParameters.nlm[ 0 ];
+    const l = MOTHAQueryParameters.nlm[ 1 ];
+    const m = MOTHAQueryParameters.nlm[ 2 ];
+    const nlmProperty = new Property( new SchrodingerQuantumNumbers( n, l, m ), {
       phetioValueType: SchrodingerQuantumNumbers.SchrodingerQuantumNumbersIO,
       tandem: tandem.createTandem( 'nlmProperty' ),
       phetioDocumentation: 'The quantum numbers (n,l,m) that specify a wavefunction for the electron.',
