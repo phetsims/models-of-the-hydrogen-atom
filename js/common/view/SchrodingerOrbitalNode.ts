@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * SchrodingerOrbitalNode renders the atomic orbital, a function describing the location and wave-like behavior of the
@@ -16,7 +16,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import { CanvasNode, Color } from '../../../../scenery/js/imports.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
-import SchrodingerBrightness from './SchrodingerBrightness.js';
+import SchrodingerBrightnessCache from './SchrodingerBrightnessCache.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -33,7 +33,7 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
   private cellWidth: number;
   private cellHeight: number;
 
-  private readonly brightnessCache: SchrodingerBrightness;
+  private readonly brightnessCache: SchrodingerBrightnessCache;
 
   // Caches the mapping of brightness [0,1] to CSS color string. The human eye can only differentiate between
   // a small number of different brightnesses of color, so this array can be relatively small.
@@ -60,8 +60,7 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
     this.cellHeight = 0;
     this.colorCache = [];
 
-    //TODO Rename SchrodingerBrightness to SchrodingerBrightnessCache?
-    this.brightnessCache = new SchrodingerBrightness( zoomedInBoxBounds );
+    this.brightnessCache = new SchrodingerBrightnessCache( zoomedInBoxBounds );
 
     nlmProperty.link( nlm => this.updateBrightness( nlm ) );
 

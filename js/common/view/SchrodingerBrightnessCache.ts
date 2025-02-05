@@ -2,7 +2,7 @@
 
 //TODO Make this a singleton, to reuse the same cache for both screens.
 /**
- * SchrodingerBrightness is responsible for representing Schrodinger states (and their associated wavefunctions)
+ * SchrodingerBrightnessCache is responsible for representing Schrodinger states (and their associated wavefunctions)
  * as brightness values that are used to render the electron orbital. Brightness is computed on demand, then cached.
  * The cache is configured for a fixed number of states, and a fixed size 2D grid. See SchrodingerNode for more
  * documentation.
@@ -28,7 +28,7 @@ const NUMBER_OF_HORIZONTAL_CELLS = 40;
 const NUMBER_OF_VERTICAL_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
 const NUMBER_OF_DEPTH_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
 
-export default class SchrodingerBrightness {
+export default class SchrodingerBrightnessCache {
 
   // Cache of 2D brightness values [row][column], indexed by [n][l][abs(m)]. The entry for n=0 is undefined, because n = [1,6].
   // This data structure is huge, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
@@ -160,4 +160,4 @@ function solveProbabilityDensity( n: number, l: number, m: number, x: number, y:
   return ( w * w );
 }
 
-modelsOfTheHydrogenAtom.register( 'SchrodingerBrightness', SchrodingerBrightness );
+modelsOfTheHydrogenAtom.register( 'SchrodingerBrightnessCache', SchrodingerBrightnessCache );
