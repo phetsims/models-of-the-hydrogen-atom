@@ -51,7 +51,7 @@ export default class SchrodingerBrightness {
       }
     }
 
-    // Initialize sums with zeros
+    // Initialize reusable sums with zeros.
     this.sums = new Array( NUMBER_OF_VERTICAL_CELLS );
     for ( let i = 0; i < NUMBER_OF_VERTICAL_CELLS; i++ ) {
       this.sums[ i ] = new Array( NUMBER_OF_HORIZONTAL_CELLS ).fill( 0 );
