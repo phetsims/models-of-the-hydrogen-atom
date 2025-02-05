@@ -138,8 +138,6 @@ export default class SchrodingerBrightness {
 
 /**
  * Solves the Schrodinger probability density equation.
- * This algorithm is undefined for (x,y,z) = (0,0,0).
- *
  * @param n
  * @param l
  * @param m
