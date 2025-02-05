@@ -21,11 +21,11 @@ export type HydrogenAtomNodeOptions = SelfOptions & PickOptional<NodeOptions, 'c
 export default class HydrogenAtomNode extends Node {
 
   /**
-   * @param hydrogenAtom - the hydrogen atom associated with this Node
+   * @param thisHydrogenAtom - the hydrogen atom associated with this Node
    * @param hydrogenAtomProperty - the hydrogen atom that is currently selected
    * @param providedOptions
    */
-  protected constructor( hydrogenAtom: HydrogenAtom,
+  protected constructor( thisHydrogenAtom: HydrogenAtom,
                          hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                          providedOptions?: HydrogenAtomNodeOptions ) {
 
@@ -33,8 +33,7 @@ export default class HydrogenAtomNode extends Node {
 
       // NodeOptions
       isDisposable: false,
-      visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ],
-        selectedHydrogenAtom => ( selectedHydrogenAtom === hydrogenAtom ) )
+      visibleProperty: new DerivedProperty( [ hydrogenAtomProperty ], hydrogenAtom => ( hydrogenAtom === thisHydrogenAtom ) )
     }, providedOptions );
 
     super( options );
