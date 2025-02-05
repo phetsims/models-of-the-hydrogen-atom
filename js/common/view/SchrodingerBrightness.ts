@@ -28,7 +28,7 @@ const NUMBER_OF_DEPTH_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
 
 export default class SchrodingerBrightness {
 
-  // Cache of 2D brightness values [z][x], indexed by [n][l][abs(m)]. The entry for n=0 is undefined, because n = [1,6].
+  // Cache of 2D brightness values [row][column], indexed by [n][l][abs(m)]. The entry for n=0 is undefined, because n = [1,6].
   // This data structure is huge, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
   private readonly cache: Array<Array<Array<null | Array<Array<number>>>>>;
 
