@@ -19,21 +19,8 @@
  * Identical to Bohr and de Broglie.
  *
  * Emission behavior:
- * Both spontaneous and stimulated emission are similar to Bohr and de Broglie, but the rules for transitions (see below)
- * are more complicated.
- *
- * Transition rules:
- * All the following rules must be obeyed when choosing a transition. Note that transitions from state nlm=(2,0,0)
- * are a special case. The lower state (1,0,0) is not possible since it violates the abs(l-l')=1 rule. The only way to
- * get out of this state (2,0,0) is by going to a higher state.
- *
- *   n = [1...6] as in Bohr and de Broglie
- *   l = [0...n-1]
- *   m = [-l...+l]
- *   abs(l-l') = 1
- *   abs(m-m') < 1
- *   n transitions have varying transition strengths
- *   valid l and m transitions have equal probability
+ * Both spontaneous and stimulated emission are similar to Bohr and de Broglie, but the rules for electron state
+ * transitions are more complicated. See SchrodingerQuantumNumbers.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
