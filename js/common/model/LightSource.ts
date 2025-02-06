@@ -206,8 +206,8 @@ export default class LightSource extends PhetioObject {
    * For monochromatic light, we simply use the value of the light's monochromatic wavelength.
    *
    * For white light, the wavelength is randomly chosen. Instead of simply picking a wavelength from the light's
-   * entire range, we give a higher weight to those wavelengths that would cause a transition from state 1 to some
-   * other state. We consider only the wavelengths relevant to state=1 because all other transitions are very
+   * entire range, we give a higher weight to those wavelengths that would cause a transition from n=1 to some
+   * other state. We consider only the wavelengths relevant to n=1 because all other transitions are very
    * improbable in practice. This increases the probability that our photon will interact with the atom.
    */
   private getNextPhotonWavelength(): number {
