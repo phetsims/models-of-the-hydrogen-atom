@@ -89,8 +89,8 @@ export default class SchrodingerQuantumNumbers {
     return `(${this.n},${this.l},${this.m})`;
   }
 
-  public equals( quantumNumbers: SchrodingerQuantumNumbers ): boolean {
-    return ( quantumNumbers.n === this.n ) && ( quantumNumbers.l === this.l ) && ( quantumNumbers.m === this.m );
+  public equals( nlm: SchrodingerQuantumNumbers ): boolean {
+    return ( nlm.n === this.n ) && ( nlm.l === this.l ) && ( nlm.m === this.m );
   }
 
   /**
