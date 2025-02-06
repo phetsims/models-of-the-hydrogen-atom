@@ -1,7 +1,7 @@
 // Copyright 2015-2025, University of Colorado Boulder
 
 /**
- * ElectronEnergyLevelAccordionBox is the accordion box that contains the electron energy level diagram.
+ * ElectronEnergyLevelAccordionBox is the accordion box that displays the electron energy level diagram.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
