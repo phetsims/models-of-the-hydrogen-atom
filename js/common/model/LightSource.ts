@@ -191,7 +191,8 @@ export default class LightSource extends PhetioObject {
   }
 
   /**
-   * Gets the next random position for a photon, along the bottom edge of the zoomed-in box.
+   * Gets a position for the next photon to be emitted by the light source.
+   * The position is randomly chosen along the bottom edge of the zoomed-in box.
    */
   private getNextPhotonPosition(): Vector2 {
     const x = dotRandom.nextDoubleBetween( this.zoomedInBox.bounds.minX, this.zoomedInBox.bounds.maxX );
@@ -200,7 +201,7 @@ export default class LightSource extends PhetioObject {
   }
 
   /**
-   * Gets a wavelength that would be appropriate for a new photon.
+   * Gets a wavelength for the next photon to be emitted by the light source.
    *
    * For monochromatic light, we simply use the value of the light's monochromatic wavelength.
    *
