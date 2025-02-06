@@ -28,8 +28,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 
 export default class SchrodingerOrbitalNode extends CanvasNode {
 
-  private readonly quadrantWidth: number;
-  private readonly quadrantHeight: number;
+  private readonly quadrantSideLength: number;
   private readonly brightnessCache: SchrodingerBrightnessCache;
 
   private brightnessValues: number[][]; // 2D grid of brightness values, in [row][column] order.
@@ -41,18 +40,17 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
                       modelViewTransform: ModelViewTransform2,
                       zoomedInBoxBounds: Bounds2 ) {
 
-    const quadrantWidth = zoomedInBoxBounds.width / 2;
-    const quadrantHeight = zoomedInBoxBounds.height / 2;
+    assert && assert( zoomedInBoxBounds.width === zoomedInBoxBounds.height, 'zoomedInBox must be square.' );
+    const quadrantSideLength = zoomedInBoxBounds.width / 2;
 
     super( {
       pickable: false,
-      canvasBounds: new Bounds2( -quadrantWidth, -quadrantHeight, quadrantWidth, quadrantHeight ),
+      canvasBounds: new Bounds2( -quadrantSideLength, -quadrantSideLength, quadrantSideLength, quadrantSideLength ),
       translation: modelViewTransform.modelToViewPosition( atomPosition )
     } );
 
-    this.quadrantWidth = quadrantWidth;
-    this.quadrantHeight = quadrantHeight;
-    this.brightnessCache = new SchrodingerBrightnessCache( zoomedInBoxBounds );
+    this.quadrantSideLength = quadrantSideLength;
+    this.brightnessCache = new SchrodingerBrightnessCache( quadrantSideLength );
 
     // These values will be populated by update().
     this.brightnessValues = [];
@@ -74,8 +72,9 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
     this.brightnessValues = this.brightnessCache.getBrightness( nlm );
 
     // brightnessValues is for 1 quadrant, so use quadrant size to compute cell size.
-    this.cellWidth = this.quadrantWidth / this.brightnessValues[ 0 ].length;
-    this.cellHeight = this.quadrantHeight / this.brightnessValues.length;
+    this.cellWidth = this.quadrantSideLength / this.brightnessValues[ 0 ].length;
+    this.cellHeight = this.quadrantSideLength / this.brightnessValues.length;
+    assert && assert( this.cellWidth === this.cellHeight, 'cells must be square.' );
 
     // This results in a call to paintCanvas.
     this.invalidatePaint();

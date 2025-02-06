@@ -13,102 +13,109 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Bounds2 from '../../../../dot/js/Bounds2.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 
-//TODO Improve resolution by increasing number of cells? But that hurts performance...
-const NUMBER_OF_HORIZONTAL_CELLS = 40;
-const NUMBER_OF_VERTICAL_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
-const NUMBER_OF_DEPTH_CELLS = NUMBER_OF_HORIZONTAL_CELLS;
+// Number of cells in one quadrant, in all dimensions.
+const NUMBER_OF_CELLS = 40; //TODO Improve resolution by increasing number of cells? But that hurts performance...
 
 export default class SchrodingerBrightnessCache {
 
-  // Cache of 2D brightness values [row][column], indexed by [n][l][abs(m)]. The entry for n=0 is undefined, because n = [1,6].
+  // Cache of 2D brightness values [row][column], indexed by [n-1][l][abs(m)].
   // This data structure is huge, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
   private readonly cache: Array<Array<Array<null | Array<Array<number>>>>>;
 
   // reusable array for computing sums
   private readonly sums: Array<Array<number>>;
 
-  private readonly cellWidth: number;
-  private readonly cellHeight: number;
-  private readonly cellDepth: number;
+  // The length of one side of a cell, which is a cube.
+  private readonly cellSideLength: number;
 
   /**
-   * @param zoomedInBoxBounds - in view coordinates
+   * @param quadrantSideLength - side length of the quadrant, which is square
    */
-  public constructor( zoomedInBoxBounds: Bounds2 ) {
+  public constructor( quadrantSideLength: number ) {
 
-    // Initialize brightness entries to null.
+    // Create the cache and initialize entries to null.
     this.cache = [];
     for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
-      this.cache[ n ] = [];
+      const index = n - 1; // The cache is indexed by n-1, because the range of n is [1,6].
+      this.cache[ index ] = [];
       for ( let l = 0; l <= n - 1; l++ ) {
-        this.cache[ n ][ l ] = [];
+        this.cache[ index ][ l ] = [];
         for ( let m = 0; m <= l; m++ ) {
-          this.cache[ n ][ l ][ m ] = null;
+          this.cache[ index ][ l ][ m ] = null;
         }
       }
     }
 
     // Initialize reusable sums with zeros.
-    this.sums = new Array( NUMBER_OF_VERTICAL_CELLS );
-    for ( let i = 0; i < NUMBER_OF_VERTICAL_CELLS; i++ ) {
-      this.sums[ i ] = new Array( NUMBER_OF_HORIZONTAL_CELLS ).fill( 0 );
+    this.sums = new Array( NUMBER_OF_CELLS );
+    for ( let i = 0; i < NUMBER_OF_CELLS; i++ ) {
+      this.sums[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
     }
     phet.log && phet.log( `SchrodingerBrightness.sums contains ${this.sums.length} entries.` );
 
-    // 3D cell size. Dividing by 2 because we only need to compute 1/8 of the 3D space, one quadrant of the 2D space.
-    this.cellWidth = ( zoomedInBoxBounds.width / NUMBER_OF_HORIZONTAL_CELLS ) / 2;
-    this.cellHeight = ( zoomedInBoxBounds.height / NUMBER_OF_VERTICAL_CELLS ) / 2;
-    this.cellDepth = ( zoomedInBoxBounds.height / NUMBER_OF_DEPTH_CELLS ) / 2;
+    // 3D cell size
+    this.cellSideLength = quadrantSideLength / NUMBER_OF_CELLS;
   }
 
   /**
    * Gets the 2D brightness for a state. If it's not already cached, compute it and cache it.
    */
-  public getBrightness( quantumNumbers: SchrodingerQuantumNumbers ): number[][] {
-
-    const n = quantumNumbers.n;
-    const l = quantumNumbers.l;
-    const mAbs = Math.abs( quantumNumbers.m );
-
-    let brightness: number[][] | null = this.cache[ n ][ l ][ mAbs ];
+  public getBrightness( nlm: SchrodingerQuantumNumbers ): number[][] {
+    let brightness = this.getCachedBrightness( nlm );
     assert && assert( brightness !== undefined );
     if ( brightness === null ) {
-      brightness = this.computeBrightness( n, l, mAbs );
-      this.cache[ n ][ l ][ mAbs ] = brightness;
+      brightness = this.computeBrightness( nlm );
+      this.setCachedBrightness( nlm, brightness );
     }
     return brightness;
   }
 
   /**
+   * Sets brightness values for an electron state (n,l,m) in the cache.
+   * Note that the cache is indexed by n-1, because the range of n is [1,6].
+   */
+  private setCachedBrightness( nlm: SchrodingerQuantumNumbers, brightness: number[][] ): void {
+    this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ] = brightness;
+  }
+
+  /**
+   * Gets brightness values for an electron state (n,l,m) from the cache.
+   * Note that the cache is indexed by n-1, because the range of n is [1,6].
+   */
+  private getCachedBrightness( nlm: SchrodingerQuantumNumbers ): number[][] | null {
+    return this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ];
+  }
+
+
+  /**
    * Computes the 2D brightness for a state.
    */
-  private computeBrightness( n: number, l: number, m: number ): number[][] {
+  private computeBrightness( nlm: SchrodingerQuantumNumbers ): number[][] {
 
     // 2D array filled with zeros
-    const brightness = new Array( NUMBER_OF_VERTICAL_CELLS );
-    for ( let i = 0; i < NUMBER_OF_VERTICAL_CELLS; i++ ) {
-      brightness[ i ] = new Array( NUMBER_OF_HORIZONTAL_CELLS ).fill( 0 );
+    const brightness = new Array( NUMBER_OF_CELLS );
+    for ( let i = 0; i < NUMBER_OF_CELLS; i++ ) {
+      brightness[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
     }
 
     let maxSum = 0;
 
-    for ( let row = 0; row < NUMBER_OF_VERTICAL_CELLS; row++ ) {
-      const z = ( row * this.cellHeight ) + ( this.cellHeight / 2 );
+    for ( let row = 0; row < NUMBER_OF_CELLS; row++ ) {
+      const z = ( row * this.cellSideLength ) + ( this.cellSideLength / 2 );
       assert && assert( z > 0, `invalid z: ${z}` );
-      for ( let column = 0; column < NUMBER_OF_HORIZONTAL_CELLS; column++ ) {
-        const x = ( column * this.cellWidth ) + ( this.cellWidth / 2 );
+      for ( let column = 0; column < NUMBER_OF_CELLS; column++ ) {
+        const x = ( column * this.cellSideLength ) + ( this.cellSideLength / 2 );
         assert && assert( x > 0, `invalid x: ${x}` );
         let sum = 0;
-        for ( let depth = 0; depth < NUMBER_OF_DEPTH_CELLS; depth++ ) {
-          const y = ( depth * this.cellDepth ) + ( this.cellDepth / 2 );
+        for ( let depth = 0; depth < NUMBER_OF_CELLS; depth++ ) {
+          const y = ( depth * this.cellSideLength ) + ( this.cellSideLength / 2 );
           assert && assert( y > 0, `invalid y: ${y}` );
-          const probabilityDensity = solveProbabilityDensity( n, l, m, x, y, z );
+          const probabilityDensity = SchrodingerModel.solveProbabilityDensity( nlm, x, y, z );
           sum += probabilityDensity;
         }
         this.sums[ row ][ column ] = sum;
@@ -118,8 +125,8 @@ export default class SchrodingerBrightnessCache {
       }
     }
 
-    for ( let row = 0; row < NUMBER_OF_VERTICAL_CELLS; row++ ) {
-      for ( let column = 0; column < NUMBER_OF_HORIZONTAL_CELLS; column++ ) {
+    for ( let row = 0; row < NUMBER_OF_CELLS; row++ ) {
+      for ( let column = 0; column < NUMBER_OF_CELLS; column++ ) {
         let b = 0;
         if ( maxSum > 0 ) {
           b = this.sums[ row ][ column ] / maxSum;
@@ -130,30 +137,6 @@ export default class SchrodingerBrightnessCache {
 
     return brightness;
   }
-}
-
-/**
- * Solves the Schrodinger probability density equation.
- * @param n
- * @param l
- * @param m
- * @param x coordinate on horizontal axis
- * @param y coordinate on axis that is perpendicular to the screen
- * @param z coordinate on vertical axis
- */
-function solveProbabilityDensity( n: number, l: number, m: number, x: number, y: number, z: number ): number {
-  assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid state: (${n},${l},${m})` );
-  assert && assert( !( x === 0 && y === 0 && z === 0 ), 'undefined for (x,y,z)=(0,0,0)' );
-
-  // Convert to Polar coordinates.
-  const r = Math.sqrt( ( x * x ) + ( y * y ) + ( z * z ) );
-  const cosTheta = Math.abs( z ) / r;
-
-  // Solve the wavefunction.
-  const w = SchrodingerModel.solveWavefunction( n, l, m, r, cosTheta );
-
-  // Square the result.
-  return ( w * w );
 }
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerBrightnessCache', SchrodingerBrightnessCache );

@@ -200,20 +200,37 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   }
 
   /**
-   * Solves the electron's wavefunction.
-   * @param n - principal quantum number
-   * @param l - azimuthal quantum number
-   * @param m - magnetic quantum number
-   * @param r - radius
-   * @param cosTheta - cosine of the angle
+   * Solves the Schrodinger probability density equation.
+   * @param nlm - quantum numbers that describe the electron's state
+   * @param x - coordinate on horizontal axis
+   * @param y - coordinate on axis that is perpendicular to the screen
+   * @param z - coordinate on vertical axis
    */
-  public static solveWavefunction( n: number, l: number, m: number, r: number, cosTheta: number ): number {
-    assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid state: (n,l,m) = (${n},${l},${m})` );
+  public static solveProbabilityDensity( nlm: SchrodingerQuantumNumbers, x: number, y: number, z: number ): number {
+    assert && assert( !( x === 0 && y === 0 && z === 0 ), 'undefined for (x,y,z)=(0,0,0)' );
 
-    const t1 = solveGeneralizedLaguerrePolynomial( n, l, r );
-    const t2 = solveAssociatedLegendrePolynomial( l, m, cosTheta );
-    return ( t1 * t2 );
+    // Convert to Polar coordinates.
+    const r = Math.sqrt( ( x * x ) + ( y * y ) + ( z * z ) );
+    const cosTheta = Math.abs( z ) / r;
+
+    // Solve the wavefunction.
+    const w = solveWavefunction( nlm, r, cosTheta );
+
+    // Square the result.
+    return ( w * w );
   }
+}
+
+/**
+ * Solves the electron's wavefunction.
+ * @param nlm - quantum numbers that describe the electron's state
+ * @param r - radius
+ * @param cosTheta - cosine of the angle
+ */
+function solveWavefunction( nlm: SchrodingerQuantumNumbers, r: number, cosTheta: number ): number {
+  const t1 = solveGeneralizedLaguerrePolynomial( nlm.n, nlm.l, r );
+  const t2 = solveAssociatedLegendrePolynomial( nlm.l, nlm.m, cosTheta );
+  return ( t1 * t2 );
 }
 
 /**
