@@ -25,21 +25,32 @@ import CloseButton from '../../../../scenery-phet/js/buttons/CloseButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
-import { AlignGroup, Color, GridBox, HBox, HSeparator, HSeparatorOptions, KeyboardListener, Node, PDOMPeer, Rectangle, Text, TextOptions, VBox, VStrut } from '../../../../scenery/js/imports.js';
+import PDOMPeer from '../../../../scenery/js/accessibility/pdom/PDOMPeer.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import GridBox from '../../../../scenery/js/layout/nodes/GridBox.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import HSeparator, { HSeparatorOptions } from '../../../../scenery/js/layout/nodes/HSeparator.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import KeyboardListener from '../../../../scenery/js/listeners/KeyboardListener.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
+import VStrut from '../../../../scenery/js/nodes/VStrut.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { LightMode } from '../model/LightMode.js';
+import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
-import PhotonNode from './PhotonNode.js';
-import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import MOTHAScreenView from './MOTHAScreenView.js';
-import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import PhotonNode from './PhotonNode.js';
 
 const TITLE_TEXT_OPTIONS: TextOptions = {
   font: new PhetFont( {

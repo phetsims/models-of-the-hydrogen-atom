@@ -7,14 +7,14 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Path } from '../../../../scenery/js/imports.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import MOTHAColors from '../MOTHAColors.js';
-import { Shape } from '../../../../kite/js/imports.js';
 import QuantumElectron from '../model/QuantumElectron.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 export default class OrbitsNode extends Path {
 

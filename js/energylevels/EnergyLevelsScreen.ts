@@ -7,8 +7,11 @@
  */
 
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { Circle, Node } from '../../../scenery/js/imports.js';
+import Circle from '../../../scenery/js/nodes/Circle.js';
+import Node from '../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import MOTHAColors from '../common/MOTHAColors.js';
+import MOTHAConstants from '../common/MOTHAConstants.js';
 import ElectronNode from '../common/view/ElectronNode.js';
 import MOTHAScreen from '../common/view/MOTHAScreen.js';
 import ProtonNode from '../common/view/ProtonNode.js';
@@ -16,8 +19,6 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
-import MOTHAConstants from '../common/MOTHAConstants.js';
-import Tandem from '../../../tandem/js/Tandem.js';
 
 export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, EnergyLevelsScreenView> {
 

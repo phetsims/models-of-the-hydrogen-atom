@@ -10,11 +10,12 @@
 
 import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
 import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
-import { Node, RichText } from '../../../../scenery/js/imports.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHASymbols from '../MOTHASymbols.js';
-import MOTHAColors from '../MOTHAColors.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHASymbols from '../MOTHASymbols.js';
 
 const ARROW_LENGTH = 50;
 const LABEL_FONT = new MathSymbolFont( 18 );

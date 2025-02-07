@@ -7,17 +7,17 @@
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import BohrNode from '../../common/view/BohrNode.js';
+import BohrOverlayNode from '../../common/view/BohrOverlayNode.js';
 import DeBroglieNode from '../../common/view/DeBroglieNode.js';
+import DeBroglieOverlayNode from '../../common/view/DeBroglieOverlayNode.js';
 import SchrodingerNode from '../../common/view/SchrodingerNode.js';
+import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 import ZoomedInBoxNode from '../../common/view/ZoomedInBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import BohrOverlayNode from '../../common/view/BohrOverlayNode.js';
-import DeBroglieOverlayNode from '../../common/view/DeBroglieOverlayNode.js';
-import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 
 export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
 

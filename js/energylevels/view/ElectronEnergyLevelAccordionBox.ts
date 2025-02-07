@@ -6,23 +6,24 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Text } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import BohrEnergyDiagram from './BohrEnergyDiagram.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DeBroglieEnergyDiagram from './DeBroglieEnergyDiagram.js';
-import SchrodingerEnergyDiagram from './SchrodingerEnergyDiagram.js';
-import ExperimentEnergyDiagram from './ExperimentEnergyDiagram.js';
 import EnergyDiagram from './EnergyDiagram.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import ExperimentEnergyDiagram from './ExperimentEnergyDiagram.js';
+import SchrodingerEnergyDiagram from './SchrodingerEnergyDiagram.js';
 
 // DIAGRAM_SIZE.height was empirically set so that heights of ElectronEnergyLevelAccordionBox and
 // EnergyLevelsZoomedInBoxNode are roughly the same.

@@ -8,14 +8,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { Line, LineOptions, Node, NodeOptions, NodeTranslationOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
+import Line, { LineOptions } from '../../../../scenery/js/nodes/Line.js';
+import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import TColor from '../../../../scenery/js/util/TColor.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import EmissionChart, { IREmissionChart, UVEmissionChart, VisibleEmissionChart } from './EmissionChart.js';
-import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // Lengths of the 3 x-axis (nm) segments
 const UV_AXIS_LENGTH = 270;

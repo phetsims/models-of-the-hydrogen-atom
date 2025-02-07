@@ -16,15 +16,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import { CanvasNode } from '../../../../scenery/js/imports.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SchrodingerBrightnessCache from './SchrodingerBrightnessCache.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 
 export default class SchrodingerOrbitalNode extends CanvasNode {
 

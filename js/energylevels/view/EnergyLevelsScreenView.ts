@@ -6,15 +6,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Node } from '../../../../scenery/js/imports.js';
+import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import EnergyLevelsZoomedInBoxNode from './EnergyLevelsZoomedInBoxNode.js';
-import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
-import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 export default class EnergyLevelsScreenView extends MOTHAScreenView {
 

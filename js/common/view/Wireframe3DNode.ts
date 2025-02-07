@@ -7,12 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Vector3 from '../../../../dot/js/Vector3.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { Path, PathOptions } from '../../../../scenery/js/imports.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
+import Shape from '../../../../kite/js/Shape.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 // A line between 2 points, identified by their indices in this.vertices and this.transformedVertices.
 type WireframeLine = {

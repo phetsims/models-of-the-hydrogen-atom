@@ -8,7 +8,9 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Circle, Node } from '../../../../scenery/js/imports.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
@@ -19,7 +21,6 @@ import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import DeBroglieRadialDistanceNode from './DeBroglieRadialDistanceNode.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class DeBroglieNode extends HydrogenAtomNode {
 

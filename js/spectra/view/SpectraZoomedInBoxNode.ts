@@ -7,21 +7,21 @@
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import BilliardBallNode from '../../common/view/BilliardBallNode.js';
 import BohrNode from '../../common/view/BohrNode.js';
+import BohrOverlayNode from '../../common/view/BohrOverlayNode.js';
 import ClassicalSolarSystemNode from '../../common/view/ClassicalSolarSystemNode.js';
+import ClassicalSolarSystemOverlayNode from '../../common/view/ClassicalSolarSystemOverlayNode.js';
 import DeBroglieNode from '../../common/view/DeBroglieNode.js';
+import DeBroglieOverlayNode from '../../common/view/DeBroglieOverlayNode.js';
 import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
 import SchrodingerNode from '../../common/view/SchrodingerNode.js';
+import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 import ZoomedInBoxNode from '../../common/view/ZoomedInBoxNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import BohrOverlayNode from '../../common/view/BohrOverlayNode.js';
-import ClassicalSolarSystemOverlayNode from '../../common/view/ClassicalSolarSystemOverlayNode.js';
-import DeBroglieOverlayNode from '../../common/view/DeBroglieOverlayNode.js';
-import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
 

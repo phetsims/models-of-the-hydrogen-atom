@@ -6,17 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Wireframe3DNode from './Wireframe3DNode.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import MOTHAColors from '../MOTHAColors.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
-import MOTHAConstants from '../MOTHAConstants.js';
-import BohrModel from '../model/BohrModel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { LinearGradient } from '../../../../scenery/js/imports.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import BohrModel from '../model/BohrModel.js';
 import QuantumElectron from '../model/QuantumElectron.js';
+import MOTHAColors from '../MOTHAColors.js';
+import MOTHAConstants from '../MOTHAConstants.js';
+import Wireframe3DNode from './Wireframe3DNode.js';
 
 export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
 

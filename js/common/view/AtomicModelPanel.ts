@@ -8,18 +8,19 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { HBox, Node } from '../../../../scenery/js/imports.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import ContinuumBarNode from './ContinuumBarNode.js';
-import AtomicModelRadioButtonGroup from './AtomicModelRadioButtonGroup.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
 import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import AtomicModelRadioButtonGroup from './AtomicModelRadioButtonGroup.js';
+import ContinuumBarNode from './ContinuumBarNode.js';
 
 type SelfOptions = {
   radioButtonTextMaxWidth: number;

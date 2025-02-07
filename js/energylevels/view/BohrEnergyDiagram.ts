@@ -8,18 +8,21 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import BohrModel from '../../common/model/BohrModel.js';
-import { HBox, Line, Node, RichText } from '../../../../scenery/js/imports.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import MOTHASymbols from '../../common/MOTHASymbols.js';
-import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
-import MOTHAColors from '../../common/MOTHAColors.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import Line from '../../../../scenery/js/nodes/Line.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
+import BohrModel from '../../common/model/BohrModel.js';
+import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 import QuantumElectron from '../../common/model/QuantumElectron.js';
+import MOTHAColors from '../../common/MOTHAColors.js';
+import MOTHASymbols from '../../common/MOTHASymbols.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;

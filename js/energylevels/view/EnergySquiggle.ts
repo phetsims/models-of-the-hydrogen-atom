@@ -11,12 +11,13 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import { Node, Path } from '../../../../scenery/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAUtils from '../../common/MOTHAUtils.js';
-import { Shape } from '../../../../kite/js/imports.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 const MIN_SQUIGGLE_LENGTH = 5;
 const ARROW_HEAD_SIZE = new Dimension2( 15, 12 );

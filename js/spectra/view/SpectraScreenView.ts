@@ -6,14 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Node } from '../../../../scenery/js/imports.js';
+import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
-import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
-import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 export default class SpectraScreenView extends MOTHAScreenView {
 

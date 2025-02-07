@@ -8,21 +8,25 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import SchrodingerModel from '../../common/model/SchrodingerModel.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHASymbols from '../../common/MOTHASymbols.js';
-import { HBox, Line, Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
-import MOTHAColors from '../../common/MOTHAColors.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import Line from '../../../../scenery/js/nodes/Line.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 import QuantumElectron from '../../common/model/QuantumElectron.js';
+import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../../common/model/SchrodingerQuantumNumbers.js';
+import MOTHAColors from '../../common/MOTHAColors.js';
+import MOTHASymbols from '../../common/MOTHASymbols.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 
 const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;

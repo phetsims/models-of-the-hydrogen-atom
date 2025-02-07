@@ -8,18 +8,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Shape } from '../../../../kite/js/imports.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, Rectangle } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAModel from '../model/MOTHAModel.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ExperimentNode from './ExperimentNode.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import PhotonNode from './PhotonNode.js';
-import MOTHAModel from '../model/MOTHAModel.js';
-import ZoomedInBox from '../model/ZoomedInBox.js';
 
 export default class ZoomedInBoxNode extends Node {
 

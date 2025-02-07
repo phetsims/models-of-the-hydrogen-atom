@@ -6,35 +6,39 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
-import { Shape } from '../../../../kite/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import { HBox, Node, Path, Rectangle, VBox } from '../../../../scenery/js/imports.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
-import TransitionsCheckbox from '../../common/view/TransitionsCheckbox.js';
-import TransitionsDialog from '../../common/view/TransitionsDialog.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
-import ExperimentOrModelSwitch from './ExperimentOrModelSwitch.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
-import { LightControlPanel } from './LightControlPanel.js';
-import { LightSourceNode } from './LightSourceNode.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import MOTHAModel from '../model/MOTHAModel.js';
+import TransitionsCheckbox from '../../common/view/TransitionsCheckbox.js';
+import TransitionsDialog from '../../common/view/TransitionsDialog.js';
 import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEnergyLevelAccordionBox.js';
-import ZoomedInBoxNode from './ZoomedInBoxNode.js';
-import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import MOTHAModel from '../model/MOTHAModel.js';
 import AtomicModelPanel from './AtomicModelPanel.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import ExperimentOopsDialog from './ExperimentOopsDialog.js';
+import ExperimentOrModelSwitch from './ExperimentOrModelSwitch.js';
+import { LightControlPanel } from './LightControlPanel.js';
+import { LightSourceNode } from './LightSourceNode.js';
+import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
+import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 
 type SelfOptions = {
 

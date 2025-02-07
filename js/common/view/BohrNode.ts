@@ -8,16 +8,17 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Circle, Node } from '../../../../scenery/js/imports.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
+import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import ElectronNode from './ElectronNode.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import OrbitsNode from './OrbitsNode.js';
 import ProtonNode from './ProtonNode.js';
-import MOTHAColors from '../MOTHAColors.js';
 
 export default class BohrNode extends HydrogenAtomNode {
 

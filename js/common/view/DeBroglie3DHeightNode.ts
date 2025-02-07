@@ -9,19 +9,19 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
-import Wireframe3DNode from './Wireframe3DNode.js';
-import ProtonNode from './ProtonNode.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import DeBroglie3DOrbitsNode from './DeBroglie3DOrbitsNode.js';
 import DeBroglie3DWaveNode from './DeBroglie3DWaveNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import ProtonNode from './ProtonNode.js';
+import Wireframe3DNode from './Wireframe3DNode.js';
 
 // The final pitch (rotation about the x-axis), after the model has rotated into place.
 const FINAL_PITCH = Utils.toRadians( 70 );

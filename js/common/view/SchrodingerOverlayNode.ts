@@ -6,8 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { HBox, Node, VBox } from '../../../../scenery/js/imports.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import LightSource from '../model/LightSource.js';
@@ -17,9 +22,6 @@ import QuantumNumbersInfoButton from './QuantumNumbersInfoButton.js';
 import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
 import SchrodingerStateText from './SchrodingerStateText.js';
 import XZAxesNode from './XZAxesNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 export default class SchrodingerOverlayNode extends Node {
 

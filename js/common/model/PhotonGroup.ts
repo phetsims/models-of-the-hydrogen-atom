@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Photon, { PhotonOptions } from './Photon.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import ZoomedInBox from './ZoomedInBox.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import HydrogenAtom from './HydrogenAtom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { Color } from '../../../../scenery/js/imports.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
+import HydrogenAtom from './HydrogenAtom.js';
+import Photon, { PhotonOptions } from './Photon.js';
+import ZoomedInBox from './ZoomedInBox.js';
 
 // Options to createElement function. tandem is omitted because photonGroup provides the tandem.
 type CreateElementOptions = StrictOmit<PhotonOptions, 'tandem'>;

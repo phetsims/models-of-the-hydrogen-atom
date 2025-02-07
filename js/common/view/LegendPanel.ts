@@ -8,17 +8,22 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ElectronNode from './ElectronNode.js';
 import PhotonNode from './PhotonNode.js';
 import ProtonNode from './ProtonNode.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
-import ZoomedInBox from '../model/ZoomedInBox.js';
 
 // Make the icons appear to be the same size as particles in the zoomed-in box.
 const ICON_SCALE = ZoomedInBoxNode.SIDE_LENGTH / ZoomedInBox.SIDE_LENGTH;

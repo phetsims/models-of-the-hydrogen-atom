@@ -6,24 +6,28 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import { Line, Node, NodeOptions, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Utils from '../../../../dot/js/Utils.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import MOTHAColors from '../MOTHAColors.js';
-import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import LightSource from '../model/LightSource.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
-import SpectrometerBarNode from './SpectrometerBarNode.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Utils from '../../../../dot/js/Utils.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import SpectrumNode from '../../../../scenery-phet/js/SpectrumNode.js';
+import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Line from '../../../../scenery/js/nodes/Line.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import LightSource from '../model/LightSource.js';
 import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import PlumPuddingModel from '../model/PlumPuddingModel.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
+import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
+import MOTHAColors from '../MOTHAColors.js';
+import SpectrometerBarNode from './SpectrometerBarNode.js';
 
 const TICK_LINE_LENGTH = 3;
 const TICK_FONT = new PhetFont( 11 );

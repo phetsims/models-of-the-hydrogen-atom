@@ -6,26 +6,26 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import HydrogenAtom from './HydrogenAtom.js';
-import SpectrometerSnapshot from './SpectrometerSnapshot.js';
-import SpectrometerDataPoint from './SpectrometerDataPoint.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import HydrogenAtom from './HydrogenAtom.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import PlumPuddingModel from './PlumPuddingModel.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import { Color } from '../../../../scenery/js/imports.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import SpectrometerDataPoint from './SpectrometerDataPoint.js';
+import SpectrometerSnapshot from './SpectrometerSnapshot.js';
 
 export default class Spectrometer extends PhetioObject {
 
