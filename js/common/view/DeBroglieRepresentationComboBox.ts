@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * DeBroglieRepresentationComboBox is the combo box for selecting which representation of the de Broglie model show be displayed.
