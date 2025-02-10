@@ -9,6 +9,7 @@
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import SchrodingerQuantumNumbers from './model/SchrodingerQuantumNumbers.js';
 
 // Without this next line, ESLint will complain: 'QueryStringMachineSchema' is not defined.(no-undef)
 /* global QueryStringMachineSchema */
@@ -59,10 +60,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
       const n = array[ 0 ];
       const l = array[ 1 ];
       const m = array[ 2 ];
-      return ( array.length === 3 ) &&
-             ( n >= 0 && n <= 6 ) &&
-             ( l >= 0 && l <= n - 1 ) &&
-             ( m >= -l && m <= l );
+      return ( array.length === 3 ) && SchrodingerQuantumNumbers.isValidState( n, l, m );
     }
   }
 };
