@@ -10,14 +10,14 @@
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import RichText from '../../../../scenery/js/nodes/RichText.js';
+import RichText, { RichTextOptions } from '../../../../scenery/js/nodes/RichText.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
-import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import MOTHAConstants from '../MOTHAConstants.js';
 
 // In quantum mechanics, an atomic orbital is a function describing the location and wave-like behavior of an electron
 // in an atom. These letters represent the orbital shape, and are indexed by the value of l from (n,l,m).
@@ -54,17 +54,9 @@ export default class SchrodingerStateText extends RichText {
         orbitalShape: ORBITAL_SHAPE_PROPERTIES[ nlmProperty.value.l ].value
       } ) );
 
-    super( stringProperty, {
-      isDisposable: false,
-      font: new PhetFont( 16 ),
-      fill: MOTHAColors.stateDisplayFillProperty,
-      maxWidth: 200,
-      tandem: tandem,
-      phetioVisiblePropertyInstrumented: true,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
-    } );
+    super( stringProperty, combineOptions<RichTextOptions>( {
+      tandem: tandem
+    }, MOTHAConstants.STATE_TEXT_OPTIONS ) );
   }
 }
 

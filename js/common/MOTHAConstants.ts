@@ -12,6 +12,9 @@ import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNo
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
+import { RichTextOptions } from '../../../scenery/js/nodes/RichText.js';
+import PhetFont from '../../../scenery-phet/js/PhetFont.js';
+import MOTHAColors from './MOTHAColors.js';
 
 const CORNER_RADIUS = 5;
 
@@ -39,6 +42,18 @@ const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
   highlightYOffset: 0.4
 };
 
+// Options for displaying the electron's state description.
+const STATE_TEXT_OPTIONS: RichTextOptions = {
+  isDisposable: false,
+  font: new PhetFont( 16 ),
+  fill: MOTHAColors.stateDisplayFillProperty,
+  maxWidth: 200,
+  phetioVisiblePropertyInstrumented: true,
+  visiblePropertyOptions: {
+    phetioFeatured: true
+  }
+};
+
 const MOTHAConstants = {
 
   // Position of all hydrogen atoms, in the model coordinate frame.
@@ -60,7 +75,8 @@ const MOTHAConstants = {
   // Various shared options
   CORNER_RADIUS: CORNER_RADIUS,
   ACCORDION_BOX_OPTIONS: ACCORDION_BOX_OPTIONS,
-  SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS
+  SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS,
+  STATE_TEXT_OPTIONS: STATE_TEXT_OPTIONS
 };
 
 modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );
