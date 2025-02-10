@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * SpectrometerChartSegment is the base class for a segment of the chart displayed by the Spectrometer, 
+ * SpectrometerChartSegment is the base class for a segment of the chart displayed by the Spectrometer,
  * It shows emitted photons for a range of wavelengths.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -116,6 +116,7 @@ export default class SpectrometerChartSegment extends Node {
       assert && assert( remap( wavelength ) >= options.minWavelength && remap( wavelength ) <= options.maxWavelength,
         `wavelength is out of range: ${wavelength}` );
 
+      // Convert wavelength to the position on the x-axis.
       const x = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, remap( wavelength ) );
 
       if ( options.hasTickMarks ) {
@@ -146,7 +147,7 @@ export default class SpectrometerChartSegment extends Node {
 
       const barNode = new SpectrometerBarNode( wavelength );
       barNode.localBoundsProperty.link( () => {
-        barNode.centerX = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, remap( wavelength ) );
+        barNode.centerX = x;
         barNode.bottom = xAxis.top - 1;
       } );
       children.push( barNode );
