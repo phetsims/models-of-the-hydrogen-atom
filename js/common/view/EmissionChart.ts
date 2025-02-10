@@ -172,6 +172,7 @@ export default class EmissionChart extends Node {
       } );
       children.push( xAxisAlignBox );
 
+      // Note that listening to localBoundsProperty did not provide the desired behavior here.
       xAxisAlignBox.boundsProperty.link( () => {
         xAxisAlignBox.centerX = xAxis.centerX;
         xAxisAlignBox.top = xAxis.bottom + 3;
