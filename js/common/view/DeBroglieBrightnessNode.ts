@@ -25,46 +25,36 @@ import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 import MOTHAColors from '../MOTHAColors.js';
-import OrbitsNode from './OrbitsNode.js';
+import DeBroglie2DWaveNode from './DeBroglie2DWaveNode.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
 // tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of
 // more polygons (Path nodes), it's important to keep this value as small as possible.
 const POLYGON_SIZE = 3;
 
-export default class DeBroglieBrightnessNode extends Node {
+export default class DeBroglieBrightnessNode extends DeBroglie2DWaveNode {
 
   public constructor( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
-    // Electron orbits
-    const orbitsNode = new OrbitsNode( deBroglieModel.position, modelViewTransform );
+    // Brightness represents the standing wave
+    const waveNode = new BrightnessWaveNode( deBroglieModel, modelViewTransform );
 
-    // Ring whose brightness represents the standing wave
-    const ringNode = new RingNode( deBroglieModel, modelViewTransform );
-
-    super( {
-      isDisposable: false,
-      children: [ orbitsNode, ringNode ],
-
-      // visible when the view choice is 'brightness'
-      visibleProperty: new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
-        deBroglieView => ( deBroglieView === 'brightness' ) )
-    } );
+    super( deBroglieModel, modelViewTransform, 'brightness', waveNode );
   }
 }
 
 /**
- * RingNode is the brightness ring that represents the standing wave.
+ * BrightnessWaveNode represents the wave as a ring whose brightness changes.
  */
-class RingNode extends Node {
+class BrightnessWaveNode extends Node {
 
   private readonly deBroglieModel: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly hydrogenAtomPosition: Vector2; // in view coordinates
   private readonly ringThickness: number; // radial width of the ring, in view coordinates
-  private readonly polygonNodes: Path[]; // an ordered pool of polygons, used to approximate the ring
+  private readonly polygonNodes: Path[]; // an ordered pool of polygons, used to approximate the wave
 
-  // range of colors used for the ring, based on electron amplitude
+  // Range of colors used for the wave, based on electron amplitude.
   private readonly positiveAmplitudeColorProperty: TReadOnlyProperty<Color>;
   private readonly negativeAmplitudeColorProperty: TReadOnlyProperty<Color>;
   private readonly zeroAmplitudeColorProperty: TReadOnlyProperty<Color>;
@@ -141,7 +131,7 @@ class RingNode extends Node {
     const children = [];
     for ( let i = 0; i < numberOfPolygons; i++ ) {
       const polygonNode = this.polygonNodes[ i ];
-      polygonNode.shape = new RingPolygonShape( i, numberOfPolygons, viewRadius, this.ringThickness, this.hydrogenAtomPosition );
+      polygonNode.shape = new BrightnessPolygonShape( i, numberOfPolygons, viewRadius, this.ringThickness, this.hydrogenAtomPosition );
       children.push( polygonNode );
     }
 
@@ -187,9 +177,9 @@ class RingNode extends Node {
 }
 
 /**
- * RingPolygonShape is the Shape of one of the polygons used to approximate the ring.
+ * BrightnessPolygonShape is the Shape of one of the polygons used to approximate the ring.
  */
-class RingPolygonShape extends Shape {
+class BrightnessPolygonShape extends Shape {
 
   // All quantities are in view coordinates.
   public constructor( index: number, numberOfPolygons: number, radius: number, ringThickness: number, hydrogenAtomPosition: Vector2 ) {

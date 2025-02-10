@@ -1,9 +1,8 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * DeBroglieRadialNodeOptions represents the de Broglie model as a standing wave. A ring is drawn that corresponds
- * to the electron's orbit. The radial offset of that ring from the electron's orbit is a function of the amplitude
- * of the standing wave.
+ * DeBroglieRadialNodeOptions represents the de Broglie model as a standing wave. A wave is drawn that corresponds
+ * to the electron's orbit. The wave's offset from the electron's orbit is a function of amplitude.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,7 +12,6 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
@@ -22,40 +20,29 @@ import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 import MOTHAColors from '../MOTHAColors.js';
-import OrbitsNode from './OrbitsNode.js';
+import DeBroglie2DWaveNode from './DeBroglie2DWaveNode.js';
 
-// multiply the ground state orbit radius by this number to determine the radial offset at max amplitude
+// Multiply the ground state orbit radius by this number to determine the radial offset at max amplitude.
 const RADIAL_OFFSET_FACTOR = 0.45;
 
-// number of line segments used to approximate the ring, empirically tunes to make the ring look smooth
+// Number of line segments used to approximate the wave, empirically tunes to make the wave look smooth.
 const NUMBER_OF_SEGMENTS = 200;
 
-export default class DeBroglieRadialDistanceNode extends Node {
+export default class DeBroglieRadialDistanceNode extends DeBroglie2DWaveNode {
 
   public constructor( deBroglieModel: DeBroglieModel, modelViewTransform: ModelViewTransform2 ) {
 
-    // Electron orbits.
-    const orbitsNode = new OrbitsNode( deBroglieModel.position, modelViewTransform );
+    const waveNode = new RadialDistanceWaveNode( deBroglieModel, modelViewTransform );
 
-    // Ring that represents the electron as a  standing wave.
-    const ringNode = new RingNode( deBroglieModel, modelViewTransform );
-
-    super( {
-      isDisposable: false,
-      children: [ orbitsNode, ringNode ],
-
-      // Visible when the view choice is 'Radial Distance'.
-      visibleProperty: new DerivedProperty( [ deBroglieModel.deBroglieRepresentationProperty ],
-        deBroglieView => ( deBroglieView === 'radialDistance' ) )
-    } );
+    super( deBroglieModel, modelViewTransform, 'radialDistance', waveNode );
   }
 }
 
 /**
- * RingNode is the ring that represents the standing wave.
- * It's radial distance from the electron's orbit is a function of amplitude.
+ * RadialDistanceWaveNode represents the wave as a ring whose radial distance from the electron's orbit
+ * changes as a function of amplitude.
  */
-class RingNode extends Path {
+class RadialDistanceWaveNode extends Path {
 
   private readonly deBroglieModel: DeBroglieModel;
   private readonly modelViewTransform: ModelViewTransform2;
@@ -95,7 +82,7 @@ class RingNode extends Path {
   }
 
   /**
-   * Updates the shape of the ring.
+   * Updates the shape of the wave.
    */
   private update(): void {
 
@@ -103,7 +90,7 @@ class RingNode extends Path {
     const n = this.deBroglieModel.electron.nProperty.value;
     const electronOrbitRadius = this.modelViewTransform.modelToViewDeltaX( BohrModel.getElectronOrbitRadius( n ) );
 
-    const ringShape = new Shape();
+    const waveShape = new Shape();
     for ( let i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
 
       const angle = ( 2 * Math.PI ) * ( i / NUMBER_OF_SEGMENTS );
@@ -114,15 +101,15 @@ class RingNode extends Path {
       const x = ( electronOrbitRadius + radialOffset ) * Math.cos( angle ) + this.hydrogenAtomPosition.x;
       const y = ( electronOrbitRadius + radialOffset ) * Math.sin( angle ) + this.hydrogenAtomPosition.y;
       if ( i === 0 ) {
-        ringShape.moveTo( x, y );
+        waveShape.moveTo( x, y );
       }
       else {
-        ringShape.lineTo( x, y );
+        waveShape.lineTo( x, y );
       }
     }
-    ringShape.close();
+    waveShape.close();
 
-    this.shape = ringShape;
+    this.shape = waveShape;
   }
 }
 
