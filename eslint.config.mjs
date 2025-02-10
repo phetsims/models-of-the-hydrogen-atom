@@ -12,10 +12,5 @@ import simEslintConfig from '../perennial-alias/js/eslint/config/sim.eslint.conf
 
 export default [
   ...simEslintConfig,
-  ...banTSCommentConfig,
-  {
-    rules: {
-      'phet/todo-should-have-issue': 'off'
-    }
-  }
+  ...banTSCommentConfig
 ];
