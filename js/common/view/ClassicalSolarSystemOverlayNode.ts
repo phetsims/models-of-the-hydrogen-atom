@@ -29,6 +29,7 @@ export default class ClassicalSolarSystemOverlayNode extends Node {
       listener: () => classicalSolarSystemModel.reset(),
       radius: 16,
       rightBottom: zoomedInBoxBounds.rightBottom.minusXY( 10, 10 ),
+      touchAreaDilation: 6,
       enabledProperty: classicalSolarSystemModel.isDestroyedProperty,
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.resetAtomButton.accessibleNameStringProperty,
       tandem: tandem.createTandem( 'resetButton' )
