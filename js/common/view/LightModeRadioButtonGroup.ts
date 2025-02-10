@@ -38,7 +38,7 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
         createNode: () => new Text( ModelsOfTheHydrogenAtomStrings.monochromaticStringProperty, {
           font: FONT,
           fill: MOTHAColors.invertibleTextFillProperty,
-          maxWidth: 115
+          maxWidth: 105
         } ),
         tandemName: 'monochromaticRadioButton'
       }
