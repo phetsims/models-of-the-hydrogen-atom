@@ -28,10 +28,18 @@ import PlumPuddingModel from '../model/PlumPuddingModel.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SpectrometerBarNode from './SpectrometerBarNode.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
 
 const TICK_LINE_LENGTH = 3;
 const TICK_FONT = new PhetFont( 11 );
 const X_AXIS_LABEL_FONT = new PhetFont( 14 );
+
+// To ensure that all x-axis labels have the same effective height, so that they can be bottom aligned.
+const X_AXIS_LABEL_ALIGN_GROUP = new AlignGroup( {
+  matchHorizontal: false,
+  matchVertical: true
+} );
 
 type SelfOptions = {
 
@@ -150,12 +158,23 @@ export default class EmissionChart extends Node {
     if ( options.hasAxisLabel ) {
       const xAxisLabel = new Text( xAxisStringProperty, {
         font: X_AXIS_LABEL_FONT,
+        maxWidth: 0.85 * xAxisLength,
         fill: MOTHAColors.invertibleTextFillProperty,
-        centerX: xAxis.centerX,
-        top: xAxis.bottom + 3,
         visibleProperty: new DerivedProperty( [ dataPointsProperty ], dataPoints => dataPoints.length === 0 )
       } );
-      children.push( xAxisLabel );
+
+      // xAxisLabelAlignGroup ensures that all x-axis labels have the same effective height, so that they
+      // can be bottom aligned.
+      const xAxisAlignBox = new AlignBox( xAxisLabel, {
+        group: X_AXIS_LABEL_ALIGN_GROUP,
+        yAlign: 'bottom'
+      } );
+      children.push( xAxisAlignBox );
+
+      xAxisAlignBox.localBoundsProperty.link( () => {
+        xAxisAlignBox.centerX = xAxis.centerX;
+        xAxisAlignBox.top = xAxis.bottom + 3;
+      } );
     }
 
     options.children = children;

@@ -55,7 +55,6 @@ export default class SpectrometerChart extends Node {
       backgroundStroke: MOTHAColors.spectrometerStrokeProperty
     }, providedOptions );
 
-
     // Photon emission charts for three spectrums, each with a different scale, so that values do not overlap.
     const chartOptions = {
       hasTickMarks: options.hasTickMarks
