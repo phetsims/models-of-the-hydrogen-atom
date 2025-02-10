@@ -54,6 +54,9 @@ const MOTHAConstants = {
   // Length of the line segments used to draw orbits.
   ORBIT_LINE_LENGTH: 3,
 
+  // Dilation of mouse and touch pointer areas for close button in Dialogs.
+  CLOSE_BUTTON_DILATION: 6,
+
   // Various shared options
   CORNER_RADIUS: CORNER_RADIUS,
   ACCORDION_BOX_OPTIONS: ACCORDION_BOX_OPTIONS,

@@ -127,8 +127,10 @@ export default class TransitionsDialog extends Panel {
       listener: () => {
         transitionsIsCheckedProperty.value = false;
       },
-      touchAreaXDilation: 5,
-      touchAreaYDilation: 5,
+      mouseAreaXDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
+      mouseAreaYDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
+      touchAreaXDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
+      touchAreaYDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       tandem: options.tandem.createTandem( 'closeButton' ),
       phetioVisiblePropertyInstrumented: false, // like Dialog
       phetioEnabledPropertyInstrumented: false // like Dialog

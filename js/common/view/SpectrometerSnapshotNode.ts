@@ -79,6 +79,8 @@ export default class SpectrometerSnapshotNode extends Node {
       iconOptions: {
         scale: 0.76
       },
+      touchAreaXDilation: 8,
+      touchAreaYDilation: 8,
       left: chart.right + 5,
       bottom: chart.bottom,
       tandem: tandem.createTandem( 'trashButton' )

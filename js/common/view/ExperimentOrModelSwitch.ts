@@ -47,6 +47,8 @@ export default class ExperimentOrModelSwitch extends ABSwitch<ExperimentOrModel>
       centerOnSwitch: false,
       toggleSwitchOptions: {
         size: new Dimension2( 50, 25 ),
+        thumbTouchAreaXDilation: 6,
+        thumbTouchAreaYDilation: 6,
         phetioVisiblePropertyInstrumented: false,
         phetioEnabledPropertyInstrumented: false
       },

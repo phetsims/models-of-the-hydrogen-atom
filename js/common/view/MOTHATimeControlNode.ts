@@ -35,7 +35,9 @@ export default class MOTHATimeControlNode extends TimeControlNode {
           font: new PhetFont( 14 ),
           fill: MOTHAColors.invertibleTextFillProperty,
           maxWidth: 65 // determined empirically in the Energy Levels screen
-        }
+        },
+        mouseAreaXDilation: 6,
+        touchAreaXDilation: 6
       },
       playPauseStepButtonOptions: {
         stepForwardButtonOptions: {

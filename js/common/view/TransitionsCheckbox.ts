@@ -42,6 +42,10 @@ export default class TransitionsCheckbox extends Checkbox {
       checkboxColorBackground: MOTHAColors.checkboxFillProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.transitionsCheckbox.helpTextStringProperty,
       visibleProperty: gatedVisibleProperty,
+      mouseAreaXDilation: 5,
+      mouseAreaYDilation: 5,
+      touchAreaXDilation: 5,
+      touchAreaYDilation: 5,
       tandem: tandem
     } );
   }

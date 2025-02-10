@@ -47,6 +47,10 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
     super( lightModeProperty, radioButtonGroupItems, {
       isDisposable: false,
       spacing: 15,
+      radioButtonOptions: {
+       mouseAreaYDilation: 5,
+       touchAreaYDilation: 5
+      },
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.accessibleNameStringProperty,
       helpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.helpTextStringProperty,
       tandem: tandem
