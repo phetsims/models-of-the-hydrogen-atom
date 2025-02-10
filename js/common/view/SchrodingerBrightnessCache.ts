@@ -1,6 +1,6 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
-//TODO Make this a singleton, to reuse the same cache for both screens.
+//TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/115 Make this a singleton, to reuse the same cache for both screens.
 /**
  * SchrodingerBrightnessCache is responsible for representing Schrodinger states (and their associated wavefunctions)
  * as brightness values that are used to render the electron orbital. Brightness is computed on demand, then cached.
@@ -19,7 +19,7 @@ import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 
 // Number of cells in one quadrant, in all dimensions.
-const NUMBER_OF_CELLS = 40; //TODO Improve resolution by increasing number of cells? But that hurts performance...
+const NUMBER_OF_CELLS = 40; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/115 Improve resolution by increasing number of cells? But that hurts performance...
 
 export default class SchrodingerBrightnessCache {
 
