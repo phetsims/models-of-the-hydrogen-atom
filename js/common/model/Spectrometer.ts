@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -26,6 +25,7 @@ import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import PlumPuddingModel from './PlumPuddingModel.js';
 import SpectrometerDataPoint from './SpectrometerDataPoint.js';
 import SpectrometerSnapshot from './SpectrometerSnapshot.js';
+import EnabledProperty from '../../../../axon/js/EnabledProperty.js';
 
 export default class Spectrometer extends PhetioObject {
 
@@ -62,7 +62,7 @@ export default class Spectrometer extends PhetioObject {
 
     this.hydrogenAtomProperty = hydrogenAtomProperty;
 
-    this.enabledProperty = new BooleanProperty( false, {
+    this.enabledProperty = new EnabledProperty( false, {
       tandem: tandem.createTandem( 'enabledProperty' ),
       phetioDocumentation: 'Whether the spectrometer is recording data. Recording is enabled when the Spectrometer accordion box is expanded.',
       phetioFeatured: true,
