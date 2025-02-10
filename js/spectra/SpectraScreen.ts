@@ -13,7 +13,7 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
-import { VisibleEmissionChart } from '../common/view/EmissionChart.js';
+import { VisibleChartSegment } from '../common/view/SpectrometerChartSegment.js';
 import Property from '../../../axon/js/Property.js';
 import SpectrometerDataPoint from '../common/model/SpectrometerDataPoint.js';
 import Tandem from '../../../tandem/js/Tandem.js';
@@ -49,7 +49,7 @@ function createScreenIcon(): ScreenIcon {
     new SpectrometerDataPoint( 656, 12 )
   ];
   const dataPointsProperty = new Property( dataPoints );
-  const icon = new VisibleEmissionChart( dataPointsProperty, 150, {
+  const icon = new VisibleChartSegment( dataPointsProperty, 150, {
     hasTickMarks: false,
     hasAxisLabel: false
   } );

@@ -18,7 +18,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
-import EmissionChart, { IREmissionChart, UVEmissionChart, VisibleEmissionChart } from './EmissionChart.js';
+import SpectrometerChartSegment, { IRChartSegment, UVChartSegment, VisibleChartSegment } from './SpectrometerChartSegment.js';
 
 // Lengths of the 3 x-axis (nm) segments
 const UV_AXIS_LENGTH = 270;
@@ -59,34 +59,34 @@ export default class SpectrometerChart extends Node {
     const chartOptions = {
       hasTickMarks: options.hasTickMarks
     };
-    const uvEmissionChart = new UVEmissionChart( dataPointsProperty, UV_AXIS_LENGTH, chartOptions );
-    const visibleEmissionChart = new VisibleEmissionChart( dataPointsProperty, VISIBLE_AXIS_LENGTH, chartOptions );
-    const irEmissionChart = new IREmissionChart( dataPointsProperty, IR_AXIS_LENGTH, chartOptions );
+    const uvChartSegment = new UVChartSegment( dataPointsProperty, UV_AXIS_LENGTH, chartOptions );
+    const visibleChartSegment = new VisibleChartSegment( dataPointsProperty, VISIBLE_AXIS_LENGTH, chartOptions );
+    const irChartSegment = new IRChartSegment( dataPointsProperty, IR_AXIS_LENGTH, chartOptions );
 
-    visibleEmissionChart.left = uvEmissionChart.right + X_SPACING;
-    irEmissionChart.left = visibleEmissionChart.right + X_SPACING;
+    visibleChartSegment.left = uvChartSegment.right + X_SPACING;
+    irChartSegment.left = visibleChartSegment.right + X_SPACING;
 
     // Breaks between the segments of the x-axis.
-    const breakNodesCenterY = uvEmissionChart.y + EmissionChart.X_AXIS_HEIGHT / 2;
+    const breakNodesCenterY = uvChartSegment.y + SpectrometerChartSegment.X_AXIS_HEIGHT / 2;
     const uvRightBreakNode = new AxisBreakNode( {
-      centerX: uvEmissionChart.right,
+      centerX: uvChartSegment.right,
       centerY: breakNodesCenterY
     } );
     const visibleLeftBreakNode = new AxisBreakNode( {
-      centerX: visibleEmissionChart.left,
+      centerX: visibleChartSegment.left,
       centerY: breakNodesCenterY
     } );
     const visibleRightBreakNode = new AxisBreakNode( {
-      centerX: visibleEmissionChart.right,
+      centerX: visibleChartSegment.right,
       centerY: breakNodesCenterY
     } );
     const irLeftBreakNode = new AxisBreakNode( {
-      centerX: irEmissionChart.left,
+      centerX: irChartSegment.left,
       centerY: breakNodesCenterY
     } );
 
     const charts = new Node( {
-      children: [ uvEmissionChart, visibleEmissionChart, irEmissionChart, uvRightBreakNode, visibleLeftBreakNode, visibleRightBreakNode, irLeftBreakNode ]
+      children: [ uvChartSegment, visibleChartSegment, irChartSegment, uvRightBreakNode, visibleLeftBreakNode, visibleRightBreakNode, irLeftBreakNode ]
     } );
 
     const backgroundNode = new Rectangle( 0, 0, charts.width + 2 * X_MARGIN, options.chartHeight, {

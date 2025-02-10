@@ -1,7 +1,8 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * EmissionChart is the base class for the charts displayed by the Spectrometer, showing emitted photons.
+ * SpectrometerChartSegment is the base class for a segment of the chart displayed by the Spectrometer, 
+ * It shows emitted photons for a range of wavelengths.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -67,7 +68,7 @@ type SelfOptions = {
 
 type EmissionChartOptions = SelfOptions;
 
-export default class EmissionChart extends Node {
+export default class SpectrometerChartSegment extends Node {
 
   // Height (or thickness) of the x-axis.
   public static readonly X_AXIS_HEIGHT = 4;
@@ -158,7 +159,7 @@ export default class EmissionChart extends Node {
     if ( options.hasAxisLabel ) {
       const xAxisLabel = new Text( xAxisStringProperty, {
         font: X_AXIS_LABEL_FONT,
-        maxWidth: 0.85 * xAxisLength,
+        maxWidth: 0.75 * xAxisLength,
         fill: MOTHAColors.invertibleTextFillProperty,
         visibleProperty: new DerivedProperty( [ dataPointsProperty ], dataPoints => dataPoints.length === 0 )
       } );
@@ -194,15 +195,15 @@ export default class EmissionChart extends Node {
 }
 
 /**
- * UVEmissionChart is the spectrometer chart that shows photons emitted in the UV (ultraviolet) spectrum.
+ * UVChartSegment is the segment of the spectrometer chart that shows photons emitted in the UV (ultraviolet) spectrum.
  */
-class UVEmissionChart extends EmissionChart {
+class UVChartSegment extends SpectrometerChartSegment {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
-    const xAxis = new Rectangle( 0, 0, axisLength, EmissionChart.X_AXIS_HEIGHT, {
+    const xAxis = new Rectangle( 0, 0, axisLength, SpectrometerChartSegment.X_AXIS_HEIGHT, {
       fill: MOTHAColors.UV_COLOR
     } );
 
@@ -233,21 +234,21 @@ class UVEmissionChart extends EmissionChart {
 }
 
 /**
- * IREmissionChart is the spectrometer chart that shows photons emitted in the IR (infrared) spectrum.
+ * IRChartSegment is the segment of the spectrometer chart that shows photons emitted in the IR (infrared) spectrum.
  */
-class IREmissionChart extends EmissionChart {
+class IRChartSegment extends SpectrometerChartSegment {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
-    const xAxis = new Rectangle( 0, 0, axisLength, EmissionChart.X_AXIS_HEIGHT, {
+    const xAxis = new Rectangle( 0, 0, axisLength, SpectrometerChartSegment.X_AXIS_HEIGHT, {
       fill: MOTHAColors.IR_COLOR
     } );
 
     const wavelengths = photonAbsorptionModel.getIRWavelengths();
 
-    // The comment about wavelengthMap in UVEmissionChart applies here.
+    // The comment about wavelengthMap in UVChartSegment applies here.
     const wavelengthMap = new Map<number, number>( [
       [ 1094, 1094 ],
       [ 1282, 1282 ],
@@ -268,9 +269,9 @@ class IREmissionChart extends EmissionChart {
 }
 
 /**
- * VisibleEmissionChart is the spectrometer chart that shows photons emitted in the visible spectrum.
+ * VisibleChartSegment is the segement of the spectrometer chart that shows photons emitted in the visible spectrum.
  */
-class VisibleEmissionChart extends EmissionChart {
+class VisibleChartSegment extends SpectrometerChartSegment {
 
   public constructor( dataPointsProperty: TReadOnlyProperty<SpectrometerDataPoint[]>,
                       axisLength: number,
@@ -281,7 +282,7 @@ class VisibleEmissionChart extends EmissionChart {
     const maxWavelength = _.max( wavelengths )! + 50;
 
     const xAxis = new SpectrumNode( {
-      size: new Dimension2( axisLength, EmissionChart.X_AXIS_HEIGHT ),
+      size: new Dimension2( axisLength, SpectrometerChartSegment.X_AXIS_HEIGHT ),
       minValue: minWavelength,
       maxValue: maxWavelength,
       valueToColor: LightSource.wavelengthToColor
@@ -296,5 +297,5 @@ class VisibleEmissionChart extends EmissionChart {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'EmissionChart', EmissionChart );
-export { UVEmissionChart, IREmissionChart, VisibleEmissionChart };
+modelsOfTheHydrogenAtom.register( 'SpectrometerChartSegment', SpectrometerChartSegment );
+export { UVChartSegment, IRChartSegment, VisibleChartSegment };
