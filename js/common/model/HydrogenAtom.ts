@@ -23,6 +23,8 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
+import LightSource from './LightSource.js';
+import MOTHAUtils from '../MOTHAUtils.js';
 
 type SelfOptions = {
 
@@ -129,6 +131,19 @@ export default abstract class HydrogenAtom extends PhetioObject {
    * Processes a photon based on the current state of the atom.
    */
   public abstract processPhoton( photon: Photon ): void;
+
+  /**
+   * Adjusts a photon's direction so that it is noticeably different from the direction of the light source.
+   * This ensures that emitted photons are easy to see, and will not be confused with photons from the light source.
+   * This method is relevant for models that are capable of emitting photons.
+   */
+  public static adjustEmissionDirection( direction: number ): number {
+    const threshold = Math.PI / 8; // How close we can be to the light direction.
+    if ( Math.abs( direction - LightSource.DIRECTION ) < threshold ) {
+      direction = LightSource.DIRECTION + MOTHAUtils.nextSign() * threshold;
+    }
+    return direction;
+  }
 
   /**
    * HydrogenAtomIO handles PhET-iO serialization of HydrogenAtom. Since all HydrogenAtom instances are created at

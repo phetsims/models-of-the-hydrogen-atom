@@ -37,7 +37,6 @@ import MOTHAUtils from '../MOTHAUtils.js';
 import BohrNode from '../view/BohrNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import BohrElectron from './BohrElectron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
-import LightSource from './LightSource.js';
 import Photon from './Photon.js';
 import Proton from './Proton.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
@@ -380,14 +379,8 @@ function getSpontaneousEmissionDirection( n: number, electronAngle: number ): nu
   }
   assert && assert( direction >= 0 && direction <= 2 * Math.PI, `invalid direction: ${direction}` );
 
-  // Adjust the direction so that it is noticeably different from the direction of the light source. This ensures
-  // that emitted photons are easy to see, and will not be confused with photons from the light source.
-  const threshold = Math.PI / 8; // How close we can be to the light direction.
-  if ( Math.abs( direction - LightSource.DIRECTION ) < threshold ) {
-    direction = LightSource.DIRECTION + MOTHAUtils.nextSign() * threshold;
-  }
-
-  return direction;
+  // Adjust the direction so that it is noticeably different from the direction of the light source.
+  return HydrogenAtom.adjustEmissionDirection( direction );
 }
 
 modelsOfTheHydrogenAtom.register( 'BohrModel', BohrModel );
