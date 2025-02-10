@@ -10,8 +10,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -27,8 +26,9 @@ import MOTHASymbols from '../../common/MOTHASymbols.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
+import { BohrEnergyDiagramOptions } from './BohrEnergyDiagram.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
-const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
 const LEVEL_LINE_X_SPACING = 4;
 const LABEL_FONT = EnergyDiagram.LABEL_FONT;
@@ -36,28 +36,20 @@ const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
-type SchrodingerEnergyDiagramOptions = SelfOptions & EnergyDiagramOptions;
+type SchrodingerEnergyDiagramOptions = SelfOptions & StrictOmit<EnergyDiagramOptions, 'createLevelNode'>;
 
 export default class SchrodingerEnergyDiagram extends EnergyDiagram {
 
-  // Nodes for each energy level.
-  private readonly levelNodes: Node;
-
   public constructor( schrodingerModel: SchrodingerModel, providedOptions: SchrodingerEnergyDiagramOptions ) {
 
-    super( providedOptions );
+    const options = optionize<BohrEnergyDiagramOptions, SelfOptions, EnergyDiagramOptions>()( {
 
-    // n horizontal lines for each energy level, labeled with 'n = {value}'.
-    this.levelNodes = new Node();
-    for ( let n = QuantumElectron.GROUND_STATE; n <= QuantumElectron.MAX_STATE; n++ ) {
-      const levelNode = createLevelNode( n );
-      const levelNodeLeftCenter = new Vector2( this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET, this.getYForState( n ) );
-      levelNode.localBoundsProperty.link( () => {
-        levelNode.leftCenter = levelNodeLeftCenter;
-      } );
-      this.levelNodes.addChild( levelNode );
-    }
-    this.stateLayer.addChild( this.levelNodes );
+      // EnergyDiagramOptions
+      createLevelNode: n => createLevelNode( n )
+    }, providedOptions );
+
+    super( options );
+    assert && assert( this.levelNodes.bounds.isFinite() );
 
     // l =
     const lEqualsStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsStringProperty, {

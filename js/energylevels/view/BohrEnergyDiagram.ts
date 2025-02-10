@@ -9,45 +9,39 @@
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
-import QuantumElectron from '../../common/model/QuantumElectron.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
-const LEVEL_NODE_X_OFFSET = EnergyDiagram.LEVEL_NODE_X_OFFSET;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
 const LABEL_FONT = EnergyDiagram.LABEL_FONT;
 const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
-export type BohrEnergyDiagramOptions = SelfOptions & EnergyDiagramOptions;
+export type BohrEnergyDiagramOptions = SelfOptions & StrictOmit<EnergyDiagramOptions, 'createLevelNode'>;
 
 export default class BohrEnergyDiagram extends EnergyDiagram {
 
   public constructor( bohrModel: BohrModel, providedOptions: BohrEnergyDiagramOptions ) {
 
-    super( providedOptions );
+    const options = optionize<BohrEnergyDiagramOptions, SelfOptions, EnergyDiagramOptions>()( {
 
-    // A horizontal line for each energy level, labeled with 'n = {value}'.
-    for ( let n = QuantumElectron.GROUND_STATE; n <= QuantumElectron.MAX_STATE; n++ ) {
-      const levelNode = createLevelNode( n );
-      const levelNodeLeftCenter = new Vector2( this.energyAxisHBox.right + LEVEL_NODE_X_OFFSET, this.getYForState( n ) );
-      levelNode.localBoundsProperty.link( () => {
-        levelNode.leftCenter = levelNodeLeftCenter;
-      } );
-      this.stateLayer.addChild( levelNode );
-    }
+      // EnergyDiagramOptions
+      createLevelNode: n => createLevelNode( n )
+    }, providedOptions );
+
+    super( options );
 
     // Position the electron on a level line, based on the value of n.
     bohrModel.electron.nProperty.link( ( nNew, nOld ) => {

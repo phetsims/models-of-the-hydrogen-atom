@@ -23,6 +23,9 @@ import ElectronNode from '../../common/view/ElectronNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergySquiggle from './EnergySquiggle.js';
+import QuantumElectron from '../../common/model/QuantumElectron.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 // Margins inside the bounds of the diagram. If you change Y_MARGIN, you will likely need to adjust Y_OFFSETS.
 const X_MARGIN = 4;
@@ -34,7 +37,12 @@ const Y_MARGIN = 5;
 const Y_OFFSETS = [ 0.025, 0.60, 0.73, 0.81, 0.86, 0.90 ];
 
 type SelfOptions = {
+
+  // Dimensions of the diagram.
   size: Dimension2;
+
+  // Creates a Node for a specified energy level n.
+  createLevelNode?: ( n: number ) => Node;
 };
 
 export type EnergyDiagramOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
@@ -59,6 +67,9 @@ export default class EnergyDiagram extends Node {
   // Squiggle drawn between the electron's previous and current state in the diagram.
   private readonly energySquiggle: EnergySquiggle;
 
+  // A Node for each energy level.
+  protected readonly levelNodes: Node;
+
   // Constants used by subclasses.
   public static readonly LEVEL_NODE_X_OFFSET = 22;
   public static readonly LEVEL_LINE_LENGTH = 15;
@@ -68,7 +79,7 @@ export default class EnergyDiagram extends Node {
 
   protected constructor( providedOptions: EnergyDiagramOptions ) {
 
-    const options = optionize<EnergyDiagramOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<EnergyDiagramOptions, StrictOmit<SelfOptions, 'createLevelNode'>, NodeOptions>()( {
 
       // NodeOptions
       isDisposable: false
@@ -115,6 +126,20 @@ export default class EnergyDiagram extends Node {
     this.energyAxisLength = energyAxisLength;
     this.stateLayer = stateLayer;
     this.energySquiggle = energySquiggle;
+
+    // Create a Node for each energy level.
+    this.levelNodes = new Node();
+    if ( options.createLevelNode ) {
+      for ( let n = QuantumElectron.GROUND_STATE; n <= QuantumElectron.MAX_STATE; n++ ) {
+        const levelNode = options.createLevelNode( n );
+        const levelNodeLeftCenter = new Vector2( this.energyAxisHBox.right + EnergyDiagram.LEVEL_NODE_X_OFFSET, this.getYForState( n ) );
+        levelNode.localBoundsProperty.link( () => {
+          levelNode.leftCenter = levelNodeLeftCenter;
+        } );
+        this.levelNodes.addChild( levelNode );
+      }
+      this.stateLayer.addChild( this.levelNodes );
+    }
   }
 
   /**
