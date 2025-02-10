@@ -167,11 +167,12 @@ export default class EmissionChart extends Node {
       // can be bottom aligned.
       const xAxisAlignBox = new AlignBox( xAxisLabel, {
         group: X_AXIS_LABEL_ALIGN_GROUP,
+        xAlign: 'center',
         yAlign: 'bottom'
       } );
       children.push( xAxisAlignBox );
 
-      xAxisAlignBox.localBoundsProperty.link( () => {
+      xAxisAlignBox.boundsProperty.link( () => {
         xAxisAlignBox.centerX = xAxis.centerX;
         xAxisAlignBox.top = xAxis.bottom + 3;
       } );
