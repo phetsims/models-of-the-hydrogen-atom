@@ -56,7 +56,7 @@ export default class SpectrometerSnapshotNode extends Node {
     const titleText = new Text( '', {
       font: new PhetFont( 14 ),
       fill: MOTHAColors.invertibleTextFillProperty,
-      maxWidth: 300,
+      maxWidth: 0.75 * chart.width,
       left: chart.left + INSIDE_X_MARGIN,
       top: chart.top + INSIDE_Y_MARGIN
     } );
