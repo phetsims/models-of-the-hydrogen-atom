@@ -24,7 +24,9 @@ export default class BohrOverlayNode extends Node {
                       tandem: Tandem ) {
 
     // n = ...
-    const electronStateText = new ElectronStateText( bohrModel.electron.nProperty, tandem.createTandem( 'electronStateText' ) );
+    const electronStateText = new ElectronStateText( bohrModel.electron.nProperty, {
+      tandem: tandem.createTandem( 'electronStateText' )
+    } );
 
     super( {
       children: [ electronStateText ],

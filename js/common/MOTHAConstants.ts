@@ -46,7 +46,7 @@ const SHADED_SPHERE_NODE_OPTIONS: ShadedSphereNodeOptions = {
 const STATE_TEXT_OPTIONS: RichTextOptions = {
   isDisposable: false,
   font: new PhetFont( 16 ),
-  fill: MOTHAColors.stateDisplayFillProperty,
+  fill: MOTHAColors.invertibleTextFillProperty,
   maxWidth: 200,
   phetioVisiblePropertyInstrumented: true,
   visiblePropertyOptions: {

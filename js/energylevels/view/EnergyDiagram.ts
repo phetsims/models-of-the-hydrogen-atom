@@ -31,6 +31,9 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 const X_MARGIN = 4;
 const Y_MARGIN = 5;
 
+// Spacing between the y-axis and the level Nodes.
+const X_SPACING = 22;
+
 // Percent offset from the bottom of the Energy axis, where the horizontal level lines will appear, index by n-1.
 // These values were set empirically. Using actual energy values results in visual overlap of the levels, since
 // higher levels are closely spaced.
@@ -71,10 +74,8 @@ export default class EnergyDiagram extends Node {
   protected readonly levelNodes: Node;
 
   // Constants used by subclasses.
-  public static readonly LEVEL_NODE_X_OFFSET = 22;
-  public static readonly LEVEL_LINE_LENGTH = 15;
-  public static readonly LEVEL_LINE_X_SPACING = 4;
   public static readonly LABEL_FONT = new PhetFont( 12 );
+  public static readonly LEVEL_LINE_LENGTH = 15;
   public static readonly LABEL_MAX_WIDTH = 40;
 
   protected constructor( providedOptions: EnergyDiagramOptions ) {
@@ -132,7 +133,7 @@ export default class EnergyDiagram extends Node {
     if ( options.createLevelNode ) {
       for ( let n = QuantumElectron.GROUND_STATE; n <= QuantumElectron.MAX_STATE; n++ ) {
         const levelNode = options.createLevelNode( n );
-        const levelNodeLeftCenter = new Vector2( this.energyAxisHBox.right + EnergyDiagram.LEVEL_NODE_X_OFFSET, this.getYForState( n ) );
+        const levelNodeLeftCenter = new Vector2( this.energyAxisHBox.right + X_SPACING, this.getYForState( n ) );
         levelNode.localBoundsProperty.link( () => {
           levelNode.leftCenter = levelNodeLeftCenter;
         } );

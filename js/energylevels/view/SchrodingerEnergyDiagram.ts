@@ -28,11 +28,13 @@ import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings
 import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 import { BohrEnergyDiagramOptions } from './BohrEnergyDiagram.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ElectronStateText from '../../common/view/ElectronStateText.js';
+import Property from '../../../../axon/js/Property.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
+const LABEL_FONT = EnergyDiagram.LABEL_FONT;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
 const LEVEL_LINE_X_SPACING = 4;
-const LABEL_FONT = EnergyDiagram.LABEL_FONT;
-const LABEL_MAX_WIDTH = EnergyDiagram.LABEL_MAX_WIDTH;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -84,7 +86,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
     const mEqualsValueText = new RichText( mEqualsValueStringProperty, {
       font: LABEL_FONT,
       fill: MOTHAColors.invertibleTextFillProperty,
-      maxWidth: LABEL_MAX_WIDTH,
+      maxWidth: EnergyDiagram.LABEL_MAX_WIDTH,
       top: this.energyAxisHBox.top
     } );
     mEqualsValueText.localBoundsProperty.link( () => {
@@ -151,14 +153,10 @@ function createLevelNode( n: number ): Node {
     spacing: LEVEL_LINE_X_SPACING
   } );
 
-  const nEqualsValueStringProperty = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.symbolEqualsValueStringProperty, {
-    symbol: MOTHASymbols.nStringProperty,
-    value: n
-  } );
-  const nEqualsValueText = new RichText( nEqualsValueStringProperty, {
-    fill: MOTHAColors.invertibleTextFillProperty,
-    font: LABEL_FONT,
-    maxWidth: LABEL_MAX_WIDTH
+  const nEqualsValueText = new ElectronStateText( new Property( n ), {
+    font: EnergyDiagram.LABEL_FONT,
+    maxWidth: EnergyDiagram.LABEL_MAX_WIDTH,
+    tandem: Tandem.OPT_OUT
   } );
 
   return new HBox( {
