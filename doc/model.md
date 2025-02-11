@@ -46,6 +46,12 @@ at the top of the following source code files.
 * de Broglie: [DeBroglieModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/DeBroglieModel.ts)
 * Schrödinger: [SchrodingerModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerModel.ts)
 
+## Experiment
+
+The Experiment is implemented as the Schrödinger model. So that we do not give this fact away to the student,
+we do not display the electron state, and instead display a '?' in the zoomed-in box and the "Electron Energy Level"
+accordion box.
+
 ## Schrödinger Transition Rules
 
 The following rules are implemented for electron state transitions in the Schrödinger model:
