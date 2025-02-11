@@ -30,10 +30,6 @@ export default class PolynomialTerm {
     this.exponent = exponent;
   }
 
-  public equals( term: PolynomialTerm ): boolean {
-    return ( this.coefficient === term.coefficient ) && ( this.exponent === term.exponent );
-  }
-
   /**
    * Evaluates this polynomial for a specified value of the variable.
    */
