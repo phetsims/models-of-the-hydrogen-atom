@@ -89,8 +89,11 @@ export default class SchrodingerNode extends HydrogenAtomNode {
       center: rect1.center
     } );
 
+    const protonIcon = ProtonNode.createIcon( 2.5 );
+    protonIcon.center = rect1.center;
+
     return new Node( {
-      children: [ rect1, rect2, rect3, rect4 ],
+      children: [ rect1, rect2, rect3, rect4, protonIcon ],
       scale: 0.25
     } );
   }
