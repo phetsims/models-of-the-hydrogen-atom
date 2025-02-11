@@ -61,7 +61,7 @@ class SchrodingerBrightnessCache {
       this.sums[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
     }
 
-    // 3D cell size
+    // 3D cell size, where each cell is a cube.
     this.cellSideLength = QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS;
   }
 
