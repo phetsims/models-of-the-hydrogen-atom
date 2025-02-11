@@ -49,9 +49,11 @@ the Java file from which they were ported.
 The zoomed-in box displays a magnified view of the hydrogen atom. All model-view transform operations take place in 
 this box. The origin is at the center of the box. The model uses a right-handed coordinate system: +x right, +y up,
 +angle counterclockwise. The view (scenery) uses a left-handed coordinate system: +x right, +y down, +angle clockwise.
-See `modelViewTransform` in ZoomedInBoxNode.ts for details.
+A `ModelViewTransform2` instance is used to transform between model and view coordinate systems. See
+`modelViewTransform` in ZoomedInBoxNode.ts for details.
 
-For the Schrodinger model, +x is to the right, +z is up, and +y is perpendicular to the screen.
+For the Schrodinger model, +x is to the right, +z is up, and +y is perpendicular to the screen. The view is flattened
+to 2D, with ZoomedInBoxNode's `modelViewTransform` handling the transform.
 
 ### Query Parameters
 
