@@ -4,6 +4,8 @@
 
 This document is a high-level description of the model used in PhET's _Models of the Hydrogen Atom_ simulation.
 
+It is assumed that the reader is familiar with atomic models and quantum mechanics.
+
 ## Symbols
 
 These symbols appear in the user interface:
@@ -127,7 +129,7 @@ Absorption behavior: Identical to Bohr and de Broglie.
 Emission behavior: Both spontaneous and stimulated emission are similar to Bohr and de Broglie, but the rules for 
 electron state transitions are more complicated. See "Schrodinger Transition Rules" below.
 
-## Schrodinger Transition Rules
+## Schrödinger Transition Rules
 
 The following rules are implemented for electron state transitions in the Schrödinger model:
 
@@ -141,12 +143,17 @@ The following rules are implemented for electron state transitions in the Schrö
 
 ## Transition Wavelengths
 
-The supported transition wavelengths are shown in the "Transitions" dialog, opened by checking the "Transitions" checkbox.
+Transition wavelengths are shown in the "Transitions" dialog, opened by checking the "Transitions" checkbox.
 
 ## Simplifications
 
-TODO: Orbits are distorted
+Wavelengths are limited to integer values, in nm.
 
-TODO: electron energy levels are distorted
+Electron orbits are necessarily distorted. The 6 orbit radii used are `[ 15, 44, 81, 124, 174, 233 ]`.
 
-TODO: wavelengths are integer values
+The x-axis (nm) of the Spectrometer is necessarily distorted. The UV and IR spectrums are compressed so that
+we can fit the data in the horizontal space available.
+
+Spacing of electron energy levels is necessarily distorted in the "Electron Energy Levels" accordion box,
+so that we can fit the diagrams in the vertical space available.
+
