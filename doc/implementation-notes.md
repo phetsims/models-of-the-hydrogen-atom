@@ -148,9 +148,9 @@ Electron
 
 For the quantum atomic models, these additional classes are interesting. See their documentation for details.
 
-* PhotonAbsorptionModel
-* SchrodingerQuantumNumbers
-* MetastableHandler
+* `PhotonAbsorptionModel`
+* `SchrodingerQuantumNumbers`
+* `MetastableHandler`
 
 ## View
 
