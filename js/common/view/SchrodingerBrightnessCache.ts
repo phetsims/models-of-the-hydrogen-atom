@@ -109,12 +109,6 @@ class SchrodingerBrightnessCache {
    */
   private computeBrightness( nlm: SchrodingerQuantumNumbers ): number[][] {
 
-    // 2D array filled with zeros
-    const brightness = new Array( NUMBER_OF_CELLS );
-    for ( let i = 0; i < NUMBER_OF_CELLS; i++ ) {
-      brightness[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
-    }
-
     let maxSum = 0;
 
     for ( let row = 0; row < NUMBER_OF_CELLS; row++ ) {
@@ -135,6 +129,12 @@ class SchrodingerBrightnessCache {
           maxSum = sum;
         }
       }
+    }
+
+    // 2D array filled with zeros
+    const brightness = new Array( NUMBER_OF_CELLS );
+    for ( let i = 0; i < NUMBER_OF_CELLS; i++ ) {
+      brightness[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
     }
 
     for ( let row = 0; row < NUMBER_OF_CELLS; row++ ) {
