@@ -36,37 +36,15 @@ increases the probability that a photon will interact with the atom.
 
 ## Atomic Models
 
-The simulation supports 6 atomic models, briefly described herein.
+The simulation supports 6 atomic models. For a brief introduction to each atomic model, read the documentation
+at the top of the following source code files.
 
-### Billiard Ball atomic model
-
-Read the documentation at the top of
-[BilliardBallModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/BilliardBallModel.ts).
-
-### Plum Pudding atomic model
-
-Read the documentation at the top of
-[PlumPuddingModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/PlumPuddingModel.ts).
-
-### Classical Solar System atomic model
-
-Read the documentation at the top of
-[ClassicalSolarSystemModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/ClassicalSolarSystemModel.ts).
-
-### Bohr atomic model
-
-Read the documentation at the top of
-[BohrModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/BohrModel.ts).
-
-### de Broglie atomic model
-
-Read the documentation at the top of
-[DeBroglieModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/DeBroglieModel.ts).
-
-### Schrödinger atomic model
-
-Read the documentation at the top of
-[SchrodingerModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerModel.ts).
+* Billiard Ball: [BilliardBallModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/BilliardBallModel.ts).
+* Plum Pudding: [PlumPuddingModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/PlumPuddingModel.ts).
+* Classical Solar System: [ClassicalSolarSystemModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/ClassicalSolarSystemModel.ts).
+* Bohr: [BohrModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/BohrModel.ts).
+* de Broglie: [DeBroglieModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/DeBroglieModel.ts).
+* Schrödinger: [SchrodingerModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerModel.ts).
 
 ## Schrödinger Transition Rules
 
