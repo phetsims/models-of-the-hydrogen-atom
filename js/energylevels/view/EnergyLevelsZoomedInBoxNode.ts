@@ -31,8 +31,7 @@ export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
       const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty,
         modelViewTransform, parentTandem.createTandem( 'deBroglieNode' ) );
 
-      const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty,
-        model.zoomedInBox, modelViewTransform );
+      const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, modelViewTransform );
 
       return [
         bohrNode,

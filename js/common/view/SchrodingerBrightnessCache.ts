@@ -1,11 +1,10 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/115 Make this a singleton, to reuse the same cache for both screens.
 /**
  * SchrodingerBrightnessCache is responsible for representing Schrodinger states (and their associated wavefunctions)
  * as brightness values that are used to render the electron orbital. Brightness is computed on demand, then cached.
  * The cache is configured for a fixed number of states, and a fixed size 2D grid. See SchrodingerNode for more
- * documentation.
+ * documentation. A singleton instance is used throughout the sim.
  *
  * In the Java implementation, this was class BrightnessCache in SchrodingerNode.java. The Java version provided
  * an option to pre-populate the cache. This proved to be quite time-consuming and the option was never used.
@@ -17,11 +16,14 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import QuantumElectron from '../model/QuantumElectron.js';
+import ZoomedInBox from '../model/ZoomedInBox.js';
 
 // Number of cells in one quadrant, in all dimensions.
 const NUMBER_OF_CELLS = 40; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/115 Improve resolution by increasing number of cells? But that hurts performance...
 
-export default class SchrodingerBrightnessCache {
+const QUADRANT_SIDE_LENGTH = ZoomedInBox.SIDE_LENGTH / 2; // in model coordinates!
+
+class SchrodingerBrightnessCache {
 
   // Cache of 2D brightness values [row][column], indexed by [n-1][l][abs(m)].
   // This data structure is large, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
@@ -33,10 +35,7 @@ export default class SchrodingerBrightnessCache {
   // The length of one side of a cell, which is a cube.
   private readonly cellSideLength: number;
 
-  /**
-   * @param quadrantSideLength - side length of the quadrant, which is square
-   */
-  public constructor( quadrantSideLength: number ) {
+  public constructor() {
 
     // Create the cache and initialize entries to null.
     this.cache = [];
@@ -59,7 +58,20 @@ export default class SchrodingerBrightnessCache {
     phet.log && phet.log( `SchrodingerBrightness.sums contains ${this.sums.length} entries.` );
 
     // 3D cell size
-    this.cellSideLength = quadrantSideLength / NUMBER_OF_CELLS;
+    this.cellSideLength = QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS;
+  }
+
+  /**
+   * Eagerly populates the cache with the electron states that are reachable in this sim.
+   */
+  public populate(): void {
+    for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
+      for ( let l = 0; l <= Math.min( n - 1, SchrodingerQuantumNumbers.lMax ); l++ ) {
+        for ( let m = 0; m <= l; m++ ) {
+          this.getBrightness( new SchrodingerQuantumNumbers( n, l, m ) );
+        }
+      }
+    }
   }
 
   /**
@@ -80,6 +92,7 @@ export default class SchrodingerBrightnessCache {
    * Note that the cache is indexed by n-1, because the range of n is [1,6].
    */
   private setCachedBrightness( nlm: SchrodingerQuantumNumbers, brightness: number[][] ): void {
+    phet.log && phet.log( `Populating brightness cache for (n,l,m) = ${nlm.toString()}` );
     this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ] = brightness;
   }
 
@@ -138,4 +151,8 @@ export default class SchrodingerBrightnessCache {
   }
 }
 
+// Singleton
+const schrodingerBrightnessCache = new SchrodingerBrightnessCache();
+
 modelsOfTheHydrogenAtom.register( 'SchrodingerBrightnessCache', SchrodingerBrightnessCache );
+export default schrodingerBrightnessCache;

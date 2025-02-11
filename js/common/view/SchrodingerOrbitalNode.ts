@@ -24,12 +24,12 @@ import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import MOTHAColors from '../MOTHAColors.js';
-import SchrodingerBrightnessCache from './SchrodingerBrightnessCache.js';
+import ZoomedInBoxNode from './ZoomedInBoxNode.js';
+import schrodingerBrightnessCache from './SchrodingerBrightnessCache.js';
+
+const QUADRANT_SIDE_LENGTH = ZoomedInBoxNode.SIDE_LENGTH / 2; // in view coordinates!
 
 export default class SchrodingerOrbitalNode extends CanvasNode {
-
-  private readonly quadrantSideLength: number;
-  private readonly brightnessCache: SchrodingerBrightnessCache;
 
   private brightnessValues: number[][]; // 2D grid of brightness values, in [row][column] order.
   private cellWidth: number;
@@ -37,20 +37,13 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
 
   public constructor( nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
                       atomPosition: Vector2,
-                      modelViewTransform: ModelViewTransform2,
-                      zoomedInBoxBounds: Bounds2 ) {
-
-    assert && assert( zoomedInBoxBounds.width === zoomedInBoxBounds.height, 'zoomedInBox must be square.' );
-    const quadrantSideLength = zoomedInBoxBounds.width / 2;
+                      modelViewTransform: ModelViewTransform2 ) {
 
     super( {
       pickable: false,
-      canvasBounds: new Bounds2( -quadrantSideLength, -quadrantSideLength, quadrantSideLength, quadrantSideLength ),
+      canvasBounds: new Bounds2( -QUADRANT_SIDE_LENGTH, -QUADRANT_SIDE_LENGTH, QUADRANT_SIDE_LENGTH, QUADRANT_SIDE_LENGTH ),
       translation: modelViewTransform.modelToViewPosition( atomPosition )
     } );
-
-    this.quadrantSideLength = quadrantSideLength;
-    this.brightnessCache = new SchrodingerBrightnessCache( quadrantSideLength );
 
     // These values will be populated by update().
     this.brightnessValues = [];
@@ -69,11 +62,11 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
   private update( nlm: SchrodingerQuantumNumbers ): void {
 
     // Get the brightness values that describe the orbital for the electron's state.
-    this.brightnessValues = this.brightnessCache.getBrightness( nlm );
+    this.brightnessValues = schrodingerBrightnessCache.getBrightness( nlm );
 
     // brightnessValues is for 1 quadrant, so use quadrant size to compute cell size.
-    this.cellWidth = this.quadrantSideLength / this.brightnessValues[ 0 ].length;
-    this.cellHeight = this.quadrantSideLength / this.brightnessValues.length;
+    this.cellWidth = QUADRANT_SIDE_LENGTH / this.brightnessValues[ 0 ].length;
+    this.cellHeight = QUADRANT_SIDE_LENGTH / this.brightnessValues.length;
     assert && assert( this.cellWidth === this.cellHeight, 'cells must be square.' );
 
     // This results in a call to paintCanvas.

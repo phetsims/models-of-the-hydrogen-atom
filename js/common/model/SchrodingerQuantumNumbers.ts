@@ -91,6 +91,9 @@ export default class SchrodingerQuantumNumbers {
   // * Describes the orientation of the region of space occupied by an electron with respect to an applied magnetic field.
   public readonly m: number;
 
+  // l will not be > 2, because all transitions for n > 2 require IR photons, and the light source does not emit IR.
+  public static readonly lMax = 2;
+
   public constructor( n: number, l: number, m: number ) {
     assert && assert( SchrodingerQuantumNumbers.isValidState( n, l, m ), `invalid state: (${n},${l},${m})` );
     this.n = n;
@@ -227,7 +230,7 @@ export default class SchrodingerQuantumNumbers {
     assert && assert( Number.isInteger( lNext ), `lNext must be an integer: lNext=${lNext}` );
     assert && assert( lNext >= 0 && lNext <= nNext - 1, `lNext must be in the range [0,nNext-1]: ${this.toString()}) -> (${nNext},${lNext},?)` );
     assert && assert( Math.abs( l - lNext ) === 1, `(l - lNext) must be 1 or -1: ${this.toString()} -> (${nNext},${lNext},?)` );
-    assert && assert( lNext < 3, `lNext is theoretically possible, but unexpected in practice: ${this.toString()} -> (${nNext},${lNext},?)` );
+    assert && assert( lNext <= SchrodingerQuantumNumbers.lMax, `lNext is theoretically possible, but unexpected in practice: ${this.toString()} -> (${nNext},${lNext},?)` );
     return lNext;
   }
 

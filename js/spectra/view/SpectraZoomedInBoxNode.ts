@@ -42,8 +42,7 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
       const deBroglieNode = new DeBroglieNode( model.deBroglieModel, model.hydrogenAtomProperty, modelViewTransform,
         parentTandem.createTandem( 'deBroglieNode' ) );
 
-      const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty,
-        model.zoomedInBox, modelViewTransform );
+      const schrodingerNode = new SchrodingerNode( model.schrodingerModel, model.hydrogenAtomProperty, modelViewTransform );
 
       return [
         billiardBallNode,

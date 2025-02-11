@@ -29,7 +29,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
-import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import ProtonNode from './ProtonNode.js';
@@ -39,13 +38,10 @@ export default class SchrodingerNode extends HydrogenAtomNode {
 
   public constructor( schrodingerModel: SchrodingerModel,
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
-                      zoomedInBox: ZoomedInBox,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    const zoomedInBoxBounds = modelViewTransform.modelToViewBounds( zoomedInBox.bounds );
-
     const orbitalNode = new SchrodingerOrbitalNode( schrodingerModel.nlmProperty, schrodingerModel.position,
-      modelViewTransform, zoomedInBoxBounds );
+      modelViewTransform );
 
     // Documentation in SchrodingerModel.java (the legacy version) said: "Proton is at the center, visible only when
     // the probability density field strength is below a threshold value." Discussed this with designers, and we
