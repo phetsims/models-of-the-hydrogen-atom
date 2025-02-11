@@ -73,7 +73,7 @@ and `photonGroup.elementDisposedEmitter` to see the specifics of how `PhotonNode
 
 * `SpectrometerSnapshot` instances (model elements) are created dynamically, but no `PhetioGroup` is involved. 
 See `Spectrometer` method `takeSnapshot` for details. The corresponding view element, `SpectrometerSnapshot`,
-is _not_ created dynamically. A fixed number of `SpectrometerSnapshot` instances is created at startup and mutated
+is _not_ created dynamically. A fixed number of `SpectrometerSnapshot` instances are created at startup and mutated
 as needed. See `SpectrometerSnapshotsDialog` for details.
 
 **Listeners**: Unless otherwise noted in the code, uses of `link`, `addListener`, etc. do not require a corresponding
