@@ -91,6 +91,26 @@ public dispose(): void {
 
 ## Model
 
+### Light Source
+
+`LightSource` is the model of a simple light source that emits photons in the UV and visible spectrums, for white
+light and monochromatic light. With white light, the algorithm for choosing a photon's wavelength is implemented
+such that the probability of the photon interacting with the atom is increased. See method `getNextPhotonWavelength`
+in LightSource.ts for details.
+
+### Atomic Models
+
+Atomic models are roughly divided into classical and quantum categories. The classical models are "Billiard Ball",
+"Plum Pudding", and "Classical Solar System". The quantum models are "Bohr", "de Broglie", and "Schrödinger".
+
+Atomic models that include the concept of photon absorption are the quantum models.
+
+Atomic models that include the concept of photon emission are the quantum models, plus "Plum Pudding".
+The quantum models include two types of emission: stimulated emission and spontaneous emission. See
+the class documentation for details.
+
+All atomic models except "Billiard Ball" include an electron.
+
 ### Class hierarchy
 
 This diagram shows the most important parts of the model class hierarchy. See the documentation of each class
@@ -126,11 +146,17 @@ Electron
  // * DeBrolieModel uses the same electron model as superclass BohrModel, so there is no DeBroglieElectron.
  ```
 
+For the quantum atomic models, these additional classes are interesting. See their documentation for details.
+
+* PhotonAbsorptionModel
+* SchrodingerQuantumNumbers
+* MetastableHandler
+
 ## View
 
 ### de Broglie representations
 
-## Schrodinger orbitals
+### Schrodinger orbitals
 
 ## PhET-iO
 
@@ -141,5 +167,4 @@ of PhET-iO serialization that is implemented.
 
 ### Dynamic PhET-iO Elements
 
-Photon and PhotonGroup
-SpectrometerSnapshot
+`Photon` is the only dynamic PhET-iO element, and is managed by PhetioGroup `PhotonGroup`.
