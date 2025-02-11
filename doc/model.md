@@ -104,8 +104,8 @@ travels alongside the original photon.
 
 Source code: DeBroglieModel.ts
 
-The de Broglie model is the same as Bohr, but the electron is represented as a wave in the view. There are three wave
-representations that the user may choose from a combo box: "Radial Distance", "3D Height", or "Brightness". Briefly:
+The de Broglie model is the same as Bohr, but the electron is represented as a wave in the view. The user may choose
+a visual representation of the wave from a combo box. The choices are:
 
 * Radial Distance - Distance of the wave from the electron's orbit is a function of amplitude.
 * 3D Height - 3D height of the wave is a function of amplitude.
