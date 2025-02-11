@@ -60,7 +60,6 @@ class SchrodingerBrightnessCache {
     for ( let i = 0; i < NUMBER_OF_CELLS; i++ ) {
       this.sums[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
     }
-    phet.log && phet.log( `SchrodingerBrightness.sums contains ${this.sums.length} entries.` );
 
     // 3D cell size
     this.cellSideLength = QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS;
