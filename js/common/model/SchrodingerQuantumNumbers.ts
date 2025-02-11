@@ -15,7 +15,7 @@
  *   l = [0...n-1]
  *   m = [-l...+l]
  *   abs(l-l') = 1
- *   abs(m-m') < 1
+ *   abs(m-m') <= 1
  *   n transitions have varying transition strengths.
  *   Valid l and m transitions have equal probability.
  *
