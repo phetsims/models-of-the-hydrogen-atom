@@ -64,7 +64,7 @@ are documented in `MOTHAQueryParameters.ts`. Running with `?log` prints the comp
 ### Memory Management
 
 **Instantiation:** Most objects in this sim are instantiated at startup, and exist for the lifetime of the simulation.
-The exceptions to this are as follows:
+The exceptions are:
 
 * `Photon`: Created dynamically, when they are emitted from the light source or the hydrogen atom. See `PhotonGroup`
 (a `PhetioGroup`) for details.
