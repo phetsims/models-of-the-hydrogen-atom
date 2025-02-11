@@ -12,8 +12,6 @@
     * [Memory Management](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#memory-management)
 * [Model](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#model)
 * [View](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#view)
-* [Sound](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#sound)
-* [Alternative Input](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#alternative-input)
 * [PhET-iO](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#phet-io)
 
 ## Introduction
