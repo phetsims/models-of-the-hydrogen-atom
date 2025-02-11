@@ -9,8 +9,8 @@ This document is a high-level description of the model used in PhET's _Models of
 These symbols appear in the user interface:
 
 * n - principal quantum number, describes the energy of the electron (range is `[1,6]`)
-* l - azimuthal quantum number, describes the shape of the electron's orbital
-* m - magnetic quantum number, describes the orientation of the electron's orbital
+* l - azimuthal quantum number, describes the shape of the electron's orbital (range is `[0,n-1]`)
+* m - magnetic quantum number, describes the orientation of the electron's orbital (range is `[-l,l]`)
 * (n,l,m) - quantum numbers that describe the state of the Schrödinger electron
 * s,p,d,f - letters used to represent shapes of atomic orbitals
 
