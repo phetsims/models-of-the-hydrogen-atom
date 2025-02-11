@@ -4,16 +4,16 @@
  * BilliardBallModel is a predictive model of the hydrogen atom.
  *
  * Physical representation:
- * The billiard ball is a sphere, with the atom's local origin at the sphere's center.
+ * The billiard ball is a sphere, with the atom's origin at the sphere's center.
  *
  * Collision behavior:
  * When photons collide with the ball, they bounce off as if the ball were a rigid body.
  *
  * Absorption behavior:
- * Does not absorb photons.
+ * The atom does not absorb photons.
  *
  * Emission behavior:
- * Does not emit photons.
+ * The atom does not emit photons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
