@@ -3,8 +3,8 @@
 /**
  * SchrodingerBrightnessCache is responsible for representing Schrodinger states (and their associated wavefunctions)
  * as brightness values that are used to render the electron orbital. Brightness is computed on demand, then cached.
- * The cache is configured for a fixed number of states, and a fixed size 2D grid. See SchrodingerNode for more
- * documentation. A singleton instance is used throughout the sim.
+ * The cache is configured for a fixed number of states, and a fixed-size 2D grid. A singleton instance is used
+ * throughout the sim.
  *
  * In the Java implementation, this was class BrightnessCache in SchrodingerNode.java. The Java version provided
  * an option to pre-populate the cache. This proved to be quite time-consuming and the option was never used.
