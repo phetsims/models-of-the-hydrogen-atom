@@ -193,4 +193,4 @@ of PhET-iO serialization that is implemented. To identify where these IOTypes ar
 
 ### Dynamic PhET-iO Elements
 
-`Photon` is the only dynamic PhET-iO element, and is managed by PhetioGroup `PhotonGroup`.
+`Photon` is the only dynamic PhET-iO Element, and is managed by PhetioGroup `PhotonGroup`.
