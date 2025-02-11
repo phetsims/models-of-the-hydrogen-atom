@@ -84,7 +84,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
     super( position, options );
 
     this.electron = new PlumPuddingElectron( {
-      position: this.position,
+      position: this.position, // Initial position at the center of the plum pudding.
       tandem: options.tandem.createTandem( 'electron' )
     } );
 
