@@ -93,9 +93,15 @@ public dispose(): void {
 
 ### Class hierarchy
 
-This diagram shows the most important parts of the model class hierarchy.
+This diagram shows the most important parts of the model class hierarchy. See the documentation of each class
+for further details. 
 
 ```
+// Top-level simulation model
+MOTHAModel
+  SpectraModel
+  EnergyLevelsModel
+  
 // Atomic Models
 HydrogrenAtom
   BilliardBallModel
@@ -114,6 +120,10 @@ Electron
   QuantumElectron
     BohrElectron
     SchrodingerElectron
+    
+ // Notes:
+ // * BilliardBallModel does not involve an electron, there is no BilliardBallElectron. 
+ // * DeBrolieModel uses the same electron model as superclass BohrModel, so there is no DeBroglieElectron.
  ```
 
 ## View
