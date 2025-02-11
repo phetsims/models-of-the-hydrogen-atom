@@ -133,7 +133,7 @@ HydrogrenAtom
   ClassicalSolarSystemModel
   BohrModel
     DeBroglieBaseModel
-      DeBrolieModel
+      DeBroglieModel
     SchrodingerModel
       Experiment
 
