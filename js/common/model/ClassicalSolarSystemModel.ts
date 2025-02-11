@@ -29,7 +29,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHAUtils from '../MOTHAUtils.js';
 import ClassicalSolarSystemNode from '../view/ClassicalSolarSystemNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import ClassicalSolarSystemElectron from './ClassicalSolarSystemElectron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
@@ -75,7 +74,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     } );
 
     const angle = 0;
-    const electronOffset = MOTHAUtils.polarToCartesian( ELECTRON_TO_PROTON_DISTANCE, angle );
+    const electronOffset = Vector2.createPolar( ELECTRON_TO_PROTON_DISTANCE, angle );
     this.electron = new ClassicalSolarSystemElectron( {
       position: this.proton.position.plus( electronOffset ),
       angle: angle,
@@ -115,7 +114,7 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
         this.electron.positionProperty.value = protonPosition;
       }
       else {
-        const electronOffset = MOTHAUtils.polarToCartesian( distance, this.electron.angleProperty.value );
+        const electronOffset = Vector2.createPolar( distance, this.electron.angleProperty.value );
         this.electron.positionProperty.value = protonPosition.plus( electronOffset );
       }
 

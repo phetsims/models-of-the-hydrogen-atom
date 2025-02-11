@@ -40,16 +40,6 @@ const MOTHAUtils = {
   },
 
   /**
-   * Converts from polar to Cartesian coordinates.
-   */
-  polarToCartesian( radius: number, angle: number ): Vector2 {
-    assert && assert( isFinite( radius ) && radius >= 0, `invalid radius: ${radius}` );
-    const x = radius * Math.cos( angle );
-    const y = radius * Math.sin( angle );
-    return new Vector2( x, y );
-  },
-
-  /**
    * Computes the factorial of a non-negative integer n without using recursion.
    * n! = 1 * 2 * ... * ( n - 1 ) * n
    */

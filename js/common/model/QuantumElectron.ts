@@ -15,7 +15,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import MOTHAUtils from '../MOTHAUtils.js';
 import BohrModel from './BohrModel.js';
 import Electron from './Electron.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -120,7 +119,7 @@ export default abstract class QuantumElectron extends Electron {
  */
 function computeOffset( n: number, angle: number ): Vector2 {
   const radius = BohrModel.getElectronOrbitRadius( n );
-  return MOTHAUtils.polarToCartesian( radius, angle );
+  return Vector2.createPolar( radius, angle );
 }
 
 assert && assert( QuantumElectron.GROUND_STATE === 1, 'A fundamental assumption of this sim is that n=1 is the ground state.' );
