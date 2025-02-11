@@ -4,8 +4,7 @@
  * BohrModel is a predictive model of the hydrogen atom.
  *
  * Physical representation:
- * Electron orbiting a proton. Each orbit corresponds to a different electron state. See createOrbitRadii for details
- * on how orbit radii are calculated.
+ * Electron orbiting a proton. Each orbit corresponds to a different electron state.
  *
  * Collision behavior:
  * Photons may be absorbed if they collide with the electron.
@@ -19,7 +18,8 @@
  * wavelength that corresponds to the current and new state. Transition to each lower state is equally likely.
  * Stimulated emission of a photon occurs when a photon hits the electron, and the photon's wavelength corresponds
  * to a wavelength that could have been absorbed in a lower state.  In this case, the colliding photon is not absorbed,
- * but a new photon is emitted with the same wavelength, and the electron moves to the lower state.
+ * but a new photon is emitted with the same wavelength, and the electron moves to the lower state. The new photon
+ * moves alongside the original photon.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
