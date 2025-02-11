@@ -40,94 +40,33 @@ The simulation supports 6 atomic models, briefly described herein.
 
 ### Billiard Ball atomic model
 
-Source code: BilliardBallModel.ts
-
-Physical representation: The billiard ball is a sphere, with the atom's origin at the sphere's center. 
-
-Collision behavior: When photons collide with the ball, they bounce off as if the ball were a rigid body.
-
-Absorption behavior: Does not absorb photons.
-
-Emission behavior: Does not emit photons.
+Read the documentation at the top of
+[BilliardBallModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/BilliardBallModel.ts).
 
 ### Plum Pudding atomic model
 
-Source code: PlumPuddingModel.ts
-
-Physical representation: The proton is a blob of pudding (or "goo"), modeled as a circle. An electron oscillates
-inside the goo along a straight line that passes through the center of the goo and has its end points on the circle.
-
-Collision behavior: Photons collide with the electron when they intersect the circle.
-
-Absorption behavior: The electron can absorb N photons. When any photon collides with the electron, it is absorbed
-with some probability, and (if absorbed) causes the electron to start oscillating.
-
-Emission behavior: The electron can emit one 150 nm photon for each photon absorbed. Photons are emitted at the electron's 
-location. No photons are emitted until the electron has completed one oscillation cycle. After emitting its last photon,
-the electron completes its current oscillation cycles, and comes to rest at the atom's center.
+Read the documentation at the top of
+[PlumPuddingModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/PlumPuddingModel.ts).
 
 ### Classical Solar System atomic model
 
-Source code: ClassicalSolarSystemModel.ts
-
-Physical representation: Proton at the center, electron spirals towards the proton. The spiral is clockwise to be
-consistent with all other orbits in this sim. The electron starts at a fixed distance from the proton.
-The radius of the spiral decreases linearly and the electron accelerates as the electron moves closer to the proton.
-The final state shows the electron on top of the proton. In this final state, the atom is considered "destroyed".
-
-Collision behavior: Ideally, the spiraling behavior occurs fast enough that the atom is destroyed before any 
-photons reach it. Therefore, there are no collisions.
-
-Absorption behavior: The atom is destroyed, so it does not absorb photons.
-
-Emission behavior: The atom is destroyed, so it does not emit photons.
+Read the documentation at the top of
+[ClassicalSolarSystemModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/ClassicalSolarSystemModel.ts).
 
 ### Bohr atomic model
 
-Source code: BohrModel.ts
-
-Physical representation: Electron orbiting a proton. Each orbit corresponds to a different electron state.
-
-Collision behavior: Photons are considered for absorption if they collide with the electron.
-
-Absorption behavior: Photons that match the transition wavelength of the electron's state (n) are absorbed with
-some probability. Other photons are not absorbed or affected.
-
-Emission behavior: Spontaneous emission of a photon takes the electron to a lower state, and the photon emitted has
-the transition wavelength that corresponds to the current and new state. Transition to each lower state is equally likely.
-Stimulated emission of a photon occurs when a photon collides with the electron, and the photon's wavelength corresponds
-to a wavelength that could have been absorbed in a lower state. In this case, the colliding photon is not absorbed,
-but a new photon is emitted with the same wavelength, and the electron moves to the lower state. The emitted photon
-travels alongside the original photon.
+Read the documentation at the top of
+[BohrModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/BohrModel.ts).
 
 ### de Broglie atomic model
 
-Source code: DeBroglieModel.ts
-
-The de Broglie model is the same as Bohr, but the electron is represented as a wave in the view. The user may choose
-a visual representation of the wave from a combo box. The choices are:
-
-* Radial Distance - Distance of the wave from the electron's orbit is a function of amplitude.
-* 3D Height - 3D height of the wave is a function of amplitude.
-* Brightness - Brightness of the wave is a function of amplitude.
+Read the documentation at the top of
+[DeBroglieModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/DeBroglieModel.ts).
 
 ### Schrödinger atomic model
 
-Source code: SchrodingerModel.ts
-
-Physical representation: The electron is a probability density field. A proton is at the center, visible only when the
-probability density field strength is below a threshold value. The electron's state is specified by 3 quantum numbers 
-(n,l,m).
-
-Wavefunction: Probability density is computed by solving the 3D Schrödinger wave function, which in turn involves 
-solving the generalized Laguerre Polynomial and the associated Legendre polynomial.
-
-Collision behavior: Identical to Bohr and de Broglie.
-
-Absorption behavior: Identical to Bohr and de Broglie.
-
-Emission behavior: Both spontaneous and stimulated emission are similar to Bohr and de Broglie, but the rules for 
-electron state transitions are more complicated. See "Schrodinger Transition Rules" below.
+Read the documentation at the top of
+[SchrodingerModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerModel.ts).
 
 ## Schrödinger Transition Rules
 

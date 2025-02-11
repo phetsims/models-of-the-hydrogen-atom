@@ -7,6 +7,11 @@
  * representations (see DeBroglieRepresentation) mean that it requires different methods of determining electron
  * position and handling collision detection.
  *
+ * The user may choose a visual representation of the wave from a combo box. The choices are:
+ *   Radial Distance - Distance of the wave from the electron's orbit is a function of amplitude.
+ *   3D Height - 3D height of the wave is a function of amplitude.
+ *   Brightness - Brightness of the wave is a function of amplitude.
+ *
  * The algorithms for determining electron position and handling collision detection differ greatly for 2D and 3D views.
  * Therefore, this model needs to know something about the view in order to make things look right in 3D. So this model
  * cannot be shown in both 2D and 3D views simultaneously. There are undoubtedly ways to do this, but this simulation
