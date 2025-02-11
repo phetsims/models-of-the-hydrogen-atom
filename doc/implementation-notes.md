@@ -52,12 +52,12 @@ this box. The origin is at the center of the box. The model uses a right-handed 
 A `ModelViewTransform2` instance is used to transform between model and view coordinate systems. See
 `modelViewTransform` in ZoomedInBoxNode.ts for details.
 
-For the deBroglie model, the "3D Height" representation involves a pseudo-3D animation as the atom is rotated into
+For the deBroglie atomic model, the "3D Height" representation involves a pseudo-3D animation as the atom is rotated into
 place. This involves animation the pitch component of 3D rotation (the other two components are roll and yaw, and 
 they are not involved here). The view is then flattened to 2D, with ZoomedInBoxNode's `modelViewTransform` handling
 the transform. See DeBroglie3DHeightNode.ts.
 
-For the Schrodinger model, +x is to the right, +z is up, and +y is perpendicular to the screen. The view is flattened
+For the Schrodinger atomic model, +x is to the right, +z is up, and +y is perpendicular to the screen. The view is flattened
 to 2D, with ZoomedInBoxNode's `modelViewTransform` handling the transform.
 
 ### Query Parameters
@@ -153,7 +153,7 @@ Electron
  // * DeBrolieModel uses the same electron model as superclass BohrModel, so there is no DeBroglieElectron.
  ```
 
-### Extra Credit
+### Other Important Model Classes
 
 For the quantum atomic models, these additional classes are critical. See their documentation for details.
 
@@ -175,7 +175,7 @@ The remainder of this section will highlight a few of the more interesting view 
 
 The de Broglie atomic model is the first of the quantum models to represent the electron as a wave. There are three
 representations:
-* Radial Distance - The wave's offset from the electron's orbit is a function of amplitude. See DeBroglieRadialDistanceNode.ts.
+* Radial Distance - The wave's offset from the electron's orbit is a function of electron amplitude. See DeBroglieRadialDistanceNode.ts.
 * 3D Height - The 3D height of the wave is a function of the electron amplitude. Selecting this view causes the atom to
 rotate into place, so that we are viewing the atom in pseudo-3D. See DeBroglie3DHeightNode.ts and Wireframe3DNode.ts.
 * Brightness - A ring is drawn that corresponds to the electron's orbit, and the brightness of the ring is a function
