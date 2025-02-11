@@ -175,11 +175,13 @@ The remainder of this section will highlight a few of the more interesting view 
 
 The de Broglie atomic model is the first of the quantum models to represent the electron as a wave. There are three
 representations:
-* Radial Distance - Distance from the electron's orbit is a function of the amplitude of the standing wave. See DeBroglieRadialDistanceNode.ts.
-* 3D Height - The 3D height of the wave is a function of the amplitude of the standing wave. Selecting this view causes the atom to
+* Radial Distance - Distance from the electron's orbit is a function of amplitude. See DeBroglieRadialDistanceNode.ts.
+* 3D Height - The 3D height of the wave is a function of amplitude. Selecting this view causes the atom to
 rotate into place, so that we are viewing the atom in pseudo-3D. See DeBroglie3DHeightNode.ts, DeBroglie3DWaveNode.ts, and Wireframe3DNode.ts.
 * Brightness - A ring is drawn that corresponds to the electron's orbit, and the brightness of the ring is a function
-of the amplitude of the standing wave. See DeBroglieBrightnessNode.ts.
+of amplitude. See DeBroglieBrightnessNode.ts.
+
+For the amplitude computation involved in all of these representations, see `getAmplitude` in `DeBroglieModel`.
 
 ### Schrodinger orbitals
 
