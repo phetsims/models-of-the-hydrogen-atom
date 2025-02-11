@@ -48,8 +48,13 @@ export default abstract class QuantumElectron extends Electron {
 
   protected constructor( nProperty: TReadOnlyProperty<number>, atomPosition: Vector2, tandem: Tandem ) {
 
+    // Compute the initial position of the electron.
+    const initialAngle = 0;
+    const initialOffset = MOTHAUtils.polarToCartesian( BohrModel.getElectronOrbitRadius( nProperty.value ), initialAngle );
+    const initialPosition = atomPosition.plus( initialOffset );
+
     super( {
-      position: atomPosition,
+      position: initialPosition,
       tandem: tandem
     } );
 
@@ -77,7 +82,7 @@ export default abstract class QuantumElectron extends Electron {
     } );
 
     // The Java version started at a different angle each time reset, but that conflicts with PhET-iO.
-    this.angleProperty = new NumberProperty( 0, {
+    this.angleProperty = new NumberProperty( initialAngle, {
       units: 'radians',
       tandem: tandem.createTandem( 'angleProperty' ),
       phetioDocumentation: 'For internal use only.',
