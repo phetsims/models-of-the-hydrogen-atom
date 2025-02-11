@@ -9,11 +9,11 @@
  * see SchrodingerQuantumNumbers.
  *
  * Wavefunction:
- * This implementation solves the 3D Schrodinger wavefunction, used to compute probability density values in 3D space.
- * The quantum numbers (n,l,m) describe the wavefunction.
+ * Probability density is computed by solving the 3D Schrödinger wave function, which in turn involves solving
+ * the generalized Laguerre Polynomial and the associated Legendre polynomial.
  *
  * Collision behavior:
- * Identical to the "brightness" views of de Broglie, which is why this class is an extension of DeBroglieModel.
+ * Identical to Bohr and de Broglie.
  *
  * Absorption behavior:
  * Identical to Bohr and de Broglie.
