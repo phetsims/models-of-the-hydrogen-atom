@@ -66,16 +66,15 @@ are documented in `MOTHAQueryParameters.ts`. Running with `?log` prints the comp
 **Instantiation:** Most objects in this sim are instantiated at startup, and exist for the lifetime of the simulation.
 The exceptions are:
 
-* `Photon`: Created dynamically, when they are emitted from the light source or the hydrogen atom. See `PhotonGroup`
-(a `PhetioGroup`) for details.
+* `Photon` instances (model elements) are created dynamically, when they are emitted from the light source or the
+hydrogen atom. See `PhotonGroup` (a `PhetioGroup`) for details. `PhotonNode` instances (the corresponding view elements)
+are created dynamically in response to the creation of `Photon` instances. Search for `photonGroup.elementCreatedEmitter`
+and `photonGroup.elementDisposedEmitter` to see the specifics of how `PhotonNode` instances are instantiated and disposed.
 
-* `PhotonNode`: Created dynamically in response to the creation of a `Photon` instance. Search for 
-`photonGroup.elementCreatedEmitter` and `photonGroup.elementDisposedEmitter` to see the specifics
-of how `PhotonNode` instances are instantiated and disposed.
-
-`* SpectrometerSnapshot`: Created dynamically, but no `PhetioGroup` is involved. See `Spectrometer` method `takeSnapshot`
-for details. (Note that the corresponding view element, `SpectrometerSnapshot`, is not created dynamically. A fixed
-number of `SpectrometerSnapshot` instances is created at startup and mutated as needed.)
+* `SpectrometerSnapshot` instances (model elements) are created dynamically, but no `PhetioGroup` is involved. 
+See `Spectrometer` method `takeSnapshot` for details. The corresponding view element, `SpectrometerSnapshot`,
+is _not_ created dynamically. A fixed number of `SpectrometerSnapshot` instances is created at startup and mutated
+as needed. See `SpectrometerSnapshotsDialog` for details.
 
 **Listeners**: Unless otherwise noted in the code, uses of `link`, `addListener`, etc. do not require a corresponding
 `unlink`, `removeListener`, etc. because most objects exist for the lifetime of the simulation.
