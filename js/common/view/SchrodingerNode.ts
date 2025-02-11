@@ -47,6 +47,9 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     const orbitalNode = new SchrodingerOrbitalNode( schrodingerModel.nlmProperty, schrodingerModel.position,
       modelViewTransform, zoomedInBoxBounds );
 
+    // Documentation in SchrodingerModel.java (the legacy version) said: "Proton is at the center, visible only when
+    // the probability density field strength is below a threshold value." Discussed this with designers, and we
+    // decided that the proton will always be visible. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/124.
     const protonNode = new ProtonNode( schrodingerModel.proton, modelViewTransform );
 
     super( schrodingerModel, hydrogenAtomProperty, {

@@ -4,9 +4,8 @@
  * SchrodingerModel is a predictive model of the hydrogen atom.
  *
  * Physical representation:
- * Electron is a probability density field. Proton is at the center, visible only when the probability density
- * field strength is below a threshold value. The electron's state is specified by 3 quantum numbers (n,l,m),
- * see SchrodingerQuantumNumbers.
+ * Electron is a probability density field. Proton is at the center. The electron's state is specified by
+ * 3 quantum numbers (n,l,m), see SchrodingerQuantumNumbers.
  *
  * Wavefunction:
  * Probability density is computed by solving the 3D Schrödinger wave function, which in turn involves solving
