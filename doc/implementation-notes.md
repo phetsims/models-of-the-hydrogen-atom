@@ -111,7 +111,7 @@ the class documentation for details.
 
 All atomic models except "Billiard Ball" include an electron.
 
-### Class hierarchy
+### Class Hierarchies
 
 This diagram shows the most important parts of the model class hierarchy. See the documentation of each class
 for further details. 
@@ -146,7 +146,9 @@ Electron
  // * DeBrolieModel uses the same electron model as superclass BohrModel, so there is no DeBroglieElectron.
  ```
 
-For the quantum atomic models, these additional classes are interesting. See their documentation for details.
+### Extra Credit
+
+For the quantum atomic models, these additional classes are critical. See their documentation for details.
 
 * `PhotonAbsorptionModel`
 * `SchrodingerQuantumNumbers`
