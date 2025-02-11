@@ -1,7 +1,8 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * DeBroglie3DWaveNode displays the electron as a wave in the '3D Height' view for the de Broglie model.
+ * DeBroglie3DWaveNode displays the electron as a wave in the '3D Height' view for the de Broglie model,
+ * where the height is a function of the amplitude of the standing wave.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

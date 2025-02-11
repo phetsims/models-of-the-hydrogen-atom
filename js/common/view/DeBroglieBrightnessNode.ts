@@ -147,7 +147,7 @@ class BrightnessWaveNode extends Node {
 
     const n = this.deBroglieModel.electron.nProperty.value;
 
-    // the number of relevant polygons, NOT this.polygonNodes.length
+    // The number of relevant polygons, NOT this.polygonNodes.length.
     assert && assert( _.every( this.children, child => child instanceof Path ), 'Every child should be an instance of Path.' );
     const numberOfPolygons = this.getChildrenCount();
 
