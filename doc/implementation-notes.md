@@ -98,7 +98,7 @@ Both screens use an identical model. The only thing that varies is which atomic 
 ### Light Source
 
 `LightSource` is the model of a simple light source that emits photons in the UV and visible spectrums, for white
-light and monochromatic light. With white light, the algorithm for choosing a photon's wavelength is implemented
+light or monochromatic light. With white light, the algorithm for choosing a photon's wavelength is implemented
 such that the probability of the photon interacting with the atom is increased. See method `getNextPhotonWavelength`
 in LightSource.ts for details.
 
@@ -172,7 +172,7 @@ The remainder of this section will highlight a few of the more interesting view 
 
 The de Broglie atomic model represents the electron as a wave. There are three such representations, which the 
 user can choose from a combo box:
-* Radial Distance - Distance from the electron's orbit is a function of amplitude. See DeBroglieRadialDistanceNode.ts.
+* Radial Distance - Distance of the wave from the electron's orbit is a function of amplitude. See DeBroglieRadialDistanceNode.ts.
 * 3D Height - The 3D height of the wave is a function of amplitude. Selecting this view causes the atom to
 rotate into place, so that we are viewing the atom in pseudo-3D. See DeBroglie3DHeightNode.ts, DeBroglie3DWaveNode.ts, and Wireframe3DNode.ts.
 * Brightness - A ring is drawn that corresponds to the electron's orbit, and the brightness of the ring is a function
