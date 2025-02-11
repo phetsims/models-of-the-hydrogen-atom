@@ -50,7 +50,8 @@ at the top of the following source code files.
 
 The following rules are implemented for electron state transitions in the Schrödinger model:
 
-* n = `[1,6]` (also in Bohr and de Broglie)
+* n, l, and m are integers.
+* n = `[1,6]`
 * l = `[0,n-1]`
 * m = `[-l,+l]`
 * |l-l'| = 1

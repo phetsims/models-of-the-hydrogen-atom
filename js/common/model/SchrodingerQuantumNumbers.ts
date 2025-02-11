@@ -11,6 +11,7 @@
  * State transition rules:
  * All the following rules must be obeyed when choosing a transition:
  *
+ *   n, l, and m are integers.
  *   n = [1...6] as in the Bohr and de Broglie models.
  *   l = [0...n-1]
  *   m = [-l...+l]
