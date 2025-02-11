@@ -52,7 +52,7 @@ type PlumPuddingModelOptions = SelfOptions & PickRequired<HydrogenAtomOptions, '
 export default class PlumPuddingModel extends HydrogenAtom {
 
   // Radius of the plum pudding, in unitless model coordinates.
-  public static readonly RADIUS = 30;
+  public static readonly RADIUS = 35;
 
   // Wavelength (in nm) of emitted photons.
   public static readonly PHOTON_EMISSION_WAVELENGTH = 150;
