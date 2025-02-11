@@ -50,8 +50,7 @@ export default abstract class QuantumElectron extends Electron {
 
     // Compute the initial position of the electron.
     const initialAngle = 0;
-    const initialOffset = MOTHAUtils.polarToCartesian( BohrModel.getElectronOrbitRadius( nProperty.value ), initialAngle );
-    const initialPosition = atomPosition.plus( initialOffset );
+    const initialPosition = atomPosition.plus( computeOffset( nProperty.value, initialAngle ) );
 
     super( {
       position: initialPosition,
@@ -91,10 +90,7 @@ export default abstract class QuantumElectron extends Electron {
 
     this.offsetProperty = new DerivedProperty(
       [ nProperty, this.angleProperty ],
-      ( n, angle ) => {
-        const radius = BohrModel.getElectronOrbitRadius( n );
-        return MOTHAUtils.polarToCartesian( radius, angle );
-      }, {
+      ( n, angle ) => computeOffset( n, angle ), {
         tandem: tandem.createTandem( 'offsetProperty' ),
         phetioDocumentation: 'For internal use only.',
         phetioValueType: Vector2.Vector2IO
@@ -117,6 +113,14 @@ export default abstract class QuantumElectron extends Electron {
    * Sets the value of n, the principal quantum number.
    */
   public abstract set_n( n: number ): void;
+}
+
+/**
+ * Computes the offset of the electron relative to the atom's position.
+ */
+function computeOffset( n: number, angle: number ): Vector2 {
+  const radius = BohrModel.getElectronOrbitRadius( n );
+  return MOTHAUtils.polarToCartesian( radius, angle );
 }
 
 assert && assert( QuantumElectron.GROUND_STATE === 1, 'A fundamental assumption of this sim is that n=1 is the ground state.' );
