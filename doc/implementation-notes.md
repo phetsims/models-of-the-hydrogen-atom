@@ -189,7 +189,7 @@ TODO
 ### IOTypes
 
 To identify custom IOTypes, search for "new IOType". The documentation for custom IOTypes identifies the type 
-of PhET-iO serialization that is implemented.
+of PhET-iO serialization that is implemented. To identify where these IOTypes are used, search for "phetioValueType".
 
 ### Dynamic PhET-iO Elements
 
