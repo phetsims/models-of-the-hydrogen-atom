@@ -10,7 +10,6 @@
     * [Coordinate Frames](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#coordinate-frames)
     * [Query Parameters](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#query-parameters)
     * [Memory Management](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#memory-management)
-    * [Software Design Patterns](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#software-design-patterns)
 * [Model](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#model)
 * [View](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#view)
 * [Sound](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#sound)
