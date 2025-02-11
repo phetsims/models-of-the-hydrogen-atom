@@ -62,7 +62,7 @@ The following rules are implemented for electron state transitions in the Schrö
 * m = `[-l,+l]`
 * |l-l'| = 1
 * |m-m'| <= 1
-* n transitions have varying transition strengths. (See `TRANSITION_STRENGTHS` in SchrodingerQuantumNumbers.ts.)
+* n transitions have varying transition strengths. (See `TRANSITION_STRENGTHS` in [SchrodingerQuantumNumbers.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerQuantumNumbers.ts).)
 * Valid l and m transitions have equal probability.
 
 ## Transition Wavelengths
