@@ -2,15 +2,14 @@
 
 /**
  * SchrodingerQuantumNumbers is the set of quantum numbers (n,l,m) that describe a wavefunction for the electron.
- * In the context of the Schrodinger model, this is also referred to as 'the electron state' or 'the state'.
+ * In the context of the Schrodinger model, this is also referred to as 'the electron state', 'the state', or
+ * 'electron energy level'.
  *
  * For a given set of quantum numbers, each principal shell (n) has a fixed number of subshells (n,l), and
  * each subshell has a fixed number of orbitals (n,l,m).
  *
  * State transition rules:
- * All the following rules must be obeyed when choosing a transition. Note that transitions from state nlm=(2,0,0)
- * are a special case. The lower state (1,0,0) is not possible since it violates the abs(l-l')=1 rule. The only way to
- * get out of this state (2,0,0) is by going to a higher state - see MetastableHandler.
+ * All the following rules must be obeyed when choosing a transition:
  *
  *   n = [1...6] as in the Bohr and de Broglie models.
  *   l = [0...n-1]
@@ -19,6 +18,10 @@
  *   abs(m-m') < 1
  *   n transitions have varying transition strengths.
  *   Valid l and m transitions have equal probability.
+ *
+ * Note that transitions from state nlm=(2,0,0) are a special case. The lower state (1,0,0) is not possible since it
+ * violates the abs(l-l')=1 rule. The only way to get out of state (2,0,0) is by excitation to a higher state - see
+ * MetastableHandler.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
