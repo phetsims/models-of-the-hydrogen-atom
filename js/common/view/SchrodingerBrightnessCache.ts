@@ -91,7 +91,6 @@ export default class SchrodingerBrightnessCache {
     return this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ];
   }
 
-
   /**
    * Computes the 2D brightness for a state.
    */
