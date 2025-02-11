@@ -230,7 +230,7 @@ function solveWavefunction( nlm: SchrodingerQuantumNumbers, r: number, cosTheta:
  */
 function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
 
-  // From doc/java-version/hydrogen-atom.pdf:
+  // From doc/java-version/hydrogen-atom.pdf, page 29:
   // Normally, a, the “Bohr radius,” is equal to the radius of the smallest Bohr orbit. Since we’ve rescaled the
   // Bohr orbits, we need to rescale a too. For a given value of n, set a=r/n2, where r is the radius of the Bohr
   // orbit for that n.
