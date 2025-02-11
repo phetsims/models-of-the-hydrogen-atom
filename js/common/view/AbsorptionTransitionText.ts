@@ -30,17 +30,25 @@ export default class AbsorptionTransitionText extends RichText {
                       tandem: Tandem ) {
 
     const visibleProperty = new DerivedProperty(
-      [ experimentOrModelProperty, isQuantumAtomProperty, lightModeProperty ],
-      ( experimentOrModel, isQuantumAtom, lightMode ) =>
-        ( experimentOrModel === 'model' && isQuantumAtom && lightMode === 'monochromatic' ) );
+      [ experimentOrModelProperty, isQuantumAtomProperty, lightModeProperty, wavelengthProperty ],
+      ( experimentOrModel, isQuantumAtom, lightMode, wavelength ) =>
+        ( experimentOrModel === 'model' &&
+          isQuantumAtom &&
+          lightMode === 'monochromatic' &&
+          photonAbsorptionModel.isTransitionWavelength( wavelength ) ) );
 
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'.
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
 
+    // Note that we cannot do something as simple as setting this string to '' or ' ' when the wavelength is not a
+    // transition wavelength. On some platforms that changes the bounds of this Node, and causes LightControlPanel
+    // to vertically resize. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/127.
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],
       ( n, wavelength ) => {
         const transition = photonAbsorptionModel.getTransition( wavelength );
-        return transition ? `${n} = ${transition.n1} ${MOTHASymbols.rightArrow} ${transition.n2}` : '';
+        const n1 = transition ? transition.n1 : '?';
+        const n2 = transition ? transition.n2 : '?';
+        return `${n} = ${n1} ${MOTHASymbols.rightArrow} ${n2}`;
       } );
 
     super( stringProperty, {

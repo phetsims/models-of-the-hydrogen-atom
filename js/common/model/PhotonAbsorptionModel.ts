@@ -114,6 +114,13 @@ class PhotonAbsorptionModel {
   }
 
   /**
+   * Is the specified wavelength a transition wavelength?
+   */
+  public isTransitionWavelength( wavelength: number ): boolean {
+    return !!this.getTransition( wavelength );
+  }
+
+  /**
    * Gets the transition for a specified wavelength. Returns null if no transition exists.
    */
   public getTransition( wavelength: number ): StateTransition | null {
