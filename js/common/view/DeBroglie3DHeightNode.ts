@@ -1,7 +1,9 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * DeBroglie3DHeightNode displays the '3D Height' view for the de Broglie model.
+ * DeBroglie3DHeightNode displays the '3D Height' view for the de Broglie model. In this view, the 3D height of the wave
+ * is a function of the electron amplitude. Selecting this view causes the atom to rotate into place, so that we are
+ * viewing the atom in pseudo-3D.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
