@@ -5,6 +5,7 @@
 ## Table of Contents
 
 * [Introduction](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#introduction)
+* [Legacy Version](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#legacy-version)
 * [General Considerations](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#general-considerations)
     * [Coordinate Frames](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#coordinate-frames)
     * [Query Parameters](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#query-parameters)
@@ -31,10 +32,15 @@ In addition to this document, you are encouraged to read:
 
 * [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md)
 * [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/main/doc/phet-software-design-patterns.md)
-* Faraday's Electromagnetic Lab HTML5 - TODO link
-* Faraday's Electromagnetic Lab PhET-iO Design - TODO link
+* [Models of the Hydrogen Atom HTML5](https://docs.google.com/document/d/1fZT_vDD8sX8nkSpTxHOyoP6-XrAIJYo44dacLIbZO14/edit?pli=1&tab=t.0) (Parts of this are likely to be stale.)
 
-TODO Talk about legacy version, when published, link to Unfuddle, source code refers to Java files.
+## Legacy Version
+
+This simulation was originally written in Java, and first published in March 2007.  The Java source code lives
+[here](https://phet.unfuddle.com/a#/projects/9404/repositories/23262/browse?path=%2Ftrunk%2Fsimulations-java%2Fsimulations%2Fhydrogen-atom&commit=75234)
+in Unfuddle SVN (login and password required.) While some of the code is a direct port, most of the code has been
+rewritten to use modern PhET software patterns and practices. For the curious, TypeScript source files often mention
+the Java file(s) from which they were ported.  
 
 ## General Considerations
 
