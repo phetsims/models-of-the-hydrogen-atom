@@ -28,7 +28,7 @@ Before reading this document, please read:
 * [model.md](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/model.md), a high-level
   description of the simulation model.
 
-In addition to this document, you are encouraged to read:
+You are also encouraged to read:
 
 * [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md)
 * [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/main/doc/phet-software-design-patterns.md)
