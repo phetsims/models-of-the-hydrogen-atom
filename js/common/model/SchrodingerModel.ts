@@ -251,7 +251,7 @@ function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): 
  * Solves the associated Legendre polynomial, as specified in the Java design document.
  * See page 28 of doc/java-version/hydrogen-atom.pdf.
  *
- * In the java version, this was AssociatedLegendrePolynomials.java.
+ * In the Java version, this was AssociatedLegendrePolynomials.java.
  *
  * This solution uses Wolfram's definition of the associated Legendre polynomial. See
  * https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html
