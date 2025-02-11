@@ -24,7 +24,7 @@ const NUMBER_OF_CELLS = 40; //TODO https://github.com/phetsims/models-of-the-hyd
 export default class SchrodingerBrightnessCache {
 
   // Cache of 2D brightness values [row][column], indexed by [n-1][l][abs(m)].
-  // This data structure is huge, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
+  // This data structure is large, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
   private readonly cache: Array<Array<Array<null | Array<Array<number>>>>>;
 
   // reusable array for computing sums
