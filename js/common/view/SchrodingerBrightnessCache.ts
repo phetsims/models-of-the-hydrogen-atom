@@ -113,14 +113,11 @@ class SchrodingerBrightnessCache {
 
     for ( let row = 0; row < NUMBER_OF_CELLS; row++ ) {
       const z = ( row * this.cellSideLength ) + ( this.cellSideLength / 2 );
-      assert && assert( z > 0, `invalid z: ${z}` );
       for ( let column = 0; column < NUMBER_OF_CELLS; column++ ) {
         const x = ( column * this.cellSideLength ) + ( this.cellSideLength / 2 );
-        assert && assert( x > 0, `invalid x: ${x}` );
         let sum = 0;
         for ( let depth = 0; depth < NUMBER_OF_CELLS; depth++ ) {
           const y = ( depth * this.cellSideLength ) + ( this.cellSideLength / 2 );
-          assert && assert( y > 0, `invalid y: ${y}` );
           const probabilityDensity = SchrodingerModel.solveProbabilityDensity( nlm, x, y, z );
           sum += probabilityDensity;
         }
