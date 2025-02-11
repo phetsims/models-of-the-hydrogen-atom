@@ -19,7 +19,7 @@
  *
  * Emission behavior:
  * Both spontaneous and stimulated emission are similar to Bohr and de Broglie, but the rules for electron state
- * transitions are more complicated. See SchrodingerQuantumNumbers.
+ * transitions are more complicated. See stimulatedEmissionIsAllowed and SchrodingerQuantumNumbers.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
