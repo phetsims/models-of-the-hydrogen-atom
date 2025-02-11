@@ -14,24 +14,24 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class PolynomialTerm {
 
-  // Exponent of the term's variable, e.g. '3' in '2x^3'.
-  public readonly exponent: number;
-
-  // The term's multiplier, e.g. '2' in '2x^3'.
+  // The term's coefficient, e.g. '2' in '2x^3'.
   public readonly coefficient: number;
+
+  // The term's exponent, e.g. '3' in '2x^3'.
+  public readonly exponent: number;
 
   private static readonly ZERO = new PolynomialTerm( 0, 0 );
 
-  public constructor( exponent: number, coefficient: number ) {
-    assert && assert( Number.isInteger( exponent ), `invalid exponent: ${exponent}` );
+  public constructor( coefficient: number, exponent: number ) {
     assert && assert( Number.isInteger( coefficient ), `invalid coefficient: ${coefficient}` );
+    assert && assert( Number.isInteger( exponent ), `invalid exponent: ${exponent}` );
 
-    this.exponent = exponent;
     this.coefficient = coefficient;
+    this.exponent = exponent;
   }
 
   public equals( term: PolynomialTerm ): boolean {
-    return ( this.exponent === term.exponent ) && ( this.coefficient === term.coefficient );
+    return ( this.coefficient === term.coefficient ) && ( this.exponent === term.exponent );
   }
 
   /**
@@ -70,7 +70,7 @@ export default class PolynomialTerm {
     else {
 
       // power rule
-      return new PolynomialTerm( this.exponent - 1, this.coefficient * this.exponent );
+      return new PolynomialTerm( this.coefficient * this.exponent, this.exponent - 1 );
     }
   }
 

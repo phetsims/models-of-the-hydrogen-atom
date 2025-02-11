@@ -275,7 +275,7 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
   // Note that the probability density will always be the same for +m and –m.
   const mAbs = Math.abs( m );
 
-  let productTerms = [ new PolynomialTerm( 0, 1 ) ]; // 1x^0
+  let productTerms = [ new PolynomialTerm( 1, 0 ) ]; // 1x^0
   for ( let i = 0; i < l; i++ ) {
 
     // x^2-1 times each term on left side
@@ -283,8 +283,8 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
     const terms: PolynomialTerm[] = [];
     for ( let k = 0; k < productTerms.length; k++ ) {
       const term = productTerms[ k ];
-      terms.push( new PolynomialTerm( term.exponent + 2, term.coefficient ) );
-      terms.push( new PolynomialTerm( term.exponent, -1 * term.coefficient ) );
+      terms.push( new PolynomialTerm( term.coefficient, term.exponent + 2 ) );
+      terms.push( new PolynomialTerm( -1 * term.coefficient, term.exponent ) );
     }
     productTerms = terms;
   }
