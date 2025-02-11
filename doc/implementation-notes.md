@@ -40,7 +40,7 @@ This simulation was originally written in Java, and first published in March 200
 [here](https://phet.unfuddle.com/a#/projects/9404/repositories/23262/browse?path=%2Ftrunk%2Fsimulations-java%2Fsimulations%2Fhydrogen-atom&commit=75234)
 in Unfuddle SVN (login and password required.) While some of the code is a direct port, most of the code has been
 rewritten to use modern PhET software patterns and practices. For the curious, TypeScript source files often mention
-the Java file(s) from which they were ported.  
+the Java file from which they were ported.  
 
 ## General Considerations
 
