@@ -122,7 +122,7 @@ Electron
     SchrodingerElectron
     
  // Notes:
- // * BilliardBallModel does not involve an electron, there is no BilliardBallElectron. 
+ // * BilliardBallModel does not involve an electron, so there is no BilliardBallElectron. 
  // * DeBrolieModel uses the same electron model as superclass BohrModel, so there is no DeBroglieElectron.
  ```
 
