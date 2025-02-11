@@ -228,9 +228,10 @@ function solveWavefunction( nlm: SchrodingerQuantumNumbers, r: number, cosTheta:
  */
 function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): number {
 
-  // From doc/java-version/hydrogen-atom.pdf: Normally, a, the “Bohr radius,” is equal to the
-  // radius of the smallest Bohr orbit. Since we’ve rescaled the Bohr orbits, we need to rescale a
-  // too. For a given value of n, set a=r/n2, where r is the radius of the Bohr orbit for that n.
+  // From doc/java-version/hydrogen-atom.pdf:
+  // Normally, a, the “Bohr radius,” is equal to the radius of the smallest Bohr orbit. Since we’ve rescaled the
+  // Bohr orbits, we need to rescale a too. For a given value of n, set a=r/n2, where r is the radius of the Bohr
+  // orbit for that n.
   const a = BohrModel.getElectronOrbitRadius( n ) / ( n * n );
 
   const multiplier = Math.pow( r, l ) * Math.exp( -r / ( n * a ) );
@@ -265,6 +266,8 @@ function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): 
  */
 function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): number {
 
+  // From doc/java-version/hydrogen-atom.pdf:
+  // Note that the probability density will always be the same for +m and –m.
   const mAbs = Math.abs( m );
 
   let productTerms = [ new PolynomialTerm( 0, 1 ) ]; // 1x^0
