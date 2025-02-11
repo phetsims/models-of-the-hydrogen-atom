@@ -66,6 +66,8 @@ the electron completes its current oscillation cycles, and comes to rest at the 
 
 ### Classical Solar System:
 
+Source code: ClassicalSolarSystemModel.ts
+
 Physical representation: Proton at the center, electron spirals towards the proton. The spiral is clockwise to be
 consistent with all other orbits in this sim. The electron starts at a fixed distance from the proton.
 The radius of the spiral decreases linearly and the electron accelerates as the electron moves closer to the proton.
@@ -79,6 +81,8 @@ Absorption behavior: The atom is destroyed, so it does not absorb photons.
 Emission behavior: The atom is destroyed, so it does not emit photons.
 
 ### Bohr:
+
+Source code: BohrModel.ts
 
 Physical representation: Electron orbiting a proton. Each orbit corresponds to a different electron state.
 
@@ -96,6 +100,8 @@ travels alongside the original photon.
 
 ### de Broglie:
 
+Source code: DeBroglieModel.ts
+
 The de Broglie model is the same as Bohr, but the electron is represented as a wave in the view. There are three wave
 representations that the user may choose from a combo box: "Radial Distance", "3D Height", or "Brightness". Briefly:
 
@@ -104,6 +110,8 @@ representations that the user may choose from a combo box: "Radial Distance", "3
 * Brightness - Brightness of the wave is a function of amplitude.
 
 ### Schrödinger:
+
+Source code: SchrodingerModel.ts
 
 Physical representation: The electron is a probability density field. A proton is at the center, visible only when the
 probability density field strength is below a threshold value. The electron's state is specified by 3 quantum numbers 
