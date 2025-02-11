@@ -8,14 +8,14 @@
  * straight line that passes through the center of the goo and has its end points on the circle.
  *
  * Collision behavior:
- * Photons collide with the electron when they are "close".
+ * Photons collide with the electron when they are inside the circle.
  *
  * Absorption behavior:
  * The electron can absorb N photons. When any photon collides with the electron, it is absorbed with some probability,
  * and (if absorbed) causes the electron to start oscillating.
  *
  * Emission behavior:
- * The electron can emit one UV photon for each photon absorbed. Photons are emitted at the electron's location.
+ * The electron can emit one 150 nm (UV) photon for each photon absorbed. Photons are emitted at the electron's location.
  * No photons are emitted until the electron has completed one oscillation cycle, and after emitting its last photon,
  * the electron completes its current oscillation cycles, coming to rest at the atom's center.
  *
