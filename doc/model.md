@@ -38,7 +38,7 @@ increases the probability that a photon will interact with the atom.
 
 The simulation supports 6 atomic models, briefly described herein.
 
-### Billiard Ball:
+### Billiard Ball atomic model
 
 Source code: BilliardBallModel.ts
 
@@ -50,7 +50,7 @@ Absorption behavior: Does not absorb photons.
 
 Emission behavior: Does not emit photons.
 
-### Plum Pudding:
+### Plum Pudding atomic model
 
 Source code: PlumPuddingModel.ts
 
@@ -66,7 +66,7 @@ Emission behavior: The electron can emit one 150 nm photon for each photon absor
 location. No photons are emitted until the electron has completed one oscillation cycle. After emitting its last photon,
 the electron completes its current oscillation cycles, and comes to rest at the atom's center.
 
-### Classical Solar System:
+### Classical Solar System atomic model
 
 Source code: ClassicalSolarSystemModel.ts
 
@@ -82,7 +82,7 @@ Absorption behavior: The atom is destroyed, so it does not absorb photons.
 
 Emission behavior: The atom is destroyed, so it does not emit photons.
 
-### Bohr:
+### Bohr atomic model
 
 Source code: BohrModel.ts
 
@@ -100,7 +100,7 @@ to a wavelength that could have been absorbed in a lower state. In this case, th
 but a new photon is emitted with the same wavelength, and the electron moves to the lower state. The emitted photon
 travels alongside the original photon.
 
-### de Broglie:
+### de Broglie atomic model
 
 Source code: DeBroglieModel.ts
 
@@ -111,7 +111,7 @@ representations that the user may choose from a combo box: "Radial Distance", "3
 * 3D Height - 3D height of the wave is a function of amplitude.
 * Brightness - Brightness of the wave is a function of amplitude.
 
-### Schrödinger:
+### Schrödinger atomic model
 
 Source code: SchrodingerModel.ts
 
