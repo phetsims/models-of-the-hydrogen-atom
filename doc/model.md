@@ -53,8 +53,8 @@ The following rules are implemented for electron state transitions in the Schrö
 * n = `[1,6]` (also in Bohr and de Broglie)
 * l = `[0,n-1]`
 * m = `[-l,+l]`
-* abs(l-l') = 1
-* abs(m-m') < 1
+* |l-l'| = 1
+* |m-m'| < 1
 * n transitions have varying transition strengths. (See `TRANSITION_STRENGTHS` in SchrodingerQuantumNumbers.ts.)
 * Valid l and m transitions have equal probability.
 
