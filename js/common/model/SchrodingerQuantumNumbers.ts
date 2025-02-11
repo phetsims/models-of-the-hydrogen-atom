@@ -12,9 +12,9 @@
  * All the following rules must be obeyed when choosing a transition:
  *
  *   n, l, and m are integers.
- *   n = [1...6] as in the Bohr and de Broglie models.
- *   l = [0...n-1]
- *   m = [-l...+l]
+ *   n has range [1,6] as in the Bohr and de Broglie models.
+ *   l has range [0,n-1]
+ *   m has range [-l,l]
  *   abs(l-l') = 1
  *   abs(m-m') <= 1
  *   n transitions have varying transition strengths.
