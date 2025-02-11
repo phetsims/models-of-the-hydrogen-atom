@@ -92,7 +92,7 @@ public dispose(): void {
 
 ### Class hierarchy
 
-This diagram shows the most important part of the model class hierarchy.
+This diagram shows the most important parts of the model class hierarchy.
 
 ```
 // Atomic Models
