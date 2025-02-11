@@ -20,6 +20,8 @@ export default class PolynomialTerm {
   // The term's multiplier, e.g. '2' in '2x^3'.
   public readonly coefficient: number;
 
+  private static readonly ZERO = new PolynomialTerm( 0, 0 );
+
   public constructor( exponent: number, coefficient: number ) {
     assert && assert( Number.isInteger( exponent ), `invalid exponent: ${exponent}` );
     assert && assert( Number.isInteger( coefficient ), `invalid coefficient: ${coefficient}` );
@@ -44,21 +46,32 @@ export default class PolynomialTerm {
    */
   public derive( iterations: number ): PolynomialTerm {
     assert && assert( Number.isInteger( iterations ) && iterations >= 0, `invalid iterations: ${iterations}` );
-
-    let coefficient = this.coefficient;
-    let exponent = this.exponent;
-    for ( let i = 0; i < iterations - 1; i++ ) {
-      if ( exponent === 0 ) {
-        exponent = 0;
-        coefficient = 0;
-        break;
-      }
-      else {
-        coefficient = coefficient * exponent;
-        exponent = exponent - 1;
-      }
+    if ( iterations === 0 ) {
+      return this;
     }
-    return new PolynomialTerm( exponent, coefficient );
+    else {
+      let term = this.derivative();
+      for ( let i = 1; i < iterations; i++ ) {
+        term = term.derivative();
+      }
+      return term;
+    }
+  }
+
+  /**
+   * Computes the derivative of this Polynomial.
+   */
+  private derivative(): PolynomialTerm {
+    if ( this.exponent === 0 ) {
+
+      // The derivative of a constant is zero.
+      return PolynomialTerm.ZERO;
+    }
+    else {
+
+      // power rule
+      return new PolynomialTerm( this.exponent - 1, this.coefficient * this.exponent );
+    }
   }
 
   /**
