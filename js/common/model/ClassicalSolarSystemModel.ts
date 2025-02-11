@@ -4,13 +4,13 @@
  * ClassicalSolarSystemModel is a predictive model of the hydrogen atom.
  *
  * Physical representation:
- * Proton at the center, electron spirals towards the proton. Our spiral is clockwise to be consistent with all other
+ * Proton at the center, electron spirals towards the proton. The spiral is clockwise to be consistent with all other
  * orbits in this sim. The electron starts at a fixed distance from the proton. The radius of the spiral decreases
  * linearly and the electron accelerates as the electron moves closer to the proton. The final state shows the electron
  * on top of the proton. In this final state, the atom is considered "destroyed".
  *
  * Collision behavior:
- * Ideally, the spiraling behavior occurs fast enough that the atom is  destroyed before any photons reach it.
+ * Ideally, the spiraling behavior occurs fast enough that the atom is destroyed before any photons reach it.
  * Therefore, there are no collisions.
  *
  * Absorption behavior:
