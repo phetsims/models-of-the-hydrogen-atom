@@ -209,7 +209,8 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
 }
 
 /**
- * Solves the electron's wavefunction.
+ * Solves the electron's wavefunction, as specified in the Java design document.
+ * See page 28 of doc/java-version/hydrogen-atom.pdf.
  * @param nlm - quantum numbers that describe the electron's state
  * @param r - radius
  * @param cosTheta - cosine of the angle
@@ -222,6 +223,7 @@ function solveWavefunction( nlm: SchrodingerQuantumNumbers, r: number, cosTheta:
 
 /**
  * Solves the generalized Laguerre Polynomial, as specified in the Java design document.
+ * See page 28 of doc/java-version/hydrogen-atom.pdf.
  * @param n - principal quantum number
  * @param l - azimuthal quantum number
  * @param r - radius
@@ -247,7 +249,10 @@ function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): 
 }
 
 /**
- * Solves the associated Legendre polynomial. In the java version, this was AssociatedLegendrePolynomials.java.
+ * Solves the associated Legendre polynomial, as specified in the Java design document.
+ * See page 28 of doc/java-version/hydrogen-atom.pdf.
+ *
+ * In the java version, this was AssociatedLegendrePolynomials.java.
  *
  * This solution uses Wolfram's definition of the associated Legendre polynomial. See
  * https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html
