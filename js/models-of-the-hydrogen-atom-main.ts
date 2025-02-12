@@ -45,7 +45,7 @@ simLauncher.launch( () => {
 
   const sim = new Sim( titleStringProperty, screens, options );
 
-  // Pre-populate the cache for Schrodinger orbitals.
+  // Pre-populate the cache for Schrodinger rendering orbitals.
   if ( MOTHAQueryParameters.computeOrbitals === 'atStartup' ) {
     schrodingerBrightnessCache.populate();
   }
