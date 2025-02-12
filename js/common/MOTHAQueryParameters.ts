@@ -70,6 +70,13 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     type: 'number',
     defaultValue: 40,
     isValidValue: value => Number.isInteger( value ) && ( value > 20 )
+  },
+
+  // Determines when the orbitals for all reachable Schrodinger (n,l,m) states will be computed.
+  computeOrbitals: {
+    type: 'string',
+    defaultValue: 'atStartup',
+    isValidValue: value => value === 'atStartup' || value === 'asNeeded'
   }
 };
 

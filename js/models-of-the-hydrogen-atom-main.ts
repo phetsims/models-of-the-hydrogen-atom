@@ -14,6 +14,7 @@ import EnergyLevelsScreen from './energylevels/EnergyLevelsScreen.js';
 import ModelsOfTheHydrogenAtomStrings from './ModelsOfTheHydrogenAtomStrings.js';
 import SpectraScreen from './spectra/SpectraScreen.js';
 import schrodingerBrightnessCache from './common/view/SchrodingerBrightnessCache.js';
+import MOTHAQueryParameters from './common/MOTHAQueryParameters.js';
 
 simLauncher.launch( () => {
 
@@ -45,7 +46,9 @@ simLauncher.launch( () => {
   const sim = new Sim( titleStringProperty, screens, options );
 
   // Pre-populate the cache for Schrodinger orbitals.
-  schrodingerBrightnessCache.populate();
+  if ( MOTHAQueryParameters.computeOrbitals === 'atStartup' ) {
+    schrodingerBrightnessCache.populate();
+  }
 
   sim.start();
 } );
