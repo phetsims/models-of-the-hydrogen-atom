@@ -2,7 +2,7 @@
 
 /**
  * SchrodingerBrightnessCache is responsible for representing Schrodinger (n,l,m) states as a 2D grid of brightness
- * values in the range [0,1]. 0 is no brightness and 1 is maximum brightness. A 2D grid of brightness values is used
+ * values in the range [0,1]. 0 is no brightness and 1 is maximum brightness. The grid of brightness values is used
  * to render the electron's orbital.
  *
  * Values are computed on demand for each (n,l,m) state, then cached. Calling the populate method will eagerly
