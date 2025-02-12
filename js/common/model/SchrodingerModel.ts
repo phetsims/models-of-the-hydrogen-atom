@@ -30,7 +30,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import SchrodingerNode from '../view/SchrodingerNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import BohrModel from './BohrModel.js';
 import DeBroglieBaseModel, { DeBroglieBaseModelOptions } from './DeBroglieBaseModel.js';
 import { DeBroglieModelOptions } from './DeBroglieModel.js';
@@ -40,6 +39,7 @@ import PolynomialTerm from './PolynomialTerm.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import SchrodingerElectron from './SchrodingerElectron.js';
 import QuantumElectron from './QuantumElectron.js';
+import MOTHAIconFactory from '../view/MOTHAIconFactory.js';  // eslint-disable-line phet/no-view-imported-from-model
 
 type SelfOptions = EmptySelfOptions;
 
@@ -68,7 +68,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
       electron: schrodingerElectron,
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.schrodingerStringProperty,
       debugName: 'Schrodinger',
-      icon: SchrodingerNode.createIcon(),
+      icon: MOTHAIconFactory.createSchrodingerIcon(),
       tandemNamePrefix: 'schrodinger'
     }, providedOptions );
 

@@ -64,6 +64,11 @@ class SchrodingerBrightnessCache {
 
     // 3D cell size, where each cell is a cube.
     this.cellSideLength = QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS;
+
+    // Eagerly populate the cache.
+    if ( MOTHAQueryParameters.computeOrbitals === 'atStartup' ) {
+      this.populate();
+    }
   }
 
   /**
