@@ -62,6 +62,14 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
       const m = array[ 2 ];
       return ( array.length === 3 ) && SchrodingerQuantumNumbers.isValidState( n, l, m );
     }
+  },
+
+  // Size of the NxNxN grid used to compute probability density for Schrodinger orbitals.
+  // As this value gets larger, performance will be impacted.
+  gridSize: {
+    type: 'number',
+    defaultValue: 40,
+    isValidValue: value => Number.isInteger( value ) && ( value > 20 )
   }
 };
 

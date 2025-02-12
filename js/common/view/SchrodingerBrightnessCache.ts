@@ -22,9 +22,10 @@ import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
+import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 // Number of cells in one quadrant, in all dimensions.
-const NUMBER_OF_CELLS = 40; //TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/115 Improve resolution by increasing number of cells? But that hurts performance...
+const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
 
 const QUADRANT_SIDE_LENGTH = ZoomedInBox.SIDE_LENGTH / 2; // in model coordinates!
 
