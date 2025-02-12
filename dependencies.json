@@ -1,11 +1,11 @@
 {
-  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.23 Tue Feb 11 2025 12:45:54 GMT-0700 (Mountain Standard Time)",
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.24 Wed Feb 12 2025 13:08:46 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "f6d41b399ad32df2a00ab4b329981be0c574d77a",
     "branch": "main"
   },
   "axon": {
-    "sha": "8f46e7d90e9d5cb63963793c353c0342c6eea1c2",
+    "sha": "8a202bf1f7b11adfbfc1c099dbf79a9bd04b7200",
     "branch": "main"
   },
   "brand": {
@@ -13,7 +13,7 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "9675442e5589c0814835aca4d63ff0863b1f6852",
+    "sha": "4dd172b9161b45bde86bdfe172a5cde7bbe44a2c",
     "branch": "main"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "main"
   },
   "joist": {
-    "sha": "15ddbe332981d15fc0c62f26bcd4eb355a82eb39",
+    "sha": "52d13c732ec2443bb29744f551ff5913b94f6b14",
     "branch": "main"
   },
   "kite": {
@@ -29,11 +29,11 @@
     "branch": "main"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "288600468fba72101edecddcb87e1fa589b50334",
+    "sha": "a1d2b919be5d1b6c4beff05ce2cda12c2dfd3a4e",
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "ae5310f8303fb0d788fc642586f6352708cf3929",
+    "sha": "36dd400f2c7034dd6365c4c8d61fafbf07162f94",
     "branch": "main"
   },
   "phet-core": {
@@ -49,7 +49,7 @@
     "branch": "main"
   },
   "phet-io-wrappers": {
-    "sha": "ed8549b13da967d302e05d40216744f8c4a2976a",
+    "sha": "d79f9e065e37b8e3af6d67e3ed1969f09d77b854",
     "branch": "main"
   },
   "phetcommon": {
@@ -65,11 +65,11 @@
     "branch": "main"
   },
   "scenery": {
-    "sha": "a88d7e7729879ae97355700f3ecbd2852fba2ade",
+    "sha": "91b953d5807cdac62b42f7c6da29a292c43e131e",
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "3208e5e9cfdc8c404011cf0ee3b500f8ebf098ba",
+    "sha": "7cea58318e5f1e65a65a62e3e2e38da3dc93238b",
     "branch": "main"
   },
   "sherpa": {
@@ -77,7 +77,7 @@
     "branch": "main"
   },
   "studio": {
-    "sha": "c1c5a52d9c8886efea792c47c1a91037a1fef996",
+    "sha": "08d3b6010bec544d3755f6dbdd38c64810ca5a80",
     "branch": "main"
   },
   "sun": {
