@@ -12,7 +12,7 @@ import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 const MOTHAUtils = {
 
   /**
-   * Gets a random sign.
+   * Gets a random sign for a number.
    */
   nextSign(): 1 | -1 {
     return ( dotRandom.nextBoolean() ? 1 : -1 );
