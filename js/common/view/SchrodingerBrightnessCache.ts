@@ -72,9 +72,9 @@ class SchrodingerBrightnessCache {
   }
 
   /**
-   * Eagerly populates the cache with the electron states that are reachable in this sim.
+   * Eagerly populates the cache for the electron states that are reachable in this sim.
    */
-  public populate(): void {
+  private populate(): void {
     for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
       for ( let l = 0; l <= Math.min( n - 1, SchrodingerQuantumNumbers.lMax ); l++ ) {
         for ( let m = 0; m <= l; m++ ) {
