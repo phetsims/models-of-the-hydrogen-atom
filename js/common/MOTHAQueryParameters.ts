@@ -77,7 +77,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // 'asNeeded' may result in the sim pausing the first time that the electron is in a specific (n,l,m) state.
   computeOrbitals: {
     type: 'string',
-    defaultValue: 'asNeeded',
+    defaultValue: 'atStartup',
     isValidValue: value => value === 'atStartup' || value === 'asNeeded'
   }
 };

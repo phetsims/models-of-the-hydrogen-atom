@@ -28,6 +28,7 @@ import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import MOTHAColors from '../MOTHAColors.js';
 
 // Number of cells in one quadrant of the 2D grid, or in 1/8 of the 3D space.
 const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
@@ -167,6 +168,34 @@ class SchrodingerOpacityCache {
     }
 
     return opacityGrid;
+  }
+
+  /**
+   * Gets a data URL containing an orbital's image in PNG format.
+   * Returns null if the orbital grid has not yet been cached.
+   */
+  public getDataURL( nlm: SchrodingerQuantumNumbers ): string | null {
+    const opacityGrid = this.getCachedOpacityGrid( nlm );
+    if ( !opacityGrid ) {
+      return null;
+    }
+    else {
+      const r = MOTHAColors.electronBaseColorProperty.value.r;
+      const g = MOTHAColors.electronBaseColorProperty.value.g;
+      const b = MOTHAColors.electronBaseColorProperty.value.b;
+
+      const opacityArray = opacityGrid.flat(); // 2D to 1D
+      const rgbaArray = opacityArray.map( opacity => [ r, g, b, opacity * 255 ] ).flat(); // 1D array of color components in r,g,b,a order
+      const imageData = new ImageData( NUMBER_OF_CELLS, NUMBER_OF_CELLS );
+      imageData.data.set( rgbaArray );
+
+      const canvas = document.createElement( 'canvas' );
+      canvas.width = NUMBER_OF_CELLS;
+      canvas.height = NUMBER_OF_CELLS;
+      const context = canvas.getContext( '2d', { alpha: true } )!;
+      context.putImageData( imageData, 0, 0 );
+      return canvas.toDataURL( 'image/png' );
+    }
   }
 }
 
