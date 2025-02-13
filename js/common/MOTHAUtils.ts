@@ -39,7 +39,7 @@ const MOTHAUtils = {
   },
 
   /**
-   * Two points collide if the distance between them is <= some threshold.
+   * Two points collide if the distance between them is <= the specified threshold.
    */
   pointsCollide( position1: Vector2, position2: Vector2, threshold: number ): boolean {
     return position1.distance( position2 ) <= threshold;
