@@ -121,8 +121,11 @@ class SchrodingerOpacityCache {
    */
   private computeOpacityGrid( nlm: SchrodingerQuantumNumbers ): OpacityGrid {
 
+    // The maximum sum, to be used for normalizing.
     let maxSum = 0;
 
+    // Calculate the probability density at each point in 3D space. Then sum the values along the depth (y) axis
+    // that have the same (x,z) coordinates.
     for ( let row = 0; row < NUMBER_OF_CELLS; row++ ) {
       const z = ( row * this.cellSideLength ) + ( this.cellSideLength / 2 );
       for ( let column = 0; column < NUMBER_OF_CELLS; column++ ) {
