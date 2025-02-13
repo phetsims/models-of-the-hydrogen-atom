@@ -25,13 +25,13 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
-import schrodingerBrightnessCache from './SchrodingerBrightnessCache.js';
+import schrodingerOpacityCache, { OpacityGrid } from './SchrodingerOpacityCache.js';
 
 const QUADRANT_SIDE_LENGTH = ZoomedInBoxNode.SIDE_LENGTH / 2; // in view coordinates!
 
 export default class SchrodingerOrbitalNode extends CanvasNode {
 
-  private brightnessValues: number[][]; // 2D grid of brightness values, in [row][column] order.
+  private opacityGrid: OpacityGrid; // 2D grid of opacity values, in [row][column] order.
   private cellWidth: number;
   private cellHeight: number;
 
@@ -46,7 +46,7 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
     } );
 
     // These values will be populated by update().
-    this.brightnessValues = [];
+    this.opacityGrid = [];
     this.cellWidth = 0;
     this.cellHeight = 0;
 
@@ -61,12 +61,12 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
    */
   private update( nlm: SchrodingerQuantumNumbers ): void {
 
-    // Get the brightness values that describe the orbital for the electron's state.
-    this.brightnessValues = schrodingerBrightnessCache.getBrightness( nlm );
+    // Get the 2D opacity grid that describe the orbital for the electron's state.
+    this.opacityGrid = schrodingerOpacityCache.getOpacityGrid( nlm );
 
-    // brightnessValues is for 1 quadrant, so use quadrant size to compute cell size.
-    this.cellWidth = QUADRANT_SIDE_LENGTH / this.brightnessValues[ 0 ].length;
-    this.cellHeight = QUADRANT_SIDE_LENGTH / this.brightnessValues.length;
+    // opacityGrid is for 1 quadrant, so use quadrant size to compute cell size.
+    this.cellWidth = QUADRANT_SIDE_LENGTH / this.opacityGrid[ 0 ].length;
+    this.cellHeight = QUADRANT_SIDE_LENGTH / this.opacityGrid.length;
     assert && assert( this.cellWidth === this.cellHeight, 'cells must be square.' );
 
     // This results in a call to paintCanvas.
@@ -89,15 +89,15 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
     const h = this.cellHeight;
 
     // For each cell in the 2D grid...
-    const numberOfRows = this.brightnessValues.length;
+    const numberOfRows = this.opacityGrid.length;
     for ( let row = 0; row < numberOfRows; row++ ) {
-      const numberOfColumns = this.brightnessValues[ row ].length;
+      const numberOfColumns = this.opacityGrid[ row ].length;
       for ( let column = 0; column < numberOfColumns; column++ ) {
 
-        const brightness = this.brightnessValues[ row ][ column ];
+        const opacity = this.opacityGrid[ row ][ column ];
 
         // Skip cells that contain no information.
-        if ( brightness > 0 ) {
+        if ( opacity > 0 ) {
 
           // Coordinates in the right-bottom quadrant.
           x = ( column * this.cellWidth );
@@ -105,7 +105,7 @@ export default class SchrodingerOrbitalNode extends CanvasNode {
 
           // Fill a rectangle in each quadrant.
           // Use globalAlpha and fillRect because we're filling rectangles with different alpha values.
-          context.globalAlpha = brightness;
+          context.globalAlpha = opacity;
           context.fillRect( x, z, w, h ); // right-bottom quadrant
           context.fillRect( -( x + this.cellWidth ), z, w, h ); // left-bottom quadrant
           context.fillRect( x, -( z + this.cellHeight ), w, h ); // right-top quadrant

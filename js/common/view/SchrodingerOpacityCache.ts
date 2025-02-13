@@ -1,18 +1,18 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * SchrodingerBrightnessCache is responsible for representing Schrodinger (n,l,m) states as a 2D grid of brightness
- * values in the range [0,1]. 0 is no brightness and 1 is maximum brightness. The grid of brightness values is used
- * to render the electron's orbital.
+ * SchrodingerOpacityCache is responsible for representing Schrodinger (n,l,m) states as a 2D grid of opacity
+ * values in the range [0,1], where 0 is transparent and 1 is opaque. The grid of opacity values is used to
+ * render the electron's orbital.
  *
- * Values are computed on demand for each (n,l,m) state, then cached. Calling the populate method will eagerly
- * compute values for all (n,l,m) states reachable in the sim, improving runtime performance at the expense of
- * startup time.
+ * A grid is computed on demand for each (n,l,m) state, then cached. Alternatively, calling the populate method
+ * will eagerly compute values for all (n,l,m) states reachable in the sim, improving runtime performance at
+ * the expense of startup time.
  *
- * A singleton instance is used throughout the sim, so that both screens can benefit from caching.
+ * A singleton instance is used throughout the sim, so that we only compute the grid once for each (n,l,m) state,
+ * and both screens can benefit from the same cache.
  *
- * In the Java implementation, this was class BrightnessCache in SchrodingerNode.java. The Java version provided
- * an option to pre-populate the cache. This proved to be quite time-consuming and the option was never used.
+ * In the Java implementation, this was class BrightnessCache in SchrodingerNode.java.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -29,11 +29,14 @@ const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
 
 const QUADRANT_SIDE_LENGTH = ZoomedInBox.SIDE_LENGTH / 2; // in model coordinates!
 
-class SchrodingerBrightnessCache {
+// A 2D grid of opacity values that describes the orbital for a specific (n,l,m) state, in [row][column] order.
+export type OpacityGrid = Array<Array<number>>;
 
-  // Cache of 2D brightness values [row][column], indexed by [n-1][l][abs(m)].
-  // This data structure is large, but Chrome heap snapshot shows that the sim still has a relatively normal memory footprint.
-  private readonly cache: Array<Array<Array<null | Array<Array<number>>>>>;
+class SchrodingerOpacityCache {
+
+  // Cache of 2D opacity grids, indexed by [n-1][l][abs(m)].
+  // This data structure is large, but Chrome heap snapshot shows that the sim still has a reasonable memory footprint.
+  private readonly cache: Array<Array<Array<null | OpacityGrid>>>;
 
   // reusable array for computing sums
   private readonly sums: Array<Array<number>>;
@@ -78,46 +81,46 @@ class SchrodingerBrightnessCache {
     for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
       for ( let l = 0; l <= Math.min( n - 1, SchrodingerQuantumNumbers.lMax ); l++ ) {
         for ( let m = 0; m <= l; m++ ) {
-          this.getBrightness( new SchrodingerQuantumNumbers( n, l, m ) );
+          this.getOpacityGrid( new SchrodingerQuantumNumbers( n, l, m ) );
         }
       }
     }
   }
 
   /**
-   * Gets the 2D brightness for a state. If it's not already cached, compute it and cache it.
+   * Gets the 2D opacity grid for a state. If it's not already cached, compute it and cache it.
    */
-  public getBrightness( nlm: SchrodingerQuantumNumbers ): number[][] {
-    let brightness = this.getCachedBrightness( nlm );
-    assert && assert( brightness !== undefined );
-    if ( brightness === null ) {
-      brightness = this.computeBrightness( nlm );
-      this.setCachedBrightness( nlm, brightness );
+  public getOpacityGrid( nlm: SchrodingerQuantumNumbers ): OpacityGrid {
+    let opacityGrid = this.getCachedOpacityGrid( nlm );
+    assert && assert( opacityGrid !== undefined );
+    if ( opacityGrid === null ) {
+      opacityGrid = this.computeOpacityGrid( nlm );
+      this.setCachedOpacityGrid( nlm, opacityGrid );
     }
-    return brightness;
+    return opacityGrid;
   }
 
   /**
-   * Sets brightness values for an electron state (n,l,m) in the cache.
+   * Sets opacity values for an electron state (n,l,m) in the cache.
    * Note that the cache is indexed by n-1, because the range of n is [1,6].
    */
-  private setCachedBrightness( nlm: SchrodingerQuantumNumbers, brightness: number[][] ): void {
-    phet.log && phet.log( `Populating brightness cache for (n,l,m) = ${nlm.toString()}` );
-    this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ] = brightness;
+  private setCachedOpacityGrid( nlm: SchrodingerQuantumNumbers, opacityGrid: OpacityGrid ): void {
+    phet.log && phet.log( `Populating orbital cache for (n,l,m) = ${nlm.toString()}` );
+    this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ] = opacityGrid;
   }
 
   /**
-   * Gets brightness values for an electron state (n,l,m) from the cache.
+   * Gets opacity values for an electron state (n,l,m) from the cache.
    * Note that the cache is indexed by n-1, because the range of n is [1,6].
    */
-  private getCachedBrightness( nlm: SchrodingerQuantumNumbers ): number[][] | null {
+  private getCachedOpacityGrid( nlm: SchrodingerQuantumNumbers ): OpacityGrid | null {
     return this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ];
   }
 
   /**
-   * Computes the 2D brightness for a state.
+   * Computes the 2D opacity grid for an (n,l,m) state.
    */
-  private computeBrightness( nlm: SchrodingerQuantumNumbers ): number[][] {
+  private computeOpacityGrid( nlm: SchrodingerQuantumNumbers ): OpacityGrid {
 
     let maxSum = 0;
 
@@ -139,9 +142,9 @@ class SchrodingerBrightnessCache {
     }
 
     // 2D array filled with zeros
-    const brightness = new Array( NUMBER_OF_CELLS );
+    const opacityGrid = new Array( NUMBER_OF_CELLS );
     for ( let i = 0; i < NUMBER_OF_CELLS; i++ ) {
-      brightness[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
+      opacityGrid[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
     }
 
     for ( let row = 0; row < NUMBER_OF_CELLS; row++ ) {
@@ -150,16 +153,16 @@ class SchrodingerBrightnessCache {
         if ( maxSum > 0 ) {
           b = this.sums[ row ][ column ] / maxSum;
         }
-        brightness[ row ][ column ] = b;
+        opacityGrid[ row ][ column ] = b;
       }
     }
 
-    return brightness;
+    return opacityGrid;
   }
 }
 
 // Singleton
-const schrodingerBrightnessCache = new SchrodingerBrightnessCache();
+const schrodingerOpacityCache = new SchrodingerOpacityCache();
 
-modelsOfTheHydrogenAtom.register( 'SchrodingerBrightnessCache', SchrodingerBrightnessCache );
-export default schrodingerBrightnessCache;
+modelsOfTheHydrogenAtom.register( 'SchrodingerOpacityCache', SchrodingerOpacityCache );
+export default schrodingerOpacityCache;
