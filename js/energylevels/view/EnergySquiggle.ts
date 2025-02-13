@@ -18,6 +18,7 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAUtils from '../../common/MOTHAUtils.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import distanceXY from '../../../../dot/js/util/distanceXY.js';
 
 const MIN_SQUIGGLE_LENGTH = 5;
 const ARROW_HEAD_SIZE = new Dimension2( 15, 12 );
@@ -57,7 +58,7 @@ export default class EnergySquiggle extends Node {
     this.removeAllChildren();
 
     // Distance between the 2 points
-    const distance = MOTHAUtils.distanceXY( x1, y1, x2, y2 );
+    const distance = distanceXY( x1, y1, x2, y2 );
 
     // Color that corresponds to the wavelength
     const color = VisibleColor.wavelengthToColor( wavelength, {

@@ -40,6 +40,7 @@ import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import SchrodingerElectron from './SchrodingerElectron.js';
 import QuantumElectron from './QuantumElectron.js';
 import SchrodingerIcon from '../view/SchrodingerIcon.js'; // eslint-disable-line phet/no-view-imported-from-model
+import factorial from '../../../../dot/js/util/factorial.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -296,7 +297,7 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
   // According to https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html, there are 2 two sign conventions
   // for associated Legendre polynomials. Some authors omit the Condon-Shortley phase (-1)^m, while others include it.
   // We are including it here, as the first term.
-  return Math.pow( -1, mAbs ) / ( Math.pow( 2, l ) * MOTHAUtils.factorial( l ) ) *
+  return Math.pow( -1, mAbs ) / ( Math.pow( 2, l ) * factorial( l ) ) *
          Math.pow( 1 - x * x, mAbs / 2 ) * PolynomialTerm.evaluatePolynomial( productTerms, x );
 }
 
