@@ -61,7 +61,7 @@ export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
       if ( numberOfVertices % 2 !== 0 ) {
         numberOfVertices++;
       }
-      vertices.push( ...DeBroglie3DOrbitsNode.getOrbitVertices( orbitRadius, numberOfVertices ) );
+      vertices.push( ...getOrbitVertices( orbitRadius, numberOfVertices ) );
     }
     assert && assert( vertices.length % 2 === 0, `An even number of vertices is required: ${vertices.length}` );
     this.setVertices( vertices );
@@ -76,24 +76,24 @@ export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
     this.setToRotationX( this.pitchProperty.value );
     super.update();
   }
+}
 
-  /**
-   * Gets the vertices that approximate an electron orbit.
-   */
-  private static getOrbitVertices( orbitRadius: number, numberOfVertices: number ): Vector3[] {
+/**
+ * Gets the vertices that approximate an electron orbit.
+ */
+function getOrbitVertices( orbitRadius: number, numberOfVertices: number ): Vector3[] {
 
-    const deltaAngle = ( 2 * Math.PI ) / numberOfVertices;
+  const deltaAngle = ( 2 * Math.PI ) / numberOfVertices;
 
-    const vertices: Vector3[] = [];
-    for ( let i = 0; i < numberOfVertices; i++ ) {
-      const angle = i * deltaAngle;
-      const x = orbitRadius * Math.cos( angle );
-      const y = orbitRadius * Math.sin( angle );
-      const z = 0;
-      vertices.push( new Vector3( x, y, z ) );
-    }
-    return vertices;
+  const vertices: Vector3[] = [];
+  for ( let i = 0; i < numberOfVertices; i++ ) {
+    const angle = i * deltaAngle;
+    const x = orbitRadius * Math.cos( angle );
+    const y = orbitRadius * Math.sin( angle );
+    const z = 0;
+    vertices.push( new Vector3( x, y, z ) );
   }
+  return vertices;
 }
 
 modelsOfTheHydrogenAtom.register( 'DeBroglie3DOrbitsNode', DeBroglie3DOrbitsNode );
