@@ -20,14 +20,14 @@ const MOTHAUtils = {
   },
 
   /**
-   * Gets a random angle >= 0 and < 2 * PI, in radians.
+   * Gets a random angle from the range [0, 2 * PI), in radians.
    */
   nextAngle(): number {
     return dotRandom.nextDoubleBetween( 0, 2 * Math.PI );
   },
 
   /**
-   * Normalizes an angle to the range [0, 2 * PI].
+   * Normalizes an angle to the range [0, 2 * PI).
    */
   normalizeAngle( angle: number ): number {
     let normalizedAngle = angle % ( 2 * Math.PI );
@@ -41,8 +41,8 @@ const MOTHAUtils = {
   /**
    * Two points collide if the distance between them is <= some threshold.
    */
-  pointsCollide( position1: Vector2, position2: Vector2, maxDistance: number ): boolean {
-    return position1.distance( position2 ) <= maxDistance;
+  pointsCollide( position1: Vector2, position2: Vector2, threshold: number ): boolean {
+    return position1.distance( position2 ) <= threshold;
   }
 };
 
