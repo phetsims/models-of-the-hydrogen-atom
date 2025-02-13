@@ -13,6 +13,11 @@
  *
  * In the Java implementation, this was class BrightnessCache in SchrodingerNode.java.
  *
+ * Useful references for orbital shapes:
+ * https://upload.wikimedia.org/wikipedia/commons/e/e7/Hydrogen_Density_Plots.png
+ * https://en.wikipedia.org/wiki/Atomic_orbital#Orbitals_table
+ * https://www.falstad.com/qmatom/
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
