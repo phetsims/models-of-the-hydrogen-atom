@@ -34,7 +34,7 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
       xMargin: 10,
       yMargin: 6,
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.deBroglieRepresentationComboBox.accessibleNameStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.deBroglieRepresentationComboBox.helpTextStringProperty
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.deBroglieRepresentationComboBox.accessibleHelpTextStringProperty
     }, providedOptions );
 
     const textOptions = {

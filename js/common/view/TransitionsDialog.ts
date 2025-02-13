@@ -146,7 +146,7 @@ export default class TransitionsDialog extends Panel {
       labelTagName: 'h3',
       descriptionTagName: 'p',
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleNameStringProperty,
-      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.helpTextStringProperty
+      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleHelpTextStringProperty
     } );
 
     const titleBarNode = new HBox( {
