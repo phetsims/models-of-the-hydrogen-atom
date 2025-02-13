@@ -1,7 +1,8 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * Strings for mathematical symbols.
+ * MOTHASymbols is the set of strings for various symbols that appear in this sim.
+ * Some of these are derived from localized string Properties, and add RichText markup typical of math symbols.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
