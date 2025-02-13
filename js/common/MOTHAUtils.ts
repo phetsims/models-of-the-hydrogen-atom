@@ -1,7 +1,7 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
 /**
- * MOTHAUtils is a collection of static utility functions used in this sim.
+ * MOTHAUtils is a collection of utility functions used in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +9,6 @@
 import dotRandom from '../../../dot/js/dotRandom.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
-import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 
 const MOTHAUtils = {
 
@@ -44,20 +43,6 @@ const MOTHAUtils = {
    */
   pointsCollide( position1: Vector2, position2: Vector2, maxDistance: number ): boolean {
     return position1.distance( position2 ) <= maxDistance;
-  },
-
-  /**
-   * Is the given wavelength in the UV spectrum?
-   */
-  isUV( wavelength: number ): boolean {
-    return wavelength < VisibleColor.MIN_WAVELENGTH;
-  },
-
-  /**
-   * Is the given wavelength in the IR spectrum?
-   */
-  isIR( wavelength: number ): boolean {
-    return wavelength > VisibleColor.MAX_WAVELENGTH;
   }
 };
 

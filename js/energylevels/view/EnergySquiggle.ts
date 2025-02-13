@@ -16,7 +16,6 @@ import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
-import MOTHAUtils from '../../common/MOTHAUtils.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import distanceXY from '../../../../dot/js/util/distanceXY.js';
 
@@ -138,10 +137,10 @@ export default class EnergySquiggle extends Node {
  */
 function wavelengthToPeriod( wavelength: number ): number {
   let period = 0;
-  if ( MOTHAUtils.isUV( wavelength ) ) {
+  if ( VisibleColor.isUVWavelength( wavelength ) ) {
     period = UV_SQUIGGLE_PERIOD;
   }
-  else if ( MOTHAUtils.isIR( wavelength ) ) {
+  else if ( VisibleColor.isIRWavelength( wavelength ) ) {
     period = IR_SQUIGGLE_PERIOD;
   }
   else {
