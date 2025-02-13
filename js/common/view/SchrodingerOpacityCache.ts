@@ -23,7 +23,7 @@ import QuantumElectron from '../model/QuantumElectron.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
-// Number of cells in one quadrant, in all dimensions.
+// Number of cells in one quadrant of the 2D grid, or in 1/8 of the 3D space.
 const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
 
 const QUADRANT_SIDE_LENGTH = ZoomedInBox.SIDE_LENGTH / 2; // in model coordinates!
