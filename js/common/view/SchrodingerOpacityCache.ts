@@ -37,7 +37,7 @@ class SchrodingerOpacityCache {
   // This data structure is large, but Chrome heap snapshot shows that the sim still has a reasonable memory footprint.
   private readonly cache: Array<Array<Array<OpacityGrid | null>>>;
 
-  // reusable array for computing sums
+  // Reusable array for summing probability densities.
   private readonly sums: Array<Array<number>>;
 
   // The length of one side of a cell, which is a cube.
@@ -45,12 +45,12 @@ class SchrodingerOpacityCache {
 
   public constructor() {
 
-    // Create the cache and initialize entries to null.
+    // Create the cache and initialize entries to null for all reachable (n,l,m) states.
     this.cache = [];
     for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
       const index = n - 1; // The cache is indexed by n-1, because the range of n is [1,6].
       this.cache[ index ] = [];
-      for ( let l = 0; l <= n - 1; l++ ) {
+      for ( let l = 0; l <= Math.min( n - 1, SchrodingerQuantumNumbers.lMax ); l++ ) {
         this.cache[ index ][ l ] = [];
         for ( let m = 0; m <= l; m++ ) {
           this.cache[ index ][ l ][ m ] = null;
@@ -140,19 +140,20 @@ class SchrodingerOpacityCache {
       }
     }
 
-    // 2D array filled with zeros
+    // Create the 2D grid, initially filled with zeros
     const opacityGrid = new Array( NUMBER_OF_CELLS );
     for ( let i = 0; i < NUMBER_OF_CELLS; i++ ) {
       opacityGrid[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
     }
 
+    // Populate the 2D grid with normalized opacity values in the range [0,1].
     for ( let row = 0; row < NUMBER_OF_CELLS; row++ ) {
       for ( let column = 0; column < NUMBER_OF_CELLS; column++ ) {
-        let b = 0;
+        let opacity = 0;
         if ( maxSum > 0 ) {
-          b = this.sums[ row ][ column ] / maxSum;
+          opacity = this.sums[ row ][ column ] / maxSum;
         }
-        opacityGrid[ row ][ column ] = b;
+        opacityGrid[ row ][ column ] = opacity;
       }
     }
 
