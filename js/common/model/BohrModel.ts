@@ -233,8 +233,6 @@ export default class BohrModel extends HydrogenAtom {
    * absorption would cause a transition from state nOld to nNew, where nNew < nOld, then the electron should drop
    * to state nNew and emit a photon. The emitted photon will have the same wavelength and be traveling alongside
    * the original photon. See https://en.wikipedia.org/wiki/Stimulated_emission
-   *
-   * @returns the photon emitted, null if no photon was emitted.
    */
   private attemptStimulatedEmission( photon: Photon ): void {
 
@@ -295,7 +293,6 @@ export default class BohrModel extends HydrogenAtom {
   /**
    * Spontaneous emission transitions from an excited energy state to a lower energy state, and emits a photon.
    * See https://en.wikipedia.org/wiki/Spontaneous_emission
-   * @returns the photon emitted, null if no photon was emitted.
    */
   private attemptSpontaneousEmission(): void {
 
