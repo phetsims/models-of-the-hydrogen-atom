@@ -1,7 +1,7 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
 /**
- * MOTHAConstants is the collection of constants used throughout this simulation.
+ * MOTHAConstants is a collection of constants used throughout this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
