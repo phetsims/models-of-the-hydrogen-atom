@@ -16,7 +16,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import { DeBroglieModelOptions } from './DeBroglieModel.js';
 import Photon from './Photon.js';
@@ -42,7 +41,6 @@ export default class DeBroglieBaseModel extends BohrModel {
 
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.deBroglieStringProperty,
-      icon: DeBroglieNode.createIcon(),
       tandemNamePrefix: 'deBroglie'
     }, providedOptions );
 

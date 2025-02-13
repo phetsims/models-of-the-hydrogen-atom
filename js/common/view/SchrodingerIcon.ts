@@ -1,10 +1,10 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * MOTHAIconFactory is a collection of functions that create icons for this sim.
+ * SchrodingerIconNode is the icon that represents the Schrodinger atomic model in the user interface.
+ * The icon consists of 4 overlapping rectangles.
  *
- * Since icons appear as fields in the model (see HydrogenAtom.icon) having these functions in a separate file
- * prevents problems of circular imports.
+ * This was originally a static method of SchrodingerNode, but that caused problems with circular imports.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,13 +16,9 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ProtonNode from './ProtonNode.js';
 
-const MOTHAIconFactory = {
+export default class SchrodingerIcon extends Node {
 
-  /**
-   * Creates the icon that represents the Schrodinger atomic model in the user interface.
-   * The icon consists of 4 overlapping rectangles.
-   */
-  createSchrodingerIcon(): Node {
+  public constructor() {
 
     const opacity = 0.4;
 
@@ -56,13 +52,11 @@ const MOTHAIconFactory = {
     const protonIcon = ProtonNode.createIcon( 2.5 );
     protonIcon.center = rect1.center;
 
-    return new Node( {
+    super( {
       children: [ rect1, rect2, rect3, rect4, protonIcon ],
       scale: 0.25
     } );
   }
-};
+}
 
-modelsOfTheHydrogenAtom.register( 'MOTHAIconFactory', MOTHAIconFactory );
-
-export default MOTHAIconFactory;
+modelsOfTheHydrogenAtom.register( 'SchrodingerIcon', SchrodingerIcon );

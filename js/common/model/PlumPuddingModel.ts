@@ -35,11 +35,11 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import PlumPuddingNode from '../view/PlumPuddingNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import Electron from './Electron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import PlumPuddingElectron from './PlumPuddingElectron.js';
+import PlumPuddingIcon from '../view/PlumPuddingIcon.js'; // eslint-disable-line phet/no-view-imported-from-model
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_PROBABILITY = 0.1; // probability [0,1] that a photon will be emitted
@@ -77,7 +77,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.plumPuddingStringProperty,
       debugName: 'Plum Pudding',
-      icon: PlumPuddingNode.createIcon(),
+      icon: new PlumPuddingIcon(),
       tandemNamePrefix: 'plumPudding'
     }, providedOptions );
 

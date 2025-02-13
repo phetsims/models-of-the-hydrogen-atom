@@ -10,7 +10,6 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BilliardBallModel from '../model/BilliardBallModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
@@ -24,29 +23,17 @@ export default class BilliardBallNode extends HydrogenAtomNode {
                       hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    const ballNode = new BallNode( 2 * modelViewTransform.modelToViewDeltaX( BilliardBallModel.RADIUS ) );
+    const ballNode = new ShadedSphereNode( 2 * modelViewTransform.modelToViewDeltaX( BilliardBallModel.RADIUS ),
+      combineOptions<ShadedSphereNodeOptions>( {}, MOTHAConstants.SHADED_SPHERE_NODE_OPTIONS, {
+        mainColor: MOTHAColors.billiardBallColorProperty,
+        highlightColor: MOTHAColors.billiardBallHighlightColorProperty
+      } ) );
 
     super( billiardBallModel, hydrogenAtomProperty, {
       children: [ ballNode ]
     } );
 
     this.translation = modelViewTransform.modelToViewPosition( billiardBallModel.position );
-  }
-
-  /**
-   * Creates the icon that represents this atomic model in the user interface.
-   */
-  public static createIcon(): Node {
-    return new BallNode( 15 );
-  }
-}
-
-class BallNode extends ShadedSphereNode {
-  public constructor( diameter: number ) {
-    super( diameter, combineOptions<ShadedSphereNodeOptions>( {}, MOTHAConstants.SHADED_SPHERE_NODE_OPTIONS, {
-      mainColor: MOTHAColors.billiardBallColorProperty,
-      highlightColor: MOTHAColors.billiardBallHighlightColorProperty
-    } ) );
   }
 }
 

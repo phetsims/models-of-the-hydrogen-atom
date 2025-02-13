@@ -8,14 +8,10 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import DeBroglie3DHeightNode from './DeBroglie3DHeightNode.js';
 import DeBroglieBrightnessNode from './DeBroglieBrightnessNode.js';
 import DeBroglieRadialDistanceNode from './DeBroglieRadialDistanceNode.js';
@@ -55,36 +51,6 @@ export default class DeBroglieNode extends HydrogenAtomNode {
    */
   public override step( dt: number ): void {
     this.deBroglie3DHeightNode.step( dt );
-  }
-
-  /**
-   * Creates the icon that represents this atomic model in the user interface.
-   * This icon corresponds to the 'Radial' view.
-   */
-  public static createIcon(): Node {
-
-    // Proton
-    const protonIcon = ProtonNode.createIcon();
-    protonIcon.setScaleMagnitude( 0.5 );
-
-    // Electron orbit
-    const orbitRadius = 1.5 * protonIcon.height;
-    const orbitNode = new Circle( orbitRadius, {
-      stroke: MOTHAColors.orbitStrokeProperty,
-      lineWidth: 1,
-      lineDash: [ MOTHAConstants.ORBIT_LINE_LENGTH, MOTHAConstants.ORBIT_LINE_LENGTH ]
-    } );
-
-    // Electron 'radial' representation
-    const electronIcon = new Circle( {
-      radius: orbitRadius,
-      stroke: MOTHAColors.electronBaseColorProperty,
-      top: orbitNode.top - 5
-    } );
-
-    return new Node( {
-      children: [ orbitNode, protonIcon, electronIcon ]
-    } );
   }
 }
 

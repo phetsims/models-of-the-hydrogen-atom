@@ -8,13 +8,9 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import MOTHAColors from '../MOTHAColors.js';
-import MOTHAConstants from '../MOTHAConstants.js';
 import ElectronNode from './ElectronNode.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
 import OrbitsNode from './OrbitsNode.js';
@@ -34,34 +30,6 @@ export default class BohrNode extends HydrogenAtomNode {
 
     super( bohrModel, hydrogenAtomProperty, {
       children: [ orbitsNode, protonNode, electronNode ]
-    } );
-  }
-
-  /**
-   * Creates the icon that represents this atomic model in the user interface.
-   */
-  public static createIcon(): Node {
-
-    // Proton
-    const protonIcon = ProtonNode.createIcon();
-    protonIcon.setScaleMagnitude( 0.5 );
-
-    // Electron orbit
-    const orbitRadius = 1.5 * protonIcon.height;
-    const orbitNode = new Circle( orbitRadius, {
-      stroke: MOTHAColors.orbitStrokeProperty,
-      lineWidth: 1,
-      lineDash: [ MOTHAConstants.ORBIT_LINE_LENGTH, MOTHAConstants.ORBIT_LINE_LENGTH ]
-    } );
-
-    // Electron particle
-    const electronIcon = ElectronNode.createIcon();
-    electronIcon.setScaleMagnitude( 0.5 );
-    const electronAngle = 1.25 * Math.PI;
-    electronIcon.centerX = orbitRadius * Math.sin( electronAngle );
-    electronIcon.centerY = orbitRadius * Math.cos( electronAngle );
-    return new Node( {
-      children: [ orbitNode, protonIcon, electronIcon ]
     } );
   }
 }

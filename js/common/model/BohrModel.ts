@@ -34,7 +34,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import BohrNode from '../view/BohrNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import BohrElectron from './BohrElectron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
@@ -45,6 +44,7 @@ import Electron from './Electron.js';
 import QuantumElectron from './QuantumElectron.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
+import BohrIcon from '../view/BohrIcon.js'; // eslint-disable-line phet/no-view-imported-from-model
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -98,7 +98,7 @@ export default class BohrModel extends HydrogenAtom {
       isQuantum: true,
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.bohrStringProperty,
       debugName: 'Bohr',
-      icon: BohrNode.createIcon(),
+      icon: new BohrIcon(),
       tandemNamePrefix: 'bohr'
     }, providedOptions );
 

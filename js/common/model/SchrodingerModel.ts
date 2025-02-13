@@ -39,7 +39,7 @@ import PolynomialTerm from './PolynomialTerm.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import SchrodingerElectron from './SchrodingerElectron.js';
 import QuantumElectron from './QuantumElectron.js';
-import MOTHAIconFactory from '../view/MOTHAIconFactory.js';  // eslint-disable-line phet/no-view-imported-from-model
+import SchrodingerIcon from '../view/SchrodingerIcon.js'; // eslint-disable-line phet/no-view-imported-from-model
 
 type SelfOptions = EmptySelfOptions;
 
@@ -68,7 +68,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
       electron: schrodingerElectron,
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.schrodingerStringProperty,
       debugName: 'Schrodinger',
-      icon: MOTHAIconFactory.createSchrodingerIcon(),
+      icon: new SchrodingerIcon(),
       tandemNamePrefix: 'schrodinger'
     }, providedOptions );
 

@@ -19,13 +19,13 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import DeBroglieNode from '../view/DeBroglieNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import DeBroglieBaseModel from './DeBroglieBaseModel.js';
 import { DeBroglieRepresentation, DeBroglieRepresentationValues } from './DeBroglieRepresentation.js';
 import Photon from './Photon.js';
 import isResettingAllProperty from '../../../../scenery-phet/js/isResettingAllProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import DeBroglieIcon from '../view/DeBroglieIcon.js'; // eslint-disable-line phet/no-view-imported-from-model
 
 type SelfOptions = EmptySelfOptions;
 
@@ -46,7 +46,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
       // DeBroglieModelOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.deBroglieStringProperty,
       debugName: 'de Broglie',
-      icon: DeBroglieNode.createIcon()
+      icon: new DeBroglieIcon()
     }, providedOptions );
 
     super( position, options );

@@ -22,10 +22,10 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import BilliardBallNode from '../view/BilliardBallNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import BilliardBallIcon from '../view/BilliardBallIcon.js'; // eslint-disable-line phet/no-view-imported-from-model
 
 type SelfOptions = EmptySelfOptions;
 
@@ -43,7 +43,7 @@ export default class BilliardBallModel extends HydrogenAtom {
       // HydrogenAtomOptions
       displayNameProperty: ModelsOfTheHydrogenAtomStrings.billiardBallStringProperty,
       debugName: 'Billiard Ball',
-      icon: BilliardBallNode.createIcon(),
+      icon: new BilliardBallIcon(),
       tandemNamePrefix: 'billiardBall'
     }, providedOptions );
 

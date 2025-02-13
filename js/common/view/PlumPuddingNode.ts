@@ -9,7 +9,6 @@
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
@@ -34,26 +33,6 @@ export default class PlumPuddingNode extends HydrogenAtomNode {
 
     super( plumPuddingModel, hydrogenAtomProperty, {
       children: [ plumPuddingImage, electronNode ]
-    } );
-  }
-
-  /**
-   * Creates the icon that represents this atomic model in the user interface.
-   */
-  public static createIcon(): Node {
-
-    // Plum pudding
-    const plumPuddingImage = new Image( plumPudding_png, {
-      scale: 0.1
-    } );
-
-    // Electron
-    const electronNode = ElectronNode.createIcon();
-    electronNode.center = plumPuddingImage.center;
-
-    return new Node( {
-      children: [ plumPuddingImage, electronNode ],
-      scale: 0.5
     } );
   }
 }
