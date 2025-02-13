@@ -57,7 +57,7 @@ export default class EnergySquiggle extends Node {
     this.removeAllChildren();
 
     // Distance between the 2 points
-    const distance = MOTHAUtils.distance( x1, y1, x2, y2 );
+    const distance = MOTHAUtils.distanceXY( x1, y1, x2, y2 );
 
     // Color that corresponds to the wavelength
     const color = VisibleColor.wavelengthToColor( wavelength, {
