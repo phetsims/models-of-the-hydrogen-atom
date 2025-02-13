@@ -33,8 +33,8 @@ export type OpacityGrid = Array<Array<number>>;
 
 class SchrodingerOpacityCache {
 
-  // Cache of 2D opacity grids, indexed by [n-1][l][abs(m)].
-  // This data structure is large, but Chrome heap snapshot shows that the sim still has a reasonable memory footprint.
+  // Cache of 2D opacity grids, indexed by [n-1][l][abs(m)]. This data structure is large, but heap snapshots in
+  // Chrome Dev Tools show that the sim still has a reasonable memory footprint.
   private readonly cache: Array<Array<Array<OpacityGrid | null>>>;
 
   // Reusable array for summing probability densities.
