@@ -75,7 +75,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // Determines when the orbitals for all reachable Schrodinger (n,l,m) electron states will be computed.
   computeOrbitals: {
     type: 'string',
-    defaultValue: 'atStartup',
+    defaultValue: 'asNeeded',
     isValidValue: value => value === 'atStartup' || value === 'asNeeded'
   }
 };
