@@ -4,7 +4,7 @@
  * SchrodingerOrbitalNode renders the atomic orbital, a function describing the location and wave-like behavior of the
  * electron. The orbital is characterized by the quantum numbers (n,l,m) that describe the electron's state - see
  * SchrodingerQuantumNumbers. In this implementation, the orbital is rendered as a 2D NxN grid, where each cell in
- * the grid is filled with the electron color with varying alpha (transparency).
+ * the grid is filled with the electron color with varying alpha (opacity).
  *
  * In the Java implementation, this was inner classes AtomNode and GridNode in SchrodingerNode.java.
  *
