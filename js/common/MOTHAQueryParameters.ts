@@ -1,7 +1,7 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * Query parameters supported by this simulation.
+ * MOTHAQueryParameters is the set of query parameters supported by this simulation.
  * Running with ?log will print these query parameters and their values to the console at startup.
  *
  * @author Chris Malley (PixelZoom, Inc.)
