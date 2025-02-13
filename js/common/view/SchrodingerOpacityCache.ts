@@ -1,9 +1,8 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * SchrodingerOpacityCache is responsible for representing Schrodinger (n,l,m) states as a 2D grid of opacity
- * values in the range [0,1], where 0 is transparent and 1 is opaque. The grid of opacity values is used to
- * render the electron's orbital.
+ * SchrodingerOpacityCache is responsible for representing Schrodinger (n,l,m) states as a 2D grid of opacity values
+ * in the range [0,1], where 0 is transparent and 1 is opaque. The grid is used to render the electron's orbital.
  *
  * A grid is computed on demand for each (n,l,m) state, then cached. Alternatively, calling the populate method
  * will eagerly compute values for all (n,l,m) states reachable in the sim, improving runtime performance at
