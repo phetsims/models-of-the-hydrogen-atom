@@ -72,7 +72,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     isValidValue: value => Number.isInteger( value ) && ( value > 20 )
   },
 
-  // Determines when the orbitals for all reachable Schrodinger (n,l,m) electron states will be computed.
+  // Determines when to compute the orbitals for all reachable Schrodinger (n,l,m) electron states.
   computeOrbitals: {
     type: 'string',
     defaultValue: 'asNeeded',
