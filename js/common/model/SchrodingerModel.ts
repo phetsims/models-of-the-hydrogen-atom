@@ -187,7 +187,8 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   }
 
   /**
-   * Solves the Schrodinger probability density equation.
+   * Solves the Schrodinger probability density equation, which is the probability of finding a photon emitted from
+   * a hydrogen atom at a specific point in space.
    * @param nlm - quantum numbers that describe the electron's state
    * @param x - coordinate on horizontal axis
    * @param y - coordinate on axis that is perpendicular to the screen
