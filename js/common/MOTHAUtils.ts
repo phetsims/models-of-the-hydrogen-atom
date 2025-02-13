@@ -26,7 +26,7 @@ const MOTHAUtils = {
   },
 
   /**
-   * Normalizes an angle to the range [0, 2 * PI).
+   * Normalizes an angle to the range [0, 2 * PI), in radians.
    */
   normalizeAngle( angle: number ): number {
     let normalizedAngle = angle % ( 2 * Math.PI );
