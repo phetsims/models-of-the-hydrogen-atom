@@ -73,21 +73,21 @@ type StringsType = {
   'experimentOopsDialogMessageStringProperty': LocalizedStringProperty;
   'a11y': {
     'transitionsCheckbox': {
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'transitionsDialog': {
       'accessibleNameStringProperty': LocalizedStringProperty;
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'deBroglieRepresentationComboBox': {
       'accessibleNameStringProperty': LocalizedStringProperty;
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'deleteSnapshotButton': {
       'accessibleNameStringProperty': LocalizedStringProperty;
     };
     'electronEnergyLevelAccordionBox': {
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'energyLevelsScreen': {
       'screenButtonsHelpTextStringProperty': LocalizedStringProperty;
@@ -101,21 +101,21 @@ type StringsType = {
       'accessibleNameStringProperty': LocalizedStringProperty;
     };
     'experimentOrModelHelpTextSwitch': {
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'quantumNumbersInfoButton': {
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'lightSource': {
       'accessibleNameStringProperty': LocalizedStringProperty;
     };
     'lightSourceModeRadioButtonGroup': {
       'accessibleNameStringProperty': LocalizedStringProperty;
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'modelRadioButtonGroup': {
       'accessibleNameStringProperty': LocalizedStringProperty;
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'mySnapshotsDialog': {
       'accessibleNameStringProperty': LocalizedStringProperty;
@@ -133,7 +133,7 @@ type StringsType = {
     };
     'snapshotButton': {
       'accessibleNameStringProperty': LocalizedStringProperty;
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'viewSnapshotsButton': {
       'accessibleNameStringProperty': LocalizedStringProperty;
@@ -143,7 +143,7 @@ type StringsType = {
     };
     'wavelengthNumberControl': {
       'accessibleNameStringProperty': LocalizedStringProperty;
-      'helpTextStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     }
   }
 };

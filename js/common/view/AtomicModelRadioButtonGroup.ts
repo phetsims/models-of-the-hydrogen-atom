@@ -59,7 +59,7 @@ export default class AtomicModelRadioButtonGroup extends RectangularRadioButtonG
         }
       },
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.modelRadioButtonGroup.accessibleNameStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.modelRadioButtonGroup.helpTextStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.modelRadioButtonGroup.accessibleHelpTextStringProperty,
       phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 

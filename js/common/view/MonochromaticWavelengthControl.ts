@@ -89,7 +89,7 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
         phetioValueType: BooleanIO
       } ),
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.accessibleNameStringProperty,
-      helpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.helpTextStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.accessibleHelpTextStringProperty,
       titleNodeOptions: {
         tandem: Tandem.OPT_OUT // because layoutFunction omits the title
       },

@@ -166,7 +166,7 @@
   },
   "a11y": {
     "transitionsCheckbox": {
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Show table of electron state transitions and their associated wavelengths."
       }
     },
@@ -174,7 +174,7 @@
       "accessibleName": {
         "value": "Transitions"
       },
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Use the buttons to set the light source to a specific wavelength."
       }
     },
@@ -182,7 +182,7 @@
       "accessibleName": {
         "value": "de Broglie Representation"
       },
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Choose the wave representation for de Broglie model."
       }
     },
@@ -192,7 +192,7 @@
       }
     },
     "electronEnergyLevelAccordionBox": {
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Observe changes in the electron’s state as shown in an energy level diagram."
       }
     },
@@ -218,12 +218,12 @@
       }
     },
     "experimentOrModelHelpTextSwitch": {
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Collect experimental data or explore atomic models."
       }
     },
     "quantumNumbersInfoButton": {
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Show definitions of quantum numbers."
       }
     },
@@ -236,7 +236,7 @@
       "accessibleName": {
         "value": "Light Source Mode"
       },
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Choose type of light emitted by light source."
       }
     },
@@ -244,7 +244,7 @@
       "accessibleName": {
         "value": "Atomic Model"
       },
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Choose atomic model to explore."
       }
     },
@@ -278,7 +278,7 @@
       "accessibleName": {
         "value": "Take Snapshot"
       },
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Take up to {{max}} snapshots of spectrometer data."
       }
     },
@@ -296,7 +296,7 @@
       "accessibleName": {
         "value": "Wavelength"
       },
-      "helpText": {
+      "accessibleHelpText": {
         "value": "Adjust wavelength for monochromatic light source."
       }
     }

@@ -41,7 +41,7 @@ export default class SnapshotButton extends RectangularPushButton {
           phetioValueType: BooleanIO
         } ),
       accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.snapshotButton.accessibleNameStringProperty,
-      helpText: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.snapshotButton.helpTextStringProperty, {
+      accessibleHelpText: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.snapshotButton.accessibleHelpTextStringProperty, {
         max: MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS
       } )
     }, providedOptions );
