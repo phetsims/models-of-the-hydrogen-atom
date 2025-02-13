@@ -13,7 +13,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Photon from './Photon.js';
 
 type SelfOptions = {
   position?: Vector2;
@@ -52,13 +51,6 @@ export default class Electron extends PhetioObject {
 
   public reset(): void {
     this.positionProperty.reset();
-  }
-
-  /**
-   * Does this electron collide with the specified photon?
-   */
-  public collidesWithPhoton( photon: Photon ): boolean {
-    return ( this.positionProperty.value.distance( photon.positionProperty.value ) <= Photon.RADIUS + Electron.RADIUS );
   }
 }
 

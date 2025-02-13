@@ -22,6 +22,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
+import Electron from './Electron.js';
 
 // Deflection angles when the photon collides with a rigid body, like the Billiard Ball atom.
 const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
@@ -157,6 +158,13 @@ export default class Photon extends PhetioObject {
     const x = this.positionProperty.value.x + dx;
     const y = this.positionProperty.value.y + dy;
     this._positionProperty.value = new Vector2( x, y );
+  }
+
+  /**
+   * Does this photon collide with the specified electron?
+   */
+  public collidesWith( electron: Electron ): boolean {
+    return ( this.positionProperty.value.distance( electron.positionProperty.value ) <= Photon.RADIUS + Electron.RADIUS );
   }
 
   /**

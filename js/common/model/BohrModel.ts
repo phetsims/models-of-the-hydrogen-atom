@@ -174,7 +174,7 @@ export default class BohrModel extends HydrogenAtom {
    * Determines whether a photon collides with this atom's electron.
    */
   protected collides( photon: Photon ): boolean {
-    return this.electron.collidesWithPhoton( photon );
+    return photon.collidesWith( this.electron );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -269,7 +269,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
    */
   private absorbPhoton( photon: Photon ): boolean {
     let absorbed = false;
-    if ( this.canAbsorb( photon ) && this.electron.collidesWithPhoton( photon ) && dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
+    if ( this.canAbsorb( photon ) && photon.collidesWith( this.electron ) && dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
       this.numberOfPhotonsAbsorbedProperty.value += 1;
       assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED,
         `Too many photons have been absorbed: ${this.numberOfPhotonsAbsorbedProperty.value}` );
