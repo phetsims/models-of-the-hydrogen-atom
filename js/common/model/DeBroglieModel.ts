@@ -73,7 +73,7 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Determines whether a photon collides with this atom. A different algorithm is used for 2D vs 3D.
+   * Determines whether a photon collides with this atom's electron. A different algorithm is used for 2D vs 3D.
    */
   protected override collides( photon: Photon ): boolean {
     if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {

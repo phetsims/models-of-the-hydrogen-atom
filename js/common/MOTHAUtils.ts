@@ -7,7 +7,6 @@
  */
 
 import dotRandom from '../../../dot/js/dotRandom.js';
-import Vector2 from '../../../dot/js/Vector2.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 
 const MOTHAUtils = {
@@ -36,13 +35,6 @@ const MOTHAUtils = {
     }
     assert && assert( normalizedAngle >= 0 && normalizedAngle <= ( 2 * Math.PI ), `Invalid normalizedAngle: ${normalizedAngle}` );
     return normalizedAngle;
-  },
-
-  /**
-   * Two points collide if the distance between them is <= the specified threshold.
-   */
-  pointsCollide( position1: Vector2, position2: Vector2, threshold: number ): boolean {
-    return position1.distance( position2 ) <= threshold;
   }
 };
 

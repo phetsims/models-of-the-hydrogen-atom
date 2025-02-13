@@ -35,7 +35,6 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAUtils from '../MOTHAUtils.js';
-import Electron from './Electron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import PlumPuddingElectron from './PlumPuddingElectron.js';
@@ -270,22 +269,13 @@ export default class PlumPuddingModel extends HydrogenAtom {
    */
   private absorbPhoton( photon: Photon ): boolean {
     let absorbed = false;
-    if ( this.canAbsorb( photon ) ) {
-
-      const electronPosition = this.electron.positionProperty.value;
-      const photonPosition = photon.positionProperty.value;
-      const maxDistance = Photon.RADIUS + Electron.RADIUS;
-
-      if ( MOTHAUtils.pointsCollide( electronPosition, photonPosition, maxDistance ) ) {
-        if ( dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
-          this.numberOfPhotonsAbsorbedProperty.value += 1;
-          assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED,
-            `Too many photons have been absorbed: ${this.numberOfPhotonsAbsorbedProperty.value}` );
-          phet.log && phet.log( `${this.debugName}: absorbing ${MOTHASymbols.lambda}=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
-          this.photonAbsorbedEmitter.emit( photon );
-          absorbed = true;
-        }
-      }
+    if ( this.canAbsorb( photon ) && this.electron.collidesWithPhoton( photon ) && dotRandom.nextDouble() < PHOTON_ABSORPTION_PROBABILITY ) {
+      this.numberOfPhotonsAbsorbedProperty.value += 1;
+      assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED,
+        `Too many photons have been absorbed: ${this.numberOfPhotonsAbsorbedProperty.value}` );
+      phet.log && phet.log( `${this.debugName}: absorbing ${MOTHASymbols.lambda}=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
+      this.photonAbsorbedEmitter.emit( photon );
+      absorbed = true;
     }
     return absorbed;
   }

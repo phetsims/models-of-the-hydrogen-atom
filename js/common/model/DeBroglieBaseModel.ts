@@ -70,7 +70,7 @@ export default class DeBroglieBaseModel extends BohrModel {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Determines whether a photon collides with this atom in one of the 2D views. In all 2D views (including
+   * Determines whether a photon collides with this atom' electron in one of the 2D views. In all 2D views (including
    * 'Radial Distance'), the photon collides with the atom if it hits the ring used to represent the standing wave.
    */
   protected override collides( photon: Photon ): boolean {

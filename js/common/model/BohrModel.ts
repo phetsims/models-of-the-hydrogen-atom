@@ -40,7 +40,6 @@ import Photon from './Photon.js';
 import Proton from './Proton.js';
 import photonAbsorptionModel from './PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
-import Electron from './Electron.js';
 import QuantumElectron from './QuantumElectron.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
@@ -172,14 +171,10 @@ export default class BohrModel extends HydrogenAtom {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Determines whether a photon collides with this atom. In this case, we treat the photon and electron as points,
-   * and see if the points are close enough to cause a collision.
+   * Determines whether a photon collides with this atom's electron.
    */
   protected collides( photon: Photon ): boolean {
-    const electronPosition = this.electron.positionProperty.value;
-    const photonPosition = photon.positionProperty.value;
-    const maxDistance = Photon.RADIUS + Electron.RADIUS;
-    return MOTHAUtils.pointsCollide( electronPosition, photonPosition, maxDistance );
+    return this.electron.collidesWithPhoton( photon );
   }
 
   //--------------------------------------------------------------------------------------------------------------------
