@@ -86,7 +86,7 @@ class SchrodingerImageCache {
     this.canvas.height = CANVAS_SIDE_LENGTH;
     this.context = this.canvas.getContext( '2d', { alpha: true } )!;
 
-    // Eagerly populate the cache.
+    // Eagerly populate the cache. The alternative is to populate the cache as needed, when getDataURL is called.
     if ( MOTHAQueryParameters.computeOrbitals === 'atStartup' ) {
       this.populate();
     }
