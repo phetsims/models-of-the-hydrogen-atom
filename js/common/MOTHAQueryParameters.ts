@@ -69,7 +69,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   gridSize: {
     type: 'number',
     defaultValue: 40,
-    isValidValue: value => Number.isInteger( value ) && ( value > 20 )
+    isValidValue: value => Number.isInteger( value ) && ( value >= 10 )
   },
 
   // Determines when to compute the orbitals for all reachable Schrodinger (n,l,m) electron states.
