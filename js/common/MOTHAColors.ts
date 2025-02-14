@@ -305,6 +305,7 @@ const MOTHAColors = {
   // Static colors
   //------------------------------------------------------------------------------------------------------------------
 
+  // While UV and IR colors may be the same, we want the flexibility for them to be different.
   UV_COLOR: 'rgb( 160, 160, 160 )',
   IR_COLOR: 'rgb( 160, 160, 160 )',
 
