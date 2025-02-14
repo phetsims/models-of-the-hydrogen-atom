@@ -309,9 +309,9 @@ const MOTHAColors = {
   IR_COLOR: 'rgb( 160, 160, 160 )',
 
   // Sparkle in the center of photons.
-  VISIBLE_SPARKLE_COLOR: 'rgba( 255, 255, 255, 0.4 )',
-  UV_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 400 ),
-  IR_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 ),
+  VISIBLE_PHOTON_SPARKLE_COLOR: 'rgba( 255, 255, 255, 0.4 )',
+  UV_PHOTON_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 400 ),
+  IR_PHOTON_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 ),
 
   // Holo colors for specific photons, for debugging with ?showHalos.
   SPONTANEOUS_EMISSION_HALO_COLOR: Color.RED,

@@ -172,13 +172,13 @@ function createHaloColor( wavelength: number, radius: number ): RadialGradient {
  */
 function getSparkleColor( wavelength: number ): TColor {
   if ( wavelength < VisibleColor.MIN_WAVELENGTH ) {
-    return MOTHAColors.UV_SPARKLE_COLOR;
+    return MOTHAColors.UV_PHOTON_SPARKLE_COLOR;
   }
   else if ( wavelength > VisibleColor.MAX_WAVELENGTH ) {
-    return MOTHAColors.IR_SPARKLE_COLOR;
+    return MOTHAColors.IR_PHOTON_SPARKLE_COLOR;
   }
   else {
-    return MOTHAColors.VISIBLE_SPARKLE_COLOR;
+    return MOTHAColors.VISIBLE_PHOTON_SPARKLE_COLOR;
   }
 }
 
