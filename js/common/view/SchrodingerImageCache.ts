@@ -1,7 +1,22 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * TODO https://github.com/phetsims/models-of-the-hydrogen-atom/issues/129
+ * SchrodingerImageCache is a cache of PNG images for Schrodinger orbitals. PNG files can be created as needed,
+ * or eagerly on startup by calling the populate method.
+ *
+ * Here's the process for creating the image that corresponds to the orbital for some (n,l,m) state:
+ *
+ * 1. Probability density is sampled on a uniform 3D grid, for 1/8 of the 3D space.
+ * 2. The 3D grid is projected into 2D space, for the rightBottom quadrant.
+ * 3. The 2D data for the rightBottom quadrant is used to symmetrically fill data for the other 3 quadrants.
+ * 4. Pixel data (rgba) is created from the 2D probability density samples. The electron color is used for the
+ *    rgb components, and the probability density sample is used to compute the alpha component (a).
+ * 5. Canvas draws the pixel data to an internal "file", where it is accessible via a data URL.
+ * 6. The data URL is cached.
+ *
+ * To access a PNG file, call getDataURL( nlm ). Since the PNG contains only pixels for the sample points, the PNG
+ * will need to be scaled up when rendered. Scaling up will automatically provide interpolation/smoothing of the image.
+ * See SchrodingerOrbitalNode for details.
  *
  * Useful references for orbital shapes:
  * https://upload.wikimedia.org/wikipedia/commons/e/e7/Hydrogen_Density_Plots.png
@@ -85,18 +100,27 @@ class SchrodingerImageCache {
    */
   public getDataURL( nlm: SchrodingerQuantumNumbers ): string {
 
+    // Attempt to get the data URL for the orbital image from the cache.
     let dataURL = this.getCachedDataURL( nlm );
+
+    // If not cached, create the image and cache its data URL.
     if ( !dataURL ) {
+
+      // Use the electron's color for rgb components.
       const r = MOTHAColors.electronBaseColorProperty.value.r;
       const g = MOTHAColors.electronBaseColorProperty.value.g;
       const b = MOTHAColors.electronBaseColorProperty.value.b;
 
+      // Compute opacity for the orbital shape.
       const opacityGrid = this.computeOpacityGrid( nlm );
       const opacityArray = opacityGrid.flat(); // 2D to 1D
-      const rgbaArray = opacityArray.map( opacity => [ r, g, b, opacity * 255 ] ).flat(); // 1D array of color components in r,g,b,a order
+
+      // Create rgba pixels for the PNG image.
+      const rgbaArray = opacityArray.map( opacity => [ r, g, b, opacity * 255 ] ).flat();
       const imageData = new ImageData( 2 * NUMBER_OF_CELLS, 2 * NUMBER_OF_CELLS );
       imageData.data.set( rgbaArray );
 
+      // Draw the pixels to a canvas, and create a data URL in PNG format.
       const canvas = document.createElement( 'canvas' );
       canvas.width = 2 * NUMBER_OF_CELLS;
       canvas.height = 2 * NUMBER_OF_CELLS;
@@ -104,8 +128,10 @@ class SchrodingerImageCache {
       context.putImageData( imageData, 0, 0 );
       dataURL = canvas.toDataURL( 'image/png' );
 
+      // Cache the data URL for the PNG file.
       this.setCachedDataURL( nlm, dataURL );
     }
+
     return dataURL;
   }
 
