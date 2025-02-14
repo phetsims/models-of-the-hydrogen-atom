@@ -208,19 +208,18 @@ class SchrodingerImageCache {
     }
 
     // 2D data for the leftBottom quadrant.
-    const leftBottomGrid = rightBottomGrid.map( rightHalfRow => Array.from( rightHalfRow ).reverse() );
+    const leftBottomGrid = rightBottomGrid.map( rightHalfRow => [ ...rightHalfRow ].reverse() );
 
     // Data for bottom half of the 2D projection.
     const bottomHalfGrid: OpacityGrid = [];
     for ( let i = 0; i < leftBottomGrid.length; i++ ) {
       const leftRow = leftBottomGrid[ i ];
       const rightRow = rightBottomGrid[ i ];
-      const row = leftRow.concat( rightRow );
-      bottomHalfGrid.push( row );
+      bottomHalfGrid.push( [ ...leftRow, ...rightRow ] );
     }
 
     // Data for the top half of the 2D projection.
-    const topHalfGrid: OpacityGrid = Array.from( bottomHalfGrid ).reverse();
+    const topHalfGrid: OpacityGrid = [ ...bottomHalfGrid ].reverse();
 
     // Data for the full grid, which completely describes the orbital.
     return [ ...topHalfGrid, ...bottomHalfGrid ];
