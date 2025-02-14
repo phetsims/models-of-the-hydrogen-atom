@@ -34,6 +34,7 @@ import QuantumElectron from '../model/QuantumElectron.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import MOTHAColors from '../MOTHAColors.js';
+import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 
 // Number of cells in 1/8 of the 3D grid, and one quadrant of the 2D grid.
 const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
@@ -127,7 +128,7 @@ class SchrodingerImageCache {
         'opacityArray does not fill the canvas dimensions.' );
 
       // Create rgba pixels for the PNG image.
-      const rgbaArray = opacityArray.map( opacity => [ r, g, b, opacity * 255 ] ).flat();
+      const rgbaArray = opacityArray.map( opacity => [ r, g, b, toFixedNumber( opacity * 255, 0 ) ] ).flat();
       assert && assert( rgbaArray.length === 4 * CANVAS_SIDE_LENGTH * CANVAS_SIDE_LENGTH,
         'rgbaArray does not fill the canvas dimensions.' );
       const imageData = new ImageData( CANVAS_SIDE_LENGTH, CANVAS_SIDE_LENGTH );
