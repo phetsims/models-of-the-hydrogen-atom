@@ -28,14 +28,17 @@ export default class SchrodingerOrbitalNode extends Image {
                       atomPosition: Vector2,
                       modelViewTransform: ModelViewTransform2 ) {
 
+    // Gets the PNG file for the orbital that corresponds to the current electron state (n,l,m).
     const imageProperty = new DerivedProperty( [ nlmProperty ], nlm => schrodingerOpacityCache.getDataURL( nlm ) );
 
     super( imageProperty, {
       isDisposable: false,
-      pickable: false
+      pickable: false,
+      
+      // The PNG image obtained from schrodingerOpacityCache.getDataURL contains a pixel for each probability density
+      // sample. By scaling this Image up, we'll automatically get a larger image with smooth interpolation. 
+      scale: QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS
     } );
-
-    this.setScaleMagnitude( QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS );
 
     // Center the image at the atom's position.
     const atomViewPosition = modelViewTransform.modelToViewPosition( atomPosition );
