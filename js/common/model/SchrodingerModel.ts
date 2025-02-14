@@ -272,8 +272,9 @@ function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): 
  */
 function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): number {
 
-  // From doc/java-version/hydrogen-atom.pdf, page 29:
-  // Note that the probability density will always be the same for +m and –m.
+  // From doc/java-version/hydrogen-atom.pdf, page 29: "Note that the probability density will always be the same for
+  // +m and –m." And from https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html, "For positive m, they can
+  // be given in terms of the unassociated polynomials by..."
   const mAbs = Math.abs( m );
 
   // (x^2 - 1)^l
