@@ -106,7 +106,9 @@ class SchrodingerImageCache {
         }
       }
     }
-    phet.log && phet.log( `Cached ${count} orbital images.` );
+    phet.log && phet.log( `Cached ${count} orbital images.`, {
+      color: MOTHAColors.LOG_CACHE_ORBITAL
+    } );
   }
 
   /**
@@ -159,7 +161,7 @@ class SchrodingerImageCache {
    */
   private setCachedDataURL( nlm: SchrodingerQuantumNumbers, dataURL: string ): void {
     phet.log && phet.log( `Populating orbital cache for (n,l,m) = ${nlm.toString()}`, {
-      color: 'orange'
+      color: MOTHAColors.LOG_CACHE_ORBITAL
     } );
     this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ] = dataURL;
   }

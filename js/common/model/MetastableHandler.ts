@@ -138,7 +138,7 @@ export default class MetastableHandler extends PhetioObject {
     this.lightSource.emitPhotonAtBottomCenter( wavelength, MOTHAColors.EXCITE_METASTABLE_HALO_COLOR );
 
     phet.log && phet.log( `MetastableHandler: exciteElectron ${MOTHASymbols.lambda}=${wavelength}`, {
-      color: 'blue'
+      color: MOTHAColors.LOG_EXCITE_METASTABLE
     } );
   }
 }

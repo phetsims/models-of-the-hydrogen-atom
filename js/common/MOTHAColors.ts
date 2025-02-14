@@ -316,7 +316,11 @@ const MOTHAColors = {
   // Holo colors for specific photons, for debugging with ?showHalos
   SPONTANEOUS_EMISSION_HALO_COLOR: Color.RED,
   STIMULATED_EMISSION_HALO_COLOR: Color.GREEN,
-  EXCITE_METASTABLE_HALO_COLOR: Color.BLUE
+  EXCITE_METASTABLE_HALO_COLOR: Color.BLUE,
+
+  // Colors for phet.log messages, when running with ?log.
+  LOG_CACHE_ORBITAL: 'magenta',
+  LOG_EXCITE_METASTABLE: 'blue'
 };
 
 modelsOfTheHydrogenAtom.register( 'MOTHAColors', MOTHAColors );
