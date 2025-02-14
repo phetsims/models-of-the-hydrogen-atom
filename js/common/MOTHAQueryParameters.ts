@@ -75,7 +75,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     isValidValue: value => Number.isInteger( value ) && ( value >= 10 )
   },
 
-  // Determines when to compute the orbitals for all reachable Schrodinger (n,l,m) electron states.
+  // Determines when to create and cache the orbital images for all reachable Schrodinger (n,l,m) electron states.
   // 'atStartup' will result in longer startup time as ?gridSize is increased.
   // 'asNeeded' may result in the sim pausing the first time that the electron is in a specific (n,l,m) state.
   computeOrbitals: {
