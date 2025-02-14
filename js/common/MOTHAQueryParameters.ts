@@ -68,7 +68,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // and 1/4 (1 quadrant) of the 2D projection. As this value gets larger, performance will be impacted.
   gridSize: {
     type: 'number',
-    defaultValue: 40,
+    defaultValue: 35,
     isValidValue: value => Number.isInteger( value ) && ( value >= 10 )
   },
 
