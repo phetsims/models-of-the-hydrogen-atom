@@ -96,13 +96,17 @@ class SchrodingerImageCache {
    * Eagerly populates the cache for the electron states that are reachable in this sim.
    */
   private populate(): void {
-    for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
-      for ( let l = 0; l <= Math.min( n - 1, SchrodingerQuantumNumbers.lMax ); l++ ) {
-        for ( let m = 0; m <= l; m++ ) {
-          this.getDataURL( new SchrodingerQuantumNumbers( n, l, m ) );
+    let count = 0;
+    for ( let n = 1; n <= this.cache.length; n++ ) {
+      const index = n - 1; // The cache is indexed by n-1, because the range of n is [1,6].
+      for ( let l = 0; l < this.cache[ index ].length; l++ ) {
+        for ( let m = 0; m < this.cache[ index ][ l ].length; m++ ) {
+          this.getDataURL( new SchrodingerQuantumNumbers( n, l, m ) ); // Requesting a dataURL causes it to be cached.
+          count++;
         }
       }
     }
+    phet.log && phet.log( `Cached ${count} orbital images.` );
   }
 
   /**
