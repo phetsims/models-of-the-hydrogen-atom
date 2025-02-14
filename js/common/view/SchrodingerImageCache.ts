@@ -153,8 +153,9 @@ class SchrodingerImageCache {
   }
 
   /**
-   * Sets the data URL (PNG image) for an electron state (n,l,m) in the cache.
-   * Note that the cache is indexed by n-1, because the range of n is [1,6].
+   * Sets the data URL (PNG image) for an electron state (n,l,m) in the cache. Note that:
+   * - The cache is indexed by n-1, because the range of n is [1,6].
+   * - The orbital is (n,l,+m) and (n,l,-m) is the same. See solveAssociatedLegendrePolynomial.
    */
   private setCachedDataURL( nlm: SchrodingerQuantumNumbers, dataURL: string ): void {
     phet.log && phet.log( `Populating orbital cache for (n,l,m) = ${nlm.toString()}` );
@@ -162,8 +163,9 @@ class SchrodingerImageCache {
   }
 
   /**
-   * Gets the data URL (PNG image) for an electron state (n,l,m) in the cache.
-   * Note that the cache is indexed by n-1, because the range of n is [1,6].
+   * Gets the data URL (PNG image) for an electron state (n,l,m) in the cache. Note that:
+   * - The cache is indexed by n-1, because the range of n is [1,6].
+   * - The orbital is (n,l,+m) and (n,l,-m) is the same. See solveAssociatedLegendrePolynomial.
    */
   private getCachedDataURL( nlm: SchrodingerQuantumNumbers ): string | null {
     return this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ];
