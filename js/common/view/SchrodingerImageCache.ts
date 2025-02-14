@@ -35,13 +35,13 @@ import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import MOTHAColors from '../MOTHAColors.js';
 
-// Number of cells in one quadrant of the 2D grid, or in 1/8 of the 3D space.
+// Number of cells in 1/8 of the 3D grid, and one quadrant of the 2D grid.
 const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
 
-const QUADRANT_SIDE_LENGTH = ZoomedInBox.SIDE_LENGTH / 2; // in model coordinates!
+// The length of one side of a 3D or 2D cell, in model coordinates.
+const CELL_SIDE_LENGTH = ( ZoomedInBox.SIDE_LENGTH / 2 ) / NUMBER_OF_CELLS;
 
-// The length of one side of a cell, which is a cube.
-const CELL_SIDE_LENGTH = QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS;
+const CANVAS_SIDE_LENGTH = 2 * NUMBER_OF_CELLS;
 
 // A 2D grid of opacity values that describes the orbital for a specific (n,l,m) state, in [row][column] order.
 export type OpacityGrid = Array<Array<number>>;
@@ -53,6 +53,10 @@ class SchrodingerImageCache {
 
   // Reusable array for summing probability densities.
   private readonly sums: Array<Array<number>>;
+
+  // Canvas and context that will be used to create PNG files.
+  private readonly canvas: HTMLCanvasElement;
+  private readonly context: CanvasRenderingContext2D;
 
   public constructor() {
 
@@ -74,6 +78,11 @@ class SchrodingerImageCache {
     for ( let i = 0; i < NUMBER_OF_CELLS; i++ ) {
       this.sums[ i ] = new Array( NUMBER_OF_CELLS ).fill( 0 );
     }
+
+    this.canvas = document.createElement( 'canvas' );
+    this.canvas.width = CANVAS_SIDE_LENGTH;
+    this.canvas.height = CANVAS_SIDE_LENGTH;
+    this.context = this.canvas.getContext( '2d', { alpha: true } )!;
 
     // Eagerly populate the cache.
     if ( MOTHAQueryParameters.computeOrbitals === 'atStartup' ) {
@@ -114,19 +123,20 @@ class SchrodingerImageCache {
       // Compute opacity for the orbital shape.
       const opacityGrid = this.computeOpacityGrid( nlm );
       const opacityArray = opacityGrid.flat(); // 2D to 1D
+      assert && assert( opacityArray.length === CANVAS_SIDE_LENGTH * CANVAS_SIDE_LENGTH,
+        'opacityArray does not fill the canvas dimensions.' );
 
       // Create rgba pixels for the PNG image.
       const rgbaArray = opacityArray.map( opacity => [ r, g, b, opacity * 255 ] ).flat();
-      const imageData = new ImageData( 2 * NUMBER_OF_CELLS, 2 * NUMBER_OF_CELLS );
+      assert && assert( rgbaArray.length === 4 * CANVAS_SIDE_LENGTH * CANVAS_SIDE_LENGTH,
+        'rgbaArray does not fill the canvas dimensions.' );
+      const imageData = new ImageData( CANVAS_SIDE_LENGTH, CANVAS_SIDE_LENGTH );
       imageData.data.set( rgbaArray );
 
-      // Draw the pixels to a canvas, and create a data URL in PNG format.
-      const canvas = document.createElement( 'canvas' );
-      canvas.width = 2 * NUMBER_OF_CELLS;
-      canvas.height = 2 * NUMBER_OF_CELLS;
-      const context = canvas.getContext( '2d', { alpha: true } )!;
-      context.putImageData( imageData, 0, 0 );
-      dataURL = canvas.toDataURL( 'image/png' );
+      // Draw the pixels to the canvas, and create a data URL in PNG format. We do not need to clear the canvas
+      // because imageData completely fills the canvas dimensions.
+      this.context.putImageData( imageData, 0, 0 );
+      dataURL = this.canvas.toDataURL( 'image/png' );
 
       // Cache the data URL for the PNG file.
       this.setCachedDataURL( nlm, dataURL );
