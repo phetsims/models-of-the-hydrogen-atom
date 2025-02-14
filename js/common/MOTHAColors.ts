@@ -313,7 +313,7 @@ const MOTHAColors = {
   UV_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 400 ),
   IR_SPARKLE_COLOR: VisibleColor.wavelengthToColor( 715 ),
 
-  // Holo colors for specific photons, for debugging with ?showHalos
+  // Holo colors for specific photons, for debugging with ?showHalos.
   SPONTANEOUS_EMISSION_HALO_COLOR: Color.RED,
   STIMULATED_EMISSION_HALO_COLOR: Color.GREEN,
   EXCITE_METASTABLE_HALO_COLOR: Color.BLUE,
