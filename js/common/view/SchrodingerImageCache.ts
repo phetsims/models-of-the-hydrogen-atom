@@ -14,9 +14,9 @@
  * 5. Canvas draws the pixel data to an internal "file", where it is accessible via a data URL.
  * 6. The data URL is cached.
  *
- * To access a PNG file, call getDataURL( nlm ). Since the PNG contains only pixels for the sample points, the PNG
- * will need to be scaled up when rendered. Scaling up will automatically provide interpolation/smoothing of the image.
- * See SchrodingerOrbitalNode for details.
+ * To get the PNG file for an orbital, call getDataURL( nlm ). Since the PNG contains only pixels for the sample points,
+ * the PNG will need to be scaled up when rendered. Scaling up will automatically provide interpolation/smoothing of
+ * the image. See SchrodingerOrbitalNode for details.
  *
  * Useful references for orbital shapes:
  * https://upload.wikimedia.org/wikipedia/commons/e/e7/Hydrogen_Density_Plots.png
