@@ -272,7 +272,7 @@ function solveGeneralizedLaguerrePolynomial( n: number, l: number, r: number ): 
  */
 function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): number {
 
-  // From doc/java-version/hydrogen-atom.pdf:
+  // From doc/java-version/hydrogen-atom.pdf, page 29:
   // Note that the probability density will always be the same for +m and –m.
   const mAbs = Math.abs( m );
 
