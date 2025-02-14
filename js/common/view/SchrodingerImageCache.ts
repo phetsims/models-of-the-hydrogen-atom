@@ -191,7 +191,7 @@ class SchrodingerImageCache {
 }
 
 // Singleton
-const schrodingerOpacityCache = new SchrodingerImageCache();
+const schrodingerImageCache = new SchrodingerImageCache();
 
 modelsOfTheHydrogenAtom.register( 'SchrodingerImageCache', SchrodingerImageCache );
-export { schrodingerOpacityCache };
+export { schrodingerImageCache };
