@@ -156,7 +156,7 @@ For the quantum atomic models, these additional classes are critical. See their 
 
 * `PhotonAbsorptionModel`
 * `SchrodingerQuantumNumbers`
-* `SchrodingerOpacityCache`
+* `SchrodingerImageCache`
 * `MetastableHandler`
 
 ## View

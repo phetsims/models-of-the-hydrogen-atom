@@ -14,7 +14,7 @@
  * for the cell's fill color.
  *
  * Computing the probability density for an NxNxN cube is fairly expensive, so the resulting NxN array of opacity
- * values is cached for reuse. See SchrodingerOpacityCache.ts.
+ * values is cached for reuse. See SchrodingerImageCache.ts.
  *
  * In the Java implementation, this was SchrodingerNode.java.
  *

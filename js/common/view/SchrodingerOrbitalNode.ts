@@ -17,7 +17,7 @@ import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { schrodingerOpacityCache } from './SchrodingerOpacityCache.js';
+import { schrodingerOpacityCache } from './SchrodingerImageCache.js';
 
 const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
 const QUADRANT_SIDE_LENGTH = ZoomedInBoxNode.SIDE_LENGTH / 2; // in view coordinates!

@@ -31,7 +31,7 @@ const CELL_SIDE_LENGTH = QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS;
 // A 2D grid of opacity values that describes the orbital for a specific (n,l,m) state, in [row][column] order.
 export type OpacityGrid = Array<Array<number>>;
 
-class SchrodingerOpacityCache {
+class SchrodingerImageCache {
 
   // Cache of dataURLs, indexed by [n-1][l][abs(m)]. These dataURLs point to PNG files for the orbitals.
   private readonly cache: Array<Array<Array<string | null>>>;
@@ -191,7 +191,7 @@ class SchrodingerOpacityCache {
 }
 
 // Singleton
-const schrodingerOpacityCache = new SchrodingerOpacityCache();
+const schrodingerOpacityCache = new SchrodingerImageCache();
 
-modelsOfTheHydrogenAtom.register( 'SchrodingerOpacityCache', SchrodingerOpacityCache );
+modelsOfTheHydrogenAtom.register( 'SchrodingerImageCache', SchrodingerImageCache );
 export { schrodingerOpacityCache };
