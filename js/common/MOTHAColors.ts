@@ -30,16 +30,6 @@ const MOTHAColors = {
     projector: Color.grayColor( 235 )
   } ),
 
-  panelFillColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'panelFillColor', {
-    default: 'black',
-    projector: 'white'
-  } ),
-
-  panelStrokeColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'panelStrokeColor', {
-    default: Color.grayColor( 180 ),
-    projector: 'black'
-  } ),
-
   //------------------------------------------------------------------------------------------------------------------
   // Boxes
   //------------------------------------------------------------------------------------------------------------------
@@ -163,6 +153,20 @@ const MOTHAColors = {
   } ),
 
   //------------------------------------------------------------------------------------------------------------------
+  // Light control panel
+  //------------------------------------------------------------------------------------------------------------------
+
+  lightControlPanelFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightControlPanelFill', {
+    default: 'black',
+    projector: 'white'
+  } ),
+
+  lightControlPanelStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'lightControlPanelStroke', {
+    default: Color.grayColor( 180 ),
+    projector: 'black'
+  } ),
+
+  //------------------------------------------------------------------------------------------------------------------
   // Spectrometer
   //------------------------------------------------------------------------------------------------------------------
 
@@ -250,11 +254,6 @@ const MOTHAColors = {
   } ),
 
   orbitStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'orbitStroke', {
-    default: 'white',
-    projector: 'black'
-  } ),
-
-  stateDisplayFillProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'stateDisplayFill', {
     default: 'white',
     projector: 'black'
   } ),

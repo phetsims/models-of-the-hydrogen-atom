@@ -51,8 +51,8 @@ export class LightControlPanel extends Panel {
 
     super( content, {
       isDisposable: false,
-      fill: MOTHAColors.panelFillColorProperty,
-      stroke: MOTHAColors.panelStrokeColorProperty,
+      fill: MOTHAColors.lightControlPanelFillProperty,
+      stroke: MOTHAColors.lightControlPanelStrokeProperty,
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
       xMargin: 5,
       yMargin: 10,
