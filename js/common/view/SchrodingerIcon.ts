@@ -23,7 +23,8 @@ export default class SchrodingerIcon extends Node {
 
     const protonIcon = ProtonNode.createIcon( 0.5 );
 
-    // Cannot use schrodingerImageCache.getDataURL here due to circular module imports. So fake it with a Circle.
+    // Cannot use schrodingerImageCache.getDataURL here due to circular module imports.
+    // So fake (n,l,m) = (1,0,0) with a Circle.
     const orbitalRadius = 2.1 * protonIcon.width;
     const orbitalNode = new Circle( orbitalRadius, {
       fill: new RadialGradient( 0, 0, 0, 0, 0, orbitalRadius )
