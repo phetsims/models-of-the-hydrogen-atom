@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * SchrodingerImageCache is a cache of PNG images for Schrodinger orbitals. PNG files can be created as needed,
