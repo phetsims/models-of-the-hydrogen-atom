@@ -19,8 +19,7 @@ export default class BohrIcon extends Node {
   public constructor() {
 
     // Proton
-    const protonIcon = ProtonNode.createIcon();
-    protonIcon.setScaleMagnitude( 0.5 );
+    const protonIcon = ProtonNode.createIcon( 0.5 );
 
     // Electron orbit
     const orbitRadius = 1.5 * protonIcon.height;

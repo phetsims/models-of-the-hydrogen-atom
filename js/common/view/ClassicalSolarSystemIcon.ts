@@ -16,12 +16,11 @@ export default class ClassicalSolarSystemIcon extends Node {
   public constructor() {
 
     // Proton
-    const protonIcon = ProtonNode.createIcon();
+    const protonIcon = ProtonNode.createIcon( 0.5 );
     protonIcon.setScaleMagnitude( 0.5 );
 
     // Electron
-    const electronIcon = ElectronNode.createIcon();
-    electronIcon.setScaleMagnitude( 0.5 );
+    const electronIcon = ElectronNode.createIcon( 0.5 );
 
     // Electron above and right of proton
     const electronAngle = 0.75 * Math.PI;
