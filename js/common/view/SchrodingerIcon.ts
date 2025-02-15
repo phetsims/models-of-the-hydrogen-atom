@@ -11,50 +11,29 @@
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import MOTHAColors from '../MOTHAColors.js';
 import ProtonNode from './ProtonNode.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
+import MOTHAColors from '../MOTHAColors.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 export default class SchrodingerIcon extends Node {
 
   public constructor() {
 
-    const opacity = 0.4;
+    const protonIcon = ProtonNode.createIcon( 0.5 );
 
-    const rect1Size = new Dimension2( 75, 50 );
-    const rect3Size = new Dimension2( 1.35 * rect1Size.width, rect1Size.width );
-    assert && assert( rect3Size.height === rect1Size.width );
-
-    // rect1 and rect2 have the same dimensions, 90 degrees different (swapped).
-    const rect1 = new Rectangle( 0, 0, rect1Size.width, rect1Size.height, {
-      fill: MOTHAColors.electronBaseColorProperty,
-      opacity: opacity
+    // Cannot use schrodingerImageCache.getDataURL here due to circular module imports. So fake it with a Circle.
+    const orbitalRadius = 2.1 * protonIcon.width;
+    const orbitalNode = new Circle( orbitalRadius, {
+      fill: new RadialGradient( 0, 0, 0, 0, 0, orbitalRadius )
+        .addColorStop( 0.2, MOTHAColors.electronBaseColorProperty )
+        .addColorStop( 1, new DerivedProperty( [ MOTHAColors.electronBaseColorProperty ], electronBaseColor => electronBaseColor.withAlpha( 0.05 ) ) )
     } );
-    const rect2 = new Rectangle( 0, 0, rect1Size.height, rect1Size.width, {
-      fill: MOTHAColors.electronBaseColorProperty,
-      opacity: opacity,
-      center: rect1.center
-    } );
-
-    // rect3 and rect4 have the same dimensions, 90 degrees different (swapped).
-    const rect3 = new Rectangle( 0, 0, rect3Size.width, rect3Size.height, {
-      fill: MOTHAColors.electronBaseColorProperty,
-      opacity: opacity,
-      center: rect1.center
-    } );
-    const rect4 = new Rectangle( 0, 0, rect3Size.height, rect3Size.width, {
-      fill: MOTHAColors.electronBaseColorProperty,
-      opacity: opacity,
-      center: rect1.center
-    } );
-
-    const protonIcon = ProtonNode.createIcon( 2.5 );
-    protonIcon.center = rect1.center;
+    orbitalNode.center = protonIcon.center;
 
     super( {
-      children: [ rect1, rect2, rect3, rect4, protonIcon ],
-      scale: 0.25
+      children: [ orbitalNode, protonIcon ]
     } );
   }
 }
