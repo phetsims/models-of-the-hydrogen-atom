@@ -64,9 +64,9 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     }
   },
 
-  // Size of the NxNxN grid used to compute probability density for Schrodinger orbitals. This is 1/8 of the 3D space,
-  // and 1/4 (1 quadrant) of the 2D projection. As this value gets larger, performance will be impacted. Note that
-  // this value can be small because the orbital image is scaled up by scenery Image, which will automatically
+  // Size of the uniform NxNxN grid used to compute probability density for Schrodinger orbitals. This is 1/8 of the
+  // 3D space, and 1/4 (1 quadrant) of the 2D projection. As this value gets larger, performance will be impacted.
+  // Note that this value can be small because the orbital image is scaled up by scenery Image, which will automatically
   // provide interpolation/smoothing. So set this value to be as small as possible, until you see an adverse
   // impact on the quality of the orbitals.
   gridSize: {
