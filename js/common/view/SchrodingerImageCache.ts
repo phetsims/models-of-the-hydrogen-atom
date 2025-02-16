@@ -1,22 +1,22 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * SchrodingerImageCache is a cache of PNG images for Schrodinger orbitals. PNG files can be created as needed,
- * or eagerly on startup by calling the populate method.
+ * SchrodingerImageCache is a cache of PNG images (accessible as dataURLs) for Schrodinger orbitals. PNG images can
+ * be created as needed, or eagerly on startup by calling the populate method.
  *
- * Here's the process for creating the image that corresponds to the orbital for some (n,l,m) state:
+ * Here's the process for creating the PNG image that corresponds to the orbital for some (n,l,m) state:
  *
  * 1. Probability density is sampled on a uniform 3D grid, for 1/8 of the 3D space.
  * 2. The 3D grid is projected into 2D space, for the rightBottom quadrant.
  * 3. The 2D data for the rightBottom quadrant is used to symmetrically fill data for the other 3 quadrants.
  * 4. Pixel data (rgba) is created from the 2D probability density samples. The electron color is used for the
  *    rgb components, and the probability density sample is used to compute the alpha component (a).
- * 5. Canvas draws the pixel data to an internal "file", where it is accessible via a data URL.
- * 6. The data URL is cached.
+ * 5. Pixel data gets drawn to a Canvas, where a dataURL provides the image in PNG format.
+ * 6. The dataURL is cached.
  *
- * To get the PNG file for an orbital, call getDataURL( nlm ). Since the PNG contains only pixels for the sample points,
- * the PNG will need to be scaled up when rendered. Scaling up will automatically provide interpolation/smoothing of
- * the image. See SchrodingerOrbitalNode for details.
+ * To get the PNG image for an orbital, call getDataURL( nlm ). Since the PNG contains only pixels for the sample points,
+ * the PNG must be scaled up when rendered. Scaling up will automatically provide interpolation/smoothing of the image.
+ * See SchrodingerOrbitalNode for details.
  *
  * Useful references for orbital shapes:
  * https://upload.wikimedia.org/wikipedia/commons/e/e7/Hydrogen_Density_Plots.png
@@ -117,10 +117,10 @@ class SchrodingerImageCache {
    */
   public getDataURL( nlm: SchrodingerQuantumNumbers ): string {
 
-    // Attempt to get the data URL for the orbital image from the cache.
+    // Attempt to get the dataURL for the orbital image from the cache.
     let dataURL = this.getCachedDataURL( nlm );
 
-    // If not cached, create the image and cache its data URL.
+    // If not cached, create the image and cache its dataURL.
     if ( !dataURL ) {
       dataURL = this.createDataURL( nlm );
       this.setCachedDataURL( nlm, dataURL );
@@ -153,14 +153,14 @@ class SchrodingerImageCache {
     const imageData = new ImageData( CANVAS_SIDE_LENGTH, CANVAS_SIDE_LENGTH );
     imageData.data.set( rgbaArray );
 
-    // Draw the pixels to the canvas, and create a data URL in PNG format. We do not need to clear the canvas
-    // because imageData completely fills the canvas dimensions.
+    // Draw the pixels to the canvas, and create a dataURL for the image in PNG format. We do not need to clear the
+    // canvas because imageData completely fills the canvas dimensions.
     this.context.putImageData( imageData, 0, 0 );
     return this.canvas.toDataURL( 'image/png' );
   }
 
   /**
-   * Sets the data URL (PNG image) for an electron state (n,l,m) in the cache. Note that:
+   * Sets the dataURL (PNG image) for an electron state (n,l,m) in the cache. Note that:
    * - The cache is indexed by n-1, because the range of n is [1,6].
    * - The orbital is (n,l,+m) and (n,l,-m) is the same. See solveAssociatedLegendrePolynomial.
    */
@@ -172,7 +172,7 @@ class SchrodingerImageCache {
   }
 
   /**
-   * Gets the data URL (PNG image) for an electron state (n,l,m) in the cache. Note that:
+   * Gets the dataURL (PNG image) for an electron state (n,l,m) in the cache. Note that:
    * - The cache is indexed by n-1, because the range of n is [1,6].
    * - The orbital is (n,l,+m) and (n,l,-m) is the same. See solveAssociatedLegendrePolynomial.
    */

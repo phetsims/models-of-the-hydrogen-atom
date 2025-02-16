@@ -19,8 +19,8 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { schrodingerImageCache } from './SchrodingerImageCache.js';
 
-const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
-const QUADRANT_SIDE_LENGTH = ZoomedInBoxNode.SIDE_LENGTH / 2; // in view coordinates!
+// PNG image is 2x the sampling grid size, because we sample only for the rightBottom quadrant.
+const PNG_IMAGE_SIDE_LENGTH = ( 2 * MOTHAQueryParameters.gridSize );
 
 export default class SchrodingerOrbitalNode extends Image {
 
@@ -28,7 +28,7 @@ export default class SchrodingerOrbitalNode extends Image {
                       atomPosition: Vector2,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    // Gets the PNG file for the orbital that corresponds to the current electron state (n,l,m).
+    // Gets the PNG image for the orbital that corresponds to the current electron state (n,l,m).
     const imageProperty = new DerivedProperty( [ nlmProperty ], nlm => schrodingerImageCache.getDataURL( nlm ) );
 
     super( imageProperty, {
@@ -37,7 +37,7 @@ export default class SchrodingerOrbitalNode extends Image {
       
       // The PNG image obtained from schrodingerImageCache.getDataURL contains a pixel for each probability density
       // sample. By scaling this Image up, we'll automatically get a larger image with smooth interpolation. 
-      scale: QUADRANT_SIDE_LENGTH / NUMBER_OF_CELLS
+      scale: ZoomedInBoxNode.SIDE_LENGTH / PNG_IMAGE_SIDE_LENGTH
     } );
 
     // Center the image at the atom's position.
