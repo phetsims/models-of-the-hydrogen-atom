@@ -190,16 +190,7 @@ export default class MOTHAScreenView extends ScreenView {
     // an absorbable photon at the atom (similar to the 'Excite Electron' button for Schrodinger), which will cause
     // the electron to move to a higher state.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/105 for feature history.
-    // To test:
-    // * Run with ?dev&showHalos. dev will show the (n,l,m) state display, and showHalos will draw a halo around
-    //   the absorbable photon, making it easier to see.
-    // * Set time speed to 'Fast', so that you'll get to the metastable state faster.
-    // * Set the A/B switch to 'Experiment'.
-    // * Set the light source to set to 'Monochromatic' 94 nm.
-    // * Turn on the light source.
-    // * Then wait for the electron to get stuck in the metastable state, and verify that this dialog opens.
-    // * Close this dialog, observe that an absorbable photon is fired at the atom, and the electron moves to
-    //   a higher state.
+    // See MetastableHandler.ts for more about the metastable state and how to test this dialog.
     const experiment = model.experiment;
     const experimentOopsDialog = new ExperimentOopsDialog( {
       hideCallback: () => {
