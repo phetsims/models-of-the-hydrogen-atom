@@ -69,7 +69,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // and this is the side length of that octant. As this value gets larger, performance will be impacted. Note that
   // this value can be small because the orbital image is scaled up by scenery Image, which will automatically provide
   // interpolation/smoothing. So set this value to be as small as possible, until you see an adverse impact on the
-  // quality of the orbitals.
+  // rendering quality of the orbitals.
   gridSize: {
     type: 'number',
     defaultValue: 35,
