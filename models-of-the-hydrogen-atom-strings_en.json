@@ -175,7 +175,7 @@
         "value": "Transitions"
       },
       "accessibleHelpText": {
-        "value": "Use the buttons to set the light source to a specific wavelength."
+        "value": "Use buttons to set the light source to a specific wavelength."
       }
     },
     "deBroglieRepresentationComboBox": {
@@ -183,7 +183,7 @@
         "value": "de Broglie Representation"
       },
       "accessibleHelpText": {
-        "value": "Choose the wave representation for de Broglie model."
+        "value": "Choose wave representation for de Broglie model."
       }
     },
     "deleteSnapshotButton": {
@@ -193,7 +193,7 @@
     },
     "electronEnergyLevelAccordionBox": {
       "accessibleHelpText": {
-        "value": "Observe changes in the electron’s state as shown in an energy level diagram."
+        "value": "Observe changes in electron’s state as shown in an energy level diagram."
       }
     },
     "energyLevelsScreen": {
@@ -208,7 +208,7 @@
           "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer to compare data. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
         },
         "interactionHint": {
-          "value": "Turn on the light source to start exploring."
+          "value": "Turn on light source to start exploring."
         }
       }
     },
@@ -270,7 +270,7 @@
           "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer to compare data. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
         },
         "interactionHint": {
-          "value": "Turn on the light source to start exploring."
+          "value": "Turn on light source to start exploring."
         }
       }
     },
