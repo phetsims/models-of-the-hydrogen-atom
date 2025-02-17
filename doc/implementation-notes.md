@@ -192,7 +192,7 @@ scaling it up to fit the zoomed-in box automatically provides smoothing of the i
 
 The most interesting source files are:
 
-* Schrodinger.ts - `solveProbabilityDensity` and related functions
+* SchrodingerModel.ts - see `solveProbabilityDensity` and related functions
 * SchrodingerImageCache.ts - creation and caching of the PNG images for orbitals
 * SchrodingerOrbitalNode.ts - scaling and rendering of the PNG images
 
