@@ -65,8 +65,8 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   },
 
   // Controls the number of probability density samples for Schrodinger orbitals. Because orbitals have reflectional
-  // symmetry about the origin, we only need to sample probability density in 1 octant of the 3D space, and this is
-  // the number of samples in 1 dimension of that octant. For example, gridSize=35 results in 35x35x35 samples.
+  // symmetry about the origin, we only need to sample probability density in 1 octant of the 3D space, and gridSize
+  // is the number of samples in 1 dimension of that octant. For example, gridSize=35 results in 35x35x35 samples.
   // As this value gets larger, performance will be impacted. Note that this value can be small because the orbital
   // image is scaled up by scenery Image, which will automatically provide interpolation/smoothing. So set this value
   // to be as small as possible, until you see an adverse impact on the rendering quality of the orbitals.
