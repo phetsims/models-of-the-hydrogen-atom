@@ -129,6 +129,9 @@ class SchrodingerImageCache {
    * Creates the dataURL (PNG image) for the orbital that corresponds to the specified (n,l,m) electron state.
    */
   private createDataURL( nlm: SchrodingerQuantumNumbers ): string {
+    phet.log && phet.log( `Creating dataURL for (n,l,m) = ${nlm.toString()}`, {
+      color: MOTHAColors.LOG_CREATE_DATA_URL
+    } );
 
     // Use the electron's color for rgb components.
     const r = MOTHAColors.electronBaseColorProperty.value.r;
@@ -161,9 +164,6 @@ class SchrodingerImageCache {
    * - The orbital is (n,l,+m) and (n,l,-m) is the same. See solveAssociatedLegendrePolynomial.
    */
   private setCachedDataURL( nlm: SchrodingerQuantumNumbers, dataURL: string ): void {
-    phet.log && phet.log( `Caching orbital image for (n,l,m) = ${nlm.toString()}`, {
-      color: MOTHAColors.LOG_CACHE_ORBITAL
-    } );
     this.cache[ nlm.n - 1 ][ nlm.l ][ Math.abs( nlm.m ) ] = dataURL;
   }
 

@@ -319,7 +319,7 @@ const MOTHAColors = {
   EXCITE_METASTABLE_HALO_COLOR: Color.BLUE,
 
   // Colors for phet.log messages, when running with ?log.
-  LOG_CACHE_ORBITAL: 'magenta',
+  LOG_CREATE_DATA_URL: 'magenta',
   LOG_EXCITE_METASTABLE: 'blue'
 };
 
