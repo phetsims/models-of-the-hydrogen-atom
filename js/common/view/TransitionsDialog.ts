@@ -110,8 +110,8 @@ export default class TransitionsDialog extends Panel {
       xMargin: 10,
       yMargin: 10,
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
-      tagName: 'div', // for KeyboardDragListener
-      focusable: true, // for KeyboardDragListener
+      tagName: 'div',
+      focusable: true,
       groupFocusHighlight: true,
       tandemNameSuffix: 'Dialog', // Yes it's a Panel, but we are OK with calling it a Dialog.
       phetioVisiblePropertyInstrumented: false // like Dialog
