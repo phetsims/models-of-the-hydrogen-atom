@@ -182,7 +182,19 @@ For the amplitude computation involved in all of these representations, see `get
 
 ### Schrodinger orbitals
 
-TODO
+Rendering Schrödinger orbitals efficiently and with good quality was one of the more interesting problems,
+and the HTML5 version makes huge improvements over the Java version.
+
+Schrödinger orbitals are created by sampling the probability density on a uniform grid in 3D space, then projecting
+into a uniform 2D grid. These samples are then used to create small PNG images for each orbital, where each sample is
+used to create an RGBA pixel in the PNG image. The small PNG image is rendered using a scenery `Image` node, and
+scaling it up to fit the zoomed-in box automatically provides smoothing of the image.
+
+The most interesting source files are:
+
+* Schrodinger.ts - `solveProbabilityDensity` and related functions
+* SchrodingerImageCache.ts - creation and caching of the PNG images for orbitals
+* SchrodingerOrbitalNode.ts - scaling and rendering of the PNG images
 
 ## PhET-iO
 
