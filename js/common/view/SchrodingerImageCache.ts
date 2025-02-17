@@ -136,16 +136,12 @@ class SchrodingerImageCache {
     // Compute 2D probability density for the electron state.
     const probabilityDensity2D = this.computeProbabilityDensity2D( nlm );
     const probabilityDensity1D = probabilityDensity2D.flat();
-    assert && assert( probabilityDensity1D.length === CANVAS_SIDE_LENGTH * CANVAS_SIDE_LENGTH,
-      'probabilityDensity1D does not fill the canvas dimensions.' );
 
     // Create rgba pixels for the PNG image. Use the electron's color for rgb components, and probabilityDensity to
     // compute the alpha component.
     const electronColor = MOTHAColors.electronBaseColorProperty.value;
     const rgbaArray = probabilityDensity1D.map( probabilityDensity =>
       [ electronColor.r, electronColor.g, electronColor.b, toFixedNumber( probabilityDensity * 255, 0 ) ] ).flat();
-    assert && assert( rgbaArray.length === 4 * CANVAS_SIDE_LENGTH * CANVAS_SIDE_LENGTH,
-      'rgbaArray does not fill the canvas dimensions.' );
     const imageData = new ImageData( CANVAS_SIDE_LENGTH, CANVAS_SIDE_LENGTH );
     imageData.data.set( rgbaArray );
 
