@@ -31,6 +31,9 @@ export default class SchrodingerOrbitalNode extends Image {
     // Gets the PNG image for the orbital that corresponds to the current electron state (n,l,m).
     const imageProperty = new DerivedProperty( [ nlmProperty ], nlm => schrodingerImageCache.getDataURL( nlm ) );
 
+    // If the cache changes, force imageProperty to be recomputed.
+    schrodingerImageCache.cacheChangedEmitter.addListener( () => imageProperty.recomputeDerivation() );
+
     super( imageProperty, {
       isDisposable: false,
       pickable: false,

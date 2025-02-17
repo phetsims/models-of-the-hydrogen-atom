@@ -35,6 +35,7 @@ import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import MOTHAColors from '../MOTHAColors.js';
 import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
+import Emitter from '../../../../axon/js/Emitter.js';
 
 // Number of cells in 1/8 of the 3D grid, and one quadrant of the 2D grid.
 const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
@@ -42,15 +43,22 @@ const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
 // The length of one side of a 3D or 2D cell, in model coordinates.
 const CELL_SIDE_LENGTH = ( ZoomedInBox.SIDE_LENGTH / 2 ) / NUMBER_OF_CELLS;
 
+// We're sampling probability density for one quadrant of the 2D grid, and the canvas includes all 4 quadrants.
 const CANVAS_SIDE_LENGTH = 2 * NUMBER_OF_CELLS;
 
 // A 2D grid of numbers.
 type NumberGrid2D = Array<Array<number>>;
 
+type CacheEntry = string | null;
+type Cache = Array<Array<Array<CacheEntry>>>;
+
 class SchrodingerImageCache {
 
   // Cache of dataURLs, indexed by [n-1][l][abs(m)]. These dataURLs point to PNG files for the orbitals.
-  private readonly cache: Array<Array<Array<string | null>>>;
+  private cache: Cache;
+
+  // Notifies listeners that the cache has changed.
+  public readonly cacheChangedEmitter: Emitter;
 
   // Reusable array for summing probability densities. This is used to project 3D samples into 2D.
   private readonly sums: NumberGrid2D;
@@ -61,18 +69,8 @@ class SchrodingerImageCache {
 
   public constructor() {
 
-    // Create the cache and initialize entries to null for all reachable (n,l,m) states.
     this.cache = [];
-    for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
-      const index = n - 1; // The cache is indexed by n-1, because the range of n is [1,6].
-      this.cache[ index ] = [];
-      for ( let l = 0; l <= Math.min( n - 1, SchrodingerQuantumNumbers.lMax ); l++ ) {
-        this.cache[ index ][ l ] = [];
-        for ( let m = 0; m <= l; m++ ) {
-          this.cache[ index ][ l ][ m ] = null;
-        }
-      }
-    }
+    this.cacheChangedEmitter = new Emitter();
 
     // Initialize reusable sums with zeros.
     this.sums = new Array( NUMBER_OF_CELLS );
@@ -86,29 +84,27 @@ class SchrodingerImageCache {
     this.canvas.height = CANVAS_SIDE_LENGTH;
     this.context = this.canvas.getContext( '2d', { alpha: true } )!;
 
-    // Eagerly populate the cache. The alternative is to populate the cache as needed, when getDataURL is called.
-    if ( MOTHAQueryParameters.computeOrbitals === 'atStartup' ) {
-      this.populate();
-    }
+    // If the electron color changes, clear the cache, repopulate if appropriate, and notify listeners that the
+    // cache has changed. The electron color may be changed by toggling 'Projector Mode' in Preferences, or via
+    // PhET-iO if electronBaseColorProperty is instrumented.
+    MOTHAColors.electronBaseColorProperty.link( () => {
+      this.cache = ( MOTHAQueryParameters.computeOrbitals === 'eagerly' ) ? this.createFullCache() : this.createEmptyCache();
+      this.cacheChangedEmitter.emit();
+    } );
   }
 
   /**
-   * Eagerly populates the cache for the electron states that are reachable in this sim.
+   * Creates a fully-populated cache, for all entries set to a dataURL (PNG image).
    */
-  private populate(): void {
-    let count = 0;
-    for ( let n = 1; n <= this.cache.length; n++ ) {
-      const index = n - 1; // The cache is indexed by n-1, because the range of n is [1,6].
-      for ( let l = 0; l < this.cache[ index ].length; l++ ) {
-        for ( let m = 0; m < this.cache[ index ][ l ].length; m++ ) {
-          this.getDataURL( new SchrodingerQuantumNumbers( n, l, m ) ); // Requesting a dataURL causes it to be cached.
-          count++;
-        }
-      }
-    }
-    phet.log && phet.log( `Cached ${count} orbital images.`, {
-      color: MOTHAColors.LOG_CACHE_ORBITAL
-    } );
+  private createFullCache(): Cache {
+    return createCache( ( n, l, m ) => this.createDataURL( new SchrodingerQuantumNumbers( n, l, m ) ) );
+  }
+
+  /**
+   * Creates an empty cache, with all entries set to null.
+   */
+  private createEmptyCache(): Cache {
+    return createCache( ( n, l, m ) => null );
   }
 
   /**
@@ -241,6 +237,24 @@ class SchrodingerImageCache {
     // Data for the full 2D grid, which completely describes the orbital's probability density.
     return [ ...topHalfGrid, ...bottomHalfGrid ];
   }
+}
+
+/**
+ * Creates a cache, populated with elements created by the createEntry function.
+ */
+function createCache( createEntry: ( n: number, l: number, m: number ) => CacheEntry ): Cache {
+  const cache: Cache = [];
+  for ( let n = 1; n <= QuantumElectron.MAX_STATE; n++ ) {
+    const index = n - 1; // The cache is indexed by n-1, because the range of n is [1,6].
+    cache[ index ] = [];
+    for ( let l = 0; l <= Math.min( n - 1, SchrodingerQuantumNumbers.lMax ); l++ ) {
+      cache[ index ][ l ] = [];
+      for ( let m = 0; m <= l; m++ ) {
+        cache[ index ][ l ][ m ] = createEntry( n, l, m );
+      }
+    }
+  }
+  return cache;
 }
 
 // Singleton

@@ -76,12 +76,14 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   },
 
   // Determines when to create and cache the orbital images for all reachable Schrodinger (n,l,m) electron states.
-  // 'atStartup' will result in longer startup time as ?gridSize is increased.
-  // 'asNeeded' may result in the sim pausing the first time that the electron is in a specific (n,l,m) state.
+  // 'eagerly populates the entire cache at once, on startup and when the electron color Property changes. It will
+  //   result in longer startup time and a slight delay when 'Projector Mode' is changed in Preferences.
+  // 'onDemand' populates the cache as the electron enters each state. It may result in the sim pausing the first
+  //   time that the electron is in a specific (n,l,m) state.
   computeOrbitals: {
     type: 'string',
-    defaultValue: 'atStartup',
-    isValidValue: value => value === 'atStartup' || value === 'asNeeded'
+    defaultValue: 'eagerly',
+    isValidValue: value => value === 'eagerly' || value === 'onDemand'
   }
 };
 
