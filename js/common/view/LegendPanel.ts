@@ -76,7 +76,7 @@ class LegendNode extends HBox {
   public constructor( iconNode: Node, iconAlignGroup: AlignGroup, labelStringProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
     super( {
       isDisposable: false,
-      spacing: 5,
+      spacing: 3,
       children: [
         new AlignBox( iconNode, {
           group: iconAlignGroup
@@ -84,7 +84,7 @@ class LegendNode extends HBox {
         new Text( labelStringProperty, {
           font: LegendNode.ITEM_FONT,
           fill: MOTHAColors.invertibleTextFillProperty,
-          maxWidth: 80 // determined empirically in the Energy Levels screen
+          maxWidth: 75 // determined empirically in the Energy Levels screen
         } )
       ],
       tandem: tandem,
