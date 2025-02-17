@@ -6,7 +6,7 @@
  *
  * Here's the process for creating the PNG image that corresponds to the orbital for some (n,l,m) state:
  *
- * 1. Probability density is sampled on a uniform 3D grid, for 1/8 of the 3D space.
+ * 1. Probability density is sampled on a uniform 3D grid, for one octant (right bottom front) of the 3D space.
  * 2. The 3D grid is projected into 2D space, for the rightBottom quadrant.
  * 3. The 2D data for the rightBottom quadrant is used to symmetrically fill data for the other 3 quadrants.
  * 4. Pixel data (rgba) is created from the 2D probability density samples. The electron color is used for the
@@ -37,7 +37,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 
-// Number of cells in 1/8 of the 3D grid, and one quadrant of the 2D grid.
+// Number of cells in 1 octant of the 3D grid, and 1 quadrant of the 2D grid.
 const NUMBER_OF_CELLS = MOTHAQueryParameters.gridSize;
 
 // The length of one side of a 3D or 2D cell, in model coordinates.
