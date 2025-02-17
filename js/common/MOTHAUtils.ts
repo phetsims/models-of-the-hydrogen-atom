@@ -28,6 +28,7 @@ const MOTHAUtils = {
   /**
    * Normalizes an angle to the range [0, 2 * PI), in radians.
    */
+  // REVIEW: Most sims use Utils.moduloBetweenDown(), why create a new function for this? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
   normalizeAngle( angle: number ): number {
     let normalizedAngle = angle % ( 2 * Math.PI );
     if ( normalizedAngle < 0 ) {

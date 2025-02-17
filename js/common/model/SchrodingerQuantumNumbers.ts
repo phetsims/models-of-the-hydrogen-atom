@@ -59,6 +59,7 @@ type SchrodingerQuantumNumbersStateObject = {
 };
 
 // This should match SchrodingerQuantumNumbersStateObject, but with IOTypes.
+// REVIEW: Should an assertion or test be added to ensure these two matching? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
 const STATE_SCHEMA = {
   n: NumberIO,
   l: NumberIO,
@@ -91,6 +92,7 @@ export default class SchrodingerQuantumNumbers {
   // * Describes the orientation of the region of space occupied by an electron with respect to an applied magnetic field.
   public readonly m: number;
 
+  // REVIEW: Should this consideration also be in the model.md? Both l<=2 and that the source doesn't emit IR https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125 and https://github.com/phetsims/models-of-the-hydrogen-atom/issues/116
   // l will not be > 2, because all transitions for n > 2 require IR photons, and the light source does not emit IR.
   public static readonly lMax = 2;
 
@@ -339,6 +341,7 @@ export default class SchrodingerQuantumNumbers {
 
 /**
  * Checks state transition rules to see if a proposed transition is valid.
+ * // REVIEW: Casing should be isAValidTransition, https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
  */
 function isaValidTransition( nlmOld: SchrodingerQuantumNumbers, nlmNew: SchrodingerQuantumNumbers ): boolean {
   return SchrodingerQuantumNumbers.isValidState( nlmOld.n, nlmOld.l, nlmOld.m ) &&

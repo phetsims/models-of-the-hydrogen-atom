@@ -17,7 +17,7 @@
  * Spontaneous emission of a photon takes the electron to a lower state, and the photon emitted has the transition
  * wavelength that corresponds to the current and new state. Transition to each lower state is equally likely.
  * Stimulated emission of a photon occurs when a photon hits the electron, and the photon's wavelength corresponds
- * to a wavelength that could have been absorbed in a lower state.  In this case, the colliding photon is not absorbed,
+ * to a wavelength that could have been absorbed in a lower state. In this case, the colliding photon is not absorbed,
  * but a new photon is emitted with the same wavelength, and the electron moves to the lower state. The new photon
  * moves alongside the original photon.
  *
@@ -58,6 +58,7 @@ const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 const STIMULATED_EMISSION_X_OFFSET = Photon.RADIUS;
 
 // Minimum time (in sec) that the electron must be in a state before transitions can occur.
+// REVIEW: Since this is time to absorption OR emission, would rename to something more general like MIN_TIME_IN_STATE_BEFORE_TRANSITION https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
 const MIN_TIME_IN_STATE_BEFORE_ABSORPTION = 0.75;
 const MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION = 1;
 const MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION = 1;
