@@ -5,16 +5,10 @@
  *
  * The axes are orientated with x horizontal, z vertical, y depth.
  *
- * Probability density is computed in 3D. The atom's 3D space is treated as a cube containing NxNxN discrete cells.
- * The probability density is computed at the center of each cell.
- *
- * The NxNxN 3D cube is projected onto an NxN 2D grid that covers the zoomed-in box. Depth information is mapped to
- * opacity (alpha). The sum of probability densities for the depth dimension (y-axis) are normalized to an opacity
- * value that has the range [0,1].  Each cell in the NxN grid has an opacity value that is used as the alpha component
- * for the cell's fill color.
- *
- * Computing the probability density for an NxNxN cube is fairly expensive, so the resulting NxN array of opacity
- * values is cached for reuse. See SchrodingerImageCache.ts.
+ * Schrodinger orbitals are created by sampling the probability density on a uniform grid in 3D space, then projecting
+ * into a uniform 2D grid. These samples are then used to create small PNG images for each orbital, where each sample
+ * is used to create an RGBA pixel in the PNG image. The small PNG image is rendered using a scenery Image node, and
+ * scaling it up to fit the zoomed-in box automatically provides smoothing of the image.
  *
  * In the Java implementation, this was SchrodingerNode.java.
  *
