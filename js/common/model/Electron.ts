@@ -22,10 +22,10 @@ export type ElectronOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 
 export default class Electron extends PhetioObject {
 
-  // Radius, in unitless model coordinates.
+  // Radius, in unitless model coordinates
   public static readonly RADIUS = 5;
 
-  // Position, in unitless model coordinates.
+  // Position, in unitless model coordinates
   public readonly positionProperty: Property<Vector2>;
 
   public constructor( providedOptions: ElectronOptions ) {

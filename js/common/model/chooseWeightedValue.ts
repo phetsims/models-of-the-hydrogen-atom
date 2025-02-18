@@ -15,6 +15,7 @@ export type WeightedValue = {
   weight: number;
 };
 
+// REVIEW: This function would definitely fit better under MOTHAUtils.ts, instead of being its own file. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
 export default function chooseWeightedValue( weightedValues: WeightedValue[] ): number | null {
 
   assert && assert( _.every( weightedValues, weightedValue => ( weightedValue.weight >= 0 ) ),

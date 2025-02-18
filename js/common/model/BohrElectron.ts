@@ -17,6 +17,7 @@ import QuantumElectron from './QuantumElectron.js';
 export default class BohrElectron extends QuantumElectron {
 
   // n, the principal quantum number
+  // REVIEW: It's not clear why we need an _nProperty besides the nProperty already in the parent class, or why creating it here and passing it to the super, document please https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
   private readonly _nProperty: NumberProperty;
 
   public constructor( atomPosition: Vector2, tandem: Tandem ) {
