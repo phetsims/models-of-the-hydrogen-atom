@@ -63,9 +63,11 @@ export default class LightSource extends PhetioObject {
   public readonly colorProperty: TReadOnlyProperty<Color | string>;
 
   // Notifies that a photon was emitted.
+  // REVIEW: Could the type of this TEmitter be explained and/or factored into a more readable type? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color | null ]>;
 
   // Time between creation of photons, in seconds.
+  // REVIEW: dt per photons seems like an odd definition. If it's not too big a refactor, I'd suggest photonEmissionRate or something similar. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
   private readonly dtPerPhotonCreated: number;
 
   // Elapsed time since a photon was emitted by the light source, in seconds.
