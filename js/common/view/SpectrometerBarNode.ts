@@ -57,8 +57,9 @@ export default class SpectrometerBarNode extends Path {
         const yTail = -( MAX_NUMBER_OF_PHOTONS * 2 * PHOTON_RADIUS ) - 2;
         const yTip = yTail - ARROW_TAIL_LENGTH - ARROW_HEAD_HEIGHT;
 
-        // Start at the tip and draw clockwise.
-        // REVIEW: Wouldnt ArrowNode.ts have been a better choice for this? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+        // Start at the tip and draw clockwise. We are not using scenery-phet.ArrowNode or scenery-phet.ArrowShape
+        // here because it is more efficient to describe each bar as a single Shape, and draw it as a single Path
+        // (the superclass of this Node).
         shape.moveTo( x, yTip );
         shape.lineTo( x + ARROW_HEAD_WIDTH / 2, yTip + ARROW_HEAD_HEIGHT );
         shape.lineTo( x + ARROW_TAIL_WIDTH / 2, yTip + ARROW_HEAD_HEIGHT );
