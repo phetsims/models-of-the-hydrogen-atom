@@ -31,8 +31,8 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import chooseWeightedValue, { WeightedValue } from './chooseWeightedValue.js';
 import QuantumElectron from './QuantumElectron.js';
+import MOTHAUtils, { WeightedValue } from '../MOTHAUtils.js';
 
 /*
  * This array defines the transition strengths for n (the primary quantum number) to lower values of n.
@@ -189,7 +189,7 @@ export default class SchrodingerQuantumNumbers {
       }
 
       // Choose a transition.
-      const value = chooseWeightedValue( weightedValues );
+      const value = MOTHAUtils.chooseWeightedValue( weightedValues );
       if ( value === null ) {
         return null;
       }
