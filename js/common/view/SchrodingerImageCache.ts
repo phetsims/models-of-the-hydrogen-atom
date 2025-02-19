@@ -20,6 +20,9 @@
  * the PNG must be scaled up when rendered. Scaling up will automatically provide interpolation/smoothing of the image.
  * See SchrodingerOrbitalNode for details.
  *
+ * There are performance and memory-size advantages to using one set of orbital images for both screens. So this is
+ * an excellent candidate for the singleton pattern, which we've used here.
+ *
  * Useful references for orbital shapes:
  * https://upload.wikimedia.org/wikipedia/commons/e/e7/Hydrogen_Density_Plots.png
  * https://en.wikipedia.org/wiki/Atomic_orbital#Orbitals_table
