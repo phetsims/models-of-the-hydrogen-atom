@@ -23,15 +23,6 @@ export default class TransitionsCheckbox extends Checkbox {
                       isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
-    // Show this checkbox only for quantum atoms, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
-    // REVIEW: This variable could be inlined below, https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
-    const visibleProperty = isQuantumAtomProperty;
-
-    // REVIEW: I moved this comment to the docstring of GatedVisibleProperty, so it's safe to delete here. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
-    // REVIEW: And I'd also inline this in the super call below. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
-    // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
-    const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
-
     const text = new Text( ModelsOfTheHydrogenAtomStrings.transitionsStringProperty, {
       font: new PhetFont( 16 ),
       fill: MOTHAColors.invertibleTextFillProperty,
@@ -40,11 +31,13 @@ export default class TransitionsCheckbox extends Checkbox {
 
     super( transitionsDialogVisibleProperty, text, {
       isDisposable: false,
-      boxWidth: text.height, // REVIEW: Should this be text.width? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+      boxWidth: text.height, // PhET convention is to size the square box to match the height of the text.
       checkboxColor: MOTHAColors.checkboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.checkboxFillProperty,
       accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.transitionsCheckbox.accessibleHelpTextStringProperty,
-      visibleProperty: gatedVisibleProperty,
+
+      // Show only for quantum atoms, and provide a way for PhET-iO clients to permanently hide.
+      visibleProperty: new GatedVisibleProperty( isQuantumAtomProperty, tandem ),
       mouseAreaXDilation: 5,
       mouseAreaYDilation: 5,
       touchAreaXDilation: 5,
