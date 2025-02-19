@@ -24,8 +24,11 @@ export default class TransitionsCheckbox extends Checkbox {
                       tandem: Tandem ) {
 
     // Show this checkbox only for quantum atoms, see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/63
+    // REVIEW: This variable could be inlined below, https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
     const visibleProperty = isQuantumAtomProperty;
 
+    // REVIEW: I moved this comment to the docstring of GatedVisibleProperty, so it's safe to delete here. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+    // REVIEW: And I'd also inline this in the super call below. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
 
@@ -37,7 +40,7 @@ export default class TransitionsCheckbox extends Checkbox {
 
     super( transitionsDialogVisibleProperty, text, {
       isDisposable: false,
-      boxWidth: text.height,
+      boxWidth: text.height, // REVIEW: Should this be text.width? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
       checkboxColor: MOTHAColors.checkboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.checkboxFillProperty,
       accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.transitionsCheckbox.accessibleHelpTextStringProperty,

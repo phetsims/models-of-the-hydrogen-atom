@@ -23,6 +23,9 @@ import MOTHAConstants from '../MOTHAConstants.js';
 // in an atom. These letters represent the orbital shape, and are indexed by the value of l from (n,l,m).
 // l > 2 (f, g, h) are theoretically possible, but should not be encountered in practice.
 // See https://en.wikipedia.org/wiki/Atomic_orbital#Orbitals_table
+// REVIEW: So we know f, g, h string properties will always be unused? It seems they should go away.
+// REVIEW: Even if theoretically possible, there's enough assertions in the sim to prevent this from ever happening.
+// REVIEW: https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
 const ORBITAL_SHAPE_PROPERTIES = [
   MOTHASymbols.sStringProperty,
   MOTHASymbols.pStringProperty,

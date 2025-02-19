@@ -58,6 +58,7 @@ export default class SpectrometerBarNode extends Path {
         const yTip = yTail - ARROW_TAIL_LENGTH - ARROW_HEAD_HEIGHT;
 
         // Start at the tip and draw clockwise.
+        // REVIEW: Wouldnt ArrowNode.ts have been a better choice for this? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
         shape.moveTo( x, yTip );
         shape.lineTo( x + ARROW_HEAD_WIDTH / 2, yTip + ARROW_HEAD_HEIGHT );
         shape.lineTo( x + ARROW_TAIL_WIDTH / 2, yTip + ARROW_HEAD_HEIGHT );

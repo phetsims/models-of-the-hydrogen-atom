@@ -21,6 +21,8 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import SpectrometerChartSegment, { IRChartSegment, UVChartSegment, VisibleChartSegment } from './SpectrometerChartSegment.js';
 
 // Lengths of the 3 x-axis (nm) segments
+// REVIEW: Are these numbers empirically determined, designed, or physically related? document.
+// REVIEW: And if they are nm, shouldn't they live in the model? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
 const UV_AXIS_LENGTH = 270;
 const VISIBLE_AXIS_LENGTH = 145;
 const IR_AXIS_LENGTH = 235;
