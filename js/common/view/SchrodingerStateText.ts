@@ -20,20 +20,16 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 
 // In quantum mechanics, an atomic orbital is a function describing the location and wave-like behavior of an electron
-// in an atom. These letters represent the orbital shape, and are indexed by the value of l from (n,l,m).
-// l > 2 (f, g, h) are theoretically possible, but should not be encountered in practice.
-// See https://en.wikipedia.org/wiki/Atomic_orbital#Orbitals_table
-// REVIEW: So we know f, g, h string properties will always be unused? It seems they should go away.
-// REVIEW: Even if theoretically possible, there's enough assertions in the sim to prevent this from ever happening.
-// REVIEW: https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+// in an atom. These letters represent the orbital shapes, and are indexed by the value of l from (n,l,m).
+// l > 2 (f, g, h) are theoretically possible, but will not be encountered in this implementation. See documentation
+// for SchrodingerQuantumNumbers.lMax and https://en.wikipedia.org/wiki/Atomic_orbital#Orbitals_table.
 const ORBITAL_SHAPE_PROPERTIES = [
   MOTHASymbols.sStringProperty,
   MOTHASymbols.pStringProperty,
-  MOTHASymbols.dStringProperty,
-  MOTHASymbols.fStringProperty,
-  MOTHASymbols.gStringProperty,
-  MOTHASymbols.hStringProperty
+  MOTHASymbols.dStringProperty
 ];
+assert && assert( SchrodingerQuantumNumbers.lMax <= 2,
+  'Increasing lMax requires adding strings for additional orbitals, e.g. f,g,h.' );
 
 export default class SchrodingerStateText extends RichText {
 

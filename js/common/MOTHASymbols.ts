@@ -26,9 +26,6 @@ const MOTHASymbols = {
   sStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.sStringProperty ),
   pStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.pStringProperty ),
   dStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.dStringProperty ),
-  gStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.gStringProperty ),
-  fStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.fStringProperty ),
-  hStringProperty: MathSymbolFont.createDerivedProperty( ModelsOfTheHydrogenAtomStrings.hStringProperty ),
 
   // Arrows
   leftRightArrow: '\u2194', // <->, for photon absorption and emission, e.g. 1 <-> 2

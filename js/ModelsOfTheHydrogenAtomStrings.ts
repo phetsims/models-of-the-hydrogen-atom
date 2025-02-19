@@ -59,9 +59,6 @@ type StringsType = {
   'sStringProperty': LocalizedStringProperty;
   'pStringProperty': LocalizedStringProperty;
   'dStringProperty': LocalizedStringProperty;
-  'fStringProperty': LocalizedStringProperty;
-  'gStringProperty': LocalizedStringProperty;
-  'hStringProperty': LocalizedStringProperty;
   'quantumNumbersStringProperty': LocalizedStringProperty;
   'nlmInfoStringProperty': LocalizedStringProperty;
   'nInfoStringProperty': LocalizedStringProperty;
