@@ -3,8 +3,9 @@
 /**
  * PhotonAbsorptionModel maps from absorption/emission wavelengths to electron state (n) transitions.
  * This model is relevant for the quantum models of the hydrogen atom: Bohr, de Broglie, and Schrodinger.
- * A singleton instance is used throughout the sim.
- * REVIEW: Explain why a singleton works better here. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+ *
+ * This class has no state (PhET-iO or otherwise), and there is no reason to duplicate the map. This makes
+ * it an excellent candidate for the single pattern, which we've used here.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
