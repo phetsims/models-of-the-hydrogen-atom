@@ -10,10 +10,10 @@
  */
 
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import Utils from '../../../../dot/js/Utils.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import QuantumElectron from './QuantumElectron.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
+import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 
 // Transition for n, the principal quantum number that represents the electron's state.
 type StateTransition = {
@@ -172,7 +172,7 @@ function computeAbsorptionWavelength( n1: number, n2: number ): number {
 
   // As a simplification to benefit PhET-iO, convert to an integer value.
   // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53.
-  return Utils.toFixedNumber( wavelength, 0 );
+  return toFixedNumber( wavelength, 0 );
 }
 
 // Singleton

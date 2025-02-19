@@ -12,7 +12,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
+import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
@@ -26,10 +26,10 @@ import ProtonNode from './ProtonNode.js';
 import Wireframe3DNode from './Wireframe3DNode.js';
 
 // The final pitch (rotation about the x-axis), after the model has rotated into place.
-const FINAL_PITCH = Utils.toRadians( 70 );
+const FINAL_PITCH = toRadians( 70 );
 
 // Angular speed of the rotation animation, in radians/s.
-const ANGULAR_SPEED = Utils.toRadians( 100 );
+const ANGULAR_SPEED = toRadians( 100 );
 
 export default class DeBroglie3DHeightNode extends Node {
 

@@ -11,7 +11,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import Utils from '../../../../dot/js/Utils.js';
+import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -25,8 +25,8 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron from './Electron.js';
 
 // Deflection angles when the photon collides with a rigid body, like the Billiard Ball atom.
-const MIN_DEFLECTION_ANGLE = Utils.toRadians( 30 );
-const MAX_DEFLECTION_ANGLE = Utils.toRadians( 60 );
+const MIN_DEFLECTION_ANGLE = toRadians( 30 );
+const MAX_DEFLECTION_ANGLE = toRadians( 60 );
 
 // This should match PHOTON_STATE_SCHEMA, but with JavaScript types.
 // Other Photon fields are instrumented Properties, and handle their own serialization.

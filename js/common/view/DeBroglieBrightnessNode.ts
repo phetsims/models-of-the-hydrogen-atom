@@ -10,7 +10,6 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -26,6 +25,7 @@ import DeBroglieModel from '../model/DeBroglieModel.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 import MOTHAColors from '../MOTHAColors.js';
 import DeBroglie2DWaveNode from './DeBroglie2DWaveNode.js';
+import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
 // tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of
@@ -216,7 +216,7 @@ class BrightnessPolygonShape extends Shape {
  */
 function calculateNumberOfPolygons( radius: number ): number {
   const circumference = Math.PI * ( 2 * radius );
-  return Utils.toFixedNumber( circumference / POLYGON_SIZE, 0 ) + 1;
+  return toFixedNumber( circumference / POLYGON_SIZE, 0 ) + 1;
 }
 
 modelsOfTheHydrogenAtom.register( 'DeBroglieBrightnessNode', DeBroglieBrightnessNode );

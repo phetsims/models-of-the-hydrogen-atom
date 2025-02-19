@@ -25,7 +25,6 @@
  */
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -44,6 +43,7 @@ import QuantumElectron from './QuantumElectron.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import BohrIcon from '../view/BohrIcon.js'; // eslint-disable-line phet/no-view-imported-from-model
+import { toRadians } from '../../../../dot/js/util/toRadians.js';
 
 // Probability that a photon will be absorbed, [0,1]
 const PHOTON_ABSORPTION_PROBABILITY = 1;
@@ -88,7 +88,7 @@ export default class BohrModel extends HydrogenAtom {
   public readonly electron: QuantumElectron;
 
   // Change in orbit angle per dt for ground state orbit.
-  protected static readonly ELECTRON_ANGLE_DELTA = Utils.toRadians( 480 );
+  protected static readonly ELECTRON_ANGLE_DELTA = toRadians( 480 );
 
   public constructor( position: Vector2, providedOptions: BohrModelOptions ) {
 

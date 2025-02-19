@@ -13,7 +13,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -33,6 +32,7 @@ import LightSource from '../model/LightSource.js';
 import Photon from '../model/Photon.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
+import { toRadians } from '../../../../dot/js/util/toRadians.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -116,10 +116,10 @@ class SparkleNode extends Node {
   public constructor( wavelength: number, radius: number ) {
     const fill = getSparkleColor( wavelength );
     const bigCrosshairs = new CrosshairsNode( radius, fill );
-    const smallCrosshairs = new CrosshairsNode( 0.7 * radius, fill, Utils.toRadians( 45 ) );
+    const smallCrosshairs = new CrosshairsNode( 0.7 * radius, fill, toRadians( 45 ) );
     super( {
       children: [ bigCrosshairs, smallCrosshairs ],
-      rotation: Utils.toRadians( 18 )
+      rotation: toRadians( 18 )
     } );
   }
 }
@@ -135,7 +135,7 @@ class CrosshairsNode extends Node {
 
     const verticalPart = new Path( crosshairShape, {
       fill: fill,
-      rotation: Utils.toRadians( 90 )
+      rotation: toRadians( 90 )
     } );
 
     super( {

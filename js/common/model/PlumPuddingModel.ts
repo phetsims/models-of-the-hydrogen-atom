@@ -25,7 +25,6 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -39,6 +38,7 @@ import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import PlumPuddingElectron from './PlumPuddingElectron.js';
 import PlumPuddingIcon from '../view/PlumPuddingIcon.js'; // eslint-disable-line phet/no-view-imported-from-model
+import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 
 const MAX_PHOTONS_ABSORBED = 1; // maximum number of photons that can be absorbed. WARNING: Untested with values !== 1
 const PHOTON_EMISSION_PROBABILITY = 0.1; // probability [0,1] that a photon will be emitted
@@ -273,7 +273,7 @@ export default class PlumPuddingModel extends HydrogenAtom {
       this.numberOfPhotonsAbsorbedProperty.value += 1;
       assert && assert( this.numberOfPhotonsAbsorbedProperty.value <= MAX_PHOTONS_ABSORBED,
         `Too many photons have been absorbed: ${this.numberOfPhotonsAbsorbedProperty.value}` );
-      phet.log && phet.log( `${this.debugName}: absorbing ${MOTHASymbols.lambda}=${Utils.toFixedNumber( photon.wavelength, 2 )}` );
+      phet.log && phet.log( `${this.debugName}: absorbing ${MOTHASymbols.lambda}=${toFixedNumber( photon.wavelength, 2 )}` );
       this.photonAbsorbedEmitter.emit( photon );
       absorbed = true;
     }

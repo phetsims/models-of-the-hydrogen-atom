@@ -10,7 +10,6 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Utils from '../../../../dot/js/Utils.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -31,6 +30,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import SpectrometerBarNode from './SpectrometerBarNode.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import { linear } from '../../../../dot/js/util/linear.js';
 
 const TICK_LINE_LENGTH = 3;
 const TICK_FONT = new PhetFont( 11 );
@@ -117,7 +117,7 @@ export default class SpectrometerChartSegment extends Node {
         `wavelength is out of range: ${wavelength}` );
 
       // Convert wavelength to the position on the x-axis.
-      const x = Utils.linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, remap( wavelength ) );
+      const x = linear( options.minWavelength, options.maxWavelength, 0, xAxisLength, remap( wavelength ) );
 
       if ( options.hasTickMarks ) {
         const line = new Line( 0, 0, 0, TICK_LINE_LENGTH, {

@@ -9,7 +9,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import Utils from '../../../../dot/js/Utils.js';
+import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron, { ElectronOptions } from './Electron.js';
@@ -46,7 +46,7 @@ export default class ClassicalSolarSystemElectron extends Electron {
       phetioReadOnly: true
     } );
 
-    this.angularSpeedProperty = new NumberProperty( Utils.toRadians( 600 ), {
+    this.angularSpeedProperty = new NumberProperty( toRadians( 600 ), {
       units: 'radians/s',
       tandem: options.tandem.createTandem( 'angularSpeedProperty' ),
       phetioDocumentation: 'Angular speed of the electron. For internal use only.',
