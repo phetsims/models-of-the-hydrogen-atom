@@ -32,9 +32,8 @@ export default abstract class QuantumElectron extends Electron {
   // n, the principal quantum number.
   public readonly nProperty: TReadOnlyProperty<number>;
 
-  // Energy of the electron in its current state, in eV.
-  // This Property is private because it exists only as a PhET-iO convenience.
-  // REVIEW: It seems this Property is never used, delete. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+  // Energy of the electron in its current state, in eV. This Property was requested by PhET-iO designers as a
+  // convenience for PhET-iO clients. This Property is not used in the sim and is therefore private.
   private readonly energyProperty: TReadOnlyProperty<number>;
 
   // Time that the electron has been in its current state, in seconds.
