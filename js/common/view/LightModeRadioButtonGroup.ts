@@ -52,8 +52,8 @@ export default class LightModeRadioButtonGroup extends HorizontalAquaRadioButton
       },
       mouseAreaYDilation: 5,
       touchAreaYDilation: 5,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.accessibleNameStringProperty,
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.lightSourceModeRadioButtonGroup.accessibleHelpTextStringProperty,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.translatable.lightSourceModeRadioButtonGroup.accessibleNameStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.lightSourceModeRadioButtonGroup.accessibleHelpTextStringProperty,
       tandem: tandem
     } );
   }

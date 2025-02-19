@@ -25,7 +25,7 @@ export default class SpectraScreen extends MOTHAScreen<SpectraModel, SpectraScre
     const options = {
       name: ModelsOfTheHydrogenAtomStrings.screen.spectraStringProperty,
       homeScreenIcon: createScreenIcon(),
-      screenButtonsHelpText: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenButtonsHelpTextStringProperty,
+      screenButtonsHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.spectraScreen.screenButtonsHelpTextStringProperty,
       tandem: tandem
     };
 

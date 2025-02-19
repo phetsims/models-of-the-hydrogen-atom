@@ -52,7 +52,7 @@ export default class ExperimentOrModelSwitch extends ABSwitch<ExperimentOrModel>
         phetioVisiblePropertyInstrumented: false,
         phetioEnabledPropertyInstrumented: false
       },
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelHelpTextSwitch.accessibleHelpTextStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.experimentOrModelHelpTextSwitch.accessibleHelpTextStringProperty,
       tandem: tandem
     } );
   }

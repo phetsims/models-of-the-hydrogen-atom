@@ -145,8 +145,8 @@ export default class TransitionsDialog extends Panel {
       tagName: 'div',
       labelTagName: 'h3',
       descriptionTagName: 'p',
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleNameStringProperty,
-      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleHelpTextStringProperty
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.translatable.transitionsDialog.accessibleNameStringProperty,
+      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.translatable.transitionsDialog.accessibleHelpTextStringProperty
     } );
 
     const titleBarNode = new HBox( {
@@ -211,7 +211,7 @@ export default class TransitionsDialog extends Panel {
             monochromaticWavelengthProperty.value = wavelength;
             lightModeProperty.value = 'monochromatic';
           },
-          accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.wavelengthButton.accessibleNameStringProperty, {
+          accessibleName: new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.translatable.wavelengthButton.accessibleNameStringProperty, {
             wavelength: wavelength
           } ),
           tandem: buttonGroupTandem.createTandem( `wavelength${wavelength}Button` ),

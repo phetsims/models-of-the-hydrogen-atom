@@ -46,7 +46,7 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
       closeButtonTouchAreaXDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       closeButtonTouchAreaYDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       xSpacing: 0,
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.mySnapshotsDialog.accessibleNameStringProperty,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.translatable.mySnapshotsDialog.accessibleNameStringProperty,
       tandem: tandem
     } );
 

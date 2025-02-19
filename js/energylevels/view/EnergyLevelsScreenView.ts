@@ -39,9 +39,9 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
       hasContinuumBarNode: false,
       screenSummaryContent: new ScreenSummaryContent( {
         additionalContent: [
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
+          ModelsOfTheHydrogenAtomStrings.a11y.translatable.energyLevelsScreen.screenSummary.playAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.translatable.energyLevelsScreen.screenSummary.controlAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.translatable.energyLevelsScreen.screenSummary.interactionHintStringProperty
         ]
       } ),
       tandem: tandem

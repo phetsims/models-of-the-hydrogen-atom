@@ -43,7 +43,7 @@ export default class TransitionsCheckbox extends Checkbox {
       boxWidth: text.height, // REVIEW: Should this be text.width? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
       checkboxColor: MOTHAColors.checkboxStrokeProperty,
       checkboxColorBackground: MOTHAColors.checkboxFillProperty,
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.transitionsCheckbox.accessibleHelpTextStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.transitionsCheckbox.accessibleHelpTextStringProperty,
       visibleProperty: gatedVisibleProperty,
       mouseAreaXDilation: 5,
       mouseAreaYDilation: 5,

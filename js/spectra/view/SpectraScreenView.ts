@@ -32,9 +32,9 @@ export default class SpectraScreenView extends MOTHAScreenView {
       atomicModelRadioButtonTextMaxWidth: 200,
       screenSummaryContent: new ScreenSummaryContent( {
         additionalContent: [
-          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.controlAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.interactionHintStringProperty
+          ModelsOfTheHydrogenAtomStrings.a11y.translatable.spectraScreen.screenSummary.playAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.translatable.spectraScreen.screenSummary.controlAreaStringProperty,
+          ModelsOfTheHydrogenAtomStrings.a11y.translatable.spectraScreen.screenSummary.interactionHintStringProperty
         ]
       } ),
       tandem: tandem
