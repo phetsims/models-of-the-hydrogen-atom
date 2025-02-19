@@ -38,7 +38,8 @@ simLauncher.launch( () => {
             'Ariel Paul, Kathy Perkins, Noah Podolefsky, Amy Rouinfar, Nancy Salpepi, Taliesin Smith, Carl Wieman',
       qualityAssurance: '',
       graphicArts: 'Mayra López'
-    }
+    },
+    phetioDesigned: true
   };
 
   const sim = new Sim( titleStringProperty, screens, options );
