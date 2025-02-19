@@ -7,6 +7,7 @@
  *
  * This was EnergySquiggle.java in the Java version.
  *
+ * // REVIEW: Is this the same Chris Malley from PixelZoom Inc?? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
  * @author Chris Malley (cmalley@pixelzoom.com)
  */
 
