@@ -129,7 +129,7 @@ export default class SchrodingerQuantumNumbers {
     let nlmNext = new SchrodingerQuantumNumbers( nNext, lNext, mNext );
 
     // Verify that the transition is valid.
-    const valid = isaValidTransition( this, nlmNext );
+    const valid = isValidTransition( this, nlmNext );
     assert && assert( valid, `Invalid transition: (n,l,m) = ${this.toString()} -> ${nNext.toString()}` );
     if ( !valid ) {
       nlmNext = new SchrodingerQuantumNumbers( 1, 0, 0 ); // Fallback, if running without assertions.
@@ -341,9 +341,8 @@ export default class SchrodingerQuantumNumbers {
 
 /**
  * Checks state transition rules to see if a proposed transition is valid.
- * // REVIEW: Casing should be isAValidTransition, https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
  */
-function isaValidTransition( nlmOld: SchrodingerQuantumNumbers, nlmNew: SchrodingerQuantumNumbers ): boolean {
+function isValidTransition( nlmOld: SchrodingerQuantumNumbers, nlmNew: SchrodingerQuantumNumbers ): boolean {
   return SchrodingerQuantumNumbers.isValidState( nlmOld.n, nlmOld.l, nlmOld.m ) &&
          SchrodingerQuantumNumbers.isValidState( nlmNew.n, nlmNew.l, nlmNew.m ) &&
          ( nlmOld.n !== nlmNew.n ) &&
