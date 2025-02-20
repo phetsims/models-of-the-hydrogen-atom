@@ -187,7 +187,7 @@ export default class MOTHAScreenView extends ScreenView {
     this.visibleBoundsProperty.link( visibleBounds => screenBackgroundRectangle.setRectBounds( visibleBounds ) );
 
     // Dialog that opens when the Experiment's electron is stuck in the metastable state. Closing this dialog fires
-    // an absorbable photon at the atom (similar to the 'Excite Electron' button for Schrodinger), which will cause
+    // an absorbable photon at the atom (similar to the 'Excite Electron' button for Schrödinger), which will cause
     // the electron to move to a higher state.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/105 for feature history.
     // See MetastableHandler.ts for more about the metastable state and how to test this dialog.

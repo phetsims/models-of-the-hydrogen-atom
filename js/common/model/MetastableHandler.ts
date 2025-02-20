@@ -1,20 +1,20 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- *  MetastableHandler handles a case where the Schrodinger model can get stuck in state (n,l,m) = (2,0,0). This state
+ *  MetastableHandler handles a case where the Schrödinger model can get stuck in state (n,l,m) = (2,0,0). This state
  *  is known as a metastable state. The only way to get out of this state is to absorb a photon that 'excites' the
  *  atom (takes the electron to a higher state, a higher value of n).
  *
  *  Automatic excitation occurs when the light is emitting white light and the atom is in state (2,0,0). In this case,
  *  the step method fires an absorbable photon at the atom's center every EXCITE_ATOM_INTERVAL ms.
  *
- *  Manual excitation occurs when the light is emitting monochromatic light. For the Schrodinger atom, the user
+ *  Manual excitation occurs when the light is emitting monochromatic light. For the Schrödinger atom, the user
  *  must manually fire an absorbable photon at the atom's center by pressing the 'Excite Electron' button. For the
  *  Experiment, an Oops! dialog informs the user that the electron is stuck, and closing this dialog has the same
  *  effect as pressing the 'Excite Electron' button.
  *
  *  For testing, here is a reliable process for getting the electron into the metastable state:
- *  1. Select the Schrodinger atomic model.
+ *  1. Select the Schrödinger atomic model.
  *  2. Select 'Fast' time speed, so you don't have to wait as long.
  *  3. Set the light source to 'Monochromatic' and 94 nm.
  *  4. Turn on the light source.

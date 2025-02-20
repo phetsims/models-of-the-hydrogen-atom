@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * QuantumNumbersInfoButton is an info button that, when pressed, shows a dialog that explains the Schrodinger
+ * QuantumNumbersInfoButton is an info button that, when pressed, shows a dialog that explains the Schrödinger
  * state notation.
  *
  * @author Chris Malley (PixelZoom, Inc.)

@@ -25,7 +25,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   //----------------------------------------------------------------------------------------------------------------
 
   // Draws a halo around special photons, to make them easier to see. This includes photons that are emitted by the
-  // atom, and photons that are used to excite the Schrodinger electron out of the metastable state (n,l,m) = (2,0,0).
+  // atom, and photons that are used to excite the Schrödinger electron out of the metastable state (n,l,m) = (2,0,0).
   // See MOTHAColors.*_HALO_COLOR for the halo colors.
   showHalos: {
     type: 'flag'
@@ -48,7 +48,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     type: 'flag'
   },
 
-  // The initial state (n,l,m) for the Schrodinger model. This is useful for checking an orbital shape, without
+  // The initial state (n,l,m) for the Schrödinger model. This is useful for checking an orbital shape, without
   // having to wait for the sim to get to a specific state.
   nlm: {
     type: 'array',
@@ -64,7 +64,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     }
   },
 
-  // Controls the number of probability density samples for Schrodinger orbitals. Because orbitals have reflectional
+  // Controls the number of probability density samples for Schrödinger orbitals. Because orbitals have reflectional
   // symmetry about the origin, we only need to sample probability density in 1 octant of the 3D space, and gridSize
   // is the number of samples in 1 dimension of that octant. For example, gridSize=35 results in 35x35x35 samples.
   // As this value gets larger, performance will be impacted. Note that this value can be small because the orbital
@@ -76,7 +76,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
     isValidValue: value => Number.isInteger( value ) && ( value >= 10 )
   },
 
-  // Determines when to create and cache the orbital images for all reachable Schrodinger (n,l,m) electron states.
+  // Determines when to create and cache the orbital images for all reachable Schrödinger (n,l,m) electron states.
   // 'eagerly' populates the entire cache at once, on startup and when the electron color Property changes. It will
   // result in longer startup time and a slight delay when 'Projector Mode' is changed in Preferences.
   // 'onDemand' creates and caches an image the first time that the electron enters a state, and may result in the sim

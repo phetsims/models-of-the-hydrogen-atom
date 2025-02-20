@@ -1,7 +1,7 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * SchrodingerIconNode is the icon that represents the Schrodinger atomic model in the user interface.
+ * SchrodingerIconNode is the icon that represents the Schrödinger atomic model in the user interface.
  * The icon consists of 4 overlapping rectangles.
  *
  * This was originally a static method of SchrodingerNode, but that caused problems with circular imports.

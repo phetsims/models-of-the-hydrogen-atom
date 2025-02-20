@@ -1,7 +1,7 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * SchrodingerOverlayNode displays user-interface elements (controls and displays) related to the Schrodinger model.
+ * SchrodingerOverlayNode displays user-interface elements (controls and displays) related to the Schrödinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * SchrodingerElectron is the QuantumElectron specialized for the Schrodinger model of the hydrogen atom. It adds
+ * SchrodingerElectron is the QuantumElectron specialized for the Schrödinger model of the hydrogen atom. It adds
  * Properties needed by that model, but the model is still responsible for all aspects of the electron's behavior.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -52,7 +52,7 @@ export default class SchrodingerElectron extends QuantumElectron {
   }
 
   /**
-   * Sets the value of n, the principal quantum number. For the Schrodinger model, this involves computing a
+   * Sets the value of n, the principal quantum number. For the Schrödinger model, this involves computing a
    * complete (n,l,m) state based on transition rules. See SchrodingerQuantumNumbers.
    */
   public override set_n( n: number ): void {

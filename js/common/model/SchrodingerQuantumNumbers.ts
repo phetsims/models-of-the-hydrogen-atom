@@ -2,7 +2,7 @@
 
 /**
  * SchrodingerQuantumNumbers is the set of quantum numbers (n,l,m) that describe a wavefunction for the electron.
- * In the context of the Schrodinger model, this is also referred to as 'the electron state', 'the state', or
+ * In the context of the Schrödinger model, this is also referred to as 'the electron state', 'the state', or
  * 'electron energy level'.
  *
  * For a given set of quantum numbers, each principal shell (n) has a fixed number of subshells (n,l), and

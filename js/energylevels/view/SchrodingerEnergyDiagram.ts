@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * SchrodingerEnergyDiagram is the Electron Energy Level diagram for the Schrodinger model.
+ * SchrodingerEnergyDiagram is the Electron Energy Level diagram for the Schrödinger model.
  *
  * This was SchrodingerEnergyDiagram.java in the Java version.
  *

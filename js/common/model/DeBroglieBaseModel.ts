@@ -6,7 +6,7 @@
  * visualization of the de Broglie model.
  *
  * The separation of DeBroglieBaseModel and DeBroglieModel was required mainly for PhET-iO, so that the 3D aspects
- * of de Broglie are not part of the Schrodinger model.
+ * of de Broglie are not part of the Schrödinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

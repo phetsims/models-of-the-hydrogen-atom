@@ -2,7 +2,7 @@
 
 /**
  * SchrodingerStateText displays the quantum numbers (n,l,m) and orbital that describe the wavefunction of the electron
- * in the Schrodinger model.
+ * in the Schrödinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

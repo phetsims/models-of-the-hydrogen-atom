@@ -2,7 +2,7 @@
 
 /**
  * QuantumElectron is a base class that specializes Electron for quantum models of the hydrogen atom
- * (Bohr, de Broglie, Schrodinger).
+ * (Bohr, de Broglie, Schrödinger).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

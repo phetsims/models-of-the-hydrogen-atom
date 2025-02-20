@@ -172,7 +172,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   }
 
   /**
-   * For spontaneous emission, our Schrodinger model emits photons from a random point on the first Bohr orbit.
+   * For spontaneous emission, our Schrödinger model emits photons from a random point on the first Bohr orbit.
    */
   protected override getSpontaneousEmissionPosition(): Vector2 {
 
@@ -187,7 +187,7 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   }
 
   /**
-   * Solves the Schrodinger probability density function, which is the probability of finding a photon emitted from
+   * Solves the Schrödinger probability density function, which is the probability of finding a photon emitted from
    * a hydrogen atom at a specific point in space.
    * @param nlm - quantum numbers that describe the electron's state
    * @param x - coordinate on horizontal axis

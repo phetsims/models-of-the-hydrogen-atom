@@ -1,11 +1,11 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * SchrodingerNode displays the Schrodinger model of the hydrogen atom.
+ * SchrodingerNode displays the Schrödinger model of the hydrogen atom.
  *
  * The axes are orientated with x horizontal, z vertical, y depth.
  *
- * Schrodinger orbitals are created by sampling the probability density on a uniform grid in 3D space, then projecting
+ * Schrödinger orbitals are created by sampling the probability density on a uniform grid in 3D space, then projecting
  * into a uniform 2D grid. These samples are then used to create small PNG images for each orbital, where each sample
  * is used to create an RGBA pixel in the PNG image. The small PNG image is rendered using a scenery Image node, and
  * scaling it up to fit the zoomed-in box automatically provides smoothing of the image.

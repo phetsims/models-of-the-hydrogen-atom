@@ -1,7 +1,7 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * Experiment is the model when we are in "Experiment" mode. It is identical to the Schrodinger model.
+ * Experiment is the model when we are in "Experiment" mode. It is identical to the Schrödinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

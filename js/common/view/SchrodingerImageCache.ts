@@ -1,7 +1,7 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * SchrodingerImageCache is a cache of PNG images (accessible as dataURLs) for Schrodinger orbitals. PNG images can
+ * SchrodingerImageCache is a cache of PNG images (accessible as dataURLs) for Schrödinger orbitals. PNG images can
  * be created as needed, or eagerly on startup by calling the populate method. Note that orbitals have reflectional
  * symmetry about the origin, so we only need to compute 1 octant of the 3D space, which is projected into 1 quadrant
  * of the 2D space.

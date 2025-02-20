@@ -1,7 +1,7 @@
 // Copyright 2022-2025, University of Colorado Boulder
 
 /**
- * XZAxesNode displays the x and z axes for the Schrodinger model.
+ * XZAxesNode displays the x and z axes for the Schrödinger model.
  *
  * In the Java implementation, this was class Axes2DNode in SchrodingerNode.java.
  *

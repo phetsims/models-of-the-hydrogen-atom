@@ -1,7 +1,7 @@
 // Copyright 2024-2025, University of Colorado Boulder
 
 /**
- * QuantumNumbersInfoDialog explains the quantum numbers that describe the electron state for the Schrodinger model.
+ * QuantumNumbersInfoDialog explains the quantum numbers that describe the electron state for the Schrödinger model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

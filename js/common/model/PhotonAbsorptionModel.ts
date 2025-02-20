@@ -2,7 +2,7 @@
 
 /**
  * PhotonAbsorptionModel maps from absorption/emission wavelengths to electron state (n) transitions.
- * This model is relevant for the quantum models of the hydrogen atom: Bohr, de Broglie, and Schrodinger.
+ * This model is relevant for the quantum models of the hydrogen atom: Bohr, de Broglie, and Schrödinger.
  *
  * This class has no state (PhET-iO or otherwise), and there is no reason to duplicate the map. So this
  * is an excellent candidate for the singleton pattern, which we've used here.
