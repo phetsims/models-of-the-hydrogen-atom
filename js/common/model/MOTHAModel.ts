@@ -218,25 +218,14 @@ export default class MOTHAModel implements TModel {
    */
   public step( dt: number ): void {
     if ( this.isPlayingProperty.value ) {
-      this._step( dt );
+      this.stepOnce( dt );
     }
   }
 
   /**
    * Steps the model by one time step. Used by the Step button in the time controls.
    */
-  public stepOnce(): void {
-    assert && assert( !this.isPlayingProperty.value, 'stepOnce should only be called when the sim is paused.' );
-    this._step( STEP_ONCE_NORMAL_DT );
-  }
-
-  /**
-   * Steps the model, scaled by the setting of the time controls.
-   * @param dt - the time step, in seconds
-   */
-  private _step( dt: number ): void {
-    // REVIEW: I see the reason, but having a _step private method is not as common in our codebase.
-    // REVIEW: So either document further or we should discuss if this is a pattern to be adopted. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+  public stepOnce( dt = STEP_ONCE_NORMAL_DT ): void {
     const dtScaled = dt * this.timeScaleProperty.value;
     this.lightSource.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );
