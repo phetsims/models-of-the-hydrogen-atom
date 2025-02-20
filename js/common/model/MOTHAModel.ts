@@ -235,6 +235,8 @@ export default class MOTHAModel implements TModel {
    * @param dt - the time step, in seconds
    */
   private _step( dt: number ): void {
+    // REVIEW: I see the reason, but having a _step private method is not as common in our codebase.
+    // REVIEW: So either document further or we should discuss if this is a pattern to be adopted. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
     const dtScaled = dt * this.timeScaleProperty.value;
     this.lightSource.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );

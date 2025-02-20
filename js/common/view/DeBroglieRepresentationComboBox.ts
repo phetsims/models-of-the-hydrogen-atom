@@ -44,6 +44,8 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
 
     const radialDistanceText = new Text( ModelsOfTheHydrogenAtomStrings.radialDistanceStringProperty, textOptions );
 
+    // REVIEW: Why is this string key written this way? Wouldn't something like Height3D, text3DHeight or even _3DHeight be better to avoid the number at the start?
+    // REVIEW: If we have to call it like this here, feels like it could bring problems in the future. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
     const threeDHeightText = new Text( ModelsOfTheHydrogenAtomStrings[ '3DHeightStringProperty' ], textOptions );
 
     const brightnessText = new Text( ModelsOfTheHydrogenAtomStrings.brightnessStringProperty, textOptions );
