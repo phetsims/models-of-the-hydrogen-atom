@@ -65,9 +65,8 @@ export default class LightSource extends PhetioObject {
   // Notifies that a photon was emitted. See Emitter instantiation for parameter names.
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color | null ]>;
 
-  // Time between creation of photons, in seconds.
-  // REVIEW: dt per photons seems like an odd definition. If it's not too big a refactor, I'd suggest photonEmissionRate or something similar. https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
-  private readonly dtPerPhotonCreated: number;
+  // Time interval between emission of photons, in seconds.
+  private readonly dtBetweenPhotonEmission: number;
 
   // Elapsed time since a photon was emitted by the light source, in seconds.
   private readonly dtSincePhotonEmittedProperty: Property<number>;
@@ -133,7 +132,7 @@ export default class LightSource extends PhetioObject {
       ]
     } );
 
-    this.dtPerPhotonCreated = ( zoomedInBox.bounds.height / Photon.SPEED ) / MAX_LIGHT_PHOTONS;
+    this.dtBetweenPhotonEmission = ( zoomedInBox.bounds.height / Photon.SPEED ) / MAX_LIGHT_PHOTONS;
 
     this.dtSincePhotonEmittedProperty = new NumberProperty( 0, {
       units: 's',
@@ -159,10 +158,10 @@ export default class LightSource extends PhetioObject {
   public step( dt: number ): void {
     if ( this.isOnProperty.value ) {
       this.dtSincePhotonEmittedProperty.value += dt;
-      if ( this.dtSincePhotonEmittedProperty.value >= this.dtPerPhotonCreated ) {
+      if ( this.dtSincePhotonEmittedProperty.value >= this.dtBetweenPhotonEmission ) {
 
         // Save the remainder.
-        this.dtSincePhotonEmittedProperty.value = this.dtSincePhotonEmittedProperty.value % this.dtPerPhotonCreated;
+        this.dtSincePhotonEmittedProperty.value = this.dtSincePhotonEmittedProperty.value % this.dtBetweenPhotonEmission;
 
         // Create a photon.
         this.emitPhoton();
