@@ -17,7 +17,8 @@
  * The atom is destroyed, so it does not absorb photons.
  *
  * Emission behavior:
- * The atom is destroyed, so it does not emit photons.
+ * The destruction of an atom results in the emission of radiation, see https://en.wikipedia.org/wiki/Larmor_formula.
+ * But our magical spectrometer ignores that radiation. So for the purposes of this sim, the atom does not emit photons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
