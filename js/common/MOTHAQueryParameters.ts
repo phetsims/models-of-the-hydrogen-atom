@@ -72,7 +72,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // to be as small as possible, until you see an adverse impact on the rendering quality of the orbitals.
   gridSize: {
     type: 'number',
-    defaultValue: 35,
+    defaultValue: 35, // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/129#issuecomment-2670189907
     isValidValue: value => Number.isInteger( value ) && ( value >= 10 )
   },
 
@@ -83,7 +83,7 @@ const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
   // pausing the first time that the electron enters that state.
   computeOrbitals: {
     type: 'string',
-    defaultValue: 'eagerly',
+    defaultValue: 'eagerly', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/129#issuecomment-2670189907
     isValidValue: value => value === 'eagerly' || value === 'onDemand'
   }
 };
