@@ -63,7 +63,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
   // Notifies listeners by emitting when a photon is absorbed or emitted. Not all models absorb or emit photons,
   // and billiard ball does not even have an electron. But it simplifies programming for us and the PhET-iO client
   // if all atomic models have these Emitters. For example, the Spectrometer can be hooked up to any of the atomic
-  // models, regardless of whether they emit photons.
+  // models, regardless of whether they emit photons. See Emitter instantiation for parameter names.
   public readonly photonAbsorbedEmitter: TEmitter<[ Photon ]>;
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color ]>;
 
@@ -90,7 +90,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this.icon = options.icon;
     this.tandemNamePrefix = options.tandemNamePrefix;
 
-    this.photonAbsorbedEmitter = new Emitter<[ Photon ]>( {
+    this.photonAbsorbedEmitter = new Emitter( {
       parameters: [
         { name: 'photon', valueType: Photon, phetioType: Photon.PhotonIO }
       ],
@@ -101,7 +101,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    this.photonEmittedEmitter = new Emitter<[ number, Vector2, number, Color ]>( {
+    this.photonEmittedEmitter = new Emitter( {
       parameters: [
         { name: 'wavelength', valueType: 'number', phetioType: NumberIO },
         { name: 'position', valueType: Vector2, phetioType: Vector2.Vector2IO },

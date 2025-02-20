@@ -62,8 +62,7 @@ export default class LightSource extends PhetioObject {
   // Color displayed by the view.
   public readonly colorProperty: TReadOnlyProperty<Color | string>;
 
-  // Notifies that a photon was emitted.
-  // REVIEW: Could the type of this TEmitter be explained and/or factored into a more readable type? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+  // Notifies that a photon was emitted. See Emitter instantiation for parameter names.
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color | null ]>;
 
   // Time between creation of photons, in seconds.
@@ -124,8 +123,9 @@ export default class LightSource extends PhetioObject {
         phetioValueType: Color.ColorIO
       } );
 
-    this.photonEmittedEmitter = new Emitter<[ number, Vector2, number, Color | null ]>( {
+    this.photonEmittedEmitter = new Emitter( {
       parameters: [
+        // phetioType is not needed for parameters because this Emitter is not instrumented.
         { name: 'wavelength', valueType: 'number' },
         { name: 'position', valueType: Vector2 },
         { name: 'direction', valueType: 'number' },
