@@ -25,7 +25,7 @@ import DeBroglie2DWaveNode from './DeBroglie2DWaveNode.js';
 // Multiply the ground state orbit radius by this number to determine the radial offset at max amplitude.
 const RADIAL_OFFSET_FACTOR = 0.45;
 
-// Number of line segments used to approximate the wave, empirically tunes to make the wave look smooth.
+// Number of line segments used to approximate the wave, empirically tuned to make the wave look smooth.
 const NUMBER_OF_SEGMENTS = 200;
 
 export default class DeBroglieRadialDistanceNode extends DeBroglie2DWaveNode {

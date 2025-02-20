@@ -29,14 +29,14 @@ export default class ExperimentOrModelSwitch extends ABSwitch<ExperimentOrModel>
     const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, {
       font: LABEL_FONT,
       fill: MOTHAColors.switchTextFillProperty,
-      maxWidth: 90 // determined empirically in the Energy Levels screen
+      maxWidth: 90 // Determined empirically in the Energy Levels screen, where there is less space for the switch.
     } );
 
     const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, {
       font: LABEL_FONT,
       fill: MOTHAColors.switchTextFillProperty,
 
-      // Determined empirically in the Energy Levels screen.
+      // Determined empirically in the Energy Levels screen, where there is less space for the switch.
       // Making modelText.maxWidth smaller than experimentText.maxWidth is wrong because it's English-centric.
       // But we are so tight on space in the Energy Levels screen that we don't have a choice.
       maxWidth: 50

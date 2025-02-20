@@ -28,8 +28,8 @@ import DeBroglie2DWaveNode from './DeBroglie2DWaveNode.js';
 import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 
 // Distance along the ring's circumference that each polygon occupies, in view coordinates. This value was
-// tuned empirically, so that the ring looks acceptably smooth. Since larger values result in creation of
-// more polygons (Path nodes), it's important to keep this value as small as possible.
+// adjusted so that the ring looks acceptably smooth. Since larger values result in creation of more polygons
+// (Path nodes), it's important to keep this value as small as possible.
 const POLYGON_SIZE = 3;
 
 export default class DeBroglieBrightnessNode extends DeBroglie2DWaveNode {

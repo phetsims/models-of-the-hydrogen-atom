@@ -34,7 +34,7 @@ export default class MOTHATimeControlNode extends TimeControlNode {
         labelOptions: {
           font: new PhetFont( 14 ),
           fill: MOTHAColors.invertibleTextFillProperty,
-          maxWidth: 65 // determined empirically in the Energy Levels screen
+          maxWidth: 65 // Determined empirically in the Energy Levels screen, where there is less space for the controls.
         },
         mouseAreaXDilation: 6,
         touchAreaXDilation: 6

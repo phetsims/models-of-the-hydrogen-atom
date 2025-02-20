@@ -25,7 +25,7 @@ import EnergyDiagram from './EnergyDiagram.js';
 import ExperimentEnergyDiagram from './ExperimentEnergyDiagram.js';
 import SchrodingerEnergyDiagram from './SchrodingerEnergyDiagram.js';
 
-// DIAGRAM_SIZE.height was empirically set so that heights of ElectronEnergyLevelAccordionBox and
+// DIAGRAM_SIZE.height was set empirically, so that heights of ElectronEnergyLevelAccordionBox and
 // EnergyLevelsZoomedInBoxNode are roughly the same.
 const DIAGRAM_SIZE = new Dimension2( 220, 364 );
 
@@ -39,7 +39,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     const titleNode = new Text( ModelsOfTheHydrogenAtomStrings.electronEnergyLevelStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: MOTHAColors.electronEnergyLevelTitleFillProperty,
-      maxWidth: 150 // i18n, determined empirically
+      maxWidth: 150
     } );
 
     const bohrEnergyDiagram = new BohrEnergyDiagram( model.bohrModel, {

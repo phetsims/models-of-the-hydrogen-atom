@@ -84,7 +84,7 @@ class LegendNode extends HBox {
         new Text( labelStringProperty, {
           font: LegendNode.ITEM_FONT,
           fill: MOTHAColors.invertibleTextFillProperty,
-          maxWidth: 75 // determined empirically in the Energy Levels screen
+          maxWidth: 75 // Determined empirically in the Energy Levels screen, where there is less space for the legend.
         } )
       ],
       tandem: tandem,

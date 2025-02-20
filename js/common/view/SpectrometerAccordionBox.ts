@@ -81,7 +81,7 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     } );
 
     const spectrometerChart = new SpectrometerChart( spectrometer.dataPointsProperty, {
-      chartHeight: 135 // set empirically with ?debugSpectrometer
+      chartHeight: 135 // Set empirically with ?debugSpectrometer
     } );
 
     super( spectrometerChart, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {

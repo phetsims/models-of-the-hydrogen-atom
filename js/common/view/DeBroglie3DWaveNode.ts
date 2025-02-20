@@ -17,7 +17,7 @@ import BohrModel from '../model/BohrModel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
-const NUMBER_OF_WAVE_VERTICES = 100; // enough for a smooth looking wave for n=6, determined empirically
+const NUMBER_OF_WAVE_VERTICES = 100; // enough for a smooth looking wave for n=6
 
 export default class DeBroglie3DWaveNode extends Wireframe3DNode {
 
