@@ -2,8 +2,7 @@
 
 /**
  * PhotonNode is the visual representation of a photon. A round "orb" has an outer "halo" and a whimsical "sparkle"
- * in the middle. Origin is at center of the Node's bounding rectangle. The look is loosely based on examples that
- * Wendy Adams found on a Disney website at http://disney.go.com/fairies/meetfairies.html.
+ * in the middle. Origin is at center of the Node's bounding rectangle.
  *
  * By default, the colorscheme is as follows:
  * - visible wavelengths are mapped to visible colors.
