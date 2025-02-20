@@ -14,7 +14,7 @@
  *
  * Emission behavior:
  * The atom does not emit photons. Photons that bounce off the billiard ball would be detected by a real spectrometer
- * (similar to how you see a laser beam by photons bouncing off dust particles in the air), but our magical
+ * (similar to how you see a laser beam of photons bouncing off dust particles in the air), but our magical
  * spectrometer only detects photons that are actually emitted.
  *
  * @author Chris Malley (PixelZoom, Inc.)
