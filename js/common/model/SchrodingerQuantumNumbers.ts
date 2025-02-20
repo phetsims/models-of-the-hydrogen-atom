@@ -92,8 +92,7 @@ export default class SchrodingerQuantumNumbers {
   // * Describes the orientation of the region of space occupied by an electron with respect to an applied magnetic field.
   public readonly m: number;
 
-  // REVIEW: Should this consideration also be in the model.md? Both l<=2 and that the source doesn't emit IR https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125 and https://github.com/phetsims/models-of-the-hydrogen-atom/issues/116
-  // l will not be > 2, because all transitions for n > 2 require IR photons, and the light source does not emit IR.
+  // l will not be > 2, because all transitions for n > 2 require IR photons, and the light source emits only UV and visible photons.
   public static readonly lMax = 2;
 
   public constructor( n: number, l: number, m: number ) {

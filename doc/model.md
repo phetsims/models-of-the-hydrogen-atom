@@ -65,6 +65,9 @@ The following rules are implemented for electron state transitions in the Schrö
 * n transitions have varying transition strengths. (See `TRANSITION_STRENGTHS` in [SchrodingerQuantumNumbers.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerQuantumNumbers.ts).)
 * Valid l and m transitions have equal probability.
 
+Also note that `l` will never be greater than 2 in this simulation. All transitions for `n` > 2 to a higher 
+state require IR photons, and the light source emits only UV and visible photons.
+
 ## Transition Wavelengths
 
 Transition wavelengths are shown in the "Transitions" dialog, opened by checking the "Transitions" checkbox.
