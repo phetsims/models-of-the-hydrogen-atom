@@ -24,9 +24,9 @@ import MOTHAConstants from '../MOTHAConstants.js';
 // l > 2 (f, g, h) are theoretically possible, but will not be encountered in this implementation. See documentation
 // for SchrodingerQuantumNumbers.lMax and https://en.wikipedia.org/wiki/Atomic_orbital#Orbitals_table.
 const ORBITAL_SHAPE_PROPERTIES = [
-  MOTHASymbols.sStringProperty,
-  MOTHASymbols.pStringProperty,
-  MOTHASymbols.dStringProperty
+  MOTHASymbols.sStringProperty, // s orbitals have a spherical shape.
+  MOTHASymbols.pStringProperty, // p orbitals have a dumbbell shape.
+  MOTHASymbols.dStringProperty  // d orbitals have a cloverleaf shape.
 ];
 assert && assert( SchrodingerQuantumNumbers.lMax <= 2,
   'Increasing lMax requires adding strings for additional orbitals, e.g. f,g,h.' );
