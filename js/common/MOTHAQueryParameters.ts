@@ -2,6 +2,7 @@
 
 /**
  * MOTHAQueryParameters is the set of query parameters supported by this simulation.
+ * In general, public query parameters will be public: true, while others are for internal use only.
  * Running with ?log will print these query parameters and their values to the console at startup.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -15,14 +16,6 @@ import SchrodingerQuantumNumbers from './model/SchrodingerQuantumNumbers.js';
 /* global QueryStringMachineSchema */
 
 const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
-
-  //----------------------------------------------------------------------------------------------------------------
-  // Public-facing query parameters
-  //----------------------------------------------------------------------------------------------------------------
-
-  //----------------------------------------------------------------------------------------------------------------
-  // Internal query parameters
-  //----------------------------------------------------------------------------------------------------------------
 
   // Draws a halo around special photons, to make them easier to see. This includes photons that are emitted by the
   // atom, and photons that are used to excite the Schrödinger electron out of the metastable state (n,l,m) = (2,0,0).
