@@ -76,6 +76,8 @@ const CONTENT_TEXT_OPTIONS: TextOptions = {
   font: new PhetFont( 12 )
 };
 
+const MARGINS = 10;
+
 type SelfOptions = {
   position?: Vector2; // the dialog's initial position, in view coordinates
 };
@@ -107,8 +109,8 @@ export default class TransitionsDialog extends Panel {
         phetioValueType: BooleanIO
       } ),
       cursor: 'pointer',
-      xMargin: 10,
-      yMargin: 10,
+      xMargin: MARGINS,
+      yMargin: MARGINS,
       cornerRadius: MOTHAConstants.CORNER_RADIUS,
       tagName: 'div',
       focusable: true,
