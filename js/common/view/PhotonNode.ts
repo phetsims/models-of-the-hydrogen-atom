@@ -4,7 +4,7 @@
  * PhotonNode is the visual representation of a photon. A round "orb" has an outer "halo" and a whimsical "sparkle"
  * in the middle. Origin is at center of the Node's bounding rectangle.
  *
- * By default, the colorscheme is as follows:
+ * By default, the colorscheme (defined in MOTHAColors) is as follows:
  * - visible wavelengths are mapped to visible colors.
  * - UV photons are rendered as gray orbs with violet crosshairs.
  * - IR photos are rendered as gray orbs with red crosshairs.
