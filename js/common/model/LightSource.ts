@@ -65,7 +65,7 @@ export default class LightSource extends PhetioObject {
   // Notifies that a photon was emitted. See Emitter instantiation for parameter names.
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color | null ]>;
 
-  // Time interval between emission of photons, in seconds.
+  // Time interval between photon emission, in seconds.
   private readonly dtBetweenPhotonEmission: number;
 
   // Elapsed time since a photon was emitted by the light source, in seconds.
