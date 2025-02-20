@@ -10,11 +10,11 @@ It is assumed that the reader is familiar with atomic models and quantum mechani
 
 These symbols appear in the user interface:
 
-* n - principal quantum number, describes the energy of the electron (range is `[1,6]`)
-* l - azimuthal quantum number, describes the shape of the electron's orbital (range is `[0,n-1]`)
-* m - magnetic quantum number, describes the orientation of the electron's orbital (range is `[-l,l]`)
-* (n,l,m) - quantum numbers that describe the state of the Schrödinger electron
-* s,p,d,f - letters used to represent shapes of atomic orbitals
+* `n` - principal quantum number, describes the energy of the electron (range is `[1,6]`)
+* `l` - azimuthal quantum number, describes the shape of the electron's orbital (range is `[0,n-1]`)
+* `m` - magnetic quantum number, describes the orientation of the electron's orbital (range is `[-l,l]`)
+* (`n`,`l`,`m`) - quantum numbers that describe the state of the Schrödinger electron
+* `s`,`p`,`d` - letters that indicate the orbital shapes that are possible in the sim
 
 ## Units
 
@@ -31,7 +31,7 @@ The following units are used in the simulation model:
 ## Light Source
 
 The light source emits photons in the UV and visible spectrums, for white light or monochromatic light. With white 
-light, 40% of the photons emitted will correspond to a wavelength that transitions from n=1 to a higher n. This
+light, 40% of the photons emitted will correspond to a wavelength that transitions from `n`=1 to a higher `n`. This
 increases the probability that a photon will interact with the atom.
 
 ## Atomic Models
@@ -56,14 +56,14 @@ accordion box.
 
 The following rules are implemented for electron state transitions in the Schrödinger model:
 
-* n, l, and m are integers.
-* n = `[1,6]`
-* l = `[0,n-1]`
-* m = `[-l,+l]`
-* |l-l'| = 1
-* |m-m'| <= 1
-* n transitions have varying transition strengths. (See `TRANSITION_STRENGTHS` in [SchrodingerQuantumNumbers.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerQuantumNumbers.ts).)
-* Valid l and m transitions have equal probability.
+* `n`, `l`, and `m` are integers.
+* `n` = `[1,6]`
+* `l` = `[0,n-1]`
+* `m` = `[-l,+l]`
+* |`l`-`l'`| = 1
+* |`m`-`m'`| <= 1
+* `n` transitions have varying transition strengths. (See `TRANSITION_STRENGTHS` in [SchrodingerQuantumNumbers.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerQuantumNumbers.ts).)
+* Valid `l` and `m` transitions have equal probability.
 
 Also note that `l` will never be greater than 2 in this simulation. All transitions for `n` > 2 to a higher 
 state require IR photons, and the light source emits only UV and visible photons.
