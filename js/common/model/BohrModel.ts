@@ -58,7 +58,6 @@ const PHOTON_SPONTANEOUS_EMISSION_PROBABILITY = 0.5;
 const STIMULATED_EMISSION_X_OFFSET = Photon.RADIUS;
 
 // Minimum time (in sec) that the electron must be in a state before transitions can occur.
-// REVIEW: Since this is time to absorption OR emission, would rename to something more general like MIN_TIME_IN_STATE_BEFORE_TRANSITION https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
 const MIN_TIME_IN_STATE_BEFORE_ABSORPTION = 0.75;
 const MIN_TIME_IN_STATE_BEFORE_STIMULATED_EMISSION = 1;
 const MIN_TIME_IN_STATE_BEFORE_SPONTANEOUS_EMISSION = 1;

@@ -59,7 +59,6 @@ type SchrodingerQuantumNumbersStateObject = {
 };
 
 // This should match SchrodingerQuantumNumbersStateObject, but with IOTypes.
-// REVIEW: Should an assertion or test be added to ensure these two matching? https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
 const STATE_SCHEMA = {
   n: NumberIO,
   l: NumberIO,
