@@ -16,8 +16,10 @@ import QuantumElectron from './QuantumElectron.js';
 
 export default class BohrElectron extends QuantumElectron {
 
-  // n, the principal quantum number
-  // REVIEW: It's not clear why we need an _nProperty besides the nProperty already in the parent class, or why creating it here and passing it to the super, document please https://github.com/phetsims/models-of-the-hydrogen-atom/issues/125
+  // n, the principal quantum number. The superclass has a read-only reference, which cannot be set or reset,
+  // to accommodate other atomic models where nProperty is a DerivedProperty (see SchrodingerElectron).
+  // So we need a reference that can be set and reset. And it must be named _nProperty so that it does not
+  // shadow/override nProperty in the superclass.
   private readonly _nProperty: NumberProperty;
 
   public constructor( atomPosition: Vector2, tandem: Tandem ) {
