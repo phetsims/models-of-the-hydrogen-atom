@@ -19,6 +19,8 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import SpectrometerSnapshotNode from './SpectrometerSnapshotNode.js';
 
+const MARGINS = 10;
+
 export default class SpectrometerSnapshotsDialog extends Dialog {
 
   public constructor( snapshotsProperty: TReadOnlyProperty<SpectrometerSnapshot[]>, tandem: Tandem ) {
@@ -37,10 +39,10 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
     super( content, {
       isDisposable: false,
       fill: MOTHAColors.snapshotsDialogFillProperty,
-      topMargin: 10,
-      bottomMargin: 10,
-      leftMargin: 10,
-      closeButtonRightMargin: 10,
+      topMargin: MARGINS,
+      bottomMargin: MARGINS,
+      leftMargin: MARGINS,
+      closeButtonRightMargin: MARGINS,
       closeButtonMouseAreaXDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       closeButtonMouseAreaYDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       closeButtonTouchAreaXDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
