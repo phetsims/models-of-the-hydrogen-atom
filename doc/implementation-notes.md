@@ -74,7 +74,7 @@ are created dynamically in response to the creation of `Photon` instances. Searc
 and `photonGroup.elementDisposedEmitter` to see the specifics of how `PhotonNode` instances are instantiated and disposed.
 
 * `SpectrometerSnapshot` instances (model elements) are created dynamically, but no `PhetioGroup` is involved. 
-See `Spectrometer` method `takeSnapshot` for details. The corresponding view element, `SpectrometerSnapshot`,
+See `Spectrometer` method `takeSnapshot` for details. The corresponding view element, `SpectrometerSnapshotNode`,
 is _not_ created dynamically. A fixed number of `SpectrometerSnapshot` instances are created at startup and mutated
 as needed. See `SpectrometerSnapshotsDialog` for details.
 
