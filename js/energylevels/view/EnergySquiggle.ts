@@ -115,6 +115,11 @@ export default class EnergySquiggle extends Node {
     this.setRotation( phi );
   }
 
+  public reset(): void {
+    this.timeSinceLastUpdate = 0;
+    this.visible = false;
+  }
+
   /**
    * Hides the squiggle after it has been visible for SQUIGGLE_LIFETIME seconds.
    * @param dt - time step, in seconds

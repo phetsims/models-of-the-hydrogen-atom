@@ -143,6 +143,10 @@ export default class EnergyDiagram extends Node {
     }
   }
 
+  public reset(): void {
+    this.energySquiggle.reset();
+  }
+
   /**
    * Steps the energy squiggle.
    * @param dt - time step, in seconds

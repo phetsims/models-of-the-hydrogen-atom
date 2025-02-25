@@ -81,6 +81,11 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     this.diagrams = diagrams;
   }
 
+  public override reset(): void {
+    this.diagrams.forEach( diagram => diagram.reset() );
+    super.reset();
+  }
+
   /**
    * Steps each diagram.
    * @param dt - time step, in seconds
