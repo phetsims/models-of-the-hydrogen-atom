@@ -172,6 +172,7 @@ export default class MOTHAScreenView extends ScreenView {
         spectrometerAccordionBox.reset();
         spectrometerSnapshotsDialog.hide();
         this.electronEnergyLevelAccordionBox && this.electronEnergyLevelAccordionBox.reset();
+        transitionsIsCheckedProperty.reset();
       },
       right: this.layoutBounds.right - MOTHAScreenView.X_MARGIN,
       bottom: this.layoutBounds.bottom - MOTHAScreenView.Y_MARGIN,
