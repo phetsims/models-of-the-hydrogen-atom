@@ -117,8 +117,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
   }
 
   public reset(): void {
-    this.photonEmittedEmitter.removeAllListeners();
-    this.photonAbsorbedEmitter.removeAllListeners();
+    // Default behavior is to do nothing.
   }
 
   /**
