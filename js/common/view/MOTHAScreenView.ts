@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
@@ -20,14 +19,12 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import BoxOfHydrogenNode from '../../common/view/BoxOfHydrogenNode.js';
 import LegendPanel from '../../common/view/LegendPanel.js';
 import MOTHATimeControlNode from '../../common/view/MOTHATimeControlNode.js';
 import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox.js';
 import TinyBox from '../../common/view/TinyBox.js';
-import TransitionsCheckbox from '../../common/view/TransitionsCheckbox.js';
 import TransitionsDialog from '../../common/view/TransitionsDialog.js';
 import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEnergyLevelAccordionBox.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
@@ -39,6 +36,7 @@ import { LightControlPanel } from './LightControlPanel.js';
 import { LightSourceNode } from './LightSourceNode.js';
 import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
+import TransitionsButton from './TransitionsButton.js';
 
 type SelfOptions = {
 
@@ -109,30 +107,14 @@ export default class MOTHAScreenView extends ScreenView {
       model.lightSource.monochromaticWavelengthProperty, model.isQuantumAtomProperty, model.experimentOrModelProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
-    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106 for the design of transitionsIsCheckedProperty.
-    const transitionsIsCheckedProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'transitionsIsCheckedProperty' ),
-      phetioDocumentation: 'Whether the Transitions checkbox is checked. Setting this to true shows transitionsDialog only for quantum atomic models.',
-      phetioFeatured: true, // see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106#issuecomment-2617048461
-      phetioReadOnly: true // see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/106#issuecomment-2616678607
-    } );
-
-    const transitionsCheckbox = new TransitionsCheckbox( transitionsIsCheckedProperty,
-      model.isQuantumAtomProperty, options.tandem.createTandem( 'transitionsCheckbox' ) );
-
-    // Uncheck the Transitions checkbox when we switch to a classical model, because the concept of electron state
-    // transition is relevant only for quantum models.
-    model.isQuantumAtomProperty.link( isQuantumAtom => {
-      if ( !isSettingPhetioStateProperty.value && !isQuantumAtom && transitionsIsCheckedProperty.value ) {
-        transitionsIsCheckedProperty.value = false;
-      }
-    } );
-
     const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
-      model.lightSource.lightModeProperty, model.experimentOrModelProperty, transitionsIsCheckedProperty,
-      model.isQuantumAtomProperty, this.visibleBoundsProperty, {
+      model.lightSource.lightModeProperty, model.experimentOrModelProperty, model.isQuantumAtomProperty,
+      this.visibleBoundsProperty, {
         tandem: options.tandem.createTandem( 'transitionsDialog' )
       } );
+
+    const transitionsButton = new TransitionsButton( transitionsDialog, model.isQuantumAtomProperty,
+      options.tandem.createTandem( 'transitionsButton' ) );
 
     // Box of hydrogen
     const boxOfHydrogenNode = new BoxOfHydrogenNode();
@@ -172,7 +154,6 @@ export default class MOTHAScreenView extends ScreenView {
         spectrometerAccordionBox.reset();
         spectrometerSnapshotsDialog.hide();
         this.electronEnergyLevelAccordionBox && this.electronEnergyLevelAccordionBox.reset();
-        transitionsIsCheckedProperty.reset();
       },
       right: this.layoutBounds.right - MOTHAScreenView.X_MARGIN,
       bottom: this.layoutBounds.bottom - MOTHAScreenView.Y_MARGIN,
@@ -278,7 +259,7 @@ export default class MOTHAScreenView extends ScreenView {
           excludeInvisibleChildrenFromBounds: false,
           align: 'center',
           spacing: 5,
-          children: [ lightControlPanel, transitionsCheckbox ]
+          children: [ lightControlPanel, transitionsButton ]
         } ),
         spectrometerAccordionBox
       ],
@@ -336,7 +317,7 @@ export default class MOTHAScreenView extends ScreenView {
     const playAreaPDOMOrder = [
       lightSourceNode,
       lightControlPanel,
-      transitionsCheckbox,
+      transitionsButton,
       transitionsDialog,
       modelVBox,
       this.zoomedInBoxNode

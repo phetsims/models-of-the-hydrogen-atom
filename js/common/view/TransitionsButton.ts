@@ -7,34 +7,35 @@
  */
 
 import { GatedVisibleProperty } from '../../../../axon/js/GatedBooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import MOTHAColors from '../MOTHAColors.js';
+import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import TransitionsDialog from './TransitionsDialog.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
-export default class TransitionsCheckbox extends Checkbox {
+export default class TransitionsButton extends RectangularPushButton {
 
-  public constructor( transitionsDialogVisibleProperty: Property<boolean>,
+  public constructor( transitionsDialog: TransitionsDialog,
                       isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
     const text = new Text( ModelsOfTheHydrogenAtomStrings.transitionsStringProperty, {
       font: new PhetFont( 16 ),
-      fill: MOTHAColors.invertibleTextFillProperty,
       maxWidth: 200
     } );
 
-    super( transitionsDialogVisibleProperty, text, {
+    super( {
+      content: text,
+      listener: () => transitionsDialog.show(),
+      enabledProperty: DerivedProperty.not( transitionsDialog.visibleProperty ),
       isDisposable: false,
-      boxWidth: text.height, // PhET convention is to size the square box to match the height of the text.
-      checkboxColor: MOTHAColors.checkboxStrokeProperty,
-      checkboxColorBackground: MOTHAColors.checkboxFillProperty,
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.transitionsCheckbox.accessibleHelpTextStringProperty,
+      //TODO https://github.com/phetsims/sun/issues/928 Default accessibleName should be discoverable by sun buttons.
+      accessibleName: ModelsOfTheHydrogenAtomStrings.transitionsStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.transitionsButton.accessibleHelpTextStringProperty,
 
       // Show only for quantum atoms, and provide a way for PhET-iO clients to permanently hide.
       visibleProperty: new GatedVisibleProperty( isQuantumAtomProperty, tandem ),
@@ -47,4 +48,4 @@ export default class TransitionsCheckbox extends Checkbox {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'TransitionsCheckbox', TransitionsCheckbox );
+modelsOfTheHydrogenAtom.register( 'TransitionsButton', TransitionsButton );

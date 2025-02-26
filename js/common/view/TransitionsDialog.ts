@@ -40,7 +40,6 @@ import Color from '../../../../scenery/js/util/Color.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { LightMode } from '../model/LightMode.js';
@@ -92,7 +91,6 @@ export default class TransitionsDialog extends Panel {
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       lightModeProperty: Property<LightMode>,
                       experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
-                      transitionsIsCheckedProperty: Property<boolean>,
                       isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: TransitionsDialogOptions ) {
@@ -104,10 +102,7 @@ export default class TransitionsDialog extends Panel {
 
       // PanelOptions
       isDisposable: false,
-      visibleProperty: DerivedProperty.and( [ transitionsIsCheckedProperty, isQuantumAtomProperty ], {
-        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
+      visible: false,
       cursor: 'pointer',
       xMargin: MARGINS,
       yMargin: MARGINS,
@@ -116,7 +111,9 @@ export default class TransitionsDialog extends Panel {
       focusable: true,
       groupFocusHighlight: true,
       tandemNameSuffix: 'Dialog', // Yes it's a Panel, but we are OK with calling it a Dialog.
-      phetioVisiblePropertyInstrumented: false // like Dialog
+      visiblePropertyOptions: {
+        phetioReadOnly: true
+      }
     }, providedOptions );
 
     const transitionColumnVisibleProperty = new DerivedProperty( [ experimentOrModelProperty ],
@@ -126,9 +123,7 @@ export default class TransitionsDialog extends Panel {
 
     const closeButton = new CloseButton( {
       iconLength: 10,
-      listener: () => {
-        transitionsIsCheckedProperty.value = false;
-      },
+      listener: () => this.hide(),
       mouseAreaXDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       mouseAreaYDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       touchAreaXDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
@@ -286,6 +281,14 @@ export default class TransitionsDialog extends Panel {
       this.translation = position;
     } );
 
+    // Hide the Transitions dialog when we switch to a classical model, because the concept of electron state
+    // transition is relevant only for quantum models.
+    isQuantumAtomProperty.link( isQuantumAtom => {
+      if ( !isSettingPhetioStateProperty.value && !isQuantumAtom ) {
+        this.hide();
+      }
+    } );
+
     // Keep the entire panel inside the visible bounds of the ScreenView.
     const dragBoundsProperty = new DerivedProperty(
       [ visibleBoundsProperty, this.boundsProperty ],
@@ -328,7 +331,7 @@ export default class TransitionsDialog extends Panel {
       keys: [ 'escape', 'tab', 'shift+tab' ],
       fire: ( event, keysPressed ) => {
         if ( keysPressed === 'escape' ) {
-          transitionsIsCheckedProperty.value = false;
+          this.hide();
         }
       }
     } );
@@ -337,6 +340,7 @@ export default class TransitionsDialog extends Panel {
 
   public reset(): void {
     this.positionProperty.reset();
+    this.hide();
   }
 
   /**
@@ -346,6 +350,14 @@ export default class TransitionsDialog extends Panel {
   public setInitialPosition( position: Vector2 ): void {
     this.positionProperty.value = position;
     this.positionProperty.setInitialValue( position );
+  }
+
+  public show(): void {
+    this.visibleProperty.value = true;
+  }
+
+  public hide(): void {
+    this.visibleProperty.value = false;
   }
 }
 

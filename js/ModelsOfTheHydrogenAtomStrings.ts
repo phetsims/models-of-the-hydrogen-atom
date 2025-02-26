@@ -56,6 +56,7 @@ type StringsType = {
   'wavelengthNanometersStringProperty': LocalizedStringProperty;
   'questionMarkStringProperty': LocalizedStringProperty;
   'transitionsStringProperty': LocalizedStringProperty;
+  'transitionsEllipsisStringProperty': LocalizedStringProperty;
   'sStringProperty': LocalizedStringProperty;
   'pStringProperty': LocalizedStringProperty;
   'dStringProperty': LocalizedStringProperty;
@@ -70,7 +71,7 @@ type StringsType = {
   'experimentOopsDialogMessageStringProperty': LocalizedStringProperty;
   'a11y': {
     'translatable': {
-      'transitionsCheckbox': {
+      'transitionsButton': {
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
       };
       'transitionsDialog': {
