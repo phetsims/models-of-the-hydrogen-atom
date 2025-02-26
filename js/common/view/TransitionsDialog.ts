@@ -134,8 +134,10 @@ export default class TransitionsDialog extends Panel {
       touchAreaXDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       touchAreaYDilation: MOTHAConstants.CLOSE_BUTTON_DILATION,
       tandem: options.tandem.createTandem( 'closeButton' ),
-      phetioVisiblePropertyInstrumented: false, // like Dialog
-      phetioEnabledPropertyInstrumented: false // like Dialog
+      phetioEnabledPropertyInstrumented: false, // like Dialog
+      visiblePropertyOptions: {
+        phetioFeatured: true // see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/139
+      }
     } );
 
     // Since we're faking a non-modal Dialog using a Panel, we need to handle description that would be handled
