@@ -65,7 +65,7 @@ const HEADING_TEXT_OPTIONS: TextOptions = {
     size: 12,
     weight: 'bold'
   } ),
-  maxWidth: 85
+  maxWidth: 95
 };
 
 const SEPARATOR_OPTIONS: HSeparatorOptions = {
