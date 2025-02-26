@@ -90,6 +90,15 @@ export default class DeBroglie3DHeightNode extends Node {
 
     this.orbitsNode.update();
     this.waveNode.update();
+
+    // When resetting PhET-iO state, restoring pitchProperty needs to trigger an update of the orbits and wave.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/141.
+    this.pitchProperty.lazyLink( () => {
+      if ( isSettingPhetioStateProperty.value ) {
+        this.orbitsNode.update();
+        this.waveNode.update();
+      }
+    } );
   }
 
   /**
