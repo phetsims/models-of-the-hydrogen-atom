@@ -85,20 +85,24 @@ export default class DeBroglie3DHeightNode extends Node {
     deBroglieModel.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
       if ( !isSettingPhetioStateProperty.value && deBroglieRepresentation === '3DHeight' ) {
         this.pitchProperty.reset();
+        this.update();
       }
     } );
 
-    this.orbitsNode.update();
-    this.waveNode.update();
+    this.update();
 
-    // When resetting PhET-iO state, restoring pitchProperty needs to trigger an update of the orbits and wave.
+    // When resetting PhET-iO state, restoring pitchProperty needs to trigger an update.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/141.
     this.pitchProperty.lazyLink( () => {
       if ( isSettingPhetioStateProperty.value ) {
-        this.orbitsNode.update();
-        this.waveNode.update();
+        this.update();
       }
     } );
+  }
+
+  private update(): void {
+    this.orbitsNode.update();
+    this.waveNode.update();
   }
 
   /**
