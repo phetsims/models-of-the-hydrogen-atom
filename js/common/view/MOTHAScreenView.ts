@@ -144,8 +144,12 @@ export default class MOTHAScreenView extends ScreenView {
       options.tandem.createTandem( 'spectrometerAccordionBox' ) );
 
     // Time controls
-    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty,
-      model.stepOnce.bind( model ), options.tandem.createTandem( 'timeControlNode' ) );
+    const stepOnce = () => {
+      model.stepOnce();
+      this.stepOnce();
+    };
+    const timeControlNode = new MOTHATimeControlNode( model.isPlayingProperty, model.timeSpeedProperty, stepOnce,
+      options.tandem.createTandem( 'timeControlNode' ) );
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {
@@ -345,9 +349,17 @@ export default class MOTHAScreenView extends ScreenView {
    */
   public override step( dt: number ): void {
     if ( this.model.isPlayingProperty.value ) {
-      this.zoomedInBoxNode.step( dt );
-      this.electronEnergyLevelAccordionBox && this.electronEnergyLevelAccordionBox.step( dt );
+      this.stepOnce( dt );
     }
+  }
+
+  /**
+   * Steps the view by one time step.
+   * @param dt - time step, in seconds
+   */
+  private stepOnce( dt = MOTHAModel.STEP_ONCE_NORMAL_DT ): void {
+    this.zoomedInBoxNode.step( dt );
+    this.electronEnergyLevelAccordionBox && this.electronEnergyLevelAccordionBox.step( dt );
   }
 }
 

@@ -32,9 +32,6 @@ import PhotonGroup from './PhotonGroup.js';
 import Spectrometer from './Spectrometer.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
-// Time step, in seconds, when pressing the time control's step button with speed set to TimeSpeed.NORMAL.
-const STEP_ONCE_NORMAL_DT = 0.1;
-
 // Maps TimeSpeed values to scale factors specified via the timeScale query parameter.
 const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
   [ TimeSpeed.FAST, MOTHAQueryParameters.timeScale[ 0 ] ],
@@ -92,6 +89,9 @@ export default class MOTHAModel implements TModel {
 
   // Scale factor applied to dt, based on timeSpeedProperty.
   private readonly timeScaleProperty: TReadOnlyProperty<number>;
+
+  // Time step, in seconds, when pressing the time control's step button with speed set to TimeSpeed.NORMAL.
+  public static readonly STEP_ONCE_NORMAL_DT = 0.1;
 
   protected constructor( zoomedInBox: ZoomedInBox,
                          lightSource: LightSource,
@@ -223,9 +223,9 @@ export default class MOTHAModel implements TModel {
   }
 
   /**
-   * Steps the model by one time step. Used by the Step button in the time controls.
+   * Steps the model by one time step.
    */
-  public stepOnce( dt = STEP_ONCE_NORMAL_DT ): void {
+  public stepOnce( dt = MOTHAModel.STEP_ONCE_NORMAL_DT ): void {
     const dtScaled = dt * this.timeScaleProperty.value;
     this.lightSource.step( dtScaled );
     this.hydrogenAtomProperty.value.step( dtScaled );
