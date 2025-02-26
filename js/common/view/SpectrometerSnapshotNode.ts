@@ -9,35 +9,33 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import TrashButton from '../../../../scenery-phet/js/buttons/TrashButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import SpectrometerSnapshot from '../model/SpectrometerSnapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SpectrometerChart from './SpectrometerChart.js';
+import Spectrometer from '../model/Spectrometer.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import SpectrometerSnapshot from '../model/SpectrometerSnapshot.js';
 
 const INSIDE_X_MARGIN = 6;
 const INSIDE_Y_MARGIN = 4;
 
 export default class SpectrometerSnapshotNode extends Node {
 
-  public readonly snapshotProperty: Property<SpectrometerSnapshot | null>;
+  public constructor( spectrometer: Spectrometer, index: number, tandem: Tandem ) {
 
-  public constructor( tandem: Tandem ) {
-
-    const snapshotProperty = new Property<SpectrometerSnapshot | null>( null, {
-      phetioValueType: NullableIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),
-      phetioReadOnly: true,
-      phetioFeatured: true,
-      tandem: tandem.createTandem( 'snapshotProperty' ),
-      phetioDocumentation: 'The snapshot displayed by this Node, null if there is no snapshot.'
-    } );
+    const snapshotProperty = new DerivedProperty( [ spectrometer.snapshotsProperty ],
+      snapshots => ( index < snapshots.length ) ? snapshots[ index ] : null, {
+        phetioValueType: NullableIO( SpectrometerSnapshot.SpectrometerSnapshotIO ),
+        phetioFeatured: true,
+        tandem: tandem.createTandem( 'snapshotProperty' ),
+        phetioDocumentation: 'The snapshot displayed by this Node, null if there is no snapshot.'
+      } );
 
     // Display the data for the associated snapshot.
     const dataPointsProperty = new DerivedProperty( [ snapshotProperty ],
@@ -72,8 +70,9 @@ export default class SpectrometerSnapshotNode extends Node {
     const trashButton = new TrashButton( {
       baseColor: MOTHAColors.pushButtonColorProperty,
       listener: () => {
-        if ( snapshotProperty.value ) {
-          snapshotProperty.value.dispose();
+        const snapshot = snapshotProperty.value;
+        if ( snapshot ) {
+          spectrometer.deleteSnapshot( snapshot );
         }
       },
       iconOptions: {
@@ -103,8 +102,6 @@ export default class SpectrometerSnapshotNode extends Node {
       phetioDocumentation: 'Displays a spectrometer snapshot. Do not confuse the tandem name of this element ' +
                            'with the snapshot number that is displayed in the user interface.'
     } );
-
-    this.snapshotProperty = snapshotProperty;
   }
 }
 

@@ -161,10 +161,6 @@ export default class Spectrometer extends PhetioObject {
     this.snapshotsProperty.value = [ ...this.snapshotsProperty.value, snapshot ];
 
     this.nextSnapshotNumberProperty.value++;
-
-    snapshot.disposeEmitter.addListener( () => {
-      this.snapshotsProperty.value = this.snapshotsProperty.value.filter( element => element !== snapshot );
-    } );
   }
 
   /**
@@ -192,6 +188,14 @@ export default class Spectrometer extends PhetioObject {
     // Sort by ascending wavelength for nice presentation in Studio.
     // This also creates a new array, so that dataPointsProperty notifies listeners.
     this.dataPointsProperty.value = _.sortBy( dataPoints, dataPoint => dataPoint.wavelength );
+  }
+
+  /**
+   * Deletes a snapshot from the list.
+   */
+  public deleteSnapshot( snapshot: SpectrometerSnapshot ): void {
+    this.snapshotsProperty.value = this.snapshotsProperty.value.filter( element => element !== snapshot );
+    snapshot.dispose();
   }
 }
 

@@ -7,28 +7,27 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Dialog from '../../../../sun/js/Dialog.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import SpectrometerSnapshot from '../model/SpectrometerSnapshot.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import SpectrometerSnapshotNode from './SpectrometerSnapshotNode.js';
+import Spectrometer from '../model/Spectrometer.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 const MARGINS = 10;
 
 export default class SpectrometerSnapshotsDialog extends Dialog {
 
-  public constructor( snapshotsProperty: TReadOnlyProperty<SpectrometerSnapshot[]>, tandem: Tandem ) {
+  public constructor( spectrometer: Spectrometer, tandem: Tandem ) {
 
     // Nodes that display snapshots. These Nodes are displayed from top to bottom in the Snapshots dialog.
     const snapshotNodes: SpectrometerSnapshotNode[] = [];
     for ( let i = 0; i < MOTHAConstants.MAX_SPECTROMETER_SNAPSHOTS; i++ ) {
-      snapshotNodes.push( new SpectrometerSnapshotNode( tandem.createTandem( `snapshotNode${i}` ) ) );
+      snapshotNodes.push( new SpectrometerSnapshotNode( spectrometer, i, tandem.createTandem( `snapshotNode${i}` ) ) );
     }
 
     const content = new VBox( {
@@ -52,20 +51,9 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
       tandem: tandem
     } );
 
-    // When the snapshots change, mutate all snapshotNodes. While not the most performant implementation, it is much
-    // simpler than shuffling the order of snapshotNodes as snapshots are added and deleted. And for PhET-iO, the
-    // order of snapshotNodes is always that same in the dialog.
-    snapshotsProperty.link( snapshots => {
-      assert && assert( snapshots.length <= snapshotNodes.length, `invalid number of snapshots: ${snapshots.length}` );
-
+    // Close this dialog if all snapshots have been deleted.
+    spectrometer.snapshotsProperty.link( snapshots => {
       if ( !isSettingPhetioStateProperty.value ) {
-
-        // Populate all snapshotNodes in order, from top to bottom.
-        for ( let i = 0; i < snapshotNodes.length; i++ ) {
-          snapshotNodes[ i ].snapshotProperty.value = snapshots[ i ] || null;
-        }
-
-        // Close this dialog if all snapshots have been deleted.
         if ( snapshots.length === 0 && this.isShowingProperty.value ) {
           this.hide();
         }
