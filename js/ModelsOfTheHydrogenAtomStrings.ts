@@ -56,7 +56,6 @@ type StringsType = {
   'wavelengthNanometersStringProperty': LocalizedStringProperty;
   'questionMarkStringProperty': LocalizedStringProperty;
   'transitionsStringProperty': LocalizedStringProperty;
-  'transitionsEllipsisStringProperty': LocalizedStringProperty;
   'sStringProperty': LocalizedStringProperty;
   'pStringProperty': LocalizedStringProperty;
   'dStringProperty': LocalizedStringProperty;
