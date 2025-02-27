@@ -33,7 +33,7 @@ export default class TransitionsButton extends RectangularPushButton {
       listener: () => transitionsDialog.show(),
       enabledProperty: DerivedProperty.not( transitionsDialog.visibleProperty ),
       isDisposable: false,
-      //TODO https://github.com/phetsims/sun/issues/928 Default accessibleName should be discoverable by sun buttons.
+      //TODO https://github.com/phetsims/sun/issues/928 accessibleName should be discoverable by sun buttons.
       accessibleName: ModelsOfTheHydrogenAtomStrings.transitionsStringProperty,
       accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.transitionsButton.accessibleHelpTextStringProperty,
 

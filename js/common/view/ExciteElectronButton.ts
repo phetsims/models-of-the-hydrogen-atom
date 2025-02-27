@@ -46,6 +46,8 @@ export default class ExciteElectronButton extends RectangularPushButton {
         font: new PhetFont( 16 ),
         maxWidth: 100
       } ),
+      //TODO https://github.com/phetsims/sun/issues/928 accessibleName should be discoverable by sun buttons.
+      accessibleName: ModelsOfTheHydrogenAtomStrings.exciteElectronStringProperty,
       tandem: tandem
     } );
   }
