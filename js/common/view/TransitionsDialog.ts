@@ -50,6 +50,7 @@ import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAScreenView from './MOTHAScreenView.js';
 import PhotonNode from './PhotonNode.js';
+import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 const TITLE_TEXT_OPTIONS: TextOptions = {
   font: new PhetFont( {
@@ -83,7 +84,7 @@ type SelfOptions = {
 
 type TransitionsDialogOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class TransitionsDialog extends Panel {
+export default class TransitionsDialog extends InteractiveHighlighting( Panel ) {
 
   // Position of the panel's top-left corner.
   private readonly positionProperty: Property<Vector2>;
