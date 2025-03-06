@@ -156,141 +156,139 @@
     "value": "The electron is stuck in an excited state. Resetting the electron."
   },
   "a11y": {
-    "translatable": {
-      "transitionsButton": {
-        "accessibleHelpText": {
-          "value": "Show table of electron state transitions and their associated wavelengths."
-        }
+    "transitionsButton": {
+      "accessibleHelpText": {
+        "value": "Show table of electron state transitions and their associated wavelengths."
+      }
+    },
+    "transitionsDialog": {
+      "accessibleName": {
+        "value": "Transitions"
       },
-      "transitionsDialog": {
-        "accessibleName": {
-          "value": "Transitions"
+      "accessibleHelpText": {
+        "value": "Use buttons to set the light source to a specific wavelength."
+      }
+    },
+    "deBroglieRepresentationComboBox": {
+      "accessibleName": {
+        "value": "de Broglie Representation"
+      },
+      "accessibleHelpText": {
+        "value": "Choose wave representation for de Broglie model."
+      }
+    },
+    "deleteSnapshotButton": {
+      "accessibleName": {
+        "value": "Delete Snapshot {{number}}: {{name}}"
+      }
+    },
+    "electronEnergyLevelAccordionBox": {
+      "accessibleHelpText": {
+        "value": "Observe changes in electron’s state as shown in an energy level diagram."
+      }
+    },
+    "energyLevelsScreen": {
+      "screenButtonsHelpText": {
+        "value": "Explore electron transitions and relate observations to quantum models of the hydrogen atom."
+      },
+      "screenSummary": {
+        "playArea": {
+          "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single atom, which varies with the mode of exploration. In Experiment mode, the atom’s structure is a mystery and is obscured. In Model mode, there are various quantum models of the hydrogen atom to explore. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample. Observe changes in the electron’s state in the Electron Energy Level diagram."
         },
-        "accessibleHelpText": {
-          "value": "Use buttons to set the light source to a specific wavelength."
-        }
-      },
-      "deBroglieRepresentationComboBox": {
-        "accessibleName": {
-          "value": "de Broglie Representation"
+        "controlArea": {
+          "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer to compare data. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
         },
-        "accessibleHelpText": {
-          "value": "Choose wave representation for de Broglie model."
+        "interactionHint": {
+          "value": "Turn on light source to start exploring."
         }
+      }
+    },
+    "eraseSnapshotsButton": {
+      "accessibleName": {
+        "value": "Erase Spectrometer Data"
+      }
+    },
+    "experimentOrModelHelpTextSwitch": {
+      "accessibleHelpText": {
+        "value": "Collect experimental data or explore atomic models."
+      }
+    },
+    "quantumNumbersInfoButton": {
+      "accessibleHelpText": {
+        "value": "Show definitions of quantum numbers."
+      }
+    },
+    "lightSource": {
+      "accessibleName": {
+        "value": "Light Source"
+      }
+    },
+    "lightSourceModeRadioButtonGroup": {
+      "accessibleName": {
+        "value": "Light Source Mode"
       },
-      "deleteSnapshotButton": {
-        "accessibleName": {
-          "value": "Delete Snapshot {{number}}: {{name}}"
-        }
+      "accessibleHelpText": {
+        "value": "Choose type of light emitted by light source."
+      }
+    },
+    "modelRadioButtonGroup": {
+      "accessibleName": {
+        "value": "Atomic Model"
       },
-      "electronEnergyLevelAccordionBox": {
-        "accessibleHelpText": {
-          "value": "Observe changes in electron’s state as shown in an energy level diagram."
-        }
+      "accessibleHelpText": {
+        "value": "Choose atomic model to explore."
+      }
+    },
+    "mySnapshotsDialog": {
+      "accessibleName": {
+        "value": "My Snapshots"
+      }
+    },
+    "resetAtomButton": {
+      "accessibleName": {
+        "value": "Reset Atom"
+      }
+    },
+    "spectraScreen": {
+      "screenButtonsHelpText": {
+        "value": "Compare experimental spectroscopy data to historical models of the hydrogen atom."
       },
-      "energyLevelsScreen": {
-        "screenButtonsHelpText": {
-          "value": "Explore electron transitions and relate observations to quantum models of the hydrogen atom."
+      "screenSummary": {
+        "playArea": {
+          "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single atom which varies with the mode of exploration. In Experiment mode, the atom’s structure is a mystery and is obscured. In Model mode, there are various models of the hydrogen atom to explore, ranging from classical to quantum. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample."
         },
-        "screenSummary": {
-          "playArea": {
-            "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single atom, which varies with the mode of exploration. In Experiment mode, the atom’s structure is a mystery and is obscured. In Model mode, there are various quantum models of the hydrogen atom to explore. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample. Observe changes in the electron’s state in the Electron Energy Level diagram."
-          },
-          "controlArea": {
-            "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer to compare data. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
-          },
-          "interactionHint": {
-            "value": "Turn on light source to start exploring."
-          }
-        }
-      },
-      "eraseSnapshotsButton": {
-        "accessibleName": {
-          "value": "Erase Spectrometer Data"
-        }
-      },
-      "experimentOrModelHelpTextSwitch": {
-        "accessibleHelpText": {
-          "value": "Collect experimental data or explore atomic models."
-        }
-      },
-      "quantumNumbersInfoButton": {
-        "accessibleHelpText": {
-          "value": "Show definitions of quantum numbers."
-        }
-      },
-      "lightSource": {
-        "accessibleName": {
-          "value": "Light Source"
-        }
-      },
-      "lightSourceModeRadioButtonGroup": {
-        "accessibleName": {
-          "value": "Light Source Mode"
+        "controlArea": {
+          "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer to compare data. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
         },
-        "accessibleHelpText": {
-          "value": "Choose type of light emitted by light source."
+        "interactionHint": {
+          "value": "Turn on light source to start exploring."
         }
+      }
+    },
+    "snapshotButton": {
+      "accessibleName": {
+        "value": "Take Snapshot"
       },
-      "modelRadioButtonGroup": {
-        "accessibleName": {
-          "value": "Atomic Model"
-        },
-        "accessibleHelpText": {
-          "value": "Choose atomic model to explore."
-        }
+      "accessibleHelpText": {
+        "value": "Take up to {{max}} snapshots of spectrometer data."
+      }
+    },
+    "viewSnapshotsButton": {
+      "accessibleName": {
+        "value": "View Snapshots"
+      }
+    },
+    "wavelengthButton": {
+      "accessibleName": {
+        "value": "{{wavelength}} nanometers"
+      }
+    },
+    "wavelengthNumberControl": {
+      "accessibleName": {
+        "value": "Wavelength"
       },
-      "mySnapshotsDialog": {
-        "accessibleName": {
-          "value": "My Snapshots"
-        }
-      },
-      "resetAtomButton": {
-        "accessibleName": {
-          "value": "Reset Atom"
-        }
-      },
-      "spectraScreen": {
-        "screenButtonsHelpText": {
-          "value": "Compare experimental spectroscopy data to historical models of the hydrogen atom."
-        },
-        "screenSummary": {
-          "playArea": {
-            "value": "The Play Area contains a light source aimed at a sample of hydrogen atoms. The observation window displays a zoomed-in view of a single atom which varies with the mode of exploration. In Experiment mode, the atom’s structure is a mystery and is obscured. In Model mode, there are various models of the hydrogen atom to explore, ranging from classical to quantum. Determine the structure of the hydrogen atom by shining white or monochromatic light on the sample."
-          },
-          "controlArea": {
-            "value": "The Control Area has a Spectrometer that displays a histogram of the photons emitted by the hydrogen atom. Take snapshots of the spectrometer to compare data. Use Time Controls to adjust how fast the action happens in the observation window, including buttons to pause and step forward. Reset the sim to start over."
-          },
-          "interactionHint": {
-            "value": "Turn on light source to start exploring."
-          }
-        }
-      },
-      "snapshotButton": {
-        "accessibleName": {
-          "value": "Take Snapshot"
-        },
-        "accessibleHelpText": {
-          "value": "Take up to {{max}} snapshots of spectrometer data."
-        }
-      },
-      "viewSnapshotsButton": {
-        "accessibleName": {
-          "value": "View Snapshots"
-        }
-      },
-      "wavelengthButton": {
-        "accessibleName": {
-          "value": "{{wavelength}} nanometers"
-        }
-      },
-      "wavelengthNumberControl": {
-        "accessibleName": {
-          "value": "Wavelength"
-        },
-        "accessibleHelpText": {
-          "value": "Adjust wavelength for monochromatic light source."
-        }
+      "accessibleHelpText": {
+        "value": "Adjust wavelength for monochromatic light source."
       }
     }
   }

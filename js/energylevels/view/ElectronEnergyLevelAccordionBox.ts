@@ -74,7 +74,7 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       expandedDefaultValue: true, // Initially expanded because this is the feature that is new to the Energy Levels screen.
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.electronEnergyLevelAccordionBox.accessibleHelpTextStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelAccordionBox.accessibleHelpTextStringProperty,
       tandem: tandem
     } ) );
 

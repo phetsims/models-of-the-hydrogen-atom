@@ -21,7 +21,7 @@ export default class QuantumNumbersInfoButton extends InfoButton {
       scale: 0.5,
       iconFill: MOTHAColors.stateInfoButtonFillProperty,
       listener: () => dialog.show(),
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.quantumNumbersInfoButton.accessibleHelpTextStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.quantumNumbersInfoButton.accessibleHelpTextStringProperty,
       tandem: tandem
     } );
   }

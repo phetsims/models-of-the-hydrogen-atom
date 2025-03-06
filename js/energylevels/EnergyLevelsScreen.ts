@@ -27,7 +27,7 @@ export default class EnergyLevelsScreen extends MOTHAScreen<EnergyLevelsModel, E
     const options = {
       name: ModelsOfTheHydrogenAtomStrings.screen.energyLevelsStringProperty,
       homeScreenIcon: createScreenIcon(),
-      screenButtonsHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.energyLevelsScreen.screenButtonsHelpTextStringProperty,
+      screenButtonsHelpText: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenButtonsHelpTextStringProperty,
       tandem: tandem
     };
 

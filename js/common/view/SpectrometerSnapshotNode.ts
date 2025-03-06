@@ -87,7 +87,7 @@ export default class SpectrometerSnapshotNode extends Node {
 
     // Dynamically update the trashButton's accessibleName to reflect the model name in the current locale.
     snapshotProperty.link( snapshot => {
-      trashButton.accessibleName = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.translatable.deleteSnapshotButton.accessibleNameStringProperty, {
+      trashButton.accessibleName = new PatternStringProperty( ModelsOfTheHydrogenAtomStrings.a11y.deleteSnapshotButton.accessibleNameStringProperty, {
         number: snapshotNumberProperty,
         name: snapshot ? snapshot.hydrogenAtom.displayNameProperty : ''
       } );

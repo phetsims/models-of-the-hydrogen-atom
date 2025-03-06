@@ -88,8 +88,8 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.translatable.wavelengthNumberControl.accessibleNameStringProperty,
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.translatable.wavelengthNumberControl.accessibleHelpTextStringProperty,
+      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.accessibleNameStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.wavelengthNumberControl.accessibleHelpTextStringProperty,
       titleNodeOptions: {
         tandem: Tandem.OPT_OUT // because layoutFunction omits the title
       },
