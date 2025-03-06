@@ -1,5 +1,5 @@
 {
-  "comment": "# models-of-the-hydrogen-atom 1.0.0-dev.30 Thu Mar 06 2025 09:35:30 GMT-0700 (Mountain Standard Time)",
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-rc.0 Thu Mar 06 2025 15:48:16 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "f6d41b399ad32df2a00ab4b329981be0c574d77a",
     "branch": "main"
@@ -21,7 +21,7 @@
     "branch": "main"
   },
   "joist": {
-    "sha": "dcaad1a18b34705e8c942313163fbfbb8236f8b5",
+    "sha": "a225e502f9f3babc531e084f587368d7dc4f7dff",
     "branch": "main"
   },
   "kite": {
@@ -29,8 +29,8 @@
     "branch": "main"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "a7c0b5eefd659dcf1748094defd9fcaa8048af82",
-    "branch": "main"
+    "sha": "67ad462d84fb6d2e95828c2e4c470d2a7a883675",
+    "branch": "1.0"
   },
   "perennial-alias": {
     "sha": "17b57aa9ff428d9724bf268309b0f0995a945961",
@@ -45,7 +45,7 @@
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "8336ec4a3baceb39cf9230923e45e8786c0d0dc9",
+    "sha": "f61d5a717620c869de83717cedf6e74af5aae8ff",
     "branch": "main"
   },
   "phet-io-wrappers": {
@@ -69,7 +69,7 @@
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "c898434a603e89da4cd2e88a6fb8aba8c622360f",
+    "sha": "0eeb1892256ba42ed26882f76440950860e918b3",
     "branch": "main"
   },
   "sherpa": {
@@ -81,7 +81,7 @@
     "branch": "main"
   },
   "sun": {
-    "sha": "f62a33e587205e6dd7f8058467f298d51a820bff",
+    "sha": "aaad0b397b40aa0915072b5189521708c0816e1d",
     "branch": "main"
   },
   "tambo": {
