@@ -9,11 +9,9 @@
  */
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
+import { QueryStringMachineSchema } from '../../../query-string-machine/js/QueryStringMachineModule.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import SchrodingerQuantumNumbers from './model/SchrodingerQuantumNumbers.js';
-
-// Without this next line, ESLint will complain: 'QueryStringMachineSchema' is not defined.(no-undef)
-/* global QueryStringMachineSchema */
 
 const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
 
