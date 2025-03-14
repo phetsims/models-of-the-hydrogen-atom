@@ -37,7 +37,7 @@ import BohrElectron from './BohrElectron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
 import Proton from './Proton.js';
-import photonAbsorptionModel from './PhotonAbsorptionModel.js';
+import PhotonAbsorptionModel from './PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import QuantumElectron from './QuantumElectron.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
@@ -196,7 +196,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Determine if the photon has a wavelength that would excite the electron to a higher energy state.
-    const nNew = photonAbsorptionModel.getHigherStateForWavelength( nCurrent, photon.wavelength );
+    const nNew = PhotonAbsorptionModel.getHigherStateForWavelength( nCurrent, photon.wavelength );
     if ( nNew === null ) {
       return false;
     }
@@ -245,7 +245,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Determine if the photon has a wavelength that would move the electron to a lower energy state.
-    const nNew = photonAbsorptionModel.getLowerStateForWavelength( nCurrent, photon.wavelength );
+    const nNew = PhotonAbsorptionModel.getLowerStateForWavelength( nCurrent, photon.wavelength );
     if ( nNew === null || !this.stimulatedEmissionIsAllowed( nCurrent, nNew ) ) {
       return;
     }
@@ -316,7 +316,7 @@ export default class BohrModel extends HydrogenAtom {
     }
 
     // Emit a photon
-    const wavelength = photonAbsorptionModel.getEmissionWavelength( nCurrent, nNew );
+    const wavelength = PhotonAbsorptionModel.getEmissionWavelength( nCurrent, nNew );
     const position = this.getSpontaneousEmissionPosition();
     const direction = getSpontaneousEmissionDirection( nCurrent, this.electron.angleProperty.value );
     phet.log && phet.log( `${this.debugName}: spontaneous emission of ${MOTHASymbols.lambda}=${wavelength}, n = ${nCurrent} -> ${nNew}` );

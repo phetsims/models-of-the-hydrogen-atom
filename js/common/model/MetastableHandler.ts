@@ -36,7 +36,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import LightSource from './LightSource.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
-import photonAbsorptionModel from './PhotonAbsorptionModel.js';
+import PhotonAbsorptionModel from './PhotonAbsorptionModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -130,7 +130,7 @@ export default class MetastableHandler extends PhetioObject {
       'exciteElectron should only be called when the atom is in the metastable state.' );
 
     // Randomly choose an absorption wavelength. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/55.
-    const wavelengths = photonAbsorptionModel.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );
+    const wavelengths = PhotonAbsorptionModel.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );
     const wavelength = wavelengths[ dotRandom.nextInt( wavelengths.length ) ];
 
     // Tell the light to emit a photon, and direct it towards the center of the atom.

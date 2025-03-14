@@ -17,7 +17,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import photonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
+import PhotonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 import QuantumElectron from '../../common/model/QuantumElectron.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../../common/model/SchrodingerQuantumNumbers.js';
@@ -113,7 +113,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
         }
         else {
           this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
-            photonAbsorptionModel.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
+            PhotonAbsorptionModel.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
         }
       }
     } );

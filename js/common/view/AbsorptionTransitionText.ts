@@ -17,7 +17,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LightMode } from '../model/LightMode.js';
 import { ExperimentOrModel } from '../model/MOTHAModel.js';
-import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
+import PhotonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
@@ -35,7 +35,7 @@ export default class AbsorptionTransitionText extends RichText {
         ( experimentOrModel === 'model' &&
           isQuantumAtom &&
           lightMode === 'monochromatic' &&
-          photonAbsorptionModel.isTransitionWavelength( wavelength ) ) );
+          PhotonAbsorptionModel.isTransitionWavelength( wavelength ) ) );
 
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'.
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
@@ -45,7 +45,7 @@ export default class AbsorptionTransitionText extends RichText {
     // to vertically resize. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/127.
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],
       ( n, wavelength ) => {
-        const transition = photonAbsorptionModel.getTransition( wavelength );
+        const transition = PhotonAbsorptionModel.getTransition( wavelength );
         const n1 = transition ? transition.n1 : '?';
         const n2 = transition ? transition.n2 : '?';
         return `${n} = ${n1} ${MOTHASymbols.rightArrow} ${n2}`;
