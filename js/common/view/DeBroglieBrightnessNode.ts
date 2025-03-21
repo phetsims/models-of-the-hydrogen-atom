@@ -80,7 +80,7 @@ class BrightnessWaveNode extends Node {
     }
 
     this.positiveAmplitudeColorProperty = MOTHAColors.electronBaseColorProperty;
-    this.negativeAmplitudeColorProperty = MOTHAColors.deBroglieNegativeAmplitudeColorProperty;
+    this.negativeAmplitudeColorProperty = MOTHAColors.screenBackgroundColorProperty;
     this.zeroAmplitudeColorProperty = new DerivedProperty(
       [ this.negativeAmplitudeColorProperty, this.positiveAmplitudeColorProperty ],
       ( negativeAmplitudeColor, positiveAmplitudeColor ) =>

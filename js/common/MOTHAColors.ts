@@ -249,10 +249,6 @@ const MOTHAColors = {
     default: 'rgb( 255, 141, 21 )'
   } ),
 
-  deBroglieNegativeAmplitudeColorProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'deBroglieNegativeAmplitudeColor', {
-    default: 'black'
-  } ),
-
   orbitStrokeProperty: new ProfileColorProperty( modelsOfTheHydrogenAtom, 'orbitStroke', {
     default: 'white',
     projector: 'black'
