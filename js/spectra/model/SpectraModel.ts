@@ -72,10 +72,7 @@ export default class SpectraModel extends MOTHAModel {
       schrodingerModel
     ];
 
-    super( zoomedInBox, lightSource, atomicModels, billiardBallModel, {
-      experimentOrModel: 'experiment',
-      tandem: tandem
-    } );
+    super( zoomedInBox, lightSource, atomicModels, billiardBallModel, tandem );
 
     this.billiardBallModel = billiardBallModel;
     this.plumPuddingModel = plumPuddingModel;
