@@ -1,5 +1,5 @@
 {
-  "comment": "# models-of-the-hydrogen-atom 1.0.0-rc.1 Thu Mar 06 2025 15:51:53 GMT-0700 (Mountain Standard Time)",
+  "comment": "# models-of-the-hydrogen-atom 1.0.0-rc.1 Mon Mar 24 2025 17:08:08 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "f6d41b399ad32df2a00ab4b329981be0c574d77a",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "567d514ab115bd217135533ceb63ca555bb88085",
+    "sha": "5e909d5503c8951ee4d7febb31ef9a3bbc185e52",
     "branch": "1.0"
   },
   "perennial-alias": {
@@ -45,8 +45,8 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "f61d5a717620c869de83717cedf6e74af5aae8ff",
-    "branch": "HEAD"
+    "sha": "3687d86e48e2739398f342713d348e5269180eb1",
+    "branch": "models-of-the-hydrogen-atom-1.0"
   },
   "phet-io-wrappers": {
     "sha": "7c86e15b9a9731929d76984fd9e11aed2736e6ee",
