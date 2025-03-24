@@ -143,7 +143,7 @@ export default class LightSource extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    this.groundStateAbsorptionWavelengths = PhotonAbsorptionModel.getAbsorptionWavelengths( QuantumElectron.GROUND_STATE );
+    this.groundStateAbsorptionWavelengths = PhotonAbsorptionModel.instance.getAbsorptionWavelengths( QuantumElectron.GROUND_STATE );
   }
 
   public reset(): void {

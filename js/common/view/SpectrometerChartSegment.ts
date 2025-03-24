@@ -208,7 +208,7 @@ class UVChartSegment extends SpectrometerChartSegment {
       fill: MOTHAColors.UV_COLOR
     } );
 
-    const wavelengths = [ ...PhotonAbsorptionModel.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
+    const wavelengths = [ ...PhotonAbsorptionModel.instance.getUVWavelengths(), PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH ];
 
     // Wavelengths are remapped to compress the UV spectrum. This is a brute-force, hardcoded approach because we
     // needed custom iterative control of the position of each tick mark on the x-axis. All possible wavelengths are
@@ -247,7 +247,7 @@ class IRChartSegment extends SpectrometerChartSegment {
       fill: MOTHAColors.IR_COLOR
     } );
 
-    const wavelengths = PhotonAbsorptionModel.getIRWavelengths();
+    const wavelengths = PhotonAbsorptionModel.instance.getIRWavelengths();
 
     // The comment about wavelengthMap in UVChartSegment applies here.
     const wavelengthMap = new Map<number, number>( [
@@ -278,7 +278,7 @@ class VisibleChartSegment extends SpectrometerChartSegment {
                       axisLength: number,
                       providedOptions?: StrictOmit<EmissionChartOptions, 'wavelengths' | 'minWavelength' | 'maxWavelength' | 'xAxis'> ) {
 
-    const wavelengths = PhotonAbsorptionModel.getVisibleWavelengths();
+    const wavelengths = PhotonAbsorptionModel.instance.getVisibleWavelengths();
     const minWavelength = VisibleColor.MIN_WAVELENGTH;
     const maxWavelength = _.max( wavelengths )! + 50;
 

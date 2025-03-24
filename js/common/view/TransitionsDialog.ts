@@ -196,7 +196,7 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
 
     // Create a row for each transition wavelength, ordered by increasing wavelength.
     let n1Previous = 1;
-    const wavelengths = PhotonAbsorptionModel.getWavelengths().sort( ( a, b ) => a - b );
+    const wavelengths = PhotonAbsorptionModel.instance.getWavelengths().sort( ( a, b ) => a - b );
     wavelengths.forEach( wavelength => {
 
       // 'wavelength' column.
@@ -231,7 +231,7 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
       } );
 
       // 'n transition' column
-      const transition = PhotonAbsorptionModel.getTransition( wavelength )!;
+      const transition = PhotonAbsorptionModel.instance.getTransition( wavelength )!;
       assert && assert( transition, `no transition found for wavelength ${wavelength}` );
       const transitionText = new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, combineOptions<TextOptions>( {
         visibleProperty: transitionColumnVisibleProperty

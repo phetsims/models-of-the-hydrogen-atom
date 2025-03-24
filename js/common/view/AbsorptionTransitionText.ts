@@ -35,7 +35,7 @@ export default class AbsorptionTransitionText extends RichText {
         ( modelOrExperiment === 'model' &&
           isQuantumAtom &&
           lightMode === 'monochromatic' &&
-          PhotonAbsorptionModel.isTransitionWavelength( wavelength ) ) );
+          PhotonAbsorptionModel.instance.isTransitionWavelength( wavelength ) ) );
 
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'.
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, tandem );
@@ -45,7 +45,7 @@ export default class AbsorptionTransitionText extends RichText {
     // to vertically resize. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/127.
     const stringProperty = new DerivedStringProperty( [ MOTHASymbols.nStringProperty, wavelengthProperty ],
       ( n, wavelength ) => {
-        const transition = PhotonAbsorptionModel.getTransition( wavelength );
+        const transition = PhotonAbsorptionModel.instance.getTransition( wavelength );
         const n1 = transition ? transition.n1 : '?';
         const n2 = transition ? transition.n2 : '?';
         return `${n} = ${n1} ${MOTHASymbols.rightArrow} ${n2}`;

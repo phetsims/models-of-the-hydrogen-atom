@@ -113,7 +113,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
         }
         else {
           this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
-            PhotonAbsorptionModel.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
+            PhotonAbsorptionModel.instance.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
         }
       }
     } );

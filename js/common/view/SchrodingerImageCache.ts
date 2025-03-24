@@ -57,7 +57,7 @@ type NumberGrid2D = Array<Array<number>>;
 type CacheEntry = string | null;
 type Cache = Array<Array<Array<CacheEntry>>>;
 
-class SchrodingerImageCache {
+export default class SchrodingerImageCache {
 
   // Cache of dataURLs, indexed by [n-1][l][abs(m)]. These dataURLs point to PNG files for the orbitals.
   private cache: Cache;
@@ -72,7 +72,10 @@ class SchrodingerImageCache {
   private readonly canvas: HTMLCanvasElement;
   private readonly context: CanvasRenderingContext2D;
 
-  public constructor() {
+  // Singleton instance
+  public static readonly instance = new SchrodingerImageCache();
+
+  private constructor() {
 
     this.cache = [];
     this.cacheChangedEmitter = new Emitter();
@@ -255,8 +258,4 @@ function createCache( createEntry: ( n: number, l: number, m: number ) => CacheE
   return cache;
 }
 
-// Singleton
-const schrodingerImageCache = new SchrodingerImageCache();
-
 modelsOfTheHydrogenAtom.register( 'SchrodingerImageCache', SchrodingerImageCache );
-export { schrodingerImageCache };

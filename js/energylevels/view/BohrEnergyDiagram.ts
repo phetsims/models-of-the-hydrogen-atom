@@ -55,7 +55,7 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
 
       // Draw squiggle between previous and current electron state.
       if ( nOld !== null ) {
-        this.setEnergySquiggle( xPrevious, yPrevious, x, y, PhotonAbsorptionModel.getTransitionWavelength( nOld, nNew ) );
+        this.setEnergySquiggle( xPrevious, yPrevious, x, y, PhotonAbsorptionModel.instance.getTransitionWavelength( nOld, nNew ) );
       }
     } );
   }

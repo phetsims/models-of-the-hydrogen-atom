@@ -130,7 +130,7 @@ export default class MetastableHandler extends PhetioObject {
       'exciteElectron should only be called when the atom is in the metastable state.' );
 
     // Randomly choose an absorption wavelength. See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/55.
-    const wavelengths = PhotonAbsorptionModel.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );
+    const wavelengths = PhotonAbsorptionModel.instance.getAbsorptionWavelengths( MetastableHandler.METASTABLE_STATE.n );
     const wavelength = wavelengths[ dotRandom.nextInt( wavelengths.length ) ];
 
     // Tell the light to emit a photon, and direct it towards the center of the atom.
