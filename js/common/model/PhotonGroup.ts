@@ -30,7 +30,7 @@ export default class PhotonGroup extends PhetioGroup<Photon, CreateElementArgume
   // the zoomed-in part of the box of hydrogen
   private readonly zoomedInBox: ZoomedInBox;
 
-  // the hydrogen-atom model that is selected: either the experiment or a predictive model.
+  // the hydrogen-atom model that is selected: either a predictive atomic model or the experiment.
   private readonly hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>;
 
   public constructor( zoomedInBox: ZoomedInBox, hydrogenAtomProperty: TReadOnlyProperty<HydrogenAtom>, tandem: Tandem ) {

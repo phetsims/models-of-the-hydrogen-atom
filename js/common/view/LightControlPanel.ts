@@ -14,7 +14,7 @@ import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LightMode } from '../model/LightMode.js';
-import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import AbsorptionTransitionText from './AbsorptionTransitionText.js';
@@ -26,14 +26,14 @@ export class LightControlPanel extends Panel {
   public constructor( lightModeProperty: Property<LightMode>,
                       monochromaticWavelengthProperty: NumberProperty,
                       isQuantumAtomProperty: TReadOnlyProperty<boolean>,
-                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
+                      modelOrExperimentProperty: TReadOnlyProperty<ModelOrExperiment>,
                       tandem: Tandem ) {
 
     const lightModeRadioButtonGroup = new LightModeRadioButtonGroup( lightModeProperty,
       tandem.createTandem( 'lightModeRadioButtonGroup' ) );
 
     const absorptionTransitionText = new AbsorptionTransitionText( monochromaticWavelengthProperty,
-      experimentOrModelProperty, isQuantumAtomProperty, lightModeProperty, tandem.createTandem( 'absorptionTransitionText' ) );
+      modelOrExperimentProperty, isQuantumAtomProperty, lightModeProperty, tandem.createTandem( 'absorptionTransitionText' ) );
 
     const monochromaticWavelengthControl = new MonochromaticWavelengthControl( monochromaticWavelengthProperty, lightModeProperty,
       tandem.createTandem( 'monochromaticWavelengthControl' ) );

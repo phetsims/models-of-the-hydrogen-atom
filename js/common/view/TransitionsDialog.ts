@@ -43,7 +43,7 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { LightMode } from '../model/LightMode.js';
-import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import PhotonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -91,7 +91,7 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       lightModeProperty: Property<LightMode>,
-                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
+                      modelOrExperimentProperty: TReadOnlyProperty<ModelOrExperiment>,
                       isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: TransitionsDialogOptions ) {
@@ -117,8 +117,8 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
       }
     }, providedOptions );
 
-    const transitionColumnVisibleProperty = new DerivedProperty( [ experimentOrModelProperty ],
-      experimentOrModel => experimentOrModel === 'model' );
+    const transitionColumnVisibleProperty = new DerivedProperty( [ modelOrExperimentProperty ],
+      modelOrExperiment => modelOrExperiment === 'model' );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.transitionsStringProperty, TITLE_TEXT_OPTIONS );
 

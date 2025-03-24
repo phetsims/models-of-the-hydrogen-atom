@@ -37,14 +37,14 @@ const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
   [ TimeSpeed.SLOW, MOTHAQueryParameters.timeScale[ 2 ] ]
 ] );
 
-const ExperimentOrModelValues = [ 'experiment', 'model' ] as const;
-export type ExperimentOrModel = ( typeof ExperimentOrModelValues )[number];
+const ModelOrExperimentValues = [ 'model', 'experiment' ] as const;
+export type ModelOrExperiment = ( typeof ModelOrExperimentValues )[number];
 
 export default class MOTHAModel implements TModel {
 
-  // Whether we are viewing the Experiment or a Model of the hydrogen atom.
+  // Whether we are viewing a Model of the hydrogen atom or an Experiment.
   // This could have been implemented as a boolean Property, but presents better in Studio as an enumeration.
-  public readonly experimentOrModelProperty: StringUnionProperty<ExperimentOrModel>;
+  public readonly modelOrExperimentProperty: StringUnionProperty<ModelOrExperiment>;
 
   // Atomic model for what is presented as the 'Experiment' in the user interface.
   public readonly experiment: Experiment;
@@ -96,10 +96,10 @@ export default class MOTHAModel implements TModel {
 
     this.zoomedInBox = zoomedInBox;
 
-    this.experimentOrModelProperty = new StringUnionProperty<ExperimentOrModel>( 'model', {
-      validValues: ExperimentOrModelValues,
-      tandem: tandem.createTandem( 'experimentOrModelProperty' ),
-      phetioDocumentation: 'Whether we are viewing the Experiment or a Model of the hydrogen atom.',
+    this.modelOrExperimentProperty = new StringUnionProperty( 'model', {
+      validValues: ModelOrExperimentValues,
+      tandem: tandem.createTandem( 'modelOrExperimentProperty' ),
+      phetioDocumentation: 'Whether we are viewing a Model of the hydrogen atom or an Experiment.',
       phetioFeatured: true
     } );
 
@@ -118,8 +118,8 @@ export default class MOTHAModel implements TModel {
     } );
 
     this.hydrogenAtomProperty = new DerivedProperty(
-      [ this.experimentOrModelProperty, this.atomicModelProperty ],
-      ( experimentOrModel, atomicModel ) => experimentOrModel === 'experiment' ? this.experiment : atomicModel );
+      [ this.modelOrExperimentProperty, this.atomicModelProperty ],
+      ( modelOrExperiment, atomicModel ) => modelOrExperiment === 'model' ? atomicModel : this.experiment );
 
     this.isQuantumAtomProperty = new DerivedProperty( [ this.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom.isQuantum );
 
@@ -187,7 +187,7 @@ export default class MOTHAModel implements TModel {
   }
 
   public reset(): void {
-    this.experimentOrModelProperty.reset();
+    this.modelOrExperimentProperty.reset();
     this.experiment.reset();
     this.atomicModels.forEach( atomicModel => atomicModel.reset() );
     this.atomicModelProperty.reset();

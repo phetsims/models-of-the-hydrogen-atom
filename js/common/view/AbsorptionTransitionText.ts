@@ -16,7 +16,7 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LightMode } from '../model/LightMode.js';
-import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import PhotonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
@@ -24,15 +24,15 @@ import MOTHASymbols from '../MOTHASymbols.js';
 export default class AbsorptionTransitionText extends RichText {
 
   public constructor( wavelengthProperty: TReadOnlyProperty<number>,
-                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
+                      modelOrExperimentProperty: TReadOnlyProperty<ModelOrExperiment>,
                       isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       lightModeProperty: TReadOnlyProperty<LightMode>,
                       tandem: Tandem ) {
 
     const visibleProperty = new DerivedProperty(
-      [ experimentOrModelProperty, isQuantumAtomProperty, lightModeProperty, wavelengthProperty ],
-      ( experimentOrModel, isQuantumAtom, lightMode, wavelength ) =>
-        ( experimentOrModel === 'model' &&
+      [ modelOrExperimentProperty, isQuantumAtomProperty, lightModeProperty, wavelengthProperty ],
+      ( modelOrExperiment, isQuantumAtom, lightMode, wavelength ) =>
+        ( modelOrExperiment === 'model' &&
           isQuantumAtom &&
           lightMode === 'monochromatic' &&
           PhotonAbsorptionModel.isTransitionWavelength( wavelength ) ) );

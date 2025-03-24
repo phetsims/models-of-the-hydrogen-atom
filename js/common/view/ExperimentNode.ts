@@ -17,7 +17,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SchrodingerStateText from './SchrodingerStateText.js';
@@ -28,7 +28,7 @@ type ExperimentNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class ExperimentNode extends Node {
 
-  public constructor( experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
+  public constructor( modelOrExperimentProperty: TReadOnlyProperty<ModelOrExperiment>,
                       nlmProperty: TReadOnlyProperty<SchrodingerQuantumNumbers>,
                       providedOptions?: ExperimentNodeOptions ) {
 
@@ -53,7 +53,7 @@ export default class ExperimentNode extends Node {
 
       // NodeOptions
       children: [ square, questionMarkText ],
-      visibleProperty: new DerivedProperty( [ experimentOrModelProperty ], experimentOrModel => experimentOrModel === 'experiment' )
+      visibleProperty: new DerivedProperty( [ modelOrExperimentProperty ], modelOrExperiment => modelOrExperiment === 'experiment' )
     }, providedOptions );
 
     super( options );
