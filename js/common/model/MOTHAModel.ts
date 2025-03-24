@@ -15,12 +15,9 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import TModel from '../../../../joist/js/TModel.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
@@ -31,6 +28,7 @@ import Photon from './Photon.js';
 import PhotonGroup from './PhotonGroup.js';
 import Spectrometer from './Spectrometer.js';
 import ZoomedInBox from './ZoomedInBox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // Maps TimeSpeed values to scale factors specified via the timeScale query parameter.
 const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
@@ -41,12 +39,6 @@ const TIME_SCALE_MAP = new Map<TimeSpeed, number>( [
 
 const ExperimentOrModelValues = [ 'experiment', 'model' ] as const;
 export type ExperimentOrModel = ( typeof ExperimentOrModelValues )[number];
-
-type SelfOptions = {
-  experimentOrModel?: ExperimentOrModel; // initial value of experimentOrModelProperty
-};
-
-type MOTHAModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class MOTHAModel implements TModel {
 
@@ -97,35 +89,29 @@ export default class MOTHAModel implements TModel {
                          lightSource: LightSource,
                          atomicModels: HydrogenAtom[],
                          initialAtomicModel: HydrogenAtom,
-                         providedOptions: MOTHAModelOptions ) {
+                         tandem: Tandem ) {
 
     assert && assert( atomicModels.includes( initialAtomicModel ),
       'initialAtomicModel is not one of the supported atomicModels' );
 
-    const options = optionize<MOTHAModelOptions, SelfOptions>()( {
-
-      // SelfOptions
-      experimentOrModel: 'experiment'
-    }, providedOptions );
-
     this.zoomedInBox = zoomedInBox;
 
-    this.experimentOrModelProperty = new StringUnionProperty<ExperimentOrModel>( options.experimentOrModel, {
+    this.experimentOrModelProperty = new StringUnionProperty<ExperimentOrModel>( 'model', {
       validValues: ExperimentOrModelValues,
-      tandem: options.tandem.createTandem( 'experimentOrModelProperty' ),
+      tandem: tandem.createTandem( 'experimentOrModelProperty' ),
       phetioDocumentation: 'Whether we are viewing the Experiment or a Model of the hydrogen atom.',
       phetioFeatured: true
     } );
 
     this.experiment = new Experiment( MOTHAConstants.ATOM_POSITION, lightSource, {
-      tandem: options.tandem.createTandem( 'experiment' )
+      tandem: tandem.createTandem( 'experiment' )
     } );
 
     this.atomicModels = atomicModels;
 
     this.atomicModelProperty = new Property<HydrogenAtom>( initialAtomicModel, {
       validValues: atomicModels,
-      tandem: options.tandem.createTandem( 'atomicModelProperty' ),
+      tandem: tandem.createTandem( 'atomicModelProperty' ),
       phetioDocumentation: 'The hydrogen-atom model that is currently selected in the user interface.',
       phetioFeatured: true,
       phetioValueType: HydrogenAtom.HydrogenAtomIO
@@ -137,17 +123,17 @@ export default class MOTHAModel implements TModel {
 
     this.isQuantumAtomProperty = new DerivedProperty( [ this.hydrogenAtomProperty ], hydrogenAtom => hydrogenAtom.isQuantum );
 
-    this.photonGroup = new PhotonGroup( zoomedInBox, this.hydrogenAtomProperty, options.tandem.createTandem( 'photonGroup' ) );
+    this.photonGroup = new PhotonGroup( zoomedInBox, this.hydrogenAtomProperty, tandem.createTandem( 'photonGroup' ) );
 
     this.lightSource = lightSource;
 
     this.lightSource.photonEmittedEmitter.addListener( ( wavelength: number, position: Vector2, direction: number, debugHaloColor: Color | null ) =>
       this.photonGroup.emitPhotonFromLight( wavelength, position, direction, debugHaloColor ) );
 
-    this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, options.tandem.createTandem( 'spectrometer' ) );
+    this.spectrometer = new Spectrometer( this.hydrogenAtomProperty, tandem.createTandem( 'spectrometer' ) );
 
     this.isPlayingProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'isPlayingProperty' ),
+      tandem: tandem.createTandem( 'isPlayingProperty' ),
       phetioDocumentation: 'Whether the model is playing (true) or paused (false).',
       phetioFeatured: true
     } );
@@ -156,7 +142,7 @@ export default class MOTHAModel implements TModel {
     // 3 speeds, using the standard PhET TimeControlNode.
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       validValues: [ TimeSpeed.FAST, TimeSpeed.NORMAL, TimeSpeed.SLOW ],
-      tandem: options.tandem.createTandem( 'timeSpeedProperty' ),
+      tandem: tandem.createTandem( 'timeSpeedProperty' ),
       phetioDocumentation: 'Speed at which the model is playing.',
       phetioFeatured: true
     } );
