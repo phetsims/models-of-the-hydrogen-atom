@@ -17,7 +17,7 @@ import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { schrodingerImageCache } from './SchrodingerImageCache.js';
+import SchrodingerImageCache from './SchrodingerImageCache.js';
 
 // PNG image is 2x the sampling grid size, because we sample only for the rightBottom quadrant.
 const PNG_IMAGE_SIDE_LENGTH = ( 2 * MOTHAQueryParameters.gridSize );
@@ -29,10 +29,10 @@ export default class SchrodingerOrbitalNode extends Image {
                       modelViewTransform: ModelViewTransform2 ) {
 
     // Gets the PNG image for the orbital that corresponds to the current electron state (n,l,m).
-    const imageProperty = new DerivedProperty( [ nlmProperty ], nlm => schrodingerImageCache.getDataURL( nlm ) );
+    const imageProperty = new DerivedProperty( [ nlmProperty ], nlm => SchrodingerImageCache.instance.getDataURL( nlm ) );
 
     // If the cache changes, force imageProperty to be recomputed.
-    schrodingerImageCache.cacheChangedEmitter.addListener( () => imageProperty.recomputeDerivation() );
+    SchrodingerImageCache.instance.cacheChangedEmitter.addListener( () => imageProperty.recomputeDerivation() );
 
     super( imageProperty, {
       isDisposable: false,

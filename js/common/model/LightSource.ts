@@ -26,7 +26,7 @@ import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import { LightMode, LightModeValues } from './LightMode.js';
 import Photon from './Photon.js';
-import photonAbsorptionModel from './PhotonAbsorptionModel.js';
+import PhotonAbsorptionModel from './PhotonAbsorptionModel.js';
 import QuantumElectron from './QuantumElectron.js';
 import ZoomedInBox from './ZoomedInBox.js';
 
@@ -143,7 +143,7 @@ export default class LightSource extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    this.groundStateAbsorptionWavelengths = photonAbsorptionModel.getAbsorptionWavelengths( QuantumElectron.GROUND_STATE );
+    this.groundStateAbsorptionWavelengths = PhotonAbsorptionModel.instance.getAbsorptionWavelengths( QuantumElectron.GROUND_STATE );
   }
 
   public reset(): void {

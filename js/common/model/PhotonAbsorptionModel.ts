@@ -22,11 +22,14 @@ type StateTransition = {
   n2: number; // n2 > n1
 };
 
-class PhotonAbsorptionModel {
+export default class PhotonAbsorptionModel {
 
   private readonly map: Map<number, StateTransition>;
 
-  public constructor() {
+  // Singleton instance
+  public static readonly instance = new PhotonAbsorptionModel();
+
+  private constructor() {
 
     // Instantiate and populate the map.
     this.map = new Map<number, StateTransition>();
@@ -176,8 +179,4 @@ function computeAbsorptionWavelength( n1: number, n2: number ): number {
   return toFixedNumber( wavelength, 0 );
 }
 
-// Singleton
-const photonAbsorptionModel = new PhotonAbsorptionModel();
-
 modelsOfTheHydrogenAtom.register( 'PhotonAbsorptionModel', PhotonAbsorptionModel );
-export default photonAbsorptionModel;
