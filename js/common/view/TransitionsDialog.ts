@@ -43,8 +43,8 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { LightMode } from '../model/LightMode.js';
-import { ExperimentOrModel } from '../model/MOTHAModel.js';
-import photonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
+import { ModelOrExperiment } from '../model/MOTHAModel.js';
+import PhotonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHASymbols from '../MOTHASymbols.js';
@@ -91,7 +91,7 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
 
   public constructor( monochromaticWavelengthProperty: NumberProperty,
                       lightModeProperty: Property<LightMode>,
-                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
+                      modelOrExperimentProperty: TReadOnlyProperty<ModelOrExperiment>,
                       isQuantumAtomProperty: TReadOnlyProperty<boolean>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: TransitionsDialogOptions ) {
@@ -117,8 +117,8 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
       }
     }, providedOptions );
 
-    const transitionColumnVisibleProperty = new DerivedProperty( [ experimentOrModelProperty ],
-      experimentOrModel => experimentOrModel === 'model' );
+    const transitionColumnVisibleProperty = new DerivedProperty( [ modelOrExperimentProperty ],
+      modelOrExperiment => modelOrExperiment === 'model' );
 
     const titleText = new Text( ModelsOfTheHydrogenAtomStrings.transitionsStringProperty, TITLE_TEXT_OPTIONS );
 
@@ -196,7 +196,7 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
 
     // Create a row for each transition wavelength, ordered by increasing wavelength.
     let n1Previous = 1;
-    const wavelengths = photonAbsorptionModel.getWavelengths().sort( ( a, b ) => a - b );
+    const wavelengths = PhotonAbsorptionModel.getWavelengths().sort( ( a, b ) => a - b );
     wavelengths.forEach( wavelength => {
 
       // 'wavelength' column.
@@ -231,7 +231,7 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
       } );
 
       // 'n transition' column
-      const transition = photonAbsorptionModel.getTransition( wavelength )!;
+      const transition = PhotonAbsorptionModel.getTransition( wavelength )!;
       assert && assert( transition, `no transition found for wavelength ${wavelength}` );
       const transitionText = new Text( `${transition.n1} ${MOTHASymbols.leftRightArrow} ${transition.n2}`, combineOptions<TextOptions>( {
         visibleProperty: transitionColumnVisibleProperty

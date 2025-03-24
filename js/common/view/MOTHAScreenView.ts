@@ -31,7 +31,7 @@ import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAModel from '../model/MOTHAModel.js';
 import AtomicModelPanel from './AtomicModelPanel.js';
 import ExperimentOopsDialog from './ExperimentOopsDialog.js';
-import ExperimentOrModelSwitch from './ExperimentOrModelSwitch.js';
+import ModelOrExperimentSwitch from './ModelOrExperimentSwitch.js';
 import { LightControlPanel } from './LightControlPanel.js';
 import { LightSourceNode } from './LightSourceNode.js';
 import SpectrometerSnapshotsDialog from './SpectrometerSnapshotsDialog.js';
@@ -104,11 +104,11 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Controls for the type of light emitted by the light source
     const lightControlPanel = new LightControlPanel( model.lightSource.lightModeProperty,
-      model.lightSource.monochromaticWavelengthProperty, model.isQuantumAtomProperty, model.experimentOrModelProperty,
+      model.lightSource.monochromaticWavelengthProperty, model.isQuantumAtomProperty, model.modelOrExperimentProperty,
       options.tandem.createTandem( 'lightControlPanel' ) );
 
     const transitionsDialog = new TransitionsDialog( model.lightSource.monochromaticWavelengthProperty,
-      model.lightSource.lightModeProperty, model.experimentOrModelProperty, model.isQuantumAtomProperty,
+      model.lightSource.lightModeProperty, model.modelOrExperimentProperty, model.isQuantumAtomProperty,
       this.visibleBoundsProperty, {
         tandem: options.tandem.createTandem( 'transitionsDialog' )
       } );
@@ -124,16 +124,15 @@ export default class MOTHAScreenView extends ScreenView {
       visibleProperty: boxOfHydrogenNode.visibleProperty
     } );
 
-    // Switches between Experiment and Model.
-    const experimentOrModelSwitch = new ExperimentOrModelSwitch( model.experimentOrModelProperty,
-      options.tandem.createTandem( 'experimentOrModelSwitch' ) );
+    // Switches between Model and Experiment.
+    const modelOrExperimentSwitch = new ModelOrExperimentSwitch( model.modelOrExperimentProperty,
+      options.tandem.createTandem( 'modelOrExperimentSwitch' ) );
 
-    const atomicModelPanel = new AtomicModelPanel( model.atomicModelProperty, model.atomicModels,
-      model.experimentOrModelProperty, {
-        radioButtonTextMaxWidth: providedOptions.atomicModelRadioButtonTextMaxWidth,
-        hasContinuumBarNode: providedOptions.hasContinuumBarNode,
-        tandem: options.tandem.createTandem( 'atomicModelPanel' )
-      } );
+    const atomicModelPanel = new AtomicModelPanel( model.atomicModelProperty, model.atomicModels, model.modelOrExperimentProperty, {
+      radioButtonTextMaxWidth: providedOptions.atomicModelRadioButtonTextMaxWidth,
+      hasContinuumBarNode: providedOptions.hasContinuumBarNode,
+      tandem: options.tandem.createTandem( 'atomicModelPanel' )
+    } );
 
     // Spectrometer snapshots dialog
     const spectrometerSnapshotsDialog = new SpectrometerSnapshotsDialog( model.spectrometer,
@@ -191,9 +190,9 @@ export default class MOTHAScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'experimentOopsDialog' )
     } );
     Multilink.multilink(
-      [ model.experimentOrModelProperty, experiment.metastableHandler.isMetastableStateProperty, model.lightSource.lightModeProperty ],
-      ( experimentOrModel, isMetastableState, lightMode ) => {
-        if ( experimentOrModel === 'experiment' && isMetastableState && lightMode === 'monochromatic' ) {
+      [ model.modelOrExperimentProperty, experiment.metastableHandler.isMetastableStateProperty, model.lightSource.lightModeProperty ],
+      ( modelOrExperiment, isMetastableState, lightMode ) => {
+        if ( modelOrExperiment === 'experiment' && isMetastableState && lightMode === 'monochromatic' ) {
           experimentOopsDialog.show();
         }
       } );
@@ -210,17 +209,17 @@ export default class MOTHAScreenView extends ScreenView {
 
     // Layout: elements to the right of zoomedInBoxNode.
     const modelVBox = new VBox( {
-      children: [ experimentOrModelSwitch, atomicModelPanel ],
+      children: [ modelOrExperimentSwitch, atomicModelPanel ],
       align: 'center',
       spacing: 10
     } );
 
-    // If experimentOrModelSwitch is invisible, then we want atomicModelPanel to move up. Otherwise, we expect the
-    // visibility of atomicModelPanel to change based on the experimentOrModelSwitch setting, and we do not want
+    // If modelOrExperimentSwitch is invisible, then we want atomicModelPanel to move up. Otherwise, we expect the
+    // visibility of atomicModelPanel to change based on the modelOrExperimentSwitch setting, and we do not want
     // the switch to be shifting left/right. Note that for a period of time, this was failing assertion in Node
     // validateBounds which was addressed by removing the assertion, see
     // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/108#issuecomment-2622765138
-    experimentOrModelSwitch.visibleProperty.link( visible => {
+    modelOrExperimentSwitch.visibleProperty.link( visible => {
       modelVBox.excludeInvisibleChildrenFromBounds = !visible;
     } );
 

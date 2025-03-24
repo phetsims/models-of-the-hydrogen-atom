@@ -1,7 +1,7 @@
 // Copyright 2015-2025, University of Colorado Boulder
 
 /**
- * ExperimentOrModelSwitch is an A/B switch that determines whether we are viewing an experiment or a predictive model.
+ * ModelOrExperimentSwitch is an A/B switch that determines whether we are viewing a predictive model or an experiment.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,7 +14,7 @@ import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
-import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 const LABEL_FONT = new PhetFont( {
@@ -22,15 +22,9 @@ const LABEL_FONT = new PhetFont( {
   weight: 'bold'
 } );
 
-export default class ExperimentOrModelSwitch extends ABSwitch<ExperimentOrModel> {
+export default class ModelOrExperimentSwitch extends ABSwitch<ModelOrExperiment> {
 
-  public constructor( experimentOrModelProperty: StringUnionProperty<ExperimentOrModel>, tandem: Tandem ) {
-
-    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, {
-      font: LABEL_FONT,
-      fill: MOTHAColors.switchTextFillProperty,
-      maxWidth: 90 // Determined empirically in the Energy Levels screen, where there is less space for the switch.
-    } );
+  public constructor( modelOrExperimentProperty: StringUnionProperty<ModelOrExperiment>, tandem: Tandem ) {
 
     const modelText = new Text( ModelsOfTheHydrogenAtomStrings.modelStringProperty, {
       font: LABEL_FONT,
@@ -42,7 +36,13 @@ export default class ExperimentOrModelSwitch extends ABSwitch<ExperimentOrModel>
       maxWidth: 50
     } );
 
-    super( experimentOrModelProperty, 'experiment', experimentText, 'model', modelText, {
+    const experimentText = new Text( ModelsOfTheHydrogenAtomStrings.experimentStringProperty, {
+      font: LABEL_FONT,
+      fill: MOTHAColors.switchTextFillProperty,
+      maxWidth: 90 // Determined empirically in the Energy Levels screen, where there is less space for the switch.
+    } );
+
+    super( modelOrExperimentProperty, 'model', modelText, 'experiment', experimentText, {
       isDisposable: false,
       centerOnSwitch: false,
       toggleSwitchOptions: {
@@ -52,10 +52,10 @@ export default class ExperimentOrModelSwitch extends ABSwitch<ExperimentOrModel>
         phetioVisiblePropertyInstrumented: false,
         phetioEnabledPropertyInstrumented: false
       },
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.experimentOrModelHelpTextSwitch.accessibleHelpTextStringProperty,
+      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.modelOrExperimentHelpTextSwitch.accessibleHelpTextStringProperty,
       tandem: tandem
     } );
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'ExperimentOrModelSwitch', ExperimentOrModelSwitch );
+modelsOfTheHydrogenAtom.register( 'ModelOrExperimentSwitch', ModelOrExperimentSwitch );

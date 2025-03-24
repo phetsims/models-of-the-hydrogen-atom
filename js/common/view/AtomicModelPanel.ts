@@ -18,7 +18,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
-import { ExperimentOrModel } from '../model/MOTHAModel.js';
+import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import AtomicModelRadioButtonGroup from './AtomicModelRadioButtonGroup.js';
 import ContinuumBarNode from './ContinuumBarNode.js';
 
@@ -33,10 +33,10 @@ export default class AtomicModelPanel extends Panel {
 
   public constructor( atomicModelProperty: Property<HydrogenAtom>,
                       atomicModels: HydrogenAtom[],
-                      experimentOrModelProperty: TReadOnlyProperty<ExperimentOrModel>,
+                      modelOrExperimentProperty: TReadOnlyProperty<ModelOrExperiment>,
                       providedOptions: AtomicModelPanelOptions ) {
 
-    const visibleProperty = new DerivedProperty( [ experimentOrModelProperty ], experimentOrModel => experimentOrModel === 'model' );
+    const visibleProperty = new DerivedProperty( [ modelOrExperimentProperty ], modelOrExperiment => modelOrExperiment === 'model' );
 
     // Provides PhET-iO clients with a way to permanently hide this Node via 'selfVisibleProperty'
     const gatedVisibleProperty = new GatedVisibleProperty( visibleProperty, providedOptions.tandem );

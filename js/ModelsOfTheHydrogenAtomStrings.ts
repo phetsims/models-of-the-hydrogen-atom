@@ -97,7 +97,7 @@ type StringsType = {
     'eraseSnapshotsButton': {
       'accessibleNameStringProperty': LocalizedStringProperty;
     };
-    'experimentOrModelHelpTextSwitch': {
+    'modelOrExperimentHelpTextSwitch': {
       'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
     'quantumNumbersInfoButton': {
