@@ -9,11 +9,11 @@
  */
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
-import { QueryStringMachineSchema } from '../../../query-string-machine/js/QueryStringMachineModule.js';
+import { QSMSchemaObject, QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import SchrodingerQuantumNumbers from './model/SchrodingerQuantumNumbers.js';
 
-const SCHEMA_MAP: Record<string, QueryStringMachineSchema> = {
+const SCHEMA_MAP: QSMSchemaObject = {
 
   // Draws a halo around special photons, to make them easier to see. This includes photons that are emitted by the
   // atom, and photons that are used to excite the Schrödinger electron out of the metastable state (n,l,m) = (2,0,0).
