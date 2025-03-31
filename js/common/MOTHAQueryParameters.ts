@@ -9,11 +9,11 @@
  */
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
-import { QSMSchemaObject, QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
+import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
 import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import SchrodingerQuantumNumbers from './model/SchrodingerQuantumNumbers.js';
 
-const SCHEMA_MAP: QSMSchemaObject = {
+const MOTHAQueryParameters = QueryStringMachine.getAll( {
 
   // Draws a halo around special photons, to make them easier to see. This includes photons that are emitted by the
   // atom, and photons that are used to excite the Schrödinger electron out of the metastable state (n,l,m) = (2,0,0).
@@ -77,11 +77,7 @@ const SCHEMA_MAP: QSMSchemaObject = {
     defaultValue: 'eagerly', // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/129#issuecomment-2670189907
     isValidValue: value => value === 'eagerly' || value === 'onDemand'
   }
-};
-
-const MOTHAQueryParameters = QueryStringMachine.getAll( SCHEMA_MAP );
-
-MOTHAQueryParameters.SCHEMA_MAP = SCHEMA_MAP;
+} );
 
 modelsOfTheHydrogenAtom.register( 'MOTHAQueryParameters', MOTHAQueryParameters );
 
