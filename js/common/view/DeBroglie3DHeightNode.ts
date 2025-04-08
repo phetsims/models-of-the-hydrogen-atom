@@ -9,6 +9,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -91,13 +92,15 @@ export default class DeBroglie3DHeightNode extends Node {
 
     this.update();
 
-    // When resetting PhET-iO state, restoring pitchProperty needs to trigger an update.
-    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/141.
-    this.pitchProperty.lazyLink( () => {
-      if ( isSettingPhetioStateProperty.value ) {
-        this.update();
-      }
-    } );
+    // When resetting PhET-iO state, restoring these Properties needs to trigger an update.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/141 and
+    // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/164
+    Multilink.multilink( [ this.pitchProperty, deBroglieModel.electron.nProperty ],
+      () => {
+        if ( isSettingPhetioStateProperty.value ) {
+          this.update();
+        }
+      } );
   }
 
   private update(): void {
