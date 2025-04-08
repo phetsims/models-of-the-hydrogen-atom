@@ -113,6 +113,7 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
       groupFocusHighlight: true,
       tandemNameSuffix: 'Dialog', // Yes it's a Panel, but we are OK with calling it a Dialog.
       visiblePropertyOptions: {
+        phetioFeatured: true,
         phetioReadOnly: true
       }
     }, providedOptions );
