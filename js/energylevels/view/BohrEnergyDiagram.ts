@@ -21,6 +21,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ElectronStateText from '../../common/view/ElectronStateText.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -55,7 +56,12 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
 
       // Draw squiggle between previous and current electron state.
       if ( nOld !== null ) {
-        this.setEnergySquiggle( xPrevious, yPrevious, x, y, PhotonAbsorptionModel.instance.getTransitionWavelength( nOld, nNew ) );
+        if ( isSettingPhetioStateProperty.value ) {
+          this.hideEnergySquiggle();
+        }
+        else {
+          this.setEnergySquiggle( xPrevious, yPrevious, x, y, PhotonAbsorptionModel.instance.getTransitionWavelength( nOld, nNew ) );
+        }
       }
     } );
   }
