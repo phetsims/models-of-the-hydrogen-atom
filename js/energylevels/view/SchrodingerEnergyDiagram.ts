@@ -31,6 +31,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ElectronStateText from '../../common/view/ElectronStateText.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 const LABEL_FONT = EnergyDiagram.LABEL_FONT;
 const LEVEL_LINE_LENGTH = EnergyDiagram.LEVEL_LINE_LENGTH;
@@ -107,8 +108,7 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
       if ( nlmOld !== null ) {
         if ( isSettingPhetioStateProperty.value || schrodingerModel.isResetting() ) {
 
-          // If we're setting PhET-iO state or resetting the model, the transition is likely to be invalid,
-          // so hide the squiggle.
+          // When setting PhET-iO state or resetting the model, the transition is likely to be invalid, so hide the squiggle.
           this.hideEnergySquiggle();
         }
         else {
@@ -117,6 +117,10 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
         }
       }
     } );
+
+    // When PhET-iO state has been set, the transition is likely to be invalid, so hide the squiggle.
+    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/164.
+    phetioStateSetEmitter.addListener( () => this.hideEnergySquiggle() );
   }
 
   /**
