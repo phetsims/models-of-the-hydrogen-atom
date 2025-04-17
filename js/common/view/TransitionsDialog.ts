@@ -143,11 +143,8 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
     // "Close" button in the order, and it needs to be a child of the content so that it can be found when the user
     // reads down through the dialog.
     const pdomNode = new Node( {
-      tagName: 'div',
-      labelTagName: 'h3',
-      descriptionTagName: 'p',
-      accessibleName: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleNameStringProperty,
-      descriptionContent: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleHelpTextStringProperty
+      accessibleHeading: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleNameStringProperty,
+      accessibleParagraph: ModelsOfTheHydrogenAtomStrings.a11y.transitionsDialog.accessibleHelpTextStringProperty
     } );
 
     const titleBarNode = new HBox( {
