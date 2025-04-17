@@ -54,11 +54,6 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
   // Responsible for the case where the electron gets stuck in the metastable state (n,l,m) = (2,0,0).
   public readonly metastableHandler: MetastableHandler;
 
-  // When reset is called, the value of nlmProperty may change in a way that violates state transition rules.
-  // This flag allows us to know when we are resetting, and ignore those violations.
-  // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59.
-  private _isResetting = false;
-
   public constructor( position: Vector2, lightSource: LightSource, providedOptions: SchrodingerModelOptions ) {
 
     const schrodingerElectron = new SchrodingerElectron( position, providedOptions.tandem.createTandem( 'electron' ) );
@@ -81,19 +76,12 @@ export default class SchrodingerModel extends DeBroglieBaseModel {
       options.tandem.createTandem( 'metastableHandler' ) );
   }
 
-  public override reset(): void {
-    this._isResetting = true;
-    this.metastableHandler.reset();
-    super.reset();
-    this._isResetting = false;
-  }
-
   /**
-   * Whether this atomic model is currently resetting. This is useful because the (n,l,m) )transition that occurs
-   * when resetting is very likely to be invalid, and other code needs to know when to ignore validation.
+   * Override resetProtected instead of reset, see HydrogenAtom reset.
    */
-  public isResetting(): boolean {
-    return this._isResetting;
+  protected override resetProtected(): void {
+    this.metastableHandler.reset();
+    super.resetProtected();
   }
 
   /**

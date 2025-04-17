@@ -67,6 +67,12 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly photonAbsorbedEmitter: TEmitter<[ Photon ]>;
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color ]>;
 
+  // When reset is called, we will need to ignore some changes in the atomic model. For example, we do not want to
+  // validate an electron state transition caused by resetting (see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59)
+  // and we do not want to show an electron state transition in the Energy Level diagram (see
+  // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/164.)
+  private _isResetting = false;
+
   protected constructor( position: Vector2, providedOptions: HydrogenAtomOptions ) {
 
     const options = optionize<HydrogenAtomOptions, SelfOptions, PhetioObjectOptions>()( {
@@ -116,8 +122,30 @@ export default abstract class HydrogenAtom extends PhetioObject {
     } );
   }
 
+  /**
+   * Subclasses should override resetProtected instead of reset, so that the value of isResetting is correct
+   * throughout the execution of reset.
+   */
   public reset(): void {
+    this._isResetting = true;
+    this.resetProtected();
+    this._isResetting = false;
+  }
+
+  /**
+   * Subclasses should override resetProtected instead of reset, so that the value of isResetting is correct
+   * throughout the execution of reset.
+   */
+  protected resetProtected(): void {
     // Default behavior is to do nothing.
+  }
+  
+  /**
+   * Whether this atomic model is currently resetting. This is useful for situations where we need to ignore
+   * some change in the atomic model that occurs during a reset.
+   */
+  public isResetting(): boolean {
+    return this._isResetting;
   }
 
   /**

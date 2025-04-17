@@ -59,13 +59,16 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
     } );
   }
 
-  public override reset(): void {
+  /**
+   * Override resetProtected instead of reset, see HydrogenAtom reset.
+   */
+  protected override resetProtected(): void {
 
     // Representation should only be reset when doing a 'Reset All', not when switching atomic models.
     if ( isResettingAllProperty.value ) {
       this.deBroglieRepresentationProperty.reset();
     }
-    super.reset();
+    super.resetProtected();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

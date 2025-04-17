@@ -110,9 +110,12 @@ export default class BohrModel extends HydrogenAtom {
     this.electron = options.electron || new BohrElectron( position, options.tandem.createTandem( 'electron' ) );
   }
 
-  public override reset(): void {
+  /**
+   * Override resetProtected instead of reset, see HydrogenAtom reset.
+   */
+  protected override resetProtected(): void {
     this.electron.reset();
-    super.reset();
+    super.resetProtected();
   }
 
   /**
