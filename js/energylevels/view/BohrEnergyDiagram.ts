@@ -73,7 +73,7 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
     bohrModel.resetEmitter.addListener( () => this.hideEnergySquiggle() );
     
     // When PhET-iO state has been set, the transition is likely to be invalid, so hide the squiggle.
-    // This is needed in addition to the isResetting() check above because setting state may not fire nProperty's listener.
+    // This is needed in addition to the isSettingPhetioStateProperty check above because setting state may not fire nProperty's listener.
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/164.
     phetioStateSetEmitter.addListener( () => this.hideEnergySquiggle() );
   }
