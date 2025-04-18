@@ -67,11 +67,12 @@ export default abstract class HydrogenAtom extends PhetioObject {
   public readonly photonAbsorbedEmitter: TEmitter<[ Photon ]>;
   public readonly photonEmittedEmitter: TEmitter<[ number, Vector2, number, Color ]>;
 
-  // When reset is called, we will need to ignore some changes in the atomic model. For example, we do not want to
-  // validate an electron state transition caused by resetting (see https://github.com/phetsims/models-of-the-hydrogen-atom/issues/59)
-  // and we do not want to show an electron state transition in the Energy Level diagram (see
-  // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/164.)
-  private _isResetting = false;
+  // When an atomic model is reset, we need to ignore some of the changes that occur in the atomic model. For example,
+  // we do not want to validate an electron state transition caused by resetting, and we do not want to show an electron
+  // state transition in the Energy Level diagram. We need both a flag and an Emitter because in some circumstances
+  // we need to test whether we're doing a reset, and in other circumstances we need to be notified of a reset.
+  private _isResetting: boolean;
+  public readonly resetEmitter: Emitter;
 
   protected constructor( position: Vector2, providedOptions: HydrogenAtomOptions ) {
 
@@ -120,6 +121,9 @@ export default abstract class HydrogenAtom extends PhetioObject {
                            'so that all models have the same API.',
       phetioReadOnly: true
     } );
+
+    this._isResetting = false;
+    this.resetEmitter = new Emitter();
   }
 
   /**
@@ -130,6 +134,7 @@ export default abstract class HydrogenAtom extends PhetioObject {
     this._isResetting = true;
     this.resetProtected();
     this._isResetting = false;
+    this.resetEmitter.emit();
   }
 
   /**
