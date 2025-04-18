@@ -55,16 +55,15 @@ export default class BohrEnergyDiagram extends EnergyDiagram {
       this.electronNode.centerX = x;
       this.electronNode.bottom = y;
 
-      // Draw squiggle between previous and current electron state.
-      if ( nOld !== null ) {
-        if ( isSettingPhetioStateProperty.value || bohrModel.isResetting() ) {
+      if ( !nOld || isSettingPhetioStateProperty.value || bohrModel.isResetting() ) {
 
-          // When setting PhET-iO state or resetting the model, the transition is likely to be invalid, so hide the squiggle.
-          this.hideEnergySquiggle();
-        }
-        else {
-          this.setEnergySquiggle( xPrevious, yPrevious, x, y, PhotonAbsorptionModel.instance.getTransitionWavelength( nOld, nNew ) );
-        }
+        // Hide the energy squiggle in situations where the state transition is invalid.
+        this.hideEnergySquiggle();
+      }
+      else {
+
+        // Hide the energy squiggle in situations where it is incorrect to show the transition.
+        this.setEnergySquiggle( xPrevious, yPrevious, x, y, PhotonAbsorptionModel.instance.getTransitionWavelength( nOld, nNew ) );
       }
     } );
 

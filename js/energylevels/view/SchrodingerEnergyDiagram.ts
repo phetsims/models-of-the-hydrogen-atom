@@ -104,17 +104,16 @@ export default class SchrodingerEnergyDiagram extends EnergyDiagram {
       this.electronNode.centerX = this.getXForState( nlmNew.l );
       this.electronNode.bottom = this.getYForState( nlmNew.n );
 
-      // Draw squiggle between previous and current electron state.
-      if ( nlmOld !== null ) {
-        if ( isSettingPhetioStateProperty.value || schrodingerModel.isResetting() ) {
+      if ( !nlmOld || isSettingPhetioStateProperty.value || schrodingerModel.isResetting() ) {
 
-          // When setting PhET-iO state or resetting the model, the transition is likely to be invalid, so hide the squiggle.
-          this.hideEnergySquiggle();
-        }
-        else {
-          this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
-            PhotonAbsorptionModel.instance.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
-        }
+        // Hide the energy squiggle in situations where it is incorrect to show the transition.
+        this.hideEnergySquiggle();
+      }
+      else {
+        
+        // Draw the energy squiggle between the previous and current electron states.
+        this.setEnergySquiggle( xPrevious, yPrevious, this.electronNode.centerX, this.electronNode.bottom,
+          PhotonAbsorptionModel.instance.getTransitionWavelength( nlmOld.n, nlmNew.n ) );
       }
     } );
 
