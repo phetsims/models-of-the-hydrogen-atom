@@ -70,6 +70,8 @@ export default class DeBroglie3DOrbitsNode extends Wireframe3DNode {
     for ( let i = 0; i < vertices.length - 1; i += 2 ) {
       this.addLine( i, i + 1 );
     }
+
+    this.pitchProperty.link( () => this.update() );
   }
 
   public override update(): void {

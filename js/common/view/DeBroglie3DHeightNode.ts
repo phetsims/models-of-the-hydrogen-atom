@@ -9,7 +9,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -24,7 +23,6 @@ import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import DeBroglie3DOrbitsNode from './DeBroglie3DOrbitsNode.js';
 import DeBroglie3DWaveNode from './DeBroglie3DWaveNode.js';
 import ProtonNode from './ProtonNode.js';
-import Wireframe3DNode from './Wireframe3DNode.js';
 
 // The final pitch (rotation about the x-axis), after the model has rotated into place.
 const FINAL_PITCH = toRadians( 70 );
@@ -40,10 +38,6 @@ export default class DeBroglie3DHeightNode extends Node {
   // Pitch, rotation about the x-axis.
   // In case you're not familiar with 3D rotation, it is typically specified as pitch, roll, and yaw angles.
   private readonly pitchProperty: Property<number>;
-
-  // Wireframe renderings of the orbits and wave.
-  private readonly orbitsNode: Wireframe3DNode;
-  private readonly waveNode: Wireframe3DNode;
 
   public constructor( deBroglieModel: DeBroglieModel,
                       modelViewTransform: ModelViewTransform2,
@@ -70,63 +64,33 @@ export default class DeBroglie3DHeightNode extends Node {
     const atomPosition = modelViewTransform.modelToViewPosition( deBroglieModel.position );
 
     // 3D orbits
-    this.orbitsNode = new DeBroglie3DOrbitsNode( modelViewTransform, this.pitchProperty, FINAL_PITCH );
-    this.orbitsNode.translation = atomPosition;
-    this.addChild( this.orbitsNode );
+    const orbitsNode = new DeBroglie3DOrbitsNode( modelViewTransform, this.pitchProperty, FINAL_PITCH );
+    orbitsNode.translation = atomPosition;
+    this.addChild( orbitsNode );
 
     // proton
     const protonNode = new ProtonNode( deBroglieModel.proton, modelViewTransform );
     this.addChild( protonNode );
 
     // wave
-    this.waveNode = new DeBroglie3DWaveNode( deBroglieModel, modelViewTransform, this.pitchProperty );
-    this.waveNode.translation = atomPosition;
-    this.addChild( this.waveNode );
+    const waveNode = new DeBroglie3DWaveNode( deBroglieModel, modelViewTransform, this.pitchProperty );
+    waveNode.translation = atomPosition;
+    this.addChild( waveNode );
 
+    // When switching to the '3D Height' view, reset the pitch so that we see the animation.
     deBroglieModel.deBroglieRepresentationProperty.lazyLink( deBroglieRepresentation => {
       if ( !isSettingPhetioStateProperty.value && deBroglieRepresentation === '3DHeight' ) {
         this.pitchProperty.reset();
-        this.update();
       }
     } );
-
-    this.update();
-
-    // When resetting PhET-iO state, restoring these Properties needs to trigger an update.
-    // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/141 and
-    // https://github.com/phetsims/models-of-the-hydrogen-atom/issues/164
-    Multilink.multilink( [ this.pitchProperty, deBroglieModel.electron.nProperty ],
-      () => {
-        if ( isSettingPhetioStateProperty.value ) {
-          this.update();
-        }
-      } );
-  }
-
-  private update(): void {
-    this.orbitsNode.update();
-    this.waveNode.update();
   }
 
   /**
-   * Advances the rotation of the 3D Height view, optimized to update only when the view representation is set to '3D Height'
+   * Advances the rotation of the 3D Height view, optimized to update only when the representation is set to '3D Height'
    * @param dt - time step, in seconds
    */
   public step( dt: number ): void {
-    if ( this.deBroglieRepresentationProperty.value === '3DHeight' ) {
-      if ( this.pitchProperty.value !== FINAL_PITCH ) {
-        this.stepRotation( dt );
-        this.orbitsNode.update();
-      }
-      this.waveNode.update();
-    }
-  }
-
-  /*
-   * Steps the rotation of the camera.
-   */
-  private stepRotation( dt: number ): void {
-    if ( this.pitchProperty.value !== FINAL_PITCH ) {
+    if ( this.deBroglieRepresentationProperty.value === '3DHeight' && this.pitchProperty.value !== FINAL_PITCH ) {
       this.pitchProperty.value = Math.min( FINAL_PITCH, this.pitchProperty.value + dt * ANGULAR_SPEED );
     }
   }
