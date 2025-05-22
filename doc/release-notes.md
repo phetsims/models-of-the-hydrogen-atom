@@ -32,7 +32,7 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 ## 1.0 (2025-04-24)
 
 * Preferences
-* Dynamic locale: see _Preferences > Localization_
+* Dynamic locale: see _Preferences > Localization > Languages_
 * Alternative Input
 * Interactive Highlights
 * Tier 1 Description
