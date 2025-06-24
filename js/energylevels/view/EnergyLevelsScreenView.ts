@@ -6,15 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import EnergyLevelsZoomedInBoxNode from './EnergyLevelsZoomedInBoxNode.js';
+import EnergyLevelsScreenSummaryContent from './EnergyLevelsScreenSummaryContent.js';
 
 export default class EnergyLevelsScreenView extends MOTHAScreenView {
 
@@ -37,11 +36,7 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
       lightSourceNodeXOffset: 35,
       atomicModelRadioButtonTextMaxWidth: 120,
       hasContinuumBarNode: false,
-      screenSummaryContent: new ScreenSummaryContent( {
-        playAreaContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
-        controlAreaContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
-        interactionHintContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
-      } ),
+      screenSummaryContent: new EnergyLevelsScreenSummaryContent(),
       tandem: tandem
     } );
   }

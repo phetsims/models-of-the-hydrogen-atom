@@ -6,14 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
+import SpectraScreenSummaryContent from './SpectraScreenSummaryContent.js';
 
 export default class SpectraScreenView extends MOTHAScreenView {
 
@@ -30,11 +29,7 @@ export default class SpectraScreenView extends MOTHAScreenView {
       zoomedInBoxNode: zoomedInBoxNode,
       lightSourceNodeXOffset: 125,
       atomicModelRadioButtonTextMaxWidth: 200,
-      screenSummaryContent: new ScreenSummaryContent( {
-        playAreaContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,
-        controlAreaContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.controlAreaStringProperty,
-        interactionHintContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.interactionHintStringProperty
-      } ),
+      screenSummaryContent: new SpectraScreenSummaryContent(),
       tandem: tandem
     } );
   }
