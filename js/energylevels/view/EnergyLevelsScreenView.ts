@@ -38,11 +38,9 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
       atomicModelRadioButtonTextMaxWidth: 120,
       hasContinuumBarNode: false,
       screenSummaryContent: new ScreenSummaryContent( {
-        additionalContent: [
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
-        ]
+        playAreaContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.playAreaStringProperty,
+        controlAreaContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.controlAreaStringProperty,
+        interactionHintContent: ModelsOfTheHydrogenAtomStrings.a11y.energyLevelsScreen.screenSummary.interactionHintStringProperty
       } ),
       tandem: tandem
     } );

@@ -31,11 +31,9 @@ export default class SpectraScreenView extends MOTHAScreenView {
       lightSourceNodeXOffset: 125,
       atomicModelRadioButtonTextMaxWidth: 200,
       screenSummaryContent: new ScreenSummaryContent( {
-        additionalContent: [
-          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.controlAreaStringProperty,
-          ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.interactionHintStringProperty
-        ]
+        playAreaContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.playAreaStringProperty,
+        controlAreaContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.controlAreaStringProperty,
+        interactionHintContent: ModelsOfTheHydrogenAtomStrings.a11y.spectraScreen.screenSummary.interactionHintStringProperty
       } ),
       tandem: tandem
     } );
