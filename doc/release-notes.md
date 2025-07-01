@@ -36,7 +36,7 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 * Alternative Input
 * Interactive Highlights
 * Projector Mode
-* Tier 1 Description
+* Core Description
 * UI Sounds
 * PhET-iO
 * TypeScript implementation
