@@ -26,7 +26,6 @@ export default class MOTHAScreen<M extends TModel, V extends ScreenView> extends
     const options = optionize<MOTHAScreenOptions, SelfOptions, ScreenOptions>()( {
 
       // ScreenOptions
-      isDisposable: false,
       backgroundColorProperty: MOTHAColors.screenBackgroundColorProperty,
       showUnselectedHomeScreenIconFrame: true,
       showScreenIconFrameForNavigationBarFill: 'black',

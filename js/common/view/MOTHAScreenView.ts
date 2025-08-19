@@ -84,10 +84,7 @@ export default class MOTHAScreenView extends ScreenView {
 
       // SelfOptions
       electronEnergyLevelAccordionBox: null,
-      hasContinuumBarNode: true,
-
-      // ScreenViewOptions
-      isDisposable: false
+      hasContinuumBarNode: true
     }, providedOptions );
 
     super( options );
