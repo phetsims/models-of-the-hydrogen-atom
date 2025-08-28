@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';

@@ -7,7 +7,7 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';

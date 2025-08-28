@@ -7,7 +7,7 @@
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import RichText, { RichTextOptions } from '../../../../scenery/js/nodes/RichText.js';
 import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';

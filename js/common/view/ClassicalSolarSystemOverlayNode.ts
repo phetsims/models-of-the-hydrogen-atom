@@ -8,7 +8,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import Node from '../../../../scenery/js/nodes/Node.js';

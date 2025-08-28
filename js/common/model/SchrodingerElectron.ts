@@ -14,7 +14,7 @@ import QuantumElectron from './QuantumElectron.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
 import Property from '../../../../axon/js/Property.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 
 export default class SchrodingerElectron extends QuantumElectron {

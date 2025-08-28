@@ -8,7 +8,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';

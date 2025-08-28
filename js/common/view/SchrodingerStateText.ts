@@ -8,7 +8,7 @@
  */
 
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import RichText, { RichTextOptions } from '../../../../scenery/js/nodes/RichText.js';
 import Tandem from '../../../../tandem/js/Tandem.js';

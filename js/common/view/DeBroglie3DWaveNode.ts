@@ -10,7 +10,7 @@
 import Wireframe3DNode from './Wireframe3DNode.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import MOTHAColors from '../MOTHAColors.js';
 import BohrModel from '../model/BohrModel.js';

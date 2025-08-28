@@ -13,7 +13,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TEmitter from '../../../../axon/js/TEmitter.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
