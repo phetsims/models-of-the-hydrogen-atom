@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "2e9fcc6dae638a0c8789195610215a6ca10483d0",
+    "sha": "71591957ec4f8f5109803f388812e0811a22c650",
     "branch": "1.0"
   },
   "perennial-alias": {
@@ -69,7 +69,7 @@
     "branch": "HEAD"
   },
   "scenery-phet": {
-    "sha": "4c04b3edac2c58d7438463191dc6551e49a4ff01",
+    "sha": "a1317e2b7459365019dbd87292774390aa99fe99",
     "branch": "HEAD"
   },
   "sherpa": {
