@@ -84,7 +84,7 @@ type StringsType = {
       'accessibleNameStringProperty': LocalizedStringProperty;
     };
     'electronEnergyLevelAccordionBox': {
-      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      'accessibleParagraphStringProperty': LocalizedStringProperty;
     };
     'energyLevelsScreen': {
       'screenButtonsHelpTextStringProperty': LocalizedStringProperty;

@@ -65,7 +65,8 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     const diagrams = [ bohrEnergyDiagram, deBroglieEnergyDiagram, schrodingerEnergyDiagram, experimentEnergyDiagram ];
 
     const content = new Node( {
-      children: diagrams
+      children: diagrams,
+      accessibleParagraph: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelAccordionBox.accessibleParagraphStringProperty
     } );
 
     super( content, combineOptions<AccordionBoxOptions>( {}, MOTHAConstants.ACCORDION_BOX_OPTIONS, {
@@ -74,7 +75,6 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
       expandedDefaultValue: true, // Initially expanded because this is the feature that is new to the Energy Levels screen.
       fill: MOTHAColors.electronEnergyLevelAccordionBoxFillProperty,
       stroke: MOTHAColors.electronEnergyLevelAccordionBoxStrokeProperty,
-      accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.electronEnergyLevelAccordionBox.accessibleHelpTextStringProperty,
       tandem: tandem
     } ) );
 
