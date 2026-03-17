@@ -29,11 +29,11 @@
     "branch": "HEAD"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "d2e229519dacab607bde13a2b9cf3a9d9166c1a5",
+    "sha": "249297d6b1bbffc51f32112867de49481075e062",
     "branch": "1.0"
   },
   "perennial-alias": {
-    "sha": "17b57aa9ff428d9724bf268309b0f0995a945961",
+    "sha": "988ecb5c5ad18873d517d7d4a4826b7dbcb3a6da",
     "branch": "HEAD"
   },
   "phet-core": {
