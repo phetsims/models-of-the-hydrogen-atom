@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "0b2aa4e0e8f91d76c373167963b83de1e13d754f",
+    "sha": "dfd3c9393b798c8f2751acfbf36d1dcaf7fc90e2",
     "branch": "HEAD"
   },
   "dot": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "models-of-the-hydrogen-atom": {
-    "sha": "c739000de53e2a61f38e9cb4da6dd7c76a5c590c",
+    "sha": "c6a35c5abb07ee77dde770a6bfc0cce259a8d40f",
     "branch": "1.0"
   },
   "perennial-alias": {
