@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2025-2026, University of Colorado Boulder
 
 /**
  * PlumPuddingIcon is the icon that represents the Plum Pudding atomic model in the user interface.

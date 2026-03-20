@@ -1,4 +1,4 @@
-// Copyright 2022-2025, University of Colorado Boulder
+// Copyright 2022-2026, University of Colorado Boulder
 
 /**
  * MOTHASymbols is the set of strings for various symbols that appear in this sim.

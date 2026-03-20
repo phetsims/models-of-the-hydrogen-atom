@@ -1,4 +1,4 @@
-// Copyright 2015-2025, University of Colorado Boulder
+// Copyright 2015-2026, University of Colorado Boulder
 
 /**
  * ModelOrExperimentSwitch is an A/B switch that determines whether we are viewing a predictive model or an experiment.

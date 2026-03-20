@@ -1,4 +1,4 @@
-// Copyright 2024-2025, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  * SpectrometerChart plots the number of photons for each emission wavelength, across the UV, visible, and IR spectrums.

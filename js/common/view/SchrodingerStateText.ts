@@ -1,4 +1,4 @@
-// Copyright 2022-2025, University of Colorado Boulder
+// Copyright 2022-2026, University of Colorado Boulder
 
 /**
  * SchrodingerStateText displays the quantum numbers (n,l,m) and orbital that describe the wavefunction of the electron

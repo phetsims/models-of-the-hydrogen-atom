@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2025-2026, University of Colorado Boulder
 
 /**
  * SchrodingerElectron is the QuantumElectron specialized for the Schrödinger model of the hydrogen atom. It adds

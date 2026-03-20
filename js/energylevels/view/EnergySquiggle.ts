@@ -1,4 +1,4 @@
-// Copyright 2024-2025, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  * EnergySquiggle is the squiggle line shown in the energy diagrams, connecting the electrons previous and current

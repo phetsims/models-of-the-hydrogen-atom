@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2025-2026, University of Colorado Boulder
 
 /**
  * SchrodingerIconNode is the icon that represents the Schrödinger atomic model in the user interface.

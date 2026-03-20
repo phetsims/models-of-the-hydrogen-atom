@@ -1,4 +1,4 @@
-// Copyright 2024-2025, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  *  MetastableHandler handles a case where the Schrödinger model can get stuck in state (n,l,m) = (2,0,0). This state

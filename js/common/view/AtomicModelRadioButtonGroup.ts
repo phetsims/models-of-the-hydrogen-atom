@@ -1,4 +1,4 @@
-// Copyright 2015-2025, University of Colorado Boulder
+// Copyright 2015-2026, University of Colorado Boulder
 
 /**
  * AtomicModelRadioButtonGroup is the radio button group for selecting one of the predictive atomic models.

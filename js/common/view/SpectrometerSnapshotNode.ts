@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * SpectrometerSnapshotNode is a snapshot from the spectrometer, shown in the snapshots dialog.

@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Photon is the model of a photon. Instances are dynamic PhET-iO Elements, created via PhotonGroup.

@@ -1,4 +1,4 @@
-// Copyright 2024-2025, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  * QuantumNumbersInfoButton is an info button that, when pressed, shows a dialog that explains the Schrödinger

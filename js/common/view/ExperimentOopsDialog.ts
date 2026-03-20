@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2025-2026, University of Colorado Boulder
 
 /**
  * ExperimentOopsDialog is a dialog that appears when the Experiment is selected and its electron is stuck in

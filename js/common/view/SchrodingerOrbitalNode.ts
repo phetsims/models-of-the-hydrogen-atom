@@ -1,4 +1,4 @@
-// Copyright 2024-2025, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  * SchrodingerOrbitalNode renders the atomic orbital, a function describing the location and wave-like behavior of the

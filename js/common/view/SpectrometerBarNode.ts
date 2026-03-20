@@ -1,4 +1,4 @@
-// Copyright 2024-2025, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  * SpectrometerBarNode is a 'bar' in the spectrometer.  It displays a stack of photons, colored by wavelength.

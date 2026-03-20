@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2025-2026, University of Colorado Boulder
 
 /**
  * BohrOverlayNode displays user-interface elements (controls and displays) related to the Bohr model.

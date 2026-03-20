@@ -1,4 +1,4 @@
-// Copyright 2024-2025, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  * BohrElectron is the QuantumElectron specialized for the Bohr and de Broglie models. It adds Properties needed by those
