@@ -10,7 +10,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -36,5 +35,3 @@ export default class OrbitsNode extends Path {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'OrbitsNode', OrbitsNode );

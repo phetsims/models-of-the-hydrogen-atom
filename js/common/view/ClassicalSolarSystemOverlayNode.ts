@@ -13,7 +13,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ResetButton from '../../../../scenery-phet/js/buttons/ResetButton.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import ClassicalSolarSystemModel from '../model/ClassicalSolarSystemModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
@@ -43,5 +42,3 @@ export default class ClassicalSolarSystemOverlayNode extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ClassicalSolarSystemOverlayNode', ClassicalSolarSystemOverlayNode );

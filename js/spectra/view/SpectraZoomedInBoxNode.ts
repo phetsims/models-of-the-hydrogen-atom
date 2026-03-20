@@ -20,7 +20,6 @@ import PlumPuddingNode from '../../common/view/PlumPuddingNode.js';
 import SchrodingerNode from '../../common/view/SchrodingerNode.js';
 import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 import ZoomedInBoxNode from '../../common/view/ZoomedInBoxNode.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 
 export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
@@ -82,5 +81,3 @@ export default class SpectraZoomedInBoxNode extends ZoomedInBoxNode {
     super( model, createHydrogenAtomNodes, createOverlayNodes, tandem );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectraZoomedInBoxNode', SpectraZoomedInBoxNode );

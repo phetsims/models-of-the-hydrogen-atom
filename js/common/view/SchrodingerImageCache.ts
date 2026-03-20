@@ -32,7 +32,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import QuantumElectron from '../model/QuantumElectron.js';
@@ -257,5 +256,3 @@ function createCache( createEntry: ( n: number, l: number, m: number ) => CacheE
   }
   return cache;
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerImageCache', SchrodingerImageCache );

@@ -22,7 +22,6 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
 import Photon from './Photon.js';
@@ -71,5 +70,3 @@ export default class BilliardBallModel extends HydrogenAtom {
     }
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'BilliardBallModel', BilliardBallModel );

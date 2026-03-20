@@ -20,7 +20,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import ElectronNode from '../../common/view/ElectronNode.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergySquiggle from './EnergySquiggle.js';
 import QuantumElectron from '../../common/model/QuantumElectron.js';
@@ -175,5 +174,3 @@ export default class EnergyDiagram extends Node {
     this.energySquiggle.visible = false;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'EnergyDiagram', EnergyDiagram );

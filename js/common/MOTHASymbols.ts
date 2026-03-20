@@ -8,7 +8,6 @@
  */
 
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
-import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 
 const MOTHASymbols = {
@@ -35,5 +34,4 @@ const MOTHASymbols = {
   lambda: '\u03BB'
 };
 
-modelsOfTheHydrogenAtom.register( 'MOTHASymbols', MOTHASymbols );
 export default MOTHASymbols;

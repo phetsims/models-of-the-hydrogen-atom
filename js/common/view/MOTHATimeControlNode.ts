@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
@@ -48,5 +47,3 @@ export default class MOTHATimeControlNode extends TimeControlNode {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'MOTHATimeControlNode', MOTHATimeControlNode );

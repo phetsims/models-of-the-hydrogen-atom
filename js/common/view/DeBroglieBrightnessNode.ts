@@ -19,7 +19,6 @@ import Color from '../../../../scenery/js/util/Color.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import QuantumElectron from '../model/QuantumElectron.js';
@@ -218,5 +217,3 @@ function calculateNumberOfPolygons( radius: number ): number {
   const circumference = Math.PI * ( 2 * radius );
   return toFixedNumber( circumference / POLYGON_SIZE, 0 ) + 1;
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieBrightnessNode', DeBroglieBrightnessNode );

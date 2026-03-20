@@ -16,7 +16,6 @@ import DeBroglieOverlayNode from '../../common/view/DeBroglieOverlayNode.js';
 import SchrodingerNode from '../../common/view/SchrodingerNode.js';
 import SchrodingerOverlayNode from '../../common/view/SchrodingerOverlayNode.js';
 import ZoomedInBoxNode from '../../common/view/ZoomedInBoxNode.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 
 export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
@@ -64,5 +63,3 @@ export default class EnergyLevelsZoomedInBoxNode extends ZoomedInBoxNode {
     super( model, createHydrogenAtomNodes, createOverlayNodes, tandem );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'EnergyLevelsZoomedInBoxNode', EnergyLevelsZoomedInBoxNode );

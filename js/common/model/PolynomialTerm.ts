@@ -10,8 +10,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
-
 export default class PolynomialTerm {
 
   // The term's coefficient, e.g. '2' in '2x^3'.
@@ -81,5 +79,3 @@ export default class PolynomialTerm {
     return sum;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'PolynomialTerm', PolynomialTerm );

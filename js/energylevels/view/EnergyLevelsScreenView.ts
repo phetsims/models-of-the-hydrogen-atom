@@ -9,7 +9,6 @@
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import ElectronEnergyLevelAccordionBox from './ElectronEnergyLevelAccordionBox.js';
 import EnergyLevelsZoomedInBoxNode from './EnergyLevelsZoomedInBoxNode.js';
@@ -41,5 +40,3 @@ export default class EnergyLevelsScreenView extends MOTHAScreenView {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenView', EnergyLevelsScreenView );

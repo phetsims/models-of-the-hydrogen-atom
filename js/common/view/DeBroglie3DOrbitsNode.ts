@@ -11,7 +11,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import QuantumElectron from '../model/QuantumElectron.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -97,5 +96,3 @@ function getOrbitVertices( orbitRadius: number, numberOfVertices: number ): Vect
   }
   return vertices;
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglie3DOrbitsNode', DeBroglie3DOrbitsNode );

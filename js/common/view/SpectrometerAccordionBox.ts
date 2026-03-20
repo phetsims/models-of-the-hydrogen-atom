@@ -17,7 +17,6 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import Dialog from '../../../../sun/js/Dialog.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -114,5 +113,3 @@ export default class SpectrometerAccordionBox extends AccordionBox {
     this.resetSpectrometerAccordionBox();
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectrometerAccordionBox', SpectrometerAccordionBox );

@@ -26,7 +26,6 @@ import Color from '../../../../scenery/js/util/Color.js';
 import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import LightSource from '../model/LightSource.js';
 import Photon from '../model/Photon.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -180,5 +179,3 @@ function getSparkleColor( wavelength: number ): TColor {
     return MOTHAColors.VISIBLE_PHOTON_SPARKLE_COLOR;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'PhotonNode', PhotonNode );

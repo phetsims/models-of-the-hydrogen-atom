@@ -21,7 +21,6 @@ import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import { LightMode, LightModeValues } from './LightMode.js';
@@ -245,5 +244,3 @@ export default class LightSource extends PhetioObject {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'LightSource', LightSource );

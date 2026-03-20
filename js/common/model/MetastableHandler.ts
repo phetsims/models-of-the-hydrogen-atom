@@ -32,7 +32,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import LightSource from './LightSource.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
@@ -142,5 +141,3 @@ export default class MetastableHandler extends PhetioObject {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'MetastableHandler', MetastableHandler );

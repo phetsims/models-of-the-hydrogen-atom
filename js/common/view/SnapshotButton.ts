@@ -14,7 +14,6 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import cameraSolidShape from '../../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import Spectrometer from '../model/Spectrometer.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -49,5 +48,3 @@ export default class SnapshotButton extends RectangularPushButton {
     super( options );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SnapshotButton', SnapshotButton );

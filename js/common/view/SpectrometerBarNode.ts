@@ -10,7 +10,6 @@
 
 import Shape from '../../../../kite/js/Shape.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import LightSource from '../model/LightSource.js';
 
 const MAX_NUMBER_OF_PHOTONS = 12;
@@ -73,5 +72,3 @@ export default class SpectrometerBarNode extends Path {
     }
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectrometerBarNode', SpectrometerBarNode );

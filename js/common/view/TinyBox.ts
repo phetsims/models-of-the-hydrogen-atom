@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 
 const TINY_BOX_SIZE = new Dimension2( 6, 6 );
@@ -36,5 +35,3 @@ export default class TinyBox extends Rectangle {
     super( 0, 0, TINY_BOX_SIZE.width, TINY_BOX_SIZE.height, options );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'TinyBox', TinyBox );

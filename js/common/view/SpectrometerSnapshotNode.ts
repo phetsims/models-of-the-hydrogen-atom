@@ -14,7 +14,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import SpectrometerChart from './SpectrometerChart.js';
@@ -104,5 +103,3 @@ export default class SpectrometerSnapshotNode extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectrometerSnapshotNode', SpectrometerSnapshotNode );

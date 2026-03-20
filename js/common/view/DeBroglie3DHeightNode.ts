@@ -17,7 +17,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Node from '../../../../scenery/js/nodes/Node.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 import DeBroglie3DOrbitsNode from './DeBroglie3DOrbitsNode.js';
@@ -95,5 +94,3 @@ export default class DeBroglie3DHeightNode extends Node {
     }
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglie3DHeightNode', DeBroglie3DHeightNode );

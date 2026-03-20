@@ -40,7 +40,6 @@ import Color from '../../../../scenery/js/util/Color.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { LightMode } from '../model/LightMode.js';
 import { ModelOrExperiment } from '../model/MOTHAModel.js';
@@ -359,5 +358,3 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
     this.visibleProperty.value = false;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'TransitionsDialog', TransitionsDialog );

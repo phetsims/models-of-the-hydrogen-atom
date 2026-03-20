@@ -9,7 +9,6 @@
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import MOTHAColors from '../common/MOTHAColors.js';
 import MOTHAScreen from '../common/view/MOTHAScreen.js';
-import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import SpectraModel from './model/SpectraModel.js';
 import SpectraScreenView from './view/SpectraScreenView.js';
@@ -60,5 +59,3 @@ function createScreenIcon(): ScreenIcon {
     fill: MOTHAColors.spectrometerFillProperty
   } );
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectraScreen', SpectraScreen );

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import ProtonNode from './ProtonNode.js';
 import ElectronNode from './ElectronNode.js';
@@ -33,5 +32,3 @@ export default class ClassicalSolarSystemIcon extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ClassicalSolarSystemIcon', ClassicalSolarSystemIcon );

@@ -11,7 +11,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron, { ElectronOptions } from './Electron.js';
 
 type SelfOptions = {
@@ -60,5 +59,3 @@ export default class ClassicalSolarSystemElectron extends Electron {
     super.reset();
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ClassicalSolarSystemElectron', ClassicalSolarSystemElectron );

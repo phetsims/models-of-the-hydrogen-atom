@@ -11,7 +11,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import classicalSolarSystemExplosion_png from '../../../images/classicalSolarSystemExplosion_png.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ClassicalSolarSystemModel from '../model/ClassicalSolarSystemModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import ElectronNode from './ElectronNode.js';
@@ -43,5 +42,3 @@ export default class ClassicalSolarSystemNode extends HydrogenAtomNode {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ClassicalSolarSystemNode', ClassicalSolarSystemNode );

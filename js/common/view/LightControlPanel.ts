@@ -12,7 +12,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LightMode } from '../model/LightMode.js';
 import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -63,5 +62,3 @@ export class LightControlPanel extends Panel {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'LightControlPanel', LightControlPanel );

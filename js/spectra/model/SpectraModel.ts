@@ -17,7 +17,6 @@ import PlumPuddingModel from '../../common/model/PlumPuddingModel.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class SpectraModel extends MOTHAModel {
 
@@ -82,5 +81,3 @@ export default class SpectraModel extends MOTHAModel {
     this.schrodingerModel = schrodingerModel;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectraModel', SpectraModel );

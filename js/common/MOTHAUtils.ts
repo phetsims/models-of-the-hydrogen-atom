@@ -7,7 +7,6 @@
  */
 
 import dotRandom from '../../../dot/js/dotRandom.js';
-import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import { moduloBetweenDown } from '../../../dot/js/util/moduloBetweenDown.js';
 
 // See chooseWeightedValue.
@@ -79,5 +78,4 @@ const MOTHAUtils = {
   }
 };
 
-modelsOfTheHydrogenAtom.register( 'MOTHAUtils', MOTHAUtils );
 export default MOTHAUtils;

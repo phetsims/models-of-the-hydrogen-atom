@@ -10,7 +10,6 @@ import Screen, { ScreenOptions } from '../../../../joist/js/Screen.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import TModel from '../../../../joist/js/TModel.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAKeyboardHelpContent from './MOTHAKeyboardHelpContent.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -35,5 +34,3 @@ export default class MOTHAScreen<M extends TModel, V extends ScreenView> extends
     super( createModel, createView, options );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'MOTHAScreen', MOTHAScreen );

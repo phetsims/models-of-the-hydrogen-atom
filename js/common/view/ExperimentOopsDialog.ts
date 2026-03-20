@@ -13,7 +13,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import OopsDialog, { OopsDialogOptions } from '../../../../scenery-phet/js/OopsDialog.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import ElectronNode from './ElectronNode.js';
 
@@ -51,5 +50,3 @@ export default class ExperimentOopsDialog extends OopsDialog {
     super( ModelsOfTheHydrogenAtomStrings.experimentOopsDialogMessageStringProperty, options );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ExperimentOopsDialog', ExperimentOopsDialog );

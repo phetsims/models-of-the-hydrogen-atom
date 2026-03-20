@@ -9,7 +9,6 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import LightSource from './LightSource.js';
 import SchrodingerModel, { SchrodingerModelOptions } from './SchrodingerModel.js';
@@ -31,5 +30,3 @@ export default class Experiment extends SchrodingerModel {
     super( position, lightSource, options );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'Experiment', Experiment );

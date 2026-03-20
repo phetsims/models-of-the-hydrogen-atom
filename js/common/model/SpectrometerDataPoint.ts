@@ -9,7 +9,6 @@
 
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 // This should match STATE_SCHEMA, but with JavaScript types.
 export type SpectrometerDataPointStateObject = {
@@ -72,5 +71,3 @@ export default class SpectrometerDataPoint {
     documentation: 'Number of photons that have been emitted for a specified wavelength.'
   } );
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectrometerDataPoint', SpectrometerDataPoint );

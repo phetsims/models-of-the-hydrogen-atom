@@ -9,7 +9,6 @@
 
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import QuantumNumbersInfoDialog from './QuantumNumbersInfoDialog.js';
@@ -26,5 +25,3 @@ export default class QuantumNumbersInfoButton extends InfoButton {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'QuantumNumbersInfoButton', QuantumNumbersInfoButton );

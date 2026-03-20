@@ -17,7 +17,6 @@
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
 import HydrogenAtomNode from './HydrogenAtomNode.js';
@@ -43,5 +42,3 @@ export default class SchrodingerNode extends HydrogenAtomNode {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerNode', SchrodingerNode );

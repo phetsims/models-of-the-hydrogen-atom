@@ -8,7 +8,6 @@
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
 
 export default class ZoomedInBox {
@@ -33,5 +32,3 @@ export default class ZoomedInBox {
     return this.bounds.containsPoint( photon.positionProperty.value );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ZoomedInBox', ZoomedInBox );

@@ -20,7 +20,6 @@ import Line from '../../../../scenery/js/nodes/Line.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import LightSource from '../model/LightSource.js';
 import PhotonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
@@ -298,5 +297,4 @@ class VisibleChartSegment extends SpectrometerChartSegment {
   }
 }
 
-modelsOfTheHydrogenAtom.register( 'SpectrometerChartSegment', SpectrometerChartSegment );
 export { UVChartSegment, IRChartSegment, VisibleChartSegment };

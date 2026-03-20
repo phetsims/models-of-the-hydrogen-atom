@@ -11,7 +11,6 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 
@@ -39,5 +38,3 @@ export default class ExperimentEnergyDiagram extends EnergyDiagram {
     this.addChild( questionMarkText );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ExperimentEnergyDiagram', ExperimentEnergyDiagram );

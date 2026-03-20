@@ -10,7 +10,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import QuantumElectron from './QuantumElectron.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
@@ -178,5 +177,3 @@ function computeAbsorptionWavelength( n1: number, n2: number ): number {
   // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/53.
   return toFixedNumber( wavelength, 0 );
 }
-
-modelsOfTheHydrogenAtom.register( 'PhotonAbsorptionModel', PhotonAbsorptionModel );

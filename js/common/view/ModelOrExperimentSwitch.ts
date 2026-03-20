@@ -12,7 +12,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -57,5 +56,3 @@ export default class ModelOrExperimentSwitch extends ABSwitch<ModelOrExperiment>
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ModelOrExperimentSwitch', ModelOrExperimentSwitch );

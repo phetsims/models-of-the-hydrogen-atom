@@ -11,7 +11,6 @@
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import ZoomedInBoxNode from './ZoomedInBoxNode.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
@@ -50,5 +49,3 @@ export default class SchrodingerOrbitalNode extends Image {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerOrbitalNode', SchrodingerOrbitalNode );

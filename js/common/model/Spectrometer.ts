@@ -18,7 +18,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import PhotonAbsorptionModel from './PhotonAbsorptionModel.js';
@@ -208,5 +207,3 @@ function getDebugDataPoints(): SpectrometerDataPoint[] {
   wavelengths.push( PlumPuddingModel.PHOTON_EMISSION_WAVELENGTH );
   return wavelengths.map( wavelength => new SpectrometerDataPoint( wavelength, 100 ) );
 }
-
-modelsOfTheHydrogenAtom.register( 'Spectrometer', Spectrometer );

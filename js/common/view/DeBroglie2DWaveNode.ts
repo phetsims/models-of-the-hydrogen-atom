@@ -10,7 +10,6 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import OrbitsNode from './OrbitsNode.js';
 import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
@@ -33,5 +32,3 @@ export default class DeBroglie2DWaveNode extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglie2DWaveNode', DeBroglie2DWaveNode );

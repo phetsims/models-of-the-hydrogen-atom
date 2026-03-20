@@ -8,7 +8,6 @@
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import ElectronNode from './ElectronNode.js';
@@ -33,5 +32,3 @@ export default class BohrNode extends HydrogenAtomNode {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'BohrNode', BohrNode );

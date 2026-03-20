@@ -21,7 +21,6 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Photon from './Photon.js';
 import LightSource from './LightSource.js';
 import MOTHAUtils from '../MOTHAUtils.js';
@@ -189,5 +188,3 @@ export default abstract class HydrogenAtom extends PhetioObject {
     documentation: 'A model of the hydrogen atom'
   } );
 }
-
-modelsOfTheHydrogenAtom.register( 'HydrogenAtom', HydrogenAtom );

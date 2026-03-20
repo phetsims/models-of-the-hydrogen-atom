@@ -28,7 +28,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import ClassicalSolarSystemElectron from './ClassicalSolarSystemElectron.js';
 import HydrogenAtom, { HydrogenAtomOptions } from './HydrogenAtom.js';
@@ -131,5 +130,3 @@ export default class ClassicalSolarSystemModel extends HydrogenAtom {
     // Do nothing.
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ClassicalSolarSystemModel', ClassicalSolarSystemModel );

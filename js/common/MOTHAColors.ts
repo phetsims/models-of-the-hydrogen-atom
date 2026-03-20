@@ -319,5 +319,4 @@ const MOTHAColors = {
   LOG_EXCITE_METASTABLE: 'blue'
 };
 
-modelsOfTheHydrogenAtom.register( 'MOTHAColors', MOTHAColors );
 export default MOTHAColors;

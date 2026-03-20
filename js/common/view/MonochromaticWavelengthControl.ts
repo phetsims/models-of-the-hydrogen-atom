@@ -24,7 +24,6 @@ import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import Slider from '../../../../sun/js/Slider.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { LightMode } from '../model/LightMode.js';
 import LightSource from '../model/LightSource.js';
@@ -124,5 +123,3 @@ export class MonochromaticWavelengthControl extends WavelengthNumberControl {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'MonochromaticWavelengthControl', MonochromaticWavelengthControl );

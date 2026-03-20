@@ -147,6 +147,4 @@ type StringsType = {
 
 const ModelsOfTheHydrogenAtomStrings = getStringModule( 'MODELS_OF_THE_HYDROGEN_ATOM' ) as StringsType;
 
-modelsOfTheHydrogenAtom.register( 'ModelsOfTheHydrogenAtomStrings', ModelsOfTheHydrogenAtomStrings );
-
 export default ModelsOfTheHydrogenAtomStrings;

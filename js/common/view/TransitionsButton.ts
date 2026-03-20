@@ -11,7 +11,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import TransitionsDialog from './TransitionsDialog.js';
@@ -47,5 +46,3 @@ export default class TransitionsButton extends RectangularPushButton {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'TransitionsButton', TransitionsButton );

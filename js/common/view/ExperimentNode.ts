@@ -15,7 +15,6 @@ import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/j
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
@@ -70,5 +69,3 @@ export default class ExperimentNode extends Node {
     }
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ExperimentNode', ExperimentNode );

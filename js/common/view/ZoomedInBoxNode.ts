@@ -14,7 +14,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAModel from '../model/MOTHAModel.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -108,5 +107,3 @@ export default class ZoomedInBoxNode extends Node {
     this.hydrogenAtomNodes.forEach( hydrogenAtomNode => hydrogenAtomNode.step( dt ) );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ZoomedInBoxNode', ZoomedInBoxNode );

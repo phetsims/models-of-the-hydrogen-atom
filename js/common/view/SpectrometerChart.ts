@@ -14,7 +14,6 @@ import Line, { LineOptions } from '../../../../scenery/js/nodes/Line.js';
 import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectrometerDataPoint from '../model/SpectrometerDataPoint.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -115,5 +114,3 @@ class AxisBreakNode extends Line {
     }, providedOptions ) );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectrometerChart', SpectrometerChart );

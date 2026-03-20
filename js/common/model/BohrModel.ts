@@ -29,7 +29,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAUtils from '../MOTHAUtils.js';
@@ -377,5 +376,3 @@ function getSpontaneousEmissionDirection( n: number, electronAngle: number ): nu
   // Adjust the direction so that it is noticeably different from the direction of the light source.
   return HydrogenAtom.adjustEmissionDirection( direction );
 }
-
-modelsOfTheHydrogenAtom.register( 'BohrModel', BohrModel );

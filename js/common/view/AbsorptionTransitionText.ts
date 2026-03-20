@@ -14,7 +14,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { LightMode } from '../model/LightMode.js';
 import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import PhotonAbsorptionModel from '../model/PhotonAbsorptionModel.js';
@@ -61,5 +60,3 @@ export default class AbsorptionTransitionText extends RichText {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'AbsorptionTransitionText', AbsorptionTransitionText );

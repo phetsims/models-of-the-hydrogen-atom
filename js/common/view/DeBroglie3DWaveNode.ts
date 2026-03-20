@@ -14,7 +14,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import MOTHAColors from '../MOTHAColors.js';
 import BohrModel from '../model/BohrModel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 
 const MAX_WAVE_HEIGHT = 15; // max height of the standing wave, in view coordinates
@@ -94,5 +93,3 @@ function getWaveVertices( deBroglieModel: DeBroglieModel, modelViewTransform: Mo
   }
   return vertices;
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglie3DWaveNode', DeBroglie3DWaveNode );

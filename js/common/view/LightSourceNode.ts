@@ -15,7 +15,6 @@ import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import Node, { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import LightSource from '../model/LightSource.js';
 
@@ -79,6 +78,3 @@ class BeamNode extends Rectangle {
     }, providedOptions ) );
   }
 }
-
-
-modelsOfTheHydrogenAtom.register( 'LightSourceNode', LightSourceNode );

@@ -15,7 +15,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import BohrModel from '../../common/model/BohrModel.js';
 import PhotonAbsorptionModel from '../../common/model/PhotonAbsorptionModel.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ElectronStateText from '../../common/view/ElectronStateText.js';
@@ -102,5 +101,3 @@ function createLevelNode( n: number ): Node {
     spacing: 5
   } );
 }
-
-modelsOfTheHydrogenAtom.register( 'BohrEnergyDiagram', BohrEnergyDiagram );

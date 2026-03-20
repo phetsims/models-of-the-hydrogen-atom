@@ -9,7 +9,6 @@
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import RichText, { RichTextOptions } from '../../../../scenery/js/nodes/RichText.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
@@ -38,5 +37,3 @@ export default class ElectronStateText extends RichText {
     super( stringProperty, options );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ElectronStateText', ElectronStateText );

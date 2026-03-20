@@ -16,7 +16,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import ZoomedInBox from '../model/ZoomedInBox.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -94,5 +93,3 @@ class LegendNode extends HBox {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'LegendPanel', LegendPanel );

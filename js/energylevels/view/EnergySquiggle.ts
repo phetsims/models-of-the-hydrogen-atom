@@ -16,7 +16,6 @@ import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import distanceXY from '../../../../dot/js/util/distanceXY.js';
 
 const MIN_SQUIGGLE_LENGTH = 5;
@@ -156,5 +155,3 @@ function wavelengthToPeriod( wavelength: number ): number {
   }
   return period;
 }
-
-modelsOfTheHydrogenAtom.register( 'EnergySquiggle', EnergySquiggle );

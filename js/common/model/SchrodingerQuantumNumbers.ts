@@ -30,7 +30,6 @@
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import QuantumElectron from './QuantumElectron.js';
 import MOTHAUtils, { WeightedValue } from '../MOTHAUtils.js';
 
@@ -347,5 +346,3 @@ function isValidTransition( nlmOld: SchrodingerQuantumNumbers, nlmNew: Schroding
          ( Math.abs( nlmOld.l - nlmNew.l ) === 1 ) &&
          ( Math.abs( nlmOld.m - nlmNew.m ) <= 1 );
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerQuantumNumbers', SchrodingerQuantumNumbers );

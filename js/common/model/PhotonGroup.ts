@@ -13,7 +13,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import Photon, { PhotonOptions } from './Photon.js';
@@ -108,5 +107,3 @@ export default class PhotonGroup extends PhetioGroup<Photon, CreateElementArgume
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'PhotonGroup', PhotonGroup );

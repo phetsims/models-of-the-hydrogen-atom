@@ -14,7 +14,6 @@ import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js'
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem, RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -95,5 +94,3 @@ function createRadioButtonItem( atomicModel: HydrogenAtom, iconAlignGroup: Align
     tandemName: `${atomicModel.tandemNamePrefix}RadioButton`
   };
 }
-
-modelsOfTheHydrogenAtom.register( 'AtomicModelRadioButtonGroup', AtomicModelRadioButtonGroup );

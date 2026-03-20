@@ -10,7 +10,6 @@
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -61,5 +60,3 @@ export default class SpectrometerSnapshotsDialog extends Dialog {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectrometerSnapshotsDialog', SpectrometerSnapshotsDialog );

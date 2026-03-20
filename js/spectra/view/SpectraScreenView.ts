@@ -9,7 +9,6 @@
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAScreenView from '../../common/view/MOTHAScreenView.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectraModel from '../model/SpectraModel.js';
 import SpectraZoomedInBoxNode from './SpectraZoomedInBoxNode.js';
 import SpectraScreenSummaryContent from './SpectraScreenSummaryContent.js';
@@ -34,5 +33,3 @@ export default class SpectraScreenView extends MOTHAScreenView {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectraScreenView', SpectraScreenView );

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -21,5 +20,3 @@ export default class BilliardBallIcon extends ShadedSphereNode {
     } ) );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'BilliardBallIcon', BilliardBallIcon );

@@ -12,7 +12,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -48,5 +47,3 @@ export default class HydrogenAtomNode extends Node {
     // Default is to do nothing.
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'HydrogenAtomNode', HydrogenAtomNode );

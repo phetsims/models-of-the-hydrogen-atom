@@ -13,7 +13,6 @@ import MathSymbolFont from '../../../../scenery-phet/js/MathSymbolFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
@@ -68,5 +67,3 @@ export default class XZAxesNode extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'XZAxesNode', XZAxesNode );

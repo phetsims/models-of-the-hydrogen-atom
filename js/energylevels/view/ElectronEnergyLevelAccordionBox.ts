@@ -16,7 +16,6 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from '../model/EnergyLevelsModel.js';
 import BohrEnergyDiagram from './BohrEnergyDiagram.js';
@@ -94,5 +93,3 @@ export default class ElectronEnergyLevelAccordionBox extends AccordionBox {
     this.diagrams.forEach( diagram => diagram.step( dt ) ); // Very low cost to step all diagrams.
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ElectronEnergyLevelAccordionBox', ElectronEnergyLevelAccordionBox );

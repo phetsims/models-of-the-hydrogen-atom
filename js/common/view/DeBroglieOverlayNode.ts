@@ -11,7 +11,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import DeBroglieRepresentationComboBox from './DeBroglieRepresentationComboBox.js';
@@ -49,5 +48,3 @@ export default class DeBroglieOverlayNode extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieOverlayNode', DeBroglieOverlayNode );

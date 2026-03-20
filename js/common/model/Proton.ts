@@ -8,7 +8,6 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 type SelfOptions = {
   position?: Vector2;
@@ -35,5 +34,3 @@ export default class Proton {
     this.position = options.position;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'Proton', Proton );

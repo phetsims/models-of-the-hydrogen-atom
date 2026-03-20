@@ -27,7 +27,6 @@ import SpectrometerAccordionBox from '../../common/view/SpectrometerAccordionBox
 import TinyBox from '../../common/view/TinyBox.js';
 import TransitionsDialog from '../../common/view/TransitionsDialog.js';
 import ElectronEnergyLevelAccordionBox from '../../energylevels/view/ElectronEnergyLevelAccordionBox.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAModel from '../model/MOTHAModel.js';
 import AtomicModelPanel from './AtomicModelPanel.js';
 import ExperimentOopsDialog from './ExperimentOopsDialog.js';
@@ -358,5 +357,3 @@ export default class MOTHAScreenView extends ScreenView {
     this.electronEnergyLevelAccordionBox && this.electronEnergyLevelAccordionBox.step( dt );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'MOTHAScreenView', MOTHAScreenView );

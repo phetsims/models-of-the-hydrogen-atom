@@ -9,7 +9,6 @@
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import DeBroglie3DHeightNode from './DeBroglie3DHeightNode.js';
@@ -53,5 +52,3 @@ export default class DeBroglieNode extends HydrogenAtomNode {
     this.deBroglie3DHeightNode.step( dt );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieNode', DeBroglieNode );

@@ -7,7 +7,6 @@
  */
 
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import SpectrometerDataPoint, { SpectrometerDataPointStateObject } from './SpectrometerDataPoint.js';
 import HydrogenAtom from './HydrogenAtom.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -70,5 +69,3 @@ export default class SpectrometerSnapshot extends PhetioObject {
     documentation: 'Number of photons that have been emitted for a specified wavelength.'
   } );
 }
-
-modelsOfTheHydrogenAtom.register( 'SpectrometerSnapshot', SpectrometerSnapshot );

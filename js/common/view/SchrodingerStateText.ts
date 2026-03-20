@@ -12,7 +12,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import RichText, { RichTextOptions } from '../../../../scenery/js/nodes/RichText.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import SchrodingerQuantumNumbers from '../model/SchrodingerQuantumNumbers.js';
 import MOTHASymbols from '../MOTHASymbols.js';
@@ -58,5 +57,3 @@ export default class SchrodingerStateText extends RichText {
     }, MOTHAConstants.STATE_TEXT_OPTIONS ) );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerStateText', SchrodingerStateText );

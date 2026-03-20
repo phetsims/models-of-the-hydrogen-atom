@@ -23,7 +23,6 @@ import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import SchrodingerQuantumNumbers from '../../common/model/SchrodingerQuantumNumbers.js';
 import MOTHAColors from '../../common/MOTHAColors.js';
 import MOTHASymbols from '../../common/MOTHASymbols.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyDiagram, { EnergyDiagramOptions } from './EnergyDiagram.js';
 import { BohrEnergyDiagramOptions } from './BohrEnergyDiagram.js';
@@ -174,5 +173,3 @@ function createLevelNode( n: number ): Node {
     spacing: 5
   } );
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerEnergyDiagram', SchrodingerEnergyDiagram );

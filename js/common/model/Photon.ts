@@ -21,7 +21,6 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron from './Electron.js';
 
 // Deflection angles when the photon collides with a rigid body, like the Billiard Ball atom.
@@ -191,5 +190,3 @@ export default class Photon extends PhetioObject {
     } ]
   } );
 }
-
-modelsOfTheHydrogenAtom.register( 'Photon', Photon );

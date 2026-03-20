@@ -13,7 +13,6 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import LightSource from '../model/LightSource.js';
 import SchrodingerModel from '../model/SchrodingerModel.js';
@@ -78,5 +77,3 @@ export default class SchrodingerOverlayNode extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerOverlayNode', SchrodingerOverlayNode );

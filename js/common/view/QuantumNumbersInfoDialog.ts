@@ -13,7 +13,6 @@ import RichText, { RichTextOptions } from '../../../../scenery/js/nodes/RichText
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 
@@ -69,5 +68,3 @@ export default class QuantumNumbersInfoDialog extends Dialog {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'QuantumNumbersInfoDialog', QuantumNumbersInfoDialog );

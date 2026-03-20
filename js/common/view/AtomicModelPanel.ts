@@ -16,7 +16,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import { ModelOrExperiment } from '../model/MOTHAModel.js';
 import AtomicModelRadioButtonGroup from './AtomicModelRadioButtonGroup.js';
@@ -79,5 +78,3 @@ export default class AtomicModelPanel extends Panel {
     super( contentNode, options );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'AtomicModelPanel', AtomicModelPanel );

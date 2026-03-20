@@ -17,7 +17,6 @@
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
 import DeBroglieBaseModel from './DeBroglieBaseModel.js';
@@ -108,5 +107,3 @@ export default class DeBroglieModel extends DeBroglieBaseModel {
     return ( distance <= DeBroglieBaseModel.CLOSENESS_FOR_COLLISION );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieModel', DeBroglieModel );

@@ -18,7 +18,6 @@ import TModel from '../../../../joist/js/TModel.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import MOTHAConstants from '../MOTHAConstants.js';
 import MOTHAQueryParameters from '../MOTHAQueryParameters.js';
 import Experiment from './Experiment.js';
@@ -218,5 +217,3 @@ export default class MOTHAModel implements TModel {
     this.photonGroup.step( dtScaled );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'MOTHAModel', MOTHAModel );

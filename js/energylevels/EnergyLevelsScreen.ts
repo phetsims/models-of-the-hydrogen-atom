@@ -15,7 +15,6 @@ import MOTHAConstants from '../common/MOTHAConstants.js';
 import ElectronNode from '../common/view/ElectronNode.js';
 import MOTHAScreen from '../common/view/MOTHAScreen.js';
 import ProtonNode from '../common/view/ProtonNode.js';
-import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../ModelsOfTheHydrogenAtomStrings.js';
 import EnergyLevelsModel from './model/EnergyLevelsModel.js';
 import EnergyLevelsScreenView from './view/EnergyLevelsScreenView.js';
@@ -72,5 +71,3 @@ function createScreenIcon(): ScreenIcon {
     fill: MOTHAColors.zoomedInBoxFillProperty
   } );
 }
-
-modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreen', EnergyLevelsScreen );

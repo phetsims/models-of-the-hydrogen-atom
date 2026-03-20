@@ -8,7 +8,6 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import QuantumElectron from './QuantumElectron.js';
 import SchrodingerQuantumNumbers from './SchrodingerQuantumNumbers.js';
@@ -59,5 +58,3 @@ export default class SchrodingerElectron extends QuantumElectron {
     this._nlmProperty.value = this.nlmProperty.value.getNextState( n );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerElectron', SchrodingerElectron );

@@ -11,7 +11,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import ElectronStateText from './ElectronStateText.js';
@@ -42,5 +41,3 @@ export default class BohrOverlayNode extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'BohrOverlayNode', BohrOverlayNode );

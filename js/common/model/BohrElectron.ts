@@ -10,7 +10,6 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import QuantumElectron from './QuantumElectron.js';
 
@@ -50,5 +49,3 @@ export default class BohrElectron extends QuantumElectron {
     this._nProperty.value = n;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'BohrElectron', BohrElectron );

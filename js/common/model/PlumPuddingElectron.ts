@@ -10,7 +10,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Electron, { ElectronOptions } from './Electron.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
@@ -86,5 +85,3 @@ export default class PlumPuddingElectron extends Electron {
     this.xDirectionProperty.value = ( this.xDirectionProperty.value === 'right' ) ? 'left' : 'right';
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'PlumPuddingElectron', PlumPuddingElectron );

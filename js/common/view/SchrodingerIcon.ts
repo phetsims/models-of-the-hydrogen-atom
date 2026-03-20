@@ -9,7 +9,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import ProtonNode from './ProtonNode.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
@@ -38,5 +37,3 @@ export default class SchrodingerIcon extends Node {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerIcon', SchrodingerIcon );

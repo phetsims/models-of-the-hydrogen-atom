@@ -10,7 +10,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BilliardBallModel from '../model/BilliardBallModel.js';
 import HydrogenAtom from '../model/HydrogenAtom.js';
 import MOTHAColors from '../MOTHAColors.js';
@@ -36,5 +35,3 @@ export default class BilliardBallNode extends HydrogenAtomNode {
     this.translation = modelViewTransform.modelToViewPosition( billiardBallModel.position );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'BilliardBallNode', BilliardBallNode );

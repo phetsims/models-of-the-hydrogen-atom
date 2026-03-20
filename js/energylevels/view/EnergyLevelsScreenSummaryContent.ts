@@ -7,7 +7,6 @@
  */
 
 import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 
 export default class EnergyLevelsScreenSummaryContent extends ScreenSummaryContent {
@@ -20,5 +19,3 @@ export default class EnergyLevelsScreenSummaryContent extends ScreenSummaryConte
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'EnergyLevelsScreenSummaryContent', EnergyLevelsScreenSummaryContent );

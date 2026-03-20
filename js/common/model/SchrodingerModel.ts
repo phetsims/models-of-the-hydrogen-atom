@@ -27,7 +27,6 @@
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import BohrModel from './BohrModel.js';
@@ -288,5 +287,3 @@ function solveAssociatedLegendrePolynomial( l: number, m: number, x: number ): n
   return Math.pow( -1, mAbs ) / ( Math.pow( 2, l ) * factorial( l ) ) *
          Math.pow( 1 - x * x, mAbs / 2 ) * PolynomialTerm.evaluatePolynomial( productTerms, x );
 }
-
-modelsOfTheHydrogenAtom.register( 'SchrodingerModel', SchrodingerModel );

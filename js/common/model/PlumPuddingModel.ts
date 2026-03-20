@@ -30,7 +30,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHASymbols from '../MOTHASymbols.js';
 import MOTHAUtils from '../MOTHAUtils.js';
@@ -322,5 +321,3 @@ function nextPointOnCircle( radius: number ): Vector2 {
 function signIsDifferent( n1: number, n2: number ): boolean {
   return ( ( n1 > 0 && n2 < 0 ) || ( n1 < 0 && n2 > 0 ) );
 }
-
-modelsOfTheHydrogenAtom.register( 'PlumPuddingModel', PlumPuddingModel );

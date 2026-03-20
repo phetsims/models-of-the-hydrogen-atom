@@ -15,7 +15,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Path from '../../../../scenery/js/nodes/Path.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import BohrModel from '../model/BohrModel.js';
 import DeBroglieModel from '../model/DeBroglieModel.js';
 import QuantumElectron from '../model/QuantumElectron.js';
@@ -112,5 +111,3 @@ class RadialDistanceWaveNode extends Path {
     this.shape = waveShape;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieRadialDistanceNode', DeBroglieRadialDistanceNode );

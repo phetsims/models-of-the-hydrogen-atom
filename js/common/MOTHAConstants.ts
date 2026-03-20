@@ -11,7 +11,6 @@ import Vector2 from '../../../dot/js/Vector2.js';
 import { ShadedSphereNodeOptions } from '../../../scenery-phet/js/ShadedSphereNode.js';
 import VisibleColor from '../../../scenery-phet/js/VisibleColor.js';
 import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
-import modelsOfTheHydrogenAtom from '../modelsOfTheHydrogenAtom.js';
 import { RichTextOptions } from '../../../scenery/js/nodes/RichText.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import MOTHAColors from './MOTHAColors.js';
@@ -78,7 +77,5 @@ const MOTHAConstants = {
   SHADED_SPHERE_NODE_OPTIONS: SHADED_SPHERE_NODE_OPTIONS,
   STATE_TEXT_OPTIONS: STATE_TEXT_OPTIONS
 };
-
-modelsOfTheHydrogenAtom.register( 'MOTHAConstants', MOTHAConstants );
 
 export default MOTHAConstants;

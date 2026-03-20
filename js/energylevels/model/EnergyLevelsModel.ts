@@ -14,7 +14,6 @@ import MOTHAModel from '../../common/model/MOTHAModel.js';
 import SchrodingerModel from '../../common/model/SchrodingerModel.js';
 import ZoomedInBox from '../../common/model/ZoomedInBox.js';
 import MOTHAConstants from '../../common/MOTHAConstants.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 export default class EnergyLevelsModel extends MOTHAModel {
 
@@ -63,5 +62,3 @@ export default class EnergyLevelsModel extends MOTHAModel {
     this.schrodingerModel = schrodingerModel;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'EnergyLevelsModel', EnergyLevelsModel );

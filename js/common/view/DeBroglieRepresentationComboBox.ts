@@ -13,7 +13,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node, { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import { DeBroglieRepresentation } from '../model/DeBroglieRepresentation.js';
 
@@ -72,5 +71,3 @@ export default class DeBroglieRepresentationComboBox extends ComboBox<DeBroglieR
     super( deBroglieRepresentationProperty, items, listboxParent, options );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieRepresentationComboBox', DeBroglieRepresentationComboBox );

@@ -11,7 +11,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Proton from '../model/Proton.js';
 import MOTHAColors from '../MOTHAColors.js';
 import MOTHAConstants from '../MOTHAConstants.js';
@@ -48,5 +47,3 @@ export default class ProtonNode extends ShadedSphereNode {
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'ProtonNode', ProtonNode );

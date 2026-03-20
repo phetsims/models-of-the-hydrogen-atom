@@ -9,7 +9,6 @@
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import TimeControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimeControlsKeyboardHelpSection.js';
 
 export default class MOTHAKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
@@ -34,5 +33,3 @@ export default class MOTHAKeyboardHelpContent extends TwoColumnKeyboardHelpConte
     } );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'MOTHAKeyboardHelpContent', MOTHAKeyboardHelpContent );

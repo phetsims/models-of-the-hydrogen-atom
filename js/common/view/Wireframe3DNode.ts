@@ -12,7 +12,6 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 
 // A line between 2 points, identified by their indices in this.vertices and this.transformedVertices.
 type WireframeLine = {
@@ -141,5 +140,3 @@ export default class Wireframe3DNode extends Path {
     this.isDirty = false;
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'Wireframe3DNode', Wireframe3DNode );

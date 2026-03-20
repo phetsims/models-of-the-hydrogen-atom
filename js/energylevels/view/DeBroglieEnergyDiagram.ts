@@ -9,7 +9,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import DeBroglieModel from '../../common/model/DeBroglieModel.js';
 import BohrEnergyDiagram, { BohrEnergyDiagramOptions } from './BohrEnergyDiagram.js';
@@ -24,5 +23,3 @@ export default class DeBroglieEnergyDiagram extends BohrEnergyDiagram {
     super( deBroglieModel, providedOptions );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieEnergyDiagram', DeBroglieEnergyDiagram );

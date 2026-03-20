@@ -13,7 +13,6 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import ModelsOfTheHydrogenAtomStrings from '../../ModelsOfTheHydrogenAtomStrings.js';
 import MOTHAUtils from '../MOTHAUtils.js';
 import BohrModel, { BohrModelOptions } from './BohrModel.js';
@@ -92,5 +91,3 @@ export default class DeBroglieBaseModel extends BohrModel {
     return photon.positionProperty.value.minus( this.position );
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieBaseModel', DeBroglieBaseModel );

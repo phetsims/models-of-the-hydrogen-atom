@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import MOTHAColors from '../MOTHAColors.js';
 import ProtonNode from './ProtonNode.js';
@@ -42,5 +41,3 @@ export default class DeBroglieIcon extends Node {
 
   }
 }
-
-modelsOfTheHydrogenAtom.register( 'DeBroglieIcon', DeBroglieIcon );

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import modelsOfTheHydrogenAtom from '../../modelsOfTheHydrogenAtom.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
@@ -31,4 +30,3 @@ export default class PlumPuddingIcon extends Node {
     } );
   }
 }
-modelsOfTheHydrogenAtom.register( 'PlumPuddingIcon', PlumPuddingIcon );
