@@ -81,6 +81,6 @@ const MOTHAQueryParameters = QueryStringMachine.getAll( {
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );
 logGlobal( 'phet.preloads.phetio.queryParameters' );
-logGlobal( 'phet.modelsOfTheHydrogenAtom.MOTHAQueryParameters' );
+phet.log && phet.log( `MOTHAQueryParameters: ${JSON.stringify( MOTHAQueryParameters, null, 2 )}` );
 
 export default MOTHAQueryParameters;
