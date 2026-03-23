@@ -32,8 +32,6 @@ export default class TransitionsButton extends RectangularPushButton {
       listener: () => transitionsDialog.show(),
       enabledProperty: DerivedProperty.not( transitionsDialog.visibleProperty ),
       isDisposable: false,
-      //TODO https://github.com/phetsims/sun/issues/928 accessibleName should be discoverable by sun buttons.
-      accessibleName: ModelsOfTheHydrogenAtomStrings.transitionsStringProperty,
       accessibleHelpText: ModelsOfTheHydrogenAtomStrings.a11y.transitionsButton.accessibleHelpTextStringProperty,
 
       // Show only for quantum atoms, and provide a way for PhET-iO clients to permanently hide.
