@@ -330,8 +330,8 @@ export default class SchrodingerQuantumNumbers {
   public static readonly SchrodingerQuantumNumbersIO = new IOType<SchrodingerQuantumNumbers, SchrodingerQuantumNumbersStateObject>( 'SchrodingerQuantumNumbersIO', {
     valueType: SchrodingerQuantumNumbers,
     stateSchema: STATE_SCHEMA,
-    toStateObject: schrodingerQuantumNumbers => schrodingerQuantumNumbers.toStateObject(),
-    fromStateObject: stateObject => SchrodingerQuantumNumbers.fromStateObject( stateObject ),
+    toStateObject: ( schrodingerQuantumNumbers: SchrodingerQuantumNumbers ) => schrodingerQuantumNumbers.toStateObject(),
+    fromStateObject: ( stateObject: SchrodingerQuantumNumbersStateObject ) => SchrodingerQuantumNumbers.fromStateObject( stateObject ),
     documentation: 'The quantum numbers (n,l,m) that describe a wavefunction for the electron.'
   } );
 }
