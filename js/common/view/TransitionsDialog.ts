@@ -263,7 +263,7 @@ export default class TransitionsDialog extends InteractiveHighlighting( Panel ) 
     // See https://github.com/phetsims/models-of-the-hydrogen-atom/issues/86.
     this.addAriaLabelledbyAssociation( {
       thisElementName: PDOMPeer.PRIMARY_SIBLING,
-      otherElementName: PDOMPeer.LABEL_SIBLING,
+      otherElementName: PDOMPeer.HEADING_SIBLING,
       otherNode: pdomNode
     } );
 
