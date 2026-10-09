@@ -4,15 +4,15 @@
 
 ## Table of Contents
 
-* [Introduction](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#introduction)
-* [Legacy Version](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#legacy-version)
-* [General Considerations](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#general-considerations)
-    * [Coordinate Frames](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#coordinate-frames)
-    * [Query Parameters](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#query-parameters)
-    * [Memory Management](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#memory-management)
-* [Model](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#model)
-* [View](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#view)
-* [PhET-iO](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/implementation-notes.md#phet-io)
+* [Introduction](implementation-notes.md#introduction)
+* [Legacy Version](implementation-notes.md#legacy-version)
+* [General Considerations](implementation-notes.md#general-considerations)
+    * [Coordinate Frames](implementation-notes.md#coordinate-frames)
+    * [Query Parameters](implementation-notes.md#query-parameters)
+    * [Memory Management](implementation-notes.md#memory-management)
+* [Model](implementation-notes.md#model)
+* [View](implementation-notes.md#view)
+* [PhET-iO](implementation-notes.md#phet-io)
 
 ## Introduction
 
@@ -22,13 +22,13 @@ to supplement the internal documentation (source code comments) and external doc
 
 Before reading this document, please read:
 
-* [model.md](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/doc/model.md), a high-level
+* [model.md](model.md), a high-level
   description of the simulation model.
 
 You are also encouraged to read:
 
-* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md)
-* [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/main/doc/phet-software-design-patterns.md)
+* [PhET Development Overview](../../phet-info/doc/phet-development-overview.md)
+* [PhET Software Design Patterns](../../phet-info/doc/phet-software-design-patterns.md)
 * [Models of the Hydrogen Atom HTML5](https://docs.google.com/document/d/1fZT_vDD8sX8nkSpTxHOyoP6-XrAIJYo44dacLIbZO14/edit?pli=1&tab=t.0) (Parts of this are likely to be stale.)
 
 ## Legacy Version

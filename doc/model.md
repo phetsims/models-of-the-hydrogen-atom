@@ -39,12 +39,12 @@ increases the probability that a photon will interact with the atom.
 The simulation supports 6 atomic models. For a brief introduction to each atomic model, read the documentation
 at the top of the following source code files.
 
-* Billiard Ball: [BilliardBallModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/BilliardBallModel.ts)
-* Plum Pudding: [PlumPuddingModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/PlumPuddingModel.ts)
-* Classical Solar System: [ClassicalSolarSystemModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/ClassicalSolarSystemModel.ts)
-* Bohr: [BohrModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/BohrModel.ts)
-* de Broglie: [DeBroglieModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/DeBroglieModel.ts)
-* Schrödinger: [SchrodingerModel.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerModel.ts)
+* Billiard Ball: [BilliardBallModel.ts](../js/common/model/BilliardBallModel.ts)
+* Plum Pudding: [PlumPuddingModel.ts](../js/common/model/PlumPuddingModel.ts)
+* Classical Solar System: [ClassicalSolarSystemModel.ts](../js/common/model/ClassicalSolarSystemModel.ts)
+* Bohr: [BohrModel.ts](../js/common/model/BohrModel.ts)
+* de Broglie: [DeBroglieModel.ts](../js/common/model/DeBroglieModel.ts)
+* Schrödinger: [SchrodingerModel.ts](../js/common/model/SchrodingerModel.ts)
 
 ## Experiment
 
@@ -62,7 +62,7 @@ The following rules are implemented for electron state transitions in the Schrö
 * `m` = `[-l,+l]`
 * |`l`-`l'`| = 1
 * |`m`-`m'`| <= 1
-* `n` transitions have varying transition strengths. (See `TRANSITION_STRENGTHS` in [SchrodingerQuantumNumbers.ts](https://github.com/phetsims/models-of-the-hydrogen-atom/blob/main/js/common/model/SchrodingerQuantumNumbers.ts).)
+* `n` transitions have varying transition strengths. (See `TRANSITION_STRENGTHS` in [SchrodingerQuantumNumbers.ts](../js/common/model/SchrodingerQuantumNumbers.ts).)
 * Valid `l` and `m` transitions have equal probability.
 
 Also note that `l` will never be greater than 2 in this simulation. All transitions for `n` > 2 to a higher 
